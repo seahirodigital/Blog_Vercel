@@ -16,3 +16,7 @@ Thumbs.db
 
 # サービスアカウント鍵
 service_account.json
+
+# ドキュメント等
+howtosetup.md
+token_result.txt
