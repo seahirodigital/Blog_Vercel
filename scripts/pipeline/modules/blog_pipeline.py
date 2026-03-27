@@ -2,57 +2,57 @@
 ブログ生成パイプライン (GitHub Actions 対応版)
 Drafter → Editor → Chief の3段階生成
 Gemini Interaction Hub を使用
+プロンプトは prompts/ フォルダのテキストファイルから読み込む
 """
 
 import os
 import time
+from pathlib import Path
 from google import genai
 from typing import Optional
 
 # Gemini 最新モデル
 MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
-# ドラフト用スキルのマッピング (種別 → プロンプトテンプレート)
-DRAFTER_PROMPTS = {
-    "単品": """あなたはプロのガジェットブログライターです。
-以下の文字起こしを元に、「一つの製品に特化した」SEOに強いブログ記事を初稿として作成してください。
-- タイトルは具体的で検索に引っかかるもの
-- 見出し (##, ###) を適切に使用
-- スマホで読みやすいように改行を多めに
-- メリット・デメリットを明確に
-- 結論を最初と最後に配置
-- Markdown形式で出力""",
+# プロンプトファイルのディレクトリ（このファイルの親の prompts/ フォルダ）
+PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
 
-    "情報": """あなたはプロのテック情報ブログライターです。
-以下の文字起こしを元に、「複数の製品やニュースをまとめた」情報系SEOブログ記事を初稿として作成してください。
-- 読者が一記事で全体像を把握できる構成
-- 各トピックごとに見出し (##) で区切る
-- ランキングやリスト形式を活用
-- スマホで読みやすいように改行を多めに
-- Markdown形式で出力""",
 
-    "複数": """あなたはプロのガジェット比較ブログライターです。
-以下の文字起こしを元に、「複数製品の比較レビュー」SEOブログ記事を初稿として作成してください。
-- 比較表を含める
-- 各製品のメリット・デメリットを明確に
-- どんな人にどの製品がおすすめかを結論付ける
-- Markdown形式で出力"""
-}
+def _load_prompt(filename: str) -> str:
+    """プロンプトファイルを読み込む（#コメント行は除去）"""
+    filepath = PROMPTS_DIR / filename
+    if not filepath.exists():
+        raise FileNotFoundError(f"プロンプトファイルが見つかりません: {filepath}")
+    
+    lines = filepath.read_text(encoding="utf-8").splitlines()
+    # '#' で始まる行（コメント）を除去して結合
+    content_lines = [line for line in lines if not line.startswith("#")]
+    return "\n".join(content_lines).strip()
 
-EDITOR_PROMPT = """あなたはプロの編集者です。以下の記事を編集してください。
-- 文章の読みやすさを向上（リズム・トーン統一）
-- 冗長な部分を削除しつつ、情報量は維持
-- SEOキーワードの自然な配置を確認
-- スマホ閲覧を意識した改行・段落分け
-- 事実誤認がないかチェック
-- Markdown形式を維持して出力"""
 
-CHIEF_PROMPT = """あなたは編集長です。以下の記事に最終品質チェックを行い、100点満点の完成稿に仕上げてください。
-- ブランドトーン（親しみやすく、でもプロフェッショナル）の確認
-- 導入文・締めの文が魅力的かチェック
-- メタディスクリプション（120文字以内）をYAMLフロントマターとして追加
-- 画像挿入ポイントをコメントで指示
-- 最終的なMarkdown形式で出力"""
+def _parse_writer_prompt(content: str, status: str) -> str:
+    """writer-prompt.txt から指定種別のプロンプトを抽出する"""
+    # [種別名] セクションを解析する
+    sections = {}
+    current_section = None
+    current_lines = []
+
+    for line in content.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("[") and stripped.endswith("]"):
+            if current_section is not None:
+                sections[current_section] = "\n".join(current_lines).strip()
+            current_section = stripped[1:-1]
+            current_lines = []
+        else:
+            if current_section is not None:
+                current_lines.append(line)
+
+    if current_section is not None:
+        sections[current_section] = "\n".join(current_lines).strip()
+
+    # 指定種別が見つからなければ「単品」にフォールバック
+    return sections.get(status, sections.get("単品", ""))
 
 
 def _run_interaction(client, input_text: str, system_prompt: str, previous_id: Optional[str] = None):
@@ -86,7 +86,7 @@ def _run_interaction(client, input_text: str, system_prompt: str, previous_id: O
 def run_pipeline(transcript: dict, gemini_api_key: str, status: str = "単品") -> Optional[str]:
     """
     3段階AI生成パイプライン
-    status によって Drafter のプロンプトを切り替える
+    status によって Drafter のプロンプトを切り替える（prompts/ から読み込み）
 
     Args:
         transcript: {"title": "...", "captions": "...", "video_id": "...", "url": "..."}
@@ -96,11 +96,19 @@ def run_pipeline(transcript: dict, gemini_api_key: str, status: str = "単品") 
     Returns:
         最終Markdown文字列 または None
     """
+    # プロンプトを prompts/ フォルダから読み込む
+    try:
+        writer_raw = _load_prompt("01-writer-prompt.txt")
+        drafter_prompt = _parse_writer_prompt(writer_raw, status)
+        editor_prompt = _load_prompt("02-editor-prompt.txt")
+        director_prompt = _load_prompt("03-director-prompt.txt")
+        print(f"   📄 プロンプト読み込み完了: 01-writer({status}) / 02-editor / 03-director")
+    except FileNotFoundError as e:
+        print(f"   ❌ プロンプトファイルエラー: {e}")
+        return None
+
     client = genai.Client(api_key=gemini_api_key)
     captions = transcript["captions"]
-
-    # Drafter のプロンプト選択
-    drafter_prompt = DRAFTER_PROMPTS.get(status, DRAFTER_PROMPTS["単品"])
 
     try:
         # Step 1: Drafter (初稿作成)
@@ -111,13 +119,13 @@ def run_pipeline(transcript: dict, gemini_api_key: str, status: str = "単品") 
 
         # Step 2: Editor (プロ編集)
         print(f"   ✏️  Step2: プロ編集中...")
-        int2 = _run_interaction(client, "上記の下書きを編集してください。", EDITOR_PROMPT, previous_id=int1.id)
+        int2 = _run_interaction(client, "上記の下書きを編集してください。", editor_prompt, previous_id=int1.id)
         print(f"   ✅ 編集完了 (ID: {int2.id})")
         time.sleep(10)
 
-        # Step 3: Chief (最終品質チェック)
+        # Step 3: Director (最終品質チェック)
         print(f"   👑 Step3: 最終品質チェック中...")
-        int3 = _run_interaction(client, "上記の記事を100点満点に仕上げてください。", CHIEF_PROMPT, previous_id=int2.id)
+        int3 = _run_interaction(client, "上記の記事を100点満点に仕上げてください。", director_prompt, previous_id=int2.id)
         final_text = int3.outputs[-1].text
         print(f"   ✅ 最終版完成 (ID: {int3.id})")
 

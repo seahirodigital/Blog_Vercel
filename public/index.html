@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vibe Blog Engine - Markdown エディタ</title>
+  <title>Vibe Blog Engine</title>
   <meta name="description" content="YouTube動画からAIで自動生成されたブログ記事を閲覧・編集・保存できるMarkdownエディタ" />
 
   <!-- Tailwind CSS -->
@@ -15,8 +15,6 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <!-- Marked.js (Markdown → HTML) -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,19 +24,17 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; background: #f8fafc; color: #334155; }
 
-    /* アニメーション */
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    /* ── アニメーション ── */
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-    @keyframes slideInLeft { from { transform: translateX(-100%); } to { transform: translateX(0); } }
-    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+    @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    .animate-fade-in { animation: fadeIn 0.5s ease-out; }
-    .animate-fade-in-up { animation: fadeInUp 0.6s ease-out; }
-    .animate-slide-in { animation: slideInLeft 0.3s ease-out; }
-    .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    .animate-fade-in { animation: fadeIn 0.35s ease-out; }
+    .animate-fade-in-up { animation: fadeInUp 0.5s ease-out; }
+    .animate-spin { animation: spin 0.8s linear infinite; }
 
-    /* スケルトンローダー */
     .skeleton {
       background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
       background-size: 200% 100%;
@@ -46,67 +42,152 @@
       border-radius: 0.5rem;
     }
 
-    /* カスタムスクロールバー */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+    /* ── スクロールバー ── */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
-    /* Markdown プレビュースタイル */
-    .markdown-preview h1 { font-size: 1.75rem; font-weight: 700; color: #1e293b; margin: 1.5rem 0 0.75rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
-    .markdown-preview h2 { font-size: 1.375rem; font-weight: 700; color: #1e293b; margin: 1.25rem 0 0.5rem; }
-    .markdown-preview h3 { font-size: 1.125rem; font-weight: 600; color: #334155; margin: 1rem 0 0.5rem; }
-    .markdown-preview p { margin: 0.75rem 0; line-height: 1.8; }
-    .markdown-preview ul, .markdown-preview ol { margin: 0.75rem 0; padding-left: 1.5rem; }
-    .markdown-preview li { margin: 0.25rem 0; line-height: 1.7; }
-    .markdown-preview blockquote { border-left: 4px solid #7C4DFF; background: #f5f3ff; padding: 0.75rem 1rem; margin: 0.75rem 0; border-radius: 0 0.5rem 0.5rem 0; color: #4c1d95; }
-    .markdown-preview code { background: #f1f5f9; padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: #7C4DFF; }
-    .markdown-preview pre { background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 0.75rem; overflow-x: auto; margin: 1rem 0; }
-    .markdown-preview pre code { background: none; color: inherit; padding: 0; }
-    .markdown-preview table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
-    .markdown-preview th { background: #f8fafc; font-weight: 600; text-align: left; padding: 0.75rem; border: 1px solid #e2e8f0; }
-    .markdown-preview td { padding: 0.75rem; border: 1px solid #e2e8f0; }
-    .markdown-preview a { color: #7C4DFF; text-decoration: underline; }
-    .markdown-preview img { max-width: 100%; border-radius: 0.5rem; margin: 0.5rem 0; }
-    .markdown-preview hr { border: none; border-top: 2px solid #e2e8f0; margin: 1.5rem 0; }
+    /* ── リサイズハンドル ── */
+    .resize-handle {
+      width: 5px;
+      background: transparent;
+      cursor: col-resize;
+      flex-shrink: 0;
+      position: relative;
+      transition: background 0.15s;
+      z-index: 10;
+    }
+    .resize-handle:hover, .resize-handle.dragging {
+      background: #7C4DFF;
+    }
+    .resize-handle::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 3px;
+      height: 40px;
+      border-radius: 9999px;
+      background: #cbd5e1;
+      transition: background 0.15s;
+    }
+    .resize-handle:hover::after, .resize-handle.dragging::after {
+      background: #7C4DFF;
+    }
 
-    /* エディタ */
+    /* サイドバー境界ハンドル */
+    .sidebar-resize-handle {
+      width: 4px;
+      background: transparent;
+      cursor: col-resize;
+      flex-shrink: 0;
+      transition: background 0.15s;
+      z-index: 10;
+    }
+    .sidebar-resize-handle:hover, .sidebar-resize-handle.dragging {
+      background: #7C4DFF22;
+    }
+
+    /* ── エディタ ── */
     .editor-textarea {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
-      line-height: 1.7;
+      font-size: 0.875rem;
+      line-height: 1.75;
       resize: none;
       tab-size: 2;
     }
 
-    /* トースト通知 */
+    /* ── Markdown プレビュー ── */
+    .markdown-preview h1 { font-size: 1.7rem; font-weight: 700; color: #1e293b; margin: 1.5rem 0 0.75rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
+    .markdown-preview h2 { font-size: 1.35rem; font-weight: 700; color: #1e293b; margin: 1.25rem 0 0.5rem; }
+    .markdown-preview h3 { font-size: 1.1rem; font-weight: 600; color: #334155; margin: 1rem 0 0.4rem; }
+    .markdown-preview p { margin: 0.7rem 0; line-height: 1.85; }
+    .markdown-preview ul, .markdown-preview ol { margin: 0.7rem 0; padding-left: 1.5rem; }
+    .markdown-preview li { margin: 0.25rem 0; line-height: 1.7; }
+    .markdown-preview blockquote { border-left: 4px solid #7C4DFF; background: #f5f3ff; padding: 0.75rem 1rem; margin: 0.75rem 0; border-radius: 0 0.5rem 0.5rem 0; color: #4c1d95; }
+    .markdown-preview code { background: #f1f5f9; padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #7C4DFF; }
+    .markdown-preview pre { background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 0.75rem; overflow-x: auto; margin: 1rem 0; }
+    .markdown-preview pre code { background: none; color: inherit; padding: 0; }
+    .markdown-preview table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .markdown-preview th { background: #f8fafc; font-weight: 600; text-align: left; padding: 0.65rem 0.75rem; border: 1px solid #e2e8f0; }
+    .markdown-preview td { padding: 0.65rem 0.75rem; border: 1px solid #e2e8f0; }
+    .markdown-preview a { color: #7C4DFF; text-decoration: underline; }
+    .markdown-preview img { max-width: 100%; border-radius: 0.5rem; margin: 0.5rem 0; }
+    .markdown-preview hr { border: none; border-top: 2px solid #e2e8f0; margin: 1.5rem 0; }
+
+    /* ── トースト ── */
     .toast {
       position: fixed; bottom: 1.5rem; right: 1.5rem;
-      padding: 1rem 1.5rem; border-radius: 0.75rem;
-      color: white; font-weight: 600; z-index: 100;
+      padding: 0.875rem 1.25rem; border-radius: 0.75rem;
+      color: white; font-weight: 600; z-index: 9999;
       animation: fadeInUp 0.3s ease-out;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      display: flex; align-items: center; gap: 0.5rem;
     }
     .toast-success { background: linear-gradient(135deg, #10B981, #059669); }
-    .toast-error { background: linear-gradient(135deg, #F43F5E, #E11D48); }
-    .toast-info { background: linear-gradient(135deg, #7C4DFF, #651FFF); }
+    .toast-error   { background: linear-gradient(135deg, #F43F5E, #E11D48); }
+    .toast-info    { background: linear-gradient(135deg, #7C4DFF, #651FFF); }
 
-    /* モバイルサイドバーオーバーレイ */
-    .sidebar-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
-      z-index: 40; display: none;
+    /* ── サイドバー ── */
+    .sidebar-collapsed { width: 0 !important; overflow: hidden; }
+
+    /* ── フォルダツリー ── */
+    .folder-item { transition: background 0.15s; }
+    .folder-item:hover { background: #f8fafc; }
+    .article-item { transition: all 0.15s; }
+    .article-item:hover { background: #f1f5f9; }
+    .article-item.active { background: #7C4DFF; color: white; }
+    .article-item.active .article-date { color: #c4b5fd; }
+
+    /* タイトル編集インプット */
+    .title-input {
+      background: transparent;
+      border: none;
+      outline: none;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #1e293b;
+      width: 100%;
     }
-    .sidebar-overlay.active { display: block; }
+    .title-input:focus {
+      background: #f8fafc;
+      border-radius: 0.25rem;
+      padding: 0 0.25rem;
+    }
 
-    /* タブ切り替え（モバイル） */
+    /* タブ（モバイル） */
     .tab-active { border-bottom: 3px solid #7C4DFF; color: #7C4DFF; font-weight: 600; }
+
+    /* サイドバートグルボタン */
+    .sidebar-toggle {
+      position: absolute;
+      top: 50%;
+      right: -14px;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      border-radius: 9999px;
+      background: white;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 20;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: all 0.15s;
+    }
+    .sidebar-toggle:hover { background: #7C4DFF; border-color: #7C4DFF; color: white; }
+    .sidebar-toggle svg { transition: transform 0.2s; }
   </style>
 </head>
 <body>
   <div id="root"></div>
 
   <script type="text/babel">
-    const { useState, useEffect, useRef, useCallback } = React;
+    const { useState, useEffect, useRef, useCallback, useMemo } = React;
 
     // === API ヘルパー ===
     const API_BASE = '/api';
@@ -148,152 +229,333 @@
       return await res.json();
     }
 
+    // === フォルダ階層構築ユーティリティ ===
+    // ファイル名規則: YYYYMMDD_HHMM_タイトル.md
+    // → 記事名からフォルダ（年月）を自動判定してツリーを構築
+    function buildFolderTree(articles) {
+      const tree = {}; // { "2026年3月": [article, ...], ... }
+      const noDate = [];
+
+      for (const article of articles) {
+        const match = article.name.match(/^(\d{4})(\d{2})\d{2}_/);
+        if (match) {
+          const year = match[1];
+          const month = parseInt(match[2], 10);
+          const key = `${year}年${month}月`;
+          if (!tree[key]) tree[key] = [];
+          tree[key].push(article);
+        } else {
+          noDate.push(article);
+        }
+      }
+
+      // 各フォルダ内を新しい順にソート
+      for (const key of Object.keys(tree)) {
+        tree[key].sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified));
+      }
+
+      return { tree, noDate };
+    }
+
     // === Toast コンポーネント ===
     function Toast({ message, type, onClose }) {
       useEffect(() => {
-        const timer = setTimeout(onClose, 3000);
-        return () => clearTimeout(timer);
+        const t = setTimeout(onClose, 3500);
+        return () => clearTimeout(t);
       }, [onClose]);
+
+      const icons = {
+        success: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6L9 17l-5-5"/></svg>,
+        error:   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>,
+        info:    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>,
+      };
 
       return (
         <div className={`toast toast-${type}`}>
+          {icons[type]}
           {message}
         </div>
       );
     }
 
-    // === サイドバー コンポーネント ===
-    function Sidebar({ articles, selectedId, onSelect, onNewArticle, loading, isOpen, onClose }) {
-      return (
-        <>
-          {/* モバイルオーバーレイ */}
-          <div className={`sidebar-overlay ${isOpen ? 'active' : ''}`} onClick={onClose} />
+    // === リサイズフック ===
+    function useResizable(initialWidth, minWidth, maxWidth) {
+      const [width, setWidth] = useState(initialWidth);
+      const dragging = useRef(false);
+      const startX   = useRef(0);
+      const startW   = useRef(0);
 
-          <aside className={`
-            fixed lg:static inset-y-0 left-0 z-50
-            w-72 bg-white border-r border-slate-200
-            flex flex-col h-screen
-            transition-transform duration-300 ease-out
-            ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-          `}>
-            {/* ヘッダー */}
-            <div className="bg-gradient-to-r from-[#7C4DFF] to-[#651FFF] text-white p-5">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h1 className="text-lg font-bold tracking-tight">Vibe Blog</h1>
-                  <p className="text-purple-200 text-xs mt-0.5">Markdown エディタ</p>
-                </div>
-                <button
-                  onClick={onClose}
-                  className="lg:hidden p-1.5 rounded-lg hover:bg-white/20 transition-colors"
-                  id="sidebar-close-btn"
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                </button>
-              </div>
+      const onMouseDown = useCallback((e) => {
+        dragging.current = true;
+        startX.current   = e.clientX;
+        startW.current   = width;
+        document.body.style.cursor = 'col-resize';
+        document.body.style.userSelect = 'none';
+      }, [width]);
+
+      useEffect(() => {
+        const onMove = (e) => {
+          if (!dragging.current) return;
+          const delta = e.clientX - startX.current;
+          const newW  = Math.min(maxWidth, Math.max(minWidth, startW.current + delta));
+          setWidth(newW);
+        };
+        const onUp = () => {
+          if (!dragging.current) return;
+          dragging.current = false;
+          document.body.style.cursor = '';
+          document.body.style.userSelect = '';
+        };
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('mouseup', onUp);
+        return () => {
+          window.removeEventListener('mousemove', onMove);
+          window.removeEventListener('mouseup', onUp);
+        };
+      }, [minWidth, maxWidth]);
+
+      return [width, onMouseDown];
+    }
+
+    // === フォルダツリー コンポーネント ===
+    function FolderTree({ articles, selectedId, onSelect, loading }) {
+      const [openFolders, setOpenFolders] = useState({});
+
+      const { tree, noDate } = useMemo(() => buildFolderTree(articles), [articles]);
+
+      // 初期状態: 最新月を展開
+      useEffect(() => {
+        const keys = Object.keys(tree);
+        if (keys.length > 0) {
+          setOpenFolders({ [keys[0]]: true });
+        }
+      }, [articles.length]);
+
+      const toggleFolder = (key) => {
+        setOpenFolders(prev => ({ ...prev, [key]: !prev[key] }));
+      };
+
+      if (loading) {
+        return (
+          <div className="p-3 space-y-2">
+            {[1,2,3,4,5].map(i => <div key={i} className="skeleton h-10 w-full" />)}
+          </div>
+        );
+      }
+
+      if (articles.length === 0) {
+        return (
+          <div className="text-center text-slate-400 text-xs mt-8 px-4">
+            <svg className="mx-auto mb-3 text-slate-300" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+            </svg>
+            記事がまだありません。<br/>新規作成するかパイプラインを実行してください。
+          </div>
+        );
+      }
+
+      const renderArticle = (article, indent = false) => {
+        const isActive = article.id === selectedId;
+        const displayName = article.name.replace(/^\d{8}_\d{4}_/, '').replace('.md', '');
+        const date = new Date(article.lastModified).toLocaleDateString('ja-JP', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+        return (
+          <button
+            key={article.id}
+            onClick={() => onSelect(article)}
+            className={`w-full text-left rounded-md px-2 py-2 mb-0.5 article-item ${isActive ? 'active' : ''} ${indent ? 'pl-6' : ''}`}
+            id={`article-item-${article.id}`}
+          >
+            <div className={`text-xs font-medium truncate ${isActive ? 'text-white' : 'text-slate-700'}`}>
+              <svg className="inline mr-1 mb-0.5 opacity-60" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+              {displayName}
             </div>
+            <div className={`text-xs mt-0.5 article-date ${isActive ? 'text-purple-200' : 'text-slate-400'}`}>
+              {date} · {(article.size / 1024).toFixed(1)}KB
+            </div>
+          </button>
+        );
+      };
 
-            {/* 新規作成ボタン */}
-            <div className="p-3">
+      return (
+        <div className="px-2 pb-2">
+          {/* フォルダ別 */}
+          {Object.keys(tree).sort((a, b) => b.localeCompare(a)).map(key => (
+            <div key={key} className="mb-1">
+              <button
+                onClick={() => toggleFolder(key)}
+                className="w-full flex items-center gap-1.5 px-2 py-1.5 rounded-md folder-item text-left text-xs font-semibold text-slate-500 hover:text-slate-700"
+              >
+                <svg
+                  width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                  style={{ transform: openFolders[key] ? 'rotate(90deg)' : 'rotate(0deg)', transition: 'transform 0.15s' }}
+                >
+                  <path d="M9 18l6-6-6-6"/>
+                </svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill={openFolders[key] ? '#7C4DFF' : 'none'} stroke={openFolders[key] ? '#7C4DFF' : 'currentColor'} strokeWidth="2">
+                  <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+                </svg>
+                <span style={{ color: openFolders[key] ? '#7C4DFF' : undefined }}>{key}</span>
+                <span className="ml-auto bg-slate-100 text-slate-400 text-xs rounded-full px-1.5 py-0.5 leading-none">{tree[key].length}</span>
+              </button>
+              {openFolders[key] && (
+                <div className="ml-1 pl-2 border-l border-slate-100">
+                  {tree[key].map(a => renderArticle(a, false))}
+                </div>
+              )}
+            </div>
+          ))}
+
+          {/* 日付なし */}
+          {noDate.length > 0 && (
+            <div>
+              <div className="px-2 py-1 text-xs text-slate-400 font-semibold">その他</div>
+              {noDate.map(a => renderArticle(a))}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // === サイドバー コンポーネント ===
+    function Sidebar({ articles, selectedId, onSelect, onNewArticle, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle }) {
+
+      return (
+        <div className="flex h-screen" style={{ position: 'relative' }}>
+          <aside
+            style={{ width: isCollapsed ? 0 : sidebarWidth, transition: isCollapsed ? 'width 0.25s' : 'none', overflow: 'hidden' }}
+            className="h-screen bg-white border-r border-slate-200 flex flex-col flex-shrink-0"
+          >
+            {/* ヘッダー: 新規作成ボタン */}
+            <div className="p-3 border-b border-slate-100 bg-gradient-to-r from-[#7C4DFF] to-[#651FFF]">
               <button
                 onClick={onNewArticle}
-                className="w-full flex items-center justify-center gap-2 bg-[#7C4DFF] text-white font-bold rounded-lg px-4 py-2.5 hover:bg-[#651FFF] transition-colors shadow-sm text-sm"
+                className="w-full flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 text-white font-bold rounded-lg px-4 py-2.5 transition-colors text-sm"
                 id="new-article-btn"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 5v14M5 12h14"/></svg>
-                新規記事作成
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12h14"/></svg>
+                新規作成
               </button>
             </div>
 
             {/* 記事一覧 */}
-            <div className="flex-1 overflow-y-auto px-3 pb-3">
-              {loading ? (
-                <div className="space-y-2">
-                  {[1,2,3,4,5].map(i => (
-                    <div key={i} className="skeleton h-16 w-full" />
-                  ))}
-                </div>
-              ) : articles.length === 0 ? (
-                <div className="text-center text-slate-400 text-sm mt-8 px-4">
-                  <svg className="mx-auto mb-3 text-slate-300" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
-                  記事がまだありません。<br/>新規作成するか、パイプラインを実行してください。
-                </div>
-              ) : (
-                <div className="space-y-1">
-                  {articles.map((article, idx) => {
-                    const isActive = article.id === selectedId;
-                    const displayName = article.name.replace('.md', '');
-                    const date = new Date(article.lastModified).toLocaleDateString('ja-JP', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-
-                    return (
-                      <button
-                        key={article.id}
-                        onClick={() => { onSelect(article); onClose(); }}
-                        className={`
-                          w-full text-left p-3 rounded-lg transition-all duration-200 group
-                          ${isActive
-                            ? 'bg-[#7C4DFF] text-white shadow-md shadow-purple-200'
-                            : 'text-slate-600 hover:bg-slate-50'
-                          }
-                        `}
-                        style={{ animationDelay: `${idx * 50}ms` }}
-                        id={`article-item-${article.id}`}
-                      >
-                        <div className={`text-sm font-medium truncate ${isActive ? 'text-white' : 'text-slate-700'}`}>
-                          {displayName}
-                        </div>
-                        <div className={`text-xs mt-1 ${isActive ? 'text-purple-200' : 'text-slate-400'}`}>
-                          {date} · {(article.size / 1024).toFixed(1)}KB
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-
-            {/* パイプライン実行ボタン */}
-            <div className="p-3 border-t border-slate-200">
-              <button
-                onClick={async () => {
-                  try {
-                    await triggerPipeline();
-                    alert('🚀 パイプラインを起動しました！\nGitHub Actionsで進捗を確認してください。');
-                  } catch (e) {
-                    alert('❌ パイプライン起動に失敗: ' + e.message);
-                  }
-                }}
-                className="w-full flex items-center justify-center gap-2 text-[#7C4DFF] border border-[#7C4DFF] font-bold rounded-lg px-4 py-2.5 hover:bg-purple-50 transition-colors text-sm"
-                id="trigger-pipeline-btn"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                パイプライン実行
-              </button>
+            <div className="flex-1 overflow-y-auto py-2">
+              <FolderTree
+                articles={articles}
+                selectedId={selectedId}
+                onSelect={(a) => { onSelect(a); }}
+                loading={loading}
+              />
             </div>
           </aside>
-        </>
+
+          {/* サイドバーリサイズハンドル (collapsed時はトグルボタンのみ) */}
+          {!isCollapsed && (
+            <div
+              className="sidebar-resize-handle h-full"
+              onMouseDown={onResizeStart}
+            />
+          )}
+
+          {/* トグルボタン */}
+          <button
+            className="sidebar-toggle"
+            onClick={onToggle}
+            title={isCollapsed ? 'サイドバーを開く' : 'サイドバーを閉じる'}
+            style={{ right: isCollapsed ? '-14px' : '-14px' }}
+          >
+            <svg
+              width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
+              style={{ transform: isCollapsed ? 'rotate(0deg)' : 'rotate(180deg)', transition: 'transform 0.2s' }}
+            >
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+        </div>
       );
     }
 
     // === メインアプリ ===
     function App() {
-      const [articles, setArticles] = useState([]);
+      const [articles, setArticles]             = useState([]);
       const [selectedArticle, setSelectedArticle] = useState(null);
-      const [content, setContent] = useState('');
+      const [content, setContent]               = useState('');
       const [originalContent, setOriginalContent] = useState('');
-      const [loading, setLoading] = useState(true);
+      const [loading, setLoading]               = useState(true);
       const [contentLoading, setContentLoading] = useState(false);
-      const [saving, setSaving] = useState(false);
-      const [sidebarOpen, setSidebarOpen] = useState(false);
-      const [mobileTab, setMobileTab] = useState('editor'); // 'editor' | 'preview'
-      const [toast, setToast] = useState(null);
-      const [isNewArticle, setIsNewArticle] = useState(false);
-      const [newFilename, setNewFilename] = useState('');
-      const textareaRef = useRef(null);
+      const [saving, setSaving]                 = useState(false);
+      const [mobileTab, setMobileTab]           = useState('editor');
+      const [toast, setToast]                   = useState(null);
+      const [isNewArticle, setIsNewArticle]     = useState(false);
+      const [newFilename, setNewFilename]       = useState('');
+      const [isEditingTitle, setIsEditingTitle] = useState(false);
+      const [editedTitle, setEditedTitle]       = useState('');
+      const [pipelineRunning, setPipelineRunning] = useState(false);
+      const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+      const textareaRef  = useRef(null);
+      const titleInputRef = useRef(null);
 
       const hasChanges = content !== originalContent;
 
-      // 記事一覧を取得
+      // サイドバー幅リサイズ
+      const [sidebarWidth, setSidebarWidth] = useState(260);
+      const sidebarDragging = useRef(false);
+      const sidebarStartX   = useRef(0);
+      const sidebarStartW   = useRef(0);
+
+      const onSidebarResizeStart = useCallback((e) => {
+        sidebarDragging.current = true;
+        sidebarStartX.current   = e.clientX;
+        sidebarStartW.current   = sidebarWidth;
+        document.body.style.cursor    = 'col-resize';
+        document.body.style.userSelect = 'none';
+      }, [sidebarWidth]);
+
+      // エディタ/プレビュー分割リサイズ
+      const [editorRatio, setEditorRatio] = useState(0.5); // 0~1
+      const editorDragging  = useRef(false);
+      const editorStartX    = useRef(0);
+      const editorStartRatio = useRef(0.5);
+      const editorAreaRef   = useRef(null);
+
+      const onEditorResizeStart = useCallback((e) => {
+        editorDragging.current  = true;
+        editorStartX.current    = e.clientX;
+        editorStartRatio.current = editorRatio;
+        document.body.style.cursor    = 'col-resize';
+        document.body.style.userSelect = 'none';
+      }, [editorRatio]);
+
+      useEffect(() => {
+        const onMove = (e) => {
+          if (sidebarDragging.current) {
+            const delta = e.clientX - sidebarStartX.current;
+            setSidebarWidth(Math.min(480, Math.max(180, sidebarStartW.current + delta)));
+          }
+          if (editorDragging.current && editorAreaRef.current) {
+            const rect  = editorAreaRef.current.getBoundingClientRect();
+            const ratio = (e.clientX - rect.left) / rect.width;
+            setEditorRatio(Math.min(0.85, Math.max(0.15, ratio)));
+          }
+        };
+        const onUp = () => {
+          if (sidebarDragging.current || editorDragging.current) {
+            sidebarDragging.current = false;
+            editorDragging.current  = false;
+            document.body.style.cursor    = '';
+            document.body.style.userSelect = '';
+          }
+        };
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('mouseup',   onUp);
+        return () => {
+          window.removeEventListener('mousemove', onMove);
+          window.removeEventListener('mouseup',   onUp);
+        };
+      }, []);
+
+      // 記事一覧取得
       const loadArticles = useCallback(async () => {
         setLoading(true);
         try {
@@ -306,26 +568,22 @@
         }
       }, []);
 
-      useEffect(() => {
-        loadArticles();
-      }, [loadArticles]);
+      useEffect(() => { loadArticles(); }, [loadArticles]);
 
-      // トースト表示
-      const showToast = (message, type = 'info') => {
-        setToast({ message, type });
-      };
+      const showToast = (message, type = 'info') => setToast({ message, type });
 
       // 記事選択
       const handleSelect = async (article) => {
         if (hasChanges && !confirm('未保存の変更があります。破棄しますか？')) return;
-
         setContentLoading(true);
         setIsNewArticle(false);
+        setIsEditingTitle(false);
         try {
           const text = await fetchArticleContent(article.id);
           setContent(text);
           setOriginalContent(text);
           setSelectedArticle(article);
+          setEditedTitle(article.name.replace(/^\d{8}_\d{4}_/, '').replace('.md', ''));
         } catch (e) {
           showToast('記事の読み込みに失敗しました', 'error');
         } finally {
@@ -340,6 +598,7 @@
         setSelectedArticle(null);
         setContent('# 新しい記事\n\nここに記事を書いてください...\n');
         setOriginalContent('');
+        setIsEditingTitle(false);
         const now = new Date();
         const dateStr = `${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}`;
         const timeStr = `${String(now.getHours()).padStart(2,'0')}${String(now.getMinutes()).padStart(2,'0')}`;
@@ -349,18 +608,12 @@
       // 保存
       const handleSave = async () => {
         const filename = isNewArticle ? newFilename : (selectedArticle?.name || '');
-        if (!filename) {
-          showToast('ファイル名を指定してください', 'error');
-          return;
-        }
-
+        if (!filename) { showToast('ファイル名を指定してください', 'error'); return; }
         setSaving(true);
         try {
           const result = await saveArticle(filename, content);
           setOriginalContent(content);
           showToast('💾 OneDriveに保存しました！', 'success');
-
-          // 保存レスポンスから直接記事情報を更新（一覧再取得に依存しない）
           if (isNewArticle && result.id) {
             const newArticle = {
               id: result.id,
@@ -373,15 +626,9 @@
             setArticles(prev => [newArticle, ...prev]);
           }
           setIsNewArticle(false);
-
-          // バックグラウンドで一覧を更新（失敗してもトーストを出さない）
           setTimeout(async () => {
-            try {
-              const data = await fetchArticles();
-              setArticles(data);
-            } catch (e) {
-              console.warn('一覧の再取得に失敗（保存は成功済み）:', e);
-            }
+            try { const data = await fetchArticles(); setArticles(data); }
+            catch (e) { console.warn('一覧再取得失敗（保存は成功）:', e); }
           }, 1500);
         } catch (e) {
           showToast('保存に失敗しました: ' + e.message, 'error');
@@ -390,26 +637,52 @@
         }
       };
 
-      // Markdownをレンダリング
-      const renderedHTML = React.useMemo(() => {
+      // パイプライン実行
+      const handlePipeline = async () => {
+        setPipelineRunning(true);
         try {
-          return marked.parse(content || '');
-        } catch {
-          return '<p>Markdownの解析に失敗しました</p>';
+          await triggerPipeline();
+          showToast('🚀 パイプラインを起動しました！GitHub Actionsで進捗を確認してください。', 'info');
+        } catch (e) {
+          showToast('❌ パイプライン起動に失敗: ' + e.message, 'error');
+        } finally {
+          setPipelineRunning(false);
         }
+      };
+
+      // タイトル編集確定
+      const commitTitleEdit = () => {
+        if (!selectedArticle || !editedTitle.trim()) {
+          setIsEditingTitle(false);
+          return;
+        }
+        const match = selectedArticle.name.match(/^(\d{8}_\d{4}_)/);
+        const prefix = match ? match[1] : '';
+        const newName = `${prefix}${editedTitle.trim()}.md`;
+        setSelectedArticle(prev => ({ ...prev, name: newName }));
+        setIsEditingTitle(false);
+      };
+
+      // Markdown プレビュー
+      const renderedHTML = useMemo(() => {
+        try { return marked.parse(content || ''); }
+        catch { return '<p>Markdownの解析に失敗しました</p>'; }
       }, [content]);
 
       // キーボードショートカット
       useEffect(() => {
         const handler = (e) => {
-          if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-            e.preventDefault();
-            handleSave();
-          }
+          if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); handleSave(); }
+          if (e.key === 'Escape' && isEditingTitle) { setIsEditingTitle(false); }
         };
         window.addEventListener('keydown', handler);
         return () => window.removeEventListener('keydown', handler);
-      }, [content, selectedArticle, isNewArticle, newFilename]);
+      }, [content, selectedArticle, isNewArticle, newFilename, isEditingTitle]);
+
+      // タイトル編集フォーカス
+      useEffect(() => {
+        if (isEditingTitle && titleInputRef.current) titleInputRef.current.focus();
+      }, [isEditingTitle]);
 
       return (
         <div className="flex h-screen overflow-hidden">
@@ -420,41 +693,66 @@
             onSelect={handleSelect}
             onNewArticle={handleNewArticle}
             loading={loading}
-            isOpen={sidebarOpen}
-            onClose={() => setSidebarOpen(false)}
+            sidebarWidth={sidebarWidth}
+            onResizeStart={onSidebarResizeStart}
+            isCollapsed={sidebarCollapsed}
+            onToggle={() => setSidebarCollapsed(v => !v)}
           />
 
           {/* メインコンテンツ */}
           <main className="flex-1 flex flex-col min-w-0 h-screen">
             {/* ツールバー */}
-            <header className="bg-white border-b border-slate-200 px-4 py-3 flex items-center gap-3 shrink-0">
-              {/* モバイルメニューボタン */}
-              <button
-                onClick={() => setSidebarOpen(true)}
-                className="lg:hidden p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors"
-                id="mobile-menu-btn"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-              </button>
-
-              {/* ファイル名 */}
-              <div className="flex-1 min-w-0">
+            <header className="bg-white border-b border-slate-200 px-4 py-2.5 flex items-center gap-3 shrink-0 min-h-[52px]">
+              {/* ファイル名 / タイトル */}
+              <div className="flex-1 min-w-0 flex items-center gap-2">
                 {isNewArticle ? (
                   <input
                     type="text"
                     value={newFilename}
                     onChange={(e) => setNewFilename(e.target.value)}
-                    className="w-full max-w-md text-sm font-medium text-slate-700 border border-slate-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-[#7C4DFF] focus:border-transparent"
+                    className="max-w-xs text-sm font-medium text-slate-700 border border-slate-200 rounded-lg px-3 py-1 focus:outline-none focus:ring-2 focus:ring-[#7C4DFF] focus:border-transparent"
                     placeholder="ファイル名.md"
                     id="filename-input"
                   />
                 ) : selectedArticle ? (
-                  <div>
-                    <h2 className="text-sm font-bold text-slate-800 truncate">{selectedArticle.name.replace('.md','')}</h2>
-                    <p className="text-xs text-slate-400">
-                      {new Date(selectedArticle.lastModified).toLocaleString('ja-JP')}
-                      {hasChanges && <span className="ml-2 text-amber-500 font-medium">● 未保存</span>}
-                    </p>
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    {isEditingTitle ? (
+                      <div className="flex items-center gap-1.5 flex-1 min-w-0">
+                        <input
+                          ref={titleInputRef}
+                          type="text"
+                          value={editedTitle}
+                          onChange={(e) => setEditedTitle(e.target.value)}
+                          onBlur={commitTitleEdit}
+                          onKeyDown={(e) => { if (e.key === 'Enter') commitTitleEdit(); }}
+                          className="title-input text-slate-800 bg-slate-50 border border-[#7C4DFF] rounded px-2 py-0.5 focus:outline-none max-w-sm"
+                          id="title-edit-input"
+                        />
+                        <button onClick={commitTitleEdit} className="text-[#7C4DFF] hover:text-[#651FFF] p-1 rounded" title="確定">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-1.5 min-w-0">
+                        <div className="min-w-0">
+                          <h2 className="text-sm font-bold text-slate-800 truncate max-w-xs">
+                            {selectedArticle.name.replace(/^\d{8}_\d{4}_/, '').replace('.md', '')}
+                          </h2>
+                          <p className="text-xs text-slate-400">
+                            {new Date(selectedArticle.lastModified).toLocaleString('ja-JP')}
+                            {hasChanges && <span className="ml-2 text-amber-500 font-medium">● 未保存</span>}
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => { setEditedTitle(selectedArticle.name.replace(/^\d{8}_\d{4}_/, '').replace('.md', '')); setIsEditingTitle(true); }}
+                          className="p-1 text-slate-300 hover:text-[#7C4DFF] rounded transition-colors flex-shrink-0"
+                          title="タイトルを編集"
+                          id="edit-title-btn"
+                        >
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        </button>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <p className="text-sm text-slate-400">記事を選択してください</p>
@@ -462,68 +760,75 @@
               </div>
 
               {/* アクションボタン群 */}
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-shrink-0">
+                {/* パイプライン実行ボタン (保存の左隣) */}
+                <button
+                  onClick={handlePipeline}
+                  disabled={pipelineRunning}
+                  className={`flex items-center gap-1.5 font-semibold rounded-lg px-3 py-2 text-xs transition-all border ${
+                    pipelineRunning
+                      ? 'border-slate-200 text-slate-400 cursor-not-allowed'
+                      : 'border-[#7C4DFF] text-[#7C4DFF] hover:bg-purple-50'
+                  }`}
+                  id="trigger-pipeline-btn"
+                  title="パイプライン実行"
+                >
+                  {pipelineRunning ? (
+                    <svg className="animate-spin" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>
+                  ) : (
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                  )}
+                  <span className="hidden sm:inline">パイプライン</span>
+                </button>
+
                 {/* 保存ボタン */}
                 <button
                   onClick={handleSave}
                   disabled={saving || (!selectedArticle && !isNewArticle)}
-                  className={`
-                    flex items-center gap-1.5 font-bold rounded-lg px-4 py-2 text-sm transition-all shadow-sm
-                    ${saving
+                  className={`flex items-center gap-1.5 font-bold rounded-lg px-4 py-2 text-sm transition-all shadow-sm ${
+                    saving
                       ? 'bg-slate-300 text-slate-500 cursor-not-allowed'
                       : hasChanges
                         ? 'bg-[#7C4DFF] text-white hover:bg-[#651FFF] shadow-purple-200'
                         : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
-                    }
-                  `}
+                  }`}
                   id="save-btn"
                 >
                   {saving ? (
                     <>
-                      <svg className="animate-spin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>
+                      <svg className="animate-spin" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>
                       保存中...
                     </>
                   ) : (
                     <>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
                       <span className="hidden sm:inline">保存</span>
                     </>
                   )}
                 </button>
 
-                {/* リロードボタン */}
+                {/* リロード */}
                 <button
                   onClick={loadArticles}
                   className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors"
-                  title="記事一覧を更新"
-                  id="reload-btn"
+                  title="記事一覧を更新" id="reload-btn"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg>
                 </button>
               </div>
             </header>
 
             {/* モバイル用タブ */}
             <div className="lg:hidden flex border-b border-slate-200 bg-white shrink-0">
-              <button
-                onClick={() => setMobileTab('editor')}
-                className={`flex-1 py-2.5 text-sm text-center transition-colors ${mobileTab === 'editor' ? 'tab-active' : 'text-slate-400'}`}
-              >
-                ✏️ エディタ
-              </button>
-              <button
-                onClick={() => setMobileTab('preview')}
-                className={`flex-1 py-2.5 text-sm text-center transition-colors ${mobileTab === 'preview' ? 'tab-active' : 'text-slate-400'}`}
-              >
-                👁 プレビュー
-              </button>
+              <button onClick={() => setMobileTab('editor')} className={`flex-1 py-2.5 text-sm text-center transition-colors ${mobileTab === 'editor' ? 'tab-active' : 'text-slate-400'}`}>✏️ エディタ</button>
+              <button onClick={() => setMobileTab('preview')} className={`flex-1 py-2.5 text-sm text-center transition-colors ${mobileTab === 'preview' ? 'tab-active' : 'text-slate-400'}`}>👁 プレビュー</button>
             </div>
 
             {/* エディタ + プレビュー */}
             {contentLoading ? (
               <div className="flex-1 flex items-center justify-center">
                 <div className="text-center">
-                  <div className="skeleton w-12 h-12 rounded-full mx-auto mb-3" />
+                  <div className="skeleton w-10 h-10 rounded-full mx-auto mb-3" />
                   <p className="text-slate-400 text-sm">読み込み中...</p>
                 </div>
               </div>
@@ -531,40 +836,30 @@
               /* 空の状態 */
               <div className="flex-1 flex items-center justify-center animate-fade-in">
                 <div className="text-center px-8">
-                  <div className="w-24 h-24 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[#7C4DFF] to-[#651FFF] flex items-center justify-center shadow-lg shadow-purple-200">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+                  <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-[#7C4DFF] to-[#651FFF] flex items-center justify-center shadow-lg shadow-purple-200">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
                   </div>
                   <h2 className="text-xl font-bold text-slate-800 mb-2">Vibe Blog Engine</h2>
-                  <p className="text-slate-400 text-sm max-w-sm leading-relaxed">
-                    サイドバーから記事を選択するか、<br/>「新規記事作成」で始めましょう。
-                  </p>
-                  <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-                    <button
-                      onClick={handleNewArticle}
-                      className="flex items-center justify-center gap-2 bg-[#7C4DFF] text-white font-bold rounded-lg px-6 py-3 hover:bg-[#651FFF] transition-colors shadow-sm text-sm"
-                    >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 5v14M5 12h14"/></svg>
-                      新規記事作成
-                    </button>
-                    <button
-                      onClick={() => setSidebarOpen(true)}
-                      className="lg:hidden flex items-center justify-center gap-2 text-[#7C4DFF] border border-[#7C4DFF] font-bold rounded-lg px-6 py-3 hover:bg-purple-50 transition-colors text-sm"
-                    >
-                      記事一覧を開く
-                    </button>
-                  </div>
+                  <p className="text-slate-400 text-sm max-w-xs leading-relaxed">サイドバーから記事を選択するか、<br/>「新規作成」で始めましょう。</p>
+                  <button
+                    onClick={handleNewArticle}
+                    className="mt-5 flex items-center justify-center gap-2 bg-[#7C4DFF] text-white font-bold rounded-lg px-6 py-3 hover:bg-[#651FFF] transition-colors text-sm mx-auto"
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12h14"/></svg>
+                    新規作成
+                  </button>
                 </div>
               </div>
             ) : (
-              /* エディタ + プレビュー */
-              <div className="flex-1 flex overflow-hidden">
+              /* エディタ + プレビュー（リサイズ対応） */
+              <div ref={editorAreaRef} className="flex-1 flex overflow-hidden">
                 {/* エディタ */}
-                <div className={`
-                  flex-1 flex flex-col border-r border-slate-200
-                  ${mobileTab === 'preview' ? 'hidden lg:flex' : 'flex'}
-                `}>
-                  <div className="px-4 py-2 bg-slate-50 border-b border-slate-100 text-xs text-slate-400 font-medium flex items-center gap-2 shrink-0">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                <div
+                  className={`flex flex-col border-r border-slate-200 ${mobileTab === 'preview' ? 'hidden lg:flex' : 'flex'}`}
+                  style={{ width: `${editorRatio * 100}%`, flexShrink: 0 }}
+                >
+                  <div className="px-4 py-1.5 bg-slate-50 border-b border-slate-100 text-xs text-slate-400 font-medium flex items-center gap-2 shrink-0">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                     MARKDOWN
                     <span className="ml-auto">{content.length.toLocaleString()} 文字</span>
                   </div>
@@ -579,13 +874,19 @@
                   />
                 </div>
 
+                {/* リサイズハンドル（デスクトップのみ） */}
+                <div
+                  className={`resize-handle hidden lg:block`}
+                  onMouseDown={onEditorResizeStart}
+                />
+
                 {/* プレビュー */}
-                <div className={`
-                  flex-1 flex flex-col
-                  ${mobileTab === 'editor' ? 'hidden lg:flex' : 'flex'}
-                `}>
-                  <div className="px-4 py-2 bg-slate-50 border-b border-slate-100 text-xs text-slate-400 font-medium flex items-center gap-2 shrink-0">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                <div
+                  className={`flex flex-col ${mobileTab === 'editor' ? 'hidden lg:flex' : 'flex'}`}
+                  style={{ flex: 1, minWidth: 0 }}
+                >
+                  <div className="px-4 py-1.5 bg-slate-50 border-b border-slate-100 text-xs text-slate-400 font-medium flex items-center gap-2 shrink-0">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                     プレビュー
                   </div>
                   <div
@@ -599,13 +900,7 @@
           </main>
 
           {/* トースト */}
-          {toast && (
-            <Toast
-              message={toast.message}
-              type={toast.type}
-              onClose={() => setToast(null)}
-            />
-          )}
+          {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
         </div>
       );
     }
