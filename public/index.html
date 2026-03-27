@@ -206,15 +206,28 @@
       return data.content || '';
     }
 
-    async function saveArticle(filename, content) {
+    async function saveArticle(filename, content, fileId = null) {
       const res = await fetch(`${API_BASE}/articles`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ filename, content }),
+        body: JSON.stringify({ filename, content, fileId }),
       });
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
         throw new Error(errData.error || '保存に失敗しました');
+      }
+      return await res.json();
+    }
+
+    async function renameArticleApi(fileId, newName) {
+      const res = await fetch(`${API_BASE}/articles`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fileId, newName }),
+      });
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || 'リネームに失敗しました');
       }
       return await res.json();
     }
@@ -230,31 +243,22 @@
     }
 
     // === フォルダ階層構築ユーティリティ ===
-    // ファイル名規則: YYYYMMDD_HHMM_タイトル.md
-    // → 記事名からフォルダ（年月）を自動判定してツリーを構築
+    // APIから返される article.path（OneDriveの実際のフォルダ階層）を使ってツリーを構築
     function buildFolderTree(articles) {
-      const tree = {}; // { "2026年3月": [article, ...], ... }
-      const noDate = [];
+      const tree = {}; // { "フォルダ名": [article, ...], ... }
+      const root  = []; // ルート直下（pathが空）
 
       for (const article of articles) {
-        const match = article.name.match(/^(\d{4})(\d{2})\d{2}_/);
-        if (match) {
-          const year = match[1];
-          const month = parseInt(match[2], 10);
-          const key = `${year}年${month}月`;
-          if (!tree[key]) tree[key] = [];
-          tree[key].push(article);
+        const p = (article.path || '').trim();
+        if (!p) {
+          root.push(article);
         } else {
-          noDate.push(article);
+          if (!tree[p]) tree[p] = [];
+          tree[p].push(article);
         }
       }
 
-      // 各フォルダ内を新しい順にソート
-      for (const key of Object.keys(tree)) {
-        tree[key].sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified));
-      }
-
-      return { tree, noDate };
+      return { tree, noDate: root };
     }
 
     // === Toast コンポーネント ===
@@ -605,19 +609,22 @@
         setNewFilename(`${dateStr}_${timeStr}_新しい記事.md`);
       };
 
-      // 保存
+      // 保存（既存記事はfileIDで上書き、新規はルートフォルダに作成）
       const handleSave = async () => {
         const filename = isNewArticle ? newFilename : (selectedArticle?.name || '');
         if (!filename) { showToast('ファイル名を指定してください', 'error'); return; }
         setSaving(true);
         try {
-          const result = await saveArticle(filename, content);
+          // 既存ファイルはIDで直接上書きして、フォルダ位置を維持する
+          const fileId = isNewArticle ? null : (selectedArticle?.id || null);
+          const result = await saveArticle(filename, content, fileId);
           setOriginalContent(content);
           showToast('💾 OneDriveに保存しました！', 'success');
           if (isNewArticle && result.id) {
             const newArticle = {
               id: result.id,
               name: result.name || filename,
+              path: '',
               lastModified: result.lastModified || new Date().toISOString(),
               webUrl: result.webUrl || '',
               size: result.size || content.length,
@@ -650,8 +657,8 @@
         }
       };
 
-      // タイトル編集確定
-      const commitTitleEdit = () => {
+      // タイトル編集確定（OneDriveでファイルリネーム + articlesリスト更新）
+      const commitTitleEdit = async () => {
         if (!selectedArticle || !editedTitle.trim()) {
           setIsEditingTitle(false);
           return;
@@ -659,8 +666,25 @@
         const match = selectedArticle.name.match(/^(\d{8}_\d{4}_)/);
         const prefix = match ? match[1] : '';
         const newName = `${prefix}${editedTitle.trim()}.md`;
-        setSelectedArticle(prev => ({ ...prev, name: newName }));
-        setIsEditingTitle(false);
+
+        // 名前が変わっていなければ何もしない
+        if (newName === selectedArticle.name) {
+          setIsEditingTitle(false);
+          return;
+        }
+
+        try {
+          const result = await renameArticleApi(selectedArticle.id, newName);
+          const renamed = { ...selectedArticle, name: result.name || newName };
+          // selectedArticle と articles リストの両方を更新
+          setSelectedArticle(renamed);
+          setArticles(prev => prev.map(a => a.id === selectedArticle.id ? renamed : a));
+          showToast('✏️ タイトルを変更しました', 'success');
+        } catch (e) {
+          showToast('タイトル変更に失敗しました: ' + e.message, 'error');
+        } finally {
+          setIsEditingTitle(false);
+        }
       };
 
       // Markdown プレビュー

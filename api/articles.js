@@ -1,11 +1,11 @@
 /**
  * Vercel Serverless Function: 記事CRUD (OneDrive Graph API)
- * GET    /api/articles         → 記事一覧取得
+ * GET    /api/articles         → 記事一覧取得（サブフォルダ再帰対応）
  * GET    /api/articles?id=xxx  → 記事内容取得
- * PUT    /api/articles         → 記事保存（上書き）
+ * PUT    /api/articles         → 記事保存（新規 or 上書き）
+ * PATCH  /api/articles         → 記事リネーム
  *
  * ★ トークン自動ローテーション実装済み
- *   アクセストークン取得のたびに新しいリフレッシュトークンをVercel環境変数に自動保存
  */
 
 const GRAPH_API = 'https://graph.microsoft.com/v1.0';
@@ -16,51 +16,29 @@ const VERCEL_API = 'https://api.vercel.com';
 async function updateVercelEnvToken(newRefreshToken) {
   const vercelToken = process.env.VERCEL_TOKEN;
   const projectId = process.env.VERCEL_PROJECT_ID;
-
   if (!vercelToken || !projectId) {
     console.warn('VERCEL_TOKEN or VERCEL_PROJECT_ID が未設定のためトークン更新をスキップ');
     return;
   }
-
   try {
-    // 既存の環境変数一覧を取得してIDを探す
     const listRes = await fetch(
       `${VERCEL_API}/v9/projects/${projectId}/env?limit=100`,
       { headers: { Authorization: `Bearer ${vercelToken}` } }
     );
-
-    if (!listRes.ok) {
-      console.warn('Vercel env list 取得失敗:', listRes.status);
-      return;
-    }
-
+    if (!listRes.ok) { console.warn('Vercel env list 取得失敗:', listRes.status); return; }
     const listData = await listRes.json();
-    const envVars = listData.envs || [];
-    const targetEnv = envVars.find(e => e.key === 'ONEDRIVE_REFRESH_TOKEN');
-
-    if (!targetEnv) {
-      console.warn('ONEDRIVE_REFRESH_TOKEN の環境変数IDが見つかりません');
-      return;
-    }
-
-    // 環境変数を更新
+    const targetEnv = (listData.envs || []).find(e => e.key === 'ONEDRIVE_REFRESH_TOKEN');
+    if (!targetEnv) { console.warn('ONEDRIVE_REFRESH_TOKEN の環境変数IDが見つかりません'); return; }
     const patchRes = await fetch(
       `${VERCEL_API}/v9/projects/${projectId}/env/${targetEnv.id}`,
       {
         method: 'PATCH',
-        headers: {
-          Authorization: `Bearer ${vercelToken}`,
-          'Content-Type': 'application/json',
-        },
+        headers: { Authorization: `Bearer ${vercelToken}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ value: newRefreshToken }),
       }
     );
-
-    if (patchRes.ok) {
-      console.log('✅ リフレッシュトークンをVercel環境変数に自動更新しました');
-    } else {
-      console.warn('Vercel env 更新失敗:', patchRes.status, await patchRes.text());
-    }
+    if (patchRes.ok) console.log('✅ リフレッシュトークンをVercel環境変数に自動更新しました');
+    else console.warn('Vercel env 更新失敗:', patchRes.status, await patchRes.text());
   } catch (e) {
     console.warn('トークン更新エラー (保存処理には影響なし):', e.message);
   }
@@ -75,48 +53,47 @@ async function getAccessToken() {
     grant_type: 'refresh_token',
     scope: 'Files.ReadWrite.All offline_access',
   });
-
   const res = await fetch(TOKEN_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: params.toString(),
   });
-
   if (!res.ok) {
     const err = await res.text();
     console.error('Token エラー:', err);
     throw new Error(`Token取得失敗: ${res.status}`);
   }
-
   const data = await res.json();
-
-  // 新しいリフレッシュトークンが返ってきた場合、Vercel環境変数を非同期で更新
   if (data.refresh_token && data.refresh_token !== process.env.ONEDRIVE_REFRESH_TOKEN) {
     updateVercelEnvToken(data.refresh_token).catch(console.warn);
   }
-
   return data.access_token;
 }
 
-// フォルダパスのURLエンコード（空白・日本語対応）
+// フォルダパスのURLエンコード
 function encodeFolderPath(folder) {
   return folder.split('/').map(encodeURIComponent).join('/');
 }
 
-// 記事一覧取得
-async function listArticles(token) {
-  const folder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
-  const encoded = encodeFolderPath(folder);
-  const url = `${GRAPH_API}/me/drive/root:/${encoded}:/children?$select=id,name,lastModifiedDateTime,webUrl,size&$top=100`;
+/**
+ * 記事一覧を再帰的に取得する（OneDriveのフォルダ階層をそのまま反映）
+ * @param {string} token - アクセストークン
+ * @param {string} folderPath - OneDriveのフォルダパス（例: "Blog_Articles"）
+ * @param {string} relativePath - UIに表示するフォルダ相対パス（例: "2026年記事"）
+ * @param {number} depth - 再帰深さ（無限ループ防止、最大5階層）
+ */
+async function listArticlesRecursive(token, folderPath, relativePath = '', depth = 0) {
+  if (depth > 5) return []; // 安全のため最大5階層まで
 
-  console.log('LIST:', url);
-  const res = await fetch(url, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const encoded = encodeFolderPath(folderPath);
+  const url = `${GRAPH_API}/me/drive/root:/${encoded}:/children?$select=id,name,lastModifiedDateTime,webUrl,size,folder&$top=200`;
+
+  console.log(`LIST (depth=${depth}):`, folderPath);
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
 
   if (!res.ok) {
     if (res.status === 404) {
-      console.log('フォルダが存在しないため空リストを返します');
+      console.log('フォルダが存在しないため空リストを返します:', folderPath);
       return [];
     }
     const errBody = await res.text();
@@ -125,24 +102,42 @@ async function listArticles(token) {
   }
 
   const data = await res.json();
-  return (data.value || [])
-    .filter(item => item.name && item.name.endsWith('.md'))
-    .sort((a, b) => new Date(b.lastModifiedDateTime) - new Date(a.lastModifiedDateTime))
-    .map(item => ({
-      id: item.id,
-      name: item.name,
-      lastModified: item.lastModifiedDateTime,
-      webUrl: item.webUrl || '',
-      size: item.size || 0,
-    }));
+  const items = data.value || [];
+  let articles = [];
+
+  for (const item of items) {
+    if (item.folder) {
+      // サブフォルダ → 再帰取得
+      const subRelative = relativePath ? `${relativePath}/${item.name}` : item.name;
+      const subArticles = await listArticlesRecursive(
+        token,
+        `${folderPath}/${item.name}`,
+        subRelative,
+        depth + 1
+      );
+      articles = articles.concat(subArticles);
+    } else if (item.name && item.name.endsWith('.md')) {
+      // Markdownファイル → 記事として追加
+      articles.push({
+        id: item.id,
+        name: item.name,
+        path: relativePath, // フォルダの相対パス（ルートフォルダからの表示用）
+        lastModified: item.lastModifiedDateTime,
+        webUrl: item.webUrl || '',
+        size: item.size || 0,
+      });
+    }
+  }
+
+  // 新しい順にソート
+  articles.sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified));
+  return articles;
 }
 
-// 記事内容取得
+// 記事内容取得（ファイルID使用）
 async function getArticle(token, fileId) {
   const url = `${GRAPH_API}/me/drive/items/${fileId}/content`;
-  const res = await fetch(url, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
   if (!res.ok) {
     const errBody = await res.text();
     console.error('Get error:', res.status, errBody);
@@ -151,12 +146,19 @@ async function getArticle(token, fileId) {
   return await res.text();
 }
 
-// 記事保存
-async function saveArticle(token, filename, content) {
-  const folder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
-  const encoded = encodeFolderPath(folder);
-  const encodedFile = encodeURIComponent(filename);
-  const url = `${GRAPH_API}/me/drive/root:/${encoded}/${encodedFile}:/content`;
+// 記事保存（新規: パス指定 / 既存: ファイルID指定）
+async function saveArticle(token, filename, content, fileId = null) {
+  let url;
+  if (fileId) {
+    // 既存ファイル: IDで直接上書き（フォルダ位置を維持）
+    url = `${GRAPH_API}/me/drive/items/${fileId}/content`;
+  } else {
+    // 新規ファイル: ルートフォルダに作成
+    const folder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
+    const encoded = encodeFolderPath(folder);
+    const encodedFile = encodeURIComponent(filename);
+    url = `${GRAPH_API}/me/drive/root:/${encoded}/${encodedFile}:/content`;
+  }
 
   console.log('SAVE:', url);
   const res = await fetch(url, {
@@ -173,40 +175,79 @@ async function saveArticle(token, filename, content) {
     console.error('Save error:', res.status, err);
     throw new Error(`保存失敗: ${res.status}`);
   }
+  return await res.json();
+}
 
+// 記事リネーム（ファイルID + 新ファイル名）
+async function renameArticle(token, fileId, newName) {
+  const url = `${GRAPH_API}/me/drive/items/${fileId}`;
+  console.log('RENAME:', fileId, '->', newName);
+  const res = await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name: newName }),
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    console.error('Rename error:', res.status, err);
+    throw new Error(`リネーム失敗: ${res.status}`);
+  }
   return await res.json();
 }
 
 export default async function handler(req, res) {
   // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, PATCH, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   try {
     const token = await getAccessToken();
 
+    // GET: 記事一覧 or 記事内容
     if (req.method === 'GET') {
       const { id } = req.query;
       if (id) {
         const content = await getArticle(token, id);
         return res.status(200).json({ content });
       }
-      const articles = await listArticles(token);
+      const folder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
+      const articles = await listArticlesRecursive(token, folder, '');
       return res.status(200).json({ articles });
     }
 
+    // PUT: 記事保存
     if (req.method === 'PUT') {
-      const { filename, content } = req.body;
+      const { filename, content, fileId } = req.body;
       if (!filename || content === undefined || content === null) {
         return res.status(400).json({ error: 'filename と content は必須です' });
       }
-      const result = await saveArticle(token, filename, content);
+      const result = await saveArticle(token, filename, content, fileId || null);
       return res.status(200).json({
         success: true,
         id: result.id || '',
         name: result.name || filename,
+        webUrl: result.webUrl || '',
+        lastModified: result.lastModifiedDateTime || new Date().toISOString(),
+        size: result.size || 0,
+      });
+    }
+
+    // PATCH: 記事リネーム
+    if (req.method === 'PATCH') {
+      const { fileId, newName } = req.body;
+      if (!fileId || !newName) {
+        return res.status(400).json({ error: 'fileId と newName は必須です' });
+      }
+      const result = await renameArticle(token, fileId, newName);
+      return res.status(200).json({
+        success: true,
+        id: result.id || fileId,
+        name: result.name || newName,
         webUrl: result.webUrl || '',
         lastModified: result.lastModifiedDateTime || new Date().toISOString(),
         size: result.size || 0,
