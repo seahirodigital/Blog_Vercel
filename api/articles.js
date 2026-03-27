@@ -35,7 +35,8 @@ async function getAccessToken() {
 // 記事一覧取得
 async function listArticles(token) {
   const folder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
-  const url = `${GRAPH_API}/me/drive/root:/${folder}:/children?$filter=file ne null&$orderby=lastModifiedDateTime desc&$select=id,name,lastModifiedDateTime,webUrl,size`;
+  const encodedFolder = folder.split('/').map(encodeURIComponent).join('/');
+  const url = `${GRAPH_API}/me/drive/root:/${encodedFolder}:/children?$filter=file ne null&$orderby=lastModifiedDateTime desc&$select=id,name,lastModifiedDateTime,webUrl,size`;
 
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${token}` },
@@ -73,7 +74,9 @@ async function getArticle(token, fileId) {
 // 記事保存
 async function saveArticle(token, filename, content) {
   const folder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
-  const url = `${GRAPH_API}/me/drive/root:/${folder}/${filename}:/content`;
+  const encodedFolder = folder.split('/').map(encodeURIComponent).join('/');
+  const encodedFilename = encodeURIComponent(filename);
+  const url = `${GRAPH_API}/me/drive/root:/${encodedFolder}/${encodedFilename}:/content`;
 
   const res = await fetch(url, {
     method: 'PUT',
