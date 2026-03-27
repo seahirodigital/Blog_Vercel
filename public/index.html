@@ -131,7 +131,10 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ filename, content }),
       });
-      if (!res.ok) throw new Error('保存に失敗しました');
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || '保存に失敗しました');
+      }
       return await res.json();
     }
 
@@ -353,11 +356,33 @@
 
         setSaving(true);
         try {
-          await saveArticle(filename, content);
+          const result = await saveArticle(filename, content);
           setOriginalContent(content);
           showToast('💾 OneDriveに保存しました！', 'success');
-          await loadArticles(); // 一覧を更新
+
+          // 保存レスポンスから直接記事情報を更新（一覧再取得に依存しない）
+          if (isNewArticle && result.id) {
+            const newArticle = {
+              id: result.id,
+              name: result.name || filename,
+              lastModified: result.lastModified || new Date().toISOString(),
+              webUrl: result.webUrl || '',
+              size: result.size || content.length,
+            };
+            setSelectedArticle(newArticle);
+            setArticles(prev => [newArticle, ...prev]);
+          }
           setIsNewArticle(false);
+
+          // バックグラウンドで一覧を更新（失敗してもトーストを出さない）
+          setTimeout(async () => {
+            try {
+              const data = await fetchArticles();
+              setArticles(data);
+            } catch (e) {
+              console.warn('一覧の再取得に失敗（保存は成功済み）:', e);
+            }
+          }, 1500);
         } catch (e) {
           showToast('保存に失敗しました: ' + e.message, 'error');
         } finally {

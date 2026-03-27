@@ -25,32 +25,48 @@ async function getAccessToken() {
 
   if (!res.ok) {
     const err = await res.text();
-    throw new Error(`Token取得失敗: ${err}`);
+    console.error('Token error response:', err);
+    throw new Error(`Token取得失敗: ${res.status}`);
   }
 
   const data = await res.json();
   return data.access_token;
 }
 
+// フォルダパスをエンコード（空白等を含むパス対応）
+function encodeFolderPath(folder) {
+  return folder.split('/').map(encodeURIComponent).join('/');
+}
+
 // 記事一覧取得
 async function listArticles(token) {
   const folder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
-  const encodedFolder = folder.split('/').map(encodeURIComponent).join('/');
-  const url = `${GRAPH_API}/me/drive/root:/${encodedFolder}:/children?$filter=file ne null&$orderby=lastModifiedDateTime desc&$select=id,name,lastModifiedDateTime,webUrl,size`;
+  const encoded = encodeFolderPath(folder);
+
+  // 個人用OneDriveでは $filter が使えないため、シンプルなクエリに変更
+  const url = `${GRAPH_API}/me/drive/root:/${encoded}:/children?$select=id,name,lastModifiedDateTime,webUrl,size&$top=100`;
+
+  console.log('List URL:', url);
 
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
   if (!res.ok) {
-    // フォルダが存在しない場合は空を返す
-    if (res.status === 404) return [];
+    // フォルダが存在しない場合は空を返す（初回起動時等）
+    if (res.status === 404) {
+      console.log('Folder not found, returning empty list');
+      return [];
+    }
+    const errBody = await res.text();
+    console.error('List error:', res.status, errBody);
     throw new Error(`一覧取得失敗: ${res.status}`);
   }
 
   const data = await res.json();
   return (data.value || [])
-    .filter((item) => item.name.endsWith('.md'))
+    .filter((item) => item.name && item.name.endsWith('.md'))
+    .sort((a, b) => new Date(b.lastModifiedDateTime) - new Date(a.lastModifiedDateTime))
     .map((item) => ({
       id: item.id,
       name: item.name,
@@ -67,29 +83,36 @@ async function getArticle(token, fileId) {
     headers: { Authorization: `Bearer ${token}` },
   });
 
-  if (!res.ok) throw new Error(`読み込み失敗: ${res.status}`);
+  if (!res.ok) {
+    const errBody = await res.text();
+    console.error('Get article error:', res.status, errBody);
+    throw new Error(`読み込み失敗: ${res.status}`);
+  }
   return await res.text();
 }
 
 // 記事保存
 async function saveArticle(token, filename, content) {
   const folder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
-  const encodedFolder = folder.split('/').map(encodeURIComponent).join('/');
+  const encoded = encodeFolderPath(folder);
   const encodedFilename = encodeURIComponent(filename);
-  const url = `${GRAPH_API}/me/drive/root:/${encodedFolder}/${encodedFilename}:/content`;
+  const url = `${GRAPH_API}/me/drive/root:/${encoded}/${encodedFilename}:/content`;
+
+  console.log('Save URL:', url);
 
   const res = await fetch(url, {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'text/plain',
+      'Content-Type': 'text/plain; charset=utf-8',
     },
     body: content,
   });
 
   if (!res.ok) {
     const err = await res.text();
-    throw new Error(`保存失敗: ${err}`);
+    console.error('Save error:', res.status, err);
+    throw new Error(`保存失敗: ${res.status}`);
   }
 
   return await res.json();
@@ -97,6 +120,10 @@ async function saveArticle(token, filename, content) {
 
 export default async function handler(req, res) {
   // CORS対応
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
@@ -121,21 +148,24 @@ export default async function handler(req, res) {
     if (req.method === 'PUT') {
       const { filename, content } = req.body;
 
-      if (!filename || !content) {
+      if (!filename || content === undefined || content === null) {
         return res.status(400).json({ error: 'filename と content は必須です' });
       }
 
       const result = await saveArticle(token, filename, content);
       return res.status(200).json({
         success: true,
+        id: result.id || '',
+        name: result.name || filename,
         webUrl: result.webUrl || '',
-        lastModified: result.lastModifiedDateTime,
+        lastModified: result.lastModifiedDateTime || new Date().toISOString(),
+        size: result.size || 0,
       });
     }
 
     return res.status(405).json({ error: 'Method not allowed' });
   } catch (error) {
-    console.error('API Error:', error);
+    console.error('API Error:', error.message);
     return res.status(500).json({ error: error.message });
   }
 }
