@@ -1,1 +1,18 @@
+# リファレンス（ローカル専用・機密情報含む）
 reference/
+
+# Node.js
+node_modules/
+.vercel/
+
+# Python
+__pycache__/
+*.pyc
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# サービスアカウント鍵
+service_account.json

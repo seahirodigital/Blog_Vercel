@@ -1,0 +1,21 @@
+{
+  "name": "vibe-blog-engine",
+  "version": "1.0.0",
+  "description": "Markdown ブログ編集・自動生成システム (YouTube → AI 3段階推敲 → OneDrive)",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build needed'",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "@microsoft/microsoft-graph-client": "^3.0.7",
+    "isomorphic-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "vercel": "^39.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

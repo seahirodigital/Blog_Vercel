@@ -1,0 +1,49 @@
+name: Blog Pipeline - YouTube → AI → OneDrive
+
+on:
+  # 定時実行 (毎日 JST 9:00 = UTC 0:00)
+  schedule:
+    - cron: '0 0 * * *'
+
+  # 手動トリガー（Vercel UIからのAPI経由 or GitHub UIから）
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: '実行モード'
+        required: false
+        default: 'batch'
+        type: choice
+        options:
+          - batch
+          - single
+
+jobs:
+  generate-blog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Python 3.13 セットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Python 依存パッケージをインストール
+        run: pip install -r scripts/pipeline/requirements.txt
+
+      - name: ブログ生成パイプラインを実行
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
+          SHEET_NAME: ${{ secrets.SHEET_NAME }}
+          APIFY_API_KEY: ${{ secrets.APIFY_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
+          ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
+          ONEDRIVE_REFRESH_TOKEN: ${{ secrets.ONEDRIVE_REFRESH_TOKEN }}
+          ONEDRIVE_FOLDER: ${{ secrets.ONEDRIVE_FOLDER }}
+        working-directory: scripts/pipeline
+        run: python main.py
