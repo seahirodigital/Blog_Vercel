@@ -181,6 +181,26 @@
     }
     .sidebar-toggle:hover { background: #7C4DFF; border-color: #7C4DFF; color: white; }
     .sidebar-toggle svg { transition: transform 0.2s; }
+
+    /* ── モバイルドロワー ── */
+    .mobile-drawer {
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      width: 280px;
+      z-index: 50;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 40px rgba(0,0,0,0.2);
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+    }
+    .mobile-drawer.open { transform: translateX(0); }
+    .mobile-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 40;
+    }
   </style>
 </head>
 <body>
@@ -422,60 +442,68 @@
     }
 
     // === サイドバー コンポーネント ===
-    function Sidebar({ articles, selectedId, onSelect, onNewArticle, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle }) {
-
+    function Sidebar({ articles, selectedId, onSelect, onNewArticle, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle, mobileSidebarOpen, onMobileClose }) {
       return (
-        <div className="flex h-screen" style={{ position: 'relative' }}>
-          <aside
-            style={{ width: isCollapsed ? 0 : sidebarWidth, transition: isCollapsed ? 'width 0.25s' : 'none', overflow: 'hidden' }}
-            className="h-screen bg-white border-r border-slate-200 flex flex-col flex-shrink-0"
-          >
-            {/* ヘッダー: 新規作成ボタン */}
-            <div className="p-3 border-b border-slate-100 bg-gradient-to-r from-[#7C4DFF] to-[#651FFF]">
+        <>
+          {/* ── モバイル: オーバーレイ + ドロワー ── */}
+          {mobileSidebarOpen && (
+            <div className="lg:hidden mobile-overlay" onClick={onMobileClose} />
+          )}
+          <div className={`lg:hidden mobile-drawer ${mobileSidebarOpen ? 'open' : ''}`}>
+            <div className="p-3 border-b border-slate-100 bg-gradient-to-r from-[#7C4DFF] to-[#651FFF] flex items-center gap-2">
               <button
-                onClick={onNewArticle}
-                className="w-full flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 text-white font-bold rounded-lg px-4 py-2.5 transition-colors text-sm"
-                id="new-article-btn"
+                onClick={() => { onNewArticle(); onMobileClose(); }}
+                className="flex-1 flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 text-white font-bold rounded-lg px-4 py-2.5 transition-colors text-sm"
               >
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12h14"/></svg>
                 新規作成
               </button>
+              <button onClick={onMobileClose} className="text-white/70 hover:text-white p-1.5 rounded-lg hover:bg-white/20 transition-colors flex-shrink-0" title="閉じる">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              </button>
             </div>
-
-            {/* 記事一覧 */}
             <div className="flex-1 overflow-y-auto py-2">
-              <FolderTree
-                articles={articles}
-                selectedId={selectedId}
-                onSelect={(a) => { onSelect(a); }}
-                loading={loading}
-              />
+              <FolderTree articles={articles} selectedId={selectedId} onSelect={(a) => { onSelect(a); onMobileClose(); }} loading={loading} />
             </div>
-          </aside>
+          </div>
 
-          {/* サイドバーリサイズハンドル (collapsed時はトグルボタンのみ) */}
-          {!isCollapsed && (
-            <div
-              className="sidebar-resize-handle h-full"
-              onMouseDown={onResizeStart}
-            />
-          )}
-
-          {/* トグルボタン */}
-          <button
-            className="sidebar-toggle"
-            onClick={onToggle}
-            title={isCollapsed ? 'サイドバーを開く' : 'サイドバーを閉じる'}
-            style={{ right: isCollapsed ? '-14px' : '-14px' }}
-          >
-            <svg
-              width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
-              style={{ transform: isCollapsed ? 'rotate(0deg)' : 'rotate(180deg)', transition: 'transform 0.2s' }}
+          {/* ── デスクトップ: インラインサイドバー ── */}
+          <div className="hidden lg:flex h-screen" style={{ position: 'relative' }}>
+            <aside
+              style={{ width: isCollapsed ? 0 : sidebarWidth, transition: isCollapsed ? 'width 0.25s' : 'none', overflow: 'hidden' }}
+              className="h-screen bg-white border-r border-slate-200 flex flex-col flex-shrink-0"
             >
-              <path d="M15 18l-6-6 6-6"/>
-            </svg>
-          </button>
-        </div>
+              <div className="p-3 border-b border-slate-100 bg-gradient-to-r from-[#7C4DFF] to-[#651FFF]">
+                <button
+                  onClick={onNewArticle}
+                  className="w-full flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 text-white font-bold rounded-lg px-4 py-2.5 transition-colors text-sm"
+                  id="new-article-btn"
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12h14"/></svg>
+                  新規作成
+                </button>
+              </div>
+              <div className="flex-1 overflow-y-auto py-2">
+                <FolderTree articles={articles} selectedId={selectedId} onSelect={onSelect} loading={loading} />
+              </div>
+            </aside>
+            {!isCollapsed && (
+              <div className="sidebar-resize-handle h-full" onMouseDown={onResizeStart} />
+            )}
+            <button
+              className="sidebar-toggle"
+              onClick={onToggle}
+              title={isCollapsed ? 'サイドバーを開く' : 'サイドバーを閉じる'}
+            >
+              <svg
+                width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
+                style={{ transform: isCollapsed ? 'rotate(0deg)' : 'rotate(180deg)', transition: 'transform 0.2s' }}
+              >
+                <path d="M15 18l-6-6 6-6"/>
+              </svg>
+            </button>
+          </div>
+        </>
       );
     }
 
@@ -496,6 +524,8 @@
       const [editedTitle, setEditedTitle]       = useState('');
       const [pipelineRunning, setPipelineRunning] = useState(false);
       const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+      const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+      const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
 
       const textareaRef  = useRef(null);
       const titleInputRef = useRef(null);
@@ -573,6 +603,13 @@
       }, []);
 
       useEffect(() => { loadArticles(); }, [loadArticles]);
+
+      // デスクトップ判定（リサイズ対応）
+      useEffect(() => {
+        const handler = () => setIsDesktop(window.innerWidth >= 1024);
+        window.addEventListener('resize', handler);
+        return () => window.removeEventListener('resize', handler);
+      }, []);
 
       const showToast = (message, type = 'info') => setToast({ message, type });
 
@@ -721,12 +758,25 @@
             onResizeStart={onSidebarResizeStart}
             isCollapsed={sidebarCollapsed}
             onToggle={() => setSidebarCollapsed(v => !v)}
+            mobileSidebarOpen={mobileSidebarOpen}
+            onMobileClose={() => setMobileSidebarOpen(false)}
           />
 
           {/* メインコンテンツ */}
           <main className="flex-1 flex flex-col min-w-0 h-screen">
             {/* ツールバー */}
             <header className="bg-white border-b border-slate-200 px-4 py-2.5 flex items-center gap-3 shrink-0 min-h-[52px]">
+              {/* ハンバーガーメニュー（モバイルのみ） */}
+              <button
+                className="lg:hidden p-1.5 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors flex-shrink-0"
+                onClick={() => setMobileSidebarOpen(true)}
+                id="hamburger-btn"
+                title="メニューを開く"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 12h18M3 6h18M3 18h18"/>
+                </svg>
+              </button>
               {/* ファイル名 / タイトル */}
               <div className="flex-1 min-w-0 flex items-center gap-2">
                 {isNewArticle ? (
@@ -800,7 +850,7 @@
                   {pipelineRunning ? (
                     <svg className="animate-spin" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>
                   ) : (
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8 5v14l11-7z"/></svg>
                   )}
                   <span className="hidden sm:inline">パイプライン</span>
                 </button>
@@ -844,8 +894,8 @@
 
             {/* モバイル用タブ */}
             <div className="lg:hidden flex border-b border-slate-200 bg-white shrink-0">
-              <button onClick={() => setMobileTab('editor')} className={`flex-1 py-2.5 text-sm text-center transition-colors ${mobileTab === 'editor' ? 'tab-active' : 'text-slate-400'}`}>✏️ エディタ</button>
-              <button onClick={() => setMobileTab('preview')} className={`flex-1 py-2.5 text-sm text-center transition-colors ${mobileTab === 'preview' ? 'tab-active' : 'text-slate-400'}`}>👁 プレビュー</button>
+              <button onClick={() => setMobileTab('editor')} className={`flex-1 py-2.5 text-sm text-center transition-colors ${mobileTab === 'editor' ? 'tab-active' : 'text-slate-400'}`}>エディタ</button>
+              <button onClick={() => setMobileTab('preview')} className={`flex-1 py-2.5 text-sm text-center transition-colors ${mobileTab === 'preview' ? 'tab-active' : 'text-slate-400'}`}>プレビュー</button>
             </div>
 
             {/* エディタ + プレビュー */}
@@ -880,7 +930,7 @@
                 {/* エディタ */}
                 <div
                   className={`flex flex-col border-r border-slate-200 ${mobileTab === 'preview' ? 'hidden lg:flex' : 'flex'}`}
-                  style={{ width: `${editorRatio * 100}%`, flexShrink: 0 }}
+                  style={isDesktop ? { width: `${editorRatio * 100}%`, flexShrink: 0 } : { width: '100%' }}
                 >
                   <div className="px-4 py-1.5 bg-slate-50 border-b border-slate-100 text-xs text-slate-400 font-medium flex items-center gap-2 shrink-0">
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
