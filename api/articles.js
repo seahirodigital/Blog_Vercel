@@ -3,11 +3,70 @@
  * GET    /api/articles         → 記事一覧取得
  * GET    /api/articles?id=xxx  → 記事内容取得
  * PUT    /api/articles         → 記事保存（上書き）
+ *
+ * ★ トークン自動ローテーション実装済み
+ *   アクセストークン取得のたびに新しいリフレッシュトークンをVercel環境変数に自動保存
  */
 
 const GRAPH_API = 'https://graph.microsoft.com/v1.0';
 const TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
+const VERCEL_API = 'https://api.vercel.com';
 
+// リフレッシュトークンをVercel環境変数に自動更新する
+async function updateVercelEnvToken(newRefreshToken) {
+  const vercelToken = process.env.VERCEL_TOKEN;
+  const projectId = process.env.VERCEL_PROJECT_ID;
+
+  if (!vercelToken || !projectId) {
+    console.warn('VERCEL_TOKEN or VERCEL_PROJECT_ID が未設定のためトークン更新をスキップ');
+    return;
+  }
+
+  try {
+    // 既存の環境変数一覧を取得してIDを探す
+    const listRes = await fetch(
+      `${VERCEL_API}/v9/projects/${projectId}/env?limit=100`,
+      { headers: { Authorization: `Bearer ${vercelToken}` } }
+    );
+
+    if (!listRes.ok) {
+      console.warn('Vercel env list 取得失敗:', listRes.status);
+      return;
+    }
+
+    const listData = await listRes.json();
+    const envVars = listData.envs || [];
+    const targetEnv = envVars.find(e => e.key === 'ONEDRIVE_REFRESH_TOKEN');
+
+    if (!targetEnv) {
+      console.warn('ONEDRIVE_REFRESH_TOKEN の環境変数IDが見つかりません');
+      return;
+    }
+
+    // 環境変数を更新
+    const patchRes = await fetch(
+      `${VERCEL_API}/v9/projects/${projectId}/env/${targetEnv.id}`,
+      {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${vercelToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ value: newRefreshToken }),
+      }
+    );
+
+    if (patchRes.ok) {
+      console.log('✅ リフレッシュトークンをVercel環境変数に自動更新しました');
+    } else {
+      console.warn('Vercel env 更新失敗:', patchRes.status, await patchRes.text());
+    }
+  } catch (e) {
+    console.warn('トークン更新エラー (保存処理には影響なし):', e.message);
+  }
+}
+
+// アクセストークン取得（+ リフレッシュトークン自動ローテーション）
 async function getAccessToken() {
   const params = new URLSearchParams({
     client_id: process.env.ONEDRIVE_CLIENT_ID,
@@ -25,15 +84,21 @@ async function getAccessToken() {
 
   if (!res.ok) {
     const err = await res.text();
-    console.error('Token error response:', err);
+    console.error('Token エラー:', err);
     throw new Error(`Token取得失敗: ${res.status}`);
   }
 
   const data = await res.json();
+
+  // 新しいリフレッシュトークンが返ってきた場合、Vercel環境変数を非同期で更新
+  if (data.refresh_token && data.refresh_token !== process.env.ONEDRIVE_REFRESH_TOKEN) {
+    updateVercelEnvToken(data.refresh_token).catch(console.warn);
+  }
+
   return data.access_token;
 }
 
-// フォルダパスをエンコード（空白等を含むパス対応）
+// フォルダパスのURLエンコード（空白・日本語対応）
 function encodeFolderPath(folder) {
   return folder.split('/').map(encodeURIComponent).join('/');
 }
@@ -42,20 +107,16 @@ function encodeFolderPath(folder) {
 async function listArticles(token) {
   const folder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
   const encoded = encodeFolderPath(folder);
-
-  // 個人用OneDriveでは $filter が使えないため、シンプルなクエリに変更
   const url = `${GRAPH_API}/me/drive/root:/${encoded}:/children?$select=id,name,lastModifiedDateTime,webUrl,size&$top=100`;
 
-  console.log('List URL:', url);
-
+  console.log('LIST:', url);
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
   if (!res.ok) {
-    // フォルダが存在しない場合は空を返す（初回起動時等）
     if (res.status === 404) {
-      console.log('Folder not found, returning empty list');
+      console.log('フォルダが存在しないため空リストを返します');
       return [];
     }
     const errBody = await res.text();
@@ -65,9 +126,9 @@ async function listArticles(token) {
 
   const data = await res.json();
   return (data.value || [])
-    .filter((item) => item.name && item.name.endsWith('.md'))
+    .filter(item => item.name && item.name.endsWith('.md'))
     .sort((a, b) => new Date(b.lastModifiedDateTime) - new Date(a.lastModifiedDateTime))
-    .map((item) => ({
+    .map(item => ({
       id: item.id,
       name: item.name,
       lastModified: item.lastModifiedDateTime,
@@ -82,10 +143,9 @@ async function getArticle(token, fileId) {
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${token}` },
   });
-
   if (!res.ok) {
     const errBody = await res.text();
-    console.error('Get article error:', res.status, errBody);
+    console.error('Get error:', res.status, errBody);
     throw new Error(`読み込み失敗: ${res.status}`);
   }
   return await res.text();
@@ -95,11 +155,10 @@ async function getArticle(token, fileId) {
 async function saveArticle(token, filename, content) {
   const folder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
   const encoded = encodeFolderPath(folder);
-  const encodedFilename = encodeURIComponent(filename);
-  const url = `${GRAPH_API}/me/drive/root:/${encoded}/${encodedFilename}:/content`;
+  const encodedFile = encodeURIComponent(filename);
+  const url = `${GRAPH_API}/me/drive/root:/${encoded}/${encodedFile}:/content`;
 
-  console.log('Save URL:', url);
-
+  console.log('SAVE:', url);
   const res = await fetch(url, {
     method: 'PUT',
     headers: {
@@ -119,39 +178,30 @@ async function saveArticle(token, filename, content) {
 }
 
 export default async function handler(req, res) {
-  // CORS対応
+  // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
+  if (req.method === 'OPTIONS') return res.status(200).end();
 
   try {
     const token = await getAccessToken();
 
-    // GET: 記事一覧 or 記事内容
     if (req.method === 'GET') {
       const { id } = req.query;
-
       if (id) {
         const content = await getArticle(token, id);
         return res.status(200).json({ content });
       }
-
       const articles = await listArticles(token);
       return res.status(200).json({ articles });
     }
 
-    // PUT: 記事保存
     if (req.method === 'PUT') {
       const { filename, content } = req.body;
-
       if (!filename || content === undefined || content === null) {
         return res.status(400).json({ error: 'filename と content は必須です' });
       }
-
       const result = await saveArticle(token, filename, content);
       return res.status(200).json({
         success: true,
