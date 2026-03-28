@@ -542,14 +542,38 @@
       const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
       const [copied, setCopied] = useState(false);
 
+      // 検索と置換
+      const [showFindReplace, setShowFindReplace] = useState(false);
+      const [findText, setFindText] = useState('');
+      const [replaceText, setReplaceText] = useState('');
+      const [matchIndex, setMatchIndex] = useState(0);
+
       const textareaRef   = useRef(null);
       const titleInputRef  = useRef(null);
+      const findInputRef   = useRef(null);
+      const replaceInputRef = useRef(null);
       // Undo 履歴管理
       const undoStack      = useRef([]);
       const lastSavedText  = useRef('');
       const undoDebounce   = useRef(null);
 
       const hasChanges = content !== originalContent;
+
+      // 検索マッチ一覧（大文字小文字を区別）
+      const findMatches = useMemo(() => {
+        if (!findText || !showFindReplace) return [];
+        const matches = [];
+        let idx = 0;
+        while (idx < content.length) {
+          const pos = content.indexOf(findText, idx);
+          if (pos === -1) break;
+          matches.push(pos);
+          idx = pos + findText.length;
+        }
+        return matches;
+      }, [content, findText, showFindReplace]);
+
+      const safeMatchIndex = findMatches.length > 0 ? Math.min(matchIndex, findMatches.length - 1) : 0;
 
       // サイドバー幅リサイズ
       const [sidebarWidth, setSidebarWidth] = useState(260);
@@ -755,11 +779,64 @@
         } catch { return '<p>Markdownの解析に失敗しました</p>'; }
       }, [content]);
 
+      // 検索と置換の操作
+      const goPrevMatch = () => {
+        if (findMatches.length === 0) return;
+        setMatchIndex((safeMatchIndex - 1 + findMatches.length) % findMatches.length);
+      };
+      const goNextMatch = () => {
+        if (findMatches.length === 0) return;
+        setMatchIndex((safeMatchIndex + 1) % findMatches.length);
+      };
+      const handleReplaceOne = () => {
+        if (findMatches.length === 0 || !findText) return;
+        const pos = findMatches[safeMatchIndex];
+        const newContent = content.substring(0, pos) + replaceText + content.substring(pos + findText.length);
+        undoStack.current = [...undoStack.current.slice(-99), content];
+        lastSavedText.current = newContent;
+        setContent(newContent);
+      };
+      const handleReplaceAll = () => {
+        if (findMatches.length === 0 || !findText) return;
+        let newContent = content;
+        for (let i = findMatches.length - 1; i >= 0; i--) {
+          const pos = findMatches[i];
+          newContent = newContent.substring(0, pos) + replaceText + newContent.substring(pos + findText.length);
+        }
+        undoStack.current = [...undoStack.current.slice(-99), content];
+        lastSavedText.current = newContent;
+        setContent(newContent);
+        setMatchIndex(0);
+      };
+
+      // マッチをテキストエリアで選択状態にする
+      useEffect(() => {
+        if (!showFindReplace || findMatches.length === 0 || !textareaRef.current || !findText) return;
+        const pos = findMatches[safeMatchIndex];
+        const ta = textareaRef.current;
+        ta.setSelectionRange(pos, pos + findText.length);
+        const linesBefore = content.substring(0, pos).split('\n').length - 1;
+        const lineHeight = parseFloat(getComputedStyle(ta).lineHeight) || 24;
+        ta.scrollTop = Math.max(0, linesBefore * lineHeight - ta.clientHeight / 2);
+      }, [safeMatchIndex, findMatches, showFindReplace, findText]);
+
+      // パネルが開いたら検索欄にフォーカス
+      useEffect(() => {
+        if (showFindReplace && findInputRef.current) {
+          findInputRef.current.focus();
+          findInputRef.current.select();
+        }
+      }, [showFindReplace]);
+
       // キーボードショートカット（Ctrl+S 保存 / Ctrl+B 太字 / Ctrl+Z 戻る）
       useEffect(() => {
         const handler = (e) => {
           if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); handleSave(); }
-          if (e.key === 'Escape' && isEditingTitle) { setIsEditingTitle(false); }
+          if ((e.ctrlKey || e.metaKey) && e.key === 'h') { e.preventDefault(); setShowFindReplace(v => !v); }
+          if (e.key === 'Escape') {
+            if (showFindReplace) { setShowFindReplace(false); textareaRef.current?.focus(); }
+            else if (isEditingTitle) { setIsEditingTitle(false); }
+          }
           // Ctrl+B / Cmd+B: 選択テキストを **太字** に
           if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
             e.preventDefault();
@@ -785,7 +862,7 @@
         };
         window.addEventListener('keydown', handler);
         return () => window.removeEventListener('keydown', handler);
-      }, [content, selectedArticle, isNewArticle, newFilename, isEditingTitle]);
+      }, [content, selectedArticle, isNewArticle, newFilename, isEditingTitle, showFindReplace]);
 
       // タイトル編集フォーカス
       useEffect(() => {
@@ -989,9 +1066,93 @@
               <div ref={editorAreaRef} className="flex-1 flex overflow-hidden">
                 {/* エディタ */}
                 <div
-                  className={`flex flex-col border-r border-slate-200 ${mobileTab === 'preview' ? 'hidden lg:flex' : 'flex'}`}
+                  className={`relative flex flex-col border-r border-slate-200 ${mobileTab === 'preview' ? 'hidden lg:flex' : 'flex'}`}
                   style={isDesktop ? { width: `${editorRatio * 100}%`, flexShrink: 0 } : { width: '100%' }}
                 >
+                  {/* 検索と置換パネル（VS Code スタイル） */}
+                  {showFindReplace && (
+                    <div
+                      className="absolute top-10 right-2 z-50 bg-white border border-slate-300 rounded-lg shadow-xl text-sm"
+                      style={{ width: '340px' }}
+                    >
+                      {/* 検索行 */}
+                      <div className="flex items-center gap-1 px-2 py-1.5 border-b border-slate-100">
+                        <svg className="text-slate-400 shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                        <input
+                          ref={findInputRef}
+                          value={findText}
+                          onChange={e => { setFindText(e.target.value); setMatchIndex(0); }}
+                          onKeyDown={e => {
+                            if (e.key === 'Enter') { e.preventDefault(); e.shiftKey ? goPrevMatch() : goNextMatch(); }
+                            if (e.key === 'Escape') { setShowFindReplace(false); textareaRef.current?.focus(); }
+                          }}
+                          placeholder="検索"
+                          className="flex-1 border border-slate-200 rounded px-1.5 py-0.5 text-slate-700 focus:outline-none focus:border-[#7C4DFF] text-xs"
+                          style={{ minWidth: 0 }}
+                        />
+                        <span className="text-slate-400 text-xs whitespace-nowrap shrink-0 min-w-[2.5rem] text-right">
+                          {findText ? (findMatches.length > 0 ? `${safeMatchIndex + 1}/${findMatches.length}` : '0件') : ''}
+                        </span>
+                        <button
+                          onClick={goPrevMatch}
+                          disabled={findMatches.length === 0}
+                          className="p-1 rounded hover:bg-slate-100 text-slate-500 disabled:opacity-30"
+                          title="前へ (Shift+Enter)"
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+                        </button>
+                        <button
+                          onClick={goNextMatch}
+                          disabled={findMatches.length === 0}
+                          className="p-1 rounded hover:bg-slate-100 text-slate-500 disabled:opacity-30"
+                          title="次へ (Enter)"
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                        </button>
+                        <button
+                          onClick={() => { setShowFindReplace(false); textareaRef.current?.focus(); }}
+                          className="p-1 rounded hover:bg-slate-100 text-slate-500"
+                          title="閉じる (Esc)"
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                        </button>
+                      </div>
+                      {/* 置換行 */}
+                      <div className="flex items-center gap-1 px-2 py-1.5">
+                        <svg className="text-slate-400 shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 7h16M4 12h10M4 17h13"/><path d="M20 14l-3 3 3 3"/></svg>
+                        <input
+                          ref={replaceInputRef}
+                          value={replaceText}
+                          onChange={e => setReplaceText(e.target.value)}
+                          onKeyDown={e => {
+                            if (e.key === 'Enter') { e.preventDefault(); handleReplaceOne(); }
+                            if (e.key === 'Escape') { setShowFindReplace(false); textareaRef.current?.focus(); }
+                          }}
+                          placeholder="置換"
+                          className="flex-1 border border-slate-200 rounded px-1.5 py-0.5 text-slate-700 focus:outline-none focus:border-[#7C4DFF] text-xs"
+                          style={{ minWidth: 0 }}
+                        />
+                        <button
+                          onClick={handleReplaceOne}
+                          disabled={findMatches.length === 0}
+                          className="flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-600 disabled:opacity-30 whitespace-nowrap"
+                          title="1件置換 (Enter)"
+                        >
+                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 16V4m0 0L3 8m4-4l4 4"/><path d="M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
+                          1件
+                        </button>
+                        <button
+                          onClick={handleReplaceAll}
+                          disabled={findMatches.length === 0}
+                          className="flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-600 disabled:opacity-30 whitespace-nowrap"
+                          title="すべて置換"
+                        >
+                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 16V4m0 0L1 7m3-3l3 3"/><path d="M10 16V4m0 0L7 7m3-3l3 3"/><path d="M20 8v12m0 0l-3-3m3 3l3-3"/></svg>
+                          全て
+                        </button>
+                      </div>
+                    </div>
+                  )}
                   <div className="px-4 py-1.5 bg-slate-50 border-b border-slate-100 text-xs text-slate-400 font-medium flex items-center gap-2 shrink-0">
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                     MARKDOWN
