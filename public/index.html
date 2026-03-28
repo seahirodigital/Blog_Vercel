@@ -832,7 +832,7 @@
       useEffect(() => {
         const handler = (e) => {
           if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); handleSave(); }
-          if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'H') { e.preventDefault(); setShowFindReplace(v => !v); }
+          if ((e.metaKey && e.altKey && e.key === 'h') || (e.ctrlKey && e.shiftKey && e.key === 'H')) { e.preventDefault(); setShowFindReplace(v => !v); }
           if (e.key === 'Escape') {
             if (showFindReplace) { setShowFindReplace(false); textareaRef.current?.focus(); }
             else if (isEditingTitle) { setIsEditingTitle(false); }
