@@ -832,8 +832,8 @@
       useEffect(() => {
         const handler = (e) => {
           if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); handleSave(); }
-          // Mac: Cmd+Option+F / Win: Ctrl+H で検索置換トグル
-          if ((e.metaKey && e.altKey && e.code === 'KeyF') || (!e.metaKey && e.ctrlKey && !e.shiftKey && !e.altKey && e.code === 'KeyH')) { e.preventDefault(); e.stopPropagation(); setShowFindReplace(v => !v); }
+          // Mac: Cmd+Option+F / Win: Ctrl+Shift+H で検索置換トグル
+          if ((e.metaKey && e.altKey && e.code === 'KeyF') || (!e.metaKey && e.ctrlKey && e.shiftKey && !e.altKey && e.code === 'KeyH')) { e.preventDefault(); e.stopPropagation(); setShowFindReplace(v => !v); }
           if (e.key === 'Escape') {
             if (showFindReplace) { setShowFindReplace(false); textareaRef.current?.focus(); }
             else if (isEditingTitle) { setIsEditingTitle(false); }
