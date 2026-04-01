@@ -357,14 +357,17 @@ def _api_login(session: http_requests.Session) -> bool:
                     if "error" in body:
                         print(f"   ❌ ログインエラー: {body['error']}")
                         break  # 認証情報が無効なので他を試しても無駄
+                    # レスポンスにトークンが含まれる場合はCookieにセット
+                    token = (body.get("data", {}) or {}).get("token") or body.get("token")
+                    if token:
+                        print(f"   🔑 レスポンストークン検出 → Cookieにセット")
+                        session.cookies.set("_note_session_v5", token, domain=".note.com")
                 except Exception:
                     pass
+                # ログイン後のCookie状況をデバッグ出力
+                note_cookies = [c.name for c in session.cookies if "note.com" in (c.domain or "")]
+                print(f"   🍪 ログイン後Cookie数: {len(list(session.cookies))} 個（note.com: {note_cookies}）")
                 print(f"   ✅ APIログイン成功: {attempt['url']}")
-                # ログイン後にCSRFトークンを再取得（セッションが更新されている）
-                new_csrf = _fetch_csrf_token(session)
-                if new_csrf:
-                    session.headers.update({"X-CSRF-Token": new_csrf})
-                    print(f"   🔐 ログイン後CSRFトークン更新")
                 return True
             elif res.status_code == 401:
                 print(f"   ❌ 認証拒否: {attempt['url']} (401) → {res.text[:150]}")
@@ -388,6 +391,10 @@ def _create_draft_api(session: http_requests.Session, title: str, body_html: str
         "body": body_html,
         "status": "draft",
     }
+
+    # リクエスト前のCookie状況を確認
+    cookie_names = [c.name for c in session.cookies]
+    print(f"   🍪 リクエスト時Cookie: {cookie_names}")
 
     res = session.post(
         f"{NOTE_API_BASE}/v1/text_notes",
