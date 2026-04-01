@@ -409,15 +409,16 @@ def _create_draft_api(session: http_requests.Session, title: str, body_html: str
     print("   📝 Step1: 記事作成...")
     res = session.post(
         f"{NOTE_API_BASE}/v1/text_notes",
-        json={"name": title, "body": body_html, "status": "draft"},
+        json={"name": title, "body": body_html, "template_key": None},
         timeout=30,
     )
 
     print(f"   🔍 POST ステータス: {res.status_code}")
+    print(f"   🔍 POST レスポンス: {res.text[:600]}")
     try:
         result = res.json()
     except Exception:
-        print(f"   ❌ レスポンスパース失敗: {res.text[:300]}")
+        print(f"   ❌ レスポンスパース失敗")
         return {}
 
     if "error" in result:
