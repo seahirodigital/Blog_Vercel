@@ -1,14 +1,11 @@
 /**
  * Vercel Serverless Function: アフィリエイトリンクメモ管理
- * GET  /api/affiliate-links → メモ1〜5を取得（OneDrive Graph API経由）
- * PUT  /api/affiliate-links → メモ1〜5を保存（OneDrive Graph API経由）
- *
- * 常にOneDriveの実ファイルを読み書きし、UIと同期する
+ * GET  /api/affiliate-links → MEMOを動的に取得（OneDrive Graph API経由）
+ * PUT  /api/affiliate-links → MEMOを動的に保存（OneDrive Graph API経由）
  */
 
 const GRAPH_API = 'https://graph.microsoft.com/v1.0';
 const TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
-// OneDrive上の実パス（開発/Blog_Vercel/...）
 const AFFILIATE_FILE_PATH = '開発/Blog_Vercel/scripts/pipeline/prompts/04-affiliate-link-manager/affiliate_links.txt';
 
 async function getAccessToken() {
@@ -32,21 +29,27 @@ function encodePath(p) {
   return p.split('/').map(encodeURIComponent).join('/');
 }
 
+// ===MEMOx=== を動的に検出してオブジェクト化
 function parseMemos(content) {
-  const memos = { memo1: '', memo2: '', memo3: '', memo4: '', memo5: '' };
-  const parts = content.split(/===MEMO(\d)===/);
+  const memos = {};
+  const parts = content.split(/===MEMO(\d+)===/);
   for (let i = 1; i < parts.length; i += 2) {
-    const n = parts[i];
-    if (n >= 1 && n <= 5) memos[`memo${n}`] = (parts[i + 1] || '').trim();
+    const n = parseInt(parts[i], 10);
+    memos[`memo${n}`] = (parts[i + 1] || '').trim();
   }
+  if (Object.keys(memos).length === 0) memos['memo1'] = '';
   return memos;
 }
 
+// 動的なmemosオブジェクトからファイル内容を生成
 function buildFileContent(memos) {
+  const nums = Object.keys(memos)
+    .map(k => parseInt(k.replace('memo', ''), 10))
+    .sort((a, b) => a - b);
   let out = '';
-  for (let i = 1; i <= 5; i++) {
-    out += `===MEMO${i}===\n`;
-    out += (memos[`memo${i}`] || '') + '\n\n';
+  for (const n of nums) {
+    out += `===MEMO${n}===\n`;
+    out += (memos[`memo${n}`] || '') + '\n\n';
   }
   return out;
 }
@@ -65,7 +68,7 @@ export default async function handler(req, res) {
       const url = `${GRAPH_API}/me/drive/root:/${encoded}:/content`;
       const r = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
       if (!r.ok) {
-        if (r.status === 404) return res.status(200).json({ memos: { memo1:'',memo2:'',memo3:'',memo4:'',memo5:'' } });
+        if (r.status === 404) return res.status(200).json({ memos: { memo1: '' } });
         throw new Error(`読み込み失敗: ${r.status}`);
       }
       return res.status(200).json({ memos: parseMemos(await r.text()) });

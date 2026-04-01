@@ -226,15 +226,15 @@
       color: #94a3b8; border: none; border-bottom: 2px solid transparent;
       background: none; cursor: pointer; transition: all 0.15s; white-space: nowrap;
     }
-    .aff-tab:hover { color: #D97706; }
-    .aff-tab.active { color: #D97706; border-bottom-color: #D97706; }
+    .aff-tab:hover { color: #7C4DFF; }
+    .aff-tab.active { color: #7C4DFF; border-bottom-color: #7C4DFF; }
     .aff-ta {
       font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.7;
       resize: none; flex: 1; width: 100%; padding: 0.75rem 1rem;
       border: 1px solid #e2e8f0; border-radius: 0.5rem;
       background: #f8fafc; color: #334155; outline: none; transition: border-color 0.15s;
     }
-    .aff-ta:focus { border-color: #D97706; box-shadow: 0 0 0 3px rgba(217,119,6,0.1); }
+    .aff-ta:focus { border-color: #7C4DFF; box-shadow: 0 0 0 3px rgba(124,77,255,0.1); }
   </style>
 </head>
 <body>
@@ -312,7 +312,7 @@
       const res = await fetch(`${API_BASE}/affiliate-links`);
       if (!res.ok) throw new Error('アフィリンクの取得に失敗しました');
       const data = await res.json();
-      return data.memos || { memo1:'',memo2:'',memo3:'',memo4:'',memo5:'' };
+      return data.memos || { memo1: '' };
     }
 
     async function saveAffiliateMemos(memos) {
@@ -570,23 +570,31 @@
       );
     }
 
-    // === アフィリエイトリンクモーダル ===
+    // === アフィリエイトリンクモーダル（動的MEMO・更新ボタン・紫配色） ===
     function AffiliateLinkModal({ isOpen, onClose, showToast }) {
-      const [memos, setMemos] = useState({ memo1:'',memo2:'',memo3:'',memo4:'',memo5:'' });
+      const [memos, setMemos] = useState({});
+      const [memoKeys, setMemoKeys] = useState(['memo1']);
       const [act, setAct] = useState('memo1');
       const [ld, setLd] = useState(false);
       const [sv, setSv] = useState(false);
       const [cp, setCp] = useState(false);
 
-      useEffect(() => {
-        if (isOpen) {
-          setLd(true);
-          fetchAffiliateMemos()
-            .then(d => setMemos(d))
-            .catch(e => showToast('アフィリンク取得失敗: ' + e.message, 'error'))
-            .finally(() => setLd(false));
-        }
-      }, [isOpen]);
+      const doLoad = useCallback(() => {
+        setLd(true);
+        fetchAffiliateMemos()
+          .then(d => {
+            setMemos(d);
+            const keys = Object.keys(d).sort((a, b) =>
+              parseInt(a.replace('memo',''),10) - parseInt(b.replace('memo',''),10)
+            );
+            setMemoKeys(keys.length > 0 ? keys : ['memo1']);
+            setAct(prev => keys.includes(prev) ? prev : (keys[0] || 'memo1'));
+          })
+          .catch(e => showToast('アフィリンク取得失敗: ' + e.message, 'error'))
+          .finally(() => setLd(false));
+      }, [showToast]);
+
+      useEffect(() => { if (isOpen) doLoad(); }, [isOpen]);
 
       const doSave = async () => {
         setSv(true);
@@ -601,36 +609,52 @@
       };
 
       if (!isOpen) return null;
-      const keys = ['memo1','memo2','memo3','memo4','memo5'];
-      const labels = ['メモ1','メモ2','メモ3','メモ4','メモ5'];
 
       return (
         <div className="aff-overlay" onClick={e => { if (e.target === e.currentTarget) onClose(); }}>
           <div className="aff-modal">
             {/* ヘッダー */}
-            <div style={{ padding:'1rem 1.25rem', borderBottom:'1px solid #e2e8f0', display:'flex', alignItems:'center', justifyContent:'space-between', background:'linear-gradient(135deg,#FFF7ED,#FFFBEB)', flexShrink:0 }}>
+            <div style={{ padding:'0.75rem 1.25rem', borderBottom:'1px solid #e2e8f0', display:'flex', alignItems:'center', justifyContent:'space-between', background:'linear-gradient(135deg,#f5f3ff,#ede9fe)', flexShrink:0 }}>
               <div style={{ display:'flex', alignItems:'center', gap:'0.5rem' }}>
-                <span style={{ fontSize:'1.2rem' }}>🔗</span>
+                <span style={{ fontSize:'1.1rem' }}>🔗</span>
                 <h3 style={{ fontWeight:700, color:'#1e293b', fontSize:'0.95rem', margin:0 }}>アフィリエイトリンク管理</h3>
-                <span style={{ fontSize:'0.65rem', color:'#94a3b8', background:'#f1f5f9', padding:'0.15rem 0.5rem', borderRadius:'9999px' }}>OneDrive同期</span>
+                <span style={{ fontSize:'0.65rem', color:'#7C4DFF', background:'#ede9fe', padding:'0.15rem 0.5rem', borderRadius:'9999px' }}>OneDrive同期</span>
               </div>
-              <button onClick={onClose} style={{ padding:'0.375rem', borderRadius:'0.5rem', border:'none', background:'transparent', cursor:'pointer', color:'#94a3b8', lineHeight:0 }} title="閉じる">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
-              </button>
-            </div>
-            {/* タブ */}
-            <div style={{ display:'flex', borderBottom:'1px solid #e2e8f0', paddingLeft:'1rem', flexShrink:0, overflowX:'auto' }}>
-              {keys.map((k,i) => (
-                <button key={k} onClick={() => setAct(k)} className={`aff-tab ${act===k?'active':''}`}>
-                  {labels[i]}
-                  {memos[k] && memos[k].trim() && <span style={{ marginLeft:'0.35rem', width:'6px', height:'6px', borderRadius:'50%', background:'#F59E0B', display:'inline-block' }} />}
+              <div style={{ display:'flex', alignItems:'center', gap:'0.375rem' }}>
+                {/* 更新ボタン */}
+                <button
+                  onClick={doLoad} disabled={ld}
+                  style={{ padding:'0.375rem', borderRadius:'0.5rem', border:'1px solid #ddd6fe', background:'white', cursor: ld?'not-allowed':'pointer', color:'#7C4DFF', lineHeight:0, transition:'all 0.15s' }}
+                  title="OneDriveから最新を読み込む"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ animation: ld?'spin 0.8s linear infinite':'none' }}>
+                    <path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/>
+                  </svg>
                 </button>
-              ))}
+                <button onClick={onClose} style={{ padding:'0.375rem', borderRadius:'0.5rem', border:'none', background:'transparent', cursor:'pointer', color:'#94a3b8', lineHeight:0 }} title="閉じる">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+              </div>
+            </div>
+            {/* タブ（数字のみ・動的） */}
+            <div style={{ display:'flex', borderBottom:'1px solid #e2e8f0', paddingLeft:'1rem', flexShrink:0, overflowX:'auto' }}>
+              {memoKeys.map(k => {
+                const num = k.replace('memo', '');
+                return (
+                  <button key={k} onClick={() => setAct(k)} className={`aff-tab ${act===k?'active':''}`}>
+                    {num}
+                    {memos[k] && memos[k].trim() && <span style={{ marginLeft:'0.3rem', width:'5px', height:'5px', borderRadius:'50%', background:'#7C4DFF', display:'inline-block', verticalAlign:'middle' }} />}
+                  </button>
+                );
+              })}
             </div>
             {/* 本文 */}
             {ld ? (
               <div style={{ flex:1, display:'flex', alignItems:'center', justifyContent:'center' }}>
-                <div style={{ textAlign:'center' }}><div className="skeleton" style={{ width:'2.5rem', height:'2.5rem', borderRadius:'50%', margin:'0 auto 0.75rem' }} /><p style={{ color:'#94a3b8', fontSize:'0.875rem' }}>OneDriveから読み込み中...</p></div>
+                <div style={{ textAlign:'center' }}>
+                  <div className="skeleton" style={{ width:'2.5rem', height:'2.5rem', borderRadius:'50%', margin:'0 auto 0.75rem' }} />
+                  <p style={{ color:'#94a3b8', fontSize:'0.875rem' }}>OneDriveから読み込み中...</p>
+                </div>
               </div>
             ) : (
               <div style={{ flex:1, display:'flex', flexDirection:'column', padding:'0.75rem 1rem', overflow:'hidden' }}>
@@ -645,7 +669,7 @@
               </button>
               <div style={{ display:'flex', gap:'0.5rem' }}>
                 <button onClick={onClose} style={{ padding:'0.5rem 1rem', borderRadius:'0.5rem', border:'1px solid #e2e8f0', background:'white', color:'#64748b', cursor:'pointer', fontSize:'0.8rem', fontWeight:600 }}>閉じる</button>
-                <button onClick={doSave} disabled={sv} style={{ display:'flex', alignItems:'center', gap:'0.375rem', padding:'0.5rem 1.25rem', borderRadius:'0.5rem', border:'none', background: sv?'#cbd5e1':'linear-gradient(135deg,#F59E0B,#D97706)', color:'white', cursor: sv?'not-allowed':'pointer', fontSize:'0.8rem', fontWeight:700, boxShadow: sv?'none':'0 2px 8px rgba(245,158,11,0.3)' }}>
+                <button onClick={doSave} disabled={sv} style={{ display:'flex', alignItems:'center', gap:'0.375rem', padding:'0.5rem 1.25rem', borderRadius:'0.5rem', border:'none', background: sv?'#cbd5e1':'linear-gradient(135deg,#7C4DFF,#651FFF)', color:'white', cursor: sv?'not-allowed':'pointer', fontSize:'0.8rem', fontWeight:700, boxShadow: sv?'none':'0 2px 8px rgba(124,77,255,0.3)' }}>
                   {sv ? (<><svg className="animate-spin" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg>保存中...</>) : (<><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>保存</>)}
                 </button>
               </div>
@@ -677,14 +701,38 @@
       const [copied, setCopied] = useState(false);
       const [affModalOpen, setAffModalOpen] = useState(false);
 
-      const textareaRef   = useRef(null);
+      // 検索と置換
+      const [showFindReplace, setShowFindReplace] = useState(false);
+      const [findText, setFindText] = useState('');
+      const [replaceText, setReplaceText] = useState('');
+      const [matchIndex, setMatchIndex] = useState(0);
+
+      const textareaRef    = useRef(null);
       const titleInputRef  = useRef(null);
+      const findInputRef   = useRef(null);
+      const replaceInputRef = useRef(null);
       // Undo 履歴管理
       const undoStack      = useRef([]);
       const lastSavedText  = useRef('');
       const undoDebounce   = useRef(null);
 
       const hasChanges = content !== originalContent;
+
+      // 検索マッチ一覧
+      const findMatches = useMemo(() => {
+        if (!findText || !showFindReplace) return [];
+        const matches = [];
+        let idx = 0;
+        while (idx < content.length) {
+          const pos = content.indexOf(findText, idx);
+          if (pos === -1) break;
+          matches.push(pos);
+          idx = pos + findText.length;
+        }
+        return matches;
+      }, [content, findText, showFindReplace]);
+
+      const safeMatchIndex = findMatches.length > 0 ? Math.min(matchIndex, findMatches.length - 1) : 0;
 
       // サイドバー幅リサイズ
       const [sidebarWidth, setSidebarWidth] = useState(260);
@@ -890,12 +938,51 @@
         } catch { return '<p>Markdownの解析に失敗しました</p>'; }
       }, [content]);
 
-      // キーボードショートカット（Ctrl+S 保存 / Ctrl+B 太字 / Ctrl+Z 戻る）
+      // 検索・置換ナビゲーション
+      const goNextMatch = useCallback(() => {
+        if (findMatches.length === 0) return;
+        const next = (safeMatchIndex + 1) % findMatches.length;
+        setMatchIndex(next);
+        const pos = findMatches[next];
+        const ta = textareaRef.current;
+        if (ta) { ta.setSelectionRange(pos, pos + findText.length); ta.focus(); }
+      }, [findMatches, safeMatchIndex, findText]);
+
+      const goPrevMatch = useCallback(() => {
+        if (findMatches.length === 0) return;
+        const prev = (safeMatchIndex - 1 + findMatches.length) % findMatches.length;
+        setMatchIndex(prev);
+        const pos = findMatches[prev];
+        const ta = textareaRef.current;
+        if (ta) { ta.setSelectionRange(pos, pos + findText.length); ta.focus(); }
+      }, [findMatches, safeMatchIndex, findText]);
+
+      const handleReplaceOne = useCallback(() => {
+        if (findMatches.length === 0) return;
+        const pos = findMatches[safeMatchIndex];
+        const newC = content.substring(0, pos) + replaceText + content.substring(pos + findText.length);
+        setContent(newC);
+        setMatchIndex(Math.min(safeMatchIndex, Math.max(0, findMatches.length - 2)));
+      }, [findMatches, safeMatchIndex, content, findText, replaceText]);
+
+      const handleReplaceAll = useCallback(() => {
+        if (findMatches.length === 0) return;
+        setContent(content.split(findText).join(replaceText));
+        setMatchIndex(0);
+      }, [findMatches, content, findText, replaceText]);
+
+      // キーボードショートカット（Ctrl+S / Ctrl+B / Ctrl+Z / Ctrl+F）
       useEffect(() => {
         const handler = (e) => {
           if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); handleSave(); }
           if (e.key === 'Escape' && isEditingTitle) { setIsEditingTitle(false); }
-          // Ctrl+B / Cmd+B: 選択テキストを **太字** に
+          if (e.key === 'Escape' && showFindReplace) { setShowFindReplace(false); textareaRef.current?.focus(); }
+          // Ctrl+F: 検索パネルの開閉
+          if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+            e.preventDefault();
+            setShowFindReplace(v => { if (!v) setTimeout(() => findInputRef.current?.focus(), 50); return !v; });
+          }
+          // Ctrl+B: 太字
           if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
             e.preventDefault();
             const ta = textareaRef.current;
@@ -908,7 +995,7 @@
               setTimeout(() => { ta.selectionStart = start + 2; ta.selectionEnd = end + 2; ta.focus(); }, 0);
             }
           }
-          // Ctrl+Z / Cmd+Z: Undo
+          // Ctrl+Z: Undo
           if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
             if (undoStack.current.length > 0) {
               e.preventDefault();
@@ -920,7 +1007,7 @@
         };
         window.addEventListener('keydown', handler);
         return () => window.removeEventListener('keydown', handler);
-      }, [content, selectedArticle, isNewArticle, newFilename, isEditingTitle]);
+      }, [content, selectedArticle, isNewArticle, newFilename, isEditingTitle, showFindReplace]);
 
       // タイトル編集フォーカス
       useEffect(() => {
@@ -1017,10 +1104,24 @@
 
               {/* アクションボタン群 */}
               <div className="flex items-center gap-2 flex-shrink-0">
+                {/* noteボタン */}
+                <a
+                  href="https://note.com/startupm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden sm:flex items-center gap-1.5 font-semibold rounded-lg px-3 py-2 text-xs border border-[#7C4DFF] text-[#7C4DFF] hover:bg-purple-50 transition-all"
+                  title="noteを開く"
+                  id="note-link-btn"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+                  </svg>
+                  <span className="hidden lg:inline">note</span>
+                </a>
                 {/* アフィリンクボタン */}
                 <button
                   onClick={() => setAffModalOpen(true)}
-                  className="hidden sm:flex items-center gap-1.5 font-semibold rounded-lg px-3 py-2 text-xs border border-amber-400 text-amber-600 hover:bg-amber-50 transition-all"
+                  className="hidden sm:flex items-center gap-1.5 font-semibold rounded-lg px-3 py-2 text-xs border border-[#7C4DFF] text-[#7C4DFF] hover:bg-purple-50 transition-all"
                   title="アフィリエイトリンク管理"
                   id="affiliate-link-btn"
                 >
@@ -1204,6 +1305,58 @@
               </div>
             )}
           </main>
+
+          {/* 検索と置換パネル（fixed） */}
+          {showFindReplace && (
+            <div style={{ position:'fixed', top:'60px', right:'16px', zIndex:1000, width:'340px' }}
+              className="bg-white border border-slate-300 rounded-lg shadow-xl text-sm"
+            >
+              <div className="flex items-center gap-1 px-2 py-1.5 border-b border-slate-100">
+                <svg className="text-slate-400 shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                <input ref={findInputRef} value={findText}
+                  onChange={e => { setFindText(e.target.value); setMatchIndex(0); }}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') { e.preventDefault(); e.shiftKey ? goPrevMatch() : goNextMatch(); }
+                    if (e.key === 'Escape') { setShowFindReplace(false); textareaRef.current?.focus(); }
+                  }}
+                  placeholder="検索"
+                  className="flex-1 border border-slate-200 rounded px-1.5 py-0.5 text-slate-700 focus:outline-none focus:border-[#7C4DFF] text-xs"
+                  style={{ minWidth:0 }}
+                />
+                <span className="text-slate-400 text-xs whitespace-nowrap shrink-0 min-w-[2.5rem] text-right">
+                  {findText ? (findMatches.length > 0 ? `${safeMatchIndex+1}/${findMatches.length}` : '0件') : ''}
+                </span>
+                <button onClick={goPrevMatch} disabled={findMatches.length===0} className="p-1 rounded hover:bg-slate-100 text-slate-500 disabled:opacity-30" title="前へ">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+                </button>
+                <button onClick={goNextMatch} disabled={findMatches.length===0} className="p-1 rounded hover:bg-slate-100 text-slate-500 disabled:opacity-30" title="次へ">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <button onClick={() => { setShowFindReplace(false); textareaRef.current?.focus(); }} className="p-1 rounded hover:bg-slate-100 text-slate-500" title="閉じる">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+              </div>
+              <div className="flex items-center gap-1 px-2 py-1.5">
+                <svg className="text-slate-400 shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 7h16M4 12h10M4 17h13"/><path d="M20 14l-3 3 3 3"/></svg>
+                <input ref={replaceInputRef} value={replaceText}
+                  onChange={e => setReplaceText(e.target.value)}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') { e.preventDefault(); handleReplaceOne(); }
+                    if (e.key === 'Escape') { setShowFindReplace(false); textareaRef.current?.focus(); }
+                  }}
+                  placeholder="置換"
+                  className="flex-1 border border-slate-200 rounded px-1.5 py-0.5 text-slate-700 focus:outline-none focus:border-[#7C4DFF] text-xs"
+                  style={{ minWidth:0 }}
+                />
+                <button onClick={handleReplaceOne} disabled={findMatches.length===0} className="flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-600 disabled:opacity-30 whitespace-nowrap" title="1件置換">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 16V4m0 0L3 8m4-4l4 4"/><path d="M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>1件
+                </button>
+                <button onClick={handleReplaceAll} disabled={findMatches.length===0} className="flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-600 disabled:opacity-30 whitespace-nowrap" title="全て置換">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 16V4m0 0L1 7m3-3l3 3"/><path d="M10 16V4m0 0L7 7m3-3l3 3"/><path d="M20 8v12m0 0l-3-3m3 3l3-3"/></svg>全て
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* アフィリンクモーダル */}
           <AffiliateLinkModal isOpen={affModalOpen} onClose={() => setAffModalOpen(false)} showToast={showToast} />
