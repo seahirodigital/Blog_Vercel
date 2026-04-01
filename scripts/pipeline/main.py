@@ -8,6 +8,8 @@ GitHub Actions または ローカルから実行可能
 import os
 import re
 import sys
+import importlib.util
+import tempfile
 from datetime import datetime
 from dotenv import load_dotenv
 
@@ -62,7 +64,35 @@ def process_single(row: dict, index: int, total: int) -> dict:
         print("   ⚠️ AI生成失敗 - スキップ")
         return result
 
-    # Step 3: OneDriveに保存
+    # Step 3: アフィリエイトリンク自動挿入
+    print("   🔗 Step 3: アフィリエイトリンク挿入中...")
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    aff_script = os.path.join(script_dir, "prompts", "04-affiliate-link-manager", "insert_affiliate_links.py")
+    aff_links = os.path.join(script_dir, "prompts", "04-affiliate-link-manager", "affiliate_links.txt")
+
+    if os.path.exists(aff_script) and os.path.exists(aff_links):
+        try:
+            spec = importlib.util.spec_from_file_location("insert_affiliate_links", aff_script)
+            aff_mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(aff_mod)
+
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False, encoding='utf-8') as tmp:
+                tmp.write(markdown)
+                tmp_path = tmp.name
+
+            aff_mod.insert_affiliate_links(aff_links, tmp_path)
+
+            with open(tmp_path, 'r', encoding='utf-8') as f:
+                markdown = f.read()
+
+            os.unlink(tmp_path)
+            print("   ✅ アフィリエイトリンク挿入完了")
+        except Exception as e:
+            print(f"   ⚠️ アフィリエイトリンク挿入失敗（続行します）: {e}")
+    else:
+        print("   ⏭️ アフィリエイトスクリプト未検出 - スキップ")
+
+    # Step 4: OneDriveに保存
     now = datetime.now()
     safe_title = _make_safe_filename(transcript["title"])
     filename = f"{now.strftime('%Y%m%d')}_{now.strftime('%H%M')}_{safe_title}.md"
@@ -70,7 +100,7 @@ def process_single(row: dict, index: int, total: int) -> dict:
     onedrive_url = onedrive_sync.upload_markdown(filename, markdown)
     result["filename"] = filename
 
-    # Step 4: スプレッドシートのステータス更新
+    # Step 5: スプレッドシートのステータス更新
     sheets_reader.update_status(SPREADSHEET_ID, SHEET_NAME, url, "完了")
 
     result["success"] = True
