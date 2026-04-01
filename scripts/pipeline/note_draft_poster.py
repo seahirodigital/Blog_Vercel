@@ -317,7 +317,13 @@ def _api_login(session: http_requests.Session) -> bool:
 
     print("   🔑 APIログインを試みます...")
 
-    # まずnote.comにアクセスしてベースCookieとCSRFトークンを取得
+    # 古いセッションCookieを削除（重複防止）
+    for name in ["_note_session_v5", "_note_session"]:
+        session.cookies.clear(domain=".note.com", name=name)
+        session.cookies.clear(domain="note.com", name=name)
+    print(f"   🧹 古いセッションCookieをクリア")
+
+    # note.comにアクセスしてベースCookieとCSRFトークンを取得
     csrf_token = _fetch_csrf_token(session)
     if csrf_token:
         session.headers.update({"X-CSRF-Token": csrf_token})
