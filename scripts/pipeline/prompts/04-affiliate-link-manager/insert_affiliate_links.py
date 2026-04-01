@@ -1,171 +1,222 @@
-import sys
+"""
+アフィリエイトリンク挿入 v2 - C案実装
+OneDriveを直接参照し、MEMOごとのルール(mode/position)に基づいて挿入する
+
+【MEMOフォーマット】
+===MEMOx===
+mode=random        # ランダム位置に挿入
+mode=fixed         # position で指定した場所に固定挿入
+mode=disabled      # このMEMOをスキップ
+position=end           # 末尾
+position=start         # 冒頭
+position=after_h2      # 最初のH2直後
+position=before_h2     # 最初のH2直前
+position=after_conclusion  # 「結論」見出し直後
+---
+（ここからリンク本文）
+"""
+
 import os
-import random
 import re
+import random
+import requests
+from urllib.parse import quote
 
-def insert_affiliate_links(link_file, article_file):
-    if not os.path.exists(link_file) or not os.path.exists(article_file):
-        print(f"❌ ファイルが見つかりません: {link_file} または {article_file}")
-        return
+# ── OneDrive 設定 ──────────────────────────────────────
+GRAPH_API = "https://graph.microsoft.com/v1.0"
+TOKEN_URL  = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+AFFILIATE_FILE_PATH = (
+    "開発/Blog_Vercel/scripts/pipeline/prompts/"
+    "04-affiliate-link-manager/affiliate_links.txt"
+)
 
-    # 1. データの準備
-    with open(link_file, 'r', encoding='utf-8') as f:
-        link_content = f.read().replace('\r\n', '\n')
-    
-    raw_blocks = re.findall(r'▼.*?(?=\n▼|$)', link_content, re.DOTALL)
-    affiliate_blocks = [b.strip() for b in raw_blocks if b.strip() and not b.startswith('(Amazon')]
-    
-    disclaimer = "(Amazonのアソシエイトとして本アカウントは適格販売により収入を得ています。)"
-    
-    # 除外パターンの作成（既存リンクの削除用）
-    exclude_patterns = [
-        re.escape(disclaimer),
-        r'https?://(www\.)?amazon\.co\.jp/dp/\w+/ref=nosim\?tag=hiroshit-22',
-        r'https?://amzn\.to/\w+',
-        r'▼.*?\n?https?://amzn\.to/\w+',
-        r'\(Amazonのアソシエイト.*?\)'
-    ]
-    # affiliate_blocks の各行も除外対象にする
-    for b in affiliate_blocks:
-        for line in b.split('\n'):
-            s = line.strip()
-            if s and len(s) > 10: # 短すぎる行は誤爆防止で除外しない
-                exclude_patterns.append(re.escape(s))
+DISCLAIMER = "(Amazonのアソシエイトとして本アカウントは適格販売により収入を得ています。)"
 
-    all_text = "\n\n".join(affiliate_blocks)
-    random_pool = affiliate_blocks[:]
-    random.shuffle(random_pool)
 
-    with open(article_file, 'r', encoding='utf-8') as f:
-        article_lines = f.readlines()
+# ── OneDrive 認証 ──────────────────────────────────────
+def _get_access_token() -> str:
+    res = requests.post(TOKEN_URL, data={
+        "client_id":     os.environ["ONEDRIVE_CLIENT_ID"],
+        "client_secret": os.environ["ONEDRIVE_CLIENT_SECRET"],
+        "refresh_token": os.environ["ONEDRIVE_REFRESH_TOKEN"],
+        "grant_type":    "refresh_token",
+        "scope":         "Files.ReadWrite.All offline_access",
+    })
+    res.raise_for_status()
+    return res.json()["access_token"]
 
-    # 2. メインリンクの抽出
-    main_link = ""
-    for line in article_lines:
-        match = re.search(r'https?://(www\.)?amazon\.co\.jp/dp/(\w+)/ref=nosim\?tag=hiroshit-22', line)
-        if not match: match = re.search(r'https?://amzn\.to/\w+', line)
-        if match:
-            main_link = match.group(0).strip()
-            break
-    
-    # 3. クリーンアップ
-    clean_lines = []
-    in_block = False
-    for line in article_lines:
-        s = line.strip()
-        if not s:
-            clean_lines.append(line)
-            continue
-        
-        should_skip = False
-        for p in exclude_patterns:
-            if re.search(p, s):
-                should_skip = True
-                break
-        if should_skip: continue
-        
-        if s.startswith('---'): # 最後の区切り線以降を除去（再度追加するため）
-            break
-        clean_lines.append(line)
 
-    # 連続空行除去
-    final_clean = []
-    last_empty = False
-    for line in clean_lines:
-        is_empty = not line.strip()
-        if is_empty and last_empty: continue
-        final_clean.append(line)
-        last_empty = is_empty
+def _fetch_from_onedrive() -> str:
+    """OneDriveからアフィリエイトリンクファイルを取得して返す"""
+    token   = _get_access_token()
+    encoded = "/".join(quote(p, safe="") for p in AFFILIATE_FILE_PATH.split("/"))
+    url     = f"{GRAPH_API}/me/drive/root:/{encoded}:/content"
+    res     = requests.get(url, headers={"Authorization": f"Bearer {token}"})
+    res.raise_for_status()
+    return res.text
 
-    # 4. 種別判定と見出しの特定
-    h2_indices = [i for i, line in enumerate(final_clean) if line.startswith('## ')]
-    is_info = any("主要課題の論点" in final_clean[i] for i in h2_indices)
-    
-    def get_index(keyword):
-        for idx in h2_indices:
-            if keyword in final_clean[idx]: return idx
-        return -1
 
-    insertions = {} # index: text
-    def get_block(): return random_pool.pop(0) if random_pool else ""
+# ── パーサー ────────────────────────────────────────────
+def _parse_memos(raw: str) -> list[dict]:
+    """
+    MEMOセクションをパースして設定リストを返す。
+    無効(disabled)や本文が空のMEMOは除外。
 
-    if is_info:
-        print("ℹ️ 「情報」種別のレイアウトを適用します")
-        # 「情報」のルール:
-        # ・全文挿入: 「結論」H2の直前
-        # ・1ブロック挿入: 結論から数えて2つ目(論点)、4つ目(詳細)、6つ目(FAQ)のセクション最後
-        conclusion_idx = -1
-        for i, h_idx in enumerate(h2_indices):
-            if "結論" in final_clean[h_idx]:
-                conclusion_idx = i
-                break
-        
-        if conclusion_idx != -1:
-            # 1. 結論の直前に全文
-            insertions[h2_indices[conclusion_idx]] = f"\n{all_text}\n\n{disclaimer}\n\n"
-            
-            # 2. 指定の見出しのセクション末尾に1ブロック
-            # 「2つ目, 4つ目, 6つ目」はインデックスベースだと conclusion_idx + 1, + 3, + 5
-            for offset in [1, 3, 5]:
-                target_h_idx = conclusion_idx + offset
-                if target_h_idx < len(h2_indices):
-                    # 次の見出しの直前が挿入ポイント
-                    insert_before_idx = h2_indices[target_h_idx + 1] if target_h_idx + 1 < len(h2_indices) else len(final_clean)
-                    # insertionsは「直前」に挿入するので、insert_before_idx をキーにする
-                    block_text = f"\n{get_block()}\n\n"
-                    if insert_before_idx in insertions:
-                        insertions[insert_before_idx] += block_text
-                    else:
-                        insertions[insert_before_idx] = block_text
-    else:
-        print("📦 「単品」種別のレイアウトを適用します")
-        idx_map = {k: get_index(k) for k in ['結論', '利用シーン', '比較', 'メリット', 'デメリット', 'FAQ', '評判', 'まとめ']}
-        if idx_map['結論'] != -1:
-            insertions[idx_map['結論']] = f"\n{main_link}\n\n{all_text}\n\n{disclaimer}\n\n"
-        if idx_map['利用シーン'] != -1:
-            insertions[idx_map['利用シーン']] = f"\n{main_link}\n\n"
-        if idx_map['比較'] != -1:
-            insertions[idx_map['比較']] = f"\n{get_block()}\n\n"
-        if idx_map['メリット'] != -1:
-            insertions[idx_map['メリット']] = f"\n{main_link}\n\n"
-        if idx_map['デメリット'] != -1:
-            insertions[idx_map['デメリット']] = f"\n{get_block()}\n\n"
-        if idx_map['FAQ'] != -1:
-            insertions[idx_map['FAQ']] = f"\n{main_link}\n\n"
-        if idx_map['評判'] != -1:
-            insertions[idx_map['評判']] = f"\n{get_block()}\n\n"
-        if idx_map['まとめ'] != -1:
-            insertions[idx_map['まとめ']] = f"\n{main_link}\n\n"
+    Returns:
+        [{"num": 1, "mode": "random", "position": "random", "content": "..."}, ...]
+    """
+    memos = []
+    parts = re.split(r"===MEMO(\d+)===", raw)
 
-    # 5. 最終出力
-    output_lines = []
-    for i in range(len(final_clean) + 1):
-        if i in insertions:
-            output_lines.append(insertions[i])
-        if i < len(final_clean):
-            output_lines.append(final_clean[i])
+    for i in range(1, len(parts), 2):
+        num  = int(parts[i])
+        body = (parts[i + 1] if i + 1 < len(parts) else "").strip()
 
-    # 最後尾
-    output_lines.append(f"\n\n---\n\n{get_block()}\n\n{all_text}\n")
+        # デフォルト設定
+        cfg = {"num": num, "mode": "random", "position": "random"}
 
-    with open(article_file, 'w', encoding='utf-8') as f:
-        f.writelines(output_lines)
-    
-    print(f"✅ {os.path.basename(article_file)} のアフィリエイトブロックを完全に適用しました")
-
-if __name__ == "__main__":
-    if len(sys.argv) >= 3:
-        # 従来通りの引数渡し
-        insert_affiliate_links(sys.argv[1], sys.argv[2])
-    else:
-        # 引数なし（ターボ実行モード）: target_job.txt から読み込む
-        job_file = "target_job.txt"
-        if os.path.exists(job_file):
-            with open(job_file, "r", encoding="utf-8") as f:
-                lines = [line.strip() for line in f.readlines() if line.strip()]
-            if len(lines) >= 2:
-                insert_affiliate_links(lines[0], lines[1])
-            else:
-                print(f"❌ {job_file} の形式が不正です（リンクファイルパスと記事パスの2行が必要です）")
+        # --- セパレータで メタ / 本文を分割
+        if "---" in body:
+            meta_str, content = body.split("---", 1)
+            for line in meta_str.strip().splitlines():
+                if "=" in line:
+                    k, v = line.split("=", 1)
+                    cfg[k.strip().lower()] = v.strip().lower()
         else:
-            print("❌ 引数が指定されておらず、target_job.txt も見つかりません。")
+            content = body  # メタなし（後方互換）
+
+        cfg["content"] = content.strip()
+
+        if cfg["mode"] == "disabled":
+            continue
+        if not cfg["content"]:
+            continue
+
+        memos.append(cfg)
+
+    return memos
+
+
+# ── 挿入ロジック ────────────────────────────────────────
+def _find_h2_positions(lines: list[str]) -> list[int]:
+    return [i for i, ln in enumerate(lines) if ln.startswith("## ")]
+
+
+def _insert_block(lines: list[str], index: int, block: str) -> list[str]:
+    insert = ["\n", block + "\n", "\n"]
+    return lines[:index] + insert + lines[index:]
+
+
+def _apply_memo(lines: list[str], memo: dict) -> list[str]:
+    content  = memo["content"]
+    mode     = memo["mode"]
+    position = memo.get("position", "random")
+    block    = content + f"\n\n{DISCLAIMER}"
+
+    h2_pos = _find_h2_positions(lines)
+
+    if mode == "fixed":
+        if position == "end":
+            lines = lines + ["\n\n---\n\n", block + "\n"]
+
+        elif position == "start":
+            lines = [block + "\n", "\n"] + lines
+
+        elif position == "after_h2":
+            if h2_pos:
+                lines = _insert_block(lines, h2_pos[0] + 1, block)
+            else:
+                lines = lines + ["\n\n---\n\n", block + "\n"]
+
+        elif position == "before_h2":
+            if h2_pos:
+                lines = _insert_block(lines, h2_pos[0], block)
+            else:
+                lines = [block + "\n", "\n"] + lines
+
+        elif position == "after_conclusion":
+            idx = next(
+                (i for i in h2_pos if "結論" in lines[i]),
+                None
+            )
+            if idx is not None:
+                lines = _insert_block(lines, idx + 1, block)
+            else:
+                lines = lines + ["\n\n---\n\n", block + "\n"]
+
+        else:
+            # position 未知 → 末尾
+            lines = lines + ["\n\n---\n\n", block + "\n"]
+
+    elif mode == "random":
+        # 段落境界（空行）の位置を取得してランダム挿入
+        para_boundaries = [
+            i for i in range(1, len(lines) - 1)
+            if not lines[i].strip() and lines[i - 1].strip()
+        ]
+        if para_boundaries:
+            idx = random.choice(para_boundaries)
+            lines = _insert_block(lines, idx, block)
+        else:
+            lines = lines + ["\n\n---\n\n", block + "\n"]
+
+    return lines
+
+
+# ── メインエントリーポイント ────────────────────────────
+def insert_affiliate_links(markdown_content: str) -> str:
+    """
+    OneDriveからアフィリエイトリンク設定を取得し、
+    MEMOごとのルールに従ってMarkdownに挿入して返す。
+
+    Args:
+        markdown_content: 挿入前のMarkdown文字列
+    Returns:
+        挿入後のMarkdown文字列（失敗時は元の文字列をそのまま返す）
+    """
+    try:
+        raw   = _fetch_from_onedrive()
+        memos = _parse_memos(raw)
+    except Exception as e:
+        print(f"   ⚠️ OneDrive取得失敗（ローカルフォールバック試行）: {e}")
+        # フォールバック: スクリプトと同階層の local ファイルを参照
+        local_path = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            "affiliate_links.txt"
+        )
+        if os.path.exists(local_path):
+            with open(local_path, "r", encoding="utf-8") as f:
+                raw = f.read()
+            memos = _parse_memos(raw)
+            print("   ✅ ローカルファイルで代替")
+        else:
+            print("   ❌ ローカルファイルも未検出 - アフィリ挿入スキップ")
+            return markdown_content
+
+    if not memos:
+        print("   ⚠️ 有効なMEMOが見つかりません（全disabled or 空）")
+        return markdown_content
+
+    print(f"   📋 有効MEMO数: {len(memos)}件")
+    lines = markdown_content.splitlines(keepends=True)
+
+    for memo in memos:
+        lines = _apply_memo(lines, memo)
+        print(f"   ✅ MEMO{memo['num']} 挿入 (mode={memo['mode']}, position={memo.get('position','-')})")
+
+    return "".join(lines)
+
+
+# ── CLI実行（デバッグ用）────────────────────────────────
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) >= 2:
+        article_file = sys.argv[1]
+        with open(article_file, "r", encoding="utf-8") as f:
+            md = f.read()
+        result = insert_affiliate_links(md)
+        with open(article_file, "w", encoding="utf-8") as f:
+            f.write(result)
+        print(f"✅ {article_file} への挿入完了")
+    else:
+        print("使用方法: python insert_affiliate_links.py <article.md>")

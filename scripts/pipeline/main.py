@@ -9,7 +9,6 @@ import os
 import re
 import sys
 import importlib.util
-import tempfile
 from datetime import datetime
 from dotenv import load_dotenv
 
@@ -64,28 +63,18 @@ def process_single(row: dict, index: int, total: int) -> dict:
         print("   ⚠️ AI生成失敗 - スキップ")
         return result
 
-    # Step 3: アフィリエイトリンク自動挿入
+    # Step 3: アフィリエイトリンク自動挿入（C案: OneDrive直接参照）
     print("   🔗 Step 3: アフィリエイトリンク挿入中...")
     script_dir = os.path.dirname(os.path.abspath(__file__))
     aff_script = os.path.join(script_dir, "prompts", "04-affiliate-link-manager", "insert_affiliate_links.py")
-    aff_links = os.path.join(script_dir, "prompts", "04-affiliate-link-manager", "affiliate_links.txt")
 
-    if os.path.exists(aff_script) and os.path.exists(aff_links):
+    if os.path.exists(aff_script):
         try:
             spec = importlib.util.spec_from_file_location("insert_affiliate_links", aff_script)
             aff_mod = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(aff_mod)
-
-            with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False, encoding='utf-8') as tmp:
-                tmp.write(markdown)
-                tmp_path = tmp.name
-
-            aff_mod.insert_affiliate_links(aff_links, tmp_path)
-
-            with open(tmp_path, 'r', encoding='utf-8') as f:
-                markdown = f.read()
-
-            os.unlink(tmp_path)
+            # 新インターフェース: markdown文字列を渡し、挿入済み文字列を返す
+            markdown = aff_mod.insert_affiliate_links(markdown)
             print("   ✅ アフィリエイトリンク挿入完了")
         except Exception as e:
             print(f"   ⚠️ アフィリエイトリンク挿入失敗（続行します）: {e}")
