@@ -93,9 +93,8 @@ def markdown_to_note_html(md: str) -> str:
         line = lines[i]
         stripped = line.strip()
 
-        # 空行 → 空段落
+        # 空行 → スキップ（<br>は422エラーの原因になるため除外）
         if not stripped:
-            html_parts.append('<p><br></p>')
             i += 1
             continue
 
@@ -406,11 +405,11 @@ def _create_draft_api(session: http_requests.Session, title: str, body_html: str
     1. POST /api/v1/text_notes でタイトルのみ作成 → ID取得
     2. PUT /api/v1/text_notes/{id} で本文を保存
     """
-    # ── Step 1: 記事作成（タイトルのみ） ──
-    print("   📝 Step1: 記事作成（タイトル）...")
+    # ── Step 1: 記事作成（タイトル＋本文） ──
+    print("   📝 Step1: 記事作成...")
     res = session.post(
         f"{NOTE_API_BASE}/v1/text_notes",
-        json={"name": title, "status": "draft"},
+        json={"name": title, "body": body_html, "status": "draft"},
         timeout=30,
     )
 
@@ -436,8 +435,8 @@ def _create_draft_api(session: http_requests.Session, title: str, body_html: str
         return {}
     print(f"   ✅ 記事作成成功: ID={article_id}, key={article_key}")
 
-    # ── Step 2: 本文をPUTで保存 ──
-    print("   📄 Step2: 本文を保存（PUT）...")
+    # ── Step 2: PUTでステータスを下書きとして確定 ──
+    print("   📄 Step2: 下書きステータスを確定（PUT）...")
     time.sleep(1)
     res2 = session.put(
         f"{NOTE_API_BASE}/v1/text_notes/{article_id}",
