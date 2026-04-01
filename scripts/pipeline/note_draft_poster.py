@@ -446,33 +446,25 @@ def _create_draft_api(session: http_requests.Session, title: str, body_html: str
     )
 
     print(f"   🔍 PUT ステータス: {res2.status_code}")
+    print(f"   🔍 PUT レスポンス全文: {res2.text[:800]}")
     try:
         result2 = res2.json()
     except Exception:
-        print(f"   ❌ PUTレスポンスパース失敗: {res2.text[:300]}")
+        print(f"   ❌ PUTレスポンスパース失敗")
         return {}
 
     if "error" in result2:
-        print(f"   ⚠️ PUT APIエラー（タイトルは保存済み）: {json.dumps(result2['error'], ensure_ascii=False)[:200]}")
-        # タイトルは保存できているので部分成功として返す
-    else:
-        print(f"   ✅ 本文保存成功")
-
-    note_url = (
-        article_data.get("note_url")
-        or article_data.get("url")
-        or article_data.get("draft_url")
-        or ""
-    )
-    if not note_url and article_key:
-        note_url = f"https://note.com/n/{article_key}"
-
-    if not article_id:
-        print(f"   ❌ IDが取得できません。レスポンス詳細: {json.dumps(result, ensure_ascii=False)[:500]}")
+        print(f"   ❌ PUT APIエラー: {json.dumps(result2['error'], ensure_ascii=False)[:300]}")
+        return {}
+    if not res2.ok:
+        print(f"   ❌ PUT失敗 ({res2.status_code})")
         return {}
 
+    print(f"   ✅ 本文保存成功")
+
+    editor_url = f"https://editor.note.com/notes/{article_key}/edit/"
     print(f"   ✅ 下書き作成成功: ID={article_id}, key={article_key}")
-    return {"id": article_id, "key": article_key, "url": note_url}
+    return {"id": article_id, "key": article_key, "url": editor_url}
 
 
 # ── save-cookies（初回のみ） ──────────────────────────
