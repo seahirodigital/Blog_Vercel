@@ -1,114 +1,154 @@
 """
-note下書きポスター v2.0
+note下書きポスター v3.0 — 完全自動化版
 Playwright でnote.comに下書き記事を作成する。
 
-【reCAPTCHA回避策】
-GitHub ActionsのヘッドレスブラウザはreCAPTCHAで弾かれるため、
-ローカルで手動ログインしてクッキーを保存→GitHub Secretに登録する方式を採用。
+【完全自動化の仕組み】
+1. NOTE_STORAGE_STATE (GitHub Secret) からPlaywrightのStorageState(クッキー等)を復元
+2. 操作完了後、最新のStorageStateをGitHub APIでSecretに自動上書き
+3. 次回実行時は自動更新されたSecretを使用 → 手動操作ゼロ
 
-【使い方】
-  # Step 1: ローカルでクッキーを取得（初回・期限切れ時）
+【初回セットアップのみ手動】
   python note_draft_poster.py --save-cookies
+  → 出力されたJSONをGitHub Secret「NOTE_STORAGE_STATE」に登録
 
-  # Step 2: 出力されたJSONをGitHub Secret「NOTE_COOKIES」に登録
-
-  # Step 3: 記事を投稿
-  python note_draft_poster.py <markdown_file.md>
-  python note_draft_poster.py --content "# タイトル\n本文..."
+【通常実行（GitHub Actions）】
+  python note_draft_poster.py <file.md> --headless
 """
 
 import os
 import sys
-import re
 import json
 import time
+import base64
 import argparse
+import tempfile
 from pathlib import Path
 
-# ── 設定 ──────────────────────────────────────────────
-NOTE_URL       = "https://note.com/"
-NOTE_LOGIN_URL = "https://note.com/login"
-NOTE_EMAIL     = os.getenv("NOTE_EMAIL", "seahiro@gmail.com")
-NOTE_PASSWORD  = os.getenv("NOTE_PASSWORD", "appleblog0227")
-NOTE_COOKIES   = os.getenv("NOTE_COOKIES", "")  # JSON形式（GitHub Secret）
+import requests as http_requests
 
-SCRIPT_DIR   = Path(__file__).parent
-OGP_JS_PATH  = SCRIPT_DIR / "prompts" / "05-note_ogp_formatter.js"
-COOKIES_FILE = SCRIPT_DIR / "note_cookies.json"  # ローカル保存先
+# ── 設定 ──────────────────────────────────────────────
+NOTE_URL            = "https://note.com/"
+NOTE_LOGIN_URL      = "https://note.com/login"
+NOTE_EMAIL          = os.getenv("NOTE_EMAIL", "seahiro@gmail.com")
+NOTE_PASSWORD       = os.getenv("NOTE_PASSWORD", "appleblog0227")
+NOTE_STORAGE_STATE  = os.getenv("NOTE_STORAGE_STATE", "")   # JSON (GitHub Secret)
+GITHUB_TOKEN        = os.getenv("GITHUB_TOKEN", "")          # PAT (secrets:write)
+GITHUB_REPO_OWNER   = "seahirodigital"
+GITHUB_REPO_NAME    = "Blog_Vercel"
+SECRET_NAME         = "NOTE_STORAGE_STATE"
+
+SCRIPT_DIR        = Path(__file__).parent
+OGP_JS_PATH       = SCRIPT_DIR / "prompts" / "05-note_ogp_formatter.js"
+LOCAL_STATE_FILE  = SCRIPT_DIR / "note_storage_state.json"   # ローカル保存先
 
 
 # ── Markdown前処理 ─────────────────────────────────────
 def extract_title_and_body(markdown: str) -> tuple:
-    """H1をタイトル、それ以降を本文として分離。不要セクションを除外。"""
+    """H1をタイトル、それ以降を本文として分離"""
     lines = markdown.replace('\r\n', '\n').split('\n')
-    title = ""
-    body_start = 0
-
+    title, body_start = "", 0
     for i, line in enumerate(lines):
-        stripped = line.strip()
-        if stripped.startswith('# ') and not stripped.startswith('## '):
-            title = stripped.lstrip('# ').strip()
-            body_start = i + 1
+        s = line.strip()
+        if s.startswith('# ') and not s.startswith('## '):
+            title, body_start = s.lstrip('# ').strip(), i + 1
             break
-
     if not title:
         for i, line in enumerate(lines):
             if line.strip():
-                title = line.strip().lstrip('# ').strip()
-                body_start = i + 1
+                title, body_start = line.strip().lstrip('# ').strip(), i + 1
                 break
-
-    body_lines = []
-    skip = False
+    body_lines, skip = [], False
     for line in lines[body_start:]:
-        stripped = line.strip()
-        if stripped.startswith('## 🎬') or stripped.startswith('## Captions'):
-            skip = True
-            continue
-        if skip and stripped.startswith('## '):
-            skip = False
-        if not skip:
-            body_lines.append(line)
-
+        s = line.strip()
+        if s.startswith('## 🎬') or s.startswith('## Captions'):
+            skip = True; continue
+        if skip and s.startswith('## '): skip = False
+        if not skip: body_lines.append(line)
     return title, '\n'.join(body_lines).strip()
 
 
-# ── クッキー管理 ───────────────────────────────────────
-def _load_cookies(context) -> bool:
+# ── StorageState 管理 ──────────────────────────────────
+def _load_state_to_file() -> str | None:
     """
-    クッキーを復元する。優先順:
-    1. NOTE_COOKIES 環境変数（GitHub Secret）
-    2. ローカルの note_cookies.json
+    StorageStateをtempファイルに書き出しパスを返す。
+    優先: 環境変数 NOTE_STORAGE_STATE → ローカルファイル
     """
-    if NOTE_COOKIES:
-        try:
-            cookies = json.loads(NOTE_COOKIES)
-            context.add_cookies(cookies)
-            print("   🍪 クッキーを環境変数（NOTE_COOKIES）から復元")
-            return True
-        except Exception as e:
-            print(f"   ⚠️ NOTE_COOKIESのパース失敗: {e}")
+    raw = ""
+    if NOTE_STORAGE_STATE:
+        raw = NOTE_STORAGE_STATE
+        print("   🍪 StorageStateを環境変数から読み込み")
+    elif LOCAL_STATE_FILE.exists():
+        raw = LOCAL_STATE_FILE.read_text(encoding="utf-8")
+        print(f"   🍪 StorageStateをローカルファイルから読み込み: {LOCAL_STATE_FILE}")
 
-    if COOKIES_FILE.exists():
-        try:
-            cookies = json.loads(COOKIES_FILE.read_text(encoding="utf-8"))
-            context.add_cookies(cookies)
-            print(f"   🍪 クッキーをローカルファイルから復元: {COOKIES_FILE}")
-            return True
-        except Exception as e:
-            print(f"   ⚠️ ローカルクッキーの読み込み失敗: {e}")
+    if not raw:
+        return None
 
-    return False
+    try:
+        json.loads(raw)  # 構文チェック
+        tmp = tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False, encoding="utf-8")
+        tmp.write(raw)
+        tmp.close()
+        return tmp.name
+    except Exception as e:
+        print(f"   ⚠️ StorageStateのパース失敗: {e}")
+        return None
 
 
-def save_cookies_locally():
+def _auto_refresh_github_secret(new_state_json: str):
     """
-    ローカルで手動ログインしてクッキーを保存するヘルパー。
-    実行後、note_cookies.json の内容をGitHub Secret「NOTE_COOKIES」に登録すること。
+    GitHub APIを使ってNOTE_STORAGE_STATEシークレットを自動更新する。
+    GITHUB_TOKEN (PAT with secrets:write) が必要。
+    """
+    if not GITHUB_TOKEN:
+        print("   ℹ️ GITHUB_TOKEN未設定のためSecretの自動更新をスキップ")
+        return
+    try:
+        import nacl.encoding
+        import nacl.public
+    except ImportError:
+        print("   ⚠️ pynacl未インストール。pip install pynacl でインストールしてください。")
+        return
+
+    api_base = f"https://api.github.com/repos/{GITHUB_REPO_OWNER}/{GITHUB_REPO_NAME}"
+    headers = {
+        "Authorization": f"Bearer {GITHUB_TOKEN}",
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+
+    # リポジトリの公開鍵を取得
+    res = http_requests.get(f"{api_base}/actions/secrets/public-key", headers=headers)
+    if not res.ok:
+        print(f"   ⚠️ GitHub公開鍵取得失敗 ({res.status_code}): {res.text[:200]}")
+        return
+
+    key_data = res.json()
+    pub_key = nacl.public.PublicKey(key_data["key"].encode(), nacl.encoding.Base64Encoder)
+    sealed = nacl.public.SealedBox(pub_key)
+    encrypted = base64.b64encode(sealed.encrypt(new_state_json.encode())).decode()
+
+    # Secretを更新
+    res = http_requests.put(
+        f"{api_base}/actions/secrets/{SECRET_NAME}",
+        headers=headers,
+        json={"encrypted_value": encrypted, "key_id": key_data["key_id"]},
+    )
+    if res.status_code in (201, 204):
+        print("   ✅ NOTE_STORAGE_STATE を自動更新しました（次回も手動不要）")
+    else:
+        print(f"   ⚠️ Secret更新失敗 ({res.status_code}): {res.text[:200]}")
+
+
+# ── save-cookies モード（初回のみ） ────────────────────
+def save_storage_state_locally():
+    """
+    ブラウザを開いて手動ログイン → StorageStateを保存。
+    初回のみ実行。以降は自動更新。
     """
     from playwright.sync_api import sync_playwright
 
-    print("\n🔑 ブラウザでnote.comにログインしてください...")
+    print("🔑 ブラウザでnote.comにログインしてください...")
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False)
         context = browser.new_context(
@@ -119,286 +159,194 @@ def save_cookies_locally():
         page.goto(NOTE_LOGIN_URL, wait_until="domcontentloaded")
 
         print("\nブラウザでnote.comへのログインを完了してください。")
-        print("ログイン後、このターミナルでEnterを押してください: ", end="")
+        print("ログイン後、Enterを押してください: ", end="", flush=True)
         input()
 
-        cookies = context.cookies()
-        COOKIES_FILE.write_text(json.dumps(cookies, ensure_ascii=False, indent=2), encoding="utf-8")
+        state = context.storage_state()
+        state_json = json.dumps(state, ensure_ascii=False, indent=2)
+        LOCAL_STATE_FILE.write_text(state_json, encoding="utf-8")
         browser.close()
 
-    print(f"\n✅ クッキー保存完了: {COOKIES_FILE}")
-    print(f"\n📋 以下をGitHub Secret「NOTE_COOKIES」に登録してください:")
-    print(COOKIES_FILE.read_text(encoding="utf-8"))
+    print(f"\n✅ StorageState保存完了: {LOCAL_STATE_FILE}")
+    print("\n📋 以下をGitHub Secret「NOTE_STORAGE_STATE」に登録してください:")
+    print(state_json)
+
+    # GITHUB_TOKENがあれば即自動登録
+    if GITHUB_TOKEN:
+        print("\n🔄 GITHUB_TOKEN検出 → GitHubSecretを自動更新します...")
+        _auto_refresh_github_secret(state_json)
+    else:
+        print("\n⚠️ GITHUB_TOKEN未設定のため手動登録が必要です。")
 
 
-# ── Phase 1: ログイン ─────────────────────────────────
-def _ensure_login(page, context):
-    """クッキー復元またはフォールバックログインでセッションを確立する"""
-
-    # クッキーを復元してからnote.comへアクセス
-    cookies_loaded = _load_cookies(context)
+# ── Phase 1: ログイン確認 ─────────────────────────────
+def _ensure_logged_in(page):
+    """StorageState復元後のログイン状態を確認する"""
     page.goto(NOTE_URL, wait_until="domcontentloaded", timeout=30000)
     time.sleep(3)
 
-    # ログイン確認: /loginへのリダイレクトがなければOK
     if "login" not in page.url:
-        print(f"   ✅ セッション有効 (URL: {page.url})")
+        print(f"   ✅ セッション有効")
         return
 
-    if cookies_loaded:
-        print("   ⚠️ クッキーが期限切れです")
-        print("   ↳ ローカルで: python note_draft_poster.py --save-cookies を実行してください")
-
-    # フォールバック: パスワードログイン（reCAPTCHAがない場合のみ成功）
-    print("   🔑 パスワードログインを試みます...")
+    # セッション切れ → フォールバックでパスワードログイン
+    print("   ⚠️ セッション無効。パスワードログインを試みます...")
     page.goto(NOTE_LOGIN_URL, wait_until="domcontentloaded", timeout=30000)
     time.sleep(4)
 
-    email_input = None
-    for sel in ['input[placeholder*="note ID"]', 'input[type="email"]', 'input[name="login"]']:
+    email_el = None
+    for sel in ['input[placeholder*="note ID"]', 'input[type="email"]']:
         el = page.query_selector(sel)
         if el and el.is_visible():
-            email_input = el
-            print(f"   📧 メール欄: {sel}")
-            break
+            email_el = el; break
 
-    if not email_input:
-        info = page.evaluate("() => Array.from(document.querySelectorAll('input')).map(e=>({type:e.type,ph:e.placeholder,v:e.offsetParent!==null}))")
-        print(f"   🔍 input一覧: {json.dumps(info, ensure_ascii=False)}")
-        raise Exception("メール入力欄が見つかりません。先に --save-cookies を実行してください。")
+    if not email_el:
+        info = page.evaluate("()=>Array.from(document.querySelectorAll('input')).map(e=>({type:e.type,ph:e.placeholder}))")
+        print(f"   🔍 inputs: {json.dumps(info, ensure_ascii=False)}")
+        raise Exception("ログイン入力欄が見つかりません。NOTE_STORAGE_STATEが無効です。")
 
-    email_input.click()
-    email_input.fill(NOTE_EMAIL)
-    time.sleep(0.5)
-
+    email_el.click(); email_el.fill(NOTE_EMAIL); time.sleep(0.5)
     pw = page.query_selector('input[type="password"]')
-    if not pw:
-        raise Exception("パスワード入力欄が見つかりません")
-    pw.fill(NOTE_PASSWORD)
-    time.sleep(0.5)
+    if not pw: raise Exception("パスワード入力欄が見つかりません")
+    pw.fill(NOTE_PASSWORD); time.sleep(0.5)
 
-    btn = page.query_selector('button[type="submit"]') or page.query_selector('button:has-text("ログイン")')
-    if btn:
-        btn.click()
-    else:
-        pw.press("Enter")
-
+    btn = (page.query_selector('button[type="submit"]') or
+           page.query_selector('button:has-text("ログイン")'))
+    if btn: btn.click()
+    else: pw.press("Enter")
     page.wait_for_load_state("networkidle", timeout=20000)
     time.sleep(4)
 
     if "login" in page.url:
-        raise Exception(
-            "ログイン失敗（reCAPTCHAで拒否）。\n"
-            "ローカルで実行: python note_draft_poster.py --save-cookies\n"
-            "出力されたJSONをGitHub Secret「NOTE_COOKIES」に登録してください。"
-        )
-
+        raise Exception("パスワードログインも失敗しました。NOTE_STORAGE_STATEが古い可能性があります。")
     print("   ✅ ログイン完了")
 
 
-# ── 本文ペースト ─────────────────────────────────────
+# ── テキスト入力 ──────────────────────────────────────
 def _paste_text(page, element, text: str):
-    """テキストを安全にペースト（3段階フォールバック）"""
-    element.click()
-    time.sleep(0.3)
-
-    # 方法1: evaluate で直接セット
+    """3段階フォールバックでテキストをペースト"""
+    element.click(); time.sleep(0.3)
+    # 1: evaluate直接セット
     try:
-        page.evaluate("""
-            ([el, text]) => {
-                el.focus();
-                if (el.contentEditable === 'true') {
-                    el.textContent = text;
-                    el.dispatchEvent(new Event('input', { bubbles: true }));
-                } else {
-                    const s = Object.getOwnPropertyDescriptor(
-                        window.HTMLTextAreaElement.prototype, 'value'
-                    )?.set;
-                    if (s) s.call(el, text); else el.value = text;
-                    el.dispatchEvent(new Event('input', { bubbles: true }));
-                    el.dispatchEvent(new Event('change', { bubbles: true }));
-                }
+        page.evaluate("""([el, text]) => {
+            el.focus();
+            if (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') {
+                const s = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype,'value')?.set;
+                if (s) s.call(el, text); else el.value = text;
+                el.dispatchEvent(new Event('input',{bubbles:true}));
+                el.dispatchEvent(new Event('change',{bubbles:true}));
+            } else {
+                el.textContent = text;
+                el.dispatchEvent(new Event('input',{bubbles:true}));
             }
-        """, [element, text])
-        time.sleep(0.5)
-        return
+        }""", [element, text])
+        time.sleep(0.5); return
     except Exception as e:
-        print(f"   ⚠️ 直接セット失敗 → クリップボード方式: {e}")
-
-    # 方法2: クリップボード
+        print(f"   ⚠️ evaluate失敗→clipboard: {e}")
+    # 2: クリップボード
     try:
-        page.evaluate("text => navigator.clipboard.writeText(text)", text)
-        time.sleep(0.3)
-        element.click()
-        page.keyboard.press("Control+a")
-        time.sleep(0.1)
-        page.keyboard.press("Control+v")
-        time.sleep(1)
-        return
+        page.evaluate("t => navigator.clipboard.writeText(t)", text)
+        element.click(); page.keyboard.press("Control+a"); time.sleep(0.1)
+        page.keyboard.press("Control+v"); time.sleep(1); return
     except Exception as e:
-        print(f"   ⚠️ クリップボード失敗 → fill方式: {e}")
-
-    # 方法3: fill/type
-    try:
-        element.click()
-        element.press("Control+a")
-        element.type(text, delay=5)
-    except Exception as e:
-        print(f"   ⚠️ fill方式も失敗: {e}")
+        print(f"   ⚠️ clipboard失敗→fill: {e}")
+    # 3: fill
+    element.click(); element.press("Control+a"); element.type(text, delay=5)
 
 
 # ── Phase 1: エディタ操作 ─────────────────────────────
 def _create_draft(page, title: str, body: str):
-    """記事作成画面でタイトル・本文を入力して下書き保存"""
-
-    print("   📝 記事作成画面を開きます...")
-    # note.com/notes/new → editor.note.com にリダイレクトされる
+    """記事エディタでタイトル・本文を入力"""
+    print("   📝 エディタを開きます...")
     page.goto("https://note.com/notes/new", wait_until="networkidle", timeout=45000)
     time.sleep(5)
-    print(f"   🔗 現在のURL: {page.url}")
+    print(f"   🔗 現在URL: {page.url}")
 
-    # ログインページに戻された場合
     if "login" in page.url:
-        raise Exception("ノートエディタに遷移できません（セッション無効）。--save-cookiesを再実行してください。")
+        raise Exception("エディタに遷移できません（セッション無効）")
 
-    # ── タイトル入力（textarea が実態） ──
+    # タイトル入力（実測: textarea[placeholder="記事タイトル"]）
     print("   📌 タイトルを入力...")
     title_el = None
-    for sel in [
-        'textarea[placeholder="記事タイトル"]',
-        'textarea[placeholder*="タイトル"]',
-        'textarea[class*="title"]',
-        'textarea[class*="Title"]',
-    ]:
+    for sel in ['textarea[placeholder="記事タイトル"]','textarea[placeholder*="タイトル"]','textarea[class*="title"]']:
         try:
             el = page.wait_for_selector(sel, timeout=10000, state="visible")
-            if el:
-                title_el = el
-                print(f"   📌 タイトル欄: {sel}")
-                break
-        except Exception:
-            continue
+            if el: title_el = el; print(f"   📌 タイトル欄: {sel}"); break
+        except Exception: continue
 
     if not title_el:
-        elems = page.evaluate("""
-            () => Array.from(document.querySelectorAll('textarea,[contenteditable]')).map(e=>({
-                tag: e.tagName, ph: e.placeholder||'', cls: e.className.slice(0,60), v: e.offsetParent!==null
-            }))
-        """)
-        print(f"   🔍 textarea/contenteditable: {json.dumps(elems, ensure_ascii=False)}")
+        elems = page.evaluate("()=>Array.from(document.querySelectorAll('textarea,[contenteditable]')).map(e=>({tag:e.tagName,ph:e.placeholder||'',cls:e.className.slice(0,50),v:e.offsetParent!==null}))")
+        print(f"   🔍 編集要素: {json.dumps(elems, ensure_ascii=False)}")
         page.screenshot(path="/tmp/note_editor_debug.png")
         raise Exception("タイトル入力欄が見つかりません")
 
-    # textarea は fill で確実に入力
-    title_el.click()
-    time.sleep(0.3)
-    title_el.fill(title)
-    time.sleep(0.5)
+    title_el.click(); time.sleep(0.3)
+    title_el.fill(title); time.sleep(0.5)
 
-    # 確認ループ
     for attempt in range(3):
         val = page.evaluate("el => el.value || ''", title_el).strip()
         if val and len(val) > 3:
-            print(f"   ✅ タイトル確認: 「{val[:40]}」")
-            break
-        print(f"   ⚠️ タイトル未入力（リトライ {attempt+1}/3）")
-        title_el.click()
-        title_el.fill(title)
-        time.sleep(1)
+            print(f"   ✅ タイトル確認: 「{val[:40]}」"); break
+        print(f"   ⚠️ リトライ {attempt+1}/3")
+        title_el.click(); title_el.fill(title); time.sleep(1)
 
-    # ── 本文入力（ProseMirror エディタ） ──
+    # 本文入力（実測: div.ProseMirror）
     print("   📄 本文を入力...")
     body_el = None
-    for sel in [
-        'div.ProseMirror',
-        '.ProseMirror',
-        'div[class*="ProseMirror"]',
-        '[role="textbox"]',
-        '.note-editable',
-        '[contenteditable="true"]',
-    ]:
+    for sel in ['div.ProseMirror','.ProseMirror','[role="textbox"]','[contenteditable="true"]']:
         try:
             el = page.wait_for_selector(sel, timeout=8000, state="visible")
-            if el:
-                body_el = el
-                print(f"   📄 本文欄: {sel}")
-                break
-        except Exception:
-            continue
+            if el: body_el = el; print(f"   📄 本文欄: {sel}"); break
+        except Exception: continue
 
     if not body_el:
         raise Exception("本文入力欄が見つかりません")
 
-    _paste_text(page, body_el, body)
-    time.sleep(2)
+    _paste_text(page, body_el, body); time.sleep(2)
 
     for attempt in range(3):
-        txt = page.evaluate("el => el.textContent || el.innerText || ''", body_el).strip()
+        txt = page.evaluate("el => el.textContent || ''", body_el).strip()
         if txt and len(txt) > 10:
-            print(f"   ✅ 本文確認: {len(txt)} 文字")
-            break
-        print(f"   ⚠️ 本文未入力（リトライ {attempt+1}/3）")
-        _paste_text(page, body_el, body)
-        time.sleep(2)
+            print(f"   ✅ 本文確認: {len(txt)} 文字"); break
+        print(f"   ⚠️ リトライ {attempt+1}/3")
+        _paste_text(page, body_el, body); time.sleep(2)
 
     return True
 
 
-# ── Phase 2: OGP展開JS ────────────────────────────────
+# ── Phase 2: OGP展開 ──────────────────────────────────
 def _run_ogp_formatter(page):
-    """OGP Formatter JSを3回実行"""
     if not OGP_JS_PATH.exists():
-        print(f"   ⚠️ OGP Formatter JS未検出: {OGP_JS_PATH}")
-        return
-
-    js_code = OGP_JS_PATH.read_text(encoding="utf-8")
-    print("   🔧 OGP Formatter JS 実行開始...")
-
-    for run_num, wait_sec in [(1, 7), (2, 5), (3, 0)]:
-        print(f"   ▶️  {run_num}回目...")
-        try:
-            page.evaluate(js_code)
-        except Exception as e:
-            print(f"   ⚠️ JS実行エラー（続行）: {e}")
-        if wait_sec > 0:
-            print(f"   ⏳ {wait_sec}秒待機...")
-            time.sleep(wait_sec)
-
-    print("   ✅ OGP Formatter 完了")
+        print(f"   ⚠️ OGP JS未検出: {OGP_JS_PATH}"); return
+    js = OGP_JS_PATH.read_text(encoding="utf-8")
+    print("   🔧 OGP Formatter実行...")
+    for n, wait in [(1,7),(2,5),(3,0)]:
+        print(f"   ▶️ {n}回目")
+        try: page.evaluate(js)
+        except Exception as e: print(f"   ⚠️ JS実行エラー: {e}")
+        if wait: print(f"   ⏳ {wait}秒待機..."); time.sleep(wait)
+    print("   ✅ OGP完了")
 
 
-# ── 下書き保存 ────────────────────────────────────────
-def _save_draft(page):
-    """下書き保存ボタンをクリック"""
-    print("   💾 下書き保存中...")
-
-    for sel in [
-        'button:has-text("下書き保存")',
-        'button:has-text("保存")',
-        '[data-test="save-draft"]',
-        'button[class*="draft"]',
-        'button[class*="save"]',
-        '.p-postEditor__action button',
-    ]:
+# ── 下書き保存 ─────────────────────────────────────────
+def _save_draft(page) -> str | None:
+    print("   💾 下書き保存...")
+    for sel in ['button:has-text("下書き保存")','button:has-text("保存")','[data-test="save-draft"]']:
         try:
             btn = page.query_selector(sel)
             if btn and btn.is_visible():
-                btn.click()
-                time.sleep(3)
+                btn.click(); time.sleep(3)
                 url = page.url
-                print(f"   ✅ 下書き保存完了: {url}")
+                print(f"   ✅ 保存完了: {url}")
                 return url
-        except Exception:
-            continue
-
+        except Exception: continue
     page.screenshot(path="/tmp/note_save_debug.png")
-    print("   ⚠️ 下書き保存ボタンが見つかりませんでした")
+    print("   ⚠️ 保存ボタンが見つかりません")
     return None
 
 
 # ── エントリーポイント ────────────────────────────────
 def post_draft_to_note(markdown: str, headless: bool = True, skip_ogp: bool = False) -> dict:
-    """noteに下書きを投稿するメイン関数"""
     from playwright.sync_api import sync_playwright
 
     title, body = extract_title_and_body(markdown)
@@ -408,24 +356,31 @@ def post_draft_to_note(markdown: str, headless: bool = True, skip_ogp: bool = Fa
 
     print(f"📋 タイトル: 「{title}」")
     print(f"📋 本文: {len(body)} 文字")
-
     result = {"success": False, "url": "", "title": title}
+
+    # StorageStateをtempファイルに準備
+    state_file = _load_state_to_file()
+    if not state_file:
+        print("⚠️ NOTE_STORAGE_STATE未設定。--save-cookiesで初期化してください。")
 
     with sync_playwright() as p:
         browser = p.chromium.launch(
             headless=headless,
-            args=["--disable-blink-features=AutomationControlled", "--no-sandbox", "--disable-dev-shm-usage"]
+            args=["--disable-blink-features=AutomationControlled","--no-sandbox","--disable-dev-shm-usage"]
         )
-        context = browser.new_context(
+        ctx_kwargs = dict(
             viewport={"width": 1280, "height": 900},
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
-            permissions=["clipboard-read", "clipboard-write"],
+            permissions=["clipboard-read","clipboard-write"],
         )
+        if state_file:
+            ctx_kwargs["storage_state"] = state_file
+        context = browser.new_context(**ctx_kwargs)
         page = context.new_page()
 
         try:
-            print("\n── Phase 1: ログイン＆下書き作成 ──")
-            _ensure_login(page, context)
+            print("\n── Phase 1: ログイン確認 ──")
+            _ensure_logged_in(page)
             _create_draft(page, title, body)
 
             if not skip_ogp:
@@ -437,36 +392,46 @@ def post_draft_to_note(markdown: str, headless: bool = True, skip_ogp: bool = Fa
                 result["success"] = True
                 result["url"] = url
 
+            # ── 操作後に最新StorageStateを自動更新 ──
+            print("\n── StorageState自動更新 ──")
+            new_state = context.storage_state()
+            new_state_json = json.dumps(new_state, ensure_ascii=False)
+            _auto_refresh_github_secret(new_state_json)
+            # ローカルにも保存
+            LOCAL_STATE_FILE.write_text(
+                json.dumps(new_state, ensure_ascii=False, indent=2), encoding="utf-8"
+            )
+
         except Exception as e:
             print(f"❌ エラー: {e}")
-            import traceback
-            traceback.print_exc()
-            try:
-                page.screenshot(path="/tmp/note_error_debug.png")
-                print("   📸 エラー時スクショ: /tmp/note_error_debug.png")
-            except Exception:
-                pass
+            import traceback; traceback.print_exc()
+            try: page.screenshot(path="/tmp/note_error_debug.png")
+            except Exception: pass
         finally:
             time.sleep(2)
             browser.close()
+
+        # tempファイル削除
+        if state_file:
+            try: Path(state_file).unlink()
+            except Exception: pass
 
     return result
 
 
 # ── CLI ──────────────────────────────────────────────
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="note.com 下書きポスター v2.0")
+    parser = argparse.ArgumentParser(description="note.com 下書きポスター v3.0")
     parser.add_argument("file", nargs="?", help="Markdownファイルパス")
     parser.add_argument("--content", help="Markdown文字列を直接指定")
-    parser.add_argument("--headless", action="store_true", default=True, help="ヘッドレスモード（デフォルト: True）")
-    parser.add_argument("--no-headless", dest="headless", action="store_false", help="ブラウザを表示して実行")
-    parser.add_argument("--skip-ogp", action="store_true", help="OGP展開をスキップ")
-    parser.add_argument("--save-cookies", action="store_true", help="ローカルでログインしてクッキーを保存")
+    parser.add_argument("--headless", action="store_true", default=True)
+    parser.add_argument("--no-headless", dest="headless", action="store_false")
+    parser.add_argument("--skip-ogp", action="store_true")
+    parser.add_argument("--save-cookies", action="store_true", help="初回セットアップ: ブラウザで手動ログインしてStorageStateを保存")
     args = parser.parse_args()
 
-    # クッキー保存モード
     if args.save_cookies:
-        save_cookies_locally()
+        save_storage_state_locally()
         sys.exit(0)
 
     if args.content:
@@ -476,15 +441,12 @@ if __name__ == "__main__":
             md = f.read()
     else:
         print("❌ Markdownファイルパスまたは --content を指定してください")
-        print("   クッキー保存: python note_draft_poster.py --save-cookies")
+        print("   初回セットアップ: python note_draft_poster.py --save-cookies")
         sys.exit(1)
 
     result = post_draft_to_note(md, headless=args.headless, skip_ogp=args.skip_ogp)
-
     if result["success"]:
-        print(f"\n🎉 下書き投稿成功！")
-        print(f"   タイトル: {result['title']}")
-        print(f"   URL: {result['url']}")
+        print(f"\n🎉 下書き投稿成功！\n   タイトル: {result['title']}\n   URL: {result['url']}")
     else:
-        print(f"\n❌ 下書き投稿失敗")
+        print("\n❌ 下書き投稿失敗")
         sys.exit(1)

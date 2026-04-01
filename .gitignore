@@ -20,3 +20,6 @@ service_account.json
 # ドキュメント等
 howtosetup.md
 token_result.txt
+
+*cookies*.json
+*storage_state*.json
