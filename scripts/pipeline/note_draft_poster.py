@@ -177,27 +177,29 @@ def _load_cookies() -> dict:
 
 def _save_cookies_state(session: http_requests.Session):
     """セッションのCookieをStorageState互換形式で保存・GitHub Secret更新"""
-    cookies = dict(session.cookies)
-    if not cookies:
+    # 同名Cookieが複数ドメインに存在する場合があるため、iter_cookies()で安全に取得
+    cookie_list = []
+    seen = set()
+    for cookie in session.cookies:
+        key = (cookie.name, cookie.domain)
+        if key in seen:
+            continue
+        seen.add(key)
+        cookie_list.append({
+            "name": cookie.name,
+            "value": cookie.value,
+            "domain": cookie.domain or ".note.com",
+            "path": cookie.path or "/",
+            "httpOnly": cookie.has_nonstandard_attr("HttpOnly") or cookie.name.startswith("_"),
+            "secure": cookie.secure,
+            "sameSite": "Lax",
+        })
+
+    if not cookie_list:
         print("   ℹ️ 保存すべきCookieがありません")
         return
 
-    # Playwright StorageState互換形式で保存
-    state = {
-        "cookies": [
-            {
-                "name": name,
-                "value": value,
-                "domain": ".note.com",
-                "path": "/",
-                "httpOnly": name.startswith("_"),
-                "secure": True,
-                "sameSite": "Lax",
-            }
-            for name, value in cookies.items()
-        ],
-        "origins": []
-    }
+    state = {"cookies": cookie_list, "origins": []}
     state_json = json.dumps(state, ensure_ascii=False)
 
     # ローカル保存
@@ -362,13 +364,26 @@ def _create_draft_api(session: http_requests.Session, title: str, body_html: str
 
     if res.ok:
         result = res.json()
-        article_data = result.get("data", {})
+        # noteのレスポンス構造を柔軟に解析（data直下 or ネスト）
+        print(f"   🔍 APIレスポンスキー: {list(result.keys())}")
+        article_data = result.get("data", result)
+        if isinstance(article_data, dict) and "note" in article_data:
+            article_data = article_data["note"]
+
         article_id = article_data.get("id")
         article_key = article_data.get("key")
-        note_url = article_data.get("note_url", "")
+        note_url = (
+            article_data.get("note_url")
+            or article_data.get("url")
+            or article_data.get("draft_url")
+            or ""
+        )
         if not note_url and article_key:
             note_url = f"https://note.com/n/{article_key}"
+
         print(f"   ✅ 下書き作成成功: ID={article_id}, key={article_key}")
+        if not article_id:
+            print(f"   🔍 レスポンス詳細: {json.dumps(result, ensure_ascii=False)[:500]}")
         return {"id": article_id, "key": article_key, "url": note_url}
     else:
         print(f"   ❌ 記事作成失敗: {res.status_code}")
