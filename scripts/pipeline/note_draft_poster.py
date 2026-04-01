@@ -289,20 +289,39 @@ def _verify_session(session: http_requests.Session) -> bool:
     return False
 
 
+def _fetch_csrf_token(session: http_requests.Session) -> str | None:
+    """note.comのHTMLからCSRFトークンを取得"""
+    import re as _re
+    try:
+        res = session.get("https://note.com/", timeout=15)
+        # <meta name="csrf-token" content="...">
+        m = _re.search(r'<meta[^>]+name=["\']csrf-token["\'][^>]+content=["\']([^"\']+)["\']', res.text)
+        if m:
+            token = m.group(1)
+            print(f"   🔐 CSRFトークン取得成功")
+            return token
+        # <meta content="..." name="csrf-token"> （順序が逆の場合）
+        m = _re.search(r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+name=["\']csrf-token["\']', res.text)
+        if m:
+            return m.group(1)
+    except Exception as e:
+        print(f"   ⚠️ CSRFトークン取得失敗: {e}")
+    return None
+
+
 def _api_login(session: http_requests.Session) -> bool:
-    """noteのAPIで直接ログインしてCookieを取得"""
+    """noteのAPIで直接ログインしてCookieとCSRFトークンを取得"""
     if not NOTE_EMAIL or not NOTE_PASSWORD:
         print("   ⚠️ NOTE_EMAIL/NOTE_PASSWORD未設定のためAPIログイン不可")
         return False
 
     print("   🔑 APIログインを試みます...")
 
-    # まずnote.comにアクセスしてベースCookieを取得
-    try:
-        session.get("https://note.com/", timeout=15)
-        time.sleep(1)
-    except Exception:
-        pass
+    # まずnote.comにアクセスしてベースCookieとCSRFトークンを取得
+    csrf_token = _fetch_csrf_token(session)
+    if csrf_token:
+        session.headers.update({"X-CSRF-Token": csrf_token})
+    time.sleep(1)
 
     # ログインAPI候補（noteのバージョンにより異なる可能性）
     login_attempts = [
@@ -332,10 +351,24 @@ def _api_login(session: http_requests.Session) -> bool:
                 timeout=15,
             )
             if res.ok:
+                # レスポンスbodyにerrorが含まれていないか確認
+                try:
+                    body = res.json()
+                    if "error" in body:
+                        print(f"   ❌ ログインエラー: {body['error']}")
+                        break  # 認証情報が無効なので他を試しても無駄
+                except Exception:
+                    pass
                 print(f"   ✅ APIログイン成功: {attempt['url']}")
+                # ログイン後にCSRFトークンを再取得（セッションが更新されている）
+                new_csrf = _fetch_csrf_token(session)
+                if new_csrf:
+                    session.headers.update({"X-CSRF-Token": new_csrf})
+                    print(f"   🔐 ログイン後CSRFトークン更新")
                 return True
             elif res.status_code == 401:
-                print(f"   ❌ 認証拒否: {attempt['url']} (401)")
+                print(f"   ❌ 認証拒否: {attempt['url']} (401) → {res.text[:150]}")
+                break  # 認証情報が無効なので他を試しても無駄
             elif res.status_code == 404:
                 continue  # エンドポイント不在 → 次を試す
             else:
@@ -362,33 +395,46 @@ def _create_draft_api(session: http_requests.Session, title: str, body_html: str
         timeout=30,
     )
 
-    if res.ok:
+    print(f"   🔍 ステータス: {res.status_code}")
+    try:
         result = res.json()
-        # noteのレスポンス構造を柔軟に解析（data直下 or ネスト）
-        print(f"   🔍 APIレスポンスキー: {list(result.keys())}")
-        article_data = result.get("data", result)
-        if isinstance(article_data, dict) and "note" in article_data:
-            article_data = article_data["note"]
-
-        article_id = article_data.get("id")
-        article_key = article_data.get("key")
-        note_url = (
-            article_data.get("note_url")
-            or article_data.get("url")
-            or article_data.get("draft_url")
-            or ""
-        )
-        if not note_url and article_key:
-            note_url = f"https://note.com/n/{article_key}"
-
-        print(f"   ✅ 下書き作成成功: ID={article_id}, key={article_key}")
-        if not article_id:
-            print(f"   🔍 レスポンス詳細: {json.dumps(result, ensure_ascii=False)[:500]}")
-        return {"id": article_id, "key": article_key, "url": note_url}
-    else:
-        print(f"   ❌ 記事作成失敗: {res.status_code}")
-        print(f"   レスポンス: {res.text[:500]}")
+    except Exception:
+        print(f"   ❌ レスポンスパース失敗: {res.text[:300]}")
         return {}
+
+    print(f"   🔍 APIレスポンスキー: {list(result.keys())}")
+
+    # errorフィールドがあれば失敗（HTTPステータスが200でも）
+    if "error" in result:
+        print(f"   ❌ APIエラー: {json.dumps(result['error'], ensure_ascii=False)[:300]}")
+        return {}
+
+    if not res.ok:
+        print(f"   ❌ 記事作成失敗 ({res.status_code}): {res.text[:300]}")
+        return {}
+
+    # noteのレスポンス構造を柔軟に解析（data直下 or ネスト）
+    article_data = result.get("data", result)
+    if isinstance(article_data, dict) and "note" in article_data:
+        article_data = article_data["note"]
+
+    article_id = article_data.get("id")
+    article_key = article_data.get("key")
+    note_url = (
+        article_data.get("note_url")
+        or article_data.get("url")
+        or article_data.get("draft_url")
+        or ""
+    )
+    if not note_url and article_key:
+        note_url = f"https://note.com/n/{article_key}"
+
+    if not article_id:
+        print(f"   ❌ IDが取得できません。レスポンス詳細: {json.dumps(result, ensure_ascii=False)[:500]}")
+        return {}
+
+    print(f"   ✅ 下書き作成成功: ID={article_id}, key={article_key}")
+    return {"id": article_id, "key": article_key, "url": note_url}
 
 
 # ── save-cookies（初回のみ） ──────────────────────────
