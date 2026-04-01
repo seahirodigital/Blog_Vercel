@@ -1,19 +1,13 @@
 """
-アフィリエイトリンク挿入 v2 - C案実装
-OneDriveを直接参照し、MEMOごとのルール(mode/position)に基づいて挿入する
+アフィリエイトリンク挿入 v3
+OneDriveを直接参照し、MEMO1の▼ブロックをルールに基づいて挿入する
 
-【MEMOフォーマット】
-===MEMOx===
-mode=random        # ランダム位置に挿入
-mode=fixed         # position で指定した場所に固定挿入
-mode=disabled      # このMEMOをスキップ
-position=end           # 末尾
-position=start         # 冒頭
-position=after_h2      # 最初のH2直後
-position=before_h2     # 最初のH2直前
-position=after_conclusion  # 「結論」見出し直後
----
-（ここからリンク本文）
+【挿入ルール】
+1. H2「結論」の直前: MEMO1全文 + 免責事項（固定）
+2. 偶数番目のH2（2,4,6...番目）の直前: ▼ブロック1つをランダム選択（重複なし）
+   ※奇数番目のH2直前は手動挿入のためスクリプトでは何もしない
+   ※「結論」H2は1で処理済みのためスキップ
+3. 記事末尾: MEMO1全文 + 免責事項（固定）
 """
 
 import os
@@ -57,129 +51,50 @@ def _fetch_from_onedrive() -> str:
 
 
 # ── パーサー ────────────────────────────────────────────
-def _parse_memos(raw: str) -> list[dict]:
+def _parse_memo1(raw: str) -> str:
     """
-    MEMOセクションをパースして設定リストを返す。
-    無効(disabled)や本文が空のMEMOは除外。
-
-    Returns:
-        [{"num": 1, "mode": "random", "position": "random", "content": "..."}, ...]
+    MEMO1のコンテンツを取得。
+    ===MEMO1=== マーカーおよび --- 以前のメタデータを除去し、純粋な本文のみ返す。
+    記事本文に ===MEMOx=== などの文字が混入しないよう保証する。
     """
-    memos = []
     parts = re.split(r"===MEMO(\d+)===", raw)
-
     for i in range(1, len(parts), 2):
-        num  = int(parts[i])
-        body = (parts[i + 1] if i + 1 < len(parts) else "").strip()
+        if int(parts[i]) == 1:
+            body = (parts[i + 1] if i + 1 < len(parts) else "").strip()
+            # --- セパレータがある場合はその前のメタデータを除去
+            if "---" in body:
+                _, content = body.split("---", 1)
+                return content.strip()
+            return body
+    return ""
 
-        # デフォルト設定
-        cfg = {"num": num, "mode": "random", "position": "random"}
 
-        # --- セパレータで メタ / 本文を分割
-        if "---" in body:
-            meta_str, content = body.split("---", 1)
-            for line in meta_str.strip().splitlines():
-                if "=" in line:
-                    k, v = line.split("=", 1)
-                    cfg[k.strip().lower()] = v.strip().lower()
-        else:
-            content = body  # メタなし（後方互換）
-
-        cfg["content"] = content.strip()
-
-        if cfg["mode"] == "disabled":
-            continue
-        if not cfg["content"]:
-            continue
-
-        memos.append(cfg)
-
-    return memos
+def _split_blocks(content: str) -> list[str]:
+    """
+    ▼から次の▼までを1ブロックとして分割。
+    ▼で始まらない先頭部分は破棄する。
+    """
+    blocks = re.split(r'(?=▼)', content)
+    return [b.strip() for b in blocks if b.strip() and b.strip().startswith("▼")]
 
 
 # ── 挿入ロジック ────────────────────────────────────────
-def _find_h2_positions(lines: list[str]) -> list[int]:
-    return [i for i, ln in enumerate(lines) if ln.startswith("## ")]
-
-
-def _insert_block(lines: list[str], index: int, block: str) -> list[str]:
+def _insert_before(lines: list[str], index: int, block: str) -> list[str]:
+    """指定行インデックスの直前にブロックを挿入"""
     insert = ["\n", block + "\n", "\n"]
     return lines[:index] + insert + lines[index:]
-
-
-def _apply_memo(lines: list[str], memo: dict) -> list[str]:
-    content  = memo["content"]
-    mode     = memo["mode"]
-    position = memo.get("position", "random")
-    block    = content + f"\n\n{DISCLAIMER}"
-
-    h2_pos = _find_h2_positions(lines)
-
-    if mode == "fixed":
-        if position == "end":
-            lines = lines + ["\n\n---\n\n", block + "\n"]
-
-        elif position == "start":
-            lines = [block + "\n", "\n"] + lines
-
-        elif position == "after_h2":
-            if h2_pos:
-                lines = _insert_block(lines, h2_pos[0] + 1, block)
-            else:
-                lines = lines + ["\n\n---\n\n", block + "\n"]
-
-        elif position == "before_h2":
-            if h2_pos:
-                lines = _insert_block(lines, h2_pos[0], block)
-            else:
-                lines = [block + "\n", "\n"] + lines
-
-        elif position == "after_conclusion":
-            idx = next(
-                (i for i in h2_pos if "結論" in lines[i]),
-                None
-            )
-            if idx is not None:
-                lines = _insert_block(lines, idx + 1, block)
-            else:
-                lines = lines + ["\n\n---\n\n", block + "\n"]
-
-        else:
-            # position 未知 → 末尾
-            lines = lines + ["\n\n---\n\n", block + "\n"]
-
-    elif mode == "random":
-        # 段落境界（空行）の位置を取得してランダム挿入
-        para_boundaries = [
-            i for i in range(1, len(lines) - 1)
-            if not lines[i].strip() and lines[i - 1].strip()
-        ]
-        if para_boundaries:
-            idx = random.choice(para_boundaries)
-            lines = _insert_block(lines, idx, block)
-        else:
-            lines = lines + ["\n\n---\n\n", block + "\n"]
-
-    return lines
 
 
 # ── メインエントリーポイント ────────────────────────────
 def insert_affiliate_links(markdown_content: str) -> str:
     """
-    OneDriveからアフィリエイトリンク設定を取得し、
-    MEMOごとのルールに従ってMarkdownに挿入して返す。
-
-    Args:
-        markdown_content: 挿入前のMarkdown文字列
-    Returns:
-        挿入後のMarkdown文字列（失敗時は元の文字列をそのまま返す）
+    OneDriveからMEMO1を取得し、ルールに従ってMarkdownに挿入して返す。
+    失敗時は元の文字列をそのまま返す。
     """
     try:
-        raw   = _fetch_from_onedrive()
-        memos = _parse_memos(raw)
+        raw = _fetch_from_onedrive()
     except Exception as e:
         print(f"   ⚠️ OneDrive取得失敗（ローカルフォールバック試行）: {e}")
-        # フォールバック: スクリプトと同階層の local ファイルを参照
         local_path = os.path.join(
             os.path.dirname(os.path.abspath(__file__)),
             "affiliate_links.txt"
@@ -187,22 +102,57 @@ def insert_affiliate_links(markdown_content: str) -> str:
         if os.path.exists(local_path):
             with open(local_path, "r", encoding="utf-8") as f:
                 raw = f.read()
-            memos = _parse_memos(raw)
             print("   ✅ ローカルファイルで代替")
         else:
             print("   ❌ ローカルファイルも未検出 - アフィリ挿入スキップ")
             return markdown_content
 
-    if not memos:
-        print("   ⚠️ 有効なMEMOが見つかりません（全disabled or 空）")
+    memo1_content = _parse_memo1(raw)
+    if not memo1_content:
+        print("   ⚠️ MEMO1が空または未検出 - アフィリ挿入スキップ")
         return markdown_content
 
-    print(f"   📋 有効MEMO数: {len(memos)}件")
-    lines = markdown_content.splitlines(keepends=True)
+    blocks = _split_blocks(memo1_content)
+    print(f"   📋 ▼ブロック数: {len(blocks)}件")
 
-    for memo in memos:
-        lines = _apply_memo(lines, memo)
-        print(f"   ✅ MEMO{memo['num']} 挿入 (mode={memo['mode']}, position={memo.get('position','-')})")
+    lines = markdown_content.splitlines(keepends=True)
+    h2_indices = [i for i, ln in enumerate(lines) if ln.startswith("## ")]
+
+    # ── 挿入計画を作成（後で逆順に適用し行番号ズレを防ぐ）──
+    insertions = []  # [(line_index, text), ...]
+
+    # 1. H2「結論」の直前（固定: MEMO1全文）
+    conclusion_idx = next((i for i in h2_indices if "結論" in lines[i]), None)
+    if conclusion_idx is not None:
+        insertions.append((conclusion_idx, memo1_content + f"\n\n{DISCLAIMER}"))
+        print("   ✅ 「結論」直前: MEMO1全文を挿入予約")
+    else:
+        print("   ⚠️ H2「結論」が見つかりません - 固定挿入をスキップ")
+
+    # 2. 偶数番目のH2の直前（ランダム▼ブロック、重複なし）
+    random.shuffle(blocks)
+    block_iter = iter(blocks)
+    for count, h2_idx in enumerate(h2_indices, start=1):
+        if count % 2 != 0:
+            continue  # 奇数番目はスキップ（手動挿入）
+        if h2_idx == conclusion_idx:
+            continue  # 結論は1で処理済みのためスキップ
+        try:
+            block = next(block_iter)
+            insertions.append((h2_idx, block + f"\n\n{DISCLAIMER}"))
+            print(f"   ✅ {count}番目H2直前: ▼ブロック挿入予約")
+        except StopIteration:
+            print(f"   ⚠️ {count}番目H2: 挿入可能なブロックが不足 - スキップ")
+            break
+
+    # 挿入位置が大きい順に適用（行番号のズレを防ぐ）
+    insertions.sort(key=lambda x: x[0], reverse=True)
+    for pos, text in insertions:
+        lines = _insert_before(lines, pos, text)
+
+    # 3. 記事末尾（固定: MEMO1全文）
+    lines += ["\n\n---\n\n", memo1_content + f"\n\n{DISCLAIMER}\n"]
+    print("   ✅ 記事末尾: MEMO1全文を挿入")
 
     return "".join(lines)
 
