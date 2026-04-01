@@ -1,13 +1,19 @@
 """
-note下書きポスター v1.1
-Playwright でnote.comにログインし、Markdownから下書き記事を作成する。
+note下書きポスター v2.0
+Playwright でnote.comに下書き記事を作成する。
 
-【2段階設計】
-Phase 1: ログイン → タイトル・本文ペースト → 下書き保存
-Phase 2: OGP展開JS（note_ogp_formatter.js）を3回実行
+【reCAPTCHA回避策】
+GitHub ActionsのヘッドレスブラウザはreCAPTCHAで弾かれるため、
+ローカルで手動ログインしてクッキーを保存→GitHub Secretに登録する方式を採用。
 
-使い方:
-  python note_draft_poster.py <markdown_file>
+【使い方】
+  # Step 1: ローカルでクッキーを取得（初回・期限切れ時）
+  python note_draft_poster.py --save-cookies
+
+  # Step 2: 出力されたJSONをGitHub Secret「NOTE_COOKIES」に登録
+
+  # Step 3: 記事を投稿
+  python note_draft_poster.py <markdown_file.md>
   python note_draft_poster.py --content "# タイトル\n本文..."
 """
 
@@ -24,24 +30,20 @@ NOTE_URL       = "https://note.com/"
 NOTE_LOGIN_URL = "https://note.com/login"
 NOTE_EMAIL     = os.getenv("NOTE_EMAIL", "seahiro@gmail.com")
 NOTE_PASSWORD  = os.getenv("NOTE_PASSWORD", "appleblog0227")
+NOTE_COOKIES   = os.getenv("NOTE_COOKIES", "")  # JSON形式（GitHub Secret）
 
-# OGP Formatter JSの場所（同ディレクトリの prompts/ 配下）
-SCRIPT_DIR     = Path(__file__).parent
-OGP_JS_PATH    = SCRIPT_DIR / "prompts" / "05-note_ogp_formatter.js"
+SCRIPT_DIR   = Path(__file__).parent
+OGP_JS_PATH  = SCRIPT_DIR / "prompts" / "05-note_ogp_formatter.js"
+COOKIES_FILE = SCRIPT_DIR / "note_cookies.json"  # ローカル保存先
 
 
 # ── Markdown前処理 ─────────────────────────────────────
 def extract_title_and_body(markdown: str) -> tuple:
-    """
-    Markdownから H1 をタイトル、それ以降を本文として分離。
-    不要セクション（YouTube埋め込み、Captions）は除外。
-    """
+    """H1をタイトル、それ以降を本文として分離。不要セクションを除外。"""
     lines = markdown.replace('\r\n', '\n').split('\n')
-
     title = ""
     body_start = 0
 
-    # H1を探す
     for i, line in enumerate(lines):
         stripped = line.strip()
         if stripped.startswith('# ') and not stripped.startswith('## '):
@@ -56,7 +58,6 @@ def extract_title_and_body(markdown: str) -> tuple:
                 body_start = i + 1
                 break
 
-    # 本文を構築（不要セクション除外）
     body_lines = []
     skip = False
     for line in lines[body_start:]:
@@ -69,152 +70,151 @@ def extract_title_and_body(markdown: str) -> tuple:
         if not skip:
             body_lines.append(line)
 
-    body = '\n'.join(body_lines).strip()
-    return title, body
+    return title, '\n'.join(body_lines).strip()
 
 
-# ── Phase 1: ログイン＆下書き保存 ──────────────────────
-def _ensure_login(page):
-    """ログイン状態をチェックし、未ログインならログインする"""
+# ── クッキー管理 ───────────────────────────────────────
+def _load_cookies(context) -> bool:
+    """
+    クッキーを復元する。優先順:
+    1. NOTE_COOKIES 環境変数（GitHub Secret）
+    2. ローカルの note_cookies.json
+    """
+    if NOTE_COOKIES:
+        try:
+            cookies = json.loads(NOTE_COOKIES)
+            context.add_cookies(cookies)
+            print("   🍪 クッキーを環境変数（NOTE_COOKIES）から復元")
+            return True
+        except Exception as e:
+            print(f"   ⚠️ NOTE_COOKIESのパース失敗: {e}")
+
+    if COOKIES_FILE.exists():
+        try:
+            cookies = json.loads(COOKIES_FILE.read_text(encoding="utf-8"))
+            context.add_cookies(cookies)
+            print(f"   🍪 クッキーをローカルファイルから復元: {COOKIES_FILE}")
+            return True
+        except Exception as e:
+            print(f"   ⚠️ ローカルクッキーの読み込み失敗: {e}")
+
+    return False
+
+
+def save_cookies_locally():
+    """
+    ローカルで手動ログインしてクッキーを保存するヘルパー。
+    実行後、note_cookies.json の内容をGitHub Secret「NOTE_COOKIES」に登録すること。
+    """
+    from playwright.sync_api import sync_playwright
+
+    print("\n🔑 ブラウザでnote.comにログインしてください...")
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False)
+        context = browser.new_context(
+            viewport={"width": 1280, "height": 900},
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        )
+        page = context.new_page()
+        page.goto(NOTE_LOGIN_URL, wait_until="domcontentloaded")
+
+        print("\nブラウザでnote.comへのログインを完了してください。")
+        print("ログイン後、このターミナルでEnterを押してください: ", end="")
+        input()
+
+        cookies = context.cookies()
+        COOKIES_FILE.write_text(json.dumps(cookies, ensure_ascii=False, indent=2), encoding="utf-8")
+        browser.close()
+
+    print(f"\n✅ クッキー保存完了: {COOKIES_FILE}")
+    print(f"\n📋 以下をGitHub Secret「NOTE_COOKIES」に登録してください:")
+    print(COOKIES_FILE.read_text(encoding="utf-8"))
+
+
+# ── Phase 1: ログイン ─────────────────────────────────
+def _ensure_login(page, context):
+    """クッキー復元またはフォールバックログインでセッションを確立する"""
+
+    # クッキーを復元してからnote.comへアクセス
+    cookies_loaded = _load_cookies(context)
     page.goto(NOTE_URL, wait_until="domcontentloaded", timeout=30000)
     time.sleep(3)
 
-    # ログイン済みチェック
-    logged_in = page.query_selector('[class*="UserMenu"], [class*="user-menu"], img[alt*="アイコン"]')
-    if logged_in:
-        print("   ✅ 既にログイン済み")
+    # ログイン確認: /loginへのリダイレクトがなければOK
+    if "login" not in page.url:
+        print(f"   ✅ セッション有効 (URL: {page.url})")
         return
 
-    print("   🔑 ログイン処理を開始...")
-    page.goto(NOTE_LOGIN_URL, wait_until="domcontentloaded", timeout=30000)
-    time.sleep(4)  # SPAのレンダリングを待つ
+    if cookies_loaded:
+        print("   ⚠️ クッキーが期限切れです")
+        print("   ↳ ローカルで: python note_draft_poster.py --save-cookies を実行してください")
 
-    # note.comのログインフォームを段階的にセレクタ探索
-    # ログインページのフォーム入力欄を検索
-    email_selectors = [
-        'input[type="email"]',
-        'input[name="login"]',
-        'input[name="email"]',
-        'input[placeholder*="メール"]',
-        'input[placeholder*="note ID"]',
-        'input[placeholder*="アドレス"]',
-        # 一般的なフォーム構造
-        'form input:first-of-type',
-        'input:not([type="password"]):not([type="hidden"]):not([type="submit"])',
-    ]
+    # フォールバック: パスワードログイン（reCAPTCHAがない場合のみ成功）
+    print("   🔑 パスワードログインを試みます...")
+    page.goto(NOTE_LOGIN_URL, wait_until="domcontentloaded", timeout=30000)
+    time.sleep(4)
 
     email_input = None
-    for sel in email_selectors:
-        try:
-            el = page.query_selector(sel)
-            if el and el.is_visible():
-                email_input = el
-                print(f"   📧 メール欄を発見: {sel}")
-                break
-        except Exception:
-            continue
+    for sel in ['input[placeholder*="note ID"]', 'input[type="email"]', 'input[name="login"]']:
+        el = page.query_selector(sel)
+        if el and el.is_visible():
+            email_input = el
+            print(f"   📧 メール欄: {sel}")
+            break
 
     if not email_input:
-        # デバッグ: ページの全input要素を列挙
-        inputs_info = page.evaluate("""
-            () => Array.from(document.querySelectorAll('input')).map(el => ({
-                type: el.type,
-                name: el.name,
-                id: el.id,
-                placeholder: el.placeholder,
-                className: el.className,
-                visible: el.offsetParent !== null
-            }))
-        """)
-        print(f"   🔍 ページ上のinput要素: {json.dumps(inputs_info, ensure_ascii=False, indent=2)}")
+        info = page.evaluate("() => Array.from(document.querySelectorAll('input')).map(e=>({type:e.type,ph:e.placeholder,v:e.offsetParent!==null}))")
+        print(f"   🔍 input一覧: {json.dumps(info, ensure_ascii=False)}")
+        raise Exception("メール入力欄が見つかりません。先に --save-cookies を実行してください。")
 
-        # スクリーンショットを残す（デバッグ用）
-        page.screenshot(path="/tmp/note_login_debug.png")
-        print("   📸 デバッグスクショ: /tmp/note_login_debug.png")
-
-        raise Exception("メールアドレス入力欄が見つかりません。ログインページの構造が変わった可能性があります。")
-
-    # メールアドレス入力
     email_input.click()
-    time.sleep(0.3)
     email_input.fill(NOTE_EMAIL)
     time.sleep(0.5)
 
-    # パスワード入力
-    pw_selectors = [
-        'input[type="password"]',
-        'input[name="password"]',
-    ]
-    pw_input = None
-    for sel in pw_selectors:
-        el = page.query_selector(sel)
-        if el and el.is_visible():
-            pw_input = el
-            print(f"   🔒 パスワード欄を発見: {sel}")
-            break
-
-    if not pw_input:
+    pw = page.query_selector('input[type="password"]')
+    if not pw:
         raise Exception("パスワード入力欄が見つかりません")
-
-    pw_input.click()
-    time.sleep(0.3)
-    pw_input.fill(NOTE_PASSWORD)
+    pw.fill(NOTE_PASSWORD)
     time.sleep(0.5)
 
-    # ログインボタン
-    login_selectors = [
-        'button[type="submit"]',
-        'button:has-text("ログイン")',
-        'input[type="submit"]',
-        'button[class*="login"]',
-        'button[class*="Login"]',
-    ]
-    clicked = False
-    for sel in login_selectors:
-        try:
-            btn = page.query_selector(sel)
-            if btn and btn.is_visible():
-                btn.click()
-                clicked = True
-                print(f"   🖱️ ログインボタンをクリック: {sel}")
-                break
-        except Exception:
-            continue
+    btn = page.query_selector('button[type="submit"]') or page.query_selector('button:has-text("ログイン")')
+    if btn:
+        btn.click()
+    else:
+        pw.press("Enter")
 
-    if not clicked:
-        pw_input.press("Enter")
-        print("   ⏎ Enterキーでログイン")
-
-    # ログイン完了待ち
     page.wait_for_load_state("networkidle", timeout=20000)
     time.sleep(4)
+
+    if "login" in page.url:
+        raise Exception(
+            "ログイン失敗（reCAPTCHAで拒否）。\n"
+            "ローカルで実行: python note_draft_poster.py --save-cookies\n"
+            "出力されたJSONをGitHub Secret「NOTE_COOKIES」に登録してください。"
+        )
+
     print("   ✅ ログイン完了")
 
 
+# ── 本文ペースト ─────────────────────────────────────
 def _paste_text(page, element, text: str):
-    """テキストを安全にペースト（クリップボード経由、フォールバック付き）"""
+    """テキストを安全にペースト（3段階フォールバック）"""
     element.click()
     time.sleep(0.3)
 
-    # 方法1: evaluate で直接テキストセット → inputイベント発火
+    # 方法1: evaluate で直接セット
     try:
         page.evaluate("""
             ([el, text]) => {
                 el.focus();
-                // contenteditable の場合
                 if (el.contentEditable === 'true') {
-                    el.innerHTML = '';
                     el.textContent = text;
                     el.dispatchEvent(new Event('input', { bubbles: true }));
                 } else {
-                    // input/textarea の場合
-                    const nativeSetter = Object.getOwnPropertyDescriptor(
-                        window.HTMLInputElement.prototype, 'value'
-                    )?.set || Object.getOwnPropertyDescriptor(
+                    const s = Object.getOwnPropertyDescriptor(
                         window.HTMLTextAreaElement.prototype, 'value'
                     )?.set;
-                    if (nativeSetter) nativeSetter.call(el, text);
-                    else el.value = text;
+                    if (s) s.call(el, text); else el.value = text;
                     el.dispatchEvent(new Event('input', { bubbles: true }));
                     el.dispatchEvent(new Event('change', { bubbles: true }));
                 }
@@ -223,118 +223,105 @@ def _paste_text(page, element, text: str):
         time.sleep(0.5)
         return
     except Exception as e:
-        print(f"   ⚠️ evaluate方式失敗、クリップボード方式へ: {e}")
+        print(f"   ⚠️ 直接セット失敗 → クリップボード方式: {e}")
 
-    # 方法2: クリップボード経由
+    # 方法2: クリップボード
     try:
         page.evaluate("text => navigator.clipboard.writeText(text)", text)
         time.sleep(0.3)
         element.click()
-        time.sleep(0.2)
         page.keyboard.press("Control+a")
         time.sleep(0.1)
         page.keyboard.press("Control+v")
         time.sleep(1)
+        return
     except Exception as e:
-        print(f"   ⚠️ クリップボード方式も失敗、fill方式へ: {e}")
-        # 方法3: fill（最終手段）
+        print(f"   ⚠️ クリップボード失敗 → fill方式: {e}")
+
+    # 方法3: fill/type
+    try:
         element.click()
         element.press("Control+a")
         element.type(text, delay=5)
-        time.sleep(0.5)
+    except Exception as e:
+        print(f"   ⚠️ fill方式も失敗: {e}")
 
 
+# ── Phase 1: エディタ操作 ─────────────────────────────
 def _create_draft(page, title: str, body: str):
-    """記事作成画面でタイトル・本文をペーストして下書き保存"""
+    """記事作成画面でタイトル・本文を入力して下書き保存"""
 
     print("   📝 記事作成画面を開きます...")
-    # note.com/notes/new は editor.note.com にリダイレクトされる
+    # note.com/notes/new → editor.note.com にリダイレクトされる
     page.goto("https://note.com/notes/new", wait_until="networkidle", timeout=45000)
-    time.sleep(5)  # SPAのエディタ初期化を待つ
+    time.sleep(5)
     print(f"   🔗 現在のURL: {page.url}")
 
-    # ── タイトル入力（textarea[placeholder='記事タイトル']）──
+    # ログインページに戻された場合
+    if "login" in page.url:
+        raise Exception("ノートエディタに遷移できません（セッション無効）。--save-cookiesを再実行してください。")
+
+    # ── タイトル入力（textarea が実態） ──
     print("   📌 タイトルを入力...")
-    # note.comのタイトル欄は textarea であることが確認済み
-    title_selectors = [
-        'textarea[placeholder="記事タイトル"]',  # 実測値（最優先）
+    title_el = None
+    for sel in [
+        'textarea[placeholder="記事タイトル"]',
         'textarea[placeholder*="タイトル"]',
         'textarea[class*="title"]',
         'textarea[class*="Title"]',
-        '.note-editor__title-input',
-    ]
-
-    title_el = None
-    for sel in title_selectors:
+    ]:
         try:
-            # 最大10秒待機してSPAのレンダリング完了を待つ
             el = page.wait_for_selector(sel, timeout=10000, state="visible")
             if el:
                 title_el = el
-                print(f"   📌 タイトル欄を発見: {sel}")
+                print(f"   📌 タイトル欄: {sel}")
                 break
         except Exception:
             continue
 
     if not title_el:
-        # デバッグ情報: textarea/contenteditable要素を全列挙
-        elements_info = page.evaluate("""
-            () => {
-                const results = [];
-                document.querySelectorAll('textarea, [contenteditable]').forEach(el => {
-                    results.push({
-                        tag: el.tagName,
-                        placeholder: el.placeholder || '',
-                        className: el.className.substring(0, 60),
-                        visible: el.offsetParent !== null
-                    });
-                });
-                return results;
-            }
+        elems = page.evaluate("""
+            () => Array.from(document.querySelectorAll('textarea,[contenteditable]')).map(e=>({
+                tag: e.tagName, ph: e.placeholder||'', cls: e.className.slice(0,60), v: e.offsetParent!==null
+            }))
         """)
-        print(f"   🔍 textarea/contenteditable要素: {json.dumps(elements_info, ensure_ascii=False)}")
+        print(f"   🔍 textarea/contenteditable: {json.dumps(elems, ensure_ascii=False)}")
         page.screenshot(path="/tmp/note_editor_debug.png")
-        print("   📸 デバッグスクショ: /tmp/note_editor_debug.png")
         raise Exception("タイトル入力欄が見つかりません")
 
-    # textareaへの入力: click → fill で確実に入れる
+    # textarea は fill で確実に入力
     title_el.click()
     time.sleep(0.3)
     title_el.fill(title)
     time.sleep(0.5)
 
-    # タイトル確認ループ
+    # 確認ループ
     for attempt in range(3):
-        try:
-            current = page.evaluate("el => el.value || el.textContent || ''", title_el).strip()
-            if current and len(current) > 3:
-                print(f"   ✅ タイトル確認: 「{current[:40]}」")
-                break
-        except Exception:
-            pass
+        val = page.evaluate("el => el.value || ''", title_el).strip()
+        if val and len(val) > 3:
+            print(f"   ✅ タイトル確認: 「{val[:40]}」")
+            break
         print(f"   ⚠️ タイトル未入力（リトライ {attempt+1}/3）")
         title_el.click()
         title_el.fill(title)
         time.sleep(1)
 
-    # ── 本文入力（ProseMirrorエディタ）──
+    # ── 本文入力（ProseMirror エディタ） ──
     print("   📄 本文を入力...")
-    body_selectors = [
-        'div.ProseMirror',                          # 実測値（最優先）
+    body_el = None
+    for sel in [
+        'div.ProseMirror',
         '.ProseMirror',
         'div[class*="ProseMirror"]',
         '[role="textbox"]',
         '.note-editable',
         '[contenteditable="true"]',
-    ]
-
-    body_el = None
-    for sel in body_selectors:
+    ]:
         try:
             el = page.wait_for_selector(sel, timeout=8000, state="visible")
             if el:
                 body_el = el
-                print(f"   📄 本文欄を発見: {sel}")
+                print(f"   📄 本文欄: {sel}")
                 break
         except Exception:
             continue
@@ -342,19 +329,14 @@ def _create_draft(page, title: str, body: str):
     if not body_el:
         raise Exception("本文入力欄が見つかりません")
 
-    # ProseMirrorへのペースト：evaluate で innerHTML を直接セット
     _paste_text(page, body_el, body)
     time.sleep(2)
 
-    # 本文確認ループ
     for attempt in range(3):
-        try:
-            body_text = page.evaluate("el => el.textContent || el.innerText || ''", body_el).strip()
-            if body_text and len(body_text) > 10:
-                print(f"   ✅ 本文確認: {len(body_text)} 文字")
-                break
-        except Exception:
-            pass
+        txt = page.evaluate("el => el.textContent || el.innerText || ''", body_el).strip()
+        if txt and len(txt) > 10:
+            print(f"   ✅ 本文確認: {len(txt)} 文字")
+            break
         print(f"   ⚠️ 本文未入力（リトライ {attempt+1}/3）")
         _paste_text(page, body_el, body)
         time.sleep(2)
@@ -362,19 +344,18 @@ def _create_draft(page, title: str, body: str):
     return True
 
 
-# ── Phase 2: OGP展開JS実行 ────────────────────────────
+# ── Phase 2: OGP展開JS ────────────────────────────────
 def _run_ogp_formatter(page):
-    """OGP Formatter JSを3回実行してリンク展開・見出し変換を行う"""
+    """OGP Formatter JSを3回実行"""
     if not OGP_JS_PATH.exists():
-        print(f"   ⚠️ OGP Formatter JSが見つかりません: {OGP_JS_PATH}")
+        print(f"   ⚠️ OGP Formatter JS未検出: {OGP_JS_PATH}")
         return
 
     js_code = OGP_JS_PATH.read_text(encoding="utf-8")
     print("   🔧 OGP Formatter JS 実行開始...")
 
-    schedules = [(1, 7), (2, 5), (3, 0)]
-    for run_num, wait_sec in schedules:
-        print(f"   ▶️  {run_num}回目のJS実行...")
+    for run_num, wait_sec in [(1, 7), (2, 5), (3, 0)]:
+        print(f"   ▶️  {run_num}回目...")
         try:
             page.evaluate(js_code)
         except Exception as e:
@@ -386,44 +367,38 @@ def _run_ogp_formatter(page):
     print("   ✅ OGP Formatter 完了")
 
 
-# ── 下書き保存 ─────────────────────────────────────────
+# ── 下書き保存 ────────────────────────────────────────
 def _save_draft(page):
     """下書き保存ボタンをクリック"""
     print("   💾 下書き保存中...")
 
-    save_selectors = [
+    for sel in [
         'button:has-text("下書き保存")',
         'button:has-text("保存")',
         '[data-test="save-draft"]',
-        '.p-postEditor__action button',
         'button[class*="draft"]',
         'button[class*="save"]',
-    ]
-
-    for sel in save_selectors:
+        '.p-postEditor__action button',
+    ]:
         try:
             btn = page.query_selector(sel)
             if btn and btn.is_visible():
                 btn.click()
                 time.sleep(3)
-                print("   ✅ 下書き保存完了")
-                current_url = page.url
-                print(f"   🔗 URL: {current_url}")
-                return current_url
+                url = page.url
+                print(f"   ✅ 下書き保存完了: {url}")
+                return url
         except Exception:
             continue
 
-    print("   ⚠️ 下書き保存ボタンが見つかりませんでした")
-    # デバッグ用スクリーンショット
     page.screenshot(path="/tmp/note_save_debug.png")
+    print("   ⚠️ 下書き保存ボタンが見つかりませんでした")
     return None
 
 
-# ── エントリーポイント ──────────────────────────────────
-def post_draft_to_note(markdown: str, headless: bool = False, skip_ogp: bool = False) -> dict:
-    """
-    noteに下書きを投稿するメイン関数。
-    """
+# ── エントリーポイント ────────────────────────────────
+def post_draft_to_note(markdown: str, headless: bool = True, skip_ogp: bool = False) -> dict:
+    """noteに下書きを投稿するメイン関数"""
     from playwright.sync_api import sync_playwright
 
     title, body = extract_title_and_body(markdown)
@@ -439,11 +414,7 @@ def post_draft_to_note(markdown: str, headless: bool = False, skip_ogp: bool = F
     with sync_playwright() as p:
         browser = p.chromium.launch(
             headless=headless,
-            args=[
-                "--disable-blink-features=AutomationControlled",
-                "--no-sandbox",
-                "--disable-dev-shm-usage",
-            ]
+            args=["--disable-blink-features=AutomationControlled", "--no-sandbox", "--disable-dev-shm-usage"]
         )
         context = browser.new_context(
             viewport={"width": 1280, "height": 900},
@@ -453,17 +424,14 @@ def post_draft_to_note(markdown: str, headless: bool = False, skip_ogp: bool = F
         page = context.new_page()
 
         try:
-            # Phase 1: ログイン → 入力 → 下書き保存
             print("\n── Phase 1: ログイン＆下書き作成 ──")
-            _ensure_login(page)
+            _ensure_login(page, context)
             _create_draft(page, title, body)
 
-            # Phase 2: OGP展開
             if not skip_ogp:
                 print("\n── Phase 2: OGP展開 ──")
                 _run_ogp_formatter(page)
 
-            # 下書き保存
             url = _save_draft(page)
             if url:
                 result["success"] = True
@@ -473,7 +441,6 @@ def post_draft_to_note(markdown: str, headless: bool = False, skip_ogp: bool = F
             print(f"❌ エラー: {e}")
             import traceback
             traceback.print_exc()
-            # デバッグ用スクリーンショット
             try:
                 page.screenshot(path="/tmp/note_error_debug.png")
                 print("   📸 エラー時スクショ: /tmp/note_error_debug.png")
@@ -486,14 +453,21 @@ def post_draft_to_note(markdown: str, headless: bool = False, skip_ogp: bool = F
     return result
 
 
-# ── CLI ────────────────────────────────────────────────
+# ── CLI ──────────────────────────────────────────────
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="note.com 下書きポスター")
+    parser = argparse.ArgumentParser(description="note.com 下書きポスター v2.0")
     parser.add_argument("file", nargs="?", help="Markdownファイルパス")
-    parser.add_argument("--content", help="直接Markdown文字列を指定")
-    parser.add_argument("--headless", action="store_true", help="ヘッドレスモード")
+    parser.add_argument("--content", help="Markdown文字列を直接指定")
+    parser.add_argument("--headless", action="store_true", default=True, help="ヘッドレスモード（デフォルト: True）")
+    parser.add_argument("--no-headless", dest="headless", action="store_false", help="ブラウザを表示して実行")
     parser.add_argument("--skip-ogp", action="store_true", help="OGP展開をスキップ")
+    parser.add_argument("--save-cookies", action="store_true", help="ローカルでログインしてクッキーを保存")
     args = parser.parse_args()
+
+    # クッキー保存モード
+    if args.save_cookies:
+        save_cookies_locally()
+        sys.exit(0)
 
     if args.content:
         md = args.content
@@ -502,6 +476,7 @@ if __name__ == "__main__":
             md = f.read()
     else:
         print("❌ Markdownファイルパスまたは --content を指定してください")
+        print("   クッキー保存: python note_draft_poster.py --save-cookies")
         sys.exit(1)
 
     result = post_draft_to_note(md, headless=args.headless, skip_ogp=args.skip_ogp)
