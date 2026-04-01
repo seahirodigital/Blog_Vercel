@@ -198,10 +198,49 @@ async function renameArticle(token, fileId, newName) {
   return await res.json();
 }
 
+// 記事削除（ファイルID指定）
+async function deleteArticle(token, fileId) {
+  const url = `${GRAPH_API}/me/drive/items/${fileId}`;
+  const res = await fetch(url, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok && res.status !== 204) {
+    const err = await res.text();
+    console.error('Delete error:', res.status, err);
+    throw new Error(`削除失敗: ${res.status}`);
+  }
+}
+
+// 記事複製（コンテンツ読み込み → 同フォルダに新規保存）
+async function duplicateArticle(token, fileId, newName, folderPath) {
+  const content = await getArticle(token, fileId);
+  const baseFolder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
+  const targetFolder = folderPath ? `${baseFolder}/${folderPath}` : baseFolder;
+  const encoded = encodeFolderPath(targetFolder);
+  const encodedFile = encodeURIComponent(newName);
+  const url = `${GRAPH_API}/me/drive/root:/${encoded}/${encodedFile}:/content`;
+  console.log('DUPLICATE:', url);
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'text/plain; charset=utf-8',
+    },
+    body: content,
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    console.error('Duplicate error:', res.status, err);
+    throw new Error(`複製失敗: ${res.status}`);
+  }
+  return await res.json();
+}
+
 export default async function handler(req, res) {
   // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, PATCH, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, PATCH, DELETE, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
@@ -247,6 +286,29 @@ export default async function handler(req, res) {
       return res.status(200).json({
         success: true,
         id: result.id || fileId,
+        name: result.name || newName,
+        webUrl: result.webUrl || '',
+        lastModified: result.lastModifiedDateTime || new Date().toISOString(),
+        size: result.size || 0,
+      });
+    }
+
+    // DELETE: 記事削除
+    if (req.method === 'DELETE') {
+      const { fileId } = req.body;
+      if (!fileId) return res.status(400).json({ error: 'fileId は必須です' });
+      await deleteArticle(token, fileId);
+      return res.status(200).json({ success: true });
+    }
+
+    // POST: 記事複製
+    if (req.method === 'POST') {
+      const { fileId, newName, folderPath } = req.body;
+      if (!fileId || !newName) return res.status(400).json({ error: 'fileId と newName は必須です' });
+      const result = await duplicateArticle(token, fileId, newName, folderPath || '');
+      return res.status(200).json({
+        success: true,
+        id: result.id || '',
         name: result.name || newName,
         webUrl: result.webUrl || '',
         lastModified: result.lastModifiedDateTime || new Date().toISOString(),
