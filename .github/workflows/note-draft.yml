@@ -11,7 +11,7 @@ on:
 jobs:
   post-to-note:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
 
     steps:
       - name: リポジトリをチェックアウト
@@ -25,9 +25,6 @@ jobs:
       - name: Python 依存パッケージをインストール
         run: pip install -r scripts/pipeline/requirements.txt
 
-      - name: Playwright ブラウザをインストール
-        run: python -m playwright install chromium --with-deps
-
       - name: OneDriveから記事を取得し note に下書き投稿
         env:
           ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
@@ -35,6 +32,8 @@ jobs:
           ONEDRIVE_REFRESH_TOKEN: ${{ secrets.ONEDRIVE_REFRESH_TOKEN }}
           NOTE_EMAIL: ${{ secrets.NOTE_EMAIL }}
           NOTE_PASSWORD: ${{ secrets.NOTE_PASSWORD }}
+          NOTE_STORAGE_STATE: ${{ secrets.NOTE_STORAGE_STATE }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FILE_ID: ${{ inputs.file_id }}
         working-directory: scripts/pipeline
         run: |
@@ -60,12 +59,4 @@ jobs:
           print(f'✅ 記事取得完了: {len(content_res.text)} 文字')
           "
 
-          python note_draft_poster.py /tmp/article.md --headless
-
-      - name: デバッグスクリーンショットをアップロード
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: note-debug-screenshots
-          path: /tmp/note_*_debug.png
-          if-no-files-found: ignore
+          python note_draft_poster.py /tmp/article.md

@@ -1,0 +1,33 @@
+name: Note セッション維持（自動）
+
+on:
+  schedule:
+    # 3日ごとにセッションを延命（Cookie有効期限切れ防止）
+    - cron: '0 3 */3 * *'
+  workflow_dispatch:  # 手動トリガーも可能
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Python 3.13 セットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: 依存パッケージをインストール
+        run: pip install requests pynacl
+
+      - name: セッション維持チェック
+        env:
+          NOTE_STORAGE_STATE: ${{ secrets.NOTE_STORAGE_STATE }}
+          NOTE_EMAIL: ${{ secrets.NOTE_EMAIL }}
+          NOTE_PASSWORD: ${{ secrets.NOTE_PASSWORD }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        working-directory: scripts/pipeline
+        run: python note_draft_poster.py --keepalive

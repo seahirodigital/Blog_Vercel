@@ -1,36 +1,37 @@
 """
-note下書きポスター v3.0 — 完全自動化版
-Playwright でnote.comに下書き記事を作成する。
+note下書きポスター v4.0 — API直接投稿版（Playwright不要）
+noteの内部APIにHTTPリクエストで直接下書き保存する。
 
 【完全自動化の仕組み】
-1. NOTE_STORAGE_STATE (GitHub Secret) からPlaywrightのStorageState(クッキー等)を復元
-2. 操作完了後、最新のStorageStateをGitHub APIでSecretに自動上書き
-3. 次回実行時は自動更新されたSecretを使用 → 手動操作ゼロ
+1. NOTE_STORAGE_STATE (GitHub Secret) からCookieを復元
+2. Cookie無効時 → APIログインで自動再認証（ブラウザ不要）
+3. POST /api/v1/text_notes で下書き作成
+4. 操作後、最新CookieをGitHub Secretに自動上書き
+5. 定期cron（note-keepalive.yml）でセッションを延命
 
 【初回セットアップのみ手動】
   python note_draft_poster.py --save-cookies
   → 出力されたJSONをGitHub Secret「NOTE_STORAGE_STATE」に登録
 
 【通常実行（GitHub Actions）】
-  python note_draft_poster.py <file.md> --headless
+  python note_draft_poster.py <file.md>
 """
 
 import os
 import sys
 import json
 import time
+import re
 import base64
 import argparse
-import tempfile
 from pathlib import Path
 
 import requests as http_requests
 
 # ── 設定 ──────────────────────────────────────────────
-NOTE_URL            = "https://note.com/"
-NOTE_LOGIN_URL      = "https://note.com/login"
-NOTE_EMAIL          = os.getenv("NOTE_EMAIL", "seahiro@gmail.com")
-NOTE_PASSWORD       = os.getenv("NOTE_PASSWORD", "appleblog0227")
+NOTE_API_BASE       = "https://note.com/api"
+NOTE_EMAIL          = os.getenv("NOTE_EMAIL", "")
+NOTE_PASSWORD       = os.getenv("NOTE_PASSWORD", "")
 NOTE_STORAGE_STATE  = os.getenv("NOTE_STORAGE_STATE", "")   # JSON (GitHub Secret)
 GITHUB_TOKEN        = os.getenv("GITHUB_TOKEN", "")          # PAT (secrets:write)
 GITHUB_REPO_OWNER   = "seahirodigital"
@@ -38,8 +39,13 @@ GITHUB_REPO_NAME    = "Blog_Vercel"
 SECRET_NAME         = "NOTE_STORAGE_STATE"
 
 SCRIPT_DIR        = Path(__file__).parent
-OGP_JS_PATH       = SCRIPT_DIR / "prompts" / "05-note_ogp_formatter.js"
 LOCAL_STATE_FILE  = SCRIPT_DIR / "note_storage_state.json"   # ローカル保存先
+
+UA = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/125.0.0.0 Safari/537.36"
+)
 
 
 # ── Markdown前処理 ─────────────────────────────────────
@@ -67,39 +73,146 @@ def extract_title_and_body(markdown: str) -> tuple:
     return title, '\n'.join(body_lines).strip()
 
 
-# ── StorageState 管理 ──────────────────────────────────
-def _load_state_to_file() -> str | None:
-    """
-    StorageStateをtempファイルに書き出しパスを返す。
-    優先: 環境変数 NOTE_STORAGE_STATE → ローカルファイル
-    """
+# ── Markdown → noteエディタHTML変換 ───────────────────
+def _inline_format(text: str) -> str:
+    """インライン要素の変換（太字、リンク、コード）"""
+    text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
+    text = re.sub(r'(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)', r'<em>\1</em>', text)
+    text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', text)
+    text = re.sub(r'`([^`]+)`', r'<code>\1</code>', text)
+    return text
+
+
+def markdown_to_note_html(md: str) -> str:
+    """MarkdownをnoteのエディタHTML形式に変換"""
+    html_parts = []
+    lines = md.split('\n')
+    i = 0
+
+    while i < len(lines):
+        line = lines[i]
+        stripped = line.strip()
+
+        # 空行 → 空段落
+        if not stripped:
+            html_parts.append('<p><br></p>')
+            i += 1
+            continue
+
+        # ### → h3
+        if stripped.startswith('### '):
+            text = _inline_format(stripped[4:].strip())
+            html_parts.append(f'<h3>{text}</h3>')
+            i += 1
+            continue
+
+        # ## → h2
+        if stripped.startswith('## '):
+            text = _inline_format(stripped[3:].strip())
+            html_parts.append(f'<h2>{text}</h2>')
+            i += 1
+            continue
+
+        # リスト項目（- または *）
+        if stripped.startswith('- ') or stripped.startswith('* '):
+            items = []
+            while i < len(lines) and (lines[i].strip().startswith('- ') or lines[i].strip().startswith('* ')):
+                item_text = lines[i].strip()[2:].strip()
+                items.append(f'<li>{_inline_format(item_text)}</li>')
+                i += 1
+            html_parts.append(f'<ul>{"".join(items)}</ul>')
+            continue
+
+        # URL単独行 → そのまま段落（noteが自動OGP展開）
+        if re.match(r'^https?://\S+$', stripped):
+            html_parts.append(f'<p>{stripped}</p>')
+            i += 1
+            continue
+
+        # 通常段落
+        text = _inline_format(stripped)
+        html_parts.append(f'<p>{text}</p>')
+        i += 1
+
+    return '\n'.join(html_parts)
+
+
+# ── Cookie管理 ────────────────────────────────────────
+def _load_cookies() -> dict:
+    """StorageStateまたはCookieファイルからCookie辞書を生成"""
     raw = ""
     if NOTE_STORAGE_STATE:
         raw = NOTE_STORAGE_STATE
-        print("   🍪 StorageStateを環境変数から読み込み")
+        print("   🍪 Cookieを環境変数から読み込み")
     elif LOCAL_STATE_FILE.exists():
         raw = LOCAL_STATE_FILE.read_text(encoding="utf-8")
-        print(f"   🍪 StorageStateをローカルファイルから読み込み: {LOCAL_STATE_FILE}")
+        print("   🍪 Cookieをローカルファイルから読み込み")
 
     if not raw:
-        return None
+        return {}
 
     try:
-        json.loads(raw)  # 構文チェック
-        tmp = tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False, encoding="utf-8")
-        tmp.write(raw)
-        tmp.close()
-        return tmp.name
+        data = json.loads(raw)
+        cookies = {}
+        # Playwright StorageState形式 {"cookies": [...]}
+        if isinstance(data, dict) and "cookies" in data:
+            for c in data["cookies"]:
+                if ".note.com" in c.get("domain", "") or "note.com" in c.get("domain", ""):
+                    cookies[c["name"]] = c["value"]
+        # シンプルなCookie辞書形式 {"name": "value", ...}
+        elif isinstance(data, dict):
+            cookies = data
+        # Cookie配列形式 [{"name": ..., "value": ...}, ...]
+        elif isinstance(data, list):
+            for c in data:
+                if isinstance(c, dict) and "name" in c:
+                    cookies[c["name"]] = c["value"]
+        if cookies:
+            print(f"   🍪 {len(cookies)}個のCookieを読み込み")
+        return cookies
     except Exception as e:
-        print(f"   ⚠️ StorageStateのパース失敗: {e}")
-        return None
+        print(f"   ⚠️ Cookie読み込み失敗: {e}")
+        return {}
 
 
+def _save_cookies_state(session: http_requests.Session):
+    """セッションのCookieをStorageState互換形式で保存・GitHub Secret更新"""
+    cookies = dict(session.cookies)
+    if not cookies:
+        print("   ℹ️ 保存すべきCookieがありません")
+        return
+
+    # Playwright StorageState互換形式で保存
+    state = {
+        "cookies": [
+            {
+                "name": name,
+                "value": value,
+                "domain": ".note.com",
+                "path": "/",
+                "httpOnly": name.startswith("_"),
+                "secure": True,
+                "sameSite": "Lax",
+            }
+            for name, value in cookies.items()
+        ],
+        "origins": []
+    }
+    state_json = json.dumps(state, ensure_ascii=False)
+
+    # ローカル保存
+    LOCAL_STATE_FILE.write_text(
+        json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    print(f"   💾 ローカル保存: {LOCAL_STATE_FILE}")
+
+    # GitHub Secret自動更新
+    _auto_refresh_github_secret(state_json)
+
+
+# ── GitHub Secret自動更新 ─────────────────────────────
 def _auto_refresh_github_secret(new_state_json: str):
-    """
-    GitHub APIを使ってNOTE_STORAGE_STATEシークレットを自動更新する。
-    GITHUB_TOKEN (PAT with secrets:write) が必要。
-    """
+    """GitHub APIを使ってNOTE_STORAGE_STATEシークレットを自動更新"""
     if not GITHUB_TOKEN:
         print("   ℹ️ GITHUB_TOKEN未設定のためSecretの自動更新をスキップ")
         return
@@ -135,16 +248,139 @@ def _auto_refresh_github_secret(new_state_json: str):
         json={"encrypted_value": encrypted, "key_id": key_data["key_id"]},
     )
     if res.status_code in (201, 204):
-        print("   ✅ NOTE_STORAGE_STATE を自動更新しました（次回も手動不要）")
+        print("   ✅ NOTE_STORAGE_STATE を自動更新しました")
     else:
         print(f"   ⚠️ Secret更新失敗 ({res.status_code}): {res.text[:200]}")
 
 
-# ── save-cookies モード（初回のみ） ────────────────────
+# ── セッション作成・検証・ログイン ────────────────────
+def _create_session(cookies: dict) -> http_requests.Session:
+    """認証済みHTTPセッションを作成"""
+    session = http_requests.Session()
+    session.headers.update({
+        "User-Agent": UA,
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Referer": "https://note.com/",
+        "Origin": "https://note.com",
+        "X-Requested-With": "XMLHttpRequest",
+    })
+    if cookies:
+        session.cookies.update(cookies)
+    return session
+
+
+def _verify_session(session: http_requests.Session) -> bool:
+    """セッションが有効か確認（ユーザー情報取得を試行）"""
+    try:
+        res = session.get(f"{NOTE_API_BASE}/v1/stats/pv", timeout=15)
+        if res.ok:
+            print("   ✅ セッション有効（API認証成功）")
+            return True
+        # 別のエンドポイントでもう一度試す
+        res = session.get("https://note.com/api/v1/note_sessions/me", timeout=15)
+        if res.ok:
+            print("   ✅ セッション有効（セッション確認成功）")
+            return True
+    except Exception as e:
+        print(f"   ⚠️ セッション検証エラー: {e}")
+    return False
+
+
+def _api_login(session: http_requests.Session) -> bool:
+    """noteのAPIで直接ログインしてCookieを取得"""
+    if not NOTE_EMAIL or not NOTE_PASSWORD:
+        print("   ⚠️ NOTE_EMAIL/NOTE_PASSWORD未設定のためAPIログイン不可")
+        return False
+
+    print("   🔑 APIログインを試みます...")
+
+    # まずnote.comにアクセスしてベースCookieを取得
+    try:
+        session.get("https://note.com/", timeout=15)
+        time.sleep(1)
+    except Exception:
+        pass
+
+    # ログインAPI候補（noteのバージョンにより異なる可能性）
+    login_attempts = [
+        {
+            "url": "https://note.com/api/v3/sessions/sign_in",
+            "payload": {"login": NOTE_EMAIL, "password": NOTE_PASSWORD},
+        },
+        {
+            "url": "https://note.com/api/v2/sessions/sign_in",
+            "payload": {"login": NOTE_EMAIL, "password": NOTE_PASSWORD},
+        },
+        {
+            "url": "https://note.com/api/v1/sessions/sign_in",
+            "payload": {"login": NOTE_EMAIL, "password": NOTE_PASSWORD},
+        },
+        {
+            "url": "https://note.com/api/v1/sessions",
+            "payload": {"login": NOTE_EMAIL, "password": NOTE_PASSWORD},
+        },
+    ]
+
+    for attempt in login_attempts:
+        try:
+            res = session.post(
+                attempt["url"],
+                json=attempt["payload"],
+                timeout=15,
+            )
+            if res.ok:
+                print(f"   ✅ APIログイン成功: {attempt['url']}")
+                return True
+            elif res.status_code == 401:
+                print(f"   ❌ 認証拒否: {attempt['url']} (401)")
+            elif res.status_code == 404:
+                continue  # エンドポイント不在 → 次を試す
+            else:
+                print(f"   ⚠️ {attempt['url']} → {res.status_code}: {res.text[:150]}")
+        except Exception as e:
+            print(f"   ⚠️ {attempt['url']} → エラー: {e}")
+        time.sleep(1)
+
+    return False
+
+
+# ── 記事作成API ───────────────────────────────────────
+def _create_draft_api(session: http_requests.Session, title: str, body_html: str) -> dict:
+    """POST /api/v1/text_notes で下書き作成"""
+    data = {
+        "name": title,
+        "body": body_html,
+        "status": "draft",
+    }
+
+    res = session.post(
+        f"{NOTE_API_BASE}/v1/text_notes",
+        json=data,
+        timeout=30,
+    )
+
+    if res.ok:
+        result = res.json()
+        article_data = result.get("data", {})
+        article_id = article_data.get("id")
+        article_key = article_data.get("key")
+        note_url = article_data.get("note_url", "")
+        if not note_url and article_key:
+            note_url = f"https://note.com/n/{article_key}"
+        print(f"   ✅ 下書き作成成功: ID={article_id}, key={article_key}")
+        return {"id": article_id, "key": article_key, "url": note_url}
+    else:
+        print(f"   ❌ 記事作成失敗: {res.status_code}")
+        print(f"   レスポンス: {res.text[:500]}")
+        return {}
+
+
+# ── save-cookies（初回のみ） ──────────────────────────
 def save_storage_state_locally():
     """
-    ブラウザを開いて手動ログイン → StorageStateを保存。
-    初回のみ実行。以降は自動更新。
+    ブラウザを開いて手動ログイン → Cookieを保存。
+    初回のみ実行。以降はAPIログイン + keepaliveで自動維持。
     """
     from playwright.sync_api import sync_playwright
 
@@ -153,10 +389,10 @@ def save_storage_state_locally():
         browser = p.chromium.launch(headless=False)
         context = browser.new_context(
             viewport={"width": 1280, "height": 900},
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+            user_agent=UA,
         )
         page = context.new_page()
-        page.goto(NOTE_LOGIN_URL, wait_until="domcontentloaded")
+        page.goto("https://note.com/login", wait_until="domcontentloaded")
 
         print("\nブラウザでnote.comへのログインを完了してください。")
         print("ログイン後、Enterを押してください: ", end="", flush=True)
@@ -168,270 +404,94 @@ def save_storage_state_locally():
         browser.close()
 
     print(f"\n✅ StorageState保存完了: {LOCAL_STATE_FILE}")
-    print("\n📋 以下をGitHub Secret「NOTE_STORAGE_STATE」に登録してください:")
-    print(state_json)
 
     # GITHUB_TOKENがあれば即自動登録
     if GITHUB_TOKEN:
-        print("\n🔄 GITHUB_TOKEN検出 → GitHubSecretを自動更新します...")
-        _auto_refresh_github_secret(state_json)
+        print("\n🔄 GITHUB_TOKEN検出 → GitHub Secretを自動更新します...")
+        _auto_refresh_github_secret(json.dumps(state, ensure_ascii=False))
     else:
-        print("\n⚠️ GITHUB_TOKEN未設定のため手動登録が必要です。")
+        print("\n📋 以下をGitHub Secret「NOTE_STORAGE_STATE」に登録してください:")
+        print(state_json)
 
 
-# ── Phase 1: ログイン確認 ─────────────────────────────
-def _ensure_logged_in(page):
-    """StorageState復元後のログイン状態を確認する"""
-    page.goto(NOTE_URL, wait_until="domcontentloaded", timeout=30000)
-    time.sleep(3)
+# ── keepaliveモード ───────────────────────────────────
+def keepalive():
+    """
+    セッション維持用: Cookieでnoteにアクセスし、有効なら更新して保存。
+    無効ならAPIログインで再取得。
+    """
+    print("🔄 セッション維持チェック...")
+    cookies = _load_cookies()
+    session = _create_session(cookies)
 
-    if "login" not in page.url:
-        print(f"   ✅ セッション有効")
-        return
+    if _verify_session(session):
+        print("   セッション有効 → Cookie更新して保存")
+    else:
+        print("   セッション切れ → APIログインで再取得")
+        if not _api_login(session):
+            print("❌ セッション復旧失敗")
+            sys.exit(1)
 
-    # セッション切れ → フォールバックでパスワードログイン
-    print("   ⚠️ セッション無効。パスワードログインを試みます...")
-    page.goto(NOTE_LOGIN_URL, wait_until="domcontentloaded", timeout=30000)
-    time.sleep(4)
-
-    email_el = None
-    for sel in ['input[placeholder*="note ID"]', 'input[type="email"]']:
-        el = page.query_selector(sel)
-        if el and el.is_visible():
-            email_el = el; break
-
-    if not email_el:
-        info = page.evaluate("()=>Array.from(document.querySelectorAll('input')).map(e=>({type:e.type,ph:e.placeholder}))")
-        print(f"   🔍 inputs: {json.dumps(info, ensure_ascii=False)}")
-        raise Exception("ログイン入力欄が見つかりません。NOTE_STORAGE_STATEが無効です。")
-
-    email_el.click(); email_el.fill(NOTE_EMAIL); time.sleep(0.5)
-    pw = page.query_selector('input[type="password"]')
-    if not pw: raise Exception("パスワード入力欄が見つかりません")
-    pw.fill(NOTE_PASSWORD); time.sleep(0.5)
-
-    btn = (page.query_selector('button[type="submit"]') or
-           page.query_selector('button:has-text("ログイン")'))
-    if btn: btn.click()
-    else: pw.press("Enter")
-    page.wait_for_load_state("networkidle", timeout=20000)
-    time.sleep(4)
-
-    if "login" in page.url:
-        raise Exception("パスワードログインも失敗しました。NOTE_STORAGE_STATEが古い可能性があります。")
-    print("   ✅ ログイン完了")
+    _save_cookies_state(session)
+    print("✅ セッション維持完了")
 
 
-# ── テキスト入力 ──────────────────────────────────────
-def _paste_text(page, element, text: str):
-    """3段階フォールバックでテキストをペースト"""
-    element.click(); time.sleep(0.3)
-    # 1: evaluate直接セット
-    try:
-        page.evaluate("""([el, text]) => {
-            el.focus();
-            if (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') {
-                const s = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype,'value')?.set;
-                if (s) s.call(el, text); else el.value = text;
-                el.dispatchEvent(new Event('input',{bubbles:true}));
-                el.dispatchEvent(new Event('change',{bubbles:true}));
-            } else {
-                el.textContent = text;
-                el.dispatchEvent(new Event('input',{bubbles:true}));
-            }
-        }""", [element, text])
-        time.sleep(0.5); return
-    except Exception as e:
-        print(f"   ⚠️ evaluate失敗→clipboard: {e}")
-    # 2: クリップボード
-    try:
-        page.evaluate("t => navigator.clipboard.writeText(t)", text)
-        element.click(); page.keyboard.press("Control+a"); time.sleep(0.1)
-        page.keyboard.press("Control+v"); time.sleep(1); return
-    except Exception as e:
-        print(f"   ⚠️ clipboard失敗→fill: {e}")
-    # 3: fill
-    element.click(); element.press("Control+a"); element.type(text, delay=5)
-
-
-# ── Phase 1: エディタ操作 ─────────────────────────────
-def _create_draft(page, title: str, body: str):
-    """記事エディタでタイトル・本文を入力"""
-    print("   📝 エディタを開きます...")
-    page.goto("https://note.com/notes/new", wait_until="networkidle", timeout=45000)
-    time.sleep(5)
-    print(f"   🔗 現在URL: {page.url}")
-
-    if "login" in page.url:
-        raise Exception("エディタに遷移できません（セッション無効）")
-
-    # タイトル入力（実測: textarea[placeholder="記事タイトル"]）
-    print("   📌 タイトルを入力...")
-    title_el = None
-    for sel in ['textarea[placeholder="記事タイトル"]','textarea[placeholder*="タイトル"]','textarea[class*="title"]']:
-        try:
-            el = page.wait_for_selector(sel, timeout=10000, state="visible")
-            if el: title_el = el; print(f"   📌 タイトル欄: {sel}"); break
-        except Exception: continue
-
-    if not title_el:
-        elems = page.evaluate("()=>Array.from(document.querySelectorAll('textarea,[contenteditable]')).map(e=>({tag:e.tagName,ph:e.placeholder||'',cls:e.className.slice(0,50),v:e.offsetParent!==null}))")
-        print(f"   🔍 編集要素: {json.dumps(elems, ensure_ascii=False)}")
-        page.screenshot(path="/tmp/note_editor_debug.png")
-        raise Exception("タイトル入力欄が見つかりません")
-
-    title_el.click(); time.sleep(0.3)
-    title_el.fill(title); time.sleep(0.5)
-
-    for attempt in range(3):
-        val = page.evaluate("el => el.value || ''", title_el).strip()
-        if val and len(val) > 3:
-            print(f"   ✅ タイトル確認: 「{val[:40]}」"); break
-        print(f"   ⚠️ リトライ {attempt+1}/3")
-        title_el.click(); title_el.fill(title); time.sleep(1)
-
-    # 本文入力（実測: div.ProseMirror）
-    print("   📄 本文を入力...")
-    body_el = None
-    for sel in ['div.ProseMirror','.ProseMirror','[role="textbox"]','[contenteditable="true"]']:
-        try:
-            el = page.wait_for_selector(sel, timeout=8000, state="visible")
-            if el: body_el = el; print(f"   📄 本文欄: {sel}"); break
-        except Exception: continue
-
-    if not body_el:
-        raise Exception("本文入力欄が見つかりません")
-
-    _paste_text(page, body_el, body); time.sleep(2)
-
-    for attempt in range(3):
-        txt = page.evaluate("el => el.textContent || ''", body_el).strip()
-        if txt and len(txt) > 10:
-            print(f"   ✅ 本文確認: {len(txt)} 文字"); break
-        print(f"   ⚠️ リトライ {attempt+1}/3")
-        _paste_text(page, body_el, body); time.sleep(2)
-
-    return True
-
-
-# ── Phase 2: OGP展開 ──────────────────────────────────
-def _run_ogp_formatter(page):
-    if not OGP_JS_PATH.exists():
-        print(f"   ⚠️ OGP JS未検出: {OGP_JS_PATH}"); return
-    js = OGP_JS_PATH.read_text(encoding="utf-8")
-    print("   🔧 OGP Formatter実行...")
-    for n, wait in [(1,7),(2,5),(3,0)]:
-        print(f"   ▶️ {n}回目")
-        try: page.evaluate(js)
-        except Exception as e: print(f"   ⚠️ JS実行エラー: {e}")
-        if wait: print(f"   ⏳ {wait}秒待機..."); time.sleep(wait)
-    print("   ✅ OGP完了")
-
-
-# ── 下書き保存 ─────────────────────────────────────────
-def _save_draft(page) -> str | None:
-    print("   💾 下書き保存...")
-    for sel in ['button:has-text("下書き保存")','button:has-text("保存")','[data-test="save-draft"]']:
-        try:
-            btn = page.query_selector(sel)
-            if btn and btn.is_visible():
-                btn.click(); time.sleep(3)
-                url = page.url
-                print(f"   ✅ 保存完了: {url}")
-                return url
-        except Exception: continue
-    page.screenshot(path="/tmp/note_save_debug.png")
-    print("   ⚠️ 保存ボタンが見つかりません")
-    return None
-
-
-# ── エントリーポイント ────────────────────────────────
-def post_draft_to_note(markdown: str, headless: bool = True, skip_ogp: bool = False) -> dict:
-    from playwright.sync_api import sync_playwright
-
+# ── メイン処理 ────────────────────────────────────────
+def post_draft_to_note(markdown: str) -> dict:
     title, body = extract_title_and_body(markdown)
     if not title or not body:
         print("❌ タイトルまたは本文が空です")
         return {"success": False, "url": "", "title": title}
 
+    body_html = markdown_to_note_html(body)
     print(f"📋 タイトル: 「{title}」")
-    print(f"📋 本文: {len(body)} 文字")
+    print(f"📋 本文: {len(body)} 文字 → HTML {len(body_html)} 文字")
     result = {"success": False, "url": "", "title": title}
 
-    # StorageStateをtempファイルに準備
-    state_file = _load_state_to_file()
-    if not state_file:
-        print("⚠️ NOTE_STORAGE_STATE未設定。--save-cookiesで初期化してください。")
+    # Phase 1: 認証
+    print("\n── Phase 1: 認証 ──")
+    cookies = _load_cookies()
+    session = _create_session(cookies)
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(
-            headless=headless,
-            args=["--disable-blink-features=AutomationControlled","--no-sandbox","--disable-dev-shm-usage"]
-        )
-        ctx_kwargs = dict(
-            viewport={"width": 1280, "height": 900},
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
-            permissions=["clipboard-read","clipboard-write"],
-        )
-        if state_file:
-            ctx_kwargs["storage_state"] = state_file
-        context = browser.new_context(**ctx_kwargs)
-        page = context.new_page()
+    if not _verify_session(session):
+        print("   ⚠️ Cookie無効 → APIログインにフォールバック")
+        if not _api_login(session):
+            print("❌ 全ての認証手段が失敗しました")
+            return result
 
-        try:
-            print("\n── Phase 1: ログイン確認 ──")
-            _ensure_logged_in(page)
-            _create_draft(page, title, body)
+    # Phase 2: 下書き作成
+    print("\n── Phase 2: 下書き作成（API） ──")
+    draft = _create_draft_api(session, title, body_html)
+    if not draft:
+        return result
 
-            if not skip_ogp:
-                print("\n── Phase 2: OGP展開 ──")
-                _run_ogp_formatter(page)
+    result["success"] = True
+    result["url"] = draft.get("url", "")
 
-            url = _save_draft(page)
-            if url:
-                result["success"] = True
-                result["url"] = url
-
-            # ── 操作後に最新StorageStateを自動更新 ──
-            print("\n── StorageState自動更新 ──")
-            new_state = context.storage_state()
-            new_state_json = json.dumps(new_state, ensure_ascii=False)
-            _auto_refresh_github_secret(new_state_json)
-            # ローカルにも保存
-            LOCAL_STATE_FILE.write_text(
-                json.dumps(new_state, ensure_ascii=False, indent=2), encoding="utf-8"
-            )
-
-        except Exception as e:
-            print(f"❌ エラー: {e}")
-            import traceback; traceback.print_exc()
-            try: page.screenshot(path="/tmp/note_error_debug.png")
-            except Exception: pass
-        finally:
-            time.sleep(2)
-            browser.close()
-
-        # tempファイル削除
-        if state_file:
-            try: Path(state_file).unlink()
-            except Exception: pass
+    # Phase 3: セッション更新
+    print("\n── Phase 3: セッション更新 ──")
+    _save_cookies_state(session)
 
     return result
 
 
 # ── CLI ──────────────────────────────────────────────
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="note.com 下書きポスター v3.0")
+    parser = argparse.ArgumentParser(description="note.com 下書きポスター v4.0（API直接投稿版）")
     parser.add_argument("file", nargs="?", help="Markdownファイルパス")
     parser.add_argument("--content", help="Markdown文字列を直接指定")
-    parser.add_argument("--headless", action="store_true", default=True)
-    parser.add_argument("--no-headless", dest="headless", action="store_false")
-    parser.add_argument("--skip-ogp", action="store_true")
-    parser.add_argument("--save-cookies", action="store_true", help="初回セットアップ: ブラウザで手動ログインしてStorageStateを保存")
+    parser.add_argument("--save-cookies", action="store_true",
+                        help="初回セットアップ: ブラウザで手動ログインしてCookieを保存")
+    parser.add_argument("--keepalive", action="store_true",
+                        help="セッション維持モード: Cookieの有効性確認・更新")
     args = parser.parse_args()
 
     if args.save_cookies:
         save_storage_state_locally()
+        sys.exit(0)
+
+    if args.keepalive:
+        keepalive()
         sys.exit(0)
 
     if args.content:
@@ -444,7 +504,7 @@ if __name__ == "__main__":
         print("   初回セットアップ: python note_draft_poster.py --save-cookies")
         sys.exit(1)
 
-    result = post_draft_to_note(md, headless=args.headless, skip_ogp=args.skip_ogp)
+    result = post_draft_to_note(md)
     if result["success"]:
         print(f"\n🎉 下書き投稿成功！\n   タイトル: {result['title']}\n   URL: {result['url']}")
     else:
