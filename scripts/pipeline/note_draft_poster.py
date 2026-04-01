@@ -392,49 +392,72 @@ def _api_login(session: http_requests.Session) -> bool:
 
 
 # ── 記事作成API ───────────────────────────────────────
+def _parse_article_data(result: dict) -> dict:
+    """noteのAPIレスポンスからarticleデータを抽出"""
+    article_data = result.get("data", result)
+    if isinstance(article_data, dict) and "note" in article_data:
+        article_data = article_data["note"]
+    return article_data
+
+
 def _create_draft_api(session: http_requests.Session, title: str, body_html: str) -> dict:
-    """POST /api/v1/text_notes で下書き作成"""
-    data = {
-        "name": title,
-        "body": body_html,
-        "status": "draft",
-    }
-
-    # リクエスト前のCookie状況を確認
-    cookie_names = [c.name for c in session.cookies]
-    print(f"   🍪 リクエスト時Cookie: {cookie_names}")
-
+    """
+    2ステップで下書き作成:
+    1. POST /api/v1/text_notes でタイトルのみ作成 → ID取得
+    2. PUT /api/v1/text_notes/{id} で本文を保存
+    """
+    # ── Step 1: 記事作成（タイトルのみ） ──
+    print("   📝 Step1: 記事作成（タイトル）...")
     res = session.post(
         f"{NOTE_API_BASE}/v1/text_notes",
-        json=data,
+        json={"name": title, "status": "draft"},
         timeout=30,
     )
 
-    print(f"   🔍 ステータス: {res.status_code}")
+    print(f"   🔍 POST ステータス: {res.status_code}")
     try:
         result = res.json()
     except Exception:
         print(f"   ❌ レスポンスパース失敗: {res.text[:300]}")
         return {}
 
-    print(f"   🔍 APIレスポンスキー: {list(result.keys())}")
-
-    # errorフィールドがあれば失敗（HTTPステータスが200でも）
     if "error" in result:
-        print(f"   ❌ APIエラー: {json.dumps(result['error'], ensure_ascii=False)[:300]}")
+        print(f"   ❌ POST APIエラー: {json.dumps(result['error'], ensure_ascii=False)[:300]}")
         return {}
-
     if not res.ok:
         print(f"   ❌ 記事作成失敗 ({res.status_code}): {res.text[:300]}")
         return {}
 
-    # noteのレスポンス構造を柔軟に解析（data直下 or ネスト）
-    article_data = result.get("data", result)
-    if isinstance(article_data, dict) and "note" in article_data:
-        article_data = article_data["note"]
-
+    article_data = _parse_article_data(result)
     article_id = article_data.get("id")
     article_key = article_data.get("key")
+    if not article_id:
+        print(f"   ❌ IDが取得できません: {json.dumps(result, ensure_ascii=False)[:300]}")
+        return {}
+    print(f"   ✅ 記事作成成功: ID={article_id}, key={article_key}")
+
+    # ── Step 2: 本文をPUTで保存 ──
+    print("   📄 Step2: 本文を保存（PUT）...")
+    time.sleep(1)
+    res2 = session.put(
+        f"{NOTE_API_BASE}/v1/text_notes/{article_id}",
+        json={"name": title, "body": body_html, "status": "draft"},
+        timeout=30,
+    )
+
+    print(f"   🔍 PUT ステータス: {res2.status_code}")
+    try:
+        result2 = res2.json()
+    except Exception:
+        print(f"   ❌ PUTレスポンスパース失敗: {res2.text[:300]}")
+        return {}
+
+    if "error" in result2:
+        print(f"   ⚠️ PUT APIエラー（タイトルは保存済み）: {json.dumps(result2['error'], ensure_ascii=False)[:200]}")
+        # タイトルは保存できているので部分成功として返す
+    else:
+        print(f"   ✅ 本文保存成功")
+
     note_url = (
         article_data.get("note_url")
         or article_data.get("url")
