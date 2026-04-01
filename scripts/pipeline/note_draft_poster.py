@@ -318,9 +318,11 @@ def _api_login(session: http_requests.Session) -> bool:
     print("   🔑 APIログインを試みます...")
 
     # 古いセッションCookieを削除（重複防止）
-    for name in ["_note_session_v5", "_note_session"]:
-        session.cookies.clear(domain=".note.com", name=name)
-        session.cookies.clear(domain="note.com", name=name)
+    remove_names = {"_note_session_v5", "_note_session"}
+    cookies_to_keep = [c for c in session.cookies if c.name not in remove_names]
+    session.cookies.clear()
+    for c in cookies_to_keep:
+        session.cookies.set(c.name, c.value, domain=c.domain, path=c.path)
     print(f"   🧹 古いセッションCookieをクリア")
 
     # note.comにアクセスしてベースCookieとCSRFトークンを取得
