@@ -87,7 +87,7 @@ def _ensure_login(page):
 
     print("   🔑 ログイン処理を開始...")
     page.goto(NOTE_LOGIN_URL, wait_until="domcontentloaded", timeout=30000)
-    time.sleep(3)
+    time.sleep(4)  # SPAのレンダリングを待つ
 
     # note.comのログインフォームを段階的にセレクタ探索
     # ログインページのフォーム入力欄を検索
@@ -248,70 +248,101 @@ def _create_draft(page, title: str, body: str):
     """記事作成画面でタイトル・本文をペーストして下書き保存"""
 
     print("   📝 記事作成画面を開きます...")
-    page.goto("https://note.com/notes/new", wait_until="domcontentloaded", timeout=30000)
-    time.sleep(4)
+    # note.com/notes/new は editor.note.com にリダイレクトされる
+    page.goto("https://note.com/notes/new", wait_until="networkidle", timeout=45000)
+    time.sleep(5)  # SPAのエディタ初期化を待つ
+    print(f"   🔗 現在のURL: {page.url}")
 
-    # タイトル入力
+    # ── タイトル入力（textarea[placeholder='記事タイトル']）──
     print("   📌 タイトルを入力...")
+    # note.comのタイトル欄は textarea であることが確認済み
     title_selectors = [
-        '.note-editor__title-input',
-        '[placeholder*="タイトル"]',
-        '[placeholder*="記事タイトル"]',
+        'textarea[placeholder="記事タイトル"]',  # 実測値（最優先）
+        'textarea[placeholder*="タイトル"]',
         'textarea[class*="title"]',
-        'div[class*="title"][contenteditable]',
+        'textarea[class*="Title"]',
+        '.note-editor__title-input',
     ]
 
     title_el = None
     for sel in title_selectors:
-        el = page.query_selector(sel)
-        if el and el.is_visible():
-            title_el = el
-            print(f"   📌 タイトル欄を発見: {sel}")
-            break
+        try:
+            # 最大10秒待機してSPAのレンダリング完了を待つ
+            el = page.wait_for_selector(sel, timeout=10000, state="visible")
+            if el:
+                title_el = el
+                print(f"   📌 タイトル欄を発見: {sel}")
+                break
+        except Exception:
+            continue
 
     if not title_el:
-        # デバッグ情報
+        # デバッグ情報: textarea/contenteditable要素を全列挙
+        elements_info = page.evaluate("""
+            () => {
+                const results = [];
+                document.querySelectorAll('textarea, [contenteditable]').forEach(el => {
+                    results.push({
+                        tag: el.tagName,
+                        placeholder: el.placeholder || '',
+                        className: el.className.substring(0, 60),
+                        visible: el.offsetParent !== null
+                    });
+                });
+                return results;
+            }
+        """)
+        print(f"   🔍 textarea/contenteditable要素: {json.dumps(elements_info, ensure_ascii=False)}")
         page.screenshot(path="/tmp/note_editor_debug.png")
         print("   📸 デバッグスクショ: /tmp/note_editor_debug.png")
         raise Exception("タイトル入力欄が見つかりません")
 
-    _paste_text(page, title_el, title)
-    time.sleep(1)
+    # textareaへの入力: click → fill で確実に入れる
+    title_el.click()
+    time.sleep(0.3)
+    title_el.fill(title)
+    time.sleep(0.5)
 
     # タイトル確認ループ
     for attempt in range(3):
         try:
-            current = page.evaluate("el => el.textContent || el.value || ''", title_el).strip()
+            current = page.evaluate("el => el.value || el.textContent || ''", title_el).strip()
             if current and len(current) > 3:
-                print(f"   ✅ タイトル確認: 「{current[:30]}...」")
+                print(f"   ✅ タイトル確認: 「{current[:40]}」")
                 break
         except Exception:
             pass
         print(f"   ⚠️ タイトル未入力（リトライ {attempt+1}/3）")
-        _paste_text(page, title_el, title)
+        title_el.click()
+        title_el.fill(title)
         time.sleep(1)
 
-    # 本文入力
+    # ── 本文入力（ProseMirrorエディタ）──
     print("   📄 本文を入力...")
     body_selectors = [
+        'div.ProseMirror',                          # 実測値（最優先）
+        '.ProseMirror',
+        'div[class*="ProseMirror"]',
+        '[role="textbox"]',
         '.note-editable',
         '[contenteditable="true"]',
-        '.ProseMirror',
-        '[class*="editor"][contenteditable]',
-        '[role="textbox"]',
     ]
 
     body_el = None
     for sel in body_selectors:
-        el = page.query_selector(sel)
-        if el and el.is_visible():
-            body_el = el
-            print(f"   📄 本文欄を発見: {sel}")
-            break
+        try:
+            el = page.wait_for_selector(sel, timeout=8000, state="visible")
+            if el:
+                body_el = el
+                print(f"   📄 本文欄を発見: {sel}")
+                break
+        except Exception:
+            continue
 
     if not body_el:
         raise Exception("本文入力欄が見つかりません")
 
+    # ProseMirrorへのペースト：evaluate で innerHTML を直接セット
     _paste_text(page, body_el, body)
     time.sleep(2)
 
