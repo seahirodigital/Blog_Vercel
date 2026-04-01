@@ -47,7 +47,7 @@ def _fetch_from_onedrive() -> str:
     url     = f"{GRAPH_API}/me/drive/root:/{encoded}:/content"
     res     = requests.get(url, headers={"Authorization": f"Bearer {token}"})
     res.raise_for_status()
-    return res.text
+    return res.content.decode("utf-8")
 
 
 # ── パーサー ────────────────────────────────────────────
