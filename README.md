@@ -40,19 +40,62 @@ YouTube動画URL
 - **処理対象の条件**: 「状況」列が `単品` / `複数` / `情報` のいずれか、かつ「動画URL」列に値がある行
 - **完了時**: 処理成功行の「状況」を `完了` に自動更新
 
-### 2.3 AI 3段階生成（Gemini 2.5 Flash）
+### 2.3 1本あたりの処理フロー（5ステップ）
+
+```
+Step 1: 文字起こし取得（Apify）
+Step 2: AI 3段階生成（Gemini 2.5 Flash）
+Step 3: アフィリエイトリンク自動挿入
+Step 4: OneDrive保存
+Step 5: スプレッドシートのステータス更新
+```
+
+#### Step 1 — 文字起こし取得
+
+- `modules/apify_fetcher.py` が Apify API 経由で YouTube の文字起こしと動画タイトルを取得
+
+#### Step 2 — AI 3段階生成（Gemini 2.5 Flash）
 
 プロンプトは `scripts/pipeline/prompts/` から読み込み。
 
-1. **Step 1 — Drafter**: `01-writer-prompt.txt`。状況（単品/情報/複数）でプロンプトを切り替えて初稿を生成。
-2. **Step 2 — Editor**: `02-editor-prompt.txt`。文章リズム・SEOキーワード・モバイル最適化。
-3. **Step 3 — Director**: `03-director-prompt.txt`。最終トーン調整・YAMLメタディスクリプション・画像挿入指示。
+| フェーズ | プロンプトファイル | 役割 |
+|---------|-----------------|------|
+| Drafter | `01-writer-prompt.txt` | 状況（単品/情報/複数）でプロンプトを切り替えて初稿を生成 |
+| Editor | `02-editor-prompt.txt` | 文章リズム・SEOキーワード・モバイル最適化 |
+| Director | `03-director-prompt.txt` | 最終トーン調整・YAMLメタ・画像挿入指示 |
 
-### 2.4 OneDrive保存
+Gemini Interaction Hub（`previous_interaction_id`）でコンテキストを連鎖させて生成。レート制限時は最大3回リトライ（30秒/60秒/90秒待機）。
 
+#### Step 3 — アフィリエイトリンク自動挿入
+
+`scripts/pipeline/prompts/04-affiliate-link-manager/insert_affiliate_links.py` を動的ロードして実行。
+
+- **リンクソース**: OneDrive上の `affiliate_links.txt`（MEMO1〜の▼ブロック形式）を毎回直接取得
+- **挿入ルール**:
+  1. H2「結論」直前 → MEMO1全文 ＋ Amazonアソシエイト免責事項
+  2. 偶数番目のH2（2,4,6...）直前 → ▼ブロックをランダム1つ選択（重複なし）
+  3. 記事末尾 → MEMO1全文 ＋ 免責事項
+- スクリプト未検出 or エラー時は**スキップして処理続行**（記事生成は止まらない）
+
+#### Step 4 — OneDrive保存
+
+- `modules/onedrive_sync.py` が Microsoft Graph API 経由でアップロード
 - **フォルダ**: `ONEDRIVE_FOLDER`（デフォルト: "Blog_Articles"）
 - **ファイル名**: `YYYYMMDD_HHMM_動画タイトル.md`
-- **文字コード**: UTF-8
+
+#### Step 5 — スプレッドシート更新
+
+- 保存成功後、対象行の「状況」を `完了` に更新（`modules/sheets_reader.py`）
+
+### 2.4 note下書き自動投稿（別ワークフロー）
+
+記事生成パイプラインとは独立した別ワークフロー（`note-draft.yml`）。詳細は [セクション4](#4-note下書き自動投稿システム) を参照。
+
+`scripts/pipeline/note_draft_poster.py` が以下を実行:
+1. Cookie復元 → セッション検証 → 必要に応じてAPIログイン
+2. `POST /api/v1/text_notes` でスケルトン作成
+3. `POST /api/v1/text_notes/draft_save` で本文保存
+4. GitHub Repository Variable に下書きURLを記録
 
 ---
 
