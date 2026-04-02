@@ -333,14 +333,24 @@
       return await res.json();
     }
 
-    async function triggerNoteDraft(fileId) {
+    async function triggerNoteDraft(fileIds) {
+      const ids = Array.isArray(fileIds) ? fileIds : [fileIds];
       const res = await fetch(`${API_BASE}/note-draft`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fileId }),
+        body: JSON.stringify({ fileIds: ids }),
       });
       if (!res.ok) throw new Error('note下書き投稿の起動に失敗しました');
       return await res.json();
+    }
+
+    async function fetchNoteDraftUrl(fileId) {
+      try {
+        const res = await fetch(`${API_BASE}/note-draft?fileId=${encodeURIComponent(fileId)}`);
+        if (!res.ok) return null;
+        const data = await res.json();
+        return data.url || null;
+      } catch { return null; }
     }
 
     // === アフィリエイトリンク API（OneDrive Graph API 経由で同期） ===
@@ -441,7 +451,7 @@
     }
 
     // === フォルダツリー コンポーネント ===
-    function FolderTree({ articles, selectedId, onSelect, loading, onDeleteArticle, onDuplicateArticle }) {
+    function FolderTree({ articles, selectedId, onSelect, loading, onDeleteArticle, onDuplicateArticle, selectMode, selectedIds, onToggleSelect, onEnterSelectMode }) {
       const [openFolders, setOpenFolders] = useState({});
       const [ctxMenu, setCtxMenu] = useState({ visible: false, x: 0, y: 0, article: null });
       const [confirmDelete, setConfirmDelete] = useState(null);
@@ -472,7 +482,7 @@
       const handleContextMenu = (e, article) => {
         e.preventDefault();
         e.stopPropagation();
-        const MENU_W = 180, MENU_H = 130;
+        const MENU_W = 180, MENU_H = 160;
         const x = Math.min(e.clientX, window.innerWidth - MENU_W - 8);
         const y = Math.min(e.clientY, window.innerHeight - MENU_H - 8);
         setCtxMenu({ visible: true, x, y, article });
@@ -499,25 +509,37 @@
 
       const renderArticle = (article, indent = false) => {
         const isActive = article.id === selectedId;
+        const isChecked = selectMode && selectedIds && selectedIds.has(article.id);
         const displayName = article.name.replace(/^\d{8}_\d{4}_/, '').replace('.md', '');
         const date = new Date(article.lastModified).toLocaleDateString('ja-JP', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
 
         return (
-          <button
-            key={article.id}
-            onClick={() => onSelect(article)}
-            onContextMenu={(e) => handleContextMenu(e, article)}
-            className={`w-full text-left rounded-md px-2 py-2 mb-0.5 article-item ${isActive ? 'active' : ''} ${indent ? 'pl-6' : ''}`}
-            id={`article-item-${article.id}`}
-          >
-            <div className={`text-xs font-medium truncate ${isActive ? 'text-white' : 'text-slate-700'}`}>
-              <svg className="inline mr-1 mb-0.5 opacity-60" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
-              {displayName}
-            </div>
-            <div className={`text-xs mt-0.5 article-date ${isActive ? 'text-purple-200' : 'text-slate-400'}`}>
-              {date} · {(article.size / 1024).toFixed(1)}KB
-            </div>
-          </button>
+          <div key={article.id} className={`flex items-center gap-1 mb-0.5 ${indent ? 'pl-4' : ''}`}>
+            {/* チェックボックス（選択モード時のみ表示） */}
+            {selectMode && (
+              <button
+                onClick={(e) => { e.stopPropagation(); onToggleSelect(article.id); }}
+                className="flex-shrink-0 w-5 h-5 flex items-center justify-center rounded border transition-colors"
+                style={{ borderColor: isChecked ? '#7C4DFF' : '#cbd5e1', background: isChecked ? '#7C4DFF' : 'white' }}
+              >
+                {isChecked && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><path d="M20 6L9 17l-5-5"/></svg>}
+              </button>
+            )}
+            <button
+              onClick={() => selectMode ? onToggleSelect(article.id) : onSelect(article)}
+              onContextMenu={(e) => handleContextMenu(e, article)}
+              className={`flex-1 min-w-0 text-left rounded-md px-2 py-2 article-item ${isActive && !selectMode ? 'active' : ''} ${isChecked ? 'bg-purple-50' : ''}`}
+              id={`article-item-${article.id}`}
+            >
+              <div className={`text-xs font-medium truncate ${isActive && !selectMode ? 'text-white' : isChecked ? 'text-purple-700' : 'text-slate-700'}`}>
+                <svg className="inline mr-1 mb-0.5 opacity-60" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+                {displayName}
+              </div>
+              <div className={`text-xs mt-0.5 article-date ${isActive && !selectMode ? 'text-purple-200' : 'text-slate-400'}`}>
+                {date} · {(article.size / 1024).toFixed(1)}KB
+              </div>
+            </button>
+          </div>
         );
       };
 
@@ -566,6 +588,15 @@
             onClick={e => e.stopPropagation()}
             style={{ position:'fixed', top:ctxMenu.y, left:ctxMenu.x, zIndex:9999, background:'white', borderRadius:'8px', boxShadow:'0 4px 24px rgba(0,0,0,0.15)', border:'1px solid #e2e8f0', minWidth:'180px', padding:'4px 0', overflow:'hidden' }}
           >
+            <button
+              onClick={() => { onEnterSelectMode(ctxMenu.article); setCtxMenu(m=>({...m,visible:false})); }}
+              onMouseEnter={e=>e.currentTarget.style.background='#f5f3ff'} onMouseLeave={e=>e.currentTarget.style.background='none'}
+              style={{ display:'flex', alignItems:'center', gap:'8px', width:'100%', padding:'9px 14px', background:'none', border:'none', cursor:'pointer', fontSize:'13px', color:'#7C4DFF', textAlign:'left', fontWeight:600 }}
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="3" y="5" width="4" height="4" rx="1"/><path d="M10 7h11M10 12h11M10 17h11"/><rect x="3" y="10" width="4" height="4" rx="1"/><rect x="3" y="15" width="4" height="4" rx="1"/></svg>
+              選択
+            </button>
+            <div style={{ height:'1px', background:'#e2e8f0', margin:'4px 0' }} />
             <button
               onClick={() => { onDuplicateArticle(ctxMenu.article); setCtxMenu(m=>({...m,visible:false})); }}
               onMouseEnter={e=>e.currentTarget.style.background='#f1f5f9'} onMouseLeave={e=>e.currentTarget.style.background='none'}
@@ -620,7 +651,7 @@
     }
 
     // === サイドバー コンポーネント ===
-    function Sidebar({ articles, selectedId, onSelect, onNewArticle, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle, mobileSidebarOpen, onMobileClose, onDeleteArticle, onDuplicateArticle }) {
+    function Sidebar({ articles, selectedId, onSelect, onNewArticle, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle, mobileSidebarOpen, onMobileClose, onDeleteArticle, onDuplicateArticle, selectMode, selectedIds, onToggleSelect, onEnterSelectMode }) {
       return (
         <>
           {/* ── モバイル: オーバーレイ + ドロワー ── */}
@@ -641,7 +672,7 @@
               </button>
             </div>
             <div className="flex-1 overflow-y-auto py-2">
-              <FolderTree articles={articles} selectedId={selectedId} onSelect={(a) => { onSelect(a); onMobileClose(); }} loading={loading} onDeleteArticle={onDeleteArticle} onDuplicateArticle={onDuplicateArticle} />
+              <FolderTree articles={articles} selectedId={selectedId} onSelect={(a) => { onSelect(a); onMobileClose(); }} loading={loading} onDeleteArticle={onDeleteArticle} onDuplicateArticle={onDuplicateArticle} selectMode={selectMode} selectedIds={selectedIds} onToggleSelect={onToggleSelect} onEnterSelectMode={onEnterSelectMode} />
             </div>
           </div>
 
@@ -662,7 +693,7 @@
                 </button>
               </div>
               <div className="flex-1 overflow-y-auto py-2">
-                <FolderTree articles={articles} selectedId={selectedId} onSelect={onSelect} loading={loading} onDeleteArticle={onDeleteArticle} onDuplicateArticle={onDuplicateArticle} />
+                <FolderTree articles={articles} selectedId={selectedId} onSelect={onSelect} loading={loading} onDeleteArticle={onDeleteArticle} onDuplicateArticle={onDuplicateArticle} selectMode={selectMode} selectedIds={selectedIds} onToggleSelect={onToggleSelect} onEnterSelectMode={onEnterSelectMode} />
               </div>
             </aside>
             {!isCollapsed && (
@@ -811,6 +842,9 @@
       const [editedTitle, setEditedTitle]       = useState('');
       const [pipelineRunning, setPipelineRunning] = useState(false);
       const [noteDraftRunning, setNoteDraftRunning] = useState(false);
+      const [noteDraftUrls, setNoteDraftUrls] = useState({});  // { fileId: url }
+      const [selectMode, setSelectMode] = useState(false);
+      const [selectedIds, setSelectedIds] = useState(new Set());
       const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
       const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
       const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
@@ -1049,21 +1083,48 @@
         }
       };
 
-      // note下書き投稿
+      // note下書き投稿（単体 or 複数選択）
       const handleNoteDraft = async () => {
-        if (!selectedArticle) { showToast('記事を選択してください', 'error'); return; }
+        // 複数選択モード
+        const targetIds = selectMode && selectedIds.size > 0
+          ? Array.from(selectedIds)
+          : selectedArticle ? [selectedArticle.id] : [];
+
+        if (targetIds.length === 0) { showToast('記事を選択してください', 'error'); return; }
+
         if (hasChanges && !confirm('未保存の変更があります。先に保存しますか？\n「OK」で保存後に投稿、「キャンセル」で現在の保存済み版を投稿')) {
           return;
         }
         if (hasChanges) await handleSave();
+
         setNoteDraftRunning(true);
         try {
-          await triggerNoteDraft(selectedArticle.id);
-          showToast('📝 note下書き投稿を開始しました！GitHub Actionsで進捗を確認してください。', 'info');
+          await triggerNoteDraft(targetIds);
+          const count = targetIds.length;
+          showToast(`📝 ${count}件のnote下書き投稿を開始しました！GitHub Actionsで進捗を確認してください。`, 'info');
+          // 選択モードを解除
+          if (selectMode) { setSelectMode(false); setSelectedIds(new Set()); }
+          // 完了後にURLをpolling（最大2分、5秒間隔）
+          pollDraftUrls(targetIds);
         } catch (e) {
           showToast('❌ note下書き投稿に失敗: ' + e.message, 'error');
         } finally {
           setNoteDraftRunning(false);
+        }
+      };
+
+      // 完了URLをpollingで取得
+      const pollDraftUrls = async (fileIds) => {
+        const pending = new Set(fileIds);
+        for (let attempt = 0; attempt < 24 && pending.size > 0; attempt++) {
+          await new Promise(r => setTimeout(r, 5000));
+          for (const id of Array.from(pending)) {
+            const url = await fetchNoteDraftUrl(id);
+            if (url) {
+              setNoteDraftUrls(prev => ({ ...prev, [id]: url }));
+              pending.delete(id);
+            }
+          }
         }
       };
 
@@ -1202,6 +1263,19 @@
             onMobileClose={() => setMobileSidebarOpen(false)}
             onDeleteArticle={handleDeleteArticle}
             onDuplicateArticle={handleDuplicateArticle}
+            selectMode={selectMode}
+            selectedIds={selectedIds}
+            onToggleSelect={(id) => {
+              setSelectedIds(prev => {
+                const next = new Set(prev);
+                next.has(id) ? next.delete(id) : next.add(id);
+                return next;
+              });
+            }}
+            onEnterSelectMode={(article) => {
+              setSelectMode(true);
+              setSelectedIds(new Set([article.id]));
+            }}
           />
 
           {/* メインコンテンツ */}
@@ -1291,18 +1365,29 @@
                   </svg>
                   <span className="hidden lg:inline">note</span>
                 </a>
+                {/* 選択モード解除ボタン */}
+                {selectMode && (
+                  <button
+                    onClick={() => { setSelectMode(false); setSelectedIds(new Set()); }}
+                    className="hidden sm:flex items-center gap-1.5 font-semibold rounded-lg px-3 py-2 text-xs border border-slate-300 text-slate-500 hover:bg-slate-100 transition-all"
+                    title="選択モードを解除"
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    <span className="hidden lg:inline">解除</span>
+                  </button>
+                )}
                 {/* note下書きボタン */}
                 <button
                   onClick={handleNoteDraft}
-                  disabled={noteDraftRunning || !selectedArticle}
+                  disabled={noteDraftRunning || (!selectedArticle && !(selectMode && selectedIds.size > 0))}
                   className={`hidden sm:flex items-center gap-1.5 font-semibold rounded-lg px-3 py-2 text-xs transition-all border ${
                     noteDraftRunning
                       ? 'border-slate-200 text-slate-400 cursor-not-allowed'
-                      : !selectedArticle
+                      : (!selectedArticle && !(selectMode && selectedIds.size > 0))
                         ? 'border-slate-200 text-slate-300 cursor-not-allowed'
                         : 'border-[#7C4DFF] text-[#7C4DFF] hover:bg-purple-50'
                   }`}
-                  title="この記事をnoteに下書き保存"
+                  title={selectMode && selectedIds.size > 0 ? `${selectedIds.size}件をnoteに下書き保存` : 'この記事をnoteに下書き保存'}
                   id="note-draft-btn"
                 >
                   {noteDraftRunning ? (
@@ -1310,7 +1395,9 @@
                   ) : (
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
                   )}
-                  <span className="hidden lg:inline">{noteDraftRunning ? '投稿中...' : '下書き'}</span>
+                  <span className="hidden lg:inline">
+                    {noteDraftRunning ? '投稿中...' : selectMode && selectedIds.size > 0 ? `下書き(${selectedIds.size})` : '下書き'}
+                  </span>
                 </button>
                 {/* アフィリンクボタン */}
                 <button
@@ -1438,6 +1525,18 @@
                   <div className="px-4 py-1.5 bg-slate-50 border-b border-slate-100 text-xs text-slate-400 font-medium flex items-center gap-2 shrink-0">
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                     MARKDOWN
+                    {selectedArticle && noteDraftUrls[selectedArticle.id] && (
+                      <a
+                        href={noteDraftUrls[selectedArticle.id]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 rounded px-1.5 py-0.5 transition-colors hover:bg-purple-100 text-purple-500 hover:text-purple-700"
+                        title="noteで開く"
+                      >
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+                        保存先URL
+                      </a>
+                    )}
                     <span className="ml-auto">{content.length.toLocaleString()} 文字</span>
                     <button
                       onClick={async () => {

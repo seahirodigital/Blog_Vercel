@@ -211,6 +211,40 @@ def _save_cookies_state(session: http_requests.Session):
     _auto_refresh_github_secret(state_json)
 
 
+# ── GitHub Variable保存（下書きURL記録用） ────────────
+def _save_draft_url_to_github_var(file_id: str, url: str):
+    """下書き保存したURLをGitHub Repository Variableに記録（フロントエンドから参照可能）"""
+    if not GITHUB_TOKEN or not file_id or not url:
+        return
+    import hashlib
+    key_hash = hashlib.md5(file_id.encode()).hexdigest()[:8].upper()
+    var_name = f"NOTE_DRAFT_URL_{key_hash}"
+    api_base = f"https://api.github.com/repos/{GITHUB_REPO_OWNER}/{GITHUB_REPO_NAME}"
+    headers = {
+        "Authorization": f"Bearer {GITHUB_TOKEN}",
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+    # 存在確認してPATCH or POST
+    check = http_requests.get(f"{api_base}/actions/variables/{var_name}", headers=headers)
+    if check.status_code == 200:
+        res = http_requests.patch(
+            f"{api_base}/actions/variables/{var_name}",
+            headers=headers,
+            json={"name": var_name, "value": url},
+        )
+    else:
+        res = http_requests.post(
+            f"{api_base}/actions/variables",
+            headers=headers,
+            json={"name": var_name, "value": url},
+        )
+    if res.status_code in (200, 201, 204):
+        print(f"   ✅ GitHub Variable {var_name} を保存しました")
+    else:
+        print(f"   ⚠️ Variable保存失敗 ({res.status_code}): {res.text[:150]}")
+
+
 # ── GitHub Secret自動更新 ─────────────────────────────
 def _auto_refresh_github_secret(new_state_json: str):
     """GitHub APIを使ってNOTE_STORAGE_STATEシークレットを自動更新"""
@@ -606,6 +640,9 @@ if __name__ == "__main__":
     result = post_draft_to_note(md)
     if result["success"]:
         print(f"\n🎉 下書き投稿成功！\n   タイトル: {result['title']}\n   URL: {result['url']}")
+        file_id = os.getenv("FILE_ID", "")
+        if file_id:
+            _save_draft_url_to_github_var(file_id, result["url"])
     else:
         print("\n❌ 下書き投稿失敗")
         sys.exit(1)
