@@ -4,6 +4,7 @@ reference/
 # Node.js
 node_modules/
 .vercel/
+.vscode-kanban/
 
 # Python
 __pycache__/
