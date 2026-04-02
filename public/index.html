@@ -948,6 +948,8 @@
       // 自動保存
       const autoSaveTimer  = useRef(null);
       const [autoSaveStatus, setAutoSaveStatus] = useState('idle'); // 'idle'|'pending'|'saved'
+      // OGP再読み込みトリガー
+      const [ogpTrigger, setOgpTrigger] = useState(0);
 
       const hasChanges = content !== originalContent;
 
@@ -1171,15 +1173,55 @@
         return () => clearTimeout(autoSaveTimer.current);
       }, [content]);
 
+      // ── スクロール同期ヘルパー ──────────────────────────
+      // 見出しアンカーベースで同期（OGPカードで縦幅が変わっても正確に対応）
+      const _editorLineInfo = () => {
+        const ta = textareaRef.current;
+        if (!ta) return null;
+        const lines = ta.value.split('\n');
+        const lineH = ta.scrollHeight / Math.max(1, lines.length);
+        const topLine = Math.max(0, Math.floor(ta.scrollTop / lineH));
+        // topLine より前の最近の見出し行
+        let hText = null, hLine = 0, nextHLine = lines.length;
+        for (let i = topLine; i >= 0; i--) {
+          const m = lines[i] && lines[i].match(/^#{1,6}\s+(.+)/);
+          if (m) { hText = m[1].trim(); hLine = i; break; }
+        }
+        if (hText !== null) {
+          for (let i = hLine + 1; i < lines.length; i++) {
+            if (lines[i] && /^#{1,6}\s+/.test(lines[i])) { nextHLine = i; break; }
+          }
+        }
+        return { lines, lineH, topLine, hText, hLine, nextHLine };
+      };
+
       // スクロール同期（エディタ → プレビュー）
       const handleEditorScroll = useCallback(() => {
         if (previewScrolling.current) return;
-        const ta = textareaRef.current;
         const pv = previewRef.current;
-        if (!ta || !pv) return;
+        if (!pv) return;
         editorScrolling.current = true;
-        const ratio = ta.scrollTop / Math.max(1, ta.scrollHeight - ta.clientHeight);
-        pv.scrollTop = ratio * (pv.scrollHeight - pv.clientHeight);
+        try {
+          const info = _editorLineInfo();
+          if (!info) throw new Error();
+          const { topLine, hText, hLine, nextHLine } = info;
+          const headingEls = [...pv.querySelectorAll('h1,h2,h3,h4,h5,h6')];
+          const targetH = hText ? headingEls.find(h => h.textContent.trim() === hText) : null;
+          if (targetH) {
+            const ratio = Math.max(0, (topLine - hLine)) / Math.max(1, nextHLine - hLine);
+            const hIdx = headingEls.indexOf(targetH);
+            const nextH = headingEls[hIdx + 1] || null;
+            const secStart = targetH.offsetTop;
+            const secEnd = nextH ? nextH.offsetTop : pv.scrollHeight;
+            pv.scrollTop = Math.max(0, secStart + ratio * (secEnd - secStart) - 20);
+          } else {
+            const ta = textareaRef.current;
+            if (ta) {
+              const ratio = ta.scrollTop / Math.max(1, ta.scrollHeight - ta.clientHeight);
+              pv.scrollTop = ratio * (pv.scrollHeight - pv.clientHeight);
+            }
+          }
+        } catch {}
         setTimeout(() => { editorScrolling.current = false; }, 60);
       }, []);
 
@@ -1190,8 +1232,44 @@
         const pv = previewRef.current;
         if (!ta || !pv) return;
         previewScrolling.current = true;
-        const ratio = pv.scrollTop / Math.max(1, pv.scrollHeight - pv.clientHeight);
-        ta.scrollTop = ratio * (ta.scrollHeight - ta.clientHeight);
+        try {
+          const headingEls = [...pv.querySelectorAll('h1,h2,h3,h4,h5,h6')];
+          // プレビューで現在の先頭付近にある見出しを検索
+          let curH = null, nextH = null;
+          for (let i = 0; i < headingEls.length; i++) {
+            if (headingEls[i].offsetTop <= pv.scrollTop + 20) {
+              curH = headingEls[i]; nextH = headingEls[i + 1] || null;
+            } else {
+              if (!curH) { curH = headingEls[i]; nextH = headingEls[i + 1] || null; }
+              break;
+            }
+          }
+          if (curH) {
+            const secStart = curH.offsetTop;
+            const secEnd = nextH ? nextH.offsetTop : pv.scrollHeight;
+            const secRatio = Math.max(0, pv.scrollTop - secStart) / Math.max(1, secEnd - secStart);
+            const hText = curH.textContent.trim();
+            const lines = ta.value.split('\n');
+            const lineH = ta.scrollHeight / Math.max(1, lines.length);
+            let hLine = -1, nextHLine = lines.length;
+            for (let i = 0; i < lines.length; i++) {
+              const m = lines[i] && lines[i].match(/^#{1,6}\s+(.+)/);
+              if (m && m[1].trim() === hText) { hLine = i; break; }
+            }
+            if (hLine >= 0) {
+              for (let i = hLine + 1; i < lines.length; i++) {
+                if (lines[i] && /^#{1,6}\s+/.test(lines[i])) { nextHLine = i; break; }
+              }
+              ta.scrollTop = Math.max(0, (hLine + secRatio * (nextHLine - hLine)) * lineH - 20);
+            } else {
+              const ratio = pv.scrollTop / Math.max(1, pv.scrollHeight - pv.clientHeight);
+              ta.scrollTop = ratio * (ta.scrollHeight - ta.clientHeight);
+            }
+          } else {
+            const ratio = pv.scrollTop / Math.max(1, pv.scrollHeight - pv.clientHeight);
+            ta.scrollTop = ratio * (ta.scrollHeight - ta.clientHeight);
+          }
+        } catch {}
         setTimeout(() => { previewScrolling.current = false; }, 60);
       }, []);
 
@@ -1296,18 +1374,16 @@
       }, [content]);
 
       // OGPカード変換（renderedHTML変更後にpreview DOMを走査）
-      // 孤立URL段落・テキスト末尾URL両方に対応
+      // 孤立URL段落・テキスト末尾URL両方に対応。順次処理でAmazonレート制限を回避。
       useEffect(() => {
         const preview = previewRef.current;
         if (!preview) return;
+        let aborted = false;
 
         const esc = (s) => (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
-
         const buildCard = (href, title, description, image, domain) => {
           const card = document.createElement('a');
-          card.href = href;
-          card.target = '_blank';
-          card.rel = 'noopener noreferrer';
+          card.href = href; card.target = '_blank'; card.rel = 'noopener noreferrer';
           card.className = 'ogp-card';
           card.innerHTML = [
             `<div class="ogp-card-body">`,
@@ -1320,55 +1396,53 @@
           return card;
         };
 
-        // すべての <a href="http..."> を走査（孤立URL・テキスト末尾URL両方）
-        const anchors = [...preview.querySelectorAll('a[href^="http"]')];
-        anchors.forEach(async (a) => {
-          if (a.dataset.ogpProcessed) return;
-          const href = a.getAttribute('href');
-          if (!href) return;
-          const linkText = (a.textContent || '').trim();
-          // リンクテキストがURLそのもの（= 素のURL貼り付け）の場合のみOGP化
-          if (linkText !== href && linkText !== href.replace(/^https?:\/\//, '')) return;
-
-          a.dataset.ogpProcessed = '1';
-
-          let title, description, image, domain;
-          try {
-            const r = await fetch(`/api/ogp?url=${encodeURIComponent(href)}`);
-            if (!r.ok) return;
-            ({ title, description, image, domain } = await r.json());
-            if (!title && !image) return; // 情報なし → 通常リンクのまま
-          } catch { return; }
-
-          const card = buildCard(href, title, description, image, domain);
+        const insertCard = (a, card) => {
           const p = a.parentElement;
-
-          if (!p || p.tagName !== 'P') {
-            // <p>以外の親（li等）→ アンカーをカードに置換
-            a.replaceWith(card);
-            return;
-          }
-
+          if (!p || p.tagName !== 'P') { a.replaceWith(card); return; }
           const pText = (p.textContent || '').trim();
           const aText = (a.textContent || '').trim();
-
           if (pText === aText) {
-            // ケース1: 段落がURLのみ → <p>ごとOGPカードに置換
-            p.replaceWith(card);
+            p.replaceWith(card); // 段落がURLのみ
           } else {
-            // ケース2: テキスト＋URL混在（▼ブロック末尾URLなど）
-            // → <a>の直前の<br>も含めてURLアンカーを削除し、OGPカードを段落の後に挿入
-            const prevNode = a.previousSibling;
-            if (prevNode && prevNode.nodeName === 'BR') prevNode.remove();
+            // テキスト＋URL混在 → URLを除去して段落の直後にカード挿入
+            const prev = a.previousSibling;
+            if (prev && prev.nodeName === 'BR') prev.remove();
             a.remove();
-            // 残ったテキストが空なら段落ごと置換、そうでなければ段落の直後に挿入
-            if ((p.textContent || '').trim() === '') {
-              p.replaceWith(card);
-            } else {
-              p.after(card);
-            }
+            if ((p.textContent || '').trim() === '') p.replaceWith(card);
+            else p.after(card);
           }
-        });
+        };
+
+        // 順次処理（同時リクエスト数を絞りAmazonのレート制限を回避）
+        const process = async () => {
+          const anchors = [...preview.querySelectorAll('a[href^="http"]')];
+          for (const a of anchors) {
+            if (aborted) break;
+            if (a.dataset.ogpProcessed) continue;
+            const href = a.getAttribute('href');
+            if (!href) continue;
+            const linkText = (a.textContent || '').trim();
+            if (linkText !== href && linkText !== href.replace(/^https?:\/\//, '')) continue;
+            a.dataset.ogpProcessed = '1';
+            try {
+              const r = await fetch(`/api/ogp?url=${encodeURIComponent(href)}`);
+              if (!r.ok) continue;
+              const { title, description, image, domain } = await r.json();
+              if (!title && !image) continue;
+              if (!aborted) insertCard(a, buildCard(href, title, description, image, domain));
+            } catch {}
+            // Amazonのレート制限対策: リクエスト間に600ms間隔を設ける
+            if (!aborted) await new Promise(r => setTimeout(r, 600));
+          }
+        };
+        process();
+        return () => { aborted = true; };
+      }, [renderedHTML, ogpTrigger]);
+
+      // プレビューOGP再読み込み（DOMリセット後に再スキャン）
+      const refreshOgp = useCallback(() => {
+        if (previewRef.current) previewRef.current.innerHTML = renderedHTML;
+        setOgpTrigger(t => t + 1);
       }, [renderedHTML]);
 
       // 検索・置換ナビゲーション
@@ -1794,6 +1868,14 @@
                   <div className="px-4 py-1.5 bg-slate-50 border-b border-slate-100 text-xs text-slate-400 font-medium flex items-center gap-2 shrink-0">
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                     プレビュー
+                    <button
+                      onClick={refreshOgp}
+                      className="flex items-center gap-0.5 rounded px-1 py-0.5 hover:bg-purple-100 hover:text-purple-600 transition-colors"
+                      title="OGPリンクを再読み込み"
+                    >
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg>
+                      OGP更新
+                    </button>
                   </div>
                   <div
                     ref={previewRef}
