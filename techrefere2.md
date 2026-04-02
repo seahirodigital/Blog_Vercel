@@ -11,6 +11,7 @@
 | セッション維持cron | ✅ 完全自動化 | `note-keepalive.yml`（3日おき）|
 | 下書きURL記録 | ✅ 完全自動化 | GitHub Repository Variable |
 | UI上のURL表示 | ✅ 実装済み | polling + MARKDOWNバーにリンク表示 |
+| **OGP展開（Amazonカード）** | ❌ 失敗 | Playwright + JS注入 → 本文が空白になる問題 |
 
 ---
 
@@ -197,7 +198,47 @@ for cookie in session.cookies:
 
 ---
 
-## 7. 関連ファイル一覧
+## 7. OGP展開（Amazonカード）試行 — 失敗記録
+
+### 試みた手法
+
+draft_save 成功後に Playwright（headless Chromium）で `editor.note.com/notes/{key}/edit/` を開き、
+`05-note_ogp_formatter.js` を3回実行（7秒→5秒→3秒待機）してから、
+`editor.innerHTML` を取得してもう一度 `draft_save` を呼ぶ実装を行った。
+
+### 失敗の結果
+
+- note エディタ上で本文が**空白（先頭に改行のみ）**になった
+- アフィリエイトリンクのAmazonカードは表示されなかった
+
+### 推定原因
+
+| 原因 | 詳細 |
+|------|------|
+| エディタの内容未ロード | Playwright でページを開いた時点では、note エディタは空の状態で起動する。draft_save で保存した内容はサーバー側にあるが、エディタDOMには即座に反映されない |
+| innerHTML が空を取得 | エディタが空のままの状態で `innerHTML` を抽出 → `draft_save` に空のHTMLを送信 → 本文が上書きで消えた |
+| OGP展開のタイミング | JS が URL にカーソルを当てて Enter を押す操作は、実際にコンテンツが表示されていないと意味をなさない |
+
+### 根本的な制約
+
+note のエディタ（`editor.note.com`）は **SPA（Single Page Application）** であり、
+URL を開いただけでは下書き内容をDOMに復元しない。
+エディタの内部状態（ProseMirror / 独自実装）のロードを待つ仕組みが別途必要。
+headless ブラウザからの制御は、エディタのレンダリング完了を正確に検知することが困難。
+
+### 今後の対策候補
+
+| 方針 | 内容 |
+|------|------|
+| A | `draft_save` API のリクエストボディに直接 OGP カードの HTML 要素を手動で組み込む（ブラウザ不要） |
+| B | エディタロード完了を確認する selector を特定して待機時間を大幅延長（15〜30秒）してから JS実行 |
+| C | OGP展開はnote の手動編集に委ね、本文保存のみ自動化（現行維持） |
+
+**現在の方針: C（OGPステップなし）でv4.1を維持。**
+
+---
+
+## 8. 関連ファイル一覧
 
 | ファイル | 役割 |
 |---------|------|
