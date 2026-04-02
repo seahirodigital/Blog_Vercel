@@ -1296,43 +1296,78 @@
       }, [content]);
 
       // OGPカード変換（renderedHTML変更後にpreview DOMを走査）
+      // 孤立URL段落・テキスト末尾URL両方に対応
       useEffect(() => {
         const preview = previewRef.current;
         if (!preview) return;
-        // URLのみが単独の段落 <p><a href="URL">URL</a></p> をOGPカードに変換
-        // ※ :only-child はテキストノードを無視するため、<p>全体のテキストと比較して確認する
-        const anchors = preview.querySelectorAll('p > a:only-child');
+
+        const esc = (s) => (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+
+        const buildCard = (href, title, description, image, domain) => {
+          const card = document.createElement('a');
+          card.href = href;
+          card.target = '_blank';
+          card.rel = 'noopener noreferrer';
+          card.className = 'ogp-card';
+          card.innerHTML = [
+            `<div class="ogp-card-body">`,
+            domain ? `<div class="ogp-card-domain">${esc(domain)}</div>` : '',
+            title ? `<div class="ogp-card-title">${esc(title)}</div>` : '',
+            description ? `<div class="ogp-card-desc">${esc(description)}</div>` : '',
+            `</div>`,
+            image ? `<img class="ogp-card-image" src="${esc(image)}" alt="" loading="lazy" onerror="this.style.display='none'" />` : '',
+          ].join('');
+          return card;
+        };
+
+        // すべての <a href="http..."> を走査（孤立URL・テキスト末尾URL両方）
+        const anchors = [...preview.querySelectorAll('a[href^="http"]')];
         anchors.forEach(async (a) => {
+          if (a.dataset.ogpProcessed) return;
           const href = a.getAttribute('href');
-          if (!href || !href.startsWith('http')) return;
+          if (!href) return;
           const linkText = (a.textContent || '').trim();
-          // リンクテキストがURLそのものの場合のみ対象
+          // リンクテキストがURLそのもの（= 素のURL貼り付け）の場合のみOGP化
           if (linkText !== href && linkText !== href.replace(/^https?:\/\//, '')) return;
-          const p = a.parentElement;
-          if (!p || p.tagName !== 'P' || p.dataset.ogpProcessed) return;
-          // 【重要】段落内にURLテキスト以外の説明文がある場合はスキップ（▼ブロックのテキストを保護）
-          const pFullText = (p.textContent || '').trim();
-          if (pFullText !== linkText) return;
-          p.dataset.ogpProcessed = '1';
+
+          a.dataset.ogpProcessed = '1';
+
+          let title, description, image, domain;
           try {
             const r = await fetch(`/api/ogp?url=${encodeURIComponent(href)}`);
             if (!r.ok) return;
-            const { title, description, image, domain } = await r.json();
-            if (!title && !image) return; // OGP情報が取得できなかった場合はスキップ
-            const esc = (s) => (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
-            const card = document.createElement('a');
-            card.href = href; card.target = '_blank'; card.rel = 'noopener noreferrer';
-            card.className = 'ogp-card';
-            card.innerHTML = [
-              `<div class="ogp-card-body">`,
-              domain ? `<div class="ogp-card-domain">${esc(domain)}</div>` : '',
-              title ? `<div class="ogp-card-title">${esc(title)}</div>` : '',
-              description ? `<div class="ogp-card-desc">${esc(description)}</div>` : '',
-              `</div>`,
-              image ? `<img class="ogp-card-image" src="${esc(image)}" alt="" loading="lazy" />` : '',
-            ].join('');
+            ({ title, description, image, domain } = await r.json());
+            if (!title && !image) return; // 情報なし → 通常リンクのまま
+          } catch { return; }
+
+          const card = buildCard(href, title, description, image, domain);
+          const p = a.parentElement;
+
+          if (!p || p.tagName !== 'P') {
+            // <p>以外の親（li等）→ アンカーをカードに置換
+            a.replaceWith(card);
+            return;
+          }
+
+          const pText = (p.textContent || '').trim();
+          const aText = (a.textContent || '').trim();
+
+          if (pText === aText) {
+            // ケース1: 段落がURLのみ → <p>ごとOGPカードに置換
             p.replaceWith(card);
-          } catch {}
+          } else {
+            // ケース2: テキスト＋URL混在（▼ブロック末尾URLなど）
+            // → <a>の直前の<br>も含めてURLアンカーを削除し、OGPカードを段落の後に挿入
+            const prevNode = a.previousSibling;
+            if (prevNode && prevNode.nodeName === 'BR') prevNode.remove();
+            a.remove();
+            // 残ったテキストが空なら段落ごと置換、そうでなければ段落の直後に挿入
+            if ((p.textContent || '').trim() === '') {
+              p.replaceWith(card);
+            } else {
+              p.after(card);
+            }
+          }
         });
       }, [renderedHTML]);
 
