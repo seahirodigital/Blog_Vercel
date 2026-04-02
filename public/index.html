@@ -1413,37 +1413,63 @@
           }
         };
 
-        // 順次処理（同時リクエスト数を絞りAmazonのレート制限を回避）
-        const process = async () => {
-          const anchors = [...preview.querySelectorAll('a[href^="http"]')];
-          for (const a of anchors) {
-            if (aborted) break;
+        // 対象リンク一覧（未処理のみ）
+        const anchors = [...preview.querySelectorAll('a[href^="http"]')].filter(a => {
+          if (a.dataset.ogpProcessed) return false;
+          const href = a.getAttribute('href') || '';
+          const text = (a.textContent || '').trim();
+          return text === href || text === href.replace(/^https?:\/\//, '');
+        });
+
+        if (anchors.length === 0) return;
+
+        // 共有キュー（2並列ワーカーが競合して取得）
+        const queue = [...anchors];
+
+        const worker = async () => {
+          while (!aborted) {
+            const a = queue.shift();
+            if (!a) break;
+            // 別ワーカーが先に取得済みの場合スキップ
             if (a.dataset.ogpProcessed) continue;
-            const href = a.getAttribute('href');
-            if (!href) continue;
-            const linkText = (a.textContent || '').trim();
-            if (linkText !== href && linkText !== href.replace(/^https?:\/\//, '')) continue;
+            // 処理中マーカー（先にセットして二重取得を防ぐ）
             a.dataset.ogpProcessed = '1';
+            const href = a.getAttribute('href');
+            let success = false;
             try {
               const r = await fetch(`/api/ogp?url=${encodeURIComponent(href)}`);
-              if (!r.ok) continue;
-              const { title, description, image, domain } = await r.json();
-              if (!title && !image) continue;
-              if (!aborted) insertCard(a, buildCard(href, title, description, image, domain));
+              if (r.ok) {
+                const { title, description, image, domain } = await r.json();
+                if ((title || image) && !aborted) {
+                  insertCard(a, buildCard(href, title, description, image, domain));
+                  success = true;
+                }
+              }
             } catch {}
-            // Amazonのレート制限対策: リクエスト間に600ms間隔を設ける
-            if (!aborted) await new Promise(r => setTimeout(r, 600));
+            // 失敗時はマーカーを除去 → 次回refreshで再試行可能にする
+            if (!success && !aborted && a.isConnected) {
+              a.removeAttribute('data-ogp-processed');
+            }
+            // ワーカー毎に800ms待機（Amazonレート制限対策）
+            if (!aborted) await new Promise(r => setTimeout(r, 800));
           }
         };
-        process();
+
+        // 2並列で実行（多すぎるとAmazonにブロックされる）
+        Promise.all([worker(), worker()]);
         return () => { aborted = true; };
       }, [renderedHTML, ogpTrigger]);
 
-      // プレビューOGP再読み込み（DOMリセット後に再スキャン）
+      // OGP更新: 成功済みカードは保持し、失敗した<a>のみ再試行
       const refreshOgp = useCallback(() => {
-        if (previewRef.current) previewRef.current.innerHTML = renderedHTML;
+        if (previewRef.current) {
+          // data-ogp-processed が残っている<a> = 失敗したリンク → マーカーをクリアして再試行対象に
+          previewRef.current.querySelectorAll('a[data-ogp-processed]').forEach(a => {
+            a.removeAttribute('data-ogp-processed');
+          });
+        }
         setOgpTrigger(t => t + 1);
-      }, [renderedHTML]);
+      }, []);
 
       // 検索・置換ナビゲーション
       const goNextMatch = useCallback(() => {
