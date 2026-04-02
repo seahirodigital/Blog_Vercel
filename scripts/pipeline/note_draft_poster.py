@@ -436,31 +436,35 @@ def _create_draft_api(session: http_requests.Session, title: str, body_html: str
         return {}
     print(f"   ✅ 記事作成成功: ID={article_id}, key={article_key}")
 
-    # ── Step 2: PUTでステータスを下書きとして確定 ──
-    print("   📄 Step2: 下書きステータスを確定（PUT）...")
+    # ── Step 2: PUTで本文を保存 ──
+    # まず最小テスト → フル本文 → プレーンテキスト の順で試す
+    put_url = f"{NOTE_API_BASE}/v1/text_notes/{article_id}"
     time.sleep(1)
-    res2 = session.put(
-        f"{NOTE_API_BASE}/v1/text_notes/{article_id}",
-        json={"name": title, "body": body_html, "status": "draft"},
-        timeout=30,
-    )
 
-    print(f"   🔍 PUT ステータス: {res2.status_code}")
-    print(f"   🔍 PUT レスポンス全文: {res2.text[:800]}")
-    try:
-        result2 = res2.json()
-    except Exception:
-        print(f"   ❌ PUTレスポンスパース失敗")
-        return {}
+    put_attempts = [
+        ("HTML本文",        {"name": title, "body": body_html, "status": "draft"}),
+        ("HTML本文(status無し)", {"name": title, "body": body_html}),
+        ("プレーンテキスト", {"name": title, "body": body_html.replace('<p>', '').replace('</p>', '\n').replace('<h2>', '\n').replace('</h2>', '\n').replace('<h3>', '\n').replace('</h3>', '\n').replace('<ul>', '').replace('</ul>', '').replace('<li>', '- ').replace('</li>', '\n').replace('<strong>', '').replace('</strong>', '').replace('<em>', '').replace('</em>', '').replace('<a href="', '').replace('">', ' ').replace('</a>', '').replace('<code>', '').replace('</code>', ''), "status": "draft"}),
+        ("最小テスト",      {"name": title, "body": "<p>テスト本文</p>", "status": "draft"}),
+    ]
 
-    if "error" in result2:
-        print(f"   ❌ PUT APIエラー: {json.dumps(result2['error'], ensure_ascii=False)[:300]}")
-        return {}
-    if not res2.ok:
-        print(f"   ❌ PUT失敗 ({res2.status_code})")
-        return {}
+    put_success = False
+    for label, data in put_attempts:
+        print(f"   📄 PUT試行: {label}...")
+        res2 = session.put(put_url, json=data, timeout=30)
+        print(f"   🔍 PUT[{label}] ステータス: {res2.status_code} → {res2.text[:300]}")
+        try:
+            result2 = res2.json()
+            if "error" not in result2 and res2.ok:
+                print(f"   ✅ PUT成功: {label}")
+                put_success = True
+                break
+        except Exception:
+            pass
+        time.sleep(1)
 
-    print(f"   ✅ 本文保存成功")
+    if not put_success:
+        print(f"   ❌ 全てのPUT試行が失敗")
 
     editor_url = f"https://editor.note.com/notes/{article_key}/edit/"
     print(f"   ✅ 下書き作成成功: ID={article_id}, key={article_key}")
