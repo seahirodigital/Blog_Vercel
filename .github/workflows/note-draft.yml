@@ -11,7 +11,7 @@ on:
 jobs:
   post-to-note:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     permissions:
       contents: read
 
@@ -26,6 +26,9 @@ jobs:
 
       - name: Python 依存パッケージをインストール
         run: pip install -r scripts/pipeline/requirements.txt
+
+      - name: Playwright Chromium をインストール
+        run: python -m playwright install chromium --with-deps
 
       - name: OneDriveから記事を取得し note に下書き投稿
         env:
