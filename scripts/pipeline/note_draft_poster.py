@@ -391,117 +391,87 @@ def _api_login(session: http_requests.Session) -> bool:
 
 
 # ── 記事作成API ───────────────────────────────────────
-def _parse_article_data(result: dict) -> dict:
-    """noteのAPIレスポンスからarticleデータを抽出"""
-    article_data = result.get("data", result)
-    if isinstance(article_data, dict) and "note" in article_data:
-        article_data = article_data["note"]
-    return article_data
+import urllib.parse as _urlparse
+
+
+def _xsrf_token(session: http_requests.Session) -> str:
+    """Cookie から XSRF-TOKEN を取得（URLデコード済み）"""
+    for cookie in session.cookies:
+        if cookie.name == "XSRF-TOKEN":
+            return _urlparse.unquote(cookie.value)
+    return ""
 
 
 def _create_draft_api(session: http_requests.Session, title: str, body_html: str) -> dict:
     """
     2ステップで下書き作成:
-    1. POST /api/v1/text_notes でタイトルのみ作成 → ID取得
-    2. PUT /api/v1/text_notes/{id} で本文を保存
+    1. POST /api/v1/text_notes でスケルトン作成 → ID取得
+    2. POST /api/v1/text_notes/draft_save?id={id}&is_temp_saved=true で本文を保存
+    ※ PUT は公開用。下書き保存には draft_save エンドポイントを使う（NoteClient2準拠）
     """
-    # ── Step 1: 記事作成（タイトル＋本文） ──
-    print("   📝 Step1: 記事作成...")
+    import re as _re
+
+    # ── Step 1: 記事スケルトン作成 ──
+    print("   📝 Step1: 記事スケルトン作成...")
     res = session.post(
         f"{NOTE_API_BASE}/v1/text_notes",
-        json={"name": title, "body": body_html, "template_key": None},
+        json={"template_key": None},
         timeout=30,
     )
-
-    print(f"   🔍 POST ステータス: {res.status_code}")
-    print(f"   🔍 POST レスポンス: {res.text[:600]}")
-    try:
-        result = res.json()
-    except Exception:
-        print(f"   ❌ レスポンスパース失敗")
-        return {}
-
-    if "error" in result:
-        print(f"   ❌ POST APIエラー: {json.dumps(result['error'], ensure_ascii=False)[:300]}")
-        return {}
+    print(f"   🔍 POST {res.status_code}")
     if not res.ok:
         print(f"   ❌ 記事作成失敗 ({res.status_code}): {res.text[:300]}")
         return {}
 
-    article_data = _parse_article_data(result)
-    article_id = article_data.get("id")
-    article_key = article_data.get("key")
+    try:
+        result = res.json()
+    except Exception:
+        print(f"   ❌ レスポンスパース失敗: {res.text[:200]}")
+        return {}
+
+    note_data = result.get("data") or {}
+    article_id = note_data.get("id")
+    article_key = note_data.get("key")
     if not article_id:
         print(f"   ❌ IDが取得できません: {json.dumps(result, ensure_ascii=False)[:300]}")
         return {}
-    print(f"   ✅ 記事作成成功: ID={article_id}, key={article_key}")
+    print(f"   ✅ スケルトン作成成功: ID={article_id}, key={article_key}")
 
-    # ── Step 2: GETでedit session初期化 ──
-    print("   🔄 GETで記事データを取得（edit session初期化）...")
-    get_res = session.get(
-        f"{NOTE_API_BASE}/v1/text_notes/{article_id}",
-        headers={"Referer": f"https://editor.note.com/notes/{article_id}/edit/",
-                 "Origin": "https://editor.note.com"},
-        timeout=15,
-    )
-    print(f"   🔍 GET {get_res.status_code} → {get_res.text[:300]}")
-    time.sleep(1)
+    # ── Step 2: draft_save で本文保存 ──
+    print("   📝 Step2: 本文を draft_save で保存...")
+    xsrf = _xsrf_token(session)
+    if not xsrf:
+        # XSRF-TOKEN がない場合はnote.comにアクセスして取得
+        print("   🔐 XSRF-TOKEN未取得 → note.comにアクセスして取得...")
+        session.get("https://note.com/", timeout=15)
+        xsrf = _xsrf_token(session)
 
-    # ── Step 3: PUTで本文を保存 ──
-
-    # URLとAPIバージョンの組み合わせで試す（Content-Typeは毎回上書き）
-    url_by_id  = f"{NOTE_API_BASE}/v1/text_notes/{article_id}"
-    url_by_key = f"{NOTE_API_BASE}/v1/text_notes/{article_key}"
-    url_v2_id  = f"{NOTE_API_BASE}/v2/text_notes/{article_id}"
-    url_v2_key = f"{NOTE_API_BASE}/v2/text_notes/{article_key}"
-
-    minimal_body = {"name": title, "body": "<p>テスト</p>", "status": "draft"}
-    full_body    = {"name": title, "body": body_html, "status": "draft"}
-
-    put_attempts = [
-        ("v1/key+full",    url_by_key, full_body),
-        ("v1/key+minimal", url_by_key, minimal_body),
-        ("v2/id+full",     url_v2_id,  full_body),
-        ("v2/id+minimal",  url_v2_id,  minimal_body),
-        ("v2/key+full",    url_v2_key, full_body),
-        ("v1/id+noStatus", url_by_id,  {"name": title, "body": "<p>テスト</p>"}),
-    ]
-
-    put_url = f"{NOTE_API_BASE}/v1/text_notes/{article_id}"
-    editor_hdrs = {
-        "Content-Type": "application/json",
-        "Origin": "https://editor.note.com",
-        "Referer": f"https://editor.note.com/notes/{article_id}/edit/",
+    plain_text = _re.sub(r"<[^>]+>", "", body_html)
+    payload = {
+        "body": body_html,
+        "body_length": len(plain_text),
+        "name": title,
+        "index": False,
+        "is_lead_form": False,
+        "image_keys": [],
     }
-
-    put_attempts = [
-        ("minimal", {"name": title, "body": "<p>テスト</p>", "status": "draft"}),
-        ("full",    {"name": title, "body": body_html, "status": "draft"}),
-        ("no-status", {"name": title, "body": body_html}),
-    ]
-
-    put_success = False
-    for label, data in put_attempts:
-        print(f"   📄 PUT試行: {label}...")
-        res2 = session.put(put_url, json=data, timeout=30, headers=editor_hdrs)
-        print(f"   🔍 PUT[{label}] {res2.status_code} → {res2.text[:300]}")
-        try:
-            result2 = res2.json()
-            if "error" not in result2 and res2.ok:
-                print(f"   ✅ PUT成功: {label}")
-                put_success = True
-                if label == "minimal":
-                    session.put(put_url, json=put_attempts[1][1], timeout=30, headers=editor_hdrs)
-                break
-        except Exception:
-            pass
-        time.sleep(0.5)
-
-    if not put_success:
-        print(f"   ❌ 全PUT試行失敗")
+    draft_headers = {
+        "Content-Type": "application/json",
+        "X-XSRF-TOKEN": xsrf,
+        "X-Requested-With": "XMLHttpRequest",
+        "Origin": "https://editor.note.com",
+        "Referer": "https://editor.note.com/",
+    }
+    draft_url = f"{NOTE_API_BASE}/v1/text_notes/draft_save?id={article_id}&is_temp_saved=true"
+    res2 = session.post(draft_url, json=payload, headers=draft_headers, timeout=30)
+    print(f"   🔍 draft_save {res2.status_code}")
+    if not res2.ok:
+        print(f"   ❌ 本文保存失敗 ({res2.status_code}): {res2.text[:300]}")
+        # タイトルなしでも下書き自体は作成済みなので editor URL は返す
+    else:
+        print(f"   ✅ 本文保存成功")
 
     editor_url = f"https://editor.note.com/notes/{article_key}/edit/"
-    print(f"   ✅ 下書き作成成功: ID={article_id}, key={article_key}")
     return {"id": article_id, "key": article_key, "url": editor_url}
 
 
