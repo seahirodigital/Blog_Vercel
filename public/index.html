@@ -901,6 +901,47 @@
       );
     }
 
+    // ── OGP ヘルパー（Appコンポーネント外・純粋関数） ──────────────
+    function _esc(s) {
+      return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+    }
+    function buildOgpCard(href, title, description, image, domain) {
+      const card = document.createElement('a');
+      card.href = href; card.target = '_blank'; card.rel = 'noopener noreferrer';
+      card.className = 'ogp-card';
+      card.innerHTML = [
+        `<div class="ogp-card-body">`,
+        domain      ? `<div class="ogp-card-domain">${_esc(domain)}</div>` : '',
+        title       ? `<div class="ogp-card-title">${_esc(title)}</div>` : '',
+        description ? `<div class="ogp-card-desc">${_esc(description)}</div>` : '',
+        `</div>`,
+        image ? `<img class="ogp-card-image" src="${_esc(image)}" alt="" loading="lazy" onerror="this.style.display='none'" />` : '',
+      ].join('');
+      return card;
+    }
+    function insertOgpCard(a, card) {
+      if (!a || !a.isConnected) return;
+      const p = a.parentElement;
+      if (!p || p.tagName !== 'P') { a.replaceWith(card); return; }
+      const pText = (p.textContent || '').trim();
+      const aText = (a.textContent || '').trim();
+      if (pText === aText) {
+        p.replaceWith(card);
+      } else {
+        const prev = a.previousSibling;
+        if (prev && prev.nodeName === 'BR') prev.remove();
+        a.remove();
+        if ((p.textContent || '').trim() === '') p.replaceWith(card);
+        else p.after(card);
+      }
+    }
+    function isOgpUrl(a) {
+      const href = a.getAttribute('href') || '';
+      if (!href.startsWith('http')) return false;
+      const text = (a.textContent || '').trim();
+      return text === href || text === href.replace(/^https?:\/\//, '');
+    }
+
     // === メインアプリ ===
     function App() {
       const [articles, setArticles]             = useState([]);
