@@ -458,27 +458,36 @@ def _create_draft_api(session: http_requests.Session, title: str, body_html: str
         ("v1/id+noStatus", url_by_id,  {"name": title, "body": "<p>テスト</p>"}),
     ]
 
+    editor_referer = f"https://editor.note.com/notes/{article_id}/edit/"
+    put_headers_list = [
+        {"Content-Type": "application/json",
+         "Origin": "https://editor.note.com",
+         "Referer": editor_referer},
+        {"Content-Type": "application/json",
+         "Origin": "https://note.com",
+         "Referer": "https://note.com/"},
+    ]
+
     put_success = False
     for label, url, data in put_attempts:
-        print(f"   📄 試行: {label} → {url.split('/api')[1]}")
-        res2 = session.put(
-            url, json=data, timeout=30,
-            headers={"Content-Type": "application/json"},
-        )
-        print(f"   🔍 [{label}] {res2.status_code} → {res2.text[:250]}")
-        try:
-            result2 = res2.json()
-            if "error" not in result2 and res2.ok:
-                print(f"   ✅ 成功: {label}")
-                put_success = True
-                # 成功したURLとdataでフル本文も保存
-                if "テスト" in data.get("body", ""):
-                    session.put(url, json=full_body, timeout=30,
-                                headers={"Content-Type": "application/json"})
-                break
-        except Exception:
-            pass
-        time.sleep(0.5)
+        for hdrs in put_headers_list:
+            origin_label = f"{label}[{hdrs['Origin'].split('//')[1]}]"
+            print(f"   📄 試行: {origin_label}")
+            res2 = session.put(url, json=data, timeout=30, headers=hdrs)
+            print(f"   🔍 {res2.status_code} → {res2.text[:200]}")
+            try:
+                result2 = res2.json()
+                if "error" not in result2 and res2.ok:
+                    print(f"   ✅ 成功: {origin_label}")
+                    put_success = True
+                    if "テスト" in data.get("body", ""):
+                        session.put(url, json=full_body, timeout=30, headers=hdrs)
+                    break
+            except Exception:
+                pass
+            time.sleep(0.5)
+        if put_success:
+            break
 
     if not put_success:
         print(f"   ❌ 全試行失敗")
