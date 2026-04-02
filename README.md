@@ -1,96 +1,279 @@
-# Vibe Blog Engine - 仕様書 (System Blueprint)
+# Vibe Blog Engine — 仕様書
 
-YouTube動画からAIでブログ記事を自動生成し、OneDriveで管理・編集・公開するためのフルスタック・オートメーション・システム。
-
----
-
-## 1. システム概要 (Architecture)
-
-本プロジェクトは以下の3つのコンポーネントで構成されています。
-
-1.  **Pipeline (scripts/pipeline)**: GitHub Actions で動作する自動記事生成エンジン。
-2.  **API (api/)**: Vercel Serverless Functions。OneDriveとの通信およびパイプライン起動。
-3.  **Frontend (public/index.html)**: 記事の閲覧・編集・リネーム・保存、および手動トリガーを行う管理画面。
+YouTube動画からAIでブログ記事を自動生成し、OneDriveで管理・編集・note.comへ自動下書き投稿するフルスタック・オートメーション・システム。
 
 ---
 
-## 2. ブログ生成パイプライン仕様
+## 1. システム全体像
+
+```
+YouTube動画URL
+    ↓ Apify（文字起こし）
+    ↓ Gemini 2.5 Flash（3段階AI生成）
+    ↓ OneDrive（Markdownファイル保存）
+    ↓ Vibe Blog UI（閲覧・編集・管理）
+    ↓ GitHub Actions（note下書き自動投稿）
+    ↓ note.com（下書き記事）
+```
+
+**コンポーネント構成:**
+
+| レイヤー | 場所 | 役割 |
+|---------|------|------|
+| パイプライン | `scripts/pipeline/` + GitHub Actions | 記事自動生成・OneDrive保存 |
+| API | `api/` | Vercel Serverless Functions（OneDrive/GitHub/note連携） |
+| フロントエンド | `public/index.html` | 記事管理・編集・note投稿管理画面 |
+
+---
+
+## 2. 記事生成パイプライン
 
 ### 2.1 実行トリガー
--   **スケジュール実行**: 毎日 JST 9:00 (UTC 0:00)。
--   **手動実行**: GitHub UI または Vibe Blog 画面上の「パイプライン実行」ボタン。
 
-### 2.2 スプレッドシート読み込み仕様 (Google Sheets)
--   **認証**: `GOOGLE_SERVICE_ACCOUNT_JSON` を使用。
--   **対象シート**: `SHEET_NAME` (デフォルト: "動画リスト")。
--   **抽出ルール**:
-    -   「状況」列の値が `単品`, `複数`, `情報` のいずれかであること。
-    -   「動画URL」列に値が入っていること。
--   **処理フロー**:
-    1. 待機中の行を取得。
-    2. 動画ごとに文字起こし取得、AI生成、OneDrive保存を実行。
-    3. 成功した場合、該当行の「状況」を `完了` に更新。
+- **自動**: 毎日 JST 9:00（UTC 0:00）スケジュール実行
+- **手動**: Vibe Blog UI の「パイプライン実行」ボタン、または GitHub Actions UI
 
-### 2.3 AI 3段階生成ロジック (Gemini 2.5 Flash)
-プロンプトは `scripts/pipeline/prompts/` フォルダ内の外部ファイルから読み込まれます。
+### 2.2 Googleスプレッドシート読み込み
 
-1.  **Step 1: Drafter (ライター)**
-    -   `01-writer-prompt.txt` を使用。
-    -   スプレッドシートの「状況」に応じて `[単品]`, `[情報]`, `[複数]` のプロンプトを切り替え。
-2.  **Step 2: Editor (編集者)**
-    -   `02-editor-prompt.txt` を使用。
-    -   文章のリズム、SEOキーワードの配置、モバイル最適化を実施。
-3.  **Step 3: Director (編集長)**
-    -   `03-director-prompt.txt` を使用。
-    -   最終トーン調整、メタディスクリプション（YAML）、画像挿入ポイントの指示。
+- **認証**: `GOOGLE_SERVICE_ACCOUNT_JSON` サービスアカウント
+- **対象シート**: `SHEET_NAME`（デフォルト: "動画リスト"）
+- **処理対象の条件**: 「状況」列が `単品` / `複数` / `情報` のいずれか、かつ「動画URL」列に値がある行
+- **完了時**: 処理成功行の「状況」を `完了` に自動更新
 
-### 2.4 保存仕様 (OneDrive)
--   **フォルダ**: `ONEDRIVE_FOLDER` (デフォルト: "Blog_Articles")。
--   **ファイル名規則**: `YYYYMMDD_HHMM_動画タイトル.md`
--   **文字コード**: UTF-8。
+### 2.3 AI 3段階生成（Gemini 2.5 Flash）
+
+プロンプトは `scripts/pipeline/prompts/` から読み込み。
+
+1. **Step 1 — Drafter**: `01-writer-prompt.txt`。状況（単品/情報/複数）でプロンプトを切り替えて初稿を生成。
+2. **Step 2 — Editor**: `02-editor-prompt.txt`。文章リズム・SEOキーワード・モバイル最適化。
+3. **Step 3 — Director**: `03-director-prompt.txt`。最終トーン調整・YAMLメタディスクリプション・画像挿入指示。
+
+### 2.4 OneDrive保存
+
+- **フォルダ**: `ONEDRIVE_FOLDER`（デフォルト: "Blog_Articles"）
+- **ファイル名**: `YYYYMMDD_HHMM_動画タイトル.md`
+- **文字コード**: UTF-8
 
 ---
 
-## 3. 管理画面 (Vibe Blog UI) 仕様
+## 3. 管理画面（Vibe Blog UI）
 
-### 3.1 記事管理 (Sidebar)
--   **フォルダ階層表示**: OneDrive上の実際のディレクトリ構造（エクスプローラー形式）を再帰的に取得して表示。
--   **UI操作**: 横幅変更（ドラッグリサイズ）および開閉（トグル）が可能。
--   **新規作成**: ルート直下に新しいMarkdownファイルを作成。
+`public/index.html` — React + Tailwind CSS（CDN）でシングルファイル実装。
 
-### 3.2 エディタ & タイトル編集
--   **タイトル編集**: ✏️ アイコンでリネーム。編集確定時に **OneDrive上の実ファイル名もリネーム（PATCH API）** され、永続化される。
--   **自動保存**: なし（明示的な「保存」ボタン押下、または Ctrl+S）。
--   **リサイズ**: エディタとプレビューの境界をドラッグで調整可能。
+### 3.1 サイドバー（記事一覧）
 
-### 3.3 認証 & トークン
--   **OAuth ローテーション**: API呼び出しごとにアクセストークンを再取得し、リフレッシュトークンが更新された場合は **Vercel環境変数を自動書き換え** して維持する（API側の `updateVercelEnvToken`）。
+- OneDriveのフォルダ階層をツリー形式で表示（月別フォルダ等）
+- 横幅ドラッグリサイズ・開閉トグル対応
+- モバイルではドロワー形式で表示
+
+**右クリックメニュー:**
+
+| 項目 | 動作 |
+|------|------|
+| 選択 | チェックボックス選択モードを開始し、この記事を最初の選択状態にする |
+| 複製 | 記事をコピー（ファイル名先頭に「コピー_」付与） |
+| 削除 | 確認ダイアログ後にOneDriveから削除 |
+| エクスプローラーで表示 | OneDrive Webで直接開く |
+
+**複数選択モード:**
+
+1. 右クリック → 「選択」でチェックボックスモード開始
+2. 記事タイトル左のチェックボックスをクリックして複数選択（薄紫ハイライト）
+3. ツールバーの「下書き」ボタンが「下書き(N)」と件数表示に変化
+4. 「解除」ボタンで選択モードをキャンセル
+
+### 3.2 エディタ
+
+- **左ペイン**: Markdownエディタ（JetBrains Monoフォント）
+- **右ペイン**: リアルタイムプレビュー
+- 両ペインの境界をドラッグでサイズ調整可能
+
+**エディタバー（MARKDOWNラベルの行）:**
+
+- 文字数表示
+- 全文コピーボタン
+- **「保存先URL」リンク**: note下書き保存が完了したときにeditor.note.comのURLが自動表示される
+
+**キーボードショートカット:**
+
+| ショートカット | 動作 |
+|--------------|------|
+| `Ctrl+S` | 保存 |
+| `Ctrl+B` | 太字（選択テキストを `**` で囲む） |
+| `Ctrl+Z` | Undo（500ms debounce、最大100段階） |
+| `Ctrl+F` | 検索・置換パネルの開閉 |
+| `Escape` | タイトル編集/検索パネルを閉じる |
+
+### 3.3 タイトル編集
+
+- ✏️ アイコンクリックでインライン編集
+- 確定時に **OneDrive上のファイル名もリネーム**（`PATCH /api/articles`）
+- ファイル名のプレフィックス（`YYYYMMDD_HHMM_`）は保持される
+
+### 3.4 ツールバーボタン一覧
+
+| ボタン | 説明 |
+|--------|------|
+| note | note.comを新しいタブで開く |
+| 下書き | 現在の記事（または選択した複数記事）をnoteに下書き投稿 |
+| アフィリンク | アフィリエイトリンク管理モーダルを開く |
+| シート | Google Sheetsを新しいタブで開く |
+| パイプライン | 記事生成パイプラインを手動起動 |
+| 保存 | 現在の内容をOneDriveに保存（`Ctrl+S`と同等） |
+| リロード | 記事一覧を再取得 |
 
 ---
 
-## 4. 開発・運用ルール
+## 4. note下書き自動投稿システム
 
-### 4.1 安全管理
--   ファイルの書き込み・変更・削除、および破壊的なコマンド実行前には必ず作業計画を報告し、ユーザーの確認 (`y/n`) を取ること。
--   ただし、`winmacsync`（同期スクリプト）および `/yt-note-edited-article` 関連の半自動ワークフローは自律実行可能。
+### 4.1 仕組み
 
-### 4.2 コミュニケーション
--   全ての応答、コード内コメント、タスク表示は **日本語** で行うこと。
+```
+[下書きボタン]
+    ↓ POST /api/note-draft  (Vercel)
+    ↓ GitHub Actions note-draft.yml を dispatch
+    ↓ note_draft_poster.py 実行
+    ↓ APIログイン → スケルトン作成 → draft_save
+    ↓ GitHub Variable NOTE_DRAFT_URL_<hash> にURLを保存
+    ↓ UI が5秒間隔でpolling → URLが取得できたらリンク表示
+```
 
-### 4.3 同期管理
--   グローバルスキルや設定（`GEMINI.md` 等）を変更した際は、OneDriveへの反映のため即座に `winmacsync` を実行すること。
+### 4.2 使用するnote API（確定版）
+
+| 操作 | エンドポイント | メソッド |
+|------|--------------|---------|
+| ログイン | `https://note.com/api/v1/sessions/sign_in` | POST |
+| スケルトン作成 | `https://note.com/api/v1/text_notes` | POST |
+| **本文保存（下書き）** | `https://note.com/api/v1/text_notes/draft_save?id={id}&is_temp_saved=true` | POST |
+
+**本文保存に必須のヘッダー:**
+- `X-XSRF-TOKEN`: CookieのXSRF-TOKENをURLデコードした値
+- `Origin: https://editor.note.com`
+- `Referer: https://editor.note.com/`
+
+詳細は `reference/techrefere2.md` を参照。
+
+### 4.3 セッション管理
+
+- **初回のみ手動**: `python note_draft_poster.py --save-cookies`（ブラウザ手動ログイン → Cookie取得）
+- **以降は完全自動**: APIログイン（`POST /api/v1/sessions/sign_in`）でCookieを自動取得・更新
+- **keepalive**: `.github/workflows/note-keepalive.yml` が3日おきにセッションを延命
+
+### 4.4 複数記事の一括投稿
+
+サイドバーで複数記事を選択した状態で「下書き」ボタンを押すと、選択した記事が**それぞれ独立したnote記事**として下書き保存される（1記事 = 1note記事）。
 
 ---
 
-## 5. 環境変数 (Required Environment Variables)
+## 5. Vercel API エンドポイント一覧
 
--   `GOOGLE_SERVICE_ACCOUNT_JSON`: スプレッドシート用サービスアカウント鍵。
--   `SPREADSHEET_ID`: 管理用スプレッドシートのID。
--   `SHEET_NAME`: 読み込み対象のシート名。
--   `APIFY_API_KEY`: YouTube文字起こし取得用。
--   `GEMINI_API_KEY`: Google AI APIキー。
--   `ONEDRIVE_CLIENT_ID / SECRET`: Microsoft Graph API 認証情報。
--   `ONEDRIVE_REFRESH_TOKEN`: OneDriveアクセス維持用。
--   `ONEDRIVE_FOLDER`: OneDrive内のルートフォルダ名。
--   `VERCEL_TOKEN`: 環境変数自動更新用（Vercel Personal Access Token）。
--   `VERCEL_PROJECT_ID`: VercelプロジェクトID。
+| エンドポイント | メソッド | 説明 |
+|--------------|---------|------|
+| `/api/articles` | GET | 記事一覧取得（OneDrive） |
+| `/api/articles?id=xxx` | GET | 記事本文取得 |
+| `/api/articles` | PUT | 記事保存（上書き） |
+| `/api/articles` | PATCH | ファイルリネーム |
+| `/api/articles` | DELETE | ファイル削除 |
+| `/api/articles` | POST | ファイル複製 |
+| `/api/trigger` | POST | パイプライン起動（GitHub Actions） |
+| `/api/note-draft` | POST | note下書き投稿トリガー（単体 or 複数） |
+| `/api/note-draft?fileId=xxx` | GET | 下書き済みURLを取得（GitHub Variable） |
+| `/api/affiliate-links` | GET | アフィリエイトリンク取得 |
+| `/api/affiliate-links` | PUT | アフィリエイトリンク保存 |
+
+---
+
+## 6. GitHub Actionsワークフロー一覧
+
+| ワークフロー | トリガー | 役割 |
+|------------|---------|------|
+| `pipeline.yml` | 毎日JST 9:00 / 手動 | 記事自動生成 |
+| `note-draft.yml` | `workflow_dispatch`（fileId必須） | note下書き投稿 |
+| `note-keepalive.yml` | 3日おき cron / 手動 | noteセッション延命 |
+
+---
+
+## 7. 環境変数一覧
+
+### GitHub Secrets（Actions用）
+
+| 変数名 | 用途 |
+|--------|------|
+| `GOOGLE_SERVICE_ACCOUNT_JSON` | スプレッドシート用サービスアカウント鍵 |
+| `SPREADSHEET_ID` | 管理用スプレッドシートID |
+| `SHEET_NAME` | 読み込み対象シート名 |
+| `APIFY_API_KEY` | YouTube文字起こし取得 |
+| `GEMINI_API_KEY` | Google AI APIキー |
+| `ONEDRIVE_CLIENT_ID` | Microsoft Graph API クライアントID |
+| `ONEDRIVE_CLIENT_SECRET` | Microsoft Graph API クライアントシークレット |
+| `ONEDRIVE_REFRESH_TOKEN` | OneDriveアクセス維持 |
+| `ONEDRIVE_FOLDER` | OneDrive内のルートフォルダ名 |
+| `NOTE_EMAIL` | noteログインメールアドレス |
+| `NOTE_PASSWORD` | noteログインパスワード |
+| `NOTE_STORAGE_STATE` | Playwright StorageState JSON（Cookie情報） |
+| `GH_PAT` | GitHub PAT（`secrets:write` + `variables:write` スコープ必須） |
+
+### Vercel 環境変数
+
+| 変数名 | 用途 |
+|--------|------|
+| `ONEDRIVE_CLIENT_ID` | Microsoft Graph API |
+| `ONEDRIVE_CLIENT_SECRET` | Microsoft Graph API |
+| `ONEDRIVE_REFRESH_TOKEN` | OneDriveトークン（自動更新） |
+| `ONEDRIVE_FOLDER` | OneDriveフォルダ名 |
+| `VERCEL_TOKEN` | 環境変数自動更新用（Vercel PAT） |
+| `VERCEL_PROJECT_ID` | VercelプロジェクトID |
+| `GITHUB_TOKEN` | note-draft API用（GH_PATの値を設定） |
+| `GITHUB_REPO` | リポジトリ名（例: `seahirodigital/Blog_Vercel`） |
+
+### GitHub Variables（自動生成）
+
+| 変数名 | 内容 |
+|--------|------|
+| `NOTE_DRAFT_URL_<8桁ハッシュ>` | 記事ごとの下書きURL（note_draft_poster.pyが自動生成） |
+
+---
+
+## 8. 初回セットアップ手順
+
+1. GitHub Secrets を上記の通りすべて設定
+2. Vercel 環境変数を設定
+3. noteのStorageState初回取得:
+   ```bash
+   cd scripts/pipeline
+   pip install requests pynacl playwright
+   python note_draft_poster.py --save-cookies
+   # ブラウザが開くのでnote.comにログイン → Enterを押す
+   # GH_PATが設定されていればNOTE_STORAGE_STATEに自動登録される
+   ```
+4. Vercelにデプロイ（`vercel --prod` またはGitHub連携）
+5. スプレッドシートに動画URLを追加してパイプラインを実行
+
+---
+
+## 9. ファイル構成
+
+```
+Blog_Vercel/
+├── public/
+│   └── index.html              # 管理画面（React + Tailwind, シングルファイル）
+├── api/
+│   ├── articles.js             # OneDrive記事CRUD
+│   ├── trigger.js              # パイプライン起動
+│   ├── note-draft.js           # note下書きトリガー + URL取得
+│   └── affiliate-links.js      # アフィリエイトリンク管理
+├── scripts/
+│   └── pipeline/
+│       ├── note_draft_poster.py    # note下書き投稿スクリプト（v4.1）
+│       ├── prompts/                # AI生成プロンプト集
+│       └── ...
+├── .github/
+│   └── workflows/
+│       ├── pipeline.yml            # 記事自動生成
+│       ├── note-draft.yml          # note下書き投稿
+│       └── note-keepalive.yml      # セッション維持cron
+├── reference/
+│   └── techrefere2.md             # note API技術リファレンス
+├── vercel.json
+└── README.md
+```

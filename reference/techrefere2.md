@@ -1,107 +1,219 @@
-# Note下書き自動投稿の技術リファレンス (v3)
+# Note下書き自動投稿の技術リファレンス (v5 — 確定版)
 
-## 1. 目的と実装できた機能
-* MarkdownのH1部分抽出、タイトルと本文の分離
-* プラットフォーム非対応タグ（動画キャプション等）のフィルタリング
-* noteエディタへの自動入力・下書き保存
-* URL自動展開（OGP化）JS注入によるリッチな編集体験の自動化
+## 1. 完成した機能一覧
 
----
-
-## 2. 試行錯誤（v3.0まで：Playwright編）
-
-### (1) ヘッドレスブラウザによるID/パスワード直接ログインの失敗
-* **手法**: `page.fill` してログインボタンを自動押下。
-* **問題**: note側のreCAPTCHAにクラウドIP（GitHub Actions）からのアクセスが完全にブロックされた。
-
-### (2) Cookieのみの設定による不安定さ
-* **手法**: 重要そうなCookieのみを環境変数からセット。
-* **問題**: セッション情報の不足・有効期限切れで不安定。手動運用となった。
-
-### (3) クリップボードペーストの制限
-* **手法**: `keyboard.press("Control+v")` で一発入力。
-* **問題**: Actionsのヘッドレス環境ではクリップボードアクセス権限の問題でペースト失敗。
-
-### (4) v3.0 StorageState方式（Playwright）
-* **手法**: 初回のみ手動ログインし、PlaywrightのStorageState（Cookie＋LocalStorage全体）をGitHub Secretに保存。毎回復元してreCAPTCHAを回避。3日おきのcronでセッション延命。
-* **問題（設定漏れ）**: GitHub Actions ワークフローに `NOTE_STORAGE_STATE` と `GITHUB_TOKEN` が渡されておらず、StorageState復元が機能しなかった。
+| 機能 | 状態 | 実装方法 |
+|------|------|---------|
+| 認証（APIログイン） | ✅ 完全自動化 | `POST /api/v1/sessions/sign_in` |
+| スケルトン作成 | ✅ 完全自動化 | `POST /api/v1/text_notes` |
+| **本文保存** | ✅ 完全自動化 | `POST /api/v1/text_notes/draft_save` |
+| Cookie自動更新 | ✅ 完全自動化 | GitHub Secret自動書き換え（PyNaCl）|
+| セッション維持cron | ✅ 完全自動化 | `note-keepalive.yml`（3日おき）|
+| 下書きURL記録 | ✅ 完全自動化 | GitHub Repository Variable |
+| UI上のURL表示 | ✅ 実装済み | polling + MARKDOWNバーにリンク表示 |
 
 ---
 
-## 3. 試行錯誤（v4.0：HTTP API直接投稿編）
+## 2. 確定した正解のAPI仕様
 
-Playwright廃止・noteの内部APIに直接HTTPリクエストを送る方式へ移行。
-
-### 判明した事実
-
-**成功した操作：**
-
-| 操作 | エンドポイント | 結果 |
-|------|--------------|------|
-| APIログイン | `POST /api/v1/sessions/sign_in` | 200 成功 |
-| 記事作成（タイトルのみ） | `POST /api/v1/text_notes` | 201 成功（`body`は常に`null`） |
-| GitHub SecretのCookie自動更新 | GitHub API | 成功 |
-
-**失敗した操作（本文保存）：**
-
-`PUT /api/v1/text_notes/{id}` は常に **422** を返す。
+### 認証
 
 ```
-{"error": {"code": "invalid", "message": "不正なパラメータが渡されました。はじめから操作をやり直してください。"}}
+POST https://note.com/api/v1/sessions/sign_in
+Content-Type: application/json
+
+{ "login": "<email>", "password": "<password>" }
+→ 200 OK + Set-Cookie: _note_session_v5, XSRF-TOKEN 等
 ```
 
-試したパターンと全ての結果：
+### 記事スケルトン作成（タイトル・本文なし）
+
+```
+POST https://note.com/api/v1/text_notes
+Content-Type: application/json
+Origin: https://editor.note.com
+X-Requested-With: XMLHttpRequest
+
+{ "template_key": null }
+→ 201 Created + { "data": { "id": 12345, "key": "nXXXXXXXXXXXX" } }
+```
+
+**重要**: `name`（タイトル）も `body` も含めない。`template_key: null` のみ。
+
+### 本文保存（下書き）← ここが核心
+
+```
+POST https://note.com/api/v1/text_notes/draft_save?id={note_id}&is_temp_saved=true
+Content-Type: application/json
+Origin: https://editor.note.com
+Referer: https://editor.note.com/
+X-XSRF-TOKEN: <CookieのXSRF-TOKENをURLデコードした値>
+X-Requested-With: XMLHttpRequest
+
+{
+  "body": "<p>本文HTML</p>",
+  "body_length": 123,
+  "name": "タイトル",
+  "index": false,
+  "is_lead_form": false,
+  "image_keys": []
+}
+→ 200 OK
+```
+
+**重要ポイント:**
+- エンドポイントは `PUT /text_notes/{id}` **ではなく** `POST /text_notes/draft_save?id={id}`
+- `X-XSRF-TOKEN` は `XSRF-TOKEN` Cookieの値を `urllib.parse.unquote()` してセット
+- `Origin` と `Referer` は必ず `https://editor.note.com` / `https://editor.note.com/` を指定
+- `body_length` はHTMLタグを除去したプレーンテキストの文字数
+
+### 下書き完成後のURL
+
+```
+https://editor.note.com/notes/{key}/edit/
+```
+
+---
+
+## 3. 試行錯誤の全記録
+
+### v3.0 — Playwright方式（2025年）
+
+| 手法 | 問題 |
+|------|------|
+| ID/パスワード直接ログイン | GitHub ActionsのクラウドIPをreCAPTCHAが完全ブロック |
+| Cookieのみ設定 | セッション情報不足・有効期限切れで不安定 |
+| クリップボードペースト | ヘッドレス環境でクリップボード権限エラー |
+| StorageState方式 | `NOTE_STORAGE_STATE` と `GITHUB_TOKEN` のワークフロー設定漏れで機能せず |
+
+### v4.0 — HTTP API直接投稿（失敗した全パターン）
+
+**`POST /api/v1/text_notes` の調査:**
+- `body` をどのパラメータで渡しても、レスポンスの `body` は常に `null`
+- `name` のみ保存される
+- → **POSTにbodyを含めることはできない**（仕様）
+
+**`PUT /api/v1/text_notes/{id}` の全失敗パターン:**
 
 | パターン | 結果 |
 |----------|------|
 | JSON + `status: "draft"` | 422 |
 | JSON（statusなし） | 422 |
-| フォームデータ（`data=`送信） | 400（Content-Type衝突） |
+| フォームデータ（`data=`送信） | 400 |
 | `PATCH` メソッド | 405 |
-| `GET` メソッド | 405 |
 | `body` を最小HTML `<p>テスト</p>` | 422 |
 | `body` をプレーンテキスト | 422 |
-| URL を数値IDでなく `key` で指定 | 404 |
+| URL を `key` で指定 | 404 |
 | `/api/v2/text_notes/{id}` | 404 |
 | `Origin: https://editor.note.com` | 422（変化なし） |
-| `Referer: https://editor.note.com/notes/{id}/edit/` | 422（変化なし） |
 | POST後にGETでsession初期化→PUT | GET: 405、PUT: 422のまま |
 
-### 根本的な制約（結論）
+**結論**: `PUT` は公開用エンドポイントであり、下書き保存には使えない。
 
-1. **`POST /api/v1/text_notes` は `body` を受け付けない**  
-   どのパラメータを渡してもPOSTレスポンスの `body` は常に `null`。タイトルのみ保存される。
+### v4.1 — NoteClient2ソース逆解析（成功）
 
-2. **`PUT /api/v1/text_notes/{id}` は外部HTTPクライアントから呼べない**  
-   パラメータ・ヘッダー・Content-Type・メソッド・APIバージョン・Origin/Refererを変えても全て422。  
-   noteのエディタ（`editor.note.com`）が内部セッションで使うAPIであり、  
-   通常のHTTPクライアントからは意図的にブロックされていると断定。
+PyPIパッケージ `NoteClient2` の `client.py` を `pip install` して読解。
+`site-packages/NoteClient2/client.py` の `_draft_save()` メソッドから正解を特定:
+
+```python
+url = f"https://note.com/api/v1/text_notes/draft_save?id={note_id}&is_temp_saved=true"
+headers = {
+    "X-XSRF-TOKEN": urllib.parse.unquote(cookies.get("XSRF-TOKEN", "")),
+    "Referer": "https://editor.note.com/",
+    ...
+}
+```
+
+これをHTTP APIクライアント（requests）で再現して完全動作を確認。
 
 ---
 
-## 4. 結論と今後の方針
+## 4. Cookie・セッション管理の仕様
 
-### 現状のまとめ
+### 初回セットアップ
 
-| 機能 | 状態 |
-|------|------|
-| 認証（APIログイン） | 完全自動化 ✅ |
-| タイトル保存 | 完全自動化 ✅ |
-| 本文保存 | 不可 ❌（PUT APIがブロック） |
-| Cookie自動更新 | 完全自動化 ✅ |
-| セッション維持cron | 完全自動化 ✅ |
+```bash
+python note_draft_poster.py --save-cookies
+# ブラウザを開いて手動ログイン → StorageState取得
+# GITHUB_TOKENがあれば NOTE_STORAGE_STATE Secretに自動登録
+```
 
-### 次のアプローチ候補
+### 以降（完全自動）
 
-| 方針 | 難易度 | 備考 |
-|------|-------|------|
-| **A: Playwrightへの回帰（v5.0）** | 中 | StorageStateで認証は解決済み。v4.0の成果（Cookie管理・ワークフロー設定）を活かして再実装 |
-| **B: note公式API（将来）** | - | 現時点で公式APIは存在しない |
-| **C: ブラウザ実通信のプロキシ解析** | 高 | 実際のブラウザリクエストをキャプチャして必要なパラメータを特定 |
+1. `NOTE_STORAGE_STATE` Secret からCookieを復元
+2. セッション有効性チェック（`GET /api/v3/users/user_features`）
+3. 無効時 → `POST /api/v1/sessions/sign_in` でAPIログイン
+4. `_note_session_v5` Cookieの重複が発生する場合は古いものをクリアしてから再セット
+5. 操作後、最新CookieをGitHub Secret `NOTE_STORAGE_STATE` に自動上書き
 
-### 推奨：Playwrightへの回帰（v5.0）
-v3.0のPlaywright方式に戻り、v4.0の成果を組み込んで安定化する：
-1. ワークフローの設定漏れ（`NOTE_STORAGE_STATE`・`GITHUB_TOKEN`）は修正済み
-2. Cookie重複問題の解決策はv4.0で確立済み
-3. APIログインによるCookie自動再取得をフォールバックとして維持
-4. 本文入力はProseMirrorへの`page.evaluate()`直接注入で安定化
+### keepalive（3日おき cron）
+
+`.github/workflows/note-keepalive.yml` が `0 3 */3 * *` で実行。
+セッションが有効なら更新保存、無効ならAPIログインで復旧。
+
+---
+
+## 5. 下書きURLの記録・表示
+
+### 記録（note_draft_poster.py）
+
+下書き成功後、GitHub Repository Variable に保存:
+```
+NOTE_DRAFT_URL_<MD5(file_id)[:8].upper()>  =  "https://editor.note.com/notes/{key}/edit/"
+```
+`PATCH /repos/{owner}/{repo}/actions/variables/{name}` で更新（なければ `POST` で作成）。
+
+### 取得（api/note-draft.js）
+
+```
+GET /api/note-draft?fileId=<OneDrive_fileId>
+→ { "url": "https://editor.note.com/notes/.../edit/" }   // またはnull
+```
+
+### 表示（public/index.html）
+
+下書きボタン押下後、5秒間隔・最大24回（2分）のpollingでURLを取得。
+取得できた時点でエディタバーの `MARKDOWN` 右隣に「保存先URL」リンクを表示。
+
+---
+
+## 6. Cookie重複エラーの解決策
+
+`requests.Session` で同一名Cookieが複数ドメインに存在すると `dict(session.cookies)` が失敗する。
+
+```python
+# NG: CookieConflictError
+cookies = dict(session.cookies)
+
+# OK: iteratorで重複を除去
+seen = set()
+cookie_list = []
+for cookie in session.cookies:
+    key = (cookie.name, cookie.domain)
+    if key not in seen:
+        seen.add(key)
+        cookie_list.append(cookie)
+```
+
+---
+
+## 7. 関連ファイル一覧
+
+| ファイル | 役割 |
+|---------|------|
+| `scripts/pipeline/note_draft_poster.py` | メインスクリプト（v4.1） |
+| `.github/workflows/note-draft.yml` | 下書き投稿ワークフロー |
+| `.github/workflows/note-keepalive.yml` | セッション維持cron |
+| `api/note-draft.js` | VercelサーバーレスAPI（トリガー + URL取得） |
+
+---
+
+## 8. GitHub Secrets / Variables 一覧
+
+| 名前 | 種別 | 内容 |
+|------|------|------|
+| `NOTE_STORAGE_STATE` | Secret | Playwright StorageState JSON（Cookie情報）|
+| `NOTE_EMAIL` | Secret | noteログインメールアドレス |
+| `NOTE_PASSWORD` | Secret | noteログインパスワード |
+| `GH_PAT` | Secret | GitHub PAT（secrets:write + variables:write スコープ必須）|
+| `NOTE_DRAFT_URL_<hash>` | Variable | 記事ごとの下書きURL（自動生成） |
