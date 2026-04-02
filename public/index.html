@@ -1413,58 +1413,74 @@
           }
         };
 
-        // 対象リンク一覧（未処理のみ）
-        const anchors = [...preview.querySelectorAll('a[href^="http"]')].filter(a => {
-          if (a.dataset.ogpProcessed) return false;
-          const href = a.getAttribute('href') || '';
-          const text = (a.textContent || '').trim();
-          return text === href || text === href.replace(/^https?:\/\//, '');
-        });
+        // 未処理リンク一覧を取得するヘルパー
+        // ※ .ogp-card は明示的に除外（成功済みカードを絶対に再処理しない）
+        const getUnprocessed = () =>
+          [...preview.querySelectorAll('a[href^="http"]:not(.ogp-card)')].filter(a => {
+            if (a.dataset.ogpProcessed) return false;
+            const href = a.getAttribute('href') || '';
+            const text = (a.textContent || '').trim();
+            return text === href || text === href.replace(/^https?:\/\//, '');
+          });
 
-        if (anchors.length === 0) return;
-
-        // 共有キュー（2並列ワーカーが競合して取得）
-        const queue = [...anchors];
-
-        const worker = async () => {
-          while (!aborted) {
-            const a = queue.shift();
-            if (!a) break;
-            // 別ワーカーが先に取得済みの場合スキップ
-            if (a.dataset.ogpProcessed) continue;
-            // 処理中マーカー（先にセットして二重取得を防ぐ）
-            a.dataset.ogpProcessed = '1';
-            const href = a.getAttribute('href');
-            let success = false;
-            try {
-              const r = await fetch(`/api/ogp?url=${encodeURIComponent(href)}`);
-              if (r.ok) {
-                const { title, description, image, domain } = await r.json();
-                if ((title || image) && !aborted) {
-                  insertCard(a, buildCard(href, title, description, image, domain));
-                  success = true;
+        // 共有キューから2並列で処理
+        const runWorkers = async (items) => {
+          const queue = [...items];
+          const worker = async () => {
+            while (!aborted) {
+              const a = queue.shift();
+              if (!a) break;
+              if (a.dataset.ogpProcessed || a.classList.contains('ogp-card')) continue;
+              if (!a.isConnected) continue; // DOMから外れていたらスキップ
+              a.dataset.ogpProcessed = '1';
+              const href = a.getAttribute('href');
+              let success = false;
+              try {
+                const r = await fetch(`/api/ogp?url=${encodeURIComponent(href)}`);
+                if (r.ok) {
+                  const data = await r.json();
+                  const { title, description, image, domain } = data;
+                  // Amazonが汎用ページを返した場合は失敗扱い（タイトルがドメイン名のみ）
+                  const isGeneric = !title || title === 'Amazon.co.jp' || title === 'Amazon' || /^Amazon\.\w/.test(title);
+                  if ((!isGeneric || image) && !aborted && a.isConnected) {
+                    insertCard(a, buildCard(href, title, description, image, domain));
+                    success = true;
+                  }
                 }
+              } catch {}
+              // 失敗時はマーカーを除去 → 自動リトライ・手動refresh両方で再試行可能にする
+              if (!success && !aborted && a.isConnected) {
+                a.removeAttribute('data-ogp-processed');
               }
-            } catch {}
-            // 失敗時はマーカーを除去 → 次回refreshで再試行可能にする
-            if (!success && !aborted && a.isConnected) {
-              a.removeAttribute('data-ogp-processed');
+              if (!aborted) await new Promise(r => setTimeout(r, 800));
             }
-            // ワーカー毎に800ms待機（Amazonレート制限対策）
-            if (!aborted) await new Promise(r => setTimeout(r, 800));
+          };
+          await Promise.all([worker(), worker()]);
+        };
+
+        // 初回 + 自動リトライ（最大4回、残リンクがあれば1.5秒後に再試行）
+        const processWithRetry = async () => {
+          for (let attempt = 0; attempt < 4 && !aborted; attempt++) {
+            const items = getUnprocessed();
+            if (items.length === 0) break;
+            await runWorkers(items);
+            if (aborted) break;
+            // 次リトライ前に少し待機
+            const remaining = getUnprocessed();
+            if (remaining.length === 0) break;
+            await new Promise(r => setTimeout(r, 1500));
           }
         };
 
-        // 2並列で実行（多すぎるとAmazonにブロックされる）
-        Promise.all([worker(), worker()]);
+        processWithRetry();
         return () => { aborted = true; };
       }, [renderedHTML, ogpTrigger]);
 
-      // OGP更新: 成功済みカードは保持し、失敗した<a>のみ再試行
+      // OGP更新: .ogp-card（成功済み）は完全スキップ、失敗<a>のみ再試行
       const refreshOgp = useCallback(() => {
         if (previewRef.current) {
-          // data-ogp-processed が残っている<a> = 失敗したリンク → マーカーをクリアして再試行対象に
-          previewRef.current.querySelectorAll('a[data-ogp-processed]').forEach(a => {
+          // .ogp-card でない <a> の data-ogp-processed を除去（成功カードに触れない）
+          previewRef.current.querySelectorAll('a[data-ogp-processed]:not(.ogp-card)').forEach(a => {
             a.removeAttribute('data-ogp-processed');
           });
         }
