@@ -263,7 +263,7 @@
   <div id="root"></div>
 
   <script type="text/babel">
-    const { useState, useEffect, useRef, useCallback, useMemo } = React;
+    const { useState, useEffect, useLayoutEffect, useRef, useCallback, useMemo } = React;
 
     // Marked.js: リンクを別タブで開く（v5 API：オブジェクト引数）
     marked.use({
@@ -1405,8 +1405,21 @@
         }
       };
 
+      // Markdown プレビュー（複数改行を <br> で保持）
+      const renderedHTML = useMemo(() => {
+        try {
+          // 3行以上の連続改行 → 余分を <br> に変換して段落間隔を保持
+          const processed = (content || '').replace(/\n{3,}/g, (m) => {
+            const extra = m.length - 2;
+            return '\n\n' + Array(extra).fill('<br>').join('\n') + '\n\n';
+          });
+          return marked.parse(processed);
+        } catch { return '<p>Markdownの解析に失敗しました</p>'; }
+      }, [content]);
+
       // キャッシュ済みOGPカードをDOMリセット直後に即時再適用（塗り前に実行）
       // → エディタ編集中もOGPカードが消えない
+      // ※ renderedHTML の useMemo より後に定義すること（const TDZ回避）
       useLayoutEffect(() => {
         const preview = previewRef.current;
         if (!preview || !Object.keys(ogpCacheRef.current).length) return;
@@ -1420,18 +1433,6 @@
           }
         });
       }, [renderedHTML]);
-
-      // Markdown プレビュー（複数改行を <br> で保持）
-      const renderedHTML = useMemo(() => {
-        try {
-          // 3行以上の連続改行 → 余分を <br> に変換して段落間隔を保持
-          const processed = (content || '').replace(/\n{3,}/g, (m) => {
-            const extra = m.length - 2;
-            return '\n\n' + Array(extra).fill('<br>').join('\n') + '\n\n';
-          });
-          return marked.parse(processed);
-        } catch { return '<p>Markdownの解析に失敗しました</p>'; }
-      }, [content]);
 
       // OGPカード変換（renderedHTML変更後にpreview DOMを走査）
       // キャッシュ利用・2並列スタガー・自動リトライ対応
