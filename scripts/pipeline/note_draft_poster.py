@@ -436,9 +436,18 @@ def _create_draft_api(session: http_requests.Session, title: str, body_html: str
         return {}
     print(f"   ✅ 記事作成成功: ID={article_id}, key={article_key}")
 
-    # ── Step 2: PUTで本文を保存 ──
-    # まず最小テスト → フル本文 → プレーンテキスト の順で試す
+    # ── Step 2: GETでedit session初期化 ──
+    print("   🔄 GETで記事データを取得（edit session初期化）...")
+    get_res = session.get(
+        f"{NOTE_API_BASE}/v1/text_notes/{article_id}",
+        headers={"Referer": f"https://editor.note.com/notes/{article_id}/edit/",
+                 "Origin": "https://editor.note.com"},
+        timeout=15,
+    )
+    print(f"   🔍 GET {get_res.status_code} → {get_res.text[:300]}")
     time.sleep(1)
+
+    # ── Step 3: PUTで本文を保存 ──
 
     # URLとAPIバージョンの組み合わせで試す（Content-Typeは毎回上書き）
     url_by_id  = f"{NOTE_API_BASE}/v1/text_notes/{article_id}"
@@ -458,39 +467,38 @@ def _create_draft_api(session: http_requests.Session, title: str, body_html: str
         ("v1/id+noStatus", url_by_id,  {"name": title, "body": "<p>テスト</p>"}),
     ]
 
-    editor_referer = f"https://editor.note.com/notes/{article_id}/edit/"
-    put_headers_list = [
-        {"Content-Type": "application/json",
-         "Origin": "https://editor.note.com",
-         "Referer": editor_referer},
-        {"Content-Type": "application/json",
-         "Origin": "https://note.com",
-         "Referer": "https://note.com/"},
+    put_url = f"{NOTE_API_BASE}/v1/text_notes/{article_id}"
+    editor_hdrs = {
+        "Content-Type": "application/json",
+        "Origin": "https://editor.note.com",
+        "Referer": f"https://editor.note.com/notes/{article_id}/edit/",
+    }
+
+    put_attempts = [
+        ("minimal", {"name": title, "body": "<p>テスト</p>", "status": "draft"}),
+        ("full",    {"name": title, "body": body_html, "status": "draft"}),
+        ("no-status", {"name": title, "body": body_html}),
     ]
 
     put_success = False
-    for label, url, data in put_attempts:
-        for hdrs in put_headers_list:
-            origin_label = f"{label}[{hdrs['Origin'].split('//')[1]}]"
-            print(f"   📄 試行: {origin_label}")
-            res2 = session.put(url, json=data, timeout=30, headers=hdrs)
-            print(f"   🔍 {res2.status_code} → {res2.text[:200]}")
-            try:
-                result2 = res2.json()
-                if "error" not in result2 and res2.ok:
-                    print(f"   ✅ 成功: {origin_label}")
-                    put_success = True
-                    if "テスト" in data.get("body", ""):
-                        session.put(url, json=full_body, timeout=30, headers=hdrs)
-                    break
-            except Exception:
-                pass
-            time.sleep(0.5)
-        if put_success:
-            break
+    for label, data in put_attempts:
+        print(f"   📄 PUT試行: {label}...")
+        res2 = session.put(put_url, json=data, timeout=30, headers=editor_hdrs)
+        print(f"   🔍 PUT[{label}] {res2.status_code} → {res2.text[:300]}")
+        try:
+            result2 = res2.json()
+            if "error" not in result2 and res2.ok:
+                print(f"   ✅ PUT成功: {label}")
+                put_success = True
+                if label == "minimal":
+                    session.put(put_url, json=put_attempts[1][1], timeout=30, headers=editor_hdrs)
+                break
+        except Exception:
+            pass
+        time.sleep(0.5)
 
     if not put_success:
-        print(f"   ❌ 全試行失敗")
+        print(f"   ❌ 全PUT試行失敗")
 
     editor_url = f"https://editor.note.com/notes/{article_key}/edit/"
     print(f"   ✅ 下書き作成成功: ID={article_id}, key={article_key}")
