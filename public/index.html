@@ -991,6 +991,9 @@
       const [autoSaveStatus, setAutoSaveStatus] = useState('idle'); // 'idle'|'pending'|'saved'
       // OGP再読み込みトリガー
       const [ogpTrigger, setOgpTrigger] = useState(0);
+      // OGPキャッシュ（URL → {title,description,image,domain}）
+      // エディタ編集でDOMがリセットされてもカードを即時復元するために使用
+      const ogpCacheRef = useRef({});
 
       const hasChanges = content !== originalContent;
 
@@ -1402,6 +1405,22 @@
         }
       };
 
+      // キャッシュ済みOGPカードをDOMリセット直後に即時再適用（塗り前に実行）
+      // → エディタ編集中もOGPカードが消えない
+      useLayoutEffect(() => {
+        const preview = previewRef.current;
+        if (!preview || !Object.keys(ogpCacheRef.current).length) return;
+        [...preview.querySelectorAll('a[href^="http"]:not(.ogp-card)')].forEach(a => {
+          if (!isOgpUrl(a)) return;
+          const href = a.getAttribute('href');
+          const cached = ogpCacheRef.current[href];
+          if (cached) {
+            a.dataset.ogpProcessed = '1'; // 重複fetch防止
+            insertOgpCard(a, buildOgpCard(href, cached.title, cached.description, cached.image, cached.domain));
+          }
+        });
+      }, [renderedHTML]);
+
       // Markdown プレビュー（複数改行を <br> で保持）
       const renderedHTML = useMemo(() => {
         try {
@@ -1415,100 +1434,65 @@
       }, [content]);
 
       // OGPカード変換（renderedHTML変更後にpreview DOMを走査）
-      // 孤立URL段落・テキスト末尾URL両方に対応。順次処理でAmazonレート制限を回避。
+      // キャッシュ利用・2並列スタガー・自動リトライ対応
       useEffect(() => {
         const preview = previewRef.current;
         if (!preview) return;
         let aborted = false;
 
-        const esc = (s) => (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
-        const buildCard = (href, title, description, image, domain) => {
-          const card = document.createElement('a');
-          card.href = href; card.target = '_blank'; card.rel = 'noopener noreferrer';
-          card.className = 'ogp-card';
-          card.innerHTML = [
-            `<div class="ogp-card-body">`,
-            domain ? `<div class="ogp-card-domain">${esc(domain)}</div>` : '',
-            title ? `<div class="ogp-card-title">${esc(title)}</div>` : '',
-            description ? `<div class="ogp-card-desc">${esc(description)}</div>` : '',
-            `</div>`,
-            image ? `<img class="ogp-card-image" src="${esc(image)}" alt="" loading="lazy" onerror="this.style.display='none'" />` : '',
-          ].join('');
-          return card;
-        };
-
-        const insertCard = (a, card) => {
-          const p = a.parentElement;
-          if (!p || p.tagName !== 'P') { a.replaceWith(card); return; }
-          const pText = (p.textContent || '').trim();
-          const aText = (a.textContent || '').trim();
-          if (pText === aText) {
-            p.replaceWith(card); // 段落がURLのみ
-          } else {
-            // テキスト＋URL混在 → URLを除去して段落の直後にカード挿入
-            const prev = a.previousSibling;
-            if (prev && prev.nodeName === 'BR') prev.remove();
-            a.remove();
-            if ((p.textContent || '').trim() === '') p.replaceWith(card);
-            else p.after(card);
-          }
-        };
-
-        // 未処理リンク一覧を取得するヘルパー
-        // ※ .ogp-card は明示的に除外（成功済みカードを絶対に再処理しない）
+        // 未処理の素URLリンクのみ取得（.ogp-card は絶対除外）
         const getUnprocessed = () =>
           [...preview.querySelectorAll('a[href^="http"]:not(.ogp-card)')].filter(a => {
             if (a.dataset.ogpProcessed) return false;
-            const href = a.getAttribute('href') || '';
-            const text = (a.textContent || '').trim();
-            return text === href || text === href.replace(/^https?:\/\//, '');
+            return isOgpUrl(a);
           });
 
-        // 共有キューから2並列で処理
+        // 2並列ワーカー（worker2は400ms遅延スタートでAmazonレート制限を分散）
         const runWorkers = async (items) => {
           const queue = [...items];
-          const worker = async () => {
+          const worker = async (startDelay = 0) => {
+            if (startDelay) await new Promise(r => setTimeout(r, startDelay));
             while (!aborted) {
               const a = queue.shift();
               if (!a) break;
               if (a.dataset.ogpProcessed || a.classList.contains('ogp-card')) continue;
-              if (!a.isConnected) continue; // DOMから外れていたらスキップ
+              if (!a.isConnected) continue;
               a.dataset.ogpProcessed = '1';
               const href = a.getAttribute('href');
               let success = false;
               try {
                 const r = await fetch(`/api/ogp?url=${encodeURIComponent(href)}`);
                 if (r.ok) {
-                  const data = await r.json();
-                  const { title, description, image, domain } = data;
-                  // Amazonが汎用ページを返した場合は失敗扱い（タイトルがドメイン名のみ）
-                  const isGeneric = !title || title === 'Amazon.co.jp' || title === 'Amazon' || /^Amazon\.\w/.test(title);
+                  const { title, description, image, domain } = await r.json();
+                  // Amazon汎用ページ（タイトルがドメイン名のみ）は失敗扱い
+                  const isGeneric = !title || /^Amazon[\.\s]/.test(title) || title === 'Amazon.co.jp';
                   if ((!isGeneric || image) && !aborted && a.isConnected) {
-                    insertCard(a, buildCard(href, title, description, image, domain));
+                    // キャッシュに保存（次回のDOMリセット時に即時復元）
+                    ogpCacheRef.current[href] = { title, description, image, domain };
+                    insertOgpCard(a, buildOgpCard(href, title, description, image, domain));
                     success = true;
                   }
                 }
               } catch {}
-              // 失敗時はマーカーを除去 → 自動リトライ・手動refresh両方で再試行可能にする
+              // 失敗時はマーカーを除去 → リトライ対象にする
               if (!success && !aborted && a.isConnected) {
                 a.removeAttribute('data-ogp-processed');
               }
-              if (!aborted) await new Promise(r => setTimeout(r, 800));
+              if (!aborted) await new Promise(r => setTimeout(r, 900));
             }
           };
-          await Promise.all([worker(), worker()]);
+          // worker1: 即時、worker2: 400ms後（同時リクエストをずらしてレート制限回避）
+          await Promise.all([worker(0), worker(400)]);
         };
 
-        // 初回 + 自動リトライ（最大4回、残リンクがあれば1.5秒後に再試行）
+        // 最大4回の自動リトライ（失敗リンクが残っていれば1.5秒後に再実行）
         const processWithRetry = async () => {
           for (let attempt = 0; attempt < 4 && !aborted; attempt++) {
             const items = getUnprocessed();
             if (items.length === 0) break;
             await runWorkers(items);
             if (aborted) break;
-            // 次リトライ前に少し待機
-            const remaining = getUnprocessed();
-            if (remaining.length === 0) break;
+            if (getUnprocessed().length === 0) break;
             await new Promise(r => setTimeout(r, 1500));
           }
         };
