@@ -438,39 +438,50 @@ def _create_draft_api(session: http_requests.Session, title: str, body_html: str
 
     # ── Step 2: PUTで本文を保存 ──
     # まず最小テスト → フル本文 → プレーンテキスト の順で試す
-    put_url = f"{NOTE_API_BASE}/v1/text_notes/{article_id}"
     time.sleep(1)
 
-    # JSON / フォームデータ / PATCH の組み合わせで試す
+    # URLとAPIバージョンの組み合わせで試す（Content-Typeは毎回上書き）
+    url_by_id  = f"{NOTE_API_BASE}/v1/text_notes/{article_id}"
+    url_by_key = f"{NOTE_API_BASE}/v1/text_notes/{article_key}"
+    url_v2_id  = f"{NOTE_API_BASE}/v2/text_notes/{article_id}"
+    url_v2_key = f"{NOTE_API_BASE}/v2/text_notes/{article_key}"
+
+    minimal_body = {"name": title, "body": "<p>テスト</p>", "status": "draft"}
+    full_body    = {"name": title, "body": body_html, "status": "draft"}
+
     put_attempts = [
-        ("JSON+status",    "put",   "json",  {"name": title, "body": body_html, "status": "draft"}),
-        ("JSON only",      "put",   "json",  {"name": title, "body": body_html}),
-        ("Form+status",    "put",   "form",  {"name": title, "body": body_html, "status": "draft"}),
-        ("Form only",      "put",   "form",  {"name": title, "body": body_html}),
-        ("PATCH JSON",     "patch", "json",  {"name": title, "body": body_html, "status": "draft"}),
-        ("PATCH Form",     "patch", "form",  {"name": title, "body": body_html, "status": "draft"}),
-        ("最小Form",       "put",   "form",  {"body": "<p>テスト</p>"}),
+        ("v1/key+full",    url_by_key, full_body),
+        ("v1/key+minimal", url_by_key, minimal_body),
+        ("v2/id+full",     url_v2_id,  full_body),
+        ("v2/id+minimal",  url_v2_id,  minimal_body),
+        ("v2/key+full",    url_v2_key, full_body),
+        ("v1/id+noStatus", url_by_id,  {"name": title, "body": "<p>テスト</p>"}),
     ]
 
     put_success = False
-    for label, method, enc, data in put_attempts:
-        print(f"   📄 試行: [{method.upper()}/{enc}] {label}...")
-        req_fn = getattr(session, method)
-        kwargs = {"json": data} if enc == "json" else {"data": data}
-        res2 = req_fn(put_url, timeout=30, **kwargs)
-        print(f"   🔍 [{label}] {res2.status_code} → {res2.text[:200]}")
+    for label, url, data in put_attempts:
+        print(f"   📄 試行: {label} → {url.split('/api')[1]}")
+        res2 = session.put(
+            url, json=data, timeout=30,
+            headers={"Content-Type": "application/json"},
+        )
+        print(f"   🔍 [{label}] {res2.status_code} → {res2.text[:250]}")
         try:
             result2 = res2.json()
             if "error" not in result2 and res2.ok:
                 print(f"   ✅ 成功: {label}")
                 put_success = True
+                # 成功したURLとdataでフル本文も保存
+                if "テスト" in data.get("body", ""):
+                    session.put(url, json=full_body, timeout=30,
+                                headers={"Content-Type": "application/json"})
                 break
         except Exception:
             pass
         time.sleep(0.5)
 
     if not put_success:
-        print(f"   ❌ 全試行失敗 — bodyなしで記事のみ保存済み")
+        print(f"   ❌ 全試行失敗")
 
     editor_url = f"https://editor.note.com/notes/{article_key}/edit/"
     print(f"   ✅ 下書き作成成功: ID={article_id}, key={article_key}")
