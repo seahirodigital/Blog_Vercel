@@ -1332,75 +1332,33 @@
         } catch {}
       }, []);
 
-      // プレビューのダブルクリック → エディタ側を対応行に上揃えスクロール
+      // プレビューのダブルクリック → data-lineを使ってエディタを上揃えスクロール
       const handlePreviewDoubleClick = useCallback((e) => {
         const pv = previewRef.current;
         const ta = textareaRef.current;
         if (!pv || !ta) return;
 
-        // クリックされた要素から最も近いブロック要素を探す
+        // クリックされた要素から最も近いdata-line付き祖先を探す
         let el = e.target;
-        const blockTags = new Set(['P','H1','H2','H3','H4','H5','H6','LI','BLOCKQUOTE','PRE','TABLE']);
         while (el && el !== pv) {
-          if (blockTags.has(el.tagName)) break;
+          if (el.dataset && el.dataset.line !== undefined) break;
           el = el.parentElement;
         }
-        if (!el || el === pv) return;
+        if (!el || el === pv) {
+          // data-lineが見つからない場合は比率で近似
+          const ratio = (e.clientY - pv.getBoundingClientRect().top + pv.scrollTop) / Math.max(1, pv.scrollHeight);
+          const lines = ta.value.split('\n');
+          const lineH = ta.scrollHeight / Math.max(1, lines.length);
+          ta.scrollTop = Math.max(0, ratio * lines.length * lineH);
+          return;
+        }
 
         const elTop = el.offsetTop;
-        const lines = ta.value.split('\n');
-        const lineH = ta.scrollHeight / Math.max(1, lines.length);
-
-        // 見出し要素なら直接テキスト照合
-        if (/^H[1-6]$/.test(el.tagName)) {
-          const hText = el.textContent.trim();
-          const lineIdx = lines.findIndex(l => {
-            const m = l.match(/^#{1,6}\s+(.+)/);
-            return m && m[1].trim() === hText;
-          });
-          if (lineIdx >= 0) {
-            editorScrolling.current = true;
-            ta.scrollTop = Math.max(0, lineIdx * lineH);
-            pv.scrollTop = elTop;
-            setTimeout(() => { editorScrolling.current = false; }, 80);
-            return;
-          }
-        }
-
-        // 見出し以外: 直前の見出しセクション内での比率からエディタ行を算出
-        const headingEls = [...pv.querySelectorAll('h1,h2,h3,h4,h5,h6')];
-        let prevH = null;
-        for (const h of headingEls) {
-          if (h.offsetTop <= elTop) prevH = h;
-          else break;
-        }
-
-        let editorLineIdx = 0;
-        if (prevH) {
-          const hText = prevH.textContent.trim();
-          const hLineIdx = lines.findIndex(l => {
-            const m = l.match(/^#{1,6}\s+(.+)/);
-            return m && m[1].trim() === hText;
-          });
-          if (hLineIdx >= 0) {
-            const nextH = headingEls[headingEls.indexOf(prevH) + 1] || null;
-            const secStart = prevH.offsetTop;
-            const secEnd = nextH ? nextH.offsetTop : pv.scrollHeight;
-            const secRatio = Math.max(0, elTop - secStart) / Math.max(1, secEnd - secStart);
-            let nextHLineIdx = lines.length;
-            for (let i = hLineIdx + 1; i < lines.length; i++) {
-              if (/^#{1,6}\s+/.test(lines[i])) { nextHLineIdx = i; break; }
-            }
-            editorLineIdx = Math.round(hLineIdx + secRatio * (nextHLineIdx - hLineIdx));
-          } else {
-            editorLineIdx = Math.round((elTop / Math.max(1, pv.scrollHeight)) * lines.length);
-          }
-        } else {
-          editorLineIdx = Math.round((elTop / Math.max(1, pv.scrollHeight)) * lines.length);
-        }
+        const elLine = parseInt(el.dataset.line, 10);
+        const lineH = ta.scrollHeight / Math.max(1, ta.value.split('\n').length);
 
         editorScrolling.current = true;
-        ta.scrollTop = Math.max(0, editorLineIdx * lineH);
+        ta.scrollTop = Math.max(0, elLine * lineH);
         pv.scrollTop = elTop;
         setTimeout(() => { editorScrolling.current = false; }, 80);
       }, []);
@@ -1568,45 +1526,66 @@
             return isOgpUrl(a);
           });
 
-        // 2並列ワーカー（worker2は400ms遅延スタートでAmazonレート制限を分散）
+        // URLがAmazon系かどうか判定
+        const isAmazonHref = (href) =>
+          /amazon\.(co\.jp|com|co\.uk|de|fr)/.test(href) ||
+          href.includes('amzn.to') || href.includes('amzn.asia');
+
+        const delay = (ms) => new Promise(r => setTimeout(r, ms));
+
+        // Amazon以外: 2並列ワーカー / Amazon: シングルワーカー（長め間隔）
         const runWorkers = async (items) => {
           const queue = [...items];
-          const worker = async (startDelay = 0) => {
-            if (startDelay) await new Promise(r => setTimeout(r, startDelay));
-            while (!aborted) {
-              const a = queue.shift();
-              if (!a) break;
-              if (a.dataset.ogpProcessed || a.classList.contains('ogp-card')) continue;
-              if (!a.isConnected) continue;
-              a.dataset.ogpProcessed = '1';
-              const href = a.getAttribute('href');
-              let success = false;
-              try {
-                const r = await fetch(`/api/ogp?url=${encodeURIComponent(href)}`);
-                if (r.ok) {
-                  const { title, description, image, domain } = await r.json();
-                  // Amazon汎用ページ（タイトルがドメイン名のみ）は失敗扱い
-                  const isGeneric = !title || /^Amazon[\.\s]/.test(title) || title === 'Amazon.co.jp';
-                  if ((!isGeneric || image) && !aborted && a.isConnected) {
-                    // キャッシュに保存（次回のDOMリセット時に即時復元）
-                    ogpCacheRef.current[href] = { title, description, image, domain };
-                    insertOgpCard(a, buildOgpCard(href, title, description, image, domain));
-                    success = true;
-                  }
+
+          const processOne = async (a) => {
+            if (!a || a.dataset.ogpProcessed || a.classList.contains('ogp-card')) return false;
+            if (!a.isConnected) return false;
+            a.dataset.ogpProcessed = '1';
+            const href = a.getAttribute('href');
+            const isAmz = isAmazonHref(href);
+            try {
+              const r = await fetch(`/api/ogp?url=${encodeURIComponent(href)}`);
+              if (r.ok) {
+                const { title, description, image, domain } = await r.json();
+                const isGeneric = !title || /^Amazon[\.\s]/.test(title) || title === 'Amazon.co.jp';
+                if ((!isGeneric || image) && !aborted && a.isConnected) {
+                  ogpCacheRef.current[href] = { title, description, image, domain };
+                  insertOgpCard(a, buildOgpCard(href, title, description, image, domain));
+                  return true;
                 }
-              } catch {}
-              // 失敗時はマーカーを除去 → リトライ対象にする
-              if (!success && !aborted && a.isConnected) {
-                a.removeAttribute('data-ogp-processed');
               }
-              if (!aborted) await new Promise(r => setTimeout(r, 900));
+            } catch {}
+            if (!aborted && a.isConnected) a.removeAttribute('data-ogp-processed');
+            return false;
+          };
+
+          const amazonItems = queue.filter(a => isAmazonHref(a.getAttribute('href') || ''));
+          const otherItems  = queue.filter(a => !isAmazonHref(a.getAttribute('href') || ''));
+
+          // Amazon以外: 2並列ワーカー（500ms間隔）
+          const runOther = async (startDelay = 0) => {
+            if (startDelay) await delay(startDelay);
+            while (!aborted) {
+              const a = otherItems.shift();
+              if (!a) break;
+              await processOne(a);
+              if (!aborted) await delay(500);
             }
           };
-          // worker1: 即時、worker2: 400ms後（同時リクエストをずらしてレート制限回避）
-          await Promise.all([worker(0), worker(400)]);
+
+          // Amazon: シングルワーカー（2000ms間隔でレート制限を確実回避）
+          const runAmazon = async () => {
+            for (const a of amazonItems) {
+              if (aborted) break;
+              await processOne(a);
+              if (!aborted) await delay(2200);
+            }
+          };
+
+          await Promise.all([runOther(0), runOther(300), runAmazon()]);
         };
 
-        // 最大4回の自動リトライ（失敗リンクが残っていれば1.5秒後に再実行）
+        // 最大4回の自動リトライ（失敗リンクが残っていれば2秒後に再実行）
         const processWithRetry = async () => {
           for (let attempt = 0; attempt < 4 && !aborted; attempt++) {
             const items = getUnprocessed();
@@ -1614,7 +1593,22 @@
             await runWorkers(items);
             if (aborted) break;
             if (getUnprocessed().length === 0) break;
-            await new Promise(r => setTimeout(r, 1500));
+            await delay(2000);
+          }
+          // 最終フォールバック: 全リトライ後も残った素URLリンクを最低限カード化
+          if (!aborted) {
+            getUnprocessed().forEach(a => {
+              if (!a.isConnected) return;
+              const href = a.getAttribute('href') || '';
+              let domain = '';
+              try { domain = new URL(href).hostname; } catch {}
+              if (!domain) return;
+              a.dataset.ogpProcessed = '1';
+              const asin = href.match(/\/dp\/([A-Z0-9]{10})/)?.[1];
+              const fallbackTitle = asin ? `Amazon商品 (${asin})` : null;
+              ogpCacheRef.current[href] = { title: fallbackTitle, description: null, image: null, domain };
+              insertOgpCard(a, buildOgpCard(href, fallbackTitle, null, null, domain));
+            });
           }
         };
 
