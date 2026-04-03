@@ -1332,7 +1332,7 @@
         } catch {}
       }, []);
 
-      // プレビューのダブルクリック → data-lineを使ってエディタを上揃えスクロール
+      // プレビューのダブルクリック → エディタの対応行をプレビューと同じ高さに揃える
       const handlePreviewDoubleClick = useCallback((e) => {
         const pv = previewRef.current;
         const ta = textareaRef.current;
@@ -1344,22 +1344,19 @@
           if (el.dataset && el.dataset.line !== undefined) break;
           el = el.parentElement;
         }
-        if (!el || el === pv) {
-          // data-lineが見つからない場合は比率で近似
-          const ratio = (e.clientY - pv.getBoundingClientRect().top + pv.scrollTop) / Math.max(1, pv.scrollHeight);
-          const lines = ta.value.split('\n');
-          const lineH = ta.scrollHeight / Math.max(1, lines.length);
-          ta.scrollTop = Math.max(0, ratio * lines.length * lineH);
-          return;
-        }
+        if (!el || el === pv) return;
 
-        const elTop = el.offsetTop;
         const elLine = parseInt(el.dataset.line, 10);
         const lineH = ta.scrollHeight / Math.max(1, ta.value.split('\n').length);
 
+        // クリックした要素がプレビューのビューポート内で何px下にあるか
+        const pvRect = pv.getBoundingClientRect();
+        const elRect = el.getBoundingClientRect();
+        const elViewportTop = elRect.top - pvRect.top;
+
+        // エディタ側: 「対応行 - 同じオフセット分」だけスクロールすれば位置が一致する
         editorScrolling.current = true;
-        ta.scrollTop = Math.max(0, elLine * lineH);
-        pv.scrollTop = elTop;
+        ta.scrollTop = Math.max(0, elLine * lineH - elViewportTop);
         setTimeout(() => { editorScrolling.current = false; }, 80);
       }, []);
 
