@@ -178,6 +178,33 @@ async function saveArticle(token, filename, content, fileId = null) {
   return await res.json();
 }
 
+// 記事移動（ファイルID + 移動先フォルダの相対パス）
+async function moveArticle(token, fileId, destRelativePath) {
+  const baseFolder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
+  const destPath = destRelativePath ? `${baseFolder}/${destRelativePath}` : baseFolder;
+  // 移動先フォルダのIDを取得
+  const folderUrl = `${GRAPH_API}/me/drive/root:/${encodeFolderPath(destPath)}`;
+  const folderRes = await fetch(folderUrl, { headers: { Authorization: `Bearer ${token}` } });
+  if (!folderRes.ok) {
+    const err = await folderRes.text();
+    throw new Error(`移動先フォルダ取得失敗: ${folderRes.status}: ${err}`);
+  }
+  const folderData = await folderRes.json();
+  // ファイルを移動（parentReference.idを書き換えるだけ）
+  const moveUrl = `${GRAPH_API}/me/drive/items/${fileId}`;
+  const res = await fetch(moveUrl, {
+    method: 'PATCH',
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ parentReference: { id: folderData.id } }),
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    console.error('Move error:', res.status, err);
+    throw new Error(`移動失敗: ${res.status}`);
+  }
+  return await res.json();
+}
+
 // 記事リネーム（ファイルID + 新ファイル名）
 async function renameArticle(token, fileId, newName) {
   const url = `${GRAPH_API}/me/drive/items/${fileId}`;
@@ -276,9 +303,23 @@ export default async function handler(req, res) {
       });
     }
 
-    // PATCH: 記事リネーム
+    // PATCH: 記事リネーム or 記事移動
     if (req.method === 'PATCH') {
-      const { fileId, newName } = req.body;
+      const { fileId, newName, action, destFolderPath } = req.body;
+      if (action === 'move') {
+        if (!fileId || destFolderPath === undefined) {
+          return res.status(400).json({ error: 'fileId と destFolderPath は必須です' });
+        }
+        const result = await moveArticle(token, fileId, destFolderPath);
+        return res.status(200).json({
+          success: true,
+          id: result.id || fileId,
+          name: result.name || '',
+          path: destFolderPath,
+          webUrl: result.webUrl || '',
+          lastModified: result.lastModifiedDateTime || new Date().toISOString(),
+        });
+      }
       if (!fileId || !newName) {
         return res.status(400).json({ error: 'fileId と newName は必須です' });
       }
