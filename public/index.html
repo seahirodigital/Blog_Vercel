@@ -501,10 +501,12 @@
 
       const rootNode = useMemo(() => buildFolderTree(articles), [articles]);
 
-      // 初期状態: ルート直下の最初のフォルダを展開
+      // 初期状態: ルート直下の全フォルダを展開（多階層視認のため）
       useEffect(() => {
-        const keys = Object.keys(rootNode.subfolders);
-        if (keys.length > 0) setOpenFolders({ [keys[0]]: true });
+        const initOpen = {};
+        // 第1階層を全展開
+        Object.keys(rootNode.subfolders).forEach(k => { initOpen[k] = true; });
+        setOpenFolders(initOpen);
       }, [articles.length]);
 
       // コンテキストメニュー外クリックで閉じる
@@ -2048,6 +2050,30 @@
 
               {/* アクションボタン群 */}
               <div className="flex items-center gap-2 flex-shrink-0">
+                {/* Amazon検索フォーム */}
+                <form
+                  className="hidden md:flex items-center gap-1"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const q = e.currentTarget.querySelector('input').value.trim();
+                    if (q) window.open(`https://www.amazon.co.jp/s?k=${encodeURIComponent(q)}`, '_blank');
+                  }}
+                >
+                  <input
+                    type="text"
+                    placeholder="Amazon検索..."
+                    className="border border-slate-200 rounded-lg px-2 py-1.5 text-xs text-slate-600 focus:outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-100"
+                    style={{ width: '130px' }}
+                  />
+                  <button
+                    type="submit"
+                    className="flex items-center gap-1 font-semibold rounded-lg px-2.5 py-1.5 text-xs border border-orange-400 text-orange-500 hover:bg-orange-50 transition-all"
+                    title="Amazonで検索"
+                  >
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <span className="hidden lg:inline">Amazon</span>
+                  </button>
+                </form>
                 {/* noteボタン */}
                 <a
                   href="https://note.com/startupm"
@@ -2237,6 +2263,33 @@
                     {autoSaveStatus === 'pending' && <span className="text-slate-300 text-xs" title="自動保存待機中...">●</span>}
                     {autoSaveStatus === 'saved' && <span className="text-green-400 text-xs" title="自動保存完了">✓</span>}
                     <span className="ml-auto">{content.length.toLocaleString()} 文字</span>
+                    {/* リンク挿入ボタン: クリップボード内容を偶数番目H2（2,4,6...）の直前に挿入 */}
+                    <button
+                      onClick={async () => {
+                        try {
+                          const clip = await navigator.clipboard.readText();
+                          if (!clip.trim()) { showToast('クリップボードが空です', 'error'); return; }
+                          const lines = content.split('\n');
+                          // H2行のインデックスを収集（1-indexed count）
+                          const h2Indices = [];
+                          lines.forEach((ln, i) => { if (/^## /.test(ln)) h2Indices.push(i); });
+                          if (h2Indices.length < 2) { showToast('H2見出しが2つ以上必要です', 'error'); return; }
+                          // 偶数番目（2,4,6...→0-indexed: 1,3,5...）の直前に挿入（逆順で行番号ズレ防止）
+                          const targets = h2Indices.filter((_, idx) => idx % 2 === 1).reverse();
+                          const insertBlock = `\n${clip.trim()}\n`;
+                          let result = [...lines];
+                          for (const lineIdx of targets) {
+                            result = [...result.slice(0, lineIdx), '', clip.trim(), '', ...result.slice(lineIdx)];
+                          }
+                          setContent(result.join('\n'));
+                          showToast(`${targets.length}箇所にリンクを挿入しました`, 'success');
+                        } catch { showToast('クリップボードの読み取りに失敗しました', 'error'); }
+                      }}
+                      className="flex items-center gap-1 rounded px-1.5 py-0.5 transition-colors hover:text-purple-600 hover:bg-purple-50"
+                      title="クリップボードの内容を偶数番目H2（2,4,6...）の直前に挿入"
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+                    </button>
                     <button
                       onClick={async () => {
                         try { await navigator.clipboard.writeText(content); setCopied(true); setTimeout(() => setCopied(false), 2000); }
