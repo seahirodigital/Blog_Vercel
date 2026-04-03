@@ -4,20 +4,19 @@
  * macOS   → open -R "path"
  * Linux   → xdg-open "folder"
  *
- * 必須環境変数 (`.env.local` に設定):
- *   LOCAL_ARTICLES_BASE=C:\Users\HCY\OneDrive\開発\Blog_Vercel\Blog_Articles
+ * 環境変数 LOCAL_ARTICLES_BASE が未設定の場合はデフォルトパスを使用:
+ *   C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog
  */
 import { spawn } from 'child_process';
 import path from 'path';
+
+const DEFAULT_BASE = 'C:\\Users\\HCY\\OneDrive\\Obsidian in Onedrive 202602\\Vercel_Blog';
 
 export default function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  const localBase = process.env.LOCAL_ARTICLES_BASE;
-  if (!localBase) {
-    return res.status(501).json({ error: 'LOCAL_ARTICLES_BASE 未設定（.env.local に追加してください）' });
-  }
+  const localBase = process.env.LOCAL_ARTICLES_BASE || DEFAULT_BASE;
 
   const { path: relPath = '', name = '' } = req.query;
   const fullPath = path.join(localBase, relPath, name);
