@@ -926,12 +926,16 @@
       const pText = (p.textContent || '').trim();
       const aText = (a.textContent || '').trim();
       if (pText === aText) {
+        if (p.dataset.line) card.dataset.line = p.dataset.line;
         p.replaceWith(card);
       } else {
         const prev = a.previousSibling;
         if (prev && prev.nodeName === 'BR') prev.remove();
         a.remove();
-        if ((p.textContent || '').trim() === '') p.replaceWith(card);
+        if ((p.textContent || '').trim() === '') {
+          if (p.dataset.line) card.dataset.line = p.dataset.line;
+          p.replaceWith(card);
+        }
         else p.after(card);
       }
     }
@@ -994,6 +998,8 @@
       // OGPキャッシュ（URL → {title,description,image,domain}）
       // エディタ編集でDOMがリセットされてもカードを即時復元するために使用
       const ogpCacheRef = useRef({});
+      // トークン→ソース行マッピング（スクロール同期用）
+      const tokenLineMapRef = useRef([]);
 
       const hasChanges = content !== originalContent;
 
@@ -1219,57 +1225,46 @@
 
       // ── スクロール同期ヘルパー ──────────────────────────
       // 見出しアンカーベースで同期（OGPカードで縦幅が変わっても正確に対応）
-      const _editorLineInfo = () => {
-        const ta = textareaRef.current;
-        if (!ta) return null;
-        const lines = ta.value.split('\n');
-        const lineH = ta.scrollHeight / Math.max(1, lines.length);
-        const topLine = Math.max(0, Math.floor(ta.scrollTop / lineH));
-        // topLine より前の最近の見出し行
-        let hText = null, hLine = 0, nextHLine = lines.length;
-        for (let i = topLine; i >= 0; i--) {
-          const m = lines[i] && lines[i].match(/^#{1,6}\s+(.+)/);
-          if (m) { hText = m[1].trim(); hLine = i; break; }
-        }
-        if (hText !== null) {
-          for (let i = hLine + 1; i < lines.length; i++) {
-            if (lines[i] && /^#{1,6}\s+/.test(lines[i])) { nextHLine = i; break; }
-          }
-        }
-        return { lines, lineH, topLine, hText, hLine, nextHLine };
-      };
-
-      // スクロール同期（エディタ → プレビュー）
+      // スクロール同期（エディタ → プレビュー）data-lineベース精密同期
       const handleEditorScroll = useCallback(() => {
         if (previewScrolling.current) return;
+        const ta = textareaRef.current;
         const pv = previewRef.current;
-        if (!pv) return;
+        if (!ta || !pv) return;
         editorScrolling.current = true;
         try {
-          const info = _editorLineInfo();
-          if (!info) throw new Error();
-          const { topLine, hText, hLine, nextHLine } = info;
-          const headingEls = [...pv.querySelectorAll('h1,h2,h3,h4,h5,h6')];
-          const targetH = hText ? headingEls.find(h => h.textContent.trim() === hText) : null;
-          if (targetH) {
-            const ratio = Math.max(0, (topLine - hLine)) / Math.max(1, nextHLine - hLine);
-            const hIdx = headingEls.indexOf(targetH);
-            const nextH = headingEls[hIdx + 1] || null;
-            const secStart = targetH.offsetTop;
-            const secEnd = nextH ? nextH.offsetTop : pv.scrollHeight;
-            pv.scrollTop = Math.max(0, secStart + ratio * (secEnd - secStart) - 20);
-          } else {
-            const ta = textareaRef.current;
-            if (ta) {
-              const ratio = ta.scrollTop / Math.max(1, ta.scrollHeight - ta.clientHeight);
-              pv.scrollTop = ratio * (pv.scrollHeight - pv.clientHeight);
+          const lines = ta.value.split('\n');
+          const lineH = ta.scrollHeight / Math.max(1, lines.length);
+          const topLine = Math.max(0, Math.floor(ta.scrollTop / lineH));
+          // data-line属性付きのブロック要素から対応位置を計算
+          const annotated = [...pv.querySelectorAll('[data-line]')];
+          if (annotated.length >= 2) {
+            let prev = annotated[0], next = null;
+            for (const el of annotated) {
+              const elLine = parseInt(el.dataset.line, 10);
+              if (elLine <= topLine) prev = el;
+              else if (!next) next = el;
             }
+            if (next) {
+              const prevLine = parseInt(prev.dataset.line, 10);
+              const nextLine = parseInt(next.dataset.line, 10);
+              const ratio = Math.max(0, topLine - prevLine) / Math.max(1, nextLine - prevLine);
+              pv.scrollTop = prev.offsetTop + ratio * (next.offsetTop - prev.offsetTop);
+            } else {
+              // 最後の要素より先 → 末尾付近
+              const lastEl = annotated[annotated.length - 1];
+              pv.scrollTop = lastEl.offsetTop;
+            }
+          } else {
+            // フォールバック: 比率スクロール
+            const ratio = ta.scrollTop / Math.max(1, ta.scrollHeight - ta.clientHeight);
+            pv.scrollTop = ratio * (pv.scrollHeight - pv.clientHeight);
           }
         } catch {}
         setTimeout(() => { editorScrolling.current = false; }, 60);
       }, []);
 
-      // スクロール同期（プレビュー → エディタ）
+      // スクロール同期（プレビュー → エディタ）data-lineベース精密同期
       const handlePreviewScroll = useCallback(() => {
         if (editorScrolling.current) return;
         const ta = textareaRef.current;
@@ -1277,44 +1272,137 @@
         if (!ta || !pv) return;
         previewScrolling.current = true;
         try {
-          const headingEls = [...pv.querySelectorAll('h1,h2,h3,h4,h5,h6')];
-          // プレビューで現在の先頭付近にある見出しを検索
-          let curH = null, nextH = null;
-          for (let i = 0; i < headingEls.length; i++) {
-            if (headingEls[i].offsetTop <= pv.scrollTop + 20) {
-              curH = headingEls[i]; nextH = headingEls[i + 1] || null;
-            } else {
-              if (!curH) { curH = headingEls[i]; nextH = headingEls[i + 1] || null; }
-              break;
+          const lineCount = ta.value.split('\n').length;
+          const lineH = ta.scrollHeight / Math.max(1, lineCount);
+          const scrollTop = pv.scrollTop;
+          const annotated = [...pv.querySelectorAll('[data-line]')];
+          if (annotated.length >= 2) {
+            let prev = annotated[0], next = null;
+            for (const el of annotated) {
+              if (el.offsetTop <= scrollTop + 10) prev = el;
+              else if (!next) next = el;
             }
-          }
-          if (curH) {
-            const secStart = curH.offsetTop;
-            const secEnd = nextH ? nextH.offsetTop : pv.scrollHeight;
-            const secRatio = Math.max(0, pv.scrollTop - secStart) / Math.max(1, secEnd - secStart);
-            const hText = curH.textContent.trim();
-            const lines = ta.value.split('\n');
-            const lineH = ta.scrollHeight / Math.max(1, lines.length);
-            let hLine = -1, nextHLine = lines.length;
-            for (let i = 0; i < lines.length; i++) {
-              const m = lines[i] && lines[i].match(/^#{1,6}\s+(.+)/);
-              if (m && m[1].trim() === hText) { hLine = i; break; }
-            }
-            if (hLine >= 0) {
-              for (let i = hLine + 1; i < lines.length; i++) {
-                if (lines[i] && /^#{1,6}\s+/.test(lines[i])) { nextHLine = i; break; }
-              }
-              ta.scrollTop = Math.max(0, (hLine + secRatio * (nextHLine - hLine)) * lineH - 20);
+            if (next) {
+              const ratio = Math.max(0, scrollTop - prev.offsetTop) / Math.max(1, next.offsetTop - prev.offsetTop);
+              const prevLine = parseInt(prev.dataset.line, 10);
+              const nextLine = parseInt(next.dataset.line, 10);
+              const editorLine = prevLine + ratio * (nextLine - prevLine);
+              ta.scrollTop = Math.max(0, editorLine * lineH);
             } else {
-              const ratio = pv.scrollTop / Math.max(1, pv.scrollHeight - pv.clientHeight);
-              ta.scrollTop = ratio * (ta.scrollHeight - ta.clientHeight);
+              const lastLine = parseInt(prev.dataset.line, 10);
+              ta.scrollTop = Math.max(0, lastLine * lineH);
             }
           } else {
-            const ratio = pv.scrollTop / Math.max(1, pv.scrollHeight - pv.clientHeight);
+            const ratio = scrollTop / Math.max(1, pv.scrollHeight - pv.clientHeight);
             ta.scrollTop = ratio * (ta.scrollHeight - ta.clientHeight);
           }
         } catch {}
         setTimeout(() => { previewScrolling.current = false; }, 60);
+      }, []);
+
+      // Enter押下でURL行のOGPをバックグラウンドフェッチ
+      const handleKeyDown = useCallback((e) => {
+        if (e.key !== 'Enter') return;
+        const ta = e.target;
+        const pos = ta.selectionStart;
+        const lineStart = ta.value.lastIndexOf('\n', pos - 1) + 1;
+        const line = ta.value.substring(lineStart, pos).trim();
+        if (!line.startsWith('http')) return;
+        try {
+          new URL(line);
+          if (ogpCacheRef.current[line]) return; // キャッシュ済みはスキップ
+          // キャンセルされない独立したバックグラウンドフェッチ
+          fetch(`/api/ogp?url=${encodeURIComponent(line)}`)
+            .then(r => r.ok ? r.json() : null)
+            .then(data => {
+              if (!data) return;
+              const { title, description, image, domain } = data;
+              const isGeneric = !title || /^Amazon[\.\s]/.test(title) || title === 'Amazon.co.jp';
+              if (isGeneric && !image) return;
+              ogpCacheRef.current[line] = { title, description, image, domain };
+              const preview = previewRef.current;
+              if (!preview) return;
+              [...preview.querySelectorAll('a[href]:not(.ogp-card)')].forEach(a => {
+                if (a.getAttribute('href') === line && isOgpUrl(a)) {
+                  a.dataset.ogpProcessed = '1';
+                  insertOgpCard(a, buildOgpCard(line, title, description, image, domain));
+                }
+              });
+            }).catch(() => {});
+        } catch {}
+      }, []);
+
+      // プレビューのダブルクリック → エディタ側を対応行に上揃えスクロール
+      const handlePreviewDoubleClick = useCallback((e) => {
+        const pv = previewRef.current;
+        const ta = textareaRef.current;
+        if (!pv || !ta) return;
+
+        // クリックされた要素から最も近いブロック要素を探す
+        let el = e.target;
+        const blockTags = new Set(['P','H1','H2','H3','H4','H5','H6','LI','BLOCKQUOTE','PRE','TABLE']);
+        while (el && el !== pv) {
+          if (blockTags.has(el.tagName)) break;
+          el = el.parentElement;
+        }
+        if (!el || el === pv) return;
+
+        const elTop = el.offsetTop;
+        const lines = ta.value.split('\n');
+        const lineH = ta.scrollHeight / Math.max(1, lines.length);
+
+        // 見出し要素なら直接テキスト照合
+        if (/^H[1-6]$/.test(el.tagName)) {
+          const hText = el.textContent.trim();
+          const lineIdx = lines.findIndex(l => {
+            const m = l.match(/^#{1,6}\s+(.+)/);
+            return m && m[1].trim() === hText;
+          });
+          if (lineIdx >= 0) {
+            editorScrolling.current = true;
+            ta.scrollTop = Math.max(0, lineIdx * lineH);
+            pv.scrollTop = elTop;
+            setTimeout(() => { editorScrolling.current = false; }, 80);
+            return;
+          }
+        }
+
+        // 見出し以外: 直前の見出しセクション内での比率からエディタ行を算出
+        const headingEls = [...pv.querySelectorAll('h1,h2,h3,h4,h5,h6')];
+        let prevH = null;
+        for (const h of headingEls) {
+          if (h.offsetTop <= elTop) prevH = h;
+          else break;
+        }
+
+        let editorLineIdx = 0;
+        if (prevH) {
+          const hText = prevH.textContent.trim();
+          const hLineIdx = lines.findIndex(l => {
+            const m = l.match(/^#{1,6}\s+(.+)/);
+            return m && m[1].trim() === hText;
+          });
+          if (hLineIdx >= 0) {
+            const nextH = headingEls[headingEls.indexOf(prevH) + 1] || null;
+            const secStart = prevH.offsetTop;
+            const secEnd = nextH ? nextH.offsetTop : pv.scrollHeight;
+            const secRatio = Math.max(0, elTop - secStart) / Math.max(1, secEnd - secStart);
+            let nextHLineIdx = lines.length;
+            for (let i = hLineIdx + 1; i < lines.length; i++) {
+              if (/^#{1,6}\s+/.test(lines[i])) { nextHLineIdx = i; break; }
+            }
+            editorLineIdx = Math.round(hLineIdx + secRatio * (nextHLineIdx - hLineIdx));
+          } else {
+            editorLineIdx = Math.round((elTop / Math.max(1, pv.scrollHeight)) * lines.length);
+          }
+        } else {
+          editorLineIdx = Math.round((elTop / Math.max(1, pv.scrollHeight)) * lines.length);
+        }
+
+        editorScrolling.current = true;
+        ta.scrollTop = Math.max(0, editorLineIdx * lineH);
+        pv.scrollTop = elTop;
+        setTimeout(() => { editorScrolling.current = false; }, 80);
       }, []);
 
       // パイプライン実行
@@ -1405,17 +1493,49 @@
         }
       };
 
-      // Markdown プレビュー（複数改行を <br> で保持）
+      // Markdown プレビュー（複数改行を <br> で保持）+ トークン行マップ構築
       const renderedHTML = useMemo(() => {
         try {
-          // 3行以上の連続改行 → 余分を <br> に変換して段落間隔を保持
           const processed = (content || '').replace(/\n{3,}/g, (m) => {
             const extra = m.length - 2;
             return '\n\n' + Array(extra).fill('<br>').join('\n') + '\n\n';
           });
+          // トークン行マップ構築（スクロール同期用）
+          try {
+            const tokens = marked.lexer(processed);
+            const map = [];
+            let lineNum = 0;
+            for (const token of tokens) {
+              if (['paragraph', 'heading', 'code', 'blockquote', 'list', 'table', 'hr', 'html', 'space'].includes(token.type)) {
+                if (token.type !== 'space') {
+                  map.push({ line: lineNum, type: token.type });
+                }
+              }
+              if (token.raw) lineNum += (token.raw.match(/\n/g) || []).length;
+            }
+            tokenLineMapRef.current = map;
+          } catch { tokenLineMapRef.current = []; }
           return marked.parse(processed);
         } catch { return '<p>Markdownの解析に失敗しました</p>'; }
       }, [content]);
+
+      // プレビュー要素に data-line（ソース行番号）を付与（スクロール同期用）
+      useLayoutEffect(() => {
+        const pv = previewRef.current;
+        if (!pv) return;
+        const map = tokenLineMapRef.current;
+        if (!map.length) return;
+        // プレビュー直下のブロック要素を取得（marked出力の直接子要素）
+        const blocks = [...pv.children].filter(el =>
+          /^(P|H[1-6]|UL|OL|PRE|BLOCKQUOTE|TABLE|HR|DIV)$/.test(el.tagName)
+        );
+        let mapIdx = 0;
+        for (const el of blocks) {
+          if (mapIdx >= map.length) break;
+          el.dataset.line = String(map[mapIdx].line);
+          mapIdx++;
+        }
+      }, [renderedHTML]);
 
       // キャッシュ済みOGPカードをDOMリセット直後に即時再適用（塗り前に実行）
       // → エディタ編集中もOGPカードが消えない
@@ -1902,6 +2022,7 @@
                   <textarea
                     ref={textareaRef}
                     onScroll={handleEditorScroll}
+                    onKeyDown={handleKeyDown}
                     value={content}
                     onChange={(e) => {
                         const newVal = e.target.value;
@@ -1948,6 +2069,7 @@
                   <div
                     ref={previewRef}
                     onScroll={handlePreviewScroll}
+                    onDoubleClick={handlePreviewDoubleClick}
                     className="flex-1 overflow-y-auto p-6 markdown-preview animate-fade-in"
                     dangerouslySetInnerHTML={{ __html: renderedHTML }}
                     id="preview-area"

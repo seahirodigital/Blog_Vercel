@@ -11,19 +11,21 @@ export default async function handler(req, res) {
 
   try {
     // ブラウザに近いヘッダーでリクエスト（Amazon等のBot検出を回避）
+    const browserHeaders = {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+      'Accept-Language': 'ja,en-US;q=0.9,en;q=0.8',
+      'Accept-Encoding': 'gzip, deflate, br',
+      'Cache-Control': 'no-cache',
+      'Pragma': 'no-cache',
+      'Referer': 'https://www.google.com/',
+      'Sec-Fetch-Dest': 'document',
+      'Sec-Fetch-Mode': 'navigate',
+      'Sec-Fetch-Site': 'cross-site',
+      'Upgrade-Insecure-Requests': '1',
+    };
     const response = await fetch(url, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-        'Accept-Language': 'ja,en-US;q=0.9,en;q=0.8',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache',
-        'Sec-Fetch-Dest': 'document',
-        'Sec-Fetch-Mode': 'navigate',
-        'Sec-Fetch-Site': 'none',
-        'Upgrade-Insecure-Requests': '1',
-      },
+      headers: browserHeaders,
       redirect: 'follow',
       signal: AbortSignal.timeout(12000),
     });
@@ -101,6 +103,49 @@ export default async function handler(req, res) {
         const priceMatch = html.match(/id="priceblock_ourprice"[^>]*>([\s\S]+?)<\/span>/i)
                         || html.match(/class="[^"]*price-large[^"]*"[^>]*>([^<]+)</i);
         if (priceMatch) description = priceMatch[1].replace(/<[^>]+>/g, '').trim();
+      }
+
+      // Bot検出された場合（タイトル・画像取得失敗）→ クリーンASIN URLで再試行
+      const titleIsGeneric = !title || /^Amazon[\.\s]/.test(title) || title === 'Amazon.co.jp' || /robot check/i.test(title);
+      if (titleIsGeneric && !image) {
+        const asinM = (finalUrl + ' ' + url).match(/\/dp\/([A-Z0-9]{10})/);
+        if (asinM) {
+          const cleanUrl = `https://www.amazon.co.jp/dp/${asinM[1]}?language=ja_JP&th=1&psc=1`;
+          if (cleanUrl !== finalUrl) {
+            try {
+              const r2 = await fetch(cleanUrl, {
+                headers: { ...browserHeaders, 'Referer': 'https://www.amazon.co.jp/' },
+                redirect: 'follow',
+                signal: AbortSignal.timeout(10000),
+              });
+              if (r2.ok) {
+                const html2 = await r2.text();
+                // タイトル再抽出
+                const tPats = [
+                  /<span id="productTitle"[^>]*>\s*([\s\S]+?)\s*<\/span>/i,
+                  /<h1[^>]*id="title"[^>]*>[\s\S]*?<span[^>]*>([\s\S]+?)<\/span>/i,
+                  /<title[^>]*>([^|<]+?)\s*[:|]\s*Amazon/i,
+                ];
+                for (const re of tPats) {
+                  const m = html2.match(re);
+                  if (m) { title = m[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim(); break; }
+                }
+                // 画像再抽出
+                const iPats = [
+                  /"hiRes"\s*:\s*"(https:\/\/m\.media-amazon\.com\/images\/[^"]+)"/,
+                  /"large"\s*:\s*"(https:\/\/m\.media-amazon\.com\/images\/[^"]+)"/,
+                  /id="landingImage"[^>]+src="(https:\/\/m\.media-amazon\.com\/images\/[^"]+)"/i,
+                  /id="imgBlkFront"[^>]+src="(https:\/\/m\.media-amazon\.com\/images\/[^"]+)"/i,
+                  /id="landingImage"[^>]+data-old-hires="(https:\/\/m\.media-amazon\.com\/images\/[^"]+)"/i,
+                ];
+                for (const re of iPats) {
+                  const m = html2.match(re);
+                  if (m) { image = m[1]; break; }
+                }
+              }
+            } catch {}
+          }
+        }
       }
     }
 
