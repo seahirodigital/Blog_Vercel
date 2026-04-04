@@ -556,11 +556,24 @@ def _run_ogp_expansion_on_draft(editor_url: str, cookies_dict: dict, headless: b
             browser.close()
             return False
 
-        print("   ⏳ noteの自動保存完了を待機（8秒）...")
+        # headless モードでは自動保存イベントが発火しないケースがあるため
+        # エディタにフォーカスを当てて Ctrl+S で明示的に保存を要求する
+        print("   ⏳ OGP展開後の非同期反映を待機（5秒）...")
+        page.wait_for_timeout(5000)
+
+        print("   💾 Ctrl+S で明示的に保存をトリガー...")
+        try:
+            editor = page.locator(".ProseMirror, .note-editable, [contenteditable='true']").first
+            editor.click()
+            page.keyboard.press("Control+s")
+        except Exception as e:
+            print(f"   ⚠️ 保存トリガーエラー（続行）: {e}")
+
+        print("   ⏳ 保存完了を待機（8秒）...")
         page.wait_for_timeout(8000)
         browser.close()
 
-    print("   ✅ OGP展開 + 自動保存が完了しました。")
+    print("   ✅ OGP展開 + 保存が完了しました。")
     return True
 
 
@@ -883,9 +896,11 @@ def post_draft_to_note(markdown: str, run_ogp: bool = True) -> dict:
 
     # Phase 4: OGP展開（Playwright）
     if run_ogp and result["url"]:
-        # セッション更新後の最新Cookieを取得
-        latest_cookies = _load_cookies()
-        _run_ogp_expansion_on_draft(result["url"], latest_cookies, headless=True)
+        # APIログイン後の最新セッションCookieをsessionオブジェクトから直接取得
+        # （_load_cookies()は古い環境変数を返すため使用しない）
+        session_cookies = {c.name: c.value for c in session.cookies}
+        print(f"   🍪 Playwrightへ渡すCookie: {len(session_cookies)}個")
+        _run_ogp_expansion_on_draft(result["url"], session_cookies, headless=True)
 
     return result
 
