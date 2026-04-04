@@ -45,5 +45,7 @@ jobs:
           ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
           ONEDRIVE_REFRESH_TOKEN: ${{ secrets.ONEDRIVE_REFRESH_TOKEN }}
           ONEDRIVE_FOLDER: ${{ secrets.ONEDRIVE_FOLDER }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+          GITHUB_REPO: ${{ github.repository }}
         working-directory: scripts/pipeline
         run: python main.py
