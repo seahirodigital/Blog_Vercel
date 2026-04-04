@@ -10,6 +10,7 @@ import re
 import sys
 import hashlib
 import importlib.util
+import requests
 from datetime import datetime
 from dotenv import load_dotenv
 
