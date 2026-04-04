@@ -8,6 +8,7 @@ GitHub Actions または ローカルから実行可能
 import os
 import re
 import sys
+import hashlib
 import importlib.util
 from datetime import datetime
 from dotenv import load_dotenv
@@ -81,13 +82,38 @@ def process_single(row: dict, index: int, total: int) -> dict:
     else:
         print("   ⏭️ アフィリエイトスクリプト未検出 - スキップ")
 
-    # Step 4: OneDriveに保存
+    # Step 4: OneDriveに保存（記事はクリーンなまま）
     now = datetime.now()
     safe_title = _make_safe_filename(transcript["title"])
     filename = f"{now.strftime('%Y%m%d')}_{now.strftime('%H%M')}_{safe_title}.md"
 
     onedrive_url = onedrive_sync.upload_markdown(filename, markdown)
     result["filename"] = filename
+
+    # Step 4.5: YouTube URL を GitHub Variables に保存（記事内容とは完全分離）
+    gh_token = os.getenv("GH_PAT") or os.getenv("GITHUB_TOKEN")
+    gh_repo = os.getenv("GITHUB_REPO", "seahirodigital/Blog_Vercel")
+    if gh_token and url:
+        try:
+            hash_key = hashlib.md5(filename.encode()).hexdigest()[:8].upper()
+            var_name = f"YT_SOURCE_{hash_key}"
+            gh_headers = {
+                "Authorization": f"Bearer {gh_token}",
+                "Accept": "application/vnd.github+json",
+                "X-GitHub-Api-Version": "2022-11-28",
+            }
+            gh_api = f"https://api.github.com/repos/{gh_repo}/actions/variables"
+            # 既存なら PATCH、なければ POST
+            r = requests.patch(
+                f"{gh_api}/{var_name}",
+                json={"name": var_name, "value": url},
+                headers=gh_headers,
+            )
+            if r.status_code == 404:
+                requests.post(gh_api, json={"name": var_name, "value": url}, headers=gh_headers)
+            print(f"   🔗 YouTube URL を GitHub Variables に保存: {var_name}")
+        except Exception as e:
+            print(f"   ⚠️ YouTube URL の記録に失敗（続行します）: {e}")
 
     # Step 5: スプレッドシートのステータス更新
     sheets_reader.update_status(SPREADSHEET_ID, SHEET_NAME, url, "完了")
