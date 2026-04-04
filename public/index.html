@@ -257,6 +257,18 @@
     .ogp-card-title { font-weight: 700; font-size: 0.88rem; line-height: 1.4; color: #1e293b; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
     .ogp-card-desc { font-size: 0.72rem; color: #64748b; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; margin-top: auto; }
     .ogp-card-image { width: 140px; min-width: 140px; max-width: 140px; object-fit: contain; padding: 0.5rem; background: #f8fafc; flex-shrink: 0; }
+
+    /* ── モバイルスワイプアクション ── */
+    .swipe-row { position: relative; overflow: hidden; border-radius: 0.375rem; }
+    .swipe-inner { transition: transform 0.2s ease; will-change: transform; }
+    .swipe-inner.swiped { transform: translateX(-84px); }
+    .swipe-actions-reveal { position: absolute; right: 0; top: 0; bottom: 0; display: flex; width: 84px; overflow: hidden; border-radius: 0 0.375rem 0.375rem 0; }
+    .swipe-action-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border: none; cursor: pointer; font-size: 10px; font-weight: 600; gap: 3px; padding: 0; transition: opacity 0.1s; }
+    .swipe-action-btn:active { opacity: 0.75; }
+    /* ── 長押しドラッグ（タッチ） ── */
+    .touch-drag-ghost { position: fixed; pointer-events: none; z-index: 9999; background: white; border-radius: 8px; padding: 7px 14px; box-shadow: 0 8px 28px rgba(124,77,255,0.35); border: 2px solid #7C4DFF; font-size: 12px; font-weight: 600; color: #7C4DFF; max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transform: translate(-50%, calc(-100% - 14px)); }
+    .touch-dragging-item { opacity: 0.35; }
+    .touch-drag-folder-target { background: rgba(124,77,255,0.12) !important; outline: 2px dashed #7C4DFF !important; outline-offset: -2px; }
   </style>
 </head>
 <body>
@@ -496,9 +508,26 @@
       const [ctxMenu, setCtxMenu] = useState({ visible: false, x: 0, y: 0, article: null });
       const [folderCtxMenu, setFolderCtxMenu] = useState({ visible: false, x: 0, y: 0, path: '' });
       const [confirmDelete, setConfirmDelete] = useState(null);
-      const [dragOver, setDragOver] = useState(null); // ドロップ先フォルダパス
+      const [dragOver, setDragOver] = useState(null); // ドロップ先フォルダパス（マウス）
       const dragArticleRef = useRef(null); // ドラッグ中の記事
       const lastClickedIdRef = useRef(null); // Shift範囲選択の起点
+      // ── モバイルタッチ用 state/ref ──
+      const [swipedId, setSwipedId] = useState(null);         // 左スワイプ中の記事ID
+      const [dragGhostInfo, setDragGhostInfo] = useState(null); // 長押しゴースト { x, y, name }
+      const [touchDragOver, _setTouchDragOver] = useState(null); // タッチドラッグ中のフォルダ
+      const touchDragOverRef = useRef(null);
+      const setTouchDragOver = (v) => { touchDragOverRef.current = v; _setTouchDragOver(v); };
+      const touchRef = useRef({ startX: 0, startY: 0, article: null, mode: null, timer: null });
+      const sbTouchContainerRef = useRef(null); // スクロール防止用コンテナ ref
+
+      // 長押しドラッグ中は touchmove のデフォルト（スクロール）を防ぐ（非パッシブ登録）
+      useEffect(() => {
+        const el = sbTouchContainerRef.current;
+        if (!el) return;
+        const prevent = (e) => { if (touchRef.current.mode === 'drag') e.preventDefault(); };
+        el.addEventListener('touchmove', prevent, { passive: false });
+        return () => el.removeEventListener('touchmove', prevent);
+      }, []);
 
       const rootNode = useMemo(() => buildFolderTree(articles), [articles]);
 
@@ -523,6 +552,77 @@
       }, [ctxMenu.visible, folderCtxMenu.visible]);
 
       const toggleFolder = (path) => setOpenFolders(prev => ({ ...prev, [path]: !prev[path] }));
+
+      // ── モバイルタッチ: 長押しドラッグ & 左スワイプ ──
+      const LONG_PRESS_MS = 500;
+      const SWIPE_THRESHOLD = 55;
+
+      const onArticleTouchStart = (e, article) => {
+        const t = e.touches[0];
+        touchRef.current = { startX: t.clientX, startY: t.clientY, article, mode: null, timer: null };
+        touchRef.current.timer = setTimeout(() => {
+          touchRef.current.mode = 'drag';
+          dragArticleRef.current = (multiSelectedIds && multiSelectedIds.size > 0 && multiSelectedIds.has(article.id))
+            ? articles.filter(a => multiSelectedIds.has(a.id))
+            : article;
+          if (navigator.vibrate) navigator.vibrate(40);
+          setDragGhostInfo({ x: t.clientX, y: t.clientY, name: article.name.replace(/^\d{8}_\d{4}_/, '').replace('.md', '') });
+          setSwipedId(null);
+        }, LONG_PRESS_MS);
+      };
+
+      const onArticleTouchMove = (e) => {
+        const tr = touchRef.current;
+        if (!tr.article) return;
+        const t = e.touches[0];
+        const dx = t.clientX - tr.startX;
+        const dy = t.clientY - tr.startY;
+
+        if (tr.mode === 'drag') {
+          // preventDefault は非パッシブリスナー側で処理
+          setDragGhostInfo(prev => prev ? { ...prev, x: t.clientX, y: t.clientY } : null);
+          const el = document.elementFromPoint(t.clientX, t.clientY);
+          const folderEl = el && el.closest('[data-folder-path]');
+          setTouchDragOver(folderEl ? folderEl.dataset.folderPath : null);
+          return;
+        }
+        if (tr.mode === null) {
+          // 縦スクロール優先: 長押しキャンセル
+          if (Math.abs(dy) > 12 && Math.abs(dy) > Math.abs(dx)) {
+            clearTimeout(tr.timer); tr.mode = 'scroll';
+          } else if (dx < -12) {
+            // 左スワイプ確定: 長押しキャンセル
+            clearTimeout(tr.timer); tr.mode = 'swipe';
+          }
+        }
+      };
+
+      const onArticleTouchEnd = (e) => {
+        const tr = touchRef.current;
+        if (!tr.article) return;
+        clearTimeout(tr.timer);
+        const t = e.changedTouches[0];
+        const dx = t.clientX - tr.startX;
+
+        if (tr.mode === 'drag') {
+          setDragGhostInfo(null);
+          const over = touchDragOverRef.current;
+          setTouchDragOver(null);
+          const dragged = dragArticleRef.current;
+          dragArticleRef.current = null;
+          if (dragged !== null && over !== null) {
+            const targets = Array.isArray(dragged) ? dragged : [dragged];
+            const toMove = targets.filter(a => a.path !== over);
+            if (toMove.length > 0) onMoveArticle && onMoveArticle(toMove, over);
+          }
+        } else if (dx < -SWIPE_THRESHOLD) {
+          setSwipedId(tr.article.id);
+        } else if (dx > 20 && swipedId === tr.article.id) {
+          setSwipedId(null);
+        }
+        touchRef.current.article = null;
+        touchRef.current.mode = null;
+      };
 
       const handleContextMenu = (e, article) => {
         e.preventDefault();
@@ -593,45 +693,80 @@
           onSelect(article);
         };
 
+        // 長押しドラッグ中にこの記事が対象かどうか
+        const isTouchDragging = dragGhostInfo && dragArticleRef.current &&
+          (Array.isArray(dragArticleRef.current)
+            ? dragArticleRef.current.some(a => a.id === article.id)
+            : dragArticleRef.current.id === article.id);
+
         return (
           <div
             key={article.id}
-            className="flex items-center gap-1 mb-0.5"
-            draggable
-            onDragStart={(e) => {
-              // 複数選択中は選択中の全記事をドラッグ対象に
-              dragArticleRef.current = (multiSelectedIds && multiSelectedIds.size > 0 && multiSelectedIds.has(article.id))
-                ? articles.filter(a => multiSelectedIds.has(a.id))
-                : article;
-              e.dataTransfer.effectAllowed = 'move';
-              e.dataTransfer.setData('text/plain', article.id);
-            }}
-            onDragEnd={() => { dragArticleRef.current = null; setDragOver(null); }}
+            className="swipe-row mb-0.5"
+            onTouchStart={(e) => onArticleTouchStart(e, article)}
+            onTouchMove={onArticleTouchMove}
+            onTouchEnd={onArticleTouchEnd}
           >
-            {selectMode && (
+            {/* 左スワイプで現れるアクションボタン */}
+            <div className="swipe-actions-reveal">
               <button
-                onClick={(e) => { e.stopPropagation(); onToggleSelect(article.id); }}
-                className="flex-shrink-0 w-5 h-5 flex items-center justify-center rounded border transition-colors"
-                style={{ borderColor: isChecked ? '#7C4DFF' : '#cbd5e1', background: isChecked ? '#7C4DFF' : 'white' }}
+                className="swipe-action-btn"
+                style={{ background: '#6366f1', color: 'white' }}
+                onPointerDown={e => e.stopPropagation()}
+                onClick={(e) => { e.stopPropagation(); setSwipedId(null); onDuplicateArticle(article); }}
               >
-                {isChecked && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><path d="M20 6L9 17l-5-5"/></svg>}
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                複製
               </button>
-            )}
-            <button
-              onClick={handleClick}
-              onContextMenu={(e) => handleContextMenu(e, article)}
-              className={`flex-1 min-w-0 text-left rounded-md px-2 py-2 article-item ${isActive && !selectMode && !highlighted ? 'active' : ''} ${highlighted ? 'bg-purple-50' : ''}`}
-              id={`article-item-${article.id}`}
-              style={{ cursor: 'grab', outline: isMultiSelected ? '1.5px solid #7C4DFF' : undefined, outlineOffset: '-1px' }}
+              <button
+                className="swipe-action-btn"
+                style={{ background: '#ef4444', color: 'white' }}
+                onPointerDown={e => e.stopPropagation()}
+                onClick={(e) => { e.stopPropagation(); setSwipedId(null); setConfirmDelete(article); }}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                削除
+              </button>
+            </div>
+
+            {/* スライドするコンテンツ（マウスD&Dも維持） */}
+            <div
+              className={`swipe-inner flex items-center gap-1${swipedId === article.id ? ' swiped' : ''}${isTouchDragging ? ' touch-dragging-item' : ''}`}
+              draggable
+              onDragStart={(e) => {
+                dragArticleRef.current = (multiSelectedIds && multiSelectedIds.size > 0 && multiSelectedIds.has(article.id))
+                  ? articles.filter(a => multiSelectedIds.has(a.id))
+                  : article;
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/plain', article.id);
+              }}
+              onDragEnd={() => { dragArticleRef.current = null; setDragOver(null); }}
             >
-              <div className={`text-xs font-medium truncate ${isActive && !selectMode && !highlighted ? 'text-white' : highlighted ? 'text-purple-700' : 'text-slate-700'}`}>
-                <svg className="inline mr-1 mb-0.5 opacity-60" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
-                {displayName}
-              </div>
-              <div className={`text-xs mt-0.5 article-date ${isActive && !selectMode && !highlighted ? 'text-purple-200' : 'text-slate-400'}`}>
-                {date} · {(article.size / 1024).toFixed(1)}KB
-              </div>
-            </button>
+              {selectMode && (
+                <button
+                  onClick={(e) => { e.stopPropagation(); onToggleSelect(article.id); }}
+                  className="flex-shrink-0 w-5 h-5 flex items-center justify-center rounded border transition-colors"
+                  style={{ borderColor: isChecked ? '#7C4DFF' : '#cbd5e1', background: isChecked ? '#7C4DFF' : 'white' }}
+                >
+                  {isChecked && <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><path d="M20 6L9 17l-5-5"/></svg>}
+                </button>
+              )}
+              <button
+                onClick={handleClick}
+                onContextMenu={(e) => handleContextMenu(e, article)}
+                className={`flex-1 min-w-0 text-left rounded-md px-2 py-2 article-item ${isActive && !selectMode && !highlighted ? 'active' : ''} ${highlighted ? 'bg-purple-50' : ''}`}
+                id={`article-item-${article.id}`}
+                style={{ cursor: 'grab', outline: isMultiSelected ? '1.5px solid #7C4DFF' : undefined, outlineOffset: '-1px' }}
+              >
+                <div className={`text-xs font-medium truncate ${isActive && !selectMode && !highlighted ? 'text-white' : highlighted ? 'text-purple-700' : 'text-slate-700'}`}>
+                  <svg className="inline mr-1 mb-0.5 opacity-60" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+                  {displayName}
+                </div>
+                <div className={`text-xs mt-0.5 article-date ${isActive && !selectMode && !highlighted ? 'text-purple-200' : 'text-slate-400'}`}>
+                  {date} · {(article.size / 1024).toFixed(1)}KB
+                </div>
+              </button>
+            </div>
           </div>
         );
       };
@@ -651,6 +786,7 @@
           <div key={folderPath} className="mb-0.5">
             {/* フォルダヘッダー（ドロップ受付） */}
             <button
+              data-folder-path={folderPath}
               onClick={() => toggleFolder(folderPath)}
               onContextMenu={(e) => handleFolderContextMenu(e, folderPath)}
               onDragOver={(e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; setDragOver(folderPath); }}
@@ -666,7 +802,7 @@
                 if (toMove.length === 0) return;
                 onMoveArticle && onMoveArticle(toMove, folderPath);
               }}
-              className="w-full flex items-center gap-1.5 px-2 py-1.5 rounded-md folder-item text-left text-xs font-semibold text-slate-500 hover:text-slate-700"
+              className={`w-full flex items-center gap-1.5 px-2 py-1.5 rounded-md folder-item text-left text-xs font-semibold text-slate-500 hover:text-slate-700${touchDragOver === folderPath ? ' touch-drag-folder-target' : ''}`}
               style={{
                 paddingLeft: `${8 + indent}px`,
                 background: isDragTarget ? 'rgba(124,77,255,0.1)' : undefined,
@@ -703,13 +839,18 @@
 
       return (
         <>
-        <div className="px-2 pb-2">
+        <div
+          ref={sbTouchContainerRef}
+          className="px-2 pb-2"
+          onTouchStart={(e) => { if (swipedId && !e.target.closest('.swipe-row')) setSwipedId(null); }}
+        >
           {/* ルート直下のフォルダを再帰レンダリング */}
           {rootSubKeys.map(k => renderFolderNode(rootNode.subfolders[k], k, k, 0))}
 
           {/* ルート直下の記事（フォルダなし） */}
           {rootNode._articles.length > 0 && (
             <div
+              data-folder-path=""
               onDragOver={(e) => { e.preventDefault(); setDragOver(''); }}
               onDragLeave={() => setDragOver(null)}
               onDrop={(e) => {
@@ -722,6 +863,7 @@
                 if (toMove.length === 0) return;
                 onMoveArticle && onMoveArticle(toMove, '');
               }}
+              className={touchDragOver === '' ? 'touch-drag-folder-target' : ''}
               style={{ borderRadius: '6px', outline: dragOver === '' ? '2px dashed #7C4DFF' : undefined, outlineOffset: '-2px' }}
             >
               <div className="px-2 py-1 text-xs text-slate-400 font-semibold">その他</div>
@@ -729,6 +871,13 @@
             </div>
           )}
         </div>
+
+        {/* 長押しドラッグゴースト */}
+        {dragGhostInfo && (
+          <div className="touch-drag-ghost" style={{ left: dragGhostInfo.x, top: dragGhostInfo.y }}>
+            {dragGhostInfo.name}
+          </div>
+        )}
 
         {/* ── 右クリックコンテキストメニュー ── */}
         {ctxMenu.visible && (
