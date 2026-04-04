@@ -47,6 +47,155 @@ UA = (
     "Chrome/125.0.0.0 Safari/537.36"
 )
 
+# ── OGP展開設定 ────────────────────────────────────────
+EDITOR_CONTENT_SELECTOR  = ".ProseMirror p, .ProseMirror h2, .ProseMirror h3"
+EDITOR_LOAD_TIMEOUT_SEC  = 60
+OGP_TARGET_DOMAINS       = ["amzn.to", "amazon.co.jp", "apple.com", "youtube.com"]
+
+# OGP展開用JS関数群 (note_ogp_opener.py から移植)
+JS_FUNCTIONS = r"""
+window.noteFormatter = {
+    getTitleInput: () => document.querySelector('.note-editor__title-input'),
+    getEditor: () => document.querySelector('.note-editable, [contenteditable="true"]') || document.querySelector('.ProseMirror'),
+
+    processTitle: function() {
+        const titleInput = this.getTitleInput();
+        const editor = this.getEditor();
+        if (!titleInput || !editor) return;
+        if (titleInput.textContent.trim().length > 10) return;
+        const firstP = editor.querySelector('p');
+        if (firstP) {
+            let text = firstP.textContent.trim().replace(/^#+\s*/, '');
+            titleInput.textContent = text;
+            titleInput.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+    },
+
+    convertMarkdownToHtml: function() {
+        const editor = this.getEditor();
+        if(!editor) return;
+        const paragraphs = Array.from(editor.querySelectorAll('p'));
+        paragraphs.forEach(p => {
+            let text = p.textContent.trim();
+            let newEl = null;
+            if (text.startsWith('### ')) {
+                newEl = document.createElement('h3');
+                newEl.textContent = text.replace('### ', '');
+            } else if (text.startsWith('## ') || text.startsWith('# ')) {
+                newEl = document.createElement('h2');
+                newEl.textContent = text.replace(/#+\s*/, '');
+            }
+            if (newEl) p.parentNode.replaceChild(newEl, p);
+        });
+
+        const walker = document.createTreeWalker(editor, NodeFilter.SHOW_TEXT);
+        const nodesToFix = [];
+        let node;
+        while ((node = walker.nextNode())) {
+            if (node.textContent.includes('**')) nodesToFix.push(node);
+        }
+        nodesToFix.forEach(textNode => {
+            const parent = textNode.parentNode;
+            if (!parent) return;
+            const parts = textNode.textContent.split(/(\*\*.*?\*\*)/g);
+            const fragment = document.createDocumentFragment();
+            parts.forEach(part => {
+                if (part.startsWith('**') && part.endsWith('**')) {
+                    const strong = document.createElement('strong');
+                    strong.textContent = part.slice(2, -2);
+                    fragment.appendChild(strong);
+                } else {
+                    fragment.appendChild(document.createTextNode(part));
+                }
+            });
+            parent.replaceChild(fragment, textNode);
+        });
+    },
+
+    extractUrls: function() {
+        const editor = this.getEditor();
+        if(!editor) return [];
+        const urls = [];
+        const regex = /(https?:\/\/[^\s\n\r<>"]+)/g;
+        let match;
+        while ((match = regex.exec(editor.innerText)) !== null) {
+            urls.push(match[1]);
+        }
+        return urls;
+    },
+
+    setCaretAtUrlEnd: function(url, occurrence) {
+        const editor = this.getEditor();
+        if(!editor) return false;
+        const selection = window.getSelection();
+        const range = document.createRange();
+        const walker = document.createTreeWalker(editor, NodeFilter.SHOW_TEXT);
+        let node, count = 0;
+        while ((node = walker.nextNode())) {
+            let startIdx = 0, idx;
+            while ((idx = node.textContent.indexOf(url, startIdx)) !== -1) {
+                count++;
+                if (count === occurrence) {
+                    range.setStart(node, idx + url.length);
+                    range.setEnd(node, idx + url.length);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                    editor.focus();
+                    return true;
+                }
+                startIdx = idx + 1;
+            }
+        }
+        return false;
+    },
+
+    normalizeLineBreaks: function() {
+        const editor = this.getEditor();
+        if(!editor) return 0;
+        let removed = 0;
+
+        const embeds = editor.querySelectorAll(
+            'div[class*="embed"], div[class*="ogp"], div[class*="Embed"], ' +
+            'div[class*="card"], figure, div[data-type]'
+        );
+        embeds.forEach(embed => {
+            let prev = embed.previousElementSibling;
+            while (prev && prev.tagName === 'P' && prev.textContent.trim() === '') {
+                const toRemove = prev;
+                prev = prev.previousElementSibling;
+                toRemove.remove();
+                removed++;
+            }
+            let next = embed.nextElementSibling;
+            while (next && next.tagName === 'P' && next.textContent.trim() === '') {
+                const toRemove = next;
+                next = next.nextElementSibling;
+                toRemove.remove();
+                removed++;
+            }
+        });
+
+        const allP = Array.from(editor.querySelectorAll('p'));
+        let prevWasEmpty = false;
+        for (const p of allP) {
+            const isEmpty = p.textContent.trim() === '' && p.children.length === 0;
+            if (isEmpty) {
+                if (prevWasEmpty) {
+                    p.remove();
+                    removed++;
+                } else {
+                    prevWasEmpty = true;
+                }
+            } else {
+                prevWasEmpty = false;
+            }
+        }
+
+        return removed;
+    }
+};
+"""
+
 
 # ── Markdown前処理 ─────────────────────────────────────
 def extract_title_and_body(markdown: str) -> tuple:
@@ -286,6 +435,133 @@ def _auto_refresh_github_secret(new_state_json: str):
         print("   ✅ NOTE_STORAGE_STATE を自動更新しました")
     else:
         print(f"   ⚠️ Secret更新失敗 ({res.status_code}): {res.text[:200]}")
+
+
+# ── OGP展開関数群 ─────────────────────────────────────
+def _cookies_to_playwright(cookies: dict) -> list:
+    """Cookie辞書 → Playwright の add_cookies() 形式リストに変換"""
+    return [
+        {"name": name, "value": value, "domain": ".note.com", "path": "/"}
+        for name, value in cookies.items()
+    ]
+
+
+def _wait_for_editor_content(page, timeout_sec: int = EDITOR_LOAD_TIMEOUT_SEC) -> bool:
+    """ProseMirrorエディタのコンテンツ（p/h2/h3）が出現するまでポーリング待機"""
+    print(f"   ⏳ エディタコンテンツのロード待機（最大{timeout_sec}秒）...")
+    deadline = time.time() + timeout_sec
+    while time.time() < deadline:
+        try:
+            count = page.locator(EDITOR_CONTENT_SELECTOR).count()
+            if count > 0:
+                text = page.locator(EDITOR_CONTENT_SELECTOR).first.text_content()
+                if text and text.strip():
+                    elapsed = timeout_sec - (deadline - time.time())
+                    print(f"   ✅ エディタコンテンツ検出: {count}要素（{elapsed:.1f}秒後）")
+                    return True
+        except Exception as e:
+            print(f"   ⚠️ 待機中エラー: {e}")
+        time.sleep(1)
+    print(f"   ❌ タイムアウト: {timeout_sec}秒待ってもエディタコンテンツが現れませんでした")
+    return False
+
+
+def process_ogp_urls(page) -> int:
+    """OGPカード展開 + 不要改行削除をまとめて実行する。処理URL数を返す。"""
+    print("\n   [Python] OGP展開ループを開始...")
+    page.evaluate(JS_FUNCTIONS)
+    page.evaluate("window.noteFormatter.processTitle()")
+    page.evaluate("window.noteFormatter.convertMarkdownToHtml()")
+
+    total_processed = 0
+    MAX_SWEEPS = 3
+
+    for sweep in range(MAX_SWEEPS):
+        print(f"\n   [Python] 🔄 {sweep + 1}回目のスイープ...")
+        all_urls = page.evaluate("window.noteFormatter.extractUrls()")
+        target_urls = [u for u in set(all_urls) if any(d in u for d in OGP_TARGET_DOMAINS)]
+
+        if not target_urls:
+            print("   [Python] 展開漏れのURLはありません。スイープ終了。")
+            break
+
+        print(f"   [Python] 残存対象URL: {len(target_urls)}種 / 計{len(all_urls)}箇所")
+        processed_this_loop = 0
+        target_counts = {u: 0 for u in target_urls}
+
+        for url in target_urls:
+            occurrences = all_urls.count(url)
+            while target_counts[url] < occurrences:
+                target_counts[url] += 1
+                found = page.evaluate(
+                    "(args) => window.noteFormatter.setCaretAtUrlEnd(args.url, args.occ)",
+                    {"url": url, "occ": target_counts[url]},
+                )
+                if found:
+                    page.keyboard.press("Enter")
+                    processed_this_loop += 1
+                    page.wait_for_timeout(300)
+
+        total_processed += processed_this_loop
+        print("   [Python] カード展開の非同期反映を待機 (3秒)...")
+        page.wait_for_timeout(3000)
+
+    print("\n   [Python] 🧹 不要な空行を最終一括削除...")
+    page.evaluate("window.noteFormatter.normalizeLineBreaks()")
+    return total_processed
+
+
+def _run_ogp_expansion_on_draft(editor_url: str, cookies_dict: dict, headless: bool = True) -> bool:
+    """
+    下書き作成後のエディタURLへPlaywrightでアクセスし、OGP展開を実行する。
+    noteの自動保存に委ねるため、8秒待機して終了。
+    """
+    from playwright.sync_api import sync_playwright
+
+    print(f"\n── Phase 4: OGP展開（Playwright） ──")
+    print(f"   対象URL: {editor_url}")
+
+    playwright_cookies = _cookies_to_playwright(cookies_dict)
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(
+            headless=headless,
+            args=["--disable-blink-features=AutomationControlled", "--no-sandbox"],
+        )
+        context = browser.new_context(
+            viewport={"width": 1280, "height": 900},
+            user_agent=UA,
+            locale="ja-JP",
+        )
+        context.add_cookies(playwright_cookies)
+
+        page = context.new_page()
+
+        try:
+            page.goto(editor_url, wait_until="domcontentloaded", timeout=30_000)
+        except Exception as e:
+            print(f"   ⚠️ ページロードエラー（続行）: {e}")
+
+        content_loaded = _wait_for_editor_content(page, timeout_sec=EDITOR_LOAD_TIMEOUT_SEC)
+        if not content_loaded:
+            print("   ❌ エディタコンテンツが表示されませんでした。OGP展開をスキップします。")
+            browser.close()
+            return False
+
+        try:
+            processed_count = process_ogp_urls(page)
+            print(f"   ✅ OGP展開処理完了: {processed_count}件")
+        except Exception as e:
+            print(f"   ⚠️ OGP展開エラー: {e}")
+            browser.close()
+            return False
+
+        print("   ⏳ noteの自動保存完了を待機（8秒）...")
+        page.wait_for_timeout(8000)
+        browser.close()
+
+    print("   ✅ OGP展開 + 自動保存が完了しました。")
+    return True
 
 
 # ── セッション作成・検証・ログイン ────────────────────
@@ -570,7 +846,7 @@ def keepalive():
 
 
 # ── メイン処理 ────────────────────────────────────────
-def post_draft_to_note(markdown: str) -> dict:
+def post_draft_to_note(markdown: str, run_ogp: bool = True) -> dict:
     title, body = extract_title_and_body(markdown)
     if not title or not body:
         print("❌ タイトルまたは本文が空です")
@@ -605,6 +881,12 @@ def post_draft_to_note(markdown: str) -> dict:
     print("\n── Phase 3: セッション更新 ──")
     _save_cookies_state(session)
 
+    # Phase 4: OGP展開（Playwright）
+    if run_ogp and result["url"]:
+        # セッション更新後の最新Cookieを取得
+        latest_cookies = _load_cookies()
+        _run_ogp_expansion_on_draft(result["url"], latest_cookies, headless=True)
+
     return result
 
 
@@ -617,6 +899,8 @@ if __name__ == "__main__":
                         help="初回セットアップ: ブラウザで手動ログインしてCookieを保存")
     parser.add_argument("--keepalive", action="store_true",
                         help="セッション維持モード: Cookieの有効性確認・更新")
+    parser.add_argument("--no-ogp", action="store_true",
+                        help="OGP展開をスキップして下書き保存のみ実行")
     args = parser.parse_args()
 
     if args.save_cookies:
@@ -637,7 +921,7 @@ if __name__ == "__main__":
         print("   初回セットアップ: python note_draft_poster.py --save-cookies")
         sys.exit(1)
 
-    result = post_draft_to_note(md)
+    result = post_draft_to_note(md, run_ogp=not args.no_ogp)
     if result["success"]:
         print(f"\n🎉 下書き投稿成功！\n   タイトル: {result['title']}\n   URL: {result['url']}")
         file_id = os.getenv("FILE_ID", "")
