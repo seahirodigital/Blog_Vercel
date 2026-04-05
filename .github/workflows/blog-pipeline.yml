@@ -34,6 +34,9 @@ jobs:
       - name: Python 依存パッケージをインストール
         run: pip install -r scripts/pipeline/requirements.txt
 
+      - name: Playwright Chromium ブラウザをインストール
+        run: playwright install --with-deps chromium
+
       - name: ブログ生成パイプラインを実行
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
