@@ -107,6 +107,21 @@ def _extract_product_name_from_h2s(markdown: str) -> str:
 
 
 # ── ② Amazon検索 → ASIN取得 ────────────────────────────
+
+# requests 用ヘッダー（ブラウザに偽装してブロック回避）
+_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/122.0.0.0 Safari/537.36"
+    ),
+    "Accept-Language": "ja-JP,ja;q=0.9,en;q=0.8",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive",
+}
+
+
 def _keyword_matches_title(keywords: list[str], title: str) -> bool:
     """
     商品ページのタイトルに、検索キーワードがすべて含まれるか確認（AND条件）。
@@ -116,30 +131,109 @@ def _keyword_matches_title(keywords: list[str], title: str) -> bool:
     return all(kw.lower() in title_lower for kw in keywords)
 
 
-def fetch_amazon_asin(product_name: str) -> str | None:
+def _parse_organic_asins_from_html(html: str) -> list[str]:
     """
-    Playwrightで Amazon.co.jp を検索し、広告を除外かつ商品名が一致する
-    最初の商品のASINを返す。
-    検索キーワードと一致しない Organic 商品（別ブランド等）は除外する。
-    失敗時は None を返す。
+    Amazon 検索結果HTMLから、広告を除いたASINリストを抽出する。
+    data-asin属性を正規表現で収集し、スポンサー判定はHTMLの前後文脈で判断。
     """
-    if not product_name:
-        return None
+    import re
+    # data-asin="XXXXXXXXXX" を持つブロックを抽出
+    # 広告ブロックは AdHolder クラスまたは puis-sponsored-label-text を持つ
+    sponsored_asins: set[str] = set()
+    # スポンサーASINを収集（AdHolderクラスのdivに含まれるASIN）
+    for block in re.finditer(
+        r'<div[^>]+class="[^"]*AdHolder[^"]*"[^>]*data-asin="([A-Z0-9]{10})"',
+        html,
+    ):
+        sponsored_asins.add(block.group(1))
+    # puis-sponsored-label-text を含むブロックのASINも広告として除外
+    for block in re.finditer(
+        r'data-asin="([A-Z0-9]{10})"[^>]*>.*?puis-sponsored-label-text',
+        html,
+        re.DOTALL,
+    ):
+        sponsored_asins.add(block.group(1))
 
+    # 全 data-asin を順序を保って収集
+    seen: set[str] = set()
+    organics: list[str] = []
+    for m in re.finditer(r'data-asin="([A-Z0-9]{10})"', html):
+        asin = m.group(1)
+        if asin in seen or asin in sponsored_asins:
+            continue
+        seen.add(asin)
+        organics.append(asin)
+        if len(organics) >= 10:
+            break
+    return organics
+
+
+def _get_product_title_requests(session, asin: str) -> str:
+    """requests で商品ページを取得してタイトルを抽出する"""
+    import re
+    url = f"https://www.amazon.co.jp/dp/{asin}"
+    try:
+        r = session.get(url, headers=_HEADERS, timeout=15)
+        if not r.ok:
+            return ""
+        html = r.text
+        # #productTitle span の1行テキストのみを抽出（re.DOTALL は使わない）
+        # <span id="productTitle" ...>タイトルテキスト</span> を想定
+        m = re.search(r'id="productTitle"[^>]*>([^<]{3,300})<', html)
+        if m:
+            return re.sub(r'\s+', ' ', m.group(1)).strip()
+        # フォールバック: <title> タグ（Amazonページタイトル）
+        m2 = re.search(r'<title>([^<]{3,200})</title>', html)
+        if m2:
+            # "商品名: Amazon.co.jp: ..." の形式から商品名部分だけ取り出す
+            t = m2.group(1).split("Amazon.co.jp")[0].strip(" :-:：")
+            return t if t else m2.group(1).strip()
+    except Exception:
+        pass
+    return ""
+
+
+def _fetch_asin_via_requests(product_name: str, keywords: list[str]) -> str | None:
+    """
+    requests ライブラリで Amazon を検索してASINを返す（CI環境向け軽量実装）。
+    Playwright より高速でタイムアウトしにくい。
+    """
+    import requests as req
+    import re
+
+    search_url = AMAZON_SEARCH_BASE + quote(product_name)
+    try:
+        session = req.Session()
+        r = session.get(search_url, headers=_HEADERS, timeout=20)
+        if not r.ok:
+            print(f"   [WARN] requests: Amazon検索HTTPエラー {r.status_code}")
+            return None
+
+        organic_asins = _parse_organic_asins_from_html(r.text)
+        print(f"   [INFO] requests: Organic候補 {len(organic_asins)}件")
+
+        for asin in organic_asins:
+            title = _get_product_title_requests(session, asin)
+            matched = _keyword_matches_title(keywords, title) if title else False
+            print(f"   [CHECK] {asin} | match={matched} | {title[:60]}")
+            if matched:
+                print(f"   [OK] ASIN確定: {asin}")
+                return asin
+    except Exception as e:
+        print(f"   [WARN] requests失敗: {e}")
+    return None
+
+
+def _fetch_asin_via_playwright(product_name: str, keywords: list[str]) -> str | None:
+    """
+    Playwright で Amazon を検索してASINを返す（ローカル環境フォールバック）。
+    """
     try:
         from playwright.sync_api import sync_playwright
     except ImportError:
-        print("   [WARN] playwright未インストール - Amazonアフィリエイト挿入スキップ")
         return None
 
     search_url = AMAZON_SEARCH_BASE + quote(product_name)
-    print(f"   [SEARCH] Amazon: {product_name}")
-
-    # 商品名をスペースで分割してマッチ用キーワードを生成
-    # 例: "Bowers & Wilkins PI8" → ["Bowers", "Wilkins", "PI8"]
-    keywords = [w for w in product_name.replace("&", " ").split() if len(w) >= 2]
-
-    # 検索結果から Organic 商品を最大10件取得
     js_get_organics = """
     () => {
         const products = Array.from(document.querySelectorAll('div[data-asin]'));
@@ -156,8 +250,6 @@ def fetch_amazon_asin(product_name: str) -> str | None:
         return organics;
     }
     """
-
-    # 商品ページのタイトル取得
     js_get_title = """
     () => {
         const el = document.querySelector('#productTitle') ||
@@ -166,37 +258,28 @@ def fetch_amazon_asin(product_name: str) -> str | None:
         return el ? el.innerText.trim() : '';
     }
     """
-
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             context = browser.new_context(
-                user_agent=(
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                    "AppleWebKit/537.36 (KHTML, like Gecko) "
-                    "Chrome/122.0.0.0 Safari/537.36"
-                ),
+                user_agent=_HEADERS["User-Agent"],
                 locale="ja-JP",
                 viewport={"width": 1280, "height": 800},
             )
             page = context.new_page()
-
-            # 検索結果ページ
             page.goto(search_url, timeout=30000, wait_until="domcontentloaded")
             try:
-                page.wait_for_selector("div[data-asin]", timeout=15000)
+                page.wait_for_selector("div[data-asin]", timeout=20000)
             except Exception:
-                print("   [WARN] Amazon検索結果の読み込みタイムアウト")
+                print("   [WARN] Playwright: 検索結果タイムアウト")
                 browser.close()
                 return None
 
             organic_asins = page.evaluate(js_get_organics)
-            print(f"   [INFO] Organic候補: {len(organic_asins)}件 → タイトル検証開始")
+            print(f"   [INFO] Playwright: Organic候補 {len(organic_asins)}件")
 
-            # 各商品ページを開いてタイトルを確認
             for asin in organic_asins:
-                product_url = f"https://www.amazon.co.jp/dp/{asin}"
-                page.goto(product_url, timeout=20000, wait_until="domcontentloaded")
+                page.goto(f"https://www.amazon.co.jp/dp/{asin}", timeout=20000, wait_until="domcontentloaded")
                 page.wait_for_timeout(800)
                 title = page.evaluate(js_get_title)
                 matched = _keyword_matches_title(keywords, title)
@@ -205,13 +288,31 @@ def fetch_amazon_asin(product_name: str) -> str | None:
                     browser.close()
                     print(f"   [OK] ASIN確定: {asin}")
                     return asin
-
             browser.close()
-            print("   [WARN] 商品名が一致するOrganicな商品が見つかりません")
-            return None
     except Exception as e:
-        print(f"   [WARN] Amazon検索失敗: {e}")
+        print(f"   [WARN] Playwright失敗: {e}")
+    return None
+
+
+def fetch_amazon_asin(product_name: str) -> str | None:
+    """
+    Amazon.co.jp を検索し、広告除外・商品名AND一致で最初のASINを返す。
+    requests（軽量・CI向け）→ Playwright（フォールバック）の順で試行。
+    """
+    if not product_name:
         return None
+
+    print(f"   [SEARCH] Amazon: {product_name}")
+    keywords = [w for w in product_name.replace("&", " ").split() if len(w) >= 2]
+
+    # 優先: requests（タイムアウトしにくい・CI/GitHub Actions向け）
+    asin = _fetch_asin_via_requests(product_name, keywords)
+    if asin:
+        return asin
+
+    # フォールバック: Playwright（ローカル環境）
+    print("   [INFO] requestsで取得できず → Playwrightでリトライ")
+    return _fetch_asin_via_playwright(product_name, keywords)
 
 
 # ── ③ アフィリエイトリンク生成 ──────────────────────────
