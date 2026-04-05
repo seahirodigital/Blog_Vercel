@@ -50,5 +50,6 @@ jobs:
           ONEDRIVE_FOLDER: ${{ secrets.ONEDRIVE_FOLDER }}
           GH_PAT: ${{ secrets.GH_PAT }}
           GITHUB_REPO: ${{ github.repository }}
+          VERCEL_URL: https://blog-vercel-dun.vercel.app
         working-directory: scripts/pipeline
         run: python main.py

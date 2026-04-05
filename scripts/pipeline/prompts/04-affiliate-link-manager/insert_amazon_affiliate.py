@@ -16,6 +16,7 @@ Amazonアフィリエイトリンク自動挿入モジュール
 - 既存の insert_affiliate_links.py は無改変
 """
 
+import os
 from urllib.parse import quote
 
 ASSOCIATE_TAG = "hiroshit-22"
@@ -294,10 +295,41 @@ def _fetch_asin_via_playwright(product_name: str, keywords: list[str]) -> str | 
     return None
 
 
+def _fetch_asin_via_vercel(product_name: str) -> str | None:
+    """
+    Vercel Serverless Function (/api/amazon-asin) 経由でASINを取得する。
+    GitHub Actions の IP は Amazon にブロックされるため、
+    Vercel のサーバーサイドを中継することでブロックを回避する。
+    """
+    import requests as req
+
+    vercel_url = os.environ.get("VERCEL_URL", "https://blog-vercel-dun.vercel.app")
+    endpoint = f"{vercel_url.rstrip('/')}/api/amazon-asin"
+    params = {"product_name": product_name}
+
+    try:
+        r = req.get(endpoint, params=params, timeout=30)
+        if not r.ok:
+            print(f"   [WARN] Vercel API HTTPエラー: {r.status_code}")
+            return None
+        data = r.json()
+        asin = data.get("asin")
+        if asin:
+            title = data.get("title", "")
+            print(f"   [OK] Vercel API ASIN確定: {asin} | {title[:50]}")
+            return asin
+        msg = data.get("message", "不明")
+        print(f"   [WARN] Vercel API: {msg}")
+        return None
+    except Exception as e:
+        print(f"   [WARN] Vercel API失敗: {e}")
+        return None
+
+
 def fetch_amazon_asin(product_name: str) -> str | None:
     """
     Amazon.co.jp を検索し、広告除外・商品名AND一致で最初のASINを返す。
-    requests（軽量・CI向け）→ Playwright（フォールバック）の順で試行。
+    Vercel API（CI向け・ブロック回避）→ requests → Playwright の順で試行。
     """
     if not product_name:
         return None
@@ -305,12 +337,18 @@ def fetch_amazon_asin(product_name: str) -> str | None:
     print(f"   [SEARCH] Amazon: {product_name}")
     keywords = [w for w in product_name.replace("&", " ").split() if len(w) >= 2]
 
-    # 優先: requests（タイムアウトしにくい・CI/GitHub Actions向け）
+    # 最優先: Vercel API（GitHub Actions の IP ブロック回避）
+    asin = _fetch_asin_via_vercel(product_name)
+    if asin:
+        return asin
+
+    # フォールバック1: requests（ローカル環境向け）
+    print("   [INFO] Vercel APIで取得できず → requestsでリトライ")
     asin = _fetch_asin_via_requests(product_name, keywords)
     if asin:
         return asin
 
-    # フォールバック: Playwright（ローカル環境）
+    # フォールバック2: Playwright（ローカル環境）
     print("   [INFO] requestsで取得できず → Playwrightでリトライ")
     return _fetch_asin_via_playwright(product_name, keywords)
 
