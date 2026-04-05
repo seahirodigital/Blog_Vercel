@@ -1777,6 +1777,20 @@
 
       // 保存（既存記事はfileIDで上書き、新規はルートフォルダに作成）
       // silent=true のとき Toast非表示（自動保存用）
+      // H1キャッシュをcontentから抽出して更新するヘルパー
+      const updateH1CacheFromContent = useCallback((articleId, text) => {
+        if (!articleId) return;
+        const h1Match = text.match(/^#\s+(.+)$/m);
+        if (!h1Match) return;
+        const h1Title = h1Match[1].trim();
+        setArticleH1Cache(prev => {
+          if (prev[articleId] === h1Title) return prev; // 変化なしなら更新しない
+          const next = { ...prev, [articleId]: h1Title };
+          try { localStorage.setItem('sb_articleH1Cache', JSON.stringify(next)); } catch {}
+          return next;
+        });
+      }, []);
+
       const handleSave = async (silent = false) => {
         const filename = isNewArticle ? newFilename : (selectedArticle?.name || '');
         if (!filename) { if (!silent) showToast('ファイル名を指定してください', 'error'); return; }
@@ -1798,6 +1812,11 @@
             };
             setSelectedArticle(newArticle);
             setArticles(prev => [newArticle, ...prev]);
+            // 新規記事保存後にH1キャッシュを更新
+            updateH1CacheFromContent(result.id, content);
+          } else {
+            // 既存記事保存後にH1キャッシュを更新
+            updateH1CacheFromContent(selectedArticle?.id, content);
           }
           setIsNewArticle(false);
           setTimeout(async () => {
@@ -1822,6 +1841,8 @@
             await saveArticle(selectedArticle.name, content, selectedArticle.id);
             setOriginalContent(content);
             setAutoSaveStatus('saved');
+            // 自動保存時もH1キャッシュを更新
+            updateH1CacheFromContent(selectedArticle.id, content);
             setTimeout(() => setAutoSaveStatus('idle'), 2000);
           } catch { setAutoSaveStatus('idle'); }
         }, 2000);
