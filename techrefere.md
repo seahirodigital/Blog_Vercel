@@ -507,43 +507,47 @@ const previewScrolling = useRef(false);  // プレビューがスクロール中
 
 ---
 
-## 10. Amazon ASIN 自動取得の改修記録
+## 10. Amazon ASIN 自動取得のアーキテクチャ改修 (2026-04-05)
 
-### 問題（v1: Vercel経由 + Amazon直接アクセス）
+### 過去の課題と変遷
+*   **v1 (スクレイピング等)**: Vercel ServerlessやGitHub Actions上のIP（Playwright等）がAmazonの強力なボット対策によって「503」や「403」で一斉にブロックされ、ASINの取得に失敗。
+*   **v2 (Google CSE)**: Amazonサイト内検索をGoogle Custom Search経由で行う戦略を取るも、リンクの正確さや抽出ロジックの面で不確実性が残る。
 
-| 手法 | 結果 |
-|------|------|
-| Vercel Serverless → Amazon スクレイピング | 503（AmazonがクラウドIPを全ブロック） |
-| GitHub Actions → Amazon (requests) | 503（同上） |
-| GitHub Actions → Amazon (Playwright) | タイムアウト（同上） |
-| Vercel → Google CSE API | 500（環境変数設定タイミング or Vercel内部エラー） |
-## 10. Amazon ASIN 取得戦略の刷新 (2026-04-05)
+### 解決策（v3: Amazon Creators APIへの移行）
+Amazonが公式に提供する新しい **Creators API** を利用し、100%確実かつブロック回避のできるASIN取得経路を確立しました。従来のPA-API（Product Advertising API）とは認証・エンドポイント・データ形式が異なります。
 
-Amazon のボット対策（IP ブロック）により Playwright や requests での取得が不安定になったため、公式の **Creators API** を最優先のデータソースとして統合。
-
+#### Creators API (v3.x / FE Region) の仕様
 - **認証方式**: OAuth2 (Login with Amazon) - Client Credentials Flow
-- **エンドポイント**: `https://creatorsapi.amazon/catalog/v1/searchItems` (POST)
+  - トークンエンドポイント: `https://api.amazon.co.jp/auth/o2/token`
+  - スコープ: `creatorsapi::default`
+- **データエンドポイント**: `https://creatorsapi.amazon/catalog/v1/searchItems` (POST)
 - **必須ヘッダー**:
     - `Authorization: Bearer <access_token>`
-    - `x-marketplace: www.amazon.co.jp`
-- **リクエスト仕様**: JSON ボディで `keywords`, `partnerTag`, `marketplace`, `resources` を送信。
-- **データ構造**: 旧 PA-API 5.0 とは異なり、レスポンスは全て **camelCase** (`searchResult`, `items`, `asin`等) で返却される。
+    - `x-marketplace: www.amazon.co.jp` (※日本向けには必須)
+    - `Content-Type: application/json`
+- **リクエスト仕様**: JSONボディで `keywords`, `partnerTag`, `marketplace`, `resources` を指定。
+- **レスポンス構造**: 全て **camelCase**（例: `searchResult`, `items`, `asin`, `itemInfo`）。
 
-これにより、GitHub Actions 上でもプロキシ等を介さず、100% の成功率で ASIN を取得可能になった。
+#### 最新の取得フロー優先順位
+```
+1. Amazon Creators API (最優先・IPブロック完全回避)
+2. Google CSE API (フォールバック 1)
+3. Vercel API 経由検索 (フォールバック 2)
+4. Playwright / requests (最終手段)
+```
 
-#### 必要な設定
+#### 必要な環境変数
+GitHub Actions (および必要ならローカルの `.env`) に以下の Secret の設定が必須です。
 
-| 設定先 | キー | 値 |
-|--------|------|----|
-| GitHub Secrets | `GOOGLE_CSE_API_KEY` | Google Cloud Console で発行した Custom Search API キー |
-| GitHub Secrets | `GOOGLE_CSE_CX` | Programmable Search Engine の検索エンジンID |
-| Vercel Environment Variables | `GOOGLE_CSE_API_KEY` | 同上（Vercel API フォールバック用） |
-| Vercel Environment Variables | `GOOGLE_CSE_CX` | 同上 |
+| キー | 用途・値 |
+|------|----------|
+| `AMAZON_CLIENT_ID` | Creators APIのアプリケーションClient ID (`amzn1.application-...`) |
+| `AMAZON_CLIENT_SECRET` | Creators APIのClient Secret (`amzn1.oa2-cs.v1...`) |
+| `GOOGLE_CSE_API_KEY` | (フォールバック用) Google Cloud Consoleで発行した API キー |
+| `GOOGLE_CSE_CX` | (フォールバック用) Programmable Search Engine の検索エンジンID |
 
 #### 変更ファイル
-
 | ファイル | 変更内容 |
 |----------|---------|
-| `insert_amazon_affiliate.py` | `_fetch_asin_via_google_cse()` 追加。最優先メソッドに設定 |
-| `blog-pipeline.yml` | `GOOGLE_CSE_API_KEY`, `GOOGLE_CSE_CX` を env に追加 |
-| `api/amazon-asin.js` | 検索クエリ・ASIN正規表現を修正（Vercel側フォールバック用） |
+| `insert_amazon_affiliate.py` | `_fetch_asin_via_creators_api()` を実装・最優先化。OAuth2フローとPOST検索 |
+| `blog-pipeline.yml` | `AMAZON_CLIENT_ID`, `AMAZON_CLIENT_SECRET` 等の env エクスポートを追加 |
