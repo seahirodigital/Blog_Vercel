@@ -295,6 +295,103 @@ def _fetch_asin_via_playwright(product_name: str, keywords: list[str]) -> str | 
     return None
 
 
+def _fetch_asin_via_creators_api(product_name: str, keywords: list[str]) -> str | None:
+    """
+    Amazon Creators API (OAuth2) の SearchItems でASINを取得する（最優先）。
+    公式APIのためクラウドIPのブロックがなく、GitHub Actionsから直接呼べる。
+
+    必要な環境変数:
+      AMAZON_CLIENT_ID     : Creators API クライアントID
+      AMAZON_CLIENT_SECRET : Creators API クライアントシークレット
+    """
+    import requests as req
+    import re
+
+    client_id = os.environ.get("AMAZON_CLIENT_ID", "")
+    client_secret = os.environ.get("AMAZON_CLIENT_SECRET", "")
+    if not client_id or not client_secret:
+        print("   [WARN] Creators API: AMAZON_CLIENT_ID または AMAZON_CLIENT_SECRET が未設定 → スキップ")
+        return None
+
+    # Step1: OAuth2 クライアントクレデンシャルでアクセストークン取得
+    try:
+        token_res = req.post(
+            "https://api.amazon.com/auth/o2/token",
+            data={
+                "grant_type": "client_credentials",
+                "client_id": client_id,
+                "client_secret": client_secret,
+                "scope": "advertising::audiences",
+            },
+            timeout=15,
+        )
+        if not token_res.ok:
+            print(f"   [WARN] Creators API トークン取得失敗: {token_res.status_code} | {token_res.text[:200]}")
+            return None
+        access_token = token_res.json().get("access_token", "")
+        if not access_token:
+            print("   [WARN] Creators API: アクセストークンが空")
+            return None
+        print("   [INFO] Creators API: アクセストークン取得成功")
+    except Exception as e:
+        print(f"   [WARN] Creators API トークン取得例外: {e}")
+        return None
+
+    # Step2: SearchItems でキーワード検索
+    try:
+        search_res = req.get(
+            "https://creators-api.amazon.com/v1/SearchItems",
+            headers={
+                "Authorization": f"Bearer {access_token}",
+                "Content-Type": "application/json",
+            },
+            params={
+                "keywords": product_name,
+                "searchIndex": "All",
+                "itemCount": 10,
+                "partnerTag": ASSOCIATE_TAG,
+                "partnerType": "Associates",
+                "marketplace": "www.amazon.co.jp",
+                "resources": "ItemInfo.Title,Images.Primary.Medium",
+            },
+            timeout=20,
+        )
+        if not search_res.ok:
+            print(f"   [WARN] Creators API SearchItems失敗: {search_res.status_code} | {search_res.text[:300]}")
+            return None
+
+        data = search_res.json()
+        items = data.get("SearchResult", {}).get("Items", [])
+        print(f"   [INFO] Creators API: {len(items)}件の検索結果")
+
+        asin_re = re.compile(r"[A-Z0-9]{10}")
+
+        for item in items:
+            asin = item.get("ASIN", "")
+            if not asin or not asin_re.fullmatch(asin):
+                continue
+            title = (item.get("ItemInfo", {}).get("Title", {}).get("DisplayValue", "") or "").lower()
+            matched = all(kw.lower() in title for kw in keywords)
+            print(f"   [CHECK] {asin} | match={matched} | {title[:60]}")
+            if matched:
+                print(f"   [OK] Creators API ASIN確定: {asin}")
+                return asin
+
+        # AND条件マッチなし → 最初のASINをフォールバック
+        if items:
+            asin = items[0].get("ASIN", "")
+            if asin:
+                title = items[0].get("ItemInfo", {}).get("Title", {}).get("DisplayValue", "")
+                print(f"   [OK] Creators API ASIN確定(フォールバック): {asin} | {title[:60]}")
+                return asin
+
+        print("   [WARN] Creators API: 検索結果にASINが見つかりません")
+        return None
+    except Exception as e:
+        print(f"   [WARN] Creators API SearchItems例外: {e}")
+        return None
+
+
 def _fetch_asin_via_google_cse(product_name: str, keywords: list[str]) -> str | None:
     """
     Google Custom Search API を直接呼び出してASINを取得する（最優先）。
@@ -418,24 +515,30 @@ def fetch_amazon_asin(product_name: str) -> str | None:
     print(f"   [SEARCH] Amazon: {product_name}")
     keywords = [w for w in product_name.replace("&", " ").split() if len(w) >= 2]
 
-    # 最優先: Google CSE API 直接呼び出し（IPブロックなし・最も信頼性が高い）
+    # 最優先: Amazon Creators API（公式・IPブロックなし）
+    asin = _fetch_asin_via_creators_api(product_name, keywords)
+    if asin:
+        return asin
+
+    # フォールバック1: Google CSE API 直接呼び出し
+    print("   [INFO] Creators APIで取得できず → Google CSEでリトライ")
     asin = _fetch_asin_via_google_cse(product_name, keywords)
     if asin:
         return asin
 
-    # フォールバック1: Vercel API経由
+    # フォールバック2: Vercel API経由
     print("   [INFO] Google CSEで取得できず → Vercel APIでリトライ")
     asin = _fetch_asin_via_vercel(product_name)
     if asin:
         return asin
 
-    # フォールバック2: requests（ローカル環境向け）
+    # フォールバック3: requests（ローカル環境向け）
     print("   [INFO] Vercel APIで取得できず → requestsでリトライ")
     asin = _fetch_asin_via_requests(product_name, keywords)
     if asin:
         return asin
 
-    # フォールバック3: Playwright（ローカル環境）
+    # フォールバック4: Playwright（ローカル環境）
     print("   [INFO] requestsで取得できず → Playwrightでリトライ")
     return _fetch_asin_via_playwright(product_name, keywords)
 
