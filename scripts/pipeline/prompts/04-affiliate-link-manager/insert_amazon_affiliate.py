@@ -16,7 +16,6 @@ Amazonアフィリエイトリンク自動挿入モジュール
 - 既存の insert_affiliate_links.py は無改変
 """
 
-import re
 from urllib.parse import quote
 
 ASSOCIATE_TAG = "hiroshit-22"
@@ -151,14 +150,35 @@ def _insertion_positions(lines: list[str]) -> list[int]:
 
 
 # ── メインエントリーポイント ────────────────────────────
-def insert_amazon_affiliate(markdown_content: str, article_title: str) -> str:
+def _extract_h1_from_markdown(markdown: str) -> str:
+    """
+    Markdownの先頭付近から `# タイトル` 形式のH1を抽出して返す。
+    見つからなければ空文字列を返す。
+    """
+    for line in markdown.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("# ") and not stripped.startswith("## "):
+            return stripped[2:].strip()
+    return ""
+
+
+def insert_amazon_affiliate(markdown_content: str, article_title: str = "") -> str:
     """
     記事タイトルから Amazonアフィリエイトリンクを生成し、Markdownに挿入して返す。
+    タイトル解析はmarkdown内のH1を優先し、なければ article_title 引数にフォールバック。
     失敗時は元の markdown_content をそのまま返す。
     """
     print("   🛒 Amazonアフィリエイト自動挿入開始")
 
-    product_name = extract_product_name(article_title)
+    # H1をmarkdown本文から直接抽出（パイプラインが生成したブログ記事タイトルを使用）
+    h1_title = _extract_h1_from_markdown(markdown_content)
+    source_title = h1_title if h1_title else article_title
+    if not source_title:
+        print("   ⚠️ タイトル取得失敗（H1なし・引数なし）- スキップ")
+        return markdown_content
+    print(f"   📋 タイトル: {source_title}")
+
+    product_name = extract_product_name(source_title)
     if not product_name:
         print("   ⚠️ 商品名抽出失敗 - スキップ")
         return markdown_content

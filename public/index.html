@@ -673,8 +673,9 @@
         const isChecked = selectMode && selectedIds && selectedIds.has(article.id);
         const isMultiSelected = multiSelectedIds && multiSelectedIds.has(article.id);
         const highlighted = isChecked || isMultiSelected;
-        // H1キャッシュがあれば優先（なければファイル名から抽出）
-        const displayName = (articleH1Cache && articleH1Cache[article.id])
+        // 優先順位: APIのh1Title > ローカルH1キャッシュ > ファイル名フォールバック
+        const displayName = article.h1Title
+          || (articleH1Cache && articleH1Cache[article.id])
           || article.name.replace(/^\d{8}_\d{4}_/, '').replace('.md', '');
         const date = new Date(article.lastModified).toLocaleDateString('ja-JP', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
 
@@ -2423,7 +2424,7 @@
                       <div className="flex items-center gap-1.5 min-w-0">
                         <div className="min-w-0">
                           <h2 className="text-sm font-bold text-slate-800 truncate max-w-xs">
-                            {(articleH1Cache && articleH1Cache[selectedArticle.id]) || selectedArticle.name.replace(/^\d{8}_\d{4}_/, '').replace('.md', '')}
+                            {selectedArticle.h1Title || (articleH1Cache && articleH1Cache[selectedArticle.id]) || selectedArticle.name.replace(/^\d{8}_\d{4}_/, '').replace('.md', '')}
                           </h2>
                           <p className="text-xs text-slate-400">
                             {new Date(selectedArticle.lastModified).toLocaleString('ja-JP')}
@@ -2431,7 +2432,7 @@
                           </p>
                         </div>
                         <button
-                          onClick={() => { setEditedTitle((articleH1Cache && articleH1Cache[selectedArticle.id]) || selectedArticle.name.replace(/^\d{8}_\d{4}_/, '').replace('.md', '')); setIsEditingTitle(true); }}
+                          onClick={() => { setEditedTitle(selectedArticle.h1Title || (articleH1Cache && articleH1Cache[selectedArticle.id]) || selectedArticle.name.replace(/^\d{8}_\d{4}_/, '').replace('.md', '')); setIsEditingTitle(true); }}
                           className="p-1 text-slate-300 hover:text-[#7C4DFF] rounded transition-colors flex-shrink-0"
                           title="タイトルを編集"
                           id="edit-title-btn"

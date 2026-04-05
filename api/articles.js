@@ -76,6 +76,42 @@ function encodeFolderPath(folder) {
 }
 
 /**
+ * MarkdownテキストからH1タイトルを抽出する
+ * `# タイトル` 形式の最初の行を返す。見つからなければ空文字列。
+ */
+function extractH1FromMarkdown(text) {
+  for (const line of text.split('\n')) {
+    const s = line.trim();
+    if (s.startsWith('# ') && !s.startsWith('## ')) {
+      return s.slice(2).trim();
+    }
+  }
+  return '';
+}
+
+/**
+ * 記事ファイルの先頭1KBをRange取得してH1タイトルを返す
+ * 失敗時は空文字列を返す（一覧取得全体はエラーにしない）
+ */
+async function fetchH1Title(token, fileId) {
+  try {
+    const url = `${GRAPH_API}/me/drive/items/${fileId}/content`;
+    const res = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Range: 'bytes=0-1023',
+      },
+    });
+    // 206 Partial Content or 200 OK どちらも受け入れる
+    if (!res.ok && res.status !== 206) return '';
+    const text = await res.text();
+    return extractH1FromMarkdown(text);
+  } catch {
+    return '';
+  }
+}
+
+/**
  * 記事一覧を再帰的に取得する（OneDriveのフォルダ階層をそのまま反映）
  * @param {string} token - アクセストークン
  * @param {string} folderPath - OneDriveのフォルダパス（例: "Blog_Articles"）
@@ -104,30 +140,41 @@ async function listArticlesRecursive(token, folderPath, relativePath = '', depth
   const data = await res.json();
   const items = data.value || [];
   let articles = [];
+  const subFolderPromises = [];
 
   for (const item of items) {
     if (item.folder) {
-      // サブフォルダ → 再帰取得
+      // サブフォルダ → 再帰取得（並列化）
       const subRelative = relativePath ? `${relativePath}/${item.name}` : item.name;
-      const subArticles = await listArticlesRecursive(
-        token,
-        `${folderPath}/${item.name}`,
-        subRelative,
-        depth + 1
+      subFolderPromises.push(
+        listArticlesRecursive(token, `${folderPath}/${item.name}`, subRelative, depth + 1)
       );
-      articles = articles.concat(subArticles);
     } else if (item.name && item.name.endsWith('.md')) {
-      // Markdownファイル → 記事として追加
+      // Markdownファイル → 記事として追加（H1はあとで並列取得）
       articles.push({
         id: item.id,
         name: item.name,
-        path: relativePath, // フォルダの相対パス（ルートフォルダからの表示用）
+        path: relativePath,
         lastModified: item.lastModifiedDateTime,
         webUrl: item.webUrl || '',
         size: item.size || 0,
+        h1Title: '', // 後で並列取得して埋める
       });
     }
   }
+
+  // サブフォルダを並列取得してマージ
+  const subResults = await Promise.all(subFolderPromises);
+  for (const sub of subResults) articles = articles.concat(sub);
+
+  // 各記事のH1タイトルを並列取得（先頭1KBのみ）
+  await Promise.all(
+    articles
+      .filter(a => !a.h1Title) // サブフォルダからの記事は既に取得済みの場合スキップ
+      .map(async (article) => {
+        article.h1Title = await fetchH1Title(token, article.id);
+      })
+  );
 
   // 新しい順にソート
   articles.sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified));
