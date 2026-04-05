@@ -2667,6 +2667,44 @@
                     {autoSaveStatus === 'pending' && <span className="text-slate-300 text-xs" title="自動保存待機中...">●</span>}
                     {autoSaveStatus === 'saved' && <span className="text-green-400 text-xs" title="自動保存完了">✓</span>}
                     <span className="ml-auto">{content.length.toLocaleString()} 文字</span>
+                    {/* Amazonアフィリエイトリンク一括削除ボタン */}
+                    <button
+                      onClick={() => {
+                        // amazon.co.jp/dp/{ASIN}/ref=nosim?tag=hiroshit-22 形式の行を削除
+                        const AMAZON_RE = /^https:\/\/www\.amazon\.co\.jp\/dp\/[A-Z0-9]{10}\/ref=nosim\?tag=hiroshit-22$/;
+                        const lines = content.split('\n');
+                        // 削除対象行のインデックスを収集
+                        const removeIdx = new Set(
+                          lines.reduce((acc, ln, i) => {
+                            if (AMAZON_RE.test(ln.trim())) acc.push(i);
+                            return acc;
+                          }, [])
+                        );
+                        if (removeIdx.size === 0) { showToast('削除対象のAmazonリンクが見つかりません', 'error'); return; }
+                        // 該当行とその前後の空行を除去
+                        const filtered = lines.filter((ln, i) => {
+                          if (removeIdx.has(i)) return false;
+                          // 前後がリンク行だった空行も除去（連続空行を1つに正規化）
+                          const prevIsLink = removeIdx.has(i - 1);
+                          const nextIsLink = removeIdx.has(i + 1);
+                          if ((prevIsLink || nextIsLink) && ln.trim() === '') return false;
+                          return true;
+                        });
+                        // 連続する空行を最大2行に正規化
+                        const normalized = [];
+                        let blankCount = 0;
+                        for (const ln of filtered) {
+                          if (ln.trim() === '') { blankCount++; if (blankCount <= 2) normalized.push(ln); }
+                          else { blankCount = 0; normalized.push(ln); }
+                        }
+                        setContent(normalized.join('\n'));
+                        showToast(`Amazonアフィリエイトリンクを${removeIdx.size}件削除しました`, 'success');
+                      }}
+                      className="flex items-center gap-1 rounded px-1.5 py-0.5 transition-colors hover:text-red-500 hover:bg-red-50"
+                      title="挿入済みAmazonアフィリエイトリンクを全て削除"
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    </button>
                     {/* リンク挿入ボタン: クリップボード内容を偶数番目H2（2,4,6...）の直前に挿入 */}
                     <button
                       onClick={async () => {

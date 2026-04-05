@@ -51,9 +51,20 @@ def extract_product_name(title: str) -> str:
 
 
 # ── ② Amazon検索 → ASIN取得 ────────────────────────────
+def _keyword_matches_title(keywords: list[str], title: str) -> bool:
+    """
+    商品ページのタイトルに、検索キーワードがすべて含まれるか確認（AND条件）。
+    大文字小文字を無視して部分一致。
+    """
+    title_lower = title.lower()
+    return all(kw.lower() in title_lower for kw in keywords)
+
+
 def fetch_amazon_asin(product_name: str) -> str | None:
     """
-    Playwrightで Amazon.co.jp を検索し、広告を除外した1番目の商品のASINを返す。
+    Playwrightで Amazon.co.jp を検索し、広告を除外かつ商品名が一致する
+    最初の商品のASINを返す。
+    検索キーワードと一致しない Organic 商品（別ブランド等）は除外する。
     失敗時は None を返す。
     """
     if not product_name:
@@ -62,24 +73,41 @@ def fetch_amazon_asin(product_name: str) -> str | None:
     try:
         from playwright.sync_api import sync_playwright
     except ImportError:
-        print("   ⚠️ playwright未インストール - Amazonアフィリエイト挿入スキップ")
+        print("   [WARN] playwright未インストール - Amazonアフィリエイト挿入スキップ")
         return None
 
     search_url = AMAZON_SEARCH_BASE + quote(product_name)
-    print(f"   🔍 Amazon検索: {product_name}")
+    print(f"   [SEARCH] Amazon: {product_name}")
 
-    # reference/skills/04-affiliate-link-maker/scripts/get_amazon_asin.js と同等のロジック
-    js_extract = """
+    # 商品名をスペースで分割してマッチ用キーワードを生成
+    # 例: "Bowers & Wilkins PI8" → ["Bowers", "Wilkins", "PI8"]
+    keywords = [w for w in product_name.replace("&", " ").split() if len(w) >= 2]
+
+    # 検索結果から Organic 商品を最大10件取得
+    js_get_organics = """
     () => {
         const products = Array.from(document.querySelectorAll('div[data-asin]'));
-        const firstOrganic = products.find(p => {
+        const organics = [];
+        for (const p of products) {
             const asin = p.getAttribute('data-asin');
+            if (!asin || asin.length !== 10) continue;
             const isAd = p.classList.contains('AdHolder') ||
-                p.querySelector('.puis-sponsored-label-text') ||
+                !!p.querySelector('.puis-sponsored-label-text') ||
                 (p.innerText && (p.innerText.includes('スポンサー') || p.innerText.includes('Sponsored')));
-            return asin && asin.length === 10 && !isAd;
-        });
-        return firstOrganic ? firstOrganic.getAttribute('data-asin') : null;
+            if (!isAd) organics.push(asin);
+            if (organics.length >= 10) break;
+        }
+        return organics;
+    }
+    """
+
+    # 商品ページのタイトル取得
+    js_get_title = """
+    () => {
+        const el = document.querySelector('#productTitle') ||
+                   document.querySelector('#title span') ||
+                   document.querySelector('.product-title-word-break');
+        return el ? el.innerText.trim() : '';
     }
     """
 
@@ -96,25 +124,37 @@ def fetch_amazon_asin(product_name: str) -> str | None:
                 viewport={"width": 1280, "height": 800},
             )
             page = context.new_page()
+
+            # 検索結果ページ
             page.goto(search_url, timeout=30000, wait_until="domcontentloaded")
-            # 検索結果要素を待機
             try:
                 page.wait_for_selector("div[data-asin]", timeout=15000)
             except Exception:
-                print("   ⚠️ Amazon検索結果の読み込みタイムアウト")
+                print("   [WARN] Amazon検索結果の読み込みタイムアウト")
                 browser.close()
                 return None
 
-            asin = page.evaluate(js_extract)
-            browser.close()
+            organic_asins = page.evaluate(js_get_organics)
+            print(f"   [INFO] Organic候補: {len(organic_asins)}件 → タイトル検証開始")
 
-            if asin:
-                print(f"   ✅ ASIN取得: {asin}")
-                return asin
-            print("   ⚠️ 広告を除外した有効な商品が見つかりません")
+            # 各商品ページを開いてタイトルを確認
+            for asin in organic_asins:
+                product_url = f"https://www.amazon.co.jp/dp/{asin}"
+                page.goto(product_url, timeout=20000, wait_until="domcontentloaded")
+                page.wait_for_timeout(800)
+                title = page.evaluate(js_get_title)
+                matched = _keyword_matches_title(keywords, title)
+                print(f"   [CHECK] {asin} | match={matched} | {title[:60]}")
+                if matched:
+                    browser.close()
+                    print(f"   [OK] ASIN確定: {asin}")
+                    return asin
+
+            browser.close()
+            print("   [WARN] 商品名が一致するOrganicな商品が見つかりません")
             return None
     except Exception as e:
-        print(f"   ⚠️ Amazon検索失敗: {e}")
+        print(f"   [WARN] Amazon検索失敗: {e}")
         return None
 
 
@@ -168,33 +208,33 @@ def insert_amazon_affiliate(markdown_content: str, article_title: str = "") -> s
     タイトル解析はmarkdown内のH1を優先し、なければ article_title 引数にフォールバック。
     失敗時は元の markdown_content をそのまま返す。
     """
-    print("   🛒 Amazonアフィリエイト自動挿入開始")
+    print("   [SHOP] Amazonアフィリエイト自動挿入開始")
 
     # H1をmarkdown本文から直接抽出（パイプラインが生成したブログ記事タイトルを使用）
     h1_title = _extract_h1_from_markdown(markdown_content)
     source_title = h1_title if h1_title else article_title
     if not source_title:
-        print("   ⚠️ タイトル取得失敗（H1なし・引数なし）- スキップ")
+        print("   [WARN] タイトル取得失敗（H1なし・引数なし）- スキップ")
         return markdown_content
-    print(f"   📋 タイトル: {source_title}")
+    print(f"   [LIST] タイトル: {source_title}")
 
     product_name = extract_product_name(source_title)
     if not product_name:
-        print("   ⚠️ 商品名抽出失敗 - スキップ")
+        print("   [WARN] 商品名抽出失敗 - スキップ")
         return markdown_content
-    print(f"   📦 商品名: {product_name}")
+    print(f"   [PKG] 商品名: {product_name}")
 
     asin = fetch_amazon_asin(product_name)
     if not asin:
         return markdown_content
 
     link = build_affiliate_link(asin)
-    print(f"   🔗 リンク: {link}")
+    print(f"   [LINK] リンク: {link}")
 
     lines = markdown_content.splitlines(keepends=True)
     positions = _insertion_positions(lines)
     if not positions:
-        print("   ⚠️ 挿入位置が見つかりません（▼も偶数H2も無し）- スキップ")
+        print("   [WARN] 挿入位置が見つかりません（▼も偶数H2も無し）- スキップ")
         return markdown_content
 
     # 挿入ブロック（前後に空行を確保）
@@ -204,7 +244,7 @@ def insert_amazon_affiliate(markdown_content: str, article_title: str = "") -> s
     for pos in sorted(positions, reverse=True):
         lines = lines[:pos] + [insert_block] + lines[pos:]
 
-    print(f"   ✅ Amazonアフィリエイトリンク挿入完了（{len(positions)}箇所）")
+    print(f"   [OK] Amazonアフィリエイトリンク挿入完了（{len(positions)}箇所）")
     return "".join(lines)
 
 
@@ -219,6 +259,6 @@ if __name__ == "__main__":
         result = insert_amazon_affiliate(md, title)
         with open(article_file, "w", encoding="utf-8") as f:
             f.write(result)
-        print(f"✅ {article_file} への挿入完了")
+        print(f"[OK] {article_file} への挿入完了")
     else:
         print("使用方法: python insert_amazon_affiliate.py <article.md> <記事タイトル>")
