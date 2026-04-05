@@ -315,13 +315,14 @@ def _fetch_asin_via_creators_api(product_name: str, keywords: list[str]) -> str 
 
     # Step1: OAuth2 クライアントクレデンシャルでアクセストークン取得
     try:
+        # 日本向けトークンエンドポイント
         token_res = req.post(
-            "https://api.amazon.com/auth/o2/token",
+            "https://api.amazon.co.jp/auth/o2/token",
             data={
                 "grant_type": "client_credentials",
                 "client_id": client_id,
                 "client_secret": client_secret,
-                "scope": "advertising::audiences",
+                "scope": "creatorsapi::default",
             },
             timeout=15,
         )
@@ -339,20 +340,19 @@ def _fetch_asin_via_creators_api(product_name: str, keywords: list[str]) -> str 
 
     # Step2: SearchItems でキーワード検索
     try:
-        search_res = req.get(
-            "https://creators-api.amazon.com/v1/SearchItems",
+        search_res = req.post(
+            "https://creatorsapi.amazon/catalog/v1/searchItems",
             headers={
                 "Authorization": f"Bearer {access_token}",
                 "Content-Type": "application/json",
+                "x-marketplace": "www.amazon.co.jp",
             },
-            params={
+            json={
                 "keywords": product_name,
-                "searchIndex": "All",
-                "itemCount": 10,
                 "partnerTag": ASSOCIATE_TAG,
-                "partnerType": "Associates",
                 "marketplace": "www.amazon.co.jp",
-                "resources": "ItemInfo.Title,Images.Primary.Medium",
+                "resources": ["itemInfo.title"],
+                "itemCount": 5,
             },
             timeout=20,
         )
@@ -361,16 +361,16 @@ def _fetch_asin_via_creators_api(product_name: str, keywords: list[str]) -> str 
             return None
 
         data = search_res.json()
-        items = data.get("SearchResult", {}).get("Items", [])
+        items = data.get("searchResult", {}).get("items", [])
         print(f"   [INFO] Creators API: {len(items)}件の検索結果")
 
         asin_re = re.compile(r"[A-Z0-9]{10}")
 
         for item in items:
-            asin = item.get("ASIN", "")
+            asin = item.get("asin", "")
             if not asin or not asin_re.fullmatch(asin):
                 continue
-            title = (item.get("ItemInfo", {}).get("Title", {}).get("DisplayValue", "") or "").lower()
+            title = (item.get("itemInfo", {}).get("title", {}).get("displayValue", "") or "").lower()
             matched = all(kw.lower() in title for kw in keywords)
             print(f"   [CHECK] {asin} | match={matched} | {title[:60]}")
             if matched:
@@ -379,9 +379,9 @@ def _fetch_asin_via_creators_api(product_name: str, keywords: list[str]) -> str 
 
         # AND条件マッチなし → 最初のASINをフォールバック
         if items:
-            asin = items[0].get("ASIN", "")
+            asin = items[0].get("asin", "")
             if asin:
-                title = items[0].get("ItemInfo", {}).get("Title", {}).get("DisplayValue", "")
+                title = items[0].get("itemInfo", {}).get("title", {}).get("displayValue", "")
                 print(f"   [OK] Creators API ASIN確定(フォールバック): {asin} | {title[:60]}")
                 return asin
 

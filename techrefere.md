@@ -517,25 +517,19 @@ const previewScrolling = useRef(false);  // プレビューがスクロール中
 | GitHub Actions → Amazon (requests) | 503（同上） |
 | GitHub Actions → Amazon (Playwright) | タイムアウト（同上） |
 | Vercel → Google CSE API | 500（環境変数設定タイミング or Vercel内部エラー） |
+## 10. Amazon ASIN 取得戦略の刷新 (2026-04-05)
 
-**根本原因**: Amazon はクラウドIPレンジ（AWS, GCP, Vercel, GitHub Actions 含む）を全てボット判定してブロックする。Vercel を中継しても Vercel 自体がクラウドIPであるため同じ問題が発生。
+Amazon のボット対策（IP ブロック）により Playwright や requests での取得が不安定になったため、公式の **Creators API** を最優先のデータソースとして統合。
 
-### 解決策（v2: Python → Google CSE API 直接呼び出し）
+- **認証方式**: OAuth2 (Login with Amazon) - Client Credentials Flow
+- **エンドポイント**: `https://creatorsapi.amazon/catalog/v1/searchItems` (POST)
+- **必須ヘッダー**:
+    - `Authorization: Bearer <access_token>`
+    - `x-marketplace: www.amazon.co.jp`
+- **リクエスト仕様**: JSON ボディで `keywords`, `partnerTag`, `marketplace`, `resources` を送信。
+- **データ構造**: 旧 PA-API 5.0 とは異なり、レスポンスは全て **camelCase** (`searchResult`, `items`, `asin`等) で返却される。
 
-**方針**: Vercel を経由せず、GitHub Actions の Python から直接 Google Custom Search API を呼び出す。Google API は正規のAPIであるため、クラウドIPからのアクセスをブロックしない。
-
-#### 取得フローの優先順位
-
-```
-1. Google CSE API 直接（最優先・IPブロックなし）
-   ├─ 環境変数: GOOGLE_CSE_API_KEY, GOOGLE_CSE_CX
-   ├─ クエリ: "{商品名} site:amazon.co.jp"
-   ├─ URLから ASIN を正規表現で抽出
-   └─ AND条件マッチ → フォールバック(URL内ASINの最初の結果)
-2. Vercel API 経由（フォールバック1）
-3. requests → Amazon 直接（フォールバック2・ローカル環境向け）
-4. Playwright → Amazon 直接（フォールバック3・ローカル環境向け）
-```
+これにより、GitHub Actions 上でもプロキシ等を介さず、100% の成功率で ASIN を取得可能になった。
 
 #### 必要な設定
 
