@@ -32,22 +32,78 @@ TITLE_MARKERS = [
 ]
 
 # タイトル末尾からトリミングする記号
-TRIM_CHARS = "：:・　 \t\r\n"
+TRIM_CHARS = "：:・　 \t\r\n、，,"
+
+# 商品名として不適切な日本語の説明ワード（これ以降を切り捨て）
+JP_NOISE_WORDS = [
+    "デスクトップ", "スピーカー", "イヤホン", "ヘッドホン", "ヘッドフォン",
+    "ワイヤレス", "ノイズ", "対応", "搭載", "機能", "高音質", "ハイレゾ",
+    "コスパ", "おすすめ", "レビュー", "比較", "まとめ",
+]
 
 
 # ── ① 商品名抽出 ────────────────────────────────────────
+def _trim_jp_noise(name: str) -> str:
+    """
+    商品名末尾の日本語説明ワードを除去して、純粋な製品名部分のみ残す。
+    例: "Edifier M90 デスクトップスピーカー、高音質..." → "Edifier M90"
+    """
+    for word in JP_NOISE_WORDS:
+        idx = name.find(word)
+        if idx > 0:
+            name = name[:idx]
+    return name.strip(TRIM_CHARS)
+
+
 def extract_product_name(title: str) -> str:
     """
     タイトルから商品名部分を抽出する。
     例: "Bowers & Wilkins PI8 レビュー比較まとめ：高音質..." → "Bowers & Wilkins PI8"
+    例: "Edifier M90 デスクトップスピーカー、高音質PCスピーカーのレビュー比較まとめ"
+        → "Edifier M90"
     """
     if not title:
         return ""
+    # TITLE_MARKERS で分割（最短になるものを優先）
     for marker in TITLE_MARKERS:
         if marker in title:
             name = title.split(marker, 1)[0]
-            return name.strip(TRIM_CHARS)
-    return title.strip(TRIM_CHARS)
+            name = name.strip(TRIM_CHARS)
+            # さらに日本語ノイズワードを除去
+            name = _trim_jp_noise(name)
+            return name
+    # マーカーがない場合：日本語ノイズワードのみで除去を試みる
+    return _trim_jp_noise(title.strip(TRIM_CHARS))
+
+
+def _extract_product_name_from_h2s(markdown: str) -> str:
+    """
+    H2見出しの共通語句から商品名を抽出するフォールバック戦略。
+    H2が "## Edifier M90 レビュー比較まとめ：結論" のように
+    共通プレフィックスを持つ場合に有効。
+    """
+    h2_lines = [
+        ln.strip()[3:].strip()  # "## " を除去
+        for ln in markdown.splitlines()
+        if ln.strip().startswith("## ")
+    ]
+    if len(h2_lines) < 2:
+        return ""
+
+    # 共通プレフィックスをトークン（スペース区切り）単位で求める
+    first_tokens = h2_lines[0].split()
+    common_tokens = []
+    for token in first_tokens:
+        if all(token in h2 for h2 in h2_lines[1:]):
+            common_tokens.append(token)
+        else:
+            break  # 最初に一致しなくなったら終了
+
+    if not common_tokens:
+        return ""
+
+    common_prefix = " ".join(common_tokens)
+    return extract_product_name(common_prefix)
 
 
 # ── ② Amazon検索 → ASIN取得 ────────────────────────────
@@ -210,15 +266,22 @@ def insert_amazon_affiliate(markdown_content: str, article_title: str = "") -> s
     """
     print("   [SHOP] Amazonアフィリエイト自動挿入開始")
 
-    # H1をmarkdown本文から直接抽出（パイプラインが生成したブログ記事タイトルを使用）
+    # 商品名抽出：H1 → article_title → H2共通語句 の優先順でフォールバック
     h1_title = _extract_h1_from_markdown(markdown_content)
     source_title = h1_title if h1_title else article_title
-    if not source_title:
-        print("   [WARN] タイトル取得失敗（H1なし・引数なし）- スキップ")
-        return markdown_content
-    print(f"   [LIST] タイトル: {source_title}")
 
-    product_name = extract_product_name(source_title)
+    product_name = ""
+    if source_title:
+        print(f"   [LIST] タイトル: {source_title}")
+        product_name = extract_product_name(source_title)
+
+    # H1/引数から取れない or 長すぎる場合 → H2共通語句で再抽出
+    if not product_name or len(product_name) > 30:
+        h2_name = _extract_product_name_from_h2s(markdown_content)
+        if h2_name and len(h2_name) < len(product_name or "x" * 999):
+            print(f"   [INFO] H2共通語句から商品名再抽出: {h2_name}")
+            product_name = h2_name
+
     if not product_name:
         print("   [WARN] 商品名抽出失敗 - スキップ")
         return markdown_content
