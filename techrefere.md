@@ -504,3 +504,52 @@ const previewScrolling = useRef(false);  // プレビューがスクロール中
 | OGP更新ボタン | 失敗リンクのみ再試行（成功済み `.ogp-card` には触れない） |
 | Markdown → HTML変換 | `marked.js`（CDN）＋ リンクは別タブ開き（カスタムrenderer） |
 | 3行以上の連続改行保持 | `\n{3,}` → 余分な行を `<br>` に変換してから `marked.parse()` |
+
+---
+
+## 10. Amazon ASIN 自動取得の改修記録
+
+### 問題（v1: Vercel経由 + Amazon直接アクセス）
+
+| 手法 | 結果 |
+|------|------|
+| Vercel Serverless → Amazon スクレイピング | 503（AmazonがクラウドIPを全ブロック） |
+| GitHub Actions → Amazon (requests) | 503（同上） |
+| GitHub Actions → Amazon (Playwright) | タイムアウト（同上） |
+| Vercel → Google CSE API | 500（環境変数設定タイミング or Vercel内部エラー） |
+
+**根本原因**: Amazon はクラウドIPレンジ（AWS, GCP, Vercel, GitHub Actions 含む）を全てボット判定してブロックする。Vercel を中継しても Vercel 自体がクラウドIPであるため同じ問題が発生。
+
+### 解決策（v2: Python → Google CSE API 直接呼び出し）
+
+**方針**: Vercel を経由せず、GitHub Actions の Python から直接 Google Custom Search API を呼び出す。Google API は正規のAPIであるため、クラウドIPからのアクセスをブロックしない。
+
+#### 取得フローの優先順位
+
+```
+1. Google CSE API 直接（最優先・IPブロックなし）
+   ├─ 環境変数: GOOGLE_CSE_API_KEY, GOOGLE_CSE_CX
+   ├─ クエリ: "{商品名} site:amazon.co.jp"
+   ├─ URLから ASIN を正規表現で抽出
+   └─ AND条件マッチ → フォールバック(URL内ASINの最初の結果)
+2. Vercel API 経由（フォールバック1）
+3. requests → Amazon 直接（フォールバック2・ローカル環境向け）
+4. Playwright → Amazon 直接（フォールバック3・ローカル環境向け）
+```
+
+#### 必要な設定
+
+| 設定先 | キー | 値 |
+|--------|------|----|
+| GitHub Secrets | `GOOGLE_CSE_API_KEY` | Google Cloud Console で発行した Custom Search API キー |
+| GitHub Secrets | `GOOGLE_CSE_CX` | Programmable Search Engine の検索エンジンID |
+| Vercel Environment Variables | `GOOGLE_CSE_API_KEY` | 同上（Vercel API フォールバック用） |
+| Vercel Environment Variables | `GOOGLE_CSE_CX` | 同上 |
+
+#### 変更ファイル
+
+| ファイル | 変更内容 |
+|----------|---------|
+| `insert_amazon_affiliate.py` | `_fetch_asin_via_google_cse()` 追加。最優先メソッドに設定 |
+| `blog-pipeline.yml` | `GOOGLE_CSE_API_KEY`, `GOOGLE_CSE_CX` を env に追加 |
+| `api/amazon-asin.js` | 検索クエリ・ASIN正規表現を修正（Vercel側フォールバック用） |

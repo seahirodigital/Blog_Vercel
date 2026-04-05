@@ -295,11 +295,87 @@ def _fetch_asin_via_playwright(product_name: str, keywords: list[str]) -> str | 
     return None
 
 
+def _fetch_asin_via_google_cse(product_name: str, keywords: list[str]) -> str | None:
+    """
+    Google Custom Search API を直接呼び出してASINを取得する（最優先）。
+    Google API はクラウドIPをブロックしないため、GitHub Actions から直接呼べる。
+    Vercel を経由しないので障害ポイントが減り、最も信頼性が高い。
+
+    必要な環境変数:
+      GOOGLE_CSE_API_KEY : Google Custom Search API キー
+      GOOGLE_CSE_CX      : カスタム検索エンジンID (cx)
+    """
+    import requests as req
+    import re
+
+    api_key = os.environ.get("GOOGLE_CSE_API_KEY", "")
+    cx = os.environ.get("GOOGLE_CSE_CX", "")
+    if not api_key or not cx:
+        print("   [WARN] Google CSE: GOOGLE_CSE_API_KEY または GOOGLE_CSE_CX が未設定 → スキップ")
+        return None
+
+    query = f"{product_name} site:amazon.co.jp"
+    params = {
+        "key": api_key,
+        "cx": cx,
+        "q": query,
+        "num": 10,
+        "gl": "jp",
+        "hl": "ja",
+    }
+
+    try:
+        r = req.get("https://www.googleapis.com/customsearch/v1", params=params, timeout=20)
+        if not r.ok:
+            body = r.text[:200]
+            print(f"   [WARN] Google CSE HTTPエラー: {r.status_code} | {body}")
+            return None
+
+        data = r.json()
+        items = data.get("items", [])
+        print(f"   [INFO] Google CSE: {len(items)}件の検索結果")
+
+        # URLから ASIN を抽出
+        asin_re = re.compile(r"(?:dp|gp/product)/([A-Z0-9]{10})")
+
+        for item in items:
+            link = item.get("link", "")
+            title = (item.get("title", "") or "").lower()
+            snippet = (item.get("snippet", "") or "").lower()
+
+            m = asin_re.search(link)
+            if not m:
+                continue
+
+            asin = m.group(1)
+            combined = title + " " + snippet
+
+            # AND条件: すべてのキーワードがタイトルまたはスニペットに含まれるか
+            matched = all(kw.lower() in combined for kw in keywords)
+            print(f"   [CHECK] {asin} | match={matched} | {item.get('title', '')[:60]}")
+            if matched:
+                print(f"   [OK] Google CSE ASIN確定: {asin}")
+                return asin
+
+        # AND条件でマッチしなかった場合、URL内にASINがある最初の結果をフォールバック
+        for item in items:
+            link = item.get("link", "")
+            m = asin_re.search(link)
+            if m:
+                asin = m.group(1)
+                print(f"   [OK] Google CSE ASIN確定(フォールバック): {asin} | {item.get('title', '')[:60]}")
+                return asin
+
+        print("   [WARN] Google CSE: ASIN含むURLが見つかりませんでした")
+        return None
+    except Exception as e:
+        print(f"   [WARN] Google CSE失敗: {e}")
+        return None
+
+
 def _fetch_asin_via_vercel(product_name: str) -> str | None:
     """
-    Vercel Serverless Function (/api/amazon-asin) 経由でASINを取得する。
-    GitHub Actions の IP は Amazon にブロックされるため、
-    Vercel のサーバーサイドを中継することでブロックを回避する。
+    Vercel Serverless Function (/api/amazon-asin) 経由でASINを取得する（フォールバック）。
     """
     import requests as req
 
@@ -310,7 +386,12 @@ def _fetch_asin_via_vercel(product_name: str) -> str | None:
     try:
         r = req.get(endpoint, params=params, timeout=30)
         if not r.ok:
-            print(f"   [WARN] Vercel API HTTPエラー: {r.status_code}")
+            body = ""
+            try:
+                body = r.text[:200]
+            except Exception:
+                pass
+            print(f"   [WARN] Vercel API HTTPエラー: {r.status_code} | {body}")
             return None
         data = r.json()
         asin = data.get("asin")
@@ -328,8 +409,8 @@ def _fetch_asin_via_vercel(product_name: str) -> str | None:
 
 def fetch_amazon_asin(product_name: str) -> str | None:
     """
-    Amazon.co.jp を検索し、広告除外・商品名AND一致で最初のASINを返す。
-    Vercel API（CI向け・ブロック回避）→ requests → Playwright の順で試行。
+    Amazon.co.jp の ASIN を取得する。
+    Google CSE直接（最優先）→ Vercel API → requests → Playwright の順で試行。
     """
     if not product_name:
         return None
@@ -337,18 +418,24 @@ def fetch_amazon_asin(product_name: str) -> str | None:
     print(f"   [SEARCH] Amazon: {product_name}")
     keywords = [w for w in product_name.replace("&", " ").split() if len(w) >= 2]
 
-    # 最優先: Vercel API（GitHub Actions の IP ブロック回避）
+    # 最優先: Google CSE API 直接呼び出し（IPブロックなし・最も信頼性が高い）
+    asin = _fetch_asin_via_google_cse(product_name, keywords)
+    if asin:
+        return asin
+
+    # フォールバック1: Vercel API経由
+    print("   [INFO] Google CSEで取得できず → Vercel APIでリトライ")
     asin = _fetch_asin_via_vercel(product_name)
     if asin:
         return asin
 
-    # フォールバック1: requests（ローカル環境向け）
+    # フォールバック2: requests（ローカル環境向け）
     print("   [INFO] Vercel APIで取得できず → requestsでリトライ")
     asin = _fetch_asin_via_requests(product_name, keywords)
     if asin:
         return asin
 
-    # フォールバック2: Playwright（ローカル環境）
+    # フォールバック3: Playwright（ローカル環境）
     print("   [INFO] requestsで取得できず → Playwrightでリトライ")
     return _fetch_asin_via_playwright(product_name, keywords)
 
