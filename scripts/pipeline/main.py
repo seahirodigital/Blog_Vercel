@@ -83,6 +83,21 @@ def process_single(row: dict, index: int, total: int) -> dict:
     else:
         print("   ⏭️ アフィリエイトスクリプト未検出 - スキップ")
 
+    # Step 3.5: Amazonアフィリエイトリンク自動挿入
+    #   タイトルから商品名を抽出 → Amazon検索 → ASIN取得 → 記事へ挿入
+    print("   🛒 Step 3.5: Amazonアフィリエイト自動挿入中...")
+    amz_script = os.path.join(script_dir, "prompts", "04-affiliate-link-manager", "insert_amazon_affiliate.py")
+    if os.path.exists(amz_script):
+        try:
+            spec = importlib.util.spec_from_file_location("insert_amazon_affiliate", amz_script)
+            amz_mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(amz_mod)
+            markdown = amz_mod.insert_amazon_affiliate(markdown, transcript["title"])
+        except Exception as e:
+            print(f"   ⚠️ Amazonアフィリエイト挿入失敗（続行します）: {e}")
+    else:
+        print("   ⏭️ Amazonアフィリエイトスクリプト未検出 - スキップ")
+
     # Step 4: OneDriveに保存（記事はクリーンなまま）
     now = datetime.now()
     safe_title = _make_safe_filename(transcript["title"])

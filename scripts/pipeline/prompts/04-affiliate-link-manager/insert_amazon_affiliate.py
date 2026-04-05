@@ -1,0 +1,204 @@
+"""
+Amazonアフィリエイトリンク自動挿入モジュール
+
+【処理フロー】
+1. 記事タイトルから商品名を抽出（「XXX レビュー比較まとめ：〜」の XXX 部分）
+2. Playwrightで Amazon 検索を実行
+3. 検索結果から広告（スポンサー）を除外した1番目の商品のASINを取得
+4. アフィリエイトリンクを生成（tag=hiroshit-22）
+5. 記事に挿入
+   (a) 最初に出現する▼の直前に1つ
+   (b) 偶数番目のH2（2,4,6...番目）の直前
+       ※ public/index.html のクリップボード添付アイコンと同一ロジック
+
+【安全性】
+- 商品名抽出失敗 / ASIN取得失敗 / H2が無い等の場合は原文を返す
+- 既存の insert_affiliate_links.py は無改変
+"""
+
+import re
+from urllib.parse import quote
+
+ASSOCIATE_TAG = "hiroshit-22"
+AMAZON_SEARCH_BASE = "https://www.amazon.co.jp/s?k="
+
+# 商品名抽出用の区切りマーカー（優先度順）
+TITLE_MARKERS = [
+    "レビュー比較まとめ",
+    "レビュー比較",
+    "比較まとめ",
+    "レビュー",
+    "比較",
+    "まとめ",
+]
+
+# タイトル末尾からトリミングする記号
+TRIM_CHARS = "：:・　 \t\r\n"
+
+
+# ── ① 商品名抽出 ────────────────────────────────────────
+def extract_product_name(title: str) -> str:
+    """
+    タイトルから商品名部分を抽出する。
+    例: "Bowers & Wilkins PI8 レビュー比較まとめ：高音質..." → "Bowers & Wilkins PI8"
+    """
+    if not title:
+        return ""
+    for marker in TITLE_MARKERS:
+        if marker in title:
+            name = title.split(marker, 1)[0]
+            return name.strip(TRIM_CHARS)
+    return title.strip(TRIM_CHARS)
+
+
+# ── ② Amazon検索 → ASIN取得 ────────────────────────────
+def fetch_amazon_asin(product_name: str) -> str | None:
+    """
+    Playwrightで Amazon.co.jp を検索し、広告を除外した1番目の商品のASINを返す。
+    失敗時は None を返す。
+    """
+    if not product_name:
+        return None
+
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        print("   ⚠️ playwright未インストール - Amazonアフィリエイト挿入スキップ")
+        return None
+
+    search_url = AMAZON_SEARCH_BASE + quote(product_name)
+    print(f"   🔍 Amazon検索: {product_name}")
+
+    # reference/skills/04-affiliate-link-maker/scripts/get_amazon_asin.js と同等のロジック
+    js_extract = """
+    () => {
+        const products = Array.from(document.querySelectorAll('div[data-asin]'));
+        const firstOrganic = products.find(p => {
+            const asin = p.getAttribute('data-asin');
+            const isAd = p.classList.contains('AdHolder') ||
+                p.querySelector('.puis-sponsored-label-text') ||
+                (p.innerText && (p.innerText.includes('スポンサー') || p.innerText.includes('Sponsored')));
+            return asin && asin.length === 10 && !isAd;
+        });
+        return firstOrganic ? firstOrganic.getAttribute('data-asin') : null;
+    }
+    """
+
+    try:
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            context = browser.new_context(
+                user_agent=(
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/122.0.0.0 Safari/537.36"
+                ),
+                locale="ja-JP",
+                viewport={"width": 1280, "height": 800},
+            )
+            page = context.new_page()
+            page.goto(search_url, timeout=30000, wait_until="domcontentloaded")
+            # 検索結果要素を待機
+            try:
+                page.wait_for_selector("div[data-asin]", timeout=15000)
+            except Exception:
+                print("   ⚠️ Amazon検索結果の読み込みタイムアウト")
+                browser.close()
+                return None
+
+            asin = page.evaluate(js_extract)
+            browser.close()
+
+            if asin:
+                print(f"   ✅ ASIN取得: {asin}")
+                return asin
+            print("   ⚠️ 広告を除外した有効な商品が見つかりません")
+            return None
+    except Exception as e:
+        print(f"   ⚠️ Amazon検索失敗: {e}")
+        return None
+
+
+# ── ③ アフィリエイトリンク生成 ──────────────────────────
+def build_affiliate_link(asin: str) -> str:
+    """ASINからアフィリエイトリンクを生成"""
+    return f"https://www.amazon.co.jp/dp/{asin}/ref=nosim?tag={ASSOCIATE_TAG}"
+
+
+# ── ④ 記事への挿入 ──────────────────────────────────────
+def _insertion_positions(lines: list[str]) -> list[int]:
+    """
+    挿入位置の行番号リストを返す。
+    (a) 最初の▼の直前
+    (b) 偶数番目のH2（1-indexedで2,4,6...→0-indexedで1,3,5...）の直前
+    """
+    positions: list[int] = []
+
+    # (a) 最初の▼
+    for i, ln in enumerate(lines):
+        if ln.lstrip().startswith("▼"):
+            positions.append(i)
+            break
+
+    # (b) 偶数番目H2
+    h2_line_indices = [i for i, ln in enumerate(lines) if ln.startswith("## ")]
+    for idx, line_idx in enumerate(h2_line_indices):
+        if idx % 2 == 1:  # 2番目, 4番目, 6番目...
+            positions.append(line_idx)
+
+    # 重複除去（▼とH2の位置が偶然同じ行になるケースへの保険）
+    return sorted(set(positions))
+
+
+# ── メインエントリーポイント ────────────────────────────
+def insert_amazon_affiliate(markdown_content: str, article_title: str) -> str:
+    """
+    記事タイトルから Amazonアフィリエイトリンクを生成し、Markdownに挿入して返す。
+    失敗時は元の markdown_content をそのまま返す。
+    """
+    print("   🛒 Amazonアフィリエイト自動挿入開始")
+
+    product_name = extract_product_name(article_title)
+    if not product_name:
+        print("   ⚠️ 商品名抽出失敗 - スキップ")
+        return markdown_content
+    print(f"   📦 商品名: {product_name}")
+
+    asin = fetch_amazon_asin(product_name)
+    if not asin:
+        return markdown_content
+
+    link = build_affiliate_link(asin)
+    print(f"   🔗 リンク: {link}")
+
+    lines = markdown_content.splitlines(keepends=True)
+    positions = _insertion_positions(lines)
+    if not positions:
+        print("   ⚠️ 挿入位置が見つかりません（▼も偶数H2も無し）- スキップ")
+        return markdown_content
+
+    # 挿入ブロック（前後に空行を確保）
+    insert_block = f"\n{link}\n\n"
+
+    # 行番号ズレを防ぐため後方から逆順に挿入
+    for pos in sorted(positions, reverse=True):
+        lines = lines[:pos] + [insert_block] + lines[pos:]
+
+    print(f"   ✅ Amazonアフィリエイトリンク挿入完了（{len(positions)}箇所）")
+    return "".join(lines)
+
+
+# ── CLI実行（デバッグ用）────────────────────────────────
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) >= 3:
+        article_file = sys.argv[1]
+        title = sys.argv[2]
+        with open(article_file, "r", encoding="utf-8") as f:
+            md = f.read()
+        result = insert_amazon_affiliate(md, title)
+        with open(article_file, "w", encoding="utf-8") as f:
+            f.write(result)
+        print(f"✅ {article_file} への挿入完了")
+    else:
+        print("使用方法: python insert_amazon_affiliate.py <article.md> <記事タイトル>")
