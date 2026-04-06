@@ -19,6 +19,7 @@ from seo_factory.analyzers.keyword_normalizer import normalize_records
 from seo_factory.collectors.rakko_suggest_collector import collect_suggest_keywords
 from seo_factory.generators.master_article_generator import generate_master_article
 from seo_factory.generators.master_outline_generator import generate_master_outline, render_markdown_outline
+from seo_factory.generators.keyword_variant_rewriter import generate_variant_articles
 from seo_factory.integrations.google_sheets_keyword_store import (
     load_keyword_records_from_sheet,
     select_keyword_records_for_generation,
@@ -45,6 +46,14 @@ def _write_text(path: Path, text: str) -> None:
 def _write_json(path: Path, data: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def _write_variant_articles(target_dir: Path, variants: list[dict[str, Any]]) -> None:
+    variants_dir = target_dir / "variants"
+    variants_dir.mkdir(parents=True, exist_ok=True)
+    for variant in variants:
+        slug = _slugify(str(variant.get("target_keyword", "")))
+        _write_text(variants_dir / f"{slug}.md", str(variant.get("article_markdown", "")))
 
 
 def parse_args() -> argparse.Namespace:
@@ -77,7 +86,8 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="シート保存後も停止せず、そのまま母艦記事生成へ進む",
     )
-    parser.add_argument("--skip-llm", action="store_true", help="Gemini を使わず土台記事だけ生成する")
+    parser.add_argument("--skip-llm", action="store_true", help="LLM を使わずローカル生成だけで出力する")
+    parser.add_argument("--use-llm", action="store_true", help="明示指定時のみ LLM を使う")
     return parser.parse_args()
 
 
@@ -156,7 +166,9 @@ def main() -> None:
     _write_text(target_dir / "master_article.md", base_generation["master_article_markdown"])
 
     generation = base_generation
-    gemini_api_key = None if args.skip_llm else os.getenv("GEMINI_API_KEY", "")
+    gemini_api_key = ""
+    if args.use_llm and not args.skip_llm:
+        gemini_api_key = os.getenv("GEMINI_API_KEY", "")
     if gemini_api_key:
         generation = generate_master_article(
             seed_keyword=args.seed_keyword,
@@ -169,9 +181,20 @@ def main() -> None:
         if generation["enhancement_plan_markdown"]:
             _write_text(target_dir / "031_enhancement_plan.md", generation["enhancement_plan_markdown"])
 
+    variants = generate_variant_articles(
+        seed_keyword=args.seed_keyword,
+        master_article_markdown=str(generation["master_article_markdown"]),
+        selected_records=current_records,
+        outline=outline,
+        gemini_api_key=gemini_api_key,
+    )
+    _write_variant_articles(target_dir, variants)
+    _write_json(target_dir / "variant_articles.json", variants)
+
     print(f"出力先: {target_dir}")
     print(f"LLM使用: {'あり' if generation['used_llm'] else 'なし'}")
     print(f"母艦記事タイトル: {generation['outline']['title']}")
+    print(f"個別記事件数: {len(variants)}")
 
 
 if __name__ == "__main__":

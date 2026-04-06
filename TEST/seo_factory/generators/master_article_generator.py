@@ -145,15 +145,24 @@ def _append_heading_block(
 ) -> None:
     lines.append(f"{heading_level} {heading_text}")
     lines.append("")
-    lines.append(f"課題：{problem_text}")
-    lines.append(f"解決：{solution_text}")
-    lines.append("")
     lines.append(explanation_text)
     lines.append("")
     lines.extend(point_lines)
     lines.append("")
     lines.append(closing_text)
     lines.append("")
+
+
+def _normalize_heading_levels(article_markdown: str) -> str:
+    normalized_lines: list[str] = []
+    for line in str(article_markdown or "").splitlines():
+        if line.startswith("### "):
+            normalized_lines.append(f"## {line[4:].strip()}")
+        elif line.startswith("#### "):
+            normalized_lines.append(f"## {line[5:].strip()}")
+        else:
+            normalized_lines.append(line)
+    return "\n".join(normalized_lines).strip() + "\n"
 
 
 def _reduce_records_for_llm(
@@ -201,25 +210,9 @@ def render_base_master_article(
     lines = [
         f"# {outline['title']}",
         "",
-        f"{seed_keyword} に関するサジェストを、ユーザー需要順で整理した母艦記事の土台。後段で 031 / 032 により不足回答を追加する。",
+        f"{seed_keyword} を検討するときに迷いやすい主要論点を、購入判断に必要な順で整理する。",
         "",
     ]
-
-    _append_heading_block(
-        lines=lines,
-        heading_level="##",
-        heading_text="この記事の使い方",
-        problem_text=f"{seed_keyword} の疑問が多く、何から確認するか散らばりやすい状態",
-        solution_text="Buy大 → Know大 → Buy中 → Know中 → Buy小 の順で読む流れ",
-        explanation_text="先に結論へ近い論点から並べることで、購入判断と疑問解消を同時に進めやすくする。",
-        point_lines=[
-            "- 結論：需要順整理",
-            "- 優先：Buy大先頭",
-            "- 次点：Know大確認",
-            "- 方法：順番固定",
-        ],
-        closing_text="先頭から読むほど、迷いの大きい論点を短く潰しやすい。",
-    )
 
     priority_groups = outline.get("priority_groups", [])
     if priority_groups:
@@ -241,13 +234,13 @@ def render_base_master_article(
                     f"- 論点：{_shorten_phrase(keywords[0] if keywords else '主要論点')}",
                     "- 方法：先頭確認",
                 ],
-                closing_text=f"対象キーワード: {', '.join(keywords)}" if keywords else "対象キーワードは後段で追加補強する。",
+                closing_text=f"主に見ておきたい論点: {', '.join(keywords)}" if keywords else "この区分は優先して確認したい。",
             )
 
     if focus_keywords:
         lines.extend(
             [
-                "## この記事で先に押さえるサジェスト",
+                "## 先に確認したい主要論点",
                 "",
                 *(f"- {keyword}" for keyword in focus_keywords),
                 "",
@@ -257,7 +250,7 @@ def render_base_master_article(
     if previous_keywords:
         lines.extend(
             [
-                "## 前作サジェストで先に確認しておく論点",
+                "## 前作から見ておきたい論点",
                 "",
                 *(f"- {keyword}" for keyword in previous_keywords),
                 "",
@@ -306,7 +299,7 @@ def render_base_master_article(
                 solution_text=_make_solution_text(str(subsection.get("query_type", "Know")), source_scope),
                 explanation_text=explanation,
                 point_lines=_build_point_lines(subsection),
-                closing_text="この論点は後段でさらに補強し、量産記事へ抜き出しやすい塊にする。",
+                closing_text="この論点を先に押さえておくと、購入判断や比較がかなりしやすくなる。",
             )
 
             for child_topic in subsection.get("child_h2_topics", []):
@@ -321,24 +314,8 @@ def render_base_master_article(
                     solution_text=_make_solution_text(str(child_topic.get("query_type", "Know")), child_source_scope),
                     explanation_text=_build_explanation(seed_keyword, child_keyword, child_source_scope),
                     point_lines=_build_point_lines(child_topic),
-                    closing_text="この子需要は、親需要の記事内で独立した回答ブロックとして回収する。",
+                    closing_text="この論点も独立して確認できるようにしておくと、読み返しやすくなる。",
                 )
-
-    _append_heading_block(
-        lines=lines,
-        heading_level="##",
-        heading_text="母艦記事化に向けた引き継ぎメモ",
-        problem_text="03 相当の土台では、未回答サジェストがまだ残る状態",
-        solution_text="031 と 032 で不足回答だけを追記し、母艦記事へ仕上げる方法",
-        explanation_text="基本見出し骨格は残したまま、サジェスト由来の未回答論点だけを足していく。",
-        point_lines=[
-            "- 結論：骨格維持",
-            "- 課題：未回答残存",
-            "- 方法：不足追記",
-            "- 目的：量産元化",
-        ],
-        closing_text="ここから先は、シートで選ばれたキーワードに沿って母艦化を深める。",
-    )
 
     return "\n".join(lines).strip() + "\n"
 
@@ -439,7 +416,7 @@ def generate_master_article(
         system_prompt=best_enhancer_prompt,
         model_name=model_name,
     )
-    master_article = master_article or base_article
+    master_article = _normalize_heading_levels(master_article or base_article)
 
     result["enhancement_plan_markdown"] = enhancement_plan
     result["master_article_markdown"] = master_article
