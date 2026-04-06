@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>モバイルリンク集</title>
+  <meta
+    name="description"
+    content="スマホで複数サイトへすばやく遷移できる、モバイル最適化済みのリンク集ページです。"
+  />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: rgba(255, 255, 255, 0.94);
+      --line: #e2e8f0;
+      --text: #334155;
+      --muted: #64748b;
+      --purple: #7c4dff;
+      --purple-dark: #5b21b6;
+      --purple-soft: #f5f3ff;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124, 77, 255, 0.12), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.10), transparent 24%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulseBorder {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(124, 77, 255, 0.18); }
+      50% { box-shadow: 0 0 0 8px rgba(124, 77, 255, 0); }
+    }
+
+    .page-shell {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 280px;
+      border-right: 1px solid var(--line);
+      background: var(--panel);
+      backdrop-filter: blur(18px);
+      padding: 20px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .brand-card {
+      border: 1px solid rgba(124, 77, 255, 0.14);
+      background: linear-gradient(180deg, #ffffff, #faf5ff);
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .nav-link:hover {
+      color: var(--purple);
+      background: var(--purple-soft);
+      border-color: rgba(124, 77, 255, 0.18);
+    }
+
+    .nav-link.active {
+      color: var(--purple);
+      background: var(--purple-soft);
+      border-color: rgba(124, 77, 255, 0.22);
+    }
+
+    .content {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      min-height: 56px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .mobile-menu-btn,
+    .header-link,
+    .close-btn,
+    .ghost-btn,
+    .mini-btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .mobile-menu-btn,
+    .close-btn {
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .header-link,
+    .ghost-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .ghost-btn:hover,
+    .header-link:hover,
+    .mobile-menu-btn:hover,
+    .close-btn:hover,
+    .mini-btn:hover {
+      color: var(--purple);
+      border-color: rgba(124, 77, 255, 0.28);
+      background: var(--purple-soft);
+    }
+
+    .canvas {
+      width: min(100%, 760px);
+      margin: 0 auto;
+      padding: 24px 16px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .hero,
+    .panel {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(124, 77, 255, 0.12);
+      border-radius: 24px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+    }
+
+    .hero {
+      padding: 24px 20px;
+      animation: fadeInUp 0.35s ease-out;
+    }
+
+    .panel {
+      padding: 18px;
+      animation: fadeInUp 0.4s ease-out;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--purple-soft);
+      color: var(--purple);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .hero h1 {
+      margin: 14px 0 10px;
+      font-size: clamp(28px, 7vw, 40px);
+      line-height: 1.05;
+      color: #1e293b;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .hero-badges {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero-badge {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--purple-dark);
+      background: #fff;
+      border: 1px solid rgba(124, 77, 255, 0.22);
+      border-radius: 999px;
+      padding: 8px 12px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 800;
+      color: #1e293b;
+    }
+
+    .section-subtitle {
+      margin: 4px 0 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .link-button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 18px;
+      border-radius: 20px;
+      border: 2px solid var(--purple);
+      background: #fff;
+      color: var(--purple);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 16px;
+      box-shadow: 0 10px 22px rgba(124, 77, 255, 0.08);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .link-button:hover,
+    .link-button:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(124, 77, 255, 0.14);
+      background: #fcfaff;
+      outline: none;
+    }
+
+    .link-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .link-url {
+      color: #8b5cf6;
+      font-size: 11px;
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .input,
+    .textarea {
+      width: 100%;
+      border: 1px solid #d8d4fe;
+      border-radius: 16px;
+      padding: 14px 15px;
+      font-size: 14px;
+      color: var(--text);
+      background: #fff;
+      outline: none;
+      transition: 0.18s ease;
+    }
+
+    .input:focus,
+    .textarea:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 4px rgba(124, 77, 255, 0.10);
+    }
+
+    .textarea {
+      min-height: 88px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .primary-btn {
+      appearance: none;
+      border: 2px solid var(--purple);
+      background: #fff;
+      color: var(--purple);
+      border-radius: 16px;
+      padding: 14px 18px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .primary-btn:hover {
+      background: var(--purple-soft);
+    }
+
+    .manage-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .manage-item {
+      border: 1px solid rgba(124, 77, 255, 0.16);
+      border-radius: 20px;
+      background: #fff;
+      padding: 14px;
+      transition: 0.18s ease;
+      touch-action: none;
+      user-select: none;
+    }
+
+    .manage-item.dragging {
+      border-color: var(--purple);
+      background: #fcfaff;
+      animation: pulseBorder 0.9s ease-in-out infinite;
+    }
+
+    .manage-item-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .manage-item-title {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--purple);
+      word-break: break-word;
+    }
+
+    .manage-item-url {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      word-break: break-all;
+    }
+
+    .manage-item-tools {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .mini-btn {
+      padding: 10px 12px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .mini-btn.danger {
+      color: #e11d48;
+      border-color: #fecdd3;
+    }
+
+    .mini-btn.danger:hover {
+      color: #be123c;
+      border-color: #fb7185;
+      background: #fff1f2;
+    }
+
+    .drag-hint {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: var(--purple-soft);
+      color: var(--purple-dark);
+      font-size: 12px;
+      line-height: 1.7;
+      font-weight: 700;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      min-width: min(90vw, 360px);
+      padding: 14px 18px;
+      border-radius: 16px;
+      background: #1e293b;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.22);
+      z-index: 100;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.42);
+      z-index: 39;
+    }
+
+    .drawer {
+      position: fixed;
+      inset: 0 auto 0 0;
+      width: min(82vw, 300px);
+      z-index: 40;
+      transform: translateX(-100%);
+      transition: transform 0.22s ease;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.18);
+    }
+
+    .drawer.open {
+      transform: translateX(0);
+    }
+
+    @media (max-width: 1023px) {
+      .sidebar-desktop { display: none; }
+      .header-link.desktop-only { display: none; }
+      .canvas { padding-top: 18px; }
+    }
+
+    @media (min-width: 1024px) {
+      .mobile-menu-btn,
+      .drawer,
+      .overlay { display: none; }
+      .sidebar-desktop .close-btn { display: none; }
+      .links-grid { gap: 14px; }
+      .form-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .form-grid .textarea-wrap,
+      .form-grid .form-actions {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header {
+        padding: 12px 14px;
+      }
+      .hero,
+      .panel {
+        border-radius: 22px;
+      }
+      .hero {
+        padding: 22px 16px;
+      }
+      .panel {
+        padding: 16px;
+      }
+      .link-button {
+        padding: 16px;
+        font-size: 15px;
+      }
+      .manage-item-header {
+        flex-direction: column;
+      }
+      .manage-item-tools {
+        width: 100%;
+      }
+      .mini-btn {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useEffect, useMemo, useRef, useState } = React;
+
+    const STORAGE_KEY = 'mobileQuickLinks_v1';
+    const DEFAULT_LINKS = [
+      { id: 'blog', label: 'ブログ', url: 'https://blog-vercel-dun.vercel.app/' },
+      { id: 'invest', label: '投資日記', url: 'https://seahirodigital.github.io/investment_dashboard/' },
+      { id: 'youtube-summary', label: 'Youtube要約', url: 'https://aistudio.google.com/apps/drive/1WtTzS5VQ00GRtR16YBcGEFWiCQy2Pc3I?showPreview=true&showAssistant=true' },
+    ];
+
+    function safeLoadLinks() {
+      try {
+        const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+        if (!Array.isArray(raw) || raw.length === 0) return DEFAULT_LINKS;
+        return raw.filter(item => item && item.id && item.label && item.url);
+      } catch {
+        return DEFAULT_LINKS;
+      }
+    }
+
+    function normalizeUrl(url) {
+      const value = (url || '').trim();
+      if (!value) return '';
+      if (/^https?:\/\//i.test(value)) return value;
+      return `https://${value}`;
+    }
+
+    function moveItem(items, fromIndex, toIndex) {
+      if (fromIndex === toIndex || fromIndex < 0 || toIndex < 0) return items;
+      const next = [...items];
+      const [picked] = next.splice(fromIndex, 1);
+      next.splice(toIndex, 0, picked);
+      return next;
+    }
+
+    function App() {
+      const [links, setLinks] = useState(() => safeLoadLinks());
+      const [labelInput, setLabelInput] = useState('');
+      const [urlInput, setUrlInput] = useState('');
+      const [editingId, setEditingId] = useState(null);
+      const [drawerOpen, setDrawerOpen] = useState(false);
+      const [toast, setToast] = useState('');
+      const [draggingId, setDraggingId] = useState(null);
+      const longPressRef = useRef(null);
+      const dragActiveRef = useRef(false);
+
+      useEffect(() => {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(links));
+      }, [links]);
+
+      useEffect(() => {
+        if (!toast) return undefined;
+        const timer = setTimeout(() => setToast(''), 2200);
+        return () => clearTimeout(timer);
+      }, [toast]);
+
+      useEffect(() => {
+        const cancelAll = () => {
+          clearTimeout(longPressRef.current);
+          longPressRef.current = null;
+          dragActiveRef.current = false;
+          setDraggingId(null);
+        };
+        window.addEventListener('pointerup', cancelAll);
+        window.addEventListener('pointercancel', cancelAll);
+        return () => {
+          window.removeEventListener('pointerup', cancelAll);
+          window.removeEventListener('pointercancel', cancelAll);
+        };
+      }, []);
+
+      const isEditing = useMemo(() => editingId !== null, [editingId]);
+
+      function showToast(message) {
+        setToast(message);
+      }
+
+      function resetForm() {
+        setLabelInput('');
+        setUrlInput('');
+        setEditingId(null);
+      }
+
+      function handleSubmit(event) {
+        event.preventDefault();
+        const label = labelInput.trim();
+        const url = normalizeUrl(urlInput);
+
+        if (!label || !url) {
+          showToast('ボタン名とURLの両方を入力してください。');
+          return;
+        }
+
+        let parsed;
+        try {
+          parsed = new URL(url);
+        } catch {
+          showToast('URLの形式が正しくありません。');
+          return;
+        }
+
+        if (!/^https?:$/.test(parsed.protocol)) {
+          showToast('http または https のURLだけ登録できます。');
+          return;
+        }
+
+        if (editingId) {
+          setLinks(prev => prev.map(item => item.id === editingId ? { ...item, label, url } : item));
+          showToast('リンクを更新しました。');
+        } else {
+          setLinks(prev => [...prev, { id: `${Date.now()}`, label, url }]);
+          showToast('リンクを追加しました。');
+        }
+
+        resetForm();
+      }
+
+      function handleEdit(item) {
+        setEditingId(item.id);
+        setLabelInput(item.label);
+        setUrlInput(item.url);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function handleDelete(id) {
+        setLinks(prev => prev.filter(item => item.id !== id));
+        if (editingId === id) resetForm();
+        showToast('リンクを削除しました。');
+      }
+
+      function startLongPress(id) {
+        clearTimeout(longPressRef.current);
+        longPressRef.current = setTimeout(() => {
+          dragActiveRef.current = true;
+          setDraggingId(id);
+          if (navigator.vibrate) navigator.vibrate(40);
+          showToast('長押し中です。上下へ動かして順序を入れ替えられます。');
+        }, 380);
+      }
+
+      function handlePointerDown(id) {
+        startLongPress(id);
+      }
+
+      function handlePointerMove(event, id) {
+        if (!dragActiveRef.current || draggingId !== id) return;
+        const target = document.elementFromPoint(event.clientX, event.clientY)?.closest('[data-link-id]');
+        if (!target) return;
+        const overId = target.getAttribute('data-link-id');
+        if (!overId || overId === draggingId) return;
+
+        setLinks(prev => {
+          const fromIndex = prev.findIndex(item => item.id === draggingId);
+          const toIndex = prev.findIndex(item => item.id === overId);
+          return moveItem(prev, fromIndex, toIndex);
+        });
+      }
+
+      function handlePointerUp() {
+        clearTimeout(longPressRef.current);
+        longPressRef.current = null;
+        if (dragActiveRef.current) showToast('順序を更新しました。');
+        dragActiveRef.current = false;
+        setDraggingId(null);
+      }
+
+      return (
+        <div className="page-shell">
+          <aside className="sidebar sidebar-desktop">
+            <SidebarContent closeDrawer={() => {}} />
+          </aside>
+
+          {drawerOpen && <div className="overlay" onClick={() => setDrawerOpen(false)} />}
+          <aside className={`sidebar drawer ${drawerOpen ? 'open' : ''}`}>
+            <SidebarContent closeDrawer={() => setDrawerOpen(false)} />
+          </aside>
+
+          <div className="content">
+            <header className="header">
+              <button className="mobile-menu-btn" onClick={() => setDrawerOpen(true)} aria-label="メニューを開く">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 12h18M3 6h18M3 18h18" />
+                </svg>
+              </button>
+
+              <div style={{ minWidth: 0, flex: 1 }}>
+                <div style={{ fontSize: '12px', color: '#8b5cf6', fontWeight: 800 }}>スマホ導線専用</div>
+                <div style={{ fontSize: '15px', fontWeight: 800, color: '#1e293b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  モバイルリンク集
+                </div>
+              </div>
+
+              <a className="header-link desktop-only" href="/index.html">ブログ管理へ戻る</a>
+            </header>
+
+            <main className="canvas">
+              <section className="hero">
+                <div className="eyebrow">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" />
+                    <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
+                  </svg>
+                  スマホで使いやすい導線ページ
+                </div>
+                <h1>必要なリンクだけを、親指ひとつで開ける。</h1>
+                <p>
+                  サイドパネルとヘッダーの雰囲気を引き継いだまま、スマホ利用に寄せたリンク専用ページです。
+                  白地・紫文字・紫枠で統一し、追加・編集・削除と長押し並び替えまでこの画面だけで完結します。
+                </p>
+                <div className="hero-badges">
+                  <span className="hero-badge">白地 + 紫文字 + 紫枠</span>
+                  <span className="hero-badge">長押しで並び替え</span>
+                  <span className="hero-badge">localStorage保存</span>
+                </div>
+              </section>
+
+              <section className="panel">
+                <div className="section-head">
+                  <div>
+                    <h2 className="section-title">リンクボタン</h2>
+                    <p className="section-subtitle">上から順番に押しやすい配置です。スマホ表示を優先しています。</p>
+                  </div>
+                </div>
+                <div className="links-grid">
+                  {links.map((item) => (
+                    <a
+                      key={item.id}
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link-button"
+                    >
+                      <span className="link-meta">
+                        <span>{item.label}</span>
+                        <span className="link-url">{item.url}</span>
+                      </span>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                        <path d="M7 17L17 7" />
+                        <path d="M8 7h9v9" />
+                      </svg>
+                    </a>
+                  ))}
+                </div>
+              </section>
+
+              <section className="panel">
+                <div className="section-head">
+                  <div>
+                    <h2 className="section-title">リンク管理</h2>
+                    <p className="section-subtitle">追加・編集・削除と順序変更をここでまとめて行えます。</p>
+                  </div>
+                  {isEditing && (
+                    <button type="button" className="ghost-btn" onClick={resetForm}>編集をやめる</button>
+                  )}
+                </div>
+
+                <form onSubmit={handleSubmit}>
+                  <div className="form-grid">
+                    <input
+                      className="input"
+                      type="text"
+                      value={labelInput}
+                      onChange={(event) => setLabelInput(event.target.value)}
+                      placeholder="ボタン名"
+                    />
+                    <input
+                      className="input"
+                      type="text"
+                      value={urlInput}
+                      onChange={(event) => setUrlInput(event.target.value)}
+                      placeholder="https://example.com"
+                    />
+                    <div className="textarea-wrap">
+                      <textarea
+                        className="textarea"
+                        value={`現在の登録数: ${links.length}件\n長押しして、そのまま上下にスライドすると順序を変更できます。`}
+                        readOnly
+                      />
+                    </div>
+                    <div className="form-actions">
+                      <button className="primary-btn" type="submit">
+                        {isEditing ? 'リンクを更新する' : 'リンクを追加する'}
+                      </button>
+                    </div>
+                  </div>
+                </form>
+
+                <div className="drag-hint">
+                  並び替え方法: 管理カードを長押しすると入れ替えモードになります。
+                  そのまま上下へ指を動かすと順序が更新されます。
+                </div>
+
+                <div className="manage-list">
+                  {links.map((item) => (
+                    <div
+                      key={item.id}
+                      data-link-id={item.id}
+                      className={`manage-item ${draggingId === item.id ? 'dragging' : ''}`}
+                      onPointerDown={() => handlePointerDown(item.id)}
+                      onPointerMove={(event) => handlePointerMove(event, item.id)}
+                      onPointerUp={handlePointerUp}
+                    >
+                      <div className="manage-item-header">
+                        <div style={{ minWidth: 0 }}>
+                          <p className="manage-item-title">{item.label}</p>
+                          <p className="manage-item-url">{item.url}</p>
+                        </div>
+                        <div className="manage-item-tools">
+                          <button type="button" className="mini-btn" onClick={() => handleEdit(item)}>編集</button>
+                          <button type="button" className="mini-btn danger" onClick={() => handleDelete(item.id)}>削除</button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </main>
+          </div>
+
+          {toast && <div className="toast">{toast}</div>}
+        </div>
+      );
+
+      function SidebarContent({ closeDrawer }) {
+        return (
+          <>
+            <div className="brand-card">
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+                <div>
+                  <div style={{ fontSize: '12px', color: '#8b5cf6', fontWeight: 800 }}>Vibe Blog Engine</div>
+                  <div style={{ marginTop: '6px', fontSize: '20px', fontWeight: 800, color: '#1e293b' }}>リンク集</div>
+                </div>
+                <button className="close-btn" onClick={closeDrawer} aria-label="メニューを閉じる">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <p style={{ margin: '12px 0 0', color: '#64748b', fontSize: '13px', lineHeight: 1.8 }}>
+                Webでは補助用途、スマホではメイン導線として使えるリンク専用ページです。
+              </p>
+            </div>
+
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <a className="nav-link" href="/index.html" onClick={closeDrawer}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 10.5L12 3l9 7.5" />
+                  <path d="M5 9.5V21h14V9.5" />
+                </svg>
+                ブログ管理
+              </a>
+              <a className="nav-link active" href="/links.html" onClick={closeDrawer}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" />
+                  <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
+                </svg>
+                モバイルリンク集
+              </a>
+            </nav>
+
+            <div style={{ marginTop: 'auto', padding: '14px', border: '1px solid rgba(124, 77, 255, 0.14)', borderRadius: '18px', background: '#fff' }}>
+              <div style={{ fontSize: '12px', color: '#8b5cf6', fontWeight: 800 }}>使い方</div>
+              <div style={{ marginTop: '8px', color: '#64748b', fontSize: '13px', lineHeight: 1.8 }}>
+                1. ボタンを押すと別タブで開きます。<br />
+                2. 下の管理欄で追加・編集・削除できます。<br />
+                3. 長押ししながら上下へ動かすと並び替えできます。
+              </div>
+            </div>
+          </>
+        );
+      }
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
