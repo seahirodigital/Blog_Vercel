@@ -42,7 +42,7 @@ def get_pending_rows(spreadsheet_id: str, sheet_name: str, status_list: list[str
     スプレッドシートからフィルター条件に合う行を取得する
     """
     if status_list is None:
-        status_list = ["単品", "複数", "情報"]
+        status_list = ["単品", "複数", "情報", "量産元"]
 
     print(f"📊 Google Sheetsに接続中...")
     try:

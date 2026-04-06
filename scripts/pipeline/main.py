@@ -42,11 +42,13 @@ def process_single(row: dict, index: int, total: int) -> dict:
     """
     url = row.get("動画URL", "").strip()
     status = str(row.get("状況", "単品")).strip()
+    is_mass_source = status == "量産元"
 
     print(f"\n{'='*60}")
     print(f"📹 [{index}/{total}] 処理開始")
     print(f"   URL: {url}")
     print(f"   種別: {status}")
+    print(f"   フロー: {'通常 + ベスト記事化' if is_mass_source else '通常'}")
     print(f"{'='*60}")
 
     result = {"success": False, "title": "", "filename": "", "url": url}
@@ -59,7 +61,7 @@ def process_single(row: dict, index: int, total: int) -> dict:
 
     result["title"] = transcript["title"]
 
-    # Step 2: 3段階AI生成
+    # Step 2: AI生成（量産元は 01→02→03→031→032 まで拡張）
     markdown = blog_pipeline.run_pipeline(transcript, GEMINI_API_KEY, status=status)
     if not markdown:
         print("   ⚠️ AI生成失敗 - スキップ")
@@ -161,7 +163,7 @@ def main():
 
     # スプレッドシートから対象を取得
     print("\n📋 スプレッドシートから対象動画を取得中...")
-    rows = sheets_reader.get_pending_rows(SPREADSHEET_ID, SHEET_NAME, ["単品", "複数", "情報"])
+    rows = sheets_reader.get_pending_rows(SPREADSHEET_ID, SHEET_NAME, ["単品", "複数", "情報", "量産元"])
 
     if not rows:
         print("✅ 処理対象がありません。パイプラインを終了します。")

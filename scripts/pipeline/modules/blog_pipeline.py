@@ -55,6 +55,14 @@ def _parse_writer_prompt(content: str, status: str) -> str:
     return sections.get(status, sections.get("単品", ""))
 
 
+def _load_optional_prompt(filename: str) -> Optional[str]:
+    """任意プロンプトを読み込む。未配置なら None を返す。"""
+    filepath = PROMPTS_DIR / filename
+    if not filepath.exists():
+        return None
+    return _load_prompt(filename)
+
+
 def _run_interaction(client, input_text: str, system_prompt: str, previous_id: Optional[str] = None):
     """Gemini Interaction Hub を使用したリクエスト実行"""
     full_input = f"【指示・行動指針】\n{system_prompt}\n\n【処理対象データ】\n{input_text}"
@@ -102,6 +110,8 @@ def run_pipeline(transcript: dict, gemini_api_key: str, status: str = "単品") 
         drafter_prompt = _parse_writer_prompt(writer_raw, status)
         editor_prompt = _load_prompt("02-editor-prompt.txt")
         director_prompt = _load_prompt("03-director-prompt.txt")
+        best_outline_prompt = _load_optional_prompt("031-best-outline-prompt.txt")
+        best_enhancer_prompt = _load_optional_prompt("032-best-article-enhancer-prompt.txt")
         print(f"   📄 プロンプト読み込み完了: 01-writer({status}) / 02-editor / 03-director")
     except FileNotFoundError as e:
         print(f"   ❌ プロンプトファイルエラー: {e}")
@@ -127,7 +137,37 @@ def run_pipeline(transcript: dict, gemini_api_key: str, status: str = "単品") 
         print(f"   👑 Step3: 最終品質チェック中...")
         int3 = _run_interaction(client, "上記の記事を100点満点に仕上げてください。", director_prompt, previous_id=int2.id)
         final_text = int3.outputs[-1].text
+        last_interaction_id = int3.id
         print(f"   ✅ 最終版完成 (ID: {int3.id})")
+
+        # Step 3.1: ベスト記事化の構成補強（量産元のみ）
+        if status == "量産元":
+            if best_outline_prompt:
+                print(f"   🧭 Step3.1: ベスト記事化の補強設計中...")
+                int31 = _run_interaction(
+                    client,
+                    "上記の記事を量産元記事として評価し、検索意図の抜け漏れ、追加すべき見出し、FAQ、比較軸を整理してください。",
+                    best_outline_prompt,
+                    previous_id=last_interaction_id,
+                )
+                last_interaction_id = int31.id
+                print(f"   ✅ 補強設計完了 (ID: {int31.id})")
+                time.sleep(10)
+            else:
+                print("   ⏭️ 031-best-outline-prompt.txt 未検出のためスキップ")
+
+            if best_enhancer_prompt:
+                print(f"   🚀 Step3.2: ベスト記事へ増強中...")
+                int32 = _run_interaction(
+                    client,
+                    "上記の通常記事と補強設計を統合し、量産元として使える完成版のベスト記事に仕上げてください。",
+                    best_enhancer_prompt,
+                    previous_id=last_interaction_id,
+                )
+                final_text = int32.outputs[-1].text
+                print(f"   ✅ ベスト記事化完了 (ID: {int32.id})")
+            else:
+                print("   ⏭️ 032-best-article-enhancer-prompt.txt 未検出のためスキップ")
 
         return final_text
 
