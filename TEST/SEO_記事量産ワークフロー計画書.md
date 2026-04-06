@@ -24,7 +24,7 @@
 1. シードキーワードを入力すると、サジェストキーワード一覧を自動取得できる
 2. 取得キーワードを分析し、検索意図を広くカバーする「完成版記事」の構成と本文を1本作れる
 3. 完成版記事をもとに、各サジェストキーワード向けに見出し順序・見出し名・本文内の語彙を調整した派生記事を作れる
-4. GitHub Actions から一連の処理を定期または手動で実行できる
+4. Antigravity Workflow から「取得 → シート保存 → 手動選別 → 母艦記事化」を再開できる
 
 ## 3. 非ゴール
 
@@ -55,13 +55,15 @@
 - `suggest_keywords.js` は文字コード崩れがあるが、以下の挙動は読み取れる
   - ラッコキーワード結果テーブルの走査
   - ページ送りで全件取得
-  - キーワードの Buy / Do / Know っぽい分類
+  - キーワードの Buy / Do / Know
+  - 分類語彙と優先順
   - TSV 形式での出力
 
 ### 重要な判断
 
 `C:\Users\HCY\OneDrive\開発\Blog_Vercel\reference\suggest_keywords.js` は、そのまま移植するのではなく、**Python で新しく書き直す**方が安全です。  
-理由は、文字化けしたラベル群を無理に救済するより、DOMロジックだけを参考にして再実装した方が保守しやすいからです。
+ただし、DOMロジックだけでなく、**分類語彙・クエリ判定順・並び順のノウハウは流用**する。  
+理由は、文字化けしたラベル群を無理に救済するより、Python で保守しやすく書き直したうえで、既存JSの運用知見だけを継承した方が安全だからです。
 
 ## 5. 全体アーキテクチャ案
 
@@ -72,13 +74,17 @@
   ↓
 Playwright + Chromium でラッコキーワード取得
   ↓
-正規化・重複除去・意図分類
+Google Spreadsheet に保存
   ↓
-キーワードクラスタ分析
+ユーザーが状況列で手動選別
+  ↓
+スプレッドシート再読込
+  ↓
+正規化・重複除去・意図分類
   ↓
 完成版記事の見出し設計
   ↓
-完成版記事の本文生成
+母艦記事の本文生成
   ↓
 キーワード別リライト
   ↓
@@ -86,7 +92,7 @@ Playwright + Chromium でラッコキーワード取得
   ↓
 Markdown / JSON / CSV で保存
   ↓
-GitHub Actions から定期実行
+Antigravity Workflow から手動再開
 ```
 
 ### 推奨実装方針
@@ -133,9 +139,6 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 │     ├─ test_keyword_normalizer.py
 │     ├─ test_intent_classifier.py
 │     └─ test_variant_rewriter.py
-└─ .github\
-   └─ workflows\
-      └─ seo-article-factory.yml
 ```
 
 ## 7. 処理フロー詳細
@@ -164,8 +167,32 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 - `ul.pagination` を辿って全ページ取得する
 - 1ページ目だけで終わらず、最後のページまで回す
 - 重複キーワードは除去する
-- 生データは JSON と CSV の両方で保存する
+- 生データは Google Spreadsheet と JSON の両方へ保存する
 - 取得失敗時はスクリーンショットと HTML を保存する
+
+### Google Spreadsheet 保存ルール
+
+- 保存先: `https://docs.google.com/spreadsheets/d/1_qjAWcrgGHY8xTQdiUrK-v_gJsXEb8FH9ABUvEpcVMo/edit?gid=894792171#gid=894792171`
+- タブ名: 取得したキーワード名
+  - 例: `macbook neo`
+- 保存位置: 右端タブ
+- ヘッダー:
+  - `キーワード`
+  - `検索ボリューム`
+  - `クエリタイプ`
+  - `状況`
+- ヘッダー装飾:
+  - 黒塗り
+  - 白文字
+- `状況 = 不要` の行は後段で除外する
+- それ以外の行は、ユーザーが手動で採用管理する
+
+### 記事化対象の決め方
+
+- 何を記事化するかはユーザーが決める
+- 自動で `記事化` を確定しない
+- スプレッドシート上で不要行を除外し、必要な行だけを再開時に使う
+- 行数が多い場合は、ユーザーが手動で採用対象を絞る前提にする
 
 ### 出力イメージ
 
@@ -203,8 +230,7 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
   - `Know`
   - `Do`
   - `Buy`
-  - 必要なら `Compare`
-  - 必要なら `Trouble`
+
 
 ### 期待する分析出力
 
@@ -212,6 +238,37 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 - 比較したい論点一覧
 - 購入前に不安な論点一覧
 - 使い方・設定・トラブル解決系の論点一覧
+
+### 不足論点の定義
+
+この計画における「不足論点」は、AIが一般論として思いついた補足事項ではない。  
+**不足論点とは、サジェストキーワードに明示されている、ユーザーがすでに知りたがっている疑問そのもの**を指す。
+
+- 書き手が書きたい論点を足してはいけない
+- サジェストに現れていない一般論だけで膨らませてはいけない
+- 「不足しているかどうか」は、`03-director` 通過後の記事がサジェストキーワードに対する答えをすでに持っているかどうかで判定する
+- 不足論点は必ずサジェストキーワード単位で洗い出す
+
+### 前作サジェストの活用ルール
+
+新製品や後継機種では、前作のサジェストキーワードが非常に重要な材料になる。  
+ユーザーは新製品でも、前作で知りたかったことをほぼ同じように知りたがるためである。
+
+#### 例
+
+- `iPhone 17` の母艦記事を作る場合
+  - `iPhone 17 + サジェスト語`
+  - `iPhone 16 + サジェスト語`
+  - この両方を洗い出して統合分析する
+
+このとき、`iPhone 16` の後ろに出ているサジェスト語は、`iPhone 17` に対してもユーザーが聞きたい論点候補として扱う。  
+たとえば `iPhone 16 バッテリー` `iPhone 16 発熱` `iPhone 16 サイズ` `iPhone 16 比較` が強ければ、`iPhone 17` の母艦記事でも同じ軸を必ず検討する。
+
+### 分析の目的
+
+- 現行製品のサジェストから、今そのまま聞かれている疑問を回収する
+- 前作サジェストから、次世代製品でも高確率で引き継がれる疑問を回収する
+- その両方を統合して、母艦記事へ足すべき不足論点を決める
 
 ### 方針
 
@@ -229,7 +286,7 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 
 - フェーズ2の分析結果を入力として、網羅性の高い見出し構成を生成する
 - 1つのキーワードに寄せすぎず、クラスタ全体の疑問を吸収する
-- 見出しの順序は「結論 → 比較 → 詳細 → FAQ」を基本形にする
+- 見出しの順序はユーザー需要順を優先し、`Buy大 → Know大 → Buy中 → Know中 → Buy小` を先頭側へ寄せる
 
 ### 完成版記事の構成要件
 
@@ -272,6 +329,41 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 - 比較軸、向いている人、向いていない人を明示する
 - 情報が薄い見出しを残さない
 
+### 母艦記事の原則
+
+母艦記事は、`03-director` までに生成された記事を捨てて作り直すのではない。  
+**`03` までの本文と基本見出しを残したまま、サジェストキーワードに対する不足回答を追加して長文化し、網羅性を高めた完成版へ育てる**ものと定義する。
+
+- `03` までの情報は原則として削除しない
+- `03` までの基本見出し構造は大きく崩さない
+- 追加する情報は、サジェストキーワードに対応する答えとして追記する
+- 追加回答は、後段でサジェストごとのアンサー記事へ切り出しやすいように配置する
+
+### 母艦記事で追加すべき内容
+
+- サジェストキーワードごとの結論
+- その結論を支える詳細説明
+- 比較、評判、注意点、FAQの不足分
+- 前作サジェスト由来の論点
+- 後段の量産記事で独立見出し化しやすい補助小見出し
+
+### 母艦記事の書式ルール
+
+- 見出し直下で、紹介商品が解決する課題と解決方法を先に示す
+- その後に短文の解説を置く
+- 要点は箇条書きで整理する
+- 箇条書きは体言止めにし、`です・ます` は使わない
+- 各箇条書きは20字以内を目安に短くする
+- 各箇条書きは必ず結論単語を文頭に置き、`結論語：説明` の形にする
+- 最後に簡易まとめで章を締める
+
+### 母艦記事で必ず触れる内容
+
+- 見出しにある疑問への解決策
+- 解決策の具体的なやり方・方法
+- 比較、価格、評判、注意点のうち該当するもの
+- 前作サジェスト由来で現行製品にも残る論点
+
 ## 7.5 フェーズ5: キーワード別リライト量産
 
 ### Why
@@ -290,6 +382,25 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 - FAQ
 - メタディスクリプション
 - 強調する比較ポイント
+
+### 量産記事の基本原則
+
+量産記事は、母艦記事からサジェストキーワードへの答えを抽出し、**そのキーワードに対するアンサー記事**として再構成する。  
+このとき、母艦記事で足したサジェスト回答を中心に使うが、`03` までの基本見出し構造は大きく崩さない。
+
+- 記事冒頭で結論を先に書く
+- その後に詳細を複数の小見出しへ分解して示す
+- `03` までの基本見出しの骨格は維持する
+- ただし、対象サジェストに合わせて小見出しや説明順は調整する
+- 母艦から不要部分を削るだけでなく、対象サジェストに必要な答えを前面に出す
+
+### アンサー記事の理想形
+
+- H1 で対象サジェストに答える
+- 冒頭で結論を明示する
+- 中盤で理由、比較、注意点を小見出しに分解する
+- FAQ で残る不安を潰す
+- 母艦記事の流れを壊しすぎずに対象疑問へ最短で答える
 
 ### 変えてよいもの
 
@@ -333,56 +444,27 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 - FAQ 未生成
 - 派生記事同士の類似度が高すぎるケース
 
-## 8. GitHub Actions 設計案
+## 8. Antigravity Workflow 優先方針
 
-## 8.1 基本方針
+### Why
 
-最初からジョブを細かく分けすぎるより、初期版は1本のワークフローで最後まで流す方が保守しやすいです。
+今回の量産記事フローでは、途中でユーザーが手動選別する工程が重要です。  
+そのため、最初から GitHub Actions へ寄せるより、**Antigravity Workflow で「途中停止と再開」がしやすい形を優先**します。
 
-### 推奨ワークフロー名
+### 基本方針
 
-`C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\seo-article-factory.yml`
+- GitHub Actions 実装は保留する
+- 初期版は Antigravity Workflow から手動起動する
+- 初回は「収集してシート保存」で停止する
+- ユーザーが Google Spreadsheet の `状況` 列を編集した後に再開する
 
-### 実行トリガー
+### 想定フロー
 
-- `workflow_dispatch`
-- `schedule`
-
-### 想定ジョブ
-
-1. `collect_keywords`
-2. `analyze_keywords`
-3. `build_master_article`
-4. `rewrite_variants`
-5. `quality_gate`
-6. `upload_artifacts`
-
-### 初期入力パラメータ
-
-- `seed_keyword`
-- `top_n`
-- `rewrite_limit`
-- `publish_mode`
-
-## 8.2 実行イメージ
-
-```text
-workflow_dispatch
-  ↓
-seed_keyword = macbook neo
-  ↓
-collect_keywords
-  ↓
-analyze_keywords
-  ↓
-build_master_article
-  ↓
-rewrite_variants
-  ↓
-quality_gate
-  ↓
-artifact 保存
-```
+1. `seed_keyword` を指定してラッコキーワード取得
+2. Google Spreadsheet の右端タブへ保存
+3. ユーザーが `状況` 列を手動更新
+4. シートを再読込して母艦記事生成を再開
+5. 量産記事生成へ進む
 
 ## 9. 無料運用方針
 
@@ -394,7 +476,7 @@ artifact 保存
 ### 無料で進めやすい部分
 
 - Playwright + Chromium によるブラウザ操作
-- GitHub Actions の手動実行
+- Antigravity Workflow の手動実行
 - ローカル保存
 - CSV / JSON / Markdown 出力
 
@@ -425,11 +507,11 @@ artifact 保存
 初回 PoC の成功条件は以下です。
 
 1. `macbook neo` のサジェストを全件取得できる
-2. 重複除去済みキーワード一覧を JSON / CSV で出力できる
-3. 完成版記事の見出しを1本生成できる
-4. 完成版記事本文を1本生成できる
-5. 3本以上の派生記事を自動生成できる
-6. 派生記事ごとに H1 / 導入 / 見出し順序が変化している
+2. 取得キーワードを Google Spreadsheet の右端タブへ保存できる
+3. ユーザーが `状況` 列で不要キーワードを手動除外できる
+4. スプレッドシート再読込後に母艦記事の見出しを1本生成できる
+5. スプレッドシート再読込後に母艦記事本文を1本生成できる
+6. 後段で量産記事へ分岐しやすい構造を保てる
 
 ## 12. 実装ステップ
 
@@ -452,11 +534,15 @@ artifact 保存
 
 ### ステップ5
 
-`C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\generators\keyword_variant_rewriter.py` を作成し、派生記事を量産する
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\integrations\google_sheets_keyword_store.py` を作成し、Google Spreadsheet の右端タブへ保存し、手動選別後に読み戻せるようにする
 
 ### ステップ6
 
-`C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\seo-article-factory.yml` を作成して自動実行できるようにする
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\generators\keyword_variant_rewriter.py` を作成し、派生記事を量産する
+
+### ステップ7
+
+Antigravity Workflow から「取得して停止」「シート再読込で再開」を実行できるようにする
 
 ## 13. 最初の実行対象
 
@@ -477,8 +563,8 @@ artifact 保存
 
 ## 15. 補足メモ
 
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\reference\suggest_keywords.js` は、DOM走査とページ送りの参考資料としてのみ扱う
-- 文言や分類辞書は Python 側で再定義する
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\reference\suggest_keywords.js` は、DOM走査だけでなく、分類語彙と並び順のノウハウも流用する
+- `Buy大 → Know大 → Buy中 → Know中 → Buy小` の順序を Python 側でも維持する
 - 既存の `scripts\pipeline` と密結合にせず、最初は `TEST` 配下で独立運用する
 - PoC が安定したら `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline` への統合を検討する
 
@@ -523,13 +609,106 @@ artifact 保存
 - `03-director`
   - 既存どおり、記事として成立する最終版へ仕上げる
 - `031-best-outline`
-  - `03` 完了記事を読み、検索意図の抜け漏れ、比較軸不足、FAQ不足、構成順の弱さを洗い出す
+  - `03` 完了記事を読み、サジェストキーワードに対する未回答部分だけを洗い出す
 - `032-best-article-enhancer`
-  - `031` の改善方針を反映して、完成版のベスト記事へ増強する
+  - `031` の改善方針を反映して、`03` までの情報を削らずに、サジェストの答えを追加した母艦記事へ増強する
 - `033-best-seo-polisher`
   - タイトル、導入、見出し順、強調点、メタ説明文をSEO向けに最終調整する
 - `04-affiliate-link-manager`
   - 既存どおり、アフィリエイト挿入とAmazon導線を付与する
+
+### スプレッドシートの「量産元」分岐
+
+今回の運用では、Googleスプレッドシートの `状況` 列の値によって、通すパイプラインを切り替える。
+
+- `単品`
+  - 通常フロー
+- `複数`
+  - 通常フロー
+- `情報`
+  - 通常フロー
+- `量産元`
+  - ベスト記事化付きフロー
+
+### フロー分岐の定義
+
+#### 通常フロー
+
+```text
+01-writer
+  ↓
+02-editor
+  ↓
+03-director
+  ↓
+04-affiliate-link-manager
+```
+
+#### 量産元フロー
+
+```text
+01-writer
+  ↓
+02-editor
+  ↓
+03-director
+  ↓
+031-best-outline
+  ↓
+032-best-article-enhancer
+  ↓
+04-affiliate-link-manager
+```
+
+### 量産元フローの意図
+
+- `量産元` の記事は、通常記事として完結させることが目的ではない
+- キーワード別量産の母艦になる完成版記事を作ることが目的である
+- そのため、`03` の通常完成記事を一度ベースにした上で、`031` と `032` で網羅性と派生性を強化する
+- その後に `04` のアフィリエイト処理へ渡す
+
+### 量産元フローで強化する内容
+
+- `031` では、`03` 記事が未回答のサジェスト論点を列挙する
+- `032` では、その未回答論点の答えを記事へ追加し、長くても網羅的な母艦記事に仕上げる
+- 追加対象は一般論ではなく、サジェストキーワードでユーザーが実際に知りたがっている論点に限定する
+- 前作モデルのサジェストも、現行モデルの母艦づくりに活用する
+
+### プロンプト分岐の定義
+
+- `状況 = 単品`
+  - `01-writer-prompt.txt` の `[単品]` を使用
+- `状況 = 複数`
+  - `01-writer-prompt.txt` の `[複数]` を使用
+- `状況 = 情報`
+  - `01-writer-prompt.txt` の `[情報]` を使用
+- `状況 = 量産元`
+  - `01-writer-prompt.txt` の `[量産元]` を使用
+  - その後、`031-best-outline-prompt.txt`
+  - その後、`032-best-article-enhancer-prompt.txt`
+
+### 実装対象ファイル
+
+この分岐仕様を実現する主な対象ファイルは以下とする。
+
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\main.py`
+  - スプレッドシートの `状況` を受け、通常フローか量産元フローかをログとともに判定する
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\modules\sheets_reader.py`
+  - 処理対象ステータスに `量産元` を含める
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\modules\blog_pipeline.py`
+  - `status == "量産元"` のときだけ `03` 後に `031` `032` を実行する
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\01-writer-prompt.txt`
+  - `[量産元]` セクションを追加する
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\031-best-outline-prompt.txt`
+  - 量産元記事の補強設計を行う
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\032-best-article-enhancer-prompt.txt`
+  - ベスト記事へ増強する
+
+### 将来拡張の方針
+
+- さらにSEO仕上げを追加する場合は `033-best-seo-polisher` を増設する
+- ただし、`量産元` の基本分岐は常に `03` の後ろに追加段を差し込む方式で統一する
+- `04-affiliate-link-manager` は後処理専用として固定する
 
 ### 命名ルール
 
@@ -551,13 +730,14 @@ artifact 保存
 
 - 入力:
   - `03-director` 通過後の記事全文
-  - 対象キーワード群
+  - 現行製品の対象サジェストキーワード群
+  - 前作製品の対象サジェストキーワード群
   - 必要なら検索意図分析結果
 - 出力:
-  - 足りない論点一覧
-  - 不要な重複
-  - 追加すべき見出し
-  - 並べ替えるべき見出し
+  - サジェスト単位の未回答論点一覧
+  - 既存見出しで回答済みかどうかの対応整理
+  - 追加すべき小見出し
+  - 前作サジェスト由来で継承すべき論点
   - FAQ候補
 
 #### 032-best-article-enhancer-prompt
@@ -566,7 +746,7 @@ artifact 保存
   - `03` の記事全文
   - `031` の改善提案
 - 出力:
-  - 完成版ベスト記事の Markdown 全文
+  - `03` までの情報を残したまま、不足回答を追記して完成させた母艦記事の Markdown 全文
 
 #### 033-best-seo-polisher-prompt
 
@@ -596,7 +776,7 @@ artifact 保存
 | 既存流用 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\02-editor-prompt.txt` | 編集工程 | 既存のまま利用 | 必要なら後で調整 | 中 |
 | 既存流用 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\03-director-prompt.txt` | 最終品質調整 | 既存のまま利用 | `031` へ渡す前提で役割を明確化 | 高 |
 | 新規追加 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\031-best-outline-prompt.txt` | なし | 新規作成 | ベスト記事化の改善設計用 | 最優先 |
-| 新規追加 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\032-best-article-enhancer-prompt.txt` | なし | 新規作成 | ベスト記事本文の増強用 | 最優先 |
+| 新規追加 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\032-best-article-enhancer-prompt.txt` | なし | 新規作成 | `03` までの本文を残したままサジェスト回答を追加する母艦化用 | 最優先 |
 | 新規追加 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\033-best-seo-polisher-prompt.txt` | なし | 新規作成 | SEO仕上げ用 | 高 |
 | 既存流用 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\main.py` | 実行入口 | 実行導線を再利用 | 新フローの呼び出し条件を追加 | 高 |
 | 既存流用 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\insert_affiliate_links.py` | アフィリエイト挿入 | 完成版記事の後処理として利用 | 入力記事が長文化しても壊れないか確認 | 中 |
@@ -618,9 +798,9 @@ artifact 保存
 1. `03` 後に `031` `032` `033` を差し込む設計を固定する
    - まずは既存の `blog_pipeline.py` の責務を崩さず、拡張点だけを決める
 2. `031-best-outline-prompt.txt` を作る
-   - 最初に「足りないものを指摘する段」を作ると、増強の方向がブレにくい
+   - 最初に「サジェストに対して未回答なものだけを指摘する段」を作ると、増強の方向がブレにくい
 3. `032-best-article-enhancer-prompt.txt` を作る
-   - `031` の改善方針を反映して、完成版ベスト記事を作る
+   - `031` の改善方針を反映して、`03` までの本文を残しつつ、完成版ベスト記事へ育てる
 4. 必要なら `033-best-seo-polisher-prompt.txt` を作る
    - SEO最終調整を独立段にする
 5. `blog_pipeline.py` を改修する
@@ -664,6 +844,13 @@ artifact 保存
 
 このフェーズの目的は、量産時の品質劣化を抑えることです。
 
+### フェーズCで守るべき制約
+
+- 量産記事は母艦から対象サジェストの答えを抽出して作る
+- 記事冒頭に結論を書く
+- その後に小見出しで詳細を分解して示す
+- `03` までの基本見出し骨格は大きく崩さない
+
 ### フェーズD: 収益化接続
 
 - `04-affiliate-link-manager`
@@ -671,3 +858,86 @@ artifact 保存
 - 将来の公開導線
 
 このフェーズの目的は、完成記事をそのまま収益化工程へ流せるようにすることです。
+
+## 21. 現在の到達点
+
+### Why
+
+計画だけでなく、**2026-04-06 時点でどこまで実装と検証が終わっているか**を残しておくことで、次回の再開時に迷わず続きへ入れるようにするためです。  
+特に PoC は進みが速いため、到達点を計画書へ固定しておくと、実装済みと未着手を混同しにくくなります。
+
+### 実装済み
+
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\collectors\rakko_suggest_collector.py`
+  - ラッコキーワードの現行 DOM に対応した Playwright 収集器を実装済み
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\analyzers\keyword_normalizer.py`
+  - 表記ゆれ整理、重複除去、収集結果の整形を実装済み
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\analyzers\keyword_intent_classifier.py`
+  - `Know / Do / Buy` の3分類を実装済み
+  - `Compare` は `Buy`、トラブル系は `Know` に寄せる方針を反映済み
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\generators\master_outline_generator.py`
+  - サジェスト起点で母艦記事用の見出し案を生成可能
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\generators\master_article_generator.py`
+  - `03` 相当の土台記事生成と、`031 / 032` による母艦記事化ロジックを実装済み
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\run_factory.py`
+  - 取得 → シート保存 → 再開読込 → 見出し生成 → 母艦記事生成の流れへ改修済み
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\integrations\google_sheets_keyword_store.py`
+  - Google Spreadsheet の右端タブ保存と再開読込を実装済み
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-best-outline-prompt.md`
+  - 不足論点 = サジェストキーワード由来の未回答論点、という定義を反映済み
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\032-best-article-enhancer-prompt.md`
+  - `03` までの本文を削らず、母艦記事として追記強化する方針を反映済み
+
+### 実サイト確認済み
+
+- ラッコキーワード実サイトで `macbook neo` を対象に Playwright 実行済み
+- 全ページ巡回を確認済み
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\reference\suggest_keywords.js` のノウハウを Python 側へ流用済み
+  - `kubunMap`
+  - `Buy → Do → Know` の判定順
+  - `Buy大 → Know大 → Buy中 → Know中 → Buy小` の優先順
+
+### 出力済み成果物
+
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\current_keywords.json`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\outline.json`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\outline.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\base_article.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\master_article.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\031_enhancement_plan.md`
+
+## 22. 未完了と差分
+
+### Why
+
+「できたこと」だけを書くと再開地点を誤るため、**未完了と差分も同じ場所に残す**必要があります。  
+これにより、次回は作業の続きを正しく始められます。
+
+### 現在の未完了
+
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\generators\keyword_variant_rewriter.py`
+  - 量産記事の自動切り出しは未実装
+- 前作キーワード統合の実運転
+  - `--previous-seed-keyword` を使った本番相当の確認は未実施
+- Antigravity Workflow からの再開確認
+  - 取得停止 → シート編集 → 再開の実運転は未実施
+
+### 現在の差分
+
+- 記事化対象は自動判定ではなく、Google Spreadsheet の手動選別へ変更した
+- `状況 = 不要` の除外ロジックを優先し、それ以外は手動採用前提へ切り替えた
+- GitHub Actions ではなく Antigravity Workflow 優先へ方針変更した
+
+## 23. 次の再開地点
+
+### Why
+
+次回の着手時に迷わないよう、**次にやるべき順番を固定**しておきます。  
+これにより、検証順を崩さずに安全に先へ進めます。
+
+### 次にやること
+
+1. Google Spreadsheet の対象タブで `状況` 列を手動入力する
+2. `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\run_factory.py --resume-from-sheet` で再開する
+3. 母艦記事の本文が、指定書式と優先順で出るかを確認する
+4. その後に `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\generators\keyword_variant_rewriter.py` を作り、量産記事生成へ進む
