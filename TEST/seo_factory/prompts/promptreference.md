@@ -232,7 +232,11 @@
 
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\031-best-outline-prompt.txt`
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\032-best-article-enhancer-prompt.txt`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-best-outline-prompt.md`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\032-best-article-enhancer-prompt.md`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\033-answer-article-prompt.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_1_keyword_pipeline.py`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_2_master_article_generator.py`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_3_kobetsu_writer.py`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_9_run_factory.py`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-1-best-outline-prompt.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-2-best-article-enhancer-prompt.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-3-kobetsu-writer-prompt.md`
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\SEO_記事量産ワークフロー計画書.md`

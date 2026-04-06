@@ -1,4 +1,4 @@
-"""母艦記事のH2骨格を流用して個別記事を生成する。"""
+"""031_3 個別記事生成器。"""
 
 from __future__ import annotations
 
@@ -176,7 +176,7 @@ def generate_variant_articles(
     prompt_dir: Path | None = None,
     model_name: str = DEFAULT_MODEL_NAME,
 ) -> list[dict[str, Any]]:
-    prompt_text = _load_prompt("033-answer-article-prompt.md", prompt_dir)
+    prompt_text = _load_prompt("031-3-kobetsu-writer-prompt.md", prompt_dir)
     client: Any | None = None
     if gemini_api_key:
         if genai is None:

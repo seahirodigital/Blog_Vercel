@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 import os
 import re
@@ -11,20 +12,32 @@ from pathlib import Path
 from typing import Any
 
 CURRENT_DIR = Path(__file__).resolve().parent
-PACKAGE_ROOT = CURRENT_DIR.parent
-if str(PACKAGE_ROOT) not in sys.path:
-    sys.path.insert(0, str(PACKAGE_ROOT))
 
-from seo_factory.analyzers.keyword_normalizer import normalize_records
-from seo_factory.collectors.rakko_suggest_collector import collect_suggest_keywords
-from seo_factory.generators.master_article_generator import generate_master_article
-from seo_factory.generators.master_outline_generator import generate_master_outline, render_markdown_outline
-from seo_factory.generators.keyword_variant_rewriter import generate_variant_articles
-from seo_factory.integrations.google_sheets_keyword_store import (
-    load_keyword_records_from_sheet,
-    select_keyword_records_for_generation,
-    write_keyword_records_to_sheet,
-)
+
+def _load_module(module_filename: str, module_alias: str) -> Any:
+    module_path = CURRENT_DIR / module_filename
+    spec = importlib.util.spec_from_file_location(module_alias, module_path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"モジュールを読み込めません: {module_path}")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+KEYWORD_PIPELINE_MODULE = _load_module("031_1_keyword_pipeline.py", "seo_factory_031_1_keyword_pipeline")
+MASTER_ARTICLE_MODULE = _load_module("031_2_master_article_generator.py", "seo_factory_031_2_master_article_generator")
+KOBETSU_WRITER_MODULE = _load_module("031_3_kobetsu_writer.py", "seo_factory_031_3_kobetsu_writer")
+
+normalize_records = KEYWORD_PIPELINE_MODULE.normalize_records
+collect_suggest_keywords = KEYWORD_PIPELINE_MODULE.collect_suggest_keywords
+load_keyword_records_from_sheet = KEYWORD_PIPELINE_MODULE.load_keyword_records_from_sheet
+select_keyword_records_for_generation = KEYWORD_PIPELINE_MODULE.select_keyword_records_for_generation
+write_keyword_records_to_sheet = KEYWORD_PIPELINE_MODULE.write_keyword_records_to_sheet
+generate_master_outline = MASTER_ARTICLE_MODULE.generate_master_outline
+render_markdown_outline = MASTER_ARTICLE_MODULE.render_markdown_outline
+generate_master_article = MASTER_ARTICLE_MODULE.generate_master_article
+generate_variant_articles = KOBETSU_WRITER_MODULE.generate_variant_articles
 
 DEFAULT_SPREADSHEET_ID = os.getenv(
     "SEO_FACTORY_SPREADSHEET_ID",
