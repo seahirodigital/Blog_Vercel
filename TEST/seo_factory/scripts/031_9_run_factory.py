@@ -69,6 +69,10 @@ def _write_variant_articles(target_dir: Path, variants: list[dict[str, Any]]) ->
         _write_text(variants_dir / f"{slug}.md", str(variant.get("article_markdown", "")))
 
 
+def _write_draft_article(target_dir: Path, text: str) -> None:
+    _write_text(target_dir / "031_base_article_draft.md", text)
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="SEO記事量産ワークフロー PoC")
     parser.add_argument("seed_keyword", help="現行製品のシードキーワード")
@@ -175,13 +179,18 @@ def main() -> None:
     _write_json(target_dir / "previous_keywords.json", previous_records)
     _write_json(target_dir / "outline.json", outline)
     _write_text(target_dir / "outline.md", render_markdown_outline(outline))
-    _write_text(target_dir / "base_article.md", base_generation["base_article_markdown"])
-    _write_text(target_dir / "master_article.md", base_generation["master_article_markdown"])
+    _write_draft_article(target_dir, str(base_generation["draft_article_markdown"]))
 
     generation = base_generation
     gemini_api_key = ""
     if args.use_llm and not args.skip_llm:
         gemini_api_key = os.getenv("GEMINI_API_KEY", "")
+    if not gemini_api_key:
+        print("LLM未使用のため、下書きのみ保存しました。master_article.md と variants は上書きしていません。")
+        print(f"下書き保存先: {target_dir / '031_base_article_draft.md'}")
+        print(f"出力先: {target_dir}")
+        return
+
     if gemini_api_key:
         generation = generate_master_article(
             seed_keyword=args.seed_keyword,

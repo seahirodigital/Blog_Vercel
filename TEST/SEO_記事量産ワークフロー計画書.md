@@ -907,8 +907,9 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 ### 現在の差分
 
 - 記事化対象は自動判定ではなく、Google Spreadsheet の手動選別へ変更した
-- `状況 = 不要` の除外ロジックを優先し、それ以外は手動採用前提へ切り替えた
+- `状況 = 不要` の除外ロジックを優先し、明示採用された行だけを後段へ流す方式へ切り替えた
 - GitHub Actions ではなく Antigravity Workflow 優先へ方針変更した
+- no-LLM 実行は下書き保存だけに制限し、完成記事と個別記事を上書きしない方針へ切り替えた
 
 ## 23. 次の再開地点
 
@@ -921,8 +922,9 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 
 1. Google Spreadsheet の対象タブで `状況` 列を手動入力する
 2. `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_9_run_factory.py --resume-from-sheet` で再開する
-3. 母艦記事の本文が、指定書式と優先順で出るかを確認する
-4. その後に `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_3_kobetsu_writer.py` を使い、量産記事生成へ進む
+3. no-LLM 実行では `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\...\031_base_article_draft.md` だけが更新され、`master_article.md` と `variants` が上書きされないことを確認する
+4. 完成記事の更新が必要なときは、手動編集または LLM 実行のどちらで仕上げるかを明示してから進める
+5. その後に `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_3_kobetsu_writer.py` を使い、量産記事生成へ進む
 
 ## 24. ルール集の固定
 
@@ -933,7 +935,7 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 
 ### 参照先
 
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\promptreference.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\promptreference.md`
 
 ### このルール集で固定したこと
 
@@ -949,6 +951,8 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 - `おすすめ` 見出しは、商品推薦ではなく選定基準を渡す記事として書く
 - AIメタ文と制作裏話を本文へ出さない
 - 箇条書きは短くても意味が通る説明にする
+- `状況` 空欄行は採用しない
+- no-LLM 実行では完成記事を上書きしない
 
 ## 25. 2026-04-06 時点の追加進展
 
@@ -971,6 +975,7 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 
 - 母艦記事はまだ調査の深さが足りず、冒頭結論の固有価値が弱い
 - 個別記事は母艦記事の調査不足を引き継ぐため、全体として情報密度が不足しやすい
+- no-LLM 実行では仮テンプレしか出せないため、完成記事扱いにしてはいけない
 - 以後の改善は、採用キーワードごとに調査した具体情報を母艦記事へ入れることが最優先
 
 ### 次の優先作業

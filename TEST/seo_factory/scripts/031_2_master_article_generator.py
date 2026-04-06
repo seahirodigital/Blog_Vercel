@@ -722,9 +722,11 @@ def generate_master_article(
         "outline": outline_data,
         "outline_markdown": render_markdown_outline(outline_data),
         "base_article_markdown": base_article,
+        "draft_article_markdown": base_article,
         "enhancement_plan_markdown": "",
-        "master_article_markdown": base_article,
+        "master_article_markdown": "",
         "used_llm": False,
+        "is_draft_only": True,
     }
 
     if not gemini_api_key:
@@ -770,6 +772,7 @@ def generate_master_article(
     result["enhancement_plan_markdown"] = enhancement_plan
     result["master_article_markdown"] = master_article
     result["used_llm"] = True
+    result["is_draft_only"] = False
     return result
 
 

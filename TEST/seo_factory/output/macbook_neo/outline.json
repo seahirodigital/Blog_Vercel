@@ -1,0 +1,146 @@
+{
+  "seed_keyword": "macbook neo",
+  "title": "macbook neo レビュー比較まとめ",
+  "summary_focus_keywords": [
+    "macbook neo エクセル",
+    "macbook neo ケース",
+    "macbook neo ゲーム",
+    "macbook neo ゲーム性能",
+    "macbook neo ゲーム配信"
+  ],
+  "current_keyword_count": 5,
+  "previous_keyword_count": 0,
+  "priority_groups": [
+    {
+      "label": "最優先の疑問解消",
+      "query_type": "Know",
+      "volume_label": "大",
+      "keywords": [
+        "macbook neo エクセル",
+        "macbook neo ケース",
+        "macbook neo ゲーム"
+      ]
+    },
+    {
+      "label": "比較前に潰す疑問",
+      "query_type": "Know",
+      "volume_label": "中",
+      "keywords": [
+        "macbook neo ゲーム性能",
+        "macbook neo ゲーム配信"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "conclusion",
+      "heading": "macbook neoレビュー比較まとめ：結論",
+      "subsections": [
+        {
+          "heading": "macbook neo エクセル",
+          "suggest_keyword": "macbook neo エクセル",
+          "query_type": "Know",
+          "volume_label": "大",
+          "article_candidate": false,
+          "source_scope": "現行需要",
+          "child_h2_topics": []
+        },
+        {
+          "heading": "macbook neo ケース",
+          "suggest_keyword": "macbook neo ケース",
+          "query_type": "Know",
+          "volume_label": "大",
+          "article_candidate": false,
+          "source_scope": "現行需要",
+          "child_h2_topics": []
+        }
+      ],
+      "supporting_keywords": [
+        "macbook neo エクセル",
+        "macbook neo ケース"
+      ]
+    },
+    {
+      "id": "selection_criteria",
+      "heading": "macbook neoレビュー比較まとめ：選定基準",
+      "subsections": [
+        {
+          "heading": "macbook neo ゲーム性能",
+          "suggest_keyword": "macbook neo ゲーム性能",
+          "query_type": "Know",
+          "volume_label": "中",
+          "article_candidate": false,
+          "source_scope": "現行需要",
+          "child_h2_topics": []
+        }
+      ],
+      "supporting_keywords": [
+        "macbook neo ゲーム性能"
+      ]
+    },
+    {
+      "id": "use_cases",
+      "heading": "macbook neoレビュー比較まとめ：利用シーン",
+      "subsections": [
+        {
+          "heading": "macbook neo ゲーム",
+          "suggest_keyword": "macbook neo ゲーム",
+          "query_type": "Know",
+          "volume_label": "大",
+          "article_candidate": false,
+          "source_scope": "現行需要",
+          "child_h2_topics": [
+            {
+              "heading": "macbook neo ゲーム配信",
+              "suggest_keyword": "macbook neo ゲーム配信",
+              "query_type": "Know",
+              "volume_label": "中",
+              "article_candidate": false,
+              "source_scope": "現行需要"
+            }
+          ]
+        }
+      ],
+      "supporting_keywords": [
+        "macbook neo ゲーム",
+        "macbook neo ゲーム配信"
+      ]
+    },
+    {
+      "id": "comparison",
+      "heading": "macbook neoレビュー比較まとめ：比較",
+      "subsections": [],
+      "supporting_keywords": []
+    },
+    {
+      "id": "merits",
+      "heading": "macbook neoレビュー比較まとめ：メリット",
+      "subsections": [],
+      "supporting_keywords": []
+    },
+    {
+      "id": "demerits",
+      "heading": "macbook neoレビュー比較まとめ：デメリット",
+      "subsections": [],
+      "supporting_keywords": []
+    },
+    {
+      "id": "faq",
+      "heading": "macbook neoレビュー比較まとめ：FAQ",
+      "subsections": [],
+      "supporting_keywords": []
+    },
+    {
+      "id": "reputation",
+      "heading": "macbook neoレビュー比較まとめ：評判",
+      "subsections": [],
+      "supporting_keywords": []
+    },
+    {
+      "id": "summary",
+      "heading": "macbook neoレビュー比較まとめ：まとめ",
+      "subsections": [],
+      "supporting_keywords": []
+    }
+  ]
+}

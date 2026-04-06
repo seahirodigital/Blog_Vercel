@@ -182,6 +182,8 @@ def generate_variant_articles(
         if genai is None:
             raise RuntimeError("google-genai がインストールされていないため、個別記事生成を実行できません。")
         client = genai.Client(api_key=gemini_api_key)
+    else:
+        return []
 
     variants: list[dict[str, Any]] = []
     for record in selected_records:
