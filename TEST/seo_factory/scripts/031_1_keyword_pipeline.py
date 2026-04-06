@@ -603,6 +603,7 @@ def select_keyword_records_for_generation(
     seed_keyword: str,
     sheet_records: Iterable[Mapping[str, Any]],
 ) -> list[dict[str, Any]]:
+    normalized_rows: list[dict[str, Any]] = []
     positive_rows: list[dict[str, Any]] = []
 
     for record in sheet_records:
@@ -624,10 +625,11 @@ def select_keyword_records_for_generation(
             "article_status": status,
             "source": "google_sheet",
         }
+        normalized_rows.append(normalized)
         if status:
             positive_rows.append(normalized)
 
-    return positive_rows
+    return positive_rows if positive_rows else normalized_rows
 
 
 __all__ = [
