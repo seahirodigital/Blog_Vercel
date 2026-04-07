@@ -999,48 +999,37 @@
       });
       const [showFolderPicker, setShowFolderPicker] = useState(false);
       const [showLinkPicker, setShowLinkPicker] = useState(false);
-            // リンク集のドラッグ＆ドロップ（長押し対応）用ステート
-      const [linkDragState, setLinkDragState] = useState({ isDragging: false, startIndex: null, currentIndex: null });
-      const linkTouchTimer = useRef(null);
-      const handleLinkTouchStart = (e, index) => {
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        linkTouchTimer.current = setTimeout(() => {
-          setLinkDragState({ isDragging: true, startIndex: index, currentIndex: index });
-          if (navigator.vibrate) navigator.vibrate(40);
-        }, 400);
+            // リンク集のドラッグ＆ドロップ（HTML5対応）用ステート
+      const [linkDragState, setLinkDragState] = useState({ isDragging: false, startIndex: null, overIndex: null });
+      const handleDragStartLink = (e, index) => {
+        setLinkDragState({ isDragging: true, startIndex: index, overIndex: index });
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', index);
+        if (navigator.vibrate) navigator.vibrate(40);
       };
-      const handleLinkTouchMove = (e) => {
-        if (!linkDragState.isDragging) {
-          clearTimeout(linkTouchTimer.current);
-          return;
-        }
+      const handleDragOverLink = (e, index) => {
         e.preventDefault();
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const el = document.elementFromPoint(clientX, clientY);
-        const targetItem = el ? el.closest('.custom-link-item') : null;
-        if (targetItem && targetItem.dataset.index !== undefined) {
-          const newIndex = parseInt(targetItem.dataset.index, 10);
-          if (newIndex !== linkDragState.currentIndex) {
-            setLinkDragState(prev => ({ ...prev, currentIndex: newIndex }));
-          }
+        e.dataTransfer.dropEffect = 'move';
+        if (linkDragState.overIndex !== index) {
+          setLinkDragState(prev => ({ ...prev, overIndex: index }));
         }
       };
-      const handleLinkTouchEnd = (e) => {
-        clearTimeout(linkTouchTimer.current);
-        if (!linkDragState.isDragging) return;
-        setLinkDragState(prev => {
-          if (prev.startIndex !== null && prev.currentIndex !== null && prev.startIndex !== prev.currentIndex) {
-            setCustomLinks(links => {
-              const newLinks = [...links];
-              const [moved] = newLinks.splice(prev.startIndex, 1);
-              newLinks.splice(prev.currentIndex, 0, moved);
-              try { localStorage.setItem('sb_customLinks', JSON.stringify(newLinks)); } catch {}
-              return newLinks;
-            });
-          }
-          return { isDragging: false, startIndex: null, currentIndex: null };
-        });
+      const handleDropLink = (e, targetIndex) => {
+        e.preventDefault();
+        const { startIndex } = linkDragState;
+        if (startIndex !== null && startIndex !== targetIndex) {
+          setCustomLinks(links => {
+            const newLinks = [...links];
+            const [moved] = newLinks.splice(startIndex, 1);
+            newLinks.splice(targetIndex, 0, moved);
+            try { localStorage.setItem('sb_customLinks', JSON.stringify(newLinks)); } catch {}
+            return newLinks;
+          });
+        }
+        setLinkDragState({ isDragging: false, startIndex: null, overIndex: null });
+      };
+      const handleDragEndLink = () => {
+        setLinkDragState({ isDragging: false, startIndex: null, overIndex: null });
       };
 
       const [customLinks, setCustomLinks] = useState(() => {
@@ -1157,23 +1146,26 @@
                     <div 
                       key={link.id} 
                       className="custom-link-item" 
-                      data-index={idx}
-                      onPointerDown={(e) => handleLinkTouchStart(e, idx)}
-                      onPointerMove={handleLinkTouchMove}
-                      onPointerUp={handleLinkTouchEnd}
-                      onPointerCancel={handleLinkTouchEnd}
-                      onDragStart={(e) => e.preventDefault()}
+                      draggable={true}
+                      onDragStart={(e) => handleDragStartLink(e, idx)}
+                      onDragOver={(e) => handleDragOverLink(e, idx)}
+                      onDrop={(e) => handleDropLink(e, idx)}
+                      onDragEnd={handleDragEndLink}
                       style={{ 
                         display: 'flex', alignItems: 'center', gap: '6px', background:'white', padding:'4px 6px', 
-                        borderRadius:'6px', border:'1px solid #e2e8f0', boxShadow:'0 1px 2px rgba(0,0,0,0.02)',
-                        transform: linkDragState.isDragging && linkDragState.currentIndex === idx && linkDragState.startIndex !== idx ? 'scale(1.02)' : 'none',
-                        opacity: linkDragState.isDragging && linkDragState.startIndex === idx ? 0.5 : 1,
-                        transition: 'transform 0.1s, opacity 0.1s',
-                        zIndex: linkDragState.isDragging && linkDragState.startIndex === idx ? 10 : 1,
-                        position: 'relative',
-                        touchAction: 'none' // スクロール防止
+                        borderRadius:'6px', border: linkDragState.overIndex === idx && linkDragState.startIndex !== idx ? '1px dashed #7C4DFF' : '1px solid #e2e8f0', 
+                        boxShadow:'0 1px 2px rgba(0,0,0,0.02)',
+                        opacity: linkDragState.startIndex === idx ? 0.4 : 1,
+                        transition: 'border 0.2s, opacity 0.2s',
+                        cursor: 'grab'
                       }}
                     >
+                      <div 
+                        style={{ cursor: 'grab', display: 'flex', alignItems: 'center', padding: '2px 4px', color: '#cbd5e1' }}
+                        title="ここを掴んでドラッグして並び替え"
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M8 6h8M8 12h8M8 18h8"/></svg>
+                      </div>
                       <a
                         href={link.url}
                         target={link.url.startsWith('/') ? '_self' : '_blank'}
@@ -1192,7 +1184,7 @@
                         style={{ textDecoration: 'none', flex: 1, minWidth: 0, userSelect: 'none' }}
                         title={link.url}
                       >
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{flexShrink:0}}>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{flexShrink:0, display:'none'}}>
                           <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
                           <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
                         </svg>
