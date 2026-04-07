@@ -5,7 +5,7 @@
 
 ## 1. このファイルの目的
 
-このファイルは、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\` と `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\` を運用する際の恒久ルール集である。
+このファイルは、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\0_common\`、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\1_keyword_collect\`、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\2_base_article\`、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\3_variant_article\` を運用する際の恒久ルール集である。
 
 過去のやり取りで発生したルール違反、品質低下、AIメタ文混入、一般論への逃避を再発させないために作成する。
 
@@ -16,18 +16,12 @@
 
 ### 1.1 ワークフロー順一覧表
 
-| 実行順 | フェーズ | 説明 | 使うプロンプト | 実行する Python | Python がやること | このチャットがやること | 主な出力先 |
+| 実行順 | フェーズフォルダ | 説明 | 使うプロンプト | 実行する Python | Python がやること | このチャットがやること | 主な出力先 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 0 | 共通ルール確認 | 実行前に、母艦記事を壊さない前提、参照記事維持、`py` とこのチャットの役割分担を先に揃える工程。 | `promptreference.md` | なし | なし | 現行ルール、過去の失敗、参照記事運用、検証基準を確認してから実行する。 | なし |
-| 1 | キーワード収集 | ラッコキーワードから現行製品のサジェストを集め、シートに保存して人が採否を決められる状態にする工程。 | なし | `scripts/031_1_keyword_pipeline.py`<br>`scripts/031_5_run_factory.py` | Playwright でサジェストを収集し、意図分類、記事候補判定、Google スプレッドシート保存まで行う。 | 本文は書かない。必要なら収集後の状態確認だけ行う。 | Google スプレッドシートの対象タブ<br>`output/<seed>/memo/current_keywords.json` |
-| 2 | シート再開 | 人がスプシの「状況」列を編集したあと、採用行だけを読み戻して母艦工程へ進める工程。 | なし | `scripts/031_5_run_factory.py` | シートを再読込し、採用キーワードだけを抽出し、出力先フォルダを決める。 | 本文は書かず、母艦に使う材料が揃ったかを確認する。 | `output/<seed>/memo/current_keywords.json`<br>`output/<seed>/memo/previous_keywords.json` |
-| 3 | 母艦アウトライン生成 | 採用キーワード群を、母艦記事で扱う H2 構造と優先度つきの設計へまとめる工程。 | `prompts/031-1-best-outline-prompt.md` | `scripts/031_2_master_article_generator.py`<br>`scripts/031_5_run_factory.py` | 採用キーワードを並べ替え、母艦用の H2 / セクション候補 / 優先グループを組み立て、`outline.json` と `outline.md` を出す。 | 後続の母艦執筆で守るべき H2 の流れを確認する。 | `output/<seed>/memo/outline.json`<br>`output/<seed>/memo/outline.md` |
-| 4 | 母艦材料生成 | 参照記事とアウトラインを束ねて、母艦記事を書くための bundle を作る工程。ここで土台は `output/<seed>/reference/` 配下の最新参照 Markdown を使う。 | `prompts/031-2-best-article-enhancer-prompt.md` | `scripts/031_2_master_article_generator.py`<br>`scripts/031_5_run_factory.py` | 参照記事の H2、章内行数、箇条書き数、Q&A 数を解析し、最低維持条件つきの母艦 bundle を出力する。 | 参照記事の章構造を壊さない前提で、どこへ新規キーワードを差し込むかを判断する。 | `output/<seed>/memo/031_2_master_research_bundle.json`<br>`output/<seed>/memo/031_2_master_research_bundle.md` |
-| 5 | 母艦記事執筆 | bundle と参照記事を見ながら、このチャットが母艦記事本文を作る工程。Python は本文を書かない。 | `prompts/031-2-best-article-enhancer-prompt.md`<br>`promptreference.md` | `scripts/031_5_run_factory.py` | 既存の `master_article.md` が無ければ bundle 保存までで止まり、「次はこのチャットで本文を書く」と案内する。 | `output/<seed>/reference/<任意の参照記事>.md` を土台に、章立て、章内説明、箇条書き、Q&A 密度を維持したまま `master_article.md` を作る。 | `output/<seed>/master_article.md` |
-| 6 | 母艦検証 | 作成した母艦記事が、参照記事の構造維持と bundle 条件を守れているかを機械検証する工程。 | なし | `scripts/031_3_article_validator.py`<br>`scripts/031_5_run_factory.py` | H2 順、必須 H2、各章の最低行数、最低箇条書き数、Q&A 数などを検証し、NG なら個別記事工程を止める。 | 検証 NG のときはレポートを読み、どの章をどう戻すかを判断して母艦記事を修正する。 | `output/<seed>/memo/031_3_master_validation_report.json`<br>`output/<seed>/memo/031_3_master_validation_report.md` |
-| 7 | 個別記事ジョブ生成 | 母艦記事と採用キーワードから、個別記事ごとの H2 要件と執筆条件をジョブ化する工程。 | `prompts/031-4-kobetsu-writer-prompt.md` | `scripts/031_4_kobetsu_writer.py`<br>`scripts/031_5_run_factory.py` | 母艦の H2 を土台に、各個別記事の必須 H2、冒頭で最初に答えること、調査観点、禁止表現を job 化する。 | ジョブを読んで、どの個別記事から書くかと、母艦から何を流用してはいけないかを確認する。 | `output/<seed>/memo/031_4_kobetsu_jobs.json`<br>`output/<seed>/memo/031_4_kobetsu_jobs.md` |
-| 8 | 個別記事執筆 | job ごとの条件に従って、このチャットが各個別記事本文を書く工程。 | `prompts/031-4-kobetsu-writer-prompt.md`<br>`promptreference.md` | なし | なし。現在の `py` は個別本文を自動生成せず、job 生成までに留める。 | job に従って新規記事として個別記事を書く。母艦の丸写しは禁止で、冒頭・見出し・本文の主題を対象キーワードへ寄せる。 | `output/<seed>/variants/<target_keyword>.md` |
-| 9 | 個別記事検証 | 書き上がった個別記事が job 条件を満たすかを確認して完了扱いにする工程。 | なし | `scripts/031_3_article_validator.py` | 必須 H2、冒頭一文、対象キーワード整合、件数などを検証する。 | 検証結果を見て不足を直し、通過したら完了扱いにする。 | 検証時に読む対象: `output/<seed>/variants/` |
+| 0 | `0_common` | 共通ルール、出力命名規則、完了条件、共通 validator、全体実行入口をまとめる工程。 | `promptreference.md` | `scripts/031_5_run_factory.py`<br>`scripts/031_3_article_validator.py` | 全体オーケストレーション、母艦検証、個別記事検証を担当する。 | 実行前にルール、過去の失敗、参照記事運用、完了条件を確認する。 | `output/<seed>/memo/...` |
+| 1 | `1_keyword_collect` | ラッコ取得、スプシ保存、手動選別後の再開までを1つのフェーズにまとめる工程。 | なし | `../1_keyword_collect/scripts/031_1_keyword_pipeline.py`<br>`../0_common/scripts/031_5_run_factory.py` | サジェスト取得、意図分類、記事候補判定、Google スプレッドシート保存、再読込、採用行抽出を行う。 | 本文は書かず、採用キーワードが母艦工程へ渡せる状態になったかを確認する。 | Google スプレッドシートの対象タブ<br>`output/<seed>/memo/current_keywords.json`<br>`output/<seed>/memo/previous_keywords.json` |
+| 2 | `2_base_article` | 母艦記事のアウトライン、bundle、参照記事ベースの本文作成、母艦検証までを順に完了させる工程。 | `../2_base_article/prompts/031-1-best-outline-prompt.md`<br>`../2_base_article/prompts/031-2-best-article-enhancer-prompt.md`<br>`promptreference.md` | `../2_base_article/scripts/031_2_master_article_generator.py`<br>`../0_common/scripts/031_5_run_factory.py`<br>`scripts/031_3_article_validator.py` | アウトライン生成、参照記事構造解析、母艦 bundle 出力、母艦記事検証を行う。 | `output/<seed>/reference/<任意の参照記事>.md` を土台に `master_article.md` を作り、検証 NG なら戻して修正する。 | `output/<seed>/master_article.md`<br>`output/<seed>/memo/outline.md`<br>`output/<seed>/memo/031_2_master_research_bundle.md`<br>`output/<seed>/memo/031_3_master_validation_report.md` |
+| 3 | `3_variant_article` | 個別記事ジョブ生成、個別記事執筆、個別記事検証までを順に完了させる工程。 | `../3_variant_article/prompts/031-4-kobetsu-writer-prompt.md`<br>`promptreference.md` | `../3_variant_article/scripts/031_4_kobetsu_writer.py`<br>`../0_common/scripts/031_5_run_factory.py`<br>`scripts/031_3_article_validator.py` | job 生成、対象キーワードごとの H2 条件整理、個別記事検証を行う。 | job を読み、各 `variants/<target_keyword>.md` を書き、validator を通して完了扱いにする。 | `output/<seed>/memo/031_4_kobetsu_jobs.md`<br>`output/<seed>/variants/<target_keyword>.md`<br>`output/<seed>/memo/031_4_variant_validation_report.md` |
 
 ## 2. 最重要目的
 
@@ -249,12 +243,13 @@
 
 ## 8. このチャット実行ルール
 
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_5_run_factory.py` は、常に材料生成と検証だけを担当する
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\0_common\scripts\031_5_run_factory.py` は、常に材料生成と検証だけを担当する
 - `Gemini` や `google-genai` を使って Python 側が本文を書く運用は廃止する
 - Python 側は、キーワード収集、スプレッドシート読込、分類、並び順整理、調査メモ作成、見出し候補整理、母艦記事検証、個別記事ジョブ生成までを担当する
 - 本文の仕上げは、このチャットで行う
+- 共通ルール、出力命名規則、完了条件、検証観点は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\0_common\promptreference.md` に集約する
 - 母艦記事の土台は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\reference\` 配下の参照記事とする
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_5_run_factory.py` の `--use-llm` / `--skip-llm` は互換用オプションであり、実際の本文作成モードは変わらない
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\0_common\scripts\031_5_run_factory.py` の `--use-llm` / `--skip-llm` は互換用オプションであり、実際の本文作成モードは変わらない
 - 材料生成実行で `master_article.md` を自動生成してはいけない
 - 材料生成実行で `variants` 配下の個別記事を自動生成してはいけない
 - 材料生成実行では、以下の材料ファイルを保存する
@@ -274,7 +269,7 @@
 - 母艦記事が 80点 baseline 未達なら、個別記事フェーズへ進めてはいけない
 - 母艦記事 validator は、現行採用キーワード由来の H2 だけでなく、参照記事から継承すべき H2 も検査する
 - 母艦記事 validator は、参照記事の章内説明量、箇条書き、FAQ 形式も検査する
-- 個別記事を生成したあとは `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_3_article_validator.py` 相当の検証を通過しなければ完了扱いにしてはいけない
+- 個別記事を生成したあとは `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\0_common\scripts\031_3_article_validator.py` 相当の検証を通過しなければ完了扱いにしてはいけない
 
 ## 9. 現時点の採用キーワード
 
@@ -324,13 +319,17 @@
 
 ## 12. 関連ファイル
 
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_1_keyword_pipeline.py`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_2_master_article_generator.py`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_3_article_validator.py`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_4_kobetsu_writer.py`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_5_run_factory.py`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-1-best-outline-prompt.md`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-2-best-article-enhancer-prompt.md`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-4-kobetsu-writer-prompt.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\1_keyword_collect\SKILL.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\1_keyword_collect\scripts\031_1_keyword_pipeline.py`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\2_base_article\SKILL.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\2_base_article\scripts\031_2_master_article_generator.py`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\2_base_article\prompts\031-1-best-outline-prompt.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\2_base_article\prompts\031-2-best-article-enhancer-prompt.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\3_variant_article\SKILL.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\3_variant_article\scripts\031_4_kobetsu_writer.py`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\3_variant_article\prompts\031-4-kobetsu-writer-prompt.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\0_common\promptreference.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\0_common\scripts\031_3_article_validator.py`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\0_common\scripts\031_5_run_factory.py`
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\reference\<任意ファイル名>.md`
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\SEO_記事量産ワークフロー計画書.md`

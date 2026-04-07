@@ -2,58 +2,31 @@
 
 ## このファイルの役割
 
-- Workflow エージェントが個別記事本文を書く前の指示書
+- このチャットで個別記事本文を書く前の指示書
 - Python 側では本文を書かず、必要な論点整理だけを済ませる
 
-## macbook neo エクセル
+## macbook neo ケース おすすめ
 
-- クエリタイプ: Know
-- 検索ボリューム: 大
-- 冒頭で最初に答えること: 検索意図に対する結論を最初の一文で答える
-- H2 接頭辞: macbook neo エクセル：
-- 母艦から流用したい見出し候補: macbook neoレビュー比較まとめ：結論, macbook neo エクセル, macbook neo ケース, macbook neo ゲーム性能, macbook neo ゲーム
-- 母艦 H2 数: 4
-- 母艦 H2 全維持: macbook neo エクセル / macbook neo ケース / macbook neo ゲーム性能 / macbook neo ゲーム
-- 必須 H2 候補:
-  - macbook neo エクセル：エクセル
-  - macbook neo エクセル：ケース
-  - macbook neo エクセル：ゲーム性能
-  - macbook neo エクセル：ゲーム
-- 調査質問:
-  - 読者が最初に知りたい結論は何か
-  - 比較前に解消すべき疑問は何か
-  - 不安や誤解を先回りして潰すには何を確認するか
-- 確認先:
-  - 公式製品ページで仕様と表記を確認
-- 執筆条件:
-  - 母艦記事の良い文章資産と論点順を土台にする
-  - 母艦記事の H2 構成は原則すべて維持する
-  - 4見出し前後へ圧縮してはいけない
-  - H2 は必ず対象検索キーワード：見出し名 で始める
-  - H2直下の最初の一文も、その見出しキーワードを自然に含めて始める
-  - おすすめ系でも商品推薦ではなく、判断軸を渡す記事にする
-- 禁止表現:
-  - 母艦記事
-  - このキーワードでは
-  - この記事の使い方
-  - テンプレート
-  - 構造
-  - 検索キーワード
-
-## macbook neo ケース
-
-- クエリタイプ: Know
-- 検索ボリューム: 大
+- クエリタイプ: Buy
+- 検索ボリューム: 中
 - 冒頭で最初に答えること: 何を守りたいかと、専用品か互換品かを最初に答える
-- H2 接頭辞: macbook neo ケース：
-- 母艦から流用したい見出し候補: macbook neoレビュー比較まとめ：結論, macbook neo ケース, macbook neo エクセル, macbook neo ゲーム性能, macbook neo ゲーム
-- 母艦 H2 数: 4
-- 母艦 H2 全維持: macbook neo エクセル / macbook neo ケース / macbook neo ゲーム性能 / macbook neo ゲーム
+- H2 接頭辞: macbook neo ケース おすすめ：
+- 母艦から流用したい見出し候補: macbook neoレビュー比較まとめ：メリット, macbook neo ケース おすすめ, MacBook Neo レビュー比較まとめ：結論, MacBook Neo レビュー比較まとめ：選定基準, MacBook Neo レビュー比較まとめ：利用シーン, MacBook Neo ハード ケース, MacBook Neo 学割キャンペーン, MacBook Neo ケース おすすめ, MacBook Neo レビュー比較まとめ：比較, MacBook Neo レビュー比較まとめ：メリット, MacBook Neo レビュー比較まとめ：デメリット, MacBook Neo レビュー比較まとめ：FAQ, MacBook Neo レビュー比較まとめ：評判, MacBook Neo レビュー比較まとめ：まとめ
+- 母艦 H2 数: 12
+- 母艦 H2 全維持: MacBook Neo レビュー比較まとめ：結論 / MacBook Neo レビュー比較まとめ：選定基準 / MacBook Neo レビュー比較まとめ：利用シーン / MacBook Neo ハード ケース / MacBook Neo 学割キャンペーン / MacBook Neo ケース おすすめ / MacBook Neo レビュー比較まとめ：比較 / MacBook Neo レビュー比較まとめ：メリット / MacBook Neo レビュー比較まとめ：デメリット / MacBook Neo レビュー比較まとめ：FAQ / MacBook Neo レビュー比較まとめ：評判 / MacBook Neo レビュー比較まとめ：まとめ
 - 必須 H2 候補:
-  - macbook neo ケース：エクセル
-  - macbook neo ケース：ケース
-  - macbook neo ケース：ゲーム性能
-  - macbook neo ケース：ゲーム
+  - macbook neo ケース おすすめ：結論
+  - macbook neo ケース おすすめ：選定基準
+  - macbook neo ケース おすすめ：利用シーン
+  - macbook neo ケース おすすめ：ハード ケース
+  - macbook neo ケース おすすめ：学割キャンペーン
+  - macbook neo ケース おすすめ：ケース おすすめ
+  - macbook neo ケース おすすめ：比較
+  - macbook neo ケース おすすめ：メリット
+  - macbook neo ケース おすすめ：デメリット
+  - macbook neo ケース おすすめ：FAQ
+  - macbook neo ケース おすすめ：評判
+  - macbook neo ケース おすすめ：まとめ
 - 調査質問:
   - 専用品か互換品か
   - サイズとポート位置の互換性はあるか
@@ -78,28 +51,36 @@
   - 構造
   - 検索キーワード
 
-## macbook neo ゲーム
+## macbook neo 学割キャンペーン
 
-- クエリタイプ: Know
-- 検索ボリューム: 大
-- 冒頭で最初に答えること: どの用途まで現実的にこなせるかを最初に答える
-- H2 接頭辞: macbook neo ゲーム：
-- 母艦から流用したい見出し候補: macbook neoレビュー比較まとめ：利用シーン, macbook neo ゲーム, macbook neo エクセル, macbook neo ケース, macbook neo ゲーム性能
-- 母艦 H2 数: 4
-- 母艦 H2 全維持: macbook neo エクセル / macbook neo ケース / macbook neo ゲーム性能 / macbook neo ゲーム
+- クエリタイプ: Buy
+- 検索ボリューム: 中
+- 冒頭で最初に答えること: 学割価格が使える条件と、通常価格との差額を最初に答える
+- H2 接頭辞: macbook neo 学割キャンペーン：
+- 母艦から流用したい見出し候補: macbook neoレビュー比較まとめ：選定基準, macbook neo 学割キャンペーン, MacBook Neo レビュー比較まとめ：結論, MacBook Neo レビュー比較まとめ：選定基準, MacBook Neo レビュー比較まとめ：利用シーン, MacBook Neo ハード ケース, MacBook Neo 学割キャンペーン, MacBook Neo ケース おすすめ, MacBook Neo レビュー比較まとめ：比較, MacBook Neo レビュー比較まとめ：メリット, MacBook Neo レビュー比較まとめ：デメリット, MacBook Neo レビュー比較まとめ：FAQ, MacBook Neo レビュー比較まとめ：評判, MacBook Neo レビュー比較まとめ：まとめ
+- 母艦 H2 数: 12
+- 母艦 H2 全維持: MacBook Neo レビュー比較まとめ：結論 / MacBook Neo レビュー比較まとめ：選定基準 / MacBook Neo レビュー比較まとめ：利用シーン / MacBook Neo ハード ケース / MacBook Neo 学割キャンペーン / MacBook Neo ケース おすすめ / MacBook Neo レビュー比較まとめ：比較 / MacBook Neo レビュー比較まとめ：メリット / MacBook Neo レビュー比較まとめ：デメリット / MacBook Neo レビュー比較まとめ：FAQ / MacBook Neo レビュー比較まとめ：評判 / MacBook Neo レビュー比較まとめ：まとめ
 - 必須 H2 候補:
-  - macbook neo ゲーム：エクセル
-  - macbook neo ゲーム：ケース
-  - macbook neo ゲーム：ゲーム性能
-  - macbook neo ゲーム：ゲーム
+  - macbook neo 学割キャンペーン：結論
+  - macbook neo 学割キャンペーン：選定基準
+  - macbook neo 学割キャンペーン：利用シーン
+  - macbook neo 学割キャンペーン：ハード ケース
+  - macbook neo 学割キャンペーン：学割キャンペーン
+  - macbook neo 学割キャンペーン：ケース おすすめ
+  - macbook neo 学割キャンペーン：比較
+  - macbook neo 学割キャンペーン：メリット
+  - macbook neo 学割キャンペーン：デメリット
+  - macbook neo 学割キャンペーン：FAQ
+  - macbook neo 学割キャンペーン：評判
+  - macbook neo 学割キャンペーン：まとめ
 - 調査質問:
-  - どの用途まで現実的に動くのか
-  - レビューで報告されている性能の限界はどこか
-  - メモリや発熱が制約になる場面は何か
-  - 配信や録画も含めて使える範囲はどこまでか
+  - 公式の教育価格はいくらか
+  - 通常価格との差額はいくらか
+  - 対象者条件は何か
+  - キャンペーンや特典の有無はどうか
 - 確認先:
   - 公式製品ページで仕様と表記を確認
-  - 信頼できるレビュー媒体で実使用の評価を確認
+  - 公式ストアと教育ストアで価格差を確認
 - 執筆条件:
   - 母艦記事の良い文章資産と論点順を土台にする
   - 母艦記事の H2 構成は原則すべて維持する
@@ -115,65 +96,37 @@
   - 構造
   - 検索キーワード
 
-## macbook neo ゲーム性能
+## macbook neo ハード ケース
 
 - クエリタイプ: Know
 - 検索ボリューム: 中
-- 冒頭で最初に答えること: どの用途まで現実的にこなせるかを最初に答える
-- H2 接頭辞: macbook neo ゲーム性能：
-- 母艦から流用したい見出し候補: macbook neoレビュー比較まとめ：選定基準, macbook neo ゲーム性能, macbook neo エクセル, macbook neo ケース, macbook neo ゲーム
-- 母艦 H2 数: 4
-- 母艦 H2 全維持: macbook neo エクセル / macbook neo ケース / macbook neo ゲーム性能 / macbook neo ゲーム
+- 冒頭で最初に答えること: 何を守りたいかと、専用品か互換品かを最初に答える
+- H2 接頭辞: macbook neo ハード ケース：
+- 母艦から流用したい見出し候補: macbook neoレビュー比較まとめ：結論, macbook neo ハード ケース, MacBook Neo レビュー比較まとめ：結論, MacBook Neo レビュー比較まとめ：選定基準, MacBook Neo レビュー比較まとめ：利用シーン, MacBook Neo ハード ケース, MacBook Neo 学割キャンペーン, MacBook Neo ケース おすすめ, MacBook Neo レビュー比較まとめ：比較, MacBook Neo レビュー比較まとめ：メリット, MacBook Neo レビュー比較まとめ：デメリット, MacBook Neo レビュー比較まとめ：FAQ, MacBook Neo レビュー比較まとめ：評判, MacBook Neo レビュー比較まとめ：まとめ
+- 母艦 H2 数: 12
+- 母艦 H2 全維持: MacBook Neo レビュー比較まとめ：結論 / MacBook Neo レビュー比較まとめ：選定基準 / MacBook Neo レビュー比較まとめ：利用シーン / MacBook Neo ハード ケース / MacBook Neo 学割キャンペーン / MacBook Neo ケース おすすめ / MacBook Neo レビュー比較まとめ：比較 / MacBook Neo レビュー比較まとめ：メリット / MacBook Neo レビュー比較まとめ：デメリット / MacBook Neo レビュー比較まとめ：FAQ / MacBook Neo レビュー比較まとめ：評判 / MacBook Neo レビュー比較まとめ：まとめ
 - 必須 H2 候補:
-  - macbook neo ゲーム性能：エクセル
-  - macbook neo ゲーム性能：ケース
-  - macbook neo ゲーム性能：ゲーム性能
-  - macbook neo ゲーム性能：ゲーム
+  - macbook neo ハード ケース：結論
+  - macbook neo ハード ケース：選定基準
+  - macbook neo ハード ケース：利用シーン
+  - macbook neo ハード ケース：ハード ケース
+  - macbook neo ハード ケース：学割キャンペーン
+  - macbook neo ハード ケース：ケース おすすめ
+  - macbook neo ハード ケース：比較
+  - macbook neo ハード ケース：メリット
+  - macbook neo ハード ケース：デメリット
+  - macbook neo ハード ケース：FAQ
+  - macbook neo ハード ケース：評判
+  - macbook neo ハード ケース：まとめ
 - 調査質問:
-  - どの用途まで現実的に動くのか
-  - レビューで報告されている性能の限界はどこか
-  - メモリや発熱が制約になる場面は何か
-  - 配信や録画も含めて使える範囲はどこまでか
+  - 専用品か互換品か
+  - サイズとポート位置の互換性はあるか
+  - 何を守りたい人向けか
+  - 公式ストアで確認できる候補と価格帯はどうか
 - 確認先:
   - 公式製品ページで仕様と表記を確認
-  - 信頼できるレビュー媒体で実使用の評価を確認
-- 執筆条件:
-  - 母艦記事の良い文章資産と論点順を土台にする
-  - 母艦記事の H2 構成は原則すべて維持する
-  - 4見出し前後へ圧縮してはいけない
-  - H2 は必ず対象検索キーワード：見出し名 で始める
-  - H2直下の最初の一文も、その見出しキーワードを自然に含めて始める
-  - おすすめ系でも商品推薦ではなく、判断軸を渡す記事にする
-- 禁止表現:
-  - 母艦記事
-  - このキーワードでは
-  - この記事の使い方
-  - テンプレート
-  - 構造
-  - 検索キーワード
-
-## macbook neo ゲーム配信
-
-- クエリタイプ: Know
-- 検索ボリューム: 中
-- 冒頭で最初に答えること: どの用途まで現実的にこなせるかを最初に答える
-- H2 接頭辞: macbook neo ゲーム配信：
-- 母艦から流用したい見出し候補: macbook neoレビュー比較まとめ：利用シーン, macbook neo ゲーム, macbook neo エクセル, macbook neo ケース, macbook neo ゲーム性能
-- 母艦 H2 数: 4
-- 母艦 H2 全維持: macbook neo エクセル / macbook neo ケース / macbook neo ゲーム性能 / macbook neo ゲーム
-- 必須 H2 候補:
-  - macbook neo ゲーム配信：エクセル
-  - macbook neo ゲーム配信：ケース
-  - macbook neo ゲーム配信：ゲーム性能
-  - macbook neo ゲーム配信：ゲーム
-- 調査質問:
-  - どの用途まで現実的に動くのか
-  - レビューで報告されている性能の限界はどこか
-  - メモリや発熱が制約になる場面は何か
-  - 配信や録画も含めて使える範囲はどこまでか
-- 確認先:
-  - 公式製品ページで仕様と表記を確認
-  - 信頼できるレビュー媒体で実使用の評価を確認
+  - 公式アクセサリページで候補と対応サイズを確認
+  - 寸法とポート位置が分かる仕様ページを確認
 - 執筆条件:
   - 母艦記事の良い文章資産と論点順を土台にする
   - 母艦記事の H2 構成は原則すべて維持する

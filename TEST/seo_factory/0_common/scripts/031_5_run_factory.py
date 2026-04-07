@@ -12,10 +12,10 @@ from pathlib import Path
 from typing import Any
 
 CURRENT_DIR = Path(__file__).resolve().parent
+SEO_FACTORY_DIR = CURRENT_DIR.parent.parent
 
 
-def _load_module(module_filename: str, module_alias: str) -> Any:
-    module_path = CURRENT_DIR / module_filename
+def _load_module(module_path: Path, module_alias: str) -> Any:
     spec = importlib.util.spec_from_file_location(module_alias, module_path)
     if spec is None or spec.loader is None:
         raise ImportError(f"モジュールを読み込めません: {module_path}")
@@ -24,11 +24,22 @@ def _load_module(module_filename: str, module_alias: str) -> Any:
     spec.loader.exec_module(module)
     return module
 
-
-KEYWORD_PIPELINE_MODULE = _load_module("031_1_keyword_pipeline.py", "seo_factory_031_1_keyword_pipeline")
-MASTER_ARTICLE_MODULE = _load_module("031_2_master_article_generator.py", "seo_factory_031_2_master_article_generator")
-ARTICLE_VALIDATOR_MODULE = _load_module("031_3_article_validator.py", "seo_factory_031_3_article_validator")
-KOBETSU_WRITER_MODULE = _load_module("031_4_kobetsu_writer.py", "seo_factory_031_4_kobetsu_writer")
+KEYWORD_PIPELINE_MODULE = _load_module(
+    SEO_FACTORY_DIR / "1_keyword_collect" / "scripts" / "031_1_keyword_pipeline.py",
+    "seo_factory_031_1_keyword_pipeline",
+)
+MASTER_ARTICLE_MODULE = _load_module(
+    SEO_FACTORY_DIR / "2_base_article" / "scripts" / "031_2_master_article_generator.py",
+    "seo_factory_031_2_master_article_generator",
+)
+ARTICLE_VALIDATOR_MODULE = _load_module(
+    CURRENT_DIR / "031_3_article_validator.py",
+    "seo_factory_031_3_article_validator",
+)
+KOBETSU_WRITER_MODULE = _load_module(
+    SEO_FACTORY_DIR / "3_variant_article" / "scripts" / "031_4_kobetsu_writer.py",
+    "seo_factory_031_4_kobetsu_writer",
+)
 
 normalize_records = KEYWORD_PIPELINE_MODULE.normalize_records
 collect_suggest_keywords = KEYWORD_PIPELINE_MODULE.collect_suggest_keywords

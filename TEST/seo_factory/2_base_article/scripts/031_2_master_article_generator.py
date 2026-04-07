@@ -15,7 +15,8 @@ from collections.abc import Iterable
 from pathlib import Path
 from typing import Any, Mapping
 
-PIPELINE_MODULE_PATH = Path(__file__).parent / "031_1_keyword_pipeline.py"
+SEO_FACTORY_DIR = Path(__file__).resolve().parents[2]
+PIPELINE_MODULE_PATH = SEO_FACTORY_DIR / "1_keyword_collect" / "scripts" / "031_1_keyword_pipeline.py"
 
 
 def _load_keyword_pipeline_module() -> Any:
