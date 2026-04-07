@@ -1000,38 +1000,6 @@
       const [showFolderPicker, setShowFolderPicker] = useState(false);
       const [showLinkPicker, setShowLinkPicker] = useState(false);
             // リンク集のドラッグ＆ドロップ（HTML5対応）用ステート
-      const [linkDragState, setLinkDragState] = useState({ isDragging: false, startIndex: null, overIndex: null });
-      const handleDragStartLink = (e, index) => {
-        setLinkDragState({ isDragging: true, startIndex: index, overIndex: index });
-        e.dataTransfer.effectAllowed = 'move';
-        e.dataTransfer.setData('text/plain', index);
-        if (navigator.vibrate) navigator.vibrate(40);
-      };
-      const handleDragOverLink = (e, index) => {
-        e.preventDefault();
-        e.dataTransfer.dropEffect = 'move';
-        if (linkDragState.overIndex !== index) {
-          setLinkDragState(prev => ({ ...prev, overIndex: index }));
-        }
-      };
-      const handleDropLink = (e, targetIndex) => {
-        e.preventDefault();
-        const { startIndex } = linkDragState;
-        if (startIndex !== null && startIndex !== targetIndex) {
-          setCustomLinks(links => {
-            const newLinks = [...links];
-            const [moved] = newLinks.splice(startIndex, 1);
-            newLinks.splice(targetIndex, 0, moved);
-            try { localStorage.setItem('sb_customLinks', JSON.stringify(newLinks)); } catch {}
-            return newLinks;
-          });
-        }
-        setLinkDragState({ isDragging: false, startIndex: null, overIndex: null });
-      };
-      const handleDragEndLink = () => {
-        setLinkDragState({ isDragging: false, startIndex: null, overIndex: null });
-      };
-
       const [customLinks, setCustomLinks] = useState(() => {
         try {
           const saved = JSON.parse(localStorage.getItem('sb_customLinks'));
@@ -1045,6 +1013,128 @@
       });
 
       // 全フォルダパス一覧（記事のpathから導出）
+      const [linkDragState, setLinkDragState] = useState({ isDragging: false, startIndex: null, overIndex: null });
+      const [linkTouchGhost, setLinkTouchGhost] = useState(null);
+      const linkTouchRef = useRef({ timer: null, startX: 0, startY: 0, startIndex: null, overIndex: null, dragging: false, blockClickUntil: 0 });
+      const LINK_LONG_PRESS_MS = 350;
+
+      const persistCustomLinks = useCallback((updater) => {
+        setCustomLinks(prevLinks => {
+          const nextLinks = typeof updater === 'function' ? updater(prevLinks) : updater;
+          try { localStorage.setItem('sb_customLinks', JSON.stringify(nextLinks)); } catch {}
+          return nextLinks;
+        });
+      }, []);
+
+      const reorderCustomLinks = useCallback((startIndex, targetIndex) => {
+        if (!Number.isInteger(startIndex) || !Number.isInteger(targetIndex) || startIndex === targetIndex) return;
+        persistCustomLinks((links) => {
+          if (startIndex < 0 || targetIndex < 0 || startIndex >= links.length || targetIndex >= links.length) return links;
+          const newLinks = [...links];
+          const [moved] = newLinks.splice(startIndex, 1);
+          newLinks.splice(targetIndex, 0, moved);
+          return newLinks;
+        });
+      }, [persistCustomLinks]);
+
+      const clearLinkTouchTimer = useCallback(() => {
+        if (linkTouchRef.current.timer) {
+          clearTimeout(linkTouchRef.current.timer);
+          linkTouchRef.current.timer = null;
+        }
+      }, []);
+
+      const resetLinkTouchDrag = useCallback(() => {
+        clearLinkTouchTimer();
+        linkTouchRef.current.dragging = false;
+        linkTouchRef.current.startIndex = null;
+        linkTouchRef.current.overIndex = null;
+        setLinkTouchGhost(null);
+        setLinkDragState({ isDragging: false, startIndex: null, overIndex: null });
+      }, [clearLinkTouchTimer]);
+
+      const updateTouchLinkTarget = useCallback((clientX, clientY) => {
+        const hit = document.elementFromPoint(clientX, clientY);
+        const item = hit && hit.closest('[data-custom-link-index]');
+        const nextIndex = item ? Number(item.dataset.customLinkIndex) : null;
+        if (Number.isInteger(nextIndex) && nextIndex !== linkTouchRef.current.overIndex) {
+          linkTouchRef.current.overIndex = nextIndex;
+          setLinkDragState(prev => prev.isDragging ? { ...prev, overIndex: nextIndex } : prev);
+        }
+      }, []);
+
+      const handleDragStartLink = (e, index) => {
+        setLinkDragState({ isDragging: true, startIndex: index, overIndex: index });
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', String(index));
+        if (navigator.vibrate) navigator.vibrate(40);
+      };
+      const handleDragOverLink = (e, index) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        if (linkDragState.overIndex !== index) {
+          setLinkDragState(prev => ({ ...prev, overIndex: index }));
+        }
+      };
+      const handleDropLink = (e, targetIndex) => {
+        e.preventDefault();
+        reorderCustomLinks(linkDragState.startIndex, targetIndex);
+        setLinkDragState({ isDragging: false, startIndex: null, overIndex: null });
+      };
+      const handleDragEndLink = () => {
+        setLinkDragState({ isDragging: false, startIndex: null, overIndex: null });
+      };
+      const handleTouchStartLink = (e, index, title) => {
+        if (e.touches.length !== 1) return;
+        const touch = e.touches[0];
+        clearLinkTouchTimer();
+        linkTouchRef.current.startX = touch.clientX;
+        linkTouchRef.current.startY = touch.clientY;
+        linkTouchRef.current.startIndex = index;
+        linkTouchRef.current.overIndex = index;
+        linkTouchRef.current.dragging = false;
+        linkTouchRef.current.timer = setTimeout(() => {
+          linkTouchRef.current.timer = null;
+          linkTouchRef.current.dragging = true;
+          linkTouchRef.current.blockClickUntil = Date.now() + 450;
+          setLinkDragState({ isDragging: true, startIndex: index, overIndex: index });
+          setLinkTouchGhost({ x: touch.clientX, y: touch.clientY, name: title });
+          if (navigator.vibrate) navigator.vibrate(40);
+        }, LINK_LONG_PRESS_MS);
+      };
+      const handleTouchMoveLink = (e) => {
+        const touch = e.touches[0];
+        if (!touch) return;
+        if (linkTouchRef.current.dragging) {
+          e.preventDefault();
+          setLinkTouchGhost(prev => prev ? { ...prev, x: touch.clientX, y: touch.clientY } : null);
+          updateTouchLinkTarget(touch.clientX, touch.clientY);
+          return;
+        }
+        const dx = touch.clientX - linkTouchRef.current.startX;
+        const dy = touch.clientY - linkTouchRef.current.startY;
+        if (Math.abs(dx) > 10 || Math.abs(dy) > 10) clearLinkTouchTimer();
+      };
+      const handleTouchEndLink = (e, fallbackIndex) => {
+        clearLinkTouchTimer();
+        if (!linkTouchRef.current.dragging) return;
+        e.preventDefault();
+        const targetIndex = Number.isInteger(linkTouchRef.current.overIndex) ? linkTouchRef.current.overIndex : fallbackIndex;
+        reorderCustomLinks(linkTouchRef.current.startIndex, targetIndex);
+        resetLinkTouchDrag();
+      };
+      const handleTouchCancelLink = () => {
+        resetLinkTouchDrag();
+      };
+      const blockLinkClickIfNeeded = (e) => {
+        if (linkTouchRef.current.dragging || Date.now() < linkTouchRef.current.blockClickUntil) {
+          e.preventDefault();
+          e.stopPropagation();
+          return true;
+        }
+        return false;
+      };
+
       const allFolderPaths = useMemo(() => {
         const paths = new Set();
         for (const a of articles) {
@@ -1135,9 +1225,7 @@
                     if (!title || !title.trim()) return;
                     const url = prompt('URLを入力:');
                     if (url && url.trim()) {
-                      const newLinks = [...customLinks, { id: 'link_' + Date.now(), title: title.trim(), url: url.trim() }];
-                      setCustomLinks(newLinks);
-                      try { localStorage.setItem('sb_customLinks', JSON.stringify(newLinks)); } catch {}
+                      persistCustomLinks([...customLinks, { id: 'link_' + Date.now(), title: title.trim(), url: url.trim() }]);
                     }
                   }} style={{ background:'none', border:'none', color:'#7C4DFF', cursor:'pointer', fontSize:'11px', fontWeight:700 }}>＋ 追加</button>
                 </div>
@@ -1145,19 +1233,25 @@
                   {customLinks.map((link, idx) => (
                     <div 
                       key={link.id} 
+                      data-custom-link-index={idx}
                       className="custom-link-item" 
                       draggable={true}
                       onDragStart={(e) => handleDragStartLink(e, idx)}
                       onDragOver={(e) => handleDragOverLink(e, idx)}
                       onDrop={(e) => handleDropLink(e, idx)}
                       onDragEnd={handleDragEndLink}
+                      onTouchStart={(e) => handleTouchStartLink(e, idx, link.title)}
+                      onTouchMove={handleTouchMoveLink}
+                      onTouchEnd={(e) => handleTouchEndLink(e, idx)}
+                      onTouchCancel={handleTouchCancelLink}
                       style={{ 
                         display: 'flex', alignItems: 'center', gap: '6px', background:'white', padding:'4px 6px', 
                         borderRadius:'6px', border: linkDragState.overIndex === idx && linkDragState.startIndex !== idx ? '1px dashed #7C4DFF' : '1px solid #e2e8f0', 
                         boxShadow:'0 1px 2px rgba(0,0,0,0.02)',
                         opacity: linkDragState.startIndex === idx ? 0.4 : 1,
                         transition: 'border 0.2s, opacity 0.2s',
-                        cursor: 'grab'
+                        cursor: 'grab',
+                        touchAction: linkDragState.startIndex === idx ? 'none' : 'manipulation'
                       }}
                     >
                       <div 
@@ -1173,6 +1267,7 @@
                         draggable={false}
                         onDragStart={(e) => e.preventDefault()}
                         onClick={(e) => {
+                           if (blockLinkClickIfNeeded(e)) return;
                            if (link.url.startsWith('/')) {
                              e.preventDefault();
                              setShowLinkPicker(false);
@@ -1191,27 +1286,34 @@
                         <span style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight:500}}>{link.title}</span>
                       </a>
                       <button onClick={() => {
+                        if (Date.now() < linkTouchRef.current.blockClickUntil) return;
                         const newTitle = prompt('タイトルを編集:', link.title);
+                        if (linkTouchRef.current.dragging) return;
                         if (newTitle === null) return;
                         const newUrl = prompt('URLを編集:', link.url);
                         if (newUrl === null) return;
                         if (newTitle.trim() && newUrl.trim()) {
-                           const newLinks = [...customLinks];
-                           newLinks[idx] = { ...newLinks[idx], title: newTitle.trim(), url: newUrl.trim() };
-                           setCustomLinks(newLinks);
-                           try { localStorage.setItem('sb_customLinks', JSON.stringify(newLinks)); } catch {}
+                           persistCustomLinks((links) => {
+                             const newLinks = [...links];
+                             newLinks[idx] = { ...newLinks[idx], title: newTitle.trim(), url: newUrl.trim() };
+                             return newLinks;
+                           });
                         }
                       }} style={{ fontSize:'10px', color:'#64748b', cursor:'pointer', background:'#f1f5f9', border:'none', padding:'2px 6px', borderRadius:'4px', flexShrink:0 }}>編集</button>
                       <button onClick={() => {
+                        if (Date.now() < linkTouchRef.current.blockClickUntil) return;
                         if (confirm('このリンクを削除しますか？')) {
-                          const newLinks = customLinks.filter((_, i) => i !== idx);
-                          setCustomLinks(newLinks);
-                          try { localStorage.setItem('sb_customLinks', JSON.stringify(newLinks)); } catch {}
+                          persistCustomLinks(customLinks.filter((_, i) => i !== idx));
                         }
                       }} style={{ fontSize:'10px', color:'#ef4444', cursor:'pointer', background:'#fff1f2', border:'none', padding:'2px 6px', borderRadius:'4px', flexShrink:0 }}>削除</button>
                     </div>
                   ))}
                 </div>
+                {linkTouchGhost && (
+                  <div className="touch-drag-ghost" style={{ left: linkTouchGhost.x, top: linkTouchGhost.y }}>
+                    {linkTouchGhost.name}
+                  </div>
+                )}
               </div>
             </div>
           )}
