@@ -13,6 +13,8 @@ from typing import Any
 
 CURRENT_DIR = Path(__file__).resolve().parent
 SEO_FACTORY_DIR = CURRENT_DIR.parent.parent
+TEST_DIR = SEO_FACTORY_DIR.parent
+INPUT_DIR = TEST_DIR / "input"
 
 
 def _load_module(module_path: Path, module_alias: str) -> Any:
@@ -59,6 +61,13 @@ DEFAULT_SPREADSHEET_ID = os.getenv(
     "SEO_FACTORY_SPREADSHEET_ID",
     "1_qjAWcrgGHY8xTQdiUrK-v_gJsXEb8FH9ABUvEpcVMo",
 )
+
+
+def _normalize_search_keyword(text: str) -> str:
+    normalized = str(text or "").replace("\u3000", " ")
+    normalized = normalized.replace("_", " ")
+    normalized = re.sub(r"\s+", " ", normalized).strip()
+    return normalized
 
 
 def _slugify(text: str) -> str:
@@ -110,12 +119,11 @@ def _write_master_validation_report(target_dir: Path, report: dict[str, Any]) ->
     )
 
 
-def _find_reference_article_path(target_dir: Path) -> Path | None:
-    reference_dir = target_dir / "reference"
-    if not reference_dir.exists():
+def _find_reference_article_path() -> Path | None:
+    if not INPUT_DIR.exists():
         return None
 
-    markdown_files = sorted(reference_dir.glob("*.md"))
+    markdown_files = sorted(INPUT_DIR.glob("*.md"))
     non_backup_files = [
         path for path in markdown_files
         if not path.name.startswith("master_article_backup_")
@@ -126,17 +134,24 @@ def _find_reference_article_path(target_dir: Path) -> Path | None:
     return max(candidates, key=lambda path: path.stat().st_mtime)
 
 
-def _load_reference_article(target_dir: Path) -> tuple[str, str]:
-    reference_path = _find_reference_article_path(target_dir)
+def _load_reference_article() -> tuple[str, str]:
+    reference_path = _find_reference_article_path()
     if reference_path is None:
         return "", ""
     return str(reference_path), reference_path.read_text(encoding="utf-8")
 
 
+def _build_resume_command(search_keyword: str, sheet_tab_name: str, script_path: Path) -> str:
+    command = f'python {script_path} "{search_keyword}" --resume-from-sheet'
+    if sheet_tab_name != search_keyword:
+        command += f' --sheet-tab-name "{sheet_tab_name}"'
+    return command
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="SEO記事量産ワークフロー PoC")
-    parser.add_argument("seed_keyword", help="現行製品のシードキーワード")
-    parser.add_argument("--previous-seed-keyword", help="前作製品のシードキーワード")
+    parser.add_argument("seed_keyword", help="ユーザーがチャットで提示した現行製品のラッコ検索キーワード")
+    parser.add_argument("--previous-seed-keyword", help="前作製品のラッコ検索キーワード")
     parser.add_argument("--mode", default="google", help="ラッコキーワードのモード")
     parser.add_argument("--show-browser", action="store_true", help="Playwright を headful で開く")
     parser.add_argument(
@@ -156,7 +171,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--sheet-tab-name",
-        help="読み書きするシート名。未指定時はシードキーワードを使用",
+        help="読み書きするシート名。未指定時は正規化済みのラッコ検索キーワードを使用",
     )
     parser.add_argument(
         "--continue-after-collection",
@@ -179,24 +194,43 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     output_root = Path(args.output_dir)
-    slug = _slugify(args.seed_keyword)
+    search_keyword = _normalize_search_keyword(args.seed_keyword)
+    if not search_keyword:
+        raise SystemExit("ラッコ検索キーワードが空です。ユーザーがチャットで提示した検索キーワードを指定してください。")
+
+    previous_seed_keyword = ""
+    if args.previous_seed_keyword:
+        previous_seed_keyword = _normalize_search_keyword(args.previous_seed_keyword)
+        if not previous_seed_keyword:
+            raise SystemExit("前作製品のラッコ検索キーワードが空です。")
+
+    sheet_tab_name = _normalize_search_keyword(args.sheet_tab_name or search_keyword)
+    slug = _slugify(search_keyword)
     target_dir = output_root / slug
-    sheet_tab_name = args.sheet_tab_name or args.seed_keyword
+    if args.seed_keyword != search_keyword:
+        print(f"入力キーワード補正: {args.seed_keyword} -> {search_keyword}")
+    if args.sheet_tab_name and args.sheet_tab_name != sheet_tab_name:
+        print(f"シート名補正: {args.sheet_tab_name} -> {sheet_tab_name}")
+    if args.previous_seed_keyword and args.previous_seed_keyword != previous_seed_keyword:
+        print(f"前作キーワード補正: {args.previous_seed_keyword} -> {previous_seed_keyword}")
+    print(f"ラッコ検索キーワード: {search_keyword}")
+    print(f"スプレッドシートタブ名: {sheet_tab_name}")
+    print(f"出力スラッグ: {slug}")
 
     if args.resume_from_sheet:
         print(f"シート読込開始: {sheet_tab_name}")
         sheet_rows = load_keyword_records_from_sheet(args.spreadsheet_id, sheet_tab_name)
         current_records = normalize_records(
-            select_keyword_records_for_generation(args.seed_keyword, sheet_rows)
+            select_keyword_records_for_generation(search_keyword, sheet_rows)
         )
         print(f"シート採用件数: {len(current_records)}")
         if not current_records:
             print("採用対象が0件のため停止します。状況列を確認してください。")
             return
     else:
-        print(f"収集開始: {args.seed_keyword}")
+        print(f"収集開始: {search_keyword}")
         current_raw = collect_suggest_keywords(
-            seed_keyword=args.seed_keyword,
+            seed_keyword=search_keyword,
             mode=args.mode,
             headless=not args.show_browser,
             debug_dir=str(target_dir / "debug"),
@@ -217,10 +251,10 @@ def main() -> None:
             return
 
     previous_records: list[dict[str, Any]] = []
-    if args.previous_seed_keyword:
-        print(f"前作収集開始: {args.previous_seed_keyword}")
+    if previous_seed_keyword:
+        print(f"前作収集開始: {previous_seed_keyword}")
         previous_raw = collect_suggest_keywords(
-            seed_keyword=args.previous_seed_keyword,
+            seed_keyword=previous_seed_keyword,
             mode=args.mode,
             headless=not args.show_browser,
             debug_dir=str(target_dir / "debug"),
@@ -231,17 +265,17 @@ def main() -> None:
         print(f"前作サジェスト件数: {len(previous_records)}")
 
     outline = generate_master_outline(
-        seed_keyword=args.seed_keyword,
+        seed_keyword=search_keyword,
         current_records=current_records,
         previous_records=previous_records,
     )
-    reference_article_path, reference_article_markdown = _load_reference_article(target_dir)
+    reference_article_path, reference_article_markdown = _load_reference_article()
     existing_master_article_markdown = ""
     existing_master_article_path = target_dir / "master_article.md"
     if existing_master_article_path.exists():
         existing_master_article_markdown = existing_master_article_path.read_text(encoding="utf-8")
     master_research_bundle = build_master_research_bundle(
-        seed_keyword=args.seed_keyword,
+        seed_keyword=search_keyword,
         current_records=current_records,
         previous_records=previous_records,
         outline=outline,
@@ -263,9 +297,14 @@ def main() -> None:
         if reference_article_path:
             print(f"土台記事: {reference_article_path}")
         else:
-            print(f"土台記事: 未検出 ({target_dir / 'reference'})")
+            print(f"土台記事: 未検出 ({INPUT_DIR})")
         print(f"母艦記事用材料: {_memo_dir(target_dir) / '031_2_master_research_bundle.md'}")
-        print(f"次の工程: このチャットで {target_dir / 'master_article.md'} を作成し、その後 {CURRENT_DIR / '031_5_run_factory.py'} --resume-from-sheet を再実行")
+        print(
+            "次の工程: "
+            f"このチャットで {target_dir / 'master_article.md'} を作成し、その後 "
+            f"{_build_resume_command(search_keyword, sheet_tab_name, CURRENT_DIR / '031_5_run_factory.py')} "
+            "を再実行"
+        )
         print(f"出力先: {target_dir}")
         return
 
@@ -281,13 +320,13 @@ def main() -> None:
         return
 
     kobetsu_jobs = generate_kobetsu_jobs(
-        seed_keyword=args.seed_keyword,
+        seed_keyword=search_keyword,
         selected_records=current_records,
         outline=outline,
         master_research_bundle=master_research_bundle,
         master_article_markdown=existing_master_article_markdown,
     )
-    _write_kobetsu_jobs(target_dir, args.seed_keyword, kobetsu_jobs)
+    _write_kobetsu_jobs(target_dir, search_keyword, kobetsu_jobs)
     print("材料保存、母艦記事検証、個別記事ジョブ生成まで完了しました。")
     if reference_article_path:
         print(f"土台記事: {reference_article_path}")

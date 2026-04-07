@@ -203,12 +203,20 @@ def normalize_keyword_text(text: str, lower: bool = False) -> str:
     return normalized.lower() if lower else normalized
 
 
+def normalize_seed_keyword_input(text: str) -> str:
+    normalized = unicodedata.normalize("NFKC", str(text or ""))
+    normalized = normalized.replace("\u3000", " ")
+    normalized = normalized.replace("_", " ")
+    normalized = re.sub(r"\s+", " ", normalized).strip()
+    return normalized
+
+
 def build_keyword_key(text: str) -> str:
     return normalize_keyword_text(text, lower=True)
 
 
 def extract_keyword_suffix(seed_keyword: str, suggest_keyword: str) -> str:
-    seed = normalize_keyword_text(seed_keyword)
+    seed = normalize_seed_keyword_input(seed_keyword)
     suggest = normalize_keyword_text(suggest_keyword)
     if not seed:
         return suggest
@@ -247,7 +255,7 @@ def normalize_records(records: Iterable[Mapping[str, Any]]) -> list[dict[str, An
         if not suggest_keyword:
             continue
 
-        seed_keyword = normalize_keyword_text(str(raw.get("seed_keyword") or ""))
+        seed_keyword = normalize_seed_keyword_input(str(raw.get("seed_keyword") or ""))
         volume_label = normalize_keyword_text(
             str(raw.get("volume_label") or raw.get("search_volume_label") or raw.get("kubun") or "")
         )
@@ -312,7 +320,7 @@ def group_records_by_intent(records: Iterable[Mapping[str, Any]]) -> dict[str, l
 
 
 def build_search_url(seed_keyword: str, mode: str = DEFAULT_MODE) -> str:
-    encoded_keyword = quote_plus(seed_keyword)
+    encoded_keyword = quote_plus(normalize_seed_keyword_input(seed_keyword))
     return f"https://rakkokeyword.com/result/suggestKeywords?q={encoded_keyword}&mode={mode}"
 
 
@@ -396,6 +404,7 @@ def collect_suggest_keywords(
     wait_after_click_ms: int = 350,
     debug_dir: str | None = None,
 ) -> list[dict[str, object]]:
+    seed_keyword = normalize_seed_keyword_input(seed_keyword)
     fetched_at = datetime.now(timezone.utc).isoformat()
     collected: list[SuggestKeywordRecord] = []
     search_url = build_search_url(seed_keyword, mode)
@@ -471,7 +480,8 @@ def _get_gs_client() -> gspread.Client:
 
 
 def _sanitize_sheet_title(title: str, max_length: int = 100) -> str:
-    normalized = re.sub(r"[\[\]\:\*\?/\\]", " ", str(title or ""))
+    normalized = normalize_seed_keyword_input(title)
+    normalized = re.sub(r"[\[\]\:\*\?/\\]", " ", normalized)
     normalized = re.sub(r"\s+", " ", normalized).strip()
     return (normalized or "seed_keyword")[:max_length]
 
