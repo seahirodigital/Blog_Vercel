@@ -2,19 +2,38 @@
   "seed_keyword": "macbook neo",
   "title": "macbook neo レビュー比較まとめ",
   "summary_focus_keywords": [
+    "macbook neo インディゴ",
+    "macbook neo ケース",
+    "macbook neo 学割",
+    "apple macbook neo レビュー",
     "macbook neo ケース おすすめ",
+    "macbook neo 学割 価格",
     "macbook neo 学割キャンペーン",
+    "macbook neo ゲーム性能",
+    "macbook neo ゲーム配信",
     "macbook neo ハード ケース"
   ],
-  "current_keyword_count": 3,
+  "current_keyword_count": 17,
   "previous_keyword_count": 0,
   "priority_groups": [
+    {
+      "label": "最優先の疑問解消",
+      "query_type": "Know",
+      "volume_label": "大",
+      "keywords": [
+        "macbook neo インディゴ",
+        "macbook neo ケース",
+        "macbook neo 学割"
+      ]
+    },
     {
       "label": "比較前に確認する購入判断",
       "query_type": "Buy",
       "volume_label": "中",
       "keywords": [
+        "apple macbook neo レビュー",
         "macbook neo ケース おすすめ",
+        "macbook neo 学割 価格",
         "macbook neo 学割キャンペーン"
       ]
     },
@@ -23,7 +42,16 @@
       "query_type": "Know",
       "volume_label": "中",
       "keywords": [
-        "macbook neo ハード ケース"
+        "macbook neo ゲーム性能",
+        "macbook neo ゲーム配信",
+        "macbook neo ハード ケース",
+        "macbook neo メモリ増設",
+        "macbook neo ワード エクセル",
+        "macbook neo 学割 中学生",
+        "macbook neo 学割 小学生",
+        "macbook neo 学割 高校生",
+        "macbook neo 学割ギフトカード",
+        "macbook neo 透明ケース"
       ]
     }
   ],
@@ -33,8 +61,70 @@
       "heading": "macbook neoレビュー比較まとめ：結論",
       "subsections": [
         {
+          "heading": "macbook neo インディゴ",
+          "suggest_keyword": "macbook neo インディゴ",
+          "query_type": "Know",
+          "volume_label": "大",
+          "article_candidate": false,
+          "source_scope": "現行需要",
+          "child_h2_topics": []
+        },
+        {
+          "heading": "macbook neo ケース",
+          "suggest_keyword": "macbook neo ケース",
+          "query_type": "Know",
+          "volume_label": "大",
+          "article_candidate": false,
+          "source_scope": "現行需要",
+          "child_h2_topics": []
+        },
+        {
+          "heading": "macbook neo 学割",
+          "suggest_keyword": "macbook neo 学割",
+          "query_type": "Know",
+          "volume_label": "大",
+          "article_candidate": false,
+          "source_scope": "現行需要",
+          "child_h2_topics": [
+            {
+              "heading": "macbook neo 学割 高校生",
+              "suggest_keyword": "macbook neo 学割 高校生",
+              "query_type": "Know",
+              "volume_label": "中",
+              "article_candidate": false,
+              "source_scope": "現行需要"
+            },
+            {
+              "heading": "macbook neo 学割ギフトカード",
+              "suggest_keyword": "macbook neo 学割ギフトカード",
+              "query_type": "Know",
+              "volume_label": "中",
+              "article_candidate": false,
+              "source_scope": "現行需要"
+            }
+          ]
+        },
+        {
           "heading": "macbook neo ハード ケース",
           "suggest_keyword": "macbook neo ハード ケース",
+          "query_type": "Know",
+          "volume_label": "中",
+          "article_candidate": false,
+          "source_scope": "現行需要",
+          "child_h2_topics": []
+        },
+        {
+          "heading": "macbook neo メモリ増設",
+          "suggest_keyword": "macbook neo メモリ増設",
+          "query_type": "Know",
+          "volume_label": "中",
+          "article_candidate": false,
+          "source_scope": "現行需要",
+          "child_h2_topics": []
+        },
+        {
+          "heading": "macbook neo ワード エクセル",
+          "suggest_keyword": "macbook neo ワード エクセル",
           "query_type": "Know",
           "volume_label": "中",
           "article_candidate": false,
@@ -43,13 +133,29 @@
         }
       ],
       "supporting_keywords": [
-        "macbook neo ハード ケース"
+        "macbook neo インディゴ",
+        "macbook neo ケース",
+        "macbook neo 学割",
+        "macbook neo 学割 高校生",
+        "macbook neo 学割ギフトカード",
+        "macbook neo ハード ケース",
+        "macbook neo メモリ増設",
+        "macbook neo ワード エクセル"
       ]
     },
     {
       "id": "selection_criteria",
       "heading": "macbook neoレビュー比較まとめ：選定基準",
       "subsections": [
+        {
+          "heading": "macbook neo 学割 価格",
+          "suggest_keyword": "macbook neo 学割 価格",
+          "query_type": "Buy",
+          "volume_label": "中",
+          "article_candidate": true,
+          "source_scope": "現行需要",
+          "child_h2_topics": []
+        },
         {
           "heading": "macbook neo 学割キャンペーン",
           "suggest_keyword": "macbook neo 学割キャンペーン",
@@ -58,17 +164,60 @@
           "article_candidate": true,
           "source_scope": "現行需要",
           "child_h2_topics": []
+        },
+        {
+          "heading": "macbook neo ゲーム性能",
+          "suggest_keyword": "macbook neo ゲーム性能",
+          "query_type": "Know",
+          "volume_label": "中",
+          "article_candidate": false,
+          "source_scope": "現行需要",
+          "child_h2_topics": []
         }
       ],
       "supporting_keywords": [
-        "macbook neo 学割キャンペーン"
+        "macbook neo 学割 価格",
+        "macbook neo 学割キャンペーン",
+        "macbook neo ゲーム性能"
       ]
     },
     {
       "id": "use_cases",
       "heading": "macbook neoレビュー比較まとめ：利用シーン",
-      "subsections": [],
-      "supporting_keywords": []
+      "subsections": [
+        {
+          "heading": "macbook neo ゲーム配信",
+          "suggest_keyword": "macbook neo ゲーム配信",
+          "query_type": "Know",
+          "volume_label": "中",
+          "article_candidate": false,
+          "source_scope": "現行需要",
+          "child_h2_topics": []
+        },
+        {
+          "heading": "macbook neo 学割 中学生",
+          "suggest_keyword": "macbook neo 学割 中学生",
+          "query_type": "Know",
+          "volume_label": "中",
+          "article_candidate": false,
+          "source_scope": "現行需要",
+          "child_h2_topics": []
+        },
+        {
+          "heading": "macbook neo 学割 小学生",
+          "suggest_keyword": "macbook neo 学割 小学生",
+          "query_type": "Know",
+          "volume_label": "中",
+          "article_candidate": false,
+          "source_scope": "現行需要",
+          "child_h2_topics": []
+        }
+      ],
+      "supporting_keywords": [
+        "macbook neo ゲーム配信",
+        "macbook neo 学割 中学生",
+        "macbook neo 学割 小学生"
+      ]
     },
     {
       "id": "comparison",
@@ -109,8 +258,20 @@
     {
       "id": "reputation",
       "heading": "macbook neoレビュー比較まとめ：評判",
-      "subsections": [],
-      "supporting_keywords": []
+      "subsections": [
+        {
+          "heading": "apple macbook neo レビュー",
+          "suggest_keyword": "apple macbook neo レビュー",
+          "query_type": "Buy",
+          "volume_label": "中",
+          "article_candidate": true,
+          "source_scope": "現行需要",
+          "child_h2_topics": []
+        }
+      ],
+      "supporting_keywords": [
+        "apple macbook neo レビュー"
+      ]
     },
     {
       "id": "summary",

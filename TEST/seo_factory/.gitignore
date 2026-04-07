@@ -2,3 +2,5 @@ __pycache__/
 *.pyc
 debug/
 env/
+output/*/memo/
+**/memo/
