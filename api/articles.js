@@ -181,6 +181,87 @@ async function listArticlesRecursive(token, folderPath, relativePath = '', depth
   return articles;
 }
 
+// 追加: URLからフォルダ情報を取得する
+async function resolveFolderFromUrl(token, urlStr) {
+  let folderId = null;
+  try {
+    const u = new URL(urlStr);
+    if (u.searchParams.has('id')) {
+      folderId = u.searchParams.get('id');
+    }
+  } catch (e) {}
+
+  if (!folderId) {
+    try {
+      const base64Value = Buffer.from(urlStr).toString('base64');
+      const encodedUrl = 'u!' + base64Value.replace(/\+/g, '-', 'g').replace(/\//g, '_', 'g').replace(/=+$/, '');
+      const res = await fetch(`${GRAPH_API}/shares/${encodedUrl}/driveItem`, { headers: { Authorization: `Bearer ${token}` } });
+      if (res.ok) {
+        const data = await res.json();
+        folderId = data.id;
+        return { id: data.id, name: data.name };
+      }
+    } catch(e) {}
+  }
+
+  if (folderId) {
+    const res = await fetch(`${GRAPH_API}/me/drive/items/${folderId}?$select=id,name`, { headers: { Authorization: `Bearer ${token}` } });
+    if (res.ok) {
+      const data = await res.json();
+      return { id: data.id, name: data.name };
+    }
+  }
+  return null;
+}
+
+// 追加: フォルダID起点での再帰取得
+async function listArticlesRecursiveById(token, folderId, relativePath, depth = 0) {
+  if (depth > 5) return [];
+
+  const url = `${GRAPH_API}/me/drive/items/${folderId}/children?$select=id,name,lastModifiedDateTime,webUrl,size,folder&$top=200`;
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+
+  if (!res.ok) {
+    console.warn('listArticlesRecursiveById error', await res.text());
+    return [];
+  }
+
+  const data = await res.json();
+  const items = data.value || [];
+  let articles = [];
+  const subFolderPromises = [];
+
+  for (const item of items) {
+    if (item.folder) {
+      const subRelative = relativePath ? `${relativePath}/${item.name}` : item.name;
+      subFolderPromises.push(listArticlesRecursiveById(token, item.id, subRelative, depth + 1));
+    } else if (item.name && item.name.endsWith('.md')) {
+      articles.push({
+        id: item.id,
+        name: item.name,
+        path: relativePath,
+        lastModified: item.lastModifiedDateTime,
+        webUrl: item.webUrl || '',
+        size: item.size || 0,
+        h1Title: '',
+      });
+    }
+  }
+
+  const subResults = await Promise.all(subFolderPromises);
+  for (const sub of subResults) articles = articles.concat(sub);
+
+  await Promise.all(
+    articles
+      .filter(a => !a.h1Title)
+      .map(async (article) => {
+        article.h1Title = await fetchH1Title(token, article.id);
+      })
+  );
+
+  return articles;
+}
+
 // 記事内容取得（ファイルID使用）
 async function getArticle(token, fileId) {
   const url = `${GRAPH_API}/me/drive/items/${fileId}/content`;
@@ -323,13 +404,37 @@ export default async function handler(req, res) {
 
     // GET: 記事一覧 or 記事内容
     if (req.method === 'GET') {
-      const { id } = req.query;
+      const { id, externalUrls } = req.query;
       if (id) {
         const content = await getArticle(token, id);
         return res.status(200).json({ content });
       }
       const folder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
-      const articles = await listArticlesRecursive(token, folder, '');
+      let articles = await listArticlesRecursive(token, folder, '');
+
+      if (externalUrls) {
+        try {
+          const urlsList = JSON.parse(externalUrls);
+          if (Array.isArray(urlsList) && urlsList.length > 0) {
+            const extPromises = urlsList.map(async (urlStr) => {
+              const folderInfo = await resolveFolderFromUrl(token, urlStr);
+              if (folderInfo && folderInfo.id) {
+                return await listArticlesRecursiveById(token, folderInfo.id, folderInfo.name);
+              }
+              return [];
+            });
+            const extResults = await Promise.all(extPromises);
+            for (const extList of extResults) {
+              articles = articles.concat(extList);
+            }
+          }
+        } catch (e) {
+          console.warn('externalUrls の処理に失敗:', e);
+        }
+      }
+
+      // 新しい順に再ソート
+      articles.sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified));
       return res.status(200).json({ articles });
     }
 

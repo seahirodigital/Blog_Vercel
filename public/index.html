@@ -298,8 +298,9 @@
     // === API ヘルパー ===
     const API_BASE = '/api';
 
-    async function fetchArticles() {
-      const res = await fetch(`${API_BASE}/articles`);
+    async function fetchArticles(externalUrls = []) {
+      const qs = externalUrls && externalUrls.length > 0 ? `?externalUrls=${encodeURIComponent(JSON.stringify(externalUrls))}` : '';
+      const res = await fetch(`${API_BASE}/articles${qs}`);
       if (!res.ok) throw new Error('記事一覧の取得に失敗しました');
       const data = await res.json();
       return data.articles || [];
@@ -990,7 +991,7 @@
     }
 
     // === サイドバー コンポーネント ===
-    function Sidebar({ articles, selectedId, onSelect, onNewArticle, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle, mobileSidebarOpen, onMobileClose, onDeleteArticle, onDuplicateArticle, onMoveArticle, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, multiSelectedIds, onMultiSelect, onRangeSelect, setAffModalOpen, articleH1Cache }) {
+    function Sidebar({ articles, selectedId, onSelect, onNewArticle, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle, mobileSidebarOpen, onMobileClose, onDeleteArticle, onDuplicateArticle, onMoveArticle, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, multiSelectedIds, onMultiSelect, onRangeSelect, setAffModalOpen, articleH1Cache, externalFolderUrls = [], setExternalFolderUrls, onRefreshArticles }) {
       // 非表示フォルダ管理（localStorageで永続化）
       const [hiddenFolders, setHiddenFolders] = useState(() => {
         try { return new Set(JSON.parse(localStorage.getItem('sb_hiddenFolders') || '[]')); }
@@ -1149,7 +1150,7 @@
           {showFolderPicker && (
             <div
               ref={pickerRef}
-              style={{ position:'absolute', bottom:'100%', left:'8px', right:'8px', zIndex:9998, background:'white', border:'1px solid #e2e8f0', borderRadius:'10px', boxShadow:'0 8px 32px rgba(0,0,0,0.15)', maxHeight:'320px', display:'flex', flexDirection:'column' }}
+              style={{ position:'absolute', bottom:'100%', left:'8px', right:'8px', zIndex:9998, background:'white', border:'1px solid #e2e8f0', borderRadius:'10px', boxShadow:'0 8px 32px rgba(0,0,0,0.15)', maxHeight:'450px', display:'flex', flexDirection:'column' }}
             >
               <div style={{ padding:'10px 12px 8px', borderBottom:'1px solid #f1f5f9', fontSize:'12px', fontWeight:700, color:'#7C4DFF', display:'flex', justifyContent:'space-between', alignItems:'center', flexShrink:0 }}>
                 <span>表示フォルダの管理</span>
@@ -1160,7 +1161,7 @@
                   >すべて表示</button>
                 )}
               </div>
-              <div style={{ overflowY:'auto', padding:'4px 0' }}>
+              <div style={{ overflowY:'auto', flex: 1, padding:'4px 0' }}>
                 {allFolderPaths.length === 0 ? (
                   <div style={{ padding:'12px', fontSize:'12px', color:'#94a3b8', textAlign:'center' }}>フォルダが見つかりません</div>
                 ) : allFolderPaths.map(fp => {
@@ -1185,6 +1186,49 @@
                     </button>
                   );
                 })}
+              </div>
+
+              {/* 追加: 外部フォルダ(URL)管理セクション */}
+              <div style={{ borderTop: '1px solid #f1f5f9', background: '#f8fafc', padding: '8px 12px', borderRadius: '0 0 10px 10px', flexShrink: 0 }}>
+                <div style={{ fontSize: '11px', fontWeight: 600, color: '#64748b', marginBottom: '6px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span>URL指定で追加</span>
+                  <button onClick={() => {
+                    const url = prompt('フォルダのURL(共有リンク)を入力:');
+                    if (url && url.trim()) {
+                      const newUrls = [...(externalFolderUrls || []), url.trim()];
+                      if (setExternalFolderUrls) setExternalFolderUrls(newUrls);
+                      try { localStorage.setItem('sb_externalFolderUrls', JSON.stringify(newUrls)); } catch {}
+                      if (onRefreshArticles) onRefreshArticles(newUrls);
+                    }
+                  }} style={{ background:'none', border:'none', color:'#7C4DFF', cursor:'pointer', fontSize:'11px', fontWeight:700 }}>＋ 追加</button>
+                </div>
+                {externalFolderUrls && externalFolderUrls.length > 0 && (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', maxHeight:'80px', overflowY:'auto', paddingBottom:'4px' }}>
+                    {externalFolderUrls.map((extUrl, idx) => (
+                      <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '6px', background:'white', padding:'4px 6px', borderRadius:'6px', border:'1px solid #e2e8f0', boxShadow:'0 1px 2px rgba(0,0,0,0.02)' }}>
+                        <div style={{ flex: 1, fontSize: '10px', color: '#475569', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={extUrl}>{extUrl}</div>
+                        <button onClick={() => {
+                          const newUrl = prompt('URLを編集:', extUrl);
+                          if (newUrl && newUrl.trim()) {
+                            const newUrls = [...externalFolderUrls];
+                            newUrls[idx] = newUrl.trim();
+                            if (setExternalFolderUrls) setExternalFolderUrls(newUrls);
+                            try { localStorage.setItem('sb_externalFolderUrls', JSON.stringify(newUrls)); } catch {}
+                            if (onRefreshArticles) onRefreshArticles(newUrls);
+                          }
+                        }} style={{ fontSize:'10px', color:'#64748b', cursor:'pointer', background:'#f1f5f9', border:'none', padding:'2px 6px', borderRadius:'4px' }}>編集</button>
+                        <button onClick={() => {
+                          if (confirm('このURLを削除しますか？')) {
+                            const newUrls = externalFolderUrls.filter((_, i) => i !== idx);
+                            if (setExternalFolderUrls) setExternalFolderUrls(newUrls);
+                            try { localStorage.setItem('sb_externalFolderUrls', JSON.stringify(newUrls)); } catch {}
+                            if (onRefreshArticles) onRefreshArticles(newUrls);
+                          }
+                        }} style={{ fontSize:'10px', color:'#ef4444', cursor:'pointer', background:'#fff1f2', border:'none', padding:'2px 6px', borderRadius:'4px' }}>削除</button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -1496,6 +1540,10 @@
       const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
       const [copied, setCopied] = useState(false);
       const [affModalOpen, setAffModalOpen] = useState(false);
+      const [externalFolderUrls, setExternalFolderUrls] = useState(() => {
+        try { return JSON.parse(localStorage.getItem('sb_externalFolderUrls') || '[]'); }
+        catch { return []; }
+      });
 
       // 検索と置換
       const [showFindReplace, setShowFindReplace] = useState(false);
@@ -1629,17 +1677,18 @@
       }, []);
 
       // 記事一覧取得
-      const loadArticles = useCallback(async () => {
+      const loadArticles = useCallback(async (exUrls = null) => {
         setLoading(true);
         try {
-          const data = await fetchArticles();
+          const targetUrls = exUrls !== null ? exUrls : externalFolderUrls;
+          const data = await fetchArticles(targetUrls);
           setArticles(data);
         } catch (e) {
           showToast('記事一覧の取得に失敗しました', 'error');
         } finally {
           setLoading(false);
         }
-      }, []);
+      }, [externalFolderUrls]);
 
       useEffect(() => { loadArticles(); }, [loadArticles]);
 
@@ -2397,6 +2446,9 @@
             onRangeSelect={handleRangeSelect}
             setAffModalOpen={setAffModalOpen}
             articleH1Cache={articleH1Cache}
+            externalFolderUrls={externalFolderUrls}
+            setExternalFolderUrls={setExternalFolderUrls}
+            onRefreshArticles={loadArticles}
           />
 
           {/* メインコンテンツ */}
