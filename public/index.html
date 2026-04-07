@@ -539,13 +539,13 @@
 
       const rootNode = useMemo(() => buildFolderTree(articles), [articles]);
 
-      // 初期状態: ルート直下の全フォルダを展開（多階層視認のため）
+      // 初期状態: デフォルトは閉じた状態にする
       useEffect(() => {
-        const initOpen = {};
-        // 第1階層を全展開
-        Object.keys(rootNode.subfolders).forEach(k => { initOpen[k] = true; });
-        setOpenFolders(initOpen);
-      }, [articles.length]);
+        // 以前は第1階層を展開していたが、ユーザー要望によりデフォルトは閉じた状態に
+        // const initOpen = {};
+        // Object.keys(rootNode.subfolders).forEach(k => { initOpen[k] = true; });
+        // setOpenFolders(initOpen);
+      }, []);
 
       // コンテキストメニュー外クリックで閉じる
       useEffect(() => {
