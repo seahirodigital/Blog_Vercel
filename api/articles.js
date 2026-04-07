@@ -205,10 +205,22 @@ async function resolveFolderFromUrl(token, urlStr) {
   }
 
   if (folderId) {
-    const res = await fetch(`${GRAPH_API}/me/drive/items/${folderId}?$select=id,name`, { headers: { Authorization: `Bearer ${token}` } });
+    let apiUrl = `${GRAPH_API}/me/drive/items/${folderId}?$select=id,name`;
+
+    if (folderId.startsWith('/')) {
+      const match = folderId.match(/\/Documents\/(.+)$/i);
+      if (match) {
+        const path = match[1].split('/').map(encodeURIComponent).join('/');
+        apiUrl = `${GRAPH_API}/me/drive/root:/${path}?$select=id,name`;
+      }
+    }
+
+    const res = await fetch(apiUrl, { headers: { Authorization: `Bearer ${token}` } });
     if (res.ok) {
       const data = await res.json();
       return { id: data.id, name: data.name };
+    } else {
+      console.warn('resolveFolderFromUrl error:', await res.text());
     }
   }
   return null;
