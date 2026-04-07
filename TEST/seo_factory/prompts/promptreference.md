@@ -77,6 +77,7 @@
 - `切り出し`
 - `検索キーワード`
 - `不足回答`
+- `CTA`
 
 ### 4.3 追加内容の考え方
 
@@ -85,7 +86,28 @@
 - 調査結果を冒頭結論と本文に反映する
 - 調査結果が薄いなら、記事も薄いと判断する
 
-### 4.4 見出し順
+### 4.4 80点記事の骨格ルール
+
+- 80点に近かった母艦記事の強みは、狭い見出しへ圧縮せず、広い判断骨格を保ったまま採用キーワードの答えを差し込んでいた点にある
+- 母艦記事の基本骨格は、原則として次の順を維持する
+  - `結論`
+  - `選定基準`
+  - `採用キーワード別 H2`
+  - `比較`
+  - `メリット`
+  - `デメリット`
+  - `FAQ`
+  - `評判`
+  - `まとめ`
+- 採用キーワード別 H2 は、必ず `選定基準` の後、`比較` の前に置く
+- 採用キーワード別 H2 を追加しても、`比較 / メリット / デメリット / FAQ / 評判 / まとめ` を落としてはいけない
+- 80点記事で良かったのは、冒頭で「今見るべき主要論点」を先に整理し、その後に各採用キーワードの答えを独立 H2 で回収していた点である
+- 各採用キーワード章は、一般論ではなく、その論点に固有の判断軸と調査済み事実を先に出す
+- 既存の良い母艦記事がある場合は、その骨格を baseline として bundle と validator の両方で保持する
+- 新しい採用キーワードが増えても、母艦記事をゼロから別構成に作り直してはいけない
+- 4見出し前後への圧縮は、80点記事のノウハウを破壊するため禁止する
+
+### 4.5 見出し順
 
 - 基本優先順は `Buy大 → Know大 → Buy中 → Know中 → Buy小`
 - 親需要と子需要は同一記事内で統合する
@@ -99,6 +121,10 @@
 - 別テンプレートで新規作文しない
 - 母艦記事の良い文章資産と論点順を引き継ぐ
 - 母艦記事に無い事実を創作しない
+- 母艦記事の H2 構成は原則すべて維持する
+- 既存の良い母艦記事がある場合は、その H2 構成と主要本文を bundle に渡して継承対象にする
+- H2 数を勝手に削って圧縮してはいけない
+- `結論 / 本文テーマ / 注意点 / まとめ` のような4見出し前後への圧縮を禁止する
 
 ### 5.2 H2絶対ルール
 
@@ -116,6 +142,7 @@
 - 「この記事は母艦から作った」などの制作事情を出さない
 - 読者の疑問に答える文だけを書く
 - 冒頭から対象キーワードの結論を出す
+- 構成を短く整理するために、母艦の論点を落としてはいけない
 
 ### 5.4 H2直下の文頭ルール
 
@@ -202,22 +229,41 @@
 - `状況` が空欄の行も処理対象に含める
 - `不要` は常に除外する
 
-## 8. no-LLM 実行ルール
+## 8. Workflow エージェント実行ルール
 
-- `Gemini` や他LLMを使わない実行は、完成記事生成ではなく下書き生成として扱う
+- `Gemini` や他LLMを使わない実行は、完成記事生成ではなく Workflow エージェント用の材料生成として扱う
+- Python 側は、キーワード収集、スプレッドシート読込、分類、並び順整理、調査メモ作成、見出し候補整理までを担当する
+- 本文の仕上げは、このチャットのLLMを使う Workflow エージェント側で行う
 - no-LLM 実行で `master_article.md` を上書きしてはいけない
 - no-LLM 実行で `variants` 配下の個別記事を上書きしてはいけない
-- no-LLM 実行では、下書きは `031_base_article_draft.md` のような別名で保存する
-- no-LLM 実行は品質確認用の途中成果物であり、最終記事扱いをしてはいけない
+- no-LLM 実行では、以下の材料ファイルを保存する
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\current_keywords.json`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\previous_keywords.json`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\outline.json`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\outline.md`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\031_2_master_research_bundle.json`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\031_2_master_research_bundle.md`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\031_3_master_validation_report.json`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\031_3_master_validation_report.md`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\031_4_kobetsu_jobs.json`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\031_4_kobetsu_jobs.md`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\031_4_variant_validation_report.json`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\031_4_variant_validation_report.md`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\variant_articles.json`
+- no-LLM 実行は最終記事扱いをしてはいけない
+- 母艦記事が 80点 baseline 未達なら、個別記事フェーズへ進めてはいけない
+- 母艦記事 validator は、現行採用キーワード由来の H2 だけでなく、既存の良い母艦記事から継承すべき H2 も検査する
+- 個別記事を生成したあとは `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_3_article_validator.py` 相当の検証を通過しなければ完了扱いにしてはいけない
 
 ## 9. 現時点の採用キーワード
 
-2026-04-06 時点で `macbook neo` タブから採用されているキーワードは以下の 4 件。
+2026-04-06 時点で `macbook neo` タブから採用されているキーワードは以下の 5 件。
 
-- `macbook neo ケース おすすめ`
-- `macbook neo シルバー レビュー`
-- `macbook neo 先行 レビュー`
-- `macbook neo 学割 価格`
+- `macbook neo エクセル`
+- `macbook neo ケース`
+- `macbook neo ゲーム`
+- `macbook neo ゲーム性能`
+- `macbook neo ゲーム配信`
 
 ## 10. ここまでで確定した失敗原因
 
@@ -229,6 +275,8 @@
 - 箇条書きが名詞の羅列になり、読者に意味が伝わりにくかった
 - `状況` 空欄行を自動採用したため、意図しないキーワード群へ差し替わった
 - no-LLM 実行で仮テンプレを完成記事として上書きした
+- Python 側が本文まで書こうとして、一般論の強い雛形へ戻った
+- 構成維持より見出し整理を優先し、母艦 H2 を4見出し前後へ圧縮した
 
 ## 11. 今後の修正判断
 
@@ -243,8 +291,14 @@
 - H2直下の最初の1文が見出しキーワードから自然に始まっているか
 - `おすすめ` 見出しで商品推薦記事に逸れていないか
 - 母艦記事の良い文章を壊していないか
-- `状況` 空欄行を誤って採用していないか
+- 母艦記事が 80点 baseline を維持しているか
+- `CTA` を見せる見出し語が残っていないか
+- `まとめ` が `まとめ & CTA` に戻っていないか
+- `不要` 以外の空欄行も処理対象に含まれているか
 - no-LLM 実行が完成記事を上書きしていないか
+- no-LLM 実行で Workflow エージェント用の材料が十分に出ているか
+- 個別記事が母艦由来の H2 構成を維持しているか
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\031_4_variant_validation_report.md` が合格しているか
 
 ## 12. 関連ファイル
 
@@ -252,9 +306,10 @@
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\032-best-article-enhancer-prompt.txt`
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_1_keyword_pipeline.py`
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_2_master_article_generator.py`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_3_kobetsu_writer.py`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_9_run_factory.py`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_3_article_validator.py`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_4_kobetsu_writer.py`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_5_run_factory.py`
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-1-best-outline-prompt.md`
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-2-best-article-enhancer-prompt.md`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-3-kobetsu-writer-prompt.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-4-kobetsu-writer-prompt.md`
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\SEO_記事量産ワークフロー計画書.md`

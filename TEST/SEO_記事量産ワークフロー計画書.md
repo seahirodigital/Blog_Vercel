@@ -84,9 +84,11 @@ Google Spreadsheet に保存
   ↓
 完成版記事の見出し設計
   ↓
-母艦記事の本文生成
+母艦記事用の調査メモ・見出し候補整理
   ↓
-キーワード別リライト
+個別記事化ジョブ整理
+  ↓
+Workflow エージェントが本文執筆
   ↓
 品質チェック
   ↓
@@ -116,12 +118,13 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 │  ├─ prompts\
 │  │  ├─ 031-1-best-outline-prompt.md
 │  │  ├─ 031-2-best-article-enhancer-prompt.md
-│  │  └─ 031-3-kobetsu-writer-prompt.md
+│  │  └─ 031-4-kobetsu-writer-prompt.md
 │  └─ scripts\
 │     ├─ 031_1_keyword_pipeline.py
 │     ├─ 031_2_master_article_generator.py
-│     ├─ 031_3_kobetsu_writer.py
-│     └─ 031_9_run_factory.py
+│     ├─ 031_3_article_validator.py
+│     ├─ 031_4_kobetsu_writer.py
+│     └─ 031_5_run_factory.py
 ```
 
 ## 7. 処理フロー詳細
@@ -275,42 +278,47 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 
 - H1 はクラスタ全体を代表する検索意図を含む
 - H2 は主要意図を漏れなくカバーする
-- H3 は比較・注意点・おすすめ・FAQ で補完する
-- 最後に CTA やアフィリエイト導線を差し込める形にする
+- H3 / H4 は使わない
+- 母艦記事の骨格は `結論 → 選定基準 → 採用キーワード別 H2 → 比較 → メリット → デメリット → FAQ → 評判 → まとめ` を原則維持する
+- 採用キーワード別 H2 は `選定基準` の後、`比較` の前に置く
+- 最後の見出しは `まとめ` に統一し、`CTA` を見せる見出し語にしない
 
 ### 想定成果物
 
 - `master_outline.json`
 - `master_outline.md`
 
-## 7.4 フェーズ4: 完成版記事の本文生成
+## 7.4 フェーズ4: 母艦記事用の材料生成
 
 ### Why
 
-派生記事の品質は、完成版記事の情報密度と論理の通りやすさでほぼ決まります。  
-先に高密度な1本を作っておく方が、後段のリライトが安定します。
+派生記事の品質は、完成版記事の材料の密度と論点整理でほぼ決まります。  
+Python 側で見出し候補、調査論点、確認先を整理しておくと、Workflow エージェントが本文執筆に集中でき、無駄なトークン消費を減らせます。
 
 ### 実装方針
 
-- 既存の  
-  `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\modules\blog_pipeline.py`  
-  の3段構成を参考にする
-- ただし入力を「YouTube文字起こし」ではなく「キーワード分析結果 + 見出し設計」に差し替える
-- 完成版記事は Markdown で保存する
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_2_master_article_generator.py` で、母艦記事用の調査メモ・確認先・見出し候補をまとめる
+- 既存の良い `master_article.md` がある場合は、その本文と H2 を bundle に渡し、継承前提で材料化する
+- Python 側は本文を書かず、Workflow エージェントが書くための材料を JSON / Markdown で保存する
+- 具体的には以下を出力する
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\031_2_master_research_bundle.json`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\031_2_master_research_bundle.md`
 
-### 推奨プロンプト分割
+### Python 側でやること
 
-1. アウトライン生成
-2. 本文ドラフト生成
-3. SEO/可読性/重複修正
-4. 最終整形
+1. 見出し候補の整理
+2. 親子クラスタの整理
+3. キーワードごとの検索意図要約
+4. キーワードごとの調査質問作成
+5. 公式確認先・レビュー確認先のメモ化
 
 ### 品質条件
 
-- 主要キーワードを不自然でない形で含む
-- FAQ を持つ
-- 比較軸、向いている人、向いていない人を明示する
-- 情報が薄い見出しを残さない
+- 主要キーワードごとに、調査質問が整理されている
+- 主要キーワードごとに、確認先が整理されている
+- 見出し候補がユーザー需要順に並んでいる
+- Workflow エージェントが本文を書き始める時点で、一般論に逃げなくてよい材料量がある
+- 中間生成物は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\` に保存される
 
 ### 母艦記事の原則
 
@@ -322,13 +330,33 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 - 追加する情報は、サジェストキーワードに対応する答えとして追記する
 - 追加回答は、後段でサジェストごとのアンサー記事へ切り出しやすいように配置する
 
+### 80点記事 baseline
+
+母艦記事では、過去に 80 点に近かった記事の骨格を baseline として扱う。  
+baseline の核は、狭い構成へ圧縮せず、広い判断骨格を残したまま採用キーワードごとの答えを差し込むことにある。
+
+- 母艦記事の骨格は原則として次の順を保つ
+  - `結論`
+  - `選定基準`
+  - `採用キーワード別 H2`
+  - `比較`
+  - `メリット`
+  - `デメリット`
+  - `FAQ`
+  - `評判`
+  - `まとめ`
+- 採用キーワード別 H2 は `選定基準` と `比較` の間へ置く
+- `比較 / メリット / デメリット / FAQ / 評判 / まとめ` を落としてはいけない
+- 既存の良い母艦記事がある場合は、その H2 骨格を bundle に含めて validator でも検査する
+- baseline 未達の母艦記事は、個別記事フェーズへ進めない
+
 ### 母艦記事で追加すべき内容
 
 - サジェストキーワードごとの結論
 - その結論を支える詳細説明
 - 比較、評判、注意点、FAQの不足分
 - 前作サジェスト由来の論点
-- 後段の量産記事で独立見出し化しやすい補助小見出し
+- 後段の量産記事で独立 H2 化しやすい論点名
 
 ### 母艦記事の書式ルール
 
@@ -339,6 +367,8 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 - 各箇条書きは20字以内を目安に短くする
 - 各箇条書きは必ず結論単語を文頭に置き、`結論語：説明` の形にする
 - 最後に簡易まとめで章を締める
+- H2 直下の最初の1文は、その見出しキーワードを自然に含めて始める
+- `CTA` は本文や見出しで見せる語として使わない
 
 ### 母艦記事で必ず触れる内容
 
@@ -347,24 +377,23 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 - 比較、価格、評判、注意点のうち該当するもの
 - 前作サジェスト由来で現行製品にも残る論点
 
-## 7.5 フェーズ5: キーワード別リライト量産
+## 7.5 フェーズ5: 個別記事化ジョブ生成
 
 ### Why
 
 このフェーズが、今回の目的である「量産」の核心です。  
-ただし単なる単語置換では弱く、検索意図に合わせて見出し順序まで変える必要があります。
+ただし Python が本文まで書くのではなく、Workflow エージェントが個別記事を仕上げるためのジョブを先に整える方が、品質とトークン効率の両立に向いています。
 
 ### 実装方針
 
-完成版記事を入力にして、各サジェストキーワード向けに以下を変化させます。
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_4_kobetsu_writer.py` で、各サジェストキーワード向けに以下を整理します。
 
-- H1
-- H2 の順序
-- H2 の文言
-- 冒頭リード文
-- FAQ
-- メタディスクリプション
-- 強調する比較ポイント
+- 流用すべき母艦記事の見出し候補
+- 冒頭で最初に答えるべき焦点
+- 個別記事ごとの調査質問
+- 個別記事ごとの確認先
+- 個別記事の H2 候補
+- 禁止表現
 
 ### 量産記事の基本原則
 
@@ -377,14 +406,21 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 - ただし、対象サジェストに合わせて小見出しや説明順は調整する
 - 母艦から不要部分を削るだけでなく、対象サジェストに必要な答えを前面に出す
 - 個別記事は、母艦記事の H2 構造と論点順をテンプレートとして流用する
+- 母艦記事の H2 構造は原則すべて維持する
 - 別テンプレートで新規作文してはいけない
+- 4見出し前後へ圧縮してはいけない
 - 過不足検証で母艦に追加した不足回答を、個別記事でもそのまま引き継ぐ
 
-### アンサー記事の理想形
+### Python 側の成果物
+
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\031_4_kobetsu_jobs.json`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\031_4_kobetsu_jobs.md`
+
+### Workflow エージェント側の理想形
 
 - H1 で対象サジェストに答える
 - 冒頭で結論を明示する
-- 中盤で理由、比較、注意点を小見出しに分解する
+- 中盤で理由、比較、注意点を H2 に分解する
 - FAQ で残る不安を潰す
 - 母艦記事の流れを壊しすぎずに対象疑問へ最短で答える
 
@@ -440,6 +476,18 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 - 文字数不足
 - FAQ 未生成
 - 派生記事同士の類似度が高すぎるケース
+- 母艦由来の H2 構成が維持されているか
+- すべての H2 が `対象検索キーワード：...` で始まっているか
+- H2直下の最初の1文に対象検索キーワードが入っているか
+
+### 検証実装
+
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_3_article_validator.py`
+- LLM で個別記事を生成した場合は、`memo\031_4_variant_validation_report.json` と `memo\031_4_variant_validation_report.md` を出力する
+- 検証に落ちた個別記事は完了扱いにしない
+- 母艦記事検証では、現行採用キーワード由来の H2 に加えて、既存の良い母艦記事から継承すべき H2 を落としていないかも確認する
+- 母艦記事検証では、80点記事 baseline である `結論 → 選定基準 → 採用キーワード別 H2 → 比較 → メリット → デメリット → FAQ → 評判 → まとめ` を満たしているかも確認する
+- 母艦記事が baseline 未達なら、個別記事ジョブ生成へ進めない
 
 ## 8. Antigravity Workflow 優先方針
 
@@ -477,17 +525,27 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 - ローカル保存
 - CSV / JSON / Markdown 出力
 
-### 無料にならない可能性がある部分
+### トークンを使わず Python 側へ寄せる部分
 
-- LLM による見出し生成
-- LLM による完成版記事生成
-- LLM によるキーワード別リライト
+- サジェスト取得
+- 正規化
+- 並び順整理
+- 親子クラスタ化
+- 調査メモ作成
+- 確認先整理
+- 見出し候補整理
+- 個別記事ジョブ整理
+
+### トークンを使う部分
+
+- Workflow エージェントによる母艦記事本文執筆
+- Workflow エージェントによる個別記事本文執筆
 
 ### 現実的な選択肢
 
-1. 既存の `GEMINI_API_KEY` を流用し、利用量を抑えながら PoC を回す
-2. 無料枠があるモデルを使う
-3. ローカルモデルに切り替える
+1. Python 側は材料生成までに限定し、本文は Workflow エージェントが書く
+2. no-LLM 実行は完成記事を作らず、`memo` 配下へ bundle / job / validation を出す
+3. 他LLMを使う場合も、まず Python 側の材料量を増やしてから使う
 
 
 ## 10. 主要リスク
@@ -507,8 +565,8 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 2. 取得キーワードを Google Spreadsheet の右端タブへ保存できる
 3. ユーザーが `状況` 列で不要キーワードを手動除外できる
 4. スプレッドシート再読込後に母艦記事の見出しを1本生成できる
-5. スプレッドシート再読込後に母艦記事本文を1本生成できる
-6. 後段で量産記事へ分岐しやすい構造を保てる
+5. スプレッドシート再読込後に母艦記事用の調査メモと見出し候補を出力できる
+6. 後段で Workflow エージェントが量産記事へ分岐しやすいジョブを保てる
 
 ## 12. 実装ステップ
 
@@ -518,15 +576,19 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 
 ### ステップ2
 
-`C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_2_master_article_generator.py` を作成し、完成版見出し生成と母艦記事生成を1本へ統合する
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_2_master_article_generator.py` を作成し、完成版見出し生成と母艦記事用の材料生成を1本へ統合する
 
 ### ステップ3
 
-`C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_3_kobetsu_writer.py` を作成し、母艦記事を使った派生記事を量産する
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_4_kobetsu_writer.py` を作成し、母艦記事を使った個別記事化ジョブを量産する
 
 ### ステップ4
 
-`C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_9_run_factory.py` を作成し、Antigravity Workflow から「取得して停止」「シート再読込で再開」を一気通貫で実行できるようにする
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_3_article_validator.py` を作成し、母艦記事と個別記事がルールを守っているかを検証する
+
+### ステップ5
+
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_5_run_factory.py` を作成し、Antigravity Workflow から「取得して停止」「シート再読込で再開」を一気通貫で実行できるようにする
 
 ## 13. 最初の実行対象
 
@@ -720,9 +782,10 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 - 出力:
   - サジェスト単位の未回答論点一覧
   - 既存見出しで回答済みかどうかの対応整理
-  - 追加すべき小見出し
+  - 追加すべき H2 と差し込み位置
   - 前作サジェスト由来で継承すべき論点
   - FAQ候補
+  - 80点記事 baseline を維持するために残すべき H2
 
 #### 032-best-article-enhancer-prompt
 
@@ -730,7 +793,8 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
   - `03` の記事全文
   - `031` の改善提案
 - 出力:
-  - `03` までの情報を残したまま、不足回答を追記して完成させた母艦記事の Markdown 全文
+  - 既存の良い記事本文を土台に、不足回答のみを追記して完成させた母艦記事の Markdown 全文
+  - 4見出し前後へ圧縮せず、`結論 → 選定基準 → 採用キーワード別 H2 → 比較 → メリット → デメリット → FAQ → 評判 → まとめ` を維持した全文
 
 #### 033-best-seo-polisher-prompt
 
@@ -767,8 +831,9 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 | 既存流用 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\insert_amazon_affiliate.py` | Amazon導線付与 | 完成版記事の後処理として利用 | 新構造の見出しにも挿入できるか確認 | 中 |
 | 新規追加 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_1_keyword_pipeline.py` | なし | 新規作成 | ラッコ取得・正規化・意図分類・Google Spreadsheet 連携を統合 | 高 |
 | 新規追加 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_2_master_article_generator.py` | なし | 新規作成 | 見出し生成と母艦記事生成を統合 | 高 |
-| 新規追加 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_3_kobetsu_writer.py` | なし | 新規作成 | 母艦記事から個別記事を生成 | 高 |
-| 新規追加 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_9_run_factory.py` | なし | 新規作成 | 取得→停止→再開→記事生成の実行入口 | 高 |
+| 新規追加 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_3_article_validator.py` | なし | 新規作成 | 母艦記事と個別記事の品質検証 | 高 |
+| 新規追加 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_4_kobetsu_writer.py` | なし | 新規作成 | 母艦記事から個別記事を生成 | 高 |
+| 新規追加 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_5_run_factory.py` | なし | 新規作成 | 取得→停止→再開→記事生成の実行入口 | 高 |
 
 ## 19. 着手順の計画
 
@@ -794,7 +859,7 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 7. `TEST\seo_factory` 側のサジェスト取得と分析基盤を作る
    - Playwright、正規化、意図分類を先に完成させる
 8. ベスト記事完成後に、量産リライトへ進む
-   - `031_3_kobetsu_writer.py` でキーワード別記事を生成する
+   - `031_4_kobetsu_writer.py` でキーワード別記事を生成する
 9. 最後に `04-affiliate-link-manager` との結合確認を行う
    - ベスト記事にも量産記事にも既存の収益化処理が通るかを見る
 
@@ -860,16 +925,20 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
   - Google Spreadsheet の右端タブ保存と再開読込を実装済み
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_2_master_article_generator.py`
   - サジェスト起点で母艦記事用の見出し案を生成可能
-  - `03` 相当の土台記事生成と、`031 / 032` による母艦記事化ロジックを実装済み
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_3_kobetsu_writer.py`
-  - 母艦記事から個別記事を生成する量産器を実装済み
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_9_run_factory.py`
-  - 取得 → シート保存 → 再開読込 → 見出し生成 → 母艦記事生成 → 個別記事生成の流れへ改修済み
+  - `03` 相当の見出し整理と、母艦記事用の調査材料生成を実装済み
+  - 80点記事 baseline を bundle に保持し、validator へ渡す構造を実装済み
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_4_kobetsu_writer.py`
+  - 母艦記事から個別記事化ジョブを生成する量産器を実装済み
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_3_article_validator.py`
+  - 個別記事の構成維持と H2 ルールを検証するバリデーターを実装済み
+  - 母艦記事の 80点記事 baseline 維持も検証可能
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_5_run_factory.py`
+  - 取得 → シート保存 → 再開読込 → 材料生成 → 母艦記事検証 → 個別記事ジョブ生成の流れへ改修済み
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-1-best-outline-prompt.md`
   - 不足論点 = サジェストキーワード由来の未回答論点、という定義を反映済み
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-2-best-article-enhancer-prompt.md`
   - 入力記事の良い本文を残しつつ、母艦記事として追記強化する方針を反映済み
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-3-kobetsu-writer-prompt.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-4-kobetsu-writer-prompt.md`
   - 個別記事では各 H2 が必ず `対象検索キーワード：見出し名` で始まるルールを反映済み
 
 ### 実サイト確認済み
@@ -883,12 +952,19 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 
 ### 出力済み成果物
 
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\current_keywords.json`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\outline.json`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\outline.md`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\base_article.md`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\master_article.md`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\031_enhancement_plan.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\memo\current_keywords.json`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\memo\outline.json`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\memo\outline.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\memo\031_2_master_research_bundle.json`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\memo\031_2_master_research_bundle.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\memo\031_3_master_validation_report.json`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\memo\031_3_master_validation_report.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\memo\031_4_kobetsu_jobs.json`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\memo\031_4_kobetsu_jobs.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\memo\031_4_variant_validation_report.json`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\memo\031_4_variant_validation_report.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\memo\previous_keywords.json`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\macbook_neo\memo\variant_articles.json`
 
 ## 22. 未完了と差分
 
@@ -909,7 +985,9 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 - 記事化対象は自動判定ではなく、Google Spreadsheet の手動選別へ変更した
 - `状況 = 不要` の除外ロジックを優先し、それ以外の行は後段へ流す方式にしている
 - GitHub Actions ではなく Antigravity Workflow 優先へ方針変更した
-- no-LLM 実行は下書き保存だけに制限し、完成記事と個別記事を上書きしない方針へ切り替えた
+- no-LLM 実行は Workflow エージェント用の材料出力だけに制限し、完成記事と個別記事を上書きしない方針へ切り替えた
+- 個別記事は `031_3_article_validator.py` を通過しない限り完了扱いにしない方針へ切り替えた
+- 母艦記事は 80点記事 baseline 未達なら個別記事フェーズへ進めない方針へ切り替えた
 
 ## 23. 次の再開地点
 
@@ -921,10 +999,12 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 ### 次にやること
 
 1. Google Spreadsheet の対象タブで `状況` 列を手動入力する
-2. `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_9_run_factory.py --resume-from-sheet` で再開する
-3. no-LLM 実行では `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\...\031_base_article_draft.md` だけが更新され、`master_article.md` と `variants` が上書きされないことを確認する
-4. 完成記事の更新が必要なときは、手動編集または LLM 実行のどちらで仕上げるかを明示してから進める
-5. その後に `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_3_kobetsu_writer.py` を使い、量産記事生成へ進む
+2. `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_5_run_factory.py --resume-from-sheet` で再開する
+3. no-LLM 実行では `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\...\memo\031_2_master_research_bundle.md` と `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\...\memo\031_4_kobetsu_jobs.md` が更新され、`master_article.md` と `variants` が上書きされないことを確認する
+   - 中間生成物と検証レポートはすべて `memo` フォルダ配下に保存される
+4. 完成記事の更新が必要なときは、Workflow エージェントが材料を読んで本文を仕上げる
+5. その後に `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_4_kobetsu_writer.py` が出したジョブを使い、量産記事生成へ進む
+6. 個別記事生成後は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\scripts\031_3_article_validator.py` の検証を通してから完了扱いにする
 
 ## 24. ルール集の固定
 
@@ -953,34 +1033,42 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 - 箇条書きは短くても意味が通る説明にする
 - `状況` 空欄行も処理対象に含める
 - no-LLM 実行では完成記事を上書きしない
+- Python 側は本文を書かず、材料整理までを担当する
+- 個別記事で母艦 H2 を圧縮しない
+- 母艦記事は `結論 → 選定基準 → 採用キーワード別 H2 → 比較 → メリット → デメリット → FAQ → 評判 → まとめ` を baseline として維持する
+- `CTA` は見出し語として見せず、最後は `まとめ` に統一する
+- 中間生成物はすべて `memo` フォルダへ保存する
 
 ## 25. 2026-04-06 時点の追加進展
 
 ### 進展
 
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\promptreference.md` を新規作成し、指摘・禁止事項・現状を集約した
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\promptreference.md` を新規作成し、指摘・禁止事項・現状を集約した
 - 以下のプロンプトへ、調査必須・正式名称・一般論禁止・既存本文尊重・AIメタ文禁止を追記した
   - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\031-best-outline-prompt.txt`
   - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\032-best-article-enhancer-prompt.txt`
   - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-1-best-outline-prompt.md`
   - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-2-best-article-enhancer-prompt.md`
-  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-3-kobetsu-writer-prompt.md`
-- シート `macbook neo` タブの採用キーワードは 4 件へ増加した
-  - `macbook neo ケース おすすめ`
-  - `macbook neo シルバー レビュー`
-  - `macbook neo 先行 レビュー`
-  - `macbook neo 学割 価格`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\prompts\031-4-kobetsu-writer-prompt.md`
+- シート `macbook neo` タブの採用キーワードは 5 件へ更新された
+  - `macbook neo エクセル`
+  - `macbook neo ケース`
+  - `macbook neo ゲーム`
+  - `macbook neo ゲーム性能`
+  - `macbook neo ゲーム配信`
+- 中間生成物はすべて `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\output\<seed>\memo\` 配下へ統一した
+- 80点記事 baseline と `CTA` 非表示ルールを、`promptreference.md`、TEST 側 prompt、本体側 prompt、bundle、validator に同期した
 
 ### 現状の問題点
 
 - 母艦記事はまだ調査の深さが足りず、冒頭結論の固有価値が弱い
 - 個別記事は母艦記事の調査不足を引き継ぐため、全体として情報密度が不足しやすい
-- no-LLM 実行では仮テンプレしか出せないため、完成記事扱いにしてはいけない
+- no-LLM 実行では Workflow エージェント用の材料しか出さないため、完成記事扱いにしてはいけない
 - 以後の改善は、採用キーワードごとに調査した具体情報を母艦記事へ入れることが最優先
 
 ### 次の優先作業
 
-1. スプシの採用 4 キーワードごとに調査論点を整理する
-2. 公式表記を揃える
-3. 調査結果を母艦記事の冒頭結論と該当 H2 へ反映する
-4. その母艦を使って個別記事を再生成する
+1. スプシの採用キーワードごとに調査論点を整理する
+2. `memo\031_2_master_research_bundle.md` と `memo\031_4_kobetsu_jobs.md` の材料量を増やす
+3. 公式表記を揃える
+4. Workflow エージェントがその材料を使って母艦記事と個別記事を仕上げる

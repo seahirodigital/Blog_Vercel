@@ -27,7 +27,8 @@ def _load_module(module_filename: str, module_alias: str) -> Any:
 
 KEYWORD_PIPELINE_MODULE = _load_module("031_1_keyword_pipeline.py", "seo_factory_031_1_keyword_pipeline")
 MASTER_ARTICLE_MODULE = _load_module("031_2_master_article_generator.py", "seo_factory_031_2_master_article_generator")
-KOBETSU_WRITER_MODULE = _load_module("031_3_kobetsu_writer.py", "seo_factory_031_3_kobetsu_writer")
+ARTICLE_VALIDATOR_MODULE = _load_module("031_3_article_validator.py", "seo_factory_031_3_article_validator")
+KOBETSU_WRITER_MODULE = _load_module("031_4_kobetsu_writer.py", "seo_factory_031_4_kobetsu_writer")
 
 normalize_records = KEYWORD_PIPELINE_MODULE.normalize_records
 collect_suggest_keywords = KEYWORD_PIPELINE_MODULE.collect_suggest_keywords
@@ -35,9 +36,17 @@ load_keyword_records_from_sheet = KEYWORD_PIPELINE_MODULE.load_keyword_records_f
 select_keyword_records_for_generation = KEYWORD_PIPELINE_MODULE.select_keyword_records_for_generation
 write_keyword_records_to_sheet = KEYWORD_PIPELINE_MODULE.write_keyword_records_to_sheet
 generate_master_outline = MASTER_ARTICLE_MODULE.generate_master_outline
+build_master_research_bundle = MASTER_ARTICLE_MODULE.build_master_research_bundle
 render_markdown_outline = MASTER_ARTICLE_MODULE.render_markdown_outline
+render_master_research_bundle_markdown = MASTER_ARTICLE_MODULE.render_master_research_bundle_markdown
 generate_master_article = MASTER_ARTICLE_MODULE.generate_master_article
+generate_kobetsu_jobs = KOBETSU_WRITER_MODULE.generate_kobetsu_jobs
+render_kobetsu_jobs_markdown = KOBETSU_WRITER_MODULE.render_kobetsu_jobs_markdown
 generate_variant_articles = KOBETSU_WRITER_MODULE.generate_variant_articles
+validate_master_article = ARTICLE_VALIDATOR_MODULE.validate_master_article
+render_master_validation_report_markdown = ARTICLE_VALIDATOR_MODULE.render_master_validation_report_markdown
+validate_variant_articles = ARTICLE_VALIDATOR_MODULE.validate_variant_articles
+render_validation_report_markdown = ARTICLE_VALIDATOR_MODULE.render_validation_report_markdown
 
 DEFAULT_SPREADSHEET_ID = os.getenv(
     "SEO_FACTORY_SPREADSHEET_ID",
@@ -61,6 +70,12 @@ def _write_json(path: Path, data: Any) -> None:
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+def _memo_dir(target_dir: Path) -> Path:
+    memo_dir = target_dir / "memo"
+    memo_dir.mkdir(parents=True, exist_ok=True)
+    return memo_dir
+
+
 def _write_variant_articles(target_dir: Path, variants: list[dict[str, Any]]) -> None:
     variants_dir = target_dir / "variants"
     variants_dir.mkdir(parents=True, exist_ok=True)
@@ -69,8 +84,40 @@ def _write_variant_articles(target_dir: Path, variants: list[dict[str, Any]]) ->
         _write_text(variants_dir / f"{slug}.md", str(variant.get("article_markdown", "")))
 
 
-def _write_draft_article(target_dir: Path, text: str) -> None:
-    _write_text(target_dir / "031_base_article_draft.md", text)
+def _write_master_research_bundle(target_dir: Path, bundle: dict[str, Any]) -> None:
+    memo_dir = _memo_dir(target_dir)
+    _write_json(memo_dir / "031_2_master_research_bundle.json", bundle)
+    _write_text(
+        memo_dir / "031_2_master_research_bundle.md",
+        render_master_research_bundle_markdown(bundle),
+    )
+
+
+def _write_kobetsu_jobs(target_dir: Path, seed_keyword: str, jobs: list[dict[str, Any]]) -> None:
+    memo_dir = _memo_dir(target_dir)
+    _write_json(memo_dir / "031_4_kobetsu_jobs.json", jobs)
+    _write_text(
+        memo_dir / "031_4_kobetsu_jobs.md",
+        render_kobetsu_jobs_markdown(seed_keyword, jobs),
+    )
+
+
+def _write_validation_report(target_dir: Path, report: dict[str, Any]) -> None:
+    memo_dir = _memo_dir(target_dir)
+    _write_json(memo_dir / "031_4_variant_validation_report.json", report)
+    _write_text(
+        memo_dir / "031_4_variant_validation_report.md",
+        render_validation_report_markdown(report),
+    )
+
+
+def _write_master_validation_report(target_dir: Path, report: dict[str, Any]) -> None:
+    memo_dir = _memo_dir(target_dir)
+    _write_json(memo_dir / "031_3_master_validation_report.json", report)
+    _write_text(
+        memo_dir / "031_3_master_validation_report.md",
+        render_master_validation_report_markdown(report),
+    )
 
 
 def parse_args() -> argparse.Namespace:
@@ -103,7 +150,7 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="シート保存後も停止せず、そのまま母艦記事生成へ進む",
     )
-    parser.add_argument("--skip-llm", action="store_true", help="LLM を使わずローカル生成だけで出力する")
+    parser.add_argument("--skip-llm", action="store_true", help="LLM を使わず Workflow 用の材料だけを出力する")
     parser.add_argument("--use-llm", action="store_true", help="明示指定時のみ LLM を使う")
     return parser.parse_args()
 
@@ -143,7 +190,7 @@ def main() -> None:
         print(f"シート保存完了: {saved_sheet_name}")
         print("状況列を手動で編集後、--resume-from-sheet で再開できます。")
 
-        _write_json(target_dir / "current_keywords.json", current_records)
+        _write_json(_memo_dir(target_dir) / "current_keywords.json", current_records)
         if not args.continue_after_collection:
             print(f"停止地点: {target_dir}")
             return
@@ -167,41 +214,85 @@ def main() -> None:
         current_records=current_records,
         previous_records=previous_records,
     )
-    base_generation = generate_master_article(
+    existing_master_article_markdown = ""
+    existing_master_article_path = target_dir / "master_article.md"
+    if existing_master_article_path.exists():
+        existing_master_article_markdown = existing_master_article_path.read_text(encoding="utf-8")
+    master_research_bundle = build_master_research_bundle(
         seed_keyword=args.seed_keyword,
         current_records=current_records,
         previous_records=previous_records,
         outline=outline,
-        gemini_api_key=None,
+        existing_master_article_markdown=existing_master_article_markdown,
     )
+    _write_json(_memo_dir(target_dir) / "current_keywords.json", current_records)
+    _write_json(_memo_dir(target_dir) / "previous_keywords.json", previous_records)
+    _write_json(_memo_dir(target_dir) / "outline.json", outline)
+    _write_text(_memo_dir(target_dir) / "outline.md", render_markdown_outline(outline))
+    _write_master_research_bundle(target_dir, master_research_bundle)
 
-    _write_json(target_dir / "current_keywords.json", current_records)
-    _write_json(target_dir / "previous_keywords.json", previous_records)
-    _write_json(target_dir / "outline.json", outline)
-    _write_text(target_dir / "outline.md", render_markdown_outline(outline))
-    _write_draft_article(target_dir, str(base_generation["draft_article_markdown"]))
-
-    generation = base_generation
     gemini_api_key = ""
     if args.use_llm and not args.skip_llm:
         gemini_api_key = os.getenv("GEMINI_API_KEY", "")
     if not gemini_api_key:
-        print("LLM未使用のため、下書きのみ保存しました。master_article.md と variants は上書きしていません。")
-        print(f"下書き保存先: {target_dir / '031_base_article_draft.md'}")
+        if not existing_master_article_markdown:
+            print("LLM未使用のため、Workflow エージェント用の材料のみ保存しました。母艦記事が未作成なので個別記事ジョブはまだ生成していません。")
+            print(f"母艦記事用材料: {_memo_dir(target_dir) / '031_2_master_research_bundle.md'}")
+            print(f"次の工程: 母艦記事を作成後に {CURRENT_DIR / '031_5_run_factory.py'} --resume-from-sheet --skip-llm を再実行")
+            print(f"出力先: {target_dir}")
+            return
+
+        master_validation_report = validate_master_article(existing_master_article_markdown, master_research_bundle)
+        _write_master_validation_report(target_dir, master_validation_report)
+        if not master_validation_report["passed"]:
+            print("母艦記事が 031_4 の検証で NG になったため、個別記事ジョブ生成を停止しました。")
+            print(f"母艦記事用材料: {_memo_dir(target_dir) / '031_2_master_research_bundle.md'}")
+            print(f"母艦記事検証レポート: {_memo_dir(target_dir) / '031_3_master_validation_report.md'}")
+            print(f"出力先: {target_dir}")
+            return
+
+        kobetsu_jobs = generate_kobetsu_jobs(
+            seed_keyword=args.seed_keyword,
+            selected_records=current_records,
+            outline=outline,
+            master_research_bundle=master_research_bundle,
+            master_article_markdown=existing_master_article_markdown,
+        )
+        _write_kobetsu_jobs(target_dir, args.seed_keyword, kobetsu_jobs)
+        print("LLM未使用のため、Workflow エージェント用の材料のみ保存しました。母艦記事は検証済みで、個別記事ジョブまで生成しました。")
+        print(f"母艦記事用材料: {_memo_dir(target_dir) / '031_2_master_research_bundle.md'}")
+        print(f"母艦記事検証レポート: {_memo_dir(target_dir) / '031_3_master_validation_report.md'}")
+        print(f"個別記事ジョブ: {_memo_dir(target_dir) / '031_4_kobetsu_jobs.md'}")
         print(f"出力先: {target_dir}")
         return
 
-    if gemini_api_key:
-        generation = generate_master_article(
-            seed_keyword=args.seed_keyword,
-            current_records=current_records,
-            previous_records=previous_records,
-            outline=outline,
-            gemini_api_key=gemini_api_key,
-        )
-        _write_text(target_dir / "master_article.md", generation["master_article_markdown"])
-        if generation["enhancement_plan_markdown"]:
-            _write_text(target_dir / "031_enhancement_plan.md", generation["enhancement_plan_markdown"])
+    generation = generate_master_article(
+        seed_keyword=args.seed_keyword,
+        current_records=current_records,
+        previous_records=previous_records,
+        outline=outline,
+        gemini_api_key=gemini_api_key,
+    )
+    _write_text(target_dir / "master_article.md", generation["master_article_markdown"])
+    if generation["enhancement_plan_markdown"]:
+        _write_text(target_dir / "031_enhancement_plan.md", generation["enhancement_plan_markdown"])
+
+    master_validation_report = validate_master_article(
+        str(generation["master_article_markdown"]),
+        master_research_bundle,
+    )
+    _write_master_validation_report(target_dir, master_validation_report)
+    if not master_validation_report["passed"]:
+        raise RuntimeError("031_4 の検証で母艦記事がルール違反になりました。母艦記事検証レポートを確認してください。")
+
+    kobetsu_jobs = generate_kobetsu_jobs(
+        seed_keyword=args.seed_keyword,
+        selected_records=current_records,
+        outline=outline,
+        master_research_bundle=master_research_bundle,
+        master_article_markdown=str(generation["master_article_markdown"]),
+    )
+    _write_kobetsu_jobs(target_dir, args.seed_keyword, kobetsu_jobs)
 
     variants = generate_variant_articles(
         seed_keyword=args.seed_keyword,
@@ -211,7 +302,11 @@ def main() -> None:
         gemini_api_key=gemini_api_key,
     )
     _write_variant_articles(target_dir, variants)
-    _write_json(target_dir / "variant_articles.json", variants)
+    _write_json(_memo_dir(target_dir) / "variant_articles.json", variants)
+    validation_report = validate_variant_articles(kobetsu_jobs, target_dir / "variants")
+    _write_validation_report(target_dir, validation_report)
+    if not validation_report["passed"]:
+        raise RuntimeError("031_4 の検証で個別記事がルール違反になりました。検証レポートを確認してください。")
 
     print(f"出力先: {target_dir}")
     print(f"LLM使用: {'あり' if generation['used_llm'] else 'なし'}")

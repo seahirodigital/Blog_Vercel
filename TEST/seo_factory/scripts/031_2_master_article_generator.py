@@ -95,6 +95,17 @@ PRIORITY_BUCKET_LABELS = [
     ("Buy", "小", "補助的な購入論点"),
 ]
 
+MASTER_BASELINE_SECTION_IDS = [
+    "conclusion",
+    "selection_criteria",
+    "comparison",
+    "merits",
+    "demerits",
+    "faq",
+    "reputation",
+    "summary",
+]
+
 
 SECTION_OPENERS = {
     "conclusion": "先に大枠の結論を置き、判断を急ぐ論点から順に答える。",
@@ -381,6 +392,427 @@ def render_markdown_outline(outline: Mapping[str, Any]) -> str:
                 lines.append(f"- 区分: {child_topic['volume_label']}")
                 lines.append(f"- 需要ソース: {child_topic['source_scope']}")
                 lines.append("")
+
+    return "\n".join(lines).strip() + "\n"
+
+
+def _dedupe_preserve_order(values: Iterable[str]) -> list[str]:
+    seen: set[str] = set()
+    result: list[str] = []
+    for value in values:
+        normalized = str(value or "").strip()
+        if not normalized or normalized in seen:
+            continue
+        seen.add(normalized)
+        result.append(normalized)
+    return result
+
+
+def _extract_h2_headings(article_markdown: str) -> list[str]:
+    headings: list[str] = []
+    for raw_line in str(article_markdown or "").splitlines():
+        line = raw_line.strip()
+        if line.startswith("## "):
+            heading = line[3:].strip()
+            heading = re.sub(r"\s*&\s*CTA\s*$", "", heading, flags=re.IGNORECASE)
+            if heading:
+                headings.append(heading)
+    return _dedupe_preserve_order(headings)
+
+
+def _build_master_baseline_h2(seed_keyword: str) -> dict[str, list[str] | str]:
+    review_prefix = f"{seed_keyword}レビュー比較まとめ"
+    leading = [
+        f"{review_prefix}：結論",
+        f"{review_prefix}：選定基準",
+    ]
+    trailing = [
+        f"{review_prefix}：比較",
+        f"{review_prefix}：メリット",
+        f"{review_prefix}：デメリット",
+        f"{review_prefix}：FAQ",
+        f"{review_prefix}：評判",
+        f"{review_prefix}：まとめ",
+    ]
+    return {
+        "leading_h2_headings": leading,
+        "trailing_h2_headings": trailing,
+        "insert_after": leading[-1],
+        "insert_before": trailing[0],
+    }
+
+
+def _extract_topic_keywords(topic: Mapping[str, Any]) -> list[str]:
+    keywords = [str(topic.get("suggest_keyword", "")).strip()]
+    keywords.extend(
+        str(child.get("suggest_keyword", "")).strip()
+        for child in topic.get("child_h2_topics", [])
+    )
+    return _dedupe_preserve_order(keywords)
+
+
+def _build_topic_intent_summary(
+    topic_keyword: str,
+    related_keywords: list[str],
+    query_type: str,
+    volume_label: str,
+) -> str:
+    joined_related = " / ".join(related_keywords[:3]) if related_keywords else topic_keyword
+    if query_type == "Buy":
+        return (
+            f"{topic_keyword} は、購入前に価格・比較・選び方を固めたい需要が強い。"
+            f" 特に {joined_related} の順で判断材料を確認したい検索として扱う。"
+        )
+    if query_type == "Do":
+        return (
+            f"{topic_keyword} は、手順や設定を迷わず進めたい需要が中心。"
+            f" {joined_related} のような関連論点も同じ記事内で回収すると抜け漏れが減る。"
+        )
+    return (
+        f"{topic_keyword} は、判断前に疑問や不安を解消したい需要が中心。"
+        f" {joined_related} のような関連疑問もまとめて答える前提で扱う。"
+    )
+
+
+def _build_opening_focus(topic_keyword: str, related_keywords: list[str]) -> str:
+    lowered = " ".join([topic_keyword, *related_keywords]).lower()
+    if any(token in lowered for token in ("学割", "教育")):
+        return "学割価格が使える条件と、通常価格との差額を最初に答える"
+    if any(token in lowered for token in ("ケース", "カバー", "スリーブ", "アクセサリ")):
+        return "何を守りたいかと、専用品か互換品かを最初に答える"
+    if any(token in lowered for token in ("先行", "レビュー", "評判", "口コミ")):
+        return "妥協点が多いのか、用途を絞れば満足できるのかを最初に答える"
+    if any(token in lowered for token in ("ゲーム", "配信", "性能")):
+        return "どの用途まで現実的にこなせるかを最初に答える"
+    if any(token in lowered for token in ("シルバー", "カラー", "色")):
+        return "見た目だけでなく、使い始めて気になる差があるかを最初に答える"
+    if any(token in lowered for token in ("価格", "値段")):
+        return "価格差と、その差額で得られる価値を最初に答える"
+    return "検索意図に対する結論を最初の一文で答える"
+
+
+def _build_research_questions(
+    seed_keyword: str,
+    topic_keyword: str,
+    related_keywords: list[str],
+    query_type: str,
+    source_scope: str,
+) -> list[str]:
+    lowered = " ".join([seed_keyword, topic_keyword, *related_keywords]).lower()
+    questions: list[str] = []
+
+    if any(token in lowered for token in ("学割", "教育")):
+        questions.extend(
+            [
+                "公式の教育価格はいくらか",
+                "通常価格との差額はいくらか",
+                "対象者条件は何か",
+                "キャンペーンや特典の有無はどうか",
+            ]
+        )
+    if any(token in lowered for token in ("ケース", "カバー", "スリーブ", "アクセサリ")):
+        questions.extend(
+            [
+                "専用品か互換品か",
+                "サイズとポート位置の互換性はあるか",
+                "何を守りたい人向けか",
+                "公式ストアで確認できる候補と価格帯はどうか",
+            ]
+        )
+    if any(token in lowered for token in ("先行", "レビュー", "評判", "口コミ")):
+        questions.extend(
+            [
+                "初見レビューで高評価と低評価が割れる点は何か",
+                "妥協点として繰り返し挙がる要素は何か",
+                "満足しやすい用途と不満が出やすい用途は何か",
+                "公式仕様と実機レビューで一致している点は何か",
+            ]
+        )
+    if any(token in lowered for token in ("シルバー", "カラー", "色")):
+        questions.extend(
+            [
+                "公式のカラー名称と仕上げは何か",
+                "指紋や傷の目立ち方はどうか",
+                "レビュー写真で見た印象差はあるか",
+                "他カラーと比べた選び分けは何か",
+            ]
+        )
+    if any(token in lowered for token in ("ゲーム", "配信", "性能")):
+        questions.extend(
+            [
+                "どの用途まで現実的に動くのか",
+                "レビューで報告されている性能の限界はどこか",
+                "メモリや発熱が制約になる場面は何か",
+                "配信や録画も含めて使える範囲はどこまでか",
+            ]
+        )
+
+    if not questions and query_type == "Buy":
+        questions.extend(
+            [
+                "価格差と選定基準は何か",
+                "比較対象と迷いどころは何か",
+                "買う人と見送る人の分かれ目は何か",
+            ]
+        )
+    if not questions and query_type == "Do":
+        questions.extend(
+            [
+                "最初に確認すべき条件は何か",
+                "手順を間違えやすいポイントは何か",
+                "途中で詰まりやすい点は何か",
+            ]
+        )
+    if not questions and query_type == "Know":
+        questions.extend(
+            [
+                "読者が最初に知りたい結論は何か",
+                "比較前に解消すべき疑問は何か",
+                "不安や誤解を先回りして潰すには何を確認するか",
+            ]
+        )
+
+    if source_scope == "前作継承":
+        questions.append("前作で不満が出た点が現行でも残るか")
+
+    return _dedupe_preserve_order(questions)
+
+
+def _build_source_checkpoints(
+    topic_keyword: str,
+    related_keywords: list[str],
+    source_scope: str,
+) -> list[str]:
+    lowered = " ".join([topic_keyword, *related_keywords]).lower()
+    checkpoints = ["公式製品ページで仕様と表記を確認"]
+
+    if any(token in lowered for token in ("学割", "教育", "価格", "値段")):
+        checkpoints.append("公式ストアと教育ストアで価格差を確認")
+    if any(token in lowered for token in ("ケース", "カバー", "スリーブ", "アクセサリ")):
+        checkpoints.extend(
+            [
+                "公式アクセサリページで候補と対応サイズを確認",
+                "寸法とポート位置が分かる仕様ページを確認",
+            ]
+        )
+    if any(token in lowered for token in ("先行", "レビュー", "評判", "口コミ", "ゲーム", "配信", "性能")):
+        checkpoints.append("信頼できるレビュー媒体で実使用の評価を確認")
+    if any(token in lowered for token in ("シルバー", "カラー", "色")):
+        checkpoints.append("公式のカラー名称とレビュー写真の印象差を確認")
+    if source_scope == "前作継承":
+        checkpoints.append("前作レビューで継続しそうな不満点を確認")
+
+    return _dedupe_preserve_order(checkpoints)
+
+
+def _lookup_priority_label(
+    priority_groups: Iterable[Mapping[str, Any]],
+    query_type: str,
+    volume_label: str,
+) -> str:
+    for group in priority_groups:
+        if (
+            str(group.get("query_type", "")) == query_type
+            and str(group.get("volume_label", "")) == volume_label
+        ):
+            return str(group.get("label", ""))
+    return ""
+
+
+def build_master_research_bundle(
+    seed_keyword: str,
+    current_records: list[Mapping[str, Any]],
+    previous_records: list[Mapping[str, Any]] | None = None,
+    outline: Mapping[str, Any] | None = None,
+    existing_master_article_markdown: str = "",
+) -> dict[str, Any]:
+    previous_records = list(previous_records or [])
+    outline_data = dict(outline or generate_master_outline(seed_keyword, current_records, previous_records))
+    topics: list[dict[str, Any]] = []
+    priority_groups = outline_data.get("priority_groups", [])
+    inherited_h2_headings = _extract_h2_headings(existing_master_article_markdown)
+    master_baseline = _build_master_baseline_h2(seed_keyword)
+
+    for section in outline_data.get("sections", []):
+        section_heading = str(section.get("heading", ""))
+        for topic in section.get("subsections", []):
+            related_keywords = _extract_topic_keywords(topic)
+            primary_keyword = str(topic.get("suggest_keyword", "")).strip()
+            query_type = str(topic.get("query_type", "Know")).strip() or "Know"
+            volume_label = str(topic.get("volume_label", "")).strip()
+            source_scope = str(topic.get("source_scope", "")).strip() or "現行需要"
+            topics.append(
+                {
+                    "section_heading": section_heading,
+                    "h2_candidate": str(topic.get("heading", "")).strip(),
+                    "primary_keyword": primary_keyword,
+                    "related_keywords": related_keywords,
+                    "query_type": query_type,
+                    "volume_label": volume_label,
+                    "source_scope": source_scope,
+                    "priority_label": _lookup_priority_label(priority_groups, query_type, volume_label),
+                    "search_intent_summary": _build_topic_intent_summary(
+                        topic_keyword=primary_keyword,
+                        related_keywords=related_keywords[1:],
+                        query_type=query_type,
+                        volume_label=volume_label,
+                    ),
+                    "opening_focus": _build_opening_focus(primary_keyword, related_keywords[1:]),
+                    "research_questions": _build_research_questions(
+                        seed_keyword=seed_keyword,
+                        topic_keyword=primary_keyword,
+                        related_keywords=related_keywords[1:],
+                        query_type=query_type,
+                        source_scope=source_scope,
+                    ),
+                    "source_checkpoints": _build_source_checkpoints(
+                        topic_keyword=primary_keyword,
+                        related_keywords=related_keywords[1:],
+                        source_scope=source_scope,
+                    ),
+                    "writing_requirements": [
+                        "一般論で膨らませず、調査で確認した事実から結論を書く",
+                        "H2直下の最初の一文は、その見出しキーワードを自然に含めて始める",
+                        "入力記事の良い文章資産を壊さず、不足部分だけを追加する",
+                    ],
+                }
+            )
+
+    return {
+        "seed_keyword": seed_keyword,
+        "title": str(outline_data.get("title", "")),
+        "workflow_target": "このチャットのLLMが母艦記事を書くための材料",
+        "current_keyword_count": len(list(current_records)),
+        "previous_keyword_count": len(previous_records),
+        "priority_groups": priority_groups,
+        "selected_keywords": [
+            str(record.get("suggest_keyword", "")).strip()
+            for record in current_records
+            if str(record.get("suggest_keyword", "")).strip()
+        ],
+        "writing_guardrails": [
+            "母艦記事が最重要であり、ここで品質を満たさない限り個別記事へ進めない",
+            "Python側は材料整理まで担当し、本文の仕上げは Workflow エージェント側で行う",
+            "既存の良い母艦記事がある場合は、その H2 構成と文章資産を土台にし、不足分だけを追加する",
+            "一般論ではなく、採用キーワードごとの調査結果を冒頭結論へ反映する",
+            "正式名称は必ず公式表記へ合わせる",
+            "おすすめ系記事は商品推薦ではなく、判断軸を渡す記事として書く",
+            "母艦記事の骨格は、結論 → 選定基準 → 採用キーワード別H2 → 比較 → メリット → デメリット → FAQ → 評判 → まとめ を原則維持する",
+            "採用キーワード別 H2 は選定基準の後、比較の前へ差し込む",
+        ],
+        "existing_master_article_markdown": str(existing_master_article_markdown or ""),
+        "inherited_master_h2_headings": inherited_h2_headings,
+        "master_baseline_structure": master_baseline,
+        "master_validation_rules": {
+            "required_h2_headings": _dedupe_preserve_order(
+                [
+                    *[str(heading).strip() for heading in master_baseline["leading_h2_headings"]],
+                    *[
+                        str(topic.get("h2_candidate", "")).strip()
+                        for topic in topics
+                        if str(topic.get("h2_candidate", "")).strip()
+                    ],
+                    *[str(heading).strip() for heading in master_baseline["trailing_h2_headings"]],
+                ]
+            ),
+            "baseline_h2_headings": _dedupe_preserve_order(
+                [
+                    *[str(heading).strip() for heading in master_baseline["leading_h2_headings"]],
+                    *[str(heading).strip() for heading in master_baseline["trailing_h2_headings"]],
+                ]
+            ),
+            "topic_h2_headings": _dedupe_preserve_order(
+                [
+                    str(topic.get("h2_candidate", "")).strip()
+                    for topic in topics
+                    if str(topic.get("h2_candidate", "")).strip()
+                ]
+            ),
+            "topic_h2_insert_after": str(master_baseline["insert_after"]).strip(),
+            "topic_h2_insert_before": str(master_baseline["insert_before"]).strip(),
+            "preserve_existing_h2_headings": inherited_h2_headings,
+            "forbidden_phrases": [
+                "母艦記事",
+                "このキーワードでは",
+                "この記事の使い方",
+                "テンプレート",
+                "構造",
+                "検索キーワード",
+                "見出し直下で課題と解決策を先に置き",
+                "この章では",
+            ],
+            "generic_draft_markers": [
+                "- 結論：",
+                "- 課題：",
+                "- 方法：",
+                "- 優先：",
+                "主要論点を",
+                "判断しやすいです。",
+            ],
+        },
+        "outline_markdown": render_markdown_outline(outline_data),
+        "topics": topics,
+    }
+
+
+def render_master_research_bundle_markdown(bundle: Mapping[str, Any]) -> str:
+    lines = [
+        f"# {bundle.get('title', '')} 母艦記事用材料",
+        "",
+        "## この材料の役割",
+        "",
+        f"- 目的: {bundle.get('workflow_target', '')}",
+        f"- 現行キーワード件数: {bundle.get('current_keyword_count', 0)}",
+        f"- 前作キーワード件数: {bundle.get('previous_keyword_count', 0)}",
+        f"- 採用キーワード: {', '.join(bundle.get('selected_keywords', []))}",
+        "",
+        "## 執筆ガードレール",
+        "",
+    ]
+    for rule in bundle.get("writing_guardrails", []):
+        lines.append(f"- {rule}")
+    lines.append("")
+
+    inherited_h2_headings = bundle.get("inherited_master_h2_headings", [])
+    if inherited_h2_headings:
+        lines.extend(["## 継承すべき既存母艦の H2", ""])
+        for heading in inherited_h2_headings:
+            lines.append(f"- {heading}")
+        lines.append("")
+
+    priority_groups = bundle.get("priority_groups", [])
+    if priority_groups:
+        lines.extend(["## 優先順", ""])
+        for group in priority_groups:
+            lines.append(f"### {group.get('label', '主要論点')}")
+            lines.append("")
+            lines.append(f"- クエリタイプ: {group.get('query_type', '')}")
+            lines.append(f"- 検索ボリューム: {group.get('volume_label', '')}")
+            lines.append(f"- 対応キーワード: {', '.join(group.get('keywords', []))}")
+            lines.append("")
+
+    lines.extend(["## 母艦記事の見出し候補", "", str(bundle.get("outline_markdown", "")).strip(), ""])
+
+    for topic in bundle.get("topics", []):
+        lines.append(f"## {topic.get('h2_candidate', '')}")
+        lines.append("")
+        lines.append(f"- 親セクション: {topic.get('section_heading', '')}")
+        lines.append(f"- 主対象キーワード: {topic.get('primary_keyword', '')}")
+        lines.append(f"- 関連キーワード: {', '.join(topic.get('related_keywords', []))}")
+        lines.append(f"- 優先バケット: {topic.get('priority_label', '')}")
+        lines.append(f"- 需要ソース: {topic.get('source_scope', '')}")
+        lines.append(f"- 冒頭で最初に答えること: {topic.get('opening_focus', '')}")
+        lines.append(f"- 検索意図の要約: {topic.get('search_intent_summary', '')}")
+        lines.append("- 調査質問:")
+        for question in topic.get("research_questions", []):
+            lines.append(f"  - {question}")
+        lines.append("- 確認先:")
+        for checkpoint in topic.get("source_checkpoints", []):
+            lines.append(f"  - {checkpoint}")
+        lines.append("- 執筆時の注意:")
+        for requirement in topic.get("writing_requirements", []):
+            lines.append(f"  - {requirement}")
+        lines.append("")
 
     return "\n".join(lines).strip() + "\n"
 
@@ -777,9 +1209,11 @@ def generate_master_article(
 
 
 __all__ = [
+    "build_master_research_bundle",
     "build_generation_payload",
     "generate_master_article",
     "generate_master_outline",
     "render_base_master_article",
+    "render_master_research_bundle_markdown",
     "render_markdown_outline",
 ]

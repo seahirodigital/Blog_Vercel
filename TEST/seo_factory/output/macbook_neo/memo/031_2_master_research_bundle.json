@@ -1,0 +1,255 @@
+{
+  "seed_keyword": "macbook neo",
+  "title": "macbook neo レビュー比較まとめ",
+  "workflow_target": "このチャットのLLMが母艦記事を書くための材料",
+  "current_keyword_count": 5,
+  "previous_keyword_count": 0,
+  "priority_groups": [
+    {
+      "label": "最優先の疑問解消",
+      "query_type": "Know",
+      "volume_label": "大",
+      "keywords": [
+        "macbook neo エクセル",
+        "macbook neo ケース",
+        "macbook neo ゲーム"
+      ]
+    },
+    {
+      "label": "比較前に潰す疑問",
+      "query_type": "Know",
+      "volume_label": "中",
+      "keywords": [
+        "macbook neo ゲーム性能",
+        "macbook neo ゲーム配信"
+      ]
+    }
+  ],
+  "selected_keywords": [
+    "macbook neo エクセル",
+    "macbook neo ケース",
+    "macbook neo ゲーム",
+    "macbook neo ゲーム性能",
+    "macbook neo ゲーム配信"
+  ],
+  "writing_guardrails": [
+    "母艦記事が最重要であり、ここで品質を満たさない限り個別記事へ進めない",
+    "Python側は材料整理まで担当し、本文の仕上げは Workflow エージェント側で行う",
+    "既存の良い母艦記事がある場合は、その H2 構成と文章資産を土台にし、不足分だけを追加する",
+    "一般論ではなく、採用キーワードごとの調査結果を冒頭結論へ反映する",
+    "正式名称は必ず公式表記へ合わせる",
+    "おすすめ系記事は商品推薦ではなく、判断軸を渡す記事として書く",
+    "母艦記事の骨格は、結論 → 選定基準 → 採用キーワード別H2 → 比較 → メリット → デメリット → FAQ → 評判 → まとめ を原則維持する",
+    "採用キーワード別 H2 は選定基準の後、比較の前へ差し込む"
+  ],
+  "existing_master_article_markdown": "# MacBook Neo レビュー 比較 初心者 コスパ AI性能\n\nMacBook Neo レビュー 比較 初心者 コスパ AI性能について、\n忙しいビジネスパーソンや効率・節約を求める一般生活者のために、\nその実力を徹底的に調査をしまとめます。\n\n「どのMacBookを選べば良いか分からない」\n「初めてのMacBookで失敗したくない」\n「高価なMacBookは手が出しにくいけれど、性能は妥協したくない」\n\nこのような悩みを抱えていませんか？\n\nPCフィルター専門工房 MacBook Neo 13インチ 2026 A18 Proチップ 対応 フィルム ブルーライトカットフィルム 反射低減 指紋防止 抗菌 保護フィルム\nhttps://www.amazon.co.jp/dp/B0GR7W6VF5/ref=nosim?tag=hiroshit-22\n\n\n▼Apple 2026 MacBook Air M5チップ搭載13インチ\n16GBメモリ、512GB SSDストレージ\nApple公式価格￥184,800が、Amazonなら【6,206円分】のポイント （3.5%）付き、\nApple公式より安く買えます！\nhttps://www.amazon.co.jp/dp/B0GR1T11D6/ref=nosim?tag=hiroshit-22\n\n▼Apple 2026 MacBook Pro 10コアCPU、10コアGPUのM5 \n32GBメモリ、1TBのSSDストレージ\nApple公式価格￥339,800が、Amazonなら【11,893円分】のポイント （3.5%）付き、\nApple公式より安く買えます！\nhttps://www.amazon.co.jp/dp/B0GR17WQHC/ref=nosim?tag=hiroshit-22\n\n▼Apple AirPods Max 2 - スターライト\nApple公式価格￥89,800が、Amazonなら【3,143円分】のポイント （3.5%）付き、\nApple公式より安く買えます！\nhttps://www.amazon.co.jp/dp/B0GSSLZB8Z/ref=nosim?tag=hiroshit-22\n\nApple AirPods Max 2 - ブルー\n\nhttps://www.amazon.co.jp/dp/B0GSS8DBTH/ref=nosim?tag=hiroshit-22\n\nApple AirPods Max 2 - オレンジ\n\nhttps://www.amazon.co.jp/dp/B0GSSPN443/ref=nosim?tag=hiroshit-22\n\nApple AirPods Max 2 - パープル\n\nhttps://www.amazon.co.jp/dp/B0GSSR9X39/ref=nosim?tag=hiroshit-22\n\n\n▼Apple 2025 11インチiPad Pro M5(Wi-Fi 256GB, ) - スペースブラック\n\nApple公式価格￥168,800が、Amazonなら【5,908円分】のポイント （3.5%）付き、\nApple公式より安く買えます！\n\nhttps://amzn.to/4neJb1L\n\n\n▼AirPods Pro 3は、\nApple公式購入よりも、\n公式価格39,600円から４％OFF に加え、\n更にAmazonは3.5%ポイント(1336円)が貯まり、\n公式比較で7.5%OFFでお得に購入できます！\nポイントでケース購入が◎\nhttps://amzn.to/4meqg6Z\n\n▼Apple iPhone 17e 512GB\nAmazonでは3.5%（4,718円分）のポイントが付き安く買えます！\nhttps://www.amazon.co.jp/dp/B0GQVVF19Q/ref=nosim?tag=hiroshit-22\n\n\n▼iPhone Airは、Apple公式購入よりも、\nAmazonでは3.5%（5593円分）のポイントが付き安く買えます！\nポイントでケースやガラスフィルム購入が◎\nhttps://amzn.to/48rwVat\n\nhttps://amzn.to/48sSfMX\n\n本記事では、MacBook Neoがあなたの日常やビジネスに\nどのような「快適さ」「時短」「効率化」「節約」をもたらすのかを、\n具体的なデータと利用シーンを交えて解説します。\n\n読み終える頃には、MacBook Neoがあなたの最適な選択肢であるかどうかが明確になり、\n後悔のない購入へと繋がるでしょう。\n\n## MacBook Neo レビュー比較まとめ：結論\n\nMacBook Neoは、コストパフォーマンスと最新のAI処理能力を両立した、\nMacBook初心者や日常使いに最適なモデルです。\n\n従来のMacBook Air M1と比較しても、特定の作業では優れたパフォーマンスを発揮し、\nあなたのデジタルライフをより「快適」で「効率的」なものに変える可能性を秘めています。\n\n*   **価格優位性**：10万円を切る価格から手に入る高いコストパフォーマンス\n*   **AI処理能力**：最新のA18 Proチップによる高速なAI関連処理\n*   **日常作業快適性**：Webブラウジングや文書作成でスムーズな動作\n*   **デザイン魅力**：可愛らしく洗練された外観とマット調のAppleロゴ\n*   **初心者最適**：初めてMacBookを使う方にとって理想的な選択肢\n\nMacBook Neoは、日々のタスクを「時短」し、生産性を「向上」させたいと考える方にとって、\n非常に魅力的な一台です。\n特にAIを活用した作業や、複数のブラウザタブを開くような使い方で、\nその「快適さ」を実感できるでしょう。\n\n後述のメリットまとめでは、MacBook Neoがあなたの生活にもたらす具体的な「喜び」と「安心」を詳しく解説します。\n\n\nPCフィルター専門工房 MacBook Neo 13インチ 2026 A18 Proチップ 対応 フィルム ブルーライトカットフィルム 反射低減 指紋防止 抗菌 保護フィルム\nhttps://www.amazon.co.jp/dp/B0GR7W6VF5/ref=nosim?tag=hiroshit-22\n\n## MacBook Neo レビュー比較まとめ：選定基準\n\nMacBook Neoの真価を理解するために、MacBook Neoの選定基準を5つ設定し、\n詳細な調査をしまとめました。\n\nこれらの基準は、あなたのMacBook選びにおける「効率」と「満足度」を最大化するために\n不可欠な要素です。\n\n*   **処理性能**：CPU、GPU、AIチップの総合的な能力\n*   **ディスプレイ品質**：画面サイズ、色域、視認性\n*   **バッテリー持続時間**：長時間の利用を支える駆動能力\n*   **拡張性と接続性**：ポートの種類、規格、周辺機器との連携\n*   **デザインと操作性**：外観、キーボード、トラックパッドの使いやすさ\n\nMacBook Neoは、これらの基準を通じて、あなたの期待に応えられるか、\nどのような利用シーンで「快適さ」を提供できるかを明らかにします。\n\nMacBook Neoの選定基準は、日々の作業をよりスムーズに、\nそして安心して行いたいと願うユーザーのために設定されました。\nこれらの項目を総合的に評価することで、MacBook Neoがあなたのニーズに合致するかどうかを判断できます。\n\n## MacBook Neo レビュー比較まとめ：利用シーン\n\nMacBook Neoは、多岐にわたる実生活のユースケースで\nあなたの「生産性向上」と「快適さ」に貢献します。\n\nMacBook Neoは、あなたの日常やビジネスシーンでどのように活躍するかを、\n具体的な8つの例で記載します。\n\n*   **Webブラウジング**：複数タブを開いてもスムーズな動作で情報収集を「時短」\n*   **文書作成**：レポートや企画書作成を「快適」なキーボードで効率化\n*   **オンライン会議**：クリアなカメラと安定した接続でストレスフリーなコミュニケーション\n*   **画像編集（軽度）**：SNS投稿用の画像加工も手軽にこなし「楽しい」クリエイティブ体験\n*   **AIツール活用**：ローカルでのAI処理が高速で、作業の「効率化」を実感\n*   **動画視聴**：高音質スピーカーと美しいディスプレイで「心地よい」エンターテイメント\n*   **プログラミング学習**：入門レベルのコーディングもスムーズに実行し「成長」をサポート\n*   **カジュアルゲーム**：設定次第で「楽しい」ゲーム体験も可能\n\nMacBook Neoは、これらのシーンであなたの作業を「安心」してサポートし、\n日々の生活に「喜び」をもたらすでしょう。\nMacBook Neoは、幅広い用途でユーザーの生活を豊かにするツールです。\n日々のタスクから趣味の時間まで、MacBook Neoがあなたの活動を快適に支えます。\n\n\nPCフィルター専門工房 MacBook Neo 13インチ 2026 A18 Proチップ 対応 フィルム ブルーライトカットフィルム 反射低減 指紋防止 抗菌 保護フィルム\nhttps://www.amazon.co.jp/dp/B0GR7W6VF5/ref=nosim?tag=hiroshit-22\n\n## MacBook Neo レビュー比較まとめ：比較\n\nMacBook Neoは、MacBook Air M1モデルと比較して、いくつかの点で異なる特性を持っています。\n\nMacBook Neoは、MacBook Air M1モデルの主要な違いを5つの論点に絞り、\nあなたの製品選びの「安心」材料となるよう、具体的な差異を提示します。\n\n**価格とモデル構成**：\n*   MacBook Neo：99,800円（256GB/Touch ID非搭載）から、114,800円（512GB/Touch ID搭載）\n*   MacBook Air M1：6年前のモデルですが、依然として高い性能を維持\n\n**チップ性能（CPU/AI）**：\n*   MacBook Neo：A18 Proチップ搭載（シングルコア性能、AI処理能力でM1を凌駕）\n*   MacBook Air M1：M1チップ搭載（マルチコア性能、MetalスコアでNeoを上回る部分あり）\n\n**ディスプレイと色表現**：\n*   MacBook Neo：sRGB止まり、True Tone非搭載（日常使いでは十分な美しさ）\n*   MacBook Air M1：P3広色域対応、True Tone搭載（クリエイティブ作業に有利）\n\n**キーボードとトラックパッド**：\n*   MacBook Neo：白っぽいキーボード、バックライト非搭載、物理式トラックパッド（耐久性に懸念も、初心者向け）\n*   MacBook Air M1：黒色キーボード、バックライト搭載、感圧式トラックパッド（より洗練された操作感）\n\n**ポートと拡張性**：\n*   MacBook Neo：USB-Cポートのみ（Thunderbolt非対応）\n*   MacBook Air M1：USB-Cポート（Thunderbolt対応）\n\nMacBook Neoは、最新のAI技術とコストパフォーマンスで優位に立ち、\nMacBook Air M1は、より専門的なクリエイティブ作業や安定した拡張性で強みを発揮します。\nあなたの利用目的と予算に合わせて、最適な一台を選ぶための「安心」材料としてご活用ください。\n\n## MacBook Neo レビュー比較まとめ：メリット\n\nMacBook Neoは、あなたの生活や仕事に多大な「実利」と「喜び」をもたらします。\n\nMacBook Neoは、提供する具体的な5つのメリットを、\n実際の利用シーンと感情的な価値に焦点を当てて記載します。\n\n*   **圧倒的コスパ**：10万円を切る価格でMacBook体験、予算を「節約」しつつ高性能を手に入れる喜び\n*   **最新AI処理**：A18 Proチップによる高速なAI処理、作業の「効率化」と「時短」を実現\n*   **日常作業快適**：Webブラウジングや文書作成がスムーズ、日々のタスクを「快適」にこなす\n*   **洗練デザイン**：丸みを帯びた可愛らしい外観とマットなAppleロゴ、持つことの「喜び」と「満足感」\n*   **初心者最適解**：初めてMacを使う人でも「安心」して始められる、シンプルで直感的な操作性\n\nこれらのメリットは、MacBook Neoが単なるツールではなく、\nあなたの生活の質を向上させるパートナーとなることを示しています。\nMacBook Neoは、価格以上の価値と最新の技術を兼ね備え、\n多くのユーザーにとって魅力的な選択肢となるでしょう。\n\n\nPCフィルター専門工房 MacBook Neo 13インチ 2026 A18 Proチップ 対応 フィルム ブルーライトカットフィルム 反射低減 指紋防止 抗菌 保護フィルム\nhttps://www.amazon.co.jp/dp/B0GR7W6VF5/ref=nosim?tag=hiroshit-22\n\n## MacBook Neo レビュー比較まとめ：デメリット\n\nMacBook Neoは多くの魅力を持つ一方で、いくつかの制限も存在します。\n\nMacBook Neoのデメリットを公平な視点で評価するために、考慮すべき5つの点を提示し、\nあなたの購入判断に「安心」と「納得」をもたらします。\n\n*   **メモリ拡張不可**：8GBメモリ固定、将来的なアップグレードや重い作業には限界\n*   **Thunderbolt非対応**：高速な外部ストレージやディスプレイ接続に制約\n*   **キーボード耐久性**：バックライト非搭載、刻印の剥げや傷への懸念\n*   **ディスプレイ色域**：sRGB止まり、プロフェッショナルな色精度を求める作業には不向き\n*   **一部作業性能**：動画書き出しや一部のグラフィック作業ではM1 Airに劣る\n\nこれらのデメリットは、MacBook Neoが特定の用途に特化していることの裏返しでもあります。\nあなたの利用目的と照らし合わせ、これらの点が許容範囲内であるかを確認することが重要です。\nMacBook Neoを選ぶ際は、これらのデメリットを理解した上で、\nご自身の使い方に合っているかを検討することをおすすめします。\n\n## MacBook Neo レビュー比較まとめ：FAQ\n\nMacBook Neoに関するよくある質問に答えることで、\nMacBook Neoのデメリットに対する「安心」と「解決策」を提供します。\n\nあなたの疑問を解消し、MacBook Neoの導入をより「快適」なものにするための情報です。\n\nQ1：メモリ8GBで将来的に不足しないか心配\n\nA1：MacBook Neoの8GBメモリは、Webブラウジング、文書作成、メール、SNS、動画視聴、軽度の画像編集、AIツールの活用といった日常的なタスクには十分な性能を発揮します。\n多くのアプリを同時に起動したり、プロレベルの動画編集や3Dモデリングのような非常に重い作業をしない限り、快適な動作を維持できます。\n\nQ2：Thunderbolt非対応だと何が不便？\n\nA2：Thunderboltは高速なデータ転送や複数の外部ディスプレイ接続を可能にする規格ですが、MacBook Neoは非対応です。\nしかし、一般的なUSB-C接続のストレージやディスプレイは利用可能です。\n日常的なファイル転送や外部モニター1台の接続であれば、ほとんどのユーザーにとって問題なく「快適」に利用できます。\n\nQ3：キーボードの耐久性やバックライトがないのは不便？\n\nA3：MacBook Neoのキーボードは、AirやProモデルと比較して耐久性で劣る可能性や、バックライトがない点は確かに違いです。\nしかし、明るい場所での作業が中心であればバックライトの必要性は低く、物理的な打鍵感は慣れれば「快適」です。\n気になる場合は、キーボードカバーの使用や、外部キーボードの活用で「安心」して対処できます。\n\nQ4：ディスプレイの色域がsRGB止まりだと何が困る？\n\nA4：sRGBは一般的なWebコンテンツや写真の色を表現する標準的な色域です。\nMacBook NeoのディスプレイはsRGB止まりですが、日常の写真鑑賞、動画視聴、Webサイト閲覧においては十分美しく「満足」できる品質です。\nプロのデザイナーや写真家のように、厳密な色精度が求められる作業でなければ、その差はほとんど感じられません。\n\nQ5：動画編集は全くできない？\n\nA5：MacBook Neoは、4K60FPSの動画編集も可能です。\nただし、M1 Airと比較すると書き出し速度が遅く、複雑な編集作業では発熱やカクつきが生じる可能性があります。\nしかし、趣味レベルの動画編集や、短尺のSNS動画作成であれば十分に「楽しい」クリエイティブ体験が可能です。\n\nMacBook Neoは、あなたの用途によってはデメリットを上回る価値を提供し、\n日々のデジタルライフを「安心」してサポートします。\nこれらのFAQを通じて、MacBook Neoに対する疑問が解消され、\nより安心して購入を検討できることと存じます。\n\n\nPCフィルター専門工房 MacBook Neo 13インチ 2026 A18 Proチップ 対応 フィルム ブルーライトカットフィルム 反射低減 指紋防止 抗菌 保護フィルム\nhttps://www.amazon.co.jp/dp/B0GR7W6VF5/ref=nosim?tag=hiroshit-22\n\n## MacBook Neo レビュー比較まとめ：評判\n\nMacBook Neoは、その登場以来、多くのユーザーから様々な評判を集めています。\n\nMacBook Neoに関する主要な5つの評価ポイントをまとめ、\nあなたの購入判断に役立つ「信頼」できる情報を提供します。\n\n*   **コスパの高さ**：10万円を切る価格でMacBookが手に入る点に「喜び」の声多数\n*   **AI処理能力の優位性**：最新のA18 ProチップによるAI関連タスクの高速処理に「驚き」と「効率化」を実感\n*   **デザインの魅力**：丸みを帯びた可愛らしい外観とマット調のAppleロゴが「所有欲」を満たす\n*   **日常使いの快適さ**：Webブラウジングや文書作成など、普段使いでのスムーズな動作に「満足」\n*   **一部機能のトレードオフ**：Thunderbolt非対応やキーボードバックライトの欠如は、価格とのバランスで許容範囲との意見\n\nこれらの評判は、MacBook Neoが特定のニーズを持つユーザーにとって、\n非常に価値のある選択肢であることを示しています。\n特に、AI機能の進化を重視し、初めてMacBookを手にする方からの評価は高く、\n「安心」しておすすめできる一台です。\n\n## MacBook Neo レビュー比較まとめ：まとめ & CTA\n\nMacBook Neoは、その「圧倒的なコストパフォーマンス」と「最新のAI処理能力」で、\nMacBookの新たな選択肢として登場しました。\n\n日常のWebブラウジングや文書作成はもちろん、AIを活用した作業での「時短」と「効率化」は、\nあなたのデジタルライフに「喜び」と「快適さ」をもたらします。\n\nMacBook Air M1と比較しても、特定のタスクでは優位に立ち、\n初めてMacBookを手にする方や、効率・節約を求めるビジネスパーソンにとって、\n最適な「安心」の選択となるでしょう。\n\n本記事が、あなたのMacBook選びの一助となれば幸いです。\n\n今後も、あなたの生活を豊かにする最新ガジェットや効率化のヒントを、\nこのブログで発信してまいります。\n\nぜひ、X（旧Twitter）や各種SNSで当ブログアカウントをフォローして、\n最新情報をいち早く手に入れてご活用ください。\n\nあなたの「生産性向上」と「快適な毎日」をサポートする情報をお届けします。",
+  "inherited_master_h2_headings": [
+    "MacBook Neo レビュー比較まとめ：結論",
+    "MacBook Neo レビュー比較まとめ：選定基準",
+    "MacBook Neo レビュー比較まとめ：利用シーン",
+    "MacBook Neo レビュー比較まとめ：比較",
+    "MacBook Neo レビュー比較まとめ：メリット",
+    "MacBook Neo レビュー比較まとめ：デメリット",
+    "MacBook Neo レビュー比較まとめ：FAQ",
+    "MacBook Neo レビュー比較まとめ：評判",
+    "MacBook Neo レビュー比較まとめ：まとめ & CTA"
+  ],
+  "master_baseline_structure": {
+    "leading_h2_headings": [
+      "macbook neoレビュー比較まとめ：結論",
+      "macbook neoレビュー比較まとめ：選定基準"
+    ],
+    "trailing_h2_headings": [
+      "macbook neoレビュー比較まとめ：比較",
+      "macbook neoレビュー比較まとめ：メリット",
+      "macbook neoレビュー比較まとめ：デメリット",
+      "macbook neoレビュー比較まとめ：FAQ",
+      "macbook neoレビュー比較まとめ：評判",
+      "macbook neoレビュー比較まとめ：まとめ"
+    ],
+    "insert_after": "macbook neoレビュー比較まとめ：選定基準",
+    "insert_before": "macbook neoレビュー比較まとめ：比較"
+  },
+  "master_validation_rules": {
+    "required_h2_headings": [
+      "macbook neoレビュー比較まとめ：結論",
+      "macbook neoレビュー比較まとめ：選定基準",
+      "macbook neo エクセル",
+      "macbook neo ケース",
+      "macbook neo ゲーム性能",
+      "macbook neo ゲーム",
+      "macbook neoレビュー比較まとめ：比較",
+      "macbook neoレビュー比較まとめ：メリット",
+      "macbook neoレビュー比較まとめ：デメリット",
+      "macbook neoレビュー比較まとめ：FAQ",
+      "macbook neoレビュー比較まとめ：評判",
+      "macbook neoレビュー比較まとめ：まとめ"
+    ],
+    "baseline_h2_headings": [
+      "macbook neoレビュー比較まとめ：結論",
+      "macbook neoレビュー比較まとめ：選定基準",
+      "macbook neoレビュー比較まとめ：比較",
+      "macbook neoレビュー比較まとめ：メリット",
+      "macbook neoレビュー比較まとめ：デメリット",
+      "macbook neoレビュー比較まとめ：FAQ",
+      "macbook neoレビュー比較まとめ：評判",
+      "macbook neoレビュー比較まとめ：まとめ"
+    ],
+    "topic_h2_headings": [
+      "macbook neo エクセル",
+      "macbook neo ケース",
+      "macbook neo ゲーム性能",
+      "macbook neo ゲーム"
+    ],
+    "topic_h2_insert_after": "macbook neoレビュー比較まとめ：選定基準",
+    "topic_h2_insert_before": "macbook neoレビュー比較まとめ：比較",
+    "preserve_existing_h2_headings": [
+      "MacBook Neo レビュー比較まとめ：結論",
+      "MacBook Neo レビュー比較まとめ：選定基準",
+      "MacBook Neo レビュー比較まとめ：利用シーン",
+      "MacBook Neo レビュー比較まとめ：比較",
+      "MacBook Neo レビュー比較まとめ：メリット",
+      "MacBook Neo レビュー比較まとめ：デメリット",
+      "MacBook Neo レビュー比較まとめ：FAQ",
+      "MacBook Neo レビュー比較まとめ：評判",
+      "MacBook Neo レビュー比較まとめ：まとめ & CTA"
+    ],
+    "forbidden_phrases": [
+      "母艦記事",
+      "このキーワードでは",
+      "この記事の使い方",
+      "テンプレート",
+      "構造",
+      "検索キーワード",
+      "見出し直下で課題と解決策を先に置き",
+      "この章では"
+    ],
+    "generic_draft_markers": [
+      "- 結論：",
+      "- 課題：",
+      "- 方法：",
+      "- 優先：",
+      "主要論点を",
+      "判断しやすいです。"
+    ]
+  },
+  "outline_markdown": "# macbook neo レビュー比較まとめ\n\n## 母艦記事の設計メモ\n\n- 現行サジェスト件数: 5\n- 前作サジェスト件数: 0\n- 優先論点: macbook neo エクセル, macbook neo ケース, macbook neo ゲーム, macbook neo ゲーム性能, macbook neo ゲーム配信\n\n## ユーザー需要順の主要論点\n\n優先順は `Buy大 → Know大 → Buy中 → Know中 → Buy小` を基本とする。\n\n### 最優先の疑問解消\n\n- クエリタイプ: Know\n- 検索ボリューム: 大\n- 対応キーワード: macbook neo エクセル, macbook neo ケース, macbook neo ゲーム\n\n### 比較前に潰す疑問\n\n- クエリタイプ: Know\n- 検索ボリューム: 中\n- 対応キーワード: macbook neo ゲーム性能, macbook neo ゲーム配信\n\n## macbook neoレビュー比較まとめ：結論\n\n- 対応サジェスト: macbook neo エクセル, macbook neo ケース\n\n## macbook neo エクセル\n\n- 対応サジェスト: macbook neo エクセル\n- クエリタイプ: Know\n- 区分: 大\n- 需要ソース: 現行需要\n\n## macbook neo ケース\n\n- 対応サジェスト: macbook neo ケース\n- クエリタイプ: Know\n- 区分: 大\n- 需要ソース: 現行需要\n\n## macbook neoレビュー比較まとめ：選定基準\n\n- 対応サジェスト: macbook neo ゲーム性能\n\n## macbook neo ゲーム性能\n\n- 対応サジェスト: macbook neo ゲーム性能\n- クエリタイプ: Know\n- 区分: 中\n- 需要ソース: 現行需要\n\n## macbook neoレビュー比較まとめ：利用シーン\n\n- 対応サジェスト: macbook neo ゲーム, macbook neo ゲーム配信\n\n## macbook neo ゲーム\n\n- 対応サジェスト: macbook neo ゲーム\n- クエリタイプ: Know\n- 区分: 大\n- 需要ソース: 現行需要\n\n## macbook neo ゲーム配信\n\n- 対応サジェスト: macbook neo ゲーム配信\n- クエリタイプ: Know\n- 区分: 中\n- 需要ソース: 現行需要\n\n## macbook neoレビュー比較まとめ：比較\n\n## macbook neoレビュー比較まとめ：メリット\n\n## macbook neoレビュー比較まとめ：デメリット\n\n## macbook neoレビュー比較まとめ：FAQ\n\n## macbook neoレビュー比較まとめ：評判\n\n## macbook neoレビュー比較まとめ：まとめ\n",
+  "topics": [
+    {
+      "section_heading": "macbook neoレビュー比較まとめ：結論",
+      "h2_candidate": "macbook neo エクセル",
+      "primary_keyword": "macbook neo エクセル",
+      "related_keywords": [
+        "macbook neo エクセル"
+      ],
+      "query_type": "Know",
+      "volume_label": "大",
+      "source_scope": "現行需要",
+      "priority_label": "最優先の疑問解消",
+      "search_intent_summary": "macbook neo エクセル は、判断前に疑問や不安を解消したい需要が中心。 macbook neo エクセル のような関連疑問もまとめて答える前提で扱う。",
+      "opening_focus": "検索意図に対する結論を最初の一文で答える",
+      "research_questions": [
+        "読者が最初に知りたい結論は何か",
+        "比較前に解消すべき疑問は何か",
+        "不安や誤解を先回りして潰すには何を確認するか"
+      ],
+      "source_checkpoints": [
+        "公式製品ページで仕様と表記を確認"
+      ],
+      "writing_requirements": [
+        "一般論で膨らませず、調査で確認した事実から結論を書く",
+        "H2直下の最初の一文は、その見出しキーワードを自然に含めて始める",
+        "入力記事の良い文章資産を壊さず、不足部分だけを追加する"
+      ]
+    },
+    {
+      "section_heading": "macbook neoレビュー比較まとめ：結論",
+      "h2_candidate": "macbook neo ケース",
+      "primary_keyword": "macbook neo ケース",
+      "related_keywords": [
+        "macbook neo ケース"
+      ],
+      "query_type": "Know",
+      "volume_label": "大",
+      "source_scope": "現行需要",
+      "priority_label": "最優先の疑問解消",
+      "search_intent_summary": "macbook neo ケース は、判断前に疑問や不安を解消したい需要が中心。 macbook neo ケース のような関連疑問もまとめて答える前提で扱う。",
+      "opening_focus": "何を守りたいかと、専用品か互換品かを最初に答える",
+      "research_questions": [
+        "専用品か互換品か",
+        "サイズとポート位置の互換性はあるか",
+        "何を守りたい人向けか",
+        "公式ストアで確認できる候補と価格帯はどうか"
+      ],
+      "source_checkpoints": [
+        "公式製品ページで仕様と表記を確認",
+        "公式アクセサリページで候補と対応サイズを確認",
+        "寸法とポート位置が分かる仕様ページを確認"
+      ],
+      "writing_requirements": [
+        "一般論で膨らませず、調査で確認した事実から結論を書く",
+        "H2直下の最初の一文は、その見出しキーワードを自然に含めて始める",
+        "入力記事の良い文章資産を壊さず、不足部分だけを追加する"
+      ]
+    },
+    {
+      "section_heading": "macbook neoレビュー比較まとめ：選定基準",
+      "h2_candidate": "macbook neo ゲーム性能",
+      "primary_keyword": "macbook neo ゲーム性能",
+      "related_keywords": [
+        "macbook neo ゲーム性能"
+      ],
+      "query_type": "Know",
+      "volume_label": "中",
+      "source_scope": "現行需要",
+      "priority_label": "比較前に潰す疑問",
+      "search_intent_summary": "macbook neo ゲーム性能 は、判断前に疑問や不安を解消したい需要が中心。 macbook neo ゲーム性能 のような関連疑問もまとめて答える前提で扱う。",
+      "opening_focus": "どの用途まで現実的にこなせるかを最初に答える",
+      "research_questions": [
+        "どの用途まで現実的に動くのか",
+        "レビューで報告されている性能の限界はどこか",
+        "メモリや発熱が制約になる場面は何か",
+        "配信や録画も含めて使える範囲はどこまでか"
+      ],
+      "source_checkpoints": [
+        "公式製品ページで仕様と表記を確認",
+        "信頼できるレビュー媒体で実使用の評価を確認"
+      ],
+      "writing_requirements": [
+        "一般論で膨らませず、調査で確認した事実から結論を書く",
+        "H2直下の最初の一文は、その見出しキーワードを自然に含めて始める",
+        "入力記事の良い文章資産を壊さず、不足部分だけを追加する"
+      ]
+    },
+    {
+      "section_heading": "macbook neoレビュー比較まとめ：利用シーン",
+      "h2_candidate": "macbook neo ゲーム",
+      "primary_keyword": "macbook neo ゲーム",
+      "related_keywords": [
+        "macbook neo ゲーム",
+        "macbook neo ゲーム配信"
+      ],
+      "query_type": "Know",
+      "volume_label": "大",
+      "source_scope": "現行需要",
+      "priority_label": "最優先の疑問解消",
+      "search_intent_summary": "macbook neo ゲーム は、判断前に疑問や不安を解消したい需要が中心。 macbook neo ゲーム配信 のような関連疑問もまとめて答える前提で扱う。",
+      "opening_focus": "どの用途まで現実的にこなせるかを最初に答える",
+      "research_questions": [
+        "どの用途まで現実的に動くのか",
+        "レビューで報告されている性能の限界はどこか",
+        "メモリや発熱が制約になる場面は何か",
+        "配信や録画も含めて使える範囲はどこまでか"
+      ],
+      "source_checkpoints": [
+        "公式製品ページで仕様と表記を確認",
+        "信頼できるレビュー媒体で実使用の評価を確認"
+      ],
+      "writing_requirements": [
+        "一般論で膨らませず、調査で確認した事実から結論を書く",
+        "H2直下の最初の一文は、その見出しキーワードを自然に含めて始める",
+        "入力記事の良い文章資産を壊さず、不足部分だけを追加する"
+      ]
+    }
+  ]
+}
