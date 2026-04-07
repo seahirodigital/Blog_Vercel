@@ -1037,6 +1037,11 @@
         });
       }, [persistCustomLinks]);
 
+      const moveCustomLinkByStep = useCallback((index, delta) => {
+        const targetIndex = index + delta;
+        reorderCustomLinks(index, targetIndex);
+      }, [reorderCustomLinks]);
+
       const clearLinkTouchTimer = useCallback(() => {
         if (linkTouchRef.current.timer) {
           clearTimeout(linkTouchRef.current.timer);
@@ -1235,27 +1240,28 @@
                       key={link.id} 
                       data-custom-link-index={idx}
                       className="custom-link-item" 
-                      draggable={true}
-                      onDragStart={(e) => handleDragStartLink(e, idx)}
+                      draggable={false}
                       onDragOver={(e) => handleDragOverLink(e, idx)}
                       onDrop={(e) => handleDropLink(e, idx)}
-                      onDragEnd={handleDragEndLink}
-                      onTouchStart={(e) => handleTouchStartLink(e, idx, link.title)}
-                      onTouchMove={handleTouchMoveLink}
-                      onTouchEnd={(e) => handleTouchEndLink(e, idx)}
-                      onTouchCancel={handleTouchCancelLink}
                       style={{ 
                         display: 'flex', alignItems: 'center', gap: '6px', background:'white', padding:'4px 6px', 
                         borderRadius:'6px', border: linkDragState.overIndex === idx && linkDragState.startIndex !== idx ? '1px dashed #7C4DFF' : '1px solid #e2e8f0', 
                         boxShadow:'0 1px 2px rgba(0,0,0,0.02)',
                         opacity: linkDragState.startIndex === idx ? 0.4 : 1,
                         transition: 'border 0.2s, opacity 0.2s',
-                        cursor: 'grab',
-                        touchAction: linkDragState.startIndex === idx ? 'none' : 'manipulation'
+                        touchAction: 'manipulation'
                       }}
                     >
                       <div 
-                        style={{ cursor: 'grab', display: 'flex', alignItems: 'center', padding: '2px 4px', color: '#cbd5e1' }}
+                        draggable={true}
+                        onDragStart={(e) => handleDragStartLink(e, idx)}
+                        onDragEnd={handleDragEndLink}
+                        onTouchStart={(e) => handleTouchStartLink(e, idx, link.title)}
+                        onTouchMove={handleTouchMoveLink}
+                        onTouchEnd={(e) => handleTouchEndLink(e, idx)}
+                        onTouchCancel={handleTouchCancelLink}
+                        onContextMenu={(e) => e.preventDefault()}
+                        style={{ cursor: 'grab', display: 'flex', alignItems: 'center', padding: '2px 4px', color: '#cbd5e1', touchAction: 'none', userSelect: 'none', WebkitUserSelect: 'none', WebkitTouchCallout: 'none' }}
                         title="ここを掴んでドラッグして並び替え"
                       >
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M8 6h8M8 12h8M8 18h8"/></svg>
@@ -1285,10 +1291,44 @@
                         </svg>
                         <span style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight:500}}>{link.title}</span>
                       </a>
+                      <div style={{ display:'flex', flexDirection:'column', gap:'2px', flexShrink:0 }}>
+                        <button
+                          onClick={() => {
+                            if (Date.now() < linkTouchRef.current.blockClickUntil) return;
+                            moveCustomLinkByStep(idx, -1);
+                          }}
+                          disabled={idx === 0}
+                          title="上へ移動"
+                          style={{
+                            width:'20px', height:'18px', display:'flex', alignItems:'center', justifyContent:'center',
+                            color: idx === 0 ? '#cbd5e1' : '#64748b',
+                            cursor: idx === 0 ? 'not-allowed' : 'pointer',
+                            background:'#f8fafc', border:'1px solid #e2e8f0', borderRadius:'4px', flexShrink:0
+                          }}
+                        >
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+                        </button>
+                        <button
+                          onClick={() => {
+                            if (Date.now() < linkTouchRef.current.blockClickUntil) return;
+                            moveCustomLinkByStep(idx, 1);
+                          }}
+                          disabled={idx === customLinks.length - 1}
+                          title="下へ移動"
+                          style={{
+                            width:'20px', height:'18px', display:'flex', alignItems:'center', justifyContent:'center',
+                            color: idx === customLinks.length - 1 ? '#cbd5e1' : '#64748b',
+                            cursor: idx === customLinks.length - 1 ? 'not-allowed' : 'pointer',
+                            background:'#f8fafc', border:'1px solid #e2e8f0', borderRadius:'4px', flexShrink:0
+                          }}
+                        >
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                        </button>
+                      </div>
                       <button onClick={() => {
                         if (Date.now() < linkTouchRef.current.blockClickUntil) return;
-                        const newTitle = prompt('タイトルを編集:', link.title);
                         if (linkTouchRef.current.dragging) return;
+                        const newTitle = prompt('タイトルを編集:', link.title);
                         if (newTitle === null) return;
                         const newUrl = prompt('URLを編集:', link.url);
                         if (newUrl === null) return;
@@ -1302,6 +1342,7 @@
                       }} style={{ fontSize:'10px', color:'#64748b', cursor:'pointer', background:'#f1f5f9', border:'none', padding:'2px 6px', borderRadius:'4px', flexShrink:0 }}>編集</button>
                       <button onClick={() => {
                         if (Date.now() < linkTouchRef.current.blockClickUntil) return;
+                        if (linkTouchRef.current.dragging) return;
                         if (confirm('このリンクを削除しますか？')) {
                           persistCustomLinks(customLinks.filter((_, i) => i !== idx));
                         }
