@@ -24,6 +24,7 @@ import time
 import re
 import base64
 import argparse
+import importlib.util
 from pathlib import Path
 
 import requests as http_requests
@@ -40,6 +41,11 @@ SECRET_NAME         = "NOTE_STORAGE_STATE"
 
 SCRIPT_DIR        = Path(__file__).parent
 LOCAL_STATE_FILE  = SCRIPT_DIR / "note_storage_state.json"   # ローカル保存先
+ADOBE_STORAGE_STATE_FILE = SCRIPT_DIR / "adobe_express_storage_state.json"
+AMAZON_PROMPTS_DIR = SCRIPT_DIR / "prompts" / "04-affiliate-link-manager"
+AMAZON_AFFILIATE_SCRIPT = AMAZON_PROMPTS_DIR / "insert_amazon_affiliate.py"
+AMAZON_TOP_IMAGE_SCRIPT = AMAZON_PROMPTS_DIR / "amazon_gazo_get.py"
+NOTE_TOP_IMAGE_ARTIFACTS_DIR = SCRIPT_DIR / "note_gazo_test" / "artifacts"
 
 UA = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -51,6 +57,11 @@ UA = (
 EDITOR_CONTENT_SELECTOR  = ".ProseMirror p, .ProseMirror h2, .ProseMirror h3"
 EDITOR_LOAD_TIMEOUT_SEC  = 60
 OGP_TARGET_DOMAINS       = ["amzn.to", "amazon.co.jp", "apple.com", "youtube.com"]
+TOP_IMAGE_BUTTON_SELECTOR = 'button[aria-label="画像を追加"]'
+PAGE_IMAGE_SELECTOR = "main img"
+CROP_DIALOG_SELECTOR = "div.ReactModal__Content.CropModal__content[role='dialog'][aria-modal='true']"
+TOP_IMAGE_LOADING_SELECTOR = "main div[class*='sc-e17b66d3-0']"
+URL_RE = re.compile(r"https?://[^\s\n\r<>\"']+")
 
 # OGP展開用JS関数群 (note_ogp_opener.py から移植)
 JS_FUNCTIONS = r"""
@@ -195,6 +206,724 @@ window.noteFormatter = {
     }
 };
 """
+
+
+def _load_module_from_path(module_name: str, module_path: Path):
+    spec = importlib.util.spec_from_file_location(module_name, module_path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"モジュールを読み込めません: {module_path}")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[module_name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def _load_amazon_affiliate_module():
+    return _load_module_from_path("insert_amazon_affiliate_runtime", AMAZON_AFFILIATE_SCRIPT)
+
+
+def _load_amazon_top_image_module():
+    return _load_module_from_path("amazon_gazo_get_runtime", AMAZON_TOP_IMAGE_SCRIPT)
+
+
+def _write_json(path: Path, payload) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def _write_text(path: Path, content: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="utf-8")
+
+
+def _dump_page_artifacts(page, artifacts_dir: Path, stem: str) -> dict:
+    artifacts_dir.mkdir(parents=True, exist_ok=True)
+    screenshot_path = artifacts_dir / f"{stem}.png"
+    html_path = artifacts_dir / f"{stem}.html"
+    page.screenshot(path=str(screenshot_path), full_page=True)
+    _write_text(html_path, page.content())
+    return {
+        "screenshot": str(screenshot_path),
+        "html": str(html_path),
+    }
+
+
+def _collect_control_snapshot(page) -> list[dict]:
+    locator = page.locator("input[type='file'], button, [role='button'], label")
+    return locator.evaluate_all(
+        """
+        (els) => els.map((el, index) => {
+          const rect = el.getBoundingClientRect();
+          const style = window.getComputedStyle(el);
+          const text = (el.innerText || el.textContent || "").replace(/\\s+/g, " ").trim();
+          return {
+            index,
+            tag: (el.tagName || "").toLowerCase(),
+            type: el.getAttribute("type") || "",
+            role: el.getAttribute("role") || "",
+            text,
+            aria_label: el.getAttribute("aria-label") || "",
+            title: el.getAttribute("title") || "",
+            accept: el.getAttribute("accept") || "",
+            class_name: String(el.className || ""),
+            visible: style.display !== "none" && style.visibility !== "hidden" && rect.width > 0 && rect.height > 0,
+            disabled: Boolean(el.disabled) || el.getAttribute("aria-disabled") === "true"
+          };
+        })
+        """
+    )
+
+
+def _count_page_images(page) -> int:
+    return page.locator(PAGE_IMAGE_SELECTOR).count()
+
+
+def _iter_playwright_scopes(page):
+    scopes = [("page", page)]
+    for idx, frame in enumerate(page.frames):
+        if frame == page.main_frame:
+            continue
+        scopes.append((f"frame#{idx}", frame))
+    return scopes
+
+
+def _find_visible_candidate(candidates, description: str, timeout_ms: int = 1500):
+    errors = []
+    for strategy, locator in candidates:
+        try:
+            total = locator.count()
+        except Exception as exc:
+            errors.append(f"{strategy}: count失敗={exc}")
+            continue
+
+        for idx in range(total - 1, -1, -1):
+            candidate = locator.nth(idx)
+            try:
+                candidate.wait_for(state="visible", timeout=timeout_ms)
+                return f"{strategy}#{idx}", candidate
+            except Exception as exc:
+                errors.append(f"{strategy}#{idx}: {exc}")
+
+    raise RuntimeError(f"{description} を特定できませんでした: {' / '.join(errors[:6])}")
+
+
+def _click_visible_candidate(page, candidates, description: str, timeout_ms: int = 4000) -> str:
+    strategy, locator = _find_visible_candidate(candidates, description)
+    locator.scroll_into_view_if_needed()
+    locator.click(timeout=timeout_ms)
+    page.wait_for_timeout(800)
+    print(f"   ✅ {description}: {strategy}")
+    return strategy
+
+
+def _find_visible_scoped_candidate(page, candidate_builders, description: str, timeout_ms: int = 1500):
+    errors = []
+    for scope_name, scope in _iter_playwright_scopes(page):
+        for strategy, builder in candidate_builders:
+            try:
+                locator = builder(scope)
+                total = locator.count()
+            except Exception as exc:
+                errors.append(f"{scope_name}:{strategy}: count失敗={exc}")
+                continue
+
+            for idx in range(total - 1, -1, -1):
+                candidate = locator.nth(idx)
+                try:
+                    candidate.wait_for(state="visible", timeout=timeout_ms)
+                    return f"{scope_name}:{strategy}#{idx}", candidate
+                except Exception as exc:
+                    errors.append(f"{scope_name}:{strategy}#{idx}: {exc}")
+
+    raise RuntimeError(f"{description} を特定できませんでした: {' / '.join(errors[:6])}")
+
+
+def _click_visible_scoped_candidate(page, candidate_builders, description: str, timeout_ms: int = 4000) -> str:
+    strategy, locator = _find_visible_scoped_candidate(page, candidate_builders, description)
+    locator.scroll_into_view_if_needed()
+    locator.click(timeout=timeout_ms)
+    page.wait_for_timeout(1000)
+    print(f"   ✅ {description}: {strategy}")
+    return strategy
+
+
+def _click_rightmost_scoped_candidate(page, candidate_builders, description: str, timeout_ms: int = 4000) -> str:
+    best = None
+    errors = []
+    for scope_name, scope in _iter_playwright_scopes(page):
+        for strategy, builder in candidate_builders:
+            try:
+                locator = builder(scope)
+                total = locator.count()
+            except Exception as exc:
+                errors.append(f"{scope_name}:{strategy}: count失敗={exc}")
+                continue
+            for idx in range(total):
+                candidate = locator.nth(idx)
+                try:
+                    candidate.wait_for(state="visible", timeout=1200)
+                    box = candidate.bounding_box() or {}
+                    x = box.get("x", -1)
+                    if best is None or x > best[0]:
+                        best = (x, f"{scope_name}:{strategy}#{idx}", candidate)
+                except Exception as exc:
+                    errors.append(f"{scope_name}:{strategy}#{idx}: {exc}")
+    if best is None:
+        raise RuntimeError(f"{description} を特定できませんでした: {' / '.join(errors[:6])}")
+    _, strategy, locator = best
+    locator.scroll_into_view_if_needed()
+    locator.click(timeout=timeout_ms)
+    page.wait_for_timeout(1200)
+    print(f"   ✅ {description}: {strategy}")
+    return strategy
+
+
+def _try_set_existing_file_input_on_scope(scope, image_path: Path) -> str | None:
+    file_inputs = scope.locator("input[type='file']")
+    for idx in range(file_inputs.count()):
+        input_locator = file_inputs.nth(idx)
+        try:
+            accept = (input_locator.get_attribute("accept") or "").lower()
+            if accept and "image" not in accept:
+                continue
+            input_locator.set_input_files(str(image_path))
+            return f"input[type='file']#{idx}"
+        except Exception:
+            continue
+    return None
+
+
+def _try_set_existing_file_input_any_scope(page, image_path: Path) -> str | None:
+    for scope_name, scope in _iter_playwright_scopes(page):
+        used = _try_set_existing_file_input_on_scope(scope, image_path)
+        if used:
+            page.wait_for_timeout(1500)
+            print(f"   ✅ 画像ファイル指定: {scope_name}:{used}")
+            return f"{scope_name}:{used}"
+    return None
+
+
+def _click_top_image_button(page) -> str:
+    return _click_visible_candidate(
+        page,
+        candidates=[
+            ("button[aria-label='画像を追加']", page.locator(TOP_IMAGE_BUTTON_SELECTOR)),
+            ("button[aria-label*='画像']", page.locator("button[aria-label*='画像']")),
+        ],
+        description="トップ画像ボタン",
+    )
+
+
+def _choose_direct_upload_image_file(page, image_path: Path) -> str:
+    direct_input = _try_set_existing_file_input_any_scope(page, image_path)
+    if direct_input:
+        return direct_input
+
+    candidate_locators = [
+        ("text=画像をアップロード", page.locator("text=画像をアップロード")),
+        ("button_text_画像をアップロード", page.locator("button").filter(has_text="画像をアップロード")),
+        ("label_text_画像をアップロード", page.locator("label").filter(has_text="画像をアップロード")),
+        ("role_button_画像をアップロード", page.get_by_role("button", name="画像をアップロード")),
+    ]
+    errors = []
+
+    for strategy, locator in candidate_locators:
+        try:
+            total = locator.count()
+        except Exception as exc:
+            errors.append(f"{strategy}: count失敗={exc}")
+            continue
+
+        for idx in range(total - 1, -1, -1):
+            candidate = locator.nth(idx)
+            try:
+                candidate.wait_for(state="visible", timeout=1500)
+            except Exception as exc:
+                errors.append(f"{strategy}#{idx}: visible失敗={exc}")
+                continue
+
+            try:
+                with page.expect_file_chooser(timeout=3000) as chooser_info:
+                    candidate.click(timeout=4000)
+                chooser_info.value.set_files(str(image_path))
+                page.wait_for_timeout(1500)
+                used = f"{strategy}#{idx}:filechooser"
+                print(f"   ✅ 画像アップロード導線: {used}")
+                return used
+            except Exception:
+                try:
+                    candidate.click(timeout=4000)
+                    page.wait_for_timeout(800)
+                    direct_input = _try_set_existing_file_input_any_scope(page, image_path)
+                    if direct_input:
+                        used = f"{strategy}#{idx}:{direct_input}"
+                        print(f"   ✅ 画像アップロード導線: {used}")
+                        return used
+                except Exception as exc:
+                    errors.append(f"{strategy}#{idx}: click失敗={exc}")
+
+    direct_input = _try_set_existing_file_input_any_scope(page, image_path)
+    if direct_input:
+        return direct_input
+
+    raise RuntimeError(f"画像アップロード導線を特定できませんでした: {' / '.join(errors[:6])}")
+
+
+def _wait_for_crop_dialog(page):
+    return _find_visible_candidate(
+        candidates=[
+            ("CropModal__content", page.locator(CROP_DIALOG_SELECTOR)),
+            ("ReactModal__Content_dialog", page.locator("div.ReactModal__Content[role='dialog'][aria-modal='true']")),
+            ("role_dialog", page.get_by_role("dialog")),
+        ],
+        description="画像保存モーダル",
+        timeout_ms=15000,
+    )
+
+
+def _save_crop_dialog(page) -> str:
+    dialog_strategy, dialog = _wait_for_crop_dialog(page)
+    save_strategy = _click_visible_candidate(
+        page,
+        candidates=[
+            (f"{dialog_strategy}->role_button_保存", dialog.get_by_role("button", name="保存")),
+            (f"{dialog_strategy}->button_text_保存", dialog.locator("button").filter(has_text="保存")),
+            (f"{dialog_strategy}->text_保存", dialog.locator("text=保存")),
+        ],
+        description="画像モーダル保存",
+    )
+    try:
+        page.locator(CROP_DIALOG_SELECTOR).last.wait_for(state="hidden", timeout=15000)
+    except Exception:
+        page.wait_for_timeout(1500)
+    return save_strategy
+
+
+def _wait_for_uploaded_image_ready(page, previous_count: int, timeout_sec: int = 60) -> tuple[int, str]:
+    for _ in range(timeout_sec):
+        current_count = _count_page_images(page)
+        if current_count > previous_count:
+            return current_count, "main_img_detected"
+
+        loading_locator = page.locator(TOP_IMAGE_LOADING_SELECTOR)
+        if loading_locator.count() > 0:
+            try:
+                if loading_locator.first.is_visible():
+                    page.wait_for_timeout(1000)
+                    continue
+            except Exception:
+                page.wait_for_timeout(1000)
+                continue
+        page.wait_for_timeout(1000)
+
+    return _count_page_images(page), "timeout"
+
+
+def _save_editor_draft(page) -> str:
+    strategy = _click_visible_candidate(
+        page,
+        candidates=[
+            ("role_button_下書き保存", page.get_by_role("button", name="下書き保存")),
+            ("header_button_下書き保存", page.locator("header button").filter(has_text="下書き保存")),
+            ("button_text_下書き保存", page.locator("button").filter(has_text="下書き保存")),
+        ],
+        description="エディタ下書き保存",
+    )
+    page.wait_for_timeout(5000)
+    return strategy
+
+
+def _run_direct_note_image_upload(page, image_path: Path, artifacts_dir: Path, previous_count: int) -> dict:
+    upload_entry_strategy = _choose_direct_upload_image_file(page, image_path)
+    crop_dialog_strategy, _ = _wait_for_crop_dialog(page)
+    _dump_page_artifacts(page, artifacts_dir, "crop_modal_open")
+    popup_save_strategy = _save_crop_dialog(page)
+    _dump_page_artifacts(page, artifacts_dir, "after_crop_modal_save")
+    ready_image_count, ready_wait_strategy = _wait_for_uploaded_image_ready(
+        page,
+        previous_count=previous_count,
+        timeout_sec=60,
+    )
+    return {
+        "upload_entry_strategy": upload_entry_strategy,
+        "crop_dialog_strategy": crop_dialog_strategy,
+        "popup_save_strategy": popup_save_strategy,
+        "ready_wait_strategy": ready_wait_strategy,
+        "after_ready_image_count": ready_image_count,
+    }
+
+
+def _is_adobe_workspace_visible(page) -> bool:
+    candidate_builders = [
+        ("text_powered_by_adobe", lambda scope: scope.locator("text=Powered by Adobe Express")),
+        ("text_ファイル形式", lambda scope: scope.locator("text=ファイル形式")),
+        ("button_アップロード", lambda scope: scope.get_by_role("button", name="アップロード")),
+        ("text_アップロード", lambda scope: scope.locator("text=アップロード")),
+    ]
+    for _, scope in _iter_playwright_scopes(page):
+        for _, builder in candidate_builders:
+            try:
+                locator = builder(scope)
+                if locator.count() > 0 and locator.first.is_visible():
+                    return True
+            except Exception:
+                continue
+    return False
+
+
+def _wait_for_adobe_workspace(page, timeout_sec: int = 40) -> None:
+    deadline = time.time() + timeout_sec
+    while time.time() < deadline:
+        if _is_adobe_workspace_visible(page):
+            return
+        page.wait_for_timeout(1000)
+    raise RuntimeError("Adobe Express の作業画面が表示されませんでした。")
+
+
+def _is_adobe_welcome_modal_visible(page) -> bool:
+    candidate_builders = [
+        ("text_welcome", lambda scope: scope.locator("text=Adobe Expressへようこそ")),
+        ("text_welcome_spaced", lambda scope: scope.locator("text=Adobe Express へようこそ")),
+        ("text_welcome_short", lambda scope: scope.locator("text=ようこそ")),
+    ]
+    for _, scope in _iter_playwright_scopes(page):
+        for _, builder in candidate_builders:
+            try:
+                locator = builder(scope)
+                if locator.count() > 0 and locator.first.is_visible():
+                    return True
+            except Exception:
+                continue
+    return False
+
+
+def _is_adobe_login_prompt_visible(page) -> bool:
+    candidate_builders = [
+        ("text_login", lambda scope: scope.locator("text=ログイン")),
+        ("text_adobe_id", lambda scope: scope.locator("text=Adobe ID")),
+        ("text_continue_using", lambda scope: scope.locator("text=続けてご利用")),
+    ]
+    for _, scope in _iter_playwright_scopes(page):
+        for _, builder in candidate_builders:
+            try:
+                locator = builder(scope)
+                if locator.count() > 0 and locator.first.is_visible():
+                    return True
+            except Exception:
+                continue
+    return False
+
+
+def _dismiss_adobe_welcome_modal(page) -> str:
+    if not _is_adobe_welcome_modal_visible(page):
+        return ""
+
+    try:
+        page.keyboard.press("Escape")
+        page.wait_for_timeout(1000)
+        if not _is_adobe_welcome_modal_visible(page):
+            print("   ✅ Adobe welcome モーダル: Escape で閉じました")
+            return "keyboard_escape"
+    except Exception:
+        pass
+
+    candidate_builders = [
+        ("aria_close", lambda scope: scope.locator("[aria-label='閉じる'], [aria-label='Close']")),
+        ("role_button_閉じる", lambda scope: scope.get_by_role("button", name=re.compile("閉じる|Close"))),
+        ("role_button_continue", lambda scope: scope.get_by_role("button", name=re.compile("続ける|続行|次へ|開始|始める|了解|スキップ"))),
+        ("button_text_continue", lambda scope: scope.locator("button").filter(has_text=re.compile("続ける|続行|次へ|開始|始める|了解|スキップ"))),
+    ]
+    strategy = _click_rightmost_scoped_candidate(
+        page,
+        candidate_builders=candidate_builders,
+        description="Adobe welcome モーダル解除",
+        timeout_ms=4000,
+    )
+    page.wait_for_timeout(1500)
+    return strategy
+
+
+def _wait_for_adobe_workspace_closed(page, timeout_sec: int = 60) -> None:
+    deadline = time.time() + timeout_sec
+    while time.time() < deadline:
+        if not _is_adobe_workspace_visible(page):
+            return
+        page.wait_for_timeout(1000)
+    print("   ⚠️ Adobe Express 画面のクローズ待機がタイムアウトしました。続行します。")
+
+
+def _choose_adobe_express_entry(page) -> str:
+    return _click_visible_candidate(
+        page,
+        candidates=[
+            ("text=Adobe Expressで画像をつくる", page.locator("text=Adobe Expressで画像をつくる")),
+            ("button_text_Adobe", page.locator("button").filter(has_text="Adobe Expressで画像をつくる")),
+            ("role_button_Adobe", page.get_by_role("button", name="Adobe Expressで画像をつくる")),
+        ],
+        description="Adobe Express 導線",
+    )
+
+
+def _upload_image_via_adobe_express(page, image_path: Path, artifacts_dir: Path, previous_count: int) -> dict:
+    adobe_entry_strategy = _choose_adobe_express_entry(page)
+    _dump_page_artifacts(page, artifacts_dir, "adobe_entry_clicked")
+    _wait_for_adobe_workspace(page)
+    _dump_page_artifacts(page, artifacts_dir, "adobe_workspace_open")
+
+    upload_strategy = _try_set_existing_file_input_any_scope(page, image_path)
+    if not upload_strategy:
+        upload_strategy = _click_visible_scoped_candidate(
+            page,
+            candidate_builders=[
+                ("role_button_アップロード", lambda scope: scope.get_by_role("button", name="アップロード")),
+                ("text_アップロード", lambda scope: scope.locator("text=アップロード")),
+                ("label_アップロード", lambda scope: scope.locator("label").filter(has_text="アップロード")),
+            ],
+            description="Adobe Express アップロード導線",
+        )
+        page.wait_for_timeout(1200)
+        direct_input = _try_set_existing_file_input_any_scope(page, image_path)
+        if direct_input:
+            upload_strategy = f"{upload_strategy}:{direct_input}"
+
+    page.wait_for_timeout(4000)
+    _dump_page_artifacts(page, artifacts_dir, "adobe_after_upload")
+    welcome_modal_strategy = ""
+    try:
+        welcome_modal_strategy = _dismiss_adobe_welcome_modal(page)
+    except Exception as exc:
+        print(f"   ⚠️ Adobe welcome モーダル解除失敗（続行）: {exc}")
+
+    insert_strategy = _click_rightmost_scoped_candidate(
+        page,
+        candidate_builders=[
+            ("role_button_挿入", lambda scope: scope.get_by_role("button", name="挿入")),
+            ("button_text_挿入", lambda scope: scope.locator("button").filter(has_text="挿入")),
+        ],
+        description="Adobe Express 上部挿入",
+    )
+    page.wait_for_timeout(3000)
+    _dump_page_artifacts(page, artifacts_dir, "adobe_after_first_insert")
+    if _is_adobe_login_prompt_visible(page):
+        raise RuntimeError("ADOBE_LOGIN_REQUIRED")
+
+    confirm_insert_strategy = _click_visible_scoped_candidate(
+        page,
+        candidate_builders=[
+            (
+                "panel_button_挿入",
+                lambda scope: scope.locator(
+                    "xpath=//div[.//*[contains(normalize-space(), 'ファイル形式')]]//button[normalize-space()='挿入']"
+                ),
+            ),
+            (
+                "panel_button_挿入_text",
+                lambda scope: scope.locator(
+                    "xpath=//div[.//*[contains(normalize-space(), 'ファイル形式')]]//*[self::button or @role='button'][contains(normalize-space(), '挿入')]"
+                ),
+            ),
+        ],
+        description="Adobe Express 確定挿入",
+    )
+    _dump_page_artifacts(page, artifacts_dir, "adobe_insert_confirmed")
+
+    _wait_for_adobe_workspace_closed(page)
+    page.wait_for_timeout(3000)
+    ready_image_count, ready_wait_strategy = _wait_for_uploaded_image_ready(
+        page,
+        previous_count=previous_count,
+        timeout_sec=30,
+    )
+    return {
+        "adobe_entry_strategy": adobe_entry_strategy,
+        "upload_entry_strategy": upload_strategy,
+        "welcome_modal_strategy": welcome_modal_strategy,
+        "insert_strategy": insert_strategy,
+        "confirm_insert_strategy": confirm_insert_strategy,
+        "ready_wait_strategy": ready_wait_strategy,
+        "after_ready_image_count": ready_image_count,
+    }
+
+
+def _collect_note_editor_snapshot(page) -> dict:
+    return page.evaluate(
+        """
+        () => {
+          const titleEl = document.querySelector('.note-editor__title-input');
+          const editor = document.querySelector('.note-editable, [contenteditable="true"]') || document.querySelector('.ProseMirror');
+          const normalize = (value) => (value || '').replace(/\\u200B/g, '').replace(/\\s+/g, ' ').trim();
+          if (!editor) {
+            return { title: normalize(titleEl?.value || titleEl?.innerText || titleEl?.textContent || ''), editor_text: '', h1s: [], h2s: [] };
+          }
+          return {
+            title: normalize(titleEl?.value || titleEl?.innerText || titleEl?.textContent || ''),
+            editor_text: normalize(editor.innerText || editor.textContent || ''),
+            h1s: Array.from(editor.querySelectorAll('h1')).map((el) => normalize(el.innerText || el.textContent || '')).filter(Boolean),
+            h2s: Array.from(editor.querySelectorAll('h2')).map((el) => normalize(el.innerText || el.textContent || '')).filter(Boolean),
+          };
+        }
+        """
+    )
+
+
+def _extract_first_url_before_marker(markdown: str) -> str:
+    before_marker = (markdown or "").split("▼", 1)[0]
+    match = URL_RE.search(before_marker)
+    if not match:
+        return ""
+    return match.group(0).strip()
+
+
+def _extract_product_name_from_note_context(snapshot: dict) -> tuple[str, str]:
+    affiliate_module = _load_amazon_affiliate_module()
+
+    title = (snapshot.get("title") or "").strip()
+    if title:
+        product_name = affiliate_module.extract_product_name(title)
+        if product_name and len(product_name) <= 30:
+            return product_name, "note_title"
+
+    h1s = snapshot.get("h1s") or []
+    if h1s:
+        product_name = affiliate_module.extract_product_name(h1s[0])
+        if product_name and len(product_name) <= 30:
+            return product_name, "note_h1"
+
+    h2s = snapshot.get("h2s") or []
+    if h2s:
+        synthetic_markdown = "\n".join(f"## {h2}" for h2 in h2s)
+        product_name = affiliate_module._extract_product_name_from_h2s(synthetic_markdown)
+        if product_name:
+            return product_name, "note_h2"
+
+    return "", ""
+
+
+def _resolve_amazon_image_target(page, source_markdown: str) -> dict:
+    snapshot = _collect_note_editor_snapshot(page)
+    first_url = _extract_first_url_before_marker(source_markdown)
+    if first_url:
+        amazon_image_module = _load_amazon_top_image_module()
+        asin = amazon_image_module.extract_asin_from_url(first_url)
+        if asin:
+            return {
+                "mode": "asin",
+                "asin": asin,
+                "keyword": "",
+                "source": "body_url_before_marker",
+                "source_url": first_url,
+                "snapshot": snapshot,
+            }
+        print(f"   ⚠️ 先頭URLから ASIN を抽出できませんでした。タイトル/H2 フォールバックへ進みます: {first_url}")
+
+    product_name, source = _extract_product_name_from_note_context(snapshot)
+    if product_name:
+        return {
+            "mode": "keyword",
+            "asin": "",
+            "keyword": product_name,
+            "source": source,
+            "source_url": "",
+            "snapshot": snapshot,
+        }
+
+    return {
+        "mode": "skip",
+        "asin": "",
+        "keyword": "",
+        "source": "unresolved",
+        "source_url": "",
+        "snapshot": snapshot,
+    }
+
+
+def _attach_amazon_top_image_to_page(page, source_markdown: str, artifacts_dir: Path | None = None) -> dict:
+    artifacts_dir = artifacts_dir or NOTE_TOP_IMAGE_ARTIFACTS_DIR
+    artifacts_dir.mkdir(parents=True, exist_ok=True)
+
+    target = _resolve_amazon_image_target(page, source_markdown)
+    _write_json(artifacts_dir / "amazon_target_resolution.json", target)
+
+    if target["mode"] == "skip":
+        print("   ⚠️ Amazon 画像対象を特定できなかったため、トップ画像挿入をスキップします。")
+        return {
+            "image_flow": "skipped",
+            "image_target_source": target["source"],
+            "draft_save_strategy": "",
+            "before_image_count": _count_page_images(page),
+        }
+
+    amazon_image_module = _load_amazon_top_image_module()
+    fetch_result = amazon_image_module.fetch_and_save_top_images(
+        keyword=target["keyword"],
+        asin=target["asin"],
+    )
+
+    before_count = _count_page_images(page)
+    controls_before = _collect_control_snapshot(page)
+    _write_json(artifacts_dir / "controls_before_top_image.json", controls_before)
+
+    image_button_strategy = _click_top_image_button(page)
+    _dump_page_artifacts(page, artifacts_dir, "top_image_menu_open")
+
+    if fetch_result.hires_image:
+        try:
+            flow_result = _upload_image_via_adobe_express(
+                page,
+                fetch_result.hires_image.local_path,
+                artifacts_dir,
+                previous_count=before_count,
+            )
+            image_flow = "adobe_hires"
+            selected_image_path = str(fetch_result.hires_image.local_path)
+        except Exception as exc:
+            print(f"   ⚠️ Adobe Express フロー失敗のため通常アップロードへフォールバックします: {exc}")
+            page.reload(wait_until="domcontentloaded", timeout=60_000)
+            if not _wait_for_editor_content(page, timeout_sec=EDITOR_LOAD_TIMEOUT_SEC):
+                raise RuntimeError("Adobe Express 失敗後のエディタ再読込に失敗しました。")
+            before_count = _count_page_images(page)
+            image_button_strategy = _click_top_image_button(page)
+            _dump_page_artifacts(page, artifacts_dir, "top_image_menu_reopen_after_adobe_failure")
+            flow_result = _run_direct_note_image_upload(
+                page,
+                fetch_result.api_image.local_path,
+                artifacts_dir,
+                previous_count=before_count,
+            )
+            flow_result["adobe_error"] = str(exc)
+            image_flow = "direct_api_after_adobe_failure"
+            selected_image_path = str(fetch_result.api_image.local_path)
+    else:
+        flow_result = _run_direct_note_image_upload(
+            page,
+            fetch_result.api_image.local_path,
+            artifacts_dir,
+            previous_count=before_count,
+        )
+        image_flow = "direct_api"
+        selected_image_path = str(fetch_result.api_image.local_path)
+
+    draft_save_strategy = _save_editor_draft(page)
+    _dump_page_artifacts(page, artifacts_dir, "after_top_image_draft_save")
+
+    result = {
+        "image_flow": image_flow,
+        "image_target_source": target["source"],
+        "image_target_asin": fetch_result.asin,
+        "image_target_keyword": target["keyword"],
+        "image_target_url": target["source_url"],
+        "image_button_strategy": image_button_strategy,
+        "draft_save_strategy": draft_save_strategy,
+        "api_image_path": str(fetch_result.api_image.local_path),
+        "api_image_url": fetch_result.api_image.image_url,
+        "hires_image_path": str(fetch_result.hires_image.local_path) if fetch_result.hires_image else "",
+        "hires_image_url": fetch_result.hires_image.image_url if fetch_result.hires_image else "",
+        "selected_image_path": selected_image_path,
+        "before_image_count": before_count,
+    }
+    result.update(flow_result)
+    _write_json(artifacts_dir / "top_image_result.json", result)
+    return result
 
 
 # ── Markdown前処理 ─────────────────────────────────────
@@ -446,6 +1175,15 @@ def _cookies_to_playwright(cookies: dict) -> list:
     ]
 
 
+def _resolve_browser_storage_state_path() -> str | None:
+    adobe_state_env = os.getenv("ADOBE_EXPRESS_STORAGE_STATE", "").strip()
+    if adobe_state_env:
+        return adobe_state_env
+    if ADOBE_STORAGE_STATE_FILE.exists():
+        return str(ADOBE_STORAGE_STATE_FILE)
+    return None
+
+
 def _wait_for_editor_content(page, timeout_sec: int = EDITOR_LOAD_TIMEOUT_SEC) -> bool:
     """ProseMirrorエディタのコンテンツ（p/h2/h3）が出現するまでポーリング待機"""
     print(f"   ⏳ エディタコンテンツのロード待機（最大{timeout_sec}秒）...")
@@ -511,19 +1249,35 @@ def process_ogp_urls(page) -> int:
     return total_processed
 
 
-def _run_ogp_expansion_on_draft(editor_url: str, cookies_dict: dict, headless: bool = True) -> bool:
+def _run_ogp_expansion_on_draft(
+    editor_url: str,
+    cookies_dict: dict,
+    headless: bool = True,
+    source_markdown: str = "",
+    run_ogp: bool = True,
+    artifacts_dir: Path | None = None,
+) -> dict:
     """
-    下書き作成後のエディタURLへPlaywrightでアクセスし、OGP展開を実行する。
-    noteの自動保存に委ねるため、8秒待機して終了。
+    下書き作成後のエディタURLへPlaywrightでアクセスし、OGP展開とトップ画像処理を実行する。
+    OGP処理後に Amazon トップ画像挿入を行い、最後に note の下書き保存を押す。
     """
     from playwright.sync_api import sync_playwright
 
-    print(f"\n── Phase 4: OGP展開（Playwright） ──")
+    artifacts_dir = artifacts_dir or NOTE_TOP_IMAGE_ARTIFACTS_DIR
+    result = {
+        "editor_url": editor_url,
+        "ogp_processed_count": 0,
+        "top_image": {},
+        "success": False,
+    }
+
+    print(f"\n── Phase 4: OGP展開 + トップ画像（Playwright） ──")
     print(f"   対象URL: {editor_url}")
 
     playwright_cookies = _cookies_to_playwright(cookies_dict)
 
     with sync_playwright() as p:
+        storage_state_path = _resolve_browser_storage_state_path()
         browser = p.chromium.launch(
             headless=headless,
             args=["--disable-blink-features=AutomationControlled", "--no-sandbox"],
@@ -532,7 +1286,10 @@ def _run_ogp_expansion_on_draft(editor_url: str, cookies_dict: dict, headless: b
             viewport={"width": 1280, "height": 900},
             user_agent=UA,
             locale="ja-JP",
+            storage_state=storage_state_path,
         )
+        if storage_state_path:
+            print(f"   📦 追加のブラウザ state を読込: {storage_state_path}")
         context.add_cookies(playwright_cookies)
 
         page = context.new_page()
@@ -546,35 +1303,46 @@ def _run_ogp_expansion_on_draft(editor_url: str, cookies_dict: dict, headless: b
         if not content_loaded:
             print("   ❌ エディタコンテンツが表示されませんでした。OGP展開をスキップします。")
             browser.close()
-            return False
+            return result
 
-        try:
-            processed_count = process_ogp_urls(page)
-            print(f"   ✅ OGP展開処理完了: {processed_count}件")
-        except Exception as e:
-            print(f"   ⚠️ OGP展開エラー: {e}")
-            browser.close()
-            return False
+        if run_ogp:
+            try:
+                processed_count = process_ogp_urls(page)
+                result["ogp_processed_count"] = processed_count
+                print(f"   ✅ OGP展開処理完了: {processed_count}件")
+            except Exception as e:
+                print(f"   ⚠️ OGP展開エラー: {e}")
+        else:
+            print("   ⏭️ OGP展開はスキップします。")
 
-        # headless モードでは自動保存イベントが発火しないケースがあるため
-        # エディタにフォーカスを当てて Ctrl+S で明示的に保存を要求する
-        print("   ⏳ OGP展開後の非同期反映を待機（5秒）...")
+        print("   ⏳ OGP反映待機（5秒）...")
         page.wait_for_timeout(5000)
 
-        print("   💾 Ctrl+S で明示的に保存をトリガー...")
-        try:
-            editor = page.locator(".ProseMirror, .note-editable, [contenteditable='true']").first
-            editor.click()
-            page.keyboard.press("Control+s")
-        except Exception as e:
-            print(f"   ⚠️ 保存トリガーエラー（続行）: {e}")
+        top_image_result = _attach_amazon_top_image_to_page(
+            page,
+            source_markdown=source_markdown,
+            artifacts_dir=artifacts_dir,
+        )
+        result["top_image"] = top_image_result
 
-        print("   ⏳ 保存完了を待機（8秒）...")
-        page.wait_for_timeout(8000)
+        if top_image_result.get("image_flow") == "skipped":
+            print("   💾 トップ画像スキップのため Ctrl+S で保存を要求します...")
+            try:
+                editor = page.locator(".ProseMirror, .note-editable, [contenteditable='true']").first
+                editor.click()
+                page.keyboard.press("Control+s")
+            except Exception as e:
+                print(f"   ⚠️ 保存トリガーエラー（続行）: {e}")
+            page.wait_for_timeout(8000)
+        else:
+            print("   ⏳ トップ画像保存後の安定待機（8秒）...")
+            page.wait_for_timeout(8000)
+
+        result["success"] = True
         browser.close()
 
-    print("   ✅ OGP展開 + 保存が完了しました。")
-    return True
+    print("   ✅ OGP展開 + トップ画像保存が完了しました。")
+    return result
 
 
 # ── セッション作成・検証・ログイン ────────────────────
@@ -875,15 +1643,16 @@ def post_draft_to_note(markdown: str, run_ogp: bool = True) -> dict:
     cookies = _load_cookies()
     session = _create_session(cookies)
 
-    if not _verify_session(session):
-        print("   ⚠️ Cookie無効 → APIログインにフォールバック")
-        if not _api_login(session):
-            print("❌ 全ての認証手段が失敗しました")
-            return result
-
     # Phase 2: 下書き作成
     print("\n── Phase 2: 下書き作成（API） ──")
     draft = _create_draft_api(session, title, body_html)
+    if not draft:
+        if not _verify_session(session):
+            print("   ⚠️ Cookie無効 → APIログインにフォールバック")
+            if not _api_login(session):
+                print("❌ 全ての認証手段が失敗しました")
+                return result
+        draft = _create_draft_api(session, title, body_html)
     if not draft:
         return result
 
@@ -895,12 +1664,19 @@ def post_draft_to_note(markdown: str, run_ogp: bool = True) -> dict:
     _save_cookies_state(session)
 
     # Phase 4: OGP展開（Playwright）
-    if run_ogp and result["url"]:
+    if result["url"]:
         # APIログイン後の最新セッションCookieをsessionオブジェクトから直接取得
         # （_load_cookies()は古い環境変数を返すため使用しない）
         session_cookies = {c.name: c.value for c in session.cookies}
         print(f"   🍪 Playwrightへ渡すCookie: {len(session_cookies)}個")
-        _run_ogp_expansion_on_draft(result["url"], session_cookies, headless=True)
+        editor_result = _run_ogp_expansion_on_draft(
+            result["url"],
+            session_cookies,
+            headless=True,
+            source_markdown=markdown,
+            run_ogp=run_ogp,
+        )
+        result["editor_result"] = editor_result
 
     return result
 

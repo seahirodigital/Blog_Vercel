@@ -388,9 +388,6 @@ def reload_and_count_images(page: Page, note_module, artifacts_dir: Path) -> int
 
 
 def run_test(markdown_path: Path | None, image_path: Path, artifacts_dir: Path, headless: bool) -> dict:
-    if not image_path.exists():
-        raise FileNotFoundError(f"画像が見つかりません: {image_path}")
-
     note_module = load_note_module()
     markdown, markdown_source = resolve_markdown(markdown_path)
     draft, session_cookies = create_note_draft(note_module, markdown)
@@ -406,6 +403,16 @@ def run_test(markdown_path: Path | None, image_path: Path, artifacts_dir: Path, 
     }
 
     print(f"作成済み下書きURL: {draft['url']}")
+
+    editor_result = note_module._run_ogp_expansion_on_draft(
+        draft["url"],
+        session_cookies,
+        headless=headless,
+        source_markdown=markdown,
+        run_ogp=False,
+        artifacts_dir=artifacts_dir,
+    )
+    report["editor_result"] = editor_result
 
     with sync_playwright() as p:
         browser = p.chromium.launch(
@@ -428,11 +435,11 @@ def run_test(markdown_path: Path | None, image_path: Path, artifacts_dir: Path, 
                 report["artifacts"] = dump
                 raise RuntimeError("noteエディタの本文ロード待機に失敗しました")
 
-            dump_page_artifacts(page, artifacts_dir, "before_upload")
-            upload_result = upload_image(page, image_path, artifacts_dir)
-            report.update(upload_result)
+            dump_page_artifacts(page, artifacts_dir, "before_reload_check")
+            top_image_result = editor_result.get("top_image", {}) if isinstance(editor_result, dict) else {}
+            report.update(top_image_result)
             report["after_reload_image_count"] = reload_and_count_images(page, note_module, artifacts_dir)
-            report["success"] = report["after_reload_image_count"] > report["before_image_count"]
+            report["success"] = report["after_reload_image_count"] > report.get("before_image_count", -1)
         finally:
             browser.close()
 

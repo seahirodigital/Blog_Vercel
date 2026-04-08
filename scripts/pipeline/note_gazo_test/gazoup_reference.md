@@ -501,3 +501,242 @@ python -X utf8 "C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompt
 
 - `0167e18`
 - メッセージ: `Add Amazon top image hi-res fallback downloader`
+
+## note トップ画像の新ルール
+
+### 対象ファイル
+
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\note_draft_poster.py`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\note_gazo_test\note_image_draft_test.py`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\amazon_gazo_get.py`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\insert_amazon_affiliate.py`
+
+### 画像対象の判定順
+
+記事と違う Amazon 画像を取らないため、トップ画像の対象商品は次の順で決める。
+
+1. 記事本文の先頭から最初の `▼` までを見る
+2. その範囲に URL があれば、一番上の URL を正しい Amazon アフィリエイトリンクとして扱い、そこから ASIN を抽出する
+3. その範囲に URL がなければ、現在の note タイトル → note H1 → note H2 から商品名を再抽出する
+4. それでも商品が特定できなければ、トップ画像挿入はスキップする
+
+ポイント:
+
+- `▼` より前に URL があるケースだけを「正しい挿入済みリンク」とみなす
+- `▼` より後ろの URL は、正しい先頭リンクが欠落している時の救済には使わない
+- フォールバック 2 の商品名抽出ロジックは `insert_amazon_affiliate.py` の `extract_product_name()` と `_extract_product_name_from_h2s()` を再利用する
+
+### note での分岐ルール
+
+#### hiRes が無い場合
+
+- 従来どおり note の `画像をアップロード` を使う
+- 保存する画像は Creator API 側の通常版
+
+#### hiRes がある場合
+
+- まず `Adobe Expressで画像をつくる` を使う
+- 左サイドの `アップロード` から hiRes 画像を読み込む
+- 右上の `挿入` を押す
+- その後の確定 UI が出ればさらに `挿入` を押す
+- 最後に note の `下書き保存` を押す
+
+### Adobe Express で実際に起きたこと
+
+2026-04-08 の実機検証では、hiRes 画像のアップロードと最初の `挿入` までは通ったが、その直後に Adobe 側のログイン要求モーダルが出た。
+
+確認できた挙動:
+
+- `Adobe Expressへようこそ` の welcome モーダルは `Escape` で閉じられた
+- その後の上部 `挿入` は押せた
+- ただし次画面で `ログイン` モーダルが表示され、Adobe 側の確定挿入までは進めなかった
+
+このため現行実装では、次の保険を入れている。
+
+- hiRes があっても Adobe Express で `ADOBE_LOGIN_REQUIRED` が出たら処理全体は止めない
+- note ページを再読込し、通常版 500px 画像の `画像をアップロード` へ自動フォールバックする
+- その後に `下書き保存` まで行い、記事の保存自体は成功させる
+
+### 2026-04-08 の note 実測結果
+
+実行コマンド:
+
+```powershell
+python -X utf8 "C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\note_gazo_test\note_image_draft_test.py" `
+  --markdown-path "C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\output\macbook_neo\variants\macbook_neo_gakuwari.md"
+```
+
+対象 Markdown の先頭は、最初の `▼` より前に URL が無かった。  
+そのため判定結果は次の通りだった。
+
+- `image_target_source`: `note_h2`
+- `image_target_keyword`: `MacBook Neo`
+- `image_target_asin`: `B0GR698XPH`
+
+取得結果:
+
+- 通常版保存:
+  `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\ダウンロード_トップ画像_vercel_blog\20260408_MacBook Neo.jpg`
+- hiRes 保存:
+  `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\ダウンロード_トップ画像_vercel_blog\20260408_MacBook Neo_hires.jpg`
+- note への最終挿入フロー:
+  `direct_api_after_adobe_failure`
+- `after_ready_image_count`: `1`
+- `after_reload_image_count`: `1`
+
+つまり、
+
+- hiRes 自体の保存は成功
+- Adobe Express 挿入はログイン要求で未完
+- ただし自動フォールバックにより note 側のトップ画像保存は成功
+
+### ASIN 直指定の補足
+
+`amazon_gazo_get.py` は ASIN が分かっている場合、先に Creator API の `GetItems` を試す。  
+ただし 2026-04-08 の検証では `429 ThrottleException` が出ることがあったため、現行版では待機付きリトライを入れている。
+
+さらに、`GetItems` が失敗しても同じ商品を取り続けるため、ASIN がある場合は商品詳細ページの `landingImage` から通常版を拾うフォールバックも入れている。
+
+この ASIN 直指定の実測では次を確認した。
+
+- ASIN: `B0GR698XPH`
+- 通常版 URL:
+  `https://m.media-amazon.com/images/I/61CNt9U8c0L._AC_SX342_SY445_QL70_ML2_.jpg`
+- 通常版サイズ:
+  `342x209`
+- hiRes URL:
+  `https://m.media-amazon.com/images/I/61CNt9U8c0L._AC_SL1500_.jpg`
+- hiRes サイズ:
+  `1500x916`
+
+### 現時点の結論
+
+- 「同じ記事の Amazon 画像を取る」ための判定順は実装済み
+- `▼` より前に URL が無い記事では、note タイトル/H1/H2 からの再抽出へ落ちる
+- hiRes 保存自体はできている
+- Adobe Express の本番挿入は、Adobe ログイン状態が無いと止まる
+- ただし現行版は 500px 画像へ自動フォールバックするため、note 下書き保存自体は止まらない
+
+## Adobe Express ログイン state 保存
+
+### 目的
+
+Adobe Express の `hiRes` 挿入を安定化するため、Google ログイン後のブラウザ state をローカルへ保存する。
+
+### 追加ファイル
+
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\note_gazo_test\save_adobe_express_storage_state.py`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\adobe_express_storage_state.json`
+
+### 使い方
+
+```powershell
+python -X utf8 "C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\note_gazo_test\save_adobe_express_storage_state.py" `
+  --markdown-path "C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\20260407_0159_【Amazonセール対象】CIOがいきなり「半固体バッテリー」新製品を大量投入！このメーカーすごすぎるわ….md"
+```
+
+処理内容:
+
+1. note 下書きを 1 本作る
+2. `Adobe Expressで画像をつくる` の導線を開く
+3. Google サインイン画面まで進める
+4. ログイン完了後、Adobe のログイン要求が消えたのを検知したら `storage_state` を保存する
+
+### 2026-04-08 の保存結果
+
+- 保存先:
+  `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\adobe_express_storage_state.json`
+- ファイルサイズ:
+  `39193 bytes`
+- 含まれていた主なドメイン:
+  `.adobe.com`
+  `.new.express.adobe.com`
+  `.google.com`
+  `accounts.google.com`
+
+### note_draft_poster.py での使い方
+
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\note_draft_poster.py` は、次の優先順で Adobe 用 browser state を読む。
+
+1. 環境変数 `ADOBE_EXPRESS_STORAGE_STATE`
+2. `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\adobe_express_storage_state.json`
+
+この state があれば、Playwright の browser context 起動時に自動で読み込まれる。
+
+## note 本番下書き保存の認証修正
+
+### 背景
+
+同じ Cookie で `note_image_draft_test.py` は下書き作成に成功するのに、`note_draft_poster.py` だけが `_verify_session()` の false 判定で先に止まるケースがあった。
+
+### 修正方針
+
+`note_draft_poster.py` でも test 側と同じく、次の順に変更した。
+
+1. まず `_create_draft_api()` を試す
+2. それが失敗した場合にだけ `_verify_session()` を行う
+3. さらに必要なら `_api_login()` にフォールバックする
+
+これにより、`_verify_session()` が false でも実際には下書き作成できるケースを通せるようになった。
+
+## 指定記事での本番実測結果
+
+### 実行対象
+
+`C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\20260407_0159_【Amazonセール対象】CIOがいきなり「半固体バッテリー」新製品を大量投入！このメーカーすごすぎるわ….md`
+
+### 実行コマンド
+
+```powershell
+python -X utf8 "C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\note_draft_poster.py" `
+  "C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\20260407_0159_【Amazonセール対象】CIOがいきなり「半固体バッテリー」新製品を大量投入！このメーカーすごすぎるわ….md"
+```
+
+### 実行結果
+
+- 下書き URL:
+  `https://editor.note.com/notes/n96cd53bdad07/edit/`
+- OGP 展開数:
+  `51件`
+- 下書き保存:
+  成功
+
+### 商品判定結果
+
+この記事では、最初の `▼` より前に URL が存在した。  
+そのため、フォールバックではなく本文先頭 URL を正として扱った。
+
+- `image_target_source`: `body_url_before_marker`
+- 対象 URL:
+  `https://www.amazon.co.jp/dp/B0FTZ46NF8/ref=nosim?tag=hiroshit-22`
+- 抽出 ASIN:
+  `B0FTZ46NF8`
+
+### 保存画像
+
+- 通常版:
+  `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\ダウンロード_トップ画像_vercel_blog\20260408_B0FTZ46NF8.jpg`
+- hiRes:
+  `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\ダウンロード_トップ画像_vercel_blog\20260408_B0FTZ46NF8_hires.jpg`
+
+### note への最終挿入結果
+
+- `image_flow`: `direct_api_after_adobe_failure`
+- `selected_image_path`:
+  `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\ダウンロード_トップ画像_vercel_blog\20260408_B0FTZ46NF8.jpg`
+- `after_ready_image_count`: `1`
+
+### Adobe Express 側で分かったこと
+
+- Adobe の browser state は読み込めた
+- `hiRes` 画像のアップロードも通った
+- 上部の最初の `挿入` も押せた
+- ただし、その次の Adobe 側「確定挿入」UI はまだ DOM 特定ができていない
+
+そのため現時点では、
+
+- `hiRes` 保存は成功
+- note 下書き保存も成功
+- ただし note 本文へ実際に入ったトップ画像は通常版 500px
+
+という状態である。

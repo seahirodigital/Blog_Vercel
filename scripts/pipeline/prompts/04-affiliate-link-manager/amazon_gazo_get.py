@@ -17,6 +17,7 @@ import argparse
 import html
 import os
 import re
+import time
 from dataclasses import dataclass
 from datetime import datetime
 from io import BytesIO
@@ -30,6 +31,7 @@ from PIL import Image
 
 TOKEN_URL = "https://api.amazon.co.jp/auth/o2/token"
 SEARCH_ITEMS_URL = "https://creatorsapi.amazon/catalog/v1/searchItems"
+GET_ITEMS_URL = "https://creatorsapi.amazon/catalog/v1/getItems"
 GRAPH_API_BASE = "https://graph.microsoft.com/v1.0"
 ONEDRIVE_TOKEN_URL = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
 
@@ -47,14 +49,24 @@ DEFAULT_RESOURCES = [
     "images.primary.small",
 ]
 INVALID_FILENAME_CHARS = re.compile(r'[<>:"/\\|?*\x00-\x1f]')
-LANDING_HIRES_RE = re.compile(
-    r'id="landingImage"[^>]*\bdata-old-hires="([^"]+)"',
+LANDING_IMAGE_TAG_RE = re.compile(
+    r"<img[^>]*\bid=[\"']landingImage[\"'][^>]*>",
     re.IGNORECASE | re.DOTALL,
 )
 COLOR_IMAGES_HIRES_RE = re.compile(
     r"""colorImages'\s*:\s*\{\s*'initial'\s*:\s*\[\s*\{"hiRes":"(https:[^"]+)""",
     re.DOTALL,
 )
+PRODUCT_TITLE_RE = re.compile(
+    r'id="productTitle"[^>]*>\s*(.*?)\s*</span>',
+    re.IGNORECASE | re.DOTALL,
+)
+ASIN_IN_URL_RE = re.compile(
+    r"/(?:dp|gp/product|gp/aw/d|exec/obidos/ASIN)/([A-Z0-9]{10})(?:[/?]|$)",
+    re.IGNORECASE,
+)
+HTML_SRC_RE = re.compile(r"""\bsrc=["']([^"']+)["']""", re.IGNORECASE)
+HTML_DATA_OLD_HIRES_RE = re.compile(r"""\bdata-old-hires=["']([^"']+)["']""", re.IGNORECASE)
 DEFAULT_PAGE_HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -90,6 +102,17 @@ class SavedImageInfo:
     width: int | None
     height: int | None
     onedrive_url: Optional[str] = None
+
+
+@dataclass
+class FetchTopImagesResult:
+    """取得・保存した画像群の結果。"""
+
+    asin: str
+    title: str
+    api_image: SavedImageInfo
+    hires_image: Optional[SavedImageInfo]
+    detail_page_url: str
 
 
 def is_github_actions() -> bool:
@@ -134,6 +157,35 @@ def get_access_token() -> str:
     return access_token
 
 
+def post_creators_api(url: str, headers: dict, payload: dict, timeout: int = 30) -> requests.Response:
+    last_response: requests.Response | None = None
+    for attempt in range(1, 5):
+        response = requests.post(
+            url,
+            headers=headers,
+            json=payload,
+            timeout=timeout,
+        )
+        last_response = response
+        if response.status_code != 429:
+            return response
+
+        if attempt < 4:
+            wait_seconds = attempt * 3
+            print(f"[WARN] Creators API がスロットル中です。{wait_seconds}秒待って再試行します。")
+            time.sleep(wait_seconds)
+
+    assert last_response is not None
+    return last_response
+
+
+def extract_asin_from_url(url: str) -> str:
+    match = ASIN_IN_URL_RE.search((url or "").strip())
+    if not match:
+        return ""
+    return match.group(1).upper()
+
+
 def get_onedrive_access_token() -> str:
     response = requests.post(
         ONEDRIVE_TOKEN_URL,
@@ -172,14 +224,14 @@ def search_top_item_image(
     marketplace: str = DEFAULT_MARKETPLACE,
     partner_tag: str = DEFAULT_ASSOCIATE_TAG,
 ) -> SearchImageResult:
-    response = requests.post(
+    response = post_creators_api(
         SEARCH_ITEMS_URL,
         headers={
             "Authorization": f"Bearer {access_token}",
             "Content-Type": "application/json",
             "x-marketplace": marketplace,
         },
-        json={
+        payload={
             "keywords": keyword,
             "partnerTag": partner_tag,
             "marketplace": marketplace,
@@ -203,6 +255,64 @@ def search_top_item_image(
         asin=(top_item.get("asin") or "").strip(),
         title=(
             top_item.get("itemInfo", {})
+            .get("title", {})
+            .get("displayValue", "")
+            .strip()
+        ),
+        image_url=image_url,
+        width=width,
+        height=height,
+    )
+
+
+def _extract_items_from_get_items_response(payload: dict) -> list[dict]:
+    for items in (
+        payload.get("itemsResult", {}).get("items", []),
+        payload.get("getItemsResult", {}).get("items", []),
+        payload.get("items", []),
+        payload.get("data", {}).get("items", []),
+    ):
+        if isinstance(items, list) and items:
+            return items
+    return []
+
+
+def get_item_image(
+    asin: str,
+    access_token: str,
+    marketplace: str = DEFAULT_MARKETPLACE,
+    associate_tag: str = DEFAULT_ASSOCIATE_TAG,
+) -> SearchImageResult:
+    response = post_creators_api(
+        GET_ITEMS_URL,
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+            "x-marketplace": marketplace,
+        },
+        payload={
+            "itemIds": [asin],
+            "partnerTag": associate_tag,
+            "marketplace": marketplace,
+            "resources": DEFAULT_RESOURCES,
+        },
+        timeout=30,
+    )
+    if not response.ok:
+        raise AmazonCreatorsApiError(
+            f"GetItems に失敗しました: {response.status_code} {response.text[:300]}"
+        )
+
+    items = _extract_items_from_get_items_response(response.json())
+    if not items:
+        raise AmazonCreatorsApiError(f"ASIN「{asin}」の GetItems 結果が0件でした。")
+
+    item = items[0]
+    image_url, width, height = pick_primary_image(item)
+    return SearchImageResult(
+        asin=(item.get("asin") or asin).strip().upper(),
+        title=(
+            item.get("itemInfo", {})
             .get("title", {})
             .get("displayValue", "")
             .strip()
@@ -268,11 +378,14 @@ def fetch_detail_page_html(asin: str, marketplace: str) -> str:
 
 
 def extract_hires_from_html(page_html: str) -> Optional[str]:
-    landing_match = LANDING_HIRES_RE.search(page_html)
-    if landing_match:
-        hires_url = html.unescape(landing_match.group(1)).strip()
-        if hires_url:
-            return hires_url
+    landing_tag_match = LANDING_IMAGE_TAG_RE.search(page_html)
+    if landing_tag_match:
+        landing_tag = landing_tag_match.group(0)
+        hires_attr_match = HTML_DATA_OLD_HIRES_RE.search(landing_tag)
+        if hires_attr_match:
+            hires_url = html.unescape(hires_attr_match.group(1)).strip()
+            if hires_url:
+                return hires_url
 
     color_match = COLOR_IMAGES_HIRES_RE.search(page_html)
     if color_match:
@@ -281,6 +394,25 @@ def extract_hires_from_html(page_html: str) -> Optional[str]:
             return hires_url
 
     return None
+
+
+def extract_primary_image_from_html(page_html: str) -> Optional[str]:
+    landing_tag_match = LANDING_IMAGE_TAG_RE.search(page_html)
+    if landing_tag_match:
+        landing_tag = landing_tag_match.group(0)
+        src_match = HTML_SRC_RE.search(landing_tag)
+        if src_match:
+            image_url = html.unescape(src_match.group(1)).strip()
+            if image_url:
+                return image_url
+    return None
+
+
+def extract_title_from_html(page_html: str) -> str:
+    product_title_match = PRODUCT_TITLE_RE.search(page_html)
+    if product_title_match:
+        return html.unescape(product_title_match.group(1)).strip()
+    return ""
 
 
 def quote_onedrive_path(path: str) -> str:
@@ -364,6 +496,121 @@ def save_and_optionally_upload(
     return image
 
 
+def resolve_top_item_image(
+    keyword: str,
+    asin: str,
+    access_token: str,
+    marketplace: str = DEFAULT_MARKETPLACE,
+    partner_tag: str = DEFAULT_ASSOCIATE_TAG,
+) -> tuple[SearchImageResult, str]:
+    normalized_asin = (asin or "").strip().upper()
+    if normalized_asin:
+        try:
+            return (
+                get_item_image(
+                    asin=normalized_asin,
+                    access_token=access_token,
+                    marketplace=marketplace,
+                    associate_tag=partner_tag,
+                ),
+                "",
+            )
+        except AmazonCreatorsApiError as exc:
+            print(f"[WARN] GetItems 取得失敗のため詳細ページへフォールバックします: {exc}")
+
+        detail_page_html = fetch_detail_page_html(normalized_asin, marketplace)
+        primary_url = extract_primary_image_from_html(detail_page_html)
+        if primary_url:
+            return (
+                SearchImageResult(
+                    asin=normalized_asin,
+                    title=extract_title_from_html(detail_page_html),
+                    image_url=primary_url,
+                    width=None,
+                    height=None,
+                ),
+                detail_page_html,
+            )
+
+        raise AmazonCreatorsApiError(
+            f"ASIN「{normalized_asin}」の商品詳細ページから通常画像を取得できませんでした。"
+        )
+
+    return (
+        search_top_item_image(
+            keyword=keyword,
+            access_token=access_token,
+            marketplace=marketplace,
+            partner_tag=partner_tag,
+        ),
+        "",
+    )
+
+
+def fetch_and_save_top_images(
+    *,
+    keyword: str = "",
+    asin: str = "",
+    output_dir: Path | None = None,
+    marketplace: str = DEFAULT_MARKETPLACE,
+    partner_tag: str = DEFAULT_ASSOCIATE_TAG,
+    onedrive_folder: str = DEFAULT_ONEDRIVE_FOLDER,
+) -> FetchTopImagesResult:
+    normalized_keyword = (keyword or "").strip()
+    normalized_asin = (asin or "").strip().upper()
+    if not normalized_keyword and not normalized_asin:
+        raise AmazonCreatorsApiError("検索キーワードまたは ASIN のどちらかが必要です。")
+
+    resolved_output_dir = (output_dir or resolve_default_output_dir()).expanduser().resolve()
+    access_token = get_access_token()
+    result, detail_page_html = resolve_top_item_image(
+        keyword=normalized_keyword,
+        asin=normalized_asin,
+        access_token=access_token,
+        marketplace=marketplace,
+        partner_tag=partner_tag,
+    )
+    file_keyword = normalized_keyword or result.asin or "amazon_image"
+
+    api_image = save_image(
+        label="api",
+        keyword=file_keyword,
+        image_url=result.image_url,
+        output_dir=resolved_output_dir,
+    )
+    api_image = save_and_optionally_upload(api_image, onedrive_folder)
+
+    if not detail_page_html:
+        detail_page_html = fetch_detail_page_html(result.asin, marketplace)
+
+    hires_image: Optional[SavedImageInfo] = None
+    hires_url = extract_hires_from_html(detail_page_html)
+    if hires_url:
+        hires_image = save_image(
+            label="hires",
+            keyword=file_keyword,
+            image_url=hires_url,
+            output_dir=resolved_output_dir,
+            suffix="_hires",
+        )
+        hires_image = save_and_optionally_upload(hires_image, onedrive_folder)
+    else:
+        print("[WARN] hiRes 画像は見つかりませんでした。通常版のみ保存します。")
+
+    saved_images = [api_image]
+    if hires_image:
+        saved_images.append(hires_image)
+    write_github_step_outputs(saved_images)
+
+    return FetchTopImagesResult(
+        asin=result.asin,
+        title=result.title,
+        api_image=api_image,
+        hires_image=hires_image,
+        detail_page_url=build_detail_page_url(result.asin, marketplace),
+    )
+
+
 def parse_args() -> argparse.Namespace:
     default_output_dir = resolve_default_output_dir()
     parser = argparse.ArgumentParser(
@@ -418,44 +665,19 @@ def main() -> int:
     print(f"[INFO] 保存先: {output_dir}")
     print(f"[INFO] 実行環境: {'GitHub Actions' if is_github_actions() else 'ローカル'}")
 
-    access_token = get_access_token()
-    result = search_top_item_image(
+    fetch_result = fetch_and_save_top_images(
         keyword=keyword,
-        access_token=access_token,
+        output_dir=output_dir,
         marketplace=args.marketplace,
         partner_tag=args.partner_tag,
+        onedrive_folder=args.onedrive_folder,
     )
 
-    saved_images: list[SavedImageInfo] = []
-
-    api_image = save_image(
-        label="api",
-        keyword=keyword,
-        image_url=result.image_url,
-        output_dir=output_dir,
-    )
-    saved_images.append(save_and_optionally_upload(api_image, args.onedrive_folder))
-
-    detail_page_html = fetch_detail_page_html(result.asin, args.marketplace)
-    hires_url = extract_hires_from_html(detail_page_html)
-    if hires_url:
-        hires_image = save_image(
-            label="hires",
-            keyword=keyword,
-            image_url=hires_url,
-            output_dir=output_dir,
-            suffix="_hires",
-        )
-        saved_images.append(save_and_optionally_upload(hires_image, args.onedrive_folder))
-    else:
-        print("[WARN] hiRes 画像は見つかりませんでした。Creator API 版のみ保存します。")
-
-    write_github_step_outputs(saved_images)
-
-    print(f"[INFO] 検索1位タイトル: {result.title}")
-    print(f"[INFO] ASIN: {result.asin}")
-    for image in saved_images:
-        print_saved_image(image)
+    print(f"[INFO] 検索1位タイトル: {fetch_result.title}")
+    print(f"[INFO] ASIN: {fetch_result.asin}")
+    print_saved_image(fetch_result.api_image)
+    if fetch_result.hires_image:
+        print_saved_image(fetch_result.hires_image)
     if os.getenv("GITHUB_OUTPUT", "").strip():
         print("[INFO] GitHub Actions の step output に画像情報を書き出しました。")
     print("[OK] 画像保存処理が完了しました。")
