@@ -26,17 +26,17 @@
 
 ## 2. 3本のファイルの役割分担
 
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\SEO_記事量産ワークフロー運用版_20260407.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\SEO_記事量産ワークフロー運用版_20260407.md`
   - 0 から 3 までの実行順を完遂するためのワークフロー
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\0_common\promptreference.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\0_common\promptreference.md`
   - プロンプト、執筆ルール、禁止事項、見出しルール
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\0_common\readme.md`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\0_common\readme.md`
   - 仕様、メモ、ログ、責務分担、不整合防止の管理
 
 ## 3. 最新の正規構成
 
 ```text
-C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
+C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\
 ├─ input\
 │  └─ <任意の元記事>.md
 └─ seo_factory\
@@ -77,17 +77,17 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 以下を正規の更新先とする。
 
 - 元記事入力
-  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\input\`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\input\`
 - 共通実行口
-  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\0_common\scripts\031_5_run_factory.py`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\0_common\scripts\031_5_run_factory.py`
 - 共通 validator
-  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\0_common\scripts\031_3_article_validator.py`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\0_common\scripts\031_3_article_validator.py`
 - キーワード収集
-  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\1_keyword_collect\scripts\031_1_keyword_pipeline.py`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\1_keyword_collect\scripts\031_1_keyword_pipeline.py`
 - 母艦記事材料
-  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\2_base_article\scripts\031_2_master_article_generator.py`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\2_base_article\scripts\031_2_master_article_generator.py`
 - 個別記事ジョブ
-  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\3_variant_article\scripts\031_4_kobetsu_writer.py`
+  - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\3_variant_article\scripts\031_4_kobetsu_writer.py`
 
 ## 5. Python とこのチャットの責務分担
 
@@ -119,7 +119,7 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 
 ### 5.4 ワークフロー開始条件
 
-- ユーザーが `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\input\` に母艦の土台記事 Markdown を入れる
+- ユーザーが `C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\input\` に母艦の土台記事 Markdown を入れる
 - ユーザーがこのチャットでラッコ検索キーワードを提示する
 - この 2 点が揃うまで Python 実行を開始しない
 - ラッコ検索キーワードは記事本文から自動推測しない
@@ -177,7 +177,7 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\
 ## 7. 元記事仕様
 
 - 元記事投入はユーザーが行う
-- 母艦記事の土台は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\input\` 配下の Markdown を使う
+- 母艦記事の土台は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\input\` 配下の Markdown を使う
 - 複数ある場合は `master_article_backup_*.md` を除外し、そのうえで最終更新日時が最新の 1 件を使う
 - `output/<slug>/reference/` は元記事の正規置き場として使わない
 - `scripts\pipeline` 由来の記事を母艦化の入力として使わない

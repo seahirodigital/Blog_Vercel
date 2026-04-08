@@ -464,7 +464,7 @@ def _get_gs_client() -> gspread.Client:
         return gspread.authorize(creds)
 
     local_candidates = [
-        r"C:\Users\HCY\OneDrive\開発\Blog_Vercel\TEST\seo_factory\env\google-service-account.json",
+        r"C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\env\google-service-account.json",
         r"C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\service_account.json",
         r"C:\Users\HCY\OneDrive\開発\Blog_Vercel\service_account.json",
     ]
