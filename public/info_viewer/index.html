@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>info_viewer | ダミー閲覧版</title>
+  <meta name="description" content="info_viewer 第一弾のダミーチャンネル・ダミー動画・ダミー記事を使った閲覧専用プロトタイプ" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f6f1e8;
+      --bg-strong: #ece3d5;
+      --surface: rgba(255, 251, 245, 0.88);
+      --surface-strong: #fffaf2;
+      --ink: #1f2a2c;
+      --muted: #5b6768;
+      --line: rgba(31, 42, 44, 0.12);
+      --accent: #c85c3b;
+      --accent-strong: #9e3f21;
+      --accent-soft: rgba(200, 92, 59, 0.14);
+      --deep: #24454c;
+      --shadow: 0 18px 50px rgba(34, 46, 49, 0.14);
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --radius-sm: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(36, 69, 76, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(200, 92, 59, 0.14), transparent 26%),
+        linear-gradient(180deg, #f7f3eb 0%, #f2e8d9 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .shell {
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .app {
+      max-width: 1680px;
+      margin: 0 auto;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero {
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      background:
+        linear-gradient(135deg, rgba(255, 250, 242, 0.98), rgba(250, 241, 229, 0.94)),
+        linear-gradient(135deg, rgba(36, 69, 76, 0.04), rgba(200, 92, 59, 0.04));
+      box-shadow: var(--shadow);
+      padding: 22px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: auto -8% -50% auto;
+      width: 280px;
+      height: 280px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(200, 92, 59, 0.18), transparent 68%);
+      pointer-events: none;
+    }
+
+    .hero-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(36, 69, 76, 0.08);
+      color: var(--deep);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 14px 0 10px;
+      font-family: 'Space Grotesk', 'Noto Sans JP', sans-serif;
+      font-size: clamp(32px, 4vw, 54px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 780px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .hero-link,
+    .hero-ghost,
+    .mobile-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .hero-link {
+      background: var(--deep);
+      color: #fff8f2;
+      box-shadow: 0 10px 26px rgba(36, 69, 76, 0.22);
+    }
+
+    .hero-link:hover,
+    .mobile-button:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero-ghost,
+    .mobile-button {
+      background: rgba(255, 255, 255, 0.6);
+      border-color: var(--line);
+      color: var(--ink);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.58);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .stat-value {
+      margin-top: 10px;
+      font-family: 'Space Grotesk', 'Noto Sans JP', sans-serif;
+      font-size: clamp(22px, 3vw, 34px);
+      letter-spacing: -0.04em;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 292px 372px minmax(0, 1fr);
+      gap: 18px;
+      min-height: calc(100vh - 260px);
+    }
+
+    .pane {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .pane-head {
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 253, 249, 0.96), rgba(255, 251, 245, 0.7));
+    }
+
+    .pane-title {
+      margin: 0;
+      font-family: 'Space Grotesk', 'Noto Sans JP', sans-serif;
+      font-size: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    .pane-subtitle {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .pane-body {
+      padding: 12px;
+      overflow: auto;
+      min-height: 0;
+    }
+
+    .channel-list,
+    .video-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .channel-card,
+    .video-card {
+      width: 100%;
+      border: 1px solid transparent;
+      border-radius: var(--radius-md);
+      padding: 16px;
+      background: transparent;
+      color: inherit;
+      text-align: left;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+      cursor: pointer;
+    }
+
+    .channel-card:hover,
+    .video-card:hover {
+      background: rgba(255, 255, 255, 0.7);
+      border-color: rgba(36, 69, 76, 0.14);
+      transform: translateY(-1px);
+    }
+
+    .channel-card.active,
+    .video-card.active {
+      background: linear-gradient(135deg, rgba(36, 69, 76, 0.94), rgba(47, 82, 90, 0.94));
+      color: #fef8f0;
+      box-shadow: 0 14px 30px rgba(36, 69, 76, 0.2);
+    }
+
+    .channel-card.active .meta,
+    .video-card.active .meta,
+    .channel-card.active .micro,
+    .video-card.active .micro,
+    .channel-card.active .status-pill,
+    .video-card.active .status-pill {
+      color: #d9e6e7;
+      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .meta {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .micro-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .micro,
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(36, 69, 76, 0.12);
+      background: rgba(255, 255, 255, 0.72);
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .status-ready {
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+      border-color: rgba(200, 92, 59, 0.24);
+    }
+
+    .status-pending {
+      color: var(--deep);
+      background: rgba(36, 69, 76, 0.08);
+      border-color: rgba(36, 69, 76, 0.14);
+    }
+
+    .empty-note {
+      border: 1px dashed rgba(36, 69, 76, 0.18);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+      background: rgba(255, 255, 255, 0.42);
+    }
+
+    .content-shell {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      height: 100%;
+    }
+
+    .article-bar {
+      padding: 22px 24px 18px;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(255, 251, 243, 0.98), rgba(255, 246, 236, 0.82));
+    }
+
+    .article-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .article-title {
+      margin: 14px 0 0;
+      font-family: 'Space Grotesk', 'Noto Sans JP', sans-serif;
+      font-size: clamp(28px, 3.6vw, 44px);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+
+    .article-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .article-body {
+      padding: 26px 28px 42px;
+      overflow: auto;
+      min-height: 0;
+    }
+
+    .article-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .article-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 11px 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.66);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .article-link.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fffaf5;
+    }
+
+    .article-placeholder {
+      border: 1px dashed rgba(200, 92, 59, 0.24);
+      border-radius: 26px;
+      padding: 26px;
+      background: linear-gradient(180deg, rgba(255, 250, 244, 0.96), rgba(255, 245, 238, 0.82));
+    }
+
+    .article-placeholder h3 {
+      margin: 0;
+      font-family: 'Space Grotesk', 'Noto Sans JP', sans-serif;
+      font-size: 28px;
+      letter-spacing: -0.03em;
+    }
+
+    .article-placeholder p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 14px;
+    }
+
+    .markdown {
+      color: var(--ink);
+      line-height: 1.9;
+      font-size: 15px;
+    }
+
+    .markdown>*:first-child {
+      margin-top: 0;
+    }
+
+    .markdown h1,
+    .markdown h2,
+    .markdown h3 {
+      font-family: 'Space Grotesk', 'Noto Sans JP', sans-serif;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .markdown h1 {
+      font-size: 34px;
+      margin: 0 0 22px;
+    }
+
+    .markdown h2 {
+      margin: 34px 0 16px;
+      font-size: 24px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(36, 69, 76, 0.12);
+    }
+
+    .markdown h3 {
+      margin: 24px 0 12px;
+      font-size: 18px;
+    }
+
+    .markdown p {
+      margin: 12px 0;
+    }
+
+    .markdown ul,
+    .markdown ol {
+      margin: 14px 0;
+      padding-left: 22px;
+    }
+
+    .markdown li {
+      margin: 8px 0;
+    }
+
+    .markdown blockquote {
+      margin: 20px 0;
+      padding: 14px 18px;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 16px 16px 0;
+      background: rgba(200, 92, 59, 0.08);
+      color: var(--accent-strong);
+    }
+
+    .markdown code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.9em;
+      background: rgba(36, 69, 76, 0.08);
+      padding: 2px 6px;
+      border-radius: 8px;
+    }
+
+    .markdown pre {
+      overflow: auto;
+      padding: 16px;
+      border-radius: 18px;
+      background: #1f2a2c;
+      color: #f7efe5;
+    }
+
+    .markdown pre code {
+      background: transparent;
+      padding: 0;
+      color: inherit;
+    }
+
+    .markdown a {
+      color: var(--accent-strong);
+      font-weight: 700;
+    }
+
+    .mobile-tools {
+      display: none;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(19, 28, 30, 0.45);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+      z-index: 60;
+    }
+
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: min(92vw, 420px);
+      background: #fffaf2;
+      border-right: 1px solid var(--line);
+      box-shadow: 0 18px 42px rgba(24, 33, 34, 0.24);
+      transform: translateX(-100%);
+      transition: transform 0.26s ease;
+      z-index: 70;
+      display: grid;
+      grid-template-rows: auto auto minmax(0, 1fr);
+    }
+
+    .drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-head {
+      padding: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .drawer-tabs {
+      display: flex;
+      gap: 8px;
+      padding: 14px 20px 0;
+    }
+
+    .drawer-tab {
+      flex: 1;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .drawer-tab.active {
+      background: var(--deep);
+      border-color: var(--deep);
+      color: #fff8f2;
+    }
+
+    .drawer-body {
+      min-height: 0;
+      overflow: auto;
+      padding: 14px;
+    }
+
+    .drawer-panel {
+      display: none;
+    }
+
+    .drawer-panel.active {
+      display: block;
+    }
+
+    @media (max-width: 1180px) {
+      .layout {
+        grid-template-columns: 250px 320px minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .shell {
+        padding: 16px;
+      }
+
+      .hero {
+        padding: 18px;
+        border-radius: 26px;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .layout .pane.channel-pane,
+      .layout .pane.video-pane {
+        display: none;
+      }
+
+      .layout .pane.content-pane {
+        min-height: calc(100vh - 280px);
+      }
+
+      .mobile-tools {
+        display: flex;
+      }
+
+      .article-bar {
+        padding: 18px;
+      }
+
+      .article-body {
+        padding: 22px 18px 34px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="shell">
+    <div class="app">
+      <header class="hero">
+        <div class="hero-top">
+          <div>
+            <div class="eyebrow">info_viewer / first phase / dummy</div>
+            <h1>チャンネル閲覧を、先に触れる形へ。</h1>
+            <p>
+              このページは第一弾のダミー実装です。ダミーチャンネル、ダミー動画、ダミー記事だけで
+              「チャンネル一覧 → 動画一覧 → Markdown 記事表示」の導線を確認できます。既存の
+              `index.html` にはまだ手を入れていません。
+            </p>
+          </div>
+          <div class="hero-actions">
+            <a class="hero-link" href="/index.html">記事エディタへ戻る</a>
+            <a class="hero-ghost" href="/links.html">リンク集へ</a>
+          </div>
+        </div>
+        <div class="hero-stats" id="heroStats"></div>
+      </header>
+
+      <div class="mobile-tools">
+        <button class="mobile-button" type="button" id="openChannels">チャンネル</button>
+        <button class="mobile-button" type="button" id="openVideos">動画一覧</button>
+      </div>
+
+      <main class="layout">
+        <section class="pane channel-pane">
+          <div class="pane-head">
+            <h2 class="pane-title">チャンネル</h2>
+            <div class="pane-subtitle">第一弾はダミーデータで UI を確定します。実データ連携は第二弾で置換します。</div>
+          </div>
+          <div class="pane-body">
+            <div class="channel-list" id="channelList"></div>
+          </div>
+        </section>
+
+        <section class="pane video-pane">
+          <div class="pane-head">
+            <h2 class="pane-title">動画一覧</h2>
+            <div class="pane-subtitle" id="videoPaneSubtitle">チャンネルを選択すると動画が切り替わります。</div>
+          </div>
+          <div class="pane-body">
+            <div class="video-list" id="videoList"></div>
+          </div>
+        </section>
+
+        <section class="pane content-pane">
+          <div class="content-shell">
+            <div class="article-bar" id="articleBar"></div>
+            <div class="article-body" id="articleBody"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="drawer" id="drawer">
+    <div class="drawer-head">
+      <div class="eyebrow">mobile drawer</div>
+      <div style="margin-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+        <strong style="font-family: 'Space Grotesk', 'Noto Sans JP', sans-serif; font-size: 28px; letter-spacing: -0.04em;">info_viewer</strong>
+        <button class="hero-ghost" type="button" id="closeDrawer" style="padding: 10px 14px;">閉じる</button>
+      </div>
+    </div>
+    <div class="drawer-tabs">
+      <button class="drawer-tab active" type="button" data-tab="channels">チャンネル</button>
+      <button class="drawer-tab" type="button" data-tab="videos">動画一覧</button>
+    </div>
+    <div class="drawer-body">
+      <div class="drawer-panel active" id="drawerChannels"></div>
+      <div class="drawer-panel" id="drawerVideos"></div>
+    </div>
+  </aside>
+
+  <script>
+    marked.use({
+      renderer: {
+        link({ href, title, text }) {
+          const safeHref = href || '#';
+          const safeTitle = title ? ` title="${title}"` : '';
+          return `<a href="${safeHref}"${safeTitle} target="_blank" rel="noopener noreferrer">${text || safeHref}</a>`;
+        }
+      }
+    });
+
+    const dataset = [
+      {
+        id: 'growth-pulse',
+        name: 'Growth Pulse',
+        channelUrl: 'https://www.youtube.com/@growth-pulse',
+        description: '米国株、市場センチメント、決算解説を扱う想定のダミーチャンネル。',
+        videos: [
+          {
+            id: 'gp-001',
+            title: '2026年春の市場転換点をどう読むか',
+            publishedAt: '2026-04-06',
+            duration: '18:24',
+            youtubeUrl: 'https://www.youtube.com/watch?v=dummy-growth-001',
+            articleUpdatedAt: '2026-04-07T08:40:00+09:00',
+            articleMarkdown: `# 2026年春の市場転換点をどう読むか
+
+## エグゼクティブ・サマリー
+- 金利のピーク感と企業ガイダンス修正が、相場の見方を変え始めた局面
+- 上昇相場の再開ではなく、物色の主役が入れ替わる転換点として捉えるべき局面
+- インデックスの強さよりも、キャッシュ創出力と値決め力を持つ企業に資金が集まりやすい構図
+
+## いま見ておきたい変化
+### 金利感応度
+- 高PER銘柄だけが恩恵を受ける局面ではなく、利益の持続性が改めて問われる段階
+- 長期金利の鈍化だけで全体強気に振れるのではなく、セクターごとの耐性差が広がる見通し
+
+### 決算の見え方
+- 売上成長率より、在庫調整後の粗利率回復やフリーキャッシュフローの改善が注目材料
+- ガイダンス維持企業が「安心材料」として評価されやすい環境
+
+## インサイト
+> 強い相場ではなく、強い銘柄を選ぶ相場に移っている。
+
+- viewer の第一弾では、このような整形済み Markdown を右ペインに表示することを目標にする
+- 実データ連携時は、ここへ Gemini 整形後の記事が流れ込む想定`
+          },
+          {
+            id: 'gp-002',
+            title: '決算シーズン前に見直したい3つの指標',
+            publishedAt: '2026-04-03',
+            duration: '12:51',
+            youtubeUrl: 'https://www.youtube.com/watch?v=dummy-growth-002',
+            articleUpdatedAt: null,
+            articleMarkdown: null
+          },
+          {
+            id: 'gp-003',
+            title: '大型株と中型株、資金循環はどこへ向かうか',
+            publishedAt: '2026-03-30',
+            duration: '21:06',
+            youtubeUrl: 'https://www.youtube.com/watch?v=dummy-growth-003',
+            articleUpdatedAt: '2026-03-31T19:15:00+09:00',
+            articleMarkdown: `# 大型株と中型株、資金循環はどこへ向かうか
+
+## 要点
+- 直近は大型テックに資金が残りつつも、中型株の押し目拾いが増えている
+- ETF 主導の資金流入だけでは説明できない個別株選好が見え始めている
+
+## 観察ポイント
+### 流動性
+- 出来高回復が先行するセクターは、テーマより需給で動くケースが増える
+
+### 評価軸
+- 中型株では将来期待だけでなく、黒字化タイミングの現実味が重要になる
+
+## まとめ
+- viewer 上では、チャンネルを切り替えても同じ UI パターンで動画を読み進められるようにする`
+          }
+        ]
+      },
+      {
+        id: 'macro-lens',
+        name: 'Macro Lens',
+        channelUrl: 'https://www.youtube.com/@macro-lens',
+        description: 'マクロ経済、為替、政策イベントを深掘りする想定のダミーチャンネル。',
+        videos: [
+          {
+            id: 'ml-001',
+            title: '円安と企業収益のズレをどう見るか',
+            publishedAt: '2026-04-07',
+            duration: '16:42',
+            youtubeUrl: 'https://www.youtube.com/watch?v=dummy-macro-001',
+            articleUpdatedAt: '2026-04-07T22:10:00+09:00',
+            articleMarkdown: `# 円安と企業収益のズレをどう見るか
+
+## サマリー
+- 円安メリットが一律に効く時期は過ぎ、コスト構造による差が広がっている
+- 海外売上比率だけでなく、輸入比率と価格転嫁力の確認が必要
+
+## 詳細
+### 輸出企業
+- 為替感応度が残る一方、想定為替レート引き上げ余地は限定的
+
+### 内需企業
+- 原材料高が残る業種では、円安がむしろ利益圧迫要因として効く
+
+### 注視点
+- 次の決算では、通期据え置きでも四半期コメントに変化が出る可能性
+
+## 結論
+- viewer は動画ごとの論点比較がしやすいレイアウトを重視する`
+          },
+          {
+            id: 'ml-002',
+            title: '雇用統計前にポジションをどう軽くするか',
+            publishedAt: '2026-04-01',
+            duration: '09:38',
+            youtubeUrl: 'https://www.youtube.com/watch?v=dummy-macro-002',
+            articleUpdatedAt: null,
+            articleMarkdown: null
+          }
+        ]
+      },
+      {
+        id: 'theme-watch',
+        name: 'Theme Watch',
+        channelUrl: 'https://www.youtube.com/@theme-watch',
+        description: 'AI、半導体、防衛などテーマ投資を追う想定のダミーチャンネル。',
+        videos: [
+          {
+            id: 'tw-001',
+            title: '半導体サイクルの次の主役は装置か設計か',
+            publishedAt: '2026-04-05',
+            duration: '14:19',
+            youtubeUrl: 'https://www.youtube.com/watch?v=dummy-theme-001',
+            articleUpdatedAt: '2026-04-06T07:20:00+09:00',
+            articleMarkdown: `# 半導体サイクルの次の主役は装置か設計か
+
+## 結論先出し
+- 足元の期待は設計側に寄りやすいが、実需の回復確認では装置側の反応が大きくなる可能性
+
+## 着目点
+### 設計
+- 生成AI投資の継続期待から、設計企業の説明ストーリーは維持されやすい
+
+### 装置
+- 設備投資再開のシグナルが出たとき、利益レバレッジが大きい
+
+### viewer 観点
+- 動画記事がまだないテーマも、一覧には先に見せておくことで運用対象が分かる
+
+## メモ
+- 第二弾では、このダミー記事が自動生成記事へ置き換わる`
+          },
+          {
+            id: 'tw-002',
+            title: '防衛関連に資金が戻る条件を整理する',
+            publishedAt: '2026-03-28',
+            duration: '11:50',
+            youtubeUrl: 'https://www.youtube.com/watch?v=dummy-theme-002',
+            articleUpdatedAt: null,
+            articleMarkdown: null
+          },
+          {
+            id: 'tw-003',
+            title: 'AIテーマ株の過熱感を数字で見る',
+            publishedAt: '2026-03-21',
+            duration: '19:02',
+            youtubeUrl: 'https://www.youtube.com/watch?v=dummy-theme-003',
+            articleUpdatedAt: '2026-03-22T09:50:00+09:00',
+            articleMarkdown: `# AIテーマ株の過熱感を数字で見る
+
+## サマリー
+- 話題先行で買われた銘柄と、業績裏付けで買われた銘柄の差が広がっている
+
+## 見分け方
+### 売上成長率
+- 単なる高成長ではなく、継続率と粗利率の質を見る
+
+### 需給
+- 信用残と出来高のバランスが崩れている銘柄は値動きが荒くなりやすい
+
+## インサイト
+- viewer の右ペインは長文を読みやすくするため、余白と本文幅を広めに取る`
+          }
+        ]
+      }
+    ];
+
+    const state = {
+      selectedChannelId: dataset[0].id,
+      selectedVideoId: dataset[0].videos[0].id,
+      drawerOpen: false,
+      drawerTab: 'channels'
+    };
+
+    const channelList = document.getElementById('channelList');
+    const videoList = document.getElementById('videoList');
+    const articleBar = document.getElementById('articleBar');
+    const articleBody = document.getElementById('articleBody');
+    const videoPaneSubtitle = document.getElementById('videoPaneSubtitle');
+    const heroStats = document.getElementById('heroStats');
+    const drawer = document.getElementById('drawer');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    const drawerChannels = document.getElementById('drawerChannels');
+    const drawerVideos = document.getElementById('drawerVideos');
+    const drawerTabs = Array.from(document.querySelectorAll('.drawer-tab'));
+
+    function getSelectedChannel() {
+      return dataset.find((channel) => channel.id === state.selectedChannelId) || dataset[0];
+    }
+
+    function getSelectedVideo() {
+      const channel = getSelectedChannel();
+      return channel.videos.find((video) => video.id === state.selectedVideoId) || channel.videos[0];
+    }
+
+    function formatDate(dateText) {
+      if (!dateText) return '日付未設定';
+      const date = new Date(dateText);
+      if (Number.isNaN(date.getTime())) return dateText;
+      return new Intl.DateTimeFormat('ja-JP', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }).format(date);
+    }
+
+    function formatDateTime(dateText) {
+      if (!dateText) return '未生成';
+      const date = new Date(dateText);
+      if (Number.isNaN(date.getTime())) return dateText;
+      return new Intl.DateTimeFormat('ja-JP', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      }).format(date);
+    }
+
+    function countReadyVideos() {
+      return dataset.reduce((count, channel) => {
+        return count + channel.videos.filter((video) => Boolean(video.articleMarkdown)).length;
+      }, 0);
+    }
+
+    function renderStats() {
+      const totalChannels = dataset.length;
+      const totalVideos = dataset.reduce((count, channel) => count + channel.videos.length, 0);
+      const readyVideos = countReadyVideos();
+
+      heroStats.innerHTML = `
+        <div class="stat">
+          <div class="stat-label">Channel Count</div>
+          <div class="stat-value">${totalChannels}</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Video Count</div>
+          <div class="stat-value">${totalVideos}</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Dummy Articles</div>
+          <div class="stat-value">${readyVideos}</div>
+        </div>
+      `;
+    }
+
+    function renderChannels(target) {
+      const html = dataset.map((channel) => {
+        const isActive = channel.id === state.selectedChannelId;
+        const readyCount = channel.videos.filter((video) => Boolean(video.articleMarkdown)).length;
+        return `
+          <button class="channel-card${isActive ? ' active' : ''}" type="button" data-channel-id="${channel.id}">
+            <h3 class="card-title">${channel.name}</h3>
+            <div class="meta">${channel.description}</div>
+            <div class="micro-row">
+              <span class="micro">${channel.videos.length} 本</span>
+              <span class="status-pill ${readyCount > 0 ? 'status-ready' : 'status-pending'}">${readyCount} 件の記事</span>
+            </div>
+          </button>
+        `;
+      }).join('');
+
+      target.innerHTML = html;
+      target.querySelectorAll('[data-channel-id]').forEach((button) => {
+        button.addEventListener('click', () => {
+          selectChannel(button.getAttribute('data-channel-id'));
+          if (window.innerWidth <= 980) {
+            setDrawerTab('videos');
+          }
+        });
+      });
+    }
+
+    function renderVideos(target) {
+      const channel = getSelectedChannel();
+      videoPaneSubtitle.textContent = `${channel.name} の動画一覧。記事がまだない動画も先に見える設計です。`;
+
+      if (!channel.videos.length) {
+        target.innerHTML = '<div class="empty-note">このチャンネルには動画がまだありません。</div>';
+        return;
+      }
+
+      target.innerHTML = channel.videos.map((video) => {
+        const isActive = video.id === state.selectedVideoId;
+        const ready = Boolean(video.articleMarkdown);
+        return `
+          <button class="video-card${isActive ? ' active' : ''}" type="button" data-video-id="${video.id}">
+            <h3 class="card-title">${video.title}</h3>
+            <div class="meta">${formatDate(video.publishedAt)} ・ ${video.duration}</div>
+            <div class="micro-row">
+              <span class="status-pill ${ready ? 'status-ready' : 'status-pending'}">${ready ? '記事あり' : '未生成'}</span>
+              <span class="micro">${video.articleUpdatedAt ? '更新 ' + formatDateTime(video.articleUpdatedAt) : '次フェーズで生成'}</span>
+            </div>
+          </button>
+        `;
+      }).join('');
+
+      target.querySelectorAll('[data-video-id]').forEach((button) => {
+        button.addEventListener('click', () => {
+          state.selectedVideoId = button.getAttribute('data-video-id');
+          render();
+          closeDrawer();
+        });
+      });
+    }
+
+    function renderArticle() {
+      const channel = getSelectedChannel();
+      const video = getSelectedVideo();
+      const ready = Boolean(video.articleMarkdown);
+
+      articleBar.innerHTML = `
+        <div class="article-kicker">${ready ? 'Dummy Article Ready' : 'Article Pending'}</div>
+        <h2 class="article-title">${video.title}</h2>
+        <div class="article-meta">
+          <span class="micro">${channel.name}</span>
+          <span class="micro">${formatDate(video.publishedAt)}</span>
+          <span class="micro">${video.duration}</span>
+          <span class="status-pill ${ready ? 'status-ready' : 'status-pending'}">${ready ? '記事あり' : '未生成'}</span>
+        </div>
+        <div class="article-actions">
+          <a class="article-link primary" href="${video.youtubeUrl}" target="_blank" rel="noopener noreferrer">元動画を開く</a>
+          <a class="article-link" href="${channel.channelUrl}" target="_blank" rel="noopener noreferrer">チャンネルを開く</a>
+        </div>
+      `;
+
+      if (!ready) {
+        articleBody.innerHTML = `
+          <div class="article-placeholder">
+            <h3>記事はまだ生成されていません。</h3>
+            <p>
+              第一弾では、動画一覧に未生成アイテムも先に表示します。これにより、
+              「どのチャンネルに、どの動画があり、どこまで記事化されているか」を閲覧専用 UI 上で確認できます。
+            </p>
+            <p>
+              第二弾では、ここに Apify 取得 → Gemini 整形 → OneDrive 保存された実記事が入る想定です。
+            </p>
+            <div class="article-actions">
+              <a class="article-link primary" href="${video.youtubeUrl}" target="_blank" rel="noopener noreferrer">元動画を開く</a>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      articleBody.innerHTML = `<div class="markdown">${marked.parse(video.articleMarkdown)}</div>`;
+    }
+
+    function selectChannel(channelId) {
+      const channel = dataset.find((item) => item.id === channelId);
+      if (!channel) return;
+      state.selectedChannelId = channel.id;
+      state.selectedVideoId = channel.videos[0] ? channel.videos[0].id : null;
+      render();
+    }
+
+    function setDrawerTab(tab) {
+      state.drawerTab = tab;
+      drawerTabs.forEach((button) => {
+        button.classList.toggle('active', button.dataset.tab === tab);
+      });
+      document.getElementById('drawerChannels').classList.toggle('active', tab === 'channels');
+      document.getElementById('drawerVideos').classList.toggle('active', tab === 'videos');
+    }
+
+    function openDrawer(tab) {
+      setDrawerTab(tab);
+      state.drawerOpen = true;
+      drawer.classList.add('open');
+      drawerOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      state.drawerOpen = false;
+      drawer.classList.remove('open');
+      drawerOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function render() {
+      renderStats();
+      renderChannels(channelList);
+      renderVideos(videoList);
+      renderChannels(drawerChannels);
+      renderVideos(drawerVideos);
+      renderArticle();
+    }
+
+    drawerTabs.forEach((button) => {
+      button.addEventListener('click', () => setDrawerTab(button.dataset.tab));
+    });
+
+    document.getElementById('openChannels').addEventListener('click', () => openDrawer('channels'));
+    document.getElementById('openVideos').addEventListener('click', () => openDrawer('videos'));
+    document.getElementById('closeDrawer').addEventListener('click', closeDrawer);
+    drawerOverlay.addEventListener('click', closeDrawer);
+
+    render();
+  </script>
+</body>
+
+</html>
