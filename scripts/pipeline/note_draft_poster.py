@@ -307,12 +307,28 @@ def _find_visible_candidate(candidates, description: str, timeout_ms: int = 1500
     raise RuntimeError(f"{description} を特定できませんでした: {' / '.join(errors[:6])}")
 
 
+def _click_locator_with_fallback(page, locator, strategy: str, description: str, timeout_ms: int = 4000) -> None:
+    locator.scroll_into_view_if_needed()
+    click_errors = []
+    for click_name, clicker in [
+        ("通常click", lambda: locator.click(timeout=timeout_ms)),
+        ("force click", lambda: locator.click(timeout=timeout_ms, force=True)),
+        ("DOM click", lambda: locator.evaluate("(element) => element.click()")),
+    ]:
+        try:
+            clicker()
+            page.wait_for_timeout(1000)
+            print(f"   ✅ {description}: {strategy} ({click_name})")
+            return
+        except Exception as exc:
+            click_errors.append(f"{click_name}={exc}")
+
+    raise RuntimeError(f"{description} の click に失敗しました: {strategy}: {' / '.join(click_errors[:3])}")
+
+
 def _click_visible_candidate(page, candidates, description: str, timeout_ms: int = 4000) -> str:
     strategy, locator = _find_visible_candidate(candidates, description)
-    locator.scroll_into_view_if_needed()
-    locator.click(timeout=timeout_ms)
-    page.wait_for_timeout(800)
-    print(f"   ✅ {description}: {strategy}")
+    _click_locator_with_fallback(page, locator, strategy, description, timeout_ms=timeout_ms)
     return strategy
 
 
@@ -340,10 +356,7 @@ def _find_visible_scoped_candidate(page, candidate_builders, description: str, t
 
 def _click_visible_scoped_candidate(page, candidate_builders, description: str, timeout_ms: int = 4000) -> str:
     strategy, locator = _find_visible_scoped_candidate(page, candidate_builders, description)
-    locator.scroll_into_view_if_needed()
-    locator.click(timeout=timeout_ms)
-    page.wait_for_timeout(1000)
-    print(f"   ✅ {description}: {strategy}")
+    _click_locator_with_fallback(page, locator, strategy, description, timeout_ms=timeout_ms)
     return strategy
 
 
@@ -371,35 +384,92 @@ def _click_rightmost_scoped_candidate(page, candidate_builders, description: str
     if best is None:
         raise RuntimeError(f"{description} を特定できませんでした: {' / '.join(errors[:6])}")
     _, strategy, locator = best
-    locator.scroll_into_view_if_needed()
-    locator.click(timeout=timeout_ms)
-    page.wait_for_timeout(1200)
-    print(f"   ✅ {description}: {strategy}")
+    _click_locator_with_fallback(page, locator, strategy, description, timeout_ms=timeout_ms)
     return strategy
 
 
-def _try_set_existing_file_input_on_scope(scope, image_path: Path) -> str | None:
-    file_inputs = scope.locator("input[type='file']")
-    for idx in range(file_inputs.count()):
-        input_locator = file_inputs.nth(idx)
+def _collect_file_input_candidates(page, prefer_adobe: bool = False) -> list[tuple[int, str, int, object, dict]]:
+    candidates = []
+    for scope_name, scope in _iter_playwright_scopes(page):
+        file_inputs = scope.locator("input[type='file']")
+        total = 0
         try:
-            accept = (input_locator.get_attribute("accept") or "").lower()
-            if accept and "image" not in accept:
-                continue
-            input_locator.set_input_files(str(image_path))
-            return f"input[type='file']#{idx}"
+            total = file_inputs.count()
         except Exception:
             continue
-    return None
+        for idx in range(total):
+            input_locator = file_inputs.nth(idx)
+            try:
+                metadata = input_locator.evaluate(
+                    """
+                    (el) => {
+                      const root = el.getRootNode();
+                      const host = root && root.host ? root.host : null;
+                      const rect = el.getBoundingClientRect();
+                      const style = window.getComputedStyle(el);
+                      return {
+                        accept: el.getAttribute('accept') || '',
+                        id: el.id || '',
+                        class_name: String(el.className || ''),
+                        visible: style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0,
+                        root_kind: root && root.toString ? root.toString() : '',
+                        host_tag: host && host.tagName ? host.tagName.toLowerCase() : '',
+                        host_id: host && host.id ? host.id : '',
+                        host_class: host ? String(host.className || '') : ''
+                      };
+                    }
+                    """
+                )
+            except Exception:
+                continue
+
+            accept = (metadata.get("accept") or "").lower()
+            if accept and "image" not in accept:
+                continue
+
+            combined = " ".join(
+                [
+                    scope_name,
+                    metadata.get("id") or "",
+                    metadata.get("class_name") or "",
+                    metadata.get("host_tag") or "",
+                    metadata.get("host_id") or "",
+                    metadata.get("host_class") or "",
+                ]
+            ).lower()
+            root_kind = (metadata.get("root_kind") or "").lower()
+            score = 0
+            if accept:
+                score += 20
+            if "shadowroot" in root_kind:
+                score += 40
+            if "cc-everywhere-container" in combined:
+                score += 120
+            if any(token in combined for token in ["adobe", "express", "upload", "asset", "media"]):
+                score += 30
+            if metadata.get("visible"):
+                score += 5
+            if prefer_adobe and "shadowroot" not in root_kind:
+                score -= 30
+
+            candidates.append((score, scope_name, idx, input_locator, metadata))
+
+    candidates.sort(key=lambda item: item[0], reverse=True)
+    return candidates
 
 
-def _try_set_existing_file_input_any_scope(page, image_path: Path) -> str | None:
-    for scope_name, scope in _iter_playwright_scopes(page):
-        used = _try_set_existing_file_input_on_scope(scope, image_path)
-        if used:
+def _try_set_existing_file_input_any_scope(page, image_path: Path, prefer_adobe: bool = False) -> str | None:
+    for score, scope_name, idx, input_locator, metadata in _collect_file_input_candidates(page, prefer_adobe=prefer_adobe):
+        try:
+            input_locator.set_input_files(str(image_path))
             page.wait_for_timeout(1500)
-            print(f"   ✅ 画像ファイル指定: {scope_name}:{used}")
-            return f"{scope_name}:{used}"
+            root_kind = metadata.get("root_kind") or ""
+            host_tag = metadata.get("host_tag") or ""
+            used = f"{scope_name}:input[type='file']#{idx}:score={score}:root={root_kind}:host={host_tag}"
+            print(f"   ✅ 画像ファイル指定: {used}")
+            return used
+        except Exception:
+            continue
     return None
 
 
@@ -664,13 +734,131 @@ def _choose_adobe_express_entry(page) -> str:
     )
 
 
+def _open_adobe_upload_sidebar(page) -> str:
+    return _click_visible_scoped_candidate(
+        page,
+        candidate_builders=[
+            ("sidebar_upload_role_exact", lambda scope: scope.get_by_role("button", name="アップロード", exact=True)),
+            ("sidebar_upload_text_exact", lambda scope: scope.locator("button, [role='button'], label").filter(has_text=re.compile(r"^アップロード$"))),
+            ("sidebar_upload_aria", lambda scope: scope.locator("[aria-label='アップロード']")),
+        ],
+        description="Adobe Express アップロードサイドバー",
+        timeout_ms=4000,
+    )
+
+
+def _wait_for_adobe_upload_signal(page, image_path: Path, timeout_sec: int = 15) -> str:
+    candidate_builders = [
+        ("blob_image", lambda scope: scope.locator("img[src^='blob:']")),
+        ("blob_image_alt", lambda scope: scope.locator(f"img[alt*='{image_path.stem}']")),
+        ("filename_text", lambda scope: scope.locator(f"text={image_path.name}")),
+        ("filename_stem_text", lambda scope: scope.locator(f"text={image_path.stem}")),
+    ]
+    deadline = time.time() + timeout_sec
+    last_error = ""
+    while time.time() < deadline:
+        try:
+            strategy, _ = _find_visible_scoped_candidate(
+                page,
+                candidate_builders,
+                "Adobe Express アップロード反映",
+                timeout_ms=1200,
+            )
+            print(f"   ✅ Adobe アップロード反映検出: {strategy}")
+            return strategy
+        except Exception as exc:
+            last_error = str(exc)
+            page.wait_for_timeout(1000)
+    print(f"   ⚠️ Adobe アップロード反映は確認できませんでした: {last_error}")
+    return "timeout"
+
+
+def _build_adobe_top_insert_candidate_builders():
+    return [
+        (
+            "sp_button_save_btn",
+            lambda scope: scope.locator("x-embed-editor-save-button sp-button#save-btn"),
+        ),
+        (
+            "sp_button_save_btn_global",
+            lambda scope: scope.locator("sp-button#save-btn"),
+        ),
+        (
+            "sp_button_save_to_host_app",
+            lambda scope: scope.locator("sp-button#save-btn[export-option-id='save-to-host-app']"),
+        ),
+        ("role_button_挿入", lambda scope: scope.get_by_role("button", name="挿入")),
+        ("button_text_挿入", lambda scope: scope.locator("button").filter(has_text="挿入")),
+    ]
+
+
+def _build_adobe_confirm_insert_candidate_builders():
+    return [
+        (
+            "dialog_download_btn_scoped",
+            lambda scope: scope.locator(
+                "x-embed-editor-save-button overlay-trigger[type='modal'] sp-button#dialog-download-btn"
+            ),
+        ),
+        (
+            "dialog_download_btn_global",
+            lambda scope: scope.locator("sp-button#dialog-download-btn"),
+        ),
+        (
+            "dialog_download_btn_host_app",
+            lambda scope: scope.locator(
+                "overlay-trigger[type='modal'] sp-button[export-option-id='save-to-host-app']"
+            ),
+        ),
+        (
+            "dialog_download_btn_slot_trigger",
+            lambda scope: scope.locator("overlay-trigger[type='modal'] sp-button[slot='trigger']"),
+        ),
+        (
+            "panel_button_挿入_xpath",
+            lambda scope: scope.locator(
+                "xpath=//div[.//*[contains(normalize-space(), 'ファイル形式')]]//button[normalize-space()='挿入']"
+            ),
+        ),
+        (
+            "panel_button_挿入_text_xpath",
+            lambda scope: scope.locator(
+                "xpath=//div[.//*[contains(normalize-space(), 'ファイル形式')]]//*[self::button or @role='button'][contains(normalize-space(), '挿入')]"
+            ),
+        ),
+    ]
+
+
+def _wait_for_adobe_confirm_insert_panel(page, timeout_sec: int = 20) -> str:
+    deadline = time.time() + timeout_sec
+    last_error = ""
+    while time.time() < deadline:
+        if _is_adobe_login_prompt_visible(page):
+            raise RuntimeError("ADOBE_LOGIN_REQUIRED")
+        try:
+            strategy, _ = _find_visible_scoped_candidate(
+                page,
+                _build_adobe_confirm_insert_candidate_builders(),
+                "Adobe Express 確定挿入パネル",
+                timeout_ms=1200,
+            )
+            print(f"   ✅ Adobe Express 確定挿入パネル検出: {strategy}")
+            return strategy
+        except Exception as exc:
+            last_error = str(exc)
+            page.wait_for_timeout(800)
+    raise RuntimeError(f"Adobe Express 確定挿入パネルが表示されませんでした: {last_error}")
+
+
 def _upload_image_via_adobe_express(page, image_path: Path, artifacts_dir: Path, previous_count: int) -> dict:
     adobe_entry_strategy = _choose_adobe_express_entry(page)
     _dump_page_artifacts(page, artifacts_dir, "adobe_entry_clicked")
     _wait_for_adobe_workspace(page)
     _dump_page_artifacts(page, artifacts_dir, "adobe_workspace_open")
+    upload_sidebar_strategy = _open_adobe_upload_sidebar(page)
+    _dump_page_artifacts(page, artifacts_dir, "adobe_upload_sidebar_open")
 
-    upload_strategy = _try_set_existing_file_input_any_scope(page, image_path)
+    upload_strategy = _try_set_existing_file_input_any_scope(page, image_path, prefer_adobe=True)
     if not upload_strategy:
         upload_strategy = _click_visible_scoped_candidate(
             page,
@@ -682,11 +870,12 @@ def _upload_image_via_adobe_express(page, image_path: Path, artifacts_dir: Path,
             description="Adobe Express アップロード導線",
         )
         page.wait_for_timeout(1200)
-        direct_input = _try_set_existing_file_input_any_scope(page, image_path)
+        direct_input = _try_set_existing_file_input_any_scope(page, image_path, prefer_adobe=True)
         if direct_input:
             upload_strategy = f"{upload_strategy}:{direct_input}"
 
-    page.wait_for_timeout(4000)
+    upload_signal_strategy = _wait_for_adobe_upload_signal(page, image_path, timeout_sec=12)
+    page.wait_for_timeout(2500)
     _dump_page_artifacts(page, artifacts_dir, "adobe_after_upload")
     welcome_modal_strategy = ""
     try:
@@ -694,36 +883,22 @@ def _upload_image_via_adobe_express(page, image_path: Path, artifacts_dir: Path,
     except Exception as exc:
         print(f"   ⚠️ Adobe welcome モーダル解除失敗（続行）: {exc}")
 
-    insert_strategy = _click_rightmost_scoped_candidate(
+    insert_strategy = _click_visible_scoped_candidate(
         page,
-        candidate_builders=[
-            ("role_button_挿入", lambda scope: scope.get_by_role("button", name="挿入")),
-            ("button_text_挿入", lambda scope: scope.locator("button").filter(has_text="挿入")),
-        ],
+        candidate_builders=_build_adobe_top_insert_candidate_builders(),
         description="Adobe Express 上部挿入",
     )
-    page.wait_for_timeout(3000)
+    page.wait_for_timeout(2000)
     _dump_page_artifacts(page, artifacts_dir, "adobe_after_first_insert")
     if _is_adobe_login_prompt_visible(page):
         raise RuntimeError("ADOBE_LOGIN_REQUIRED")
 
+    confirm_panel_strategy = _wait_for_adobe_confirm_insert_panel(page, timeout_sec=20)
     confirm_insert_strategy = _click_visible_scoped_candidate(
         page,
-        candidate_builders=[
-            (
-                "panel_button_挿入",
-                lambda scope: scope.locator(
-                    "xpath=//div[.//*[contains(normalize-space(), 'ファイル形式')]]//button[normalize-space()='挿入']"
-                ),
-            ),
-            (
-                "panel_button_挿入_text",
-                lambda scope: scope.locator(
-                    "xpath=//div[.//*[contains(normalize-space(), 'ファイル形式')]]//*[self::button or @role='button'][contains(normalize-space(), '挿入')]"
-                ),
-            ),
-        ],
+        candidate_builders=_build_adobe_confirm_insert_candidate_builders(),
         description="Adobe Express 確定挿入",
+        timeout_ms=6000,
     )
     _dump_page_artifacts(page, artifacts_dir, "adobe_insert_confirmed")
 
@@ -736,9 +911,12 @@ def _upload_image_via_adobe_express(page, image_path: Path, artifacts_dir: Path,
     )
     return {
         "adobe_entry_strategy": adobe_entry_strategy,
+        "upload_sidebar_strategy": upload_sidebar_strategy,
         "upload_entry_strategy": upload_strategy,
+        "upload_signal_strategy": upload_signal_strategy,
         "welcome_modal_strategy": welcome_modal_strategy,
         "insert_strategy": insert_strategy,
+        "confirm_panel_strategy": confirm_panel_strategy,
         "confirm_insert_strategy": confirm_insert_strategy,
         "ready_wait_strategy": ready_wait_strategy,
         "after_ready_image_count": ready_image_count,
