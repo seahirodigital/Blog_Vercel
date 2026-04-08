@@ -6,6 +6,18 @@
 
 このメモは 2026-04-08 時点の検証結果であり、成功条件は「画像アップロード後に再読み込みしても画像が残っていること」とする。
 
+## 最新結論
+
+2026-04-08 の最新成功系は ver2.0 で、座標固定ではなく DOM ベースで通せた。
+
+- 下書き作成は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\note_draft_poster.py` の既存 API フローを使う
+- トップ画像追加は `button[aria-label="画像を追加"]` を押す
+- 画像選択は `画像をアップロード` のテキスト導線から `expect_file_chooser()` と `set_files()` で通す
+- 画像トリミング確定は `div.ReactModal__Content.CropModal__content[role="dialog"][aria-modal="true"]` 配下の `保存` を押す
+- その直後に保存しない
+- 先にトップ画像エリアのローディング完了を待ち、`main img` が増えたことを確認してから上部 `下書き保存` を押す
+- 最後に再読み込みし、`main img` が残っていることを確認する
+
 
 ## 主要ファイル
 
@@ -47,14 +59,22 @@ python "C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\note_gazo_test
 
 - `run_report.json`
 - `controls_before.json`
-- `controls_after.json`
-- `controls_after_insert.json`
+- `controls_after_menu.json`
+- `controls_after_popup_save.json`
 - `before_upload.png`
 - `before_upload.html`
-- `after_upload.png`
-- `after_upload.html`
-- `after_save.png`
-- `after_save.html`
+- `after_menu_open.png`
+- `after_menu_open.html`
+- `crop_modal_open.png`
+- `crop_modal_open.html`
+- `after_popup_save.png`
+- `after_popup_save.html`
+- `after_upload_ready.png`
+- `after_upload_ready.html`
+- `after_draft_save.png`
+- `after_draft_save.html`
+- `after_reload.png`
+- `after_reload.html`
 
 ## 既定本文
 
@@ -73,13 +93,13 @@ python "C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\note_gazo_test
 
 1. `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\note_draft_poster.py` の既存工程で下書き URL を作る
 2. その `https://editor.note.com/notes/{key}/edit/` を Playwright で開く
-3. トップ画像アイコンを押す
-4. `画像をアップロード` を押す
-5. `C:\Users\HCY\Downloads\Image_fx.png` を選択する
-6. 画像トリミング系ポップアップの `保存` を押す
-7. エディタ上部の `下書き保存` を押す
+3. `button[aria-label="画像を追加"]` を押す
+4. `画像をアップロード` の導線を押し、`C:\Users\HCY\Downloads\Image_fx.png` を `expect_file_chooser()` と `set_files()` で渡す
+5. `div.ReactModal__Content.CropModal__content[role="dialog"][aria-modal="true"]` 配下の `保存` を押す
+6. トップ画像エリアがローディング中の 3 点表示から抜け、`main img` が増えるまで待つ
+7. その後にエディタ上部の `下書き保存` を押す
 8. ページを再読み込みする
-9. `img` 要素が 1 件以上あることを確認する
+9. `main img` が 1 件以上あることを確認する
 
 ## 初期調査で分かったこと
 
@@ -88,7 +108,8 @@ python "C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\note_gazo_test
 1. `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\note_draft_poster.py` の API 下書き作成フローは、画像追加テストのベースとして再利用しやすい
 2. `https://editor.note.com/notes/new` の直接オープンは `AccessDenied` になった
 3. 初回の失敗要因は認証切れとプロキシ継承にあった
-4. 認証更新後は、既存の `_create_draft_api()` を使えば edit URL を安定して取得できた
+4. `note_draft_poster.py` の `_verify_session()` は false を返しても、実際の `_create_draft_api()` は成功するケースがあった
+5. そのため ver2.0 では、検証 API の結果だけで止めず、まず実際の下書き作成を試すようにした
 
 つまり、初期のボトルネックは画像アップロード以前に認証と入口選定だったが、最終的には解消済みである
 
@@ -105,7 +126,44 @@ python "C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\note_gazo_test
 
 実際に `https://editor.note.com/notes/new` はこの環境で `AccessDenied` だったため、新規作成ページ直叩きより既存下書き URL を使う方が正攻法だった。
 
+## ver2.0 のDOMセレクタ方針
+
+ver2.0 では、2026-04-08 に取得した次の HTML を根拠に、明示的な DOM セレクタで処理する。
+
+- 参考スクリーンショット:
+  `C:\Users\HCY\Pictures\Screenshots\スクリーンショット 2026-04-08 155953.png`
+- 参考スクリーンショット:
+  `C:\Users\HCY\Pictures\Screenshots\スクリーンショット 2026-04-08 160430.png`
+
+採用した主セレクタ:
+
+- トップ画像追加:
+  `button[aria-label="画像を追加"]`
+- 画像アップロード導線:
+  `text=画像をアップロード`
+- トリミングモーダル:
+  `div.ReactModal__Content.CropModal__content[role="dialog"][aria-modal="true"]`
+- トリミングモーダル内保存:
+  上記 dialog 配下の `get_by_role("button", name="保存")`
+- 上部下書き保存:
+  `get_by_role("button", name="下書き保存")`
+- 保存判定:
+  `main img`
+
+使わない方がよいもの:
+
+- `id=":rj:"` や `id=":rk:"` のような React の動的 ID
+- 単純な固定座標
+
+追加で必要だった待機:
+
+- モーダル内 `保存` の直後は、トップ画像エリアが即画像化せず、3 点ローディングになる
+- この段階で `下書き保存` すると、画像が draft に残らないことがある
+- そのため ver2.0 では、`main img` が増えるまで待ってから `下書き保存` を押す
+
 ## なぜ座標ベースで実施したか
+
+この節は v1.0 の試行錯誤ログであり、最新版の推奨ではない。
 
 セレクタ方式だけで最後まで通そうとすると、今回の note UI では不安定だったため。
 
@@ -214,6 +272,23 @@ python "C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\note_gazo_test
 - ラベル解決のぶれ
 - 日本語文字列の扱いと strict マッチの不安定さ
 
+### 失敗した試行 5
+
+DOM ベースで `保存` までは押せているのに、その直後にすぐ `下書き保存` した方式。
+
+結果:
+
+- 再読み込み後に画像が残らなかった
+
+原因:
+
+- モーダル内 `保存` の直後は、トップ画像エリアが即画像化されず、3 点ローディング表示になっていた
+- その段階ではまだアップロード完了前で、`下書き保存` が早すぎた
+
+改善:
+
+- `main img` が増えるまで待ってから `下書き保存` を押す
+
 ### 成功した試行
 
 座標ベースで
@@ -248,10 +323,17 @@ python "C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\note_gazo_test
 
 ## 2026-04-08 時点の最終成功ログ要約
 
-- 下書き URL: `https://editor.note.com/notes/na8ef5750a583/edit/`
-- `IMG_COUNT_BEFORE=0`
-- ポップアップ `保存` 実行後、その場の `IMG_COUNT_AFTER_POPUP_SAVE=0`
-- 上部 `下書き保存` 実行後に再読み込み
-- `IMG_COUNT_AFTER_RELOAD=1`
+ver2.0 の headless 実行で、DOM ベースでも保存成功を確認した。
 
-この結果により、保存成功は確認済み。
+- 下書き URL: `https://editor.note.com/notes/n0526d6251980/edit/`
+- `before_image_count=0`
+- `image_button_strategy=button[aria-label='画像を追加']#0`
+- `upload_entry_strategy=text=画像をアップロード#0:filechooser`
+- `crop_dialog_strategy=CropModal__content#0`
+- `popup_save_strategy=CropModal__content#0->role_button_保存#0`
+- `ready_wait_strategy=main_img_detected`
+- `after_ready_image_count=1`
+- `draft_save_strategy=role_button_下書き保存#0`
+- `after_reload_image_count=1`
+
+この結果により、ver2.0 の DOM ベース保存は確認済み。
