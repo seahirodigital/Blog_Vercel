@@ -1260,10 +1260,20 @@ def _resolve_amazon_image_target(page, source_markdown: str) -> dict:
     }
 
 
+def _select_note_top_image_for_upload(fetch_result) -> tuple[object, str]:
+    prepared_image = getattr(fetch_result, "prepared_image", None)
+    if prepared_image:
+        return prepared_image, "prepared"
+    if fetch_result.hires_image:
+        return fetch_result.hires_image, "hires"
+    return fetch_result.api_image, "api"
+
+
 def _attach_amazon_top_image_to_page(page, source_markdown: str, artifacts_dir: Path | None = None) -> dict:
     artifacts_dir = artifacts_dir or NOTE_TOP_IMAGE_ARTIFACTS_DIR
     artifacts_dir.mkdir(parents=True, exist_ok=True)
     force_direct_upload = os.getenv("NOTE_TOP_IMAGE_FORCE_DIRECT", "").strip().lower() in {"1", "true", "yes", "on"}
+    use_adobe_upload = os.getenv("NOTE_TOP_IMAGE_USE_ADOBE", "").strip().lower() in {"1", "true", "yes", "on"}
 
     target = _resolve_amazon_image_target(page, source_markdown)
     _write_json(artifacts_dir / "amazon_target_resolution.json", target)
@@ -1289,8 +1299,10 @@ def _attach_amazon_top_image_to_page(page, source_markdown: str, artifacts_dir: 
         "browser_probe_used": False,
         "browser_hires_url": "",
         "browser_hires_saved_path": "",
+        "browser_prepared_saved_path": "",
         "requests_error": "",
         "browser_error": "",
+        "prepared_error": "",
     }
     try:
         requests_html = amazon_image_module.fetch_detail_page_html(
@@ -1325,10 +1337,29 @@ def _attach_amazon_top_image_to_page(page, source_markdown: str, artifacts_dir: 
                 )
                 hires_image = amazon_image_module.save_and_optionally_upload(
                     hires_image,
-                    getattr(amazon_image_module, "DEFAULT_ONEDRIVE_FOLDER", ""),
+                    amazon_image_module.build_remote_image_folder(
+                        getattr(amazon_image_module, "DEFAULT_ONEDRIVE_FOLDER", ""),
+                        getattr(amazon_image_module, "RAW_SUBDIR_NAME", "raw"),
+                    ),
                 )
                 fetch_result.hires_image = hires_image
                 amazon_hires_probe["browser_hires_saved_path"] = str(hires_image.local_path)
+                try:
+                    prepared_image = amazon_image_module.create_prepared_note_hero_image(
+                        source_image=hires_image,
+                        keyword=fetch_result.asin or target["keyword"] or "amazon_image",
+                    )
+                    prepared_image = amazon_image_module.save_and_optionally_upload(
+                        prepared_image,
+                        amazon_image_module.build_remote_image_folder(
+                            getattr(amazon_image_module, "DEFAULT_ONEDRIVE_FOLDER", ""),
+                            getattr(amazon_image_module, "PREPARED_SUBDIR_NAME", "prepared"),
+                        ),
+                    )
+                    fetch_result.prepared_image = prepared_image
+                    amazon_hires_probe["browser_prepared_saved_path"] = str(prepared_image.local_path)
+                except Exception as exc:
+                    amazon_hires_probe["prepared_error"] = str(exc)
         except Exception as exc:
             amazon_hires_probe["browser_error"] = str(exc)
         finally:
@@ -1346,10 +1377,12 @@ def _attach_amazon_top_image_to_page(page, source_markdown: str, artifacts_dir: 
     image_button_strategy = _click_top_image_button(page)
     _dump_page_artifacts(page, artifacts_dir, "top_image_menu_open")
 
-    if force_direct_upload:
-        print("   ℹ️ NOTE_TOP_IMAGE_FORCE_DIRECT=1 のため通常アップロードを強制します")
+    selected_upload_image, selected_upload_kind = _select_note_top_image_for_upload(fetch_result)
 
-    if fetch_result.hires_image and not force_direct_upload:
+    if force_direct_upload and use_adobe_upload:
+        print("   ℹ️ NOTE_TOP_IMAGE_FORCE_DIRECT=1 のため Adobe 経由を使わず通常アップロードを維持します")
+
+    if fetch_result.hires_image and use_adobe_upload and not force_direct_upload:
         try:
             flow_result = _upload_image_via_adobe_express(
                 page,
@@ -1357,8 +1390,9 @@ def _attach_amazon_top_image_to_page(page, source_markdown: str, artifacts_dir: 
                 artifacts_dir,
                 previous_count=before_count,
             )
-            image_flow = "adobe_hires"
+            image_flow = "adobe_hires_debug"
             selected_image_path = str(fetch_result.hires_image.local_path)
+            selected_image_kind = "hires"
         except Exception as exc:
             print(f"   ⚠️ Adobe Express フロー失敗のため通常アップロードへフォールバックします: {exc}")
             page.reload(wait_until="domcontentloaded", timeout=60_000)
@@ -1369,22 +1403,22 @@ def _attach_amazon_top_image_to_page(page, source_markdown: str, artifacts_dir: 
             _dump_page_artifacts(page, artifacts_dir, "top_image_menu_reopen_after_adobe_failure")
             flow_result = _run_direct_note_image_upload(
                 page,
-                fetch_result.api_image.local_path,
+                selected_upload_image.local_path,
                 artifacts_dir,
                 previous_count=before_count,
             )
             flow_result["adobe_error"] = str(exc)
-            image_flow = "direct_api_after_adobe_failure"
-            selected_image_path = str(fetch_result.api_image.local_path)
+            image_flow = f"direct_{selected_upload_kind}_after_adobe_failure"
+            selected_image_path = str(selected_upload_image.local_path)
     else:
         flow_result = _run_direct_note_image_upload(
             page,
-            fetch_result.api_image.local_path,
+            selected_upload_image.local_path,
             artifacts_dir,
             previous_count=before_count,
         )
-        image_flow = "direct_api_forced" if force_direct_upload else "direct_api"
-        selected_image_path = str(fetch_result.api_image.local_path)
+        image_flow = f"direct_{selected_upload_kind}"
+        selected_image_path = str(selected_upload_image.local_path)
 
     draft_save_strategy = _save_editor_draft(page)
     _dump_page_artifacts(page, artifacts_dir, "after_top_image_draft_save")
@@ -1401,7 +1435,10 @@ def _attach_amazon_top_image_to_page(page, source_markdown: str, artifacts_dir: 
         "api_image_url": fetch_result.api_image.image_url,
         "hires_image_path": str(fetch_result.hires_image.local_path) if fetch_result.hires_image else "",
         "hires_image_url": fetch_result.hires_image.image_url if fetch_result.hires_image else "",
+        "prepared_image_path": str(fetch_result.prepared_image.local_path) if getattr(fetch_result, "prepared_image", None) else "",
+        "prepared_image_url": fetch_result.prepared_image.image_url if getattr(fetch_result, "prepared_image", None) else "",
         "selected_image_path": selected_image_path,
+        "selected_image_kind": selected_upload_kind,
         "before_image_count": before_count,
     }
     result.update(flow_result)

@@ -26,7 +26,7 @@ from typing import Optional
 from urllib.parse import quote, urlparse
 
 import requests
-from PIL import Image
+from PIL import Image, ImageOps
 
 
 TOKEN_URL = "https://api.amazon.co.jp/auth/o2/token"
@@ -39,10 +39,14 @@ ONEDRIVE_TOKEN_URL = "https://login.microsoftonline.com/common/oauth2/v2.0/token
 DEFAULT_MARKETPLACE = "www.amazon.co.jp"
 DEFAULT_ASSOCIATE_TAG = "hiroshit-22"
 DEFAULT_LOCAL_OUTPUT_DIR = Path(
-    r"C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\ダウンロード_トップ画像_vercel_blog"
+    r"C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images"
 )
 DEFAULT_ACTIONS_SUBDIR = "amazon_top_images"
-DEFAULT_ONEDRIVE_FOLDER = "Vercel_Blog/ダウンロード_トップ画像_vercel_blog"
+DEFAULT_ONEDRIVE_FOLDER = "Vercel_Blog/Amazon_images"
+RAW_SUBDIR_NAME = "raw"
+PREPARED_SUBDIR_NAME = "prepared"
+NOTE_HERO_CANVAS_SIZE = (1600, 836)
+NOTE_HERO_JPEG_QUALITY = 92
 DEFAULT_RESOURCES = [
     "itemInfo.title",
     "images.primary.large",
@@ -119,6 +123,7 @@ class FetchTopImagesResult:
     title: str
     api_image: SavedImageInfo
     hires_image: Optional[SavedImageInfo]
+    prepared_image: Optional[SavedImageInfo]
     detail_page_url: str
 
 
@@ -131,6 +136,26 @@ def resolve_default_output_dir() -> Path:
     if is_github_actions() and runner_temp:
         return Path(runner_temp) / DEFAULT_ACTIONS_SUBDIR
     return DEFAULT_LOCAL_OUTPUT_DIR
+
+
+def resolve_image_output_dirs(output_root: Path) -> tuple[Path, Path]:
+    resolved_root = output_root.expanduser().resolve()
+    return resolved_root / RAW_SUBDIR_NAME, resolved_root / PREPARED_SUBDIR_NAME
+
+
+def build_remote_image_folder(root_folder: str, subdir: str = "") -> str:
+    normalized_root = (root_folder or "").strip().strip("/")
+    normalized_subdir = (subdir or "").strip().strip("/")
+    if normalized_root and normalized_subdir:
+        return f"{normalized_root}/{normalized_subdir}"
+    return normalized_root or normalized_subdir
+
+
+def infer_output_root_from_image_path(image_path: Path) -> Path:
+    parent = image_path.parent
+    if parent.name.lower() in {RAW_SUBDIR_NAME, PREPARED_SUBDIR_NAME}:
+        return parent.parent
+    return parent
 
 
 def get_env_or_raise(name: str) -> str:
@@ -345,11 +370,17 @@ def infer_extension_from_url(image_url: str) -> str:
     return suffix if suffix else ".jpg"
 
 
-def build_output_path(keyword: str, image_url: str, output_dir: Path, suffix: str = "") -> Path:
+def build_output_path(
+    keyword: str,
+    image_url: str,
+    output_dir: Path,
+    suffix: str = "",
+    extension: str | None = None,
+) -> Path:
     date_prefix = datetime.now().strftime("%Y%m%d")
     safe_keyword = sanitize_filename_part(keyword)
-    extension = infer_extension_from_url(image_url)
-    return output_dir / f"{date_prefix}_{safe_keyword}{suffix}{extension}"
+    resolved_extension = extension or infer_extension_from_url(image_url)
+    return output_dir / f"{date_prefix}_{safe_keyword}{suffix}{resolved_extension}"
 
 
 def download_image(image_url: str, output_path: Path) -> tuple[Path, int | None, int | None]:
@@ -579,6 +610,76 @@ def save_and_optionally_upload(
     return image
 
 
+def _to_rgb_tuple(pixel: object) -> tuple[int, int, int]:
+    if isinstance(pixel, int):
+        return (pixel, pixel, pixel)
+    if isinstance(pixel, tuple):
+        if len(pixel) >= 3:
+            return tuple(int(channel) for channel in pixel[:3])
+    return (255, 255, 255)
+
+
+def _pick_note_hero_background_color(image: Image.Image) -> tuple[int, int, int]:
+    sample = image.resize((1, 1), Image.Resampling.BILINEAR)
+    average_rgb = _to_rgb_tuple(sample.getpixel((0, 0)))
+    return tuple(int((channel * 0.35) + (255 * 0.65)) for channel in average_rgb)
+
+
+def create_prepared_note_hero_image(
+    source_image: SavedImageInfo,
+    keyword: str,
+    output_root: Path | None = None,
+    canvas_size: tuple[int, int] = NOTE_HERO_CANVAS_SIZE,
+) -> SavedImageInfo:
+    resolved_output_root = (
+        (output_root or infer_output_root_from_image_path(source_image.local_path))
+        .expanduser()
+        .resolve()
+    )
+    _, prepared_dir = resolve_image_output_dirs(resolved_output_root)
+    prepared_path = build_output_path(
+        keyword=keyword,
+        image_url=source_image.image_url or source_image.local_path.name,
+        output_dir=prepared_dir,
+        suffix="_note_hero",
+        extension=".jpg",
+    )
+    prepared_path.parent.mkdir(parents=True, exist_ok=True)
+
+    try:
+        with Image.open(source_image.local_path) as opened:
+            normalized = ImageOps.exif_transpose(opened).convert("RGB")
+            contained = ImageOps.contain(
+                normalized,
+                canvas_size,
+                method=Image.Resampling.LANCZOS,
+            )
+            canvas = Image.new("RGB", canvas_size, _pick_note_hero_background_color(normalized))
+            offset = (
+                (canvas_size[0] - contained.width) // 2,
+                (canvas_size[1] - contained.height) // 2,
+            )
+            canvas.paste(contained, offset)
+            canvas.save(
+                prepared_path,
+                format="JPEG",
+                quality=NOTE_HERO_JPEG_QUALITY,
+                optimize=True,
+            )
+    except Exception as exc:
+        raise AmazonCreatorsApiError(
+            f"note HERO 用画像の整形に失敗しました: {source_image.local_path} | {exc}"
+        ) from exc
+
+    return SavedImageInfo(
+        label="prepared",
+        image_url=source_image.image_url,
+        local_path=prepared_path,
+        width=canvas_size[0],
+        height=canvas_size[1],
+    )
+
+
 def resolve_top_item_image(
     keyword: str,
     asin: str,
@@ -644,7 +745,8 @@ def fetch_and_save_top_images(
     if not normalized_keyword and not normalized_asin:
         raise AmazonCreatorsApiError("検索キーワードまたは ASIN のどちらかが必要です。")
 
-    resolved_output_dir = (output_dir or resolve_default_output_dir()).expanduser().resolve()
+    resolved_output_root = (output_dir or resolve_default_output_dir()).expanduser().resolve()
+    raw_output_dir, _ = resolve_image_output_dirs(resolved_output_root)
     access_token = get_access_token()
     result, detail_page_html = resolve_top_item_image(
         keyword=normalized_keyword,
@@ -653,15 +755,18 @@ def fetch_and_save_top_images(
         marketplace=marketplace,
         partner_tag=partner_tag,
     )
-    file_keyword = normalized_keyword or result.asin or "amazon_image"
+    file_keyword = result.asin or normalized_keyword or "amazon_image"
 
     api_image = save_image(
         label="api",
         keyword=file_keyword,
         image_url=result.image_url,
-        output_dir=resolved_output_dir,
+        output_dir=raw_output_dir,
     )
-    api_image = save_and_optionally_upload(api_image, onedrive_folder)
+    api_image = save_and_optionally_upload(
+        api_image,
+        build_remote_image_folder(onedrive_folder, RAW_SUBDIR_NAME),
+    )
 
     hires_image: Optional[SavedImageInfo] = None
     hires_url = fetch_hires_from_apify(result.asin, marketplace=marketplace)
@@ -676,16 +781,36 @@ def fetch_and_save_top_images(
             label="hires",
             keyword=file_keyword,
             image_url=hires_url,
-            output_dir=resolved_output_dir,
+            output_dir=raw_output_dir,
             suffix="_hires",
         )
-        hires_image = save_and_optionally_upload(hires_image, onedrive_folder)
+        hires_image = save_and_optionally_upload(
+            hires_image,
+            build_remote_image_folder(onedrive_folder, RAW_SUBDIR_NAME),
+        )
     else:
         print("[WARN] hiRes 画像は見つかりませんでした。通常版のみ保存します。")
+
+    prepared_image: Optional[SavedImageInfo] = None
+    prepared_source = hires_image or api_image
+    try:
+        prepared_image = create_prepared_note_hero_image(
+            source_image=prepared_source,
+            keyword=file_keyword,
+            output_root=resolved_output_root,
+        )
+        prepared_image = save_and_optionally_upload(
+            prepared_image,
+            build_remote_image_folder(onedrive_folder, PREPARED_SUBDIR_NAME),
+        )
+    except AmazonCreatorsApiError as exc:
+        print(f"[WARN] note HERO 用の整形画像生成に失敗しました: {exc}")
 
     saved_images = [api_image]
     if hires_image:
         saved_images.append(hires_image)
+    if prepared_image:
+        saved_images.append(prepared_image)
     write_github_step_outputs(saved_images)
 
     return FetchTopImagesResult(
@@ -693,6 +818,7 @@ def fetch_and_save_top_images(
         title=result.title,
         api_image=api_image,
         hires_image=hires_image,
+        prepared_image=prepared_image,
         detail_page_url=build_detail_page_url(result.asin, marketplace),
     )
 
@@ -707,7 +833,7 @@ def parse_args() -> argparse.Namespace:
         "--output-dir",
         default=str(default_output_dir),
         help=(
-            "保存先。ローカル既定値は "
+            "保存先ルート。raw / prepared サブフォルダを自動作成します。ローカル既定値は "
             f"{DEFAULT_LOCAL_OUTPUT_DIR}、GitHub Actions では "
             f"%%RUNNER_TEMP%%\\{DEFAULT_ACTIONS_SUBDIR} です。"
         ),
@@ -764,6 +890,8 @@ def main() -> int:
     print_saved_image(fetch_result.api_image)
     if fetch_result.hires_image:
         print_saved_image(fetch_result.hires_image)
+    if fetch_result.prepared_image:
+        print_saved_image(fetch_result.prepared_image)
     if os.getenv("GITHUB_OUTPUT", "").strip():
         print("[INFO] GitHub Actions の step output に画像情報を書き出しました。")
     print("[OK] 画像保存処理が完了しました。")

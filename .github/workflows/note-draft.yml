@@ -30,23 +30,6 @@ jobs:
       - name: Playwright ブラウザをインストール（Chromium）
         run: playwright install --with-deps chromium
 
-      - name: Adobe browser state Secret を確認
-        env:
-          ADOBE_EXPRESS_STORAGE_STATE: ${{ secrets.ADOBE_EXPRESS_STORAGE_STATE }}
-        run: |
-          python -c "
-          import json, os, sys
-
-          raw = os.environ.get('ADOBE_EXPRESS_STORAGE_STATE', '').strip()
-          if not raw:
-              raise SystemExit('ADOBE_EXPRESS_STORAGE_STATE secret が未設定です。ローカルと同じ browser state で再現できません。')
-          try:
-              json.loads(raw)
-          except Exception as exc:
-              raise SystemExit(f'ADOBE_EXPRESS_STORAGE_STATE secret の JSON が不正です: {exc}')
-          print('✅ ADOBE_EXPRESS_STORAGE_STATE secret を確認しました')
-          "
-
       - name: OneDriveから記事を取得し note に下書き投稿
         env:
           ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
@@ -55,7 +38,6 @@ jobs:
           NOTE_EMAIL: ${{ secrets.NOTE_EMAIL }}
           NOTE_PASSWORD: ${{ secrets.NOTE_PASSWORD }}
           NOTE_STORAGE_STATE: ${{ secrets.NOTE_STORAGE_STATE }}
-          ADOBE_EXPRESS_STORAGE_STATE: ${{ secrets.ADOBE_EXPRESS_STORAGE_STATE }}
           AMAZON_CLIENT_ID: ${{ secrets.AMAZON_CLIENT_ID }}
           AMAZON_CLIENT_SECRET: ${{ secrets.AMAZON_CLIENT_SECRET }}
           APIFY_API_KEY: ${{ secrets.APIFY_API_KEY }}
