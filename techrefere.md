@@ -774,3 +774,52 @@ GitHub Actions (および必要ならローカルの `.env`) に以下の Secret
   `browser_hires_url`
   のどちらで hiRes を拾えるか、である
 
+### 2026-04-09 Actions 追加実測: hiRes 欠落の正体
+
+push:
+`e838a6e`
+
+再実行した Actions run:
+`https://github.com/seahirodigital/Blog_Vercel/actions/runs/24170695007`
+
+run 自体は成功したが、結果は引き続き通常版画像だった。
+
+artifact:
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\tmp\run_24170695007\note-top-image-artifacts-24170695007\top_image_result.json`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\tmp\run_24170695007\note-top-image-artifacts-24170695007\amazon_hires_probe.json`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\tmp\run_24170695007\note-top-image-artifacts-24170695007\amazon_detail_requests.html`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\tmp\run_24170695007\note-top-image-artifacts-24170695007\amazon_detail_browser.html`
+
+`amazon_hires_probe.json` は次の通りだった。
+
+```json
+{
+  "requests_hires_url": "",
+  "browser_probe_used": true,
+  "browser_hires_url": "",
+  "browser_error": ""
+}
+```
+
+さらに `amazon_detail_requests.html` と `amazon_detail_browser.html` の先頭を確認すると、どちらも商品詳細ページではなく Amazon の captcha ページだった。
+
+判定文字列:
+- `opfcaptcha.amazon.co.jp`
+- `api-services-support@amazon.com`
+- `/errors/validateCaptcha`
+
+つまり、**GitHub Actions ランナーからの Amazon 詳細ページアクセスは requests でも Playwright browser でも captcha にリダイレクトされている**。
+
+このため、現在の hiRes 未取得の真因は
+`regex が弱い`
+ではなく
+`Actions 側の Amazon 詳細ページ取得が bot 判定されている`
+である。
+
+したがって現時点の最終結論は次の通り。
+
+- ローカル:
+  `adobe_hires` で hiRes 保存まで成功
+- Actions:
+  note / Adobe 側の実装は動作しているが、Amazon 詳細ページ取得が captcha 化されるため hiRes URL を得られず、`direct_api` の通常版へフォールバックする
+
