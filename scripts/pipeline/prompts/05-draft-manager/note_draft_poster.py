@@ -501,6 +501,56 @@ def _wait_for_existing_file_input_any_scope(
     return _try_set_existing_file_input_any_scope(page, image_path, prefer_adobe=prefer_adobe)
 
 
+def _serialize_file_input_candidates(page, prefer_adobe: bool = False, limit: int = 20) -> list[dict]:
+    serialized = []
+    for score, scope_name, idx, _input_locator, metadata in _collect_file_input_candidates(
+        page,
+        prefer_adobe=prefer_adobe,
+    ):
+        serialized.append(
+            {
+                "score": score,
+                "scope_name": scope_name,
+                "index": idx,
+                "accept": metadata.get("accept") or "",
+                "id": metadata.get("id") or "",
+                "class_name": metadata.get("class_name") or "",
+                "visible": bool(metadata.get("visible")),
+                "root_kind": metadata.get("root_kind") or "",
+                "host_tag": metadata.get("host_tag") or "",
+                "host_id": metadata.get("host_id") or "",
+                "host_class": metadata.get("host_class") or "",
+            }
+        )
+        if len(serialized) >= limit:
+            break
+    return serialized
+
+
+def _has_adobe_file_input_candidate(page) -> bool:
+    for score, scope_name, _idx, _input_locator, metadata in _collect_file_input_candidates(
+        page,
+        prefer_adobe=True,
+    ):
+        combined = " ".join(
+            [
+                scope_name,
+                metadata.get("id") or "",
+                metadata.get("class_name") or "",
+                metadata.get("host_tag") or "",
+                metadata.get("host_id") or "",
+                metadata.get("host_class") or "",
+            ]
+        ).lower()
+        if score >= 100:
+            return True
+        if "cc-everywhere-container" in combined:
+            return True
+        if any(token in combined for token in ["adobe", "express"]):
+            return True
+    return False
+
+
 def _write_control_snapshot(path: Path, page) -> None:
     _write_json(path, _collect_control_snapshot(page))
 
@@ -758,8 +808,28 @@ def _run_direct_note_image_upload(page, image_path: Path, artifacts_dir: Path, p
 
 
 def _is_adobe_workspace_visible(page) -> bool:
+    if _is_adobe_welcome_modal_visible(page):
+        return True
+    if _is_adobe_login_prompt_visible(page):
+        return True
+    if _has_adobe_file_input_candidate(page):
+        return True
+
     candidate_builders = [
+        (
+            "cc_everywhere_container",
+            lambda scope: scope.locator("xpath=//*[starts-with(local-name(), 'cc-everywhere-container-')]"),
+        ),
         ("text_powered_by_adobe", lambda scope: scope.locator("text=Powered by Adobe Express")),
+        ("x_embed_editor_save_button", lambda scope: scope.locator("x-embed-editor-save-button")),
+        ("sp_button_save_btn", lambda scope: scope.locator("sp-button#save-btn")),
+        ("dialog_download_btn", lambda scope: scope.locator("sp-button#dialog-download-btn")),
+        (
+            "adobe_dialog",
+            lambda scope: scope.locator("[role='dialog'], [aria-modal='true']").filter(
+                has_text=re.compile("Adobe Express")
+            ),
+        ),
         ("text_ファイル形式", lambda scope: scope.locator("text=ファイル形式")),
         ("button_アップロード", lambda scope: scope.get_by_role("button", name="アップロード")),
         ("text_アップロード", lambda scope: scope.locator("text=アップロード")),
@@ -989,10 +1059,45 @@ def _upload_image_via_adobe_express(page, image_path: Path, artifacts_dir: Path,
     _dump_page_artifacts(page, artifacts_dir, "adobe_entry_clicked")
     _wait_for_adobe_workspace(page)
     _dump_page_artifacts(page, artifacts_dir, "adobe_workspace_open")
-    upload_sidebar_strategy = _open_adobe_upload_sidebar(page)
-    _dump_page_artifacts(page, artifacts_dir, "adobe_upload_sidebar_open")
+    welcome_modal_strategy = ""
+    if not welcome_modal_strategy:
+        try:
+            welcome_modal_strategy = _dismiss_adobe_welcome_modal(page)
+        except Exception as exc:
+            print(f"   笞・・Adobe welcome 繝｢繝ｼ繝繝ｫ隗｣髯､螟ｱ謨暦ｼ育ｶ夊｡鯉ｼ・ {exc}")
+    if welcome_modal_strategy:
+        page.wait_for_timeout(1500)
+        _dump_page_artifacts(page, artifacts_dir, "adobe_welcome_dismissed")
 
-    upload_strategy = _try_set_existing_file_input_any_scope(page, image_path, prefer_adobe=True)
+    _write_json(
+        artifacts_dir / "adobe_file_input_candidates_pre_sidebar.json",
+        _serialize_file_input_candidates(page, prefer_adobe=True),
+    )
+    pre_sidebar_input_strategy = _wait_for_existing_file_input_any_scope(
+        page,
+        image_path,
+        prefer_adobe=True,
+        timeout_ms=6000,
+        poll_ms=400,
+    )
+
+    if pre_sidebar_input_strategy:
+        upload_sidebar_strategy = "direct_input_pre_sidebar"
+        upload_strategy = pre_sidebar_input_strategy
+    else:
+        upload_sidebar_strategy = _open_adobe_upload_sidebar(page)
+        _dump_page_artifacts(page, artifacts_dir, "adobe_upload_sidebar_open")
+        _write_json(
+            artifacts_dir / "adobe_file_input_candidates_post_sidebar.json",
+            _serialize_file_input_candidates(page, prefer_adobe=True),
+        )
+        upload_strategy = _wait_for_existing_file_input_any_scope(
+            page,
+            image_path,
+            prefer_adobe=True,
+            timeout_ms=6000,
+            poll_ms=400,
+        )
     if not upload_strategy:
         upload_strategy = _click_visible_scoped_candidate(
             page,
@@ -1004,7 +1109,13 @@ def _upload_image_via_adobe_express(page, image_path: Path, artifacts_dir: Path,
             description="Adobe Express アップロード導線",
         )
         page.wait_for_timeout(1200)
-        direct_input = _try_set_existing_file_input_any_scope(page, image_path, prefer_adobe=True)
+        direct_input = _wait_for_existing_file_input_any_scope(
+            page,
+            image_path,
+            prefer_adobe=True,
+            timeout_ms=4000,
+            poll_ms=300,
+        )
         if direct_input:
             upload_strategy = f"{upload_strategy}:{direct_input}"
 
@@ -1171,6 +1282,62 @@ def _attach_amazon_top_image_to_page(page, source_markdown: str, artifacts_dir: 
         keyword=target["keyword"],
         asin=target["asin"],
     )
+    amazon_hires_probe = {
+        "detail_page_url": fetch_result.detail_page_url,
+        "asin": fetch_result.asin,
+        "requests_hires_url": fetch_result.hires_image.image_url if fetch_result.hires_image else "",
+        "browser_probe_used": False,
+        "browser_hires_url": "",
+        "browser_hires_saved_path": "",
+        "requests_error": "",
+        "browser_error": "",
+    }
+    try:
+        requests_html = amazon_image_module.fetch_detail_page_html(
+            fetch_result.asin,
+            getattr(amazon_image_module, "DEFAULT_MARKETPLACE", "www.amazon.co.jp"),
+        )
+        _write_text(artifacts_dir / "amazon_detail_requests.html", requests_html)
+        amazon_hires_probe["requests_hires_url"] = (
+            amazon_image_module.extract_hires_from_html(requests_html) or ""
+        )
+    except Exception as exc:
+        amazon_hires_probe["requests_error"] = str(exc)
+
+    if not fetch_result.hires_image:
+        amazon_hires_probe["browser_probe_used"] = True
+        browser_page = None
+        try:
+            browser_page = page.context.new_page()
+            browser_page.goto(fetch_result.detail_page_url, wait_until="domcontentloaded", timeout=60_000)
+            browser_page.wait_for_timeout(2500)
+            browser_html = browser_page.content()
+            _write_text(artifacts_dir / "amazon_detail_browser.html", browser_html)
+            browser_hires_url = amazon_image_module.extract_hires_from_html(browser_html) or ""
+            amazon_hires_probe["browser_hires_url"] = browser_hires_url
+            if browser_hires_url:
+                hires_image = amazon_image_module.save_image(
+                    label="hires",
+                    keyword=fetch_result.asin or target["keyword"] or "amazon_image",
+                    image_url=browser_hires_url,
+                    output_dir=fetch_result.api_image.local_path.parent,
+                    suffix="_hires",
+                )
+                hires_image = amazon_image_module.save_and_optionally_upload(
+                    hires_image,
+                    getattr(amazon_image_module, "DEFAULT_ONEDRIVE_FOLDER", ""),
+                )
+                fetch_result.hires_image = hires_image
+                amazon_hires_probe["browser_hires_saved_path"] = str(hires_image.local_path)
+        except Exception as exc:
+            amazon_hires_probe["browser_error"] = str(exc)
+        finally:
+            try:
+                if browser_page:
+                    browser_page.close()
+            except Exception:
+                pass
+    _write_json(artifacts_dir / "amazon_hires_probe.json", amazon_hires_probe)
 
     before_count = _count_page_images(page)
     controls_before = _collect_control_snapshot(page)

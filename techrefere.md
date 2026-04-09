@@ -591,3 +591,186 @@ GitHub Actions (および必要ならローカルの `.env`) に以下の Secret
 - `adobe_after_upload.html`
 - `adobe_after_upload.png`
 
+---
+
+## 2026-04-09 トップ画像障害の実録
+
+### 失敗の時系列
+
+今回の Pixel 10a 記事で、note 下書き投稿のトップ画像処理は複数の独立した問題が連続して表面化した。
+
+1. 最初の失敗は Amazon Secret 未注入だった。  
+   `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml` に `AMAZON_CLIENT_ID` と `AMAZON_CLIENT_SECRET` が無く、`amazon_gazo_get.py` が `環境変数 AMAZON_CLIENT_ID が未設定` で停止した。  
+   修正 commit: `770e4bb`
+
+2. その次は note の通常アップロード導線が古い文言依存だった。  
+   `text=画像をアップロード` 前提では current UI に追従できず、ローカルでは成功しても Actions では `画像アップロード導線を特定できませんでした` で止まった。  
+   修正 commit: `7e6153e`
+
+3. さらに Actions とローカルで browser state が揃っていなかった。  
+   ローカルは `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\adobe_express_storage_state.json` を読み込んでいたが、Actions は未読込だった。  
+   これを `ADOBE_EXPRESS_STORAGE_STATE` Secret と artifact 保存付きで揃えた。  
+   修正 commit: `652d6a5`
+
+4. `ADOBE_EXPRESS_STORAGE_STATE` を JSON 文字列で渡した後、`Path(...).exists()` を先に呼んで `File name too long` で落ちた。  
+   JSON 判定を先にし、パス判定は後段へ回した。  
+   修正 commit: `7ec0d99`
+
+5. その後の Actions では、アップロード導線クリック後にメニューが閉じるケースに弱かった。  
+   `input[type='file']` のポーリング待機、メニュー再オープン、再試行 artifact を追加した。  
+   修正 commit: `ada05c2`
+
+6. 最後に残っていた本丸は、Amazon 画像ファイルを Actions 上で早すぎるタイミングで消していたことだった。  
+   `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\amazon_gazo_get.py` が OneDrive アップロード直後に JPEG を削除しており、その後段の Playwright が存在しない画像を note に渡そうとしていた。  
+   修正 commit: `7564857`
+
+### 今回成功したノウハウ
+
+- `note-draft.yml` には Amazon / note / Adobe の Secret をすべて明示的に `env` で渡す必要がある。Repository Secret に登録しただけでは Python から見えない。
+- `ADOBE_EXPRESS_STORAGE_STATE` はファイルパスではなく JSON 本文として Secret に入れ、実行時に一時 `storage_state` ファイルへ変換するのが安全。
+- GitHub Actions とローカルの差分追跡には artifact 保存が必須。  
+  `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml` で `if: always()` の `actions/upload-artifact@v4` を入れておくと、失敗時の DOM と screenshot を後追いできる。
+- note の通常アップロードは file chooser が遅延発火することがある。  
+  1回目クリック直後の `input[type='file']` ポーリング、導線消失時のトップ画像メニュー再オープン、追加 artifact 保存が有効だった。
+- Amazon 画像を note へ直接アップロードする経路では、OneDrive 連携後でもローカル画像は削除してはいけない。  
+  note 挿入が終わるまで JPEG を残す必要がある。
+
+### Actions 成功 run
+
+- 成功 run:
+  `https://github.com/seahirodigital/Blog_Vercel/actions/runs/24167942186`
+- 成功時の note URL:
+  `https://editor.note.com/notes/n8a945789c39b/edit/`
+- ローカルへダウンロードした artifact:
+  `C:\Users\HCY\OneDrive\開発\Blog_Vercel\tmp\run_24167942186\note-top-image-artifacts-24167942186\top_image_result.json`
+
+この成功 run では、トップ画像の保存自体は完了している。
+
+```json
+{
+  "image_flow": "direct_api",
+  "image_target_asin": "B0F535RF9Z",
+  "hires_image_url": "",
+  "upload_entry_strategy": "button_role_label_regex_upload#0:filechooser",
+  "after_ready_image_count": 1
+}
+```
+
+### hiRes / Adobe 差分の実測結果
+
+#### 1. 同一 ASIN `B0F535RF9Z` の hiRes 抽出差分
+
+同じ `B0F535RF9Z` をローカルで `amazon_gazo_get.py` に直接渡すと、hiRes は取得できた。
+
+- ローカル検証出力先:
+  `C:\Users\HCY\OneDrive\開発\Blog_Vercel\tmp\local_hires_probe`
+- ローカル実測結果:
+  - `api_image_url`:
+    `https://m.media-amazon.com/images/I/31gI-U4GtcL._SL500_.jpg`
+  - `hires_image_url`:
+    `https://m.media-amazon.com/images/I/51QPhONLrhL._AC_SL1280_.jpg`
+
+一方、Actions 成功 run の `top_image_result.json` では `hires_image_url` は空だった。  
+つまり、**同一 ASIN でも GitHub Actions ランナー経由では Amazon 商品ページから hiRes を引けていない**。
+
+#### 2. 同一 Pixel 10a 記事をローカルで実行した結果
+
+記事:
+`C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\20260408_0200_【待望】Google Pixel 10a国内発表キタァーー！Pixel 9aから何が変わった？わかりやすくスペック仕様を.md`
+
+ローカル実行後の artifact:
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts\top_image_result.json`
+
+ローカル実測結果:
+
+```json
+{
+  "image_flow": "direct_api_after_adobe_failure",
+  "image_target_asin": "B0F535RF9Z",
+  "hires_image_url": "https://m.media-amazon.com/images/I/51QPhONLrhL._AC_SL1280_.jpg",
+  "selected_image_path": "C:\\Users\\HCY\\OneDrive\\Obsidian in Onedrive 202602\\Vercel_Blog\\...\\20260409_B0F535RF9Z.jpg",
+  "after_ready_image_count": 1,
+  "adobe_error": "Adobe Express アップロードサイドバー を特定できませんでした"
+}
+```
+
+ここから分かることは次の2点。
+
+- ローカルでは `hiRes` 自体の取得は成功している
+- ただし現状の本番コードでは、Adobe Express のアップロードサイドバー検出に失敗して通常アップロードへフォールバックしている
+
+### 現時点の結論
+
+- Actions 側:
+  hiRes が取れていないため、Adobe 経由には入らず `direct_api` で通常版画像を保存している
+- ローカル側:
+  hiRes は取れて Adobe 導線までは入るが、Adobe UI 操作が未完成で `direct_api_after_adobe_failure` にフォールバックしている
+- したがって、**現在確認できている「最終的に note に保存されたトップ画像」は、ローカル・Actions とも通常版である**
+
+### 次にやるべき差分調査
+
+1. Actions 上の Amazon 商品詳細 HTML を artifact 化し、ローカル HTML と比較して `data-old-hires` / `colorImages.initial[0].hiRes` の有無を確認する  
+2. ローカルの Adobe Express 画面で、`adobe_workspace_open.html` と `adobe_upload_sidebar_open.html` が取れていない理由を詰め、アップロードサイドバー検出セレクタを更新する  
+3. `image_flow=adobe_hires` が実際に成立した証跡が取れるまで、ローカル成功と Actions 成功を分けて記録する
+
+### 2026-04-09 追加検証: Adobe 経路の修正後
+
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py`
+に以下を追加した。
+
+- Adobe Express へ入った直後に、サイドバーを開く前から shadow DOM 内の `input[type='file']` を探索する
+- `cc-everywhere-container-*`、`sp-button#save-btn`、`dialog_download_btn` を Adobe ワークスペース判定に追加する
+- Amazon hiRes が空のとき、note の Playwright context から Amazon 詳細ページを開いて再抽出する browser fallback を追加する
+- 差分確認用 artifact として
+  `amazon_detail_requests.html`
+  `amazon_detail_browser.html`
+  `amazon_hires_probe.json`
+  `adobe_file_input_candidates_pre_sidebar.json`
+  を出す
+
+#### ローカル再実行結果
+
+記事:
+`C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\20260408_0200_【待望】Google Pixel 10a国内発表キタァーー！Pixel 9aから何が変わった？わかりやすくスペック仕様を.md`
+
+実行後の artifact:
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts\top_image_result.json`
+
+結果:
+
+```json
+{
+  "image_flow": "adobe_hires",
+  "hires_image_url": "https://m.media-amazon.com/images/I/51QPhONLrhL._AC_SL1280_.jpg",
+  "selected_image_path": "C:\\Users\\HCY\\OneDrive\\Obsidian in Onedrive 202602\\Vercel_Blog\\...\\20260409_B0F535RF9Z_hires.jpg",
+  "upload_sidebar_strategy": "direct_input_pre_sidebar",
+  "upload_entry_strategy": "frame#1:input[type='file']#2:score=90:root=[object ShadowRoot]:host=x-upload-button-editor",
+  "insert_strategy": "frame#1:sp_button_save_btn#0",
+  "confirm_insert_strategy": "frame#1:dialog_download_btn_scoped#0"
+}
+```
+
+ここで初めて、**ローカルでは hiRes JPEG を Adobe 経由で note に保存できた**。
+
+#### ローカル hiRes probe の結果
+
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts\amazon_hires_probe.json`
+
+```json
+{
+  "detail_page_url": "https://www.amazon.co.jp/dp/B0F535RF9Z",
+  "asin": "B0F535RF9Z",
+  "requests_hires_url": "https://m.media-amazon.com/images/I/51QPhONLrhL._AC_SL1280_.jpg",
+  "browser_probe_used": false
+}
+```
+
+この時点での更新された結論は次の通り。
+
+- ローカル側の Adobe 経路は修正完了し、`adobe_hires` まで到達した
+- Actions 側の未解決は、**Amazon hiRes が requests で抜けない差分がまだ残っているか** に集約された
+- そのため次の確認対象は、Actions run の `amazon_hires_probe.json` が
+  `requests_hires_url`
+  `browser_hires_url`
+  のどちらで hiRes を拾えるか、である
+
