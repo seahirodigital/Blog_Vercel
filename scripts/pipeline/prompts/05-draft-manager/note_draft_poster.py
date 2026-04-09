@@ -485,6 +485,33 @@ def _try_set_existing_file_input_with_brief_wait(
     return _try_set_existing_file_input_any_scope(page, image_path, prefer_adobe=prefer_adobe)
 
 
+def _wait_for_existing_file_input_any_scope(
+    page,
+    image_path: Path,
+    prefer_adobe: bool = False,
+    timeout_ms: int = 4000,
+    poll_ms: int = 250,
+) -> str | None:
+    deadline = time.time() + (timeout_ms / 1000)
+    while time.time() < deadline:
+        direct_input = _try_set_existing_file_input_any_scope(page, image_path, prefer_adobe=prefer_adobe)
+        if direct_input:
+            return direct_input
+        page.wait_for_timeout(poll_ms)
+    return _try_set_existing_file_input_any_scope(page, image_path, prefer_adobe=prefer_adobe)
+
+
+def _write_control_snapshot(path: Path, page) -> None:
+    _write_json(path, _collect_control_snapshot(page))
+
+
+def _dump_upload_retry_artifacts(page, artifacts_dir: Path | None, stem: str) -> None:
+    if not artifacts_dir:
+        return
+    _dump_page_artifacts(page, artifacts_dir, stem)
+    _write_control_snapshot(artifacts_dir / f"{stem}_controls.json", page)
+
+
 def _click_top_image_button(page) -> str:
     return _click_visible_candidate(
         page,
@@ -496,7 +523,7 @@ def _click_top_image_button(page) -> str:
     )
 
 
-def _choose_direct_upload_image_file(page, image_path: Path) -> str:
+def _choose_direct_upload_image_file(page, image_path: Path, artifacts_dir: Path | None = None) -> str:
     upload_text_pattern = re.compile(r"画像\s*を?\s*アップロード|^アップロード$")
     errors = []
 
@@ -524,6 +551,20 @@ def _choose_direct_upload_image_file(page, image_path: Path) -> str:
             ("text_画像をアップロード", page.locator("text=画像をアップロード")),
             ("text_アップロード", page.locator("text=アップロード")),
         ]
+
+    def has_visible_upload_entry() -> bool:
+        for _strategy, locator in build_candidate_locators():
+            try:
+                total = locator.count()
+            except Exception:
+                continue
+            for idx in range(total):
+                try:
+                    if locator.nth(idx).is_visible():
+                        return True
+                except Exception:
+                    continue
+        return False
 
     for attempt in range(1, 6):
         direct_input = _try_set_existing_file_input_any_scope(page, image_path)
@@ -564,33 +605,63 @@ def _choose_direct_upload_image_file(page, image_path: Path) -> str:
                     print(f"   ✅ 画像アップロード導線: {used}")
                     return used
                 except Exception as exc:
-                    direct_input = _try_set_existing_file_input_with_brief_wait(page, image_path)
+                    _dump_upload_retry_artifacts(
+                        page,
+                        artifacts_dir,
+                        f"direct_upload_click_attempt{attempt}_{idx}",
+                    )
+                    direct_input = _wait_for_existing_file_input_any_scope(
+                        page,
+                        image_path,
+                        timeout_ms=4000,
+                        poll_ms=250,
+                    )
                     if direct_input:
                         used = f"{strategy}#{idx}:postclick:{direct_input}"
                         print(f"   ✅ 画像アップロード導線: {used}")
                         return used
+                    errors.append(f"{strategy}#{idx}: filechooser未発火={exc}")
+                    try:
+                        candidate.wait_for(state="visible", timeout=500)
+                    except Exception as exc:
+                        errors.append(f"{strategy}#{idx}: click再試行前に導線消失={exc}")
+                        continue
                     try:
                         _click_locator_with_fallback(
                             page,
                             candidate,
                             f"{strategy}#{idx}",
                             "画像アップロード導線",
-                            timeout_ms=4000,
+                            timeout_ms=1500,
                         )
-                        page.wait_for_timeout(800)
-                        direct_input = _try_set_existing_file_input_any_scope(page, image_path)
+                        _dump_upload_retry_artifacts(
+                            page,
+                            artifacts_dir,
+                            f"direct_upload_reclick_attempt{attempt}_{idx}",
+                        )
+                        direct_input = _wait_for_existing_file_input_any_scope(
+                            page,
+                            image_path,
+                            timeout_ms=2500,
+                            poll_ms=250,
+                        )
                         if direct_input:
-                            used = f"{strategy}#{idx}:{direct_input}"
+                            used = f"{strategy}#{idx}:reclick:{direct_input}"
                             print(f"   ✅ 画像アップロード導線: {used}")
                             return used
                     except Exception as exc:
                         errors.append(f"{strategy}#{idx}: click失敗={exc}")
-                        continue
-                    errors.append(f"{strategy}#{idx}: filechooser未発火={exc}")
 
         if attempt < 5:
             if not found_candidate:
                 errors.append(f"attempt{attempt}: no_upload_entry_visible")
+            if not has_visible_upload_entry():
+                try:
+                    reopen_strategy = _click_top_image_button(page)
+                    print(f"   🔄 トップ画像メニューを再オープン: {reopen_strategy} (attempt {attempt + 1})")
+                    _dump_upload_retry_artifacts(page, artifacts_dir, f"top_image_menu_reopened_attempt{attempt + 1}")
+                except Exception as exc:
+                    errors.append(f"attempt{attempt}: menu_reopen_failed={exc}")
             page.wait_for_timeout(1000)
 
     direct_input = _try_set_existing_file_input_any_scope(page, image_path)
@@ -667,7 +738,7 @@ def _save_editor_draft(page) -> str:
 def _run_direct_note_image_upload(page, image_path: Path, artifacts_dir: Path, previous_count: int) -> dict:
     controls_after_menu = _collect_control_snapshot(page)
     _write_json(artifacts_dir / "controls_after_top_image_menu.json", controls_after_menu)
-    upload_entry_strategy = _choose_direct_upload_image_file(page, image_path)
+    upload_entry_strategy = _choose_direct_upload_image_file(page, image_path, artifacts_dir=artifacts_dir)
     crop_dialog_strategy, _ = _wait_for_crop_dialog(page)
     _dump_page_artifacts(page, artifacts_dir, "crop_modal_open")
     popup_save_strategy = _save_crop_dialog(page)
