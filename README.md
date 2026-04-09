@@ -1,629 +1,352 @@
-﻿# Vibe Blog Engine — 仕様書
+# Vibe Blog Engine - 現在仕様書
 
-YouTube動画からAIでブログ記事を自動生成し、OneDriveで管理・編集・note.comへ自動下書き投稿するフルスタック・オートメーション・システム。
+YouTube 動画からブログ記事を生成し、OneDrive で管理し、Vercel UI から編集し、note.com へ下書き保存する自動化システムです。ここには 2026-04-09 時点で実際に動いている仕様だけを書きます。試行錯誤、失敗ノウハウ、Adobe Express を使った時期の経緯は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\techrefere.md` に分離しています。
 
 ---
 
 ## 1. システム全体像
 
-```
-YouTube動画URL
-    ↓ Apify（文字起こし）
-    ↓ Gemini 2.5 Flash（3段階AI生成）
-    ↓ OneDrive（Markdownファイル保存）
-    ↓ Vibe Blog UI（閲覧・編集・管理）
-    ↓ GitHub Actions（note下書き自動投稿）
-    ↓ note.com（下書き記事）
-```
+このリポジトリは、次の 3 本の本番フローで動いています。
 
-**コンポーネント構成:**
+### 1.1 記事生成フロー
 
-| レイヤー | 場所 | 役割 |
-|---------|------|------|
-| パイプライン | `scripts/pipeline/` + GitHub Actions | 記事自動生成・OneDrive保存 |
-| API | `api/` | Vercel Serverless Functions（OneDrive/GitHub/note連携） |
-| フロントエンド | `public/index.html` | 記事管理・編集・note投稿管理画面 |
-
----
-
-## 2. 記事生成パイプライン
-
-### 2.1 実行トリガー
-
-- **自動**: 毎日 JST 9:00（UTC 0:00）スケジュール実行
-- **手動**: Vibe Blog UI の「パイプライン実行」ボタン、または GitHub Actions UI
-
-### 2.2 Googleスプレッドシート読み込み
-
-- **認証**: `GOOGLE_SERVICE_ACCOUNT_JSON` サービスアカウント
-- **対象シート**: `SHEET_NAME`（デフォルト: "動画リスト"）
-- **処理対象の条件**: 「状況」列が `単品` / `複数` / `情報` のいずれか、かつ「動画URL」列に値がある行
-- **完了時**: 処理成功行の「状況」を `完了` に自動更新
-
-### 2.3 1本あたりの処理フロー（5ステップ）
-
-```
-Step 1: 文字起こし取得（Apify）
-Step 2: AI 3段階生成（Gemini 2.5 Flash）
-Step 3: アフィリエイトリンク自動挿入
-Step 4: OneDrive保存
-Step 5: スプレッドシートのステータス更新
+```text
+Google Sheets
+  ↓ 「状況」列が 単品 / 複数 / 情報 / 量産元 の行だけを取得
+C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\blog-pipeline.yml
+  ↓
+C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\main.py
+  ↓
+C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\modules\apify_fetcher.py
+  ↓ YouTube 文字起こし取得
+C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\modules\blog_pipeline.py
+  ↓ Gemini 2.5 Flash で記事生成
+C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\insert_affiliate_links.py
+  ↓
+C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\insert_amazon_affiliate.py
+  ↓
+C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\modules\onedrive_sync.py
+  ↓ OneDrive へ Markdown 保存
+Google Sheets の「状況」を 完了 へ更新
+  ↓
+GitHub Variable YT_SOURCE_<hash> を保存
 ```
 
-#### Step 1 — 文字起こし取得
-
-- `modules/apify_fetcher.py` が Apify API 経由で YouTube の文字起こしと動画タイトルを取得
-
-#### Step 2 — AI 3段階生成（Gemini 2.5 Flash）
-
-プロンプトは `scripts/pipeline/prompts/` から読み込み。
-
-| フェーズ | プロンプトファイル | 役割 |
-|---------|-----------------|------|
-| Drafter | `01-writer-prompt.txt` | 状況（単品/情報/複数）でプロンプトを切り替えて初稿を生成 |
-| Editor | `02-editor-prompt.txt` | 文章リズム・SEOキーワード・モバイル最適化 |
-| Director | `03-director-prompt.txt` | 最終トーン調整・YAMLメタ・画像挿入指示 |
-
-Gemini Interaction Hub（`previous_interaction_id`）でコンテキストを連鎖させて生成。レート制限時は最大3回リトライ（30秒/60秒/90秒待機）。
-
-#### Step 3 — アフィリエイトリンク自動挿入
-
-`scripts/pipeline/prompts/04-affiliate-link-manager/insert_affiliate_links.py` を動的ロードして実行。
-
-- **リンクソース**: OneDrive上の `affiliate_links.txt`（`===MEMO1===` セクション内の `▼` ブロック形式）を毎回直接取得
-
-**挿入ルール（スクリプト自動）:**
-
-| 挿入位置 | 挿入内容 | 備考 |
-|---------|---------|------|
-| H2「結論」の直前 | MEMO1全文 ＋ Amazonアソシエイト免責事項 | 固定位置 |
-| 奇数番目H2（3,5,7...）の直前 | ▼ブロックを1つランダム選択（重複なし） | 1番目はスキップ |
-| 記事末尾 | MEMO1全文 | 常に付与 |
-
-> **免責事項**（最初の挿入位置のみ1回付与）:  
-> `(Amazonのアソシエイトとして本アカウントは適格販売により収入を得ています。)`
-
-**挿入ルール（UIボタン手動）:**
-
-| 挿入位置 | 挿入内容 | 担当 |
-|---------|---------|------|
-| 偶数番目H2（2,4,6...）の直前 | クリップボードの内容 | 🔗 リンク挿入ボタン（3.2節参照） |
-
-> スクリプトが奇数H2を担当し、UIボタンが偶数H2を担当することで、**全ての章間に必ずアフィリエイトリンクが配置**される。
-
-- スクリプト未検出 or エラー時は**スキップして処理続行**（記事生成は止まらない）
-- OneDrive取得失敗時はスクリプトと同階層のローカルファイルにフォールバック
-
-#### Step 4 — OneDrive保存
-
-- `modules/onedrive_sync.py` が Microsoft Graph API 経由でアップロード
-- **フォルダ**: `ONEDRIVE_FOLDER`（デフォルト: "Blog_Articles"）
-- **ファイル名**: `YYYYMMDD_HHMM_動画タイトル.md`
-
-#### Step 5 — スプレッドシート更新
-
-- 保存成功後、対象行の「状況」を `完了` に更新（`modules/sheets_reader.py`）
-
-### 2.4 note下書き自動投稿（別ワークフロー）
-
-記事生成パイプラインとは独立した別ワークフロー（`note-draft.yml`）。詳細は [セクション4](#4-note下書き自動投稿システム) を参照。
-
-`scripts/pipeline/prompts/05-draft-manager/note_draft_poster.py` が以下を実行:
-1. Cookie復元 → セッション検証 → 必要に応じてAPIログイン
-2. `POST /api/v1/text_notes` でスケルトン作成
-3. `POST /api/v1/text_notes/draft_save` で本文保存
-4. GitHub Repository Variable に下書きURLを記録
-
----
-
-## 3. 管理画面（Vibe Blog UI）
-
-`public/index.html` — React + Tailwind CSS（CDN）でシングルファイル実装。
-
----
-
-### 3.1 サイドバー（記事一覧）
-
-OneDriveのフォルダ階層を**多段階ツリー**で表示。横幅ドラッグリサイズ・開閉トグル対応。モバイルではドロワー形式で表示。
-
-#### フォルダツリー
-
-- OneDriveの実際のフォルダ構造を最大5階層まで再帰表示
-- 各フォルダはクリックで開閉（初期状態は全トップレベルフォルダを展開）
-- フォルダ横の数字バッジはサブフォルダ含む全記事数
-
-#### 記事の右クリックメニュー
-
-| 項目 | 動作 |
-|------|------|
-| 選択 | チェックボックス選択モードを開始し、この記事を最初の選択状態にする |
-| 複製 | 記事をコピー（ファイル名先頭に「コピー_」付与） |
-| 削除 | 確認ダイアログ後にOneDriveから削除 |
-| OneDriveで開く | OneDrive Webブラウザ画面で直接開く |
-| エクスプローラーで表示 | ローカルのExplorer/Finderでファイルを選択表示（要 `LOCAL_ARTICLES_BASE` 環境変数） |
-
-#### フォルダの右クリックメニュー
-
-| 項目 | 動作 |
-|------|------|
-| サイドバーから非表示 | そのフォルダをサイドバー表示から除外する（ファイル削除ではない） |
-
-#### ドラッグ&ドロップでの記事移動
-
-- 記事をドラッグしてフォルダヘッダーへドロップ → OneDrive上でファイルを移動
-- ドロップ可能フォルダは紫の破線アウトラインで強調表示
-- **複数選択してから一括ドラッグ**も可能（後述）
-
-#### Ctrl/Shift クリックによる複数選択（フォルダ移動専用）
-
-| 操作 | 動作 |
-|------|------|
-| `Ctrl` / `Cmd` + クリック | 個別にトグル選択（紫アウトラインでハイライト） |
-| `Shift` + クリック | 最後にクリックした記事から現在の記事まで範囲選択 |
-| 修飾キーなしクリック | 複数選択を解除して通常選択に戻る |
-| `Esc` | 複数選択を解除 |
-| 複数選択中にドラッグ | 選択中の全記事を一括でフォルダ移動 |
-
-> **note下書き投稿の複数選択とは別機能。**  
-> フォルダ移動用の複数選択は `Ctrl/Cmd/Shift` クリック。  
-> note下書き一括投稿用の選択は右クリック→「選択」でチェックボックスモードを使う。
-
-#### フォルダ管理（下部の「フォルダ管理」ボタン）
-
-サイドバー下部に常駐するボタン。クリックするとフォルダピッカーパネルが上方に展開。
-
-- 全フォルダを階層インデント付きで一覧表示
-- チェックボックスをクリックで表示/非表示を切り替え
-- 「すべて表示」ボタンで非表示を一括解除
-- 非表示フォルダ数がバッジ（オレンジ）で常時表示
-- 設定は `localStorage` に永続保存（`sb_hiddenFolders` キー）
-
-#### note下書き投稿の複数選択モード
-
-1. 記事を右クリック → 「選択」でチェックボックスモード開始
-2. 記事タイトル左のチェックボックスをクリックして複数選択（薄紫ハイライト）
-3. ツールバーの「下書き」ボタンが「下書き(N)」と件数表示に変化
-4. 「解除」ボタンで選択モードをキャンセル
-
----
-
-### 3.2 エディタ
-
-- **左ペイン**: Markdownエディタ（JetBrains Monoフォント）
-- **右ペイン**: リアルタイムMarkdownプレビュー（OGPカード展開対応）
-- 両ペインの境界をドラッグでサイズ調整可能
-
-#### エディタ ↔ プレビュー スクロール同期
-
-- エディタをスクロール → プレビューが対応位置に自動追従
-- プレビューをスクロール → エディタが対応位置に自動追従
-- `marked.lexer()` によるトークン行番号マップ方式で、見出し以外の段落も精密に同期
-- プレビューをダブルクリック → クリックした要素と**同じ高さ**にエディタの対応行を表示
-
-#### OGPカード自動展開
-
-プレビュー内のURL行（URLのみの段落）を自動でOGPカードに変換。
-
-- Amazon商品URL（`amzn.to` 短縮URL含む）に対応
-- エディタでURL行末に Enter を押すと即時フェッチ開始
-- 「OGP更新」ボタンで失敗したリンクを再試行
-- エディタ編集中もOGPカードは維持される（キャッシュ機構）
-
-#### エディタバー（MARKDOWNラベルの行）
-
-左から順に:
-
-| 要素 | 説明 |
-|------|------|
-| 保存先URLリンク | note下書き保存完了後に `editor.note.com` のURLが自動表示 |
-| ●（灰） / ✓（緑） | 自動保存ステータス（待機中 / 完了） |
-| 文字数 | 現在の文字数をリアルタイム表示 |
-| 🔗 リンク挿入ボタン | クリップボードの内容を偶数番目H2（2,4,6...）の直前に一括挿入 |
-| コピーボタン | Markdown全文をクリップボードにコピー |
-
-#### リンク挿入ボタン（🔗）の詳細
-
-**目的**: アフィリエイトリンクのPythonスクリプト（`insert_affiliate_links.py`）が奇数番目H2（3,5,7...）に自動挿入するのと**対になるように**、偶数番目H2（2,4,6...）の直前にも手動でリンクを挿入する。これにより全ての章間にリンクが配置される。
-
-**操作手順**:
-1. アフィリエイトリンクモーダルから挿入したいリンクをコピー
-2. エディタバーの 🔗 ボタンをクリック
-3. 偶数番目H2（2番目・4番目・6番目...）の直前に一括挿入される
-
-**挿入位置の対応関係**（H2見出し番号ベース）:
-
-| H2番号 | 挿入担当 |
-|--------|---------|
-| 1番目 | なし（記事冒頭のリード文） |
-| 2番目 | 🔗 リンク挿入ボタン（手動） |
-| 3番目 | Pythonスクリプト（自動） |
-| 4番目 | 🔗 リンク挿入ボタン（手動） |
-| 5番目 | Pythonスクリプト（自動） |
-| 6番目 | 🔗 リンク挿入ボタン（手動） |
-| H2「結論」 | Pythonスクリプト（MEMO1全文） |
-| 記事末尾 | Pythonスクリプト（MEMO1全文） |
-
-#### Amazon検索フォーム（ヘッダー右）
-
-- テキスト入力後 Enter または「Amazon」ボタンで `https://www.amazon.co.jp/s?k=キーワード` を新タブで開く
-
-#### エディタバーのリンク（MARKDOWN ラベルの右隣）
-
-**YouTube リンク（元動画）**
-- 記事内容から最初の YouTube URL を自動抽出して表示（youtube.com/watch?v=... または youtu.be/... に対応）
-- 見つからない場合は非表示
-- クリックで元の YouTube 動画を新タブで開く
-
-**note 下書き保存先 URL**
-- note への下書き投稿完了後、GitHub Variables から取得したリンクを表示
-- **永続化**: localStorage に保存され、ページリロード後も消えない
-- 記事を選択するたびにバックグラウンドで最新 URL を再取得（移動後も維持）
-- クリックで note.com の下書き記事を新タブで開く
-
-#### 記事タイトル表示（H1 ベース）
-
-- **記事を開くと**: 本文先頭の `# H1タイトル` を自動抽出
-- **サイドバー**: H1 がキャッシュされ、ファイル名由来のタイトル（YouTube タイトル）の代わりに表示
-- **エディタヘッダー**: H1 がサイドバーと同じタイトルを表示
-- **✏️ 編集ボタン**: H1 がある場合はそれを初期値として提供
-- **フォールバック**: H1 が存在しない場合はファイル名から従来通り抽出
-- **キャッシュ**: localStorage（`sb_articleH1Cache` キー）に保存、一度開いた記事は次回から即表示
-
-**メリット**: YouTube 動画タイトル（ファイル名に埋め込まれた記事生成時のタイトル）ではなく、実際の記事内容を反映した**真の記事タイトル**をサイドバーで一目で確認できる
-
-**キーボードショートカット:**
-
-| ショートカット | 動作 |
-|--------------|------|
-| `Ctrl+S` | 保存 |
-| `Ctrl+B` | 太字（選択テキストを `**` で囲む） |
-| `Ctrl+Z` | Undo（500ms debounce、最大100段階） |
-| `Ctrl+F` | 検索・置換パネルの開閉 |
-| `Escape` | タイトル編集 / 検索パネル / 複数選択を閉じる・解除 |
-
----
-
-### 3.3 タイトル編集
-
-- ✏️ アイコンクリックでインライン編集
-- 確定時に **OneDrive上のファイル名もリネーム**（`PATCH /api/articles`）
-- ファイル名のプレフィックス（`YYYYMMDD_HHMM_`）は保持される
-
----
-
-### 3.4 ツールバーボタン一覧
-
-| ボタン | 説明 |
-|--------|------|
-| Amazon検索フォーム | キーワードでAmazon商品検索（新タブ） |
-| note | note.comを新しいタブで開く |
-| 下書き | 現在の記事（または選択した複数記事）をnoteに下書き投稿 |
-| アフィリンク | アフィリエイトリンク管理モーダルを開く |
-| シート | Google Sheetsを新しいタブで開く |
-| パイプライン | 記事生成パイプラインを手動起動 |
-| 保存 | 現在の内容をOneDriveに保存（`Ctrl+S`と同等） |
-| リロード | 記事一覧を再取得 |
-
----
-
-### 3.5 モバイルレスポンシブ対応
-
-スマートフォンでの記事管理を専用タッチジェスチャーで対応。
-
-#### 長押しドラッグ＆ドロップ（フォルダ移動）
-
-**トリガー**: 記事を 500ms 長押し
-
-| 動作 | 説明 |
-|------|------|
-| ゴースト表示 | 指の下に記事名カードが浮かぶ（バイブレーション付き） |
-| フォルダ検出 | 指が重なるフォルダが紫の破線でハイライト |
-| 指を離す | ハイライト中のフォルダへ記事を移動（複数選択も一括対応） |
-| スクロール干渉 | 長押し中の上下スクロール防止（スムーズなドラッグ実現） |
-
-> **複数選択中の場合**: Ctrl/Cmd+クリックで選択した全記事が同時に移動
-
-#### 左スワイプ（削除・複製）
-
-**トリガー**: 記事を左に 55px 以上スワイプ
-
-| 動作 | ボタン | 説明 |
-|------|--------|------|
-| スワイプ左 | 複製（🟣） | 記事をコピー（ファイル名に「コピー_」付与） |
-|  | 削除（🔴） | 確認ダイアログ後に削除 |
-| スワイプ右 or 別タップ | — | スワイプ状態を閉じる |
-
-> **レイアウト**: 記事が左にスライドして右端に2ボタンが露出（iOS風スワイプメニュー）
-
-#### 操作の判別
-
-| 条件 | 判定 | 動作 |
-|------|------|------|
-| 縦方向 > 横方向 +12px 移動 | 縦スクロール | スクロール優先（スワイプ/ドラッグキャンセル） |
-| 左方向 12px以上かつ横 > 縦 | スワイプ確定 | 55px でアクション表示 |
-| 500ms無移動 | 長押し確定 | ドラッグ開始 |
-
-> デバイス振動・遅延なしの流暢な UX を実現
-
----
-
-## 4. note下書き自動投稿システム
-
-### 4.1 仕組み
-
+### 1.2 note 下書き保存フロー
+
+```text
+C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\index.html
+  ↓ 下書きボタン
+C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\note-draft.js
+  ↓ workflow_dispatch
+C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml
+  ↓ OneDrive から file_id の Markdown を取得
+C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py
+  ↓ note API で下書き作成
+  ↓ Playwright で OGP 展開
+  ↓ Amazon トップ画像を判定してアップロード
+GitHub Variable NOTE_DRAFT_URL_<hash> を保存
+  ↓
+C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\index.html が URL を再取得して表示
 ```
+
+### 1.3 info_viewer 構築フロー
+
+```text
+C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\trigger-info-viewer.js
+  ↓ workflow_dispatch
+C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\info-viewer-pipeline.yml
+  ↓
+C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\info_viewer\main.py
+  ↓
+OneDrive の info_viewer 配下に manifest と出力を更新
+  ↓
+C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\info_viewer\index.html で表示
+```
+
+## 2. GitHub Actions の現在仕様
+
+| ワークフロー | ファイル | トリガー | 現在の役割 |
+| --- | --- | --- | --- |
+| Blog Pipeline - YouTube → AI → OneDrive | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\blog-pipeline.yml` | 毎日実行 / 手動実行 | Google Sheets を読んで記事を量産する |
+| Note 下書き保存 - OneDrive → note.com | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml` | `workflow_dispatch` | OneDrive の 1 記事を note 下書きへ保存する |
+| Note セッション維持 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\note-keepalive.yml` | 3 日ごと / 手動実行 | note セッションを延命する |
+| Info Viewer Pipeline | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\info-viewer-pipeline.yml` | 毎日実行 / 手動実行 | info_viewer の出力を構築する |
+
+現在の本番 Actions には、debug 専用の `Apify Amazon hiRes Probe` は含みません。
+
+## 3. 記事生成パイプラインの現実仕様
+
+### 3.1 処理対象の決め方
+
+- 実行入口は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\trigger.js` です。
+- ただし、実際にどの行を処理するかは `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\main.py` が Google Sheets の「状況」列で決めます。
+- 現在処理対象になる値は `単品`、`複数`、`情報`、`量産元` の 4 種です。
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\blog-pipeline.yml` には `mode` 入力がありますが、2026-04-09 時点の `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\main.py` はシートの pending 行を読む方式で動いており、単発 URL を受け取る専用分岐にはなっていません。
+
+### 3.2 1 行ごとの処理フロー
+
+1. `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\modules\apify_fetcher.py` が YouTube の文字起こしを取得します。
+2. `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\modules\blog_pipeline.py` が Gemini 2.5 Flash で記事本文を生成します。
+3. `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\insert_affiliate_links.py` が通常アフィリエイトリンクを挿入します。
+4. `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\insert_amazon_affiliate.py` が Amazon アフィリエイト導線を挿入します。
+5. `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\modules\onedrive_sync.py` が Markdown を OneDrive へ保存します。
+6. Google Sheets の「状況」を `完了` へ更新します。
+7. GitHub Variable `YT_SOURCE_<hash>` に元 YouTube URL を保存します。
+
+### 3.3 状況列による分岐
+
+| 状況 | 使うプロンプト |
+| --- | --- |
+| `単品` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\01-writer-prompt.txt` → `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\02-editor-prompt.txt` → `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\03-director-prompt.txt` |
+| `複数` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\01-writer-prompt.txt` 内の該当セクション → `02-editor-prompt.txt` → `03-director-prompt.txt` |
+| `情報` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\01-writer-prompt.txt` 内の該当セクション → `02-editor-prompt.txt` → `03-director-prompt.txt` |
+| `量産元` | 上記に加えて `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\031-best-outline-prompt.txt` と `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\032-best-article-enhancer-prompt.txt` を使います |
+
+### 3.4 アフィリエイト挿入の現在仕様
+
+- 通常アフィリエイト挿入は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\insert_affiliate_links.py` が担当します。
+- Amazon アフィリエイト導線は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\insert_amazon_affiliate.py` が担当します。
+- `insert_affiliate_links.py` は `affiliate_links.txt` の `===MEMO1===` と `▼` ブロックを読んで挿入します。
+- スクリプト未検出またはエラー時は記事生成自体は止めず、その行だけ挿入をスキップします。
+- UI 側の 🔗 ボタンは偶数 H2 の手動挿入、Python スクリプトは奇数 H2 の自動挿入、という役割分担です。
+
+### 3.5 保存と失敗時の現在挙動
+
+- 保存先は OneDrive の `ONEDRIVE_FOLDER` です。
+- 保存ファイル名は `YYYYMMDD_HHMM_動画タイトル.md` です。
+- 文字起こし取得に失敗した場合: その行は失敗扱いで終了し、Google Sheets の「状況」は更新しません。
+- AI 生成に失敗した場合: その行は失敗扱いで終了し、後続の保存へ進みません。
+- 保存成功時は GitHub Variable `YT_SOURCE_<hash>` に元 YouTube URL を保存します。
+
+## 4. 管理画面（Vibe Blog UI）
+
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\index.html` で記事一覧、Markdown 編集、note 下書き保存を行います。
+
+### 4.1 サイドバー
+
+- OneDrive のフォルダ階層を最大 5 階層まで再帰表示します。
+- 右クリックメニューで選択、複製、削除、OneDrive で開く、エクスプローラー表示ができます。
+- 複数選択してドラッグすると、フォルダ間一括移動ができます。
+- 下部のフォルダ管理から表示対象を絞れます。
+
+### 4.2 エディタ
+
+- 左ペインは Markdown エディタ、右ペインはプレビューです。
+- エディタとプレビューは相互スクロール同期します。
+- URL 単独行は OGP カードへ変換できます。
+- エディタバーには note 保存先 URL、保存状態、文字数、🔗 ボタン、コピーボタンがあります。
+
+### 4.3 操作系
+
+- タイトル編集は H1 優先で行い、確定時に OneDrive 側ファイル名も更新します。
+- ツールバーから Amazon 検索、note、新規下書き、アフィリンク管理、Google Sheets、パイプライン実行、保存、リロードができます。
+- モバイルでは長押しドラッグ移動と左スワイプ操作に対応しています。
+
+## 5. note 下書き自動投稿システム
+
+### 5.1 仕組み
+
+```text
 [下書きボタン]
-    ↓ POST /api/note-draft  (Vercel)
-    ↓ GitHub Actions note-draft.yml を dispatch
-    ↓ prompts/05-draft-manager/note_draft_poster.py 実行
-    ↓ APIログイン → スケルトン作成 → draft_save
-    ↓ GitHub Variable NOTE_DRAFT_URL_<hash> にURLを保存
-    ↓ UI が5秒間隔でpolling → URLが取得できたらリンク表示
+    ↓ POST /api/note-draft
+    ↓ C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml を dispatch
+    ↓ C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py 実行
+    ↓ API ログイン → text_notes → draft_save
+    ↓ Playwright で OGP 展開
+    ↓ Amazon トップ画像を判定してアップロード
+    ↓ GitHub Variable NOTE_DRAFT_URL_<hash> に URL を保存
+    ↓ UI が polling して URL を表示
 ```
 
-### 4.2 使用するnote API（確定版）
+### 5.2 note API の現在仕様
 
 | 操作 | エンドポイント | メソッド |
 |------|--------------|---------|
 | ログイン | `https://note.com/api/v1/sessions/sign_in` | POST |
 | スケルトン作成 | `https://note.com/api/v1/text_notes` | POST |
-| **本文保存（下書き）** | `https://note.com/api/v1/text_notes/draft_save?id={id}&is_temp_saved=true` | POST |
+| 本文保存 | `https://note.com/api/v1/text_notes/draft_save?id={id}&is_temp_saved=true` | POST |
 
-**本文保存に必須のヘッダー:**
-- `X-XSRF-TOKEN`: CookieのXSRF-TOKENをURLデコードした値
-- `Origin: https://editor.note.com`
-- `Referer: https://editor.note.com/`
+本文保存では `X-XSRF-TOKEN`、`Origin: https://editor.note.com`、`Referer: https://editor.note.com/` が必須です。低レベル仕様は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\reference\techrefere2.md` にあります。
 
-詳細は `reference/techrefere2.md` を参照。
+### 5.3 セッション管理
 
-### 4.3 セッション管理
+- 初回だけ `python prompts/05-draft-manager/note_draft_poster.py --save-cookies` で Cookie を保存します。
+- 以降は API ログインで Cookie を自動更新します。
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\note-keepalive.yml` が 3 日ごとにセッションを延命します。
 
-- **初回のみ手動**: `python prompts/05-draft-manager/note_draft_poster.py --save-cookies`（ブラウザ手動ログイン → Cookie取得）
-- **以降は完全自動**: APIログイン（`POST /api/v1/sessions/sign_in`）でCookieを自動取得・更新
-- **keepalive**: `.github/workflows/note-keepalive.yml` が3日おきにセッションを延命
+### 5.4 Playwright フェーズの現在分岐
 
-### 4.4 複数記事の一括投稿
+- エディタ本文が読み込めた場合: OGP 展開とトップ画像処理まで進みます。
+- エディタ本文が読み込めない場合: Playwright フェーズを打ち切ります。この場合でも、API で保存した本文下書き自体は残ります。
+- 複数記事を選んだ場合でも、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\note-draft.js` は file_id ごとに順番に `workflow_dispatch` を投げます。1 file_id = 1 note 記事です。
 
-サイドバーで複数記事を選択した状態で「下書き」ボタンを押すと、選択した記事が**それぞれ独立したnote記事**として下書き保存される（1記事 = 1note記事）。
+### 5.5 Amazon トップ画像の対象解決
 
----
+1. 記事本文の先頭から最初の `▼` より前にある最初の URL を拾います。
+2. その URL から ASIN を抽出できれば、それを最優先ターゲットにします。
+3. URL から ASIN が取れない場合は、note タイトル → H1 → H2 の順で商品名を再抽出します。
+4. それでも商品名が決まらなければ、トップ画像挿入をスキップします。
 
-## 5. Vercel API エンドポイント一覧
+### 5.6 Amazon トップ画像の取得方法
 
-| エンドポイント | メソッド | 説明 |
-|--------------|---------|------|
-| `/api/articles` | GET | 記事一覧取得（OneDrive） |
-| `/api/articles?id=xxx` | GET | 記事本文取得 |
-| `/api/articles` | PUT | 記事保存（上書き） |
-| `/api/articles` | PATCH | ファイルリネーム（`action`省略時） |
-| `/api/articles` | PATCH (`action=move`) | 記事をフォルダ間移動（OneDrive Graph API） |
-| `/api/articles` | DELETE | ファイル削除 |
-| `/api/articles` | POST | ファイル複製 |
-| `/api/trigger` | POST | パイプライン起動（GitHub Actions） |
-| `/api/note-draft` | POST | note下書き投稿トリガー（単体 or 複数） |
-| `/api/note-draft?fileId=xxx` | GET | 下書き済みURLを取得（GitHub Variable） |
-| `/api/affiliate-links` | GET | アフィリエイトリンク取得 |
-| `/api/affiliate-links` | PUT | アフィリエイトリンク保存 |
-| `/api/open-file?path=&name=` | GET | ローカルExplorer/Finderでファイルを開く（`vercel dev`環境専用） |
-| `/api/ogp?url=` | GET | OGPメタデータ取得（Amazonは自動クリーン+遅延処理） |
+トップ画像の取得と保存は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\amazon_gazo_get.py` が担当します。
 
----
+現在の処理順は次です。
 
-## 6. GitHub Actionsワークフロー一覧
+1. Amazon Creators API の `getItems` または `searchItems` で通常画像を必ず取得します。
+2. 画像 URL と ASIN が決まったら、Apify actor `kawsar/amazon-product-details-scrapper` へ `https://www.amazon.co.jp/dp/{ASIN}` を渡して hiRes 画像を取りに行きます。
+3. Apify で hiRes が返らない場合だけ、Amazon 商品詳細 HTML を取得して `data-old-hires` と `colorImages.initial[].hiRes` を正規表現で探します。
+4. HTML が captcha の場合や hiRes が見つからない場合は、通常画像だけを使って継続します。
+
+つまり、現在の hiRes 主経路は Amazon 直接 scraping ではなく Apify です。Amazon 直接 HTML は fallback です。
+
+### 5.7 画像の保存ルール
+
+| 種別 | ローカル既定保存先 | GitHub Actions 上の一時保存先 | OneDrive 側の保存先 | 内容 |
+| --- | --- | --- | --- | --- |
+| raw | `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\raw` | `/home/runner/work/_temp/amazon_top_images/raw` | `Vercel_Blog/Amazon_images/raw` | Creators API の通常画像と、取得できた場合の hiRes 元画像 |
+| prepared | `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\prepared` | `/home/runner/work/_temp/amazon_top_images/prepared` | `Vercel_Blog/Amazon_images/prepared` | note ヘッダー用に整形した画像 |
+
+命名規則は次です。
+
+- 通常画像: `YYYYMMDD_ASIN.jpg`
+- hiRes 元画像: `YYYYMMDD_ASIN_hires.jpg`
+- note ヘッダー整形画像: `YYYYMMDD_ASIN_note_hero.jpg`
+
+### 5.8 `prepared` 画像の現在仕様
+
+- 生成サイズは `1600x836` です。
+- 比率は note ヘッダーの `800:418` と同じです。
+- リサイズは `contain` です。
+- 余白色は白固定 `RGB(255, 255, 255)` です。
+- 向き補正は `ImageOps.exif_transpose()` です。
+- 保存形式は JPEG、品質は `quality=92` です。
+
+### 5.9 note へアップロードする画像の選び方
+
+現在の優先順位は固定です。
+
+1. `prepared`
+2. `hires`
+3. `api`
+
+したがって、正常系では `direct_prepared` が本番経路です。
+
+### 5.10 アップロード方法の現在仕様
+
+- 本番経路は note の通常 `画像をアップロード` 導線です。
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py` は、選ばれた画像を file chooser で直接アップロードします。
+- Adobe Express は本番経路では使いません。
+- `NOTE_TOP_IMAGE_USE_ADOBE=1` を明示したときだけ debug 経路として残しています。
+- `NOTE_TOP_IMAGE_FORCE_DIRECT=1` を付けると、Adobe debug を有効にしていても通常アップロードを維持します。
+- `NOTE_TOP_IMAGE_DEBUG=1` を付けたときだけ、HTML、PNG、JSON の debug 成果物を保存します。
+
+## 6. Vercel API の現在仕様
+
+| API | ファイル | 役割 |
+| --- | --- | --- |
+| `/api/articles` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\articles.js` | OneDrive 記事の一覧取得、本文取得、保存、複製、移動、削除、リネーム |
+| `/api/trigger` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\trigger.js` | `blog-pipeline.yml` を dispatch |
+| `/api/note-draft` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\note-draft.js` | `note-draft.yml` を dispatch、または note 下書き URL を返す |
+| `/api/affiliate-links` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\affiliate-links.js` | `affiliate_links.txt` の MEMO を OneDrive 経由で読み書き |
+| `/api/ogp` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\ogp.js` | OGP タイトル、説明、画像を取得。Amazon URL の特殊処理あり |
+| `/api/open-file` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\open-file.js` | ローカルの Explorer / Finder で記事ファイルを選択表示 |
+| `/api/amazon-asin` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\amazon-asin.js` | Google Custom Search で商品名から ASIN を探す |
+| `/api/youtube-source` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\youtube-source.js` | GitHub Variable `YT_SOURCE_<hash>` から元動画 URL を返す |
+| `/api/trigger-info-viewer` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\trigger-info-viewer.js` | `info-viewer-pipeline.yml` を dispatch |
+| `/api/info-viewer-index` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\info-viewer-index.js` | info_viewer の manifest や index 情報を返す |
+
+## 7. GitHub Actions ワークフロー一覧
 
 | ワークフロー | トリガー | 役割 |
 |------------|---------|------|
-| `pipeline.yml` | 毎日JST 9:00 / 手動 | 記事自動生成 |
-| `note-draft.yml` | `workflow_dispatch`（fileId必須） | note下書き投稿 |
-| `note-keepalive.yml` | 3日おき cron / 手動 | noteセッション延命 |
+| `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\blog-pipeline.yml` | 毎日実行 / 手動実行 | 記事自動生成 |
+| `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml` | `workflow_dispatch` | note 下書き投稿 |
+| `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\note-keepalive.yml` | 3 日ごと / 手動実行 | note セッション延命 |
+| `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\info-viewer-pipeline.yml` | 毎日実行 / 手動実行 | info_viewer 構築 |
 
----
+## 8. 環境変数の現在仕様
 
-## 7. 環境変数一覧
+### 8.1 GitHub Secrets
 
-### GitHub Secrets（Actions用）
+| 変数名 | 現在の用途 |
+| --- | --- |
+| `GOOGLE_SERVICE_ACCOUNT_JSON` | Google Sheets 読み書き |
+| `SPREADSHEET_ID` | 記事生成対象シートのあるスプレッドシート ID |
+| `SHEET_NAME` | 記事生成対象シート名 |
+| `APIFY_API_KEY` | YouTube 文字起こし取得と Amazon hiRes 取得 |
+| `GEMINI_API_KEY` | Gemini 2.5 Flash 記事生成 |
+| `ONEDRIVE_CLIENT_ID` | OneDrive / Microsoft Graph |
+| `ONEDRIVE_CLIENT_SECRET` | OneDrive / Microsoft Graph |
+| `ONEDRIVE_REFRESH_TOKEN` | OneDrive / Microsoft Graph |
+| `ONEDRIVE_FOLDER` | 記事 Markdown の保存先ルート |
+| `NOTE_EMAIL` | note API ログイン |
+| `NOTE_PASSWORD` | note API ログイン |
+| `NOTE_STORAGE_STATE` | Playwright 用の note Cookie |
+| `GH_PAT` | GitHub Variables / Secrets 更新、workflow dispatch |
+| `GOOGLE_CSE_API_KEY` | `/api/amazon-asin` 用 |
+| `GOOGLE_CSE_CX` | `/api/amazon-asin` 用 |
+| `AMAZON_CLIENT_ID` | Amazon Creators API |
+| `AMAZON_CLIENT_SECRET` | Amazon Creators API |
 
-| 変数名 | 用途 |
-|--------|------|
-| `GOOGLE_SERVICE_ACCOUNT_JSON` | スプレッドシート用サービスアカウント鍵 |
-| `SPREADSHEET_ID` | 管理用スプレッドシートID |
-| `SHEET_NAME` | 読み込み対象シート名 |
-| `APIFY_API_KEY` | Amazon hiRes 画像取得の Apify fallback |
-| `GEMINI_API_KEY` | Google AI APIキー |
-| `ONEDRIVE_CLIENT_ID` | Microsoft Graph API クライアントID |
-| `ONEDRIVE_CLIENT_SECRET` | Microsoft Graph API クライアントシークレット |
-| `ONEDRIVE_REFRESH_TOKEN` | OneDriveアクセス維持 |
-| `ONEDRIVE_FOLDER` | OneDrive内のルートフォルダ名 |
-| `NOTE_EMAIL` | noteログインメールアドレス |
-| `NOTE_PASSWORD` | noteログインパスワード |
-| `NOTE_STORAGE_STATE` | Playwright StorageState JSON（Cookie情報） |
-| `GH_PAT` | GitHub PAT（`secrets:write` + `variables:write` スコープ必須） |
+### 8.2 Vercel 環境変数
 
-### Vercel 環境変数
+| 変数名 | 現在の用途 |
+| --- | --- |
+| `ONEDRIVE_CLIENT_ID` | OneDrive / Microsoft Graph |
+| `ONEDRIVE_CLIENT_SECRET` | OneDrive / Microsoft Graph |
+| `ONEDRIVE_REFRESH_TOKEN` | OneDrive トークン更新 |
+| `ONEDRIVE_FOLDER` | 記事 Markdown の保存先ルート |
+| `VERCEL_TOKEN` | OneDrive refresh token を Vercel へ反映 |
+| `VERCEL_PROJECT_ID` | OneDrive refresh token を Vercel へ反映 |
+| `GITHUB_TOKEN` | GitHub Actions dispatch と Variables 読み書き |
+| `GITHUB_REPO` | 対象リポジトリ名 |
+| `LOCAL_ARTICLES_BASE` | `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog` |
+| `INFO_VIEWER_ONEDRIVE_FOLDER` | info_viewer の OneDrive ルート |
 
-| 変数名 | 用途 |
-|--------|------|
-| `ONEDRIVE_CLIENT_ID` | Microsoft Graph API |
-| `ONEDRIVE_CLIENT_SECRET` | Microsoft Graph API |
-| `ONEDRIVE_REFRESH_TOKEN` | OneDriveトークン（自動更新） |
-| `ONEDRIVE_FOLDER` | OneDriveフォルダ名 |
-| `VERCEL_TOKEN` | 環境変数自動更新用（Vercel PAT） |
-| `VERCEL_PROJECT_ID` | VercelプロジェクトID |
-| `GITHUB_TOKEN` | note-draft API用（GH_PATの値を設定） |
-| `GITHUB_REPO` | リポジトリ名（例: `seahirodigital/Blog_Vercel`） |
-| `LOCAL_ARTICLES_BASE` | ローカル開発時のExplorer/Finder表示用ベースパス（省略時: `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog`） |
+### 8.3 実行フラグ
 
-### GitHub Variables（自動生成）
-
-| 変数名 | 内容 |
-|--------|------|
-| `NOTE_DRAFT_URL_<8桁ハッシュ>` | 記事ごとの下書きURL（note_draft_poster.pyが自動生成） |
-
----
-
-## 8. 初回セットアップ手順
-
-1. GitHub Secrets を上記の通りすべて設定
-2. Vercel 環境変数を設定
-3. noteのStorageState初回取得:
-   ```bash
-   cd scripts/pipeline
-   pip install requests pynacl playwright
-   python prompts/05-draft-manager/note_draft_poster.py --save-cookies
-   # ブラウザが開くのでnote.comにログイン → Enterを押す
-   # GH_PATが設定されていればNOTE_STORAGE_STATEに自動登録される
-   ```
-4. Vercelにデプロイ（`vercel --prod` またはGitHub連携）
-5. スプレッドシートに動画URLを追加してパイプラインを実行
-
----
+| 変数名 | 現在の意味 |
+| --- | --- |
+| `NOTE_TOP_IMAGE_DEBUG` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts` に debug 成果物を出す |
+| `NOTE_TOP_IMAGE_USE_ADOBE` | Adobe Express 経路を debug 用に有効化する |
+| `NOTE_TOP_IMAGE_FORCE_DIRECT` | Adobe debug を有効にしていても direct upload を維持する |
 
 ## 9. ファイル構成
 
+| パス | 役割 |
+| --- | --- |
+| `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\index.html` | 記事一覧、Markdown 編集、note 下書き実行のメイン UI |
+| `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\links.html` | 補助ページ |
+| `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\info_viewer\index.html` | info_viewer の表示 UI |
+| `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api` | Vercel Serverless Functions |
+| `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\main.py` | 記事生成パイプラインの入口 |
+| `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\modules` | Google Sheets、Apify、OneDrive、Gemini 連携 |
+| `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts` | 記事生成・アフィリエイト挿入・note 下書き投稿の prompt / 実処理 |
+| `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager` | アフィリエイトリンク挿入、Amazon 画像取得 |
+| `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager` | note 下書き保存、OGP 展開、トップ画像挿入 |
+| `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test` | note トップ画像の debug 専用置き場 |
+| `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows` | GitHub Actions 定義 |
+| `C:\Users\HCY\OneDrive\開発\Blog_Vercel\reference\techrefere2.md` | note API の低レベル技術リファレンス |
+| `C:\Users\HCY\OneDrive\開発\Blog_Vercel\techrefere.md` | 経緯、試行錯誤、失敗ノウハウの蓄積場所 |
+
+## 10. 現在の note トップ画像の正常系
+
+```text
+記事本文の先頭 URL から ASIN 解決
+  ↓
+Amazon Creators API で通常画像取得
+  ↓
+Apify で hiRes を試行
+  ↓ 取れれば hiRes、取れなければ通常画像
+raw 保存
+  ↓
+Pillow で white background の prepared 画像を作成
+  ↓
+note の通常アップロード導線へ prepared を投入
+  ↓
+下書き保存
 ```
-Blog_Vercel/
-├── public/
-│   └── index.html              # 管理画面（React + Tailwind, シングルファイル）
-├── api/
-│   ├── articles.js             # OneDrive記事CRUD（移動含む）
-│   ├── ogp.js                  # OGPメタデータ取得（Amazon対応）
-│   ├── open-file.js            # ローカルExplorer/Finder起動（開発環境専用）
-│   ├── trigger.js              # パイプライン起動
-│   ├── note-draft.js           # note下書きトリガー + URL取得
-│   └── affiliate-links.js      # アフィリエイトリンク管理
-├── scripts/
-│   └── pipeline/
-│       ├── prompts/05-draft-manager/ # note下書き投稿スクリプト群（v4.1）
-│       ├── prompts/                # AI生成プロンプト集
-│       └── ...
-├── .github/
-│   └── workflows/
-│       ├── pipeline.yml            # 記事自動生成
-│       ├── note-draft.yml          # note下書き投稿
-│       └── note-keepalive.yml      # セッション維持cron
-├── reference/
-│   └── techrefere2.md             # note API技術リファレンス
-├── vercel.json
-└── README.md
-```
 
----
-
-## 10. note 下書き保存の現在仕様
-
-### 本番で使うスクリプト
-- 本番導線は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py`
-- このスクリプトが、本文下書き作成、OGP 展開、Amazon 商品特定、トップ画像挿入、最後の `下書き保存` まで担当する
-
-### Amazonトップ画像のルール
-- 記事本文の先頭から最初の `▼` より前に URL があれば、その先頭 URL から ASIN を抽出する
-- `▼` より前に URL がなければ、note タイトル / H1 / H2 から商品名を再抽出する
-- それでも特定できない場合は画像挿入をスキップする
-
-### 画像の分岐ルール
-- `hires` が取得できた場合:
-- 元画像を `raw` に保存し、note HERO 向けの整形済み画像を `prepared` に生成して、note の通常アップロードで挿入する
-- `hires` が取得できない場合:
-- Amazon Creators API の通常画像を `raw` に保存し、それを元に `prepared` を生成して、note の通常アップロードで挿入する
-
-### Adobe Express 関連
-- Adobe Express のログイン state は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\adobe_express_storage_state.json`
-- state 保存補助スクリプトは `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\save_adobe_express_storage_state.py`
-- 現在の本番経路では Adobe Express は使わない
-- Adobe Express は `NOTE_TOP_IMAGE_USE_ADOBE=1` を入れたときだけ debug 用に残す
-
-### debug / 切り分け用
-- 画像単体の切り分け検証は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\note_image_draft_test.py`
-- 詳細メモは `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\gazoup_reference.md`
-- スクリーンショットや HTML などの成果物は `NOTE_TOP_IMAGE_DEBUG=1` を入れたときだけ `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts\` に保存する
-
-### 2026-04-09 時点の成功実績
-- GitHub Actions 成功 run は `https://github.com/seahirodigital/Blog_Vercel/actions/runs/24174122466`
-- note 下書き URL は `https://editor.note.com/notes/n941b2432f659/edit/`
-- artifact `top_image_result.json` の実測結果は `image_flow=direct_prepared`
-- `selected_image_kind=prepared` で、`C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\prepared\YYYYMMDD_ASIN_note_hero.jpg` 系の整形済み画像が note ヘッダーへ通常アップロードされている
-- 同じ artifact では `hires_image_url=https://m.media-amazon.com/images/I/51QPhONLrhL._AC_SL1280_.jpg` も確認できており、hiRes 自体の取得と note 添付の両方が通った
-
----
-
-## 11. トップ画像の現状と今後の主方針
-
-### 現状
-
-- GitHub Actions から Amazon 商品詳細ページへ直接アクセスすると captcha に捕まりやすいため、Amazon hiRes 画像の取得は **Apify fallback** に切り替えている
-- 2026-04-09 の時点で、本番経路は **Adobe Express を外し、整形済み画像を note の通常アップロードへ入れる方式** に切り替わった
-- 成功 run `24174122466` では `direct_prepared` で note ヘッダー保存まで完了している
-
-### 白画像問題の要点
-
-- artifact 検証では、note に保存された後で壊れているのではなく、**Adobe 側のキャンバスが白いまま保存・挿入されている** 可能性が高い
-- `blob:` 画像検出だけでアップロード完了扱いしていること
-- `プロジェクトを保存中...` が消える前に確定挿入へ進んでいる可能性があること
-- Adobe 内で用途違いの file input を掴んでいる可能性があること
-
-### 今後の主方針
-
-Adobe Express 経由は複雑で、GitHub Actions 上での安定化コストが高い。  
-そのため、現在の主方針は **note の `画像をアップロード` 導線を本番経路にする**。
-
-ただし、元画像をそのままトップ画像へ入れると、ヘッダー枠で **見切れやすい**。  
-そのため、以下の流れへ舵を切る。
-
-1. Apify から hiRes 画像を取得する
-2. 元画像を必ず OneDrive に保存する
-3. note ヘッダー向けに、見切れないよう事前整形した画像を生成する
-4. 整形済み画像を note の通常アップロードで貼る
-
-### OneDrive 保存先
-
-トップ画像用の Amazon 画像は、元画像と整形済み画像の両方を必ず次へ保存する。
-
-`C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images`
-
-推奨構成:
-
-- 元画像:
-  `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\raw\YYYYMMDD_ASIN_hires.jpg`
-- 整形済み画像:
-  `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\prepared\YYYYMMDD_ASIN_note_hero.jpg`
-
-理由:
-
-- GitHub Actions で添付に失敗しても、手動添付へすぐ切り替えられる
-- 元画像と整形済み画像を残しておけば、見た目の再調整がしやすい
-- 成功 run の artifact にも `raw` と `prepared` の両方のパスが残るため、後追い検証がしやすい
-
-### 整形ルール
-
-最優先は **見切れ禁止**。  
-画像が少し小さくなるほうが、見切れるよりましとする。  
-そのうえで、トップの HERO なので、**枠内に収まる最大サイズ**で中央配置する。
-
-実装方針:
-
-- note のトップ画像比率 `800:418` を基準に固定キャンバスを作る
-- 実生成サイズは `1600x836` など、同一比率で高解像度にする
-- 元画像は `contain` で縮小し、**cover や crop は使わない**
-- 足りない余白は**必ず白背景**で埋める
-
-### 推奨ツール
-
-GitHub Actions で扱いやすいのは Python の `Pillow`。
-
-推奨処理:
-
-- `ImageOps.exif_transpose()` で向きを正規化
-- `Image.convert('RGB')`
-- `ImageOps.contain(image, (1600, 836), method=Image.Resampling.LANCZOS)` で最大サイズ化
-- `Image.new('RGB', (1600, 836), background_color)` で固定キャンバス生成
-- `paste()` で中央配置
-- `save(..., quality=92, optimize=True)` で JPEG 保存
-
-この方針により、Amazon captcha は Apify で回避しつつ、Adobe 依存を外し、GitHub Actions 上で再現性の高いトップ画像処理へ寄せる。
-
-### 今回の失敗ノウハウ要約
-
-- Amazon 商品詳細ページの直接 scraping は、GitHub Actions ランナーからだと captcha に落ちやすく、hiRes 抽出の主経路にしてはいけない
-- Adobe Express 経由は一見 hiRes を使えても、白画像・UI 文言差分・保存待機不足の不安定さが大きく、本番経路に向かない
-- note の通常アップロード導線は、file chooser の遅延発火や文言差分があるので、複数セレクタと再試行は必要
-- ただし一度整形済み画像まで用意できれば、**note 通常アップロードの方が Adobe より再現性が高い**
+この正常系が通ったときの `image_flow` は `direct_prepared` です。

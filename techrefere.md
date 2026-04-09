@@ -1,5 +1,59 @@
 ﻿# Note下書き自動投稿の技術リファレンス (v6 — OGP展開統合版)
 
+## 0. 2026-04 の note トップ画像改善ログ
+
+### Adobe Express を使うに至った経緯
+
+- 当初は hiRes 画像をそのまま note ヘッダーへ入れると見切れやすく、note 側の通常アップロードだけでは見た目の安定性が足りないと判断した。
+- そのため、一度 Adobe Express のキャンバスへ hiRes 画像を置いてから note に差し込む経路を試した。
+- ローカル検証では `adobe_hires` まで到達できた時期があり、hiRes を使った保存自体は成立していた。
+
+### Adobe Express をやめた経緯
+
+- GitHub Actions では Amazon hiRes の取得経路と Adobe 側 UI 操作の両方が不安定だった。
+- Amazon 商品詳細ページの直接取得は captcha に引っかかりやすく、hiRes 取得の主経路に向かなかった。
+- Adobe Express 側では白画像、保存待機不足、UI セレクタ変化の 3 つが重なり、本番導線として維持コストが高すぎた。
+- そのため、Adobe Express は `NOTE_TOP_IMAGE_USE_ADOBE=1` の debug 専用に落とし、本番から外した。
+
+### 最終解決案
+
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\amazon_gazo_get.py` が Amazon Creators API で通常画像を取得する。
+- 同じスクリプトが Apify actor `kawsar/amazon-product-details-scrapper` で hiRes を試し、失敗時だけ Amazon HTML を fallback で読む。
+- 取得した元画像は `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\raw` に残す。
+- その元画像から `1600x836`、白背景固定、`contain`、中央配置の `prepared` 画像を生成する。
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py` は `prepared -> hires -> api` の順で選び、note の通常アップロード導線へ直接入れる。
+- これが 2026-04-09 時点の本番経路で、`direct_prepared` が正常系になっている。
+
+### 今回の失敗ノウハウ要約
+
+- Amazon 商品詳細ページの直接 scraping は、GitHub Actions ランナーからだと captcha に落ちやすく、hiRes の主経路にしてはいけない。
+- Adobe Express 経由は hiRes が取れていても、白画像、保存待機、UI 差分の不安定さが大きく、本番経路に向かない。
+- note の通常アップロード導線でも file chooser の遅延発火はあるので、複数セレクタと再試行は必要だった。
+- ただし、`prepared` 画像まで先に作っておけば、note 通常アップロードの方が Adobe より再現性が高い。
+- 画像の見切れ対策は note 側の crop 調整ではなく、アップロード前の `prepared` 生成でやる方が安定する。
+- 背景色は灰色や透過ではなく白固定にした方が note ヘッダー上の見た目が崩れない。
+
+### debug / 切り分け用
+
+- 画像単体の切り分け検証は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\note_image_draft_test.py`
+- 詳細メモは `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\gazoup_reference.md`
+- スクリーンショットや HTML などの成果物は `NOTE_TOP_IMAGE_DEBUG=1` を入れたときだけ `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts\` に保存する
+- 以前あった `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\apify-amazon-probe.yml` は debug 専用で本番依存が無かったため削除した
+
+### 2026-04-09 時点の成功実績
+
+- GitHub Actions 成功 run は `https://github.com/seahirodigital/Blog_Vercel/actions/runs/24174122466`
+- note 下書き URL は `https://editor.note.com/notes/n941b2432f659/edit/`
+- artifact `top_image_result.json` の実測結果は `image_flow=direct_prepared`
+- `selected_image_kind=prepared` で、`C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\prepared\YYYYMMDD_ASIN_note_hero.jpg` 系の整形済み画像が note ヘッダーへ通常アップロードされている
+- 同じ artifact では `hires_image_url=https://m.media-amazon.com/images/I/51QPhONLrhL._AC_SL1280_.jpg` も確認できており、hiRes 自体の取得と note 添付の両方が通った
+- 後続 run `https://github.com/seahirodigital/Blog_Vercel/actions/runs/24175081881` では、artifact 常時保存を外した状態でも成功し、背景白固定の整形画像で `125秒` で完走した
+
+### 最終的な運用メモ
+
+- README には現在仕様だけを書く。
+- Adobe Express を使った時代の理由、やめた理由、captcha 問題、artifact での切り分け、成功 run の実測はこの `C:\Users\HCY\OneDrive\開発\Blog_Vercel\techrefere.md` に集約する。
+
 ## 1. 完成した機能一覧
 
 | 機能 | 状態 | 実装方法 |
