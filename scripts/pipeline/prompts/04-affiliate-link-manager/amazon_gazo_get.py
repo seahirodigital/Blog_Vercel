@@ -492,7 +492,8 @@ def save_and_optionally_upload(
 ) -> SavedImageInfo:
     if is_github_actions():
         image.onedrive_url = upload_file_to_onedrive(image.local_path, remote_folder)
-        remove_local_file_if_exists(image.local_path)
+        # note 下書き投稿では、この後 Playwright が同じローカル画像を直接アップロードする。
+        # Actions 上でもアップロード完了までは手元に残しておく。
     return image
 
 
