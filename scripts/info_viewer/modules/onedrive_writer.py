@@ -216,6 +216,25 @@ def upload_json(relative_path: str, data: dict[str, Any]) -> dict[str, Any]:
     )
 
 
+def download_text(relative_path: str) -> Optional[str]:
+    token = _get_access_token()
+    relative_path = str(relative_path).strip("/ ")
+    full_path = f"{DEFAULT_BASE_FOLDER}/{relative_path}" if relative_path else DEFAULT_BASE_FOLDER
+    url = f"{GRAPH_API_BASE}/me/drive/root:/{_encode_path(full_path)}:/content"
+    response = _request("GET", url, token)
+    if response.status_code == 404:
+        return None
+    response.raise_for_status()
+    return response.text
+
+
+def download_json(relative_path: str) -> Optional[dict[str, Any]]:
+    text = download_text(relative_path)
+    if text is None or not text.strip():
+        return None
+    return json.loads(text)
+
+
 def upload_markdown(
     channel_name: str,
     title: str,

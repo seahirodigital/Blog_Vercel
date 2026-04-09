@@ -719,6 +719,36 @@
       }
     });
 
+    const INFO_VIEWER_LINK = { id: 'info-viewer', title: 'info_viewer', url: '/info_viewer/index.html' };
+
+    function isInfoViewerLink(link) {
+      if (!link || typeof link !== 'object') return false;
+      const linkId = String(link.id || '').trim();
+      const linkUrl = String(link.url || '').trim().replace(/\/+$/, '');
+      return linkId === INFO_VIEWER_LINK.id || linkUrl === '/info_viewer/index.html' || linkUrl === '/info_viewer';
+    }
+
+    function ensureInfoViewerLink(links) {
+      const normalizedLinks = Array.isArray(links) ? links.filter((link) => link && typeof link === 'object') : [];
+      const result = [];
+      let hasInfoViewer = false;
+
+      normalizedLinks.forEach((link) => {
+        if (isInfoViewerLink(link)) {
+          if (hasInfoViewer) return;
+          hasInfoViewer = true;
+          result.push({ ...link, ...INFO_VIEWER_LINK });
+          return;
+        }
+        result.push(link);
+      });
+
+      if (!hasInfoViewer) {
+        result.push({ ...INFO_VIEWER_LINK });
+      }
+      return result;
+    }
+
     // === API ヘルパー ===
     const API_BASE = '/api';
 
@@ -1427,13 +1457,13 @@
       const [customLinks, setCustomLinks] = useState(() => {
         try {
           const saved = JSON.parse(localStorage.getItem('sb_customLinks'));
-          if (saved && Array.isArray(saved) && saved.length > 0) return saved;
+          if (saved && Array.isArray(saved) && saved.length > 0) return ensureInfoViewerLink(saved);
         } catch { }
-        return [
+        return ensureInfoViewerLink([
           { id: 'mobile-links', title: 'モバイルリンク集', url: '/links.html' },
           { id: 'note', title: 'note', url: 'https://note.com/startupm' },
           { id: 'yt-sheet', title: 'YouTube動画取得シート', url: 'https://docs.google.com/spreadsheets/d/1cw6RC1XX4nAYvfZrBq7nmTtrr2oGFsSI0r_pVIxGxAc/edit?pli=1&gid=983578135#gid=983578135' }
-        ];
+        ]);
       });
 
       // 全フォルダパス一覧（記事のpathから導出）
@@ -1444,10 +1474,14 @@
 
       const persistCustomLinks = useCallback((updater) => {
         setCustomLinks(prevLinks => {
-          const nextLinks = typeof updater === 'function' ? updater(prevLinks) : updater;
+          const nextLinks = ensureInfoViewerLink(typeof updater === 'function' ? updater(prevLinks) : updater);
           try { localStorage.setItem('sb_customLinks', JSON.stringify(nextLinks)); } catch { }
           return nextLinks;
         });
+      }, []);
+
+      useEffect(() => {
+        try { localStorage.setItem('sb_customLinks', JSON.stringify(ensureInfoViewerLink(customLinks))); } catch { }
       }, []);
 
       const reorderCustomLinks = useCallback((startIndex, targetIndex) => {

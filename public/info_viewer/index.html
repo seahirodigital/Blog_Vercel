@@ -1834,6 +1834,9 @@
                 articleStatus: video.articleStatus || (video.hasArticle ? '記事あり' : '未生成'),
                 hasArticle: Boolean(video.hasArticle || video.articleId),
                 articleUpdatedAt: video.articleUpdatedAt || '',
+                lastFailureStage: video.lastFailureStage || '',
+                lastFailureMessage: video.lastFailureMessage || '',
+                lastFailureAt: video.lastFailureAt || '',
                 markdown: typeof video.markdown === 'string' ? video.markdown : ''
               }))
             : []
@@ -1994,7 +1997,10 @@
             youtubeUrl: '#',
             articleStatus: '未生成',
             markdown: '',
-            hasArticle: false
+            hasArticle: false,
+            lastFailureStage: '',
+            lastFailureMessage: '',
+            lastFailureAt: ''
           },
           [selectedChannel, selectedVideoId]
         );
@@ -2268,6 +2274,19 @@
                           ? 'この動画はシート上の対象ですが、まだ記事ファイルが生成されていません。次回の自動取得で再試行されます。'
                           : 'この動画はダミー一覧には表示していますが、本文はまだありません。第一弾では既存 UI を流用した 3 パネル構造とドラッグハンドルの確認を優先します。'}
                       </p>
+                      {selectedVideo.lastFailureMessage ? (
+                        <div className="mt-4 max-w-xl rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-left">
+                          <p className="text-xs font-bold text-amber-700">
+                            最終失敗: {selectedVideo.lastFailureStage || '未分類'}
+                          </p>
+                          <p className="mt-1 text-xs leading-relaxed text-amber-900">
+                            {selectedVideo.lastFailureMessage}
+                          </p>
+                          <p className="mt-1 text-[11px] text-amber-700">
+                            {formatDateTime(selectedVideo.lastFailureAt)}
+                          </p>
+                        </div>
+                      ) : null}
                       {indexError ? <p className="mt-3 text-[11px] text-slate-400">{indexError}</p> : null}
                     </div>
                   </div>
