@@ -823,3 +823,194 @@ artifact:
 - Actions:
   note / Adobe 側の実装は動作しているが、Amazon 詳細ページ取得が captcha 化されるため hiRes URL を得られず、`direct_api` の通常版へフォールバックする
 
+### 2026-04-09 現状整理: Amazon は Apify、Adobe は白画像リスクあり
+
+#### 今起きていること
+
+- Amazon hiRes 画像の取得は、GitHub Actions から Amazon 詳細ページへ直接アクセスすると captcha に捕まるため、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\amazon_gazo_get.py` で **Apify fallback** に切り替えた
+- この切替により、Actions 上でも `https://m.media-amazon.com/images/I/51QPhONLrhL._AC_SL1280_.jpg` のような hiRes URL 自体は取得できる
+- しかし、hiRes を `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py` の Adobe Express 経由で note トップ画像へ挿入すると、**トップ画像が真っ白で保存されるケース** が発生している
+
+#### 白画像問題の現在の見立て
+
+artifact:
+
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\tmp\run_24171624385\adobe_after_upload.png`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\tmp\run_24171624385\adobe_insert_confirmed.png`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\tmp\run_24171624385\after_top_image_draft_save.png`
+
+上記を確認すると、白画像は note 側で壊れたのではなく、**Adobe 側の作業面が白いまま保存・挿入されている** 可能性が高い。
+
+現時点の有力原因は次の 3 つ。
+
+1. `_wait_for_adobe_upload_signal()` が `img[src^='blob:']` を見つけただけでアップロード完了扱いしており、**実キャンバス反映前**に次へ進んでいる  
+2. `Adobe Express 確定挿入` の時点で `プロジェクトを保存中...` モーダルが残っており、**保存完了前に確定挿入を押している**  
+3. Adobe の file input 選定が `file-selector-premium-redirect` に寄っており、**キャンバス差し替え用ではなく素材アップロード用 input を掴んでいる** 可能性がある
+
+#### ここまでの試行錯誤の要点
+
+- Secrets 未注入問題を解消し、`AMAZON_CLIENT_ID` / `AMAZON_CLIENT_SECRET` を `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml` へ追加
+- `ADOBE_EXPRESS_STORAGE_STATE` を GitHub Actions に渡し、ローカルと browser state を揃えた
+- note 側の `画像をアップロード` 導線のセレクタを強化し、artifact 回収も追加した
+- Amazon hiRes 取得は、Amazon 直接 scraping を諦め、**Apify actor 経由**へ切り替えた
+- その結果、hiRes 取得自体は安定したが、**Adobe Express 挿入で白画像**という新しい不安定さが残った
+
+#### 今後の方針
+
+Adobe Express 経由は複雑で、GitHub Actions 上では白画像問題の切り分けと安定化コストが高い。  
+そのため、**今後の主方針は Adobe 経由をやめ、note の `画像をアップロード` 導線へ寄せる**。
+
+ただし、単純に元画像をそのまま note のトップ画像へ入れると、ヘッダー枠で **画像が見切れる**。  
+そのため、次の方針で進める。
+
+1. Apify から hiRes 画像を取得する  
+2. hiRes 元画像を必ず OneDrive に保存する  
+3. note ヘッダー向けに、**見切れないように事前整形した画像** を別途生成する  
+4. note には Adobe ではなく、この整形済み画像を `画像をアップロード` で入れる
+
+#### OneDrive 保存ルール
+
+保存先は固定で次を使う。
+
+`C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images`
+
+最低限、以下の 2 種を必ず残す。
+
+- 元画像:
+  `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\raw\YYYYMMDD_ASIN_hires.jpg`
+- 整形済み画像:
+  `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\prepared\YYYYMMDD_ASIN_note_hero.jpg`
+
+理由:
+
+- GitHub Actions 側でアップロード失敗しても、手動添付にすぐ切り替えられる
+- 元画像と整形済み画像の両方が残るので、見た目調整の再実行がしやすい
+
+#### 整形方針
+
+最優先ルールは **見切れ禁止**。  
+画像が少し小さくなってもよいので、**必ず画像全体を枠内に収める**。  
+そのうえで、トップの HERO なので、**入る限り最大サイズ**で中央配置する。
+
+具体的には次の方針を推奨する。
+
+- note のトップ画像比率に合わせた固定キャンバスを作る  
+- 現状の note 出力 HTML では `width=\"800\" height=\"418\"` が確認できているため、比率は **800:418** を基準にする  
+- 実生成サイズは `1600x836` など、同じ比率で少し高解像度にする  
+- 元画像は `cover` や crop ではなく、**`contain` で縮小**する  
+- 余白は白または平均色背景で許容し、**主画像の欠けを絶対に出さない**
+
+#### 推奨ツールと実装方法
+
+GitHub Actions で最も扱いやすいのは Python の `Pillow`。
+
+推奨 API:
+
+- `ImageOps.exif_transpose()` で向きを正規化
+- `Image.convert('RGB')`
+- `ImageOps.contain(image, (1600, 836), method=Image.Resampling.LANCZOS)` で最大限大きく収める
+- `Image.new('RGB', (1600, 836), background_color)` で固定キャンバス生成
+- `paste()` で中央配置
+- `save(..., quality=92, optimize=True)` で JPEG 保存
+
+禁止寄りの方針:
+
+- `cover`
+- 中央 crop
+- 枠からはみ出す前提のトリミング
+
+#### 次の AI への引き継ぎ要点
+
+- Amazon hiRes 取得は **Apify を正** とする  
+- Adobe Express は当面 debug 用に残してもよいが、**本命の本番経路にはしない**  
+- これからの本命は
+  `Apify 取得 → OneDrive へ元画像保存 → Pillow で note HERO 向けに整形 → 整形済み画像を note の通常アップロード`
+  である  
+- 画像が小さくなることより、**見切れることのほうが悪い**  
+- ただし HERO 画像なので、`contain` の範囲内で最大限大きく表示する
+
+### 2026-04-09 実測: `direct_prepared` で本番成功
+
+#### 実行結果
+
+- 成功 run:
+  `https://github.com/seahirodigital/Blog_Vercel/actions/runs/24174122466`
+- 対象 commit:
+  `223c6fb`
+- 対象 branch:
+  `codex-note-direct-upload-test-20260409`
+- note 下書き URL:
+  `https://editor.note.com/notes/n941b2432f659/edit/`
+
+今回の run では、GitHub Actions から note 下書き投稿が最後まで成功した。
+
+#### artifact 実測値
+
+artifact:
+
+- `note-top-image-artifacts-24174122466/top_image_result.json`
+- `note-top-image-artifacts-24174122466/amazon_hires_probe.json`
+
+`top_image_result.json` の主要値は次の通りだった。
+
+```json
+{
+  "image_flow": "direct_prepared",
+  "image_target_asin": "B0F535RF9Z",
+  "hires_image_url": "https://m.media-amazon.com/images/I/51QPhONLrhL._AC_SL1280_.jpg",
+  "prepared_image_path": "/home/runner/work/_temp/amazon_top_images/prepared/20260409_B0F535RF9Z_note_hero.jpg",
+  "selected_image_path": "/home/runner/work/_temp/amazon_top_images/prepared/20260409_B0F535RF9Z_note_hero.jpg",
+  "selected_image_kind": "prepared",
+  "upload_entry_strategy": "button_role_label_regex_upload#0:filechooser",
+  "ready_wait_strategy": "main_img_detected"
+}
+```
+
+ここから分かることは次の通り。
+
+- hiRes 自体は `https://m.media-amazon.com/images/I/51QPhONLrhL._AC_SL1280_.jpg` を取得できている
+- note に実際に渡したのは hiRes 生画像ではなく、`prepared` 側の整形済み JPEG である
+- 本番経路は **Adobe Express ではなく note の通常アップロード** である
+- file chooser 起点の通常アップロードでも、note ヘッダー保存まで到達できた
+
+#### `amazon_hires_probe.json` の意味
+
+同じ run の `amazon_hires_probe.json` は次の通りだった。
+
+```json
+{
+  "requests_hires_url": "",
+  "browser_probe_used": false,
+  "browser_hires_url": "",
+  "browser_error": ""
+}
+```
+
+これは、今回の成功 run では
+**Amazon 商品詳細 HTML の再取得に頼らず、Apify から得た hiRes をそのまま採用できた**
+ことを意味する。
+
+つまり、hiRes の主経路としては
+`Amazon 詳細ページ scraping`
+ではなく
+`Apify actor`
+を使う設計が正しかった。
+
+#### 今回確定した成功パターン
+
+1. note 本文の先頭 URL から ASIN を解決する  
+2. Apify で hiRes URL を取得する  
+3. `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\raw` に元画像を保存する  
+4. Pillow で `1600x836` の note HERO 用 `prepared` 画像を生成する  
+5. `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\prepared` に保存する  
+6. note の `画像をアップロード` 導線から `prepared` を通常アップロードする  
+7. note 側の crop 保存と最後の `下書き保存` まで完了させる
+
+#### ここまでの失敗ノウハウを、今回の成功視点で整理すると
+
+- Amazon 商品詳細ページ scraping は captcha に落ちるので、hiRes 主経路にしてはいけない  
+- Adobe Express は白画像・UI 変化・保存待機不足の3重リスクがあり、本番経路から外すのが正解だった  
+- `prepared` 画像を事前生成すると、見切れを防ぎながら note 通常アップロードの安定性だけを享受できる  
+- `raw` と `prepared` を両方 OneDrive に残すと、失敗時の手動リカバリと見た目調整がかなり楽になる  
+- 成功 run の artifact は「新経路が実際に使われた証跡」として有効だったが、本番が安定した後は常時保存を減らして速度優先へ寄せてよい
+
