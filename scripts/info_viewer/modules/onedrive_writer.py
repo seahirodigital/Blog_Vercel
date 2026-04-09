@@ -72,7 +72,23 @@ def _date_prefix(date_text: str) -> str:
     return datetime.now().strftime("%Y%m%d")
 
 
+def _prepend_video_url(markdown_body: str, video_url: str) -> str:
+    body = str(markdown_body or "").strip()
+    normalized_url = normalize_youtube_url(video_url or "")
+    if not normalized_url:
+        return body
+
+    if body.startswith(normalized_url):
+        return body
+
+    if not body:
+        return f"{normalized_url}\n"
+
+    return f"{normalized_url}\n\n{body}"
+
+
 def _build_markdown_document(markdown_body: str, metadata: dict[str, Any]) -> str:
+    prepared_markdown = _prepend_video_url(markdown_body, metadata.get("video_url", ""))
     frontmatter = [
         "---",
         f'title: "{_yaml_escape(metadata.get("title", ""))}"',
@@ -86,7 +102,7 @@ def _build_markdown_document(markdown_body: str, metadata: dict[str, Any]) -> st
         "---",
         "",
     ]
-    return "\n".join(frontmatter) + markdown_body.strip() + "\n"
+    return "\n".join(frontmatter) + prepared_markdown + "\n"
 
 
 def _encode_path(path: str) -> str:

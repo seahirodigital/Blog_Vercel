@@ -1658,7 +1658,7 @@
       }
 
       function countReadyVideos(channel) {
-        return channel.videos.filter((video) => Boolean(video.markdown)).length;
+        return channel.videos.filter((video) => Boolean(video.markdown || video.articleId || video.hasArticle)).length;
       }
 
       const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1cw6RC1XX4nAYvfZrBq7nmTtrr2oGFsSI0r_pVIxGxAc/edit?gid=1025543042#gid=1025543042';
@@ -1668,6 +1668,19 @@
           <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <rect x="3" y="5" width="18" height="14" rx="3" ry="3" />
             <polygon points="10 9 16 12 10 15 10 9" fill="currentColor" stroke="none" />
+          </svg>
+        );
+      }
+
+      function PriorityWireGlyph({ size = 13, className = '' }) {
+        return (
+          <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 7V4" />
+            <path d="M15 7V4" />
+            <path d="M8 11h8" />
+            <path d="M12 11v7" />
+            <path d="M10 18h4" />
+            <path d="M7 7h10v2a5 5 0 0 1-5 5 5 5 0 0 1-5-5V7Z" />
           </svg>
         );
       }
@@ -1685,6 +1698,99 @@
           >
             <path d="m15 18-6-6 6-6" />
           </svg>
+        );
+      }
+
+      function extractYoutubeVideoId(url) {
+        const raw = String(url || '').trim();
+        if (!raw) return '';
+
+        try {
+          const parsed = new URL(raw);
+          const host = parsed.hostname.toLowerCase();
+          if (host.includes('youtu.be')) {
+            return parsed.pathname.replace(/^\/+/, '').split('/')[0] || '';
+          }
+          if (host.includes('youtube.com')) {
+            if (parsed.pathname === '/watch') {
+              return parsed.searchParams.get('v') || '';
+            }
+            if (parsed.pathname.startsWith('/shorts/') || parsed.pathname.startsWith('/live/')) {
+              return parsed.pathname.replace(/^\/+/, '').split('/')[1] || '';
+            }
+          }
+        } catch {
+          return '';
+        }
+
+        return '';
+      }
+
+      function resolveThumbnailUrl(video) {
+        if (video.thumbnailUrl) return video.thumbnailUrl;
+        const videoId = extractYoutubeVideoId(video.youtubeUrl);
+        if (!videoId || videoId.startsWith('dummy-')) return '';
+        return `https://i2.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+      }
+
+      function isGeminiDeferredVideo(video) {
+        const hasArticle = Boolean(video.markdown || video.articleId || video.hasArticle);
+        return !hasArticle && video.queueStatus === 'deferred' && video.lastFailureStage === 'Gemini';
+      }
+
+      function VideoCard({ video, isActive, onOpen, onPrioritize, priorityLoadingId, secondaryText }) {
+        const hasArticle = Boolean(video.markdown || video.articleId || video.hasArticle);
+        const thumbnailUrl = resolveThumbnailUrl(video);
+        const canPrioritize = isGeminiDeferredVideo(video);
+        const isPrioritizing = priorityLoadingId === video.id;
+
+        return (
+          <div className={`rounded-md px-2 py-2 article-item mb-0.5 ${isActive ? 'active' : ''}`}>
+            <div className="flex items-end gap-3">
+              <button type="button" onClick={onOpen} className="flex min-w-0 flex-1 items-stretch gap-3 text-left">
+                <div className="h-[72px] w-[96px] overflow-hidden rounded-xl border border-slate-200 bg-slate-100 flex-shrink-0">
+                  {thumbnailUrl ? (
+                    <img src={thumbnailUrl} alt="" loading="lazy" className="h-full w-full object-cover" />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-slate-400">
+                      <VideoGlyph size={24} />
+                    </div>
+                  )}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className={`article-title-text text-xs leading-5 ${isActive ? 'text-[#7C4DFF] font-bold' : 'text-slate-700 font-medium'}`}>
+                    {video.title}
+                  </div>
+                  <div className={`mt-1 text-[11px] ${isActive ? 'text-[#7C4DFF]/80' : 'text-slate-500'}`}>
+                    {video.articleStatus}
+                  </div>
+                  <div className={`mt-2 article-date flex items-center gap-1.5 text-[11px] ${isActive ? 'text-[#7C4DFF] font-semibold' : 'text-slate-400'}`}>
+                    <span className="truncate">{secondaryText}</span>
+                    {hasArticle ? (
+                      <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-[#7C4DFF] text-white flex-shrink-0" title="記事あり">
+                        <VideoGlyph size={9} className="text-white" />
+                      </span>
+                    ) : null}
+                  </div>
+                </div>
+              </button>
+              {canPrioritize ? (
+                <button
+                  type="button"
+                  onClick={() => onPrioritize?.(video)}
+                  disabled={isPrioritizing}
+                  className={`mb-0.5 inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border transition-colors ${
+                    isPrioritizing
+                      ? 'cursor-wait border-emerald-200 bg-emerald-50 text-emerald-500'
+                      : 'border-amber-200 bg-amber-50 text-amber-600 hover:bg-amber-100'
+                  }`}
+                  title={isPrioritizing ? '最優先キューへ移動中' : 'Gemini 保留記事を最優先キューへ移動'}
+                >
+                  <PriorityWireGlyph size={14} className={isPrioritizing ? 'animate-pulse' : ''} />
+                </button>
+              ) : null}
+            </div>
+          </div>
         );
       }
 
@@ -1716,7 +1822,7 @@
         );
       }
 
-      function VideoList({ channel, selectedVideoId, onSelect }) {
+      function VideoList({ channel, selectedVideoId, onSelect, onPrioritize, priorityLoadingId }) {
         if (!channel) {
           return <div className="px-4 py-4 text-sm text-slate-400">チャンネルを選択してください。</div>;
         }
@@ -1725,33 +1831,23 @@
           <div className="px-2 py-2">
             {channel.videos.map((video) => {
               const isActive = video.id === selectedVideoId;
-              const hasArticle = Boolean(video.markdown || video.articleId || video.hasArticle);
               return (
-                <button
+                <VideoCard
                   key={video.id}
-                  onClick={() => onSelect(video.id)}
-                  className={`w-full text-left rounded-md px-2 py-2 article-item mb-0.5 ${isActive ? 'active' : ''}`}
-                >
-                  <div className={`article-title-text text-xs truncate ${isActive ? 'text-[#7C4DFF] font-bold' : 'text-slate-700 font-medium'}`}>
-                    <VideoGlyph size={11} className="inline mr-1 mb-0.5 opacity-60" />
-                    {video.title}
-                  </div>
-                  <div className={`text-xs mt-0.5 article-date flex items-center gap-1.5 ${isActive ? 'text-[#7C4DFF] font-semibold' : 'text-slate-400'}`}>
-                    <span className="truncate">{formatDate(video.publishedAt)} ・ {video.duration}</span>
-                    {hasArticle ? (
-                      <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-[#7C4DFF] text-white flex-shrink-0" title="記事あり">
-                        <VideoGlyph size={9} className="text-white" />
-                      </span>
-                    ) : null}
-                  </div>
-                </button>
+                  video={video}
+                  isActive={isActive}
+                  onOpen={() => onSelect(video.id)}
+                  onPrioritize={onPrioritize}
+                  priorityLoadingId={priorityLoadingId}
+                  secondaryText={`${formatDate(video.publishedAt)} ・ ${video.duration || '時間未設定'}`}
+                />
               );
             })}
           </div>
         );
       }
 
-      function RecentList({ videos, selectedVideoId, onSelect }) {
+      function RecentList({ videos, selectedVideoId, onSelect, onPrioritize, priorityLoadingId }) {
         if (!videos.length) {
           return <div className="px-4 py-4 text-sm text-slate-400">新着記事はまだありません。</div>;
         }
@@ -1761,19 +1857,15 @@
             {videos.map((video) => {
               const isActive = video.id === selectedVideoId;
               return (
-                <button
+                <VideoCard
                   key={video.id}
-                  onClick={() => onSelect(video.channelId, video.id)}
-                  className={`w-full text-left rounded-md px-2 py-2 article-item mb-0.5 ${isActive ? 'active' : ''}`}
-                >
-                  <div className={`article-title-text text-xs truncate ${isActive ? 'text-[#7C4DFF] font-bold' : 'text-slate-700 font-medium'}`}>
-                    <VideoGlyph size={11} className="inline mr-1 mb-0.5 opacity-60" />
-                    {video.title}
-                  </div>
-                  <div className={`text-xs mt-0.5 article-date ${isActive ? 'text-[#7C4DFF] font-semibold' : 'text-slate-400'}`}>
-                    {formatDate(video.publishedAt)} ・ {video.channelName}
-                  </div>
-                </button>
+                  video={video}
+                  isActive={isActive}
+                  onOpen={() => onSelect(video.channelId, video.id)}
+                  onPrioritize={onPrioritize}
+                  priorityLoadingId={priorityLoadingId}
+                  secondaryText={`${formatDate(video.publishedAt)} ・ ${video.channelName}`}
+                />
               );
             })}
           </div>
@@ -1783,7 +1875,7 @@
       function PanelHeader({ title, badge, bottomRight }) {
         return (
           <div className="relative min-h-[52px] px-3 py-2 border-b border-slate-100 bg-gradient-to-r from-[#7C4DFF] to-[#651FFF] flex items-center">
-            <div className="flex items-center gap-2 min-h-[20px] pr-10">
+            <div className="flex items-center gap-2 min-h-[20px] pr-36">
               <div className="text-sm font-bold text-white">{title}</div>
               {badge ? <span className="text-[10px] font-semibold text-white/80 bg-white/15 rounded-full px-2 py-0.5">{badge}</span> : null}
             </div>
@@ -1830,10 +1922,16 @@
                 title: video.title || '無題',
                 publishedAt: video.publishedAt || '',
                 duration: video.duration || '',
+                thumbnailUrl: video.thumbnailUrl || '',
                 youtubeUrl: video.youtubeUrl || '',
                 articleStatus: video.articleStatus || (video.hasArticle ? '記事あり' : '未生成'),
                 hasArticle: Boolean(video.hasArticle || video.articleId),
                 articleUpdatedAt: video.articleUpdatedAt || '',
+                sheetStatus: video.sheetStatus || '',
+                queueStatus: video.queueStatus || '',
+                queueNextRetryAt: video.queueNextRetryAt || '',
+                queueAttemptCount: Number(video.queueAttemptCount || 0),
+                manualPriorityAt: video.manualPriorityAt || '',
                 lastFailureStage: video.lastFailureStage || '',
                 lastFailureMessage: video.lastFailureMessage || '',
                 lastFailureAt: video.lastFailureAt || '',
@@ -1858,6 +1956,8 @@
         const [articleLoadingId, setArticleLoadingId] = useState('');
         const [channelCollapsed, setChannelCollapsed] = useState(false);
         const [videoCollapsed, setVideoCollapsed] = useState(false);
+        const [desktopVideoFilter, setDesktopVideoFilter] = useState('channel');
+        const [priorityLoadingId, setPriorityLoadingId] = useState('');
         const channelDragging = useRef(false);
         const videoDragging = useRef(false);
         const channelStartX = useRef(0);
@@ -1987,6 +2087,11 @@
           [channels, selectedChannelId]
         );
 
+        const desktopVideos = useMemo(
+          () => (desktopVideoFilter === 'latest' ? latestVideos : selectedChannel.videos),
+          [desktopVideoFilter, latestVideos, selectedChannel.videos]
+        );
+
         const selectedVideo = useMemo(
           () => selectedChannel.videos.find((video) => video.id === selectedVideoId) || selectedChannel.videos[0] || {
             id: '',
@@ -1994,10 +2099,14 @@
             title: '動画がありません',
             publishedAt: '',
             duration: '',
+            thumbnailUrl: '',
             youtubeUrl: '#',
             articleStatus: '未生成',
             markdown: '',
             hasArticle: false,
+            queueStatus: '',
+            queueNextRetryAt: '',
+            manualPriorityAt: '',
             lastFailureStage: '',
             lastFailureMessage: '',
             lastFailureAt: ''
@@ -2037,6 +2146,61 @@
           setMobileSidebarOpen(false);
         }, [handleSelectVideoAcrossChannels]);
 
+        const updateVideoInChannels = useCallback((videoId, updater) => {
+          setChannels((currentChannels) => currentChannels.map((channel) => ({
+            ...channel,
+            videos: channel.videos.map((video) => {
+              if (video.id !== videoId) return video;
+              const patch = typeof updater === 'function' ? updater(video) : updater;
+              return { ...video, ...patch };
+            })
+          })));
+        }, []);
+
+        const handlePrioritizeVideo = useCallback(async (video) => {
+          if (!video?.youtubeUrl || priorityLoadingId) return;
+
+          try {
+            setPriorityLoadingId(video.id);
+            const response = await fetch('/api/info-viewer-priority', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                video_url: video.youtubeUrl,
+                title: video.title,
+                channelName: video.channelName || selectedChannel.name,
+                channelUrl: video.channelUrl || selectedChannel.channelUrl,
+                publishedAt: video.publishedAt,
+                duration: video.duration,
+                thumbnailUrl: video.thumbnailUrl || resolveThumbnailUrl(video),
+                sheetStatus: video.sheetStatus || '',
+                lastFailureStage: video.lastFailureStage,
+                lastFailureMessage: video.lastFailureMessage,
+                lastFailureAt: video.lastFailureAt,
+                queueAttemptCount: video.queueAttemptCount || 0,
+              }),
+            });
+            const payload = await response.json();
+            if (!response.ok || payload.success === false) {
+              throw new Error(payload.error || `priority API ${response.status}`);
+            }
+
+            updateVideoInChannels(video.id, {
+              queueStatus: 'pending',
+              queueNextRetryAt: payload.manualPriorityAt || new Date().toISOString(),
+              manualPriorityAt: payload.manualPriorityAt || new Date().toISOString(),
+            });
+
+            if (payload.warning) {
+              setIndexError(payload.warning);
+            }
+          } catch (error) {
+            setIndexError(error.message || '最優先化に失敗しました');
+          } finally {
+            setPriorityLoadingId('');
+          }
+        }, [priorityLoadingId, selectedChannel.channelUrl, selectedChannel.name, updateVideoInChannels]);
+
         const swipeSequence = useMemo(() => {
           const isCurrentInLatest = latestVideos.some((video) => video.id === selectedVideoId);
           return isCurrentInLatest ? latestVideos : allVideosByDate;
@@ -2051,6 +2215,12 @@
           if (!nextVideo) return;
           handleSelectVideoAcrossChannels(nextVideo.channelId, nextVideo.id);
         }, [handleSelectVideoAcrossChannels, selectedVideoId, swipeSequence]);
+
+        useEffect(() => {
+          if (desktopVideoFilter !== 'latest' || !latestVideos.length) return;
+          if (latestVideos.some((video) => video.id === selectedVideoId)) return;
+          handleSelectVideoAcrossChannels(latestVideos[0].channelId, latestVideos[0].id);
+        }, [desktopVideoFilter, handleSelectVideoAcrossChannels, latestVideos, selectedVideoId]);
 
         const handlePreviewTouchStart = useCallback((event) => {
           if (typeof window !== 'undefined' && window.innerWidth >= 1024) return;
@@ -2121,6 +2291,20 @@
           </a>
         );
 
+        const renderDesktopVideoFilter = () => (
+          <label className="hidden lg:flex items-center gap-2 text-[10px] font-semibold text-white/85">
+            <span>フィルタ</span>
+            <select
+              value={desktopVideoFilter}
+              onChange={(event) => setDesktopVideoFilter(event.target.value)}
+              className="rounded-full border border-white/25 bg-white/90 px-3 py-1 text-[11px] text-slate-700 outline-none"
+            >
+              <option value="channel">チャンネル順</option>
+              <option value="latest">新着順</option>
+            </select>
+          </label>
+        );
+
         return (
           <div className="flex h-screen overflow-hidden">
             {mobileSidebarOpen && <div className="lg:hidden mobile-overlay" onClick={() => setMobileSidebarOpen(false)} />}
@@ -2136,9 +2320,21 @@
                 {mobilePanel === 'channels' ? (
                   <ChannelList channels={channels} selectedChannelId={selectedChannelId} onSelect={handleMobileSelectChannel} />
                 ) : mobilePanel === 'videos' ? (
-                  <VideoList channel={selectedChannel} selectedVideoId={selectedVideoId} onSelect={(videoId) => { setSelectedVideoId(videoId); setMobileSidebarOpen(false); }} />
+                  <VideoList
+                    channel={selectedChannel}
+                    selectedVideoId={selectedVideoId}
+                    onSelect={(videoId) => { setSelectedVideoId(videoId); setMobileSidebarOpen(false); }}
+                    onPrioritize={handlePrioritizeVideo}
+                    priorityLoadingId={priorityLoadingId}
+                  />
                 ) : (
-                  <RecentList videos={latestVideos} selectedVideoId={selectedVideoId} onSelect={handleSelectLatestArticle} />
+                  <RecentList
+                    videos={latestVideos}
+                    selectedVideoId={selectedVideoId}
+                    onSelect={handleSelectLatestArticle}
+                    onPrioritize={handlePrioritizeVideo}
+                    priorityLoadingId={priorityLoadingId}
+                  />
                 )}
               </div>
             </div>
@@ -2168,9 +2364,29 @@
               }`}
               style={{ width: videoCollapsed ? 0 : videoWidth }}
             >
-              <PanelHeader title="動画一覧" badge={`${selectedChannel.videos.length} 本`} />
+              <PanelHeader
+                title="動画一覧"
+                badge={`${desktopVideos.length} 本`}
+                bottomRight={renderDesktopVideoFilter()}
+              />
               <div className="flex-1 overflow-y-auto py-2">
-                <VideoList channel={selectedChannel} selectedVideoId={selectedVideoId} onSelect={setSelectedVideoId} />
+                {desktopVideoFilter === 'latest' ? (
+                  <RecentList
+                    videos={desktopVideos}
+                    selectedVideoId={selectedVideoId}
+                    onSelect={handleSelectVideoAcrossChannels}
+                    onPrioritize={handlePrioritizeVideo}
+                    priorityLoadingId={priorityLoadingId}
+                  />
+                ) : (
+                  <VideoList
+                    channel={selectedChannel}
+                    selectedVideoId={selectedVideoId}
+                    onSelect={setSelectedVideoId}
+                    onPrioritize={handlePrioritizeVideo}
+                    priorityLoadingId={priorityLoadingId}
+                  />
+                )}
               </div>
             </div>
 

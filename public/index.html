@@ -719,33 +719,26 @@
       }
     });
 
-    const INFO_VIEWER_LINK = { id: 'info-viewer', title: 'info_viewer', url: '/info_viewer/index.html' };
+    const INFO_VIEWER_LINK = { id: 'info-viewer', title: 'info_viewer', url: 'https://blog-vercel-dun.vercel.app/info_viewer/' };
 
     function isInfoViewerLink(link) {
       if (!link || typeof link !== 'object') return false;
       const linkId = String(link.id || '').trim();
       const linkUrl = String(link.url || '').trim().replace(/\/+$/, '');
-      return linkId === INFO_VIEWER_LINK.id || linkUrl === '/info_viewer/index.html' || linkUrl === '/info_viewer';
+      return linkId === INFO_VIEWER_LINK.id
+        || linkUrl === '/info_viewer/index.html'
+        || linkUrl === '/info_viewer'
+        || linkUrl === 'https://blog-vercel-dun.vercel.app/info_viewer';
     }
 
     function ensureInfoViewerLink(links) {
       const normalizedLinks = Array.isArray(links) ? links.filter((link) => link && typeof link === 'object') : [];
-      const result = [];
-      let hasInfoViewer = false;
+      const result = [{ ...INFO_VIEWER_LINK }];
 
       normalizedLinks.forEach((link) => {
-        if (isInfoViewerLink(link)) {
-          if (hasInfoViewer) return;
-          hasInfoViewer = true;
-          result.push({ ...link, ...INFO_VIEWER_LINK });
-          return;
-        }
+        if (isInfoViewerLink(link)) return;
         result.push(link);
       });
-
-      if (!hasInfoViewer) {
-        result.push({ ...INFO_VIEWER_LINK });
-      }
       return result;
     }
 

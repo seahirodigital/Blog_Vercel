@@ -557,6 +557,7 @@ def main():
 
     saved_articles_before = onedrive_writer.list_saved_articles()
     existing_article_map = _build_existing_article_map(saved_articles_before)
+    state = state_store.load_state()
 
     if run_mode != "rebuild_manifest_only":
         synced_count = _sync_sheet_status_for_saved_articles(
@@ -568,7 +569,6 @@ def main():
         if synced_count:
             print(f"既存記事に合わせて Sheets 状況を完了へ同期: {synced_count}件")
 
-        state = state_store.load_state()
         sync_stats = _sync_queue_state(
             state,
             all_target_videos,
@@ -583,9 +583,9 @@ def main():
             f"pending={sync_stats['pending']} done={sync_stats['markedDone']} "
             f"deactivated={sync_stats['deactivated']}"
         )
+        state_store.attach_queue_metadata(all_target_videos, state)
         _print_queue_summary(state, "キュー状況")
     else:
-        state = None
         print("manifest 再構築のみ実行します。")
 
     if run_mode == "rebuild_manifest_only":
@@ -610,6 +610,7 @@ def main():
                 processing_logs,
                 failures_this_run,
             )
+            state_store.attach_queue_metadata(all_target_videos, state)
             _print_queue_summary(state, "処理後キュー状況")
 
     saved_articles_after = onedrive_writer.list_saved_articles()
@@ -620,6 +621,7 @@ def main():
     }
     merged_failures = _merge_failures(previous_failures, failures_this_run, resolved_keys)
     merged_processing_logs = _merge_processing_logs(previous_processing_logs, processing_logs)
+    state_store.attach_queue_metadata(all_target_videos, state)
     manifest = manifest_builder.build_manifest(
         target_channels=target_channels,
         target_videos=all_target_videos,
@@ -627,6 +629,7 @@ def main():
         failures=merged_failures,
         processing_logs=merged_processing_logs,
         run_id=run_id,
+        queue_state=state,
     )
     manifest_builder.write_manifest(manifest)
 

@@ -11,9 +11,11 @@ def build_manifest(
     failures: list[dict[str, Any]] | None = None,
     processing_logs: list[dict[str, Any]] | None = None,
     run_id: str | None = None,
+    queue_state: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     failures = failures or []
     processing_logs = processing_logs or []
+    queue_videos = queue_state.get("videos", {}) if isinstance(queue_state, dict) else {}
     article_map = {
         article["youtubeUrlNormalized"]: article
         for article in saved_articles
@@ -42,13 +44,23 @@ def build_manifest(
             normalized_video_url = normalize_youtube_url(video.get("video_url", ""))
             article = article_map.get(normalized_video_url)
             failure = failure_map.get(normalized_video_url)
+            queue_record = queue_videos.get(normalized_video_url, {}) if isinstance(queue_videos, dict) else {}
             has_article = bool(article)
             if has_article:
                 ready_count += 1
 
             pending_status = video.get("status") or "未生成"
-            if not has_article and failure and failure.get("stage"):
-                pending_status = f"{failure.get('stage')}失敗"
+            queue_stage = queue_record.get("lastStage") or (failure.get("stage", "") if failure else "")
+            queue_error = queue_record.get("lastError") or (failure.get("error", "") if failure else "")
+            queue_failure_at = queue_record.get("lastFailureAt") or (failure.get("occurredAt", "") if failure else "")
+            queue_status = queue_record.get("status", video.get("_queue_status", ""))
+            if not has_article and queue_stage:
+                if queue_status == "deferred":
+                    pending_status = f"{queue_stage}保留"
+                elif queue_status == "failed":
+                    pending_status = f"{queue_stage}失敗"
+                else:
+                    pending_status = f"{queue_stage}失敗"
 
             item = {
                 "id": article.get("fileId") if article else normalized_video_url,
@@ -56,6 +68,7 @@ def build_manifest(
                 "title": video.get("video_title") or (article.get("title") if article else "無題"),
                 "publishedAt": video.get("published_at", ""),
                 "duration": video.get("duration", ""),
+                "thumbnailUrl": video.get("thumbnail_url", ""),
                 "youtubeUrl": video.get("video_url", ""),
                 "articleStatus": "記事あり" if has_article else pending_status,
                 "hasArticle": has_article,
@@ -64,9 +77,13 @@ def build_manifest(
                 "channelName": channel.get("channel_name", ""),
                 "channelUrl": channel.get("channel_url", ""),
                 "sheetStatus": video.get("status", ""),
-                "lastFailureStage": failure.get("stage", "") if failure else "",
-                "lastFailureMessage": failure.get("error", "") if failure else "",
-                "lastFailureAt": failure.get("occurredAt", "") if failure else "",
+                "queueStatus": queue_status,
+                "queueNextRetryAt": queue_record.get("nextRetryAt", video.get("_queue_next_retry_at", "")),
+                "queueAttemptCount": int(queue_record.get("attemptCount") or video.get("_queue_attempt_count") or 0),
+                "manualPriorityAt": queue_record.get("manualPriorityAt", video.get("_queue_manual_priority_at", "")),
+                "lastFailureStage": queue_stage,
+                "lastFailureMessage": queue_error,
+                "lastFailureAt": queue_failure_at,
                 "markdown": "",
             }
             videos.append(item)

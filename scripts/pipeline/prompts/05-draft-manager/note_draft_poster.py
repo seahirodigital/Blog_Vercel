@@ -1199,10 +1199,14 @@ def _collect_note_editor_snapshot(page) -> dict:
 
 def _extract_first_url_before_marker(markdown: str) -> str:
     before_marker = (markdown or "").split("▼", 1)[0]
-    match = URL_RE.search(before_marker)
-    if not match:
+    matches = [match.group(0).strip() for match in URL_RE.finditer(before_marker)]
+    if not matches:
         return ""
-    return match.group(0).strip()
+    for candidate in matches:
+        lowered = candidate.lower()
+        if "amzn.to" in lowered or "amazon.co.jp" in lowered or "amazon.com" in lowered:
+            return candidate
+    return matches[0]
 
 
 def _extract_product_name_from_note_context(snapshot: dict) -> tuple[str, str]:

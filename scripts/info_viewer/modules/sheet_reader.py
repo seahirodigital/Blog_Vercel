@@ -1,5 +1,6 @@
 import json
 import os
+import re
 from typing import Any
 
 import gspread
@@ -50,6 +51,7 @@ def _get_worksheet(spreadsheet_id: str, sheet_name: str):
 def _load_rows(spreadsheet_id: str, sheet_name: str) -> list[dict[str, Any]]:
     worksheet = _get_worksheet(spreadsheet_id, sheet_name)
     values = worksheet.get_all_values()
+    formula_values = worksheet.get_all_values(value_render_option="FORMULA")
     if not values:
         return []
 
@@ -58,9 +60,28 @@ def _load_rows(spreadsheet_id: str, sheet_name: str) -> list[dict[str, Any]]:
     for index, raw_row in enumerate(values[1:], start=2):
         padded = raw_row + [""] * max(0, len(headers) - len(raw_row))
         row = {headers[i]: padded[i] for i in range(len(headers))}
+        formula_row = formula_values[index - 1] if len(formula_values) >= index else []
+        formula_padded = formula_row + [""] * max(0, len(headers) - len(formula_row))
+        row["_formula"] = {headers[i]: formula_padded[i] for i in range(len(headers))}
         row["_row_number"] = index
         rows.append(row)
     return rows
+
+
+def _extract_thumbnail_url(*values: str) -> str:
+    for value in values:
+        text = str(value or "").strip()
+        if not text:
+            continue
+
+        image_match = re.search(r"""IMAGE\(\s*["']([^"']+)["']""", text, flags=re.I)
+        if image_match:
+            return image_match.group(1).strip()
+
+        if re.match(r"^https?://", text, flags=re.I):
+            return text
+
+    return ""
 
 
 def get_target_channels(
@@ -129,6 +150,10 @@ def get_target_videos(
                 "video_title": _pick_value(row, ["動画タイトル", "タイトル", "title", "動画名"]),
                 "published_at": _pick_value(row, ["投稿日", "公開日", "published_at", "publishedAt"]),
                 "duration": _pick_value(row, ["長さ", "再生時間", "duration"]),
+                "thumbnail_url": _extract_thumbnail_url(
+                    _pick_value(row.get("_formula", {}), ["サムネイル", "thumbnail", "thumb", "thumbnail_url"]),
+                    _pick_value(row, ["サムネイル", "thumbnail", "thumb", "thumbnail_url"]),
+                ),
                 "status": status,
                 "channel_name": matched_channel["channel_name"],
                 "channel_url": matched_channel["channel_url"],

@@ -31,6 +31,7 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           ref: 'main',
           inputs: {
+            mode: req.body?.mode || 'process_queue',
             max_items: String(req.body?.max_items || '5'),
             channel_name: req.body?.channel_name || '',
             video_url: req.body?.video_url || '',

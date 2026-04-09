@@ -35,6 +35,13 @@ def _parse_iso(value: str | None) -> datetime | None:
         return None
 
 
+def _timestamp(value: str | None) -> float:
+    parsed = _parse_iso(value)
+    if parsed is None:
+        return 0.0
+    return parsed.timestamp()
+
+
 def _iso_after(wait_seconds: int) -> str:
     delay = max(0, int(wait_seconds or 0))
     return (_now() + timedelta(seconds=delay)).isoformat()
@@ -86,12 +93,17 @@ def _record_to_video(record: dict[str, Any]) -> dict[str, Any]:
         "video_title": record.get("videoTitle", ""),
         "published_at": record.get("publishedAt", ""),
         "duration": record.get("duration", ""),
+        "thumbnail_url": record.get("thumbnailUrl", ""),
         "status": record.get("sheetStatus", ""),
         "channel_name": record.get("channelName", ""),
         "channel_url": record.get("channelUrl", ""),
         "_queue_status": record.get("status", PENDING_STATUS),
         "_queue_next_retry_at": record.get("nextRetryAt", ""),
         "_queue_attempt_count": int(record.get("attemptCount") or 0),
+        "_queue_last_stage": record.get("lastStage", ""),
+        "_queue_last_error": record.get("lastError", ""),
+        "_queue_last_failure_at": record.get("lastFailureAt", ""),
+        "_queue_manual_priority_at": record.get("manualPriorityAt", ""),
     }
 
 
@@ -159,6 +171,7 @@ def sync_target_videos(
             stats["added"] += 1
 
         _copy_video_fields(record, video)
+        record["thumbnailUrl"] = video.get("thumbnail_url", "")
         record["active"] = True
         record["removedAt"] = ""
         record["lastSeenAt"] = now_iso
@@ -176,6 +189,7 @@ def sync_target_videos(
             record["sheetStatus"] = "完了"
             record["processingStartedAt"] = ""
             record["lastCompletedAt"] = now_iso
+            record["manualPriorityAt"] = ""
             if article:
                 _copy_article_fields(record, article)
             continue
@@ -277,14 +291,40 @@ def list_processable_videos(
 
     candidates.sort(
         key=lambda item: (
+            0 if item.get("_queue_manual_priority_at") else 1,
+            -_timestamp(item.get("_queue_manual_priority_at", "")),
             str(item.get("_queue_next_retry_at", "")),
-            str(item.get("published_at", "")),
+            -_timestamp(item.get("published_at", "")),
             str(item.get("video_url", "")),
         )
     )
     if max_items > 0:
         return candidates[:max_items]
     return candidates
+
+
+def attach_queue_metadata(target_videos: list[dict[str, Any]], state: dict[str, Any]) -> list[dict[str, Any]]:
+    videos = state.get("videos", {}) if isinstance(state, dict) else {}
+    if not isinstance(videos, dict):
+        return target_videos
+
+    for video in target_videos:
+        key = _normalize_video_key(video.get("video_url", ""))
+        if not key:
+            continue
+        record = videos.get(key)
+        if not isinstance(record, dict):
+            continue
+        video["_queue_status"] = record.get("status", PENDING_STATUS)
+        video["_queue_next_retry_at"] = record.get("nextRetryAt", "")
+        video["_queue_attempt_count"] = int(record.get("attemptCount") or 0)
+        video["_queue_last_stage"] = record.get("lastStage", "")
+        video["_queue_last_error"] = record.get("lastError", "")
+        video["_queue_last_failure_at"] = record.get("lastFailureAt", "")
+        video["_queue_manual_priority_at"] = record.get("manualPriorityAt", "")
+        if not video.get("thumbnail_url"):
+            video["thumbnail_url"] = record.get("thumbnailUrl", "")
+    return target_videos
 
 
 def get_record(state: dict[str, Any], video_url: str) -> dict[str, Any]:
@@ -342,9 +382,21 @@ def mark_done(
     record["nextRetryAt"] = ""
     record["processingStartedAt"] = ""
     record["lastCompletedAt"] = now_iso
+    record["manualPriorityAt"] = ""
     if isinstance(upload_result, dict):
         record["articleRelativePath"] = upload_result.get("relativePath", "")
         record["articleFileId"] = upload_result.get("id", "")
         record["articleTitle"] = upload_result.get("title", "")
+    state["updatedAt"] = now_iso
+    return record
+
+
+def prioritize_video(state: dict[str, Any], video_url: str) -> dict[str, Any]:
+    record = _ensure_record(state, video_url)
+    now_iso = _now_iso()
+    record["status"] = PENDING_STATUS
+    record["manualPriorityAt"] = now_iso
+    record["nextRetryAt"] = now_iso
+    record["processingStartedAt"] = ""
     state["updatedAt"] = now_iso
     return record
