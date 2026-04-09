@@ -1423,13 +1423,16 @@ def _cookies_to_playwright(cookies: dict) -> list:
 def _resolve_browser_storage_state_path() -> str | None:
     adobe_state_env = os.getenv("ADOBE_EXPRESS_STORAGE_STATE", "").strip()
     if adobe_state_env:
-        adobe_state_path = Path(adobe_state_env)
-        if adobe_state_path.exists():
-            return str(adobe_state_path)
         try:
             state = json.loads(adobe_state_env)
         except Exception as exc:
-            print(f"   [WARN] ADOBE_EXPRESS_STORAGE_STATE を storage_state として解釈できませんでした: {exc}")
+            adobe_state_path = Path(adobe_state_env)
+            try:
+                if adobe_state_path.exists():
+                    return str(adobe_state_path)
+            except OSError as path_exc:
+                print(f"   [WARN] ADOBE_EXPRESS_STORAGE_STATE をパスとして確認できませんでした: {path_exc}")
+            print(f"   [WARN] ADOBE_EXPRESS_STORAGE_STATE を storage_state JSON として解釈できませんでした: {exc}")
         else:
             with tempfile.NamedTemporaryFile(
                 mode="w",
