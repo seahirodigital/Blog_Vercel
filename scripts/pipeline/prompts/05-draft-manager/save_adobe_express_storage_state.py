@@ -16,13 +16,13 @@ if hasattr(sys.stderr, "reconfigure"):
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-PIPELINE_DIR = SCRIPT_DIR.parent
-NOTE_DRAFT_POSTER_PATH = PIPELINE_DIR / "note_draft_poster.py"
+PIPELINE_DIR = SCRIPT_DIR.parent.parent
+NOTE_DRAFT_POSTER_PATH = SCRIPT_DIR / "note_draft_poster.py"
 DEFAULT_MARKDOWN_PATH = Path(
     r"C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\output\macbook_neo\variants\macbook_neo_gakuwari.md"
 )
-DEFAULT_OUTPUT_PATH = PIPELINE_DIR / "adobe_express_storage_state.json"
-DEFAULT_ARTIFACTS_DIR = SCRIPT_DIR / "artifacts"
+DEFAULT_OUTPUT_PATH = SCRIPT_DIR / "adobe_express_storage_state.json"
+DEFAULT_ARTIFACTS_DIR = PIPELINE_DIR / "debug" / "note_gazo_test" / "artifacts"
 
 
 def load_note_module():
@@ -206,3 +206,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

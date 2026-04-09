@@ -64,4 +64,4 @@ jobs:
           print(f'✅ 記事取得完了: {len(content_res.text)} 文字')
           "
 
-          python note_draft_poster.py /tmp/article.md
+          python prompts/05-draft-manager/note_draft_poster.py /tmp/article.md

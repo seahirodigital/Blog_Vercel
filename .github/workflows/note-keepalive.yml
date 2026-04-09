@@ -32,4 +32,4 @@ jobs:
           NOTE_PASSWORD: ${{ secrets.NOTE_PASSWORD }}
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         working-directory: scripts/pipeline
-        run: python note_draft_poster.py --keepalive
+        run: python prompts/05-draft-manager/note_draft_poster.py --keepalive

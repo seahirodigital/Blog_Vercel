@@ -10,11 +10,11 @@ noteの内部APIにHTTPリクエストで直接下書き保存する。
 5. 定期cron（note-keepalive.yml）でセッションを延命
 
 【初回セットアップのみ手動】
-  python note_draft_poster.py --save-cookies
+  python prompts/05-draft-manager/note_draft_poster.py --save-cookies
   → 出力されたJSONをGitHub Secret「NOTE_STORAGE_STATE」に登録
 
 【通常実行（GitHub Actions）】
-  python note_draft_poster.py <file.md>
+  python prompts/05-draft-manager/note_draft_poster.py <file.md>
 """
 
 import os
@@ -39,13 +39,13 @@ GITHUB_REPO_OWNER   = "seahirodigital"
 GITHUB_REPO_NAME    = "Blog_Vercel"
 SECRET_NAME         = "NOTE_STORAGE_STATE"
 
-SCRIPT_DIR        = Path(__file__).parent
+SCRIPT_DIR        = Path(__file__).resolve().parent
 LOCAL_STATE_FILE  = SCRIPT_DIR / "note_storage_state.json"   # ローカル保存先
 ADOBE_STORAGE_STATE_FILE = SCRIPT_DIR / "adobe_express_storage_state.json"
-AMAZON_PROMPTS_DIR = SCRIPT_DIR / "prompts" / "04-affiliate-link-manager"
+AMAZON_PROMPTS_DIR = SCRIPT_DIR.parent / "04-affiliate-link-manager"
 AMAZON_AFFILIATE_SCRIPT = AMAZON_PROMPTS_DIR / "insert_amazon_affiliate.py"
 AMAZON_TOP_IMAGE_SCRIPT = AMAZON_PROMPTS_DIR / "amazon_gazo_get.py"
-NOTE_TOP_IMAGE_ARTIFACTS_DIR = SCRIPT_DIR / "note_gazo_test" / "artifacts"
+NOTE_TOP_IMAGE_ARTIFACTS_DIR = SCRIPT_DIR.parent.parent / "debug" / "note_gazo_test" / "artifacts"
 
 UA = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -1887,7 +1887,7 @@ if __name__ == "__main__":
             md = f.read()
     else:
         print("❌ Markdownファイルパスまたは --content を指定してください")
-        print("   初回セットアップ: python note_draft_poster.py --save-cookies")
+        print("   初回セットアップ: python prompts/05-draft-manager/note_draft_poster.py --save-cookies")
         sys.exit(1)
 
     result = post_draft_to_note(md, run_ogp=not args.no_ogp)

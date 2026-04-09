@@ -1,4 +1,4 @@
-# Note下書き自動投稿の技術リファレンス (v6 — OGP展開統合版)
+﻿# Note下書き自動投稿の技術リファレンス (v6 — OGP展開統合版)
 
 ## 1. 完成した機能一覧
 
@@ -134,7 +134,7 @@ headers = {
 ### 初回セットアップ
 
 ```bash
-python note_draft_poster.py --save-cookies
+python prompts/05-draft-manager/note_draft_poster.py --save-cookies
 # ブラウザを開いて手動ログイン → StorageState取得
 # GITHUB_TOKENがあれば NOTE_STORAGE_STATE Secretに自動登録
 ```
@@ -339,7 +339,7 @@ OGP展開には Playwright Chromium のバイナリが必要。`pip install play
 
 | ファイル | 役割 |
 |---------|------|
-| `scripts/pipeline/note_draft_poster.py` | メインスクリプト（v6 — OGP展開統合版） |
+| `scripts/pipeline/prompts/05-draft-manager/note_draft_poster.py` | メインスクリプト（v6 — OGP展開統合版） |
 | `testcode/note_ogp_opener.py` | OGP展開の試作・検証スクリプト（スタンドアロン版） |
 | `.github/workflows/note-draft.yml` | 下書き投稿ワークフロー（timeout: 20分、playwright install 含む） |
 | `.github/workflows/note-keepalive.yml` | セッション維持cron |
@@ -548,3 +548,46 @@ GitHub Actions (および必要ならローカルの `.env`) に以下の Secret
 |----------|---------|
 | `insert_amazon_affiliate.py` | `_fetch_asin_via_creators_api()` を実装・最優先化。OAuth2フローとPOST検索 |
 | `blog-pipeline.yml` | `AMAZON_CLIENT_ID`, `AMAZON_CLIENT_SECRET` 等の env エクスポートを追加 |
+
+---
+
+## noteトップ画像・Adobe Express 技術メモ
+
+### 現在の本番導線
+- 本番スクリプトは `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py`
+- Amazon画像取得は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\amazon_gazo_get.py`
+- Adobe Express のログイン state 保存補助は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\save_adobe_express_storage_state.py`
+- debug 切り分け用スクリプトと成果物は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\`
+
+### Amazon画像取得で確定した知見
+- Creators API の `Images.Primary.Large` は、実測では 500px 級で止まるケースがある
+- 高画質画像は商品ページ側の `hiRes` / `data-old-hires` / `landingImage` 系から取れる場合がある
+- 現在は `amazon_gazo_get.py` で、通常版を必ず保存し、取れた場合のみ `_hires` 付き画像を追加保存する
+- 保存先は `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\ダウンロード_トップ画像_vercel_blog`
+
+### note 側の商品特定ルール
+- 記事本文の先頭から最初の `▼` より前に URL がある場合は、その一番上の URL を正しい Amazon リンクとして扱い ASIN を抽出する
+- `▼` より前に URL が無い場合のみ、現在の note タイトル / H1 / H2 から商品名を再抽出する
+- それでも商品特定できなければ、トップ画像挿入はスキップする
+
+### Adobe Express で白画像になった原因と対策
+- 初期実装では、`input[type='file']` の候補が広すぎて、Adobe ではなく note 側や別の隠し input に当たる可能性があった
+- その結果、Adobe 側のキャンバスが白紙のまま `挿入` が進み、note に白い eyecatch が保存されるケースがあった
+- 対策として `アップロード` サイドバーを明示で開き、Adobe 側 shadow root 内の `x-upload-button-editor` 配下 `input[type='file']` を優先するよう修正した
+- ファイル投入後は `blob:` 画像の出現を待ってから、`sp-button#save-btn` → `sp-button#dialog-download-btn` でコードベースのまま挿入する
+
+### 現在の Adobe セレクタ方針
+- 上部 `挿入`: `sp-button#save-btn`
+- 確定 `挿入`: `sp-button#dialog-download-btn`
+- 画像アップロード: `アップロード` サイドバーを開いた上で Adobe 側 `input[type='file']`
+- 右パネルの `ファイル形式` / `サイズ` は調整せず、そのまま note へ返す
+
+### debug 出力先
+- note トップ画像まわりの成果物は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts\`
+- 代表ファイル:
+- `top_image_result.json`
+- `after_top_image_draft_save.html`
+- `after_top_image_draft_save.png`
+- `adobe_after_upload.html`
+- `adobe_after_upload.png`
+

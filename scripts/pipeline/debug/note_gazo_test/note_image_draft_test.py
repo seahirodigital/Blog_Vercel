@@ -19,7 +19,7 @@ if hasattr(sys.stderr, "reconfigure"):
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-NOTE_DRAFT_POSTER_PATH = SCRIPT_DIR.parent / "note_draft_poster.py"
+NOTE_DRAFT_POSTER_PATH = SCRIPT_DIR.parent.parent / "prompts" / "05-draft-manager" / "note_draft_poster.py"
 DEFAULT_IMAGE_PATH = Path(r"C:\Users\HCY\Downloads\Image_fx.png")
 DEFAULT_ARTIFACTS_DIR = SCRIPT_DIR / "artifacts"
 DEFAULT_MARKDOWN_LABEL = "embedded_default_markdown"
@@ -78,7 +78,7 @@ def create_note_draft(note_module, markdown: str) -> tuple[dict, dict]:
         if not note_module._api_login(session):
             raise RuntimeError(
                 "note APIログインに失敗しました。"
-                "C:\\Users\\HCY\\OneDrive\\開発\\Blog_Vercel\\scripts\\pipeline\\note_draft_poster.py "
+                "C:\\Users\\HCY\\OneDrive\\開発\\Blog_Vercel\\scripts\\pipeline\\prompts\\05-draft-manager\\note_draft_poster.py "
                 "--save-cookies で Cookie を更新するか、NOTE_EMAIL / NOTE_PASSWORD を設定してください。"
             )
 
