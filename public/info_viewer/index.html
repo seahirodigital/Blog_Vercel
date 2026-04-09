@@ -797,6 +797,10 @@
       box-shadow: 0 14px 28px rgba(124, 77, 255, 0.24);
     }
 
+    .mobile-swipe-surface {
+      touch-action: pan-y;
+    }
+
     .mobile-drawer {
       position: fixed;
       top: 0;
@@ -1662,8 +1666,8 @@
       function VideoGlyph({ size = 13, className = '' }) {
         return (
           <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <polygon points="23 7 16 12 23 17 23 7" />
-            <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+            <rect x="3" y="5" width="18" height="14" rx="3" ry="3" />
+            <polygon points="10 9 16 12 10 15 10 9" fill="currentColor" stroke="none" />
           </svg>
         );
       }
@@ -1727,10 +1731,7 @@
                   className={`w-full text-left rounded-md px-2 py-2 article-item mb-0.5 ${isActive ? 'active' : ''}`}
                 >
                   <div className={`article-title-text text-xs truncate ${isActive ? 'text-[#7C4DFF] font-bold' : 'text-slate-700 font-medium'}`}>
-                    <svg className="inline mr-1 mb-0.5 opacity-60" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-                      <path d="M14 2v6h6" />
-                    </svg>
+                    <VideoGlyph size={11} className="inline mr-1 mb-0.5 opacity-60" />
                     {video.title}
                   </div>
                   <div className={`text-xs mt-0.5 article-date ${isActive ? 'text-[#7C4DFF] font-semibold' : 'text-slate-400'}`}>
@@ -1743,14 +1744,43 @@
         );
       }
 
-      function PanelHeader({ title, badge, children }) {
+      function RecentList({ videos, selectedVideoId, onSelect }) {
+        if (!videos.length) {
+          return <div className="px-4 py-4 text-sm text-slate-400">新着記事はまだありません。</div>;
+        }
+
         return (
-          <div className="h-[84px] px-3 border-b border-slate-100 bg-gradient-to-r from-[#7C4DFF] to-[#651FFF] flex flex-col justify-center">
-            <div className="flex items-center gap-2 min-h-[20px]">
+          <div className="px-2 py-2">
+            {videos.map((video) => {
+              const isActive = video.id === selectedVideoId;
+              return (
+                <button
+                  key={video.id}
+                  onClick={() => onSelect(video.channelId, video.id)}
+                  className={`w-full text-left rounded-md px-2 py-2 article-item mb-0.5 ${isActive ? 'active' : ''}`}
+                >
+                  <div className={`article-title-text text-xs truncate ${isActive ? 'text-[#7C4DFF] font-bold' : 'text-slate-700 font-medium'}`}>
+                    <VideoGlyph size={11} className="inline mr-1 mb-0.5 opacity-60" />
+                    {video.title}
+                  </div>
+                  <div className={`text-xs mt-0.5 article-date ${isActive ? 'text-[#7C4DFF] font-semibold' : 'text-slate-400'}`}>
+                    {formatDate(video.publishedAt)} ・ {video.channelName}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        );
+      }
+
+      function PanelHeader({ title, badge, bottomRight }) {
+        return (
+          <div className="relative min-h-[52px] px-3 py-2 border-b border-slate-100 bg-gradient-to-r from-[#7C4DFF] to-[#651FFF] flex items-center">
+            <div className="flex items-center gap-2 min-h-[20px] pr-10">
               <div className="text-sm font-bold text-white">{title}</div>
               {badge ? <span className="text-[10px] font-semibold text-white/80 bg-white/15 rounded-full px-2 py-0.5">{badge}</span> : null}
             </div>
-            {children ? <div className="mt-2 flex items-center justify-between gap-2 text-[11px] text-white/85">{children}</div> : null}
+            {bottomRight ? <div className="absolute right-3 bottom-2">{bottomRight}</div> : null}
           </div>
         );
       }
@@ -1792,6 +1822,8 @@
         const videoStartX = useRef(0);
         const channelStartW = useRef(0);
         const videoStartW = useRef(0);
+        const touchStartX = useRef(null);
+        const touchStartY = useRef(null);
 
         const onChannelResizeStart = useCallback((e) => {
           if (e.button !== 0) return;
@@ -1844,6 +1876,26 @@
           };
         }, []);
 
+        const allVideos = useMemo(
+          () => channels.flatMap((channel) => channel.videos.map((video) => ({
+            ...video,
+            channelId: channel.id,
+            channelName: channel.name,
+            channelUrl: channel.channelUrl
+          }))),
+          [channels]
+        );
+
+        const allVideosByDate = useMemo(
+          () => [...allVideos].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()),
+          [allVideos]
+        );
+
+        const latestVideos = useMemo(
+          () => allVideosByDate.filter((video) => Boolean(video.markdown)),
+          [allVideosByDate]
+        );
+
         const selectedChannel = useMemo(
           () => channels.find((channel) => channel.id === selectedChannelId) || channels[0],
           [channels, selectedChannelId]
@@ -1871,20 +1923,81 @@
           setMobilePanel('videos');
         }, [handleSelectChannel]);
 
+        const handleSelectVideoAcrossChannels = useCallback((channelId, videoId) => {
+          setSelectedChannelId(channelId);
+          setSelectedVideoId(videoId);
+        }, []);
+
+        const handleSelectLatestArticle = useCallback((channelId, videoId) => {
+          handleSelectVideoAcrossChannels(channelId, videoId);
+          setMobileSidebarOpen(false);
+        }, [handleSelectVideoAcrossChannels]);
+
+        const swipeSequence = useMemo(() => {
+          const isCurrentInLatest = latestVideos.some((video) => video.id === selectedVideoId);
+          return isCurrentInLatest ? latestVideos : allVideosByDate;
+        }, [allVideosByDate, latestVideos, selectedVideoId]);
+
+        const moveBySwipe = useCallback((direction) => {
+          if (typeof window !== 'undefined' && window.innerWidth >= 1024) return;
+          const currentIndex = swipeSequence.findIndex((video) => video.id === selectedVideoId);
+          if (currentIndex === -1) return;
+          const nextIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
+          const nextVideo = swipeSequence[nextIndex];
+          if (!nextVideo) return;
+          handleSelectVideoAcrossChannels(nextVideo.channelId, nextVideo.id);
+        }, [handleSelectVideoAcrossChannels, selectedVideoId, swipeSequence]);
+
+        const handlePreviewTouchStart = useCallback((event) => {
+          if (typeof window !== 'undefined' && window.innerWidth >= 1024) return;
+          const touch = event.touches[0];
+          touchStartX.current = touch.clientX;
+          touchStartY.current = touch.clientY;
+        }, []);
+
+        const handlePreviewTouchEnd = useCallback((event) => {
+          if (typeof window !== 'undefined' && window.innerWidth >= 1024) return;
+          if (touchStartX.current === null || touchStartY.current === null) return;
+          const touch = event.changedTouches[0];
+          const deltaX = touch.clientX - touchStartX.current;
+          const deltaY = touch.clientY - touchStartY.current;
+          touchStartX.current = null;
+          touchStartY.current = null;
+          if (Math.abs(deltaX) < 70 || Math.abs(deltaY) > 60) return;
+          moveBySwipe(deltaX < 0 ? 'next' : 'prev');
+        }, [moveBySwipe]);
+
+        const renderVideoLinkButton = () => (
+          <a
+            href={selectedVideo.youtubeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-6 h-6 rounded-full border border-white/35 bg-white/15 hover:bg-white/25 transition-colors inline-flex items-center justify-center"
+            title="元動画を開く"
+          >
+            <VideoGlyph size={12} />
+          </a>
+        );
+
         return (
           <div className="flex h-screen overflow-hidden">
             {mobileSidebarOpen && <div className="lg:hidden mobile-overlay" onClick={() => setMobileSidebarOpen(false)} />}
 
             <div className={`lg:hidden mobile-drawer ${mobileSidebarOpen ? 'open' : ''}`}>
-              <PanelHeader title="Info-Viewer" badge="DUMMY" />
+              <PanelHeader title="Info-Viewer" badge="DUMMY" bottomRight={renderVideoLinkButton()} />
               <div className="lg:hidden flex border-b border-slate-200 bg-white shrink-0">
                 <button onClick={() => setMobilePanel('channels')} className={`flex-1 py-2.5 text-sm text-center transition-colors ${mobilePanel === 'channels' ? 'tab-active' : 'text-slate-400'}`}>チャンネル</button>
                 <button onClick={() => setMobilePanel('videos')} className={`flex-1 py-2.5 text-sm text-center transition-colors ${mobilePanel === 'videos' ? 'tab-active' : 'text-slate-400'}`}>動画一覧</button>
+                <button onClick={() => setMobilePanel('latest')} className={`flex-1 py-2.5 text-sm text-center transition-colors ${mobilePanel === 'latest' ? 'tab-active' : 'text-slate-400'}`}>新着</button>
               </div>
               <div className="flex-1 overflow-y-auto py-2">
-                {mobilePanel === 'channels'
-                  ? <ChannelList channels={channels} selectedChannelId={selectedChannelId} onSelect={handleMobileSelectChannel} />
-                  : <VideoList channel={selectedChannel} selectedVideoId={selectedVideoId} onSelect={(videoId) => { setSelectedVideoId(videoId); setMobileSidebarOpen(false); }} />}
+                {mobilePanel === 'channels' ? (
+                  <ChannelList channels={channels} selectedChannelId={selectedChannelId} onSelect={handleMobileSelectChannel} />
+                ) : mobilePanel === 'videos' ? (
+                  <VideoList channel={selectedChannel} selectedVideoId={selectedVideoId} onSelect={(videoId) => { setSelectedVideoId(videoId); setMobileSidebarOpen(false); }} />
+                ) : (
+                  <RecentList videos={latestVideos} selectedVideoId={selectedVideoId} onSelect={handleSelectLatestArticle} />
+                )}
               </div>
             </div>
 
@@ -1894,7 +2007,7 @@
               }`}
               style={{ width: channelCollapsed ? 0 : channelWidth }}
             >
-              <PanelHeader title="Info-Viewer" badge={`${channels.length} 件`} />
+              <PanelHeader title="Info-Viewer" badge={`${channels.length} 件`} bottomRight={renderVideoLinkButton()} />
               <div className="flex-1 overflow-y-auto py-2">
                 <ChannelList channels={channels} selectedChannelId={selectedChannelId} onSelect={handleSelectChannel} />
               </div>
@@ -1913,18 +2026,7 @@
               }`}
               style={{ width: videoCollapsed ? 0 : videoWidth }}
             >
-              <PanelHeader title="動画一覧" badge={`${selectedChannel.videos.length} 本`}>
-                <div className="min-w-0 truncate font-medium">{selectedChannel.name}</div>
-                <a
-                  href={selectedVideo.youtubeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-6 h-6 rounded-full border border-white/35 bg-white/15 hover:bg-white/25 transition-colors inline-flex items-center justify-center flex-shrink-0"
-                  title="元動画を開く"
-                >
-                  <VideoGlyph size={12} />
-                </a>
-              </PanelHeader>
+              <PanelHeader title="動画一覧" badge={`${selectedChannel.videos.length} 本`} />
               <div className="flex-1 overflow-y-auto py-2">
                 <VideoList channel={selectedChannel} selectedVideoId={selectedVideoId} onSelect={setSelectedVideoId} />
               </div>
@@ -1995,26 +2097,32 @@
                 </a>
               </div>
 
-              {selectedVideo.markdown ? (
-                <div className="flex-1 overflow-y-auto p-6 markdown-preview animate-fade-in bg-white" dangerouslySetInnerHTML={{ __html: renderedHTML }} />
-              ) : (
-                <div className="flex-1 flex items-center justify-center bg-white animate-fade-in">
-                  <div className="text-center px-8">
-                    <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-[#7C4DFF] to-[#651FFF] flex items-center justify-center shadow-lg shadow-purple-200">
-                      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
-                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-                        <path d="M14 2v6h6" />
-                        <path d="M9 15h6" />
-                      </svg>
+              <div
+                className="flex-1 min-h-0 mobile-swipe-surface"
+                onTouchStart={handlePreviewTouchStart}
+                onTouchEnd={handlePreviewTouchEnd}
+              >
+                {selectedVideo.markdown ? (
+                  <div className="h-full overflow-y-auto p-6 markdown-preview animate-fade-in bg-white" dangerouslySetInnerHTML={{ __html: renderedHTML }} />
+                ) : (
+                  <div className="h-full flex items-center justify-center bg-white animate-fade-in">
+                    <div className="text-center px-8">
+                      <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-[#7C4DFF] to-[#651FFF] flex items-center justify-center shadow-lg shadow-purple-200">
+                        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
+                          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                          <path d="M14 2v6h6" />
+                          <path d="M9 15h6" />
+                        </svg>
+                      </div>
+                      <h3 className="text-lg font-bold text-slate-800 mb-2">記事はまだ生成されていません</h3>
+                      <p className="text-slate-400 text-sm max-w-md leading-relaxed">
+                        この動画はダミー一覧には表示していますが、本文はまだありません。
+                        第一弾では既存 UI を流用した 3 パネル構造とドラッグハンドルの確認を優先します。
+                      </p>
                     </div>
-                    <h3 className="text-lg font-bold text-slate-800 mb-2">記事はまだ生成されていません</h3>
-                    <p className="text-slate-400 text-sm max-w-md leading-relaxed">
-                      この動画はダミー一覧には表示していますが、本文はまだありません。
-                      第一弾では既存 UI を流用した 3 パネル構造とドラッグハンドルの確認を優先します。
-                    </p>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </main>
           </div>
         );
