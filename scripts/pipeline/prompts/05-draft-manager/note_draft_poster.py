@@ -25,6 +25,7 @@ import re
 import base64
 import argparse
 import importlib.util
+import tempfile
 from pathlib import Path
 
 import requests as http_requests
@@ -473,6 +474,17 @@ def _try_set_existing_file_input_any_scope(page, image_path: Path, prefer_adobe:
     return None
 
 
+def _try_set_existing_file_input_with_brief_wait(
+    page,
+    image_path: Path,
+    prefer_adobe: bool = False,
+    wait_ms: int = 500,
+) -> str | None:
+    if wait_ms > 0:
+        page.wait_for_timeout(wait_ms)
+    return _try_set_existing_file_input_any_scope(page, image_path, prefer_adobe=prefer_adobe)
+
+
 def _click_top_image_button(page) -> str:
     return _click_visible_candidate(
         page,
@@ -551,7 +563,12 @@ def _choose_direct_upload_image_file(page, image_path: Path) -> str:
                     used = f"{strategy}#{idx}:filechooser"
                     print(f"   ✅ 画像アップロード導線: {used}")
                     return used
-                except Exception:
+                except Exception as exc:
+                    direct_input = _try_set_existing_file_input_with_brief_wait(page, image_path)
+                    if direct_input:
+                        used = f"{strategy}#{idx}:postclick:{direct_input}"
+                        print(f"   ✅ 画像アップロード導線: {used}")
+                        return used
                     try:
                         _click_locator_with_fallback(
                             page,
@@ -568,6 +585,8 @@ def _choose_direct_upload_image_file(page, image_path: Path) -> str:
                             return used
                     except Exception as exc:
                         errors.append(f"{strategy}#{idx}: click失敗={exc}")
+                        continue
+                    errors.append(f"{strategy}#{idx}: filechooser未発火={exc}")
 
         if attempt < 5:
             if not found_candidate:
@@ -1404,7 +1423,25 @@ def _cookies_to_playwright(cookies: dict) -> list:
 def _resolve_browser_storage_state_path() -> str | None:
     adobe_state_env = os.getenv("ADOBE_EXPRESS_STORAGE_STATE", "").strip()
     if adobe_state_env:
-        return adobe_state_env
+        adobe_state_path = Path(adobe_state_env)
+        if adobe_state_path.exists():
+            return str(adobe_state_path)
+        try:
+            state = json.loads(adobe_state_env)
+        except Exception as exc:
+            print(f"   [WARN] ADOBE_EXPRESS_STORAGE_STATE を storage_state として解釈できませんでした: {exc}")
+        else:
+            with tempfile.NamedTemporaryFile(
+                mode="w",
+                encoding="utf-8",
+                suffix=".json",
+                prefix="note_browser_state_",
+                delete=False,
+            ) as temp_state_file:
+                json.dump(state, temp_state_file, ensure_ascii=False, indent=2)
+                temp_state_path = temp_state_file.name
+            print(f"   📦 ADOBE_EXPRESS_STORAGE_STATE を一時ファイル化しました: {temp_state_path}")
+            return temp_state_path
     if ADOBE_STORAGE_STATE_FILE.exists():
         return str(ADOBE_STORAGE_STATE_FILE)
     return None
