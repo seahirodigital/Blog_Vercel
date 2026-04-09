@@ -1,0 +1,108 @@
+name: Apify Amazon hiRes Probe
+
+on:
+  workflow_dispatch:
+    inputs:
+      asin:
+        description: '検証するAmazon ASIN'
+        required: false
+        default: 'B0F535RF9Z'
+        type: string
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Python 3.13 セットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: probe 出力フォルダを準備
+        run: mkdir -p tmp/apify_probe
+
+      - name: Apify で Amazon hiRes を検証
+        env:
+          APIFY_API_KEY: ${{ secrets.APIFY_API_KEY }}
+          AMAZON_TEST_ASIN: ${{ inputs.asin }}
+        run: |
+          python -c "
+          import json, os, pathlib, requests
+
+          token = os.environ.get('APIFY_API_KEY', '').strip()
+          if not token:
+              raise SystemExit('APIFY_API_KEY secret が未設定です。')
+
+          asin = (os.environ.get('AMAZON_TEST_ASIN') or 'B0F535RF9Z').strip().upper()
+          actor_url = 'https://api.apify.com/v2/acts/kawsar~amazon-product-details-scrapper/run-sync-get-dataset-items'
+          payload = {
+              'productUrls': [f'https://www.amazon.co.jp/dp/{asin}'],
+              'requestTimeoutSecs': 60,
+          }
+          response = requests.post(
+              actor_url,
+              params={'token': token},
+              json=payload,
+              timeout=360,
+          )
+
+          out_dir = pathlib.Path('tmp/apify_probe')
+          out_dir.mkdir(parents=True, exist_ok=True)
+          raw_path = out_dir / 'apify_raw_response.json'
+          raw_path.write_text(response.text, encoding='utf-8')
+
+          summary = {
+              'asin': asin,
+              'status_code': response.status_code,
+              'ok': response.ok,
+              'actor_url': actor_url,
+              'payload': payload,
+          }
+
+          if response.ok:
+              data = response.json()
+              first = data[0] if isinstance(data, list) and data else {}
+              summary.update({
+                  'record_count': len(data) if isinstance(data, list) else None,
+                  'first_record': first,
+                  'productTitle': first.get('productTitle'),
+                  'mainImage': first.get('mainImage'),
+                  'images': first.get('images'),
+                  'images_count': len(first.get('images') or []),
+                  'error': first.get('error'),
+              })
+          else:
+              summary['error'] = response.text[:2000]
+
+          summary_path = out_dir / 'apify_hires_probe_summary.json'
+          summary_path.write_text(
+              json.dumps(summary, ensure_ascii=False, indent=2),
+              encoding='utf-8',
+          )
+
+          print(json.dumps({
+              'asin': summary['asin'],
+              'status_code': summary['status_code'],
+              'images_count': summary.get('images_count'),
+              'mainImage': summary.get('mainImage'),
+              'error': summary.get('error'),
+          }, ensure_ascii=False))
+
+          if not response.ok:
+              raise SystemExit(f'Apify actor 実行失敗: HTTP {response.status_code}')
+          "
+
+      - name: probe artifact を保存
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: apify-amazon-probe-${{ github.run_id }}
+          path: tmp/apify_probe
+          if-no-files-found: error
