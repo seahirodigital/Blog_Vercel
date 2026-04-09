@@ -485,58 +485,100 @@ def _click_top_image_button(page) -> str:
 
 
 def _choose_direct_upload_image_file(page, image_path: Path) -> str:
-    direct_input = _try_set_existing_file_input_any_scope(page, image_path)
-    if direct_input:
-        return direct_input
-
-    candidate_locators = [
-        ("text=画像をアップロード", page.locator("text=画像をアップロード")),
-        ("button_text_画像をアップロード", page.locator("button").filter(has_text="画像をアップロード")),
-        ("label_text_画像をアップロード", page.locator("label").filter(has_text="画像をアップロード")),
-        ("role_button_画像をアップロード", page.get_by_role("button", name="画像をアップロード")),
-    ]
+    upload_text_pattern = re.compile(r"画像\s*を?\s*アップロード|^アップロード$")
     errors = []
 
-    for strategy, locator in candidate_locators:
-        try:
-            total = locator.count()
-        except Exception as exc:
-            errors.append(f"{strategy}: count失敗={exc}")
-            continue
+    def build_candidate_locators():
+        return [
+            (
+                "button_role_label_regex_upload",
+                page.locator("button, [role='button'], label").filter(has_text=upload_text_pattern),
+            ),
+            (
+                "role_button_regex_upload",
+                page.get_by_role("button", name=upload_text_pattern),
+            ),
+            (
+                "aria_label_contains_upload",
+                page.locator("[aria-label*='アップロード'], [title*='アップロード']"),
+            ),
+            (
+                "xpath_clickable_upload_ancestor",
+                page.locator(
+                    "xpath=//*[contains(normalize-space(.), '画像をアップロード') or normalize-space(.)='アップロード']"
+                    "/ancestor-or-self::*[self::button or self::label or @role='button'][1]"
+                ),
+            ),
+            ("text_画像をアップロード", page.locator("text=画像をアップロード")),
+            ("text_アップロード", page.locator("text=アップロード")),
+        ]
 
-        for idx in range(total - 1, -1, -1):
-            candidate = locator.nth(idx)
+    for attempt in range(1, 6):
+        direct_input = _try_set_existing_file_input_any_scope(page, image_path)
+        if direct_input:
+            return direct_input
+
+        found_candidate = False
+        for strategy, locator in build_candidate_locators():
             try:
-                candidate.wait_for(state="visible", timeout=1500)
+                total = locator.count()
             except Exception as exc:
-                errors.append(f"{strategy}#{idx}: visible失敗={exc}")
+                errors.append(f"{strategy}: count失敗={exc}")
                 continue
 
-            try:
-                with page.expect_file_chooser(timeout=3000) as chooser_info:
-                    candidate.click(timeout=4000)
-                chooser_info.value.set_files(str(image_path))
-                page.wait_for_timeout(1500)
-                used = f"{strategy}#{idx}:filechooser"
-                print(f"   ✅ 画像アップロード導線: {used}")
-                return used
-            except Exception:
+            if total > 0:
+                found_candidate = True
+
+            for idx in range(total - 1, -1, -1):
+                candidate = locator.nth(idx)
                 try:
-                    candidate.click(timeout=4000)
-                    page.wait_for_timeout(800)
-                    direct_input = _try_set_existing_file_input_any_scope(page, image_path)
-                    if direct_input:
-                        used = f"{strategy}#{idx}:{direct_input}"
-                        print(f"   ✅ 画像アップロード導線: {used}")
-                        return used
+                    candidate.wait_for(state="visible", timeout=1500)
                 except Exception as exc:
-                    errors.append(f"{strategy}#{idx}: click失敗={exc}")
+                    errors.append(f"{strategy}#{idx}: visible失敗={exc}")
+                    continue
+
+                try:
+                    with page.expect_file_chooser(timeout=3000) as chooser_info:
+                        _click_locator_with_fallback(
+                            page,
+                            candidate,
+                            f"{strategy}#{idx}",
+                            "画像アップロード導線",
+                            timeout_ms=4000,
+                        )
+                    chooser_info.value.set_files(str(image_path))
+                    page.wait_for_timeout(1500)
+                    used = f"{strategy}#{idx}:filechooser"
+                    print(f"   ✅ 画像アップロード導線: {used}")
+                    return used
+                except Exception:
+                    try:
+                        _click_locator_with_fallback(
+                            page,
+                            candidate,
+                            f"{strategy}#{idx}",
+                            "画像アップロード導線",
+                            timeout_ms=4000,
+                        )
+                        page.wait_for_timeout(800)
+                        direct_input = _try_set_existing_file_input_any_scope(page, image_path)
+                        if direct_input:
+                            used = f"{strategy}#{idx}:{direct_input}"
+                            print(f"   ✅ 画像アップロード導線: {used}")
+                            return used
+                    except Exception as exc:
+                        errors.append(f"{strategy}#{idx}: click失敗={exc}")
+
+        if attempt < 5:
+            if not found_candidate:
+                errors.append(f"attempt{attempt}: no_upload_entry_visible")
+            page.wait_for_timeout(1000)
 
     direct_input = _try_set_existing_file_input_any_scope(page, image_path)
     if direct_input:
         return direct_input
 
-    raise RuntimeError(f"画像アップロード導線を特定できませんでした: {' / '.join(errors[:6])}")
+    raise RuntimeError(f"画像アップロード導線を特定できませんでした: {' / '.join(errors[:8])}")
 
 
 def _wait_for_crop_dialog(page):
@@ -604,6 +646,8 @@ def _save_editor_draft(page) -> str:
 
 
 def _run_direct_note_image_upload(page, image_path: Path, artifacts_dir: Path, previous_count: int) -> dict:
+    controls_after_menu = _collect_control_snapshot(page)
+    _write_json(artifacts_dir / "controls_after_top_image_menu.json", controls_after_menu)
     upload_entry_strategy = _choose_direct_upload_image_file(page, image_path)
     crop_dialog_strategy, _ = _wait_for_crop_dialog(page)
     _dump_page_artifacts(page, artifacts_dir, "crop_modal_open")
@@ -1018,6 +1062,7 @@ def _resolve_amazon_image_target(page, source_markdown: str) -> dict:
 def _attach_amazon_top_image_to_page(page, source_markdown: str, artifacts_dir: Path | None = None) -> dict:
     artifacts_dir = artifacts_dir or NOTE_TOP_IMAGE_ARTIFACTS_DIR
     artifacts_dir.mkdir(parents=True, exist_ok=True)
+    force_direct_upload = os.getenv("NOTE_TOP_IMAGE_FORCE_DIRECT", "").strip().lower() in {"1", "true", "yes", "on"}
 
     target = _resolve_amazon_image_target(page, source_markdown)
     _write_json(artifacts_dir / "amazon_target_resolution.json", target)
@@ -1044,7 +1089,10 @@ def _attach_amazon_top_image_to_page(page, source_markdown: str, artifacts_dir: 
     image_button_strategy = _click_top_image_button(page)
     _dump_page_artifacts(page, artifacts_dir, "top_image_menu_open")
 
-    if fetch_result.hires_image:
+    if force_direct_upload:
+        print("   ℹ️ NOTE_TOP_IMAGE_FORCE_DIRECT=1 のため通常アップロードを強制します")
+
+    if fetch_result.hires_image and not force_direct_upload:
         try:
             flow_result = _upload_image_via_adobe_express(
                 page,
@@ -1078,7 +1126,7 @@ def _attach_amazon_top_image_to_page(page, source_markdown: str, artifacts_dir: 
             artifacts_dir,
             previous_count=before_count,
         )
-        image_flow = "direct_api"
+        image_flow = "direct_api_forced" if force_direct_upload else "direct_api"
         selected_image_path = str(fetch_result.api_image.local_path)
 
     draft_save_strategy = _save_editor_draft(page)
