@@ -47,6 +47,8 @@ AMAZON_PROMPTS_DIR = SCRIPT_DIR.parent / "04-affiliate-link-manager"
 AMAZON_AFFILIATE_SCRIPT = AMAZON_PROMPTS_DIR / "insert_amazon_affiliate.py"
 AMAZON_TOP_IMAGE_SCRIPT = AMAZON_PROMPTS_DIR / "amazon_gazo_get.py"
 NOTE_TOP_IMAGE_ARTIFACTS_DIR = SCRIPT_DIR.parent.parent / "debug" / "note_gazo_test" / "artifacts"
+NOTE_TOP_IMAGE_DEBUG = os.getenv("NOTE_TOP_IMAGE_DEBUG", "").strip().lower() in {"1", "true", "yes", "on"}
+NOTE_TOP_IMAGE_USE_ADOBE = os.getenv("NOTE_TOP_IMAGE_USE_ADOBE", "").strip().lower() in {"1", "true", "yes", "on"}
 
 UA = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -228,16 +230,22 @@ def _load_amazon_top_image_module():
 
 
 def _write_json(path: Path, payload) -> None:
+    if not NOTE_TOP_IMAGE_DEBUG:
+        return
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 def _write_text(path: Path, content: str) -> None:
+    if not NOTE_TOP_IMAGE_DEBUG:
+        return
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
 
 
 def _dump_page_artifacts(page, artifacts_dir: Path, stem: str) -> dict:
+    if not NOTE_TOP_IMAGE_DEBUG:
+        return {}
     artifacts_dir.mkdir(parents=True, exist_ok=True)
     screenshot_path = artifacts_dir / f"{stem}.png"
     html_path = artifacts_dir / f"{stem}.html"
@@ -1271,9 +1279,8 @@ def _select_note_top_image_for_upload(fetch_result) -> tuple[object, str]:
 
 def _attach_amazon_top_image_to_page(page, source_markdown: str, artifacts_dir: Path | None = None) -> dict:
     artifacts_dir = artifacts_dir or NOTE_TOP_IMAGE_ARTIFACTS_DIR
-    artifacts_dir.mkdir(parents=True, exist_ok=True)
     force_direct_upload = os.getenv("NOTE_TOP_IMAGE_FORCE_DIRECT", "").strip().lower() in {"1", "true", "yes", "on"}
-    use_adobe_upload = os.getenv("NOTE_TOP_IMAGE_USE_ADOBE", "").strip().lower() in {"1", "true", "yes", "on"}
+    use_adobe_upload = NOTE_TOP_IMAGE_USE_ADOBE
 
     target = _resolve_amazon_image_target(page, source_markdown)
     _write_json(artifacts_dir / "amazon_target_resolution.json", target)
@@ -1818,17 +1825,19 @@ def _run_ogp_expansion_on_draft(
     playwright_cookies = _cookies_to_playwright(cookies_dict)
 
     with sync_playwright() as p:
-        storage_state_path = _resolve_browser_storage_state_path()
+        storage_state_path = _resolve_browser_storage_state_path() if (NOTE_TOP_IMAGE_USE_ADOBE or NOTE_TOP_IMAGE_DEBUG) else None
         browser = p.chromium.launch(
             headless=headless,
             args=["--disable-blink-features=AutomationControlled", "--no-sandbox"],
         )
-        context = browser.new_context(
+        context_kwargs = dict(
             viewport={"width": 1280, "height": 900},
             user_agent=UA,
             locale="ja-JP",
-            storage_state=storage_state_path,
         )
+        if storage_state_path:
+            context_kwargs["storage_state"] = storage_state_path
+        context = browser.new_context(**context_kwargs)
         if storage_state_path:
             print(f"   📦 追加のブラウザ state を読込: {storage_state_path}")
         context.add_cookies(playwright_cookies)

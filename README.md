@@ -535,7 +535,7 @@ Blog_Vercel/
 ### debug / 切り分け用
 - 画像単体の切り分け検証は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\note_image_draft_test.py`
 - 詳細メモは `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\gazoup_reference.md`
-- スクリーンショットや HTML などの成果物は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts\`
+- スクリーンショットや HTML などの成果物は `NOTE_TOP_IMAGE_DEBUG=1` を入れたときだけ `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts\` に保存する
 
 ### 2026-04-09 時点の成功実績
 - GitHub Actions 成功 run は `https://github.com/seahirodigital/Blog_Vercel/actions/runs/24174122466`
@@ -604,7 +604,7 @@ Adobe Express 経由は複雑で、GitHub Actions 上での安定化コストが
 - note のトップ画像比率 `800:418` を基準に固定キャンバスを作る
 - 実生成サイズは `1600x836` など、同一比率で高解像度にする
 - 元画像は `contain` で縮小し、**cover や crop は使わない**
-- 足りない余白は白または平均色背景で埋める
+- 足りない余白は**必ず白背景**で埋める
 
 ### 推奨ツール
 

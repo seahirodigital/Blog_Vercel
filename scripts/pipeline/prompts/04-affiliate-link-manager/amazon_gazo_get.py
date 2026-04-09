@@ -47,6 +47,7 @@ RAW_SUBDIR_NAME = "raw"
 PREPARED_SUBDIR_NAME = "prepared"
 NOTE_HERO_CANVAS_SIZE = (1600, 836)
 NOTE_HERO_JPEG_QUALITY = 92
+NOTE_HERO_BACKGROUND_COLOR = (255, 255, 255)
 DEFAULT_RESOURCES = [
     "itemInfo.title",
     "images.primary.large",
@@ -610,21 +611,6 @@ def save_and_optionally_upload(
     return image
 
 
-def _to_rgb_tuple(pixel: object) -> tuple[int, int, int]:
-    if isinstance(pixel, int):
-        return (pixel, pixel, pixel)
-    if isinstance(pixel, tuple):
-        if len(pixel) >= 3:
-            return tuple(int(channel) for channel in pixel[:3])
-    return (255, 255, 255)
-
-
-def _pick_note_hero_background_color(image: Image.Image) -> tuple[int, int, int]:
-    sample = image.resize((1, 1), Image.Resampling.BILINEAR)
-    average_rgb = _to_rgb_tuple(sample.getpixel((0, 0)))
-    return tuple(int((channel * 0.35) + (255 * 0.65)) for channel in average_rgb)
-
-
 def create_prepared_note_hero_image(
     source_image: SavedImageInfo,
     keyword: str,
@@ -654,7 +640,7 @@ def create_prepared_note_hero_image(
                 canvas_size,
                 method=Image.Resampling.LANCZOS,
             )
-            canvas = Image.new("RGB", canvas_size, _pick_note_hero_background_color(normalized))
+            canvas = Image.new("RGB", canvas_size, NOTE_HERO_BACKGROUND_COLOR)
             offset = (
                 (canvas_size[0] - contained.width) // 2,
                 (canvas_size[1] - contained.height) // 2,
