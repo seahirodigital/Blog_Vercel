@@ -58,6 +58,7 @@ jobs:
           ADOBE_EXPRESS_STORAGE_STATE: ${{ secrets.ADOBE_EXPRESS_STORAGE_STATE }}
           AMAZON_CLIENT_ID: ${{ secrets.AMAZON_CLIENT_ID }}
           AMAZON_CLIENT_SECRET: ${{ secrets.AMAZON_CLIENT_SECRET }}
+          APIFY_API_KEY: ${{ secrets.APIFY_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           FILE_ID: ${{ inputs.file_id }}
         working-directory: scripts/pipeline

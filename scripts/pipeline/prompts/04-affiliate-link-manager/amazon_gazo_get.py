@@ -32,6 +32,7 @@ from PIL import Image
 TOKEN_URL = "https://api.amazon.co.jp/auth/o2/token"
 SEARCH_ITEMS_URL = "https://creatorsapi.amazon/catalog/v1/searchItems"
 GET_ITEMS_URL = "https://creatorsapi.amazon/catalog/v1/getItems"
+DEFAULT_APIFY_AMAZON_ACTOR = "kawsar/amazon-product-details-scrapper"
 GRAPH_API_BASE = "https://graph.microsoft.com/v1.0"
 ONEDRIVE_TOKEN_URL = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
 
@@ -75,6 +76,12 @@ DEFAULT_PAGE_HEADERS = {
     ),
     "Accept-Language": "ja-JP,ja;q=0.9,en-US;q=0.8,en;q=0.7",
 }
+AMAZON_CAPTCHA_MARKERS = (
+    "opfcaptcha.amazon.",
+    "errors/validatecaptcha",
+    "api-services-support@amazon.com",
+    "robot check",
+)
 
 
 class AmazonCreatorsApiError(RuntimeError):
@@ -133,6 +140,10 @@ def get_env_or_raise(name: str) -> str:
             f"環境変数 {name} が未設定です。PowerShell または GitHub Actions の環境変数を確認してください。"
         )
     return value
+
+
+def get_optional_env(name: str) -> str:
+    return os.getenv(name, "").strip()
 
 
 def get_access_token() -> str:
@@ -377,6 +388,77 @@ def fetch_detail_page_html(asin: str, marketplace: str) -> str:
     return response.text
 
 
+def is_amazon_captcha_html(page_html: str) -> bool:
+    lowered = (page_html or "").lower()
+    return any(marker in lowered for marker in AMAZON_CAPTCHA_MARKERS)
+
+
+def build_apify_actor_run_url() -> str:
+    actor_name = get_optional_env("APIFY_AMAZON_PRODUCT_ACTOR") or DEFAULT_APIFY_AMAZON_ACTOR
+    return f"https://api.apify.com/v2/acts/{actor_name.replace('/', '~')}/run-sync-get-dataset-items"
+
+
+def extract_hires_from_apify_payload(payload: object) -> Optional[str]:
+    if not isinstance(payload, list) or not payload:
+        return None
+
+    first_item = payload[0] if isinstance(payload[0], dict) else {}
+    if not isinstance(first_item, dict):
+        return None
+
+    images = first_item.get("images") or []
+    if isinstance(images, list):
+        for image_url in images:
+            if isinstance(image_url, str) and image_url.strip():
+                return image_url.strip()
+    return None
+
+
+def fetch_hires_from_apify(
+    asin: str,
+    marketplace: str = DEFAULT_MARKETPLACE,
+) -> Optional[str]:
+    apify_token = get_optional_env("APIFY_API_KEY")
+    if not apify_token:
+        return None
+
+    actor_url = build_apify_actor_run_url()
+    payload = {
+        "productUrls": [build_detail_page_url(asin, marketplace)],
+        "requestTimeoutSecs": 60,
+    }
+    try:
+        response = requests.post(
+            actor_url,
+            params={"token": apify_token},
+            json=payload,
+            timeout=360,
+        )
+    except requests.RequestException as exc:
+        print(f"[WARN] Apify hiRes 取得に失敗しました: {exc}")
+        return None
+
+    if not response.ok:
+        print(
+            "[WARN] Apify hiRes 取得に失敗しました: "
+            f"{response.status_code} {response.text[:300]}"
+        )
+        return None
+
+    try:
+        apify_payload = response.json()
+    except ValueError as exc:
+        print(f"[WARN] Apify hiRes 応答の JSON 解析に失敗しました: {exc}")
+        return None
+
+    hires_url = extract_hires_from_apify_payload(apify_payload)
+    if hires_url:
+        print(f"[INFO] Apify で hiRes 画像を取得しました: {hires_url}")
+    else:
+        print("[WARN] Apify 応答に hiRes 画像が見つかりませんでした。")
+    return hires_url
+
+
 def extract_hires_from_html(page_html: str) -> Optional[str]:
     landing_tag_match = LANDING_IMAGE_TAG_RE.search(page_html)
     if landing_tag_match:
@@ -581,11 +663,14 @@ def fetch_and_save_top_images(
     )
     api_image = save_and_optionally_upload(api_image, onedrive_folder)
 
-    if not detail_page_html:
-        detail_page_html = fetch_detail_page_html(result.asin, marketplace)
-
     hires_image: Optional[SavedImageInfo] = None
-    hires_url = extract_hires_from_html(detail_page_html)
+    hires_url = fetch_hires_from_apify(result.asin, marketplace=marketplace)
+    if not hires_url:
+        if not detail_page_html:
+            detail_page_html = fetch_detail_page_html(result.asin, marketplace)
+        if is_amazon_captcha_html(detail_page_html):
+            print("[WARN] Amazon 商品詳細ページが captcha 応答でした。")
+        hires_url = extract_hires_from_html(detail_page_html)
     if hires_url:
         hires_image = save_image(
             label="hires",
