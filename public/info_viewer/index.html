@@ -1806,14 +1806,46 @@
         );
       }
 
+      function normalizeApiPayload(payload) {
+        if (!payload || !Array.isArray(payload.channels) || !payload.channels.length) {
+          return null;
+        }
+
+        return payload.channels.map((channel, channelIndex) => ({
+          id: channel.id || `channel-${channelIndex}`,
+          name: channel.name || `チャンネル${channelIndex + 1}`,
+          channelUrl: channel.channelUrl || '',
+          summary: channel.summary || '',
+          videos: Array.isArray(channel.videos)
+            ? channel.videos.map((video, videoIndex) => ({
+                id: video.id || video.articleId || video.youtubeUrl || `${channel.id || channelIndex}-${videoIndex}`,
+                articleId: video.articleId || '',
+                title: video.title || '無題',
+                publishedAt: video.publishedAt || '',
+                duration: video.duration || '',
+                youtubeUrl: video.youtubeUrl || '',
+                articleStatus: video.articleStatus || (video.hasArticle ? '記事あり' : '未生成'),
+                hasArticle: Boolean(video.hasArticle || video.articleId),
+                articleUpdatedAt: video.articleUpdatedAt || '',
+                markdown: typeof video.markdown === 'string' ? video.markdown : ''
+              }))
+            : []
+        }));
+      }
+
       function App() {
-        const [channels] = useState(DUMMY_CHANNELS);
+        const [channels, setChannels] = useState(DUMMY_CHANNELS);
         const [selectedChannelId, setSelectedChannelId] = useState(DUMMY_CHANNELS[0].id);
         const [selectedVideoId, setSelectedVideoId] = useState(DUMMY_CHANNELS[0].videos[0].id);
         const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
         const [mobilePanel, setMobilePanel] = useState('channels');
         const [channelWidth, setChannelWidth] = useState(280);
         const [videoWidth, setVideoWidth] = useState(320);
+        const [dataSource, setDataSource] = useState('dummy');
+        const [loadingIndex, setLoadingIndex] = useState(true);
+        const [indexError, setIndexError] = useState('');
+        const [articleCache, setArticleCache] = useState({});
+        const [articleLoadingId, setArticleLoadingId] = useState('');
         const [channelCollapsed, setChannelCollapsed] = useState(false);
         const [videoCollapsed, setVideoCollapsed] = useState(false);
         const channelDragging = useRef(false);
@@ -1876,6 +1908,50 @@
           };
         }, []);
 
+        useEffect(() => {
+          let cancelled = false;
+
+          const loadIndex = async () => {
+            try {
+              setLoadingIndex(true);
+              const response = await fetch('/api/info-viewer-index');
+              if (!response.ok) {
+                throw new Error(`index API ${response.status}`);
+              }
+
+              const payload = await response.json();
+              const normalized = normalizeApiPayload(payload);
+              if (!cancelled && normalized && normalized.length) {
+                setChannels(normalized);
+                setSelectedChannelId(normalized[0].id);
+                setSelectedVideoId(normalized[0].videos[0]?.id || null);
+                setDataSource('api');
+                setIndexError('');
+                return;
+              }
+
+              if (!cancelled) {
+                setDataSource('dummy');
+                setIndexError('manifest 未生成のためダミーデータを表示中');
+              }
+            } catch (error) {
+              if (!cancelled) {
+                setDataSource('dummy');
+                setIndexError('実データ取得に失敗したためダミーデータを表示中');
+              }
+            } finally {
+              if (!cancelled) {
+                setLoadingIndex(false);
+              }
+            }
+          };
+
+          loadIndex();
+          return () => {
+            cancelled = true;
+          };
+        }, []);
+
         const allVideos = useMemo(
           () => channels.flatMap((channel) => channel.videos.map((video) => ({
             ...video,
@@ -1892,23 +1968,38 @@
         );
 
         const latestVideos = useMemo(
-          () => allVideosByDate.filter((video) => Boolean(video.markdown)),
+          () => allVideosByDate.filter((video) => Boolean(video.markdown || video.articleId || video.hasArticle)),
           [allVideosByDate]
         );
 
         const selectedChannel = useMemo(
-          () => channels.find((channel) => channel.id === selectedChannelId) || channels[0],
+          () => channels.find((channel) => channel.id === selectedChannelId) || channels[0] || { id: '', name: '', channelUrl: '', videos: [] },
           [channels, selectedChannelId]
         );
 
         const selectedVideo = useMemo(
-          () => selectedChannel.videos.find((video) => video.id === selectedVideoId) || selectedChannel.videos[0],
+          () => selectedChannel.videos.find((video) => video.id === selectedVideoId) || selectedChannel.videos[0] || {
+            id: '',
+            articleId: '',
+            title: '動画がありません',
+            publishedAt: '',
+            duration: '',
+            youtubeUrl: '#',
+            articleStatus: '未生成',
+            markdown: '',
+            hasArticle: false
+          },
           [selectedChannel, selectedVideoId]
         );
 
+        const selectedMarkdown = useMemo(
+          () => selectedVideo?.markdown || (selectedVideo?.articleId ? articleCache[selectedVideo.articleId] || '' : ''),
+          [articleCache, selectedVideo]
+        );
+
         const renderedHTML = useMemo(
-          () => selectedVideo && selectedVideo.markdown ? marked.parse(selectedVideo.markdown) : '',
-          [selectedVideo]
+          () => selectedMarkdown ? marked.parse(selectedMarkdown) : '',
+          [selectedMarkdown]
         );
 
         const handleSelectChannel = useCallback((channelId) => {
@@ -1967,9 +2058,47 @@
           moveBySwipe(deltaX < 0 ? 'next' : 'prev');
         }, [moveBySwipe]);
 
+        useEffect(() => {
+          let cancelled = false;
+
+          const loadArticle = async () => {
+            if (!selectedVideo?.articleId || selectedVideo.markdown || articleCache[selectedVideo.articleId]) {
+              return;
+            }
+
+            try {
+              setArticleLoadingId(selectedVideo.articleId);
+              const response = await fetch(`/api/info-viewer-index?id=${encodeURIComponent(selectedVideo.articleId)}`);
+              if (!response.ok) {
+                throw new Error(`article API ${response.status}`);
+              }
+              const payload = await response.json();
+              if (!cancelled) {
+                setArticleCache((current) => ({
+                  ...current,
+                  [selectedVideo.articleId]: payload.content || ''
+                }));
+              }
+            } catch (error) {
+              if (!cancelled) {
+                setIndexError('記事本文の取得に失敗しました');
+              }
+            } finally {
+              if (!cancelled) {
+                setArticleLoadingId('');
+              }
+            }
+          };
+
+          loadArticle();
+          return () => {
+            cancelled = true;
+          };
+        }, [articleCache, selectedVideo]);
+
         const renderVideoLinkButton = () => (
           <a
-            href={selectedVideo.youtubeUrl}
+            href={selectedVideo.youtubeUrl || '#'}
             target="_blank"
             rel="noopener noreferrer"
             className="w-6 h-6 rounded-full border border-white/35 bg-white/15 hover:bg-white/25 transition-colors inline-flex items-center justify-center"
@@ -1984,7 +2113,7 @@
             {mobileSidebarOpen && <div className="lg:hidden mobile-overlay" onClick={() => setMobileSidebarOpen(false)} />}
 
             <div className={`lg:hidden mobile-drawer ${mobileSidebarOpen ? 'open' : ''}`}>
-              <PanelHeader title="Info-Viewer" badge="DUMMY" bottomRight={renderVideoLinkButton()} />
+              <PanelHeader title="Info-Viewer" badge={loadingIndex ? 'LOAD' : dataSource === 'api' ? 'LIVE' : 'DUMMY'} bottomRight={renderVideoLinkButton()} />
               <div className="lg:hidden flex border-b border-slate-200 bg-white shrink-0">
                 <button onClick={() => setMobilePanel('channels')} className={`flex-1 py-2.5 text-sm text-center transition-colors ${mobilePanel === 'channels' ? 'tab-active' : 'text-slate-400'}`}>チャンネル</button>
                 <button onClick={() => setMobilePanel('videos')} className={`flex-1 py-2.5 text-sm text-center transition-colors ${mobilePanel === 'videos' ? 'tab-active' : 'text-slate-400'}`}>動画一覧</button>
@@ -2086,11 +2215,14 @@
                   <circle cx="12" cy="12" r="3" />
                 </svg>
                 <span>プレビュー</span>
+                <span className="ml-auto text-[11px] text-slate-400">
+                  {loadingIndex ? '読み込み中' : dataSource === 'api' ? '実データ' : 'ダミー'}
+                </span>
                 <a
                   href={selectedChannel.channelUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-5 h-5 rounded-full border border-slate-200 text-[#7C4DFF] hover:bg-purple-50 transition-colors inline-flex items-center justify-center"
+                  className="w-5 h-5 rounded-full border border-slate-200 text-[#7C4DFF] hover:bg-purple-50 transition-colors inline-flex items-center justify-center flex-shrink-0"
                   title="チャンネルを開く"
                 >
                   <VideoGlyph size={10} />
@@ -2102,8 +2234,17 @@
                 onTouchStart={handlePreviewTouchStart}
                 onTouchEnd={handlePreviewTouchEnd}
               >
-                {selectedVideo.markdown ? (
+                {selectedMarkdown ? (
                   <div className="h-full overflow-y-auto p-6 markdown-preview animate-fade-in bg-white" dangerouslySetInnerHTML={{ __html: renderedHTML }} />
+                ) : articleLoadingId && articleLoadingId === selectedVideo.articleId ? (
+                  <div className="h-full flex items-center justify-center bg-white animate-fade-in">
+                    <div className="text-center px-8">
+                      <h3 className="text-lg font-bold text-slate-800 mb-2">記事を読み込み中です</h3>
+                      <p className="text-slate-400 text-sm max-w-md leading-relaxed">
+                        {dataSource === 'api' ? 'OneDrive 上の記事本文を取得しています。' : 'ダミーデータを準備しています。'}
+                      </p>
+                    </div>
+                  </div>
                 ) : (
                   <div className="h-full flex items-center justify-center bg-white animate-fade-in">
                     <div className="text-center px-8">
@@ -2116,9 +2257,11 @@
                       </div>
                       <h3 className="text-lg font-bold text-slate-800 mb-2">記事はまだ生成されていません</h3>
                       <p className="text-slate-400 text-sm max-w-md leading-relaxed">
-                        この動画はダミー一覧には表示していますが、本文はまだありません。
-                        第一弾では既存 UI を流用した 3 パネル構造とドラッグハンドルの確認を優先します。
+                        {dataSource === 'api'
+                          ? 'この動画はシート上の対象ですが、まだ記事ファイルが生成されていません。次回の自動取得で再試行されます。'
+                          : 'この動画はダミー一覧には表示していますが、本文はまだありません。第一弾では既存 UI を流用した 3 パネル構造とドラッグハンドルの確認を優先します。'}
                       </p>
+                      {indexError ? <p className="mt-3 text-[11px] text-slate-400">{indexError}</p> : null}
                     </div>
                   </div>
                 )}
