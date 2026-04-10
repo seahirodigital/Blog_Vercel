@@ -1897,7 +1897,7 @@
                   onOpen={() => onSelect(video.id)}
                   onPrioritize={onPrioritize}
                   priorityLoadingId={priorityLoadingId}
-                  secondaryText={`${formatVideoTimestamp(resolveVideoUpdatedAt(video))} ・ ${video.duration || '時間未設定'}`}
+                  secondaryText={formatVideoTimestamp(resolveVideoUpdatedAt(video))}
                 />
               );
             })}
@@ -2558,7 +2558,7 @@
                 <div className="flex-1 min-w-0">
                   <h2 className="text-sm font-bold text-slate-800 truncate">{selectedVideo.title}</h2>
                   <p className="text-xs text-slate-400">
-                    {selectedChannel.name} ・ {formatVideoTimestamp(resolveVideoUpdatedAt(selectedVideo))} ・ {selectedVideo.duration || '時間未設定'}
+                    {selectedChannel.name} ・ {formatVideoTimestamp(resolveVideoUpdatedAt(selectedVideo))}
                   </p>
                 </div>
 

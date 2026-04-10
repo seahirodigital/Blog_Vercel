@@ -36,18 +36,6 @@ def _make_safe_filename(title: str, max_length: int = 60) -> str:
     return safe[:max_length].strip()
 
 
-def _prepend_source_url(markdown: str, video_url: str) -> str:
-    source_url = str(video_url or "").strip()
-    body = str(markdown or "").strip()
-    if not source_url:
-        return body
-    if body.startswith(source_url):
-        return body
-    if not body:
-        return f"{source_url}\n"
-    return f"{source_url}\n\n{body}"
-
-
 def _fingerprint_secret(secret: str) -> str:
     normalized = str(secret or "").strip()
     if not normalized:
@@ -164,8 +152,6 @@ def process_single(row: dict, index: int, total: int) -> dict:
             print(f"   ⚠️ Amazonアフィリエイト挿入失敗（続行します）: {e}")
     else:
         print("   ⏭️ Amazonアフィリエイトスクリプト未検出 - スキップ")
-
-    markdown = _prepend_source_url(markdown, url)
 
     # Step 4: OneDriveに保存（記事はクリーンなまま）
     now = datetime.now()

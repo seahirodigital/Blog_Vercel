@@ -78,11 +78,26 @@ def _prepend_video_url(markdown_body: str, video_url: str) -> str:
     if not normalized_url:
         return body
 
-    if body.startswith(normalized_url):
-        return body
-
     if not body:
         return f"{normalized_url}\n"
+
+    lines = body.splitlines()
+    leading_window = [line.strip() for line in lines[:6] if line.strip()]
+    if normalized_url in leading_window:
+        return body
+
+    for index, line in enumerate(lines):
+        if not line.strip().startswith("# "):
+            continue
+
+        trailing = lines[index + 1 :]
+        while trailing and not trailing[0].strip():
+            trailing = trailing[1:]
+
+        rebuilt = lines[: index + 1] + ["", normalized_url]
+        if trailing:
+            rebuilt.extend([""] + trailing)
+        return "\n".join(rebuilt).strip()
 
     return f"{normalized_url}\n\n{body}"
 
