@@ -16,14 +16,12 @@ SPREADSHEET_ID = os.getenv("SPREADSHEET_ID", "")
 CHANNEL_SHEET_NAME = os.getenv("INFO_VIEWER_CHANNEL_SHEET_NAME", "チャンネル設定")
 VIDEO_SHEET_NAME = os.getenv("INFO_VIEWER_VIDEO_SHEET_NAME", "動画リスト")
 APIFY_API_KEY = os.getenv("APIFY_API_KEY", "")
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 GEMINI_TOKEN_INVEST = os.getenv("GEMINI_TOKEN_invest", "") or os.getenv("GEMINI_TOKEN_INVEST", "")
 GEMINI_TOKEN_INVEST_SUB = os.getenv("GEMINI_TOKEN_INVESTsub", "") or os.getenv("GEMINI_TOKEN_INVESTSUB", "")
 GEMINI_TOKEN_TECH = os.getenv("GEMINI_TOKEN_tech", "") or os.getenv("GEMINI_TOKEN_TECH", "")
 GEMINI_SERIAL_DELAY_SECONDS = int(os.getenv("INFO_VIEWER_GEMINI_SERIAL_DELAY_SECONDS", "20") or 20)
 
 GEMINI_TOKEN_POOLS = {
-    "default": ("GEMINI_API_KEY", GEMINI_API_KEY),
     "invest": ("GEMINI_TOKEN_invest", GEMINI_TOKEN_INVEST),
     "invest_sub": ("GEMINI_TOKEN_INVESTsub", GEMINI_TOKEN_INVEST_SUB),
     "tech": ("GEMINI_TOKEN_tech", GEMINI_TOKEN_TECH),
@@ -143,12 +141,12 @@ def _normalize_gemini_profile(value: str) -> str:
 def _resolve_gemini_selection(video: dict[str, Any]) -> dict[str, str]:
     profile = _normalize_gemini_profile(video.get("gemini_profile", ""))
     fallback_order = {
-        "invest": ["invest", "default", "tech"],
-        "tech": ["tech", "default", "invest"],
-        "default": ["default", "invest", "tech"],
+        "invest": ["invest", "invest_sub"],
+        "tech": ["tech"],
+        "default": [],
     }
 
-    for pool_name in fallback_order.get(profile, ["default", "invest", "tech"]):
+    for pool_name in fallback_order.get(profile, []):
         token_name, token_value = GEMINI_TOKEN_POOLS[pool_name]
         if token_value:
             return {
@@ -238,7 +236,7 @@ def _require_environment(run_mode: str):
     if run_mode in {"process_queue", "full"} and not APIFY_API_KEY:
         required.append("APIFY_API_KEY")
     if run_mode in {"process_queue", "full"} and not any(token for _, token in GEMINI_TOKEN_POOLS.values()):
-        required.append("GEMINI_API_KEY / GEMINI_TOKEN_invest / GEMINI_TOKEN_INVESTsub / GEMINI_TOKEN_tech")
+        required.append("GEMINI_TOKEN_invest / GEMINI_TOKEN_INVESTsub / GEMINI_TOKEN_tech")
     if required:
         print(f"必要な環境変数が不足しています: {', '.join(required)}")
         sys.exit(1)
@@ -378,7 +376,11 @@ def _process_pending_videos(
 
         actual_title = video.get("video_title") or transcript.get("title") or "無題"
         video["video_title"] = actual_title
-        gemini_result = gemini_formatter.format_transcript(transcript, GEMINI_API_KEY, video)
+        gemini_result = gemini_formatter.format_transcript(
+            transcript,
+            _resolve_gemini_selection(video).get("api_key", ""),
+            video,
+        )
         if not gemini_result.get("ok"):
             error_message = gemini_result.get("error") or "Gemini 整形に失敗しました"
             quota_stop = bool(gemini_result.get("stopPipeline"))
@@ -932,14 +934,14 @@ def _process_pending_videos(
 def _resolve_gemini_candidates(video: dict[str, Any]) -> list[dict[str, str]]:
     profile = _normalize_gemini_profile(video.get("gemini_profile", ""))
     fallback_order = {
-        "invest": ["invest", "invest_sub", "default", "tech"],
-        "tech": ["tech", "default", "invest", "invest_sub"],
-        "default": ["default", "invest", "invest_sub", "tech"],
+        "invest": ["invest", "invest_sub"],
+        "tech": ["tech"],
+        "default": [],
     }
 
     candidates: list[dict[str, str]] = []
     seen_tokens: set[str] = set()
-    for pool_name in fallback_order.get(profile, ["default", "invest", "invest_sub", "tech"]):
+    for pool_name in fallback_order.get(profile, []):
         token_name, token_value = GEMINI_TOKEN_POOLS.get(pool_name, ("", ""))
         normalized_token = str(token_value or "").strip()
         if not normalized_token or normalized_token in seen_tokens:
@@ -971,6 +973,41 @@ def _process_pending_videos(
         gemini_candidates = _resolve_gemini_candidates(video)
         requested_profile = _normalize_gemini_profile(video.get("gemini_profile", ""))
         candidate_order = ", ".join(candidate["token_name"] for candidate in gemini_candidates)
+
+        if not gemini_candidates and requested_profile == "default":
+            error_message = "動画リストの Gemini 分類が未設定です。invest または tech を設定してください"
+            retry_record = state_store.mark_retry(
+                state,
+                video["video_url"],
+                "Gemini",
+                error_message,
+                run_id,
+                wait_seconds=state_store.resolve_retry_wait_seconds(),
+                status=state_store.FAILED_STATUS,
+            )
+            state_store.save_state(state)
+            _append_failure(
+                failures_this_run,
+                video,
+                "gemini_config",
+                "Gemini",
+                error_message,
+                geminiRequestedProfile=requested_profile,
+                geminiCandidateOrder=candidate_order,
+                nextRetryAt=retry_record.get("nextRetryAt"),
+            )
+            _append_processing_log(
+                processing_logs,
+                run_id,
+                video,
+                "Gemini",
+                "failed",
+                error_message,
+                geminiRequestedProfile=requested_profile,
+                geminiCandidateOrder=candidate_order,
+                nextRetryAt=retry_record.get("nextRetryAt"),
+            )
+            continue
 
         if not gemini_candidates:
             error_message = "info_viewer 用の Gemini API キーが設定されていません"
