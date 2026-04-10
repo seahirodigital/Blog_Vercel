@@ -1068,3 +1068,75 @@ artifact:
 - `raw` と `prepared` を両方 OneDrive に残すと、失敗時の手動リカバリと見た目調整がかなり楽になる  
 - 成功 run の artifact は「新経路が実際に使われた証跡」として有効だったが、本番が安定した後は常時保存をやめ、`NOTE_TOP_IMAGE_DEBUG=1` のときだけ出す方がよい
 
+## 2026-04-10 Gemini quota と failover の試行錯誤メモ
+
+### 背景
+
+2026年4月10日時点で、本番記事フローでは Gemini の `429` が連続し、
+記事生成に 7 分以上かかる run が発生していた。
+同時に、`info_viewer` 側でも Gemini キーの共有が本番記事フローへ悪影響を出す懸念があった。
+
+### 実施した改善
+
+1. 本番記事フローの Gemini 候補を 3 段構えにした  
+   `GEMINI_API_KEY -> GEMINI_TOKEN_sub -> GEMINI_TOKEN_SUB2`
+2. `429` / quota / rate limit を 1 回でも検知したら、同一キーで待機せず即次候補へ切り替えるよう変更した
+3. `info_viewer` から `GEMINI_API_KEY` を外し、専用キーだけを使う構成へ分離した
+4. キー本体を漏らさずに確認できるよう、SHA-256 先頭 8 文字の指紋ログを追加した
+5. 同じ GitHub Actions run 中で `429` になったキーは、その run の残り記事では自動スキップするよう変更した
+
+### 関連コミット
+
+- `0cee406`
+  `info_viewer` から `GEMINI_API_KEY` を外し、本番記事フロー専用に分離
+- `56ce55c`
+  本番記事フローへ `GEMINI_TOKEN_SUB2` を追加し、即時切替へ拡張
+- `ff0685d`
+  キー指紋ログと exhausted-key スキップを追加
+
+### 観測した run
+
+#### Run `24229592415`
+
+本番記事フローの 3 段切替自体は機能していることを確認した。
+
+- `GEMINI_API_KEY` が `429`
+- `GEMINI_TOKEN_sub` へ即切替
+- `GEMINI_TOKEN_sub` も失敗時は待機せず `GEMINI_TOKEN_SUB2` へ即切替
+- `GEMINI_TOKEN_SUB2` では Step1 完了まで進んだ
+
+この時点で、`SUB2` 自体は無効キーではなく、少なくとも一部 run では利用できることが分かった。
+
+#### Run `24230460831`
+
+指紋ログの追加後に再実行して、3 キーが別物であることを確認した。
+
+- `GEMINI_API_KEY[8817d4d3]`
+- `GEMINI_TOKEN_sub[f3b130f5]`
+- `GEMINI_TOKEN_SUB2[d5663914]`
+
+この run では 1 本目の記事の Step1 で 3 キーすべてが `429` だった。
+その後は exhausted-key スキップが働き、2 本目以降の記事では 3 キーとも即スキップされた。
+
+これにより、少なくとも次の 2 点は否定できた。
+
+- `SUB2` が他のキーと同じ値である
+- 同じ run の再試行地獄で `SUB2` が消耗している
+
+### 現時点の結論
+
+- 本番記事フローの記事処理は並列ではなく直列である
+- 1記事の中でも `writer -> editor -> director` を順番に呼んでいる
+- `429` は Gemini 側の quota / rate limit 到達を意味する
+- 現在のコード上では、quota 到達時の待機時間は廃止済みであり、無駄打ちも run 内スキップで抑制済みである
+- それでも `SUB2` が初回使用時点で `429` を返す run があるため、残る疑いは Gemini 側のプロジェクト / アカウント状態である
+
+### `info_viewer` 側で確定したこと
+
+- `info_viewer` は `GEMINI_API_KEY` を使わない
+- `invest` は `GEMINI_TOKEN_invest -> GEMINI_TOKEN_INVESTSUB`
+- `tech` は `GEMINI_TOKEN_tech`
+- 分離後の `Info Viewer Pipeline` run `24229629342` は成功している
+
+このため、2026年4月10日以降は「本番記事フローの Gemini 枠」と
+「`info_viewer` の Gemini 枠」は別管理として扱う。

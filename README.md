@@ -350,3 +350,70 @@ note の通常アップロード導線へ prepared を投入
 ```
 
 この正常系が通ったときの `image_flow` は `direct_prepared` です。
+
+## 11. 2026-04-10 Gemini 制限時の切り替え仕様
+
+本番記事フローの Gemini 呼び出しは、2026年4月10日現在では
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\blog-pipeline.yml`
+から
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\main.py`
+を起動し、1記事ずつ直列で処理する。
+
+1記事あたりの AI 整形は次の 3 段階で進む。
+
+1. writer
+2. editor
+3. director
+
+Gemini のキー候補は次の 3 段構えである。
+
+1. `GEMINI_API_KEY`
+2. `GEMINI_TOKEN_sub`
+3. `GEMINI_TOKEN_SUB2`
+
+切り替えルールは次の通り。
+
+- `429`
+- `quota exceeded`
+- `rate limit`
+
+上記のいずれかを検知したら、同じキーでは待機せず、その場で次の候補キーへ切り替える。
+30秒 / 60秒 / 90秒待機して同一キーを再試行する旧仕様は廃止した。
+
+さらに、あるキーが 1 回でも quota / rate limit に到達した場合は、その GitHub Actions run 中では以後そのキーを再試行しない。
+これにより、2本目以降の記事で同じ exhausted key を無駄打ちしない。
+
+ログにはキー本体を出さず、SHA-256 の先頭 8 文字だけを指紋として表示する。
+これにより、秘密値を漏らさずに「本当に別キーか」を確認できる。
+
+現在の本番記事フロー用 Gemini secrets は次の通り。
+
+- `GEMINI_API_KEY`
+- `GEMINI_TOKEN_sub`
+- `GEMINI_TOKEN_SUB2`
+
+## 12. 2026-04-10 info_viewer 現行運用メモ
+
+`info_viewer` の現行 workflow は
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\info-viewer-queue.yml`
+であり、旧 `Info Viewer Pipeline Legacy` は廃止した。
+
+`info_viewer` は本番記事フローと Gemini キーを分離している。
+2026年4月10日現在では `GEMINI_API_KEY` を使わず、次の専用キーのみを利用する。
+
+- `GEMINI_TOKEN_invest`
+- `GEMINI_TOKEN_INVESTSUB`
+- `GEMINI_TOKEN_tech`
+
+プロフィールごとの切り替えは次の通り。
+
+- `invest`: `GEMINI_TOKEN_invest -> GEMINI_TOKEN_INVESTSUB`
+- `tech`: `GEMINI_TOKEN_tech`
+
+一覧 UI の現行仕様は次の通り。
+
+- スプレッドシートの `サムネイル` 列から YouTube サムネイル URL を取り出し、カード左側へ表示する
+- スプレッドシートの `動画更新日時` を読み込み、一覧の日時表示と `新着順` の並び替えに使う
+- 日時表示は `YYYY/MM/DD/HH:MM` 形式で出す
+- YouTube タイトルは一覧では 30 文字以内に省略してカード高さを抑える
+- `記事あり` や `完了` などの一覧ラベルは表示しない
