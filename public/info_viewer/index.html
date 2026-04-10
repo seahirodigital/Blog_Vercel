@@ -2091,48 +2091,6 @@
 
         useEffect(() => {
           loadIndex({ preserveSelection: false });
-          return undefined;
-          let cancelled = false;
-
-          const loadIndex = async () => {
-            try {
-              setLoadingIndex(true);
-              const response = await fetch('/api/info-viewer-index');
-              if (!response.ok) {
-                throw new Error(`index API ${response.status}`);
-              }
-
-              const payload = await response.json();
-              const normalized = normalizeApiPayload(payload);
-              if (!cancelled && normalized && normalized.length) {
-                setChannels(normalized);
-                setSelectedChannelId(normalized[0].id);
-                setSelectedVideoId(normalized[0].videos[0]?.id || null);
-                setDataSource('api');
-                setIndexError('');
-                return;
-              }
-
-              if (!cancelled) {
-                setDataSource('dummy');
-                setIndexError('manifest 未生成のためダミーデータを表示中');
-              }
-            } catch (error) {
-              if (!cancelled) {
-                setDataSource('dummy');
-                setIndexError('実データ取得に失敗したためダミーデータを表示中');
-              }
-            } finally {
-              if (!cancelled) {
-                setLoadingIndex(false);
-              }
-            }
-          };
-
-          loadIndex();
-          return () => {
-            cancelled = true;
-          };
         }, [loadIndex]);
 
         const allVideos = useMemo(
@@ -2401,18 +2359,6 @@
             cancelled = true;
           };
         }, [articleCache, selectedVideo]);
-
-        const renderVideoLinkButton = () => (
-          <a
-            href={selectedVideo.youtubeUrl || '#'}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-6 h-6 rounded-full border border-white/35 bg-white/15 hover:bg-white/25 transition-colors inline-flex items-center justify-center"
-            title="元動画を開く"
-          >
-            <VideoGlyph size={12} />
-          </a>
-        );
 
         const renderHeaderControls = () => (
           <div className="flex items-center gap-2">
