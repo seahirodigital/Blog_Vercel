@@ -77,6 +77,7 @@ def _copy_video_fields(record: dict[str, Any], video: dict[str, Any]):
     record["duration"] = video.get("duration", "")
     record["rowNumber"] = video.get("row_number")
     record["sheetStatus"] = video.get("status", "")
+    record["geminiProfile"] = video.get("gemini_profile", "")
 
 
 def _copy_article_fields(record: dict[str, Any], article: dict[str, Any]):
@@ -97,6 +98,7 @@ def _record_to_video(record: dict[str, Any]) -> dict[str, Any]:
         "status": record.get("sheetStatus", ""),
         "channel_name": record.get("channelName", ""),
         "channel_url": record.get("channelUrl", ""),
+        "gemini_profile": record.get("geminiProfile", ""),
         "_queue_status": record.get("status", PENDING_STATUS),
         "_queue_next_retry_at": record.get("nextRetryAt", ""),
         "_queue_attempt_count": int(record.get("attemptCount") or 0),

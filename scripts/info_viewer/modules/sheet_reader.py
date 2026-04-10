@@ -84,6 +84,67 @@ def _extract_thumbnail_url(*values: str) -> str:
     return ""
 
 
+def _normalize_gemini_profile(value: str) -> str:
+    text = _normalize_key(value)
+    if not text:
+        return ""
+
+    if any(keyword in text for keyword in ("geminitokeninvest", "tokeninvest", "invest", "investment", "投資", "株", "fx", "為替", "市況")):
+        return "invest"
+    if any(keyword in text for keyword in ("geminitokentech", "tokentech", "tech", "technology", "テック", "技術", "開発", "ガジェット", "半導体", "ソフトウェア", "人工知能")):
+        return "tech"
+    if any(keyword in text for keyword in ("default", "standard", "通常", "標準", "共通", "main")):
+        return "default"
+
+    return ""
+
+
+def _resolve_gemini_profile(*rows: dict[str, Any]) -> str:
+    profile_aliases = [
+        "gemini_token",
+        "gemini token",
+        "Geminiトークン",
+        "gemini_profile",
+        "gemini profile",
+        "Geminiプロファイル",
+        "カテゴリ",
+        "分類",
+        "ジャンル",
+        "type",
+    ]
+
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        explicit_profile = _normalize_gemini_profile(_pick_value(row, profile_aliases))
+        if explicit_profile:
+            return explicit_profile
+
+    keyword_aliases = [
+        "カテゴリ",
+        "分類",
+        "ジャンル",
+        "備考",
+        "description",
+        "channel",
+        "channel name",
+        "チャンネル",
+        "チャンネル名",
+        "title",
+        "動画タイトル",
+        "タイトル",
+    ]
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        for alias in keyword_aliases:
+            profile = _normalize_gemini_profile(_pick_value(row, [alias]))
+            if profile:
+                return profile
+
+    return ""
+
+
 def get_target_channels(
     spreadsheet_id: str,
     sheet_name: str = DEFAULT_CHANNEL_SHEET_NAME,
@@ -107,6 +168,7 @@ def get_target_channels(
                 "name": channel_name or channel_url,
                 "channel_name": channel_name or channel_url,
                 "channel_url": channel_url,
+                "gemini_profile": _resolve_gemini_profile(row),
                 "_row_number": row["_row_number"],
                 "_raw": row,
             }
@@ -158,6 +220,7 @@ def get_target_videos(
                 "channel_name": matched_channel["channel_name"],
                 "channel_url": matched_channel["channel_url"],
                 "channel_id": matched_channel["id"],
+                "gemini_profile": _resolve_gemini_profile(row, matched_channel.get("_raw", {})),
                 "_raw": row,
             }
         )

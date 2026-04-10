@@ -8,14 +8,54 @@ Gemini Interaction Hub を使用
 import os
 import time
 from pathlib import Path
+from typing import Iterable, Optional
+
 from google import genai
-from typing import Optional
 
 # Gemini 最新モデル
 MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
 # プロンプトファイルのディレクトリ（このファイルの親の prompts/ フォルダ）
 PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
+
+
+class GeminiQuotaExceededError(RuntimeError):
+    """Gemini の quota / rate limit 到達。"""
+
+
+def _is_quota_error(error: Exception | str) -> bool:
+    text = str(error or "").lower()
+    keywords = (
+        "429",
+        "quota",
+        "resource_exhausted",
+        "rate limit",
+        "too many requests",
+        "exceeded",
+        "throttle",
+    )
+    return any(keyword in text for keyword in keywords)
+
+
+def _normalize_api_key_candidates(gemini_api_keys) -> list[tuple[str, str]]:
+    if isinstance(gemini_api_keys, str):
+        return [("GEMINI_API_KEY", gemini_api_keys.strip())] if gemini_api_keys.strip() else []
+
+    candidates: list[tuple[str, str]] = []
+    seen: set[str] = set()
+    if isinstance(gemini_api_keys, Iterable):
+        for item in gemini_api_keys:
+            if isinstance(item, tuple) and len(item) >= 2:
+                label = str(item[0] or "").strip() or "Gemini"
+                api_key = str(item[1] or "").strip()
+            else:
+                label = "Gemini"
+                api_key = str(item or "").strip()
+            if not api_key or api_key in seen:
+                continue
+            seen.add(api_key)
+            candidates.append((label, api_key))
+    return candidates
 
 
 def _load_prompt(filename: str) -> str:
@@ -61,6 +101,144 @@ def _load_optional_prompt(filename: str) -> Optional[str]:
     if not filepath.exists():
         return None
     return _load_prompt(filename)
+
+
+def _run_interaction_with_quota_handling(client, input_text: str, system_prompt: str, previous_id: Optional[str] = None):
+    """Gemini への問い合わせを行い、quota 系は専用例外へ寄せる。"""
+    full_input = f"【指示・役割】\n{system_prompt}\n\n【入力データ】\n{input_text}"
+
+    max_retries = 3
+    for i in range(max_retries):
+        try:
+            interaction = client.interactions.create(
+                model=MODEL_NAME,
+                input=full_input,
+                previous_interaction_id=previous_id,
+                generation_config={
+                    "temperature": 0.5,
+                    "thinking_level": "high",
+                },
+            )
+            return interaction
+        except Exception as error:
+            if _is_quota_error(error):
+                wait_time = (i + 1) * 30
+                if i < max_retries - 1:
+                    print(f"   quota / rate limit を検知。{wait_time}秒待機して再試行します ({i + 1}/{max_retries})")
+                    time.sleep(wait_time)
+                    continue
+                raise GeminiQuotaExceededError(str(error)) from error
+            print(f"   APIエラー: {error}")
+            raise
+    raise GeminiQuotaExceededError("Gemini quota retry exhausted")
+
+
+def _run_pipeline_with_candidate_client(
+    client,
+    transcript: dict,
+    status: str,
+    drafter_prompt: str,
+    editor_prompt: str,
+    director_prompt: str,
+    best_outline_prompt: Optional[str],
+    best_enhancer_prompt: Optional[str],
+) -> str:
+    captions = transcript["captions"]
+
+    print(f"   Step1: 下書き生成 ({status})")
+    int1 = _run_interaction_with_quota_handling(client, captions, drafter_prompt)
+    print(f"   Step1 完了: {int1.id}")
+    time.sleep(10)
+
+    print("   Step2: 編集")
+    int2 = _run_interaction_with_quota_handling(client, "上記の記事を編集してください。", editor_prompt, previous_id=int1.id)
+    print(f"   Step2 完了: {int2.id}")
+    time.sleep(10)
+
+    print("   Step3: 最終チェック")
+    int3 = _run_interaction_with_quota_handling(client, "上記の記事を100点満点へ引き上げてください。", director_prompt, previous_id=int2.id)
+    final_text = int3.outputs[-1].text
+    last_interaction_id = int3.id
+    print(f"   Step3 完了: {int3.id}")
+
+    if status == "ベスト版":
+        if best_outline_prompt:
+            print("   Step3.1: ベスト版の構成強化")
+            int31 = _run_interaction_with_quota_handling(
+                client,
+                "この記事をベスト版記事として再構成し、不足観点を補ってください。",
+                best_outline_prompt,
+                previous_id=last_interaction_id,
+            )
+            last_interaction_id = int31.id
+            print(f"   Step3.1 完了: {int31.id}")
+            time.sleep(10)
+        else:
+            print("   031-best-outline-prompt.txt が見つからないため Step3.1 をスキップします")
+
+        if best_enhancer_prompt:
+            print("   Step3.2: ベスト版へ磨き込み")
+            int32 = _run_interaction_with_quota_handling(
+                client,
+                "この記事と強化済み構成を統合し、公開可能なベスト版へ仕上げてください。",
+                best_enhancer_prompt,
+                previous_id=last_interaction_id,
+            )
+            final_text = int32.outputs[-1].text
+            print(f"   Step3.2 完了: {int32.id}")
+        else:
+            print("   032-best-article-enhancer-prompt.txt が見つからないため Step3.2 をスキップします")
+
+    return final_text
+
+
+def run_pipeline_with_fallback(transcript: dict, gemini_api_keys, status: str = "単品") -> Optional[str]:
+    """
+    quota / rate limit を検知した場合だけ次の Gemini キーへ退避する。
+    """
+    try:
+        writer_raw = _load_prompt("01-writer-prompt.txt")
+        drafter_prompt = _parse_writer_prompt(writer_raw, status)
+        editor_prompt = _load_prompt("02-editor-prompt.txt")
+        director_prompt = _load_prompt("03-director-prompt.txt")
+        best_outline_prompt = _load_optional_prompt("031-best-outline-prompt.txt")
+        best_enhancer_prompt = _load_optional_prompt("032-best-article-enhancer-prompt.txt")
+        print(f"   プロンプト読み込み完了: 01-writer({status}) / 02-editor / 03-director")
+    except FileNotFoundError as error:
+        print(f"   プロンプトファイルエラー: {error}")
+        return None
+
+    candidates = _normalize_api_key_candidates(gemini_api_keys)
+    if not candidates:
+        print("   Gemini APIキーが設定されていません")
+        return None
+
+    for index, (label, api_key) in enumerate(candidates, start=1):
+        try:
+            print(f"   Geminiキーを使用: {label} ({index}/{len(candidates)})")
+            client = genai.Client(api_key=api_key)
+            return _run_pipeline_with_candidate_client(
+                client,
+                transcript,
+                status,
+                drafter_prompt,
+                editor_prompt,
+                director_prompt,
+                best_outline_prompt,
+                best_enhancer_prompt,
+            )
+        except GeminiQuotaExceededError as error:
+            print(f"   {label} が quota / rate limit に到達しました: {error}")
+            if index >= len(candidates):
+                print("   利用可能な Gemini キーを使い切ったため停止します")
+                return None
+            next_label = candidates[index][0]
+            print(f"   {next_label} に切り替えて続行します")
+        except Exception as error:
+            print(f"   パイプラインエラー: {error}")
+            return None
+
+    return None
 
 
 def _run_interaction(client, input_text: str, system_prompt: str, previous_id: Optional[str] = None):

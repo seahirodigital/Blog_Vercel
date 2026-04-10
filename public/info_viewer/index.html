@@ -1685,6 +1685,15 @@
         );
       }
 
+      function RefreshGlyph({ size = 13, className = '' }) {
+        return (
+          <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 12a9 9 0 1 1-2.64-6.36" />
+            <path d="M21 3v6h-6" />
+          </svg>
+        );
+      }
+
       function ChevronGlyph({ collapsed, size = 14 }) {
         return (
           <svg
@@ -1942,14 +1951,14 @@
       }
 
       function App() {
-        const [channels, setChannels] = useState(DUMMY_CHANNELS);
-        const [selectedChannelId, setSelectedChannelId] = useState(DUMMY_CHANNELS[0].id);
-        const [selectedVideoId, setSelectedVideoId] = useState(DUMMY_CHANNELS[0].videos[0].id);
+        const [channels, setChannels] = useState([]);
+        const [selectedChannelId, setSelectedChannelId] = useState('');
+        const [selectedVideoId, setSelectedVideoId] = useState('');
         const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
         const [mobilePanel, setMobilePanel] = useState('channels');
         const [channelWidth, setChannelWidth] = useState(280);
         const [videoWidth, setVideoWidth] = useState(320);
-        const [dataSource, setDataSource] = useState('dummy');
+        const [dataSource, setDataSource] = useState('loading');
         const [loadingIndex, setLoadingIndex] = useState(true);
         const [indexError, setIndexError] = useState('');
         const [articleCache, setArticleCache] = useState({});
@@ -1958,6 +1967,8 @@
         const [videoCollapsed, setVideoCollapsed] = useState(false);
         const [desktopVideoFilter, setDesktopVideoFilter] = useState('channel');
         const [priorityLoadingId, setPriorityLoadingId] = useState('');
+        const [refreshingSheet, setRefreshingSheet] = useState(false);
+        const [manifestGeneratedAt, setManifestGeneratedAt] = useState('');
         const channelDragging = useRef(false);
         const videoDragging = useRef(false);
         const channelStartX = useRef(0);
@@ -1966,6 +1977,8 @@
         const videoStartW = useRef(0);
         const touchStartX = useRef(null);
         const touchStartY = useRef(null);
+        const selectedChannelIdRef = useRef('');
+        const selectedVideoIdRef = useRef('');
 
         const onChannelResizeStart = useCallback((e) => {
           if (e.button !== 0) return;
@@ -2019,6 +2032,66 @@
         }, []);
 
         useEffect(() => {
+          selectedChannelIdRef.current = selectedChannelId;
+        }, [selectedChannelId]);
+
+        useEffect(() => {
+          selectedVideoIdRef.current = selectedVideoId;
+        }, [selectedVideoId]);
+
+        const loadIndex = useCallback(async ({ preserveSelection = true, silent = false } = {}) => {
+          try {
+            if (!silent) {
+              setLoadingIndex(true);
+            }
+
+            const response = await fetch(`/api/info-viewer-index?ts=${Date.now()}`, { cache: 'no-store' });
+            if (!response.ok) {
+              throw new Error(`index API ${response.status}`);
+            }
+
+            const payload = await response.json();
+            const normalized = normalizeApiPayload(payload) || [];
+            const nextGeneratedAt = payload?.generatedAt || '';
+            setManifestGeneratedAt(nextGeneratedAt);
+
+            if (normalized.length) {
+              const currentChannelId = preserveSelection ? selectedChannelIdRef.current : '';
+              const currentVideoId = preserveSelection ? selectedVideoIdRef.current : '';
+              const owningChannel = normalized.find((channel) => channel.id === currentChannelId || channel.videos.some((video) => video.id === currentVideoId)) || normalized[0];
+              const nextChannelId = owningChannel?.id || normalized[0].id;
+              const nextVideoId = owningChannel?.videos.some((video) => video.id === currentVideoId)
+                ? currentVideoId
+                : owningChannel?.videos[0]?.id || normalized[0].videos[0]?.id || '';
+
+              setChannels(normalized);
+              setSelectedChannelId(nextChannelId);
+              setSelectedVideoId(nextVideoId);
+              setDataSource('api');
+              setIndexError('');
+              return { ok: true, generatedAt: nextGeneratedAt, hasContent: true };
+            }
+
+            setChannels([]);
+            setSelectedChannelId('');
+            setSelectedVideoId('');
+            setDataSource('empty');
+            setIndexError(payload?.source === 'manifest_missing' ? 'manifest はまだ生成されていません。' : '');
+            return { ok: true, generatedAt: nextGeneratedAt, hasContent: false };
+          } catch (error) {
+            setDataSource('error');
+            setIndexError(error.message || '実データの読み込みに失敗しました。');
+            return { ok: false, generatedAt: '', hasContent: false };
+          } finally {
+            if (!silent) {
+              setLoadingIndex(false);
+            }
+          }
+        }, []);
+
+        useEffect(() => {
+          loadIndex({ preserveSelection: false });
+          return undefined;
           let cancelled = false;
 
           const loadIndex = async () => {
@@ -2060,7 +2133,7 @@
           return () => {
             cancelled = true;
           };
-        }, []);
+        }, [loadIndex]);
 
         const allVideos = useMemo(
           () => channels.flatMap((channel) => channel.videos.map((video) => ({
@@ -2201,6 +2274,56 @@
           }
         }, [priorityLoadingId, selectedChannel.channelUrl, selectedChannel.name, updateVideoInChannels]);
 
+        const waitFor = useCallback((ms) => new Promise((resolve) => window.setTimeout(resolve, ms)), []);
+
+        const waitForFreshManifest = useCallback(async (previousGeneratedAt) => {
+          for (let attempt = 0; attempt < 8; attempt += 1) {
+            await waitFor(attempt === 0 ? 1600 : 2200);
+            const result = await loadIndex({ preserveSelection: true, silent: true });
+            if (!result.ok) {
+              continue;
+            }
+            if (!previousGeneratedAt || (result.generatedAt && result.generatedAt !== previousGeneratedAt)) {
+              setLoadingIndex(false);
+              return true;
+            }
+          }
+          return false;
+        }, [loadIndex, waitFor]);
+
+        const handleRefreshSheet = useCallback(async () => {
+          if (refreshingSheet) return;
+
+          try {
+            setRefreshingSheet(true);
+            setLoadingIndex(true);
+            setIndexError('');
+            const response = await fetch('/api/trigger-info-viewer', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                mode: 'sync_only',
+                max_items: '0',
+              }),
+            });
+            const payload = await response.json();
+            if (!response.ok || payload.success === false) {
+              throw new Error(payload.error || `trigger API ${response.status}`);
+            }
+
+            const refreshed = await waitForFreshManifest(manifestGeneratedAt);
+            if (!refreshed) {
+              await loadIndex({ preserveSelection: true, silent: true });
+              setIndexError('スプレッドシート再読込を開始しました。数秒後に再度ご確認ください。');
+            }
+          } catch (error) {
+            setIndexError(error.message || 'スプレッドシートの更新に失敗しました。');
+          } finally {
+            setRefreshingSheet(false);
+            setLoadingIndex(false);
+          }
+        }, [loadIndex, manifestGeneratedAt, refreshingSheet, waitForFreshManifest]);
+
         const swipeSequence = useMemo(() => {
           const isCurrentInLatest = latestVideos.some((video) => video.id === selectedVideoId);
           return isCurrentInLatest ? latestVideos : allVideosByDate;
@@ -2291,6 +2414,31 @@
           </a>
         );
 
+        const renderHeaderControls = () => (
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={handleRefreshSheet}
+              disabled={refreshingSheet}
+              className={`w-6 h-6 rounded-full border border-white/35 bg-white/15 transition-colors inline-flex items-center justify-center ${
+                refreshingSheet ? 'cursor-wait opacity-80' : 'hover:bg-white/25'
+              }`}
+              title="スプレッドシートを再読込"
+            >
+              <RefreshGlyph size={12} className={refreshingSheet ? 'animate-spin' : ''} />
+            </button>
+            <a
+              href={selectedVideo.youtubeUrl || '#'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-6 h-6 rounded-full border border-white/35 bg-white/15 hover:bg-white/25 transition-colors inline-flex items-center justify-center"
+              title="動画を開く"
+            >
+              <VideoGlyph size={12} />
+            </a>
+          </div>
+        );
+
         const renderDesktopVideoFilter = () => (
           <label className="hidden lg:flex items-center gap-2 text-[10px] font-semibold text-white/85">
             <span>フィルタ</span>
@@ -2310,7 +2458,7 @@
             {mobileSidebarOpen && <div className="lg:hidden mobile-overlay" onClick={() => setMobileSidebarOpen(false)} />}
 
             <div className={`lg:hidden mobile-drawer ${mobileSidebarOpen ? 'open' : ''}`}>
-              <PanelHeader title="Info-Viewer" badge={loadingIndex ? 'LOAD' : dataSource === 'api' ? 'LIVE' : 'DUMMY'} bottomRight={renderVideoLinkButton()} />
+              <PanelHeader title="Info-Viewer" badge={loadingIndex ? 'LOAD' : dataSource === 'api' ? 'LIVE' : dataSource === 'error' ? 'ERROR' : 'EMPTY'} bottomRight={renderHeaderControls()} />
               <div className="lg:hidden flex border-b border-slate-200 bg-white shrink-0">
                 <button onClick={() => setMobilePanel('channels')} className={`flex-1 py-2.5 text-sm text-center transition-colors ${mobilePanel === 'channels' ? 'tab-active' : 'text-slate-400'}`}>チャンネル</button>
                 <button onClick={() => setMobilePanel('videos')} className={`flex-1 py-2.5 text-sm text-center transition-colors ${mobilePanel === 'videos' ? 'tab-active' : 'text-slate-400'}`}>動画一覧</button>
@@ -2345,7 +2493,7 @@
               }`}
               style={{ width: channelCollapsed ? 0 : channelWidth }}
             >
-              <PanelHeader title="Info-Viewer" badge={`${channels.length} 件`} bottomRight={renderVideoLinkButton()} />
+              <PanelHeader title="Info-Viewer" badge={`${channels.length} 件`} bottomRight={renderHeaderControls()} />
               <div className="flex-1 overflow-y-auto py-2">
                 <ChannelList channels={channels} selectedChannelId={selectedChannelId} onSelect={handleSelectChannel} />
               </div>
@@ -2444,8 +2592,11 @@
                   <circle cx="12" cy="12" r="3" />
                 </svg>
                 <span>プレビュー</span>
-                <span className="ml-auto text-[11px] text-slate-400">
+                <span className="hidden ml-auto text-[11px] text-slate-400">
                   {loadingIndex ? '読み込み中' : dataSource === 'api' ? '実データ' : 'ダミー'}
+                </span>
+                <span className="ml-auto text-[11px] text-slate-400">
+                  {loadingIndex ? '読み込み中' : dataSource === 'api' ? '実データ' : dataSource === 'error' ? 'エラー' : '未生成'}
                 </span>
                 <a
                   href={selectedChannel.channelUrl}
@@ -2470,7 +2621,7 @@
                     <div className="text-center px-8">
                       <h3 className="text-lg font-bold text-slate-800 mb-2">記事を読み込み中です</h3>
                       <p className="text-slate-400 text-sm max-w-md leading-relaxed">
-                        {dataSource === 'api' ? 'OneDrive 上の記事本文を取得しています。' : 'ダミーデータを準備しています。'}
+                        {dataSource === 'api' ? 'OneDrive 上の記事本文を取得しています。' : 'manifest の更新結果を待っています。'}
                       </p>
                     </div>
                   </div>
@@ -2488,7 +2639,9 @@
                       <p className="text-slate-400 text-sm max-w-md leading-relaxed">
                         {dataSource === 'api'
                           ? 'この動画はシート上の対象ですが、まだ記事ファイルが生成されていません。次回の自動取得で再試行されます。'
-                          : 'この動画はダミー一覧には表示していますが、本文はまだありません。第一弾では既存 UI を流用した 3 パネル構造とドラッグハンドルの確認を優先します。'}
+                          : dataSource === 'error'
+                            ? 'manifest の取得に失敗しています。更新ボタンで再読込するか、Actions の状態をご確認ください。'
+                            : 'manifest 生成待ちです。更新ボタンからスプレッドシート再読込を実行できます。'}
                       </p>
                       {selectedVideo.lastFailureMessage ? (
                         <div className="mt-4 max-w-xl rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-left">

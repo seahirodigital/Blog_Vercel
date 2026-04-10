@@ -25,6 +25,7 @@ SPREADSHEET_ID = os.getenv("SPREADSHEET_ID", "")
 SHEET_NAME = os.getenv("SHEET_NAME", "動画リスト")
 APIFY_API_KEY = os.getenv("APIFY_API_KEY", "")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+GEMINI_TOKEN_SUB = os.getenv("GEMINI_TOKEN_sub", "") or os.getenv("GEMINI_TOKEN_SUB", "")
 
 
 def _make_safe_filename(title: str, max_length: int = 60) -> str:
@@ -43,6 +44,21 @@ def _prepend_source_url(markdown: str, video_url: str) -> str:
     if not body:
         return f"{source_url}\n"
     return f"{source_url}\n\n{body}"
+
+
+def _build_gemini_key_candidates() -> list[tuple[str, str]]:
+    candidates: list[tuple[str, str]] = []
+    seen: set[str] = set()
+    for label, api_key in (
+        ("GEMINI_API_KEY", GEMINI_API_KEY),
+        ("GEMINI_TOKEN_sub", GEMINI_TOKEN_SUB),
+    ):
+        normalized = str(api_key or "").strip()
+        if not normalized or normalized in seen:
+            continue
+        seen.add(normalized)
+        candidates.append((label, normalized))
+    return candidates
 
 
 def process_single(row: dict, index: int, total: int) -> dict:
@@ -74,7 +90,7 @@ def process_single(row: dict, index: int, total: int) -> dict:
     result["title"] = transcript["title"]
 
     # Step 2: AI生成（量産元は 01→02→03→031→032 まで拡張）
-    markdown = blog_pipeline.run_pipeline(transcript, GEMINI_API_KEY, status=status)
+    markdown = blog_pipeline.run_pipeline_with_fallback(transcript, _build_gemini_key_candidates(), status=status)
     if not markdown:
         print("   ⚠️ AI生成失敗 - スキップ")
         return result
@@ -168,8 +184,8 @@ def main():
         missing.append("SPREADSHEET_ID")
     if not APIFY_API_KEY:
         missing.append("APIFY_API_KEY")
-    if not GEMINI_API_KEY:
-        missing.append("GEMINI_API_KEY")
+    if not (GEMINI_API_KEY or GEMINI_TOKEN_SUB):
+        missing.append("GEMINI_API_KEY / GEMINI_TOKEN_sub")
 
     if missing:
         print(f"❌ 必須環境変数が未設定です: {', '.join(missing)}")
