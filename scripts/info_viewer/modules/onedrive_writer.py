@@ -11,7 +11,7 @@ GRAPH_API_BASE = "https://graph.microsoft.com/v1.0"
 TOKEN_URL = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
 DEFAULT_BASE_FOLDER = os.getenv(
     "INFO_VIEWER_ONEDRIVE_FOLDER",
-    "Obsidian in Onedrive 202602/Vercel_Blog/投資info_viewer",
+    "Obsidian in Onedrive 202602/Vercel_Blog/情報取得/info_viewer",
 )
 
 

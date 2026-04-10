@@ -1,7 +1,7 @@
 const GRAPH_API = 'https://graph.microsoft.com/v1.0';
 const TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
 const VERCEL_API = 'https://api.vercel.com';
-const DEFAULT_FOLDER = process.env.INFO_VIEWER_ONEDRIVE_FOLDER || 'Obsidian in Onedrive 202602/Vercel_Blog/投資info_viewer';
+const DEFAULT_FOLDER = process.env.INFO_VIEWER_ONEDRIVE_FOLDER || 'Obsidian in Onedrive 202602/Vercel_Blog/情報取得/info_viewer';
 
 function encodeFolderPath(folderPath = '') {
   return String(folderPath)
