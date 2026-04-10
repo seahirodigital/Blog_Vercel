@@ -23,6 +23,9 @@ class GeminiQuotaExceededError(RuntimeError):
     """Gemini の quota / rate limit 到達。"""
 
 
+_EXHAUSTED_GEMINI_KEYS: set[str] = set()
+
+
 def _is_quota_error(error: Exception | str) -> bool:
     text = str(error or "").lower()
     keywords = (
@@ -35,6 +38,17 @@ def _is_quota_error(error: Exception | str) -> bool:
         "throttle",
     )
     return any(keyword in text for keyword in keywords)
+
+
+def _is_exhausted_key(api_key: str) -> bool:
+    normalized = str(api_key or "").strip()
+    return bool(normalized) and normalized in _EXHAUSTED_GEMINI_KEYS
+
+
+def _mark_key_exhausted(api_key: str):
+    normalized = str(api_key or "").strip()
+    if normalized:
+        _EXHAUSTED_GEMINI_KEYS.add(normalized)
 
 
 def _normalize_api_key_candidates(gemini_api_keys) -> list[tuple[str, str]]:
@@ -200,9 +214,19 @@ def run_pipeline_with_fallback(transcript: dict, gemini_api_keys, status: str = 
         print(f"   プロンプトファイルエラー: {error}")
         return None
 
-    candidates = _normalize_api_key_candidates(gemini_api_keys)
+    raw_candidates = _normalize_api_key_candidates(gemini_api_keys)
+    candidates: list[tuple[str, str]] = []
+    for label, api_key in raw_candidates:
+        if _is_exhausted_key(api_key):
+            print(f"   {label} はこの run で quota 到達済みのためスキップします")
+            continue
+        candidates.append((label, api_key))
+
     if not candidates:
-        print("   Gemini APIキーが設定されていません")
+        if raw_candidates:
+            print("   この run で利用可能な Gemini キーが残っていません")
+        else:
+            print("   Gemini APIキーが設定されていません")
         return None
 
     for index, (label, api_key) in enumerate(candidates, start=1):
@@ -221,6 +245,7 @@ def run_pipeline_with_fallback(transcript: dict, gemini_api_keys, status: str = 
             )
         except GeminiQuotaExceededError as error:
             print(f"   {label} が quota / rate limit に到達しました: {error}")
+            _mark_key_exhausted(api_key)
             if index >= len(candidates):
                 print("   利用可能な Gemini キーを使い切ったため停止します")
                 return None

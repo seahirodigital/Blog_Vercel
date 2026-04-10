@@ -27,6 +27,7 @@ APIFY_API_KEY = os.getenv("APIFY_API_KEY", "")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 GEMINI_TOKEN_SUB = os.getenv("GEMINI_TOKEN_sub", "") or os.getenv("GEMINI_TOKEN_SUB", "")
 GEMINI_TOKEN_SUB2 = os.getenv("GEMINI_TOKEN_sub2", "") or os.getenv("GEMINI_TOKEN_SUB2", "")
+_GEMINI_CANDIDATES_LOGGED = False
 
 
 def _make_safe_filename(title: str, max_length: int = 60) -> str:
@@ -47,19 +48,53 @@ def _prepend_source_url(markdown: str, video_url: str) -> str:
     return f"{source_url}\n\n{body}"
 
 
-def _build_gemini_key_candidates() -> list[tuple[str, str]]:
-    candidates: list[tuple[str, str]] = []
-    seen: set[str] = set()
-    for label, api_key in (
+def _fingerprint_secret(secret: str) -> str:
+    normalized = str(secret or "").strip()
+    if not normalized:
+        return "missing"
+    return hashlib.sha256(normalized.encode("utf-8")).hexdigest()[:8]
+
+
+def _raw_gemini_key_sources() -> list[tuple[str, str]]:
+    return [
         ("GEMINI_API_KEY", GEMINI_API_KEY),
         ("GEMINI_TOKEN_sub", GEMINI_TOKEN_SUB),
         ("GEMINI_TOKEN_SUB2", GEMINI_TOKEN_SUB2),
-    ):
+    ]
+
+
+def _build_gemini_key_candidates() -> list[tuple[str, str]]:
+    global _GEMINI_CANDIDATES_LOGGED
+    candidates: list[tuple[str, str]] = []
+    seen: dict[str, str] = {}
+    candidate_labels: list[str] = []
+    duplicate_messages: list[str] = []
+
+    for label, api_key in _raw_gemini_key_sources():
         normalized = str(api_key or "").strip()
-        if not normalized or normalized in seen:
+        if not normalized:
             continue
-        seen.add(normalized)
-        candidates.append((label, normalized))
+
+        fingerprint = _fingerprint_secret(normalized)
+        display_label = f"{label}[{fingerprint}]"
+
+        if normalized in seen:
+            duplicate_messages.append(f"{display_label} は {seen[normalized]} と同じキーです")
+            continue
+
+        seen[normalized] = display_label
+        candidate_labels.append(display_label)
+        candidates.append((display_label, normalized))
+
+    if not _GEMINI_CANDIDATES_LOGGED:
+        if candidate_labels:
+            print(f"   Gemini候補: {', '.join(candidate_labels)}")
+        else:
+            print("   Gemini候補: なし")
+        for message in duplicate_messages:
+            print(f"   注意: {message}")
+        _GEMINI_CANDIDATES_LOGGED = True
+
     return candidates
 
 
