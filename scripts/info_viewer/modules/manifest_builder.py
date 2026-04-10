@@ -4,6 +4,44 @@ from typing import Any
 from .onedrive_writer import DEFAULT_BASE_FOLDER, normalize_youtube_url, upload_json
 
 
+def _video_sort_key(item: dict[str, Any]) -> tuple[str, str, str]:
+    video_updated_at = item.get("videoUpdatedAt") or item.get("publishedAt", "")
+    return (
+        _sort_timestamp(video_updated_at),
+        _sort_timestamp(item.get("publishedAt", "")),
+        _sort_timestamp(item.get("articleUpdatedAt", "")),
+    )
+
+
+def _sort_timestamp(value: str | None) -> float:
+    text = str(value or "").strip()
+    if not text:
+        return 0.0
+
+    try:
+        return datetime.fromisoformat(text.replace("Z", "+00:00")).timestamp()
+    except ValueError:
+        pass
+
+    normalized = " ".join(text.split())
+    for date_format in (
+        "%Y/%m/%d/%H:%M:%S",
+        "%Y/%m/%d/%H:%M",
+        "%Y/%m/%d %H:%M:%S",
+        "%Y/%m/%d %H:%M",
+        "%Y-%m-%d %H:%M:%S",
+        "%Y-%m-%d %H:%M",
+        "%Y/%m/%d",
+        "%Y-%m-%d",
+    ):
+        try:
+            return datetime.strptime(normalized, date_format).timestamp()
+        except ValueError:
+            continue
+
+    return 0.0
+
+
 def build_manifest(
     target_channels: list[dict[str, Any]],
     target_videos: list[dict[str, Any]],
@@ -67,6 +105,7 @@ def build_manifest(
                 "articleId": article.get("fileId") if article else "",
                 "title": video.get("video_title") or (article.get("title") if article else "無題"),
                 "publishedAt": video.get("published_at", ""),
+                "videoUpdatedAt": video.get("video_updated_at", "") or video.get("published_at", ""),
                 "duration": video.get("duration", ""),
                 "thumbnailUrl": video.get("thumbnail_url", ""),
                 "youtubeUrl": video.get("video_url", ""),
@@ -89,10 +128,7 @@ def build_manifest(
             videos.append(item)
             all_videos.append(item)
 
-        videos.sort(
-            key=lambda item: (item.get("publishedAt", ""), item.get("articleUpdatedAt", "")),
-            reverse=True,
-        )
+        videos.sort(key=_video_sort_key, reverse=True)
 
         channels.append(
             {
@@ -106,7 +142,7 @@ def build_manifest(
 
     recent = sorted(
         [video for video in all_videos if video.get("hasArticle")],
-        key=lambda item: (item.get("publishedAt", ""), item.get("articleUpdatedAt", "")),
+        key=_video_sort_key,
         reverse=True,
     )
 

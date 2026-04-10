@@ -1,6 +1,7 @@
 import json
 import os
 import re
+from datetime import datetime
 from typing import Any
 
 import gspread
@@ -13,6 +14,13 @@ SCOPES = [
 
 DEFAULT_CHANNEL_SHEET_NAME = os.getenv("INFO_VIEWER_CHANNEL_SHEET_NAME", "チャンネル設定")
 DEFAULT_VIDEO_SHEET_NAME = os.getenv("INFO_VIEWER_VIDEO_SHEET_NAME", "動画リスト")
+
+
+VIDEO_TITLE_ALIASES = ["動画タイトル", "タイトル", "title", "動画名"]
+PUBLISHED_AT_ALIASES = ["投稿日", "公開日", "published_at", "publishedAt"]
+VIDEO_UPDATED_AT_ALIASES = ["動画更新日時", "更新日時", "updated_at", "updatedAt", "video_updated_at", "videoUpdatedAt"]
+DURATION_ALIASES = ["長さ", "動画時間", "再生時間", "duration"]
+THUMBNAIL_ALIASES = ["サムネイル", "thumbnail", "thumb", "thumbnail_url"]
 
 
 def _normalize_key(value: str) -> str:
@@ -82,6 +90,37 @@ def _extract_thumbnail_url(*values: str) -> str:
             return text
 
     return ""
+
+
+def _normalize_datetime_value(value: str) -> str:
+    text = str(value or "").strip()
+    if not text:
+        return ""
+
+    try:
+        parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
+        return parsed.isoformat().replace("+00:00", "Z")
+    except ValueError:
+        pass
+
+    normalized = re.sub(r"\s+", " ", text)
+    formats = (
+        "%Y/%m/%d/%H:%M:%S",
+        "%Y/%m/%d/%H:%M",
+        "%Y/%m/%d %H:%M:%S",
+        "%Y/%m/%d %H:%M",
+        "%Y-%m-%d %H:%M:%S",
+        "%Y-%m-%d %H:%M",
+        "%Y/%m/%d",
+        "%Y-%m-%d",
+    )
+    for date_format in formats:
+        try:
+            return datetime.strptime(normalized, date_format).isoformat()
+        except ValueError:
+            continue
+
+    return text
 
 
 def _normalize_gemini_profile(value: str) -> str:
@@ -205,16 +244,20 @@ def get_target_videos(
         if not include_completed and status == "完了":
             continue
 
+        published_at = _normalize_datetime_value(_pick_value(row, PUBLISHED_AT_ALIASES))
+        video_updated_at = _normalize_datetime_value(_pick_value(row, VIDEO_UPDATED_AT_ALIASES)) or published_at
+
         selected_videos.append(
             {
                 "row_number": row["_row_number"],
                 "video_url": video_url,
-                "video_title": _pick_value(row, ["動画タイトル", "タイトル", "title", "動画名"]),
-                "published_at": _pick_value(row, ["投稿日", "公開日", "published_at", "publishedAt"]),
-                "duration": _pick_value(row, ["長さ", "再生時間", "duration"]),
+                "video_title": _pick_value(row, VIDEO_TITLE_ALIASES),
+                "published_at": published_at,
+                "video_updated_at": video_updated_at,
+                "duration": _pick_value(row, DURATION_ALIASES),
                 "thumbnail_url": _extract_thumbnail_url(
-                    _pick_value(row.get("_formula", {}), ["サムネイル", "thumbnail", "thumb", "thumbnail_url"]),
-                    _pick_value(row, ["サムネイル", "thumbnail", "thumb", "thumbnail_url"]),
+                    _pick_value(row.get("_formula", {}), THUMBNAIL_ALIASES),
+                    _pick_value(row, THUMBNAIL_ALIASES),
                 ),
                 "status": status,
                 "channel_name": matched_channel["channel_name"],

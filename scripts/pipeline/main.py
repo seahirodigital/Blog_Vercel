@@ -26,6 +26,7 @@ SHEET_NAME = os.getenv("SHEET_NAME", "動画リスト")
 APIFY_API_KEY = os.getenv("APIFY_API_KEY", "")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 GEMINI_TOKEN_SUB = os.getenv("GEMINI_TOKEN_sub", "") or os.getenv("GEMINI_TOKEN_SUB", "")
+GEMINI_TOKEN_SUB2 = os.getenv("GEMINI_TOKEN_sub2", "") or os.getenv("GEMINI_TOKEN_SUB2", "")
 
 
 def _make_safe_filename(title: str, max_length: int = 60) -> str:
@@ -52,6 +53,7 @@ def _build_gemini_key_candidates() -> list[tuple[str, str]]:
     for label, api_key in (
         ("GEMINI_API_KEY", GEMINI_API_KEY),
         ("GEMINI_TOKEN_sub", GEMINI_TOKEN_SUB),
+        ("GEMINI_TOKEN_SUB2", GEMINI_TOKEN_SUB2),
     ):
         normalized = str(api_key or "").strip()
         if not normalized or normalized in seen:
@@ -184,8 +186,8 @@ def main():
         missing.append("SPREADSHEET_ID")
     if not APIFY_API_KEY:
         missing.append("APIFY_API_KEY")
-    if not (GEMINI_API_KEY or GEMINI_TOKEN_SUB):
-        missing.append("GEMINI_API_KEY / GEMINI_TOKEN_sub")
+    if not (GEMINI_API_KEY or GEMINI_TOKEN_SUB or GEMINI_TOKEN_SUB2):
+        missing.append("GEMINI_API_KEY / GEMINI_TOKEN_sub / GEMINI_TOKEN_SUB2")
 
     if missing:
         print(f"❌ 必須環境変数が未設定です: {', '.join(missing)}")

@@ -172,6 +172,7 @@ function ensurePriorityRecord(state, body) {
     channelName: body.channelName || existing.channelName || '',
     channelUrl: body.channelUrl || existing.channelUrl || '',
     publishedAt: body.publishedAt || existing.publishedAt || '',
+    videoUpdatedAt: body.videoUpdatedAt || existing.videoUpdatedAt || body.publishedAt || existing.publishedAt || '',
     duration: body.duration || existing.duration || '',
     thumbnailUrl: body.thumbnailUrl || existing.thumbnailUrl || '',
     rowNumber: body.rowNumber || existing.rowNumber || null,

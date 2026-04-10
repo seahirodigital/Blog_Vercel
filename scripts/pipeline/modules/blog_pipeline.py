@@ -107,30 +107,22 @@ def _run_interaction_with_quota_handling(client, input_text: str, system_prompt:
     """Gemini への問い合わせを行い、quota 系は専用例外へ寄せる。"""
     full_input = f"【指示・役割】\n{system_prompt}\n\n【入力データ】\n{input_text}"
 
-    max_retries = 3
-    for i in range(max_retries):
-        try:
-            interaction = client.interactions.create(
-                model=MODEL_NAME,
-                input=full_input,
-                previous_interaction_id=previous_id,
-                generation_config={
-                    "temperature": 0.5,
-                    "thinking_level": "high",
-                },
-            )
-            return interaction
-        except Exception as error:
-            if _is_quota_error(error):
-                wait_time = (i + 1) * 30
-                if i < max_retries - 1:
-                    print(f"   quota / rate limit を検知。{wait_time}秒待機して再試行します ({i + 1}/{max_retries})")
-                    time.sleep(wait_time)
-                    continue
-                raise GeminiQuotaExceededError(str(error)) from error
-            print(f"   APIエラー: {error}")
-            raise
-    raise GeminiQuotaExceededError("Gemini quota retry exhausted")
+    try:
+        interaction = client.interactions.create(
+            model=MODEL_NAME,
+            input=full_input,
+            previous_interaction_id=previous_id,
+            generation_config={
+                "temperature": 0.5,
+                "thinking_level": "high",
+            },
+        )
+        return interaction
+    except Exception as error:
+        if _is_quota_error(error):
+            raise GeminiQuotaExceededError(str(error)) from error
+        print(f"   APIエラー: {error}")
+        raise
 
 
 def _run_pipeline_with_candidate_client(
@@ -245,28 +237,22 @@ def _run_interaction(client, input_text: str, system_prompt: str, previous_id: O
     """Gemini Interaction Hub を使用したリクエスト実行"""
     full_input = f"【指示・行動指針】\n{system_prompt}\n\n【処理対象データ】\n{input_text}"
 
-    max_retries = 3
-    for i in range(max_retries):
-        try:
-            interaction = client.interactions.create(
-                model=MODEL_NAME,
-                input=full_input,
-                previous_interaction_id=previous_id,
-                generation_config={
-                    "temperature": 0.5,
-                    "thinking_level": "high"
-                }
-            )
-            return interaction
-        except Exception as e:
-            if "429" in str(e):
-                wait_time = (i + 1) * 30
-                print(f"   ⚠️ レート制限 (429)。{wait_time}秒待機... ({i+1}/{max_retries})")
-                time.sleep(wait_time)
-            else:
-                print(f"   ❌ APIエラー: {e}")
-                raise e
-    raise Exception("最大リトライ回数を超えました。")
+    try:
+        interaction = client.interactions.create(
+            model=MODEL_NAME,
+            input=full_input,
+            previous_interaction_id=previous_id,
+            generation_config={
+                "temperature": 0.5,
+                "thinking_level": "high"
+            }
+        )
+        return interaction
+    except Exception as e:
+        if _is_quota_error(e):
+            raise e
+        print(f"   ❌ APIエラー: {e}")
+        raise e
 
 
 def run_pipeline(transcript: dict, gemini_api_key: str, status: str = "単品") -> Optional[str]:

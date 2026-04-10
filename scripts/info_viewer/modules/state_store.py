@@ -35,6 +35,21 @@ def _parse_iso(value: str | None) -> datetime | None:
             return parsed.replace(tzinfo=timezone.utc)
         return parsed.astimezone(timezone.utc)
     except ValueError:
+        normalized = " ".join(text.split())
+        for date_format in (
+            "%Y/%m/%d/%H:%M:%S",
+            "%Y/%m/%d/%H:%M",
+            "%Y/%m/%d %H:%M:%S",
+            "%Y/%m/%d %H:%M",
+            "%Y-%m-%d %H:%M:%S",
+            "%Y-%m-%d %H:%M",
+            "%Y/%m/%d",
+            "%Y-%m-%d",
+        ):
+            try:
+                return datetime.strptime(normalized, date_format).replace(tzinfo=timezone.utc)
+            except ValueError:
+                continue
         return None
 
 
@@ -77,6 +92,7 @@ def _copy_video_fields(record: dict[str, Any], video: dict[str, Any]):
     record["channelName"] = video.get("channel_name", "")
     record["channelUrl"] = video.get("channel_url", "")
     record["publishedAt"] = video.get("published_at", "")
+    record["videoUpdatedAt"] = video.get("video_updated_at", "") or video.get("published_at", "")
     record["duration"] = video.get("duration", "")
     record["rowNumber"] = video.get("row_number")
     record["sheetStatus"] = video.get("status", "")
@@ -96,6 +112,7 @@ def _record_to_video(record: dict[str, Any]) -> dict[str, Any]:
         "video_url": record.get("videoUrl", ""),
         "video_title": record.get("videoTitle", ""),
         "published_at": record.get("publishedAt", ""),
+        "video_updated_at": record.get("videoUpdatedAt", "") or record.get("publishedAt", ""),
         "duration": record.get("duration", ""),
         "thumbnail_url": record.get("thumbnailUrl", ""),
         "status": record.get("sheetStatus", ""),
@@ -299,7 +316,7 @@ def list_processable_videos(
             0 if item.get("_queue_manual_priority_at") else 1,
             -_timestamp(item.get("_queue_manual_priority_at", "")),
             str(item.get("_queue_next_retry_at", "")),
-            -_timestamp(item.get("published_at", "")),
+            -_timestamp(item.get("video_updated_at", "") or item.get("published_at", "")),
             str(item.get("video_url", "")),
         )
     )
@@ -329,6 +346,8 @@ def attach_queue_metadata(target_videos: list[dict[str, Any]], state: dict[str, 
         video["_queue_manual_priority_at"] = record.get("manualPriorityAt", "")
         if not video.get("thumbnail_url"):
             video["thumbnail_url"] = record.get("thumbnailUrl", "")
+        if not video.get("video_updated_at"):
+            video["video_updated_at"] = record.get("videoUpdatedAt", "") or record.get("publishedAt", "")
     return target_videos
 
 
