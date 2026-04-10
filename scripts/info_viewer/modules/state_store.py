@@ -1,5 +1,5 @@
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Any
 
 from . import onedrive_writer
@@ -18,11 +18,11 @@ INACTIVE_STATUS = "inactive"
 
 
 def _now() -> datetime:
-    return datetime.now()
+    return datetime.now(timezone.utc)
 
 
 def _now_iso() -> str:
-    return _now().isoformat()
+    return _now().isoformat().replace("+00:00", "Z")
 
 
 def _parse_iso(value: str | None) -> datetime | None:
@@ -30,7 +30,10 @@ def _parse_iso(value: str | None) -> datetime | None:
     if not text:
         return None
     try:
-        return datetime.fromisoformat(text.replace("Z", "+00:00"))
+        parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
+        if parsed.tzinfo is None:
+            return parsed.replace(tzinfo=timezone.utc)
+        return parsed.astimezone(timezone.utc)
     except ValueError:
         return None
 
@@ -44,7 +47,7 @@ def _timestamp(value: str | None) -> float:
 
 def _iso_after(wait_seconds: int) -> str:
     delay = max(0, int(wait_seconds or 0))
-    return (_now() + timedelta(seconds=delay)).isoformat()
+    return (_now() + timedelta(seconds=delay)).isoformat().replace("+00:00", "Z")
 
 
 def _blank_state() -> dict[str, Any]:
@@ -286,7 +289,7 @@ def list_processable_videos(
             continue
         if status == PROCESSING_STATUS and not _is_stale_processing(record, now):
             continue
-        if not _is_due(record, now):
+        if not normalized_filter and not _is_due(record, now):
             continue
 
         candidates.append(_record_to_video(record))
