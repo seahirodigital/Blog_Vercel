@@ -1,6 +1,10 @@
 name: Blog Pipeline - YouTube → AI → OneDrive
 
 on:
+  # AppSheetからの外部トリガー（Webhook検知用）
+  repository_dispatch:
+    types: [trigger-from-appsheet]
+
   # 定時実行 (毎日 JST 9:00 = UTC 0:00)
   schedule:
     - cron: '0 0 * * *'
