@@ -1,21 +1,34 @@
 """
 ブログ生成パイプライン (GitHub Actions 対応版)
-Drafter → Editor → Chief の3段階生成
-Gemini Interaction Hub を使用
-プロンプトは prompts/ フォルダのテキストファイルから読み込む
+Drafter → Editor → Director の多段生成を行う。
+
+Gemini の quota / rate limit でキーを切り替える際も、
+成功済みステップの出力を引き継ぎ、未完了ステップから再開する。
 """
 
+from __future__ import annotations
+
 import os
+import sys
 import time
 from pathlib import Path
-from typing import Iterable, Optional
+from typing import Any, Iterable, Optional
 
-from google import genai
+SCRIPTS_DIR = Path(__file__).resolve().parents[2]
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.append(str(SCRIPTS_DIR))
 
-# Gemini 最新モデル
-MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+from gemini_runtime import (  # noqa: E402
+    build_generation_config,
+    create_client,
+    get_text_model_name,
+    get_text_transport,
+    run_text_generation,
+)
 
-# プロンプトファイルのディレクトリ（このファイルの親の prompts/ フォルダ）
+MODEL_NAME = get_text_model_name()
+TRANSPORT_NAME = get_text_transport(default="interactions.create")
+GENERATION_CONFIG = build_generation_config(temperature=0.5, thinking_level="high")
 PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
 
 
@@ -24,6 +37,20 @@ class GeminiQuotaExceededError(RuntimeError):
 
 
 _EXHAUSTED_GEMINI_KEYS: set[str] = set()
+
+
+def _is_github_actions() -> bool:
+    return os.getenv("GITHUB_ACTIONS", "").strip().lower() == "true"
+
+
+def _escape_actions_command_text(value: str) -> str:
+    return str(value or "").replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+
+
+def _emit_actions_notice(message: str):
+    if not _is_github_actions():
+        return
+    print(f"::notice::{_escape_actions_command_text(message)}")
 
 
 def _is_quota_error(error: Exception | str) -> bool:
@@ -73,23 +100,19 @@ def _normalize_api_key_candidates(gemini_api_keys) -> list[tuple[str, str]]:
 
 
 def _load_prompt(filename: str) -> str:
-    """プロンプトファイルを読み込む（#コメント行は除去）"""
     filepath = PROMPTS_DIR / filename
     if not filepath.exists():
         raise FileNotFoundError(f"プロンプトファイルが見つかりません: {filepath}")
-    
+
     lines = filepath.read_text(encoding="utf-8").splitlines()
-    # '#' で始まる行（コメント）を除去して結合
     content_lines = [line for line in lines if not line.startswith("#")]
     return "\n".join(content_lines).strip()
 
 
 def _parse_writer_prompt(content: str, status: str) -> str:
-    """writer-prompt.txt から指定種別のプロンプトを抽出する"""
-    # [種別名] セクションを解析する
-    sections = {}
+    sections: dict[str, str] = {}
     current_section = None
-    current_lines = []
+    current_lines: list[str] = []
 
     for line in content.splitlines():
         stripped = line.strip()
@@ -98,40 +121,133 @@ def _parse_writer_prompt(content: str, status: str) -> str:
                 sections[current_section] = "\n".join(current_lines).strip()
             current_section = stripped[1:-1]
             current_lines = []
-        else:
-            if current_section is not None:
-                current_lines.append(line)
+            continue
+
+        if current_section is not None:
+            current_lines.append(line)
 
     if current_section is not None:
         sections[current_section] = "\n".join(current_lines).strip()
 
-    # 指定種別が見つからなければ「単品」にフォールバック
     return sections.get(status, sections.get("単品", ""))
 
 
 def _load_optional_prompt(filename: str) -> Optional[str]:
-    """任意プロンプトを読み込む。未配置なら None を返す。"""
     filepath = PROMPTS_DIR / filename
     if not filepath.exists():
         return None
     return _load_prompt(filename)
 
 
-def _run_interaction_with_quota_handling(client, input_text: str, system_prompt: str, previous_id: Optional[str] = None):
-    """Gemini への問い合わせを行い、quota 系は専用例外へ寄せる。"""
-    full_input = f"【指示・役割】\n{system_prompt}\n\n【入力データ】\n{input_text}"
+def _load_pipeline_prompts(status: str) -> dict[str, Optional[str]]:
+    writer_raw = _load_prompt("01-writer-prompt.txt")
+    prompts = {
+        "drafter": _parse_writer_prompt(writer_raw, status),
+        "editor": _load_prompt("02-editor-prompt.txt"),
+        "director": _load_prompt("03-director-prompt.txt"),
+        "best_outline": _load_optional_prompt("031-best-outline-prompt.txt"),
+        "best_enhancer": _load_optional_prompt("032-best-article-enhancer-prompt.txt"),
+    }
+    return prompts
 
+
+def _build_resume_input(source_text: str, instruction: str) -> str:
+    return (
+        f"【引き継ぎ済みの前段出力】\n{source_text}\n\n"
+        f"【今回の依頼】\n{instruction}"
+    ).strip()
+
+
+def _build_pipeline_steps(transcript: dict[str, Any], status: str, prompts: dict[str, Optional[str]]) -> list[dict[str, Any]]:
+    steps: list[dict[str, Any]] = [
+        {
+            "code": "Step1",
+            "start_message": f"   Step1: 下書き生成 ({status})",
+            "success_message": "   Step1 完了",
+            "prompt": prompts["drafter"] or "",
+            "seed_input": transcript["captions"],
+            "stateful_input": transcript["captions"],
+            "resume_instruction": None,
+            "sleep_after_success": True,
+        },
+        {
+            "code": "Step2",
+            "start_message": "   Step2: 編集",
+            "success_message": "   Step2 完了",
+            "prompt": prompts["editor"] or "",
+            "seed_input": "",
+            "stateful_input": "上記の記事を編集してください。",
+            "resume_instruction": "次の記事を編集してください。",
+            "sleep_after_success": True,
+        },
+        {
+            "code": "Step3",
+            "start_message": "   Step3: 最終チェック",
+            "success_message": "   Step3 完了",
+            "prompt": prompts["director"] or "",
+            "seed_input": "",
+            "stateful_input": "上記の記事を100点満点へ引き上げてください。",
+            "resume_instruction": "次の記事を100点満点へ引き上げてください。",
+            "sleep_after_success": False,
+        },
+    ]
+
+    if status == "量産元":
+        best_outline_prompt = prompts.get("best_outline")
+        best_enhancer_prompt = prompts.get("best_enhancer")
+
+        if best_outline_prompt:
+            steps.append(
+                {
+                    "code": "Step3.1",
+                    "start_message": "   Step3.1: ベスト記事化の補強設計",
+                    "success_message": "   Step3.1 完了",
+                    "prompt": best_outline_prompt,
+                    "seed_input": "",
+                    "stateful_input": "上記の記事を量産元記事として評価し、検索意図の抜け漏れ、追加すべき見出し、FAQ、比較軸を整理してください。",
+                    "resume_instruction": "次の記事を量産元記事として評価し、検索意図の抜け漏れ、追加すべき見出し、FAQ、比較軸を整理してください。",
+                    "sleep_after_success": True,
+                }
+            )
+        else:
+            print("   031-best-outline-prompt.txt が見つからないため Step3.1 をスキップします")
+
+        if best_enhancer_prompt:
+            steps.append(
+                {
+                    "code": "Step3.2",
+                    "start_message": "   Step3.2: ベスト記事へ磨き込み",
+                    "success_message": "   Step3.2 完了",
+                    "prompt": best_enhancer_prompt,
+                    "seed_input": "",
+                    "stateful_input": "上記の通常記事と補強設計を統合し、量産元として使える完成版のベスト記事に仕上げてください。",
+                    "resume_instruction": "次の記事と補強設計を統合し、量産元として使える完成版のベスト記事に仕上げてください。",
+                    "sleep_after_success": False,
+                }
+            )
+        else:
+            print("   032-best-article-enhancer-prompt.txt が見つからないため Step3.2 をスキップします")
+
+    return steps
+
+
+def _run_generation_with_quota_handling(
+    client,
+    *,
+    input_text: str,
+    system_prompt: str,
+    previous_id: Optional[str] = None,
+) -> tuple[Any, str]:
     try:
-        interaction = client.interactions.create(
+        return run_text_generation(
+            client,
             model=MODEL_NAME,
-            input=full_input,
+            transport=TRANSPORT_NAME,
+            prompt=system_prompt,
+            input_text=input_text,
+            generation_config=GENERATION_CONFIG,
             previous_interaction_id=previous_id,
-            generation_config={
-                "temperature": 0.5,
-                "thinking_level": "high",
-            },
         )
-        return interaction
     except Exception as error:
         if _is_quota_error(error):
             raise GeminiQuotaExceededError(str(error)) from error
@@ -139,89 +255,148 @@ def _run_interaction_with_quota_handling(client, input_text: str, system_prompt:
         raise
 
 
-def _run_pipeline_with_candidate_client(
+def _prepare_step_request(
+    step: dict[str, Any],
+    previous_output_text: Optional[str],
+    previous_interaction_id: Optional[str],
+) -> tuple[str, Optional[str], bool]:
+    if step["resume_instruction"] is None:
+        return step["seed_input"], None, False
+
+    if TRANSPORT_NAME == "interactions.create" and previous_interaction_id:
+        return step["stateful_input"], previous_interaction_id, False
+
+    if not previous_output_text:
+        raise RuntimeError(f"{step['code']} を再開するための前段出力が見つかりません")
+
+    return _build_resume_input(previous_output_text, step["resume_instruction"]), None, True
+
+
+def _run_single_step(
     client,
-    transcript: dict,
+    step: dict[str, Any],
+    *,
+    previous_output_text: Optional[str],
+    previous_interaction_id: Optional[str],
+) -> dict[str, str]:
+    input_text, previous_id, resumed = _prepare_step_request(step, previous_output_text, previous_interaction_id)
+    print(step["start_message"])
+    if resumed:
+        print(f"   {step['code']} は前段出力を引き継いで再開します")
+        _emit_actions_notice(f"Gemini パイプラインは {step['code']} から再開しました")
+
+    response, output_text = _run_generation_with_quota_handling(
+        client,
+        input_text=input_text,
+        system_prompt=step["prompt"],
+        previous_id=previous_id,
+    )
+
+    normalized_output = str(output_text or "").strip()
+    if not normalized_output:
+        raise RuntimeError(f"{step['code']} の応答が空でした")
+
+    interaction_id = str(getattr(response, "id", "") or "")
+    if interaction_id:
+        print(f"{step['success_message']}: {interaction_id}")
+    else:
+        print(f"{step['success_message']}: response received")
+
+    return {
+        "output_text": normalized_output,
+        "interaction_id": interaction_id,
+    }
+
+
+def _run_pipeline_steps_with_candidates(
+    transcript: dict[str, Any],
     status: str,
-    drafter_prompt: str,
-    editor_prompt: str,
-    director_prompt: str,
-    best_outline_prompt: Optional[str],
-    best_enhancer_prompt: Optional[str],
-) -> str:
-    captions = transcript["captions"]
+    prompts: dict[str, Optional[str]],
+    candidates: list[tuple[str, str]],
+) -> Optional[str]:
+    steps = _build_pipeline_steps(transcript, status, prompts)
+    step_index = 0
+    previous_output_text: Optional[str] = None
+    previous_interaction_id: Optional[str] = None
+    candidate_index = 0
 
-    print(f"   Step1: 下書き生成 ({status})")
-    int1 = _run_interaction_with_quota_handling(client, captions, drafter_prompt)
-    print(f"   Step1 完了: {int1.id}")
-    time.sleep(10)
+    while step_index < len(steps):
+        if candidate_index >= len(candidates):
+            print("   利用可能な Gemini キーを使い切ったため停止します")
+            return None
 
-    print("   Step2: 編集")
-    int2 = _run_interaction_with_quota_handling(client, "上記の記事を編集してください。", editor_prompt, previous_id=int1.id)
-    print(f"   Step2 完了: {int2.id}")
-    time.sleep(10)
+        label, api_key = candidates[candidate_index]
+        print(f"   Geminiキーを使用: {label} ({candidate_index + 1}/{len(candidates)})")
+        client = create_client(api_key)
 
-    print("   Step3: 最終チェック")
-    int3 = _run_interaction_with_quota_handling(client, "上記の記事を100点満点へ引き上げてください。", director_prompt, previous_id=int2.id)
-    final_text = int3.outputs[-1].text
-    last_interaction_id = int3.id
-    print(f"   Step3 完了: {int3.id}")
+        try:
+            while step_index < len(steps):
+                step = steps[step_index]
+                result = _run_single_step(
+                    client,
+                    step,
+                    previous_output_text=previous_output_text,
+                    previous_interaction_id=previous_interaction_id,
+                )
+                previous_output_text = result["output_text"]
+                previous_interaction_id = result["interaction_id"] or None
 
-    if status == "ベスト版":
-        if best_outline_prompt:
-            print("   Step3.1: ベスト版の構成強化")
-            int31 = _run_interaction_with_quota_handling(
-                client,
-                "この記事をベスト版記事として再構成し、不足観点を補ってください。",
-                best_outline_prompt,
-                previous_id=last_interaction_id,
-            )
-            last_interaction_id = int31.id
-            print(f"   Step3.1 完了: {int31.id}")
-            time.sleep(10)
-        else:
-            print("   031-best-outline-prompt.txt が見つからないため Step3.1 をスキップします")
+                should_sleep = bool(step.get("sleep_after_success")) and step_index < len(steps) - 1
+                step_index += 1
+                if should_sleep:
+                    time.sleep(10)
 
-        if best_enhancer_prompt:
-            print("   Step3.2: ベスト版へ磨き込み")
-            int32 = _run_interaction_with_quota_handling(
-                client,
-                "この記事と強化済み構成を統合し、公開可能なベスト版へ仕上げてください。",
-                best_enhancer_prompt,
-                previous_id=last_interaction_id,
-            )
-            final_text = int32.outputs[-1].text
-            print(f"   Step3.2 完了: {int32.id}")
-        else:
-            print("   032-best-article-enhancer-prompt.txt が見つからないため Step3.2 をスキップします")
+            return previous_output_text
+        except GeminiQuotaExceededError as error:
+            step = steps[step_index]
+            print(f"   {label} が quota / rate limit に到達しました: {error}")
+            _mark_key_exhausted(api_key)
+            candidate_index += 1
+            previous_interaction_id = None
 
-    return final_text
+            if candidate_index >= len(candidates):
+                print("   利用可能な Gemini キーを使い切ったため停止します")
+                return None
+
+            next_label = candidates[candidate_index][0]
+            if previous_output_text and step.get("resume_instruction"):
+                print(f"   {next_label} に切り替え、{step['code']} から再開します")
+                _emit_actions_notice(
+                    f"Gemini キーを {label} から {next_label} へ切り替え、{step['code']} から再開します"
+                )
+            else:
+                print(f"   {next_label} に切り替えて続行します")
+                _emit_actions_notice(f"Gemini キーを {label} から {next_label} へ切り替えます")
+        except Exception as error:
+            print(f"   パイプラインエラー: {error}")
+            return None
+
+    return previous_output_text
 
 
-def run_pipeline_with_fallback(transcript: dict, gemini_api_keys, status: str = "単品") -> Optional[str]:
-    """
-    quota / rate limit を検知した場合だけ次の Gemini キーへ退避する。
-    """
-    try:
-        writer_raw = _load_prompt("01-writer-prompt.txt")
-        drafter_prompt = _parse_writer_prompt(writer_raw, status)
-        editor_prompt = _load_prompt("02-editor-prompt.txt")
-        director_prompt = _load_prompt("03-director-prompt.txt")
-        best_outline_prompt = _load_optional_prompt("031-best-outline-prompt.txt")
-        best_enhancer_prompt = _load_optional_prompt("032-best-article-enhancer-prompt.txt")
-        print(f"   プロンプト読み込み完了: 01-writer({status}) / 02-editor / 03-director")
-    except FileNotFoundError as error:
-        print(f"   プロンプトファイルエラー: {error}")
-        return None
-
+def _build_available_candidates(gemini_api_keys) -> tuple[list[tuple[str, str]], list[tuple[str, str]]]:
     raw_candidates = _normalize_api_key_candidates(gemini_api_keys)
     candidates: list[tuple[str, str]] = []
+
     for label, api_key in raw_candidates:
         if _is_exhausted_key(api_key):
             print(f"   {label} はこの run で quota 到達済みのためスキップします")
             continue
         candidates.append((label, api_key))
 
+    return raw_candidates, candidates
+
+
+def run_pipeline_with_fallback(transcript: dict, gemini_api_keys, status: str = "単品") -> Optional[str]:
+    try:
+        prompts = _load_pipeline_prompts(status)
+        print(f"   プロンプト読み込み完了: 01-writer({status}) / 02-editor / 03-director")
+        print(f"   Gemini設定: model={MODEL_NAME} / transport={TRANSPORT_NAME}")
+    except FileNotFoundError as error:
+        print(f"   プロンプトファイルエラー: {error}")
+        return None
+
+    raw_candidates, candidates = _build_available_candidates(gemini_api_keys)
     if not candidates:
         if raw_candidates:
             print("   この run で利用可能な Gemini キーが残っていません")
@@ -229,137 +404,23 @@ def run_pipeline_with_fallback(transcript: dict, gemini_api_keys, status: str = 
             print("   Gemini APIキーが設定されていません")
         return None
 
-    for index, (label, api_key) in enumerate(candidates, start=1):
-        try:
-            print(f"   Geminiキーを使用: {label} ({index}/{len(candidates)})")
-            client = genai.Client(api_key=api_key)
-            return _run_pipeline_with_candidate_client(
-                client,
-                transcript,
-                status,
-                drafter_prompt,
-                editor_prompt,
-                director_prompt,
-                best_outline_prompt,
-                best_enhancer_prompt,
-            )
-        except GeminiQuotaExceededError as error:
-            print(f"   {label} が quota / rate limit に到達しました: {error}")
-            _mark_key_exhausted(api_key)
-            if index >= len(candidates):
-                print("   利用可能な Gemini キーを使い切ったため停止します")
-                return None
-            next_label = candidates[index][0]
-            print(f"   {next_label} に切り替えて続行します")
-        except Exception as error:
-            print(f"   パイプラインエラー: {error}")
-            return None
-
-    return None
-
-
-def _run_interaction(client, input_text: str, system_prompt: str, previous_id: Optional[str] = None):
-    """Gemini Interaction Hub を使用したリクエスト実行"""
-    full_input = f"【指示・行動指針】\n{system_prompt}\n\n【処理対象データ】\n{input_text}"
-
-    try:
-        interaction = client.interactions.create(
-            model=MODEL_NAME,
-            input=full_input,
-            previous_interaction_id=previous_id,
-            generation_config={
-                "temperature": 0.5,
-                "thinking_level": "high"
-            }
-        )
-        return interaction
-    except Exception as e:
-        if _is_quota_error(e):
-            raise e
-        print(f"   ❌ APIエラー: {e}")
-        raise e
+    return _run_pipeline_steps_with_candidates(transcript, status, prompts, candidates)
 
 
 def run_pipeline(transcript: dict, gemini_api_key: str, status: str = "単品") -> Optional[str]:
     """
-    3段階AI生成パイプライン
-    status によって Drafter のプロンプトを切り替える（prompts/ から読み込み）
+    単一キーでブログ生成パイプラインを実行する。
 
     Args:
         transcript: {"title": "...", "captions": "...", "video_id": "...", "url": "..."}
         gemini_api_key: Gemini APIキー
-        status: "単品" / "情報" / "複数"
+        status: "単品" / "情報" / "複数" / "量産元"
 
     Returns:
         最終Markdown文字列 または None
     """
-    # プロンプトを prompts/ フォルダから読み込む
-    try:
-        writer_raw = _load_prompt("01-writer-prompt.txt")
-        drafter_prompt = _parse_writer_prompt(writer_raw, status)
-        editor_prompt = _load_prompt("02-editor-prompt.txt")
-        director_prompt = _load_prompt("03-director-prompt.txt")
-        best_outline_prompt = _load_optional_prompt("031-best-outline-prompt.txt")
-        best_enhancer_prompt = _load_optional_prompt("032-best-article-enhancer-prompt.txt")
-        print(f"   📄 プロンプト読み込み完了: 01-writer({status}) / 02-editor / 03-director")
-    except FileNotFoundError as e:
-        print(f"   ❌ プロンプトファイルエラー: {e}")
-        return None
-
-    client = genai.Client(api_key=gemini_api_key)
-    captions = transcript["captions"]
-
-    try:
-        # Step 1: Drafter (初稿作成)
-        print(f"   ✍️  Step1: 初稿作成中 (種別: {status})...")
-        int1 = _run_interaction(client, captions, drafter_prompt)
-        print(f"   ✅ 初稿完成 (ID: {int1.id})")
-        time.sleep(10)
-
-        # Step 2: Editor (プロ編集)
-        print(f"   ✏️  Step2: プロ編集中...")
-        int2 = _run_interaction(client, "上記の下書きを編集してください。", editor_prompt, previous_id=int1.id)
-        print(f"   ✅ 編集完了 (ID: {int2.id})")
-        time.sleep(10)
-
-        # Step 3: Director (最終品質チェック)
-        print(f"   👑 Step3: 最終品質チェック中...")
-        int3 = _run_interaction(client, "上記の記事を100点満点に仕上げてください。", director_prompt, previous_id=int2.id)
-        final_text = int3.outputs[-1].text
-        last_interaction_id = int3.id
-        print(f"   ✅ 最終版完成 (ID: {int3.id})")
-
-        # Step 3.1: ベスト記事化の構成補強（量産元のみ）
-        if status == "量産元":
-            if best_outline_prompt:
-                print(f"   🧭 Step3.1: ベスト記事化の補強設計中...")
-                int31 = _run_interaction(
-                    client,
-                    "上記の記事を量産元記事として評価し、検索意図の抜け漏れ、追加すべき見出し、FAQ、比較軸を整理してください。",
-                    best_outline_prompt,
-                    previous_id=last_interaction_id,
-                )
-                last_interaction_id = int31.id
-                print(f"   ✅ 補強設計完了 (ID: {int31.id})")
-                time.sleep(10)
-            else:
-                print("   ⏭️ 031-best-outline-prompt.txt 未検出のためスキップ")
-
-            if best_enhancer_prompt:
-                print(f"   🚀 Step3.2: ベスト記事へ増強中...")
-                int32 = _run_interaction(
-                    client,
-                    "上記の通常記事と補強設計を統合し、量産元として使える完成版のベスト記事に仕上げてください。",
-                    best_enhancer_prompt,
-                    previous_id=last_interaction_id,
-                )
-                final_text = int32.outputs[-1].text
-                print(f"   ✅ ベスト記事化完了 (ID: {int32.id})")
-            else:
-                print("   ⏭️ 032-best-article-enhancer-prompt.txt 未検出のためスキップ")
-
-        return final_text
-
-    except Exception as e:
-        print(f"   ❌ パイプラインエラー: {e}")
-        return None
+    return run_pipeline_with_fallback(
+        transcript,
+        [("GEMINI_API_KEY", gemini_api_key)],
+        status=status,
+    )

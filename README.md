@@ -365,11 +365,12 @@ note の通常アップロード導線へ prepared を投入
 2. editor
 3. director
 
-Gemini のキー候補は次の 3 段構えである。
+Gemini のキー候補は次の 4 段構えである。
 
 1. `GEMINI_API_KEY`
 2. `GEMINI_TOKEN_sub`
 3. `GEMINI_TOKEN_SUB2`
+4. `GEMINI_TOKEN_SUB3`
 
 切り替えルールは次の通り。
 
@@ -383,6 +384,10 @@ Gemini のキー候補は次の 3 段構えである。
 さらに、あるキーが 1 回でも quota / rate limit に到達した場合は、その GitHub Actions run 中では以後そのキーを再試行しない。
 これにより、2本目以降の記事で同じ exhausted key を無駄打ちしない。
 
+writer / editor / director の途中で quota に到達した場合でも、成功済みステップの出力は保持する。
+たとえば writer 完了後に editor で quota へ達した場合、次のキーでは writer をやり直さず、
+editor から再開する。director で止まった場合も同様に、次キーでは director から再開する。
+
 ログにはキー本体を出さず、SHA-256 の先頭 8 文字だけを指紋として表示する。
 これにより、秘密値を漏らさずに「本当に別キーか」を確認できる。
 
@@ -391,6 +396,13 @@ Gemini のキー候補は次の 3 段構えである。
 - `GEMINI_API_KEY`
 - `GEMINI_TOKEN_sub`
 - `GEMINI_TOKEN_SUB2`
+- `GEMINI_TOKEN_SUB3`
+
+モデル名と transport の共通設定は
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\gemini_runtime.py`
+へ集約している。
+本編と `info_viewer` の両方がこの共通モジュールを参照するため、
+将来 Gemini のモデル名を変更する場合は、この共通設定を起点に見直せばよい。
 
 ## 12. 2026-04-10 info_viewer 現行運用メモ
 

@@ -1,14 +1,26 @@
 import os
 import re
+import sys
 import time
 from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from google import genai
+SCRIPTS_DIR = Path(__file__).resolve().parents[2]
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.append(str(SCRIPTS_DIR))
 
-MODEL_NAME = os.getenv("INFO_VIEWER_GEMINI_MODEL", os.getenv("GEMINI_MODEL", "gemini-2.5-flash"))
-TRANSPORT_NAME = os.getenv("INFO_VIEWER_GEMINI_TRANSPORT", "models.generate_content").strip() or "models.generate_content"
+from gemini_runtime import (  # noqa: E402
+    build_generation_config,
+    create_client,
+    get_text_model_name,
+    get_text_transport,
+    run_text_generation,
+)
+
+MODEL_NAME = get_text_model_name("INFO_VIEWER_GEMINI_MODEL")
+TRANSPORT_NAME = get_text_transport("INFO_VIEWER_GEMINI_TRANSPORT", default="models.generate_content")
+GENERATION_CONFIG = build_generation_config(temperature=0.2)
 PROMPT_PATH = Path(__file__).resolve().parents[3] / "info_viewer" / "prompt" / "base_prompt.md"
 RETRYABLE_KEYWORDS = ("429", "503", "500", "timeout", "timed out", "rate limit", "unavailable", "resource exhausted")
 INPUT_LIMIT_KEYWORDS = ("too large", "too many tokens", "context", "token", "request too large", "input too long", "invalid argument")
@@ -44,29 +56,6 @@ def _build_input_from_text(transcript_text: str, transcript: dict[str, Any], vid
         f"【動画URL】\n{video.get('video_url') or transcript.get('url') or ''}\n\n"
         f"【YouTubeトランスクリプト】\n{transcript_text}"
     )
-
-
-def _extract_text_from_response(response: Any) -> str:
-    text = getattr(response, "text", "") or ""
-    if text:
-        return text
-
-    outputs = getattr(response, "outputs", None) or []
-    for output in outputs:
-        output_text = getattr(output, "text", "") or ""
-        if output_text:
-            return output_text
-
-    candidates = getattr(response, "candidates", None) or []
-    for candidate in candidates:
-        content = getattr(candidate, "content", None)
-        parts = getattr(content, "parts", None) or []
-        for part in parts:
-            part_text = getattr(part, "text", "") or ""
-            if part_text:
-                return part_text
-
-    return ""
 
 
 def _normalize_markdown(text: str, fallback_title: str) -> str:
@@ -142,41 +131,9 @@ def _format_exception(error: Exception) -> str:
     return detail
 
 
-def _generate_with_models(client: genai.Client, prompt: str, input_text: str) -> str:
-    response = client.models.generate_content(
-        model=MODEL_NAME,
-        contents=f"{prompt}\n\n{input_text}",
-        config={"temperature": 0.2},
-    )
-    return _extract_text_from_response(response)
-
-
-def _generate_with_interactions(client: genai.Client, prompt: str, input_text: str) -> str:
-    interaction = client.interactions.create(
-        model=MODEL_NAME,
-        system_instruction=prompt,
-        input=input_text,
-        generation_config={"temperature": 0.2},
-    )
-    return _extract_text_from_response(interaction)
-
-
-def _run_transport(
-    client: genai.Client,
-    transport_name: str,
-    prompt: str,
-    input_text: str,
-) -> str:
-    if transport_name == "models.generate_content":
-        return _generate_with_models(client, prompt, input_text)
-    if transport_name == "interactions.create":
-        return _generate_with_interactions(client, prompt, input_text)
-    raise ValueError(f"未知の Gemini transport です: {transport_name}")
-
-
 def format_transcript(transcript: dict[str, Any], api_key: str, video: dict[str, Any]) -> dict[str, Any]:
     prompt = _load_prompt()
-    client = genai.Client(api_key=api_key)
+    client = create_client(api_key)
     raw_transcript = str(transcript.get("captions", "") or "")
     fallback_title = video.get("video_title") or transcript.get("title") or "無題"
     attempts: list[dict[str, Any]] = []
@@ -198,7 +155,7 @@ def format_transcript(transcript: dict[str, Any], api_key: str, video: dict[str,
             }
         )
 
-    transport_name = TRANSPORT_NAME if TRANSPORT_NAME in ("models.generate_content", "interactions.create") else "models.generate_content"
+    transport_name = TRANSPORT_NAME
     last_error = "Gemini 整形に失敗しました"
     recommended_wait_seconds = 0
     stop_pipeline = False
@@ -222,7 +179,14 @@ def format_transcript(transcript: dict[str, Any], api_key: str, video: dict[str,
                 "occurredAt": datetime.now().isoformat(),
             }
             try:
-                generated = _run_transport(client, transport_name, prompt, input_text)
+                _, generated = run_text_generation(
+                    client,
+                    model=MODEL_NAME,
+                    transport=transport_name,
+                    prompt=prompt,
+                    input_text=input_text,
+                    generation_config=GENERATION_CONFIG,
+                )
                 normalized = _normalize_markdown(generated, fallback_title)
                 if normalized:
                     attempt_log["status"] = "success"
