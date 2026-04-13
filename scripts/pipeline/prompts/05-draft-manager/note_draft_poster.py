@@ -38,7 +38,7 @@ NOTE_STORAGE_STATE  = os.getenv("NOTE_STORAGE_STATE", "")   # JSON (GitHub Secre
 GITHUB_TOKEN        = os.getenv("GITHUB_TOKEN", "")          # PAT (secrets:write)
 GITHUB_REPO_OWNER   = "seahirodigital"
 GITHUB_REPO_NAME    = "Blog_Vercel"
-NOTE_STORAGE_SECRET_NAME = os.getenv("NOTE_STORAGE_SECRET_NAME", "NOTE_STORAGE_STATE")
+NOTE_STORAGE_SECRET_NAME = os.getenv("NOTE_STORAGE_SECRET_NAME", "NOTE_STORAGE_STATE_XPOST_TECH")
 
 SCRIPT_DIR        = Path(__file__).resolve().parent
 LOCAL_STATE_FILE  = SCRIPT_DIR / "note_storage_state.json"   # ローカル保存先

@@ -3,12 +3,12 @@
 ## 0. 2026-04-13 Xpost note Secret 名切り替えメモ
 ### 変更内容
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml` の note 認証系 Secret は Xpost 専用名へ切り替えた。
-- 使用する Secret 名は `NOTE_EMAIL_XPOST_TECH`、`NOTE_PASSWORD_XPOST_TECH`、`NOTE_STORAGE_STATE_NOTE_STORAGE_STATE` とする。
+- 使用する Secret 名は `NOTE_EMAIL_XPOST_TECH`、`NOTE_PASSWORD_XPOST_TECH`、`NOTE_STORAGE_STATE_XPOST_TECH` とする。
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py` は `NOTE_STORAGE_SECRET_NAME` 環境変数で、どの GitHub Secret に Cookie JSON を自動更新するか切り替えられるようにした。
 
 ### 運用ルール
 - Xpost 側の note 下書きでは、既存の `NOTE_EMAIL` / `NOTE_PASSWORD` / `NOTE_STORAGE_STATE` を使わず、Xpost 専用 Secret だけを見る。
-- `NOTE_STORAGE_STATE_NOTE_STORAGE_STATE` が空でも、`NOTE_EMAIL_XPOST_TECH` と `NOTE_PASSWORD_XPOST_TECH` があれば初回ログインで下書きを作成し、その後に Cookie JSON を同名 Secret へ自動保存する。
+- `NOTE_STORAGE_STATE_XPOST_TECH` が空でも、`NOTE_EMAIL_XPOST_TECH` と `NOTE_PASSWORD_XPOST_TECH` があれば初回ログインで下書きを作成し、その後に Cookie JSON を同名 Secret へ自動保存する。
 - 以後の note 下書きは保存済み Cookie を優先し、期限切れ時だけ再ログインして同じ Secret を上書き更新する。
 
 ## 0. 2026-04-13 Xpost UI / note 認証メモ
