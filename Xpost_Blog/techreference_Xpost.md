@@ -89,3 +89,19 @@
 - `https://blog-vercel-git-xpost-blog-preview-seahirodigitals-projects.vercel.app/xpost_blog/` は Vercel Deployment Protection 配下の preview URL である。
 - Vercel MCP では HTML と runtime log の取得ができたが、未ログインの Playwright では Vercel のログイン画面へリダイレクトされた。
 - 画面確認用には Vercel が発行する一時共有 URL を使う。ただしブラウザ側の認証状態によっては Vercel ログインが必要になる。
+
+## 8. 2026-04-13 Vercel Functions 上限と Xpost API 統合方針
+### 背景
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api` 配下の JavaScript ファイルは、Vercel では基本的に 1 ファイル 1 Serverless Function として扱われる。
+- Vercel Hobby plan では deployment あたりの Function 数に上限があるため、Xpost 用 API を `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog-articles.js`、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog-index.js`、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\trigger-xpost-blog.js` のように 3 本足すと上限に当たりやすい。
+
+### 採用する方針
+- Xpost 用 API は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` の 1 本に統合する。
+- ここでいう「3つに分岐」とは、Vercel Function を 3 本作るという意味ではない。1 本の `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` の中で、URL query の `resource` 値を見て処理を切り替えるという意味である。
+- 例: `https://blog-vercel-dun.vercel.app/api/xpost-blog?resource=articles` は記事一覧・記事本文・保存処理を担当する。
+- 例: `https://blog-vercel-dun.vercel.app/api/xpost-blog?resource=index` は manifest と元投稿ソース取得を担当する。
+- 例: `https://blog-vercel-dun.vercel.app/api/xpost-blog?resource=trigger` は GitHub Actions の Xpost pipeline 起動を担当する。
+
+### 理由
+- 外から見ると API の入口は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` 1 本だけなので、Vercel Functions 数の増加は 1 本に抑えられる。
+- 中では `resource=articles`、`resource=index`、`resource=trigger` で処理責務を分けるため、既存の `xpost-blog-articles` / `xpost-blog-index` / `trigger-xpost-blog` の考え方は維持できる。
