@@ -123,3 +123,21 @@
 - `https://blog-vercel-dun.vercel.app/xpost_blog.html` のスクリーンショット確認で、記事一覧の上に OneDrive の相対フォルダ名 `20260413_...` が残っていることを確認した。
 - これは「記事カードレイアウト上部にある説明文章は不要」という指定に反するため、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` から記事一覧のフォルダラベル表示を削除した。
 - あわせて、初回ロード時に先頭記事を自動選択し、エディタとプレビューまで即時に見えるようにした。
+
+## 10. 2026-04-13 info_viewer型4ペインUIとtech affiliate / note下書きメモ
+### 成功
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` は、角丸カード型ではなく `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\info_viewer\index.html` のサイドパネル思想に合わせ、記事一覧 / 元投稿 / エディター / プレビューの4ペイン型へ戻す方針にした。
+- 「元投稿」トグルは各記事行ではなく、記事一覧ヘッダー右側に固定する。これにより、記事選択と元投稿ペイン表示切り替えの責務を分離できる。
+- Xリンクは削除ボタンに見えないよう、斜め線2本ではなく「X」文字入りの正方形アイコンへ変更する。
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` に `resource=affiliate` を追加し、Vercel Functionを増やさず tech affiliate の読み書きを統合APIに載せる。
+- tech affiliate の保存先は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\Xpost_Blog\tech_affiliate\affiliate_links.txt` とし、本編の `===MEMO1===` 形式を流用する。
+- note下書きは既存の `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\note-draft.js` と `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml` を流用し、Xpost_blog からは `noTopImage: true` を渡す。
+
+### 判断
+- note下書きでは OGP 展開は維持する。技術記事では URL カードの見え方が重要なため、`--no-top-image` は Amazonトップ画像の添付だけを止め、OGP処理は止めない。
+- Vercel Hobby の Function 数対策として、affiliate 専用APIファイルは新規作成しない。既存の `resource=articles` / `resource=index` / `resource=trigger` と同じ統合API内に `resource=affiliate` を追加する。
+- tech affiliate は Gemini 整形後の記事末尾へ入れる運用でよい。UI上では「アフィ挿入」ボタンで、選択中の MEMO を記事末尾へ追記する。
+
+### 注意
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py` の既定動作は本編用に残す。`--no-top-image` が明示された場合だけ、Amazonトップ画像をスキップする。
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\affiliate_links.txt` は本編用のため、Xpost_blog側からは直接編集しない。

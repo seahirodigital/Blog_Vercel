@@ -54,11 +54,12 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { fileId, fileIds } = req.body || {};
+  const { fileId, fileIds, noTopImage, no_top_image } = req.body || {};
   const ids = fileIds && Array.isArray(fileIds) ? fileIds : fileId ? [fileId] : [];
   if (ids.length === 0) {
     return res.status(400).json({ error: 'fileId または fileIds は必須です' });
   }
+  const skipTopImage = Boolean(noTopImage || no_top_image);
 
   const url = `${GITHUB_API}/repos/${repo}/actions/workflows/note-draft.yml/dispatches`;
   const ghHeaders = {
@@ -74,7 +75,13 @@ export default async function handler(req, res) {
       const response = await fetch(url, {
         method: 'POST',
         headers: ghHeaders,
-        body: JSON.stringify({ ref: 'main', inputs: { file_id: id } }),
+        body: JSON.stringify({
+          ref: 'main',
+          inputs: {
+            file_id: id,
+            no_top_image: String(skipTopImage),
+          },
+        }),
       });
       if (response.status === 204) {
         results.push({ fileId: id, success: true });

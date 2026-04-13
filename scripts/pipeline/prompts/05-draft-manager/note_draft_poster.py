@@ -1807,6 +1807,7 @@ def _run_ogp_expansion_on_draft(
     headless: bool = True,
     source_markdown: str = "",
     run_ogp: bool = True,
+    run_top_image: bool = True,
     artifacts_dir: Path | None = None,
 ) -> dict:
     """
@@ -1872,14 +1873,18 @@ def _run_ogp_expansion_on_draft(
         print("   ⏳ OGP反映待機（5秒）...")
         page.wait_for_timeout(5000)
 
-        top_image_result = _attach_amazon_top_image_to_page(
-            page,
-            source_markdown=source_markdown,
-            artifacts_dir=artifacts_dir,
-        )
+        if run_top_image:
+            top_image_result = _attach_amazon_top_image_to_page(
+                page,
+                source_markdown=source_markdown,
+                artifacts_dir=artifacts_dir,
+            )
+        else:
+            top_image_result = {"image_flow": "skipped_by_option"}
+            print("   ⏭️ Amazonトップ画像はオプション指定によりスキップします")
         result["top_image"] = top_image_result
 
-        if top_image_result.get("image_flow") == "skipped":
+        if top_image_result.get("image_flow") in {"skipped", "skipped_by_option"}:
             print("   💾 トップ画像スキップのため Ctrl+S で保存を要求します...")
             try:
                 editor = page.locator(".ProseMirror, .note-editable, [contenteditable='true']").first
@@ -2181,7 +2186,7 @@ def keepalive():
 
 
 # ── メイン処理 ────────────────────────────────────────
-def post_draft_to_note(markdown: str, run_ogp: bool = True) -> dict:
+def post_draft_to_note(markdown: str, run_ogp: bool = True, run_top_image: bool = True) -> dict:
     title, body = extract_title_and_body(markdown)
     if not title or not body:
         print("❌ タイトルまたは本文が空です")
@@ -2229,6 +2234,7 @@ def post_draft_to_note(markdown: str, run_ogp: bool = True) -> dict:
             headless=True,
             source_markdown=markdown,
             run_ogp=run_ogp,
+            run_top_image=run_top_image,
         )
         result["editor_result"] = editor_result
 
@@ -2246,6 +2252,8 @@ if __name__ == "__main__":
                         help="セッション維持モード: Cookieの有効性確認・更新")
     parser.add_argument("--no-ogp", action="store_true",
                         help="OGP展開をスキップして下書き保存のみ実行")
+    parser.add_argument("--no-top-image", action="store_true",
+                        help="Amazonトップ画像の添付をスキップする")
     args = parser.parse_args()
 
     if args.save_cookies:
@@ -2266,7 +2274,7 @@ if __name__ == "__main__":
         print("   初回セットアップ: python prompts/05-draft-manager/note_draft_poster.py --save-cookies")
         sys.exit(1)
 
-    result = post_draft_to_note(md, run_ogp=not args.no_ogp)
+    result = post_draft_to_note(md, run_ogp=not args.no_ogp, run_top_image=not args.no_top_image)
     if result["success"]:
         print(f"\n🎉 下書き投稿成功！\n   タイトル: {result['title']}\n   URL: {result['url']}")
         file_id = os.getenv("FILE_ID", "")

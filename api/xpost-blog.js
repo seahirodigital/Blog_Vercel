@@ -7,6 +7,8 @@ const GRAPH_API = 'https://graph.microsoft.com/v1.0';
 const TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
 const VERCEL_API = 'https://api.vercel.com';
 const DEFAULT_FOLDER = process.env.XPOST_BLOG_ONEDRIVE_FOLDER || 'Obsidian in Onedrive 202602/Vercel_Blog/X投稿';
+const TECH_AFFILIATE_FILE_PATH = process.env.XPOST_BLOG_TECH_AFFILIATE_FILE_PATH
+  || '開発/Blog_Vercel/Xpost_Blog/tech_affiliate/affiliate_links.txt';
 
 function encodeFolderPath(folderPath = '') {
   return String(folderPath)
@@ -14,6 +16,31 @@ function encodeFolderPath(folderPath = '') {
     .filter(Boolean)
     .map((part) => encodeURIComponent(part))
     .join('/');
+}
+
+function parseAffiliateMemos(content = '') {
+  const memos = {};
+  const parts = String(content || '').split(/===MEMO(\d+)===/);
+  for (let i = 1; i < parts.length; i += 2) {
+    const memoNumber = parseInt(parts[i], 10);
+    if (Number.isFinite(memoNumber)) {
+      memos[`memo${memoNumber}`] = (parts[i + 1] || '').trim();
+    }
+  }
+  if (Object.keys(memos).length === 0) memos.memo1 = '';
+  return memos;
+}
+
+function buildAffiliateFileContent(memos = {}) {
+  const memoNumbers = Object.keys(memos)
+    .map((key) => parseInt(String(key).replace('memo', ''), 10))
+    .filter(Number.isFinite)
+    .sort((a, b) => a - b);
+
+  const numbers = memoNumbers.length ? memoNumbers : [1];
+  return numbers
+    .map((number) => `===MEMO${number}===\n${memos[`memo${number}`] || ''}\n`)
+    .join('\n');
 }
 
 function isBlogArticleFile(name = '') {
@@ -565,6 +592,43 @@ async function handleIndexRequest(req, res, token) {
   return res.status(200).json(manifest);
 }
 
+async function handleAffiliateRequest(req, res, token) {
+  const encodedPath = encodeFolderPath(TECH_AFFILIATE_FILE_PATH);
+  const url = `${GRAPH_API}/me/drive/root:/${encodedPath}:/content`;
+
+  if (req.method === 'GET') {
+    const response = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+    if (response.status === 404) {
+      return res.status(200).json({ memos: { memo1: '' } });
+    }
+    if (!response.ok) {
+      throw new Error(`tech affiliate 読み込み失敗: ${response.status}`);
+    }
+    return res.status(200).json({ memos: parseAffiliateMemos(await response.text()) });
+  }
+
+  if (req.method === 'PUT') {
+    const { memos } = req.body || {};
+    if (!memos || typeof memos !== 'object') {
+      return res.status(400).json({ error: 'memos は必須です' });
+    }
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'text/plain; charset=utf-8',
+      },
+      body: buildAffiliateFileContent(memos),
+    });
+    if (!response.ok) {
+      throw new Error(`tech affiliate 保存失敗: ${response.status}`);
+    }
+    return res.status(200).json({ success: true });
+  }
+
+  return res.status(405).json({ error: 'Method not allowed' });
+}
+
 async function handleTriggerRequest(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -633,6 +697,9 @@ export default async function handler(req, res) {
     const token = await getAccessToken();
     if (resource === 'index') {
       return await handleIndexRequest(req, res, token);
+    }
+    if (resource === 'affiliate') {
+      return await handleAffiliateRequest(req, res, token);
     }
     if (resource === 'articles') {
       return await handleArticlesRequest(req, res, token);

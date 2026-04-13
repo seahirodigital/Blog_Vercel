@@ -7,6 +7,11 @@ on:
         description: 'OneDrive上の記事ファイルID'
         required: true
         type: string
+      no_top_image:
+        description: 'Amazonトップ画像をスキップする'
+        required: false
+        default: 'false'
+        type: string
 
 jobs:
   post-to-note:
@@ -45,6 +50,7 @@ jobs:
           APIFY_API_KEY: ${{ secrets.APIFY_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           FILE_ID: ${{ inputs.file_id }}
+          NO_TOP_IMAGE: ${{ inputs.no_top_image }}
         working-directory: scripts/pipeline
         run: |
           python -c "
@@ -69,4 +75,8 @@ jobs:
           print(f'✅ 記事取得完了: {len(content_res.text)} 文字')
           "
 
-          python prompts/05-draft-manager/note_draft_poster.py /tmp/article.md
+          if [ "$NO_TOP_IMAGE" = "true" ]; then
+            python prompts/05-draft-manager/note_draft_poster.py /tmp/article.md --no-top-image
+          else
+            python prompts/05-draft-manager/note_draft_poster.py /tmp/article.md
+          fi
