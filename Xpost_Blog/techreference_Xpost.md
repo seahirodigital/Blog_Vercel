@@ -80,3 +80,12 @@
 ### 判断
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\modules\blog_pipeline.py` の本編多段生成は触らない。
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\gemini_formatter.py` だけ `thinking_level` を外し、ブログ本編と同じく素直な Gemini generation config として `temperature=0.5` を使う。
+
+### 成功
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\gemini_formatter.py` から `thinking_level` を外した後、GitHub Actions run `24331356968` は `処理成功件数: 1` で完了した。
+- 同 run の manifest 更新時刻は `2026-04-13T07:37:29.427484` で、OneDrive への記事保存処理まで進んだ。
+
+### 追加の注意
+- `https://blog-vercel-git-xpost-blog-preview-seahirodigitals-projects.vercel.app/xpost_blog/` は Vercel Deployment Protection 配下の preview URL である。
+- Vercel MCP では HTML と runtime log の取得ができたが、未ログインの Playwright では Vercel のログイン画面へリダイレクトされた。
+- 画面確認用には Vercel が発行する一時共有 URL を使う。ただしブラウザ側の認証状態によっては Vercel ログインが必要になる。
