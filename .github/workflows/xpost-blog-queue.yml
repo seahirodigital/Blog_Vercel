@@ -1,0 +1,90 @@
+name: Xpost Blog Pipeline
+
+on:
+  schedule:
+    - cron: "0,30 * * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "実行モード"
+        required: false
+        type: choice
+        default: full_pipeline
+        options:
+          - full_pipeline
+          - sync_only
+          - process_queue
+          - rebuild_manifest_only
+      max_items:
+        description: "1回で処理する最大件数"
+        required: false
+        default: "3"
+      post_url:
+        description: "単一 X URL を優先処理する場合"
+        required: false
+        default: ""
+      rebuild_manifest_only:
+        description: "manifest 再構築だけを強制する"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  build-xpost-blog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Python 3.13 をセットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: 依存パッケージをインストール
+        run: pip install -r scripts/pipeline/requirements.txt
+
+      - name: Xpost_blog パイプラインを実行
+        env:
+          ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
+          ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
+          ONEDRIVE_REFRESH_TOKEN: ${{ secrets.ONEDRIVE_REFRESH_TOKEN }}
+          XPOST_BLOG_ONEDRIVE_FOLDER: Obsidian in Onedrive 202602/Vercel_Blog/X投稿
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          XPOST_DISCORD_GUILD_ID: "1485160018767642705"
+          XPOST_DISCORD_CHANNEL_ID: "1485179091463307344"
+          XPOST_DISCORD_CHANNEL_NAME: 01_tech
+          SOCIALDATA_API_KEY: ${{ secrets.SOCIALDATA_API_KEY }}
+          GEMINI_TOKEN_tech: ${{ secrets.GEMINI_TOKEN_TECH }}
+          GEMINI_TOKEN_INVESTSUB: ${{ secrets.GEMINI_TOKEN_INVESTSUB }}
+          XPOST_BLOG_GEMINI_SERIAL_DELAY_SECONDS: "20"
+          INPUT_MODE: ${{ github.event.inputs.mode || 'full_pipeline' }}
+          INPUT_MAX_ITEMS: ${{ github.event.inputs.max_items || '3' }}
+          INPUT_POST_URL: ${{ github.event.inputs.post_url || '' }}
+          INPUT_REBUILD_MANIFEST_ONLY: ${{ github.event.inputs.rebuild_manifest_only || 'false' }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          MODE="${INPUT_MODE}"
+          MAX_ITEMS="${INPUT_MAX_ITEMS}"
+
+          if [ "${EVENT_NAME}" = "schedule" ]; then
+            MODE="full_pipeline"
+          fi
+
+          CMD=(python scripts/xpost_blog/main.py --max-items "${MAX_ITEMS}" --post-url "${INPUT_POST_URL}")
+
+          if [ "${MODE}" = "sync_only" ]; then
+            CMD+=("--sync-only")
+          elif [ "${MODE}" = "process_queue" ]; then
+            CMD+=("--process-queue")
+          elif [ "${MODE}" = "full_pipeline" ]; then
+            CMD+=("--sync-only" "--process-queue")
+          fi
+
+          if [ "${INPUT_REBUILD_MANIFEST_ONLY}" = "true" ] || [ "${MODE}" = "rebuild_manifest_only" ]; then
+            CMD+=("--rebuild-manifest-only")
+          fi
+
+          "${CMD[@]}"
