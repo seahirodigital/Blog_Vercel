@@ -54,3 +54,5 @@
 ### 気づき
 - PowerShell の表示だけで文字化けして見える箇所があったが、`python -X utf8` で実ファイルを確認すると UTF-8 本体は正常だった。Windows では表示と実体を分けて確認する方が安全。
 - GitHub Actions で fallback を有効にするには、コード変更だけでなく `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` に `GEMINI_TOKEN_INVESTSUB` の受け渡しも必要だった。
+- `xpost-blog-preview` branch の Vercel preview では Hobby 上限の「Serverless Functions 12 本」に引っかかった。
+- 検証のため branch 上だけで `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\amazon-asin.js` と `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\trigger.js` を `C:\Users\HCY\OneDrive\開発\Blog_Vercel\vercel_preview_disabled_api\` へ退避し、Xpost 関連 API を優先して preview を通す方針に切り替えた。
