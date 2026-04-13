@@ -1,5 +1,16 @@
 # techreference_Xpost
 
+## 0. 2026-04-13 Xpost UI / note 認証メモ
+### 実装
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` のヘッダーは `note下書き` を青塗り白文字、`パイプライン` と `保存` を青枠白地青文字へそろえ、`保存` を最右端へ移した。
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` のサイド下部には `アフィリンク` の下へ `ブログエディター` と `Info-Viewer` の戻りリンクを追加した。戻り先は `/index.html` と `/info_viewer/index.html`。
+- Xpost の note 下書きは `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\note-draft.js` を本編ブログと同じ経路で使い、`NOTE_DRAFT_URL_<hash>` を `localStorage` キー `xpostBlog.noteDraftUrls` にキャッシュするようにした。
+
+### 運用ルール
+- note のログイン情報はリポジトリ内ファイルへ書かない。登録先は GitHub Secrets の `NOTE_EMAIL`、`NOTE_PASSWORD`、`NOTE_STORAGE_STATE`。
+- `NOTE_STORAGE_STATE` は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py` の `--save-cookies` で取得する note Cookie JSON を使う。
+- Xpost 側の note 下書きでも Amazon トップ画像は使わず、`noTopImage: true` を維持する。本編と同じ workflow を通すが、技術記事では OGP 展開だけを残す。
+
 ## 1. 文書の目的
 本書は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\Xpost_Blog` の実装中に得た技術メモ、成功、失敗、試行中の判断を蓄積するための記録である。
 

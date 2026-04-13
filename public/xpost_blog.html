@@ -123,6 +123,28 @@
       border-color: #0077ed;
     }
 
+    .tool-button.accent-fill {
+      color: #ffffff;
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .tool-button.accent-fill:hover {
+      background: #0077ed;
+      border-color: #0077ed;
+    }
+
+    .tool-button.accent-outline {
+      color: var(--accent);
+      background: #ffffff;
+      border-color: var(--accent);
+    }
+
+    .tool-button.accent-outline:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+
     .tool-button.danger {
       color: var(--danger);
       border-color: rgba(185, 28, 28, 0.35);
@@ -308,6 +330,12 @@
       flex-shrink: 0;
     }
 
+    .sidebar-footer-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
     .sidebar-footer-button {
       width: 100%;
       display: flex;
@@ -326,7 +354,31 @@
       color: var(--accent);
     }
 
+    .sidebar-footer-link {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 4px;
+      color: var(--text-soft);
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .sidebar-footer-link:hover {
+      color: var(--accent);
+    }
+
     .sidebar-footer-button svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      flex-shrink: 0;
+    }
+
+    .sidebar-footer-link svg {
       width: 14px;
       height: 14px;
       stroke: currentColor;
@@ -686,10 +738,10 @@
     <header class="topbar">
       <h1 class="brand">Xpost_blog</h1>
       <div class="toolbar">
-        <button type="button" class="tool-button primary" id="saveButton">保存</button>
-        <button type="button" class="tool-button" id="noteDraftButton">note下書き</button>
-        <button type="button" class="tool-button" id="pipelineButton">パイプライン</button>
+        <button type="button" class="tool-button accent-fill" id="noteDraftButton">note下書き</button>
+        <button type="button" class="tool-button accent-outline" id="pipelineButton">パイプライン</button>
         <button type="button" class="icon-button" id="refreshButton" aria-label="再読み込み" title="再読み込み"></button>
+        <button type="button" class="tool-button accent-outline" id="saveButton">保存</button>
       </div>
       <span class="status-live" id="statusChip" aria-live="polite">初期化中</span>
     </header>
@@ -705,10 +757,20 @@
         </div>
         <div class="content-scroll"><div class="article-list" id="articleList"><div class="empty">読み込み中</div></div></div>
         <div class="sidebar-footer">
-          <button type="button" class="sidebar-footer-button" id="affiliateLauncher" title="アフィリエイトリンク管理">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 1 0-7.1-7.1l-1.1 1.1"/><path d="M14 11a5 5 0 0 0-7.1 0l-2 2a5 5 0 0 0 7.1 7.1l1.1-1.1"/></svg>
-            <span>アフィリンク</span>
-          </button>
+          <div class="sidebar-footer-stack">
+            <button type="button" class="sidebar-footer-button" id="affiliateLauncher" title="アフィリエイトリンク管理">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 1 0-7.1-7.1l-1.1 1.1"/><path d="M14 11a5 5 0 0 0-7.1 0l-2 2a5 5 0 0 0 7.1 7.1l1.1-1.1"/></svg>
+              <span>アフィリンク</span>
+            </button>
+            <a class="sidebar-footer-link" href="/index.html" title="ブログエディターへ戻る">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5V4.5"/><path d="M8 7.5h10"/><path d="M8 12h8"/><path d="M8 16.5h6"/></svg>
+              <span>ブログエディター</span>
+            </a>
+            <a class="sidebar-footer-link" href="/info_viewer/index.html" title="Info-Viewerへ戻る">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/></svg>
+              <span>Info-Viewer</span>
+            </a>
+          </div>
         </div>
       </aside>
       <div class="resize-handle" id="sidebarHandle" aria-hidden="true"></div>
@@ -779,6 +841,7 @@
   <script>
     const API = '/api/xpost-blog';
     const SOURCE_VISIBLE_KEY = 'xpostBlog.sourceVisible';
+    const NOTE_DRAFT_STORAGE_KEY = 'xpostBlog.noteDraftUrls';
     const ICONS = {
       refresh: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6v5h-5"/><path d="M4 18v-5h5"/><path d="M18.5 9A7 7 0 0 0 6.2 6.2L4 8.5"/><path d="M5.5 15A7 7 0 0 0 17.8 17.8L20 15.5"/></svg>',
       copy: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11"/><path d="M5 15H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v1"/></svg>',
@@ -801,7 +864,13 @@
       affiliateMemos: { memo1: '' },
       activeAffiliateKey: 'memo1',
       affiliateDirty: false,
-      noteDraftUrls: {},
+      noteDraftUrls: (() => {
+        try {
+          return JSON.parse(localStorage.getItem(NOTE_DRAFT_STORAGE_KEY) || '{}');
+        } catch {
+          return {};
+        }
+      })(),
       ogpCache: Object.create(null),
       ogpRunId: 0,
     };
@@ -864,6 +933,14 @@
     function setAffiliateStatus(message, isError = false) {
       els.affiliateStatus.textContent = message;
       els.affiliateStatus.style.color = isError ? 'var(--danger)' : 'var(--text-soft)';
+    }
+
+    function persistNoteDraftUrls() {
+      try {
+        localStorage.setItem(NOTE_DRAFT_STORAGE_KEY, JSON.stringify(state.noteDraftUrls));
+      } catch {
+        // localStorage が使えない環境ではメモリ保持だけで続行する
+      }
     }
 
     function escapeHtml(text) {
@@ -1058,6 +1135,7 @@
       renderSourcePanel();
       renderEditorLinks();
       renderPreview(false);
+      void fetchNoteDraftUrl(article.id);
       setStatus('記事を読み込みました');
     }
 
@@ -1127,31 +1205,44 @@
       const response = await fetch('/api/note-draft', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fileId, noTopImage: true }),
+        body: JSON.stringify({ fileIds: [fileId], noTopImage: true }),
       });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok || payload.success === false) {
         throw new Error(payload.error || payload.message || 'note下書きの起動に失敗しました');
       }
-      setStatus('note下書きを実行中。URLを確認します');
+      setStatus('note下書きを実行中です。URLを確認します');
       await pollNoteDraftUrl(fileId);
+    }
+
+    async function fetchNoteDraftUrl(fileId) {
+      if (!fileId) return null;
+      try {
+        const response = await fetch(`/api/note-draft?fileId=${encodeURIComponent(fileId)}`, { cache: 'no-store' });
+        if (!response.ok) return null;
+        const payload = await response.json().catch(() => ({}));
+        const url = payload.url || null;
+        if (url) {
+          state.noteDraftUrls[fileId] = url;
+          persistNoteDraftUrls();
+        }
+        return url;
+      } catch {
+        return null;
+      }
     }
 
     async function pollNoteDraftUrl(fileId) {
       for (let attempt = 0; attempt < 24; attempt += 1) {
-        const response = await fetch(`/api/note-draft?fileId=${encodeURIComponent(fileId)}`, { cache: 'no-store' });
-        if (response.ok) {
-          const payload = await response.json().catch(() => ({}));
-          if (payload.url) {
-            state.noteDraftUrls[fileId] = payload.url;
-            setStatus(`note下書きURL: ${payload.url}`);
-            window.open(payload.url, '_blank', 'noopener,noreferrer');
-            return payload.url;
-          }
+        const url = await fetchNoteDraftUrl(fileId);
+        if (url) {
+          setStatus(`note下書きURL: ${url}`);
+          window.open(url, '_blank', 'noopener,noreferrer');
+          return url;
         }
         await new Promise((resolve) => setTimeout(resolve, 5000));
       }
-      setStatus('note下書きは実行中です。Actions完了後に再確認してください');
+      setStatus('note下書きは実行中です。GitHub Actions 完了後に再確認してください');
       return null;
     }
 
