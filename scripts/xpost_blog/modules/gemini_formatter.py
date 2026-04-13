@@ -19,7 +19,7 @@ from gemini_runtime import (  # noqa: E402
 
 MODEL_NAME = get_text_model_name("XPOST_BLOG_GEMINI_MODEL")
 TRANSPORT_NAME = get_text_transport("XPOST_BLOG_GEMINI_TRANSPORT", default="models.generate_content")
-GENERATION_CONFIG = build_generation_config(temperature=0.4, thinking_level="medium")
+GENERATION_CONFIG = build_generation_config(temperature=0.5)
 PROMPT_PATH = Path(__file__).resolve().parents[3] / "Xpost_Blog" / "Discord_connect" / "Xpost_blog_prompt" / "prompt.md"
 RETRYABLE_KEYWORDS = (
     "429",

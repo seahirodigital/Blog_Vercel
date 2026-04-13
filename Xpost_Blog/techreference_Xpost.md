@@ -71,3 +71,12 @@
 - まず quota や token 切り替え不良を疑ったが、run log では `GEMINI_TOKEN_tech` 自体は読めていたため、認証や secret ではなく SDK パラメータ形状の問題だと切り分けた。
 - ローカルで `google.genai.types.GenerateContentConfig.model_fields` を確認すると、`thinking_level` は直下ではなく `thinking_config` 配下で受ける構造だった。
 - そのため `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\gemini_runtime.py` を修正し、`thinking_level` を `thinking_config.thinking_level` に詰め直す方針へ切り替えた。
+
+## 7. 2026-04-13 Gemini thinking_level 無効化メモ
+### 失敗
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\gemini_runtime.py` で `thinking_config.thinking_level` へ正しくネストしても、`gemini-2.5-flash` の `models.generate_content` では `Thinking level is not supported for this model.` が返った。
+- そのため Xpost_blog では、パラメータ形状ではなく `thinking_level` 指定そのものを外す必要があると判断した。
+
+### 判断
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\modules\blog_pipeline.py` の本編多段生成は触らない。
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\gemini_formatter.py` だけ `thinking_level` を外し、ブログ本編と同じく素直な Gemini generation config として `temperature=0.5` を使う。
