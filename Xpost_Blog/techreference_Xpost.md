@@ -56,3 +56,18 @@
 - GitHub Actions で fallback を有効にするには、コード変更だけでなく `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` に `GEMINI_TOKEN_INVESTSUB` の受け渡しも必要だった。
 - `xpost-blog-preview` branch の Vercel preview では Hobby 上限の「Serverless Functions 12 本」に引っかかった。
 - 検証のため branch 上だけで `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\amazon-asin.js` と `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\trigger.js` を `C:\Users\HCY\OneDrive\開発\Blog_Vercel\vercel_preview_disabled_api\` へ退避し、Xpost 関連 API を優先して preview を通す方針に切り替えた。
+
+## 6. 2026-04-13 GitHub Actions 再検証メモ
+### 成功
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` の再実行 run `24330603939` では、`DISCORD_BOT_TOKEN` と `SOCIALDATA_API_KEY` の不足は解消した。
+- 同 run で Discord 6 件の同期、SocialData からの元投稿取得、OneDrive への元投稿ソース保存、manifest 再構築までは成功した。
+- `https://blog-vercel-git-xpost-blog-preview-seahirodigitals-projects.vercel.app/api/xpost-blog-index` でも `generatedAt: 2026-04-13T07:15:14.854875` の manifest を確認でき、少なくとも preview API から最新 manifest を読める状態になった。
+
+### 失敗
+- 記事本文の生成だけは `Gemini` で停止した。失敗メッセージは `GenerateContentConfig` に対する `thinking_level` の validation error だった。
+- 失敗した投稿は `https://x.com/l_go_mrk/status/2041474685767159840` で、queue 上は `failed`、`lastFailureStage` は `Gemini` として manifest に残った。
+
+### 試行錯誤
+- まず quota や token 切り替え不良を疑ったが、run log では `GEMINI_TOKEN_tech` 自体は読めていたため、認証や secret ではなく SDK パラメータ形状の問題だと切り分けた。
+- ローカルで `google.genai.types.GenerateContentConfig.model_fields` を確認すると、`thinking_level` は直下ではなく `thinking_config` 配下で受ける構造だった。
+- そのため `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\gemini_runtime.py` を修正し、`thinking_level` を `thinking_config.thinking_level` に詰め直す方針へ切り替えた。
