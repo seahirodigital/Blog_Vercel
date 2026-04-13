@@ -118,3 +118,8 @@
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog-articles.js`、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog-index.js`、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\trigger-xpost-blog.js` は本番 `main` に個別追加しない。
 - 理由は、Vercel Hobby の Function 数上限に近いためである。3 本を個別追加すると制限に当たりやすいが、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` 1 本なら API 増加を 1 Function に抑えられる。
 - `OneDrive 元投稿` リンクは UI から削除し、`OneDrive 記事` リンクだけをエディタ側のアイコンとして残す。
+
+### 画面確認後の修正
+- `https://blog-vercel-dun.vercel.app/xpost_blog.html` のスクリーンショット確認で、記事一覧の上に OneDrive の相対フォルダ名 `20260413_...` が残っていることを確認した。
+- これは「記事カードレイアウト上部にある説明文章は不要」という指定に反するため、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` から記事一覧のフォルダラベル表示を削除した。
+- あわせて、初回ロード時に先頭記事を自動選択し、エディタとプレビューまで即時に見えるようにした。

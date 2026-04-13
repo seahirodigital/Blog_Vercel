@@ -131,14 +131,6 @@
     }
     .panel-actions { display: flex; align-items: center; gap: 8px; }
     .tree-wrap { flex: 1; overflow: auto; padding: 12px; }
-    .folder-group { margin-bottom: 18px; }
-    .folder-label {
-      margin: 0 4px 8px;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-soft);
-    }
     .article-row {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
@@ -499,46 +491,26 @@
       return `<a class="icon-link" href="${escapeHtml(href)}" target="_blank" rel="noreferrer" aria-label="${safeLabel}" title="${safeLabel}">${ICONS[iconName]}</a>`;
     }
 
-    function buildFolderGroups(articles) {
-      const groups = new Map();
-      for (const article of articles) {
-        const key = article.path || 'ルート';
-        if (!groups.has(key)) groups.set(key, []);
-        groups.get(key).push(article);
-      }
-      return [...groups.entries()].sort((a, b) => a[0].localeCompare(b[0], 'ja'));
-    }
-
     function renderArticleList() {
       if (!state.articles.length) {
         els.articleList.innerHTML = '<div class="empty">記事がありません</div>';
         return;
       }
 
-      const groups = buildFolderGroups(state.articles);
-      els.articleList.innerHTML = groups.map(([folder, items]) => {
-        const rows = items.map((article) => {
-          const title = article.h1Title || article.name.replace(/\.md$/, '');
-          const isActive = state.selectedArticle?.id === article.id;
-          const sourceOn = isActive && state.sourceVisible;
-          return `
-            <div class="article-row ${isActive ? 'active' : ''}">
-              <button type="button" class="article-select" data-article-id="${escapeHtml(article.id)}">
-                <span class="article-title">${escapeHtml(title)}</span>
-              </button>
-              <button type="button" class="source-toggle" data-source-article-id="${escapeHtml(article.id)}" aria-pressed="${sourceOn ? 'true' : 'false'}">
-                <span>元投稿</span>
-                <span class="switch" aria-hidden="true"></span>
-              </button>
-            </div>
-          `;
-        }).join('');
-
+      els.articleList.innerHTML = state.articles.map((article) => {
+        const title = article.h1Title || article.name.replace(/\.md$/, '');
+        const isActive = state.selectedArticle?.id === article.id;
+        const sourceOn = isActive && state.sourceVisible;
         return `
-          <section class="folder-group">
-            <div class="folder-label">${escapeHtml(folder)}</div>
-            ${rows}
-          </section>
+          <div class="article-row ${isActive ? 'active' : ''}">
+            <button type="button" class="article-select" data-article-id="${escapeHtml(article.id)}">
+              <span class="article-title">${escapeHtml(title)}</span>
+            </button>
+            <button type="button" class="source-toggle" data-source-article-id="${escapeHtml(article.id)}" aria-pressed="${sourceOn ? 'true' : 'false'}">
+              <span>元投稿</span>
+              <span class="switch" aria-hidden="true"></span>
+            </button>
+          </div>
         `;
       }).join('');
 
@@ -572,12 +544,17 @@
 
     async function fetchArticles() {
       setStatus('記事一覧を取得中');
+      const previousId = state.selectedArticle?.id;
       const response = await fetch(apiUrl('articles'), { cache: 'no-store' });
       if (!response.ok) throw new Error('記事一覧の取得に失敗しました');
       const data = await response.json();
       state.articles = data.articles || [];
+      state.selectedArticle = previousId ? state.articles.find((article) => article.id === previousId) || null : null;
       renderArticleList();
       setStatus(`記事一覧 ${state.articles.length}件`);
+      if (!state.selectedArticle && state.articles[0]) {
+        await selectArticle(state.articles[0]);
+      }
     }
 
     async function selectArticle(article) {
