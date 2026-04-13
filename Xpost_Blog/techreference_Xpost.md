@@ -105,3 +105,16 @@
 ### 理由
 - 外から見ると API の入口は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` 1 本だけなので、Vercel Functions 数の増加は 1 本に抑えられる。
 - 中では `resource=articles`、`resource=index`、`resource=trigger` で処理責務を分けるため、既存の `xpost-blog-articles` / `xpost-blog-index` / `trigger-xpost-blog` の考え方は維持できる。
+
+## 9. 2026-04-13 本番 URL 用 UI と統合 API 実装メモ
+### 成功
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` を追加し、`resource=articles`、`resource=index`、`resource=trigger` の 3 ルートを 1 本の Vercel Function に統合した。
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` を追加し、`https://blog-vercel-dun.vercel.app/xpost_blog.html` で読める静的ページとして配置する方針にした。
+- UI は黒背景ではなく白背景基調へ変更した。
+- 「元投稿」の表示切り替えは、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` の記事一覧行右端にある `元投稿` トグルから制御する。
+- エディタは入力に合わせてプレビューを即時更新し、保存は `Ctrl+S` または `Command+S` でも実行できるようにした。
+
+### 判断
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog-articles.js`、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog-index.js`、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\trigger-xpost-blog.js` は本番 `main` に個別追加しない。
+- 理由は、Vercel Hobby の Function 数上限に近いためである。3 本を個別追加すると制限に当たりやすいが、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` 1 本なら API 増加を 1 Function に抑えられる。
+- `OneDrive 元投稿` リンクは UI から削除し、`OneDrive 記事` リンクだけをエディタ側のアイコンとして残す。

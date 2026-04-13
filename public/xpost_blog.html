@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xpost_blog</title>
+  <meta name="description" content="Xpost_blog" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    :root {
+      --bg: #f7f3ea;
+      --bg-ink: #f0e7d8;
+      --surface: #fffdf8;
+      --surface-soft: #f4efe6;
+      --surface-strong: #ebe1d1;
+      --line: rgba(54, 45, 35, 0.14);
+      --line-strong: rgba(15, 88, 157, 0.32);
+      --text: #25211b;
+      --text-soft: #786e62;
+      --accent: #1f6fb2;
+      --accent-strong: #164f82;
+      --accent-soft: #dfeefb;
+      --danger: #b33636;
+      --shadow: 0 18px 45px rgba(72, 52, 27, 0.12);
+      --radius: 22px;
+      --sidebar-width: 310px;
+      --source-width: 330px;
+      --editor-width: 46%;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      color: var(--text);
+      font-family: "BIZ UDPGothic", "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+      background:
+        radial-gradient(circle at 8% 8%, rgba(31, 111, 178, 0.14), transparent 28%),
+        radial-gradient(circle at 88% 14%, rgba(218, 145, 48, 0.16), transparent 24%),
+        linear-gradient(135deg, var(--bg), #fcfaf4 42%, var(--bg-ink));
+      min-height: 100vh;
+    }
+    button, textarea { font: inherit; }
+    button { color: inherit; }
+
+    .app-shell { min-height: 100vh; display: flex; flex-direction: column; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 253, 248, 0.9);
+      backdrop-filter: blur(18px);
+    }
+    .brand {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+    }
+    .toolbar { display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
+    .status-chip {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 14px;
+      color: var(--text-soft);
+      background: rgba(255, 255, 255, 0.7);
+      font-size: 13px;
+    }
+    .tool-button {
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 9px 15px;
+      background: var(--surface);
+      box-shadow: 0 8px 18px rgba(72, 52, 27, 0.08);
+      cursor: pointer;
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+    }
+    .tool-button:hover { transform: translateY(-1px); border-color: var(--line-strong); background: #ffffff; }
+    .tool-button.primary { color: #fff; background: var(--accent); border-color: var(--accent); }
+    .tool-button.primary:hover { background: var(--accent-strong); }
+    .icon-button {
+      width: 42px;
+      min-height: 42px;
+      padding: 0;
+      display: inline-grid;
+      place-items: center;
+    }
+    .icon-button svg, .icon-link svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    .workspace { flex: 1; min-height: 0; display: flex; padding: 18px; gap: 12px; }
+    .sidebar,
+    .panel {
+      background: rgba(255, 253, 248, 0.86);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .sidebar {
+      width: var(--sidebar-width);
+      min-width: 240px;
+      max-width: 460px;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar-header,
+    .panel-header {
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.56);
+    }
+    .sidebar-title,
+    .panel-title {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .panel-actions { display: flex; align-items: center; gap: 8px; }
+    .tree-wrap { flex: 1; overflow: auto; padding: 12px; }
+    .folder-group { margin-bottom: 18px; }
+    .folder-label {
+      margin: 0 4px 8px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+    .article-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: stretch;
+      gap: 8px;
+      margin-bottom: 8px;
+      border: 1px solid transparent;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.46);
+      transition: border-color 140ms ease, background 140ms ease;
+    }
+    .article-row:hover { background: #fff; border-color: rgba(31, 111, 178, 0.18); }
+    .article-row.active { background: var(--accent-soft); border-color: var(--line-strong); }
+    .article-select {
+      min-width: 0;
+      border: 0;
+      background: transparent;
+      padding: 13px 0 13px 14px;
+      text-align: left;
+      cursor: pointer;
+      font-weight: 760;
+      line-height: 1.42;
+    }
+    .article-title {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .source-toggle {
+      border: 0;
+      border-left: 1px solid rgba(54, 45, 35, 0.1);
+      border-radius: 0 17px 17px 0;
+      background: transparent;
+      padding: 10px 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-soft);
+      cursor: pointer;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .switch {
+      width: 36px;
+      height: 20px;
+      border-radius: 999px;
+      background: #d8d0c5;
+      position: relative;
+      transition: background 140ms ease;
+    }
+    .switch::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(54, 45, 35, 0.2);
+      transition: transform 140ms ease;
+    }
+    .source-toggle[aria-pressed="true"] .switch { background: var(--accent); }
+    .source-toggle[aria-pressed="true"] .switch::after { transform: translateX(16px); }
+
+    .resize-handle {
+      width: 10px;
+      cursor: col-resize;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .resize-handle::after {
+      content: "";
+      position: absolute;
+      top: 14px;
+      bottom: 14px;
+      left: 50%;
+      width: 2px;
+      border-radius: 999px;
+      transform: translateX(-50%);
+      background: rgba(54, 45, 35, 0.13);
+      transition: background 140ms ease;
+    }
+    .resize-handle:hover::after,
+    .resize-handle.dragging::after { background: var(--accent); }
+
+    .main-panels { flex: 1; min-width: 0; display: flex; min-height: 0; gap: 12px; }
+    .main-panels.source-hidden .source-panel,
+    .main-panels.source-hidden #sourceHandle { display: none; }
+    .panel { min-height: 0; display: flex; flex-direction: column; }
+    .source-panel { width: var(--source-width); min-width: 270px; max-width: 540px; }
+    .editor-panel { width: var(--editor-width); min-width: 340px; }
+    .preview-panel { flex: 1; min-width: 300px; }
+    .panel-body { flex: 1; min-height: 0; overflow: auto; padding: 18px; }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .meta-card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px 14px;
+      background: var(--surface);
+    }
+    .meta-card strong { display: block; margin-bottom: 5px; color: var(--text-soft); font-size: 12px; font-weight: 700; }
+    .meta-card span { font-size: 14px; line-height: 1.5; }
+    .icon-link {
+      width: 38px;
+      height: 38px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--accent);
+      background: #fff;
+      text-decoration: none;
+      transition: transform 140ms ease, border-color 140ms ease;
+    }
+    .icon-link:hover { transform: translateY(-1px); border-color: var(--line-strong); }
+    .icon-link[aria-disabled="true"] {
+      opacity: 0.34;
+      pointer-events: none;
+      color: var(--text-soft);
+    }
+
+    textarea {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      border: 0;
+      resize: none;
+      outline: none;
+      padding: 20px;
+      color: var(--text);
+      background: rgba(255, 253, 248, 0.62);
+      line-height: 1.76;
+      font-size: 14px;
+    }
+    .markdown {
+      color: var(--text);
+      line-height: 1.78;
+      font-size: 14px;
+    }
+    .markdown h1,
+    .markdown h2,
+    .markdown h3 { line-height: 1.24; letter-spacing: -0.04em; }
+    .markdown h1 { margin: 0 0 18px; font-size: 30px; }
+    .markdown h2 { margin: 30px 0 14px; font-size: 23px; }
+    .markdown h3 { margin: 24px 0 12px; font-size: 18px; }
+    .markdown p { margin: 0 0 14px; }
+    .markdown a { color: var(--accent); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; }
+    .markdown ul, .markdown ol { margin: 0 0 16px 22px; padding: 0; }
+    .markdown li { margin-bottom: 6px; }
+    .markdown blockquote {
+      margin: 18px 0;
+      padding: 14px 16px;
+      border-left: 4px solid var(--accent);
+      border-radius: 12px;
+      background: #f2eadc;
+      color: #4d453c;
+    }
+    .markdown code {
+      padding: 2px 7px;
+      border-radius: 8px;
+      background: #ece3d4;
+      font-size: 13px;
+    }
+    .markdown pre {
+      overflow: auto;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #29231d;
+      color: #fff7ea;
+    }
+    .markdown img { max-width: 100%; border-radius: 16px; }
+    .empty {
+      min-height: 180px;
+      display: grid;
+      place-items: center;
+      color: var(--text-soft);
+      text-align: center;
+      padding: 24px;
+    }
+
+    @media (max-width: 1180px) {
+      .workspace { flex-direction: column; }
+      .sidebar { width: 100%; max-width: none; min-width: 0; }
+      .resize-handle { display: none; }
+      .main-panels { flex-direction: column; }
+      .source-panel,
+      .editor-panel,
+      .preview-panel { width: 100%; min-width: 0; max-width: none; }
+      .panel { min-height: 34vh; }
+    }
+
+    @media (max-width: 720px) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .toolbar { justify-content: flex-start; }
+      .workspace { padding: 10px; }
+      .article-row { grid-template-columns: 1fr; }
+      .source-toggle {
+        justify-content: space-between;
+        border-left: 0;
+        border-top: 1px solid rgba(54, 45, 35, 0.1);
+        border-radius: 0 0 17px 17px;
+      }
+      .meta-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <h1 class="brand">Xpost_blog</h1>
+      <div class="toolbar">
+        <div class="status-chip" id="statusChip">待機中</div>
+        <button type="button" class="tool-button icon-button" id="refreshButton" aria-label="更新" title="更新">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v6h-6"/></svg>
+        </button>
+        <button type="button" class="tool-button" id="saveButton">保存</button>
+        <button type="button" class="tool-button primary" id="pipelineButton">パイプライン実行</button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-title">記事一覧</div>
+        </div>
+        <div class="tree-wrap" id="articleList"></div>
+      </aside>
+      <div class="resize-handle" id="sidebarHandle"></div>
+
+      <section class="main-panels" id="mainPanels">
+        <section class="panel source-panel" id="sourcePanel">
+          <div class="panel-header">
+            <div class="panel-title">元投稿</div>
+            <div class="panel-actions" id="sourceLinks"></div>
+          </div>
+          <div class="panel-body" id="sourceBody">
+            <div class="empty">記事を選択してください</div>
+          </div>
+        </section>
+        <div class="resize-handle" id="sourceHandle"></div>
+
+        <section class="panel editor-panel" id="editorPanel">
+          <div class="panel-header">
+            <div class="panel-title">エディタ</div>
+            <div class="panel-actions" id="editorLinks"></div>
+          </div>
+          <textarea id="editor" placeholder="記事を選択してください"></textarea>
+        </section>
+        <div class="resize-handle" id="editorHandle"></div>
+
+        <section class="panel preview-panel">
+          <div class="panel-header">
+            <div class="panel-title">プレビュー</div>
+          </div>
+          <div class="panel-body markdown" id="preview">
+            <div class="empty">記事を選択してください</div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const API = '/api/xpost-blog';
+    const ICONS = {
+      x: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l16 16"/><path d="M20 4L4 20"/></svg>',
+      discord: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8.5c3.2-1.4 6.8-1.4 10 0"/><path d="M7.5 16.5c2.8 1.3 6.2 1.3 9 0"/><path d="M8 18c-2.4-.6-3.8-1.8-4.6-3.4.5-3.3 1.4-6.1 3.3-8.1 1.3.1 2.2.4 3.2 1"/><path d="M16 7.5c1-.6 1.9-.9 3.2-1 1.9 2 2.8 4.8 3.3 8.1-.8 1.6-2.2 2.8-4.6 3.4"/><path d="M9.5 13h.01"/><path d="M14.5 13h.01"/></svg>',
+      onedrive: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 18h9.1a4 4 0 0 0 .7-7.94A6.1 6.1 0 0 0 6.8 8.4 4.8 4.8 0 0 0 8.4 18Z"/></svg>',
+    };
+
+    const state = {
+      articles: [],
+      selectedArticle: null,
+      frontmatterContent: '',
+      editorContent: '',
+      sourceContent: '',
+      sourceMeta: null,
+      sourceVisible: true,
+      dirty: false,
+    };
+
+    const els = {
+      articleList: document.getElementById('articleList'),
+      statusChip: document.getElementById('statusChip'),
+      saveButton: document.getElementById('saveButton'),
+      refreshButton: document.getElementById('refreshButton'),
+      pipelineButton: document.getElementById('pipelineButton'),
+      editor: document.getElementById('editor'),
+      preview: document.getElementById('preview'),
+      sourceBody: document.getElementById('sourceBody'),
+      sourceLinks: document.getElementById('sourceLinks'),
+      editorLinks: document.getElementById('editorLinks'),
+      sidebar: document.getElementById('sidebar'),
+      sourcePanel: document.getElementById('sourcePanel'),
+      editorPanel: document.getElementById('editorPanel'),
+      mainPanels: document.getElementById('mainPanels'),
+      sidebarHandle: document.getElementById('sidebarHandle'),
+      sourceHandle: document.getElementById('sourceHandle'),
+      editorHandle: document.getElementById('editorHandle'),
+    };
+
+    function setStatus(message, isError = false) {
+      els.statusChip.textContent = message;
+      els.statusChip.style.color = isError ? 'var(--danger)' : 'var(--text-soft)';
+      els.statusChip.style.borderColor = isError ? 'rgba(179, 54, 54, 0.36)' : 'var(--line)';
+    }
+
+    function escapeHtml(text) {
+      return String(text || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function apiUrl(resource, params = {}) {
+      const url = new URL(API, window.location.origin);
+      url.searchParams.set('resource', resource);
+      for (const [key, value] of Object.entries(params)) {
+        if (value !== undefined && value !== null && value !== '') {
+          url.searchParams.set(key, value);
+        }
+      }
+      return url.toString();
+    }
+
+    function renderMarkdown(text) {
+      if (!text || !text.trim()) {
+        return '<div class="empty">表示する内容がありません</div>';
+      }
+      if (window.marked?.parse) {
+        return marked.parse(text, { breaks: true, gfm: true });
+      }
+      return `<pre>${escapeHtml(text)}</pre>`;
+    }
+
+    function composeMarkdownDocument(frontmatter, body) {
+      const normalizedBody = String(body || '').trim();
+      const normalizedFrontmatter = String(frontmatter || '').trim();
+      if (!normalizedFrontmatter) return normalizedBody;
+      return normalizedBody ? `${normalizedFrontmatter}\n\n${normalizedBody}\n` : `${normalizedFrontmatter}\n`;
+    }
+
+    function iconLink(href, label, iconName) {
+      const safeLabel = escapeHtml(label);
+      if (!href) {
+        return `<a class="icon-link" aria-disabled="true" aria-label="${safeLabel}" title="${safeLabel}">${ICONS[iconName]}</a>`;
+      }
+      return `<a class="icon-link" href="${escapeHtml(href)}" target="_blank" rel="noreferrer" aria-label="${safeLabel}" title="${safeLabel}">${ICONS[iconName]}</a>`;
+    }
+
+    function buildFolderGroups(articles) {
+      const groups = new Map();
+      for (const article of articles) {
+        const key = article.path || 'ルート';
+        if (!groups.has(key)) groups.set(key, []);
+        groups.get(key).push(article);
+      }
+      return [...groups.entries()].sort((a, b) => a[0].localeCompare(b[0], 'ja'));
+    }
+
+    function renderArticleList() {
+      if (!state.articles.length) {
+        els.articleList.innerHTML = '<div class="empty">記事がありません</div>';
+        return;
+      }
+
+      const groups = buildFolderGroups(state.articles);
+      els.articleList.innerHTML = groups.map(([folder, items]) => {
+        const rows = items.map((article) => {
+          const title = article.h1Title || article.name.replace(/\.md$/, '');
+          const isActive = state.selectedArticle?.id === article.id;
+          const sourceOn = isActive && state.sourceVisible;
+          return `
+            <div class="article-row ${isActive ? 'active' : ''}">
+              <button type="button" class="article-select" data-article-id="${escapeHtml(article.id)}">
+                <span class="article-title">${escapeHtml(title)}</span>
+              </button>
+              <button type="button" class="source-toggle" data-source-article-id="${escapeHtml(article.id)}" aria-pressed="${sourceOn ? 'true' : 'false'}">
+                <span>元投稿</span>
+                <span class="switch" aria-hidden="true"></span>
+              </button>
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <section class="folder-group">
+            <div class="folder-label">${escapeHtml(folder)}</div>
+            ${rows}
+          </section>
+        `;
+      }).join('');
+
+      els.articleList.querySelectorAll('[data-article-id]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const article = state.articles.find((item) => item.id === button.dataset.articleId);
+          if (article) selectArticle(article).catch((error) => setStatus(error.message, true));
+        });
+      });
+
+      els.articleList.querySelectorAll('[data-source-article-id]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const article = state.articles.find((item) => item.id === button.dataset.sourceArticleId);
+          if (!article) return;
+
+          const wasActive = state.selectedArticle?.id === article.id;
+          setSourceVisible(wasActive ? !state.sourceVisible : true);
+          if (!wasActive) {
+            selectArticle(article).catch((error) => setStatus(error.message, true));
+          } else {
+            renderArticleList();
+          }
+        });
+      });
+    }
+
+    function setSourceVisible(visible) {
+      state.sourceVisible = Boolean(visible);
+      els.mainPanels.classList.toggle('source-hidden', !state.sourceVisible);
+    }
+
+    async function fetchArticles() {
+      setStatus('記事一覧を取得中');
+      const response = await fetch(apiUrl('articles'), { cache: 'no-store' });
+      if (!response.ok) throw new Error('記事一覧の取得に失敗しました');
+      const data = await response.json();
+      state.articles = data.articles || [];
+      renderArticleList();
+      setStatus(`記事一覧 ${state.articles.length}件`);
+    }
+
+    async function selectArticle(article) {
+      state.selectedArticle = article;
+      state.dirty = false;
+      renderArticleList();
+      renderEditorLinks();
+      setStatus('記事本文を取得中');
+
+      const [articleResponse, sourceResponse] = await Promise.all([
+        fetch(apiUrl('articles', { id: article.id }), { cache: 'no-store' }),
+        fetch(apiUrl('index', { articleId: article.id }), { cache: 'no-store' }),
+      ]);
+
+      if (!articleResponse.ok) throw new Error('記事本文の取得に失敗しました');
+      const articleData = await articleResponse.json();
+      state.frontmatterContent = articleData.frontmatter || '';
+      state.editorContent = articleData.body || articleData.content || '';
+      els.editor.value = state.editorContent;
+      els.preview.innerHTML = renderMarkdown(state.editorContent);
+
+      if (sourceResponse.ok) {
+        const sourceData = await sourceResponse.json();
+        state.sourceMeta = sourceData.item || null;
+        state.sourceContent = sourceData.sourceContent || '';
+      } else {
+        state.sourceMeta = null;
+        state.sourceContent = '';
+      }
+
+      renderSourcePanel();
+      renderEditorLinks();
+      setStatus(article.h1Title || article.name);
+    }
+
+    function renderSourcePanel() {
+      const item = state.sourceMeta;
+      if (!item) {
+        els.sourceBody.innerHTML = '<div class="empty">元投稿がありません</div>';
+        els.sourceLinks.innerHTML = '';
+        return;
+      }
+
+      const stats = [
+        ['投稿者', item.authorName || '-'],
+        ['いいね', item.favoriteCount ?? 0],
+        ['リポスト', item.repostCount ?? 0],
+        ['状態', item.articleStatus || '-'],
+      ];
+
+      els.sourceBody.innerHTML = `
+        <div class="meta-grid">
+          ${stats.map(([label, value]) => `<div class="meta-card"><strong>${escapeHtml(label)}</strong><span>${escapeHtml(String(value))}</span></div>`).join('')}
+        </div>
+        <div class="markdown">${renderMarkdown(state.sourceContent)}</div>
+      `;
+
+      els.sourceLinks.innerHTML = [
+        iconLink(item.postUrl, 'Xを開く', 'x'),
+        iconLink(item.discordJumpUrl, 'Discordを開く', 'discord'),
+      ].join('');
+    }
+
+    function renderEditorLinks() {
+      const articleUrl = state.sourceMeta?.articleWebUrl || state.selectedArticle?.webUrl || '';
+      els.editorLinks.innerHTML = iconLink(articleUrl, 'OneDrive記事を開く', 'onedrive');
+    }
+
+    async function saveCurrentArticle() {
+      if (!state.selectedArticle) {
+        setStatus('保存対象の記事が未選択です', true);
+        return;
+      }
+
+      setStatus('保存中');
+      const response = await fetch(apiUrl('articles'), {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          filename: state.selectedArticle.name,
+          fileId: state.selectedArticle.id,
+          content: composeMarkdownDocument(state.frontmatterContent, els.editor.value),
+        }),
+      });
+
+      if (!response.ok) {
+        const payload = await response.json().catch(() => ({}));
+        throw new Error(payload.error || '保存に失敗しました');
+      }
+
+      state.dirty = false;
+      setStatus('保存しました');
+      await fetchArticles();
+      const refreshed = state.articles.find((item) => item.id === state.selectedArticle.id);
+      if (refreshed) state.selectedArticle = refreshed;
+      renderArticleList();
+      renderEditorLinks();
+    }
+
+    async function triggerPipeline() {
+      setStatus('パイプライン起動中');
+      const response = await fetch(apiUrl('trigger'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mode: 'full_pipeline' }),
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(payload.error || 'パイプライン起動に失敗しました');
+      setStatus(payload.message || 'パイプラインを起動しました');
+    }
+
+    function applyResizer(handle, target, cssVar, minPx, maxPx) {
+      let dragging = false;
+      handle.addEventListener('pointerdown', (event) => {
+        dragging = true;
+        handle.classList.add('dragging');
+        const startX = event.clientX;
+        const startWidth = target.getBoundingClientRect().width;
+
+        function onMove(moveEvent) {
+          if (!dragging) return;
+          const nextWidth = Math.min(Math.max(startWidth + (moveEvent.clientX - startX), minPx), maxPx);
+          document.documentElement.style.setProperty(cssVar, `${nextWidth}px`);
+        }
+
+        function onUp() {
+          dragging = false;
+          handle.classList.remove('dragging');
+          window.removeEventListener('pointermove', onMove);
+          window.removeEventListener('pointerup', onUp);
+        }
+
+        window.addEventListener('pointermove', onMove);
+        window.addEventListener('pointerup', onUp);
+      });
+    }
+
+    function applyEditorResizer(handle) {
+      let dragging = false;
+      handle.addEventListener('pointerdown', (event) => {
+        dragging = true;
+        handle.classList.add('dragging');
+        const container = handle.parentElement;
+        const sourceWidth = state.sourceVisible ? els.sourcePanel.getBoundingClientRect().width : 0;
+        const previewWidth = container.getBoundingClientRect().width - sourceWidth - 24;
+        const startX = event.clientX;
+        const startWidth = els.editorPanel.getBoundingClientRect().width;
+
+        function onMove(moveEvent) {
+          if (!dragging) return;
+          const nextWidth = Math.min(Math.max(startWidth + (moveEvent.clientX - startX), 340), previewWidth - 300);
+          const ratio = (nextWidth / previewWidth) * 100;
+          document.documentElement.style.setProperty('--editor-width', `${ratio}%`);
+        }
+
+        function onUp() {
+          dragging = false;
+          handle.classList.remove('dragging');
+          window.removeEventListener('pointermove', onMove);
+          window.removeEventListener('pointerup', onUp);
+        }
+
+        window.addEventListener('pointermove', onMove);
+        window.addEventListener('pointerup', onUp);
+      });
+    }
+
+    els.editor.addEventListener('input', () => {
+      state.dirty = true;
+      state.editorContent = els.editor.value;
+      els.preview.innerHTML = renderMarkdown(state.editorContent);
+      setStatus('未保存の変更があります');
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') {
+        event.preventDefault();
+        saveCurrentArticle().catch((error) => setStatus(error.message, true));
+      }
+    });
+
+    els.saveButton.addEventListener('click', () => saveCurrentArticle().catch((error) => setStatus(error.message, true)));
+    els.refreshButton.addEventListener('click', () => fetchArticles().catch((error) => setStatus(error.message, true)));
+    els.pipelineButton.addEventListener('click', () => triggerPipeline().catch((error) => setStatus(error.message, true)));
+
+    applyResizer(els.sidebarHandle, els.sidebar, '--sidebar-width', 240, 460);
+    applyResizer(els.sourceHandle, els.sourcePanel, '--source-width', 270, 540);
+    applyEditorResizer(els.editorHandle);
+    setSourceVisible(true);
+    renderEditorLinks();
+    fetchArticles().catch((error) => setStatus(error.message, true));
+  </script>
+</body>
+</html>
