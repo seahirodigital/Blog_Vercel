@@ -8,15 +8,15 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     :root {
-      --app-bg: #f8fafc;
+      --app-bg: #f5f5f7;
       --surface: #ffffff;
-      --surface-soft: #f1f5f9;
-      --line: #d9e2ec;
-      --line-strong: #94a3b8;
-      --text: #0f172a;
-      --text-soft: #64748b;
-      --accent: #0f766e;
-      --accent-soft: #ccfbf1;
+      --surface-soft: #f5f5f7;
+      --line: #d2d2d7;
+      --line-strong: #0071e3;
+      --text: #1d1d1f;
+      --text-soft: rgba(0, 0, 0, 0.56);
+      --accent: #0071e3;
+      --accent-soft: rgba(0, 113, 227, 0.08);
       --danger: #b91c1c;
       --sidebar-width: 280px;
       --source-width: 300px;
@@ -28,11 +28,11 @@
     body {
       color: var(--text);
       background: var(--app-bg);
-      font-family: "BIZ UDPGothic", "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+      font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
     button, textarea, input { font: inherit; }
-    button { color: inherit; border-radius: 0; }
-    a { color: var(--accent); }
+    button { color: inherit; }
+    a { color: #0066cc; }
 
     .app-shell {
       height: 100vh;
@@ -43,6 +43,7 @@
     }
 
     .topbar {
+      position: relative;
       height: 50px;
       flex: 0 0 50px;
       display: flex;
@@ -51,14 +52,16 @@
       gap: 12px;
       padding: 0 12px;
       border-bottom: 1px solid var(--line);
-      background: var(--surface);
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: saturate(180%) blur(20px);
     }
 
     .brand {
       margin: 0;
-      font-size: 15px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
+      font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.24px;
       white-space: nowrap;
     }
 
@@ -70,20 +73,16 @@
       min-width: 0;
     }
 
-    .status-chip {
-      min-width: 180px;
-      max-width: min(42vw, 540px);
-      height: 30px;
-      display: inline-flex;
-      align-items: center;
+    .status-live {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
       overflow: hidden;
+      clip: rect(0, 0, 0, 0);
       white-space: nowrap;
-      text-overflow: ellipsis;
-      padding: 0 10px;
-      border-left: 3px solid var(--accent);
-      background: var(--surface-soft);
-      color: var(--text-soft);
-      font-size: 12px;
+      border: 0;
     }
 
     .tool-button,
@@ -101,6 +100,8 @@
       color: var(--text);
       text-decoration: none;
       cursor: pointer;
+      border-radius: 999px;
+      transition: color 0.15s, background 0.15s, border-color 0.15s;
     }
 
     .tool-button:hover,
@@ -118,8 +119,8 @@
     }
 
     .tool-button.primary:hover {
-      background: #115e59;
-      border-color: #115e59;
+      background: #0077ed;
+      border-color: #0077ed;
     }
 
     .tool-button.danger {
@@ -129,9 +130,14 @@
 
     .icon-button,
     .icon-link {
-      width: 32px;
+      width: auto;
+      height: auto;
       padding: 0;
-      flex: 0 0 32px;
+      flex: 0 0 auto;
+      border: 0;
+      background: transparent;
+      border-radius: 0;
+      color: var(--text-soft);
     }
 
     .tool-button[disabled],
@@ -140,6 +146,13 @@
     .icon-link[aria-disabled="true"] {
       opacity: 0.42;
       pointer-events: none;
+    }
+
+    .icon-button:hover,
+    .icon-link:hover {
+      background: transparent;
+      border-color: transparent;
+      color: var(--accent);
     }
 
     .icon-button svg,
@@ -211,22 +224,35 @@
 
     .panel-title,
     .sidebar-title {
+      flex: 1 1 auto;
       min-width: 0;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      font-size: 13px;
-      font-weight: 800;
+      font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.2px;
     }
 
     .panel-actions,
     .editor-links,
     .source-links {
+      flex: 0 0 auto;
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 4px;
-      min-width: 0;
+      gap: 6px;
+      min-width: max-content;
+    }
+
+    .editor-panel .panel-title {
+      max-width: calc(100% - 228px);
+    }
+
+    .editor-panel .panel-actions {
+      min-width: 220px;
+      margin-left: auto;
     }
 
     .count-chip {
@@ -234,11 +260,12 @@
       display: inline-flex;
       align-items: center;
       padding: 0 8px;
-      background: var(--surface);
+      background: transparent;
       border: 1px solid var(--line);
       color: var(--text-soft);
       font-size: 12px;
       white-space: nowrap;
+      border-radius: 999px;
     }
 
     .resize-handle {
@@ -272,6 +299,40 @@
       min-height: 0;
       overflow: auto;
       background: var(--surface);
+    }
+
+    .sidebar-footer {
+      border-top: 1px solid var(--line);
+      padding: 6px 8px;
+      background: var(--surface);
+      flex-shrink: 0;
+    }
+
+    .sidebar-footer-button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 4px;
+      border: 0;
+      background: transparent;
+      color: var(--text-soft);
+      font-size: 12px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .sidebar-footer-button:hover {
+      color: var(--accent);
+    }
+
+    .sidebar-footer-button svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      flex-shrink: 0;
     }
     .article-list {
       margin: 0;
@@ -445,8 +506,9 @@
     .markdown pre {
       padding: 12px;
       overflow: auto;
-      background: #0f172a;
-      color: #e2e8f0;
+      border: 1px solid var(--line);
+      background: #fbfbfd;
+      color: var(--text);
     }
     .markdown code {
       font-family: "UDEV Gothic", Consolas, monospace;
@@ -467,7 +529,7 @@
 
     .ogp-card:hover {
       border-color: var(--line-strong);
-      background: #f8fafc;
+      background: var(--accent-soft);
     }
 
     .ogp-card-body {
@@ -486,7 +548,7 @@
     }
 
     .ogp-card-title {
-      color: #1e293b;
+      color: var(--text);
       font-size: 0.88rem;
       font-weight: 800;
       line-height: 1.4;
@@ -515,29 +577,13 @@
       padding: 8px;
       background: var(--surface-soft);
     }
-    .affiliate-launcher {
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      z-index: 50;
-      height: 34px;
-      padding: 0 12px;
-      border: 1px solid var(--line-strong);
-      border-left: 0;
-      border-bottom: 0;
-      background: var(--surface);
-      cursor: pointer;
-      font-weight: 800;
-    }
-
-    .affiliate-launcher:hover { background: var(--surface-soft); }
-
     .modal-backdrop {
       position: fixed;
       inset: 0;
       z-index: 80;
       display: none;
-      background: rgba(15, 23, 42, 0.35);
+      background: rgba(29, 29, 31, 0.18);
+      backdrop-filter: blur(6px);
     }
 
     .modal-backdrop.open {
@@ -618,7 +664,6 @@
       .source-panel { min-width: 300px; }
       .editor-panel { min-width: 480px; }
       .preview-panel { min-width: 420px; }
-      .status-chip { min-width: 120px; }
     }
 
     @media (max-width: 760px) {
@@ -633,10 +678,6 @@
         justify-content: flex-start;
         overflow-x: auto;
       }
-      .status-chip {
-        max-width: none;
-        flex: 1;
-      }
     }
   </style>
 </head>
@@ -645,12 +686,12 @@
     <header class="topbar">
       <h1 class="brand">Xpost_blog</h1>
       <div class="toolbar">
-        <span class="status-chip" id="statusChip">初期化中</span>
         <button type="button" class="tool-button primary" id="saveButton">保存</button>
         <button type="button" class="tool-button" id="noteDraftButton">note下書き</button>
-        <button type="button" class="tool-button" id="pipelineButton">Actions実行</button>
+        <button type="button" class="tool-button" id="pipelineButton">パイプライン</button>
         <button type="button" class="icon-button" id="refreshButton" aria-label="再読み込み" title="再読み込み"></button>
       </div>
+      <span class="status-live" id="statusChip" aria-live="polite">初期化中</span>
     </header>
 
     <main class="workspace" id="mainPanels">
@@ -663,6 +704,12 @@
           </button>
         </div>
         <div class="content-scroll"><div class="article-list" id="articleList"><div class="empty">読み込み中</div></div></div>
+        <div class="sidebar-footer">
+          <button type="button" class="sidebar-footer-button" id="affiliateLauncher" title="アフィリエイトリンク管理">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 1 0-7.1-7.1l-1.1 1.1"/><path d="M14 11a5 5 0 0 0-7.1 0l-2 2a5 5 0 0 0 7.1 7.1l1.1-1.1"/></svg>
+            <span>アフィリンク</span>
+          </button>
+        </div>
       </aside>
       <div class="resize-handle" id="sidebarHandle" aria-hidden="true"></div>
 
@@ -681,7 +728,7 @@
           <div class="panel-actions">
             <span class="count-chip" id="charCount">0字</span>
             <div class="editor-links" id="editorLinks"></div>
-            <button type="button" class="flat-button" id="insertAffiliateButton">アフィ挿入</button>
+            <button type="button" class="icon-button" id="insertAffiliateButton" aria-label="アフィ挿入" title="アフィ挿入"></button>
             <button type="button" class="icon-button" id="copyEditorButton" aria-label="本文コピー" title="本文コピー"></button>
           </div>
         </div>
@@ -706,8 +753,6 @@
       </section>
     </main>
   </div>
-
-  <button type="button" class="affiliate-launcher" id="affiliateLauncher">アフィリンク</button>
 
   <div class="modal-backdrop" id="affiliateModalBackdrop" aria-hidden="true">
     <section class="affiliate-modal" role="dialog" aria-modal="true" aria-labelledby="affiliateModalTitle">
@@ -737,10 +782,11 @@
     const ICONS = {
       refresh: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6v5h-5"/><path d="M4 18v-5h5"/><path d="M18.5 9A7 7 0 0 0 6.2 6.2L4 8.5"/><path d="M5.5 15A7 7 0 0 0 17.8 17.8L20 15.5"/></svg>',
       copy: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11"/><path d="M5 15H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v1"/></svg>',
-      x: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="0"/><text x="12" y="15.5" text-anchor="middle" font-size="10.5" font-weight="900" fill="currentColor" stroke="none" font-family="Arial, sans-serif">X</text></svg>',
+      link: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 1 0-7.1-7.1l-1.1 1.1"/><path d="M14 11a5 5 0 0 0-7.1 0l-2 2a5 5 0 0 0 7.1 7.1l1.1-1.1"/></svg>',
+      x: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 2H21l-6.873 7.855L22.5 22h-6.556l-5.135-7.341L4.385 22H2.284l7.351-8.401L1.5 2h6.722l4.642 6.636L18.901 2Z" fill="currentColor" stroke="none"/></svg>',
       discord: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8.5c3.2-1.4 6.8-1.4 10 0"/><path d="M7.5 16.5c2.8 1.3 6.2 1.3 9 0"/><path d="M8 18c-2.4-.6-3.8-1.8-4.6-3.4.5-3.3 1.4-6.1 3.3-8.1 1.3.1 2.2.4 3.2 1"/><path d="M16 7.5c1-.6 1.9-.9 3.2-1 1.9 2 2.8 4.8 3.3 8.1-.8 1.6-2.2 2.8-4.6 3.4"/><path d="M9.5 13h.01"/><path d="M14.5 13h.01"/></svg>',
       onedrive: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.4 18h9.1a4 4 0 0 0 .7-7.94A6.1 6.1 0 0 0 6.8 8.4 4.8 4.8 0 0 0 8.4 18Z"/></svg>',
-      ogp: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1"/><path d="M14 11a5 5 0 0 0-7.1 0l-2 2a5 5 0 0 0 7.1 7.1l1.1-1.1"/></svg>'
+      ogp: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6v5h-5"/><path d="M4 18v-5h5"/><path d="M18.5 9A7 7 0 0 0 6.2 6.2L4 8.5"/><path d="M5.5 15A7 7 0 0 0 17.8 17.8L20 15.5"/></svg>'
     };
 
     const state = {
@@ -804,6 +850,7 @@
     function initIcons() {
       els.refreshButton.innerHTML = ICONS.refresh;
       els.refreshOgpButton.innerHTML = ICONS.ogp;
+      els.insertAffiliateButton.innerHTML = ICONS.link;
       els.copyEditorButton.innerHTML = ICONS.copy;
       els.copyPreviewButton.innerHTML = ICONS.copy;
     }
@@ -812,7 +859,6 @@
       els.statusChip.textContent = message;
       els.statusChip.title = message;
       els.statusChip.style.color = isError ? 'var(--danger)' : 'var(--text-soft)';
-      els.statusChip.style.borderLeftColor = isError ? 'var(--danger)' : 'var(--accent)';
     }
 
     function setAffiliateStatus(message, isError = false) {
@@ -955,7 +1001,7 @@
       const count = els.editor.value.length;
       els.charCount.textContent = `${count.toLocaleString('ja-JP')}字`;
       els.dirtyState.textContent = state.dirty ? '未保存' : '保存済み';
-      els.editorFooter.textContent = state.selectedArticle ? `${state.selectedArticle.name}` : 'Ctrl+S / Command+S で保存';
+      els.editorFooter.textContent = 'Ctrl+S / Command+S で保存';
     }
 
     function renderPreview(forceOgp = false) {
@@ -1012,7 +1058,7 @@
       renderSourcePanel();
       renderEditorLinks();
       renderPreview(false);
-      setStatus(articleTitle(article));
+      setStatus('記事を読み込みました');
     }
 
     async function saveCurrentArticle() {
@@ -1054,15 +1100,15 @@
     }
 
     async function triggerPipeline() {
-      setStatus('Actions実行中');
+      setStatus('パイプライン実行中');
       const response = await fetch(apiUrl('trigger'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ mode: 'full_pipeline' }),
       });
       const payload = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(payload.error || 'Actions実行に失敗しました');
-      setStatus(payload.message || 'Actionsを実行しました');
+      if (!response.ok) throw new Error(payload.error || 'パイプライン実行に失敗しました');
+      setStatus(payload.message || 'パイプラインを実行しました');
     }
 
     async function triggerNoteDraft() {
