@@ -3,7 +3,7 @@ note下書きポスター v4.0 — API直接投稿版（Playwright不要）
 noteの内部APIにHTTPリクエストで直接下書き保存する。
 
 【完全自動化の仕組み】
-1. NOTE_STORAGE_STATE (GitHub Secret) からCookieを復元
+1. NOTE_STORAGE_SECRET_NAME で指定した GitHub Secret からCookieを復元
 2. Cookie無効時 → APIログインで自動再認証（ブラウザ不要）
 3. POST /api/v1/text_notes で下書き作成
 4. 操作後、最新CookieをGitHub Secretに自動上書き
@@ -11,7 +11,7 @@ noteの内部APIにHTTPリクエストで直接下書き保存する。
 
 【初回セットアップのみ手動】
   python prompts/05-draft-manager/note_draft_poster.py --save-cookies
-  → 出力されたJSONをGitHub Secret「NOTE_STORAGE_STATE」に登録
+  → 出力されたJSONを GitHub Secret「NOTE_STORAGE_SECRET_NAME で指定した名前」に登録
 
 【通常実行（GitHub Actions）】
   python prompts/05-draft-manager/note_draft_poster.py <file.md>
@@ -38,7 +38,7 @@ NOTE_STORAGE_STATE  = os.getenv("NOTE_STORAGE_STATE", "")   # JSON (GitHub Secre
 GITHUB_TOKEN        = os.getenv("GITHUB_TOKEN", "")          # PAT (secrets:write)
 GITHUB_REPO_OWNER   = "seahirodigital"
 GITHUB_REPO_NAME    = "Blog_Vercel"
-SECRET_NAME         = "NOTE_STORAGE_STATE"
+NOTE_STORAGE_SECRET_NAME = os.getenv("NOTE_STORAGE_SECRET_NAME", "NOTE_STORAGE_STATE")
 
 SCRIPT_DIR        = Path(__file__).resolve().parent
 LOCAL_STATE_FILE  = SCRIPT_DIR / "note_storage_state.json"   # ローカル保存先
@@ -1656,7 +1656,7 @@ def _save_draft_url_to_github_var(file_id: str, url: str):
 
 # ── GitHub Secret自動更新 ─────────────────────────────
 def _auto_refresh_github_secret(new_state_json: str):
-    """GitHub APIを使ってNOTE_STORAGE_STATEシークレットを自動更新"""
+    """GitHub APIを使って note storage state Secret を自動更新"""
     if not GITHUB_TOKEN:
         print("   ℹ️ GITHUB_TOKEN未設定のためSecretの自動更新をスキップ")
         return
@@ -1687,12 +1687,12 @@ def _auto_refresh_github_secret(new_state_json: str):
 
     # Secretを更新
     res = http_requests.put(
-        f"{api_base}/actions/secrets/{SECRET_NAME}",
+        f"{api_base}/actions/secrets/{NOTE_STORAGE_SECRET_NAME}",
         headers=headers,
         json={"encrypted_value": encrypted, "key_id": key_data["key_id"]},
     )
     if res.status_code in (201, 204):
-        print("   ✅ NOTE_STORAGE_STATE を自動更新しました")
+        print(f"   ✅ {NOTE_STORAGE_SECRET_NAME} を自動更新しました")
     else:
         print(f"   ⚠️ Secret更新失敗 ({res.status_code}): {res.text[:200]}")
 
@@ -2159,7 +2159,7 @@ def save_storage_state_locally():
         print("\n🔄 GITHUB_TOKEN検出 → GitHub Secretを自動更新します...")
         _auto_refresh_github_secret(json.dumps(state, ensure_ascii=False))
     else:
-        print("\n📋 以下をGitHub Secret「NOTE_STORAGE_STATE」に登録してください:")
+        print(f"\n📋 以下をGitHub Secret「{NOTE_STORAGE_SECRET_NAME}」に登録してください:")
         print(state_json)
 
 
