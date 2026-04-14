@@ -128,6 +128,12 @@ function toInteger(value) {
   return Number.isFinite(parsed) ? parsed : 0;
 }
 
+function timestampMs(value) {
+  const date = new Date(value || '');
+  const time = date.getTime();
+  return Number.isNaN(time) ? 0 : time;
+}
+
 function stripFrontmatter(markdownText = '') {
   const parsed = parseMarkdownDocument(markdownText);
   return parsed.body;
@@ -543,6 +549,49 @@ function findItemByPostUrl(manifest, postUrl) {
   }) || null;
 }
 
+function enrichArticlesWithManifest(articles, manifest) {
+  const items = Array.isArray(manifest?.items) ? manifest.items : [];
+  const byArticleId = new Map();
+
+  for (const item of items) {
+    const articleId = firstNonEmpty(item.articleId, item.hasArticle ? item.id : '');
+    if (articleId) byArticleId.set(articleId, item);
+  }
+
+  return articles.map((article) => {
+    const item = byArticleId.get(article.id);
+    if (!item) {
+      return {
+        ...article,
+        discordPostedAt: '',
+        sourcePublishedAt: '',
+        sortPublishedAt: article.lastModified || '',
+      };
+    }
+
+    const discordPostedAt = firstNonEmpty(item.discordPostedAt, item.discordPublishedAt, item.observedAt);
+    const sourcePublishedAt = firstNonEmpty(item.sourcePublishedAt, item.publishedAt);
+    const articleUpdatedAt = firstNonEmpty(item.articleUpdatedAt, article.lastModified);
+
+    return {
+      ...article,
+      h1Title: firstNonEmpty(article.h1Title, item.title),
+      sourceTitle: item.sourceTitle || '',
+      postUrl: item.postUrl || '',
+      normalizedPostUrl: item.normalizedPostUrl || '',
+      sourcePublishedAt,
+      discordPostedAt,
+      sortPublishedAt: firstNonEmpty(discordPostedAt, sourcePublishedAt, articleUpdatedAt, article.lastModified),
+      articleUpdatedAt,
+      sourceUpdatedAt: item.sourceUpdatedAt || '',
+      discordMessageId: item.discordMessageId || '',
+      discordJumpUrl: item.discordJumpUrl || '',
+      discordChannelId: item.discordChannelId || '',
+      channelName: item.channelName || '',
+    };
+  });
+}
+
 function buildFallbackItemFromArticle(articleId, metadata = {}, manifestItem = null) {
   const sourceId = firstNonEmpty(manifestItem?.sourceId, metadata.source_file_id);
   const postUrl = firstNonEmpty(manifestItem?.postUrl, metadata.post_url, metadata.normalized_post_url);
@@ -570,6 +619,8 @@ function buildFallbackItemFromArticle(articleId, metadata = {}, manifestItem = n
     sourceTitle,
     postUrl,
     normalizedPostUrl,
+    publishedAt: firstNonEmpty(manifestItem?.publishedAt, metadata.published_at),
+    observedAt: firstNonEmpty(manifestItem?.observedAt, metadata.observed_at),
     authorName: firstNonEmpty(metadata.author_name, manifestItem?.authorName),
     authorScreenName: firstNonEmpty(metadata.author_screen_name, manifestItem?.authorScreenName),
     favoriteCount: manifestItem?.favoriteCount ?? toInteger(metadata.favorite_count),
@@ -580,6 +631,7 @@ function buildFallbackItemFromArticle(articleId, metadata = {}, manifestItem = n
     viewCount: manifestItem?.viewCount ?? toInteger(metadata.view_count),
     discordMessageId: firstNonEmpty(metadata.discord_message_id, manifestItem?.discordMessageId),
     discordJumpUrl: firstNonEmpty(metadata.discord_jump_url, manifestItem?.discordJumpUrl),
+    channelName: firstNonEmpty(manifestItem?.channelName, metadata.discord_channel_name),
   };
 }
 
@@ -648,7 +700,15 @@ async function handleArticlesRequest(req, res, token) {
       }
     }
 
-    articles.sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified));
+    let manifest = null;
+    try {
+      manifest = await fetchManifest(token);
+    } catch (error) {
+      console.warn('manifest による記事一覧補強をスキップ:', error.message);
+    }
+
+    articles = enrichArticlesWithManifest(articles, manifest);
+    articles.sort((a, b) => timestampMs(b.sortPublishedAt || b.lastModified) - timestampMs(a.sortPublishedAt || a.lastModified));
     return res.status(200).json({ articles });
   }
 
@@ -790,6 +850,7 @@ async function handleTriggerRequest(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  const mode = req.body?.mode || 'full_pipeline';
   const githubToken = process.env.GITHUB_TOKEN;
   const repo = process.env.GITHUB_REPO || 'seahirodigital/Blog_Vercel';
   if (!githubToken) {
@@ -808,8 +869,8 @@ async function handleTriggerRequest(req, res) {
       body: JSON.stringify({
         ref: req.body?.ref || 'main',
         inputs: {
-          mode: req.body?.mode || 'full_pipeline',
-          max_items: String(req.body?.max_items ?? '3'),
+          mode,
+          max_items: String(req.body?.max_items ?? '0'),
           post_url: req.body?.post_url || '',
           rebuild_manifest_only: String(Boolean(req.body?.rebuild_manifest_only)),
         },
@@ -820,7 +881,10 @@ async function handleTriggerRequest(req, res) {
   if (response.status === 204) {
     return res.status(200).json({
       success: true,
-      message: 'Xpost_blog パイプラインを起動しました。GitHub Actions で進捗を確認してください。',
+      message:
+        mode === 'process_queue'
+          ? 'Xpost_blog QUE処理を起動しました。GitHub Actions で進捗を確認してください。'
+          : 'Xpost_blog を最初から実行しました。GitHub Actions で進捗を確認してください。',
     });
   }
 

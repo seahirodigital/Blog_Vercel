@@ -65,6 +65,13 @@
       white-space: nowrap;
     }
 
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
     .toolbar {
       display: flex;
       align-items: center;
@@ -257,6 +264,15 @@
       letter-spacing: -0.2px;
     }
 
+    .sidebar-controls {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      min-width: 0;
+    }
+
     .panel-actions,
     .editor-links,
     .source-links {
@@ -394,7 +410,9 @@
 
     .article-row {
       width: 100%;
-      display: block;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
       border: 0;
       border-bottom: 1px solid var(--line);
       border-left: 3px solid transparent;
@@ -406,14 +424,42 @@
 
     .article-row:hover { background: var(--surface-soft); }
     .article-row.active { border-left-color: var(--accent); background: var(--accent-soft); }
+    .article-row.selected { background: rgba(0, 113, 227, 0.12); }
+    .article-row-main { flex: 1 1 auto; min-width: 0; }
+    .article-check {
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      display: none;
+      flex: 0 0 16px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      color: #ffffff;
+    }
+    .article-list.selecting .article-check { display: inline-flex; }
+    .article-row.selected .article-check {
+      border-color: var(--accent);
+      background: var(--accent);
+    }
+    .article-check svg {
+      width: 11px;
+      height: 11px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 3;
+    }
     .article-title { display: block; font-size: 13px; font-weight: 700; line-height: 1.45; }
     .article-meta { display: block; margin-top: 4px; color: var(--text-soft); font-size: 11px; line-height: 1.35; }
+    .article-time { color: #334155; }
 
+    .sort-toggle,
     .source-toggle {
       height: 28px;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       padding: 0;
       border: 0;
       background: transparent;
@@ -421,6 +467,14 @@
       cursor: pointer;
       font-size: 12px;
       font-weight: 700;
+    }
+
+    .sort-toggle {
+      max-width: 92px;
+      color: var(--accent);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
     .switch {
@@ -629,6 +683,58 @@
       padding: 8px;
       background: var(--surface-soft);
     }
+
+    .context-menu {
+      position: fixed;
+      z-index: 120;
+      min-width: 220px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.16);
+    }
+
+    .context-menu[hidden] { display: none; }
+
+    .context-menu-button {
+      width: 100%;
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 18px;
+      border: 0;
+      background: transparent;
+      color: #334155;
+      cursor: pointer;
+      font-size: 15px;
+      text-align: left;
+    }
+
+    .context-menu-button:hover { background: #f1f5f9; }
+    .context-menu-button.primary { color: #7c3aed; font-weight: 700; }
+    .context-menu-button.primary:hover { background: #f5f3ff; }
+    .context-menu-button.danger { color: #ef4444; }
+    .context-menu-button.danger:hover { background: #fff1f2; }
+    .context-menu-button[disabled] {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .context-menu-button[disabled]:hover { background: transparent; }
+    .context-menu-button svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+    .context-menu-divider {
+      height: 1px;
+      margin: 4px 0;
+      background: var(--line);
+    }
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -736,11 +842,14 @@
 <body>
   <div class="app-shell">
     <header class="topbar">
-      <h1 class="brand">Xpost_blog</h1>
+      <div class="brand-group">
+        <h1 class="brand">Xpost_blog</h1>
+        <button type="button" class="icon-button" id="refreshButton" aria-label="OneDriveを再読み込み" title="OneDriveを再読み込み"></button>
+      </div>
       <div class="toolbar">
         <button type="button" class="tool-button accent-fill" id="noteDraftButton">note下書き</button>
-        <button type="button" class="tool-button accent-outline" id="pipelineButton">パイプライン</button>
-        <button type="button" class="icon-button" id="refreshButton" aria-label="再読み込み" title="再読み込み"></button>
+        <button type="button" class="tool-button accent-outline" id="queueButton">QUE処理</button>
+        <button type="button" class="tool-button accent-outline" id="pipelineButton">最初から実行</button>
         <button type="button" class="tool-button accent-outline" id="saveButton">保存</button>
       </div>
       <span class="status-live" id="statusChip" aria-live="polite">初期化中</span>
@@ -750,10 +859,13 @@
       <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
           <div class="sidebar-title">記事一覧</div>
-          <button type="button" class="source-toggle" id="sourceToggle" aria-pressed="true">
-            <span>元投稿</span>
-            <span class="switch" aria-hidden="true"></span>
-          </button>
+          <div class="sidebar-controls">
+            <button type="button" class="sort-toggle" id="sortToggle" aria-label="新着順の並び替え"></button>
+            <button type="button" class="source-toggle" id="sourceToggle" aria-pressed="true">
+              <span>元投稿</span>
+              <span class="switch" aria-hidden="true"></span>
+            </button>
+          </div>
         </div>
         <div class="content-scroll"><div class="article-list" id="articleList"><div class="empty">読み込み中</div></div></div>
         <div class="sidebar-footer">
@@ -838,9 +950,35 @@
     </section>
   </div>
 
+  <div class="context-menu" id="articleContextMenu" hidden>
+    <button type="button" class="context-menu-button primary" id="contextSelectButton">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="4" height="4" rx="1"/><path d="M10 7h11M10 12h11M10 17h11"/><rect x="3" y="10" width="4" height="4" rx="1"/><rect x="3" y="15" width="4" height="4" rx="1"/></svg>
+      <span>選択</span>
+    </button>
+    <div class="context-menu-divider"></div>
+    <button type="button" class="context-menu-button" id="contextDuplicateButton">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span>複製</span>
+    </button>
+    <button type="button" class="context-menu-button danger" id="contextDeleteButton">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+      <span>削除</span>
+    </button>
+    <div class="context-menu-divider"></div>
+    <button type="button" class="context-menu-button" id="contextOpenOneDriveButton">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      <span>OneDriveで開く</span>
+    </button>
+    <button type="button" class="context-menu-button" id="contextOpenExplorerButton">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      <span>エクスプローラーで表示</span>
+    </button>
+  </div>
+
   <script>
     const API = '/api/xpost-blog';
     const SOURCE_VISIBLE_KEY = 'xpostBlog.sourceVisible';
+    const SORT_ORDER_KEY = 'xpostBlog.sortOrder';
     const NOTE_DRAFT_STORAGE_KEY = 'xpostBlog.noteDraftUrls';
     const ICONS = {
       refresh: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6v5h-5"/><path d="M4 18v-5h5"/><path d="M18.5 9A7 7 0 0 0 6.2 6.2L4 8.5"/><path d="M5.5 15A7 7 0 0 0 17.8 17.8L20 15.5"/></svg>',
@@ -860,7 +998,11 @@
       sourceContent: '',
       sourceMeta: null,
       sourceVisible: localStorage.getItem(SOURCE_VISIBLE_KEY) !== '0',
+      sortOrder: localStorage.getItem(SORT_ORDER_KEY) === 'asc' ? 'asc' : 'desc',
       dirty: false,
+      selectMode: false,
+      selectedArticleIds: new Set(),
+      contextArticleId: '',
       affiliateMemos: { memo1: '' },
       activeAffiliateKey: 'memo1',
       affiliateDirty: false,
@@ -879,6 +1021,7 @@
       mainPanels: document.getElementById('mainPanels'),
       statusChip: document.getElementById('statusChip'),
       articleList: document.getElementById('articleList'),
+      sortToggle: document.getElementById('sortToggle'),
       sourceToggle: document.getElementById('sourceToggle'),
       sourceBody: document.getElementById('sourceBody'),
       sourceLinks: document.getElementById('sourceLinks'),
@@ -892,6 +1035,7 @@
       previewFooter: document.getElementById('previewFooter'),
       saveButton: document.getElementById('saveButton'),
       noteDraftButton: document.getElementById('noteDraftButton'),
+      queueButton: document.getElementById('queueButton'),
       pipelineButton: document.getElementById('pipelineButton'),
       refreshButton: document.getElementById('refreshButton'),
       refreshOgpButton: document.getElementById('refreshOgpButton'),
@@ -914,6 +1058,12 @@
       affiliateEditor: document.getElementById('affiliateEditor'),
       affiliateStatus: document.getElementById('affiliateStatus'),
       insertAffiliateFromModalButton: document.getElementById('insertAffiliateFromModalButton'),
+      articleContextMenu: document.getElementById('articleContextMenu'),
+      contextSelectButton: document.getElementById('contextSelectButton'),
+      contextDuplicateButton: document.getElementById('contextDuplicateButton'),
+      contextDeleteButton: document.getElementById('contextDeleteButton'),
+      contextOpenOneDriveButton: document.getElementById('contextOpenOneDriveButton'),
+      contextOpenExplorerButton: document.getElementById('contextOpenExplorerButton'),
     };
 
     function initIcons() {
@@ -995,6 +1145,42 @@
       }).format(date);
     }
 
+    function formatDiscordDate(value) {
+      if (!value) return '';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '';
+      return new Intl.DateTimeFormat('ja-JP', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+      }).format(date);
+    }
+
+    function articleSortTimestamp(article) {
+      const value = article?.discordPostedAt || article?.sourcePublishedAt || article?.sortPublishedAt || article?.lastModified || '';
+      const date = new Date(value);
+      const time = date.getTime();
+      return Number.isNaN(time) ? 0 : time;
+    }
+
+    function sortedArticles() {
+      const direction = state.sortOrder === 'asc' ? 1 : -1;
+      return [...state.articles].sort((a, b) => {
+        const diff = articleSortTimestamp(a) - articleSortTimestamp(b);
+        if (diff !== 0) return diff * direction;
+        return String(a.name || '').localeCompare(String(b.name || ''), 'ja-JP') * direction;
+      });
+    }
+
+    function updateSortButton() {
+      const isAsc = state.sortOrder === 'asc';
+      els.sortToggle.textContent = isAsc ? 'フィルタ: 新着↑' : 'フィルタ: 新着↓';
+      els.sortToggle.title = isAsc ? '新着順を昇順で表示中。クリックで降順に切り替え' : '新着順を降順で表示中。クリックで昇順に切り替え';
+      els.sortToggle.setAttribute('aria-label', els.sortToggle.title);
+    }
+
     function iconLink(href, label, iconName) {
       const safeLabel = escapeHtml(label);
       const icon = ICONS[iconName] || '';
@@ -1012,18 +1198,32 @@
     }
 
     function renderArticleList() {
+      els.articleList.classList.toggle('selecting', state.selectMode);
       if (!state.articles.length) {
         els.articleList.innerHTML = '<div class="empty">記事がありません</div>';
         return;
       }
 
-      els.articleList.innerHTML = state.articles.map((article) => {
+      els.articleList.innerHTML = sortedArticles().map((article) => {
         const isActive = state.selectedArticle?.id === article.id;
-        const meta = [article.path || '', formatDate(article.lastModified)].filter(Boolean).join(' / ');
+        const isSelected = state.selectedArticleIds.has(article.id);
+        const articlePath = [article.path || '', article.name || ''].filter(Boolean).join('/');
+        const fallbackDate = formatDate(article.lastModified);
+        const discordDate = formatDiscordDate(article.discordPostedAt);
+        const sourceDate = formatDiscordDate(article.sourcePublishedAt);
+        const timeLabel = discordDate
+          ? `Discord掲載: ${discordDate}`
+          : sourceDate
+            ? `元投稿日時: ${sourceDate}`
+            : `更新: ${fallbackDate || '-'}`;
         return `
-          <button type="button" class="article-row ${isActive ? 'active' : ''}" data-article-id="${escapeHtml(article.id)}">
-            <span class="article-title">${escapeHtml(articleTitle(article))}</span>
-            <span class="article-meta">${escapeHtml(meta || article.name)}</span>
+          <button type="button" class="article-row ${isActive ? 'active' : ''} ${isSelected ? 'selected' : ''}" data-article-id="${escapeHtml(article.id)}">
+            <span class="article-check" aria-hidden="true">${isSelected ? '<svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>' : ''}</span>
+            <span class="article-row-main">
+              <span class="article-title">${escapeHtml(articleTitle(article))}</span>
+              <span class="article-meta">${escapeHtml(articlePath || article.name || '')}</span>
+              <span class="article-meta article-time">${escapeHtml(timeLabel)}</span>
+            </span>
           </button>
         `;
       }).join('');
@@ -1031,9 +1231,174 @@
       els.articleList.querySelectorAll('[data-article-id]').forEach((button) => {
         button.addEventListener('click', () => {
           const article = state.articles.find((item) => item.id === button.dataset.articleId);
-          if (article) selectArticle(article).catch((error) => setStatus(error.message, true));
+          if (!article) return;
+          if (state.selectMode) {
+            toggleArticleSelection(article.id);
+            return;
+          }
+          selectArticle(article).catch((error) => setStatus(error.message, true));
+        });
+        button.addEventListener('contextmenu', (event) => {
+          const article = state.articles.find((item) => item.id === button.dataset.articleId);
+          if (article) openArticleContextMenu(event, article);
         });
       });
+    }
+
+    function setSelectionStatus() {
+      const count = state.selectedArticleIds.size;
+      setStatus(count ? `${count}件を選択中` : '選択モードです');
+    }
+
+    function enterSelectMode(article) {
+      state.selectMode = true;
+      state.selectedArticleIds = new Set([article.id]);
+      closeArticleContextMenu();
+      renderArticleList();
+      setSelectionStatus();
+    }
+
+    function clearSelectMode() {
+      state.selectMode = false;
+      state.selectedArticleIds.clear();
+      renderArticleList();
+      setStatus('選択を解除しました');
+    }
+
+    function toggleArticleSelection(articleId) {
+      if (state.selectedArticleIds.has(articleId)) {
+        state.selectedArticleIds.delete(articleId);
+      } else {
+        state.selectedArticleIds.add(articleId);
+      }
+      renderArticleList();
+      setSelectionStatus();
+    }
+
+    function contextArticle() {
+      return state.articles.find((article) => article.id === state.contextArticleId) || null;
+    }
+
+    function closeArticleContextMenu() {
+      els.articleContextMenu.hidden = true;
+      state.contextArticleId = '';
+    }
+
+    function openArticleContextMenu(event, article) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const menuWidth = 220;
+      const menuHeight = 252;
+      const x = Math.max(8, Math.min(event.clientX, window.innerWidth - menuWidth - 8));
+      const y = Math.max(8, Math.min(event.clientY, window.innerHeight - menuHeight - 8));
+
+      state.contextArticleId = article.id;
+      els.contextOpenOneDriveButton.disabled = !article.webUrl;
+      els.contextOpenExplorerButton.disabled = !article.name;
+      els.articleContextMenu.style.left = `${x}px`;
+      els.articleContextMenu.style.top = `${y}px`;
+      els.articleContextMenu.hidden = false;
+    }
+
+    function clearArticlePanels() {
+      state.selectedArticle = null;
+      state.frontmatterContent = '';
+      state.editorContent = '';
+      state.sourceContent = '';
+      state.sourceMeta = null;
+      state.dirty = false;
+      els.editor.value = '';
+      els.editorTitle.textContent = 'エディター';
+      els.sourceLinks.innerHTML = '';
+      els.sourceBody.innerHTML = '<div class="empty">記事を選択してください</div>';
+      els.preview.innerHTML = '<div class="empty">記事を選択してください</div>';
+      updateEditorMeta();
+      renderEditorLinks();
+    }
+
+    function duplicateName(name) {
+      return `コピー_${name || '無題.md'}`;
+    }
+
+    async function duplicateArticle(article) {
+      if (!article) return;
+      closeArticleContextMenu();
+      setStatus('記事を複製中');
+      const newName = duplicateName(article.name);
+      const response = await fetch(apiUrl('articles'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fileId: article.id,
+          newName,
+          folderPath: article.path || '',
+        }),
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(payload.error || '複製に失敗しました');
+
+      state.articles = [
+        {
+          ...article,
+          id: payload.id || '',
+          name: payload.name || newName,
+          webUrl: payload.webUrl || '',
+          lastModified: payload.lastModified || new Date().toISOString(),
+          size: payload.size || article.size || 0,
+        },
+        ...state.articles,
+      ];
+      renderArticleList();
+      setStatus('記事を複製しました');
+    }
+
+    async function deleteArticle(article) {
+      if (!article) return;
+      closeArticleContextMenu();
+      const label = articleTitle(article);
+      if (!window.confirm(`「${label}」を削除します。この操作は取り消せません。`)) return;
+
+      setStatus('記事を削除中');
+      const response = await fetch(apiUrl('articles'), {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fileId: article.id }),
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(payload.error || '削除に失敗しました');
+
+      const wasSelected = state.selectedArticle?.id === article.id;
+      state.articles = state.articles.filter((item) => item.id !== article.id);
+      state.selectedArticleIds.delete(article.id);
+
+      if (state.selectedArticleIds.size === 0) state.selectMode = false;
+      renderArticleList();
+
+      if (wasSelected) {
+        const nextArticle = sortedArticles()[0] || null;
+        if (nextArticle) {
+          await selectArticle(nextArticle);
+        } else {
+          clearArticlePanels();
+        }
+      }
+
+      setStatus('記事を削除しました');
+    }
+
+    function openOneDriveArticle(article) {
+      if (!article?.webUrl) return;
+      window.open(article.webUrl, '_blank', 'noopener,noreferrer');
+      closeArticleContextMenu();
+    }
+
+    function openExplorerArticle(article) {
+      if (!article) return;
+      const localPath = ['X投稿', article.path || ''].filter(Boolean).join('/');
+      fetch(`/api/open-file?path=${encodeURIComponent(localPath)}&name=${encodeURIComponent(article.name || '')}`).catch(() => {});
+      closeArticleContextMenu();
+      setStatus('エクスプローラーで表示します');
     }
 
     function renderSourcePanel() {
@@ -1046,6 +1411,7 @@
 
       const stats = [
         ['投稿者', item.authorName || item.authorUsername || '-'],
+        ['Discord掲載', formatDiscordDate(item.observedAt || item.discordPostedAt) || '-'],
         ['いいね', item.favoriteCount ?? item.likeCount ?? 0],
         ['リポスト', item.repostCount ?? item.retweetCount ?? 0],
         ['状態', item.articleStatus || item.status || '-'],
@@ -1087,18 +1453,19 @@
       updateEditorMeta();
       queueOgpCards(forceOgp);
     }
-    async function fetchArticles() {
-      setStatus('記事一覧を取得中');
+    async function fetchArticles(forceReload = false) {
+      setStatus(forceReload ? 'OneDriveを再読み込み中' : '記事一覧を取得中');
       const previousId = state.selectedArticle?.id;
-      const response = await fetch(apiUrl('articles'), { cache: 'no-store' });
+      const response = await fetch(apiUrl('articles', { refresh: Date.now() }), { cache: 'no-store' });
       if (!response.ok) throw new Error('記事一覧の取得に失敗しました');
       const data = await response.json();
       state.articles = data.articles || [];
       state.selectedArticle = previousId ? state.articles.find((article) => article.id === previousId) || null : null;
       renderArticleList();
-      setStatus(`記事一覧 ${state.articles.length}件`);
-      if (!state.selectedArticle && state.articles[0]) {
-        await selectArticle(state.articles[0]);
+      setStatus(forceReload ? `OneDrive再読み込み完了 ${state.articles.length}件` : `記事一覧 ${state.articles.length}件`);
+      const firstArticle = sortedArticles()[0];
+      if (!state.selectedArticle && firstArticle) {
+        await selectArticle(firstArticle);
       } else if (state.selectedArticle) {
         await selectArticle(state.selectedArticle);
       }
@@ -1177,42 +1544,57 @@
       return true;
     }
 
-    async function triggerPipeline() {
-      setStatus('パイプライン実行中');
+    async function triggerWorkflow(mode, statusMessage, errorMessage) {
+      setStatus(statusMessage);
       const response = await fetch(apiUrl('trigger'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mode: 'full_pipeline' }),
+        body: JSON.stringify({ mode, max_items: 0 }),
       });
       const payload = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(payload.error || 'パイプライン実行に失敗しました');
-      setStatus(payload.message || 'パイプラインを実行しました');
+      if (!response.ok) throw new Error(payload.error || errorMessage);
+      setStatus(payload.message || statusMessage.replace('実行中', '起動しました'));
+    }
+
+    async function triggerQueue() {
+      return triggerWorkflow('process_queue', 'QUE処理を実行中', 'QUE処理の実行に失敗しました');
+    }
+
+    async function triggerPipeline() {
+      return triggerWorkflow('full_pipeline', '最初から実行中', '最初から実行に失敗しました');
     }
 
     async function triggerNoteDraft() {
-      if (!state.selectedArticle) {
+      const selectedIds = state.selectMode ? Array.from(state.selectedArticleIds) : [];
+      const targetIds = selectedIds.length ? selectedIds : (state.selectedArticle ? [state.selectedArticle.id] : []);
+
+      if (!targetIds.length) {
         setStatus('note下書き対象の記事が未選択です', true);
         return;
       }
 
-      if (state.dirty) {
+      if (state.dirty && state.selectedArticle && targetIds.includes(state.selectedArticle.id)) {
         const saved = await saveCurrentArticle();
         if (!saved) return;
       }
 
       setStatus('note下書きを起動中');
-      const fileId = state.selectedArticle.id;
       const response = await fetch('/api/note-draft', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fileIds: [fileId], noTopImage: true }),
+        body: JSON.stringify({ fileIds: targetIds, noTopImage: true }),
       });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok || payload.success === false) {
         throw new Error(payload.error || payload.message || 'note下書きの起動に失敗しました');
       }
-      setStatus('note下書きを実行中です。URLを確認します');
-      await pollNoteDraftUrl(fileId);
+      setStatus(`${targetIds.length}件のnote下書きを実行中です。URLを確認します`);
+      if (state.selectMode) {
+        state.selectMode = false;
+        state.selectedArticleIds.clear();
+        renderArticleList();
+      }
+      await pollNoteDraftUrls(targetIds);
     }
 
     async function fetchNoteDraftUrl(fileId) {
@@ -1244,6 +1626,24 @@
       }
       setStatus('note下書きは実行中です。GitHub Actions 完了後に再確認してください');
       return null;
+    }
+
+    async function pollNoteDraftUrls(fileIds) {
+      const ids = Array.isArray(fileIds) ? fileIds : [fileIds];
+      if (ids.length === 1) return pollNoteDraftUrl(ids[0]);
+
+      const pending = new Set(ids);
+      for (let attempt = 0; attempt < 24 && pending.size > 0; attempt += 1) {
+        for (const fileId of [...pending]) {
+          const url = await fetchNoteDraftUrl(fileId);
+          if (url) pending.delete(fileId);
+        }
+        setStatus(pending.size ? `note下書きURL確認中 残り${pending.size}件` : 'note下書きURLを取得しました');
+        if (pending.size === 0) return true;
+        await new Promise((resolve) => setTimeout(resolve, 5000));
+      }
+      setStatus('note下書きは実行中です。GitHub Actions 完了後に再確認してください');
+      return false;
     }
 
     async function copyText(text, doneMessage) {
@@ -1493,12 +1893,20 @@
     function bindEvents() {
       els.saveButton.addEventListener('click', () => saveCurrentArticle().catch((error) => setStatus(error.message, true)));
       els.noteDraftButton.addEventListener('click', () => triggerNoteDraft().catch((error) => setStatus(error.message, true)));
+      els.queueButton.addEventListener('click', () => triggerQueue().catch((error) => setStatus(error.message, true)));
       els.pipelineButton.addEventListener('click', () => triggerPipeline().catch((error) => setStatus(error.message, true)));
-      els.refreshButton.addEventListener('click', () => fetchArticles().catch((error) => setStatus(error.message, true)));
+      els.refreshButton.addEventListener('click', () => fetchArticles(true).catch((error) => setStatus(error.message, true)));
       els.refreshOgpButton.addEventListener('click', refreshOgp);
       els.copyEditorButton.addEventListener('click', () => copyText(els.editor.value, '本文をコピーしました').catch((error) => setStatus(error.message, true)));
       els.copyPreviewButton.addEventListener('click', () => copyText(els.preview.innerHTML, 'プレビューHTMLをコピーしました').catch((error) => setStatus(error.message, true)));
       els.insertAffiliateButton.addEventListener('click', insertAffiliateAtEnd);
+      els.sortToggle.addEventListener('click', () => {
+        state.sortOrder = state.sortOrder === 'asc' ? 'desc' : 'asc';
+        localStorage.setItem(SORT_ORDER_KEY, state.sortOrder);
+        updateSortButton();
+        renderArticleList();
+        setStatus(state.sortOrder === 'asc' ? '新着順を昇順にしました' : '新着順を降順にしました');
+      });
       els.sourceToggle.addEventListener('click', () => setSourceVisible(!state.sourceVisible));
 
       els.editor.addEventListener('input', () => {
@@ -1508,10 +1916,41 @@
 
       window.addEventListener('keydown', (event) => {
         const isSaveShortcut = (event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's';
-        if (!isSaveShortcut) return;
-        event.preventDefault();
-        saveCurrentArticle().catch((error) => setStatus(error.message, true));
+        if (isSaveShortcut) {
+          event.preventDefault();
+          saveCurrentArticle().catch((error) => setStatus(error.message, true));
+          return;
+        }
+        if (event.key === 'Escape') {
+          if (!els.articleContextMenu.hidden) closeArticleContextMenu();
+          else if (state.selectMode) clearSelectMode();
+        }
       });
+
+      window.addEventListener('click', (event) => {
+        if (!els.articleContextMenu.hidden && !els.articleContextMenu.contains(event.target)) {
+          closeArticleContextMenu();
+        }
+      });
+      window.addEventListener('contextmenu', (event) => {
+        if (!els.articleContextMenu.hidden && !els.articleContextMenu.contains(event.target)) {
+          closeArticleContextMenu();
+        }
+      });
+
+      els.articleContextMenu.addEventListener('click', (event) => event.stopPropagation());
+      els.contextSelectButton.addEventListener('click', () => {
+        const article = contextArticle();
+        if (article) enterSelectMode(article);
+      });
+      els.contextDuplicateButton.addEventListener('click', () => {
+        duplicateArticle(contextArticle()).catch((error) => setStatus(error.message, true));
+      });
+      els.contextDeleteButton.addEventListener('click', () => {
+        deleteArticle(contextArticle()).catch((error) => setStatus(error.message, true));
+      });
+      els.contextOpenOneDriveButton.addEventListener('click', () => openOneDriveArticle(contextArticle()));
+      els.contextOpenExplorerButton.addEventListener('click', () => openExplorerArticle(contextArticle()));
 
       els.affiliateLauncher.addEventListener('click', openAffiliateModal);
       els.closeAffiliateButton.addEventListener('click', closeAffiliateModal);
@@ -1537,6 +1976,7 @@
       initIcons();
       bindEvents();
       setSourceVisible(state.sourceVisible);
+      updateSortButton();
       updateEditorMeta();
       await Promise.all([
         fetchArticles(),
