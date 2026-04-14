@@ -1,12 +1,15 @@
+import os
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
 from . import onedrive_writer
 
 STATE_FILE_PATH = "state/xpost_pipeline_state.json"
-DEFAULT_RETRY_SECONDS = 1800
-QUOTA_RETRY_SECONDS = 3600
-PROCESSING_STALE_SECONDS = 14400
+DEFAULT_RETRY_SECONDS = int(os.getenv("XPOST_BLOG_RETRY_SECONDS", "1800") or 1800)
+QUOTA_RETRY_SECONDS = int(os.getenv("XPOST_BLOG_QUOTA_RETRY_SECONDS", "21600") or 21600)
+GEMINI_TOKEN_COOLDOWN_SECONDS = int(os.getenv("XPOST_BLOG_GEMINI_TOKEN_COOLDOWN_SECONDS", str(QUOTA_RETRY_SECONDS)) or QUOTA_RETRY_SECONDS)
+PROCESSING_STALE_SECONDS = int(os.getenv("XPOST_BLOG_PROCESSING_STALE_SECONDS", "14400") or 14400)
+MAX_GEMINI_FAILURES = int(os.getenv("XPOST_BLOG_GEMINI_MAX_FAILURES", "3") or 3)
 
 PENDING_STATUS = "pending"
 PROCESSING_STATUS = "processing"
@@ -14,6 +17,7 @@ DEFERRED_STATUS = "deferred"
 FAILED_STATUS = "failed"
 DONE_STATUS = "done"
 INACTIVE_STATUS = "inactive"
+NEEDS_REVIEW_STATUS = "needs_review"
 
 
 def _now() -> datetime:
@@ -46,12 +50,34 @@ def _iso_after(wait_seconds: int) -> str:
     return (_now() + timedelta(seconds=max(0, int(wait_seconds or 0)))).isoformat().replace("+00:00", "Z")
 
 
+def _ensure_meta(state: dict[str, Any]) -> dict[str, Any]:
+    meta = state.setdefault("meta", {})
+    if not isinstance(meta, dict):
+        meta = {}
+        state["meta"] = meta
+    meta.setdefault("discordChannels", {})
+    meta.setdefault("geminiTokenCooldowns", {})
+    if not isinstance(meta["discordChannels"], dict):
+        meta["discordChannels"] = {}
+    if not isinstance(meta["geminiTokenCooldowns"], dict):
+        meta["geminiTokenCooldowns"] = {}
+    return meta
+
+
+def _seconds_until(value: str | None) -> int:
+    parsed = _parse_iso(value)
+    if not parsed:
+        return 0
+    return max(0, int((parsed - _now()).total_seconds() + 0.999))
+
+
 def _blank_state() -> dict[str, Any]:
     return {
         "version": 1,
         "updatedAt": "",
         "meta": {
             "discordChannels": {},
+            "geminiTokenCooldowns": {},
         },
         "posts": {},
     }
@@ -103,16 +129,14 @@ def load_state() -> dict[str, Any]:
     state.setdefault("updatedAt", "")
     state.setdefault("meta", {"discordChannels": {}})
     state.setdefault("posts", {})
-    if not isinstance(state["meta"], dict):
-        state["meta"] = {"discordChannels": {}}
-    state["meta"].setdefault("discordChannels", {})
+    _ensure_meta(state)
     if not isinstance(state["posts"], dict):
         state["posts"] = {}
     return state
 
 
 def save_state(state: dict[str, Any]) -> dict[str, Any]:
-    state.setdefault("meta", {"discordChannels": {}})
+    _ensure_meta(state)
     state.setdefault("posts", {})
     state["updatedAt"] = _now_iso()
     onedrive_writer.upload_json(STATE_FILE_PATH, state)
@@ -191,7 +215,61 @@ def resolve_retry_wait_seconds(recommended_wait_seconds: int = 0, quota: bool = 
     return max(base, int(recommended_wait_seconds or 0))
 
 
-def list_processable_posts(state: dict[str, Any], max_items: int = 0, post_url: str = "") -> list[dict[str, Any]]:
+def resolve_token_cooldown_wait_seconds(recommended_wait_seconds: int = 0) -> int:
+    return max(GEMINI_TOKEN_COOLDOWN_SECONDS, int(recommended_wait_seconds or 0))
+
+
+def get_gemini_token_cooldown(state: dict[str, Any], gemini_token_env: str) -> dict[str, Any]:
+    token_name = str(gemini_token_env or "").strip()
+    if not token_name:
+        return {}
+    cooldowns = _ensure_meta(state).setdefault("geminiTokenCooldowns", {})
+    entry = cooldowns.get(token_name)
+    if not isinstance(entry, dict):
+        return {}
+    until = _parse_iso(entry.get("until"))
+    if not until:
+        cooldowns.pop(token_name, None)
+        return {}
+    if until <= _now():
+        cooldowns.pop(token_name, None)
+        state["updatedAt"] = _now_iso()
+        return {}
+    result = dict(entry)
+    result["remainingSeconds"] = _seconds_until(result.get("until"))
+    return result
+
+
+def mark_gemini_token_cooldown(
+    state: dict[str, Any],
+    gemini_token_env: str,
+    reason: str,
+    wait_seconds: int = 0,
+    failure_kind: str = "",
+) -> dict[str, Any]:
+    token_name = str(gemini_token_env or "").strip()
+    if not token_name:
+        return {}
+    now_iso = _now_iso()
+    cooldown_wait_seconds = resolve_token_cooldown_wait_seconds(wait_seconds)
+    entry = {
+        "until": _iso_after(cooldown_wait_seconds),
+        "reason": str(reason or "").strip()[:500],
+        "failureKind": str(failure_kind or "unknown"),
+        "waitSeconds": cooldown_wait_seconds,
+        "lastFailureAt": now_iso,
+    }
+    _ensure_meta(state).setdefault("geminiTokenCooldowns", {})[token_name] = entry
+    state["updatedAt"] = now_iso
+    return dict(entry)
+
+
+def list_processable_posts(
+    state: dict[str, Any],
+    max_items: int = 0,
+    post_url: str = "",
+    skip_gemini_retry_backlog: bool = False,
+) -> list[dict[str, Any]]:
     normalized_filter = _normalize_post_key(post_url)
     now = _now()
     records: list[dict[str, Any]] = []
@@ -200,9 +278,11 @@ def list_processable_posts(state: dict[str, Any], max_items: int = 0, post_url: 
         if not record.get("active", True):
             continue
         status = str(record.get("status") or PENDING_STATUS)
-        if status in {DONE_STATUS, INACTIVE_STATUS}:
+        if status in {DONE_STATUS, INACTIVE_STATUS, NEEDS_REVIEW_STATUS}:
             continue
         if normalized_filter and record.get("normalizedPostUrl") != normalized_filter:
+            continue
+        if skip_gemini_retry_backlog and status in {DEFERRED_STATUS, FAILED_STATUS} and str(record.get("lastStage") or "") == "Gemini":
             continue
         if status == PROCESSING_STATUS:
             started_at = _parse_iso(record.get("processingStartedAt") or record.get("lastAttemptAt"))
@@ -218,8 +298,9 @@ def list_processable_posts(state: dict[str, Any], max_items: int = 0, post_url: 
         key=lambda item: (
             0 if item.get("manualPriorityAt") else 1,
             -_timestamp(item.get("manualPriorityAt")),
-            str(item.get("nextRetryAt", "")),
-            -_timestamp(item.get("publishedAt") or item.get("observedAt")),
+            0 if item.get("retryPriorityAt") else 1,
+            _timestamp(item.get("nextRetryAt")),
+            _timestamp(item.get("publishedAt") or item.get("observedAt") or item.get("firstSeenAt")),
             str(item.get("postUrl", "")),
         )
     )
@@ -309,6 +390,51 @@ def mark_retry(
     return record
 
 
+def mark_gemini_retry(
+    state: dict[str, Any],
+    post_url: str,
+    error: str,
+    run_id: str,
+    wait_seconds: int,
+    status: str = DEFERRED_STATUS,
+    failure_kind: str = "",
+    gemini_attempt_count: int = 0,
+    gemini_token_env: str = "",
+    retry_priority: bool = False,
+) -> dict[str, Any]:
+    record = mark_retry(
+        state,
+        post_url,
+        "Gemini",
+        error,
+        run_id,
+        wait_seconds=wait_seconds,
+        status=status,
+    )
+    now_iso = record.get("lastFailureAt") or _now_iso()
+    record["geminiFailureCount"] = int(record.get("geminiFailureCount") or 0) + 1
+    record["geminiCallCount"] = int(record.get("geminiCallCount") or 0) + max(0, int(gemini_attempt_count or 0))
+    record["geminiLastFailureKind"] = str(failure_kind or "unknown")
+    record["geminiLastAttemptAt"] = now_iso
+    record["geminiLastTokenEnv"] = str(gemini_token_env or "")
+    record["geminiLastRecommendedWaitSeconds"] = max(0, int(wait_seconds or 0))
+    if retry_priority:
+        record["retryPriorityAt"] = now_iso
+        record["retryPriorityReason"] = "Gemini TOKEN が利用できなかったため、次回 queue 処理の先頭へ回します"
+
+    if record["geminiFailureCount"] >= MAX_GEMINI_FAILURES:
+        record["status"] = NEEDS_REVIEW_STATUS
+        record["nextRetryAt"] = ""
+        record["retryPriorityAt"] = ""
+        record["retryPriorityReason"] = ""
+        record["needsReviewReason"] = (
+            f"Gemini 失敗が {record['geminiFailureCount']} 回に達したため、自動再試行を停止しました"
+        )
+
+    state["updatedAt"] = now_iso
+    return record
+
+
 def mark_done(
     state: dict[str, Any],
     post_url: str,
@@ -330,6 +456,12 @@ def mark_done(
     record["articleTitle"] = blog_result.get("title", record.get("articleTitle", ""))
     record["folderName"] = blog_result.get("folderName", record.get("folderName", ""))
     record["manualPriorityAt"] = ""
+    record["retryPriorityAt"] = ""
+    record["retryPriorityReason"] = ""
+    record["geminiFailureCount"] = 0
+    record["geminiLastFailureKind"] = ""
+    record["geminiLastSuccessAt"] = now_iso
+    record["needsReviewReason"] = ""
     state["updatedAt"] = now_iso
     return record
 
@@ -341,5 +473,9 @@ def prioritize_post(state: dict[str, Any], post_url: str) -> dict[str, Any]:
     record["manualPriorityAt"] = now_iso
     record["nextRetryAt"] = now_iso
     record["processingStartedAt"] = ""
+    record["needsReviewReason"] = ""
+    record["retryPriorityAt"] = ""
+    record["retryPriorityReason"] = ""
+    record["geminiFailureCount"] = 0
     state["updatedAt"] = now_iso
     return record

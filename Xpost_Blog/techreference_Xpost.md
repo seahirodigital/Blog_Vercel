@@ -44,9 +44,9 @@
 
 ## 3. 実装方針メモ
 ### queue
-- Discord 取得は `C:\Users\HCY\OneDrive\Vercel_Blog\X投稿\state\xpost_pipeline_state.json` に cursor と post 状態を保存する。
-- 2026-04-14 時点の本番運用では 15分巡回で新規 URL を `pending` 化する。
-- quota 時は `deferred` と `nextRetryAt` を付けて次回 run に回す。
+- Discord 取得は `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\X投稿\state\xpost_pipeline_state.json` に cursor と post 状態を保存する。
+- 2026-04-14 時点の本番運用では1時間巡回で新規 URL を `pending` 化する。
+- Gemini の quota / 一時障害時は TOKEN 単位で6時間クールダウンし、全TOKENが使えなければ投稿を `deferred` と `retryPriorityAt` 付きで次回 queue 処理の先頭へ回す。
 
 ### 取得層
 - phase 1 は `SocialData API` を使う。
@@ -212,19 +212,19 @@
 ### 方針更新
 - Xpost_blog の取得主経路は `SocialData API` に戻す。
 - `Apify` は Xpost 取得案としては採用しない。検証コードは残すが、本番 workflow では使わない。
-- queue 同期は `15分ごと`、取得は `1 run 最大1件` に固定する。
+- queue 同期は後続見直しで `1時間ごと`、取得は `1 run 件数制限なし` に変更した。詳細は第14章を正とする。
 - thread 展開は行わない。記事化に必要な `Get Tweet` と必要時のみ `Get Article` だけを見る。
 - Gemini は日次上限制御を入れず、既存の `GEMINI_TOKEN_tech -> GEMINI_TOKEN_INVESTSUB` failover を維持する。
 
 ### 運用整理表
 | 項目 | 採用値 | 理由 |
 | --- | --- | --- |
-| queue 同期間隔 | 15分ごと | GitHub Actions の起動と依存インストールの重さを踏まえ、5分や10分より安定しやすい |
-| 1 run の取得件数 | 最大1件 | SocialData の無料帯に十分余裕を残し、記事化の進行も追いやすい |
+| queue 同期間隔 | 1時間ごと | 15分おきはGemini失敗時の再試行圧が強すぎるため |
+| 1 run の取得件数 | 件数制限なし | 実運用の新着は最大でも1日5件程度なので、人工的な1件制限を外す |
 | 取得主経路 | SocialData API | X article 取得まで含めると一番安定するため |
 | Apify | 不採用 | X article 本文取得まで単独で安定させにくかったため |
 | thread 展開 | しない | 記事目的では過剰取得になりやすく、無料帯設計とも相性が悪いため |
-| Gemini 制御 | 既存 failover 維持 | 日次上限より token failover の方が実運用に合っているため |
+| Gemini 制御 | token failover + token別6時間クールダウン | 429/500/503で同じTOKENを連打しないため |
 
 ### コスト整理表
 | ケース | 想定 API 呼び出し | 1記事あたりコスト | 1ドルあたり理論件数 | 備考 |
@@ -236,16 +236,16 @@
 ### 取得間隔と無料帯の見積もり
 | 指標 | 計算式 | 値 | メモ |
 | --- | --- | --- | --- |
-| 1日あたりの run 回数 | `24時間 × 4回/時` | `96 run/日` | 15分ごと実行 |
-| 1日あたりの通常ポスト取得上限 | `96 run × 1件` | `96件/日` | `Get Tweet` のみ |
-| 1日あたりの X article 取得上限 | `96 run × 1件` | `96件/日` | 件数上限は同じ、API 呼び出しは増える |
-| 1日あたりの通常ポスト API 使用量 | `96 × 1 req` | `96 req/日` | SocialData 無料帯理論値より大幅に低い |
-| 1日あたりの X article API 使用量 | `96 × 2 req` | `192 req/日` | article 付き投稿だけが続いても低水準 |
+| 1日あたりの run 回数 | `24時間 × 1回/時` | `24 run/日` | 1時間ごと実行 |
+| 1日あたりの想定通常ポスト取得 | 実運用見込み | `最大5件程度/日` | `Get Tweet` のみ |
+| 1日あたりの想定 X article 取得 | 実運用見込み | `最大5件程度/日` | article 付き投稿だけ API 呼び出しが増える |
+| 1日あたりの通常ポスト API 使用量 | `5 × 1 req` | `5 req/日` | SocialData 無料帯理論値より大幅に低い |
+| 1日あたりの X article API 使用量 | `5 × 2 req` | `10 req/日` | article 付き投稿だけが続いても低水準 |
 | SocialData 無料帯理論値 | `3 req/分 × 60 × 24` | `4,320 req/日` | docs 記載の fair-use ベース |
 
 ### 注意
 - SocialData docs には「`3 requests per minute` までは free」と「`positive balance` が必要」が同居しているため、完全残高ゼロ運用を断定はしない。少額残高を置きつつ、課金発生を避ける設計として解釈する方が安全。
-- 本番 workflow は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` で `15分ごと` と `1 run 最大1件` に寄せる。
+- 本番 workflow は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` で `1時間ごと` と `max_items=0` に寄せる。
 - 今回の設計は「最大取得」ではなく「安定して候補を拾い、記事制作を止めない」ことを優先する。
 
 ### 参考URL
@@ -275,3 +275,52 @@
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\onedrive_writer.py`
   - OneDrive 保存時に `429/500/502/503/504` の短い retry を追加した。
   - transient な Graph API エラーで `state` と `manifest` だけ取り残される事故を減らす狙い。
+
+## 14. 2026-04-14 今回の検証でまだうまくいっていない点
+### 現在の結論
+- Gemini の失敗原因は、Discord 巡回ではなく `Gemini` 整形段階の `429/500/503` 系エラー。
+- `GEMINI_TOKEN_SUB3` は別 Google account の新TOKENでも `503 UNAVAILABLE` が出たため、account quota だけでなく Gemini 側の高負荷・一時障害として扱う。
+- 最悪UXは「Geminiで生成されず、何度も無駄打ちすること」なので、定期実行と手動実行を分け、保存済みソースを再利用して Gemini / SocialData の両方を節約する。
+
+### GitHub Actions と Discord 巡回
+| 項目 | 現在の設定 | 実装場所 | 理由 |
+| --- | --- | --- | --- |
+| scheduled run | `7 * * * *` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` | 15分おきは過剰なので、Discord巡回は1時間に1回へ落とす |
+| scheduled run の mode | `full_pipeline` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` | 定期実行では Discord 巡回から始める |
+| 1回あたり処理件数 | `max_items=0` / `XPOST_BLOG_MAX_ITEMS_PER_RUN=0` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` / `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\runner.py` | `0` を無制限として扱う。実運用は最大でも1日5件程度なので、1件制限は外す |
+| Discord 新規追加0件 | scheduled run では queue 処理自体をしない | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\runner.py` | 新着が無い定期実行で過去queueを燃やし続けないため |
+| Discord 新規追加あり | queue を古い順で処理する | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\state_store.py` | queue が溜まった場合でも、先に入った投稿から救済する |
+
+### 手動実行ボタン
+| ボタン | 起動する mode | 動き | 実装場所 |
+| --- | --- | --- | --- |
+| `QUE処理` | `process_queue` | Discord巡回はせず、既存queueだけを処理する。保存済み元ソースがある投稿は SocialData を呼ばず Gemini から再開する | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` / `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` |
+| `最初から実行` | `full_pipeline` | Discord巡回から始め、その後queue処理へ進む。次の1時間を待てない時に使う | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` / `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` |
+| 更新アイコン | OneDrive記事一覧の再読込 | `Xpost_blog` 見出しの右隣へ移動し、キャッシュ回避つきで `articles` を再取得する | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` |
+
+### SocialDataAPI と OneDrive ソース再利用
+| 条件 | SocialDataAPIを呼ぶか | Geminiへ進むか | 理由 |
+| --- | --- | --- | --- |
+| Discord巡回 | 呼ばない | 呼ばない | Discordは `DISCORD_BOT_TOKEN` でX URLを拾うだけ。SocialDataAPIはDiscordへアクセスしない |
+| queue投稿に `sourceRelativePath` が無い | 呼ぶ | SocialData成功後に進む | Geminiへ渡す元投稿ソースが必要なため |
+| queue投稿に `sourceRelativePath` がある | 呼ばない | 保存済み OneDrive ソースを読み直してGeminiへ進む | SUB3検証のように「元ソース保存済み、Geminiだけ失敗」の投稿を安く再処理するため |
+| SocialData取得失敗 | 呼んだ結果として失敗 | 進まない | Geminiに渡す材料が無いため |
+
+### Gemini リクエストルール
+| 条件 | 処理 | 次のTOKEN | 次回扱い |
+| --- | --- | --- | --- |
+| 通常開始 | `GEMINI_TOKEN_tech` から試す | 失敗条件に応じて `GEMINI_TOKEN_INVESTSUB` へ進む | token順は従来どおり |
+| `429` / quota / rate limit | そのTOKENを6時間クールダウン | 次TOKENを試す | 全TOKENが使えなければ投稿を `deferred` にし、次回queue処理の先頭へ回す |
+| `500` / `503` / `UNAVAILABLE` | 同一TOKENで再試行連打せず、そのTOKENを6時間クールダウン | 次TOKENを試す | Gemini側の高負荷を疑い、連打しない |
+| 入力過大や明確な入力エラー | 次TOKENへ逃がさず投稿側の失敗として扱う | 原則試さない | tokenを変えても直りにくいので、無駄打ちを避ける |
+| 同じ投稿でGemini失敗3回 | `needs_review` | 試さない | 処理不能投稿がtokenを消費し続けるのを止める |
+| 全TOKENがクールダウン中 | Geminiは呼ばない | なし | `retryPriorityAt` を付け、次回queue処理の先頭へ回す |
+
+### SUB3検証で取得できたもの・できていないもの
+| 対象 | 結果 | 保存先・状態 | 補足 |
+| --- | --- | --- | --- |
+| 検証 run | 実行成功 | GitHub Actions run `24385355631` | `GEMINI_TOKEN_SUB3` を `GEMINI_TOKEN_tech` 枠に一時差し替えた短命ブランチで実行 |
+| 元投稿ソース | 取得できた | `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\X投稿\20260413_2043674800888119512_今さら聞けない！Claude × Obsidian、これはもう違\` 相当 | SocialData / OneDrive 保存は通っている |
+| 記事本文 Markdown | 取得できていない | `articleId` 空、`articleWebUrl` 空 | Gemini が `503 UNAVAILABLE` を返したため |
+| 現在の救済策 | 手動 `QUE処理` で再開可能 | 保存済み元ソースを再利用 | SocialDataを再実行せず、Geminiから再処理できる |
+| `GEMINI_TOKEN_SUB3` の残骸 | 本番 workflow には残さない | main にはSUB3専用分岐なし | 検証用の特殊コードを残すと紛らわしいため |

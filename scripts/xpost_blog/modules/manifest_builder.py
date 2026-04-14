@@ -23,6 +23,8 @@ def _article_status(record: dict[str, Any]) -> str:
         return f"{stage or 'Gemini'}保留"
     if status == "failed":
         return f"{stage or '取得'}失敗"
+    if status == "needs_review":
+        return "人手確認待ち"
     if record.get("sourceFileId"):
         return "整形待ち"
     return "未生成"
@@ -70,6 +72,8 @@ def build_manifest(
             "articleStatus": _article_status(record),
             "queueStatus": record.get("status", "pending"),
             "queueNextRetryAt": record.get("nextRetryAt", ""),
+            "queueRetryPriorityAt": record.get("retryPriorityAt", ""),
+            "queueRetryPriorityReason": record.get("retryPriorityReason", ""),
             "queueAttemptCount": int(record.get("attemptCount") or 0),
             "sourceStatus": "元投稿あり" if record.get("sourceFileId") else "未取得",
             "sourceProvider": record.get("sourceProvider", ""),
@@ -86,6 +90,12 @@ def build_manifest(
             "lastFailureStage": record.get("lastStage", ""),
             "lastFailureMessage": record.get("lastError", ""),
             "lastFailureAt": record.get("lastFailureAt", ""),
+            "geminiFailureCount": int(record.get("geminiFailureCount") or 0),
+            "geminiCallCount": int(record.get("geminiCallCount") or 0),
+            "geminiLastFailureKind": record.get("geminiLastFailureKind", ""),
+            "geminiLastAttemptAt": record.get("geminiLastAttemptAt", ""),
+            "geminiLastTokenEnv": record.get("geminiLastTokenEnv", ""),
+            "needsReviewReason": record.get("needsReviewReason", ""),
             "folderName": record.get("folderName", ""),
         }
         items.append(item)
@@ -121,6 +131,7 @@ def build_manifest(
         "generatedAt": datetime.now().isoformat(),
         "baseFolder": DEFAULT_BASE_FOLDER,
         "source": "xpost_blog_manifest",
+        "geminiTokenCooldowns": (state.get("meta", {}) or {}).get("geminiTokenCooldowns", {}),
         "channels": channels,
         "items": items,
         "recent": recent,

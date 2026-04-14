@@ -2,7 +2,7 @@ name: Xpost Blog Pipeline
 
 on:
   schedule:
-    - cron: "7,22,37,52 * * * *"
+    - cron: "7 * * * *"
   workflow_dispatch:
     inputs:
       mode:
@@ -16,9 +16,9 @@ on:
           - process_queue
           - rebuild_manifest_only
       max_items:
-        description: "1回で処理する最大件数"
+        description: "1回で処理する最大件数。0 は無制限"
         required: false
-        default: "1"
+        default: "0"
       post_url:
         description: "単一 X URL を優先処理する場合"
         required: false
@@ -58,12 +58,12 @@ jobs:
           XPOST_DISCORD_CHANNEL_NAME: 01_tech
           SOCIALDATA_API_KEY: ${{ secrets.SOCIALDATA_API_KEY }}
           XPOST_BLOG_SOURCE_PROVIDER: socialdata
-          XPOST_BLOG_MAX_ITEMS_PER_RUN: "1"
+          XPOST_BLOG_MAX_ITEMS_PER_RUN: "0"
           GEMINI_TOKEN_tech: ${{ secrets.GEMINI_TOKEN_TECH }}
           GEMINI_TOKEN_INVESTSUB: ${{ secrets.GEMINI_TOKEN_INVESTSUB }}
           XPOST_BLOG_GEMINI_SERIAL_DELAY_SECONDS: "20"
           INPUT_MODE: ${{ github.event.inputs.mode || 'full_pipeline' }}
-          INPUT_MAX_ITEMS: ${{ github.event.inputs.max_items || '1' }}
+          INPUT_MAX_ITEMS: ${{ github.event.inputs.max_items || '0' }}
           INPUT_POST_URL: ${{ github.event.inputs.post_url || '' }}
           INPUT_REBUILD_MANIFEST_ONLY: ${{ github.event.inputs.rebuild_manifest_only || 'false' }}
           EVENT_NAME: ${{ github.event_name }}

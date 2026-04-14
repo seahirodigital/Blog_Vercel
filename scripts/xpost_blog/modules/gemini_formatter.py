@@ -48,6 +48,14 @@ INPUT_LIMIT_KEYWORDS = (
 FALLBACK_SOURCE_CHARS = int(os.getenv("XPOST_BLOG_GEMINI_FALLBACK_SOURCE_CHARS", "32000") or 32000)
 MAX_RETRIES = int(os.getenv("XPOST_BLOG_GEMINI_MAX_RETRIES", "3") or 3)
 RETRY_WAIT_SECONDS = int(os.getenv("XPOST_BLOG_GEMINI_RETRY_WAIT_SECONDS", "15") or 15)
+TRANSIENT_RETRY_SECONDS = int(os.getenv("XPOST_BLOG_GEMINI_TRANSIENT_RETRY_SECONDS", "3600") or 3600)
+DEFER_WITHOUT_INLINE_RETRY_KEYWORDS = (
+    "500",
+    "503",
+    "internal server error",
+    "service unavailable",
+    "unavailable",
+)
 
 
 def _load_prompt() -> str:
@@ -130,6 +138,11 @@ def _is_input_limit(message: str) -> bool:
     return any(keyword in lowered for keyword in INPUT_LIMIT_KEYWORDS)
 
 
+def _should_defer_without_inline_retry(message: str) -> bool:
+    lowered = str(message or "").lower()
+    return any(keyword in lowered for keyword in DEFER_WITHOUT_INLINE_RETRY_KEYWORDS)
+
+
 def _extract_retry_after_seconds(message: str) -> int:
     match = re.search(r"retry in\s+([0-9]+(?:\.[0-9]+)?)s", str(message or ""), flags=re.I)
     if not match:
@@ -155,6 +168,8 @@ def format_post(bundle: dict[str, Any], api_key: str, queue_item: dict[str, Any]
     last_error = "Gemini 整形に失敗しました"
     recommended_wait_seconds = 0
     stop_pipeline = False
+    failure_kind = "unknown"
+    defer_without_retry = False
 
     for variant in variants:
         input_text = _build_input(bundle, queue_item, variant["source"])
@@ -195,6 +210,7 @@ def format_post(bundle: dict[str, Any], api_key: str, queue_item: dict[str, Any]
                         "attempts": attempts[-6:],
                     }
                 last_error = "Gemini の応答が空でした"
+                failure_kind = "empty"
                 attempt_log["status"] = "empty"
                 attempt_log["error"] = last_error
                 attempts.append(attempt_log)
@@ -207,20 +223,29 @@ def format_post(bundle: dict[str, Any], api_key: str, queue_item: dict[str, Any]
                 print(f"   Gemini 整形エラー: {last_error}")
 
                 if not variant["trimmed"] and _is_input_limit(last_error) and len(variants) > 1:
+                    failure_kind = "input_limit"
                     force_next_variant = True
                     break
                 if _is_quota(last_error):
+                    failure_kind = "quota"
                     stop_pipeline = True
                     recommended_wait_seconds = max(recommended_wait_seconds, _extract_retry_after_seconds(last_error))
                     break
+                if _should_defer_without_inline_retry(last_error):
+                    failure_kind = "transient"
+                    defer_without_retry = True
+                    recommended_wait_seconds = max(recommended_wait_seconds, TRANSIENT_RETRY_SECONDS)
+                    break
                 if attempt_index < MAX_RETRIES and _is_retryable(last_error):
+                    failure_kind = "retryable"
                     wait_seconds = RETRY_WAIT_SECONDS * attempt_index
                     print(f"   Gemini 再試行待機: {wait_seconds}秒")
                     time.sleep(wait_seconds)
                     continue
+                failure_kind = "error"
                 break
 
-        if force_next_variant or stop_pipeline:
+        if force_next_variant or stop_pipeline or defer_without_retry:
             break
 
     return {
@@ -232,5 +257,6 @@ def format_post(bundle: dict[str, Any], api_key: str, queue_item: dict[str, Any]
         "trimmed": bool(attempts[-1]["trimmed"]) if attempts else False,
         "recommendedWaitSeconds": recommended_wait_seconds,
         "stopPipeline": stop_pipeline,
+        "failureKind": failure_kind,
         "attempts": attempts[-6:],
     }
