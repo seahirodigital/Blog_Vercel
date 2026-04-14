@@ -79,6 +79,22 @@ def _safe_name(value: str, max_length: int = 48) -> str:
     return safe or "untitled"
 
 
+def _strip_urls_and_emoji(value: str) -> str:
+    text = str(value or "")
+    text = re.sub(r"https?://\S+", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(?:https?|ftp)[:/._-]*\S*", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"\bt\.co\S*", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"[\U00010000-\U0010ffff]", "", text)
+    return text
+
+
+def _safe_title_name(value: str, max_length: int = 48) -> str:
+    text = _strip_urls_and_emoji(value)
+    text = re.sub(r"[^\w\s\u3040-\u30ff\u3400-\u9fff\u3000ー・.-]", "", text, flags=re.UNICODE)
+    text = re.sub(r"\s+", " ", text).strip()
+    return _safe_name(text, max_length=max_length)
+
+
 def _date_prefix(date_text: str) -> str:
     text = str(date_text or "").strip()
     if text:
@@ -92,8 +108,7 @@ def _date_prefix(date_text: str) -> str:
 
 def build_record_folder_name(post_url: str, published_at: str, title: str) -> str:
     date_prefix = _date_prefix(published_at)
-    post_id = extract_post_id(post_url) or hashlib.md5(str(post_url or title).encode("utf-8")).hexdigest()[:8]
-    return f"{date_prefix}_{post_id}_{_safe_name(title, max_length=32)}"
+    return f"{date_prefix}_{_safe_title_name(title, max_length=48)}"
 
 
 def _build_markdown_document(markdown_body: str, metadata: dict[str, Any]) -> str:
@@ -303,7 +318,7 @@ def download_json(relative_path: str) -> dict[str, Any] | None:
 
 def upload_source_markdown(source_title: str, published_at: str, markdown_body: str, metadata: dict[str, Any]) -> dict[str, Any]:
     folder_name = build_record_folder_name(metadata.get("post_url", ""), published_at, source_title)
-    filename = f"{_date_prefix(published_at)}_元投稿_{_safe_name(source_title, 42)}.md"
+    filename = f"{_date_prefix(published_at)}_元投稿_{_safe_title_name(source_title, 42)}.md"
     document = _build_markdown_document(
         markdown_body,
         {
@@ -326,7 +341,7 @@ def upload_source_markdown(source_title: str, published_at: str, markdown_body: 
 
 def upload_blog_markdown(title: str, published_at: str, markdown_body: str, metadata: dict[str, Any]) -> dict[str, Any]:
     folder_name = metadata.get("folder_name") or build_record_folder_name(metadata.get("post_url", ""), published_at, title)
-    filename = f"{_date_prefix(published_at)}_ブログ_{_safe_name(title, 42)}.md"
+    filename = f"{_date_prefix(published_at)}_ブログ_{_safe_title_name(title, 42)}.md"
     document = _build_markdown_document(
         markdown_body,
         {

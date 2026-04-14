@@ -919,7 +919,7 @@
           <div class="panel-title">プレビュー</div>
           <div class="panel-actions">
             <button type="button" class="icon-button" id="refreshOgpButton" aria-label="OGP更新" title="OGP更新"></button>
-            <button type="button" class="icon-button" id="copyPreviewButton" aria-label="プレビューHTMLコピー" title="プレビューHTMLコピー"></button>
+            <button type="button" class="icon-button" id="copyPreviewButton" aria-label="Markdownコピー" title="Markdownコピー"></button>
           </div>
         </div>
         <div class="content-scroll preview-body markdown" id="preview"><div class="empty">記事を選択してください</div></div>
@@ -1190,6 +1190,13 @@
       return `<a class="icon-link" href="${escapeHtml(href)}" target="_blank" rel="noreferrer" aria-label="${safeLabel}" title="${safeLabel}">${icon}</a>`;
     }
 
+    function iconButton(id, label, iconName) {
+      const safeId = escapeHtml(id);
+      const safeLabel = escapeHtml(label);
+      const icon = ICONS[iconName] || '';
+      return `<button type="button" class="icon-button" id="${safeId}" aria-label="${safeLabel}" title="${safeLabel}">${icon}</button>`;
+    }
+
     function setSourceVisible(visible) {
       state.sourceVisible = Boolean(visible);
       localStorage.setItem(SOURCE_VISIBLE_KEY, state.sourceVisible ? '1' : '0');
@@ -1207,21 +1214,19 @@
       els.articleList.innerHTML = sortedArticles().map((article) => {
         const isActive = state.selectedArticle?.id === article.id;
         const isSelected = state.selectedArticleIds.has(article.id);
-        const articlePath = [article.path || '', article.name || ''].filter(Boolean).join('/');
         const fallbackDate = formatDate(article.lastModified);
         const discordDate = formatDiscordDate(article.discordPostedAt);
         const sourceDate = formatDiscordDate(article.sourcePublishedAt);
         const timeLabel = discordDate
-          ? `Discord掲載: ${discordDate}`
+          ? `${discordDate} 投稿`
           : sourceDate
-            ? `元投稿日時: ${sourceDate}`
+            ? `${sourceDate} 投稿`
             : `更新: ${fallbackDate || '-'}`;
         return `
           <button type="button" class="article-row ${isActive ? 'active' : ''} ${isSelected ? 'selected' : ''}" data-article-id="${escapeHtml(article.id)}">
             <span class="article-check" aria-hidden="true">${isSelected ? '<svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>' : ''}</span>
             <span class="article-row-main">
               <span class="article-title">${escapeHtml(articleTitle(article))}</span>
-              <span class="article-meta">${escapeHtml(articlePath || article.name || '')}</span>
               <span class="article-meta article-time">${escapeHtml(timeLabel)}</span>
             </span>
           </button>
@@ -1409,18 +1414,23 @@
         return;
       }
 
+      const sourcePostedAt = formatDiscordDate(item.observedAt || item.discordPostedAt);
       const stats = [
         ['投稿者', item.authorName || item.authorUsername || '-'],
-        ['Discord掲載', formatDiscordDate(item.observedAt || item.discordPostedAt) || '-'],
+        ['Discord掲載', sourcePostedAt ? `${sourcePostedAt} 投稿` : '-'],
         ['いいね', item.favoriteCount ?? item.likeCount ?? 0],
         ['リポスト', item.repostCount ?? item.retweetCount ?? 0],
         ['状態', item.articleStatus || item.status || '-'],
       ];
 
       els.sourceLinks.innerHTML = [
+        iconButton('copySourceButton', '元投稿をコピー', 'copy'),
         iconLink(item.postUrl || item.xUrl || item.url, 'Xを開く', 'x'),
         iconLink(item.discordJumpUrl || item.discordUrl, 'Discordを開く', 'discord'),
       ].join('');
+      els.sourceLinks.querySelector('#copySourceButton')?.addEventListener('click', () => {
+        copyText(state.sourceContent, '元投稿をコピーしました').catch((error) => setStatus(error.message, true));
+      });
 
       els.sourceBody.innerHTML = `
         <div class="meta-grid">
@@ -1898,7 +1908,7 @@
       els.refreshButton.addEventListener('click', () => fetchArticles(true).catch((error) => setStatus(error.message, true)));
       els.refreshOgpButton.addEventListener('click', refreshOgp);
       els.copyEditorButton.addEventListener('click', () => copyText(els.editor.value, '本文をコピーしました').catch((error) => setStatus(error.message, true)));
-      els.copyPreviewButton.addEventListener('click', () => copyText(els.preview.innerHTML, 'プレビューHTMLをコピーしました').catch((error) => setStatus(error.message, true)));
+      els.copyPreviewButton.addEventListener('click', () => copyText(els.editor.value, 'Markdownをコピーしました').catch((error) => setStatus(error.message, true)));
       els.insertAffiliateButton.addEventListener('click', insertAffiliateAtEnd);
       els.sortToggle.addEventListener('click', () => {
         state.sortOrder = state.sortOrder === 'asc' ? 'desc' : 'asc';

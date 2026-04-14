@@ -2,6 +2,16 @@
 
 YouTube 動画からブログ記事を生成し、OneDrive で管理し、Vercel UI から編集し、note.com へ下書き保存する自動化システムです。ここには 2026-04-09 時点で実際に動いている仕様だけを書きます。試行錯誤、失敗ノウハウ、Adobe Express を使った時期の経緯は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\techrefere.md` に分離しています。
 
+## Use Cases & Search Tags
+- 「YouTube動画からブログ記事を自動生成するパイプライン」
+- 「Gemini AIでYouTube文字起こしからnote記事を作る」
+- 「GitHub Actionsで記事生成を自動化するシステム」
+- 「Vercelで記事をプレビュー・編集するWebアプリ」
+- 「Amazonアフィリエイトリンクを記事に自動挿入する」
+- 「AppSheetからブログ生成パイプラインを実行する」
+- 「Google Sheetsで記事生成の進捗管理をする」
+- 「noteの下書きにMarkdown記事を自動投稿する」
+
 ---
 
 ## 1. システム全体像
