@@ -64,6 +64,70 @@ function parseMarkdownDocument(text = '') {
   };
 }
 
+function parseFrontmatterFields(frontmatter = '') {
+  const text = String(frontmatter || '').trim();
+  if (!text.startsWith('---')) return {};
+
+  const normalized = text
+    .replace(/^---\s*\n?/, '')
+    .replace(/\n?---\s*$/, '');
+  const fields = {};
+
+  for (const line of normalized.split('\n')) {
+    const separator = line.indexOf(':');
+    if (separator < 0) continue;
+
+    const key = line.slice(0, separator).trim();
+    let value = line.slice(separator + 1).trim();
+    if (!key) continue;
+
+    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+      value = value.slice(1, -1);
+    }
+    fields[key] = value.replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+  }
+
+  return fields;
+}
+
+function normalizeXUrl(url = '') {
+  const raw = String(url || '').trim();
+  if (!raw) return '';
+
+  const candidate = raw.startsWith('http://') || raw.startsWith('https://') ? raw : `https://${raw}`;
+  try {
+    const parsed = new URL(candidate);
+    const host = parsed.hostname.toLowerCase().replace(/^www\./, '');
+    const parts = parsed.pathname.split('/').filter(Boolean);
+    if (!['x.com', 'twitter.com'].includes(host)) return candidate;
+
+    if (parts.length >= 3 && parts[1] === 'status') {
+      return `https://x.com/i/status/${parts[2]}`;
+    }
+    if (parts.length >= 3 && parts[0] === 'i' && ['status', 'article'].includes(parts[1])) {
+      return `https://x.com/i/${parts[1]}/${parts[2]}`;
+    }
+  } catch {
+    return candidate;
+  }
+
+  return candidate;
+}
+
+function firstNonEmpty(...values) {
+  for (const value of values) {
+    if (value === undefined || value === null) continue;
+    const text = String(value).trim();
+    if (text) return text;
+  }
+  return '';
+}
+
+function toInteger(value) {
+  const parsed = Number.parseInt(String(value ?? '').replace(/,/g, ''), 10);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
 function stripFrontmatter(markdownText = '') {
   const parsed = parseMarkdownDocument(markdownText);
   return parsed.body;
@@ -461,6 +525,99 @@ function findItemByArticleId(manifest, articleId) {
   return items.find((item) => item.articleId === articleId) || null;
 }
 
+function findItemBySourceId(manifest, sourceId) {
+  const items = Array.isArray(manifest?.items) ? manifest.items : [];
+  const target = String(sourceId || '').trim();
+  if (!target) return null;
+  return items.find((item) => String(item.sourceId || '').trim() === target) || null;
+}
+
+function findItemByPostUrl(manifest, postUrl) {
+  const items = Array.isArray(manifest?.items) ? manifest.items : [];
+  const target = normalizeXUrl(postUrl);
+  if (!target) return null;
+
+  return items.find((item) => {
+    const candidates = [item.normalizedPostUrl, item.postUrl].map((value) => normalizeXUrl(value));
+    return candidates.includes(target);
+  }) || null;
+}
+
+function buildFallbackItemFromArticle(articleId, metadata = {}, manifestItem = null) {
+  const sourceId = firstNonEmpty(manifestItem?.sourceId, metadata.source_file_id);
+  const postUrl = firstNonEmpty(manifestItem?.postUrl, metadata.post_url, metadata.normalized_post_url);
+  const normalizedPostUrl = firstNonEmpty(
+    manifestItem?.normalizedPostUrl,
+    normalizeXUrl(metadata.normalized_post_url || metadata.post_url),
+    postUrl,
+  );
+  const sourceTitle = firstNonEmpty(
+    manifestItem?.sourceTitle,
+    metadata.title,
+    manifestItem?.title,
+    normalizedPostUrl,
+  );
+
+  return {
+    ...(manifestItem || {}),
+    id: articleId,
+    articleId,
+    hasArticle: true,
+    articleStatus: manifestItem?.articleStatus || '記事あり',
+    sourceId,
+    sourceStatus: sourceId ? '元投稿あり' : '未取得',
+    title: firstNonEmpty(manifestItem?.title, metadata.title, normalizedPostUrl, articleId),
+    sourceTitle,
+    postUrl,
+    normalizedPostUrl,
+    authorName: firstNonEmpty(metadata.author_name, manifestItem?.authorName),
+    authorScreenName: firstNonEmpty(metadata.author_screen_name, manifestItem?.authorScreenName),
+    favoriteCount: manifestItem?.favoriteCount ?? toInteger(metadata.favorite_count),
+    repostCount: manifestItem?.repostCount ?? toInteger(metadata.repost_count),
+    replyCount: manifestItem?.replyCount ?? toInteger(metadata.reply_count),
+    quoteCount: manifestItem?.quoteCount ?? toInteger(metadata.quote_count),
+    bookmarkCount: manifestItem?.bookmarkCount ?? toInteger(metadata.bookmark_count),
+    viewCount: manifestItem?.viewCount ?? toInteger(metadata.view_count),
+    discordMessageId: firstNonEmpty(metadata.discord_message_id, manifestItem?.discordMessageId),
+    discordJumpUrl: firstNonEmpty(metadata.discord_jump_url, manifestItem?.discordJumpUrl),
+  };
+}
+
+async function resolveSourceBundleForArticle(token, manifest, articleId) {
+  const directItem = findItemByArticleId(manifest, articleId);
+  if (directItem?.sourceId) {
+    return {
+      item: directItem,
+      sourceContent: directItem.sourceId ? await fetchItemContent(token, directItem.sourceId) : '',
+    };
+  }
+
+  const articleDocument = parseMarkdownDocument(await getArticle(token, articleId));
+  const metadata = parseFrontmatterFields(articleDocument.frontmatter);
+  if (directItem) {
+    const hydratedItem = buildFallbackItemFromArticle(articleId, metadata, directItem);
+    return {
+      item: hydratedItem,
+      sourceContent: hydratedItem.sourceId ? await fetchItemContent(token, hydratedItem.sourceId) : '',
+      sourceFallback: true,
+    };
+  }
+
+  const fallbackItem = buildFallbackItemFromArticle(
+    articleId,
+    metadata,
+    findItemBySourceId(manifest, metadata.source_file_id)
+      || findItemByPostUrl(manifest, metadata.post_url || metadata.normalized_post_url),
+  );
+
+  if (!fallbackItem) return null;
+  return {
+    item: fallbackItem,
+    sourceContent: fallbackItem.sourceId ? await fetchItemContent(token, fallbackItem.sourceId) : '',
+    sourceFallback: true,
+  };
+}
+
 async function handleArticlesRequest(req, res, token) {
   if (req.method === 'GET') {
     const { id, externalUrls } = req.query;
@@ -581,12 +738,11 @@ async function handleIndexRequest(req, res, token) {
 
   const manifest = await fetchManifest(token);
   if (articleId) {
-    const item = findItemByArticleId(manifest, articleId);
-    if (!item) {
+    const bundle = await resolveSourceBundleForArticle(token, manifest, articleId);
+    if (!bundle?.item) {
       return res.status(404).json({ error: 'articleId に対応する manifest 項目が見つかりません' });
     }
-    const sourceContent = item.sourceId ? await fetchItemContent(token, item.sourceId) : '';
-    return res.status(200).json({ item, sourceContent });
+    return res.status(200).json(bundle);
   }
 
   return res.status(200).json(manifest);

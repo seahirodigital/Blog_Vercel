@@ -252,3 +252,26 @@
 - SocialData Pricing: https://docs.socialdata.tools/getting-started/pricing/
 - GitHub Actions billing: https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-actions/about-billing-for-github-actions
 - GitHub Actions scheduled workflows: https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+
+## 13. 2026-04-14 元投稿ビューアー空表示の調査メモ
+### 症状
+- `https://blog-vercel-dun.vercel.app/xpost_blog.html` で記事を開くと、元投稿ペインに `元投稿がありません` と出るケースがあった。
+- 代表例は `📝 DESIGN.mdの日本版をつくりました ...` で、記事本文は存在するのに元投稿だけが空だった。
+
+### 切り分け結果
+- Discord 取得失敗ではなかった。`processingLogs` では `SocialData success` と `source_saved` が先に記録され、元投稿 Markdown 自体は OneDrive に保存されていた。
+- 問題は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` が `article.id` から `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js?resource=index&articleId=...` を呼び、API 側が manifest の `articleId` 一致だけで元投稿を探していた点だった。
+- 孤立記事では、記事 frontmatter に `source_file_id` が入っていても、manifest 側の同一投稿レコードに `articleId` が戻っておらず、viewer からは 404 になっていた。
+
+### 根本原因
+- `2026-04-14T03:46:49Z` の GitHub Actions run `24379895620` で、OneDrive Graph API が `503 Service Unavailable` を返し、`state/xpost_pipeline_state.json` 保存中に pipeline が停止していた。
+- このとき記事ファイル実体だけが先に保存され、`state` と `manifest` の更新が追いつかず、`articleId` が欠けたまま残る条件が実際に発生していた。
+- 加えて `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` の手動保存は記事ファイル更新だけで、manifest/state の再同期は行っていなかった。
+
+### 対応
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js`
+  - manifest に `articleId` が無い場合でも、記事 frontmatter の `source_file_id` / `post_url` / `normalized_post_url` を使って元投稿を引ける fallback を追加した。
+  - これにより、孤立記事でも viewer が元投稿を返せるようにした。
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\onedrive_writer.py`
+  - OneDrive 保存時に `429/500/502/503/504` の短い retry を追加した。
+  - transient な Graph API エラーで `state` と `manifest` だけ取り残される事故を減らす狙い。

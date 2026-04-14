@@ -2,6 +2,7 @@ import hashlib
 import json
 import os
 import re
+import time
 from datetime import datetime
 from typing import Any
 from urllib.parse import quote, urlparse
@@ -10,6 +11,8 @@ import requests
 
 GRAPH_API_BASE = "https://graph.microsoft.com/v1.0"
 TOKEN_URL = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
+UPLOAD_RETRY_DELAYS = (2, 5, 10)
 DEFAULT_BASE_FOLDER = os.getenv(
     "XPOST_BLOG_ONEDRIVE_FOLDER",
     "Obsidian in Onedrive 202602/Vercel_Blog/X投稿",
@@ -239,22 +242,36 @@ def upload_text(relative_path: str, content: str, content_type: str = "text/plai
     token = _get_access_token()
     relative_path = str(relative_path).strip("/ ")
     parent = relative_path.rsplit("/", 1)[0] if "/" in relative_path else ""
-    if parent:
-        _ensure_folder_path(f"{DEFAULT_BASE_FOLDER}/{parent}", token)
-    else:
-        _ensure_folder_path(DEFAULT_BASE_FOLDER, token)
-
     full_path = f"{DEFAULT_BASE_FOLDER}/{relative_path}" if relative_path else DEFAULT_BASE_FOLDER
     upload_url = f"{GRAPH_API_BASE}/me/drive/root:/{_encode_path(full_path)}:/content"
-    response = _request(
-        "PUT",
-        upload_url,
-        token,
-        headers={"Content-Type": content_type},
-        data=content.encode("utf-8"),
-    )
-    response.raise_for_status()
-    return response.json()
+
+    for attempt, wait_seconds in enumerate((0, *UPLOAD_RETRY_DELAYS), start=1):
+        if wait_seconds:
+            time.sleep(wait_seconds)
+        try:
+            if parent:
+                _ensure_folder_path(f"{DEFAULT_BASE_FOLDER}/{parent}", token)
+            else:
+                _ensure_folder_path(DEFAULT_BASE_FOLDER, token)
+
+            response = _request(
+                "PUT",
+                upload_url,
+                token,
+                headers={"Content-Type": content_type},
+                data=content.encode("utf-8"),
+            )
+            response.raise_for_status()
+            return response.json()
+        except requests.HTTPError as error:
+            status_code = error.response.status_code if error.response is not None else 0
+            if status_code not in RETRYABLE_STATUS_CODES or attempt > len(UPLOAD_RETRY_DELAYS):
+                raise
+        except requests.RequestException:
+            if attempt > len(UPLOAD_RETRY_DELAYS):
+                raise
+
+    raise RuntimeError(f"upload failed without response: {relative_path}")
 
 
 def upload_json(relative_path: str, data: dict[str, Any]) -> dict[str, Any]:
