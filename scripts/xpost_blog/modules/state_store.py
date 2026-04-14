@@ -264,6 +264,9 @@ def update_post_metadata(state: dict[str, Any], post_url: str, metadata: dict[st
         "view_count": "viewCount",
         "is_article": "isArticle",
         "source_title": "sourceTitle",
+        "source_provider": "sourceProvider",
+        "source_provider_label": "sourceProviderLabel",
+        "source_provider_detail": "sourceProviderDetail",
     }
     for source_key, target_key in field_map.items():
         if metadata.get(source_key) not in (None, ""):

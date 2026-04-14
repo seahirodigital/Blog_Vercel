@@ -12,16 +12,20 @@ MODULES_DIR = Path(__file__).resolve().parent
 if str(MODULES_DIR) not in sys.path:
     sys.path.append(str(MODULES_DIR))
 
-from modules import discord_fetcher, gemini_formatter, manifest_builder, onedrive_writer, socialdata_fetcher, state_store
+from modules import discord_fetcher, gemini_formatter, manifest_builder, onedrive_writer, source_fetcher, state_store
 
 DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN", "").strip()
 DISCORD_GUILD_ID = os.getenv("XPOST_DISCORD_GUILD_ID", "1485160018767642705").strip()
 DISCORD_CHANNEL_ID = os.getenv("XPOST_DISCORD_CHANNEL_ID", "1485179091463307344").strip()
 DISCORD_CHANNEL_NAME = os.getenv("XPOST_DISCORD_CHANNEL_NAME", "01_tech").strip() or "01_tech"
 SOCIALDATA_API_KEY = os.getenv("SOCIALDATA_API_KEY", "").strip()
+APIFY_API_KEY = os.getenv("APIFY_API_KEY", "").strip()
+XPOST_BLOG_SOURCE_PROVIDER = os.getenv("XPOST_BLOG_SOURCE_PROVIDER", "socialdata").strip() or "socialdata"
+XPOST_BLOG_APIFY_ACTOR = os.getenv("XPOST_BLOG_APIFY_ACTOR", "").strip()
 GEMINI_TOKEN_INVEST_SUB = (os.getenv("GEMINI_TOKEN_INVESTsub", "") or os.getenv("GEMINI_TOKEN_INVESTSUB", "")).strip()
 GEMINI_TOKEN_TECH = (os.getenv("GEMINI_TOKEN_tech", "") or os.getenv("GEMINI_TOKEN_TECH", "")).strip()
-DEFAULT_MAX_ITEMS = int(os.getenv("XPOST_BLOG_MAX_ITEMS", "3") or 3)
+DEFAULT_MAX_ITEMS = int(os.getenv("XPOST_BLOG_MAX_ITEMS", "1") or 1)
+MAX_ITEMS_PER_RUN = max(1, int(os.getenv("XPOST_BLOG_MAX_ITEMS_PER_RUN", "1") or 1))
 GEMINI_SERIAL_DELAY_SECONDS = int(os.getenv("XPOST_BLOG_GEMINI_SERIAL_DELAY_SECONDS", "20") or 20)
 
 GEMINI_TOKEN_POOLS = {
@@ -52,11 +56,20 @@ def _resolve_run_mode(args) -> str:
     return "full"
 
 
+def _resolve_max_items(requested: int) -> int:
+    normalized = max(1, int(requested or DEFAULT_MAX_ITEMS))
+    return min(normalized, MAX_ITEMS_PER_RUN)
+
+
 def _require_environment(run_mode: str):
     if run_mode in {"sync_only", "full"} and not DISCORD_BOT_TOKEN:
         raise ValueError("DISCORD_BOT_TOKEN が設定されていません")
-    if run_mode in {"process_queue", "full"} and not SOCIALDATA_API_KEY:
-        raise ValueError("SOCIALDATA_API_KEY が設定されていません")
+    source_fetcher.validate_environment(
+        run_mode=run_mode,
+        preferred_provider=XPOST_BLOG_SOURCE_PROVIDER,
+        socialdata_api_key=SOCIALDATA_API_KEY,
+        apify_api_key=APIFY_API_KEY,
+    )
     if run_mode in {"process_queue", "full"} and not any(token for _, token in GEMINI_TOKEN_POOLS.values()):
         raise ValueError("GEMINI_TOKEN_tech または GEMINI_TOKEN_INVESTSUB が設定されていません")
 
@@ -193,22 +206,57 @@ def _process_pending_posts(
         state_store.save_state(state)
         _append_processing_log(processing_logs, post, "queue", "queued", "X投稿を処理キューへ投入しました")
 
-        bundle = socialdata_fetcher.fetch_post_bundle(post["postUrl"], SOCIALDATA_API_KEY)
+        bundle = source_fetcher.fetch_post_bundle(
+            post["postUrl"],
+            socialdata_api_key=SOCIALDATA_API_KEY,
+            apify_api_key=APIFY_API_KEY,
+            preferred_provider=XPOST_BLOG_SOURCE_PROVIDER,
+            apify_actor_name=XPOST_BLOG_APIFY_ACTOR,
+        )
+        source_provider_label = bundle.get("source_provider_label") or "取得"
+        source_provider = bundle.get("source_provider") or ""
+        source_provider_detail = bundle.get("source_provider_detail") or ""
+        attempted_providers = bundle.get("attempted_providers") or []
+        fallback_used = bool(bundle.get("fallback_used"))
+        fallback_reason = bundle.get("fallback_reason") or ""
         if not bundle.get("ok"):
-            error_message = bundle.get("error") or "SocialData 取得に失敗しました"
+            error_message = bundle.get("error") or "取得に失敗しました"
             wait_seconds = state_store.resolve_retry_wait_seconds()
             state_store.mark_retry(
                 state,
                 post["postUrl"],
-                "SocialData",
+                source_provider_label,
                 error_message,
                 run_id,
                 wait_seconds=wait_seconds,
                 status=state_store.FAILED_STATUS,
             )
             state_store.save_state(state)
-            _append_failure(failures, post, "SocialData", error_message, httpStatus=bundle.get("httpStatus"))
-            _append_processing_log(processing_logs, post, "SocialData", "failed", error_message, httpStatus=bundle.get("httpStatus"))
+            _append_failure(
+                failures,
+                post,
+                source_provider_label,
+                error_message,
+                httpStatus=bundle.get("httpStatus"),
+                sourceProvider=source_provider,
+                sourceProviderDetail=source_provider_detail,
+                attemptedProviders=attempted_providers,
+                fallbackUsed=fallback_used,
+                fallbackReason=fallback_reason,
+            )
+            _append_processing_log(
+                processing_logs,
+                post,
+                source_provider_label,
+                "failed",
+                error_message,
+                httpStatus=bundle.get("httpStatus"),
+                sourceProvider=source_provider,
+                sourceProviderDetail=source_provider_detail,
+                attemptedProviders=attempted_providers,
+                fallbackUsed=fallback_used,
+                fallbackReason=fallback_reason,
+            )
             continue
 
         state_store.update_post_metadata(state, post["postUrl"], bundle)
@@ -216,11 +264,16 @@ def _process_pending_posts(
         _append_processing_log(
             processing_logs,
             post,
-            "SocialData",
+            source_provider_label,
             "success",
-            "SocialData から元投稿ソースを取得しました",
+            f"{source_provider_label} から元投稿ソースを取得しました",
             isArticle=bundle.get("is_article"),
             favoriteCount=bundle.get("favorite_count", 0),
+            sourceProvider=source_provider,
+            sourceProviderDetail=source_provider_detail,
+            attemptedProviders=attempted_providers,
+            fallbackUsed=fallback_used,
+            fallbackReason=fallback_reason,
         )
 
         source_upload = onedrive_writer.upload_source_markdown(
@@ -243,6 +296,11 @@ def _process_pending_posts(
                 "view_count": bundle.get("view_count", 0),
                 "discord_message_id": post.get("discordMessageId", ""),
                 "discord_jump_url": post.get("discordJumpUrl", ""),
+                "source_provider": source_provider,
+                "source_provider_detail": source_provider_detail,
+                "attempted_providers": ", ".join(str(item) for item in attempted_providers if item),
+                "fallback_used": str(fallback_used).lower(),
+                "fallback_reason": fallback_reason,
             },
         )
         state_store.update_source_upload(state, post["postUrl"], source_upload)
@@ -446,6 +504,11 @@ def _process_pending_posts(
                 "source_file_id": source_upload.get("id", ""),
                 "source_relative_path": source_upload.get("relativePath", ""),
                 "folder_name": source_upload.get("folderName", ""),
+                "source_provider": source_provider,
+                "source_provider_detail": source_provider_detail,
+                "attempted_providers": ", ".join(str(item) for item in attempted_providers if item),
+                "fallback_used": str(fallback_used).lower(),
+                "fallback_reason": fallback_reason,
             },
         )
         state_store.mark_done(state, post["postUrl"], run_id, article_upload)
@@ -470,6 +533,9 @@ def main():
 
     print(f"実行モード: {run_mode}")
     print(f"対象 Discord チャンネル: {DISCORD_CHANNEL_NAME} ({DISCORD_CHANNEL_ID})")
+    print(f"取得プロバイダ: {source_fetcher.normalize_provider_name(XPOST_BLOG_SOURCE_PROVIDER)}")
+    if source_fetcher.normalize_provider_name(XPOST_BLOG_SOURCE_PROVIDER) == "apify" and XPOST_BLOG_APIFY_ACTOR.strip():
+        print(f"Apify Actor: {XPOST_BLOG_APIFY_ACTOR.strip()}")
 
     if args.post_url:
         state_store.upsert_manual_post(state, args.post_url, channel_name=DISCORD_CHANNEL_NAME)
@@ -482,11 +548,12 @@ def main():
 
     success_count = 0
     if run_mode in {"process_queue", "full"}:
-        pending_posts = state_store.list_processable_posts(state, max_items=args.max_items, post_url=args.post_url)
+        effective_max_items = _resolve_max_items(args.max_items)
+        pending_posts = state_store.list_processable_posts(state, max_items=effective_max_items, post_url=args.post_url)
         if not pending_posts:
             print("処理対象件数: 0")
         else:
-            print(f"処理対象件数: {len(pending_posts)}")
+            print(f"処理対象件数: {len(pending_posts)} (上限 {effective_max_items})")
             success_count = _process_pending_posts(pending_posts, state, failures, processing_logs, run_id)
             print(f"処理成功件数: {success_count}")
 

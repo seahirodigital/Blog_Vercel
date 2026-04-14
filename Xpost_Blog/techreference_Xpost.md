@@ -45,7 +45,7 @@
 ## 3. 実装方針メモ
 ### queue
 - Discord 取得は `C:\Users\HCY\OneDrive\Vercel_Blog\X投稿\state\xpost_pipeline_state.json` に cursor と post 状態を保存する。
-- 30分巡回時に新規 URL を `pending` 化する。
+- 2026-04-14 時点の本番運用では 15分巡回で新規 URL を `pending` 化する。
 - quota 時は `deferred` と `nextRetryAt` を付けて次回 run に回す。
 
 ### 取得層
@@ -163,3 +163,92 @@
 ### 注意
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py` の既定動作は本編用に残す。`--no-top-image` が明示された場合だけ、Amazonトップ画像をスキップする。
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\affiliate_links.txt` は本編用のため、Xpost_blog側からは直接編集しない。
+
+## 11. 2026-04-14 フェーズ4 Apify 置き換え検証メモ
+### 位置づけ
+- 本節は `Apify` 検証時点の履歴メモであり、2026-04-14 の本番採用方針は次節 `12. SocialData 安定運用へ戻す判断メモ` を正とする。
+
+### 比較した候補
+- `apidojo/tweet-scraper`
+  - Apify 表記価格は `from $0.40 / 1,000 tweets`。
+  - 価格見出しは最安だが、今回の用途は Discord から拾った単一 X URL をその場で引く運用なので、検索主体 actor より単一 URL 指定が明示された actor を優先した。
+- `apidojo/twitter-scraper-lite`
+  - Actor ページの価格説明では `Single Tweet Query: $0.05 per query` と書かれている。
+  - 単一 URL を 1 件ずつ処理する Xpost_blog では、見出し価格より実運用コストが高くなりやすいので採用しなかった。
+- `fastdata/twitter-scraper`
+  - Apify 表記価格は `from $0.50 / 1,000 results`。
+  - `tweetUrls` による `Single Tweet Lookup` が明示され、空振り run は課金しない旨も書かれていた。
+  - 今回は「単一 URL を安く、最短で取る」要件に最も合うため、第一採用にした。
+- `SocialDataAPI`
+  - 記事取得1件あたり0.0002ドル。
+  - https://docs.socialdata.tools/getting-started/pricing/
+
+### 採用判断
+- 検証時点では `Apify -> fastdata/twitter-scraper` を主経路候補として見ていた。
+- ただし `https://x.com/i/article/...` 本文まで Apify 単独で安定取得できる根拠は、この時点では確認できなかった。
+- そのため `SocialData API` は残し、以下の条件だけ fallback する。
+  - Discord 入力 URL 自体が `https://x.com/i/article/...` のとき
+  - 通常ポストでも展開 URL に `https://x.com/i/article/...` が含まれ、記事本文の欠落が起きると判断したとき
+  - Apify actor 実行自体が失敗したとき
+
+### 実装メモ
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\apify_fetcher.py`
+  - `fastdata/twitter-scraper` の `tweetUrls` 入力を使い、1 URL 単位で tweet 本文・件数・author 情報を共通 bundle へ正規化する。
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\source_fetcher.py`
+  - `Apify` / `SocialData` の切替と fallback 判定を集約した。
+  - `preferred_provider=apify` でも fallback 自体は残し、極力 `Apify` を先に試す構成にした。
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\runner.py`
+  - 取得元を直結から抽象化へ切り替えた。
+  - processing log と OneDrive frontmatter に `source_provider`、`source_provider_detail`、fallback の有無を残すようにした。
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml`
+  - `APIFY_API_KEY`、`XPOST_BLOG_SOURCE_PROVIDER=apify`、`XPOST_BLOG_APIFY_ACTOR=fastdata/twitter-scraper` を渡すようにした。
+
+### 試行錯誤
+- 最初は `apidojo/tweet-scraper` を最有力候補に見たが、headline 価格が安くても「単一 tweet lookup が明示されているか」と「1件ずつ回す運用での実コスト」は別問題だと判断した。
+- `fastdata/twitter-scraper` は利用実績がまだ少ないため、不調時に即 `SocialData` へ戻せる抽象化を先に入れた。actor 差し替えだけで検証を続けられる状態にしてある。
+- X記事本文取得は、今すぐ無理に Apify へ一本化すると品質事故になりやすいため、今回は「通常ポストは Apify 主経路、X記事だけ SocialData fallback」の折衷を採用した。
+
+## 12. 2026-04-14 SocialData 安定運用へ戻す判断メモ
+### 方針更新
+- Xpost_blog の取得主経路は `SocialData API` に戻す。
+- `Apify` は Xpost 取得案としては採用しない。検証コードは残すが、本番 workflow では使わない。
+- queue 同期は `15分ごと`、取得は `1 run 最大1件` に固定する。
+- thread 展開は行わない。記事化に必要な `Get Tweet` と必要時のみ `Get Article` だけを見る。
+- Gemini は日次上限制御を入れず、既存の `GEMINI_TOKEN_tech -> GEMINI_TOKEN_INVESTSUB` failover を維持する。
+
+### 運用整理表
+| 項目 | 採用値 | 理由 |
+| --- | --- | --- |
+| queue 同期間隔 | 15分ごと | GitHub Actions の起動と依存インストールの重さを踏まえ、5分や10分より安定しやすい |
+| 1 run の取得件数 | 最大1件 | SocialData の無料帯に十分余裕を残し、記事化の進行も追いやすい |
+| 取得主経路 | SocialData API | X article 取得まで含めると一番安定するため |
+| Apify | 不採用 | X article 本文取得まで単独で安定させにくかったため |
+| thread 展開 | しない | 記事目的では過剰取得になりやすく、無料帯設計とも相性が悪いため |
+| Gemini 制御 | 既存 failover 維持 | 日次上限より token failover の方が実運用に合っているため |
+
+### コスト整理表
+| ケース | 想定 API 呼び出し | 1記事あたりコスト | 1ドルあたり理論件数 | 備考 |
+| --- | --- | --- | --- | --- |
+| 通常ポスト | `Get Tweet` = 1回 | `$0.0002` | `5,000件` | 本文と基本メタだけで足りる場合 |
+| X article 付き | `Get Tweet` + `Get Article` = 2回 | `$0.0004` | `2,500件` | article 本文を引く場合 |
+| thread 展開 | 不採用 | `0` | 対象外 | 今回の運用では行わない |
+
+### 取得間隔と無料帯の見積もり
+| 指標 | 計算式 | 値 | メモ |
+| --- | --- | --- | --- |
+| 1日あたりの run 回数 | `24時間 × 4回/時` | `96 run/日` | 15分ごと実行 |
+| 1日あたりの通常ポスト取得上限 | `96 run × 1件` | `96件/日` | `Get Tweet` のみ |
+| 1日あたりの X article 取得上限 | `96 run × 1件` | `96件/日` | 件数上限は同じ、API 呼び出しは増える |
+| 1日あたりの通常ポスト API 使用量 | `96 × 1 req` | `96 req/日` | SocialData 無料帯理論値より大幅に低い |
+| 1日あたりの X article API 使用量 | `96 × 2 req` | `192 req/日` | article 付き投稿だけが続いても低水準 |
+| SocialData 無料帯理論値 | `3 req/分 × 60 × 24` | `4,320 req/日` | docs 記載の fair-use ベース |
+
+### 注意
+- SocialData docs には「`3 requests per minute` までは free」と「`positive balance` が必要」が同居しているため、完全残高ゼロ運用を断定はしない。少額残高を置きつつ、課金発生を避ける設計として解釈する方が安全。
+- 本番 workflow は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` で `15分ごと` と `1 run 最大1件` に寄せる。
+- 今回の設計は「最大取得」ではなく「安定して候補を拾い、記事制作を止めない」ことを優先する。
+
+### 参考URL
+- SocialData Pricing: https://docs.socialdata.tools/getting-started/pricing/
+- GitHub Actions billing: https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-actions/about-billing-for-github-actions
+- GitHub Actions scheduled workflows: https://docs.github.com/en/actions/reference/events-that-trigger-workflows

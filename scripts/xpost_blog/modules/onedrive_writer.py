@@ -101,6 +101,8 @@ def _build_markdown_document(markdown_body: str, metadata: dict[str, Any]) -> st
         "normalized_post_url",
         "tweet_id",
         "article_id",
+        "source_provider",
+        "source_provider_detail",
         "author_name",
         "author_screen_name",
         "published_at",
