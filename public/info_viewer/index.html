@@ -1805,15 +1805,21 @@
         return !hasArticle && video.queueStatus === 'deferred' && video.lastFailureStage === 'Gemini';
       }
 
-      function VideoCard({ video, isActive, onOpen, onPrioritize, priorityLoadingId, secondaryText }) {
+      function VideoCard({ video, isActive, isSelected, onOpen, onPrioritize, priorityLoadingId, secondaryText, onContextMenu }) {
         const thumbnailUrl = resolveThumbnailUrl(video);
         const canPrioritize = isGeminiDeferredVideo(video);
         const isPrioritizing = priorityLoadingId === video.id;
 
         return (
-          <div className={`rounded-md px-2 py-2 article-item mb-0.5 ${isActive ? 'active' : ''}`}>
+          <div className={`rounded-md px-2 py-2 article-item mb-0.5 ${isActive ? 'active' : ''} ${isSelected && !isActive ? 'bg-purple-50 border border-purple-200' : ''}`}>
             <div className="flex items-start gap-3">
-              <button type="button" onClick={onOpen} className="flex min-w-0 flex-1 items-stretch gap-3 text-left">
+              <button
+                type="button"
+                onClick={onOpen}
+                onContextMenu={(event) => onContextMenu?.(event, video)}
+                className="flex min-w-0 flex-1 items-stretch gap-3 text-left rounded-lg"
+                style={{ outline: isSelected ? '1.5px solid #7C4DFF' : undefined, outlineOffset: '-1px' }}
+              >
                 <div className="h-[72px] w-[96px] overflow-hidden rounded-xl border border-slate-200 bg-slate-100 flex-shrink-0">
                   {thumbnailUrl ? (
                     <img src={thumbnailUrl} alt="" loading="lazy" className="h-full w-full object-cover" />
@@ -1880,7 +1886,7 @@
         );
       }
 
-      function VideoList({ channel, selectedVideoId, onSelect, onPrioritize, priorityLoadingId }) {
+      function VideoList({ channel, selectedVideoId, selectedVideoIds, onSelect, onPrioritize, priorityLoadingId, onContextMenu }) {
         if (!channel) {
           return <div className="px-4 py-4 text-sm text-slate-400">チャンネルを選択してください。</div>;
         }
@@ -1894,10 +1900,12 @@
                   key={video.id}
                   video={video}
                   isActive={isActive}
-                  onOpen={() => onSelect(video.id)}
+                  isSelected={selectedVideoIds?.has(video.id)}
+                  onOpen={(event) => onSelect(video.id, event)}
                   onPrioritize={onPrioritize}
                   priorityLoadingId={priorityLoadingId}
                   secondaryText={formatVideoTimestamp(resolveVideoUpdatedAt(video))}
+                  onContextMenu={onContextMenu}
                 />
               );
             })}
@@ -1905,7 +1913,7 @@
         );
       }
 
-      function RecentList({ videos, selectedVideoId, onSelect, onPrioritize, priorityLoadingId }) {
+      function RecentList({ videos, selectedVideoId, selectedVideoIds, onSelect, onPrioritize, priorityLoadingId, onContextMenu }) {
         if (!videos.length) {
           return <div className="px-4 py-4 text-sm text-slate-400">新着記事はまだありません。</div>;
         }
@@ -1919,10 +1927,12 @@
                   key={video.id}
                   video={video}
                   isActive={isActive}
-                  onOpen={() => onSelect(video.channelId, video.id)}
+                  isSelected={selectedVideoIds?.has(video.id)}
+                  onOpen={(event) => onSelect(video.channelId, video.id, event)}
                   onPrioritize={onPrioritize}
                   priorityLoadingId={priorityLoadingId}
                   secondaryText={`${formatVideoTimestamp(resolveVideoUpdatedAt(video))} ・ ${video.channelName}`}
+                  onContextMenu={onContextMenu}
                 />
               );
             })}
@@ -1983,6 +1993,7 @@
                 duration: video.duration || '',
                 thumbnailUrl: video.thumbnailUrl || '',
                 youtubeUrl: video.youtubeUrl || '',
+                articleWebUrl: video.articleWebUrl || '',
                 articleStatus: video.articleStatus || (video.hasArticle ? '記事あり' : '未生成'),
                 hasArticle: Boolean(video.hasArticle || video.articleId),
                 articleUpdatedAt: video.articleUpdatedAt || '',
@@ -2019,6 +2030,8 @@
         const [priorityLoadingId, setPriorityLoadingId] = useState('');
         const [refreshingSheet, setRefreshingSheet] = useState(false);
         const [manifestGeneratedAt, setManifestGeneratedAt] = useState('');
+        const [selectedVideoIds, setSelectedVideoIds] = useState(new Set());
+        const [videoContextMenu, setVideoContextMenu] = useState({ visible: false, x: 0, y: 0, video: null });
         const channelDragging = useRef(false);
         const videoDragging = useRef(false);
         const channelStartX = useRef(0);
@@ -2029,6 +2042,7 @@
         const touchStartY = useRef(null);
         const selectedChannelIdRef = useRef('');
         const selectedVideoIdRef = useRef('');
+        const lastClickedVideoIdRef = useRef('');
 
         const onChannelResizeStart = useCallback((e) => {
           if (e.button !== 0) return;
@@ -2088,6 +2102,24 @@
         useEffect(() => {
           selectedVideoIdRef.current = selectedVideoId;
         }, [selectedVideoId]);
+
+        useEffect(() => {
+          if (!videoContextMenu.visible) return undefined;
+          const close = () => setVideoContextMenu((current) => ({ ...current, visible: false }));
+          const onKeyDown = (event) => {
+            if (event.key === 'Escape') {
+              close();
+            }
+          };
+          window.addEventListener('click', close);
+          window.addEventListener('contextmenu', close);
+          window.addEventListener('keydown', onKeyDown);
+          return () => {
+            window.removeEventListener('click', close);
+            window.removeEventListener('contextmenu', close);
+            window.removeEventListener('keydown', onKeyDown);
+          };
+        }, [videoContextMenu.visible]);
 
         const loadIndex = useCallback(async ({ preserveSelection = true, silent = false } = {}) => {
           try {
@@ -2173,6 +2205,15 @@
           [desktopVideoFilter, latestVideos, selectedChannel.videos]
         );
 
+        const currentVideoList = useMemo(() => {
+          if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+            if (mobilePanel === 'latest') return latestVideos;
+            if (mobilePanel === 'videos') return selectedChannel.videos;
+            return [];
+          }
+          return desktopVideoFilter === 'latest' ? latestVideos : selectedChannel.videos;
+        }, [desktopVideoFilter, latestVideos, mobilePanel, selectedChannel.videos]);
+
         const selectedVideo = useMemo(
           () => selectedChannel.videos.find((video) => video.id === selectedVideoId) || selectedChannel.videos[0] || {
             id: '',
@@ -2183,6 +2224,7 @@
             duration: '',
             thumbnailUrl: '',
             youtubeUrl: '#',
+            articleWebUrl: '',
             articleStatus: '未生成',
             markdown: '',
             hasArticle: false,
@@ -2226,6 +2268,71 @@
         const handleSelectLatestArticle = useCallback((channelId, videoId) => {
           handleSelectVideoAcrossChannels(channelId, videoId);
           setMobileSidebarOpen(false);
+        }, [handleSelectVideoAcrossChannels]);
+
+        const handleToggleVideoSelection = useCallback((videoId) => {
+          setSelectedVideoIds((current) => {
+            const next = new Set(current);
+            if (next.has(videoId)) {
+              next.delete(videoId);
+            } else {
+              next.add(videoId);
+            }
+            return next;
+          });
+        }, []);
+
+        const handleRangeSelect = useCallback((fromId, toId) => {
+          const ids = currentVideoList.map((video) => video.id);
+          const fromIndex = ids.indexOf(fromId);
+          const toIndex = ids.indexOf(toId);
+          if (fromIndex === -1 || toIndex === -1) return;
+          const [start, end] = fromIndex < toIndex ? [fromIndex, toIndex] : [toIndex, fromIndex];
+          setSelectedVideoIds(new Set(ids.slice(start, end + 1)));
+        }, [currentVideoList]);
+
+        const handleVideoClick = useCallback((video, event, mode = 'single') => {
+          const selectVideo = () => {
+            if (mode === 'latest') {
+              handleSelectVideoAcrossChannels(video.channelId, video.id);
+            } else {
+              setSelectedVideoId(video.id);
+            }
+          };
+
+          if (event?.shiftKey && lastClickedVideoIdRef.current) {
+            handleRangeSelect(lastClickedVideoIdRef.current, video.id);
+            selectVideo();
+            return;
+          }
+
+          if (event?.metaKey || event?.ctrlKey) {
+            handleToggleVideoSelection(video.id);
+            lastClickedVideoIdRef.current = video.id;
+            selectVideo();
+            return;
+          }
+
+          lastClickedVideoIdRef.current = video.id;
+          if (selectedVideoIds.size > 0) {
+            setSelectedVideoIds(new Set());
+          }
+          selectVideo();
+        }, [handleRangeSelect, handleSelectVideoAcrossChannels, handleToggleVideoSelection, selectedVideoIds.size]);
+
+        const handleVideoContextMenu = useCallback((event, video) => {
+          event.preventDefault();
+          event.stopPropagation();
+          const menuWidth = 188;
+          const menuHeight = 146;
+          const x = Math.min(event.clientX, window.innerWidth - menuWidth - 8);
+          const y = Math.min(event.clientY, window.innerHeight - menuHeight - 8);
+          setVideoContextMenu({ visible: true, x, y, video });
+          if (video?.channelId) {
+            handleSelectVideoAcrossChannels(video.channelId, video.id);
+          } else if (video?.id) {
+            setSelectedVideoId(video.id);
+          }
         }, [handleSelectVideoAcrossChannels]);
 
         const updateVideoInChannels = useCallback((videoId, updater) => {
@@ -2333,6 +2440,76 @@
             setLoadingIndex(false);
           }
         }, [loadIndex, manifestGeneratedAt, refreshingSheet, waitForFreshManifest]);
+
+        const handleDeleteVideo = useCallback(async (video) => {
+          if (!video?.articleId) {
+            setIndexError('削除できる OneDrive 記事が見つかりません。');
+            return;
+          }
+          if (!window.confirm(`「${video.title || 'この記事'}」を削除します。\nこの操作は取り消せません。`)) {
+            return;
+          }
+
+          try {
+            setLoadingIndex(true);
+            setIndexError('');
+            setVideoContextMenu((current) => ({ ...current, visible: false }));
+            const response = await fetch('/api/info-viewer-delete', {
+              method: 'DELETE',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ articleId: video.articleId }),
+            });
+            const payload = await response.json();
+            if (!response.ok || payload.success === false) {
+              throw new Error(payload.error || `delete API ${response.status}`);
+            }
+
+            setArticleCache((current) => {
+              const next = { ...current };
+              delete next[video.articleId];
+              return next;
+            });
+            setSelectedVideoIds((current) => {
+              const next = new Set(current);
+              next.delete(video.id);
+              return next;
+            });
+
+            const triggerResponse = await fetch('/api/trigger-info-viewer', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                mode: 'rebuild_manifest_only',
+                max_items: '0',
+                rebuild_manifest_only: true,
+              }),
+            });
+            const triggerPayload = await triggerResponse.json();
+            if (!triggerResponse.ok || triggerPayload.success === false) {
+              throw new Error(triggerPayload.error || `trigger API ${triggerResponse.status}`);
+            }
+
+            const refreshed = await waitForFreshManifest(manifestGeneratedAt);
+            if (!refreshed) {
+              await loadIndex({ preserveSelection: true, silent: true });
+              setIndexError('削除後の manifest 再読込に少し時間がかかっています。数秒後に再読込してください。');
+            }
+          } catch (error) {
+            setIndexError(error.message || '記事削除に失敗しました。');
+          } finally {
+            setLoadingIndex(false);
+          }
+        }, [loadIndex, manifestGeneratedAt, waitForFreshManifest]);
+
+        const handleOpenInOneDrive = useCallback((video) => {
+          const target = video?.articleWebUrl || '';
+          if (!target) {
+            setIndexError('OneDrive の記事 URL が見つかりません。');
+            return;
+          }
+          window.open(target, '_blank', 'noopener,noreferrer');
+          setVideoContextMenu((current) => ({ ...current, visible: false }));
+        }, []);
 
         const swipeSequence = useMemo(() => {
           const isCurrentInLatest = latestVideos.some((video) => video.id === selectedVideoId);
@@ -2469,17 +2646,31 @@
                   <VideoList
                     channel={selectedChannel}
                     selectedVideoId={selectedVideoId}
-                    onSelect={(videoId) => { setSelectedVideoId(videoId); setMobileSidebarOpen(false); }}
+                    selectedVideoIds={selectedVideoIds}
+                    onSelect={(videoId, event) => {
+                      const video = selectedChannel.videos.find((item) => item.id === videoId);
+                      if (!video) return;
+                      handleVideoClick(video, event, 'channel');
+                      setMobileSidebarOpen(false);
+                    }}
                     onPrioritize={handlePrioritizeVideo}
                     priorityLoadingId={priorityLoadingId}
+                    onContextMenu={handleVideoContextMenu}
                   />
                 ) : (
                   <RecentList
                     videos={latestVideos}
                     selectedVideoId={selectedVideoId}
-                    onSelect={handleSelectLatestArticle}
+                    selectedVideoIds={selectedVideoIds}
+                    onSelect={(channelId, videoId, event) => {
+                      const video = latestVideos.find((item) => item.id === videoId && item.channelId === channelId);
+                      if (!video) return;
+                      handleVideoClick(video, event, 'latest');
+                      setMobileSidebarOpen(false);
+                    }}
                     onPrioritize={handlePrioritizeVideo}
                     priorityLoadingId={priorityLoadingId}
+                    onContextMenu={handleVideoContextMenu}
                   />
                 )}
               </div>
@@ -2520,17 +2711,29 @@
                   <RecentList
                     videos={desktopVideos}
                     selectedVideoId={selectedVideoId}
-                    onSelect={handleSelectVideoAcrossChannels}
+                    selectedVideoIds={selectedVideoIds}
+                    onSelect={(channelId, videoId, event) => {
+                      const video = desktopVideos.find((item) => item.id === videoId && item.channelId === channelId);
+                      if (!video) return;
+                      handleVideoClick(video, event, 'latest');
+                    }}
                     onPrioritize={handlePrioritizeVideo}
                     priorityLoadingId={priorityLoadingId}
+                    onContextMenu={handleVideoContextMenu}
                   />
                 ) : (
                   <VideoList
                     channel={selectedChannel}
                     selectedVideoId={selectedVideoId}
-                    onSelect={setSelectedVideoId}
+                    selectedVideoIds={selectedVideoIds}
+                    onSelect={(videoId, event) => {
+                      const video = selectedChannel.videos.find((item) => item.id === videoId);
+                      if (!video) return;
+                      handleVideoClick(video, event, 'channel');
+                    }}
                     onPrioritize={handlePrioritizeVideo}
                     priorityLoadingId={priorityLoadingId}
+                    onContextMenu={handleVideoContextMenu}
                   />
                 )}
               </div>
@@ -2659,6 +2862,60 @@
                 )}
               </div>
             </main>
+
+            {videoContextMenu.visible && videoContextMenu.video ? (
+              <div
+                style={{
+                  position: 'fixed',
+                  left: videoContextMenu.x,
+                  top: videoContextMenu.y,
+                  width: '188px',
+                  background: 'white',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '12px',
+                  boxShadow: '0 16px 40px rgba(15, 23, 42, 0.18)',
+                  zIndex: 9999,
+                  padding: '6px',
+                }}
+                onClick={(event) => event.stopPropagation()}
+              >
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleToggleVideoSelection(videoContextMenu.video.id);
+                    setVideoContextMenu((current) => ({ ...current, visible: false }));
+                  }}
+                  onMouseEnter={(event) => { event.currentTarget.style.background = '#f5f3ff'; }}
+                  onMouseLeave={(event) => { event.currentTarget.style.background = 'transparent'; }}
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '9px 12px', border: 'none', background: 'transparent', borderRadius: '9px', cursor: 'pointer', color: '#334155', textAlign: 'left', fontSize: '13px' }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" /></svg>
+                  {selectedVideoIds.has(videoContextMenu.video.id) ? '選択解除' : '選択'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDeleteVideo(videoContextMenu.video)}
+                  disabled={!videoContextMenu.video.articleId}
+                  onMouseEnter={(event) => { if (!event.currentTarget.disabled) event.currentTarget.style.background = '#fff1f2'; }}
+                  onMouseLeave={(event) => { event.currentTarget.style.background = 'transparent'; }}
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '9px 12px', border: 'none', background: 'transparent', borderRadius: '9px', cursor: videoContextMenu.video.articleId ? 'pointer' : 'not-allowed', color: videoContextMenu.video.articleId ? '#dc2626' : '#cbd5e1', textAlign: 'left', fontSize: '13px' }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18" /><path d="M8 6V4h8v2" /><path d="M19 6l-1 14H6L5 6" /></svg>
+                  削除
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleOpenInOneDrive(videoContextMenu.video)}
+                  disabled={!videoContextMenu.video.articleWebUrl}
+                  onMouseEnter={(event) => { if (!event.currentTarget.disabled) event.currentTarget.style.background = '#f8fafc'; }}
+                  onMouseLeave={(event) => { event.currentTarget.style.background = 'transparent'; }}
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '9px 12px', border: 'none', background: 'transparent', borderRadius: '9px', cursor: videoContextMenu.video.articleWebUrl ? 'pointer' : 'not-allowed', color: videoContextMenu.video.articleWebUrl ? '#334155' : '#cbd5e1', textAlign: 'left', fontSize: '13px' }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
+                  OneDriveで開く
+                </button>
+              </div>
+            ) : null}
           </div>
         );
       }
