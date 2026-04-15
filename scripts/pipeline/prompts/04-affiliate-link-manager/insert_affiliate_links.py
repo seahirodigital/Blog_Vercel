@@ -1,14 +1,14 @@
 """
-アフィリエイトリンク挿入 v4
-OneDriveを直接参照し、MEMO1の▼ブロックをルールに基づいて挿入する
+アフィリエイトリンク挿入 v5
+OneDriveを直接参照し、指定した MEMO 番号の▼ブロックをルールに基づいて挿入する
 
 【挿入ルール】
-1. H2「結論」の直前: MEMO1全文（手動リンク用・スクリプトは挿入のみ）
+1. H2「結論」の直前: 指定 MEMO 全文（手動リンク用・スクリプトは挿入のみ）
 2. 奇数番目のH2で1番目を除く（3,5,7...番目）の直前: ▼ブロック1つをランダム選択（重複なし）
    ※1番目・偶数番目のH2直前は手動挿入のためスクリプトでは何もしない
    ※「結論」H2は1で処理済みのためスキップ
 3. 免責事項は最初の挿入位置に1回のみ付与（各ブロックには付与しない）
-4. 記事末尾にアフィリエイトリンクテキスト（MEMO1全文）を添付する
+4. 記事末尾にアフィリエイトリンクテキスト（指定 MEMO 全文）を添付する
 """
 
 import os
@@ -25,7 +25,7 @@ AFFILIATE_FILE_PATH = (
     "04-affiliate-link-manager/affiliate_links.txt"
 )
 
-DISCLAIMER = "(Amazonのアソシエイトとして本アカウントは適格販売により収入を得ています。)"
+DISCLAIMER = "(Amazonのアソシエイトとして本アカウントは適格販売により収入を得ています。文章にはAIの整形・編集が含まれます。)"
 
 
 # ── OneDrive 認証 ──────────────────────────────────────
@@ -52,15 +52,15 @@ def _fetch_from_onedrive() -> str:
 
 
 # ── パーサー ────────────────────────────────────────────
-def _parse_memo1(raw: str) -> str:
+def _parse_memo(raw: str, memo_number: int) -> str:
     """
-    MEMO1のコンテンツを取得。
-    ===MEMO1=== マーカーおよび --- 以前のメタデータを除去し、純粋な本文のみ返す。
+    指定 MEMO のコンテンツを取得。
+    ===MEMO<n>=== マーカーおよび --- 以前のメタデータを除去し、純粋な本文のみ返す。
     記事本文に ===MEMOx=== などの文字が混入しないよう保証する。
     """
     parts = re.split(r"===MEMO(\d+)===", raw)
     for i in range(1, len(parts), 2):
-        if int(parts[i]) == 1:
+        if int(parts[i]) == memo_number:
             body = (parts[i + 1] if i + 1 < len(parts) else "").strip()
             # --- セパレータがある場合はその前のメタデータを除去
             if "---" in body:
@@ -87,15 +87,19 @@ def _insert_before(lines: list[str], index: int, block: str) -> list[str]:
 
 
 # ── メインエントリーポイント ────────────────────────────
-def insert_affiliate_links(markdown_content: str) -> str:
+def insert_affiliate_links(markdown_content: str, memo_number: int = 1) -> str:
     """
-    OneDriveからMEMO1を取得し、ルールに従ってMarkdownに挿入して返す。
+    OneDriveから指定 MEMO を取得し、ルールに従ってMarkdownに挿入して返す。
     失敗時は元の文字列をそのまま返す。
     """
+    if memo_number < 1:
+        print(f"   [警告] MEMO番号が不正です: {memo_number}")
+        return markdown_content
+
     try:
         raw = _fetch_from_onedrive()
     except Exception as e:
-        print(f"   ⚠️ OneDrive取得失敗（ローカルフォールバック試行）: {e}")
+        print(f"   [警告] OneDrive取得失敗（ローカルフォールバック試行）: {e}")
         local_path = os.path.join(
             os.path.dirname(os.path.abspath(__file__)),
             "affiliate_links.txt"
@@ -103,18 +107,18 @@ def insert_affiliate_links(markdown_content: str) -> str:
         if os.path.exists(local_path):
             with open(local_path, "r", encoding="utf-8") as f:
                 raw = f.read()
-            print("   ✅ ローカルファイルで代替")
+            print("   [OK] ローカルファイルで代替")
         else:
-            print("   ❌ ローカルファイルも未検出 - アフィリ挿入スキップ")
+            print("   [警告] ローカルファイルも未検出 - アフィリ挿入スキップ")
             return markdown_content
 
-    memo1_content = _parse_memo1(raw)
-    if not memo1_content:
-        print("   ⚠️ MEMO1が空または未検出 - アフィリ挿入スキップ")
+    memo_content = _parse_memo(raw, memo_number)
+    if not memo_content:
+        print(f"   [警告] MEMO{memo_number}が空または未検出 - アフィリ挿入スキップ")
         return markdown_content
 
-    blocks = _split_blocks(memo1_content)
-    print(f"   📋 ▼ブロック数: {len(blocks)}件")
+    blocks = _split_blocks(memo_content)
+    print(f"   [情報] MEMO{memo_number} / ▼ブロック数: {len(blocks)}件")
 
     lines = markdown_content.splitlines(keepends=True)
     h2_indices = [i for i, ln in enumerate(lines) if ln.startswith("## ")]
@@ -122,13 +126,13 @@ def insert_affiliate_links(markdown_content: str) -> str:
     # ── 挿入計画を作成（後で逆順に適用し行番号ズレを防ぐ）──
     insertions = []  # [(line_index, text), ...]
 
-    # 1. H2「結論」の直前（固定: MEMO1全文）
+    # 1. H2「結論」の直前（固定: 指定 MEMO 全文）
     conclusion_idx = next((i for i in h2_indices if "結論" in lines[i]), None)
     if conclusion_idx is not None:
-        insertions.append((conclusion_idx, memo1_content))
-        print("   ✅ 「結論」直前: MEMO1全文を挿入予約")
+        insertions.append((conclusion_idx, memo_content))
+        print(f"   [OK] 「結論」直前: MEMO{memo_number}全文を挿入予約")
     else:
-        print("   ⚠️ H2「結論」が見つかりません - 固定挿入をスキップ")
+        print("   [警告] H2「結論」が見つかりません - 固定挿入をスキップ")
 
     # 2. 奇数番目のH2で1番目を除く（3,5,7...）直前（ランダム▼ブロック、重複なし）
     random.shuffle(blocks)
@@ -141,9 +145,9 @@ def insert_affiliate_links(markdown_content: str) -> str:
         try:
             block = next(block_iter)
             insertions.append((h2_idx, block))
-            print(f"   ✅ {count}番目H2直前: ▼ブロック挿入予約")
+            print(f"   [OK] {count}番目H2直前: ▼ブロック挿入予約")
         except StopIteration:
-            print(f"   ⚠️ {count}番目H2: 挿入可能なブロックが不足 - スキップ")
+            print(f"   [警告] {count}番目H2: 挿入可能なブロックが不足 - スキップ")
             break
 
     # 免責事項を最も早い挿入位置（行番号が最小）に1回のみ付与
@@ -157,26 +161,34 @@ def insert_affiliate_links(markdown_content: str) -> str:
     for pos, text in insertions:
         lines = _insert_before(lines, pos, text)
 
-    # 4. 記事末尾にMEMO1全文を添付
+    # 4. 記事末尾に指定 MEMO 全文を添付
     if lines and not lines[-1].endswith("\n"):
         lines[-1] += "\n"
-    lines.extend(["\n", "---", "\n\n", memo1_content, "\n"])
-    print("   ✅ 記事末尾: MEMO1全文を添付")
+    lines.extend(["\n", "---", "\n\n", memo_content, "\n"])
+    print(f"   [OK] 記事末尾: MEMO{memo_number}全文を添付")
 
-    print("   ✅ アフィリエイトリンク挿入完了")
+    print("   [OK] アフィリエイトリンク挿入完了")
     return "".join(lines)
 
 
 # ── CLI実行（デバッグ用）────────────────────────────────
 if __name__ == "__main__":
-    import sys
-    if len(sys.argv) >= 2:
-        article_file = sys.argv[1]
-        with open(article_file, "r", encoding="utf-8") as f:
-            md = f.read()
-        result = insert_affiliate_links(md)
-        with open(article_file, "w", encoding="utf-8") as f:
-            f.write(result)
-        print(f"✅ {article_file} への挿入完了")
-    else:
-        print("使用方法: python insert_affiliate_links.py <article.md>")
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Markdown記事へアフィリエイトリンクを挿入する")
+    parser.add_argument("article_file", help="対象のMarkdownファイル")
+    parser.add_argument(
+        "--memo",
+        type=int,
+        default=1,
+        help="使用する MEMO 番号。未指定時は 1",
+    )
+    args = parser.parse_args()
+
+    article_file = args.article_file
+    with open(article_file, "r", encoding="utf-8") as f:
+        md = f.read()
+    result = insert_affiliate_links(md, memo_number=args.memo)
+    with open(article_file, "w", encoding="utf-8") as f:
+        f.write(result)
+    print(f"[OK] {article_file} への挿入完了（MEMO{args.memo}）")

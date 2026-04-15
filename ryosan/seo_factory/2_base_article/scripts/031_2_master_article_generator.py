@@ -149,11 +149,29 @@ def _base_section_heading(seed_keyword: str, section_id: str) -> str:
     return f"{seed_keyword}レビュー比較まとめ：{SECTION_TITLES[section_id]}"
 
 
+def _topic_heading_label(seed_keyword: str, suggest_keyword: str) -> str:
+    normalized_keyword = str(suggest_keyword or "").strip()
+    if not normalized_keyword:
+        return ""
+
+    lowered_keyword = normalized_keyword.lower()
+    explicit_label_map = {
+        "dji osmo pocket 4 バッテリー": "DJI Osmo Pocket 4 バッテリ",
+        "dji osmo pocket 3 4 比較": "dji osmo pocket 3 4 比較",
+        "dji osmo pocket 3 4 違い": "dji osmo pocket 3 4 違い",
+    }
+    if lowered_keyword in explicit_label_map:
+        return explicit_label_map[lowered_keyword]
+
+    suffix = extract_keyword_suffix(seed_keyword, normalized_keyword)
+    if suffix != normalized_keyword:
+        return f"{seed_keyword} {suffix}".strip()
+    return normalized_keyword
+
+
 def _make_subheading(seed_keyword: str, suggest_keyword: str) -> str:
-    suffix = extract_keyword_suffix(seed_keyword, suggest_keyword)
-    if suffix == suggest_keyword:
-        return suggest_keyword
-    return f"{seed_keyword} {suffix}".strip()
+    topic_label = _topic_heading_label(seed_keyword, suggest_keyword)
+    return f"{seed_keyword}レビュー比較まとめ：{topic_label}"
 
 
 def _build_section_topic_entries(
@@ -493,6 +511,47 @@ def _build_reference_section_rules(article_markdown: str) -> list[dict[str, Any]
     return rules
 
 
+def _normalize_reference_heading(seed_keyword: str, heading: str) -> str:
+    normalized_heading = str(heading or "").strip()
+    if not normalized_heading:
+        return ""
+
+    legacy_prefix_patterns = (
+        r"^DJI Pocket 4レビュー比較まとめ[:：]\s*",
+        r"^DJI Pocket 4[:：]\s*",
+    )
+    for pattern in legacy_prefix_patterns:
+        if re.match(pattern, normalized_heading, flags=re.IGNORECASE):
+            suffix = re.sub(pattern, "", normalized_heading, flags=re.IGNORECASE).strip()
+            if not suffix:
+                return normalized_heading
+            return f"{seed_keyword}レビュー比較まとめ：{suffix}"
+
+    return normalized_heading
+
+
+def _normalize_reference_headings(seed_keyword: str, headings: Iterable[str]) -> list[str]:
+    return _dedupe_preserve_order(
+        _normalize_reference_heading(seed_keyword, heading)
+        for heading in headings
+    )
+
+
+def _normalize_reference_section_rules(
+    seed_keyword: str,
+    reference_section_rules: Iterable[Mapping[str, Any]],
+) -> list[dict[str, Any]]:
+    normalized_rules: list[dict[str, Any]] = []
+    for rule in reference_section_rules:
+        normalized_heading = _normalize_reference_heading(seed_keyword, str(rule.get("heading", "")))
+        if not normalized_heading:
+            continue
+        normalized_rule = dict(rule)
+        normalized_rule["heading"] = normalized_heading
+        normalized_rules.append(normalized_rule)
+    return normalized_rules
+
+
 def _build_master_baseline_h2(seed_keyword: str) -> dict[str, list[str] | str]:
     review_prefix = f"{seed_keyword}レビュー比較まとめ"
     leading = [
@@ -706,9 +765,18 @@ def build_master_research_bundle(
     topics: list[dict[str, Any]] = []
     priority_groups = outline_data.get("priority_groups", [])
     source_article_markdown = str(reference_article_markdown or existing_master_article_markdown or "")
-    inherited_h2_headings = _extract_h2_headings(source_article_markdown)
-    reference_h2_headings = _extract_h2_headings(reference_article_markdown)
-    reference_section_rules = _build_reference_section_rules(reference_article_markdown)
+    inherited_h2_headings = _normalize_reference_headings(
+        seed_keyword,
+        _extract_h2_headings(source_article_markdown),
+    )
+    reference_h2_headings = _normalize_reference_headings(
+        seed_keyword,
+        _extract_h2_headings(reference_article_markdown),
+    )
+    reference_section_rules = _normalize_reference_section_rules(
+        seed_keyword,
+        _build_reference_section_rules(reference_article_markdown),
+    )
     master_baseline = _build_master_baseline_h2(seed_keyword)
 
     for section in outline_data.get("sections", []):

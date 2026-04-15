@@ -27,3 +27,9 @@ token_result.txt
 
 # ドキュメント等
 変換前
+
+# SEO量産出力
+ryosan/seo_factory/output/
+
+# アフィリエイトリンク原本
+scripts/pipeline/prompts/04-affiliate-link-manager/affiliate_links.txt
