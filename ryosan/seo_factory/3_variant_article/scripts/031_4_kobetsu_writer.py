@@ -6,12 +6,7 @@ import json
 import re
 from typing import Any, Mapping
 
-def _make_h2_prefix(text: str) -> str:
-    return f"{str(text or '').strip()}："
-
-
 def _normalize_h2_prefixes(article_markdown: str, target_keyword: str) -> str:
-    prefix = _make_h2_prefix(target_keyword)
     normalized_lines: list[str] = []
     for line in str(article_markdown or "").splitlines():
         if line.startswith("### "):
@@ -20,12 +15,11 @@ def _normalize_h2_prefixes(article_markdown: str, target_keyword: str) -> str:
             line = f"## {line[5:].strip()}"
         if line.startswith("## "):
             heading_text = line[3:].strip()
-            if not heading_text.startswith(prefix):
-                if "：" in heading_text:
-                    heading_text = heading_text.split("：", 1)[1].strip()
-                normalized_lines.append(f"## {prefix}{heading_text}")
+            if "：" in heading_text:
+                suffix = heading_text.split("：", 1)[1].strip()
             else:
-                normalized_lines.append(line)
+                suffix = _derive_section_label(target_keyword, heading_text)
+            normalized_lines.append(f"## {target_keyword}：{suffix}")
         else:
             normalized_lines.append(line)
     return "\n".join(normalized_lines).strip() + "\n"
@@ -114,21 +108,20 @@ def _build_kobetsu_section_labels(
     target_keyword: str,
     template_sections: list[Mapping[str, str]],
 ) -> list[str]:
-    target_prefix = _make_h2_prefix(target_keyword)
     labels: list[str] = []
     for section in template_sections:
         section_label = str(section.get("section_label", "")).strip()
         if not section_label:
             continue
-        labels.append(f"{target_prefix}{section_label}")
+        labels.append(f"{target_keyword}：{section_label}")
 
     if not labels:
         target_suffix = _derive_section_label(seed_keyword, target_keyword)
         labels = [
-            f"{target_prefix}結論",
-            f"{target_prefix}{target_suffix or '確認ポイント'}",
-            f"{target_prefix}注意点",
-            f"{target_prefix}まとめ",
+            f"{target_keyword}：結論",
+            f"{target_keyword}：{target_suffix or target_keyword or '確認ポイント'}",
+            f"{target_keyword}：注意点",
+            f"{target_keyword}：まとめ",
         ]
     return _dedupe_preserve_order(labels)
 
@@ -194,7 +187,6 @@ def build_kobetsu_job(
         "target_keyword": target_keyword,
         "query_type": query_type,
         "volume_label": volume_label,
-        "required_h2_prefix": _make_h2_prefix(target_keyword),
         "opening_focus": opening_focus,
         "reuse_candidates": reuse_candidates,
         "master_h2_headings": master_h2_headings,
@@ -206,8 +198,9 @@ def build_kobetsu_job(
             "母艦記事の良い文章資産と論点順を土台にする",
             "母艦記事の H2 構成は原則すべて維持する",
             "4見出し前後へ圧縮してはいけない",
-            "H2 は必ず対象検索キーワード：見出し名 で始める",
-            "H2直下の最初の一文も、その見出しキーワードを自然に含めて始める",
+            "H2 は `対象SEOキーワード：見出し名` の形式を維持する",
+            "各H2直下の最初の一文では、見出し名全体を機械的に繰り返さず、対象SEOキーワードを自然な位置に含める",
+            "発売済み前提の記事では、発表前や正式発表待ちの言い回しを削ってリライトする",
             "おすすめ系でも商品推薦ではなく、判断軸を渡す記事にする",
         ],
         "forbidden_phrases": [
@@ -217,6 +210,9 @@ def build_kobetsu_job(
             "テンプレート",
             "構造",
             "検索キーワード",
+            "発表直前",
+            "待つ価値",
+            "正式発表待ち",
         ],
         "outline_title": str(outline.get("title", "")),
     }
@@ -265,7 +261,7 @@ def render_kobetsu_jobs_markdown(seed_keyword: str, jobs: list[Mapping[str, Any]
         lines.append(f"- クエリタイプ: {job.get('query_type', '')}")
         lines.append(f"- 検索ボリューム: {job.get('volume_label', '')}")
         lines.append(f"- 冒頭で最初に答えること: {job.get('opening_focus', '')}")
-        lines.append(f"- H2 接頭辞: {job.get('required_h2_prefix', '')}")
+        lines.append("- H2 方針: `対象SEOキーワード：見出し名` の形式を維持し、導入文は自然な日本語で始める")
         lines.append(f"- 母艦から流用したい見出し候補: {', '.join(job.get('reuse_candidates', []))}")
         lines.append(f"- 母艦 H2 数: {job.get('minimum_h2_count', 0)}")
         lines.append(f"- 母艦 H2 全維持: {' / '.join(job.get('master_h2_headings', []))}")
@@ -303,7 +299,7 @@ def _build_payload(
         "target_keyword": target_keyword,
         "volume_label": volume_label,
         "query_type": query_type,
-        "target_heading_prefix": _make_h2_prefix(target_keyword),
+        "target_heading_prefix": target_keyword,
         "outline_title": str(outline.get("title", "")),
         "priority_groups": outline.get("priority_groups", []),
         "template_sections": template_sections,

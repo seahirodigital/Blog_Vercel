@@ -55,6 +55,18 @@ def _first_nonempty_line(text: str) -> str:
     return ""
 
 
+def _opening_excerpt(text: str, limit: int = 2) -> str:
+    excerpts: list[str] = []
+    for line in str(text or "").splitlines():
+        normalized = line.strip()
+        if not normalized:
+            continue
+        excerpts.append(normalized)
+        if len(excerpts) >= limit:
+            break
+    return " ".join(excerpts)
+
+
 def _analyze_section_body(body_markdown: str) -> dict[str, int]:
     raw_lines = [line.rstrip() for line in str(body_markdown or "").splitlines()]
     nonempty_lines = [line.strip() for line in raw_lines if line.strip()]
@@ -83,6 +95,20 @@ def _contains_any(text: str, candidates: list[str]) -> bool:
 def _canonical_heading(text: str) -> str:
     normalized = re.sub(r"\s*&\s*cta\s*$", "", str(text or ""), flags=re.IGNORECASE)
     return "".join(normalized.lower().split())
+
+
+def _contains_keyword_naturally(text: str, keyword: str) -> bool:
+    normalized_text = str(text or "").strip()
+    normalized_keyword = str(keyword or "").strip()
+    if not normalized_text or not normalized_keyword:
+        return False
+
+    tokens = [token for token in normalized_keyword.split() if token]
+    if len(tokens) <= 1:
+        return normalized_keyword.lower() in normalized_text.lower()
+
+    pattern = ".*?".join(re.escape(token) for token in tokens)
+    return re.search(pattern, normalized_text, flags=re.IGNORECASE) is not None
 
 
 def validate_master_article(article_markdown: str, bundle: Mapping[str, Any]) -> dict[str, Any]:
@@ -250,7 +276,6 @@ def validate_master_article(article_markdown: str, bundle: Mapping[str, Any]) ->
 
 def validate_variant_article(article_markdown: str, job: Mapping[str, Any]) -> dict[str, Any]:
     target_keyword = str(job.get("target_keyword", "")).strip()
-    prefix = str(job.get("required_h2_prefix", "")).strip()
     expected_h2 = [str(heading).strip() for heading in job.get("required_h2_headings", []) if str(heading).strip()]
     forbidden_phrases = [str(phrase).strip() for phrase in job.get("forbidden_phrases", []) if str(phrase).strip()]
     minimum_h2_count = int(job.get("minimum_h2_count", 0) or 0)
@@ -268,24 +293,20 @@ def validate_variant_article(article_markdown: str, job: Mapping[str, Any]) -> d
 
     h2_blocks = _extract_h2_blocks(article_text)
     actual_h2 = [block["heading"] for block in h2_blocks]
-
     if minimum_h2_count and len(actual_h2) < minimum_h2_count:
         errors.append(f"H2 数が不足している: {len(actual_h2)} / {minimum_h2_count}")
 
     if expected_h2 and actual_h2 != expected_h2:
         errors.append("H2 構成が母艦由来の必須構成と一致していない")
 
-    for heading in actual_h2:
-        if prefix and not heading.startswith(prefix):
-            errors.append(f"H2 が対象キーワード始まりではない: {heading}")
-
     for block in h2_blocks:
         first_line = _first_nonempty_line(block["body"])
         if not first_line:
             errors.append(f"H2 直下の本文が空: {block['heading']}")
             continue
-        if target_keyword and target_keyword not in first_line:
-            errors.append(f"H2 直下の最初の1文に対象検索キーワードが無い: {block['heading']}")
+        opening_excerpt = _opening_excerpt(block["body"])
+        if target_keyword and not _contains_keyword_naturally(opening_excerpt, target_keyword):
+            errors.append(f"H2 直下の導入文に対象検索キーワードが自然に含まれていない: {block['heading']}")
 
     if expected_h2 and not actual_h2:
         errors.append("H2 が1つも無い")

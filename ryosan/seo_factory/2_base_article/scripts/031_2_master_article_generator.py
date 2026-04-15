@@ -516,17 +516,6 @@ def _normalize_reference_heading(seed_keyword: str, heading: str) -> str:
     if not normalized_heading:
         return ""
 
-    legacy_prefix_patterns = (
-        r"^DJI Pocket 4レビュー比較まとめ[:：]\s*",
-        r"^DJI Pocket 4[:：]\s*",
-    )
-    for pattern in legacy_prefix_patterns:
-        if re.match(pattern, normalized_heading, flags=re.IGNORECASE):
-            suffix = re.sub(pattern, "", normalized_heading, flags=re.IGNORECASE).strip()
-            if not suffix:
-                return normalized_heading
-            return f"{seed_keyword}レビュー比較まとめ：{suffix}"
-
     return normalized_heading
 
 
@@ -553,18 +542,17 @@ def _normalize_reference_section_rules(
 
 
 def _build_master_baseline_h2(seed_keyword: str) -> dict[str, list[str] | str]:
-    review_prefix = f"{seed_keyword}レビュー比較まとめ"
     leading = [
-        f"{review_prefix}：結論",
-        f"{review_prefix}：選定基準",
+        f"{seed_keyword}レビュー比較まとめ：結論",
+        f"{seed_keyword}レビュー比較まとめ：選定基準",
     ]
     trailing = [
-        f"{review_prefix}：比較",
-        f"{review_prefix}：メリット",
-        f"{review_prefix}：デメリット",
-        f"{review_prefix}：FAQ",
-        f"{review_prefix}：評判",
-        f"{review_prefix}：まとめ",
+        f"{seed_keyword}レビュー比較まとめ：比較",
+        f"{seed_keyword}レビュー比較まとめ：メリット",
+        f"{seed_keyword}レビュー比較まとめ：デメリット",
+        f"{seed_keyword}レビュー比較まとめ：FAQ",
+        f"{seed_keyword}レビュー比較まとめ：評判",
+        f"{seed_keyword}レビュー比較まとめ：まとめ",
     ]
     return {
         "leading_h2_headings": leading,
