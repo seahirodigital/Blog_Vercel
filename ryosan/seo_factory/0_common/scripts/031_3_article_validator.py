@@ -111,6 +111,19 @@ def _contains_keyword_naturally(text: str, keyword: str) -> bool:
     return re.search(pattern, normalized_text, flags=re.IGNORECASE) is not None
 
 
+def _find_lowercase_product_name(text: str) -> str:
+    lowered = str(text or "")
+    lowercase_product_names = [
+        "dji osmo pocket 4",
+        "dji osmo pocket 3",
+        "macbook neo",
+    ]
+    for product_name in lowercase_product_names:
+        if product_name in lowered:
+            return product_name
+    return ""
+
+
 def validate_master_article(article_markdown: str, bundle: Mapping[str, Any]) -> dict[str, Any]:
     article_text = str(article_markdown or "")
     rules = dict(bundle.get("master_validation_rules", {}))
@@ -307,6 +320,11 @@ def validate_variant_article(article_markdown: str, job: Mapping[str, Any]) -> d
         opening_excerpt = _opening_excerpt(block["body"])
         if target_keyword and not _contains_keyword_naturally(opening_excerpt, target_keyword):
             errors.append(f"H2 直下の導入文に対象検索キーワードが自然に含まれていない: {block['heading']}")
+        lowercase_product_name = _find_lowercase_product_name(opening_excerpt)
+        if lowercase_product_name:
+            errors.append(
+                f"H2 直下の導入文で製品名が公式表記になっていない: {block['heading']} ({lowercase_product_name})"
+            )
 
     if expected_h2 and not actual_h2:
         errors.append("H2 が1つも無い")
