@@ -28,7 +28,7 @@ from gemini_runtime import (  # noqa: E402
 
 MODEL_NAME = get_text_model_name()
 TRANSPORT_NAME = get_text_transport(default="interactions.create")
-GENERATION_CONFIG = build_generation_config(temperature=0.5, thinking_level="high")
+GENERATION_CONFIG = build_generation_config(temperature=0.5)
 PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
 
 

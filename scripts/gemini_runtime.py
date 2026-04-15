@@ -66,19 +66,8 @@ def build_generation_config(
     max_output_tokens: int | None = None,
 ) -> dict[str, Any]:
     config: dict[str, Any] = {}
-    thinking_config: dict[str, Any] = {}
     if temperature is not None:
         config["temperature"] = temperature
-    if thinking_level:
-        thinking_config["thinking_level"] = thinking_level
-    if thinking_summaries:
-        normalized = str(thinking_summaries).strip().lower()
-        if normalized in {"true", "1", "yes", "on", "enabled"}:
-            thinking_config["include_thoughts"] = True
-        elif normalized in {"false", "0", "no", "off", "disabled"}:
-            thinking_config["include_thoughts"] = False
-    if thinking_config:
-        config["thinking_config"] = thinking_config
     if max_output_tokens is not None:
         config["max_output_tokens"] = max_output_tokens
     return config
