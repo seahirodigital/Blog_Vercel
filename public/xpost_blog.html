@@ -110,34 +110,36 @@
 
     .mobile-tabbar {
       display: none;
-      align-items: center;
-      gap: 14px;
-      padding: 5px 12px 6px;
+      align-items: flex-end;
+      gap: 0;
+      padding: 5px 12px 0;
       border-bottom: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.96);
       backdrop-filter: saturate(180%) blur(18px);
     }
 
     .mobile-tab {
-      flex: 0 0 auto;
+      flex: 1 1 0;
       min-width: 0;
       height: 28px;
-      padding: 0;
+      padding: 0 8px;
       border: 0;
+      border-bottom: 2px solid transparent;
       background: transparent;
       color: var(--text-soft);
       border-radius: 0;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 600;
       white-space: nowrap;
       line-height: 1;
-      transition: color 0.15s ease, transform 0.15s ease;
+      transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
     }
 
     .mobile-tab.active {
       color: var(--accent);
       background: transparent;
-      border-color: transparent;
+      border-color: var(--accent);
+      font-weight: 800;
     }
 
     .mobile-tab:hover {
@@ -232,22 +234,22 @@
       height: 34px;
       gap: 6px;
       padding: 0 12px;
-      border: 1px solid #7c4dff;
+      border: 1px solid var(--accent);
       border-radius: 0.75rem;
       background: #ffffff;
-      color: #7c4dff;
+      color: var(--accent);
       font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.01em;
       white-space: nowrap;
       flex: 0 0 auto;
-      box-shadow: 0 1px 2px rgba(124, 77, 255, 0.08);
+      box-shadow: 0 1px 2px rgba(0, 113, 227, 0.08);
     }
 
     .action-button:hover {
-      background: #f5f3ff;
-      border-color: #7c4dff;
-      color: #651fff;
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: #005bbb;
     }
 
     .button-icon {
@@ -270,16 +272,16 @@
       width: 36px;
       padding: 0;
       gap: 0;
-      border-color: #7c4dff;
-      background: #7c4dff;
-      color: #ffffff;
-      box-shadow: 0 2px 8px rgba(124, 77, 255, 0.28);
+      border-color: var(--accent);
+      background: #ffffff;
+      color: var(--accent);
+      box-shadow: 0 1px 2px rgba(0, 113, 227, 0.08);
     }
 
     .action-button.action-save:hover {
-      background: #651fff;
-      border-color: #651fff;
-      color: #ffffff;
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: #005bbb;
     }
 
     .action-button.action-save .button-icon svg {
@@ -333,7 +335,7 @@
       padding: 0;
       border: 1px solid var(--line);
       background: var(--surface);
-      border-radius: 999px;
+      border-radius: 10px;
       color: var(--text-soft);
       box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
     }
@@ -1124,6 +1126,9 @@
       .sidebar-controls {
         gap: 6px;
       }
+      .source-toggle {
+        display: none;
+      }
       .mobile-sidebar-close {
         display: inline-flex;
       }
@@ -1476,12 +1481,13 @@
 
     function updateMobileTabs() {
       if (!els.mainPanels) return;
-      if (!state.sourceVisible && state.mobileTab === 'source') {
+      const mobileLayout = isMobileLayout();
+      if (!mobileLayout && !state.sourceVisible && state.mobileTab === 'source') {
         state.mobileTab = 'editor';
       }
 
       if (els.sourceTabButton) {
-        els.sourceTabButton.hidden = !state.sourceVisible;
+        els.sourceTabButton.hidden = !mobileLayout && !state.sourceVisible;
       }
 
       [
@@ -1500,7 +1506,7 @@
     }
 
     function setMobileTab(tabName) {
-      state.mobileTab = tabName === 'source' && !state.sourceVisible ? 'editor' : tabName;
+      state.mobileTab = tabName === 'source' && !state.sourceVisible && !isMobileLayout() ? 'editor' : tabName;
       updateMobileTabs();
     }
 
