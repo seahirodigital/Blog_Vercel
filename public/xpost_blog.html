@@ -34,6 +34,18 @@
     button { color: inherit; }
     a { color: #0066cc; }
 
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .app-shell {
       height: 100vh;
       min-height: 0;
@@ -99,30 +111,37 @@
     .mobile-tabbar {
       display: none;
       align-items: center;
-      gap: 6px;
-      padding: 8px 10px;
+      gap: 14px;
+      padding: 5px 12px 6px;
       border-bottom: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: saturate(180%) blur(18px);
     }
 
     .mobile-tab {
-      flex: 1 1 0;
+      flex: 0 0 auto;
       min-width: 0;
-      height: 36px;
-      border: 1px solid transparent;
+      height: 28px;
+      padding: 0;
+      border: 0;
       background: transparent;
       color: var(--text-soft);
-      border-radius: 999px;
-      font-size: 13px;
+      border-radius: 0;
+      font-size: 12px;
       font-weight: 700;
       white-space: nowrap;
+      line-height: 1;
+      transition: color 0.15s ease, transform 0.15s ease;
     }
 
     .mobile-tab.active {
       color: var(--accent);
-      background: var(--accent-soft);
-      border-color: rgba(0, 113, 227, 0.18);
+      background: transparent;
+      border-color: transparent;
+    }
+
+    .mobile-tab:hover {
+      color: var(--text);
     }
 
     .mobile-tab[hidden] {
@@ -160,7 +179,7 @@
       text-decoration: none;
       cursor: pointer;
       border-radius: 999px;
-      transition: color 0.15s, background 0.15s, border-color 0.15s;
+      transition: color 0.15s, background 0.15s, border-color 0.15s, transform 0.15s, box-shadow 0.15s;
     }
 
     .tool-button:hover,
@@ -210,14 +229,25 @@
     }
 
     .action-button {
-      height: 32px;
-      gap: 8px;
+      height: 34px;
+      gap: 6px;
       padding: 0 12px;
+      border: 1px solid #7c4dff;
+      border-radius: 0.75rem;
+      background: #ffffff;
+      color: #7c4dff;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: 0.01em;
       white-space: nowrap;
       flex: 0 0 auto;
+      box-shadow: 0 1px 2px rgba(124, 77, 255, 0.08);
+    }
+
+    .action-button:hover {
+      background: #f5f3ff;
+      border-color: #7c4dff;
+      color: #651fff;
     }
 
     .button-icon {
@@ -228,12 +258,33 @@
     }
 
     .action-button .button-icon svg {
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
     }
 
     .button-label {
       line-height: 1;
+    }
+
+    .action-button.action-save {
+      width: 36px;
+      padding: 0;
+      gap: 0;
+      border-color: #7c4dff;
+      background: #7c4dff;
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(124, 77, 255, 0.28);
+    }
+
+    .action-button.action-save:hover {
+      background: #651fff;
+      border-color: #651fff;
+      color: #ffffff;
+    }
+
+    .action-button.action-save .button-icon svg {
+      width: 15px;
+      height: 15px;
     }
 
     .icon-button,
@@ -263,6 +314,19 @@
       color: var(--accent);
     }
 
+    .tool-button:active,
+    .icon-button:active,
+    .flat-button:active,
+    .mobile-tab:active,
+    .chrome-button:active,
+    .tool-button.is-pressed,
+    .icon-button.is-pressed,
+    .flat-button.is-pressed,
+    .mobile-tab.is-pressed,
+    .chrome-button.is-pressed {
+      transform: translateY(1px) scale(0.98);
+    }
+
     .chrome-button {
       width: 32px;
       height: 32px;
@@ -271,6 +335,7 @@
       background: var(--surface);
       border-radius: 999px;
       color: var(--text-soft);
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
     }
 
     .chrome-button:hover {
@@ -844,6 +909,48 @@
       backdrop-filter: blur(6px);
     }
 
+    .toast-host {
+      position: fixed;
+      right: 1.5rem;
+      bottom: 1.5rem;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    .toast {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.25rem;
+      border-radius: 0.75rem;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+      animation: fadeInUp 0.3s ease-out;
+    }
+
+    .toast svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.5;
+      flex: 0 0 auto;
+    }
+
+    .toast-success {
+      background: linear-gradient(135deg, #10B981, #059669);
+    }
+
+    .toast-error {
+      background: linear-gradient(135deg, #F43F5E, #E11D48);
+    }
+
+    .toast-info {
+      background: linear-gradient(135deg, #7C4DFF, #651FFF);
+    }
+
     .modal-backdrop.open {
       display: flex;
       align-items: stretch;
@@ -926,35 +1033,45 @@
 
     @media (max-width: 760px) {
       .topbar {
-        height: auto;
-        min-height: 56px;
-        flex: 0 0 auto;
-        flex-wrap: wrap;
-        align-items: flex-start;
+        height: 48px;
+        min-height: 48px;
+        flex: 0 0 48px;
+        flex-wrap: nowrap;
+        align-items: center;
         padding: 10px;
-        gap: 10px;
+        gap: 6px;
       }
       .brand-group {
-        width: 100%;
+        width: auto;
+        flex: 0 0 auto;
+        gap: 6px;
       }
       .brand {
-        flex: 1 1 auto;
-        min-width: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        display: none;
       }
       .mobile-menu-button {
         display: inline-flex;
       }
       .toolbar {
-        width: 100%;
+        width: auto;
+        flex: 1 1 auto;
         justify-content: flex-start;
         overflow-x: auto;
-        padding-bottom: 2px;
+        padding-bottom: 0;
         scrollbar-width: none;
       }
       .mobile-tabbar {
         display: flex;
+      }
+      .action-button {
+        height: 30px;
+        padding: 0 10px;
+        font-size: 11px;
+      }
+      .action-button.action-save,
+      .chrome-button {
+        width: 30px;
+        height: 30px;
       }
       .workspace {
         position: relative;
@@ -1042,6 +1159,18 @@
         flex: 0 0 32px;
         padding: 0 12px;
       }
+      .toast-host {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+      }
+      .toast {
+        display: flex;
+        width: 100%;
+        padding: 0.8rem 0.95rem;
+        border-radius: 0.85rem;
+        font-size: 13px;
+      }
     }
   </style>
 </head>
@@ -1054,13 +1183,15 @@
         <button type="button" class="icon-button chrome-button" id="refreshButton" aria-label="Refresh" title="Refresh"></button>
       </div>
       <div class="toolbar" role="toolbar" aria-label="Article actions">
-        <button type="button" class="tool-button accent-fill action-button" id="noteDraftButton">Note Draft</button>
-        <button type="button" class="tool-button accent-outline action-button" id="queueButton">Legacy</button>
-        <button type="button" class="tool-button accent-outline action-button" id="pipelineButton">Run All</button>
-        <button type="button" class="tool-button accent-outline action-button" id="saveButton">Save</button>
+        <button type="button" class="tool-button action-button" id="noteDraftButton">Note</button>
+        <button type="button" class="tool-button action-button" id="queueButton">QUE</button>
+        <button type="button" class="tool-button action-button" id="pipelineButton">ALL</button>
+        <button type="button" class="tool-button action-button action-save" id="saveButton" aria-label="Save" title="Save"></button>
       </div>
       <span class="status-live" id="statusChip" aria-live="polite">初期化中</span>
     </header>
+
+    <div class="toast-host" id="toastHost" aria-live="polite" aria-atomic="true"></div>
 
     <div class="mobile-tabbar" id="mobileTabbar" role="tablist" aria-label="Workspace tabs">
       <button type="button" class="mobile-tab" id="sourceTabButton" data-mobile-tab="source" role="tab" aria-selected="false">Source</button>
@@ -1207,10 +1338,14 @@
       menu: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>',
       close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>',
       draft: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M8 13h8"/><path d="M8 17h6"/></svg>',
-      queue: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h12"/><path d="M4 12h16"/><path d="M4 17h10"/><path d="M18 15l2 2 3-4"/></svg>',
-      run: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v18l15-9-15-9Z" fill="currentColor" stroke="none"/></svg>',
-      save: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11l3 3v13H5z"/><path d="M8 4v6h8V4"/><path d="M9 17h6"/></svg>'
+      queue: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l5-3.5z" fill="currentColor" stroke="none"/></svg>',
+      run: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 7v10l6.5-5z" fill="currentColor" stroke="none"/><path d="M13 7v10l6.5-5z" fill="currentColor" stroke="none"/></svg>',
+      save: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8"/><path d="M7 3v5h8"/></svg>',
+      check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>',
+      info: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>'
     };
+
+    let toastTimer = 0;
 
     const state = {
       articles: [],
@@ -1261,6 +1396,7 @@
       noteDraftButton: document.getElementById('noteDraftButton'),
       queueButton: document.getElementById('queueButton'),
       pipelineButton: document.getElementById('pipelineButton'),
+      toastHost: document.getElementById('toastHost'),
       mobileMenuButton: document.getElementById('mobileMenuButton'),
       mobileOverlay: document.getElementById('mobileOverlay'),
       sourceTabButton: document.getElementById('sourceTabButton'),
@@ -1312,6 +1448,30 @@
       button.innerHTML = ICONS[iconName] || '';
       button.setAttribute('aria-label', label);
       button.title = label;
+    }
+
+    function toastIcon(type) {
+      if (type === 'success') return ICONS.check;
+      if (type === 'error') return ICONS.close;
+      return ICONS.info;
+    }
+
+    function showToast(message, type = 'info') {
+      if (!els.toastHost) return;
+      window.clearTimeout(toastTimer);
+      els.toastHost.innerHTML = `<div class="toast toast-${escapeHtml(type)}" role="status">${toastIcon(type)}<span>${escapeHtml(message)}</span></div>`;
+      toastTimer = window.setTimeout(() => {
+        if (els.toastHost) els.toastHost.innerHTML = '';
+      }, 3500);
+    }
+
+    function pulseButton(button) {
+      if (!button) return;
+      window.clearTimeout(button._pulseTimer);
+      button.classList.remove('is-pressed');
+      void button.offsetWidth;
+      button.classList.add('is-pressed');
+      button._pulseTimer = window.setTimeout(() => button.classList.remove('is-pressed'), 180);
     }
 
     function updateMobileTabs() {
@@ -1372,16 +1532,21 @@
       setIconOnlyButton(els.insertAffiliateButton, 'Insert affiliate', 'link');
       setIconOnlyButton(els.copyEditorButton, 'Copy editor', 'copy');
       setIconOnlyButton(els.copyPreviewButton, 'Copy preview', 'copy');
-      setLabeledIconButton(els.noteDraftButton, 'Note Draft', 'draft');
-      setLabeledIconButton(els.queueButton, 'Legacy', 'queue');
-      setLabeledIconButton(els.pipelineButton, 'Run All', 'run');
-      setLabeledIconButton(els.saveButton, 'Save', 'save');
+      setLabeledIconButton(els.noteDraftButton, 'Note', 'draft');
+      setLabeledIconButton(els.queueButton, 'QUE', 'queue');
+      setLabeledIconButton(els.pipelineButton, 'ALL', 'run');
+      setIconOnlyButton(els.saveButton, 'Save', 'save');
     }
 
-    function setStatus(message, isError = false) {
+    function setStatus(message, isError = false, toastType = '') {
       els.statusChip.textContent = message;
       els.statusChip.title = message;
       els.statusChip.style.color = isError ? 'var(--danger)' : 'var(--text-soft)';
+      if (toastType) {
+        showToast(message, toastType);
+      } else if (isError) {
+        showToast(message, 'error');
+      }
     }
 
     function setAffiliateStatus(message, isError = false) {
@@ -1773,7 +1938,7 @@
       queueOgpCards(forceOgp);
     }
     async function fetchArticles(forceReload = false) {
-      setStatus(forceReload ? 'OneDriveを再読み込み中' : '記事一覧を取得中');
+      setStatus(forceReload ? 'OneDriveを再読み込み中' : '記事一覧を取得中', false, forceReload ? 'info' : '');
       const previousId = state.selectedArticle?.id;
       const response = await fetch(apiUrl('articles', { refresh: Date.now() }), { cache: 'no-store' });
       if (!response.ok) throw new Error('記事一覧の取得に失敗しました');
@@ -1781,7 +1946,7 @@
       state.articles = data.articles || [];
       state.selectedArticle = previousId ? state.articles.find((article) => article.id === previousId) || null : null;
       renderArticleList();
-      setStatus(forceReload ? `OneDrive再読み込み完了 ${state.articles.length}件` : `記事一覧 ${state.articles.length}件`);
+      setStatus(forceReload ? `OneDrive再読み込み完了 ${state.articles.length}件` : `記事一覧 ${state.articles.length}件`, false, forceReload ? 'success' : '');
       const firstArticle = sortedArticles()[0];
       if (!state.selectedArticle && firstArticle) {
         await selectArticle(firstArticle);
@@ -1831,11 +1996,11 @@
 
     async function saveCurrentArticle() {
       if (!state.selectedArticle) {
-        setStatus('保存対象の記事が未選択です', true);
+        setStatus('保存対象の記事が未選択です', true, 'error');
         return false;
       }
 
-      setStatus('保存中');
+      setStatus('保存中', false, 'info');
       const response = await fetch(apiUrl('articles'), {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -1863,12 +2028,12 @@
       updateEditorMeta();
       renderEditorLinks();
       renderArticleList();
-      setStatus('保存しました');
+      setStatus('保存しました', false, 'success');
       return true;
     }
 
-    async function triggerWorkflow(mode, statusMessage, errorMessage) {
-      setStatus(statusMessage);
+    async function triggerWorkflow(mode, statusMessage, errorMessage, successMessage) {
+      setStatus(statusMessage, false, 'info');
       const response = await fetch(apiUrl('trigger'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -1876,15 +2041,15 @@
       });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(payload.error || errorMessage);
-      setStatus(payload.message || statusMessage.replace('実行中', '起動しました'));
+      setStatus(payload.message || successMessage || statusMessage.replace('実行中', '起動しました'), false, 'success');
     }
 
     async function triggerQueue() {
-      return triggerWorkflow('process_queue', 'QUE処理を実行中', 'QUE処理の実行に失敗しました');
+      return triggerWorkflow('process_queue', 'QUEを起動中', 'QUEの起動に失敗しました', 'QUEを起動しました');
     }
 
     async function triggerPipeline() {
-      return triggerWorkflow('full_pipeline', '最初から実行中', '最初から実行に失敗しました');
+      return triggerWorkflow('full_pipeline', 'ALLを起動中', 'ALLの起動に失敗しました', 'ALLを起動しました');
     }
 
     async function triggerNoteDraft() {
@@ -1892,7 +2057,7 @@
       const targetIds = selectedIds.length ? selectedIds : (state.selectedArticle ? [state.selectedArticle.id] : []);
 
       if (!targetIds.length) {
-        setStatus('note下書き対象の記事が未選択です', true);
+        setStatus('Note対象の記事が未選択です', true, 'error');
         return;
       }
 
@@ -1901,7 +2066,7 @@
         if (!saved) return;
       }
 
-      setStatus('note下書きを起動中');
+      setStatus('Noteを起動中', false, 'info');
       const response = await fetch('/api/note-draft', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -1909,9 +2074,9 @@
       });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok || payload.success === false) {
-        throw new Error(payload.error || payload.message || 'note下書きの起動に失敗しました');
+        throw new Error(payload.error || payload.message || 'Noteの起動に失敗しました');
       }
-      setStatus(`${targetIds.length}件のnote下書きを実行中です。URLを確認します`);
+      setStatus(`${targetIds.length}件のNoteを実行中です。URLを確認します`, false, 'success');
       if (state.selectMode) {
         state.selectMode = false;
         state.selectedArticleIds.clear();
@@ -1942,12 +2107,13 @@
         const url = await fetchNoteDraftUrl(fileId);
         if (url) {
           setStatus(`note下書きURL: ${url}`);
+          showToast('Note URLを開きました', 'success');
           window.open(url, '_blank', 'noopener,noreferrer');
           return url;
         }
         await new Promise((resolve) => setTimeout(resolve, 5000));
       }
-      setStatus('note下書きは実行中です。GitHub Actions 完了後に再確認してください');
+      setStatus('Noteは実行中です。GitHub Actions 完了後に再確認してください', false, 'info');
       return null;
     }
 
@@ -1962,16 +2128,19 @@
           if (url) pending.delete(fileId);
         }
         setStatus(pending.size ? `note下書きURL確認中 残り${pending.size}件` : 'note下書きURLを取得しました');
-        if (pending.size === 0) return true;
+        if (pending.size === 0) {
+          showToast('Note URLを取得しました', 'success');
+          return true;
+        }
         await new Promise((resolve) => setTimeout(resolve, 5000));
       }
-      setStatus('note下書きは実行中です。GitHub Actions 完了後に再確認してください');
+      setStatus('Noteは実行中です。GitHub Actions 完了後に再確認してください', false, 'info');
       return false;
     }
 
     async function copyText(text, doneMessage) {
       await navigator.clipboard.writeText(text);
-      setStatus(doneMessage);
+      setStatus(doneMessage, false, 'success');
     }
     function buildOgpCard(href, title, description, image, domain) {
       const card = document.createElement('a');
@@ -2058,7 +2227,7 @@
       els.preview.querySelectorAll('.ogp-card').forEach((card) => card.remove());
       els.preview.querySelectorAll('a[data-ogp-processed]').forEach((anchor) => anchor.removeAttribute('data-ogp-processed'));
       renderPreview(true);
-      setStatus('OGPを更新します');
+      setStatus('OGPを更新します', false, 'info');
     }
 
     function memoKeys() {
@@ -2153,18 +2322,18 @@
     function insertAffiliateAtEnd() {
       const text = activeAffiliateText();
       if (!text) {
-        setStatus('挿入するアフィリエイトテキストが空です', true);
+        setStatus('挿入するアフィリエイトテキストが空です', true, 'error');
         return;
       }
       if (!state.selectedArticle) {
-        setStatus('記事が未選択です', true);
+        setStatus('記事が未選択です', true, 'error');
         return;
       }
       const current = els.editor.value.trimEnd();
       els.editor.value = current.includes(text) ? current : `${current}\n\n---\n\n${text}\n`;
       state.dirty = true;
       renderPreview(false);
-      setStatus(`${state.activeAffiliateKey.toUpperCase()}を記事末尾へ挿入しました`);
+      setStatus(`${state.activeAffiliateKey.toUpperCase()}を記事末尾へ挿入しました`, false, 'success');
     }
     function applyResizer(handle, target, cssVar, minPx, maxPx) {
       handle.addEventListener('pointerdown', (event) => {
@@ -2213,30 +2382,55 @@
       });
     }
 
-    function bindEvents() {
-      els.saveButton.addEventListener('click', () => saveCurrentArticle().catch((error) => setStatus(error.message, true)));
-      els.noteDraftButton.addEventListener('click', () => triggerNoteDraft().catch((error) => setStatus(error.message, true)));
-      els.queueButton.addEventListener('click', () => triggerQueue().catch((error) => setStatus(error.message, true)));
-      els.pipelineButton.addEventListener('click', () => triggerPipeline().catch((error) => setStatus(error.message, true)));
-      els.mobileMenuButton?.addEventListener('click', () => setMobileSidebarOpen(!state.mobileSidebarOpen));
-      els.mobileOverlay?.addEventListener('click', () => setMobileSidebarOpen(false));
-      els.mobileSidebarCloseButton?.addEventListener('click', () => setMobileSidebarOpen(false));
-      [els.sourceTabButton, els.editorTabButton, els.previewTabButton].forEach((button) => {
-        button?.addEventListener('click', () => setMobileTab(button.dataset.mobileTab || 'editor'));
+function bindEvents() {
+      const bindAction = (button, handler) => {
+        button?.addEventListener('click', () => {
+          pulseButton(button);
+          Promise.resolve(handler()).catch((error) => setStatus(error.message, true, 'error'));
+        });
+      };
+
+      bindAction(els.saveButton, () => saveCurrentArticle());
+      bindAction(els.noteDraftButton, () => triggerNoteDraft());
+      bindAction(els.queueButton, () => triggerQueue());
+      bindAction(els.pipelineButton, () => triggerPipeline());
+      bindAction(els.refreshButton, () => fetchArticles(true));
+      bindAction(els.refreshOgpButton, () => refreshOgp());
+      bindAction(els.copyEditorButton, () => copyText(els.editor.value, '本文をコピーしました'));
+      bindAction(els.copyPreviewButton, () => copyText(els.editor.value, 'Markdownをコピーしました'));
+
+      els.mobileMenuButton?.addEventListener('click', () => {
+        pulseButton(els.mobileMenuButton);
+        setMobileSidebarOpen(!state.mobileSidebarOpen);
       });
-      els.refreshButton.addEventListener('click', () => fetchArticles(true).catch((error) => setStatus(error.message, true)));
-      els.refreshOgpButton.addEventListener('click', refreshOgp);
-      els.copyEditorButton.addEventListener('click', () => copyText(els.editor.value, '本文をコピーしました').catch((error) => setStatus(error.message, true)));
-      els.copyPreviewButton.addEventListener('click', () => copyText(els.editor.value, 'Markdownをコピーしました').catch((error) => setStatus(error.message, true)));
-      els.insertAffiliateButton.addEventListener('click', insertAffiliateAtEnd);
+      els.mobileOverlay?.addEventListener('click', () => setMobileSidebarOpen(false));
+      els.mobileSidebarCloseButton?.addEventListener('click', () => {
+        pulseButton(els.mobileSidebarCloseButton);
+        setMobileSidebarOpen(false);
+      });
+      [els.sourceTabButton, els.editorTabButton, els.previewTabButton].forEach((button) => {
+        button?.addEventListener('click', () => {
+          pulseButton(button);
+          setMobileTab(button.dataset.mobileTab || 'editor');
+        });
+      });
+      els.insertAffiliateButton.addEventListener('click', () => {
+        pulseButton(els.insertAffiliateButton);
+        insertAffiliateAtEnd();
+      });
       els.sortToggle.addEventListener('click', () => {
+        pulseButton(els.sortToggle);
         state.sortOrder = state.sortOrder === 'asc' ? 'desc' : 'asc';
         localStorage.setItem(SORT_ORDER_KEY, state.sortOrder);
         updateSortButton();
         renderArticleList();
-        setStatus(state.sortOrder === 'asc' ? '新着順を昇順にしました' : '新着順を降順にしました');
+        setStatus(state.sortOrder === 'asc' ? '新着順を昇順にしました' : '新着順を降順にしました', false, 'info');
       });
-      els.sourceToggle.addEventListener('click', () => setSourceVisible(!state.sourceVisible));
+      els.sourceToggle.addEventListener('click', () => {
+        pulseButton(els.sourceToggle);
+        setSourceVisible(!state.sourceVisible);
+        setStatus(state.sourceVisible ? 'Sourceを表示しました' : 'Sourceを非表示にしました', false, 'info');
+      });
 
       els.editor.addEventListener('input', () => {
         state.dirty = true;
@@ -2247,7 +2441,7 @@
         const isSaveShortcut = (event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's';
         if (isSaveShortcut) {
           event.preventDefault();
-          saveCurrentArticle().catch((error) => setStatus(error.message, true));
+          saveCurrentArticle().catch((error) => setStatus(error.message, true, 'error'));
           return;
         }
         if (event.key === 'Escape') {
@@ -2277,23 +2471,43 @@
         if (article) enterSelectMode(article);
       });
       els.contextDuplicateButton.addEventListener('click', () => {
-        duplicateArticle(contextArticle()).catch((error) => setStatus(error.message, true));
+        pulseButton(els.contextDuplicateButton);
+        duplicateArticle(contextArticle()).catch((error) => setStatus(error.message, true, 'error'));
       });
       els.contextDeleteButton.addEventListener('click', () => {
-        deleteArticle(contextArticle()).catch((error) => setStatus(error.message, true));
+        pulseButton(els.contextDeleteButton);
+        deleteArticle(contextArticle()).catch((error) => setStatus(error.message, true, 'error'));
       });
       els.contextOpenOneDriveButton.addEventListener('click', () => openOneDriveArticle(contextArticle()));
       els.contextOpenExplorerButton.addEventListener('click', () => openExplorerArticle(contextArticle()));
 
-      els.affiliateLauncher.addEventListener('click', openAffiliateModal);
-      els.closeAffiliateButton.addEventListener('click', closeAffiliateModal);
+      els.affiliateLauncher.addEventListener('click', () => {
+        pulseButton(els.affiliateLauncher);
+        openAffiliateModal();
+      });
+      els.closeAffiliateButton.addEventListener('click', () => {
+        pulseButton(els.closeAffiliateButton);
+        closeAffiliateModal();
+      });
       els.affiliateModalBackdrop.addEventListener('click', (event) => {
         if (event.target === els.affiliateModalBackdrop) closeAffiliateModal();
       });
-      els.reloadAffiliateButton.addEventListener('click', () => fetchAffiliateMemos().catch((error) => setAffiliateStatus(error.message, true)));
-      els.saveAffiliateButton.addEventListener('click', () => saveAffiliateMemos().catch((error) => setAffiliateStatus(error.message, true)));
-      els.addMemoButton.addEventListener('click', addMemo);
-      els.insertAffiliateFromModalButton.addEventListener('click', insertAffiliateAtEnd);
+      els.reloadAffiliateButton.addEventListener('click', () => {
+        pulseButton(els.reloadAffiliateButton);
+        fetchAffiliateMemos().catch((error) => setAffiliateStatus(error.message, true));
+      });
+      els.saveAffiliateButton.addEventListener('click', () => {
+        pulseButton(els.saveAffiliateButton);
+        saveAffiliateMemos().catch((error) => setAffiliateStatus(error.message, true));
+      });
+      els.addMemoButton.addEventListener('click', () => {
+        pulseButton(els.addMemoButton);
+        addMemo();
+      });
+      els.insertAffiliateFromModalButton.addEventListener('click', () => {
+        pulseButton(els.insertAffiliateFromModalButton);
+        insertAffiliateAtEnd();
+      });
       els.affiliateEditor.addEventListener('input', () => {
         state.affiliateDirty = true;
         syncAffiliateEditorToState();
