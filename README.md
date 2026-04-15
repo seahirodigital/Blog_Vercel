@@ -272,11 +272,10 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\info_viewer\index.html で表示
 | `/api/note-draft` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\note-draft.js` | `note-draft.yml` を dispatch、または note 下書き URL を返す |
 | `/api/affiliate-links` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\affiliate-links.js` | `affiliate_links.txt` の MEMO を OneDrive 経由で読み書き |
 | `/api/ogp` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\ogp.js` | OGP タイトル、説明、画像を取得。Amazon URL の特殊処理あり |
-| `/api/open-file` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\open-file.js` | ローカルの Explorer / Finder で記事ファイルを選択表示 |
 | `/api/amazon-asin` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\amazon-asin.js` | Google Custom Search で商品名から ASIN を探す |
 | `/api/youtube-source` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\youtube-source.js` | GitHub Variable `YT_SOURCE_<hash>` から元動画 URL を返す |
 | `/api/trigger-info-viewer` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\trigger-info-viewer.js` | `info-viewer-pipeline.yml` を dispatch |
-| `/api/info-viewer-index` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\info-viewer-index.js` | info_viewer の manifest や index 情報を返す |
+| `/api/info-viewer` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\info-viewer.js` | info_viewer の manifest 読み込み、記事本文取得、優先度更新、記事削除をまとめて扱う |
 
 ## 7. GitHub Actions ワークフロー一覧
 

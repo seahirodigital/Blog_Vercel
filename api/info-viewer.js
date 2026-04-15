@@ -67,7 +67,7 @@ async function ensureFolderPath(accessToken, folderPath) {
       continue;
     }
     if (lookupRes.status !== 404) {
-      throw new Error(`OneDrive フォルダ確認失敗: ${lookupRes.status}`);
+      throw new Error(`OneDrive フォルダ確認に失敗しました: ${lookupRes.status}`);
     }
 
     const createUrl = parentId
@@ -82,7 +82,7 @@ async function ensureFolderPath(accessToken, folderPath) {
       }),
     });
     if (!createRes.ok) {
-      throw new Error(`OneDrive フォルダ作成失敗: ${createRes.status} ${await createRes.text()}`);
+      throw new Error(`OneDrive フォルダ作成に失敗しました: ${createRes.status} ${await createRes.text()}`);
     }
 
     const payload = await createRes.json();
@@ -134,7 +134,7 @@ async function getAccessToken() {
     body: params.toString(),
   });
   if (!response.ok) {
-    throw new Error(`OneDrive token 取得失敗: ${response.status}`);
+    throw new Error(`OneDrive token 更新に失敗しました: ${response.status}`);
   }
 
   const data = await response.json();
@@ -142,6 +142,58 @@ async function getAccessToken() {
     updateVercelEnvToken(data.refresh_token).catch(console.warn);
   }
   return data.access_token;
+}
+
+function stripFrontmatter(markdownText = '') {
+  const match = markdownText.match(/^---\s*\n[\s\S]*?\n---\s*\n?/);
+  return match ? markdownText.slice(match[0].length) : markdownText;
+}
+
+async function fetchManifest(token) {
+  for (const folder of folderCandidates()) {
+    const url = `${GRAPH_API}/me/drive/root:/${encodeFolderPath(folder)}/manifest.json:/content`;
+    const response = await fetch(url, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (response.status === 404) {
+      continue;
+    }
+    if (!response.ok) {
+      throw new Error(`manifest の取得に失敗しました: ${response.status}`);
+    }
+
+    const manifest = await response.json();
+    if (!manifest.baseFolder) {
+      manifest.baseFolder = folder;
+    }
+    return manifest;
+  }
+
+  return {
+    generatedAt: null,
+    baseFolder: PRIMARY_FOLDER,
+    source: 'manifest_missing',
+    channels: [],
+    recent: [],
+    stats: { channelCount: 0, videoCount: 0, articleCount: 0, failureCount: 0 },
+    failures: [],
+  };
+}
+
+async function fetchArticleContent(token, itemId) {
+  const url = `${GRAPH_API}/me/drive/items/${itemId}/content`;
+  const response = await fetch(url, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!response.ok) {
+    throw new Error(`記事本文の取得に失敗しました: ${response.status}`);
+  }
+
+  const raw = await response.text();
+  return {
+    content: stripFrontmatter(raw),
+  };
 }
 
 function normalizeYoutubeUrl(url = '') {
@@ -186,7 +238,7 @@ async function loadState(token) {
       continue;
     }
     if (!response.ok) {
-      throw new Error(`state 読み込み失敗: ${response.status}`);
+      throw new Error(`state の取得に失敗しました: ${response.status}`);
     }
 
     const payload = await response.json();
@@ -215,7 +267,7 @@ async function saveState(token, state) {
   });
 
   if (!response.ok) {
-    throw new Error(`state 保存失敗: ${response.status} ${await response.text()}`);
+    throw new Error(`state の保存に失敗しました: ${response.status} ${await response.text()}`);
   }
 
   return response.json();
@@ -272,7 +324,7 @@ async function dispatchPriorityWorkflow(videoUrl) {
   if (!githubToken) {
     return {
       workflowTriggered: false,
-      warning: 'GITHUB_TOKEN が未設定のため、次回キュー更新で処理されます。',
+      warning: 'GITHUB_TOKEN が未設定のため、キュー更新だけを実施しました。',
     };
   }
 
@@ -307,13 +359,72 @@ async function dispatchPriorityWorkflow(videoUrl) {
 
   return {
     workflowTriggered: false,
-    warning: `GitHub Actions 起動失敗: ${response.status} ${await response.text()}`,
+    warning: `GitHub Actions の起動に失敗しました: ${response.status} ${await response.text()}`,
   };
+}
+
+async function deleteArticle(token, articleId) {
+  const response = await fetch(`${GRAPH_API}/me/drive/items/${encodeURIComponent(articleId)}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  if (response.status === 404) {
+    return;
+  }
+  if (!response.ok) {
+    throw new Error(`OneDrive 記事削除に失敗しました: ${response.status} ${await response.text()}`);
+  }
+}
+
+function resolveResource(req) {
+  return String(
+    req.query?.resource || req.body?.resource || (req.method === 'DELETE' ? 'article' : 'index')
+  ).toLowerCase();
+}
+
+async function handleIndexRequest(req, res, token) {
+  const articleId = req.query?.id || '';
+  if (articleId) {
+    const article = await fetchArticleContent(token, articleId);
+    return res.status(200).json(article);
+  }
+
+  const manifest = await fetchManifest(token);
+  return res.status(200).json(manifest);
+}
+
+async function handlePriorityRequest(req, res, token) {
+  const state = await loadState(token);
+  const record = ensurePriorityRecord(state, req.body || {});
+  await saveState(token, state);
+  const dispatchResult = await dispatchPriorityWorkflow(record.normalizedVideoUrl);
+
+  return res.status(200).json({
+    success: true,
+    message: dispatchResult.workflowTriggered
+      ? '最優先キューへ追加し、GitHub Actions を起動しました。'
+      : '最優先キューへ追加しました。',
+    workflowTriggered: dispatchResult.workflowTriggered,
+    warning: dispatchResult.warning || '',
+    videoUrl: record.normalizedVideoUrl,
+    manualPriorityAt: record.manualPriorityAt,
+  });
+}
+
+async function handleArticleDeleteRequest(req, res, token) {
+  const articleId = req.body?.articleId || '';
+  if (!articleId) {
+    return res.status(400).json({ success: false, error: 'articleId が不足しています。' });
+  }
+
+  await deleteArticle(token, articleId);
+  return res.status(200).json({ success: true });
 }
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Cache-Control', 'no-store');
 
@@ -321,29 +432,23 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
   try {
     const token = await getAccessToken();
-    const state = await loadState(token);
-    const record = ensurePriorityRecord(state, req.body || {});
-    await saveState(token, state);
-    const dispatchResult = await dispatchPriorityWorkflow(record.normalizedVideoUrl);
+    const resource = resolveResource(req);
 
-    return res.status(200).json({
-      success: true,
-      message: dispatchResult.workflowTriggered
-        ? '最優先キューへ追加し、GitHub Actions を起動しました。'
-        : '最優先キューへ追加しました。',
-      workflowTriggered: dispatchResult.workflowTriggered,
-      warning: dispatchResult.warning || '',
-      videoUrl: record.normalizedVideoUrl,
-      manualPriorityAt: record.manualPriorityAt,
-    });
+    if (req.method === 'GET') {
+      return await handleIndexRequest(req, res, token);
+    }
+    if (req.method === 'POST' && resource === 'priority') {
+      return await handlePriorityRequest(req, res, token);
+    }
+    if (req.method === 'DELETE' && (resource === 'article' || resource === 'delete')) {
+      return await handleArticleDeleteRequest(req, res, token);
+    }
+
+    return res.status(405).json({ error: 'Method not allowed' });
   } catch (error) {
-    console.error('info-viewer-priority error:', error);
+    console.error('info-viewer error:', error);
     return res.status(500).json({ success: false, error: error.message });
   }
 }

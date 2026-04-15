@@ -1381,9 +1381,12 @@
                 OneDriveで開く
               </button>
               <button
+                hidden
                 onClick={() => {
                   const a = ctxMenu.article;
-                  fetch(`/api/open-file?path=${encodeURIComponent(a.path || '')}&name=${encodeURIComponent(a.name)}`).catch(() => { });
+                  if (a.webUrl) {
+                    window.open(a.webUrl, '_blank');
+                  }
                   setCtxMenu(m => ({ ...m, visible: false }));
                 }}
                 onMouseEnter={e => e.currentTarget.style.background = '#f1f5f9'} onMouseLeave={e => e.currentTarget.style.background = 'none'}

@@ -2127,7 +2127,7 @@
               setLoadingIndex(true);
             }
 
-            const response = await fetch(`/api/info-viewer-index?ts=${Date.now()}`, { cache: 'no-store' });
+            const response = await fetch(`/api/info-viewer?ts=${Date.now()}`, { cache: 'no-store' });
             if (!response.ok) {
               throw new Error(`index API ${response.status}`);
             }
@@ -2351,7 +2351,7 @@
 
           try {
             setPriorityLoadingId(video.id);
-            const response = await fetch('/api/info-viewer-priority', {
+            const response = await fetch('/api/info-viewer?resource=priority', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -2454,7 +2454,7 @@
             setLoadingIndex(true);
             setIndexError('');
             setVideoContextMenu((current) => ({ ...current, visible: false }));
-            const response = await fetch('/api/info-viewer-delete', {
+            const response = await fetch('/api/info-viewer?resource=article', {
               method: 'DELETE',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ articleId: video.articleId }),
@@ -2561,7 +2561,7 @@
 
             try {
               setArticleLoadingId(selectedVideo.articleId);
-              const response = await fetch(`/api/info-viewer-index?id=${encodeURIComponent(selectedVideo.articleId)}`);
+              const response = await fetch(`/api/info-viewer?id=${encodeURIComponent(selectedVideo.articleId)}`);
               if (!response.ok) {
                 throw new Error(`article API ${response.status}`);
               }

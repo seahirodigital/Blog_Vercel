@@ -1316,7 +1316,7 @@
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       <span>OneDriveで開く</span>
     </button>
-    <button type="button" class="context-menu-button" id="contextOpenExplorerButton">
+    <button type="button" class="context-menu-button" id="contextOpenExplorerButton" hidden>
       <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
       <span>エクスプローラーで表示</span>
     </button>
@@ -1875,7 +1875,9 @@
     function openExplorerArticle(article) {
       if (!article) return;
       const localPath = ['X投稿', article.path || ''].filter(Boolean).join('/');
-      fetch(`/api/open-file?path=${encodeURIComponent(localPath)}&name=${encodeURIComponent(article.name || '')}`).catch(() => {});
+      if (article.webUrl) {
+        window.open(article.webUrl, '_blank', 'noopener,noreferrer');
+      }
       closeArticleContextMenu();
       setStatus('エクスプローラーで表示します');
     }
