@@ -1,7 +1,21 @@
 const GRAPH_API = 'https://graph.microsoft.com/v1.0';
 const TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
 const VERCEL_API = 'https://api.vercel.com';
-const DEFAULT_FOLDER = process.env.INFO_VIEWER_ONEDRIVE_FOLDER || 'Obsidian in Onedrive 202602/Vercel_Blog/情報取得/info_viewer';
+const PRIMARY_FOLDER =
+  process.env.INFO_VIEWER_ONEDRIVE_FOLDER || 'Obsidian in Onedrive 202602/Vercel_Blog/info_viewer';
+const LEGACY_FOLDER = 'Obsidian in Onedrive 202602/Vercel_Blog/情報取得/info_viewer';
+
+function folderCandidates() {
+  const configuredFallbacks = String(process.env.INFO_VIEWER_ONEDRIVE_FALLBACK_FOLDERS || '')
+    .split(/[\r\n;]+/)
+    .map((part) => part.trim().replace(/^\/+|\/+$/g, ''))
+    .filter(Boolean);
+
+  const seen = new Set();
+  return [PRIMARY_FOLDER, ...configuredFallbacks, LEGACY_FOLDER]
+    .map((folder) => String(folder || '').trim().replace(/^\/+|\/+$/g, ''))
+    .filter((folder) => folder && !seen.has(folder) && seen.add(folder));
+}
 
 function encodeFolderPath(folderPath = '') {
   return String(folderPath)
@@ -17,10 +31,9 @@ async function updateVercelEnvToken(newRefreshToken) {
   if (!vercelToken || !projectId) return;
 
   try {
-    const listRes = await fetch(
-      `${VERCEL_API}/v9/projects/${projectId}/env?limit=100`,
-      { headers: { Authorization: `Bearer ${vercelToken}` } }
-    );
+    const listRes = await fetch(`${VERCEL_API}/v9/projects/${projectId}/env?limit=100`, {
+      headers: { Authorization: `Bearer ${vercelToken}` },
+    });
     if (!listRes.ok) return;
     const listData = await listRes.json();
     const targetEnv = (listData.envs || []).find((env) => env.key === 'ONEDRIVE_REFRESH_TOKEN');
@@ -70,28 +83,35 @@ function stripFrontmatter(markdownText = '') {
 }
 
 async function fetchManifest(token) {
-  const url = `${GRAPH_API}/me/drive/root:/${encodeFolderPath(DEFAULT_FOLDER)}/manifest.json:/content`;
-  const response = await fetch(url, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  for (const folder of folderCandidates()) {
+    const url = `${GRAPH_API}/me/drive/root:/${encodeFolderPath(folder)}/manifest.json:/content`;
+    const response = await fetch(url, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
-  if (response.status === 404) {
-    return {
-      generatedAt: null,
-      baseFolder: DEFAULT_FOLDER,
-      source: 'manifest_missing',
-      channels: [],
-      recent: [],
-      stats: { channelCount: 0, videoCount: 0, articleCount: 0, failureCount: 0 },
-      failures: [],
-    };
+    if (response.status === 404) {
+      continue;
+    }
+    if (!response.ok) {
+      throw new Error(`manifest 読み込み失敗: ${response.status}`);
+    }
+
+    const manifest = await response.json();
+    if (!manifest.baseFolder) {
+      manifest.baseFolder = folder;
+    }
+    return manifest;
   }
 
-  if (!response.ok) {
-    throw new Error(`manifest 読み込み失敗: ${response.status}`);
-  }
-
-  return await response.json();
+  return {
+    generatedAt: null,
+    baseFolder: PRIMARY_FOLDER,
+    source: 'manifest_missing',
+    channels: [],
+    recent: [],
+    stats: { channelCount: 0, videoCount: 0, articleCount: 0, failureCount: 0 },
+    failures: [],
+  };
 }
 
 async function fetchArticleContent(token, itemId) {
@@ -100,7 +120,7 @@ async function fetchArticleContent(token, itemId) {
     headers: { Authorization: `Bearer ${token}` },
   });
   if (!response.ok) {
-    throw new Error(`記事読み込み失敗: ${response.status}`);
+    throw new Error(`記事本文読み込み失敗: ${response.status}`);
   }
 
   const raw = await response.text();

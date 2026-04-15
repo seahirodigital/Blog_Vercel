@@ -1,8 +1,22 @@
 const GRAPH_API = 'https://graph.microsoft.com/v1.0';
 const TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
 const VERCEL_API = 'https://api.vercel.com';
-const DEFAULT_FOLDER = process.env.INFO_VIEWER_ONEDRIVE_FOLDER || 'Obsidian in Onedrive 202602/Vercel_Blog/情報取得/info_viewer';
+const PRIMARY_FOLDER =
+  process.env.INFO_VIEWER_ONEDRIVE_FOLDER || 'Obsidian in Onedrive 202602/Vercel_Blog/info_viewer';
+const LEGACY_FOLDER = 'Obsidian in Onedrive 202602/Vercel_Blog/情報取得/info_viewer';
 const STATE_RELATIVE_PATH = 'state/pipeline_state.json';
+
+function folderCandidates() {
+  const configuredFallbacks = String(process.env.INFO_VIEWER_ONEDRIVE_FALLBACK_FOLDERS || '')
+    .split(/[\r\n;]+/)
+    .map((part) => part.trim().replace(/^\/+|\/+$/g, ''))
+    .filter(Boolean);
+
+  const seen = new Set();
+  return [PRIMARY_FOLDER, ...configuredFallbacks, LEGACY_FOLDER]
+    .map((folder) => String(folder || '').trim().replace(/^\/+|\/+$/g, ''))
+    .filter((folder) => folder && !seen.has(folder) && seen.add(folder));
+}
 
 function encodeFolderPath(folderPath = '') {
   return String(folderPath)
@@ -12,16 +26,81 @@ function encodeFolderPath(folderPath = '') {
     .join('/');
 }
 
+function fullPath(baseFolder = '', relativePath = '') {
+  const cleanBase = String(baseFolder || '').trim().replace(/^\/+|\/+$/g, '');
+  const cleanRelative = String(relativePath || '').trim().replace(/^\/+|\/+$/g, '');
+  return cleanRelative ? `${cleanBase}/${cleanRelative}` : cleanBase;
+}
+
+function stateUrl(baseFolder = PRIMARY_FOLDER) {
+  return `${GRAPH_API}/me/drive/root:/${encodeFolderPath(fullPath(baseFolder, STATE_RELATIVE_PATH))}:/content`;
+}
+
+async function graphRequest(method, url, accessToken, options = {}) {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    ...(options.headers || {}),
+  };
+
+  return fetch(url, {
+    ...options,
+    method,
+    headers,
+  });
+}
+
+async function ensureFolderPath(accessToken, folderPath) {
+  const cleanPath = String(folderPath || '').trim().replace(/^\/+|\/+$/g, '');
+  if (!cleanPath) return null;
+
+  let currentPath = '';
+  let parentId = null;
+
+  for (const segment of cleanPath.split('/').filter(Boolean)) {
+    currentPath = currentPath ? `${currentPath}/${segment}` : segment;
+    const lookupUrl = `${GRAPH_API}/me/drive/root:/${encodeFolderPath(currentPath)}`;
+    const lookupRes = await graphRequest('GET', lookupUrl, accessToken);
+
+    if (lookupRes.ok) {
+      const payload = await lookupRes.json();
+      parentId = payload.id;
+      continue;
+    }
+    if (lookupRes.status !== 404) {
+      throw new Error(`OneDrive フォルダ確認失敗: ${lookupRes.status}`);
+    }
+
+    const createUrl = parentId
+      ? `${GRAPH_API}/me/drive/items/${parentId}/children`
+      : `${GRAPH_API}/me/drive/root/children`;
+    const createRes = await graphRequest('POST', createUrl, accessToken, {
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: segment,
+        folder: {},
+        '@microsoft.graph.conflictBehavior': 'replace',
+      }),
+    });
+    if (!createRes.ok) {
+      throw new Error(`OneDrive フォルダ作成失敗: ${createRes.status} ${await createRes.text()}`);
+    }
+
+    const payload = await createRes.json();
+    parentId = payload.id;
+  }
+
+  return parentId;
+}
+
 async function updateVercelEnvToken(newRefreshToken) {
   const vercelToken = process.env.VERCEL_TOKEN;
   const projectId = process.env.VERCEL_PROJECT_ID;
   if (!vercelToken || !projectId) return;
 
   try {
-    const listRes = await fetch(
-      `${VERCEL_API}/v9/projects/${projectId}/env?limit=100`,
-      { headers: { Authorization: `Bearer ${vercelToken}` } }
-    );
+    const listRes = await fetch(`${VERCEL_API}/v9/projects/${projectId}/env?limit=100`, {
+      headers: { Authorization: `Bearer ${vercelToken}` },
+    });
     if (!listRes.ok) return;
     const listData = await listRes.json();
     const targetEnv = (listData.envs || []).find((env) => env.key === 'ONEDRIVE_REFRESH_TOKEN');
@@ -99,46 +178,44 @@ function blankState() {
   };
 }
 
-function stateUrl() {
-  return `${GRAPH_API}/me/drive/root:/${encodeFolderPath(`${DEFAULT_FOLDER}/${STATE_RELATIVE_PATH}`)}:/content`;
-}
-
 async function loadState(token) {
-  const response = await fetch(stateUrl(), {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  for (const folder of folderCandidates()) {
+    const response = await graphRequest('GET', stateUrl(folder), token);
 
-  if (response.status === 404) {
-    return blankState();
-  }
-  if (!response.ok) {
-    throw new Error(`state 読み込み失敗: ${response.status}`);
+    if (response.status === 404) {
+      continue;
+    }
+    if (!response.ok) {
+      throw new Error(`state 読み込み失敗: ${response.status}`);
+    }
+
+    const payload = await response.json();
+    const state = payload && typeof payload === 'object' ? payload : blankState();
+    if (!state.videos || typeof state.videos !== 'object') {
+      state.videos = {};
+    }
+    state.baseFolder = folder;
+    return state;
   }
 
-  const payload = await response.json();
-  if (!payload || typeof payload !== 'object') {
-    return blankState();
-  }
-
-  if (!payload.videos || typeof payload.videos !== 'object') {
-    payload.videos = {};
-  }
-  return payload;
+  return {
+    ...blankState(),
+    baseFolder: PRIMARY_FOLDER,
+  };
 }
 
 async function saveState(token, state) {
-  const response = await fetch(stateUrl(), {
-    method: 'PUT',
+  await ensureFolderPath(token, fullPath(PRIMARY_FOLDER, 'state'));
+
+  const response = await graphRequest('PUT', stateUrl(PRIMARY_FOLDER), token, {
     headers: {
-      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json; charset=utf-8',
     },
     body: JSON.stringify(state, null, 2),
   });
 
   if (!response.ok) {
-    const text = await response.text();
-    throw new Error(`state 保存失敗: ${response.status} ${text}`);
+    throw new Error(`state 保存失敗: ${response.status} ${await response.text()}`);
   }
 
   return response.json();
@@ -147,7 +224,7 @@ async function saveState(token, state) {
 function ensurePriorityRecord(state, body) {
   const normalizedVideoUrl = normalizeYoutubeUrl(body.video_url || body.youtubeUrl || '');
   if (!normalizedVideoUrl) {
-    throw new Error('video_url が不足しています');
+    throw new Error('video_url が不足しています。');
   }
 
   if (!state.videos || typeof state.videos !== 'object') {
@@ -195,7 +272,7 @@ async function dispatchPriorityWorkflow(videoUrl) {
   if (!githubToken) {
     return {
       workflowTriggered: false,
-      warning: 'GITHUB_TOKEN が設定されていないため、次回スケジュール実行で処理されます。',
+      warning: 'GITHUB_TOKEN が未設定のため、次回キュー更新で処理されます。',
     };
   }
 
@@ -258,8 +335,8 @@ export default async function handler(req, res) {
     return res.status(200).json({
       success: true,
       message: dispatchResult.workflowTriggered
-        ? '最優先キューへ移動し、GitHub Actions を起動しました。'
-        : '最優先キューへ移動しました。',
+        ? '最優先キューへ追加し、GitHub Actions を起動しました。'
+        : '最優先キューへ追加しました。',
       workflowTriggered: dispatchResult.workflowTriggered,
       warning: dispatchResult.warning || '',
       videoUrl: record.normalizedVideoUrl,

@@ -9,10 +9,33 @@ import requests
 
 GRAPH_API_BASE = "https://graph.microsoft.com/v1.0"
 TOKEN_URL = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
-DEFAULT_BASE_FOLDER = os.getenv(
-    "INFO_VIEWER_ONEDRIVE_FOLDER",
-    "Obsidian in Onedrive 202602/Vercel_Blog/情報取得/info_viewer",
-)
+PRIMARY_BASE_FOLDER = str(
+    os.getenv(
+        "INFO_VIEWER_ONEDRIVE_FOLDER",
+        "Obsidian in Onedrive 202602/Vercel_Blog/info_viewer",
+    )
+    or ""
+).strip("/ ")
+LEGACY_BASE_FOLDER = "Obsidian in Onedrive 202602/Vercel_Blog/情報取得/info_viewer"
+
+
+def _candidate_base_folders() -> list[str]:
+    configured_fallbacks = str(os.getenv("INFO_VIEWER_ONEDRIVE_FALLBACK_FOLDERS", "") or "")
+    raw_candidates = [PRIMARY_BASE_FOLDER]
+    if configured_fallbacks.strip():
+        raw_candidates.extend(
+            part.strip("/ ")
+            for part in re.split(r"[;\r\n]+", configured_fallbacks)
+            if part.strip("/ ")
+        )
+    raw_candidates.append(LEGACY_BASE_FOLDER)
+
+    candidates: list[str] = []
+    for folder in raw_candidates:
+        normalized = str(folder or "").strip("/ ")
+        if normalized and normalized not in candidates:
+            candidates.append(normalized)
+    return candidates
 
 
 def normalize_youtube_url(url: str) -> str:
@@ -108,7 +131,7 @@ def _append_apify_transcript(markdown_body: str, transcript_text: str) -> str:
     if not raw_transcript:
         return body
 
-    appendix = "\n\n## Apify文字起こし\n\n```text\n" + raw_transcript + "\n```\n"
+    appendix = "\n\n## Apify 取得文字起こし\n\n```text\n" + raw_transcript + "\n```\n"
     if not body:
         return appendix.strip() + "\n"
     return body + appendix
@@ -138,6 +161,14 @@ def _build_markdown_document(markdown_body: str, metadata: dict[str, Any]) -> st
 
 def _encode_path(path: str) -> str:
     return "/".join(quote(part) for part in str(path or "").split("/") if part)
+
+
+def _full_path(base_folder: str, relative_path: str = "") -> str:
+    clean_base = str(base_folder or "").strip("/ ")
+    clean_relative = str(relative_path or "").strip("/ ")
+    if not clean_relative:
+        return clean_base
+    return f"{clean_base}/{clean_relative}"
 
 
 def parse_frontmatter(text: str) -> tuple[dict[str, str], str]:
@@ -237,12 +268,10 @@ def upload_text(relative_path: str, content: str, content_type: str = "text/plai
     token = _get_access_token()
     relative_path = str(relative_path).strip("/ ")
     parent = relative_path.rsplit("/", 1)[0] if "/" in relative_path else ""
-    if parent:
-        _ensure_folder_path(f"{DEFAULT_BASE_FOLDER}/{parent}", token)
-    else:
-        _ensure_folder_path(DEFAULT_BASE_FOLDER, token)
+    target_parent = _full_path(PRIMARY_BASE_FOLDER, parent)
+    _ensure_folder_path(target_parent, token)
 
-    full_path = f"{DEFAULT_BASE_FOLDER}/{relative_path}" if relative_path else DEFAULT_BASE_FOLDER
+    full_path = _full_path(PRIMARY_BASE_FOLDER, relative_path)
     upload_url = f"{GRAPH_API_BASE}/me/drive/root:/{_encode_path(full_path)}:/content"
     response = _request(
         "PUT",
@@ -263,16 +292,24 @@ def upload_json(relative_path: str, data: dict[str, Any]) -> dict[str, Any]:
     )
 
 
-def download_text(relative_path: str) -> Optional[str]:
-    token = _get_access_token()
-    relative_path = str(relative_path).strip("/ ")
-    full_path = f"{DEFAULT_BASE_FOLDER}/{relative_path}" if relative_path else DEFAULT_BASE_FOLDER
+def _download_text_from_base(relative_path: str, base_folder: str, token: str) -> Optional[str]:
+    full_path = _full_path(base_folder, relative_path)
     url = f"{GRAPH_API_BASE}/me/drive/root:/{_encode_path(full_path)}:/content"
     response = _request("GET", url, token)
     if response.status_code == 404:
         return None
     response.raise_for_status()
     return response.text
+
+
+def download_text(relative_path: str) -> Optional[str]:
+    token = _get_access_token()
+    relative_path = str(relative_path).strip("/ ")
+    for base_folder in _candidate_base_folders():
+        text = _download_text_from_base(relative_path, base_folder, token)
+        if text is not None:
+            return text
+    return None
 
 
 def download_json(relative_path: str) -> Optional[dict[str, Any]]:
@@ -312,6 +349,7 @@ def upload_markdown(
         "title": title,
         "videoUrl": metadata.get("video_url", ""),
         "publishedAt": published_at,
+        "baseFolder": PRIMARY_BASE_FOLDER,
     }
 
 
@@ -337,30 +375,32 @@ def _download_item_text(item_id: str, token: str, byte_range: Optional[str] = No
 
 def list_saved_articles() -> list[dict[str, Any]]:
     token = _get_access_token()
-    _ensure_folder_path(DEFAULT_BASE_FOLDER, token)
-    channels = _list_children(DEFAULT_BASE_FOLDER, token)
-    saved_articles: list[dict[str, Any]] = []
+    _ensure_folder_path(PRIMARY_BASE_FOLDER, token)
 
-    for folder in channels:
-        if not folder.get("folder"):
-            continue
-        folder_name = folder.get("name", "")
-        files = _list_children(f"{DEFAULT_BASE_FOLDER}/{folder_name}", token)
-        for file_item in files:
-            file_name = file_item.get("name", "")
-            if not file_name.endswith(".md"):
+    saved_articles_by_key: dict[str, dict[str, Any]] = {}
+    for base_folder in _candidate_base_folders():
+        channels = _list_children(base_folder, token)
+        for folder in channels:
+            if not folder.get("folder"):
                 continue
-            preview_text = _download_item_text(file_item["id"], token, byte_range="bytes=0-8191")
-            metadata, _ = parse_frontmatter(preview_text)
-            saved_articles.append(
-                {
+            folder_name = folder.get("name", "")
+            files = _list_children(_full_path(base_folder, folder_name), token)
+            for file_item in files:
+                file_name = file_item.get("name", "")
+                if not file_name.endswith(".md"):
+                    continue
+                preview_text = _download_item_text(file_item["id"], token, byte_range="bytes=0-8191")
+                metadata, _ = parse_frontmatter(preview_text)
+                youtube_url_normalized = normalize_youtube_url(metadata.get("video_url", ""))
+                dedupe_key = youtube_url_normalized or file_item.get("id", "") or f"{folder_name}/{file_name}"
+                article = {
                     "fileId": file_item.get("id", ""),
                     "fileName": file_name,
                     "webUrl": file_item.get("webUrl", ""),
                     "lastModified": file_item.get("lastModifiedDateTime", ""),
                     "title": metadata.get("title") or file_name[:-3],
                     "youtubeUrl": metadata.get("video_url", ""),
-                    "youtubeUrlNormalized": normalize_youtube_url(metadata.get("video_url", "")),
+                    "youtubeUrlNormalized": youtube_url_normalized,
                     "channelName": metadata.get("channel_name") or folder_name,
                     "channelUrl": metadata.get("channel_url", ""),
                     "publishedAt": metadata.get("published_at", ""),
@@ -368,7 +408,11 @@ def list_saved_articles() -> list[dict[str, Any]]:
                     "sheetStatus": metadata.get("sheet_status", ""),
                     "channelFolder": folder_name,
                     "relativePath": f"{folder_name}/{file_name}",
+                    "baseFolder": base_folder,
                 }
-            )
+                existing = saved_articles_by_key.get(dedupe_key)
+                if existing and existing.get("baseFolder") == PRIMARY_BASE_FOLDER:
+                    continue
+                saved_articles_by_key[dedupe_key] = article
 
-    return saved_articles
+    return list(saved_articles_by_key.values())
