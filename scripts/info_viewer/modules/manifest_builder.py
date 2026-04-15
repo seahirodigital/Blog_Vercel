@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Any
 
-from .onedrive_writer import DEFAULT_BASE_FOLDER, normalize_youtube_url, upload_json
+from .onedrive_writer import PRIMARY_BASE_FOLDER, normalize_youtube_url, upload_json
 
 
 def _video_sort_key(item: dict[str, Any]) -> tuple[str, str, str]:
@@ -149,7 +149,7 @@ def build_manifest(
     return {
         "runId": run_id or datetime.now().strftime("%Y%m%dT%H%M%S"),
         "generatedAt": datetime.now().isoformat(),
-        "baseFolder": DEFAULT_BASE_FOLDER,
+        "baseFolder": PRIMARY_BASE_FOLDER,
         "source": "info_viewer_manifest",
         "channels": channels,
         "recent": recent,
