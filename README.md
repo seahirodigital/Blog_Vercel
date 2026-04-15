@@ -70,6 +70,7 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\info-viewer-pipeline.
 C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\info_viewer\main.py
   ↓
 OneDrive の info_viewer 配下に manifest と出力を更新
+  ↓ 完成記事の末尾へ Apify 文字起こし原文も同一 Markdown として保存
   ↓
 C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\info_viewer\index.html で表示
 ```
@@ -161,6 +162,7 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\info_viewer\index.html で表示
 [下書きボタン]
     ↓ POST /api/note-draft
     ↓ C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml を dispatch
+    ↓ note_target に応じて保存先 note アカウントを切り替え
     ↓ C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py 実行
     ↓ API ログイン → text_notes → draft_save
     ↓ Playwright で OGP 展開
@@ -191,14 +193,23 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\info_viewer\index.html で表示
 - エディタ本文が読み込めない場合: Playwright フェーズを打ち切ります。この場合でも、API で保存した本文下書き自体は残ります。
 - 複数記事を選んだ場合でも、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\note-draft.js` は file_id ごとに順番に `workflow_dispatch` を投げます。1 file_id = 1 note 記事です。
 
-### 5.5 Amazon トップ画像の対象解決
+### 5.5 note 下書き保存先の仕様
+
+- 本編ブログ記事は `NOTE_EMAIL` と `NOTE_PASSWORD` を使って note 下書きを保存します。
+- 本編ブログ記事の Cookie 保存先は `NOTE_STORAGE_STATE` です。
+- XPOST blog 記事は `NOTE_EMAIL_XPOST_TECH` と `NOTE_PASSWORD_XPOST_TECH` を使って note 下書きを保存します。
+- XPOST blog 記事の Cookie 保存先は `NOTE_STORAGE_STATE_XPOST_TECH` です。
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\index.html` と `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\links.html` は `noteTarget=blog_main` を渡します。
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` は `noteTarget=xpost_tech` を渡します。
+
+### 5.6 Amazon トップ画像の対象解決
 
 1. 記事本文の先頭から最初の `▼` より前にある最初の URL を拾います。
 2. その URL から ASIN を抽出できれば、それを最優先ターゲットにします。
 3. URL から ASIN が取れない場合は、note タイトル → H1 → H2 の順で商品名を再抽出します。
 4. それでも商品名が決まらなければ、トップ画像挿入をスキップします。
 
-### 5.6 Amazon トップ画像の取得方法
+### 5.7 Amazon トップ画像の取得方法
 
 トップ画像の取得と保存は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\amazon_gazo_get.py` が担当します。
 
@@ -211,7 +222,7 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\info_viewer\index.html で表示
 
 つまり、現在の hiRes 主経路は Amazon 直接 scraping ではなく Apify です。Amazon 直接 HTML は fallback です。
 
-### 5.7 画像の保存ルール
+### 5.8 画像の保存ルール
 
 | 種別 | ローカル既定保存先 | GitHub Actions 上の一時保存先 | OneDrive 側の保存先 | 内容 |
 | --- | --- | --- | --- | --- |
@@ -224,7 +235,7 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\info_viewer\index.html で表示
 - hiRes 元画像: `YYYYMMDD_ASIN_hires.jpg`
 - note ヘッダー整形画像: `YYYYMMDD_ASIN_note_hero.jpg`
 
-### 5.8 `prepared` 画像の現在仕様
+### 5.9 `prepared` 画像の現在仕様
 
 - 生成サイズは `1600x836` です。
 - 比率は note ヘッダーの `800:418` と同じです。
@@ -233,7 +244,7 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\info_viewer\index.html で表示
 - 向き補正は `ImageOps.exif_transpose()` です。
 - 保存形式は JPEG、品質は `quality=92` です。
 
-### 5.9 note へアップロードする画像の選び方
+### 5.10 note へアップロードする画像の選び方
 
 現在の優先順位は固定です。
 
@@ -243,7 +254,7 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\info_viewer\index.html で表示
 
 したがって、正常系では `direct_prepared` が本番経路です。
 
-### 5.10 アップロード方法の現在仕様
+### 5.11 アップロード方法の現在仕様
 
 - 本番経路は note の通常 `画像をアップロード` 導線です。
 - `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py` は、選ばれた画像を file chooser で直接アップロードします。
@@ -291,9 +302,12 @@ C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\info_viewer\index.html で表示
 | `ONEDRIVE_CLIENT_SECRET` | OneDrive / Microsoft Graph |
 | `ONEDRIVE_REFRESH_TOKEN` | OneDrive / Microsoft Graph |
 | `ONEDRIVE_FOLDER` | 記事 Markdown の保存先ルート |
-| `NOTE_EMAIL` | note API ログイン |
-| `NOTE_PASSWORD` | note API ログイン |
-| `NOTE_STORAGE_STATE` | Playwright 用の note Cookie |
+| `NOTE_EMAIL` | 本編ブログ記事の note API ログイン |
+| `NOTE_PASSWORD` | 本編ブログ記事の note API ログイン |
+| `NOTE_STORAGE_STATE` | 本編ブログ記事用の Playwright note Cookie |
+| `NOTE_EMAIL_XPOST_TECH` | XPOST blog 記事の note API ログイン |
+| `NOTE_PASSWORD_XPOST_TECH` | XPOST blog 記事の note API ログイン |
+| `NOTE_STORAGE_STATE_XPOST_TECH` | XPOST blog 記事用の Playwright note Cookie |
 | `GH_PAT` | GitHub Variables / Secrets 更新、workflow dispatch |
 | `GOOGLE_CSE_API_KEY` | `/api/amazon-asin` 用 |
 | `GOOGLE_CSE_CX` | `/api/amazon-asin` 用 |

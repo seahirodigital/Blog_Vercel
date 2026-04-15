@@ -840,7 +840,7 @@
       const res = await fetch(`${API_BASE}/note-draft`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fileIds: ids }),
+        body: JSON.stringify({ fileIds: ids, noteTarget: 'blog_main' }),
       });
       if (!res.ok) throw new Error('note下書き投稿の起動に失敗しました');
       return await res.json();

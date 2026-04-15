@@ -1592,7 +1592,7 @@
       const response = await fetch('/api/note-draft', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fileIds: targetIds, noTopImage: true }),
+        body: JSON.stringify({ fileIds: targetIds, noTopImage: true, noteTarget: 'xpost_tech' }),
       });
       const payload = await response.json().catch(() => ({}));
       if (!response.ok || payload.success === false) {

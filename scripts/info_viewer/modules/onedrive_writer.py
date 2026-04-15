@@ -102,8 +102,24 @@ def _prepend_video_url(markdown_body: str, video_url: str) -> str:
     return f"{normalized_url}\n\n{body}"
 
 
+def _append_apify_transcript(markdown_body: str, transcript_text: str) -> str:
+    body = str(markdown_body or "").rstrip()
+    raw_transcript = str(transcript_text or "").strip()
+    if not raw_transcript:
+        return body
+
+    appendix = "\n\n## Apify文字起こし\n\n```text\n" + raw_transcript + "\n```\n"
+    if not body:
+        return appendix.strip() + "\n"
+    return body + appendix
+
+
 def _build_markdown_document(markdown_body: str, metadata: dict[str, Any]) -> str:
     prepared_markdown = _prepend_video_url(markdown_body, metadata.get("video_url", ""))
+    prepared_markdown = _append_apify_transcript(
+        prepared_markdown,
+        metadata.get("apify_transcript", ""),
+    )
     frontmatter = [
         "---",
         f'title: "{_yaml_escape(metadata.get("title", ""))}"',

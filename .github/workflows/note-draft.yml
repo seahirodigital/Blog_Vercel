@@ -12,6 +12,11 @@ on:
         required: false
         default: 'false'
         type: string
+      note_target:
+        description: 'note下書き保存先（blog_main / xpost_tech）'
+        required: false
+        default: 'blog_main'
+        type: string
 
 jobs:
   post-to-note:
@@ -37,23 +42,53 @@ jobs:
       - name: Playwright ブラウザをインストール（Chromium）
         run: playwright install --with-deps chromium
 
+      - name: note 保存先の認証情報を選択
+        env:
+          NOTE_TARGET: ${{ inputs.note_target }}
+          BLOG_NOTE_EMAIL: ${{ secrets.NOTE_EMAIL }}
+          BLOG_NOTE_PASSWORD: ${{ secrets.NOTE_PASSWORD }}
+          BLOG_NOTE_STORAGE_STATE: ${{ secrets.NOTE_STORAGE_STATE }}
+          XPOST_NOTE_EMAIL: ${{ secrets.NOTE_EMAIL_XPOST_TECH }}
+          XPOST_NOTE_PASSWORD: ${{ secrets.NOTE_PASSWORD_XPOST_TECH }}
+          XPOST_NOTE_STORAGE_STATE: ${{ secrets.NOTE_STORAGE_STATE_XPOST_TECH }}
+        run: |
+          if [ "$NOTE_TARGET" = "xpost_tech" ]; then
+            echo "NOTE_EMAIL=${XPOST_NOTE_EMAIL}" >> "$GITHUB_ENV"
+            echo "NOTE_PASSWORD=${XPOST_NOTE_PASSWORD}" >> "$GITHUB_ENV"
+            echo "NOTE_STORAGE_SECRET_NAME=NOTE_STORAGE_STATE_XPOST_TECH" >> "$GITHUB_ENV"
+            echo "NOTE_TARGET_LABEL=xpost_tech" >> "$GITHUB_ENV"
+            {
+              echo "NOTE_STORAGE_STATE<<__NOTE_STORAGE_STATE__"
+              echo "${XPOST_NOTE_STORAGE_STATE}"
+              echo "__NOTE_STORAGE_STATE__"
+            } >> "$GITHUB_ENV"
+          else
+            echo "NOTE_EMAIL=${BLOG_NOTE_EMAIL}" >> "$GITHUB_ENV"
+            echo "NOTE_PASSWORD=${BLOG_NOTE_PASSWORD}" >> "$GITHUB_ENV"
+            echo "NOTE_STORAGE_SECRET_NAME=NOTE_STORAGE_STATE" >> "$GITHUB_ENV"
+            echo "NOTE_TARGET_LABEL=blog_main" >> "$GITHUB_ENV"
+            {
+              echo "NOTE_STORAGE_STATE<<__NOTE_STORAGE_STATE__"
+              echo "${BLOG_NOTE_STORAGE_STATE}"
+              echo "__NOTE_STORAGE_STATE__"
+            } >> "$GITHUB_ENV"
+          fi
+
       - name: OneDriveから記事を取得し note に下書き投稿
         env:
           ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
           ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
           ONEDRIVE_REFRESH_TOKEN: ${{ secrets.ONEDRIVE_REFRESH_TOKEN }}
-          NOTE_EMAIL: ${{ secrets.NOTE_EMAIL_XPOST_TECH }}
-          NOTE_PASSWORD: ${{ secrets.NOTE_PASSWORD_XPOST_TECH }}
-          NOTE_STORAGE_STATE: ${{ secrets.NOTE_STORAGE_STATE_XPOST_TECH }}
-          NOTE_STORAGE_SECRET_NAME: NOTE_STORAGE_STATE_XPOST_TECH
           AMAZON_CLIENT_ID: ${{ secrets.AMAZON_CLIENT_ID }}
           AMAZON_CLIENT_SECRET: ${{ secrets.AMAZON_CLIENT_SECRET }}
           APIFY_API_KEY: ${{ secrets.APIFY_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           FILE_ID: ${{ inputs.file_id }}
           NO_TOP_IMAGE: ${{ inputs.no_top_image }}
+          NOTE_TARGET: ${{ inputs.note_target }}
         working-directory: scripts/pipeline
         run: |
+          echo "note 保存先: ${NOTE_TARGET_LABEL}"
           python -c "
           import requests, os
 

@@ -489,6 +489,7 @@ def _process_pending_videos(
                     "channel_url": video.get("channel_url", ""),
                     "duration": video.get("duration", ""),
                     "sheet_status": COMPLETED_STATUS,
+                    "apify_transcript": transcript.get("captions", ""),
                 },
             )
         except Exception as error:
@@ -828,6 +829,7 @@ def _process_pending_videos(
                     "channel_url": video.get("channel_url", ""),
                     "duration": video.get("duration", ""),
                     "sheet_status": COMPLETED_STATUS,
+                    "apify_transcript": transcript.get("captions", ""),
                 },
             )
         except Exception as error:
@@ -1329,6 +1331,7 @@ def _process_pending_videos(
                     "channel_url": video.get("channel_url", ""),
                     "duration": video.get("duration", ""),
                     "sheet_status": COMPLETED_STATUS,
+                    "apify_transcript": transcript.get("captions", ""),
                 },
             )
         except Exception as error:

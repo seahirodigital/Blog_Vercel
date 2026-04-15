@@ -4,11 +4,14 @@
  * GET  /api/note-draft?fileId=xxx  → GitHub Variable からURLを返す
  * POST /api/note-draft             → GitHub Actions の note-draft ワークフローを起動
  *   Body: { fileId: "..." }  または { fileIds: ["...", "..."] }（複数一括）
+ *         noteTarget: "blog_main" | "xpost_tech"
  */
 
 import { createHash } from 'crypto';
 
 const GITHUB_API = 'https://api.github.com';
+const DEFAULT_NOTE_TARGET = 'blog_main';
+const ALLOWED_NOTE_TARGETS = new Set(['blog_main', 'xpost_tech']);
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -54,12 +57,18 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { fileId, fileIds, noTopImage, no_top_image } = req.body || {};
+  const { fileId, fileIds, noTopImage, no_top_image, noteTarget } = req.body || {};
   const ids = fileIds && Array.isArray(fileIds) ? fileIds : fileId ? [fileId] : [];
   if (ids.length === 0) {
     return res.status(400).json({ error: 'fileId または fileIds は必須です' });
   }
   const skipTopImage = Boolean(noTopImage || no_top_image);
+  const resolvedNoteTarget = typeof noteTarget === 'string' && noteTarget.trim()
+    ? noteTarget.trim()
+    : DEFAULT_NOTE_TARGET;
+  if (!ALLOWED_NOTE_TARGETS.has(resolvedNoteTarget)) {
+    return res.status(400).json({ error: `noteTarget が不正です: ${resolvedNoteTarget}` });
+  }
 
   const url = `${GITHUB_API}/repos/${repo}/actions/workflows/note-draft.yml/dispatches`;
   const ghHeaders = {
@@ -80,6 +89,7 @@ export default async function handler(req, res) {
           inputs: {
             file_id: id,
             no_top_image: String(skipTopImage),
+            note_target: resolvedNoteTarget,
           },
         }),
       });
@@ -102,6 +112,7 @@ export default async function handler(req, res) {
     message: allSuccess
       ? `${results.length}件のnote下書き投稿を開始しました。`
       : `一部失敗: ${results.filter(r => !r.success).map(r => r.fileId).join(', ')}`,
+    noteTarget: resolvedNoteTarget,
     results,
   });
 }
