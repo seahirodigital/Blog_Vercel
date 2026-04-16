@@ -388,6 +388,56 @@ def _process_pending_videos(
                 gemini_result.get("recommendedWaitSeconds") or 0,
                 quota=quota_stop,
             )
+            should_try_next_candidate = bool(gemini_result.get("retryableError")) and candidate_index < len(gemini_candidates)
+            if should_try_next_candidate:
+                _append_processing_log(
+                    processing_logs,
+                    run_id,
+                    video,
+                    "Gemini",
+                    "retry_next_candidate",
+                    error_message,
+                    model=gemini_result.get("model"),
+                    transport=gemini_result.get("transport"),
+                    attemptCount=gemini_result.get("attemptCount"),
+                    transcriptChars=gemini_result.get("transcriptChars"),
+                    inputChars=gemini_result.get("inputChars"),
+                    trimmed=gemini_result.get("trimmed"),
+                    recommendedWaitSeconds=gemini_result.get("recommendedWaitSeconds"),
+                    geminiRequestedProfile=requested_profile,
+                    geminiResolvedProfile=resolved_profile,
+                    geminiTokenEnv=gemini_token_name,
+                    geminiCandidateOrder=candidate_order,
+                    candidateIndex=candidate_index,
+                )
+                print(f"   {gemini_token_name} transient error. fallback を続行します。")
+                continue
+
+            should_try_next_candidate = bool(gemini_result.get("retryableError")) and candidate_index < len(gemini_candidates)
+            if should_try_next_candidate:
+                _append_processing_log(
+                    processing_logs,
+                    run_id,
+                    video,
+                    "Gemini",
+                    "retry_next_candidate",
+                    error_message,
+                    model=gemini_result.get("model"),
+                    transport=gemini_result.get("transport"),
+                    attemptCount=gemini_result.get("attemptCount"),
+                    transcriptChars=gemini_result.get("transcriptChars"),
+                    inputChars=gemini_result.get("inputChars"),
+                    trimmed=gemini_result.get("trimmed"),
+                    recommendedWaitSeconds=gemini_result.get("recommendedWaitSeconds"),
+                    geminiRequestedProfile=requested_profile,
+                    geminiResolvedProfile=resolved_profile,
+                    geminiTokenEnv=gemini_token_name,
+                    geminiCandidateOrder=candidate_order,
+                    candidateIndex=candidate_index,
+                )
+                print(f"   {gemini_token_name} transient error. fallback を続行します。")
+                continue
+
             retry_record = state_store.mark_retry(
                 state,
                 video["video_url"],
@@ -1251,6 +1301,9 @@ def _process_pending_videos(
                 geminiCandidateOrder=candidate_order,
                 nextRetryAt=retry_record.get("nextRetryAt"),
             )
+            if bool(gemini_result.get("retryableError")) and candidate_index < len(gemini_candidates):
+                print(f"   {gemini_token_name} transient error. fallback を続行します。")
+                continue
             terminal_failure = True
             break
 

@@ -251,6 +251,8 @@ def format_transcript(transcript: dict[str, Any], api_key: str, video: dict[str,
         "usedTranscriptChars": attempts[-1]["transcriptChars"] if attempts else 0,
         "trimmed": bool(attempts[-1]["trimmed"]) if attempts else False,
         "stopPipeline": stop_pipeline,
+        "quotaExhausted": stop_pipeline,
+        "retryableError": _is_retryable_error(last_error),
         "recommendedWaitSeconds": recommended_wait_seconds,
         "attempts": attempts[-6:],
     }
