@@ -64,7 +64,7 @@ jobs:
           ONEDRIVE_REFRESH_TOKEN: ${{ secrets.ONEDRIVE_REFRESH_TOKEN }}
           INFO_VIEWER_CHANNEL_SHEET_NAME: チャンネル設定
           INFO_VIEWER_VIDEO_SHEET_NAME: 動画リスト
-          INFO_VIEWER_ONEDRIVE_FOLDER: Obsidian in Onedrive 202602/Vercel_Blog/情報取得/info_viewer
+          INFO_VIEWER_ONEDRIVE_FOLDER: Obsidian in Onedrive 202602/Vercel_Blog/info_viewer
           INFO_VIEWER_GEMINI_SERIAL_DELAY_SECONDS: "20"
           INFO_VIEWER_RETRY_SECONDS: "3600"
           INFO_VIEWER_QUOTA_RETRY_SECONDS: "7200"

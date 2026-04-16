@@ -149,7 +149,51 @@ function stripFrontmatter(markdownText = '') {
   return match ? markdownText.slice(match[0].length) : markdownText;
 }
 
+function toTimestamp(value = '') {
+  const text = String(value || '').trim();
+  if (!text) return 0;
+
+  const direct = Date.parse(text);
+  if (!Number.isNaN(direct)) {
+    return direct;
+  }
+
+  const normalized = text.replace(/\//g, '-').replace(/\s+/g, ' ').trim();
+  const compactMatch = normalized.match(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})$/);
+  if (compactMatch) {
+    const [, year, month, day, hour, minute, second] = compactMatch;
+    return Date.parse(`${year}-${month}-${day}T${hour}:${minute}:${second}Z`) || 0;
+  }
+
+  const dateTimeMatch = normalized.match(/^(\d{4})-(\d{2})-(\d{2})(?:[ T-])(\d{2}):(\d{2})(?::(\d{2}))?$/);
+  if (dateTimeMatch) {
+    const [, year, month, day, hour, minute, second = '00'] = dateTimeMatch;
+    return Date.parse(`${year}-${month}-${day}T${hour}:${minute}:${second}Z`) || 0;
+  }
+
+  const dateOnlyMatch = normalized.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (dateOnlyMatch) {
+    const [, year, month, day] = dateOnlyMatch;
+    return Date.parse(`${year}-${month}-${day}T00:00:00Z`) || 0;
+  }
+
+  return 0;
+}
+
+function compareFreshness(left, right, selector) {
+  const leftTime = toTimestamp(selector(left));
+  const rightTime = toTimestamp(selector(right));
+  if (leftTime !== rightTime) {
+    return rightTime - leftTime;
+  }
+
+  const leftPrimary = left.baseFolder === PRIMARY_FOLDER ? 1 : 0;
+  const rightPrimary = right.baseFolder === PRIMARY_FOLDER ? 1 : 0;
+  return rightPrimary - leftPrimary;
+}
+
 async function fetchManifest(token) {
+  const manifests = [];
   for (const folder of folderCandidates()) {
     const url = `${GRAPH_API}/me/drive/root:/${encodeFolderPath(folder)}/manifest.json:/content`;
     const response = await fetch(url, {
@@ -167,7 +211,14 @@ async function fetchManifest(token) {
     if (!manifest.baseFolder) {
       manifest.baseFolder = folder;
     }
-    return manifest;
+    manifests.push(manifest);
+  }
+
+  if (manifests.length) {
+    manifests.sort((left, right) =>
+      compareFreshness(left, right, (item) => item.generatedAt || item.updatedAt || item.runId)
+    );
+    return manifests[0];
   }
 
   return {
@@ -231,6 +282,7 @@ function blankState() {
 }
 
 async function loadState(token) {
+  const states = [];
   for (const folder of folderCandidates()) {
     const response = await graphRequest('GET', stateUrl(folder), token);
 
@@ -247,7 +299,14 @@ async function loadState(token) {
       state.videos = {};
     }
     state.baseFolder = folder;
-    return state;
+    states.push(state);
+  }
+
+  if (states.length) {
+    states.sort((left, right) =>
+      compareFreshness(left, right, (item) => item.updatedAt || item.generatedAt)
+    );
+    return states[0];
   }
 
   return {
