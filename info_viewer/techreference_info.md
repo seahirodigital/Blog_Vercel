@@ -1,309 +1,247 @@
-# techreference_info
+﻿# techreference_info
 
-## 1. 文書の目的
-本書は、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\info_viewer` に関する技術メモ、試行錯誤、つまずき、運用ノウハウをまとめた実務向けリファレンスである。
+## 1. この文書の目的
+この文書は、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\info_viewer` に関する実装メモです。  
+特に 2026-04-16 の調査で判明した「見かけ上は成功しているのに viewer に記事が出ない」問題について、次に同じところでつまずかないための知見をまとめます。
 
-仕様の正本は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\info_viewer\仕様書.md` とし、本書はその裏側にある判断理由を残す。
+この文書は仕様書ではなく、以下を残すための技術メモです。
 
-## 2. 現在の構成要約
-### 2.1 viewer 側
-主な実装ファイル:
+- 誤解しやすかったポイント
+- 実際の原因
+- 調査の順番
+- 再発防止のための確認観点
 
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\info_viewer\index.html`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\info-viewer.js`
+正式な最終仕様は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\info_viewer\仕様書.md` を参照してください。
 
-viewer は `manifest.json` を読み、記事本文は `articleId` 指定で都度取得する。
+## 2. 今回の事象
+### 2.1 見えていた症状
+GitHub Actions の実行結果では success に見えるにもかかわらず、viewer に新しい記事が出てこない状態が発生した。  
+実行ログには次のような表示があった。
 
-### 2.2 自動取得側
-主な実装ファイル:
+- `実行モード: sync_only`
+- `Sheets 差分取得とキュー同期のみ実行しました。`
+- `成功: 0件`
+- `失敗: 0件`
 
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\info_viewer\runner.py`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\info_viewer\modules\state_store.py`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\info_viewer\modules\gemini_formatter.py`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\info_viewer\modules\manifest_builder.py`
+このログだけを見ると「Apify も Gemini も動いていない」「処理が壊れている」と見えやすい。
 
-### 2.3 workflow 側
-主な実装ファイル:
+### 2.2 実際に起きていたこと
+問題は 1 つではなく、次の 2 層に分かれていた。
 
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\info-viewer-queue.yml`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\info-viewer-pipeline.yml`
+1. 直近 run が `sync_only` だったため、そもそも Gemini を実行しない run を見ていた
+2. workflow の出力先と viewer / API の参照先がずれており、処理されていても新記事が viewer に出なかった
 
-## 3. 実装フェーズごとの学び
-### 3.1 第一弾
-第一弾では viewer を先に完成させた。
+## 3. 最重要の学び
+### 3.1 `success` は「記事生成成功」を意味しない
+`info_viewer` の workflow では、`sync_only` でも正常終了する。  
+つまり Actions の緑色の success は「ジョブが壊れず終わった」ことしか保証しない。
 
-理由:
+記事生成が実際に行われたかは、必ず以下を確認する。
 
-- 取得自動化がまだ不安定でも、最終的な見え方を先に固めた方が判断しやすい
-- `manifest.json` を中間フォーマットにすると、viewer と pipeline を疎結合にできる
+- `実行モード`
+- `処理対象件数`
+- `Apify で文字起こし取得`
+- `Gemini candidate`
+- `成功: N件`
+- `失敗: N件`
 
-この判断は有効だった。
-後から `failures` や `processingLogs` を `manifest.json` に足しても viewer 本体を大きく壊さずに済んだ。
+### 3.2 `sync_only` は仕様どおり Gemini を動かさない
+`sync_only` は以下だけを行う。
 
-### 3.2 第二弾
-第二弾は「配線はできるが、歩留まりが安定しない」段階で止まりやすかった。
+- Google Sheets の差分取得
+- キュー同期
+- `pipeline_state.json` 更新
+- `manifest.json` 再生成
 
-詰まりやすかった箇所:
+以下は行わない。
 
-- Apify 取得失敗
-- Gemini の 503
-- Gemini の 429
-- OneDrive 保存
-- Sheets 更新
+- Apify による文字起こし取得
+- Gemini による Markdown 整形
+- 新規記事ファイルの生成
 
-そこで、単なる `None` 返しではなく、各段階が失敗理由を返す形へ揃えた。
+そのため、`sync_only` の run を見て「Gemini が走っていない」と判断してはいけない。
 
-### 3.3 第三弾の着手内容
-第三弾で先に入れたのは「見た目の検索やソート」ではなく、「自動で記事が出来上がっている体験を支える運用側」である。
+### 3.3 `process_queue` で初めて記事生成が動く
+記事生成を確認したい場合は、`process_queue` の run を見る。  
+1件だけ強制検証したい場合は、`video_url` を指定した `workflow_dispatch` が最も確実。
 
-先に入れたもの:
+## 4. 今回の本当の原因
+### 4.1 OneDrive 保存先の不一致
+workflow 側が旧保存先に書き込み、viewer / API 側は新保存先を参照していた。
 
-- queue state
-- schedule 分離
-- defer
-- retry wait
-- Gemini 直列化
-
-後回しにしたもの:
-
-- viewer の検索
-- viewer のソート
-- 操作 UI の追加
-
-## 4. もっとも大きかった詰まり
-### 4.1 Gemini の高負荷と quota
-最も大きい詰まりは Gemini である。
-
-実際に出たエラー傾向:
-
-- `503 UNAVAILABLE`
-- `429 RESOURCE_EXHAUSTED`
-- `500 api_error`
-- `too_many_requests`
-
-ここから分かったこと:
-
-- 「一度にたくさん投げる」のではなく「1件終わったら次」にしないと止まりやすい
-- 無料枠では 1 run の中で全部終わらせる思想は弱い
-- 失敗を次回へ送る設計が必須
-
-### 4.2 旧 fallback 方式の問題
-以前は Gemini transport を複数経路で試す作りがあり、失敗時に実質リクエスト数が増えやすかった。
-
-現在の判断:
-
-- 既定 transport は `models.generate_content`
-- まず 1 経路に絞る
-- quota 到達時は無理に続けない
-
-### 4.3 長文入力問題
-文字起こしが長い動画では、入力サイズ由来の失敗も考慮が必要だった。
-
-現在の対策:
-
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\info_viewer\modules\gemini_formatter.py`
-- 45000 文字へトリムした fallback を用意
-- 入力制限系エラーのときだけ trimmed variant に進む
-
-## 5. queue 方式へ切り替えた理由
-### 5.1 旧 daily 1 回では体験が弱い
-旧 `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\info-viewer-pipeline.yml` は 1 日 1 回の schedule だった。
-
-問題:
-
-- Sheets に動画が追加されてもすぐ拾えない
-- quota 失敗時の再試行までの待ちが長い
-- 自動で増えていく感じが出にくい
-
-### 5.2 sync と process を分けた
-そこで、1 本の run で全部やるのをやめ、以下に分割した。
-
-- 30分ごとの `sync_only`
-- 1時間ごとの `process_queue`
-
-この分割で良くなった点:
-
-- 新しい動画 URL を先に保持できる
-- Gemini が詰まっても収集自体は止まりにくい
-- quota 時に backlog を自然に貯められる
-
-### 5.3 state/pipeline_state.json の役割
-`C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\info_viewer\modules\state_store.py` を追加し、`pipeline_state.json` を持つようにした。
-
-これで可能になったこと:
-
-- pending の保持
-- retry 時刻の保持
-- active / inactive の判定
-- done 済みの再判定
-- 失敗理由を manifest とは別に持つこと
-
-## 6. 実 run から得た知見
-### 6.1 run `24180648716`
-用途:
-
-- Gemini 直列化の挙動確認
-
-分かったこと:
-
-- 動画ごとの待機は効いている
-- ただし quota 自体は解決しない
-
-### 6.2 run `24182954517`
-用途:
-
-- queue workflow 導入後の手動確認
-
-確認できたこと:
-
-- `process_queue` モードで起動
-- `scanned=5`
-- `added=5`
-- `done=1`
-- `処理対象件数=2`
-- 1 件目で Gemini が `503` と `429`
-- 残件が defer へ送られた
-
-この run は「queue と defer の骨格が動いた」確認として重要である。
-
-### 6.3 run `24185904735`
-用途:
-
-- schedule 発火確認
-
-確認できたこと:
-
-- event が `schedule`
-- 自動収集はもう始まっている
-
-## 7. viewer と pipeline をつなぐ key 設計
-### 7.1 URL 正規化
-動画対応づけの基準はタイトルではなく URL である。
-
-理由:
-
-- タイトルは後で変わる
-- OneDrive のファイル名は短縮される
-- YouTube URL は watch / shorts / youtu.be など揺れがある
-
-そのため `normalize_youtube_url` を基準キーにしている。
-
-### 7.2 manifest を中間フォーマットにした理由
-viewer が Google Sheets と OneDrive を毎回直接突き合わせるより、pipeline 側で一度 `manifest.json` に整形する方が安定する。
-
-利点:
-
-- viewer が軽い
-- failure 情報を一緒に渡せる
-- UI 側で「記事なし」や「最終失敗」を出しやすい
-
-## 8. ログの見方
-### 8.1 GitHub Actions ログ
-まず見る場所:
-
-- `Info Viewer Pipeline` の run log
-
-確認順:
-
-1. `実行モード`
-2. `キュー同期`
-3. `処理対象件数`
-4. `Apify`
-5. `Gemini`
-6. `OneDrive保存`
-7. `状況更新`
-8. `処理後キュー状況`
-
-### 8.2 manifest の failure
-viewer 側で最終失敗を見るときは `manifest.json` の以下を見ればよい。
-
-- `lastFailureStage`
-- `lastFailureMessage`
-- `lastFailureAt`
-
-### 8.3 pipeline_state.json
-再試行待ちの実体は `pipeline_state.json` 側にある。
-
-重要項目:
-
-- `status`
-- `nextRetryAt`
-- `attemptCount`
-- `lastError`
-- `lastStage`
-
-## 9. 現在の不一致と注意点
-### 9.1 trigger API は legacy workflow を叩く
-`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\trigger-info-viewer.js` は、まだ `info-viewer-pipeline.yml` を dispatch している。
-
-つまり現状は以下の二重構造である。
-
-- 定期実行: `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\info-viewer-queue.yml`
-- API 手動起動: `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\info-viewer-pipeline.yml`
-
-これは今後解消すべき技術的負債である。
-
-### 9.2 API 側 default folder と workflow env
-`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\info-viewer.js` の default folder は旧値を持つ。
-
-一方、queue workflow は以下を使う。
+旧保存先:
 
 - `Obsidian in Onedrive 202602/Vercel_Blog/情報取得/info_viewer`
 
-そのため、運用上は `INFO_VIEWER_ONEDRIVE_FOLDER` の環境変数 override が正しく入っている前提で整合が取れている。
+正しい保存先:
 
-### 9.3 main.py と runner.py の二段構成
-`C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\info_viewer\main.py` は実体ではなく、`runner.py` を呼ぶ薄い入口である。
+- `Obsidian in Onedrive 202602/Vercel_Blog/info_viewer`
 
-注意点:
+このズレにより、Apify / Gemini が成功しても viewer 側には反映されないことがあった。
 
-- 仕様変更は原則 `runner.py` 側で行う
-- `main.py` だけ見てロジックを追うと古い実装に見える
+### 4.2 API が「最初に見つかった manifest」を拾っていた
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\info-viewer.js` は、候補フォルダの中から最初に見つかった `manifest.json` / `pipeline_state.json` を使う実装だった。  
+新旧フォルダが共存していると、古い manifest を拾う可能性があった。
 
-### 9.4 OneDrive 上での py_compile
-OneDrive 配下では `.pyc` の rename 時にアクセス拒否が出ることがある。
+結果として、
 
-実際に遭遇した症状:
+- 実ファイルは新しい
+- viewer は古い manifest を見ている
 
-- `py_compile` 実行時に `__pycache__` への rename で `Permission denied`
+という不整合が起きえた。
 
-対処:
+### 4.3 Gemini の一時障害時フォールバック不足
+修正後の再検証で、Gemini が `503 UNAVAILABLE` を返した際に、次の候補キーへ即時フォールバックせず failure 扱いになる箇所が見つかった。  
+このため、一時的な Gemini 側障害がそのまま記事生成失敗になっていた。
 
-- AST parse に切り替える
-- または `PYTHONDONTWRITEBYTECODE=1` を使う
+## 5. 修正内容
+### 5.1 workflow の保存先統一
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\info-viewer-queue.yml` の
+`INFO_VIEWER_ONEDRIVE_FOLDER` を新保存先へ統一した。
 
-## 10. 今後の改善候補
-優先度が高いもの:
+正:
 
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\trigger-info-viewer.js` を新 queue workflow 対応へ揃える
-- viewer 側の検索
-- viewer 側のソート
-- `processingLogs` の可視化
-- defer 対象の明示表示
-- quota 時の待機戦略の最適化
+- `Obsidian in Onedrive 202602/Vercel_Blog/info_viewer`
 
-優先度は次点:
+### 5.2 API の manifest / state 選択ロジック修正
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\info-viewer.js` を修正し、候補の中から
+「最初に見つかったもの」ではなく「最新日時のもの」を選ぶようにした。
 
-- UI 文言の第一弾表記整理
-- 失敗理由の分類表示
-- queue 状態の操作 UI
+評価の基準:
 
-## 11. 実務メモ
-### 11.1 第二弾の本当の完成条件
-第二弾の本当の完成条件は「対象動画が安定して自動記事化される」である。
+- `generatedAt`
+- `updatedAt`
+- `runId`
 
-現状は「配線できた」「viewer で見える」「自動収集が開始した」までは到達しているが、歩留まりの安定はこれから詰める段階である。
+これにより、新旧フォルダが残っていても最新成果物を優先できる。
 
-### 11.2 第三弾の優先順位
-第三弾は UI 追加より運用安定を先に進める方針が妥当である。
+### 5.3 Gemini retryable エラー時のフォールバック追加
+以下を修正した。
 
-現時点の優先順:
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\info_viewer\modules\gemini_formatter.py`
+- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\info_viewer\runner.py`
 
-1. 差分取得
-2. 再処理キュー
-3. 夜間を含む定期実行
-4. quota 時の自然 defer
-5. その後に検索とソート
+対応内容:
 
-### 11.3 一言で言うと
-現在の `info_viewer` は「viewer は既に使える」「自動収集も始まった」「ただし Gemini の無料枠と高負荷が最後のボトルネック」という状態である。
+- `503`
+- `429`
+- 一部の transport エラー
+
+これらを retryable error として判定し、次の Gemini 候補キーへ進めるようにした。
+
+## 6. 調査時につまずいたポイント
+### 6.1 直近 run だけを見ると誤判定しやすい
+今回の最初の誤解はここだった。  
+`schedule` の最新 run が `sync_only` で正常終了していたため、
+「Gemini が全く実行されていない」と見えてしまった。
+
+対策:
+
+- 直近 run だけでなく、同日の `process_queue` run も確認する
+- `event=schedule` だけでなく `workflow_dispatch` も確認する
+- run ID 単位で `mode` を必ず読む
+
+### 6.2 queue 状態を見ずに「なぜ処理されない」を考えてしまいがち
+`process_queue` を実行しても、必ずその場で記事生成されるとは限らない。  
+`nextRetryAt` が未来時刻の場合、対象は `deferred` のままで、その run では処理されない。
+
+対策:
+
+- `pipeline_state.json` の `status` を見る
+- `nextRetryAt` を見る
+- `queueable=0` / `deferred` を読む
+
+### 6.3 failure と quota defer は意味が違う
+Gemini の `429` や quota 制限時は、「壊れた」のではなく「待てば再開できる」状態である。  
+このときは `deferred` として次回 run に回すのが正しい。
+
+対策:
+
+- `failed` と `deferred` を混同しない
+- `recommendedWaitSeconds` が出ているかを見る
+- 即修正ではなく、設計どおりの defer かを先に判断する
+
+### 6.4 viewer 側の見え方だけでパイプライン全体を判断しない
+viewer に記事が出ない理由は、生成失敗だけではない。
+
+- manifest が古い
+- 保存先が違う
+- article file はあるが manifest に載っていない
+- API が別フォルダを見ている
+
+この層を分けて確認する必要がある。
+
+## 7. 再発防止チェックリスト
+### 7.1 まず最初に見るべき順番
+1. GitHub Actions の run の `mode` を確認する
+2. `success / failure` 件数を確認する
+3. `Apify` と `Gemini` のログ有無を確認する
+4. `INFO_VIEWER_ONEDRIVE_FOLDER` を確認する
+5. 最新 `manifest.json` の `generatedAt` を確認する
+6. `pipeline_state.json` の `status` / `nextRetryAt` を確認する
+7. viewer API がどの manifest を返しているか確認する
+
+### 7.2 `sync_only` を見たときの判断ルール
+`sync_only` の run を見たら、次のように考える。
+
+- これは記事生成 run ではない
+- Gemini が走っていなくても正常
+- 記事生成可否の判定材料にはしない
+
+### 7.3 `process_queue` を見たときの判断ルール
+`process_queue` の run を見たら、次を確認する。
+
+- `処理対象件数`
+- `Apify で文字起こし取得`
+- `Gemini candidate`
+- `成功`
+- `失敗`
+- `manifest 更新完了`
+
+この 6 つが揃って初めて「記事生成がどこまで進んだか」を判断しやすい。
+
+## 8. 1件だけ確実に検証する方法
+再現確認や修正確認では、`video_url` 指定の `workflow_dispatch` が最も扱いやすい。
+
+考え方:
+
+- queue の defer 状態に引っ張られにくい
+- 対象を 1 件に限定できる
+- ログが読みやすい
+
+確認したいログ:
+
+- `処理対象件数: 1`
+- `Apify で文字起こし取得`
+- `Gemini candidate`
+- `成功: 1件`
+- `失敗: 0件`
+
+## 9. 今後の運用ノウハウ
+### 9.1 「viewer に出ない」を 3 層に分ける
+`viewer に出ない` は次の 3 層に分けて考える。
+
+1. queue に乗っていない
+2. 記事生成に失敗している
+3. 生成済みだが manifest / API / viewer 反映でこぼれている
+
+この切り分けを最初にやると、調査がかなり短くなる。
+
+### 9.2 保存先は 1 つに寄せる
+OneDrive 上の保存先は 1 つに統一し、旧パスを残したまま運用しない。  
+過渡期で旧パスを残す場合でも、viewer 側は必ず「最新 manifest 優先」にする。
+
+### 9.3 legacy workflow を判断材料にしない
+`C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\info-viewer-pipeline.yml` は legacy 扱い。  
+現在の本線は `info-viewer-queue.yml` であり、挙動確認は必ずこちらを基準にする。
+
+## 10. 最終確認済みの状態
+2026-04-16 時点で、以下を確認済み。
+
+- workflow の保存先は新保存先へ統一済み
+- viewer API は最新 manifest / state を優先取得できる
+- Gemini の一時エラー時は次候補キーへフォールバックできる
+- `video_url` 指定 run で Apify → Gemini → manifest 更新 → 成功 まで確認済み
+
+このため、現時点の `info_viewer` は
+「正しく値を取得し、Apify と Gemini の処理を通し、viewer に出す」ための基礎部分は復旧済みである。
