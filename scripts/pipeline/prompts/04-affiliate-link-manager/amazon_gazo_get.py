@@ -8,7 +8,7 @@ Amazon のトップ画像を保存する試験スクリプト。
 4. GitHub Actions では一時フォルダへ保存し、OneDrive へアップロード後に一時ファイルを削除する
 
 使い方:
-    python "C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\amazon_gazo_get.py" "MacBook Neo"
+    python .\scripts\pipeline\prompts\04-affiliate-link-manager\amazon_gazo_get.py "MacBook Neo"
 """
 
 from __future__ import annotations
