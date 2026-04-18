@@ -41,6 +41,7 @@ DEFAULT_ASSOCIATE_TAG = "hiroshit-22"
 DEFAULT_LOCAL_OUTPUT_DIR = Path(
     r"C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images"
 )
+LEGACY_DEFAULT_LOCAL_OUTPUT_DIR = DEFAULT_LOCAL_OUTPUT_DIR
 DEFAULT_ACTIONS_SUBDIR = "amazon_top_images"
 DEFAULT_ONEDRIVE_FOLDER = "Vercel_Blog/Amazon_images"
 RAW_SUBDIR_NAME = "raw"
@@ -132,11 +133,32 @@ def is_github_actions() -> bool:
     return os.getenv("GITHUB_ACTIONS", "").strip().lower() == "true"
 
 
+def resolve_default_local_output_dir() -> Path:
+    override = os.getenv("AMAZON_TOP_IMAGE_LOCAL_OUTPUT_DIR", "").strip()
+    if override:
+        return Path(override).expanduser()
+
+    userprofile = os.getenv("USERPROFILE", "").strip()
+    portable_default = (
+        Path(userprofile)
+        / "OneDrive"
+        / "Obsidian in Onedrive 202602"
+        / "Vercel_Blog"
+        / "Amazon_images"
+        if userprofile
+        else LEGACY_DEFAULT_LOCAL_OUTPUT_DIR
+    )
+    for candidate in (portable_default, LEGACY_DEFAULT_LOCAL_OUTPUT_DIR):
+        if candidate.exists():
+            return candidate.resolve()
+    return portable_default
+
+
 def resolve_default_output_dir() -> Path:
     runner_temp = os.getenv("RUNNER_TEMP", "").strip()
     if is_github_actions() and runner_temp:
         return Path(runner_temp) / DEFAULT_ACTIONS_SUBDIR
-    return DEFAULT_LOCAL_OUTPUT_DIR
+    return resolve_default_local_output_dir()
 
 
 def resolve_image_output_dirs(output_root: Path) -> tuple[Path, Path]:

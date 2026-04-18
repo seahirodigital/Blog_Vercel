@@ -22,6 +22,9 @@ import gspread
 from google.oauth2.service_account import Credentials
 from playwright.sync_api import Locator, Page, sync_playwright
 
+REPO_ROOT = Path(__file__).resolve().parents[4]
+LEGACY_REPO_ROOT = Path(r"C:\Users\HCY\OneDrive\髢狗匱\Blog_Vercel")
+
 INTENT_BUY = "Buy"
 INTENT_DO = "Do"
 INTENT_KNOW = "Know"
@@ -468,6 +471,42 @@ def _get_gs_client() -> gspread.Client:
         r"C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\service_account.json",
         r"C:\Users\HCY\OneDrive\開発\Blog_Vercel\service_account.json",
     ]
+    sa_file = os.getenv("GOOGLE_SERVICE_ACCOUNT_FILE", "").strip()
+    extra_candidates: list[Path] = []
+    if sa_file:
+        extra_candidates.append(Path(sa_file).expanduser())
+
+    userprofile = os.getenv("USERPROFILE", "").strip()
+    portable_repo_root = (
+        Path(userprofile) / "OneDrive" / "開発" / "Blog_Vercel"
+        if userprofile
+        else None
+    )
+    configured_repo_root = os.getenv("BLOG_VERCEL_HOME", "").strip()
+    repo_roots = [
+        Path(configured_repo_root).expanduser() if configured_repo_root else None,
+        REPO_ROOT,
+        portable_repo_root,
+        LEGACY_REPO_ROOT,
+    ]
+    relative_candidates = [
+        Path("ryosan/seo_factory/env/google-service-account.json"),
+        Path("scripts/pipeline/service_account.json"),
+        Path("service_account.json"),
+    ]
+    seen_paths = {str(path).lower() for path in local_candidates}
+    for repo_root in repo_roots:
+        if repo_root is None:
+            continue
+        for relative_path in relative_candidates:
+            candidate = repo_root / relative_path
+            normalized = str(candidate).lower()
+            if normalized in seen_paths:
+                continue
+            seen_paths.add(normalized)
+            extra_candidates.append(candidate)
+    local_candidates = extra_candidates + [Path(path) for path in local_candidates]
+
     for path in local_candidates:
         if os.path.exists(path):
             creds = Credentials.from_service_account_file(path, scopes=SCOPES)

@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -21,6 +22,7 @@ if hasattr(sys.stderr, "reconfigure"):
 SCRIPT_DIR = Path(__file__).resolve().parent
 NOTE_DRAFT_POSTER_PATH = SCRIPT_DIR.parent.parent / "prompts" / "05-draft-manager" / "note_draft_poster.py"
 DEFAULT_IMAGE_PATH = Path(r"C:\Users\HCY\Downloads\Image_fx.png")
+LEGACY_DEFAULT_IMAGE_PATH = DEFAULT_IMAGE_PATH
 DEFAULT_ARTIFACTS_DIR = SCRIPT_DIR / "artifacts"
 DEFAULT_MARKDOWN_LABEL = "embedded_default_markdown"
 DEFAULT_MARKDOWN_CONTENT = """# note画像アップロード検証
@@ -38,6 +40,30 @@ PAGE_IMAGE_SELECTOR = "main img"
 TOP_IMAGE_BUTTON_SELECTOR = 'button[aria-label="画像を追加"]'
 CROP_DIALOG_SELECTOR = "div.ReactModal__Content.CropModal__content[role='dialog'][aria-modal='true']"
 TOP_IMAGE_LOADING_SELECTOR = "main div[class*='sc-e17b66d3-0']"
+
+
+def resolve_default_image_path() -> Path:
+    override = os.getenv("NOTE_IMAGE_DRAFT_TEST_IMAGE_PATH", "").strip()
+    if override:
+        return Path(override).expanduser()
+
+    userprofile = os.getenv("USERPROFILE", "").strip()
+    portable_default = (
+        Path(userprofile) / "Downloads" / "Image_fx.png"
+        if userprofile
+        else LEGACY_DEFAULT_IMAGE_PATH
+    )
+    for candidate in (portable_default, LEGACY_DEFAULT_IMAGE_PATH):
+        if candidate.exists():
+            return candidate.resolve()
+    return portable_default
+
+
+DEFAULT_IMAGE_PATH = resolve_default_image_path()
+DEFAULT_MARKDOWN_CONTENT = DEFAULT_MARKDOWN_CONTENT.replace(
+    r"C:\\Users\\HCY\\Downloads\\Image_fx.png",
+    str(DEFAULT_IMAGE_PATH).replace("\\", "\\\\"),
+)
 
 
 def load_note_module():

@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -17,7 +18,17 @@ if hasattr(sys.stderr, "reconfigure"):
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 PIPELINE_DIR = SCRIPT_DIR.parent.parent
+REPO_ROOT = PIPELINE_DIR.parent.parent
 NOTE_DRAFT_POSTER_PATH = SCRIPT_DIR / "note_draft_poster.py"
+PORTABLE_DEFAULT_MARKDOWN_PATH = (
+    REPO_ROOT
+    / "ryosan"
+    / "seo_factory"
+    / "output"
+    / "macbook_neo"
+    / "variants"
+    / "macbook_neo_gakuwari.md"
+)
 DEFAULT_MARKDOWN_PATH = Path(
     r"C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\output\macbook_neo\variants\macbook_neo_gakuwari.md"
 )
@@ -39,6 +50,30 @@ def resolve_markdown(markdown_path: Path) -> str:
     if not markdown_path.exists():
         raise FileNotFoundError(f"Markdownが見つかりません: {markdown_path}")
     return markdown_path.read_text(encoding="utf-8")
+
+def resolve_default_markdown_path() -> Path:
+    override = os.getenv("ADOBE_EXPRESS_DEFAULT_MARKDOWN_PATH", "").strip()
+    if override:
+        return Path(override).expanduser()
+
+    for candidate in (PORTABLE_DEFAULT_MARKDOWN_PATH, DEFAULT_MARKDOWN_PATH):
+        if candidate.exists():
+            return candidate.resolve()
+
+    output_root = REPO_ROOT / "ryosan" / "seo_factory" / "output"
+    if output_root.exists():
+        markdown_files = sorted(
+            (
+                path for path in output_root.rglob("*.md")
+                if "memo" not in path.parts
+            ),
+            key=lambda path: path.stat().st_mtime,
+            reverse=True,
+        )
+        if markdown_files:
+            return markdown_files[0]
+
+    return PORTABLE_DEFAULT_MARKDOWN_PATH
 
 
 def create_note_draft(note_module, markdown: str) -> tuple[dict, dict]:
@@ -94,7 +129,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Adobe Express のログイン state を保存します。")
     parser.add_argument(
         "--markdown-path",
-        default=str(DEFAULT_MARKDOWN_PATH),
+        default=str(resolve_default_markdown_path()),
         help="Adobe Express ログイン導線を開くために使う Markdown のフルパス",
     )
     parser.add_argument(

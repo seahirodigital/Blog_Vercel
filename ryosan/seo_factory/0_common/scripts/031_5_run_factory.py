@@ -61,6 +61,19 @@ DEFAULT_SPREADSHEET_ID = os.getenv(
     "SEO_FACTORY_SPREADSHEET_ID",
     "1_qjAWcrgGHY8xTQdiUrK-v_gJsXEb8FH9ABUvEpcVMo",
 )
+LEGACY_DEFAULT_OUTPUT_DIR = Path(r"C:\Users\HCY\OneDrive\髢狗匱\Blog_Vercel\ryosan\seo_factory\output")
+
+
+def resolve_default_output_dir() -> Path:
+    override = os.getenv("SEO_FACTORY_OUTPUT_DIR", "").strip()
+    if override:
+        return Path(override).expanduser()
+
+    portable_default = SEO_FACTORY_DIR / "output"
+    for candidate in (portable_default, LEGACY_DEFAULT_OUTPUT_DIR):
+        if candidate.exists():
+            return candidate.resolve()
+    return portable_default
 
 
 def _normalize_search_keyword(text: str) -> str:
@@ -193,6 +206,8 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    if args.output_dir == str(LEGACY_DEFAULT_OUTPUT_DIR) and not Path(args.output_dir).exists():
+        args.output_dir = str(resolve_default_output_dir())
     output_root = Path(args.output_dir)
     search_keyword = _normalize_search_keyword(args.seed_keyword)
     if not search_keyword:
