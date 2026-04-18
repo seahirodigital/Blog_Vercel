@@ -1,7 +1,7 @@
 # プロンプト運用リファレンス
 
 更新日: 2026-04-07
-対象リポジトリ: `C:\Users\HCY\OneDrive\開発\Blog_Vercel`
+対象リポジトリ: `%USERPROFILE%\OneDrive\開発\Blog_Vercel`
 
 ## 1. このファイルの役割
 
@@ -23,16 +23,16 @@
 - 過去の失敗ログ
 - 構成再編のメモ
 
-それらは `C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\0_common\readme.md` と `C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\SEO_記事量産ワークフロー運用版_20260407.md` に分けて管理する。
+それらは `%USERPROFILE%\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\0_common\readme.md` と `%USERPROFILE%\OneDrive\開発\Blog_Vercel\ryosan\SEO_記事量産ワークフロー運用版_20260407.md` に分けて管理する。
 
 ## 2. 使うプロンプト
 
 | フェーズ | 使うファイル | 役割 |
 | --- | --- | --- |
-| 共通 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\0_common\promptreference.md` | 母艦記事と個別記事の本文ルール、禁止事項、表現ルールを定義する |
-| 母艦 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\2_base_article\prompts\031-1-best-outline-prompt.md` | 母艦記事の見出し整理と論点設計の補助に使う |
-| 母艦 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\2_base_article\prompts\031-2-best-article-enhancer-prompt.md` | 参照記事を壊さずに母艦記事へ不足分を追加するために使う |
-| 個別 | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\3_variant_article\prompts\031-4-kobetsu-writer-prompt.md` | 母艦記事を土台に個別記事を書くときに使う |
+| 共通 | `%USERPROFILE%\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\0_common\promptreference.md` | 母艦記事と個別記事の本文ルール、禁止事項、表現ルールを定義する |
+| 母艦 | `%USERPROFILE%\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\2_base_article\prompts\031-1-best-outline-prompt.md` | 母艦記事の見出し整理と論点設計の補助に使う |
+| 母艦 | `%USERPROFILE%\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\2_base_article\prompts\031-2-best-article-enhancer-prompt.md` | 参照記事を壊さずに母艦記事へ不足分を追加するために使う |
+| 個別 | `%USERPROFILE%\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\3_variant_article\prompts\031-4-kobetsu-writer-prompt.md` | 母艦記事を土台に個別記事を書くときに使う |
 
 ## 3. 共通執筆原則
 

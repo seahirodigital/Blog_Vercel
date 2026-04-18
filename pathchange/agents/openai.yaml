@@ -1,0 +1,4 @@
+interface:
+  display_name: "Path Change"
+  short_description: "Portable path replacement workflow for projects"
+  default_prompt: "Use $pathchange to audit and replace machine-specific paths in this project safely."

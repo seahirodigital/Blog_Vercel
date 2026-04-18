@@ -1,4 +1,4 @@
-﻿# Note下書き自動投稿の技術リファレンス (v6 — OGP展開統合版)
+# Note下書き自動投稿の技術リファレンス (v6 — OGP展開統合版)
 
 ## 0. 2026-04 の note トップ画像改善ログ
 
@@ -17,11 +17,11 @@
 
 ### 最終解決案
 
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\amazon_gazo_get.py` が Amazon Creators API で通常画像を取得する。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\amazon_gazo_get.py` が Amazon Creators API で通常画像を取得する。
 - 同じスクリプトが Apify actor `kawsar/amazon-product-details-scrapper` で hiRes を試し、失敗時だけ Amazon HTML を fallback で読む。
-- 取得した元画像は `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\raw` に残す。
+- 取得した元画像は `%USERPROFILE%\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\raw` に残す。
 - その元画像から `1600x836`、白背景固定、`contain`、中央配置の `prepared` 画像を生成する。
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py` は `prepared -> hires -> api` の順で選び、note の通常アップロード導線へ直接入れる。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py` は `prepared -> hires -> api` の順で選び、note の通常アップロード導線へ直接入れる。
 - これが 2026-04-09 時点の本番経路で、`direct_prepared` が正常系になっている。
 
 ### 今回の失敗ノウハウ要約
@@ -35,24 +35,24 @@
 
 ### debug / 切り分け用
 
-- 画像単体の切り分け検証は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\note_image_draft_test.py`
-- 詳細メモは `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\gazoup_reference.md`
-- スクリーンショットや HTML などの成果物は `NOTE_TOP_IMAGE_DEBUG=1` を入れたときだけ `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts\` に保存する
-- 以前あった `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\apify-amazon-probe.yml` は debug 専用で本番依存が無かったため削除した
+- 画像単体の切り分け検証は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\note_image_draft_test.py`
+- 詳細メモは `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\gazoup_reference.md`
+- スクリーンショットや HTML などの成果物は `NOTE_TOP_IMAGE_DEBUG=1` を入れたときだけ `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts\` に保存する
+- 以前あった `%USERPROFILE%\OneDrive\開発\Blog_Vercel\.github\workflows\apify-amazon-probe.yml` は debug 専用で本番依存が無かったため削除した
 
 ### 2026-04-09 時点の成功実績
 
 - GitHub Actions 成功 run は `https://github.com/seahirodigital/Blog_Vercel/actions/runs/24174122466`
 - note 下書き URL は `https://editor.note.com/notes/n941b2432f659/edit/`
 - artifact `top_image_result.json` の実測結果は `image_flow=direct_prepared`
-- `selected_image_kind=prepared` で、`C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\prepared\YYYYMMDD_ASIN_note_hero.jpg` 系の整形済み画像が note ヘッダーへ通常アップロードされている
+- `selected_image_kind=prepared` で、`%USERPROFILE%\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\prepared\YYYYMMDD_ASIN_note_hero.jpg` 系の整形済み画像が note ヘッダーへ通常アップロードされている
 - 同じ artifact では `hires_image_url=https://m.media-amazon.com/images/I/51QPhONLrhL._AC_SL1280_.jpg` も確認できており、hiRes 自体の取得と note 添付の両方が通った
 - 後続 run `https://github.com/seahirodigital/Blog_Vercel/actions/runs/24175081881` では、artifact 常時保存を外した状態でも成功し、背景白固定の整形画像で `125秒` で完走した
 
 ### 最終的な運用メモ
 
 - README には現在仕様だけを書く。
-- Adobe Express を使った時代の理由、やめた理由、captcha 問題、artifact での切り分け、成功 run の実測はこの `C:\Users\HCY\OneDrive\開発\Blog_Vercel\techrefere.md` に集約する。
+- Adobe Express を使った時代の理由、やめた理由、captcha 問題、artifact での切り分け、成功 run の実測はこの `%USERPROFILE%\OneDrive\開発\Blog_Vercel\techrefere.md` に集約する。
 
 ## 1. 完成した機能一覧
 
@@ -608,16 +608,16 @@ GitHub Actions (および必要ならローカルの `.env`) に以下の Secret
 ## noteトップ画像・Adobe Express 技術メモ
 
 ### 現在の本番導線
-- 本番スクリプトは `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py`
-- Amazon画像取得は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\amazon_gazo_get.py`
-- Adobe Express のログイン state 保存補助は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\save_adobe_express_storage_state.py`
-- debug 切り分け用スクリプトと成果物は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\`
+- 本番スクリプトは `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py`
+- Amazon画像取得は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\amazon_gazo_get.py`
+- Adobe Express のログイン state 保存補助は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\save_adobe_express_storage_state.py`
+- debug 切り分け用スクリプトと成果物は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\`
 
 ### Amazon画像取得で確定した知見
 - Creators API の `Images.Primary.Large` は、実測では 500px 級で止まるケースがある
 - 高画質画像は商品ページ側の `hiRes` / `data-old-hires` / `landingImage` 系から取れる場合がある
 - 現在は `amazon_gazo_get.py` で、通常版を必ず保存し、取れた場合のみ `_hires` 付き画像を追加保存する
-- 保存先は `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\ダウンロード_トップ画像_vercel_blog`
+- 保存先は `%USERPROFILE%\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\ダウンロード_トップ画像_vercel_blog`
 
 ### note 側の商品特定ルール
 - 記事本文の先頭から最初の `▼` より前に URL がある場合は、その一番上の URL を正しい Amazon リンクとして扱い ASIN を抽出する
@@ -637,7 +637,7 @@ GitHub Actions (および必要ならローカルの `.env`) に以下の Secret
 - 右パネルの `ファイル形式` / `サイズ` は調整せず、そのまま note へ返す
 
 ### debug 出力先
-- note トップ画像まわりの成果物は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts\`
+- note トップ画像まわりの成果物は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts\`
 - 代表ファイル:
 - `top_image_result.json`
 - `after_top_image_draft_save.html`
@@ -654,7 +654,7 @@ GitHub Actions (および必要ならローカルの `.env`) に以下の Secret
 今回の Pixel 10a 記事で、note 下書き投稿のトップ画像処理は複数の独立した問題が連続して表面化した。
 
 1. 最初の失敗は Amazon Secret 未注入だった。  
-   `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml` に `AMAZON_CLIENT_ID` と `AMAZON_CLIENT_SECRET` が無く、`amazon_gazo_get.py` が `環境変数 AMAZON_CLIENT_ID が未設定` で停止した。  
+   `%USERPROFILE%\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml` に `AMAZON_CLIENT_ID` と `AMAZON_CLIENT_SECRET` が無く、`amazon_gazo_get.py` が `環境変数 AMAZON_CLIENT_ID が未設定` で停止した。  
    修正 commit: `770e4bb`
 
 2. その次は note の通常アップロード導線が古い文言依存だった。  
@@ -662,7 +662,7 @@ GitHub Actions (および必要ならローカルの `.env`) に以下の Secret
    修正 commit: `7e6153e`
 
 3. さらに Actions とローカルで browser state が揃っていなかった。  
-   ローカルは `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\adobe_express_storage_state.json` を読み込んでいたが、Actions は未読込だった。  
+   ローカルは `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\adobe_express_storage_state.json` を読み込んでいたが、Actions は未読込だった。  
    これを `ADOBE_EXPRESS_STORAGE_STATE` Secret と artifact 保存付きで揃えた。  
    修正 commit: `652d6a5`
 
@@ -675,7 +675,7 @@ GitHub Actions (および必要ならローカルの `.env`) に以下の Secret
    修正 commit: `ada05c2`
 
 6. 最後に残っていた本丸は、Amazon 画像ファイルを Actions 上で早すぎるタイミングで消していたことだった。  
-   `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\amazon_gazo_get.py` が OneDrive アップロード直後に JPEG を削除しており、その後段の Playwright が存在しない画像を note に渡そうとしていた。  
+   `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\amazon_gazo_get.py` が OneDrive アップロード直後に JPEG を削除しており、その後段の Playwright が存在しない画像を note に渡そうとしていた。  
    修正 commit: `7564857`
 
 ### 今回成功したノウハウ
@@ -683,7 +683,7 @@ GitHub Actions (および必要ならローカルの `.env`) に以下の Secret
 - `note-draft.yml` には Amazon / note / Adobe の Secret をすべて明示的に `env` で渡す必要がある。Repository Secret に登録しただけでは Python から見えない。
 - `ADOBE_EXPRESS_STORAGE_STATE` はファイルパスではなく JSON 本文として Secret に入れ、実行時に一時 `storage_state` ファイルへ変換するのが安全。
 - GitHub Actions とローカルの差分追跡には artifact 保存が必須。  
-  `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml` で `if: always()` の `actions/upload-artifact@v4` を入れておくと、失敗時の DOM と screenshot を後追いできる。
+  `%USERPROFILE%\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml` で `if: always()` の `actions/upload-artifact@v4` を入れておくと、失敗時の DOM と screenshot を後追いできる。
 - note の通常アップロードは file chooser が遅延発火することがある。  
   1回目クリック直後の `input[type='file']` ポーリング、導線消失時のトップ画像メニュー再オープン、追加 artifact 保存が有効だった。
 - Amazon 画像を note へ直接アップロードする経路では、OneDrive 連携後でもローカル画像は削除してはいけない。  
@@ -696,7 +696,7 @@ GitHub Actions (および必要ならローカルの `.env`) に以下の Secret
 - 成功時の note URL:
   `https://editor.note.com/notes/n8a945789c39b/edit/`
 - ローカルへダウンロードした artifact:
-  `C:\Users\HCY\OneDrive\開発\Blog_Vercel\tmp\run_24167942186\note-top-image-artifacts-24167942186\top_image_result.json`
+  `%USERPROFILE%\OneDrive\開発\Blog_Vercel\tmp\run_24167942186\note-top-image-artifacts-24167942186\top_image_result.json`
 
 この成功 run では、トップ画像の保存自体は完了している。
 
@@ -717,7 +717,7 @@ GitHub Actions (および必要ならローカルの `.env`) に以下の Secret
 同じ `B0F535RF9Z` をローカルで `amazon_gazo_get.py` に直接渡すと、hiRes は取得できた。
 
 - ローカル検証出力先:
-  `C:\Users\HCY\OneDrive\開発\Blog_Vercel\tmp\local_hires_probe`
+  `%USERPROFILE%\OneDrive\開発\Blog_Vercel\tmp\local_hires_probe`
 - ローカル実測結果:
   - `api_image_url`:
     `https://m.media-amazon.com/images/I/31gI-U4GtcL._SL500_.jpg`
@@ -730,10 +730,10 @@ GitHub Actions (および必要ならローカルの `.env`) に以下の Secret
 #### 2. 同一 Pixel 10a 記事をローカルで実行した結果
 
 記事:
-`C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\20260408_0200_【待望】Google Pixel 10a国内発表キタァーー！Pixel 9aから何が変わった？わかりやすくスペック仕様を.md`
+`%USERPROFILE%\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\20260408_0200_【待望】Google Pixel 10a国内発表キタァーー！Pixel 9aから何が変わった？わかりやすくスペック仕様を.md`
 
 ローカル実行後の artifact:
-`C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts\top_image_result.json`
+`%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts\top_image_result.json`
 
 ローカル実測結果:
 
@@ -769,7 +769,7 @@ GitHub Actions (および必要ならローカルの `.env`) に以下の Secret
 
 ### 2026-04-09 追加検証: Adobe 経路の修正後
 
-`C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py`
+`%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py`
 に以下を追加した。
 
 - Adobe Express へ入った直後に、サイドバーを開く前から shadow DOM 内の `input[type='file']` を探索する
@@ -785,10 +785,10 @@ GitHub Actions (および必要ならローカルの `.env`) に以下の Secret
 #### ローカル再実行結果
 
 記事:
-`C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\20260408_0200_【待望】Google Pixel 10a国内発表キタァーー！Pixel 9aから何が変わった？わかりやすくスペック仕様を.md`
+`%USERPROFILE%\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\20260408_0200_【待望】Google Pixel 10a国内発表キタァーー！Pixel 9aから何が変わった？わかりやすくスペック仕様を.md`
 
 実行後の artifact:
-`C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts\top_image_result.json`
+`%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts\top_image_result.json`
 
 結果:
 
@@ -808,7 +808,7 @@ GitHub Actions (および必要ならローカルの `.env`) に以下の Secret
 
 #### ローカル hiRes probe の結果
 
-`C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts\amazon_hires_probe.json`
+`%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\debug\note_gazo_test\artifacts\amazon_hires_probe.json`
 
 ```json
 {
@@ -839,10 +839,10 @@ push:
 run 自体は成功したが、結果は引き続き通常版画像だった。
 
 artifact:
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\tmp\run_24170695007\note-top-image-artifacts-24170695007\top_image_result.json`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\tmp\run_24170695007\note-top-image-artifacts-24170695007\amazon_hires_probe.json`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\tmp\run_24170695007\note-top-image-artifacts-24170695007\amazon_detail_requests.html`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\tmp\run_24170695007\note-top-image-artifacts-24170695007\amazon_detail_browser.html`
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\tmp\run_24170695007\note-top-image-artifacts-24170695007\top_image_result.json`
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\tmp\run_24170695007\note-top-image-artifacts-24170695007\amazon_hires_probe.json`
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\tmp\run_24170695007\note-top-image-artifacts-24170695007\amazon_detail_requests.html`
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\tmp\run_24170695007\note-top-image-artifacts-24170695007\amazon_detail_browser.html`
 
 `amazon_hires_probe.json` は次の通りだった。
 
@@ -881,17 +881,17 @@ artifact:
 
 #### 今起きていること
 
-- Amazon hiRes 画像の取得は、GitHub Actions から Amazon 詳細ページへ直接アクセスすると captcha に捕まるため、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\amazon_gazo_get.py` で **Apify fallback** に切り替えた
+- Amazon hiRes 画像の取得は、GitHub Actions から Amazon 詳細ページへ直接アクセスすると captcha に捕まるため、`%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\amazon_gazo_get.py` で **Apify fallback** に切り替えた
 - この切替により、Actions 上でも `https://m.media-amazon.com/images/I/51QPhONLrhL._AC_SL1280_.jpg` のような hiRes URL 自体は取得できる
-- しかし、hiRes を `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py` の Adobe Express 経由で note トップ画像へ挿入すると、**トップ画像が真っ白で保存されるケース** が発生している
+- しかし、hiRes を `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py` の Adobe Express 経由で note トップ画像へ挿入すると、**トップ画像が真っ白で保存されるケース** が発生している
 
 #### 白画像問題の現在の見立て
 
 artifact:
 
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\tmp\run_24171624385\adobe_after_upload.png`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\tmp\run_24171624385\adobe_insert_confirmed.png`
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\tmp\run_24171624385\after_top_image_draft_save.png`
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\tmp\run_24171624385\adobe_after_upload.png`
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\tmp\run_24171624385\adobe_insert_confirmed.png`
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\tmp\run_24171624385\after_top_image_draft_save.png`
 
 上記を確認すると、白画像は note 側で壊れたのではなく、**Adobe 側の作業面が白いまま保存・挿入されている** 可能性が高い。
 
@@ -903,7 +903,7 @@ artifact:
 
 #### ここまでの試行錯誤の要点
 
-- Secrets 未注入問題を解消し、`AMAZON_CLIENT_ID` / `AMAZON_CLIENT_SECRET` を `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml` へ追加
+- Secrets 未注入問題を解消し、`AMAZON_CLIENT_ID` / `AMAZON_CLIENT_SECRET` を `%USERPROFILE%\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml` へ追加
 - `ADOBE_EXPRESS_STORAGE_STATE` を GitHub Actions に渡し、ローカルと browser state を揃えた
 - note 側の `画像をアップロード` 導線のセレクタを強化し、artifact 回収も追加した
 - Amazon hiRes 取得は、Amazon 直接 scraping を諦め、**Apify actor 経由**へ切り替えた
@@ -926,14 +926,14 @@ Adobe Express 経由は複雑で、GitHub Actions 上では白画像問題の切
 
 保存先は固定で次を使う。
 
-`C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images`
+`%USERPROFILE%\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images`
 
 最低限、以下の 2 種を必ず残す。
 
 - 元画像:
-  `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\raw\YYYYMMDD_ASIN_hires.jpg`
+  `%USERPROFILE%\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\raw\YYYYMMDD_ASIN_hires.jpg`
 - 整形済み画像:
-  `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\prepared\YYYYMMDD_ASIN_note_hero.jpg`
+  `%USERPROFILE%\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\prepared\YYYYMMDD_ASIN_note_hero.jpg`
 
 理由:
 
@@ -1054,9 +1054,9 @@ artifact:
 
 1. note 本文の先頭 URL から ASIN を解決する  
 2. Apify で hiRes URL を取得する  
-3. `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\raw` に元画像を保存する  
+3. `%USERPROFILE%\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\raw` に元画像を保存する  
 4. Pillow で `1600x836` の note HERO 用 `prepared` 画像を生成する  
-5. `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\prepared` に保存する  
+5. `%USERPROFILE%\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\Amazon_images\prepared` に保存する  
 6. note の `画像をアップロード` 導線から `prepared` を通常アップロードする  
 7. note 側の crop 保存と最後の `下書き保存` まで完了させる
 

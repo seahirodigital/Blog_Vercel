@@ -169,7 +169,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--show-browser", action="store_true", help="Playwright を headful で開く")
     parser.add_argument(
         "--output-dir",
-        default=r"C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\output",
+        default=str(resolve_default_output_dir()),
         help="出力ディレクトリ",
     )
     parser.add_argument(

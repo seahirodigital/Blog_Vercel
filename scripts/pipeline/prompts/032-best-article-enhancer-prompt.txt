@@ -188,4 +188,4 @@
 - 記事冒頭の結論部分で、主要な疑問への答えを先出しする
 - その後の本文では、各サジェスト論点を小見出しに分解して詳述する
 - 量産記事ではこの母艦から対象サジェストの答えを抽出する前提なので、各論点のまとまりを壊さないこと
-- 中間生成物は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\output\<seed>\memo\` に保存される前提で扱うこと
+- 中間生成物は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\ryosan\seo_factory\output\<seed>\memo\` に保存される前提で扱うこと

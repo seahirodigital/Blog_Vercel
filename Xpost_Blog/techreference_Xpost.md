@@ -2,9 +2,9 @@
 
 ## 0. 2026-04-13 Xpost note Secret 名切り替えメモ
 ### 変更内容
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml` の note 認証系 Secret は Xpost 専用名へ切り替えた。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml` の note 認証系 Secret は Xpost 専用名へ切り替えた。
 - 使用する Secret 名は `NOTE_EMAIL_XPOST_TECH`、`NOTE_PASSWORD_XPOST_TECH`、`NOTE_STORAGE_STATE_XPOST_TECH` とする。
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py` は `NOTE_STORAGE_SECRET_NAME` 環境変数で、どの GitHub Secret に Cookie JSON を自動更新するか切り替えられるようにした。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py` は `NOTE_STORAGE_SECRET_NAME` 環境変数で、どの GitHub Secret に Cookie JSON を自動更新するか切り替えられるようにした。
 
 ### 運用ルール
 - Xpost 側の note 下書きでは、既存の `NOTE_EMAIL` / `NOTE_PASSWORD` / `NOTE_STORAGE_STATE` を使わず、Xpost 専用 Secret だけを見る。
@@ -13,25 +13,25 @@
 
 ## 0. 2026-04-13 Xpost UI / note 認証メモ
 ### 実装
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` のヘッダーは `note下書き` を青塗り白文字、`パイプライン` と `保存` を青枠白地青文字へそろえ、`保存` を最右端へ移した。
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` のサイド下部には `アフィリンク` の下へ `ブログエディター` と `Info-Viewer` の戻りリンクを追加した。戻り先は `/index.html` と `/info_viewer/index.html`。
-- Xpost の note 下書きは `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\note-draft.js` を本編ブログと同じ経路で使い、`NOTE_DRAFT_URL_<hash>` を `localStorage` キー `xpostBlog.noteDraftUrls` にキャッシュするようにした。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` のヘッダーは `note下書き` を青塗り白文字、`パイプライン` と `保存` を青枠白地青文字へそろえ、`保存` を最右端へ移した。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` のサイド下部には `アフィリンク` の下へ `ブログエディター` と `Info-Viewer` の戻りリンクを追加した。戻り先は `/index.html` と `/info_viewer/index.html`。
+- Xpost の note 下書きは `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\note-draft.js` を本編ブログと同じ経路で使い、`NOTE_DRAFT_URL_<hash>` を `localStorage` キー `xpostBlog.noteDraftUrls` にキャッシュするようにした。
 
 ### 運用ルール
 - note のログイン情報はリポジトリ内ファイルへ書かない。登録先は GitHub Secrets の `NOTE_EMAIL`、`NOTE_PASSWORD`、`NOTE_STORAGE_STATE`。
-- `NOTE_STORAGE_STATE` は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py` の `--save-cookies` で取得する note Cookie JSON を使う。
+- `NOTE_STORAGE_STATE` は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py` の `--save-cookies` で取得する note Cookie JSON を使う。
 - Xpost 側の note 下書きでも Amazon トップ画像は使わず、`noTopImage: true` を維持する。本編と同じ workflow を通すが、技術記事では OGP 展開だけを残す。
 
 ## 1. 文書の目的
-本書は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\Xpost_Blog` の実装中に得た技術メモ、成功、失敗、試行中の判断を蓄積するための記録である。
+本書は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\Xpost_Blog` の実装中に得た技術メモ、成功、失敗、試行中の判断を蓄積するための記録である。
 
-仕様の正本は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\Xpost_Blog\仕様書.md` とし、本書は裏側の判断理由を残す。
+仕様の正本は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\Xpost_Blog\仕様書.md` とし、本書は裏側の判断理由を残す。
 
 ## 2. 2026-04-13 実装着手メモ
 ### 成功
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\info_viewer\runner.py` の queue 設計は Xpost にも転用しやすく、`state -> processable -> deferred` の流れをそのまま使える見込みが高い。
-- OneDrive CRUD は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\articles.js` を保存先差し替えで流用できる。
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\info_viewer\仕様書.md` の Gemini tech 運用ルールを参照することで、Xpost でも `GEMINI_TOKEN_tech` 専用運用に揃えやすい。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\info_viewer\runner.py` の queue 設計は Xpost にも転用しやすく、`state -> processable -> deferred` の流れをそのまま使える見込みが高い。
+- OneDrive CRUD は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\articles.js` を保存先差し替えで流用できる。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\info_viewer\仕様書.md` の Gemini tech 運用ルールを参照することで、Xpost でも `GEMINI_TOKEN_tech` 専用運用に揃えやすい。
 
 ### 修正した認識
 - 将来差し替え先として最初に口頭で `Antigravity` と書いてしまったが、これは誤り。
@@ -39,49 +39,49 @@
 - 今後の文書と実装では `SocialData -> Apify` の順で表記を統一する。
 
 ### 試行中
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog\index.html` は本編の完全コピーをそのまま保守するより、主要操作だけ残した専用 UI を組む方が安全かを比較中。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\public\xpost_blog\index.html` は本編の完全コピーをそのまま保守するより、主要操作だけ残した専用 UI を組む方が安全かを比較中。
 - phase 1 では「一覧 / 元投稿 / エディタ / プレビュー / pipeline 起動」の最短導線を優先する。
 
 ## 3. 実装方針メモ
 ### queue
-- Discord 取得は `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\X投稿\state\xpost_pipeline_state.json` に cursor と post 状態を保存する。
+- Discord 取得は `%USERPROFILE%\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\X投稿\state\xpost_pipeline_state.json` に cursor と post 状態を保存する。
 - 2026-04-14 時点の本番運用では1時間巡回で新規 URL を `pending` 化する。
 - Gemini の quota / 一時障害時は TOKEN 単位で6時間クールダウンし、全TOKENが使えなければ投稿を `deferred` と `retryPriorityAt` 付きで次回 queue 処理の先頭へ回す。
 
 ### 取得層
 - phase 1 は `SocialData API` を使う。
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\socialdata_fetcher.py` は X URL -> tweet/article JSON -> Markdown ソースへの変換だけに責務を絞る。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\socialdata_fetcher.py` は X URL -> tweet/article JSON -> Markdown ソースへの変換だけに責務を絞る。
 - 将来 `Apify` へ切り替えるときは、この取得層の差し替えで済むようにする。
 
 ### Gemini
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\info_viewer\仕様書.md` の `12.2 Gemini キー分離と quota 時の挙動` を参照。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\info_viewer\仕様書.md` の `12.2 Gemini キー分離と quota 時の挙動` を参照。
 - 基本は `GEMINI_TOKEN_tech` を使う。
 - ただし検証を止めないため、`GEMINI_TOKEN_tech` の quota 到達時だけ `GEMINI_TOKEN_INVESTSUB` へ fallback する。
 - 本編の `GEMINI_API_KEY` や `GEMINI_TOKEN_SUB3` には逃がさない。
 
 ## 4. 注意点
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\Xpost_Blog\Discord_connect\reference\xpost_api_reference.md` には機密情報が混ざる可能性があるため、記事やログへ転記しない。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\Xpost_Blog\Discord_connect\reference\xpost_api_reference.md` には機密情報が混ざる可能性があるため、記事やログへ転記しない。
 - OneDrive 配下では `.pyc` の扱いが不安定なことがあるため、構文確認は AST parse を使う。
 
 ## 5. 2026-04-13 仕上げメモ
 ### 成功
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog-articles.js` の記事一覧は `*_ブログ_*.md` だけを返すようにした。これで `C:\Users\HCY\OneDrive\Vercel_Blog\X投稿` 配下の元投稿ソース Markdown が一覧に混ざらない。
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog\index.html` は frontmatter を保持しつつ本文だけ編集する方式にした。保存時に YAML を壊しにくい。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\xpost-blog-articles.js` の記事一覧は `*_ブログ_*.md` だけを返すようにした。これで `%USERPROFILE%\OneDrive\Vercel_Blog\X投稿` 配下の元投稿ソース Markdown が一覧に混ざらない。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\public\xpost_blog\index.html` は frontmatter を保持しつつ本文だけ編集する方式にした。保存時に YAML を壊しにくい。
 
 ### 判断
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\Xpost_Blog\仕様書.md` の `GEMINI_TOKEN_INVESTSUB` 記述は、当初いったん採用しない方針に寄せていた。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\Xpost_Blog\仕様書.md` の `GEMINI_TOKEN_INVESTSUB` 記述は、当初いったん採用しない方針に寄せていた。
 - その後、検証中に pipeline 全体が止まる不都合を避けるため、最終的に `GEMINI_TOKEN_tech -> GEMINI_TOKEN_INVESTSUB` の順で fallback する実装へ修正した。
 - それでも fallback は 1 段だけに限定し、本編の Gemini キー群には広げない。
 
 ### 気づき
 - PowerShell の表示だけで文字化けして見える箇所があったが、`python -X utf8` で実ファイルを確認すると UTF-8 本体は正常だった。Windows では表示と実体を分けて確認する方が安全。
-- GitHub Actions で fallback を有効にするには、コード変更だけでなく `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` に `GEMINI_TOKEN_INVESTSUB` の受け渡しも必要だった。
+- GitHub Actions で fallback を有効にするには、コード変更だけでなく `%USERPROFILE%\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` に `GEMINI_TOKEN_INVESTSUB` の受け渡しも必要だった。
 - `xpost-blog-preview` branch の Vercel preview では Hobby 上限の「Serverless Functions 12 本」に引っかかった。
-- 検証のため branch 上だけで `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\amazon-asin.js` と `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\trigger.js` を `C:\Users\HCY\OneDrive\開発\Blog_Vercel\vercel_preview_disabled_api\` へ退避し、Xpost 関連 API を優先して preview を通す方針に切り替えた。
+- 検証のため branch 上だけで `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\amazon-asin.js` と `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\trigger.js` を `%USERPROFILE%\OneDrive\開発\Blog_Vercel\vercel_preview_disabled_api\` へ退避し、Xpost 関連 API を優先して preview を通す方針に切り替えた。
 
 ## 6. 2026-04-13 GitHub Actions 再検証メモ
 ### 成功
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` の再実行 run `24330603939` では、`DISCORD_BOT_TOKEN` と `SOCIALDATA_API_KEY` の不足は解消した。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` の再実行 run `24330603939` では、`DISCORD_BOT_TOKEN` と `SOCIALDATA_API_KEY` の不足は解消した。
 - 同 run で Discord 6 件の同期、SocialData からの元投稿取得、OneDrive への元投稿ソース保存、manifest 再構築までは成功した。
 - `https://blog-vercel-git-xpost-blog-preview-seahirodigitals-projects.vercel.app/api/xpost-blog-index` でも `generatedAt: 2026-04-13T07:15:14.854875` の manifest を確認でき、少なくとも preview API から最新 manifest を読める状態になった。
 
@@ -92,19 +92,19 @@
 ### 試行錯誤
 - まず quota や token 切り替え不良を疑ったが、run log では `GEMINI_TOKEN_tech` 自体は読めていたため、認証や secret ではなく SDK パラメータ形状の問題だと切り分けた。
 - ローカルで `google.genai.types.GenerateContentConfig.model_fields` を確認すると、`thinking_level` は直下ではなく `thinking_config` 配下で受ける構造だった。
-- そのため `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\gemini_runtime.py` を修正し、`thinking_level` を `thinking_config.thinking_level` に詰め直す方針へ切り替えた。
+- そのため `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\gemini_runtime.py` を修正し、`thinking_level` を `thinking_config.thinking_level` に詰め直す方針へ切り替えた。
 
 ## 7. 2026-04-13 Gemini thinking_level 無効化メモ
 ### 失敗
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\gemini_runtime.py` で `thinking_config.thinking_level` へ正しくネストしても、`gemini-2.5-flash` の `models.generate_content` では `Thinking level is not supported for this model.` が返った。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\gemini_runtime.py` で `thinking_config.thinking_level` へ正しくネストしても、`gemini-2.5-flash` の `models.generate_content` では `Thinking level is not supported for this model.` が返った。
 - そのため Xpost_blog では、パラメータ形状ではなく `thinking_level` 指定そのものを外す必要があると判断した。
 
 ### 判断
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\modules\blog_pipeline.py` の本編多段生成は触らない。
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\gemini_formatter.py` だけ `thinking_level` を外し、ブログ本編と同じく素直な Gemini generation config として `temperature=0.5` を使う。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\modules\blog_pipeline.py` の本編多段生成は触らない。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\gemini_formatter.py` だけ `thinking_level` を外し、ブログ本編と同じく素直な Gemini generation config として `temperature=0.5` を使う。
 
 ### 成功
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\gemini_formatter.py` から `thinking_level` を外した後、GitHub Actions run `24331356968` は `処理成功件数: 1` で完了した。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\gemini_formatter.py` から `thinking_level` を外した後、GitHub Actions run `24331356968` は `処理成功件数: 1` で完了した。
 - 同 run の manifest 更新時刻は `2026-04-13T07:37:29.427484` で、OneDrive への記事保存処理まで進んだ。
 
 ### 追加の注意
@@ -114,46 +114,46 @@
 
 ## 8. 2026-04-13 Vercel Functions 上限と Xpost API 統合方針
 ### 背景
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api` 配下の JavaScript ファイルは、Vercel では基本的に 1 ファイル 1 Serverless Function として扱われる。
-- Vercel Hobby plan では deployment あたりの Function 数に上限があるため、Xpost 用 API を `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog-articles.js`、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog-index.js`、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\trigger-xpost-blog.js` のように 3 本足すと上限に当たりやすい。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api` 配下の JavaScript ファイルは、Vercel では基本的に 1 ファイル 1 Serverless Function として扱われる。
+- Vercel Hobby plan では deployment あたりの Function 数に上限があるため、Xpost 用 API を `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\xpost-blog-articles.js`、`%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\xpost-blog-index.js`、`%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\trigger-xpost-blog.js` のように 3 本足すと上限に当たりやすい。
 
 ### 採用する方針
-- Xpost 用 API は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` の 1 本に統合する。
-- ここでいう「3つに分岐」とは、Vercel Function を 3 本作るという意味ではない。1 本の `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` の中で、URL query の `resource` 値を見て処理を切り替えるという意味である。
+- Xpost 用 API は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` の 1 本に統合する。
+- ここでいう「3つに分岐」とは、Vercel Function を 3 本作るという意味ではない。1 本の `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` の中で、URL query の `resource` 値を見て処理を切り替えるという意味である。
 - 例: `https://blog-vercel-dun.vercel.app/api/xpost-blog?resource=articles` は記事一覧・記事本文・保存処理を担当する。
 - 例: `https://blog-vercel-dun.vercel.app/api/xpost-blog?resource=index` は manifest と元投稿ソース取得を担当する。
 - 例: `https://blog-vercel-dun.vercel.app/api/xpost-blog?resource=trigger` は GitHub Actions の Xpost pipeline 起動を担当する。
 
 ### 理由
-- 外から見ると API の入口は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` 1 本だけなので、Vercel Functions 数の増加は 1 本に抑えられる。
+- 外から見ると API の入口は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` 1 本だけなので、Vercel Functions 数の増加は 1 本に抑えられる。
 - 中では `resource=articles`、`resource=index`、`resource=trigger` で処理責務を分けるため、既存の `xpost-blog-articles` / `xpost-blog-index` / `trigger-xpost-blog` の考え方は維持できる。
 
 ## 9. 2026-04-13 本番 URL 用 UI と統合 API 実装メモ
 ### 成功
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` を追加し、`resource=articles`、`resource=index`、`resource=trigger` の 3 ルートを 1 本の Vercel Function に統合した。
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` を追加し、`https://blog-vercel-dun.vercel.app/xpost_blog.html` で読める静的ページとして配置する方針にした。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` を追加し、`resource=articles`、`resource=index`、`resource=trigger` の 3 ルートを 1 本の Vercel Function に統合した。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` を追加し、`https://blog-vercel-dun.vercel.app/xpost_blog.html` で読める静的ページとして配置する方針にした。
 - UI は黒背景ではなく白背景基調へ変更した。
-- 「元投稿」の表示切り替えは、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` の記事一覧行右端にある `元投稿` トグルから制御する。
+- 「元投稿」の表示切り替えは、`%USERPROFILE%\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` の記事一覧行右端にある `元投稿` トグルから制御する。
 - エディタは入力に合わせてプレビューを即時更新し、保存は `Ctrl+S` または `Command+S` でも実行できるようにした。
 
 ### 判断
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog-articles.js`、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog-index.js`、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\trigger-xpost-blog.js` は本番 `main` に個別追加しない。
-- 理由は、Vercel Hobby の Function 数上限に近いためである。3 本を個別追加すると制限に当たりやすいが、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` 1 本なら API 増加を 1 Function に抑えられる。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\xpost-blog-articles.js`、`%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\xpost-blog-index.js`、`%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\trigger-xpost-blog.js` は本番 `main` に個別追加しない。
+- 理由は、Vercel Hobby の Function 数上限に近いためである。3 本を個別追加すると制限に当たりやすいが、`%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` 1 本なら API 増加を 1 Function に抑えられる。
 - `OneDrive 元投稿` リンクは UI から削除し、`OneDrive 記事` リンクだけをエディタ側のアイコンとして残す。
 
 ### 画面確認後の修正
 - `https://blog-vercel-dun.vercel.app/xpost_blog.html` のスクリーンショット確認で、記事一覧の上に OneDrive の相対フォルダ名 `20260413_...` が残っていることを確認した。
-- これは「記事カードレイアウト上部にある説明文章は不要」という指定に反するため、`C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` から記事一覧のフォルダラベル表示を削除した。
+- これは「記事カードレイアウト上部にある説明文章は不要」という指定に反するため、`%USERPROFILE%\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` から記事一覧のフォルダラベル表示を削除した。
 - あわせて、初回ロード時に先頭記事を自動選択し、エディタとプレビューまで即時に見えるようにした。
 
 ## 10. 2026-04-13 info_viewer型4ペインUIとtech affiliate / note下書きメモ
 ### 成功
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` は、角丸カード型ではなく `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\info_viewer\index.html` のサイドパネル思想に合わせ、記事一覧 / 元投稿 / エディター / プレビューの4ペイン型へ戻す方針にした。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` は、角丸カード型ではなく `%USERPROFILE%\OneDrive\開発\Blog_Vercel\public\info_viewer\index.html` のサイドパネル思想に合わせ、記事一覧 / 元投稿 / エディター / プレビューの4ペイン型へ戻す方針にした。
 - 「元投稿」トグルは各記事行ではなく、記事一覧ヘッダー右側に固定する。これにより、記事選択と元投稿ペイン表示切り替えの責務を分離できる。
 - Xリンクは削除ボタンに見えないよう、斜め線2本ではなく「X」文字入りの正方形アイコンへ変更する。
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` に `resource=affiliate` を追加し、Vercel Functionを増やさず tech affiliate の読み書きを統合APIに載せる。
-- tech affiliate の保存先は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\Xpost_Blog\tech_affiliate\affiliate_links.txt` とし、本編の `===MEMO1===` 形式を流用する。
-- note下書きは既存の `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\note-draft.js` と `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml` を流用し、Xpost_blog からは `noTopImage: true` を渡す。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` に `resource=affiliate` を追加し、Vercel Functionを増やさず tech affiliate の読み書きを統合APIに載せる。
+- tech affiliate の保存先は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\Xpost_Blog\tech_affiliate\affiliate_links.txt` とし、本編の `===MEMO1===` 形式を流用する。
+- note下書きは既存の `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\note-draft.js` と `%USERPROFILE%\OneDrive\開発\Blog_Vercel\.github\workflows\note-draft.yml` を流用し、Xpost_blog からは `noTopImage: true` を渡す。
 
 ### 判断
 - note下書きでは OGP 展開は維持する。技術記事では URL カードの見え方が重要なため、`--no-top-image` は Amazonトップ画像の添付だけを止め、OGP処理は止めない。
@@ -161,8 +161,8 @@
 - tech affiliate は Gemini 整形後の記事末尾へ入れる運用でよい。UI上では「アフィ挿入」ボタンで、選択中の MEMO を記事末尾へ追記する。
 
 ### 注意
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py` の既定動作は本編用に残す。`--no-top-image` が明示された場合だけ、Amazonトップ画像をスキップする。
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\affiliate_links.txt` は本編用のため、Xpost_blog側からは直接編集しない。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\05-draft-manager\note_draft_poster.py` の既定動作は本編用に残す。`--no-top-image` が明示された場合だけ、Amazonトップ画像をスキップする。
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\pipeline\prompts\04-affiliate-link-manager\affiliate_links.txt` は本編用のため、Xpost_blog側からは直接編集しない。
 
 ## 11. 2026-04-14 フェーズ4 Apify 置き換え検証メモ
 ### 位置づけ
@@ -192,15 +192,15 @@
   - Apify actor 実行自体が失敗したとき
 
 ### 実装メモ
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\apify_fetcher.py`
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\apify_fetcher.py`
   - `fastdata/twitter-scraper` の `tweetUrls` 入力を使い、1 URL 単位で tweet 本文・件数・author 情報を共通 bundle へ正規化する。
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\source_fetcher.py`
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\source_fetcher.py`
   - `Apify` / `SocialData` の切替と fallback 判定を集約した。
   - `preferred_provider=apify` でも fallback 自体は残し、極力 `Apify` を先に試す構成にした。
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\runner.py`
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\runner.py`
   - 取得元を直結から抽象化へ切り替えた。
   - processing log と OneDrive frontmatter に `source_provider`、`source_provider_detail`、fallback の有無を残すようにした。
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml`
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml`
   - `APIFY_API_KEY`、`XPOST_BLOG_SOURCE_PROVIDER=apify`、`XPOST_BLOG_APIFY_ACTOR=fastdata/twitter-scraper` を渡すようにした。
 
 ### 試行錯誤
@@ -245,7 +245,7 @@
 
 ### 注意
 - SocialData docs には「`3 requests per minute` までは free」と「`positive balance` が必要」が同居しているため、完全残高ゼロ運用を断定はしない。少額残高を置きつつ、課金発生を避ける設計として解釈する方が安全。
-- 本番 workflow は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` で `1時間ごと` と `max_items=0` に寄せる。
+- 本番 workflow は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` で `1時間ごと` と `max_items=0` に寄せる。
 - 今回の設計は「最大取得」ではなく「安定して候補を拾い、記事制作を止めない」ことを優先する。
 
 ### 参考URL
@@ -260,19 +260,19 @@
 
 ### 切り分け結果
 - Discord 取得失敗ではなかった。`processingLogs` では `SocialData success` と `source_saved` が先に記録され、元投稿 Markdown 自体は OneDrive に保存されていた。
-- 問題は `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` が `article.id` から `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js?resource=index&articleId=...` を呼び、API 側が manifest の `articleId` 一致だけで元投稿を探していた点だった。
+- 問題は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` が `article.id` から `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\xpost-blog.js?resource=index&articleId=...` を呼び、API 側が manifest の `articleId` 一致だけで元投稿を探していた点だった。
 - 孤立記事では、記事 frontmatter に `source_file_id` が入っていても、manifest 側の同一投稿レコードに `articleId` が戻っておらず、viewer からは 404 になっていた。
 
 ### 根本原因
 - `2026-04-14T03:46:49Z` の GitHub Actions run `24379895620` で、OneDrive Graph API が `503 Service Unavailable` を返し、`state/xpost_pipeline_state.json` 保存中に pipeline が停止していた。
 - このとき記事ファイル実体だけが先に保存され、`state` と `manifest` の更新が追いつかず、`articleId` が欠けたまま残る条件が実際に発生していた。
-- 加えて `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` の手動保存は記事ファイル更新だけで、manifest/state の再同期は行っていなかった。
+- 加えて `%USERPROFILE%\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` の手動保存は記事ファイル更新だけで、manifest/state の再同期は行っていなかった。
 
 ### 対応
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js`
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\xpost-blog.js`
   - manifest に `articleId` が無い場合でも、記事 frontmatter の `source_file_id` / `post_url` / `normalized_post_url` を使って元投稿を引ける fallback を追加した。
   - これにより、孤立記事でも viewer が元投稿を返せるようにした。
-- `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\onedrive_writer.py`
+- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\onedrive_writer.py`
   - OneDrive 保存時に `429/500/502/503/504` の短い retry を追加した。
   - transient な Graph API エラーで `state` と `manifest` だけ取り残される事故を減らす狙い。
 
@@ -285,18 +285,18 @@
 ### GitHub Actions と Discord 巡回
 | 項目 | 現在の設定 | 実装場所 | 理由 |
 | --- | --- | --- | --- |
-| scheduled run | `7 * * * *` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` | 15分おきは過剰なので、Discord巡回は1時間に1回へ落とす |
-| scheduled run の mode | `full_pipeline` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` | 定期実行では Discord 巡回から始める |
-| 1回あたり処理件数 | `max_items=0` / `XPOST_BLOG_MAX_ITEMS_PER_RUN=0` | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` / `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\runner.py` | `0` を無制限として扱う。実運用は最大でも1日5件程度なので、1件制限は外す |
-| Discord 新規追加0件 | scheduled run では queue 処理自体をしない | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\runner.py` | 新着が無い定期実行で過去queueを燃やし続けないため |
-| Discord 新規追加あり | queue を古い順で処理する | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\state_store.py` | queue が溜まった場合でも、先に入った投稿から救済する |
+| scheduled run | `7 * * * *` | `%USERPROFILE%\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` | 15分おきは過剰なので、Discord巡回は1時間に1回へ落とす |
+| scheduled run の mode | `full_pipeline` | `%USERPROFILE%\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` | 定期実行では Discord 巡回から始める |
+| 1回あたり処理件数 | `max_items=0` / `XPOST_BLOG_MAX_ITEMS_PER_RUN=0` | `%USERPROFILE%\OneDrive\開発\Blog_Vercel\.github\workflows\xpost-blog-queue.yml` / `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\runner.py` | `0` を無制限として扱う。実運用は最大でも1日5件程度なので、1件制限は外す |
+| Discord 新規追加0件 | scheduled run では queue 処理自体をしない | `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\runner.py` | 新着が無い定期実行で過去queueを燃やし続けないため |
+| Discord 新規追加あり | queue を古い順で処理する | `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\xpost_blog\modules\state_store.py` | queue が溜まった場合でも、先に入った投稿から救済する |
 
 ### 手動実行ボタン
 | ボタン | 起動する mode | 動き | 実装場所 |
 | --- | --- | --- | --- |
-| `QUE処理` | `process_queue` | Discord巡回はせず、既存queueだけを処理する。保存済み元ソースがある投稿は SocialData を呼ばず Gemini から再開する | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` / `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` |
-| `最初から実行` | `full_pipeline` | Discord巡回から始め、その後queue処理へ進む。次の1時間を待てない時に使う | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` / `C:\Users\HCY\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` |
-| 更新アイコン | OneDrive記事一覧の再読込 | `Xpost_blog` 見出しの右隣へ移動し、キャッシュ回避つきで `articles` を再取得する | `C:\Users\HCY\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` |
+| `QUE処理` | `process_queue` | Discord巡回はせず、既存queueだけを処理する。保存済み元ソースがある投稿は SocialData を呼ばず Gemini から再開する | `%USERPROFILE%\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` / `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` |
+| `最初から実行` | `full_pipeline` | Discord巡回から始め、その後queue処理へ進む。次の1時間を待てない時に使う | `%USERPROFILE%\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` / `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\xpost-blog.js` |
+| 更新アイコン | OneDrive記事一覧の再読込 | `Xpost_blog` 見出しの右隣へ移動し、キャッシュ回避つきで `articles` を再取得する | `%USERPROFILE%\OneDrive\開発\Blog_Vercel\public\xpost_blog.html` |
 
 ### SocialDataAPI と OneDrive ソース再利用
 | 条件 | SocialDataAPIを呼ぶか | Geminiへ進むか | 理由 |
@@ -320,7 +320,7 @@
 | 対象 | 結果 | 保存先・状態 | 補足 |
 | --- | --- | --- | --- |
 | 検証 run | 実行成功 | GitHub Actions run `24385355631` | `GEMINI_TOKEN_SUB3` を `GEMINI_TOKEN_tech` 枠に一時差し替えた短命ブランチで実行 |
-| 元投稿ソース | 取得できた | `C:\Users\HCY\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\X投稿\20260413_2043674800888119512_今さら聞けない！Claude × Obsidian、これはもう違\` 相当 | SocialData / OneDrive 保存は通っている |
+| 元投稿ソース | 取得できた | `%USERPROFILE%\OneDrive\Obsidian in Onedrive 202602\Vercel_Blog\X投稿\20260413_2043674800888119512_今さら聞けない！Claude × Obsidian、これはもう違\` 相当 | SocialData / OneDrive 保存は通っている |
 | 記事本文 Markdown | 取得できていない | `articleId` 空、`articleWebUrl` 空 | Gemini が `503 UNAVAILABLE` を返したため |
 | 現在の救済策 | 手動 `QUE処理` で再開可能 | 保存済み元ソースを再利用 | SocialDataを再実行せず、Geminiから再処理できる |
 | `GEMINI_TOKEN_SUB3` の残骸 | 本番 workflow には残さない | main にはSUB3専用分岐なし | 検証用の特殊コードを残すと紛らわしいため |
