@@ -63,6 +63,13 @@ def _is_quota_error(error: Exception | str) -> bool:
         "too many requests",
         "exceeded",
         "throttle",
+        "500",
+        "503",
+        "api_error",
+        "internal server error",
+        "unavailable",
+        "high demand",
+        "try again later",
     )
     return any(keyword in text for keyword in keywords)
 
