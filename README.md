@@ -400,6 +400,13 @@ Gemini のキー候補は次の 4 段構えである。
 - `429`
 - `quota exceeded`
 - `rate limit`
+- `500`
+- `503`
+- `api_error`
+- `internal server error`
+- `UNAVAILABLE`
+- `high demand`
+- `try again later`
 
 上記のいずれかを検知したら、同じキーでは待機せず、その場で次の候補キーへ切り替える。
 30秒 / 60秒 / 90秒待機して同一キーを再試行する旧仕様は廃止した。
