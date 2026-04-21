@@ -111,6 +111,107 @@ async function fetchH1Title(token, fileId) {
   }
 }
 
+function firstQueryValue(value, fallback = '') {
+  if (Array.isArray(value)) return value[0] ?? fallback;
+  return value ?? fallback;
+}
+
+function safeNumber(value, fallback = 0, max = 20) {
+  const n = Number.parseInt(firstQueryValue(value, String(fallback)), 10);
+  if (!Number.isFinite(n) || n < 0) return fallback;
+  return Math.min(n, max);
+}
+
+function isMarkdownArticle(item) {
+  return item && item.name && item.name.endsWith('.md');
+}
+
+function toArticle(item, relativePath) {
+  return {
+    id: item.id,
+    name: item.name,
+    path: relativePath,
+    lastModified: item.lastModifiedDateTime,
+    webUrl: item.webUrl || '',
+    size: item.size || 0,
+    h1Title: '',
+  };
+}
+
+function toFolder(item, relativePath, extra = {}) {
+  const path = relativePath ? `${relativePath}/${item.name}` : item.name;
+  return {
+    id: item.id,
+    name: item.name,
+    path,
+    childCount: item.folder?.childCount || 0,
+    loaded: false,
+    ...extra,
+  };
+}
+
+async function fetchGraphChildren(token, initialUrl) {
+  let url = initialUrl;
+  const items = [];
+
+  while (url) {
+    const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+
+    if (!res.ok) {
+      if (res.status === 404) return [];
+      const errBody = await res.text();
+      console.error('List error:', res.status, errBody);
+      throw new Error(`一覧取得失敗: ${res.status}`);
+    }
+
+    const data = await res.json();
+    items.push(...(data.value || []));
+    url = data['@odata.nextLink'] || '';
+  }
+
+  return items;
+}
+
+async function listArticlesShallow(token, folderPath, relativePath = '', options = {}) {
+  const encoded = encodeFolderPath(folderPath);
+  const url = `${GRAPH_API}/me/drive/root:/${encoded}:/children?$select=id,name,lastModifiedDateTime,webUrl,size,folder&$top=200`;
+  const items = await fetchGraphChildren(token, url);
+  return buildShallowListing(token, items, relativePath, options);
+}
+
+async function listArticlesShallowById(token, folderId, relativePath = '', options = {}) {
+  const url = `${GRAPH_API}/me/drive/items/${encodeURIComponent(folderId)}/children?$select=id,name,lastModifiedDateTime,webUrl,size,folder&$top=200`;
+  const items = await fetchGraphChildren(token, url);
+  return buildShallowListing(token, items, relativePath, options);
+}
+
+async function buildShallowListing(token, items, relativePath, options = {}) {
+  const folders = [];
+  const articles = [];
+
+  for (const item of items) {
+    if (item.folder) {
+      folders.push(toFolder(item, relativePath));
+    } else if (isMarkdownArticle(item)) {
+      articles.push(toArticle(item, relativePath));
+    }
+  }
+
+  folders.sort((a, b) => b.name.localeCompare(a.name));
+  articles.sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified));
+
+  const h1Limit = safeNumber(options.h1Limit, 0, 20);
+  if (h1Limit > 0) {
+    await Promise.all(
+      articles.slice(0, h1Limit).map(async (article) => {
+        article.h1Title = await fetchH1Title(token, article.id);
+      })
+    );
+  }
+
+  return { folders, articles };
+}
+
 /**
  * 記事一覧を再帰的に取得する（OneDriveのフォルダ階層をそのまま反映）
  * @param {string} token - アクセストークン
@@ -199,26 +300,26 @@ async function resolveFolderFromUrl(token, urlStr) {
       if (res.ok) {
         const data = await res.json();
         folderId = data.id;
-        return { id: data.id, name: data.name };
+        return { id: data.id, name: data.name, childCount: data.folder?.childCount || 0 };
       }
     } catch(e) {}
   }
 
   if (folderId) {
-    let apiUrl = `${GRAPH_API}/me/drive/items/${folderId}?$select=id,name`;
+    let apiUrl = `${GRAPH_API}/me/drive/items/${folderId}?$select=id,name,folder`;
 
     if (folderId.startsWith('/')) {
       const match = folderId.match(/\/Documents\/(.+)$/i);
       if (match) {
         const path = match[1].split('/').map(encodeURIComponent).join('/');
-        apiUrl = `${GRAPH_API}/me/drive/root:/${path}?$select=id,name`;
+        apiUrl = `${GRAPH_API}/me/drive/root:/${path}?$select=id,name,folder`;
       }
     }
 
     const res = await fetch(apiUrl, { headers: { Authorization: `Bearer ${token}` } });
     if (res.ok) {
       const data = await res.json();
-      return { id: data.id, name: data.name };
+      return { id: data.id, name: data.name, childCount: data.folder?.childCount || 0 };
     } else {
       console.warn('resolveFolderFromUrl error:', await res.text());
     }
@@ -416,17 +517,58 @@ export default async function handler(req, res) {
 
     // GET: 記事一覧 or 記事内容
     if (req.method === 'GET') {
-      const { id, externalUrls } = req.query;
+      const { id, externalUrls, mode, folderPath, folderId, h1Limit } = req.query;
       if (id) {
         const content = await getArticle(token, id);
         return res.status(200).json({ content });
       }
       const folder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
+
+      if (firstQueryValue(mode) === 'shallow' || folderPath !== undefined || folderId) {
+        const targetPath = firstQueryValue(folderPath, '').trim().replace(/^\/+|\/+$/g, '');
+        const limit = safeNumber(h1Limit, 0, 20);
+        const listing = folderId
+          ? await listArticlesShallowById(token, firstQueryValue(folderId), targetPath, { h1Limit: limit })
+          : await listArticlesShallow(token, targetPath ? `${folder}/${targetPath}` : folder, targetPath, { h1Limit: limit });
+
+        if (!targetPath && !folderId && externalUrls) {
+          try {
+            const urlsList = JSON.parse(firstQueryValue(externalUrls, '[]'));
+            if (Array.isArray(urlsList) && urlsList.length > 0) {
+              const extFolders = await Promise.all(
+                urlsList.map(async (urlStr) => {
+                  const folderInfo = await resolveFolderFromUrl(token, urlStr);
+                  if (!folderInfo || !folderInfo.id) return null;
+                  return {
+                    id: folderInfo.id,
+                    name: folderInfo.name,
+                    path: folderInfo.name,
+                    childCount: folderInfo.childCount || 0,
+                    loaded: false,
+                    external: true,
+                  };
+                })
+              );
+              listing.folders.push(...extFolders.filter(Boolean));
+              listing.folders.sort((a, b) => b.name.localeCompare(a.name));
+            }
+          } catch (e) {
+            console.warn('externalUrls の処理に失敗:', e);
+          }
+        }
+
+        return res.status(200).json({
+          articles: listing.articles,
+          folders: listing.folders,
+          lazy: true,
+        });
+      }
+
       let articles = await listArticlesRecursive(token, folder, '');
 
       if (externalUrls) {
         try {
-          const urlsList = JSON.parse(externalUrls);
+          const urlsList = JSON.parse(firstQueryValue(externalUrls, '[]'));
           if (Array.isArray(urlsList) && urlsList.length > 0) {
             const extPromises = urlsList.map(async (urlStr) => {
               const folderInfo = await resolveFolderFromUrl(token, urlStr);

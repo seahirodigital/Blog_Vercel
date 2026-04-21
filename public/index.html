@@ -745,11 +745,18 @@
     // === API ヘルパー ===
     const API_BASE = '/api';
 
-    async function fetchArticles(externalUrls = []) {
-      const qs = externalUrls && externalUrls.length > 0 ? `?externalUrls=${encodeURIComponent(JSON.stringify(externalUrls))}` : '';
+    async function fetchArticles(externalUrls = [], options = {}) {
+      const params = new URLSearchParams();
+      if (externalUrls && externalUrls.length > 0) params.set('externalUrls', JSON.stringify(externalUrls));
+      if (options.mode) params.set('mode', options.mode);
+      if (options.folderPath) params.set('folderPath', options.folderPath);
+      if (options.folderId) params.set('folderId', options.folderId);
+      if (options.h1Limit !== undefined) params.set('h1Limit', String(options.h1Limit));
+      const qs = params.toString() ? `?${params.toString()}` : '';
       const res = await fetch(`${API_BASE}/articles${qs}`);
       if (!res.ok) throw new Error('記事一覧の取得に失敗しました');
       const data = await res.json();
+      if (options.raw) return data;
       return data.articles || [];
     }
 
@@ -877,15 +884,32 @@
     // APIから返される article.path（OneDriveの実際のフォルダ階層）を使って
     // 多段階ネストツリーを構築する
     // 戻り値: { _articles: [], subfolders: { "フォルダ名": { _articles: [], subfolders: {} } } }
-    function buildFolderTree(articles) {
-      const root = { _articles: [], subfolders: {} };
+    function createFolderNode(path = '') {
+      return { _articles: [], subfolders: {}, _meta: { path, loaded: true, childCount: 0 } };
+    }
+
+    function ensureFolderNode(root, folderPath) {
+      const parts = (folderPath || '').trim().split('/').filter(Boolean);
+      let node = root;
+      let acc = '';
+      for (const part of parts) {
+        acc = acc ? `${acc}/${part}` : part;
+        if (!node.subfolders[part]) node.subfolders[part] = createFolderNode(acc);
+        node = node.subfolders[part];
+      }
+      return node;
+    }
+
+    function buildFolderTree(articles, folderMeta = {}) {
+      const root = createFolderNode('');
+      Object.values(folderMeta || {}).forEach((meta) => {
+        if (!meta || !meta.path) return;
+        const node = ensureFolderNode(root, meta.path);
+        node._meta = { ...node._meta, ...meta };
+      });
+
       for (const article of articles) {
-        const parts = (article.path || '').trim().split('/').filter(Boolean);
-        let node = root;
-        for (const part of parts) {
-          if (!node.subfolders[part]) node.subfolders[part] = { _articles: [], subfolders: {} };
-          node = node.subfolders[part];
-        }
+        const node = ensureFolderNode(root, article.path || '');
         node._articles.push(article);
       }
       return root;
@@ -893,8 +917,10 @@
 
     // ノード以下の全記事数を再帰的に合計
     function countArticles(node) {
-      return node._articles.length +
+      const knownCount = node._articles.length +
         Object.values(node.subfolders).reduce((s, c) => s + countArticles(c), 0);
+      const childCount = node._meta && Number.isFinite(node._meta.childCount) ? node._meta.childCount : 0;
+      return node._meta && node._meta.loaded === false ? Math.max(knownCount, childCount) : knownCount;
     }
 
     // === Toast コンポーネント ===
@@ -958,7 +984,7 @@
     }
 
     // === フォルダツリー コンポーネント ===
-    function FolderTree({ articles, selectedId, onSelect, loading, onDeleteArticle, onDuplicateArticle, onMoveArticle, hiddenFolders, onHideFolder, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, onMultiSelect, onRangeSelect, multiSelectedIds, articleH1Cache }) {
+    function FolderTree({ articles, selectedId, onSelect, loading, onDeleteArticle, onDuplicateArticle, onMoveArticle, hiddenFolders, onHideFolder, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, onMultiSelect, onRangeSelect, multiSelectedIds, articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder }) {
       const [openFolders, setOpenFolders] = useState({});
       const [ctxMenu, setCtxMenu] = useState({ visible: false, x: 0, y: 0, article: null });
       const [folderCtxMenu, setFolderCtxMenu] = useState({ visible: false, x: 0, y: 0, path: '' });
@@ -970,6 +996,7 @@
       const [swipedId, setSwipedId] = useState(null);         // 左スワイプ中の記事ID
       const [dragGhostInfo, setDragGhostInfo] = useState(null); // 長押しゴースト { x, y, name }
       const [touchDragOver, _setTouchDragOver] = useState(null); // タッチドラッグ中のフォルダ
+      const [visibleArticleLimit, setVisibleArticleLimit] = useState(3);
       const touchDragOverRef = useRef(null);
       const setTouchDragOver = (v) => { touchDragOverRef.current = v; _setTouchDragOver(v); };
       const touchRef = useRef({ startX: 0, startY: 0, article: null, mode: null, timer: null });
@@ -984,7 +1011,28 @@
         return () => el.removeEventListener('touchmove', prevent);
       }, []);
 
-      const rootNode = useMemo(() => buildFolderTree(articles), [articles]);
+      const rootNode = useMemo(() => buildFolderTree(articles, folderMeta), [articles, folderMeta]);
+
+      useEffect(() => {
+        if (visibleArticleLimit >= articles.length) return;
+        let cancelled = false;
+        let idleId = null;
+        let timerId = null;
+        const run = () => {
+          if (cancelled) return;
+          setVisibleArticleLimit(limit => Math.min(limit + 20, articles.length));
+        };
+        if (window.requestIdleCallback) {
+          idleId = window.requestIdleCallback(run, { timeout: 300 });
+        } else {
+          timerId = setTimeout(run, 120);
+        }
+        return () => {
+          cancelled = true;
+          if (idleId !== null && window.cancelIdleCallback) window.cancelIdleCallback(idleId);
+          if (timerId !== null) clearTimeout(timerId);
+        };
+      }, [articles.length, visibleArticleLimit]);
 
       // 初期状態: デフォルトは閉じた状態にする
       useEffect(() => {
@@ -1006,7 +1054,13 @@
         return () => { window.removeEventListener('click', close); window.removeEventListener('contextmenu', close); };
       }, [ctxMenu.visible, folderCtxMenu.visible]);
 
-      const toggleFolder = (path) => setOpenFolders(prev => ({ ...prev, [path]: !prev[path] }));
+      const toggleFolder = (path, meta) => {
+        const willOpen = !openFolders[path];
+        setOpenFolders(prev => ({ ...prev, [path]: !prev[path] }));
+        if (willOpen && meta && meta.loaded === false && !folderLoading[path] && onLoadFolder) {
+          onLoadFolder(path, meta);
+        }
+      };
 
       // ── モバイルタッチ: 長押しドラッグ & 左スワイプ ──
       const LONG_PRESS_MS = 500;
@@ -1236,6 +1290,7 @@
 
         const isOpen = openFolders[folderPath];
         const isDragTarget = dragOver === folderPath;
+        const isFolderLoading = !!folderLoading[folderPath];
         const total = countArticles(node);
         const subKeys = Object.keys(node.subfolders).sort((a, b) => b.localeCompare(a));
         const indent = depth * 12;
@@ -1245,7 +1300,7 @@
             {/* フォルダヘッダー（ドロップ受付） */}
             <button
               data-folder-path={folderPath}
-              onClick={() => toggleFolder(folderPath)}
+              onClick={() => toggleFolder(folderPath, node._meta)}
               onContextMenu={(e) => handleFolderContextMenu(e, folderPath)}
               onDragOver={(e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; setDragOver(folderPath); }}
               onDragLeave={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setDragOver(null); }}
@@ -1278,15 +1333,16 @@
                 <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
               </svg>
               <span className="truncate" style={{ color: isOpen ? '#7C4DFF' : undefined }}>{folderName}</span>
-              <span className="ml-auto bg-slate-100 text-slate-400 text-xs rounded-full px-1.5 py-0.5 leading-none flex-shrink-0">{total}</span>
+              <span className="ml-auto bg-slate-100 text-slate-400 text-xs rounded-full px-1.5 py-0.5 leading-none flex-shrink-0">{isFolderLoading ? '...' : total}</span>
             </button>
 
             {isOpen && (
               <div style={{ marginLeft: `${4 + indent}px`, paddingLeft: '8px', borderLeft: '1px solid #f1f5f9' }}>
+                {isFolderLoading && <div className="skeleton h-8 w-full my-1" />}
                 {/* サブフォルダ（再帰） */}
                 {subKeys.map(k => renderFolderNode(node.subfolders[k], k, folderPath ? `${folderPath}/${k}` : k, depth + 1))}
                 {/* このフォルダ内の記事 */}
-                {node._articles.map(a => renderArticle(a))}
+                {node._articles.slice(0, visibleArticleLimit).map(a => renderArticle(a))}
               </div>
             )}
           </div>
@@ -1325,7 +1381,7 @@
                 style={{ borderRadius: '6px', outline: dragOver === '' ? '2px dashed #7C4DFF' : undefined, outlineOffset: '-2px' }}
               >
                 <div className="px-2 py-1 text-xs text-slate-400 font-semibold">その他</div>
-                {rootNode._articles.map(a => renderArticle(a))}
+                {rootNode._articles.slice(0, visibleArticleLimit).map(a => renderArticle(a))}
               </div>
             )}
           </div>
@@ -1441,7 +1497,7 @@
     }
 
     // === サイドバー コンポーネント ===
-    function Sidebar({ articles, selectedId, onSelect, onNewArticle, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle, mobileSidebarOpen, onMobileClose, onDeleteArticle, onDuplicateArticle, onMoveArticle, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, multiSelectedIds, onMultiSelect, onRangeSelect, setAffModalOpen, articleH1Cache, externalFolderUrls = [], setExternalFolderUrls, onRefreshArticles }) {
+    function Sidebar({ articles, selectedId, onSelect, onNewArticle, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle, mobileSidebarOpen, onMobileClose, onDeleteArticle, onDuplicateArticle, onMoveArticle, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, multiSelectedIds, onMultiSelect, onRangeSelect, setAffModalOpen, articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder, externalFolderUrls = [], setExternalFolderUrls, onRefreshArticles }) {
       // 非表示フォルダ管理（localStorageで永続化）
       const [hiddenFolders, setHiddenFolders] = useState(() => {
         try { return new Set(JSON.parse(localStorage.getItem('sb_hiddenFolders') || '[]')); }
@@ -1596,6 +1652,9 @@
 
       const allFolderPaths = useMemo(() => {
         const paths = new Set();
+        Object.keys(folderMeta || {}).forEach(path => {
+          if (path) paths.add(path);
+        });
         for (const a of articles) {
           const parts = (a.path || '').trim().split('/').filter(Boolean);
           let acc = '';
@@ -1605,7 +1664,7 @@
           }
         }
         return [...paths].sort((a, b) => a.localeCompare(b));
-      }, [articles]);
+      }, [articles, folderMeta]);
 
       const toggleFolderVisibility = useCallback((folderPath) => {
         setHiddenFolders(prev => {
@@ -1635,6 +1694,7 @@
         selectMode, selectedIds, onToggleSelect, onEnterSelectMode,
         multiSelectedIds, onMultiSelect, onRangeSelect,
         articleH1Cache,
+        folderMeta, folderLoading, onLoadFolder,
       };
 
       // サイドバー下部フッター（＋ボタン + フォルダピッカー）
@@ -2190,9 +2250,26 @@
       return text === href || text === href.replace(/^https?:\/\//, '');
     }
 
+    function mergeArticlesById(current, incoming) {
+      const map = new Map((current || []).map(article => [article.id, article]));
+      (incoming || []).forEach(article => map.set(article.id, { ...(map.get(article.id) || {}), ...article }));
+      return [...map.values()].sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified));
+    }
+
+    function foldersToMeta(folders, previous = {}) {
+      const next = { ...previous };
+      (folders || []).forEach(folder => {
+        if (!folder || !folder.path) return;
+        next[folder.path] = { ...(next[folder.path] || {}), ...folder };
+      });
+      return next;
+    }
+
     // === メインアプリ ===
     function App() {
       const [articles, setArticles] = useState([]);
+      const [folderMeta, setFolderMeta] = useState({});
+      const [folderLoading, setFolderLoading] = useState({});
       const [selectedArticle, setSelectedArticle] = useState(null);
       const [content, setContent] = useState('');
       const [originalContent, setOriginalContent] = useState('');
@@ -2256,6 +2333,8 @@
       const tokenLineMapRef = useRef([]);
 
       const hasChanges = content !== originalContent;
+      const selectedArticleRef = useRef(null);
+      useEffect(() => { selectedArticleRef.current = selectedArticle; }, [selectedArticle]);
 
       // 記事H1キャッシュ（localStorageで永続化: サイドバータイトル表示に使用）
       const [articleH1Cache, setArticleH1Cache] = useState(() => {
@@ -2362,14 +2441,49 @@
         setLoading(true);
         try {
           const targetUrls = exUrls !== null ? exUrls : externalFolderUrls;
-          const data = await fetchArticles(targetUrls);
-          setArticles(data);
+          const data = await fetchArticles(targetUrls, { raw: true, mode: 'shallow', h1Limit: 3 });
+          const initialArticles = data.articles || [];
+          const selected = selectedArticleRef.current;
+          setArticles(selected && !initialArticles.some(article => article.id === selected.id)
+            ? mergeArticlesById(initialArticles, [selected])
+            : initialArticles);
+          setFolderMeta(foldersToMeta(data.folders || [], {}));
+          setFolderLoading({});
         } catch (e) {
           showToast('記事一覧の取得に失敗しました', 'error');
         } finally {
           setLoading(false);
         }
       }, [externalFolderUrls]);
+
+      const loadFolder = useCallback(async (folderPath, meta = {}) => {
+        const normalizedPath = (folderPath || '').trim().replace(/^\/+|\/+$/g, '');
+        if (!normalizedPath) return;
+        setFolderLoading(prev => ({ ...prev, [normalizedPath]: true }));
+        try {
+          const data = await fetchArticles([], {
+            raw: true,
+            mode: 'shallow',
+            folderPath: normalizedPath,
+            folderId: meta.id || '',
+            h1Limit: 3,
+          });
+          setArticles(prev => mergeArticlesById(prev, data.articles || []));
+          setFolderMeta(prev => {
+            const next = foldersToMeta(data.folders || [], prev);
+            next[normalizedPath] = { ...(next[normalizedPath] || {}), ...meta, path: normalizedPath, loaded: true };
+            return next;
+          });
+        } catch (e) {
+          showToast('フォルダの読み込みに失敗しました', 'error');
+        } finally {
+          setFolderLoading(prev => {
+            const next = { ...prev };
+            delete next[normalizedPath];
+            return next;
+          });
+        }
+      }, []);
 
       useEffect(() => { loadArticles(); }, [loadArticles]);
 
@@ -2574,7 +2688,7 @@
           }
           setIsNewArticle(false);
           setTimeout(async () => {
-            try { const data = await fetchArticles(); setArticles(data); }
+            try { await loadArticles(); }
             catch (e) { console.warn('一覧再取得失敗（保存は成功）:', e); }
           }, 1500);
         } catch (e) {
@@ -3127,6 +3241,9 @@
             onRangeSelect={handleRangeSelect}
             setAffModalOpen={setAffModalOpen}
             articleH1Cache={articleH1Cache}
+            folderMeta={folderMeta}
+            folderLoading={folderLoading}
+            onLoadFolder={loadFolder}
             externalFolderUrls={externalFolderUrls}
             setExternalFolderUrls={setExternalFolderUrls}
             onRefreshArticles={loadArticles}
