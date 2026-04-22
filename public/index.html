@@ -2379,6 +2379,11 @@
 
       const safeMatchIndex = findMatches.length > 0 ? Math.min(matchIndex, findMatches.length - 1) : 0;
 
+      const openFindReplacePanel = useCallback(() => {
+        setShowFindReplace(true);
+        setTimeout(() => findInputRef.current?.focus(), 50);
+      }, []);
+
       // サイドバー幅リサイズ
       const [sidebarWidth, setSidebarWidth] = useState(260);
       const sidebarDragging = useRef(false);
@@ -3536,7 +3541,16 @@
                     )}
                     {autoSaveStatus === 'pending' && <span className="text-slate-300 text-xs" title="自動保存待機中...">●</span>}
                     {autoSaveStatus === 'saved' && <span className="text-green-400 text-xs" title="自動保存完了">✓</span>}
-                    <span className="ml-auto">{content.length.toLocaleString()} 文字</span>
+                    <div className="ml-auto flex items-center gap-2">
+                      <button
+                        onClick={openFindReplacePanel}
+                        className="lg:hidden rounded px-1.5 py-0.5 text-[#7C4DFF] hover:bg-purple-50 hover:text-[#651FFF] transition-colors"
+                        title="検索と置換を開く"
+                      >
+                        置換
+                      </button>
+                      <span>{content.length.toLocaleString()} 文字</span>
+                    </div>
                     {/* Amazonアフィリエイトリンク一括削除ボタン */}
                     <button
                       onClick={() => {
@@ -3678,7 +3692,7 @@
 
           {/* 検索と置換パネル（fixed） */}
           {showFindReplace && (
-            <div style={{ position: 'fixed', top: '60px', right: '16px', zIndex: 1000, width: '340px' }}
+            <div style={{ position: 'fixed', top: isDesktop ? '60px' : '106px', right: isDesktop ? '16px' : '12px', left: isDesktop ? 'auto' : '12px', zIndex: 1000, width: isDesktop ? '340px' : 'auto' }}
               className="bg-white border border-slate-300 rounded-lg shadow-xl text-sm"
             >
               <div className="flex items-center gap-1 px-2 py-1.5 border-b border-slate-100">
