@@ -1,0 +1,277 @@
+body {
+    width: 400px;
+    font-family: sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    padding: 15px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  h3 {
+    margin: 0;
+    color: #232f3e;
+    font-size: 16px;
+    flex-grow: 1;
+  }
+  
+  .settings-button {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+  }
+  
+  .settings-button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .settings-panel {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  h4 {
+    margin: 0 0 8px 0;
+    font-size: 12px;
+    color: #232f3e;
+    font-weight: bold;
+  }
+  
+  .form-group {
+    margin-bottom: 12px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: bold;
+    font-size: 12px;
+  }
+  
+  .form-group input {
+    width: calc(100% - 12px);
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+  
+  /* 2列レイアウト */
+  .form-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  
+  .form-group-half {
+    flex: 1;
+  }
+  
+  .form-group-half label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: bold;
+    font-size: 12px;
+  }
+  
+  .form-group-half input,
+  .form-group-half select {
+    width: calc(100% - 12px);
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+
+  .page-detail-row {
+    align-items: flex-end;
+  }
+
+  .create-article-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .create-article-button {
+    width: 100%;
+    background-color: #ff9900;
+  }
+
+  .create-article-button:hover {
+    background-color: #e68a00;
+  }
+  
+  /* ボタングリッド（3つ横並び） */
+  .button-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    transition: opacity 0.2s;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+  }
+  
+  .action-button {
+    background-color: #007bff;
+  }
+  
+  .action-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .copy-button {
+    background-color: #28a745;
+  }
+  
+  .copy-button:hover {
+    background-color: #218838;
+  }
+  
+  .reset-button {
+    background-color: #dc3545;
+  }
+  
+  .reset-button:hover {
+    background-color: #c82333;
+  }
+  
+  .stop-button {
+    background-color: #dc3545;
+  }
+  
+  .stop-button:hover {
+    background-color: #c82333;
+  }
+  
+  /* ステータス2列レイアウト */
+  .status-row {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .status-column {
+    flex: 1;
+  }
+  
+  .status-box {
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 12px;
+    color: #555;
+    text-align: center;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .info-box {
+    padding: 8px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 11px;
+    color: #555;
+    min-height: 40px;
+  }
+  
+  .info-box div {
+    margin: 2px 0;
+  }
+  
+  .info-box span {
+    font-weight: bold;
+    color: #232f3e;
+  }
+  
+  hr {
+    margin: 12px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+  }
+
+  /* トグルスイッチのスタイル */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: #28a745;
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(26px);
+}
+
+.toggle-slider:hover {
+  opacity: 0.9;
+}

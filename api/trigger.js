@@ -5,6 +5,10 @@
 
 export default async function handler(req, res) {
   // CORS対応
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
@@ -22,6 +26,12 @@ export default async function handler(req, res) {
 
   try {
     const url = `https://api.github.com/repos/${repo}/actions/workflows/blog-pipeline.yml/dispatches`;
+    const sourceType = String(req.body?.source_type || req.body?.sourceType || '').trim();
+    const rawUrls = req.body?.source_urls || req.body?.sourceUrls || req.body?.urls || req.body?.url || '';
+    const sourceUrls = Array.isArray(rawUrls)
+      ? rawUrls.map((item) => String(item || '').trim()).filter(Boolean)
+      : String(rawUrls || '').split(/\r?\n|,/).map((item) => item.trim()).filter(Boolean);
+    const status = String(req.body?.status || '単品').trim() || '単品';
 
     const response = await fetch(url, {
       method: 'POST',
@@ -34,6 +44,9 @@ export default async function handler(req, res) {
         ref: 'main',
         inputs: {
           mode: req.body?.mode || 'batch',
+          source_type: sourceType,
+          source_urls: sourceUrls.length > 0 ? JSON.stringify(sourceUrls) : '',
+          status,
         },
       }),
     });

@@ -20,6 +20,18 @@ on:
         options:
           - batch
           - single
+      source_type:
+        description: '入力ソース種別（amazon指定時はsource_urlsを直接処理）'
+        required: false
+        default: ''
+      source_urls:
+        description: '直接処理するURL配列(JSON)または改行区切りURL'
+        required: false
+        default: ''
+      status:
+        description: 'Gemini writer prompt status'
+        required: false
+        default: '単品'
 
 jobs:
   generate-blog:
@@ -62,5 +74,9 @@ jobs:
           GOOGLE_CSE_CX: ${{ secrets.GOOGLE_CSE_CX }}
           AMAZON_CLIENT_ID: ${{ secrets.AMAZON_CLIENT_ID }}
           AMAZON_CLIENT_SECRET: ${{ secrets.AMAZON_CLIENT_SECRET }}
+          INPUT_MODE: ${{ github.event.inputs.mode || 'batch' }}
+          INPUT_SOURCE_TYPE: ${{ github.event.inputs.source_type || '' }}
+          INPUT_SOURCE_URLS: ${{ github.event.inputs.source_urls || '' }}
+          INPUT_STATUS: ${{ github.event.inputs.status || '単品' }}
         working-directory: scripts/pipeline
         run: python main.py

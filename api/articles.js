@@ -89,11 +89,22 @@ function extractH1FromMarkdown(text) {
   return '';
 }
 
+function extractSourceTypeFromMarkdown(text) {
+  const match = String(text || '').match(/<!--\s*source_type\s*:\s*([a-z0-9_-]+)\s*-->/i);
+  if (!match) return '';
+  const value = match[1].toLowerCase();
+  return value === 'amazon' || value === 'amzn' ? 'amazon' : 'youtube';
+}
+
+function inferSourceTypeFromName(name) {
+  return /(^|_)AMZN_/i.test(String(name || '')) ? 'amazon' : '';
+}
+
 /**
- * 記事ファイルの先頭1KBをRange取得してH1タイトルを返す
+ * 記事ファイルの先頭1KBをRange取得してH1タイトルとsource種別を返す
  * 失敗時は空文字列を返す（一覧取得全体はエラーにしない）
  */
-async function fetchH1Title(token, fileId) {
+async function fetchArticlePreviewMeta(token, fileId) {
   try {
     const url = `${GRAPH_API}/me/drive/items/${fileId}/content`;
     const res = await fetch(url, {
@@ -103,11 +114,14 @@ async function fetchH1Title(token, fileId) {
       },
     });
     // 206 Partial Content or 200 OK どちらも受け入れる
-    if (!res.ok && res.status !== 206) return '';
+    if (!res.ok && res.status !== 206) return { h1Title: '', sourceType: '' };
     const text = await res.text();
-    return extractH1FromMarkdown(text);
+    return {
+      h1Title: extractH1FromMarkdown(text),
+      sourceType: extractSourceTypeFromMarkdown(text),
+    };
   } catch {
-    return '';
+    return { h1Title: '', sourceType: '' };
   }
 }
 
@@ -135,6 +149,7 @@ function toArticle(item, relativePath) {
     webUrl: item.webUrl || '',
     size: item.size || 0,
     h1Title: '',
+    sourceType: inferSourceTypeFromName(item.name),
   };
 }
 
@@ -204,7 +219,9 @@ async function buildShallowListing(token, items, relativePath, options = {}) {
   if (h1Limit > 0) {
     await Promise.all(
       articles.slice(0, h1Limit).map(async (article) => {
-        article.h1Title = await fetchH1Title(token, article.id);
+        const meta = await fetchArticlePreviewMeta(token, article.id);
+        article.h1Title = meta.h1Title;
+        article.sourceType = meta.sourceType || article.sourceType;
       })
     );
   }
@@ -260,6 +277,7 @@ async function listArticlesRecursive(token, folderPath, relativePath = '', depth
         webUrl: item.webUrl || '',
         size: item.size || 0,
         h1Title: '', // 後で並列取得して埋める
+        sourceType: inferSourceTypeFromName(item.name),
       });
     }
   }
@@ -273,7 +291,9 @@ async function listArticlesRecursive(token, folderPath, relativePath = '', depth
     articles
       .filter(a => !a.h1Title) // サブフォルダからの記事は既に取得済みの場合スキップ
       .map(async (article) => {
-        article.h1Title = await fetchH1Title(token, article.id);
+        const meta = await fetchArticlePreviewMeta(token, article.id);
+        article.h1Title = meta.h1Title;
+        article.sourceType = meta.sourceType || article.sourceType;
       })
   );
 
@@ -357,6 +377,7 @@ async function listArticlesRecursiveById(token, folderId, relativePath, depth = 
         webUrl: item.webUrl || '',
         size: item.size || 0,
         h1Title: '',
+        sourceType: inferSourceTypeFromName(item.name),
       });
     }
   }
@@ -368,7 +389,9 @@ async function listArticlesRecursiveById(token, folderId, relativePath, depth = 
     articles
       .filter(a => !a.h1Title)
       .map(async (article) => {
-        article.h1Title = await fetchH1Title(token, article.id);
+        const meta = await fetchArticlePreviewMeta(token, article.id);
+        article.h1Title = meta.h1Title;
+        article.sourceType = meta.sourceType || article.sourceType;
       })
   );
 

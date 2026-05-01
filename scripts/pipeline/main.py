@@ -5,10 +5,13 @@ Vibe Blog Engine - メインパイプライン
 GitHub Actions または ローカルから実行可能
 """
 
+from __future__ import annotations
+
 import os
 import re
 import sys
 import hashlib
+import json
 import importlib.util
 import requests
 from datetime import datetime
@@ -18,7 +21,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # モジュールインポート
-from modules import sheets_reader, apify_fetcher, blog_pipeline, onedrive_sync
+from modules import amazon_product_fetcher
 
 # 設定
 SPREADSHEET_ID = os.getenv("SPREADSHEET_ID", "")
@@ -28,6 +31,10 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 GEMINI_TOKEN_SUB = os.getenv("GEMINI_TOKEN_sub", "") or os.getenv("GEMINI_TOKEN_SUB", "")
 GEMINI_TOKEN_SUB2 = os.getenv("GEMINI_TOKEN_sub2", "") or os.getenv("GEMINI_TOKEN_SUB2", "")
 GEMINI_TOKEN_SUB3 = os.getenv("GEMINI_TOKEN_sub3", "") or os.getenv("GEMINI_TOKEN_SUB3", "")
+INPUT_SOURCE_TYPE = os.getenv("INPUT_SOURCE_TYPE", "").strip()
+INPUT_SOURCE_URLS = os.getenv("INPUT_SOURCE_URLS", "").strip()
+INPUT_SOURCE_URL = os.getenv("INPUT_SOURCE_URL", "").strip()
+INPUT_STATUS = os.getenv("INPUT_STATUS", "単品").strip() or "単品"
 _GEMINI_CANDIDATES_LOGGED = False
 
 
@@ -88,33 +95,95 @@ def _build_gemini_key_candidates() -> list[tuple[str, str]]:
     return candidates
 
 
-def process_single(row: dict, index: int, total: int) -> dict:
-    """
-    1本の動画を処理する
+def _normalize_source_type(value: str) -> str:
+    text = str(value or "").strip().lower()
+    if text in {"amazon", "amzn"}:
+        return "amazon"
+    return "youtube"
 
-    Returns:
-        {"success": bool, "title": str, "filename": str, "url": str}
-    """
-    url = row.get("動画URL", "").strip()
-    status = str(row.get("状況", "単品")).strip()
-    is_mass_source = status == "量産元"
 
-    print(f"\n{'='*60}")
-    print(f"📹 [{index}/{total}] 処理開始")
-    print(f"   URL: {url}")
-    print(f"   種別: {status}")
-    print(f"   フロー: {'通常 + ベスト記事化' if is_mass_source else '通常'}")
-    print(f"{'='*60}")
+def _parse_input_urls(*values: str) -> list[str]:
+    urls: list[str] = []
+    for value in values:
+        text = str(value or "").strip()
+        if not text:
+            continue
+        try:
+            parsed = json.loads(text)
+            if isinstance(parsed, list):
+                urls.extend(str(item).strip() for item in parsed if str(item).strip())
+                continue
+            if isinstance(parsed, str) and parsed.strip():
+                urls.append(parsed.strip())
+                continue
+        except json.JSONDecodeError:
+            pass
 
+        normalized = text.replace("\r", "\n").replace(",", "\n")
+        urls.extend(part.strip() for part in normalized.split("\n") if part.strip())
+
+    unique: list[str] = []
+    seen = set()
+    for url in urls:
+        if url in seen:
+            continue
+        seen.add(url)
+        unique.append(url)
+    return unique
+
+
+def _prepend_source_metadata(markdown: str, source_type: str) -> str:
+    normalized = _normalize_source_type(source_type)
+    if re.search(r"<!--\s*source_type\s*:", markdown, flags=re.I):
+        return markdown
+    return f"<!-- source_type: {normalized} -->\n\n{markdown}"
+
+
+def _save_source_variable(filename: str, source_url: str, source_type: str):
+    gh_token = os.getenv("GH_PAT") or os.getenv("GITHUB_TOKEN")
+    gh_repo = os.getenv("GITHUB_REPO", "seahirodigital/Blog_Vercel")
+    if not gh_token or not source_url:
+        return
+
+    hash_key = hashlib.md5(filename.encode()).hexdigest()[:8].upper()
+    prefix = "AMZN_SOURCE" if _normalize_source_type(source_type) == "amazon" else "YT_SOURCE"
+    variables = {
+        f"{prefix}_{hash_key}": source_url,
+        f"SOURCE_TYPE_{hash_key}": _normalize_source_type(source_type),
+    }
+    gh_headers = {
+        "Authorization": f"Bearer {gh_token}",
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+    gh_api = f"https://api.github.com/repos/{gh_repo}/actions/variables"
+
+    for var_name, value in variables.items():
+        r = requests.patch(
+            f"{gh_api}/{var_name}",
+            json={"name": var_name, "value": value},
+            headers=gh_headers,
+        )
+        if r.status_code == 404:
+            requests.post(gh_api, json={"name": var_name, "value": value}, headers=gh_headers)
+        print(f"   🔗 source metadata を GitHub Variables に保存: {var_name}")
+
+
+def _run_article_generation(
+    *,
+    transcript: dict,
+    url: str,
+    status: str,
+    index: int,
+    total: int,
+    source_type: str = "youtube",
+    update_sheet: bool = False,
+) -> dict:
     result = {"success": False, "title": "", "filename": "", "url": url}
+    normalized_source = _normalize_source_type(source_type)
+    result["title"] = transcript.get("title", "")
 
-    # Step 1: 文字起こし取得
-    transcript = apify_fetcher.get_transcript(url, APIFY_API_KEY)
-    if not transcript:
-        print("   ⚠️ 文字起こし取得失敗 - スキップ")
-        return result
-
-    result["title"] = transcript["title"]
+    from modules import blog_pipeline, onedrive_sync
 
     # Step 2: AI生成（量産元は 01→02→03→031→032 まで拡張）
     markdown = blog_pipeline.run_pipeline_with_fallback(transcript, _build_gemini_key_candidates(), status=status)
@@ -158,42 +227,91 @@ def process_single(row: dict, index: int, total: int) -> dict:
     # Step 4: OneDriveに保存（記事はクリーンなまま）
     now = datetime.now()
     safe_title = _make_safe_filename(transcript["title"])
-    filename = f"{now.strftime('%Y%m%d')}_{now.strftime('%H%M')}_{safe_title}.md"
+    source_prefix = "AMZN_" if normalized_source == "amazon" else ""
+    filename = f"{now.strftime('%Y%m%d')}_{now.strftime('%H%M')}_{source_prefix}{safe_title}.md"
+    markdown = _prepend_source_metadata(markdown, normalized_source)
 
     onedrive_url = onedrive_sync.upload_markdown(filename, markdown)
     result["filename"] = filename
 
-    # Step 4.5: YouTube URL を GitHub Variables に保存（記事内容とは完全分離）
-    gh_token = os.getenv("GH_PAT") or os.getenv("GITHUB_TOKEN")
-    gh_repo = os.getenv("GITHUB_REPO", "seahirodigital/Blog_Vercel")
-    if gh_token and url:
-        try:
-            hash_key = hashlib.md5(filename.encode()).hexdigest()[:8].upper()
-            var_name = f"YT_SOURCE_{hash_key}"
-            gh_headers = {
-                "Authorization": f"Bearer {gh_token}",
-                "Accept": "application/vnd.github+json",
-                "X-GitHub-Api-Version": "2022-11-28",
-            }
-            gh_api = f"https://api.github.com/repos/{gh_repo}/actions/variables"
-            # 既存なら PATCH、なければ POST
-            r = requests.patch(
-                f"{gh_api}/{var_name}",
-                json={"name": var_name, "value": url},
-                headers=gh_headers,
-            )
-            if r.status_code == 404:
-                requests.post(gh_api, json={"name": var_name, "value": url}, headers=gh_headers)
-            print(f"   🔗 YouTube URL を GitHub Variables に保存: {var_name}")
-        except Exception as e:
-            print(f"   ⚠️ YouTube URL の記録に失敗（続行します）: {e}")
+    # Step 4.5: 元URLとsource種別を GitHub Variables に保存（記事内容とは分離）
+    try:
+        _save_source_variable(filename, url, normalized_source)
+    except Exception as e:
+        print(f"   ⚠️ source metadata の記録に失敗（続行します）: {e}")
 
     # Step 5: スプレッドシートのステータス更新
-    sheets_reader.update_status(SPREADSHEET_ID, SHEET_NAME, url, "完了")
+    if update_sheet:
+        from modules import sheets_reader
+
+        sheets_reader.update_status(SPREADSHEET_ID, SHEET_NAME, url, "完了")
 
     result["success"] = True
     print(f"\n   🎉 完了: {filename}")
     return result
+
+
+def process_single(row: dict, index: int, total: int) -> dict:
+    """
+    1本の動画を処理する
+
+    Returns:
+        {"success": bool, "title": str, "filename": str, "url": str}
+    """
+    url = row.get("動画URL", "").strip()
+    status = str(row.get("状況", "単品")).strip()
+    is_mass_source = status == "量産元"
+
+    print(f"\n{'='*60}")
+    print(f"📹 [{index}/{total}] 処理開始")
+    print(f"   URL: {url}")
+    print(f"   種別: {status}")
+    print(f"   フロー: {'通常 + ベスト記事化' if is_mass_source else '通常'}")
+    print(f"{'='*60}")
+
+    result = {"success": False, "title": "", "filename": "", "url": url}
+
+    # Step 1: 文字起こし取得
+    from modules import apify_fetcher
+
+    transcript = apify_fetcher.get_transcript(url, APIFY_API_KEY)
+    if not transcript:
+        print("   ⚠️ 文字起こし取得失敗 - スキップ")
+        return result
+
+    return _run_article_generation(
+        transcript=transcript,
+        url=url,
+        status=status,
+        index=index,
+        total=total,
+        source_type="youtube",
+        update_sheet=True,
+    )
+
+
+def process_amazon_url(product_url: str, index: int, total: int) -> dict:
+    print(f"\n{'='*60}")
+    print(f"🛒 [{index}/{total}] Amazon商品処理開始")
+    print(f"   URL: {product_url}")
+    print(f"   Apify Actor: scraper-engine/amazon-product-details-scraper")
+    print(f"{'='*60}")
+
+    result = {"success": False, "title": "", "filename": "", "url": product_url}
+    transcript = amazon_product_fetcher.get_product_details(product_url, APIFY_API_KEY)
+    if not transcript:
+        print("   ⚠️ Amazon商品詳細取得失敗 - スキップ")
+        return result
+
+    return _run_article_generation(
+        transcript=transcript,
+        url=product_url,
+        status=INPUT_STATUS,
+        index=index,
+        total=total,
+        source_type="amazon",
+        update_sheet=False,
+    )
 
 
 def main():
@@ -203,9 +321,13 @@ def main():
     print(f"   時刻: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
 
+    source_type = _normalize_source_type(INPUT_SOURCE_TYPE)
+    direct_urls = _parse_input_urls(INPUT_SOURCE_URLS, INPUT_SOURCE_URL)
+    direct_amazon_mode = source_type == "amazon" and len(direct_urls) > 0
+
     # バリデーション
     missing = []
-    if not SPREADSHEET_ID:
+    if not direct_amazon_mode and not SPREADSHEET_ID:
         missing.append("SPREADSHEET_ID")
     if not APIFY_API_KEY:
         missing.append("APIFY_API_KEY")
@@ -216,7 +338,17 @@ def main():
         print(f"❌ 必須環境変数が未設定です: {', '.join(missing)}")
         sys.exit(1)
 
+    if direct_amazon_mode:
+        print(f"\n🛒 Amazon直URLモード: {len(direct_urls)}件")
+        results = []
+        for i, product_url in enumerate(direct_urls, 1):
+            results.append(process_amazon_url(product_url, i, len(direct_urls)))
+        _print_final_report(results)
+        return
+
     # スプレッドシートから対象を取得
+    from modules import sheets_reader
+
     print("\n📋 スプレッドシートから対象動画を取得中...")
     rows = sheets_reader.get_pending_rows(SPREADSHEET_ID, SHEET_NAME, ["単品", "複数", "情報", "量産元"])
 
@@ -232,6 +364,10 @@ def main():
         result = process_single(row, i, len(rows))
         results.append(result)
 
+    _print_final_report(results)
+
+
+def _print_final_report(results: list[dict]):
     # 最終レポート
     print("\n" + "=" * 60)
     print("📊 最終レポート")
