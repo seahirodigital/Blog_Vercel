@@ -1,0 +1,341 @@
+# Amazon A+ No-OCR DOM/Text Probe - B0G39C97WQ
+
+Existing amazon_extract_preview_B0G39C97WQ.md is preserved. This file checks what extra text can be extracted without OCR.
+
+## Experiment Conditions
+- Run at: 2026-05-01 13:09:26
+- URL: https://www.amazon.co.jp/dp/B0G39C97WQ
+- HTTP status: 200
+- captcha / robot check: False
+- OCR: not used
+- Sources: Amazon HTML DOM text, hidden carousel DOM, image alt/title/aria-label, embedded JSON-like metadata
+
+## Baseline Extraction Summary
+- Title: DJI Mic Mini 2（2 TX + 1 スタンダードRX + 充電ケース） iPhone 17/16/15＆Android／カメラ／タブレット／PC用ワイヤレスマイク 48時間駆動 400 m伝送 マルチカラー マグネット式フロントカバー
+- Feature bullets: 7
+- Description length: 1654
+- Product overview/spec rows: 11
+- Captions length: 3162
+
+## Screenshot-Visible Text Direct HTML Hit Check
+- Major text visible in the provided screenshot did not directly match the raw HTML string. Some of it is likely baked into images or generated differently.
+
+## A+ DOM Visible Text Candidates
+- メーカーによる説明
+- DJI Mic Mini | コンパクトなワイヤレスマイクで高品質なオーディオを実現
+- ビデオでは使用中の商品を紹介しています。
+- このビデオでは、商品セットアップの手順を説明します。
+- このビデオでは、複数の商品を比較しています。
+- ビデオは商品が開梱されているところを表示しています。
+- mic mini 2麦克风
+- 出品者の動画
+- Previous page
+- Next page
+- コンパクト&調整可能
+- マグネティックカバー[2]
+- アーティストカバー
+- オールインワン収納[11]
+- 3音声トーンプリセット[5]
+- 細部にこだわった豊かなサウンド
+- ノイズキャンセリング[8]
+- 音割れのないオーディオ
+- ゲイン調整
+- デバイスの互換性[12]
+- シームレスなミキシング[6]
+- シーン別創作対応
+- デュアルチャンネル
+- DJI OsmoAudio[4]
+- 終日駆動
+- スマート省電力
+- 安定した伝送
+- DJI Mimo アプリ
+- DJI Mic Mini 2の詳細情報
+- DJI Mic Mini 2 マルチカラー マグネット式フロントカバー[2]
+- 街中から屋外まで、8種類の鮮やかなマグネット式カバーが、何気ない瞬間を特別なクリエイティブ体験へと変えてくれる。
+- 詳細はこちら
+- DJI Mic Mini 2充電ケース（TX×1+モバイル RX×1）
+- フル充電されたケースで、トランスミッター1台に対して約1.3回のフル充電が可能で、最大24時間の動作時間を実現します。
+- どれがあなたにぴったり？
+- Mini 2 （2TX+1RX+ケース）
+- カートに入れる
+- Mini （2TX+1RX+ケース）
+- Mic 3 （2TX+1RX+ケース）
+- Mic 2 （2TX+1RX+ケース）
+- カスタマーレビュー
+- 5つ星のうち5.0
+- 5つ星のうち4.6
+- 8,282
+- 5つ星のうち4.7
+- 1,041
+- 5つ星のうち4.5
+- 1,942
+- 価格
+- ￥14,520
+- 14,520
+- ￥12,980
+- 12,980
+- ￥43,890
+- 43,890
+- ￥29,919
+- 29,919
+- トランスミッターの重量
+- 約11g(クリップとマグネット除く)
+- 10g
+- 16 g（マグネット含む）
+- 28g
+- ノイズキャンセリング
+- 2段階ノイズキャンセリング
+- アクティブ ノイズキャンセリング
+- マイクの録音方向
+- 無指向性
+- 音声トーンプリセット
+- 3つの音声トーンプリセット
+- なし
+- 接続性能
+- 2 TX、1 RX 複数モデル伝送
+- 2 TX、1 RX
+- 4 TX、8 RX
+- セーフティトラック
+- あり、-6 dB
+- 内部収録
+- 32 GB、24-bit/32-bitフロート
+- 8 GB、32-bitフロート
+- 総動作時間
+- 48時間
+- 28時間
+- 15時間
+- 対応アクセサリー[2]
+- Lightningアダプター モバイルRX
+- ブランド紹介
+- ▼DJI Mic Mini 2
+- ▼DJI Mic 3
+- ストアにアクセス
+- ▼Osmo Nano ウェアラブルカメラ
+- DJI ワイヤレスマイク
+- ▼ポケットサイズvlogカメラ
+- ▼アクションカメラ
+- ▼ハンドヘルドジンバル・スタビライザー
+- ▼ポータブル電源
+- ▼カメラドローン
+- ▼カメラスタビライザー
+- ▼アクセサリー
+- ▼Osmo 360 革命的な8K 360°カメラ
+
+## A+ Image Alt Attributes
+- コンパクト&amp;調整可能
+- マグネティックカバー[2]
+- アーティストカバー
+- オールインワン収納[11]
+- 3音声トーンプリセット[5]
+- 細部にこだわった豊かなサウンド
+- ノイズキャンセリング[8]
+- 音割れのないオーディオ
+- ゲイン調整
+- デバイスの互換性[12]
+- シームレスなミキシング[6]
+- シーン別創作対応
+- デュアルチャンネル
+- DJI OsmoAudio[4]
+- 終日駆動
+- スマート省電力
+- 安定した伝送
+- DJI Mimo アプリ
+- DJI Mic Mini 2 マルチカラー マグネット式フロントカバー[2]
+- DJI Mic Mini 2 Charging Case (1 TX + 1 Mobile RX)
+- mic mini 2_PC
+- Mic Mini 2の詳細情報
+- DM202 notes
+- DM202 BS
+- DJI BRAND 新
+- DJI Mic Mini 2（2 TX + 1 スタンダードRX + 充電ケース） iPhone 17/16/15＆Android／カメラ／タブレット／PC用ワイヤレスマイク 48時間駆動 40...
+- DJI Mic Mini 2（1 TX + 1 スタンダードRX） iPhone 17/16/15＆Android／カメラ／タブレット／PC用ワイヤレスラベリアマイク 超軽量 11.5時間駆動 ...
+- DJI Mic Mini 2（2 TX + 1 モバイル RX + 充電ケース） iPhone 17/16/15＆Android／タブレット／PC用ワイヤレスマイク プラグ＆プレイ 90時間駆動...
+- DJI Mic Mini 2（1 TX + 1 モバイル RX + 充電ケース） iPhone 17/16/15＆Android／タブレット／PC用ワイヤレスラベリアマイク プラグ＆プレイ 24...
+- DM303 BS_1
+- DM303 BS
+- OW 1
+- OW 2
+- OW 3
+- OW BS
+- mic 3_1
+- DJI Mic Mini 2 マルチカラー マグネット式フロントカバー
+- DJI Mic Mini 2 マルチカラー ウィンドスクリーン
+- 标准套
+- DJI Osmo Pocket 4 クリエイター コンボ ポケットジンバル Vlog カメラ 1インチCMOS &amp; 4K/240fps 3軸手ブレ補正 2倍 ロスレスズーム 107 GB内蔵スト...
+- DJI Osmo Pocket 4 エッセンシャル コンボ ポケットジンバル Vlog カメラ 1インチCMOS &amp; 4K/240fps 3軸手ブレ補正 2倍 ロスレスズーム 14ストップダイナ...
+- DJI vlogカメラ Osmo Pocket 3 クリエイターコンボ 1インチCMOS 4K 120fps 動画対応 3軸スタビライザー ジンバル アクションカメラ デジカメ 顔 被写体トラッ...
+- OA6
+- DJI Osmo Action 5 Pro
+- OA5モーターバイクコンボ
+- OA5 ハイキングコンボ
+- OM308
+- OM7P+Mic Mini TX
+- OM7+磁気マウント
+- Osmo Mobile 7
+- 302 无新品标
+- 401 bs
+- power1000
+- power 500
+- Lito X1
+- Lito 1
+- Avata 360
+- Neo 2
+- RS5
+- rs4
+- RS 4 Pro
+- RS 4 mini
+- DJI RC Motion 3
+- mic 3 bs_1
+- DJI Zignes 120W ソーラーパネル
+- DJI Osmo 360 スタンダードコンボ 360度アクションカメラ Vlogカメラ ネイティブ8K 動画 4K/120fps &amp; 170°ブーストビデオ 1.2億画素 100分8K撮影 防水...
+- DJI Osmo 360 アドベンチャーコンボ 360度アクションカメラ Vlogカメラ バッテリー3つ付き ネイティブ8K 動画 4K/120fps &amp; 170°ブーストビデオ スポーツ Vl...
+- Osmo 360 エッセンシャルコンボ 360度アクションカメラ 1インチ360°イメージングエリアを備えた360カメラ ネイティブ8K 360°動画 4K/120fps＆1...
+- DJI Osmo 360 モーターサイクル ハンドルバーPOVコンボ、1インチ360°イメージングエリアを備えた360°カメラ、170° FOV、ネイティブ8K 360°動画 、マグネットクイッ...
+
+## A+ aria-label / title Attributes
+- おすすめコンテンツカルーセル
+- 商品の詳細はこちら: DJI Mic Mini 2 マルチカラー マグネット式フロントカバー[2]
+- 商品の詳細はこちら: DJI Mic Mini 2充電ケース（TX×1+モバイル RX×1）
+- tablist-section
+- slide-1
+- slide-2
+- slide-3
+- slide-4
+- slide-5
+- slide-6
+- Mini 2 （2TX+1RX+ケース）
+- Mini （2TX+1RX+ケース）
+- Mic 3 （2TX+1RX+ケース）
+- Mic 2 （2TX+1RX+ケース）
+
+## Embedded JSON-like Metadata Texts
+- altText: mic mini 2麦克风
+- videoTitle: mic mini 2麦克风
+- vendorName: 出品者の動画
+- title: エラーです。
+- title: MIC MINI 2 商品ビデオ
+- title: DJI Mic Mini 2（2 TX + 1 スタンダードRX + 充電ケース） iPhone 17\/16\/15＆Android／カメラ／タブレット／PC用ワイヤレスマイク 48時間駆動 400 m伝送 マルチカラー マグネット式フロントカバー
+
+## Carousel / Module DOM Text By Group
+### aplus-premium-module-8-hero-video
+- DJI Mic Mini | コンパクトなワイヤレスマイクで高品質なオーディオを実現
+- ビデオでは使用中の商品を紹介しています。
+- このビデオでは、商品セットアップの手順を説明します。
+- このビデオでは、複数の商品を比較しています。
+- ビデオは商品が開梱されているところを表示しています。
+- mic mini 2麦克风
+- 出品者の動画
+### 1
+- Previous page
+- Next page
+- コンパクト&調整可能
+- マグネティックカバー[2]
+- アーティストカバー
+- オールインワン収納[11]
+### 2
+- Previous page
+- Next page
+- 3音声トーンプリセット[5]
+- 細部にこだわった豊かなサウンド
+- ノイズキャンセリング[8]
+- 音割れのないオーディオ
+- ゲイン調整
+### 3
+- Previous page
+- Next page
+- デバイスの互換性[12]
+- シームレスなミキシング[6]
+- シーン別創作対応
+- デュアルチャンネル
+- DJI OsmoAudio[4]
+### 4
+- Previous page
+- Next page
+- 終日駆動
+- スマート省電力
+- 安定した伝送
+- DJI Mimo アプリ
+### aplus-premium-module-13-carousel
+- DJI Mic Mini 2の詳細情報
+- Previous page
+- DJI Mic Mini 2 マルチカラー マグネット式フロントカバー[2]
+- 街中から屋外まで、8種類の鮮やかなマグネット式カバーが、何気ない瞬間を特別なクリエイティブ体験へと変えてくれる。
+- 詳細はこちら
+- DJI Mic Mini 2充電ケース（TX×1+モバイル RX×1）
+- フル充電されたケースで、トランスミッター1台に対して約1.3回のフル充電が可能で、最大24時間の動作時間を実現します。
+- Next page
+### aplus-premium-module-5-comparison-table-scroller
+- どれがあなたにぴったり？
+- Mini 2 （2TX+1RX+ケース）
+- カートに入れる
+- Mini （2TX+1RX+ケース）
+- Mic 3 （2TX+1RX+ケース）
+- Mic 2 （2TX+1RX+ケース）
+- カスタマーレビュー
+- 5つ星のうち5.0
+- 5つ星のうち4.6
+- 8,282
+- 5つ星のうち4.7
+- 1,041
+- 5つ星のうち4.5
+- 1,942
+- 価格
+- ￥14,520
+- 14,520
+- ￥12,980
+- 12,980
+- ￥43,890
+- 43,890
+- ￥29,919
+- 29,919
+- トランスミッターの重量
+- 約11g(クリップとマグネット除く)
+- 10g
+- 16 g（マグネット含む）
+- 28g
+- ノイズキャンセリング
+- 2段階ノイズキャンセリング
+- アクティブ ノイズキャンセリング
+- マイクの録音方向
+- 無指向性
+- 音声トーンプリセット
+- 3つの音声トーンプリセット
+- なし
+- 接続性能
+- 2 TX、1 RX 複数モデル伝送
+- 2 TX、1 RX
+- 4 TX、8 RX
+- セーフティトラック
+- あり、-6 dB
+- 内部収録
+- 32 GB、24-bit/32-bitフロート
+- 8 GB、32-bitフロート
+- 総動作時間
+- 48時間
+- 28時間
+- 15時間
+- 対応アクセサリー[2]
+- Lightningアダプター モバイルRX
+- ブランド紹介
+### aplus-brand-story-hero-1-image-logo
+- Previous page
+### aplus-brand-story-card-1-four-asin
+- ▼DJI Mic Mini 2
+- ▼DJI Mic 3
+- ストアにアクセス
+- ▼Osmo Nano ウェアラブルカメラ
+- DJI ワイヤレスマイク
+- ▼ポケットサイズvlogカメラ
+- ▼アクションカメラ
+- ▼ハンドヘルドジンバル・スタビライザー
+- ▼ポータブル電源
+- ▼カメラドローン
+- ▼カメラスタビライザー
+- ▼アクセサリー
+- ▼Osmo 360 革命的な8K 360°カメラ
+- Next page
+
+## Judgment
+- Without OCR, we can extract DOM-visible descriptions, video/image alt text, aria-label/title attributes, and JSON-like metadata.
+- If blue headings or labels visible in screenshots are not present in HTML, they cannot be extracted without OCR.
+- If carousel DOM is already expanded in HTML, multiple pages of descriptions can be collected without clicking or OCR.

@@ -31,6 +31,15 @@ export default async function handler(req, res) {
     const sourceUrls = Array.isArray(rawUrls)
       ? rawUrls.map((item) => String(item || '').trim()).filter(Boolean)
       : String(rawUrls || '').split(/\r?\n|,/).map((item) => item.trim()).filter(Boolean);
+    const rawPayloads = req.body?.source_payloads || req.body?.sourcePayloads || req.body?.payloads || '';
+    const sourcePayloads = Array.isArray(rawPayloads)
+      ? rawPayloads.filter((item) => item && typeof item === 'object')
+      : rawPayloads && typeof rawPayloads === 'object'
+        ? [rawPayloads]
+        : [];
+    const sourcePayloadsInput = sourcePayloads.length > 0
+      ? JSON.stringify(sourcePayloads)
+      : String(rawPayloads || '').trim();
     const status = String(req.body?.status || '単品').trim() || '単品';
 
     const response = await fetch(url, {
@@ -46,6 +55,7 @@ export default async function handler(req, res) {
           mode: req.body?.mode || 'batch',
           source_type: sourceType,
           source_urls: sourceUrls.length > 0 ? JSON.stringify(sourceUrls) : '',
+          source_payloads: sourcePayloadsInput,
           status,
         },
       }),

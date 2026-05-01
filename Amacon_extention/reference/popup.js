@@ -191,23 +191,185 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     }
 
-    async function collectAmazonDetailUrls(scope) {
+    async function collectAmazonDetailTargets(scope) {
         if (scope === 'allTabs') {
             const allTabs = await chrome.tabs.query({ currentWindow: true });
-            const urls = allTabs
-                .map(tab => tab.url || '')
-                .filter(url => !isSystemUrl(url) && isAmazonProductUrl(url));
-            return [...new Set(urls)];
+            const seen = new Set();
+            return allTabs.filter(tab => {
+                const url = tab.url || '';
+                if (isSystemUrl(url) || !isAmazonProductUrl(url) || seen.has(url)) return false;
+                seen.add(url);
+                return true;
+            });
         }
 
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
         if (!tab || !tab.url || isSystemUrl(tab.url) || !isAmazonProductUrl(tab.url)) {
             return [];
         }
-        return [tab.url];
+        return [tab];
     }
 
-    async function triggerAmazonArticlePipeline(urls) {
+    async function collectAmazonDetailPayload(tab) {
+        try {
+            const [result] = await chrome.scripting.executeScript({
+                target: { tabId: tab.id },
+                func: async () => {
+                    const clean = (value) => String(value || '')
+                        .replace(/\u200e|\u200f/g, '')
+                        .replace(/\s+/g, ' ')
+                        .trim();
+                    const text = (selector) => clean(document.querySelector(selector)?.textContent || '');
+                    const attr = (selector, name) => clean(document.querySelector(selector)?.getAttribute(name) || '');
+                    const uniq = (values, limit = 300) => {
+                        const out = [];
+                        const seen = new Set();
+                        for (const value of values.flat(Infinity)) {
+                            const line = clean(value);
+                            if (!line || seen.has(line)) continue;
+                            seen.add(line);
+                            out.push(line);
+                            if (out.length >= limit) break;
+                        }
+                        return out;
+                    };
+                    const texts = (selector, limit = 300) => uniq([...document.querySelectorAll(selector)].map(el => el.textContent), limit);
+                    const linesFrom = (root, limit = 300) => {
+                        if (!root) return [];
+                        const lines = [];
+                        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+                        while (walker.nextNode()) {
+                            const line = clean(walker.currentNode.nodeValue);
+                            if (line && line.length >= 2) lines.push(line);
+                        }
+                        return uniq(lines, limit);
+                    };
+                    const kvRows = (selector) => {
+                        const rows = {};
+                        document.querySelectorAll(selector).forEach((row) => {
+                            const key = clean(row.querySelector('th, .a-span3, .label, .prodDetSectionEntry')?.textContent || '').replace(/:$/, '');
+                            const value = clean(row.querySelector('td, .a-span9, .value, .prodDetAttrValue')?.textContent || '');
+                            if (key && value) rows[key] = value;
+                        });
+                        return rows;
+                    };
+                    const detailBullets = {};
+                    document.querySelectorAll('#detailBullets_feature_div li, #detailBulletsWrapper_feature_div li').forEach((li) => {
+                        const raw = clean(li.textContent);
+                        const parts = raw.split(':');
+                        if (parts.length >= 2) {
+                            const key = clean(parts.shift()).replace(/^[\u200e\u200f\s]+|[:：]$/g, '');
+                            const value = clean(parts.join(':'));
+                            if (key && value) detailBullets[key] = value;
+                        }
+                    });
+
+                    const aplusRoot = document.querySelector('#aplus, #aplus_feature_div, #aplus3p_feature_div, #dpx-aplus-product-description_feature_div');
+                    const aplusLines = linesFrom(aplusRoot, 260);
+                    const carouselTexts = uniq([
+                        texts('#aplus [role="tab"], #aplus button, #aplus .a-carousel-card, #aplus [class*="carousel"], #aplus [class*="module"], #aplus h1, #aplus h2, #aplus h3, #aplus h4, #aplus p, #aplus li', 260),
+                        texts('[data-a-carousel-options], .a-carousel-container, .a-carousel-row, .a-carousel-card', 180),
+                    ], 300);
+                    const imageAlts = uniq([...document.querySelectorAll('#aplus img, #imageBlock img, #altImages img, img')]
+                        .flatMap(img => [img.alt, img.title, img.getAttribute('aria-label')]), 300);
+
+                    const ocrTexts = [];
+                    let ocrStatus = 'not_available';
+                    if ('TextDetector' in window) {
+                        ocrStatus = 'attempted';
+                        try {
+                            const detector = new window.TextDetector();
+                            const images = [...document.querySelectorAll('#aplus img, #imageBlock img, #altImages img')]
+                                .filter(img => img.complete && img.naturalWidth > 120 && img.naturalHeight > 80)
+                                .slice(0, 24);
+                            for (const img of images) {
+                                try {
+                                    const bitmap = await createImageBitmap(img);
+                                    const detected = await detector.detect(bitmap);
+                                    bitmap.close?.();
+                                    for (const block of detected || []) {
+                                        if (block?.rawValue) ocrTexts.push(block.rawValue);
+                                    }
+                                } catch (_) {
+                                    // Cross-origin images may not be OCR-readable from the page context.
+                                }
+                            }
+                        } catch (error) {
+                            ocrStatus = `error: ${error.message}`;
+                        }
+                    }
+
+                    const dynamicImagesRaw = attr('#landingImage', 'data-a-dynamic-image');
+                    let images = [];
+                    try { images = Object.keys(JSON.parse(dynamicImagesRaw || '{}')); } catch (_) { images = []; }
+                    if (!images.length) {
+                        images = uniq([
+                            attr('#landingImage', 'src'),
+                            attr('meta[property="og:image"]', 'content'),
+                        ], 20);
+                    }
+
+                    const canonicalUrl = attr('link[rel="canonical"]', 'href');
+                    const asin = attr('#ASIN', 'value') ||
+                        (location.href.match(/\/(?:dp|gp\/product)\/([A-Z0-9]{10})/i) || [])[1] ||
+                        (location.search.match(/[?&]asin=([A-Z0-9]{10})/i) || [])[1] || '';
+
+                    return {
+                        source: 'chrome-extension',
+                        capturedAt: new Date().toISOString(),
+                        url: location.href,
+                        canonicalUrl,
+                        asin,
+                        title: text('#productTitle') || attr('meta[property="og:title"]', 'content') || document.title,
+                        pageTitle: document.title,
+                        brand: text('#bylineInfo') || text('tr.po-brand td.a-span9 span'),
+                        price: text('.a-price .a-offscreen') || text('#priceblock_ourprice') || text('#priceblock_dealprice'),
+                        listPrice: text('.basisPrice .a-offscreen') || text('.a-text-price .a-offscreen'),
+                        rating: text('#acrPopover span.a-icon-alt') || text('[data-hook="rating-out-of-text"]'),
+                        reviewCount: text('#acrCustomerReviewText') || text('[data-hook="total-review-count"]'),
+                        availability: text('#availability span'),
+                        seller: text('#merchant-info') || text('#sellerProfileTriggerId'),
+                        categories: texts('#wayfinding-breadcrumbs_feature_div li a', 20),
+                        featureBullets: texts('#feature-bullets li span.a-list-item', 80).filter(value => !/^make sure/i.test(value)),
+                        description: text('#productDescription') || text('#bookDescription_feature_div'),
+                        aplusLines,
+                        carouselTexts,
+                        imageAlts,
+                        ocrTexts: uniq(ocrTexts, 120),
+                        ocrStatus,
+                        productOverview: {
+                            ...kvRows('#productOverview_feature_div tr'),
+                            ...kvRows('#productDetails_techSpec_section_1 tr'),
+                            ...kvRows('#productDetails_detailBullets_sections1 tr'),
+                        },
+                        detailBullets,
+                        importantInformation: text('#importantInformation') || text('#legal_feature_div'),
+                        highResolutionImages: images,
+                    };
+                }
+            });
+            const payload = result?.result || {};
+            return { ...payload, url: payload.url || tab.url || '' };
+        } catch (error) {
+            return {
+                source: 'chrome-extension',
+                url: tab.url || '',
+                title: tab.title || '',
+                extractionError: error.message,
+            };
+        }
+    }
+
+    async function triggerAmazonArticlePipeline(urls, payloads) {
+        if (payloads && payloads.length > 1) {
+            const results = [];
+            for (const payload of payloads) {
+                const singleUrl = payload.url || payload.canonicalUrl || '';
+                results.push(await triggerAmazonArticlePipeline(singleUrl ? [singleUrl] : [], [payload]));
+            }
+            return results;
+        }
+
         const response = await fetch(`${BLOG_API_BASE}/api/trigger`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -215,6 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 mode: 'single',
                 source_type: 'amazon',
                 source_urls: urls,
+                source_payloads: payloads,
                 status: '単品'
             })
         });
@@ -232,19 +395,26 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 createArticleButton.disabled = true;
                 createArticleButton.textContent = '起動中...';
-                statusMessageEl.textContent = '🔄 Amazon商品URLを収集中...';
+                statusMessageEl.textContent = '🔄 Amazon商品ページを解析中...';
 
                 const scope = pageDetailSelectEl ? pageDetailSelectEl.value : 'current';
-                const urls = await collectAmazonDetailUrls(scope);
-                if (urls.length === 0) {
+                const tabs = await collectAmazonDetailTargets(scope);
+                if (tabs.length === 0) {
                     statusMessageEl.textContent = '⚠️ Amazon商品ページが見つかりません';
                     return;
                 }
 
-                statusMessageEl.textContent = `🚀 ${urls.length}件の記事作成を起動中...`;
-                await triggerAmazonArticlePipeline(urls);
-                statusMessageEl.textContent = `✅ ${urls.length}件の記事作成を起動しました`;
-                alert(`${urls.length}件のAmazon商品記事作成を起動しました。\nGitHub Actionsで進捗を確認してください。`);
+                const payloads = [];
+                for (let i = 0; i < tabs.length; i += 1) {
+                    statusMessageEl.textContent = `🔄 Amazon商品詳細を抽出中... ${i + 1}/${tabs.length}`;
+                    payloads.push(await collectAmazonDetailPayload(tabs[i]));
+                }
+                const urls = payloads.map(payload => payload.url).filter(Boolean);
+
+                statusMessageEl.textContent = `🚀 ${payloads.length}件の記事作成を起動中...`;
+                await triggerAmazonArticlePipeline(urls, payloads);
+                statusMessageEl.textContent = `✅ ${payloads.length}件の記事作成を起動しました`;
+                alert(`${payloads.length}件のAmazon商品記事作成を起動しました。\nGitHub Actionsで進捗を確認してください。`);
             } catch (error) {
                 console.error('Amazon記事作成エラー:', error);
                 statusMessageEl.textContent = `❌ 記事作成に失敗: ${error.message}`;

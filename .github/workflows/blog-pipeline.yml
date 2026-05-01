@@ -28,6 +28,10 @@ on:
         description: '直接処理するURL配列(JSON)または改行区切りURL'
         required: false
         default: ''
+      source_payloads:
+        description: 'Chrome拡張で抽出済みのAmazon商品詳細payload(JSON)'
+        required: false
+        default: ''
       status:
         description: 'Gemini writer prompt status'
         required: false
@@ -77,6 +81,7 @@ jobs:
           INPUT_MODE: ${{ github.event.inputs.mode || 'batch' }}
           INPUT_SOURCE_TYPE: ${{ github.event.inputs.source_type || '' }}
           INPUT_SOURCE_URLS: ${{ github.event.inputs.source_urls || '' }}
+          INPUT_SOURCE_PAYLOADS: ${{ github.event.inputs.source_payloads || '' }}
           INPUT_STATUS: ${{ github.event.inputs.status || '単品' }}
         working-directory: scripts/pipeline
         run: python main.py

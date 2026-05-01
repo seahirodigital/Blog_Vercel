@@ -34,6 +34,7 @@ GEMINI_TOKEN_SUB3 = os.getenv("GEMINI_TOKEN_sub3", "") or os.getenv("GEMINI_TOKE
 INPUT_SOURCE_TYPE = os.getenv("INPUT_SOURCE_TYPE", "").strip()
 INPUT_SOURCE_URLS = os.getenv("INPUT_SOURCE_URLS", "").strip()
 INPUT_SOURCE_URL = os.getenv("INPUT_SOURCE_URL", "").strip()
+INPUT_SOURCE_PAYLOADS = os.getenv("INPUT_SOURCE_PAYLOADS", "").strip()
 INPUT_STATUS = os.getenv("INPUT_STATUS", "単品").strip() or "単品"
 _GEMINI_CANDIDATES_LOGGED = False
 
@@ -130,6 +131,38 @@ def _parse_input_urls(*values: str) -> list[str]:
         seen.add(url)
         unique.append(url)
     return unique
+
+
+def _parse_input_payloads(value: str) -> list[dict]:
+    text = str(value or "").strip()
+    if not text:
+        return []
+    try:
+        parsed = json.loads(text)
+    except json.JSONDecodeError as error:
+        print(f"   ⚠️ source_payloads JSON parse error: {error}")
+        return []
+
+    if isinstance(parsed, dict):
+        candidates = parsed.get("items") if isinstance(parsed.get("items"), list) else [parsed]
+    elif isinstance(parsed, list):
+        candidates = parsed
+    else:
+        return []
+
+    payloads: list[dict] = []
+    for item in candidates:
+        if isinstance(item, dict):
+            payloads.append(item)
+    return payloads
+
+
+def _payload_source_url(payload: dict, fallback_url: str = "") -> str:
+    for key in ("url", "finalUrl", "canonicalUrl", "sourceUrl", "productUrl"):
+        value = str(payload.get(key) or "").strip()
+        if value:
+            return value
+    return fallback_url
 
 
 def _prepend_source_metadata(markdown: str, source_type: str) -> str:
@@ -294,7 +327,7 @@ def process_amazon_url(product_url: str, index: int, total: int) -> dict:
     print(f"\n{'='*60}")
     print(f"🛒 [{index}/{total}] Amazon商品処理開始")
     print(f"   URL: {product_url}")
-    print(f"   Apify Actor: scraper-engine/amazon-product-details-scraper")
+    print("   入力: URLのみ（サーバーHTML fallback）")
     print(f"{'='*60}")
 
     result = {"success": False, "title": "", "filename": "", "url": product_url}
@@ -314,6 +347,31 @@ def process_amazon_url(product_url: str, index: int, total: int) -> dict:
     )
 
 
+def process_amazon_payload(payload: dict, fallback_url: str, index: int, total: int) -> dict:
+    source_url = _payload_source_url(payload, fallback_url)
+    print(f"\n{'='*60}")
+    print(f"🛒 [{index}/{total}] Amazon商品処理開始")
+    print(f"   URL: {source_url or fallback_url}")
+    print("   入力: Chrome拡張抽出payload（Apify/サーバー再取得なし）")
+    print(f"{'='*60}")
+
+    result = {"success": False, "title": "", "filename": "", "url": source_url or fallback_url}
+    transcript = amazon_product_fetcher.build_transcript_from_chrome_payload(payload, source_url or fallback_url)
+    if not transcript:
+        print("   ⚠️ Chrome抽出payloadから商品詳細を組み立てられませんでした - スキップ")
+        return result
+
+    return _run_article_generation(
+        transcript=transcript,
+        url=source_url or fallback_url,
+        status=INPUT_STATUS,
+        index=index,
+        total=total,
+        source_type="amazon",
+        update_sheet=False,
+    )
+
+
 def main():
     """メインエントリーポイント"""
     print("=" * 60)
@@ -323,13 +381,14 @@ def main():
 
     source_type = _normalize_source_type(INPUT_SOURCE_TYPE)
     direct_urls = _parse_input_urls(INPUT_SOURCE_URLS, INPUT_SOURCE_URL)
-    direct_amazon_mode = source_type == "amazon" and len(direct_urls) > 0
+    source_payloads = _parse_input_payloads(INPUT_SOURCE_PAYLOADS)
+    direct_amazon_mode = source_type == "amazon" and (len(direct_urls) > 0 or len(source_payloads) > 0)
 
     # バリデーション
     missing = []
     if not direct_amazon_mode and not SPREADSHEET_ID:
         missing.append("SPREADSHEET_ID")
-    if not APIFY_API_KEY:
+    if source_type != "amazon" and not APIFY_API_KEY:
         missing.append("APIFY_API_KEY")
     if not (GEMINI_API_KEY or GEMINI_TOKEN_SUB or GEMINI_TOKEN_SUB2 or GEMINI_TOKEN_SUB3):
         missing.append("GEMINI_API_KEY / GEMINI_TOKEN_sub / GEMINI_TOKEN_SUB2 / GEMINI_TOKEN_SUB3")
@@ -339,10 +398,16 @@ def main():
         sys.exit(1)
 
     if direct_amazon_mode:
-        print(f"\n🛒 Amazon直URLモード: {len(direct_urls)}件")
+        payload_count = len(source_payloads)
+        url_only_count = max(0, len(direct_urls) - payload_count)
+        print(f"\n🛒 Amazon直接入力モード: Chrome payload {payload_count}件 / URLのみ {url_only_count}件")
         results = []
-        for i, product_url in enumerate(direct_urls, 1):
-            results.append(process_amazon_url(product_url, i, len(direct_urls)))
+        total = payload_count + url_only_count
+        for i, payload in enumerate(source_payloads, 1):
+            fallback_url = direct_urls[i - 1] if i - 1 < len(direct_urls) else ""
+            results.append(process_amazon_payload(payload, fallback_url, i, total))
+        for offset, product_url in enumerate(direct_urls[payload_count:], 1):
+            results.append(process_amazon_url(product_url, payload_count + offset, total))
         _print_final_report(results)
         return
 
