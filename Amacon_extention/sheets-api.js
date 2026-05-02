@@ -61,6 +61,7 @@ class GoogleSheetsAPI {
     async authenticate() {
         try {
             const config = await this.getConfig();
+            config.sheetsClientId = config.sheetsClientId || 'manifest-oauth-client';
             
             if (!config.sheetsClientId) {
                 throw new Error('Client IDが設定されていません');
