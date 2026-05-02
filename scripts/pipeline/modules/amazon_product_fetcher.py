@@ -93,7 +93,7 @@ async function pageFunction(context) {
     })).get().filter((review) => review.title || review.text);
 
     const url = request.loadedUrl || request.url;
-    const asinFromUrl = (url.match(/\/(?:dp|gp\/product)\/([A-Z0-9]{10})/i) || [])[1] || '';
+    const asinFromUrl = (url.match(/\/(?:dp|gp\/product|gp\/aw\/d)\/([A-Z0-9]{10})(?:[/?#]|$)/i) || [])[1] || '';
     const asin = $('#ASIN').attr('value') || $('[data-asin]').first().attr('data-asin') || asinFromUrl;
 
     return {
@@ -119,7 +119,7 @@ async function pageFunction(context) {
 }
 """
 
-ASIN_RE = re.compile(r"(?:/dp/|/gp/product/|/product/|asin=)([A-Z0-9]{10})", re.I)
+ASIN_RE = re.compile(r"(?:/dp/|/gp/product/|/gp/aw/d/|/product/|asin=)([A-Z0-9]{10})", re.I)
 RAW_ASIN_RE = re.compile(r"^[A-Z0-9]{10}$", re.I)
 
 

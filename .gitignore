@@ -1,5 +1,8 @@
 # リファレンス（ローカル専用・機密情報含む）
 reference/
+.codex_tmp/
+Amazon_extention/manifest.json
+Amazon_extention/image/
 
 # Node.js
 node_modules/

@@ -138,7 +138,7 @@ EXCLUDE_STATUS = {"不要"}
 PARTICLE_PREFIXES = ("の ", "を ", "に ", "で ", "は ", "が ", "と ")
 
 
-@dataclass(slots=True)
+@dataclass
 class SuggestKeywordRecord:
     seed_keyword: str
     suggest_keyword: str

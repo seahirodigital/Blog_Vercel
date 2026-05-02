@@ -1,4 +1,5 @@
 name: Blog Pipeline - YouTube → AI → OneDrive
+run-name: Blog Pipeline ${{ github.event.inputs.request_id || github.event_name }}
 
 on:
   # AppSheetからの外部トリガー（Webhook検知用）
@@ -36,6 +37,10 @@ on:
         description: 'Gemini writer prompt status'
         required: false
         default: '単品'
+      request_id:
+        description: 'Chrome拡張/APIから渡された起動リクエストID'
+        required: false
+        default: ''
 
 jobs:
   generate-blog:
@@ -83,5 +88,6 @@ jobs:
           INPUT_SOURCE_URLS: ${{ github.event.inputs.source_urls || '' }}
           INPUT_SOURCE_PAYLOADS: ${{ github.event.inputs.source_payloads || '' }}
           INPUT_STATUS: ${{ github.event.inputs.status || '単品' }}
+          INPUT_REQUEST_ID: ${{ github.event.inputs.request_id || '' }}
         working-directory: scripts/pipeline
         run: python main.py

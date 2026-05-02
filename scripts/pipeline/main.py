@@ -36,6 +36,7 @@ INPUT_SOURCE_URLS = os.getenv("INPUT_SOURCE_URLS", "").strip()
 INPUT_SOURCE_URL = os.getenv("INPUT_SOURCE_URL", "").strip()
 INPUT_SOURCE_PAYLOADS = os.getenv("INPUT_SOURCE_PAYLOADS", "").strip()
 INPUT_STATUS = os.getenv("INPUT_STATUS", "単品").strip() or "単品"
+INPUT_REQUEST_ID = os.getenv("INPUT_REQUEST_ID", "").strip()
 _GEMINI_CANDIDATES_LOGGED = False
 
 
@@ -368,6 +369,8 @@ def main():
     print("=" * 60)
     print("🚀 Vibe Blog Engine - パイプライン起動")
     print(f"   時刻: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    if INPUT_REQUEST_ID:
+        print(f"   request_id: {INPUT_REQUEST_ID}")
     print("=" * 60)
 
     source_type = _normalize_source_type(INPUT_SOURCE_TYPE)
