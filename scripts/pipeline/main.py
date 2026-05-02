@@ -165,13 +165,6 @@ def _payload_source_url(payload: dict, fallback_url: str = "") -> str:
     return fallback_url
 
 
-def _prepend_source_metadata(markdown: str, source_type: str) -> str:
-    normalized = _normalize_source_type(source_type)
-    if re.search(r"<!--\s*source_type\s*:", markdown, flags=re.I):
-        return markdown
-    return f"<!-- source_type: {normalized} -->\n\n{markdown}"
-
-
 def _save_source_variable(filename: str, source_url: str, source_type: str):
     gh_token = os.getenv("GH_PAT") or os.getenv("GITHUB_TOKEN")
     gh_repo = os.getenv("GITHUB_REPO", "seahirodigital/Blog_Vercel")
@@ -262,8 +255,6 @@ def _run_article_generation(
     safe_title = _make_safe_filename(transcript["title"])
     source_prefix = "AMZN_" if normalized_source == "amazon" else ""
     filename = f"{now.strftime('%Y%m%d')}_{now.strftime('%H%M')}_{source_prefix}{safe_title}.md"
-    markdown = _prepend_source_metadata(markdown, normalized_source)
-
     onedrive_url = onedrive_sync.upload_markdown(filename, markdown)
     result["filename"] = filename
 

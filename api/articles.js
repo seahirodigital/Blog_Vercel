@@ -89,11 +89,10 @@ function extractH1FromMarkdown(text) {
   return '';
 }
 
-function extractSourceTypeFromMarkdown(text) {
-  const match = String(text || '').match(/<!--\s*source_type\s*:\s*([a-z0-9_-]+)\s*-->/i);
-  if (!match) return '';
-  const value = match[1].toLowerCase();
-  return value === 'amazon' || value === 'amzn' ? 'amazon' : 'youtube';
+function stripSourceTypeMetadata(text) {
+  return String(text || '')
+    .replace(/^[ \t]*<!--\s*source_type\s*:\s*[a-z0-9_-]+\s*-->[ \t]*(?:\r?\n){0,2}/i, '')
+    .replace(/\r?\n[ \t]*<!--\s*source_type\s*:\s*[a-z0-9_-]+\s*-->[ \t]*(?=\r?\n|$)/gi, '');
 }
 
 function inferSourceTypeFromName(name) {
@@ -115,10 +114,10 @@ async function fetchArticlePreviewMeta(token, fileId) {
     });
     // 206 Partial Content or 200 OK どちらも受け入れる
     if (!res.ok && res.status !== 206) return { h1Title: '', sourceType: '' };
-    const text = await res.text();
+    const text = stripSourceTypeMetadata(await res.text());
     return {
       h1Title: extractH1FromMarkdown(text),
-      sourceType: extractSourceTypeFromMarkdown(text),
+      sourceType: '',
     };
   } catch {
     return { h1Title: '', sourceType: '' };
@@ -407,7 +406,7 @@ async function getArticle(token, fileId) {
     console.error('Get error:', res.status, errBody);
     throw new Error(`読み込み失敗: ${res.status}`);
   }
-  return await res.text();
+  return stripSourceTypeMetadata(await res.text());
 }
 
 // 記事保存（新規: パス指定 / 既存: ファイルID指定）
@@ -431,7 +430,7 @@ async function saveArticle(token, filename, content, fileId = null) {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'text/plain; charset=utf-8',
     },
-    body: content,
+    body: stripSourceTypeMetadata(content),
   });
 
   if (!res.ok) {

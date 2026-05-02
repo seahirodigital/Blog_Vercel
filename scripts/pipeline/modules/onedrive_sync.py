@@ -4,6 +4,7 @@ OneDrive 同期モジュール (Microsoft Graph API)
 """
 
 import os
+import re
 import requests
 from typing import Optional
 
@@ -12,6 +13,23 @@ TOKEN_URL = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
 
 # OneDrive内の保存先フォルダパス
 ONEDRIVE_FOLDER = os.getenv("ONEDRIVE_FOLDER", "Blog_Articles")
+
+
+def _strip_source_type_metadata(content: str) -> str:
+    text = str(content or "")
+    text = re.sub(
+        r"^[ \t]*<!--\s*source_type\s*:\s*[a-z0-9_-]+\s*-->[ \t]*(?:\r?\n){0,2}",
+        "",
+        text,
+        count=1,
+        flags=re.I,
+    )
+    return re.sub(
+        r"\r?\n[ \t]*<!--\s*source_type\s*:\s*[a-z0-9_-]+\s*-->[ \t]*(?=\r?\n|$)",
+        "",
+        text,
+        flags=re.I,
+    )
 
 
 def _get_access_token() -> str:
@@ -58,6 +76,7 @@ def upload_markdown(filename: str, content: str) -> Optional[str]:
         OneDrive上のファイルURL または None
     """
     try:
+        content = _strip_source_type_metadata(content)
         access_token = _get_access_token()
         headers = {
             "Authorization": f"Bearer {access_token}",
@@ -137,7 +156,7 @@ def get_article_content(file_id: str) -> Optional[str]:
         response = requests.get(url, headers=headers)
         response.raise_for_status()
 
-        return response.text
+        return _strip_source_type_metadata(response.text)
 
     except Exception as e:
         print(f"   ❌ ファイル読み込みエラー: {e}")
