@@ -6,6 +6,8 @@ class GoogleSheetsAPI {
     constructor() {
         this.accessToken = null;
         this.tokenExpiry = null;
+        this.defaultSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1ioLnPe9z6vO0tuN3I_qcDi6buS8GCaYowbjq8LTOT94/edit?gid=698344880#gid=698344880';
+        this.defaultSheetName = 'ブランド製品名仕訳';
     }
 
     /**
@@ -130,37 +132,55 @@ class GoogleSheetsAPI {
     }
 
     /**
-     * ヘッダー定義。AI用の長い行までそのまま入るようV列まで用意する。
+     * Gemma4の記事化に渡すAmazon詳細情報の標準ヘッダー。
      */
-    buildHeaders(width = 22) {
-        const headers = [
+    getBaseHeaders() {
+        return [
             'カテゴリ',
             'タイトル',
             'Amazon URL',
+            'ASIN',
             'ブランド',
             '製品名',
             '価格',
             '参考価格',
             'レビュー平均',
             'レビュー数',
-            '種別',
-            '予備1',
-            '予備2',
-            '予備3',
-            '予備4',
-            '予備5',
-            '予備6',
-            '予備7',
-            '予備8',
-            '予備9',
-            '商品情報1',
-            '商品情報2',
-            '商品情報3'
+            '在庫状況',
+            '販売元',
+            '発送元',
+            '状況',
+            '記事方針',
+            '想定読者',
+            '検索キーワード',
+            '商品特徴',
+            '商品説明',
+            'A+コンテンツ',
+            'ブランドストーリー',
+            '商品概要',
+            '技術仕様',
+            '詳細情報',
+            '重要情報',
+            '画像altテキスト',
+            'カルーセル内テキスト',
+            '画像内OCRテキスト',
+            'OCR状態',
+            '高解像度画像URL',
+            '取得日時',
+            '取得元URL',
+            '正規URL',
+            '抽出エラー',
+            '取得メモ'
         ];
-        while (headers.length < width) {
+    }
+
+    buildHeaders(width = null) {
+        const headers = this.getBaseHeaders();
+        const targetWidth = Math.max(Number(width) || 0, headers.length);
+        while (headers.length < targetWidth) {
             headers.push(`追加列${headers.length + 1}`);
         }
-        return headers.slice(0, width);
+        return headers.slice(0, targetWidth);
     }
 
     normalizeRows(data) {
@@ -180,15 +200,15 @@ class GoogleSheetsAPI {
             }
 
             const config = await this.getConfig();
-            const spreadsheetId = this.extractSpreadsheetId(config.spreadsheetUrl);
+            const spreadsheetId = this.extractSpreadsheetId(config.spreadsheetUrl || this.defaultSpreadsheetUrl);
 
             if (!spreadsheetId) {
                 throw new Error('スプレッドシートURLが無効です');
             }
 
-            const sheetName = config.sheetName || 'ブランド製品名仕訳';
+            const sheetName = config.sheetName || this.defaultSheetName;
             const token = await this.getAccessToken();
-            const width = Math.max(22, ...rows.map(row => row.length));
+            const width = Math.max(this.buildHeaders().length, ...rows.map(row => row.length));
             const endColumn = this.columnName(width);
 
             await this.ensureHeader(spreadsheetId, sheetName, token, width);
@@ -227,11 +247,12 @@ class GoogleSheetsAPI {
     }
 
     /**
-     * ヘッダー行を確認し、不足列だけ補完する。
+     * ヘッダー行を確認し、Gemma4用の標準列へ更新する。
      */
-    async ensureHeader(spreadsheetId, sheetName, token, width = 22) {
+    async ensureHeader(spreadsheetId, sheetName, token, width = null) {
         try {
-            const endColumn = this.columnName(width);
+            const requestedWidth = Math.max(Number(width) || 0, this.buildHeaders().length);
+            const endColumn = this.columnName(requestedWidth);
             const range = `'${sheetName}'!A1:${endColumn}1`;
             const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${encodeURIComponent(range)}`;
 
@@ -245,17 +266,24 @@ class GoogleSheetsAPI {
 
             if (!response.ok) {
                 console.warn('ヘッダーチェック失敗:', response.status);
-                await this.addHeader(spreadsheetId, sheetName, token, this.buildHeaders(width));
+                await this.addHeader(spreadsheetId, sheetName, token, this.buildHeaders(requestedWidth));
                 return;
             }
 
             const result = await response.json();
             const current = result.values?.[0] || [];
-            const desired = this.buildHeaders(width);
-            const merged = desired.map((header, index) => current[index] || header);
+            const outputWidth = Math.max(requestedWidth, current.length);
+            const desired = this.buildHeaders(outputWidth);
+            const baseWidth = this.getBaseHeaders().length;
+            const next = desired.map((header, index) => {
+                if (index >= baseWidth && current[index]) {
+                    return current[index];
+                }
+                return header;
+            });
 
-            if (current.length === 0 || current.length < width || merged.some((value, index) => value !== current[index])) {
-                await this.addHeader(spreadsheetId, sheetName, token, merged);
+            if (current.length === 0 || current.length < outputWidth || next.some((value, index) => value !== current[index])) {
+                await this.addHeader(spreadsheetId, sheetName, token, next);
             }
         } catch (error) {
             console.error('ヘッダー確認エラー:', error);

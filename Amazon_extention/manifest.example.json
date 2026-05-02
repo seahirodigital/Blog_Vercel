@@ -27,7 +27,7 @@
     "default_popup": "popup.html"
   },
   "oauth2": {
-    "client_id": "929105247696-jbe4ufgqu6cof6po6unpeiiaq235kufg.apps.googleusercontent.com",
+    "client_id": "YOUR_GOOGLE_OAUTH_CLIENT_ID.apps.googleusercontent.com",
     "scopes": [
       "https://www.googleapis.com/auth/spreadsheets"
     ]

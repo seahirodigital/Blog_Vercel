@@ -36,3 +36,6 @@ ryosan/seo_factory/output/
 
 # アフィリエイトリンク原本
 scripts/pipeline/prompts/04-affiliate-link-manager/affiliate_links.txt
+
+# Local verification outputs
+TEST/

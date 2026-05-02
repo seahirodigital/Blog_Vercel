@@ -1,5 +1,7 @@
 // Google Sheets APIインスタンス
 let sheetsAPI = null;
+const DEFAULT_SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/1ioLnPe9z6vO0tuN3I_qcDi6buS8GCaYowbjq8LTOT94/edit?gid=698344880#gid=698344880';
+const DEFAULT_SHEET_NAME = 'ブランド製品名仕訳';
 
 // sheets-api.jsを動的に読み込む
 const loadSheetsAPI = () => {
@@ -45,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sheetsToggleEl) sheetsToggleEl.checked = result.sheetsToggle || false;
         if (sheetsClientIdEl) sheetsClientIdEl.value = result.sheetsClientId || '';
         if (sheetsClientSecretEl) sheetsClientSecretEl.value = result.sheetsClientSecret || '';
-        if (spreadsheetUrlEl) spreadsheetUrlEl.value = result.spreadsheetUrl || '';
-        if (sheetNameEl) sheetNameEl.value = result.sheetName || 'ブランド製品名仕訳';
+        if (spreadsheetUrlEl) spreadsheetUrlEl.value = result.spreadsheetUrl || DEFAULT_SPREADSHEET_URL;
+        if (sheetNameEl) sheetNameEl.value = result.sheetName || DEFAULT_SHEET_NAME;
 
         updateAuthStatus(result.sheetsAccessToken, result.sheetsTokenExpiry);
         updateExecuteButtonLabel();
@@ -81,8 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 sheetsToggle: sheetsToggleEl ? sheetsToggleEl.checked : false,
                 sheetsClientId: sheetsClientIdEl ? sheetsClientIdEl.value.trim() : '',
                 sheetsClientSecret: sheetsClientSecretEl ? sheetsClientSecretEl.value.trim() : '',
-                spreadsheetUrl: spreadsheetUrlEl ? spreadsheetUrlEl.value.trim() : '',
-                sheetName: sheetNameEl ? sheetNameEl.value.trim() : 'ブランド製品名仕訳'
+                spreadsheetUrl: spreadsheetUrlEl ? (spreadsheetUrlEl.value.trim() || DEFAULT_SPREADSHEET_URL) : DEFAULT_SPREADSHEET_URL,
+                sheetName: sheetNameEl ? (sheetNameEl.value.trim() || DEFAULT_SHEET_NAME) : DEFAULT_SHEET_NAME
             }, () => {
                 updateExecuteButtonLabel();
                 resolve();
@@ -299,25 +301,38 @@ document.addEventListener('DOMContentLoaded', () => {
         'カテゴリ',
         'タイトル',
         'Amazon URL',
+        'ASIN',
         'ブランド',
         '製品名',
         '価格',
         '参考価格',
         'レビュー平均',
         'レビュー数',
-        '種別',
-        '予備1',
-        '予備2',
-        '予備3',
-        '予備4',
-        '予備5',
-        '予備6',
-        '予備7',
-        '予備8',
-        '予備9',
-        '商品情報1',
-        '商品情報2',
-        '商品情報3'
+        '在庫状況',
+        '販売元',
+        '発送元',
+        '状況',
+        '記事方針',
+        '想定読者',
+        '検索キーワード',
+        '商品特徴',
+        '商品説明',
+        'A+コンテンツ',
+        'ブランドストーリー',
+        '商品概要',
+        '技術仕様',
+        '詳細情報',
+        '重要情報',
+        '画像altテキスト',
+        'カルーセル内テキスト',
+        '画像内OCRテキスト',
+        'OCR状態',
+        '高解像度画像URL',
+        '取得日時',
+        '取得元URL',
+        '正規URL',
+        '抽出エラー',
+        '取得メモ'
     ];
 
     const chromeSyncGet = (keys) => new Promise(resolve => chrome.storage.sync.get(keys, resolve));
@@ -334,6 +349,135 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function normalizePrice(value) {
         return cleanSheetValue(value).replace(/[^0-9]/g, '');
+    }
+
+    function limitSheetCell(value, limit = 49000) {
+        const text = cleanSheetValue(value);
+        return text.length > limit ? `${text.slice(0, limit)}\n[文字数上限のため省略]` : text;
+    }
+
+    function stringifySheetValue(value) {
+        if (Array.isArray(value)) {
+            return value
+                .flat(Infinity)
+                .map(item => stringifySheetValue(item))
+                .filter(Boolean)
+                .join('\n');
+        }
+        if (value && typeof value === 'object') {
+            return Object.entries(value)
+                .filter(([, entryValue]) => cleanSheetValue(entryValue).trim() !== '')
+                .map(([key, entryValue]) => `${key}: ${stringifySheetValue(entryValue)}`)
+                .join('\n');
+        }
+        return cleanSheetValue(value);
+    }
+
+    function removeMarkupAndCode(value) {
+        let text = cleanSheetValue(value);
+        for (let i = 0; i < 8; i += 1) {
+            const next = text
+                .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ' ')
+                .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, ' ')
+                .replace(/<noscript\b[^>]*>[\s\S]*?<\/noscript>/gi, ' ')
+                .replace(/<template\b[^>]*>[\s\S]*?<\/template>/gi, ' ')
+                .replace(/<img\b[^>]*>/gi, ' ')
+                .replace(/<[^>]+>/g, ' ')
+                .replace(/(?:^|\s)(?:\.|#)[\w.#:[\]\-="'\s>*+~,()]+?\s*\{[^{}]*\}/g, ' ')
+                .replace(/@media[^{]+\{[^{}]*\}/g, ' ')
+                .replace(/\bfunction\s+[A-Za-z0-9_$]*\s*\([^)]*\)\s*\{[^{}]*\}/g, ' ')
+                .replace(/\(\s*function\s*\([^)]*\)\s*\{[^{}]*\}\s*\([^)]*\)\s*\)/g, ' ');
+            if (next === text) break;
+            text = next;
+        }
+        return text
+            .replace(/&nbsp;/gi, ' ')
+            .replace(/&amp;/gi, '&')
+            .replace(/&lt;/gi, '<')
+            .replace(/&gt;/gi, '>')
+            .replace(/&quot;/gi, '"')
+            .replace(/&#39;/g, "'")
+            .replace(/[ \t]+\n/g, '\n')
+            .replace(/\n[ \t]+/g, '\n')
+            .replace(/[ \t]{2,}/g, ' ')
+            .trim();
+    }
+
+    function isSheetNoiseLine(line) {
+        const value = cleanSheetValue(line).trim();
+        if (!value) return true;
+        if (/^(?:\.|#|@media\b|function\b|var\b|let\b|const\b|\(function\b|window\.|document\.|P\.when\b|A\.declarative\b)/.test(value)) return true;
+        if (/[{}]/.test(value) && /(display|position|padding|margin|width|height|background|font|border|color|float|z-index|text-align|vertical-align|line-height)\s*:/.test(value)) return true;
+        if (/(SponsoredProductsViewability|adFeedback|data-adfeedbackdetails|sp_detail|spAddToCart|a-carousel-card-empty|FirebirdSpRendering)/.test(value)) return true;
+        if (/^(?:Thumbs up feedback|Thumbs down feedback|Scroll|Icon|Product Image|送信|読み込み中|カスタマー画像)$/.test(value)) return true;
+        if (/(?:お寄せいただいたフィードバック|おすすめの管理|商品を読み込めません|前のスライドセット|次のスライドセット|前のページの関連|次のページの関連|この商品をチェックした人|この商品に関連する商品|無料配送になる関連商品)/.test(value)) return true;
+        if (/^ページ:\s*\d+\s*\/\s*\d+/.test(value)) return true;
+        return false;
+    }
+
+    function sanitizeSheetText(value) {
+        const stripped = removeMarkupAndCode(value);
+        const lines = stripped
+            .split(/\n+/)
+            .map(line => line.replace(/\s{2,}/g, ' ').trim())
+            .filter(line => !isSheetNoiseLine(line));
+        const seen = new Set();
+        const out = [];
+        for (const line of lines) {
+            const key = line.replace(/\s+/g, '');
+            if (seen.has(key)) continue;
+            seen.add(key);
+            out.push(line);
+        }
+        return out.join('\n');
+    }
+
+    function sheetCell(value) {
+        return limitSheetCell(sanitizeSheetText(stringifySheetValue(value)));
+    }
+
+    function extractAsinFromUrl(url) {
+        const match = cleanSheetValue(url).match(/\/(?:dp|gp\/product|gp\/aw\/d)\/([A-Z0-9]{10})(?:[/?#]|$)|[?&]asin=([A-Z0-9]{10})/i);
+        return match ? (match[1] || match[2] || '').toUpperCase() : '';
+    }
+
+    function normalizeBrandName(value) {
+        return cleanSheetValue(value)
+            .replace(/^ブランド\s*[:：]\s*/i, '')
+            .replace(/^Brand\s*[:：]\s*/i, '')
+            .replace(/^Visit the\s+(.+?)\s+Store$/i, '$1')
+            .replace(/^(.+?)のストア.*$/i, '$1')
+            .trim();
+    }
+
+    function extractProductNameFromTitle(title, brand) {
+        const cleanTitle = cleanSheetValue(title);
+        const cleanBrand = normalizeBrandName(brand);
+        if (!cleanTitle) return '';
+        if (!cleanBrand) return cleanTitle;
+        if (cleanTitle.toLowerCase().startsWith(cleanBrand.toLowerCase())) {
+            return cleanTitle.slice(cleanBrand.length).replace(/^[\s:：\-|]+/, '').trim() || cleanTitle;
+        }
+        return cleanTitle;
+    }
+
+    function buildBaseSheetRow(values = {}) {
+        return [
+            sheetCell(values.category),
+            sheetCell(values.title),
+            sheetCell(values.amazonUrl || values.url),
+            sheetCell(values.asin || extractAsinFromUrl(values.amazonUrl || values.url)),
+            sheetCell(values.brand),
+            sheetCell(values.productName),
+            sheetCell(values.price),
+            sheetCell(values.referencePrice || values.listPrice),
+            sheetCell(values.rating),
+            sheetCell(values.reviewCount),
+            sheetCell(values.availability),
+            sheetCell(values.seller),
+            sheetCell(values.fulfilledBy || values.shipsFrom),
+            sheetCell(values.status || values.kind)
+        ];
     }
 
     function makeTsv(headers, rows) {
@@ -354,51 +498,86 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function buildListRows(products, category, sortOrder, kind = '') {
-        return sortProducts(products, sortOrder).map(p => [
-            category || '',
-            p.name || p.title || '',
-            p.url || p.amazonUrl || p.affiliateUrl || '',
-            p.brand || '',
-            p.productName || '',
-            normalizePrice(p.price),
-            normalizePrice(p.referencePrice),
-            p.rating || '',
-            p.reviewCount || '',
-            kind || p.kind || ''
-        ]);
+        return sortProducts(products, sortOrder).map(p => buildBaseSheetRow({
+            category: category || '',
+            title: p.name || p.title || '',
+            amazonUrl: p.url || p.amazonUrl || p.affiliateUrl || '',
+            asin: p.asin || extractAsinFromUrl(p.url || p.amazonUrl || p.affiliateUrl || ''),
+            brand: p.brand || '',
+            productName: p.productName || '',
+            price: normalizePrice(p.price),
+            referencePrice: normalizePrice(p.referencePrice),
+            rating: p.rating || '',
+            reviewCount: p.reviewCount || '',
+            availability: p.availability || '',
+            seller: p.seller || '',
+            status: kind || p.kind || ''
+        }));
     }
 
     function buildProductDetailRow(productData, kind = '個別商品ページ') {
-        return [
-            productData.category || '',
-            productData.title || '',
-            productData.amazonUrl || productData.url || '',
-            productData.brand || '',
-            productData.productName || '',
-            normalizePrice(productData.price),
-            normalizePrice(productData.referencePrice),
-            productData.rating || '',
-            productData.reviewCount || '',
-            kind
-        ];
+        return buildBaseSheetRow({
+            category: productData.category || '',
+            title: productData.title || '',
+            amazonUrl: productData.amazonUrl || productData.url || '',
+            asin: productData.asin || extractAsinFromUrl(productData.amazonUrl || productData.url || ''),
+            brand: productData.brand || '',
+            productName: productData.productName || extractProductNameFromTitle(productData.title, productData.brand),
+            price: normalizePrice(productData.price),
+            referencePrice: normalizePrice(productData.referencePrice || productData.listPrice),
+            rating: productData.rating || '',
+            reviewCount: productData.reviewCount || '',
+            availability: productData.availability || '',
+            seller: productData.seller || '',
+            fulfilledBy: productData.fulfilledBy || productData.shipsFrom || '',
+            status: kind
+        });
     }
 
     function buildCurrentPageAIRow(productData) {
+        const category = Array.isArray(productData.categories) && productData.categories.length
+            ? productData.categories[productData.categories.length - 1]
+            : productData.category || '';
+        const amazonUrl = productData.amazonUrl || productData.canonicalUrl || productData.url || '';
+        const asin = productData.asin || extractAsinFromUrl(amazonUrl);
+        const productName = productData.productName || extractProductNameFromTitle(productData.title, productData.brand);
+
         return [
-            productData.category || '',
-            productData.title || '',
-            productData.amazonUrl || '',
-            productData.brand || '',
-            productData.productName || '',
-            normalizePrice(productData.price),
-            normalizePrice(productData.referencePrice),
-            productData.rating || '',
-            productData.reviewCount || '',
+            sheetCell(category),
+            sheetCell(productData.title),
+            sheetCell(amazonUrl),
+            sheetCell(asin),
+            sheetCell(productData.brand),
+            sheetCell(productName),
+            sheetCell(productData.price),
+            sheetCell(productData.referencePrice || productData.listPrice),
+            sheetCell(productData.rating),
+            sheetCell(productData.reviewCount),
+            sheetCell(productData.availability),
+            sheetCell(productData.seller),
+            sheetCell(productData.fulfilledBy || productData.shipsFrom),
             '単品',
-            '', '', '', '', '', '', '', '', '',
-            cleanSheetValue(productData.text1).substring(0, 50000),
-            cleanSheetValue(productData.text2).substring(0, 50000),
-            cleanSheetValue(productData.text3).substring(0, 50000)
+            '',
+            '',
+            '',
+            sheetCell(productData.featureBullets || productData.text1),
+            sheetCell(productData.description || productData.text2),
+            sheetCell(productData.aplusLines || productData.text3),
+            sheetCell(productData.brandStory),
+            sheetCell(productData.productOverview),
+            sheetCell(productData.technicalSpecifications || productData.productOverview),
+            sheetCell(productData.detailBullets),
+            sheetCell(productData.importantInformation),
+            sheetCell(productData.imageAlts),
+            sheetCell(productData.carouselTexts),
+            sheetCell(productData.ocrTexts),
+            sheetCell(productData.ocrStatus),
+            sheetCell(productData.highResolutionImages),
+            sheetCell(productData.capturedAt),
+            sheetCell(productData.url),
+            sheetCell(productData.canonicalUrl),
+            sheetCell(productData.extractionError),
+            ''
         ];
     }
 
@@ -569,36 +748,72 @@ document.addEventListener('DOMContentLoaded', () => {
                         .replace(/\u200e|\u200f/g, '')
                         .replace(/\s+/g, ' ')
                         .trim();
-                    const text = (selector) => clean(document.querySelector(selector)?.textContent || '');
+                    const removeNoiseNodes = (root) => {
+                        if (!root || !root.querySelectorAll) return root;
+                        root.querySelectorAll([
+                            'script',
+                            'style',
+                            'noscript',
+                            'template',
+                            'svg',
+                            'iframe',
+                            '[aria-hidden="true"]',
+                            '.aok-hidden',
+                            '[id*="sp_detail"]',
+                            '[id*="sponsored"]',
+                            '[class*="sponsored"]',
+                            '[data-adfeedbackdetails]',
+                            '[data-ad-placement-metadata]'
+                        ].join(',')).forEach(el => el.remove());
+                        return root;
+                    };
+                    const isNoiseLine = (value) => {
+                        const line = clean(value);
+                        if (!line) return true;
+                        if (/^(?:\.|#|@media\b|function\b|var\b|let\b|const\b|\(function\b|window\.|document\.|P\.when\b|A\.declarative\b)/.test(line)) return true;
+                        if (/[{}]/.test(line) && /(display|position|padding|margin|width|height|background|font|border|color|float|z-index|text-align|vertical-align|line-height)\s*:/.test(line)) return true;
+                        if (/(SponsoredProductsViewability|adFeedback|data-adfeedbackdetails|sp_detail|spAddToCart|a-carousel-card-empty|FirebirdSpRendering)/.test(line)) return true;
+                        if (/^(?:Thumbs up feedback|Thumbs down feedback|Scroll|Icon|Product Image|送信|読み込み中|カスタマー画像)$/.test(line)) return true;
+                        if (/(?:お寄せいただいたフィードバック|おすすめの管理|商品を読み込めません|前のスライドセット|次のスライドセット|前のページの関連|次のページの関連|この商品をチェックした人|この商品に関連する商品|無料配送になる関連商品)/.test(line)) return true;
+                        if (/^ページ:\s*\d+\s*\/\s*\d+/.test(line)) return true;
+                        return false;
+                    };
+                    const cleanNodeText = (node) => {
+                        if (!node) return '';
+                        const clone = removeNoiseNodes(node.cloneNode(true));
+                        return clean(clone.textContent || '');
+                    };
+                    const text = (selector) => cleanNodeText(document.querySelector(selector));
                     const attr = (selector, name) => clean(document.querySelector(selector)?.getAttribute(name) || '');
                     const uniq = (values, limit = 300) => {
                         const out = [];
                         const seen = new Set();
                         for (const value of values.flat(Infinity)) {
                             const line = clean(value);
-                            if (!line || seen.has(line)) continue;
+                            if (!line || isNoiseLine(line) || seen.has(line)) continue;
                             seen.add(line);
                             out.push(line);
                             if (out.length >= limit) break;
                         }
                         return out;
                     };
-                    const texts = (selector, limit = 300) => uniq([...document.querySelectorAll(selector)].map(el => el.textContent), limit);
+                    const texts = (selector, limit = 300, root = document) => uniq([...root.querySelectorAll(selector)].map(el => cleanNodeText(el)), limit);
                     const linesFrom = (root, limit = 300) => {
                         if (!root) return [];
+                        const clone = removeNoiseNodes(root.cloneNode(true));
                         const lines = [];
-                        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+                        const walker = document.createTreeWalker(clone, NodeFilter.SHOW_TEXT);
                         while (walker.nextNode()) {
                             const line = clean(walker.currentNode.nodeValue);
-                            if (line && line.length >= 2) lines.push(line);
+                            if (line && line.length >= 2 && !isNoiseLine(line)) lines.push(line);
                         }
                         return uniq(lines, limit);
                     };
                     const kvRows = (selector) => {
                         const rows = {};
                         document.querySelectorAll(selector).forEach((row) => {
-                            const key = clean(row.querySelector('th, .a-span3, .label, .prodDetSectionEntry')?.textContent || '').replace(/:$/, '');
-                            const value = clean(row.querySelector('td, .a-span9, .value, .prodDetAttrValue')?.textContent || '');
+                            const key = cleanNodeText(row.querySelector('th, .a-span3, .label, .prodDetSectionEntry')).replace(/:$/, '');
+                            const value = cleanNodeText(row.querySelector('td, .a-span9, .value, .prodDetAttrValue'));
                             if (key && value) rows[key] = value;
                         });
                         return rows;
@@ -617,11 +832,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     const aplusRoot = document.querySelector('#aplus, #aplus_feature_div, #aplus3p_feature_div, #dpx-aplus-product-description_feature_div');
                     const aplusLines = linesFrom(aplusRoot, 260);
                     const carouselTexts = uniq([
-                        texts('#aplus [role="tab"], #aplus button, #aplus .a-carousel-card, #aplus [class*="carousel"], #aplus [class*="module"], #aplus h1, #aplus h2, #aplus h3, #aplus h4, #aplus p, #aplus li', 260),
-                        texts('[data-a-carousel-options], .a-carousel-container, .a-carousel-row, .a-carousel-card', 180),
+                        aplusRoot ? texts('[role="tab"], button, .a-carousel-card, [class*="carousel"], [class*="module"], h1, h2, h3, h4, p, li', 180, aplusRoot) : [],
                     ], 300);
-                    const imageAlts = uniq([...document.querySelectorAll('#aplus img, #imageBlock img, #altImages img, img')]
+                    const imageAlts = uniq([...document.querySelectorAll('#aplus img, #imageBlock img, #altImages img')]
                         .flatMap(img => [img.alt, img.title, img.getAttribute('aria-label')]), 300);
+                    const productOverviewRows = kvRows('#productOverview_feature_div tr');
+                    const technicalSpecificationRows = {
+                        ...kvRows('#productDetails_techSpec_section_1 tr'),
+                        ...kvRows('#productDetails_detailBullets_sections1 tr'),
+                    };
 
                     const ocrTexts = [];
                     let ocrStatus = 'not_available';
@@ -687,11 +906,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         imageAlts,
                         ocrTexts: uniq(ocrTexts, 120),
                         ocrStatus,
-                        productOverview: {
-                            ...kvRows('#productOverview_feature_div tr'),
-                            ...kvRows('#productDetails_techSpec_section_1 tr'),
-                            ...kvRows('#productDetails_detailBullets_sections1 tr'),
-                        },
+                        productOverview: productOverviewRows,
+                        technicalSpecifications: technicalSpecificationRows,
                         detailBullets,
                         importantInformation: text('#importantInformation') || text('#legal_feature_div'),
                         highResolutionImages: images,
@@ -1509,7 +1725,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (match) reviewCount = match[0].replace(/,/g, '');
         }
 
-        // Amazon商品情報1-3取得
+        // AI用詳細情報取得
         const text1 = extractFeatureBullets(doc);
         const manufacturerDesc = extractManufacturerDescription(doc);
         const productDetailsSection = extractProductDetailsSection(doc);
@@ -1567,6 +1783,8 @@ document.addEventListener('DOMContentLoaded', () => {
             text('.a-price .a-offscreen');
         const referencePrice = text('.basisPrice .a-price.a-text-price .a-offscreen') ||
             text('.a-price.a-text-price .a-offscreen');
+        const availability = text('#availability span');
+        const seller = text('#merchant-info') || text('#sellerProfileTriggerId');
 
         let rating = '';
         const ratingText = text('span[data-hook="rating-out-of-text"]') || text('i.a-icon-star span.a-icon-alt');
@@ -1587,11 +1805,14 @@ document.addEventListener('DOMContentLoaded', () => {
             category,
             title,
             amazonUrl,
+            asin,
             brand,
             price,
             referencePrice,
             rating,
-            reviewCount
+            reviewCount,
+            availability,
+            seller
         };
     }
 
@@ -1857,7 +2078,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     buildListRows(result.products || [], result.category || 'カテゴリ不明', sortOrderEl.value, '現在ページ取得')
                 );
                 await outputRows(rows, {
-                    headers: SHEET_HEADERS.slice(0, 10),
+                    headers: SHEET_HEADERS.slice(0, 14),
                     sheetSuccessPrefix: '現在ページ取得をSheetsへ書き込みました',
                     copySuccessMessage: `✅ 現在ページ取得 ${rows.length}件をコピーしました`
                 });
@@ -1877,7 +2098,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }], '個別商品ページ');
                 const rows = results.map(result => buildProductDetailRow(result, '個別商品ページ'));
                 await outputRows(rows, {
-                    headers: SHEET_HEADERS.slice(0, 10),
+                    headers: SHEET_HEADERS.slice(0, 14),
                     sheetSuccessPrefix: '個別商品ページをSheetsへ書き込みました',
                     copySuccessMessage: `✅ 個別商品ページ ${rows.length}件をコピーしました`
                 });
@@ -1893,9 +2114,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mode === 'currentPageAI') {
             try {
                 const targets = await collectAmazonDetailTargets(pageDetailSelectEl?.value || 'current');
-                const results = await executeOnTabs(targets, runCurrentPageAIScraper, () => [{
-                    affiliateTag: affiliateTagEl.value
-                }], 'AI用商品ページ');
+                const results = [];
+                for (let i = 0; i < targets.length; i += 1) {
+                    statusMessageEl.textContent = `🔄 AI用商品ページ ${i + 1}/${targets.length} を詳細抽出中...`;
+                    chrome.storage.local.set({ status: `🔄 AI用商品ページ ${i + 1}/${targets.length} を詳細抽出中...` });
+                    results.push(await collectAmazonDetailPayload(targets[i]));
+                }
                 const rows = results.map(buildCurrentPageAIRow);
                 await outputRows(rows, {
                     headers: SHEET_HEADERS,
@@ -1920,7 +2144,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rows = results.map(result => buildProductDetailRow(result, '全タブリンク'));
                 const copyText = results.map(item => `${item.title}\n\n${item.amazonUrl}`).join('\n\n');
                 await outputRows(rows, {
-                    headers: SHEET_HEADERS.slice(0, 10),
+                    headers: SHEET_HEADERS.slice(0, 14),
                     copyText,
                     sheetSuccessPrefix: '全タブリンクをSheetsへ書き込みました',
                     copySuccessMessage: `✅ 全タブリンク ${rows.length}件をコピーしました`
@@ -1939,24 +2163,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 const results = await executeOnTabs(targets, runCouponGridScraperForRows, () => [{
                     affiliateTag: affiliateTagEl.value
                 }], 'クーポンページ');
-                const rows = results.flatMap(result => (result.products || []).map(p => [
-                    result.category || 'クーポン',
-                    p.name || '',
-                    p.url || '',
-                    '',
-                    p.couponInfo || '',
-                    normalizePrice(p.price),
-                    '',
-                    '',
-                    '',
-                    'クーポン取得'
-                ]));
+                const rows = results.flatMap(result => (result.products || []).map(p => buildBaseSheetRow({
+                    category: result.category || 'クーポン',
+                    title: p.name || '',
+                    amazonUrl: p.url || '',
+                    asin: p.asin || extractAsinFromUrl(p.url || ''),
+                    productName: p.couponInfo || '',
+                    price: normalizePrice(p.price),
+                    status: 'クーポン取得'
+                })));
                 const copyText = results
                     .flatMap(result => result.products || [])
                     .map(p => `${p.name}\n価格:${p.price}⇛${p.couponInfo}\n${p.url}`)
                     .join('\n\n');
                 await outputRows(rows, {
-                    headers: SHEET_HEADERS.slice(0, 10),
+                    headers: SHEET_HEADERS.slice(0, 14),
                     copyText,
                     sheetSuccessPrefix: 'クーポン取得結果をSheetsへ書き込みました',
                     copySuccessMessage: `✅ クーポン取得 ${rows.length}件をコピーしました`
@@ -1976,24 +2197,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     affiliateTag: affiliateTagEl.value,
                     itemCount: parseInt(itemCountEl.value, 10)
                 }], 'ふるさと納税ページ');
-                const rows = results.flatMap(result => (result.products || []).map(p => [
-                    result.category || 'ふるさと納税',
-                    p.name || '',
-                    p.url || '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    '',
-                    'ふるさと納税'
-                ]));
+                const rows = results.flatMap(result => (result.products || []).map(p => buildBaseSheetRow({
+                    category: result.category || 'ふるさと納税',
+                    title: p.name || '',
+                    amazonUrl: p.url || '',
+                    asin: p.asin || extractAsinFromUrl(p.url || ''),
+                    status: 'ふるさと納税'
+                })));
                 const copyText = results
                     .flatMap(result => result.products || [])
                     .map(p => `${p.name}\n${p.url}`)
                     .join('\n');
                 await outputRows(rows, {
-                    headers: SHEET_HEADERS.slice(0, 10),
+                    headers: SHEET_HEADERS.slice(0, 14),
                     copyText,
                     sheetSuccessPrefix: 'ふるさと納税取得結果をSheetsへ書き込みました',
                     copySuccessMessage: `✅ ふるさと納税 ${rows.length}件をコピーしました`
@@ -2013,18 +2229,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     affiliateTag: affiliateTagEl.value,
                     priorityBrands: ['apple', 'anker', 'dji', 'bose', 'shure', 'sony', 'samsung', 'amazon', 'insta360']
                 }], 'ブランドページ');
-                const rows = results.flatMap(result => (result.products || []).map(p => [
-                    result.category || 'ブランド個別ページ',
-                    p.name || '',
-                    p.url || '',
-                    '',
-                    p.couponInfo || '',
-                    normalizePrice(p.price),
-                    normalizePrice(p.referencePrice),
-                    '',
-                    '',
-                    'ブランド個別ページ'
-                ]));
+                const rows = results.flatMap(result => (result.products || []).map(p => buildBaseSheetRow({
+                    category: result.category || 'ブランド個別ページ',
+                    title: p.name || '',
+                    amazonUrl: p.url || '',
+                    asin: p.asin || extractAsinFromUrl(p.url || ''),
+                    productName: p.couponInfo || '',
+                    price: normalizePrice(p.price),
+                    referencePrice: normalizePrice(p.referencePrice),
+                    status: 'ブランド個別ページ'
+                })));
                 const copyText = results
                     .flatMap(result => result.products || [])
                     .map(p => {
@@ -2034,7 +2248,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     })
                     .join('\n\n');
                 await outputRows(rows, {
-                    headers: SHEET_HEADERS.slice(0, 10),
+                    headers: SHEET_HEADERS.slice(0, 14),
                     copyText,
                     sheetSuccessPrefix: 'ブランド個別ページをSheetsへ書き込みました',
                     copySuccessMessage: `✅ ブランド個別ページ ${rows.length}件をコピーしました`
