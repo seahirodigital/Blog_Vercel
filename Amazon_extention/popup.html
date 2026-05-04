@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>設定</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h3>商品情報整形ツール</h3>
+      <div style="display: flex; gap: 5px;">
+        <button id="multiLinkButton" class="settings-button" title="全タブのアフィリエイトリンクを一括取得">🔗</button>
+        <button id="promptButton" class="settings-button">📝</button>
+        <button id="affiliateLinkButton" class="settings-button" title="アフィリエイトリンク作成">🔗</button>
+        <button id="settingsButton" class="settings-button">⚙️</button>
+      </div>
+    </div>
+  <!-- プロンプト管理パネル（デフォルトは非表示）: mainPanelの外に配置 -->
+  <div id="promptPanel" class="settings-panel" style="display: none;">
+    <h4>プロンプト管理</h4>
+    <div class="form-group">
+      <label for="promptTitleSelect">タイトル選択:</label>
+      <select id="promptTitleSelect" style="width: 100%; margin-bottom: 10px;">
+        <option value="">-- 新規作成 --</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="promptTitleInput">タイトル名:</label>
+      <input type="text" id="promptTitleInput" placeholder="例: Amazon商品レビュー分析">
+    </div>
+    <div class="form-group">
+      <label for="promptContent">プロンプト内容:</label>
+      <textarea id="promptContent" rows="8" style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; font-family: monospace;" placeholder="プロンプトを入力してください..."></textarea>
+    </div>
+    <div class="button-grid" style="margin-top: 10px;">
+      <button id="promptSaveButton" class="action-button">💾 保存</button>
+      <button id="promptCopyButton" class="copy-button">📋 コピー</button>
+      <button id="promptDeleteButton" class="stop-button">🗑️ 削除</button>
+    </div>
+    <hr>
+  </div>
+
+    <!-- メインパネル: プロンプト管理表示時は非表示にする -->
+    <div id="mainPanel">
+      <!-- モード切替 -->
+      <div class="form-row">
+        <div class="form-group-half">
+          <label for="modeSelect">モード:</label>
+          <select id="modeSelect">
+            <option value="productPage">個別商品ページ</option>
+            <option value="currentPage">現在ページ取得</option>
+            <option value="standard">標準スクレイプ</option>
+            <option value="currentPageAI">現在ページをAI用取得</option>
+            <option value="allTabsAI">全タブページをAI用取得</option>
+            <option value="coupon">クーポン取得(グリッド)</option>
+            <option value="brand">ブランド個別ページ</option>
+            <option value="furusato">ふるさと納税取得用</option>
+          </select>
+        </div>
+        <div class="form-group-half">
+          <label for="sortOrder">整列順序:</label>
+          <select id="sortOrder">
+            <option value="default">デフォルト</option>
+            <option value="asc">昇順</option>
+            <option value="desc">降順</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row page-detail-row">
+        <div class="form-group-half">
+          <label for="pageDetailSelect">ページ詳細取得:</label>
+          <select id="pageDetailSelect">
+            <option value="current">今表示しているページ</option>
+            <option value="allTabs">その他タブで表示中すべて</option>
+          </select>
+        </div>
+        <div class="form-group-half create-article-wrap">
+          <label>&nbsp;</label>
+          <button id="createArticleButton" class="action-button create-article-button">記事作成</button>
+        </div>
+      </div>
+          
+
+    <!-- 設定パネル（デフォルトは非表示） -->
+    <div id="settingsPanel" class="settings-panel" style="display: none;">
+      <div class="form-group">
+        <label for="affiliateTag">アフィリエイトタグ:</label>
+        <input type="text" id="affiliateTag" placeholder="例: your-tag-22">
+      </div>
+      <hr>
+      
+      <!-- Google Sheets連携設定 -->
+      <h4>Google Sheets連携設定</h4>
+      <div class="form-group">
+        <label for="spreadsheetUrl">スプレッドシートURL:</label>
+        <input type="text" id="spreadsheetUrl" placeholder="https://docs.google.com/spreadsheets/d/...">
+      </div>
+      <div class="form-group">
+          <label for="sheetName">シート名:</label>
+          <input type="text" id="sheetName" placeholder="例: ブランド製品名仕訳" value="ブランド製品名仕訳">
+      </div>
+      <div class="form-group" style="margin-top: 10px;">
+        <button id="authenticateButton" class="action-button" style="width: 100%;">🔐 Google認証</button>
+      </div>
+      <div id="authStatus" class="status-box" style="margin-top: 10px; font-size: 11px;">
+        未認証
+      </div>
+      <hr>
+    </div>
+
+    <!-- メイン設定（2列表示） -->
+    <div class="form-row">
+      <div class="form-group-half">
+        <label for="itemCount">取得商品数:</label>
+        <input type="number" id="itemCount" value="50" min="1">
+      </div>
+      <div class="form-group-half">
+        <label for="minReviews">レビュー件数:</label>
+        <input type="number" id="minReviews" value="10" placeholder="例: 100">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group-half">
+        <label for="minRating">レビュー平均点:</label>
+        <input type="number" id="minRating" value="4.0" step="0.1" placeholder="例: 4.0">
+      </div>
+      <div class="form-group-half">
+        <label for="sheetsToggle" style="display: flex; align-items: center; gap: 8px;">
+          <span>Sheets書き込み:</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="sheetsToggle">
+            <span class="toggle-slider"></span>
+          </label>
+        </label>
+      </div>
+    </div>
+
+    <hr>
+    
+    <!-- ボタン群 -->
+    <div class="button-grid">
+      <button id="executeJsButton" class="action-button">▶️ 実行</button>
+      <button id="copyAllButton" class="copy-button">📋 コピー</button>
+      <button id="stopButton" class="stop-button">⏹️ 停止</button>
+    </div>
+
+    <hr>
+
+    <!-- ステータスと取得情報（2列表示） -->
+    <div class="status-row">
+      <div class="status-column">
+        <h4>ステータス</h4>
+        <div class="status-box">
+          <div id="statusMessage">待機中</div>
+        </div>
+      </div>
+      <div class="status-column">
+        <h4>取得情報</h4>
+        <div class="info-box">
+          <div>モード: <span id="statusMode">個別商品ページ</span></div>
+          <div>カテゴリ: <span id="statusCategory">-</span></div>
+          <div>件数: <span id="statusCount">0</span>/<span id="statusTarget">50</span></div>
+          <div>順序: <span id="statusSort">デフォルト</span></div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

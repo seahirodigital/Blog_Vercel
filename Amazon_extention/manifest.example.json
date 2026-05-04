@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "Amazon Product Scraper",
+  "version": "11.0",
+  "description": "Amazon商品情報取得拡張機能",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "scripting",
+    "clipboardWrite",
+    "identity"
+  ],
+  "host_permissions": [
+    "https://www.amazon.co.jp/*",
+    "https://www.amazon.com/*",
+    "https://amzn.asia/*",
+    "https://amzn.to/*",
+    "https://blog-vercel-dun.vercel.app/*",
+    "https://sheets.googleapis.com/*",
+    "https://www.googleapis.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "oauth2": {
+    "client_id": "YOUR_GOOGLE_OAUTH_CLIENT_ID.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/spreadsheets"
+    ]
+  }
+}
