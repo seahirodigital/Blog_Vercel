@@ -72,6 +72,7 @@ ASIN_IN_URL_RE = re.compile(
     r"/(?:dp|gp/product|gp/aw/d|exec/obidos/ASIN)/([A-Z0-9]{10})(?:[/?]|$)",
     re.IGNORECASE,
 )
+SHORT_AMAZON_HOSTS = {"amzn.to", "www.amzn.to", "amzn.asia", "www.amzn.asia"}
 HTML_SRC_RE = re.compile(r"""\bsrc=["']([^"']+)["']""", re.IGNORECASE)
 HTML_DATA_OLD_HIRES_RE = re.compile(r"""\bdata-old-hires=["']([^"']+)["']""", re.IGNORECASE)
 DEFAULT_PAGE_HEADERS = {
@@ -238,11 +239,62 @@ def post_creators_api(url: str, headers: dict, payload: dict, timeout: int = 30)
     return last_response
 
 
-def extract_asin_from_url(url: str) -> str:
+def _extract_asin_from_expanded_url(url: str) -> str:
     match = ASIN_IN_URL_RE.search((url or "").strip())
     if not match:
         return ""
     return match.group(1).upper()
+
+
+def _is_short_amazon_url(url: str) -> bool:
+    try:
+        parsed = urlparse((url or "").strip())
+    except ValueError:
+        return False
+    return (parsed.netloc or "").lower() in SHORT_AMAZON_HOSTS
+
+
+def _resolve_short_amazon_url(url: str) -> list[str]:
+    """amzn.to などの短縮URLを展開し、ASIN候補を含むURL一覧を返す。"""
+    if not _is_short_amazon_url(url):
+        return []
+
+    try:
+        response = requests.get(
+            url,
+            headers=DEFAULT_PAGE_HEADERS,
+            allow_redirects=True,
+            timeout=15,
+            stream=True,
+        )
+        response.close()
+    except requests.RequestException as exc:
+        print(f"[WARN] Amazon 短縮URLの展開に失敗しました: {url} ({exc})")
+        return []
+
+    resolved_urls = [response.url]
+    for history_response in response.history:
+        location = history_response.headers.get("Location", "").strip()
+        if location:
+            resolved_urls.append(location)
+        if history_response.url:
+            resolved_urls.append(history_response.url)
+    return [candidate for candidate in resolved_urls if candidate]
+
+
+def extract_asin_from_url(url: str) -> str:
+    normalized_url = (url or "").strip()
+    asin = _extract_asin_from_expanded_url(normalized_url)
+    if asin:
+        return asin
+
+    for resolved_url in _resolve_short_amazon_url(normalized_url):
+        asin = _extract_asin_from_expanded_url(resolved_url)
+        if asin:
+            print(f"[INFO] Amazon 短縮URLから ASIN を抽出しました: {asin}")
+            return asin
+
+    return ""
 
 
 def get_onedrive_access_token() -> str:
