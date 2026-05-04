@@ -66,6 +66,24 @@ CROP_DIALOG_SELECTOR = "div.ReactModal__Content.CropModal__content[role='dialog'
 TOP_IMAGE_LOADING_SELECTOR = "main div[class*='sc-e17b66d3-0']"
 URL_RE = re.compile(r"https?://[^\s\n\r<>\"']+")
 
+
+class NoteLoginRequiresManualAction(Exception):
+    """note側の認証要求により、無人環境ではログインを続行できない状態。"""
+
+
+def _print_manual_cookie_refresh_steps(reason: str) -> None:
+    """GitHub Actionsログに、手動Cookie更新の復旧手順を出力する。"""
+    print(f"   ⚠️ 自動セッション復旧不可: {reason}")
+    print("   📋 手動復旧手順:")
+    print("      1. ローカル端末で次のフォルダへ移動してください。")
+    print("         /Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/scripts/pipeline")
+    print("      2. 次のコマンドを実行してください。")
+    print("         python prompts/05-draft-manager/note_draft_poster.py --save-cookies")
+    print("      3. 起動したブラウザで note に手動ログインしてください。")
+    print("      4. Cookie が自動更新されない場合は、出力された JSON を GitHub Secret NOTE_STORAGE_STATE に登録してください。")
+    print("      5. GitHub Actions の「Note セッション維持（自動）」を手動再実行してください。")
+    print("   理由: note が reCAPTCHA などのブラウザ操作を要求しており、GitHub Actions の無人実行では認証を完了できません。")
+
 # OGP展開用JS関数群 (note_ogp_opener.py から移植)
 JS_FUNCTIONS = r"""
 window.noteFormatter = {
@@ -2012,13 +2030,18 @@ def _api_login(session: http_requests.Session) -> bool:
                 try:
                     body = res.json()
                     if "error" in body:
-                        print(f"   ❌ ログインエラー: {body['error']}")
+                        error = body["error"]
+                        print(f"   ❌ ログインエラー: {error}")
+                        if isinstance(error, dict) and error.get("code") == "required_recaptcha":
+                            raise NoteLoginRequiresManualAction(error.get("message", "reCAPTCHA認証が必要です"))
                         break  # 認証情報が無効なので他を試しても無駄
                     # レスポンスにトークンが含まれる場合はCookieにセット
                     token = (body.get("data", {}) or {}).get("token") or body.get("token")
                     if token:
                         print(f"   🔑 レスポンストークン検出 → Cookieにセット")
                         session.cookies.set("_note_session_v5", token, domain=".note.com")
+                except NoteLoginRequiresManualAction:
+                    raise
                 except Exception:
                     pass
                 # ログイン後のCookie状況をデバッグ出力
@@ -2033,6 +2056,8 @@ def _api_login(session: http_requests.Session) -> bool:
                 continue  # エンドポイント不在 → 次を試す
             else:
                 print(f"   ⚠️ {attempt['url']} → {res.status_code}: {res.text[:150]}")
+        except NoteLoginRequiresManualAction:
+            raise
         except Exception as e:
             print(f"   ⚠️ {attempt['url']} → エラー: {e}")
         time.sleep(1)
@@ -2177,7 +2202,13 @@ def keepalive():
         print("   セッション有効 → Cookie更新して保存")
     else:
         print("   セッション切れ → APIログインで再取得")
-        if not _api_login(session):
+        try:
+            login_ok = _api_login(session)
+        except NoteLoginRequiresManualAction as e:
+            _print_manual_cookie_refresh_steps(str(e))
+            print("✅ 手動対応が必要なため、Actionsの失敗扱いにはせず終了します")
+            return
+        if not login_ok:
             print("❌ セッション復旧失敗")
             sys.exit(1)
 
@@ -2208,7 +2239,12 @@ def post_draft_to_note(markdown: str, run_ogp: bool = True, run_top_image: bool 
     if not draft:
         if not _verify_session(session):
             print("   ⚠️ Cookie無効 → APIログインにフォールバック")
-            if not _api_login(session):
+            try:
+                login_ok = _api_login(session)
+            except NoteLoginRequiresManualAction as e:
+                _print_manual_cookie_refresh_steps(str(e))
+                return result
+            if not login_ok:
                 print("❌ 全ての認証手段が失敗しました")
                 return result
         draft = _create_draft_api(session, title, body_html)
