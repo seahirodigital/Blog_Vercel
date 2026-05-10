@@ -36,6 +36,10 @@ class GeminiQuotaExceededError(RuntimeError):
     """Gemini の quota / rate limit 到達。"""
 
 
+class GeminiEmptyResponseError(RuntimeError):
+    """Gemini が本文なしの応答を返した場合の切替用エラー。"""
+
+
 _EXHAUSTED_GEMINI_KEYS: set[str] = set()
 
 
@@ -301,7 +305,7 @@ def _run_single_step(
 
     normalized_output = str(output_text or "").strip()
     if not normalized_output:
-        raise RuntimeError(f"{step['code']} の応答が空でした")
+        raise GeminiEmptyResponseError(f"{step['code']} の応答が空でした")
 
     interaction_id = str(getattr(response, "id", "") or "")
     if interaction_id:
@@ -374,6 +378,26 @@ def _run_pipeline_steps_with_candidates(
             else:
                 print(f"   {next_label} に切り替えて続行します")
                 _emit_actions_notice(f"Gemini キーを {label} から {next_label} へ切り替えます")
+        except GeminiEmptyResponseError as error:
+            step = steps[step_index]
+            print(f"   {label} の Gemini 応答が空でした: {error}")
+            _mark_key_exhausted(api_key)
+            candidate_index += 1
+            previous_interaction_id = None
+
+            if candidate_index >= len(candidates):
+                print("   利用可能な Gemini キーをすべて試しましたが、本文を取得できませんでした")
+                return None
+
+            next_label = candidates[candidate_index][0]
+            if previous_output_text and step.get("resume_instruction"):
+                print(f"   {next_label} に切り替え、{step['code']} から再開します")
+                _emit_actions_notice(
+                    f"Gemini 応答が空だったため {label} から {next_label} へ切り替え、{step['code']} から再開します"
+                )
+            else:
+                print(f"   {next_label} に切り替えて続行します")
+                _emit_actions_notice(f"Gemini 応答が空だったため {label} から {next_label} へ切り替えます")
         except Exception as error:
             print(f"   パイプラインエラー: {error}")
             return None

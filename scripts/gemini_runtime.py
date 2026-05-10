@@ -8,6 +8,7 @@ Gemini 呼び出しの共通設定と transport ラッパー。
 from __future__ import annotations
 
 import os
+from collections.abc import Mapping
 from typing import Any
 
 from google import genai
@@ -77,6 +78,82 @@ def create_client(api_key: str) -> genai.Client:
     return genai.Client(api_key=api_key)
 
 
+def _read_attr_or_key(value: Any, name: str) -> Any:
+    if isinstance(value, Mapping):
+        return value.get(name)
+    return getattr(value, name, None)
+
+
+def _as_mapping(value: Any) -> Any:
+    if isinstance(value, Mapping):
+        return value
+
+    for method_name in ("model_dump", "to_dict", "dict"):
+        method = getattr(value, method_name, None)
+        if not callable(method):
+            continue
+        try:
+            mapped = method()
+        except Exception:
+            continue
+        if isinstance(mapped, Mapping):
+            return mapped
+
+    return value
+
+
+def _iter_items(value: Any):
+    if value is None or isinstance(value, (str, bytes)):
+        return []
+    if isinstance(value, Mapping):
+        return [value]
+    if isinstance(value, (list, tuple)):
+        return value
+    return []
+
+
+def _extract_text_from_node(node: Any, depth: int = 0) -> str:
+    if node is None or depth > 8:
+        return ""
+
+    node = _as_mapping(node)
+
+    if isinstance(node, str):
+        return node
+
+    for field_name in ("text", "output_text"):
+        value = _read_attr_or_key(node, field_name)
+        if isinstance(value, str) and value:
+            return value
+
+    for field_name in (
+        "outputs",
+        "output",
+        "candidates",
+        "content",
+        "contents",
+        "parts",
+        "message",
+        "messages",
+        "response",
+        "responses",
+        "interaction",
+        "data",
+        "items",
+    ):
+        value = _read_attr_or_key(node, field_name)
+        if value is None:
+            continue
+        if isinstance(value, str) and value:
+            return value
+        for item in _iter_items(value) or [value]:
+            text = _extract_text_from_node(item, depth + 1)
+            if text:
+                return text
+
+    return ""
+
+
 def extract_text_from_response(response: Any) -> str:
     text = getattr(response, "text", "") or ""
     if text:
@@ -97,7 +174,7 @@ def extract_text_from_response(response: Any) -> str:
             if part_text:
                 return part_text
 
-    return ""
+    return _extract_text_from_node(response)
 
 
 def run_text_generation(
