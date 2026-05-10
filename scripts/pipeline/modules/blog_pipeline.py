@@ -27,7 +27,7 @@ from gemini_runtime import (  # noqa: E402
 )
 
 MODEL_NAME = get_text_model_name()
-TRANSPORT_NAME = get_text_transport(default="interactions.create")
+TRANSPORT_NAME = get_text_transport(default="models.generate_content")
 GENERATION_CONFIG = build_generation_config(temperature=0.5)
 PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
 
@@ -247,7 +247,6 @@ def _run_generation_with_quota_handling(
     *,
     input_text: str,
     system_prompt: str,
-    previous_id: Optional[str] = None,
 ) -> tuple[Any, str]:
     try:
         return run_text_generation(
@@ -257,7 +256,6 @@ def _run_generation_with_quota_handling(
             prompt=system_prompt,
             input_text=input_text,
             generation_config=GENERATION_CONFIG,
-            previous_interaction_id=previous_id,
         )
     except Exception as error:
         if _is_quota_error(error):
@@ -269,18 +267,16 @@ def _run_generation_with_quota_handling(
 def _prepare_step_request(
     step: dict[str, Any],
     previous_output_text: Optional[str],
-    previous_interaction_id: Optional[str],
-) -> tuple[str, Optional[str], bool]:
+) -> tuple[str, bool]:
+    # Step1 は seed_input（文字起こし）をそのまま使う
     if step["resume_instruction"] is None:
-        return step["seed_input"], None, False
+        return step["seed_input"], False
 
-    if TRANSPORT_NAME == "interactions.create" and previous_interaction_id:
-        return step["stateful_input"], previous_interaction_id, False
-
+    # Step2 以降は前段出力テキストを直接引き継ぐ
     if not previous_output_text:
         raise RuntimeError(f"{step['code']} を再開するための前段出力が見つかりません")
 
-    return _build_resume_input(previous_output_text, step["resume_instruction"]), None, True
+    return _build_resume_input(previous_output_text, step["resume_instruction"]), True
 
 
 def _run_single_step(
@@ -288,9 +284,8 @@ def _run_single_step(
     step: dict[str, Any],
     *,
     previous_output_text: Optional[str],
-    previous_interaction_id: Optional[str],
-) -> dict[str, str]:
-    input_text, previous_id, resumed = _prepare_step_request(step, previous_output_text, previous_interaction_id)
+) -> str:
+    input_text, resumed = _prepare_step_request(step, previous_output_text)
     print(step["start_message"])
     if resumed:
         print(f"   {step['code']} は前段出力を引き継いで再開します")
@@ -300,23 +295,14 @@ def _run_single_step(
         client,
         input_text=input_text,
         system_prompt=step["prompt"],
-        previous_id=previous_id,
     )
 
     normalized_output = str(output_text or "").strip()
     if not normalized_output:
         raise GeminiEmptyResponseError(f"{step['code']} の応答が空でした")
 
-    interaction_id = str(getattr(response, "id", "") or "")
-    if interaction_id:
-        print(f"{step['success_message']}: {interaction_id}")
-    else:
-        print(f"{step['success_message']}: response received")
-
-    return {
-        "output_text": normalized_output,
-        "interaction_id": interaction_id,
-    }
+    print(f"{step['success_message']}: response received")
+    return normalized_output
 
 
 def _run_pipeline_steps_with_candidates(
@@ -328,7 +314,6 @@ def _run_pipeline_steps_with_candidates(
     steps = _build_pipeline_steps(transcript, status, prompts)
     step_index = 0
     previous_output_text: Optional[str] = None
-    previous_interaction_id: Optional[str] = None
     candidate_index = 0
 
     while step_index < len(steps):
@@ -343,14 +328,11 @@ def _run_pipeline_steps_with_candidates(
         try:
             while step_index < len(steps):
                 step = steps[step_index]
-                result = _run_single_step(
+                previous_output_text = _run_single_step(
                     client,
                     step,
                     previous_output_text=previous_output_text,
-                    previous_interaction_id=previous_interaction_id,
                 )
-                previous_output_text = result["output_text"]
-                previous_interaction_id = result["interaction_id"] or None
 
                 should_sleep = bool(step.get("sleep_after_success")) and step_index < len(steps) - 1
                 step_index += 1
@@ -363,7 +345,6 @@ def _run_pipeline_steps_with_candidates(
             print(f"   {label} が quota / rate limit に到達しました: {error}")
             _mark_key_exhausted(api_key)
             candidate_index += 1
-            previous_interaction_id = None
 
             if candidate_index >= len(candidates):
                 print("   利用可能な Gemini キーを使い切ったため停止します")
@@ -383,7 +364,6 @@ def _run_pipeline_steps_with_candidates(
             print(f"   {label} の Gemini 応答が空でした: {error}")
             _mark_key_exhausted(api_key)
             candidate_index += 1
-            previous_interaction_id = None
 
             if candidate_index >= len(candidates):
                 print("   利用可能な Gemini キーをすべて試しましたが、本文を取得できませんでした")

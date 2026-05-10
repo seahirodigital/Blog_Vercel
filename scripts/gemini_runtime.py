@@ -3,6 +3,9 @@ Gemini 呼び出しの共通設定と transport ラッパー。
 
 モデル名や transport の解決をここへ集約し、
 本編パイプラインと info_viewer の両方から再利用する。
+
+デフォルト transport は安定した models.generate_content を使用。
+interactions.create は環境変数 GEMINI_TRANSPORT で明示指定した場合のみ利用可能。
 """
 
 from __future__ import annotations
@@ -35,7 +38,7 @@ def get_text_model_name(*override_env_names: str, default: str = DEFAULT_TEXT_MO
 def normalize_transport_name(
     value: str | None,
     *,
-    default: str = DEFAULT_INTERACTIONS_TRANSPORT,
+    default: str = DEFAULT_GENERATE_CONTENT_TRANSPORT,
 ) -> str:
     normalized = str(value or "").strip()
     if normalized in SUPPORTED_TRANSPORTS:
@@ -45,7 +48,7 @@ def normalize_transport_name(
 
 def get_text_transport(
     *override_env_names: str,
-    default: str = DEFAULT_INTERACTIONS_TRANSPORT,
+    default: str = DEFAULT_GENERATE_CONTENT_TRANSPORT,
 ) -> str:
     for env_name in override_env_names:
         value = os.getenv(env_name, "").strip()
