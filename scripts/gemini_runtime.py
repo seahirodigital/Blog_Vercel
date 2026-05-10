@@ -201,7 +201,19 @@ def run_text_generation(
         if previous_interaction_id:
             request["previous_interaction_id"] = previous_interaction_id
         response = client.interactions.create(**request)
-        return response, extract_text_from_response(response)
+        text = extract_text_from_response(response)
+        if not text:
+            print("   [DIAGNOSTICS] interactions.create returned empty text.")
+            print(f"   [DIAGNOSTICS] type(response) = {type(response)}")
+            try:
+                import json
+                dump_val = _as_mapping(response)
+                print("   [DIAGNOSTICS] response structure:")
+                print(json.dumps(dump_val, default=str, indent=2, ensure_ascii=False))
+            except Exception as e:
+                print(f"   [DIAGNOSTICS] could not dump response: {e}")
+                print(f"   [DIAGNOSTICS] repr(response) = {repr(response)}")
+        return response, text
 
     contents = input_text
     if prompt:
