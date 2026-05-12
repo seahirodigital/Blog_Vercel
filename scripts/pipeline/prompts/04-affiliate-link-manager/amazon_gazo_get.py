@@ -679,7 +679,11 @@ def save_and_optionally_upload(
     remote_folder: str,
 ) -> SavedImageInfo:
     if is_github_actions():
-        image.onedrive_url = upload_file_to_onedrive(image.local_path, remote_folder)
+        try:
+            image.onedrive_url = upload_file_to_onedrive(image.local_path, remote_folder)
+        except AmazonCreatorsApiError as exc:
+            print(f"[WARN] OneDrive への画像保存をスキップしました: {exc}")
+            print("[WARN] note 下書き投稿ではローカル画像を直接アップロードするため処理を続行します。")
         # note 下書き投稿では、この後 Playwright が同じローカル画像を直接アップロードする。
         # Actions 上でもアップロード完了までは手元に残しておく。
     return image
