@@ -1,0 +1,4 @@
+.codex_tmp
+.env
+.git
+node_modules
