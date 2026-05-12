@@ -1,4 +1,4 @@
-# Vibe Blog Engine 環境構築マニュアル (howtosetup.md)
+# Vibe Blog Engine 環境構築マニュアル (howtosetup.mdOut
 
 このドキュメントは、Vercel Blog Engine（YouTube→自動ブログ作成→OneDrive保存）システムの構築から各種APIキーの取得・設定方法までをまとめた完全版マニュアルです。
 

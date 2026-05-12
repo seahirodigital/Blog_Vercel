@@ -83,6 +83,7 @@ jobs:
           AMAZON_CLIENT_SECRET: ${{ secrets.AMAZON_CLIENT_SECRET }}
           APIFY_API_KEY: ${{ secrets.APIFY_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          VERCEL_URL: https://blog-vercel-dun.vercel.app
           FILE_ID: ${{ inputs.file_id }}
           NO_TOP_IMAGE: ${{ inputs.no_top_image }}
           NOTE_TARGET: ${{ inputs.note_target }}
@@ -90,25 +91,135 @@ jobs:
         run: |
           echo "note 保存先: ${NOTE_TARGET_LABEL}"
           python -c "
-          import requests, os
+          import base64
+          import json
+          import os
+          import sys
 
-          token_res = requests.post('https://login.microsoftonline.com/common/oauth2/v2.0/token', data={
-              'client_id': os.environ['ONEDRIVE_CLIENT_ID'],
-              'client_secret': os.environ['ONEDRIVE_CLIENT_SECRET'],
-              'refresh_token': os.environ['ONEDRIVE_REFRESH_TOKEN'],
-              'grant_type': 'refresh_token',
-              'scope': 'Files.ReadWrite.All offline_access',
-          })
-          token = token_res.json()['access_token']
+          import requests
+
+          TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
+          GRAPH_API = 'https://graph.microsoft.com/v1.0'
+          SECRET_NAME = 'ONEDRIVE_REFRESH_TOKEN'
+
+
+          def _body_preview(response):
+              text = response.text or ''
+              try:
+                  parsed = response.json()
+                  text = json.dumps(parsed, ensure_ascii=False)
+              except Exception:
+                  pass
+              return text[:800]
+
+
+          def _update_github_secret(secret_name, secret_value):
+              github_token = os.getenv('GITHUB_TOKEN', '')
+              repository = os.getenv('GITHUB_REPOSITORY', 'seahirodigital/Blog_Vercel')
+              if not github_token:
+                  print('ℹ️ GITHUB_TOKEN未設定のため、OneDrive refresh token の自動更新をスキップします')
+                  return
+              try:
+                  import nacl.encoding
+                  import nacl.public
+              except ImportError:
+                  print('⚠️ pynacl未インストールのため、OneDrive refresh token の自動更新をスキップします')
+                  return
+
+              headers = {
+                  'Authorization': f'Bearer {github_token}',
+                  'Accept': 'application/vnd.github+json',
+                  'X-GitHub-Api-Version': '2022-11-28',
+              }
+              api_base = f'https://api.github.com/repos/{repository}'
+              key_res = requests.get(f'{api_base}/actions/secrets/public-key', headers=headers, timeout=30)
+              if not key_res.ok:
+                  print(f'⚠️ GitHub公開鍵取得失敗: {key_res.status_code} {_body_preview(key_res)}')
+                  return
+
+              key_data = key_res.json()
+              public_key = nacl.public.PublicKey(key_data['key'].encode(), nacl.encoding.Base64Encoder)
+              sealed_box = nacl.public.SealedBox(public_key)
+              encrypted_value = base64.b64encode(sealed_box.encrypt(secret_value.encode())).decode()
+              put_res = requests.put(
+                  f'{api_base}/actions/secrets/{secret_name}',
+                  headers=headers,
+                  json={'encrypted_value': encrypted_value, 'key_id': key_data['key_id']},
+                  timeout=30,
+              )
+              if put_res.status_code in (201, 204):
+                  print(f'✅ GitHub Actions Secret {secret_name} を最新の OneDrive refresh token に更新しました')
+              else:
+                  print(f'⚠️ Secret更新失敗: {put_res.status_code} {_body_preview(put_res)}')
+
+
+          def _fetch_article_via_graph(file_id):
+              token_res = requests.post(
+                  TOKEN_URL,
+                  data={
+                      'client_id': os.environ['ONEDRIVE_CLIENT_ID'],
+                      'client_secret': os.environ['ONEDRIVE_CLIENT_SECRET'],
+                      'refresh_token': os.environ['ONEDRIVE_REFRESH_TOKEN'],
+                      'grant_type': 'refresh_token',
+                      'scope': 'Files.ReadWrite.All offline_access',
+                  },
+                  timeout=60,
+              )
+              if not token_res.ok:
+                  raise RuntimeError(f'OneDrive token取得失敗: HTTP {token_res.status_code}: {_body_preview(token_res)}')
+
+              token_data = token_res.json()
+              token = token_data.get('access_token')
+              if not token:
+                  raise RuntimeError(f'OneDrive token取得結果に access_token がありません: {_body_preview(token_res)}')
+
+              new_refresh = token_data.get('refresh_token')
+              if new_refresh and new_refresh != os.environ.get('ONEDRIVE_REFRESH_TOKEN'):
+                  _update_github_secret(SECRET_NAME, new_refresh)
+
+              content_res = requests.get(
+                  f'{GRAPH_API}/me/drive/items/{file_id}/content',
+                  headers={'Authorization': f'Bearer {token}'},
+                  timeout=120,
+              )
+              if not content_res.ok:
+                  raise RuntimeError(f'OneDrive記事取得失敗: HTTP {content_res.status_code}: {_body_preview(content_res)}')
+              return content_res.text
+
+
+          def _fetch_article_via_vercel(file_id):
+              vercel_url = os.getenv('VERCEL_URL', 'https://blog-vercel-dun.vercel.app').rstrip('/')
+              response = requests.get(
+                  f'{vercel_url}/api/articles',
+                  params={'id': file_id},
+                  timeout=120,
+              )
+              if not response.ok:
+                  raise RuntimeError(f'Vercel API経由の記事取得失敗: HTTP {response.status_code}: {_body_preview(response)}')
+              data = response.json()
+              content = data.get('content', '')
+              if not content:
+                  raise RuntimeError(f'Vercel API経由の記事取得結果に content がありません: {_body_preview(response)}')
+              return content
+
+
           file_id = os.environ['FILE_ID']
-          content_res = requests.get(
-              f'https://graph.microsoft.com/v1.0/me/drive/items/{file_id}/content',
-              headers={'Authorization': f'Bearer {token}'}
-          )
-          content_res.raise_for_status()
+          try:
+              content = _fetch_article_via_graph(file_id)
+              print('✅ OneDrive Graph APIから記事取得完了')
+          except Exception as graph_error:
+              print(f'⚠️ OneDrive Graph APIからの記事取得に失敗しました: {graph_error}')
+              print('↪️ Vercel /api/articles 経由で再取得します')
+              try:
+                  content = _fetch_article_via_vercel(file_id)
+                  print('✅ Vercel API経由で記事取得完了')
+              except Exception as fallback_error:
+                  print(f'❌ 記事取得に失敗しました: {fallback_error}')
+                  sys.exit(1)
+
           with open('/tmp/article.md', 'w', encoding='utf-8') as f:
-              f.write(content_res.text)
-          print(f'✅ 記事取得完了: {len(content_res.text)} 文字')
+              f.write(content)
+          print(f'✅ 記事取得完了: {len(content)} 文字')
           "
 
           if [ "$NO_TOP_IMAGE" = "true" ]; then
