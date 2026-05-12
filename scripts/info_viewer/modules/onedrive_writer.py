@@ -1,3 +1,4 @@
+import base64
 import json
 import os
 import re
@@ -17,6 +18,7 @@ PRIMARY_BASE_FOLDER = str(
     or ""
 ).strip("/ ")
 LEGACY_BASE_FOLDER = "Obsidian in Onedrive 202602/Vercel_Blog/情報取得/info_viewer"
+ONEDRIVE_REFRESH_TOKEN_SECRET_NAME = "ONEDRIVE_REFRESH_TOKEN"
 
 
 def _candidate_base_folders() -> list[str]:
@@ -195,6 +197,56 @@ def parse_frontmatter(text: str) -> tuple[dict[str, str], str]:
     return metadata, body
 
 
+def _response_preview(response: requests.Response, limit: int = 800) -> str:
+    text = response.text or ""
+    try:
+        text = json.dumps(response.json(), ensure_ascii=False)
+    except ValueError:
+        pass
+    return text[:limit]
+
+
+def _update_github_actions_secret(secret_name: str, secret_value: str) -> None:
+    github_token = os.getenv("GITHUB_TOKEN") or os.getenv("GH_PAT")
+    repository = os.getenv("GITHUB_REPOSITORY", "seahirodigital/Blog_Vercel")
+    if not github_token:
+        print("   ℹ️ GITHUB_TOKEN未設定のため、OneDrive refresh token の自動更新をスキップします。")
+        return
+
+    try:
+        import nacl.encoding
+        import nacl.public
+    except ImportError:
+        print("   ⚠️ pynacl未インストールのため、OneDrive refresh token の自動更新をスキップします。")
+        return
+
+    headers = {
+        "Authorization": f"Bearer {github_token}",
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+    api_base = f"https://api.github.com/repos/{repository}"
+    key_res = requests.get(f"{api_base}/actions/secrets/public-key", headers=headers, timeout=30)
+    if not key_res.ok:
+        print(f"   ⚠️ GitHub公開鍵取得失敗: {key_res.status_code} {_response_preview(key_res)}")
+        return
+
+    key_data = key_res.json()
+    public_key = nacl.public.PublicKey(key_data["key"].encode(), nacl.encoding.Base64Encoder)
+    sealed_box = nacl.public.SealedBox(public_key)
+    encrypted_value = base64.b64encode(sealed_box.encrypt(secret_value.encode())).decode()
+    put_res = requests.put(
+        f"{api_base}/actions/secrets/{secret_name}",
+        headers=headers,
+        json={"encrypted_value": encrypted_value, "key_id": key_data["key_id"]},
+        timeout=30,
+    )
+    if put_res.status_code in (201, 204):
+        print(f"   ✅ GitHub Actions Secret {secret_name} を最新の OneDrive refresh token に更新しました。")
+    else:
+        print(f"   ⚠️ Secret更新失敗: {put_res.status_code} {_response_preview(put_res)}")
+
+
 def _get_access_token() -> str:
     client_id = os.getenv("ONEDRIVE_CLIENT_ID")
     client_secret = os.getenv("ONEDRIVE_CLIENT_SECRET")
@@ -214,8 +266,20 @@ def _get_access_token() -> str:
         },
         timeout=60,
     )
-    response.raise_for_status()
-    return response.json()["access_token"]
+    if not response.ok:
+        raise RuntimeError(f"OneDrive token取得失敗: HTTP {response.status_code}: {_response_preview(response)}")
+
+    token_data = response.json()
+    access_token = token_data.get("access_token")
+    if not access_token:
+        raise RuntimeError(f"OneDrive token取得結果に access_token がありません: {_response_preview(response)}")
+
+    new_refresh_token = token_data.get("refresh_token")
+    if new_refresh_token and new_refresh_token != refresh_token:
+        os.environ["ONEDRIVE_REFRESH_TOKEN"] = new_refresh_token
+        _update_github_actions_secret(ONEDRIVE_REFRESH_TOKEN_SECRET_NAME, new_refresh_token)
+
+    return access_token
 
 
 def _request(method: str, url: str, token: str, **kwargs):
