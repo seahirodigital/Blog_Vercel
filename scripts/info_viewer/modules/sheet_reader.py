@@ -1,10 +1,13 @@
 import json
 import os
 import re
+import time
 from datetime import datetime
+from collections.abc import Callable
 from typing import Any
 
 import gspread
+from gspread.exceptions import APIError
 from google.oauth2.service_account import Credentials
 
 SCOPES = [
@@ -14,6 +17,8 @@ SCOPES = [
 
 DEFAULT_CHANNEL_SHEET_NAME = os.getenv("INFO_VIEWER_CHANNEL_SHEET_NAME", "チャンネル設定")
 DEFAULT_VIDEO_SHEET_NAME = os.getenv("INFO_VIEWER_VIDEO_SHEET_NAME", "動画リスト")
+GOOGLE_RETRY_STATUS_CODES = {429, 500, 502, 503, 504}
+GOOGLE_RETRY_DELAYS = (5, 15, 30)
 
 
 VIDEO_TITLE_ALIASES = ["動画タイトル", "タイトル", "title", "動画名"]
@@ -35,6 +40,39 @@ def _pick_value(row: dict[str, Any], aliases: list[str], default: str = "") -> s
     return default
 
 
+def _api_error_status(error: APIError) -> int | None:
+    response = getattr(error, "response", None)
+    status_code = getattr(response, "status_code", None)
+    if status_code:
+        return int(status_code)
+
+    args = getattr(error, "args", ())
+    if args and isinstance(args[0], dict):
+        code = args[0].get("code")
+        return int(code) if code else None
+    return None
+
+
+def _with_google_retry(label: str, operation: Callable[[], Any]):
+    max_attempts = len(GOOGLE_RETRY_DELAYS) + 1
+    for attempt in range(1, max_attempts + 1):
+        try:
+            return operation()
+        except APIError as error:
+            status_code = _api_error_status(error)
+            if status_code not in GOOGLE_RETRY_STATUS_CODES or attempt >= max_attempts:
+                raise
+
+            delay = GOOGLE_RETRY_DELAYS[attempt - 1]
+            print(
+                f"   ⚠️ Google Sheets {label} が一時失敗しました "
+                f"(HTTP {status_code})。{delay}秒後に再試行します。"
+            )
+            time.sleep(delay)
+
+    raise RuntimeError(f"Google Sheets {label} の再試行が想定外に終了しました。")
+
+
 def _get_service_account_client():
     sa_json = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON")
     if sa_json:
@@ -52,14 +90,17 @@ def _get_service_account_client():
 
 def _get_worksheet(spreadsheet_id: str, sheet_name: str):
     client = _get_service_account_client()
-    spreadsheet = client.open_by_key(spreadsheet_id)
-    return spreadsheet.worksheet(sheet_name)
+    spreadsheet = _with_google_retry("スプレッドシート取得", lambda: client.open_by_key(spreadsheet_id))
+    return _with_google_retry("ワークシート取得", lambda: spreadsheet.worksheet(sheet_name))
 
 
 def _load_rows(spreadsheet_id: str, sheet_name: str) -> list[dict[str, Any]]:
     worksheet = _get_worksheet(spreadsheet_id, sheet_name)
-    values = worksheet.get_all_values()
-    formula_values = worksheet.get_all_values(value_render_option="FORMULA")
+    values = _with_google_retry("通常値取得", worksheet.get_all_values)
+    formula_values = _with_google_retry(
+        "数式値取得",
+        lambda: worksheet.get_all_values(value_render_option="FORMULA"),
+    )
     if not values:
         return []
 
@@ -278,7 +319,7 @@ def update_video_status(
     sheet_name: str = DEFAULT_VIDEO_SHEET_NAME,
 ):
     worksheet = _get_worksheet(spreadsheet_id, sheet_name)
-    headers = worksheet.row_values(1)
+    headers = _with_google_retry("ヘッダー取得", lambda: worksheet.row_values(1))
     status_col = None
     for index, header in enumerate(headers, start=1):
         if _normalize_key(header) == _normalize_key("状況"):
@@ -288,4 +329,4 @@ def update_video_status(
     if status_col is None:
         raise ValueError("動画リストに「状況」列が見つかりません。")
 
-    worksheet.update_cell(row_number, status_col, new_status)
+    _with_google_retry("ステータス更新", lambda: worksheet.update_cell(row_number, status_col, new_status))

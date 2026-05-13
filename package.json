@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@microsoft/microsoft-graph-client": "^3.0.7",
-    "isomorphic-fetch": "^3.0.0"
+    "isomorphic-fetch": "^3.0.0",
+    "libsodium-wrappers": "^0.7.15"
   },
   "devDependencies": {
     "vercel": "^39.0.0"

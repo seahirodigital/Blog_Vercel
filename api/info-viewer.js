@@ -1,3 +1,5 @@
+import { syncGitHubActionsRefreshToken } from './_onedrive-token-sync.js';
+
 const GRAPH_API = 'https://graph.microsoft.com/v1.0';
 const TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
 const VERCEL_API = 'https://api.vercel.com';
@@ -138,8 +140,15 @@ async function getAccessToken() {
   }
 
   const data = await response.json();
+  const issuedRefreshToken = data.refresh_token || '';
   if (data.refresh_token && data.refresh_token !== process.env.ONEDRIVE_REFRESH_TOKEN) {
-    updateVercelEnvToken(data.refresh_token).catch(console.warn);
+    process.env.ONEDRIVE_REFRESH_TOKEN = data.refresh_token;
+    await Promise.allSettled([
+      updateVercelEnvToken(data.refresh_token),
+      syncGitHubActionsRefreshToken(data.refresh_token),
+    ]);
+  } else {
+    await syncGitHubActionsRefreshToken(issuedRefreshToken || process.env.ONEDRIVE_REFRESH_TOKEN);
   }
   return data.access_token;
 }
