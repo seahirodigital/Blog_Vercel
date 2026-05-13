@@ -46,11 +46,17 @@ jobs:
       - name: 依存パッケージをインストール
         run: pip install -r scripts/pipeline/requirements.txt
 
+      - name: OneDrive refresh token をVercelから同期
+        env:
+          ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          VERCEL_URL: https://blog-vercel-dun.vercel.app
+        run: python scripts/pipeline/sync_onedrive_refresh_token_from_vercel.py
+
       - name: Xpost_blog パイプラインを実行
         env:
           ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
           ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
-          ONEDRIVE_REFRESH_TOKEN: ${{ secrets.ONEDRIVE_REFRESH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
           XPOST_BLOG_ONEDRIVE_FOLDER: Obsidian in Onedrive 202602/Vercel_Blog/X投稿
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
