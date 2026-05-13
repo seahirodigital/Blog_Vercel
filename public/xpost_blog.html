@@ -986,6 +986,13 @@
       border-bottom: 0;
     }
 
+    .modal-title-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
     .memo-tabs {
       height: 40px;
       flex: 0 0 40px;
@@ -1283,7 +1290,10 @@
   <div class="modal-backdrop" id="affiliateModalBackdrop" aria-hidden="true">
     <section class="affiliate-modal" role="dialog" aria-modal="true" aria-labelledby="affiliateModalTitle">
       <div class="modal-header">
-        <strong id="affiliateModalTitle">tech affiliate</strong>
+        <div class="modal-title-group">
+          <strong id="affiliateModalTitle">アフィリエイトリンク管理</strong>
+          <a class="flat-button" id="affiliateStorageLink" href="#" target="_blank" rel="noopener" hidden>保存場所</a>
+        </div>
         <div class="panel-actions">
           <button type="button" class="flat-button" id="addMemoButton">MEMO追加</button>
           <button type="button" class="flat-button" id="reloadAffiliateButton">再読込</button>
@@ -1366,6 +1376,7 @@
       selectedArticleIds: new Set(),
       contextArticleId: '',
       affiliateMemos: { memo1: '' },
+      affiliateStorageUrl: '',
       activeAffiliateKey: 'memo1',
       affiliateDirty: false,
       mobileTab: 'editor',
@@ -1428,6 +1439,7 @@
       memoTabs: document.getElementById('memoTabs'),
       affiliateEditor: document.getElementById('affiliateEditor'),
       affiliateStatus: document.getElementById('affiliateStatus'),
+      affiliateStorageLink: document.getElementById('affiliateStorageLink'),
       insertAffiliateFromModalButton: document.getElementById('insertAffiliateFromModalButton'),
       articleContextMenu: document.getElementById('articleContextMenu'),
       contextSelectButton: document.getElementById('contextSelectButton'),
@@ -1558,6 +1570,13 @@
     function setAffiliateStatus(message, isError = false) {
       els.affiliateStatus.textContent = message;
       els.affiliateStatus.style.color = isError ? 'var(--danger)' : 'var(--text-soft)';
+    }
+
+    function updateAffiliateStorageLink() {
+      if (!els.affiliateStorageLink) return;
+      const href = state.affiliateStorageUrl || '';
+      els.affiliateStorageLink.href = href || '#';
+      els.affiliateStorageLink.hidden = !href;
     }
 
     function persistNoteDraftUrls() {
@@ -2272,8 +2291,10 @@
       if (!response.ok) throw new Error('tech affiliateの取得に失敗しました');
       const payload = await response.json();
       state.affiliateMemos = payload.memos || { memo1: '' };
+      state.affiliateStorageUrl = payload.storageUrl || '';
       state.activeAffiliateKey = memoKeys()[0] || 'memo1';
       state.affiliateDirty = false;
+      updateAffiliateStorageLink();
       renderMemoTabs();
       els.affiliateEditor.value = state.affiliateMemos[state.activeAffiliateKey] || '';
       setAffiliateStatus('読み込みました');

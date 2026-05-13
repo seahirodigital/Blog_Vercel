@@ -819,17 +819,21 @@ async function handleIndexRequest(req, res, token) {
 
 async function handleAffiliateRequest(req, res, token) {
   const encodedPath = encodeFolderPath(TECH_AFFILIATE_FILE_PATH);
+  const itemUrl = `${GRAPH_API}/me/drive/root:/${encodedPath}:`;
   const url = `${GRAPH_API}/me/drive/root:/${encodedPath}:/content`;
 
   if (req.method === 'GET') {
-    const response = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+    const headers = { Authorization: `Bearer ${token}` };
+    const itemResponse = await fetch(itemUrl, { headers });
+    const storageUrl = itemResponse.ok ? (await itemResponse.json()).webUrl || '' : '';
+    const response = await fetch(url, { headers });
     if (response.status === 404) {
-      return res.status(200).json({ memos: { memo1: '' } });
+      return res.status(200).json({ memos: { memo1: '' }, storageUrl });
     }
     if (!response.ok) {
       throw new Error(`tech affiliate 読み込み失敗: ${response.status}`);
     }
-    return res.status(200).json({ memos: parseAffiliateMemos(await response.text()) });
+    return res.status(200).json({ memos: parseAffiliateMemos(await response.text()), storageUrl });
   }
 
   if (req.method === 'PUT') {
