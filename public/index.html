@@ -872,7 +872,10 @@
       const res = await fetch(`${API_BASE}/affiliate-links`);
       if (!res.ok) throw new Error('アフィリンクの取得に失敗しました');
       const data = await res.json();
-      return data.memos || { memo1: '' };
+      return {
+        memos: data.memos || { memo1: '' },
+        storageUrl: data.storageUrl || '',
+      };
     }
 
     async function saveAffiliateMemos(memos) {
@@ -2116,6 +2119,7 @@
       const [ld, setLd] = useState(false);
       const [sv, setSv] = useState(false);
       const [cp, setCp] = useState(false);
+      const [storageUrl, setStorageUrl] = useState('');
       // モーダルサイズ（リサイズ対応）
       const [modalW, setModalW] = useState(680);
       const [modalH, setModalH] = useState(600);
@@ -2129,9 +2133,10 @@
         setLd(true);
         affUserEdited.current = false; // ロード中はユーザー編集フラグをリセット
         fetchAffiliateMemos()
-          .then(d => {
-            setMemos(d);
-            const keys = Object.keys(d).sort((a, b) =>
+          .then(({ memos: nextMemos, storageUrl: nextStorageUrl }) => {
+            setMemos(nextMemos);
+            setStorageUrl(nextStorageUrl);
+            const keys = Object.keys(nextMemos).sort((a, b) =>
               parseInt(a.replace('memo', ''), 10) - parseInt(b.replace('memo', ''), 10)
             );
             setMemoKeys(keys.length > 0 ? keys : ['memo1']);
@@ -2195,6 +2200,11 @@
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <span style={{ fontSize: '1.1rem' }}>🔗</span>
                 <h3 style={{ fontWeight: 700, color: '#1e293b', fontSize: '0.95rem', margin: 0 }}>アフィリエイトリンク管理</h3>
+                {storageUrl && (
+                  <a href={storageUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.7rem', fontWeight: 700, color: '#7C4DFF', textDecoration: 'none', background: 'white', border: '1px solid #ddd6fe', padding: '0.2rem 0.55rem', borderRadius: '9999px' }}>
+                    保存場所
+                  </a>
+                )}
                 <span style={{ fontSize: '0.65rem', color: '#7C4DFF', background: '#ede9fe', padding: '0.15rem 0.5rem', borderRadius: '9999px' }}>OneDrive同期</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>

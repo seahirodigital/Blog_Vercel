@@ -129,13 +129,17 @@ export default async function handler(req, res) {
     const encoded = encodePath(AFFILIATE_FILE_PATH);
 
     if (req.method === 'GET') {
+      const itemUrl = `${GRAPH_API}/me/drive/root:/${encoded}:`;
       const url = `${GRAPH_API}/me/drive/root:/${encoded}:/content`;
-      const r = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+      const headers = { Authorization: `Bearer ${token}` };
+      const itemResponse = await fetch(itemUrl, { headers });
+      const storageUrl = itemResponse.ok ? (await itemResponse.json()).webUrl || '' : '';
+      const r = await fetch(url, { headers });
       if (!r.ok) {
-        if (r.status === 404) return res.status(200).json({ memos: { memo1: '' } });
+        if (r.status === 404) return res.status(200).json({ memos: { memo1: '' }, storageUrl });
         throw new Error(`読み込み失敗: ${r.status}`);
       }
-      return res.status(200).json({ memos: parseMemos(await r.text()) });
+      return res.status(200).json({ memos: parseMemos(await r.text()), storageUrl });
     }
 
     if (req.method === 'PUT') {
