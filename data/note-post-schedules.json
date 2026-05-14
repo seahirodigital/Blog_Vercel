@@ -1258,7 +1258,7 @@
   },
   {
     "id": "eff3ef5e-7482-4921-9844-c3c9cb37accd",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s75494b2e712c48818c74b5e3a92c1e8c",
     "title": "リファファインバブル ピュア MTG シャワーヘッド選びの決定版レビュー比較",
     "name": "リファファインバブル ピュア、シャワーヘッド選びの決定版レビュー比較.md",
@@ -1270,7 +1270,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-14T13:48:42.250Z"
   },
   {
     "id": "1eb94dc5-8600-439b-8a2e-9e6f24d07839",
