@@ -1072,7 +1072,7 @@
   },
   {
     "id": "e022b4ff-f6e0-48f6-9ea5-86df8b005346",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5d91e5d54f004fbfb447382d36601e3f",
     "title": "Mindoo AquaX Plus 水拭き掃除機 レビュー比較まとめ：効率的なお掃除を実現する新常識",
     "name": "Mindoo AquaX Plus 水拭き掃除機 レビュー比較まとめ：効率的なお掃除を実現する新常識.md",
@@ -1084,7 +1084,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-14T13:44:15.784Z"
   },
   {
     "id": "58cf226d-ade8-4efb-8d28-17aaf694e95f",
