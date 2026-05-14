@@ -1,0 +1,445 @@
+name: Note 公開投稿 - OneDrive → note.com
+
+on:
+  workflow_dispatch:
+    inputs:
+      file_id:
+        description: 'OneDrive上の記事ファイルID'
+        required: false
+        default: ''
+        type: string
+      no_top_image:
+        description: 'Amazonトップ画像をスキップする'
+        required: false
+        default: 'false'
+        type: string
+      note_target:
+        description: 'note公開投稿先（blog_main / xpost_tech）'
+        required: false
+        default: 'blog_main'
+        type: string
+      publish_mode:
+        description: '公開モード（now / scheduled_due）'
+        required: false
+        default: 'now'
+        type: string
+      scheduled_at:
+        description: '予約投稿日時（ISO 8601）'
+        required: false
+        default: ''
+        type: string
+      schedule_id:
+        description: '予約ID'
+        required: false
+        default: ''
+        type: string
+      article_title:
+        description: '記事タイトル'
+        required: false
+        default: ''
+        type: string
+  schedule:
+    - cron: '*/5 * * * *'
+
+jobs:
+  dispatch-due-schedules:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: write
+      contents: read
+    steps:
+      - name: 予約投稿を確認して対象を起動
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import urllib.error
+          import urllib.request
+          from datetime import datetime, timezone
+
+          token = os.environ.get('GH_PAT', '')
+          repo = os.environ.get('REPOSITORY', 'seahirodigital/Blog_Vercel')
+          if not token:
+              raise SystemExit('GH_PAT が未設定です')
+
+          api_base = f'https://api.github.com/repos/{repo}'
+          var_name = 'NOTE_POST_SCHEDULES'
+
+          def request_json(method, url, payload=None, accept_404=False):
+              data = None if payload is None else json.dumps(payload).encode('utf-8')
+              req = urllib.request.Request(
+                  url,
+                  data=data,
+                  method=method,
+                  headers={
+                      'Authorization': f'Bearer {token}',
+                      'Accept': 'application/vnd.github+json',
+                      'X-GitHub-Api-Version': '2022-11-28',
+                      'Content-Type': 'application/json',
+                  },
+              )
+              try:
+                  with urllib.request.urlopen(req, timeout=30) as response:
+                      body = response.read().decode('utf-8')
+                      return response.status, json.loads(body) if body else {}
+              except urllib.error.HTTPError as error:
+                  body = error.read().decode('utf-8')
+                  if accept_404 and error.code == 404:
+                      return 404, {}
+                  raise RuntimeError(f'{method} {url} failed: {error.code} {body[:300]}')
+
+          status, variable = request_json('GET', f'{api_base}/actions/variables/{var_name}', accept_404=True)
+          schedules = []
+          if status == 200:
+              try:
+                  schedules = json.loads(variable.get('value') or '[]')
+              except Exception:
+                  schedules = []
+          if not isinstance(schedules, list):
+              schedules = []
+
+          now = datetime.now(timezone.utc)
+          due = []
+          next_schedules = []
+          for item in schedules:
+              if not isinstance(item, dict):
+                  continue
+              if item.get('status') != 'scheduled':
+                  next_schedules.append(item)
+                  continue
+              raw_publish_at = str(item.get('publishAt') or '')
+              try:
+                  publish_at = datetime.fromisoformat(raw_publish_at.replace('Z', '+00:00'))
+              except Exception:
+                  item['status'] = 'error'
+                  item['error'] = f'publishAtを解析できません: {raw_publish_at}'
+                  next_schedules.append(item)
+                  continue
+              if publish_at <= now:
+                  due.append(item)
+              else:
+                  next_schedules.append(item)
+
+          if not due:
+              print('期日到来の予約投稿はありません')
+              raise SystemExit(0)
+
+          for item in due:
+              inputs = {
+                  'file_id': str(item.get('fileId') or ''),
+                  'no_top_image': str(bool(item.get('noTopImage'))).lower(),
+                  'note_target': str(item.get('noteTarget') or 'blog_main'),
+                  'publish_mode': 'scheduled_due',
+                  'scheduled_at': str(item.get('publishAt') or ''),
+                  'schedule_id': str(item.get('id') or ''),
+                  'article_title': str(item.get('title') or item.get('name') or ''),
+              }
+              try:
+                  request_json(
+                      'POST',
+                      f'{api_base}/actions/workflows/note-post.yml/dispatches',
+                      {'ref': 'main', 'inputs': inputs},
+                  )
+                  item['status'] = 'queued'
+                  item['queuedAt'] = now.isoformat()
+                  item['error'] = ''
+                  print(f"起動しました: {inputs['file_id']} / {inputs['article_title']}")
+              except Exception as exc:
+                  item['status'] = 'error'
+                  item['error'] = str(exc)[:500]
+                  print(f"起動失敗: {inputs['file_id']} / {exc}")
+              next_schedules.append(item)
+
+          payload = {'name': var_name, 'value': json.dumps(next_schedules, ensure_ascii=False)}
+          if status == 200:
+              request_json('PATCH', f'{api_base}/actions/variables/{var_name}', payload)
+          else:
+              request_json('POST', f'{api_base}/actions/variables', payload)
+          PY
+
+  post-to-note:
+    if: github.event_name == 'workflow_dispatch' && inputs.file_id != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Python 3.13 セットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+          cache-dependency-path: scripts/pipeline/requirements.txt
+
+      - name: Python 依存パッケージをインストール
+        run: pip install -r scripts/pipeline/requirements.txt
+
+      - name: Playwright ブラウザをインストール（Chromium）
+        run: playwright install --with-deps chromium
+
+      - name: note 保存先の認証情報を選択
+        env:
+          NOTE_TARGET: ${{ inputs.note_target }}
+          BLOG_NOTE_EMAIL: ${{ secrets.NOTE_EMAIL }}
+          BLOG_NOTE_PASSWORD: ${{ secrets.NOTE_PASSWORD }}
+          BLOG_NOTE_STORAGE_STATE: ${{ secrets.NOTE_STORAGE_STATE }}
+          XPOST_NOTE_EMAIL: ${{ secrets.NOTE_EMAIL_XPOST_TECH }}
+          XPOST_NOTE_PASSWORD: ${{ secrets.NOTE_PASSWORD_XPOST_TECH }}
+          XPOST_NOTE_STORAGE_STATE: ${{ secrets.NOTE_STORAGE_STATE_XPOST_TECH }}
+        run: |
+          if [ "$NOTE_TARGET" = "xpost_tech" ]; then
+            echo "NOTE_EMAIL=${XPOST_NOTE_EMAIL}" >> "$GITHUB_ENV"
+            echo "NOTE_PASSWORD=${XPOST_NOTE_PASSWORD}" >> "$GITHUB_ENV"
+            echo "NOTE_STORAGE_SECRET_NAME=NOTE_STORAGE_STATE_XPOST_TECH" >> "$GITHUB_ENV"
+            echo "NOTE_TARGET_LABEL=xpost_tech" >> "$GITHUB_ENV"
+            {
+              echo "NOTE_STORAGE_STATE<<__NOTE_STORAGE_STATE__"
+              echo "${XPOST_NOTE_STORAGE_STATE}"
+              echo "__NOTE_STORAGE_STATE__"
+            } >> "$GITHUB_ENV"
+          else
+            echo "NOTE_EMAIL=${BLOG_NOTE_EMAIL}" >> "$GITHUB_ENV"
+            echo "NOTE_PASSWORD=${BLOG_NOTE_PASSWORD}" >> "$GITHUB_ENV"
+            echo "NOTE_STORAGE_SECRET_NAME=NOTE_STORAGE_STATE" >> "$GITHUB_ENV"
+            echo "NOTE_TARGET_LABEL=blog_main" >> "$GITHUB_ENV"
+            {
+              echo "NOTE_STORAGE_STATE<<__NOTE_STORAGE_STATE__"
+              echo "${BLOG_NOTE_STORAGE_STATE}"
+              echo "__NOTE_STORAGE_STATE__"
+            } >> "$GITHUB_ENV"
+          fi
+
+      - name: OneDriveから記事を取得し note に公開投稿
+        env:
+          ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
+          ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
+          ONEDRIVE_REFRESH_TOKEN: ${{ secrets.ONEDRIVE_REFRESH_TOKEN }}
+          AMAZON_CLIENT_ID: ${{ secrets.AMAZON_CLIENT_ID }}
+          AMAZON_CLIENT_SECRET: ${{ secrets.AMAZON_CLIENT_SECRET }}
+          APIFY_API_KEY: ${{ secrets.APIFY_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          VERCEL_URL: https://blog-vercel-dun.vercel.app
+          FILE_ID: ${{ inputs.file_id }}
+          NO_TOP_IMAGE: ${{ inputs.no_top_image }}
+          NOTE_TARGET: ${{ inputs.note_target }}
+          SCHEDULE_ID: ${{ inputs.schedule_id }}
+        working-directory: scripts/pipeline
+        run: |
+          echo "note 保存先: ${NOTE_TARGET_LABEL}"
+          python -c "
+          import base64
+          import json
+          import os
+          import sys
+
+          import requests
+
+          TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
+          GRAPH_API = 'https://graph.microsoft.com/v1.0'
+          SECRET_NAME = 'ONEDRIVE_REFRESH_TOKEN'
+
+
+          def _body_preview(response):
+              text = response.text or ''
+              try:
+                  parsed = response.json()
+                  text = json.dumps(parsed, ensure_ascii=False)
+              except Exception:
+                  pass
+              return text[:800]
+
+
+          def _update_github_secret(secret_name, secret_value):
+              github_token = os.getenv('GITHUB_TOKEN', '')
+              repository = os.getenv('GITHUB_REPOSITORY', 'seahirodigital/Blog_Vercel')
+              if not github_token:
+                  print('ℹ️ GITHUB_TOKEN未設定のため、OneDrive refresh token の自動更新をスキップします')
+                  return
+              try:
+                  import nacl.encoding
+                  import nacl.public
+              except ImportError:
+                  print('⚠️ pynacl未インストールのため、OneDrive refresh token の自動更新をスキップします')
+                  return
+
+              headers = {
+                  'Authorization': f'Bearer {github_token}',
+                  'Accept': 'application/vnd.github+json',
+                  'X-GitHub-Api-Version': '2022-11-28',
+              }
+              api_base = f'https://api.github.com/repos/{repository}'
+              key_res = requests.get(f'{api_base}/actions/secrets/public-key', headers=headers, timeout=30)
+              if not key_res.ok:
+                  print(f'⚠️ GitHub公開鍵取得失敗: {key_res.status_code} {_body_preview(key_res)}')
+                  return
+
+              key_data = key_res.json()
+              public_key = nacl.public.PublicKey(key_data['key'].encode(), nacl.encoding.Base64Encoder)
+              sealed_box = nacl.public.SealedBox(public_key)
+              encrypted_value = base64.b64encode(sealed_box.encrypt(secret_value.encode())).decode()
+              put_res = requests.put(
+                  f'{api_base}/actions/secrets/{secret_name}',
+                  headers=headers,
+                  json={'encrypted_value': encrypted_value, 'key_id': key_data['key_id']},
+                  timeout=30,
+              )
+              if put_res.status_code in (201, 204):
+                  print(f'✅ GitHub Actions Secret {secret_name} を最新の OneDrive refresh token に更新しました')
+              else:
+                  print(f'⚠️ Secret更新失敗: {put_res.status_code} {_body_preview(put_res)}')
+
+
+          def _fetch_article_via_graph(file_id):
+              token_res = requests.post(
+                  TOKEN_URL,
+                  data={
+                      'client_id': os.environ['ONEDRIVE_CLIENT_ID'],
+                      'client_secret': os.environ['ONEDRIVE_CLIENT_SECRET'],
+                      'refresh_token': os.environ['ONEDRIVE_REFRESH_TOKEN'],
+                      'grant_type': 'refresh_token',
+                      'scope': 'Files.ReadWrite.All offline_access',
+                  },
+                  timeout=60,
+              )
+              if not token_res.ok:
+                  raise RuntimeError(f'OneDrive token取得失敗: HTTP {token_res.status_code}: {_body_preview(token_res)}')
+
+              token_data = token_res.json()
+              token = token_data.get('access_token')
+              if not token:
+                  raise RuntimeError(f'OneDrive token取得結果に access_token がありません: {_body_preview(token_res)}')
+
+              new_refresh = token_data.get('refresh_token')
+              if new_refresh and new_refresh != os.environ.get('ONEDRIVE_REFRESH_TOKEN'):
+                  _update_github_secret(SECRET_NAME, new_refresh)
+
+              content_res = requests.get(
+                  f'{GRAPH_API}/me/drive/items/{file_id}/content',
+                  headers={'Authorization': f'Bearer {token}'},
+                  timeout=120,
+              )
+              if not content_res.ok:
+                  raise RuntimeError(f'OneDrive記事取得失敗: HTTP {content_res.status_code}: {_body_preview(content_res)}')
+              return content_res.text
+
+
+          def _fetch_article_via_vercel(file_id):
+              vercel_url = os.getenv('VERCEL_URL', 'https://blog-vercel-dun.vercel.app').rstrip('/')
+              response = requests.get(
+                  f'{vercel_url}/api/articles',
+                  params={'id': file_id},
+                  timeout=120,
+              )
+              if not response.ok:
+                  raise RuntimeError(f'Vercel API経由の記事取得失敗: HTTP {response.status_code}: {_body_preview(response)}')
+              data = response.json()
+              content = data.get('content', '')
+              if not content:
+                  raise RuntimeError(f'Vercel API経由の記事取得結果に content がありません: {_body_preview(response)}')
+              return content
+
+
+          file_id = os.environ['FILE_ID']
+          try:
+              content = _fetch_article_via_graph(file_id)
+              print('✅ OneDrive Graph APIから記事取得完了')
+          except Exception as graph_error:
+              print(f'⚠️ OneDrive Graph APIからの記事取得に失敗しました: {graph_error}')
+              print('↪️ Vercel /api/articles 経由で再取得します')
+              try:
+                  content = _fetch_article_via_vercel(file_id)
+                  print('✅ Vercel API経由で記事取得完了')
+              except Exception as fallback_error:
+                  print(f'❌ 記事取得に失敗しました: {fallback_error}')
+                  sys.exit(1)
+
+          with open('/tmp/article.md', 'w', encoding='utf-8') as f:
+              f.write(content)
+          print(f'✅ 記事取得完了: {len(content)} 文字')
+          "
+
+          if [ "$NO_TOP_IMAGE" = "true" ]; then
+            python prompts/06-note-post/note_post_publisher.py /tmp/article.md --no-top-image --result-json /tmp/note_post_result.json
+          else
+            python prompts/06-note-post/note_post_publisher.py /tmp/article.md --result-json /tmp/note_post_result.json
+          fi
+
+      - name: 予約状態を完了へ更新
+        if: ${{ inputs.schedule_id != '' }}
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          REPOSITORY: ${{ github.repository }}
+          SCHEDULE_ID: ${{ inputs.schedule_id }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import urllib.error
+          import urllib.request
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          token = os.environ.get('GH_PAT', '')
+          repo = os.environ.get('REPOSITORY', 'seahirodigital/Blog_Vercel')
+          schedule_id = os.environ.get('SCHEDULE_ID', '')
+          if not token or not schedule_id:
+              raise SystemExit(0)
+
+          api_base = f'https://api.github.com/repos/{repo}'
+          var_name = 'NOTE_POST_SCHEDULES'
+          result_path = Path('/tmp/note_post_result.json')
+          result = {}
+          if result_path.exists():
+              result = json.loads(result_path.read_text(encoding='utf-8'))
+
+          def request_json(method, url, payload=None, accept_404=False):
+              data = None if payload is None else json.dumps(payload).encode('utf-8')
+              req = urllib.request.Request(
+                  url,
+                  data=data,
+                  method=method,
+                  headers={
+                      'Authorization': f'Bearer {token}',
+                      'Accept': 'application/vnd.github+json',
+                      'X-GitHub-Api-Version': '2022-11-28',
+                      'Content-Type': 'application/json',
+                  },
+              )
+              try:
+                  with urllib.request.urlopen(req, timeout=30) as response:
+                      body = response.read().decode('utf-8')
+                      return response.status, json.loads(body) if body else {}
+              except urllib.error.HTTPError as error:
+                  body = error.read().decode('utf-8')
+                  if accept_404 and error.code == 404:
+                      return 404, {}
+                  raise RuntimeError(f'{method} {url} failed: {error.code} {body[:300]}')
+
+          status, variable = request_json('GET', f'{api_base}/actions/variables/{var_name}', accept_404=True)
+          if status != 200:
+              raise SystemExit(0)
+          schedules = json.loads(variable.get('value') or '[]')
+          now = datetime.now(timezone.utc).isoformat()
+          for item in schedules:
+              if isinstance(item, dict) and item.get('id') == schedule_id:
+                  item['status'] = 'published'
+                  item['publishedAt'] = now
+                  item['publishedUrl'] = result.get('published_url') or result.get('url') or ''
+                  item['error'] = ''
+
+          request_json(
+              'PATCH',
+              f'{api_base}/actions/variables/{var_name}',
+              {'name': var_name, 'value': json.dumps(schedules, ensure_ascii=False)},
+          )
+          print(f'予約状態をpublishedへ更新しました: {schedule_id}')
+          PY

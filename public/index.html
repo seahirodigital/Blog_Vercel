@@ -858,6 +858,48 @@
       return await res.json();
     }
 
+    async function triggerNotePost(fileIds, options = {}) {
+      const ids = Array.isArray(fileIds) ? fileIds : [fileIds];
+      const body = {
+        fileIds: ids,
+        mode: options.mode || 'now',
+        noteTarget: 'blog_main',
+        articles: options.articles || [],
+      };
+      if (options.publishAt) body.publishAt = options.publishAt;
+      if (options.noTopImage !== undefined) body.noTopImage = Boolean(options.noTopImage);
+      const res = await fetch(`${API_BASE}/note-post`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || 'note公開投稿の起動に失敗しました');
+      }
+      return await res.json();
+    }
+
+    async function fetchNotePostSchedules() {
+      const res = await fetch(`${API_BASE}/note-post`);
+      if (!res.ok) throw new Error('note公開予約の取得に失敗しました');
+      const data = await res.json();
+      return data.schedules || [];
+    }
+
+    async function cancelNotePostSchedule(scheduleId) {
+      const res = await fetch(`${API_BASE}/note-post`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ scheduleId }),
+      });
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || 'note公開予約のキャンセルに失敗しました');
+      }
+      return await res.json();
+    }
+
     async function fetchNoteDraftUrl(fileId) {
       try {
         const res = await fetch(`${API_BASE}/note-draft?fileId=${encodeURIComponent(fileId)}`);
@@ -886,6 +928,58 @@
       });
       if (!res.ok) throw new Error('アフィリンクの保存に失敗しました');
       return await res.json();
+    }
+
+    function pad2(value) {
+      return String(value).padStart(2, '0');
+    }
+
+    function toDateInputValue(date) {
+      return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`;
+    }
+
+    function toTimeInputValue(date) {
+      return `${pad2(date.getHours())}:${pad2(date.getMinutes())}`;
+    }
+
+    function formatDateTimeJa(value) {
+      if (!value) return '';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '';
+      return date.toLocaleString('ja-JP', {
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+    }
+
+    function formatTimeJa(value) {
+      if (!value) return '';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '';
+      return date.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function monthLabelJa(date) {
+      return `${date.getFullYear()}年 ${date.getMonth() + 1}月`;
+    }
+
+    function addHours(date, hours) {
+      const next = new Date(date);
+      next.setHours(next.getHours() + hours);
+      return next;
+    }
+
+    function nextRoundedHour() {
+      const date = new Date();
+      date.setMinutes(0, 0, 0);
+      date.setHours(date.getHours() + 1);
+      return date;
+    }
+
+    function getScheduleTitle(item) {
+      return item?.title || item?.name || item?.fileId || '記事';
     }
 
     // === フォルダ階層構築ユーティリティ ===
@@ -2363,6 +2457,17 @@
       const [amazonInputValue, setAmazonInputValue] = useState('');
       const [amazonTriggerRunning, setAmazonTriggerRunning] = useState(false);
       const [noteDraftRunning, setNoteDraftRunning] = useState(false);
+      const [notePostRunning, setNotePostRunning] = useState(false);
+      const [notePostModalOpen, setNotePostModalOpen] = useState(false);
+      const [notePostMode, setNotePostMode] = useState('now');
+      const [notePostSchedules, setNotePostSchedules] = useState([]);
+      const [notePostScheduleLoading, setNotePostScheduleLoading] = useState(false);
+      const [notePostSelectedDate, setNotePostSelectedDate] = useState(() => toDateInputValue(new Date()));
+      const [notePostMonth, setNotePostMonth] = useState(() => {
+        const date = new Date();
+        return new Date(date.getFullYear(), date.getMonth(), 1);
+      });
+      const [notePostTime, setNotePostTime] = useState(() => toTimeInputValue(nextRoundedHour()));
       // note下書きURL（localStorageで永続化: ページリロード後も保持）
       const [noteDraftUrls, setNoteDraftUrls] = useState(() => {
         try { return JSON.parse(localStorage.getItem('sb_noteDraftUrls') || '{}'); }
@@ -2985,6 +3090,155 @@
         }
       };
 
+      const selectedPostTargets = useMemo(() => {
+        const ids = selectMode && selectedIds.size > 0
+          ? Array.from(selectedIds)
+          : selectedArticle
+            ? [selectedArticle.id]
+            : [];
+        return ids.map((id) => {
+          const article = articles.find(a => a.id === id) || (selectedArticle?.id === id ? selectedArticle : null);
+          if (!article) return null;
+          return {
+            id,
+            title: article.h1Title || (articleH1Cache && articleH1Cache[id]) || getArticleFilenameTitle(article.name),
+            name: article.name || '',
+            path: article.path || '',
+          };
+        }).filter(Boolean);
+      }, [selectMode, selectedIds, selectedArticle, articles, articleH1Cache]);
+
+      const activeNotePostSchedules = useMemo(() => (
+        notePostSchedules.filter(item => item && item.status !== 'cancelled')
+      ), [notePostSchedules]);
+
+      const suggestedPostSlot = useMemo(() => {
+        const future = activeNotePostSchedules
+          .filter(item => item.status === 'scheduled' && new Date(item.publishAt).getTime() > Date.now())
+          .sort((a, b) => new Date(a.publishAt) - new Date(b.publishAt));
+        if (future.length === 0) return nextRoundedHour();
+        return addHours(new Date(future[future.length - 1].publishAt), 2);
+      }, [activeNotePostSchedules]);
+
+      const notePostSchedulesByDate = useMemo(() => {
+        const map = {};
+        activeNotePostSchedules.forEach((item) => {
+          if (!item.publishAt) return;
+          const date = new Date(item.publishAt);
+          if (Number.isNaN(date.getTime())) return;
+          const key = toDateInputValue(date);
+          if (!map[key]) map[key] = [];
+          map[key].push(item);
+        });
+        Object.values(map).forEach(list => list.sort((a, b) => new Date(a.publishAt) - new Date(b.publishAt)));
+        return map;
+      }, [activeNotePostSchedules]);
+
+      const notePostCalendarDays = useMemo(() => {
+        const first = new Date(notePostMonth.getFullYear(), notePostMonth.getMonth(), 1);
+        const start = new Date(first);
+        start.setDate(first.getDate() - first.getDay());
+        return Array.from({ length: 42 }, (_, index) => {
+          const date = new Date(start);
+          date.setDate(start.getDate() + index);
+          return date;
+        });
+      }, [notePostMonth]);
+
+      const selectedDateSchedules = notePostSchedulesByDate[notePostSelectedDate] || [];
+
+      const loadNotePostSchedules = useCallback(async () => {
+        setNotePostScheduleLoading(true);
+        try {
+          const schedules = await fetchNotePostSchedules();
+          setNotePostSchedules(schedules);
+        } catch (e) {
+          showToast('note公開予約の取得に失敗: ' + e.message, 'error');
+        } finally {
+          setNotePostScheduleLoading(false);
+        }
+      }, []);
+
+      useEffect(() => {
+        if (notePostModalOpen) loadNotePostSchedules();
+      }, [notePostModalOpen, loadNotePostSchedules]);
+
+      const applySuggestedPostSlot = useCallback(() => {
+        setNotePostSelectedDate(toDateInputValue(suggestedPostSlot));
+        setNotePostMonth(new Date(suggestedPostSlot.getFullYear(), suggestedPostSlot.getMonth(), 1));
+        setNotePostTime(toTimeInputValue(suggestedPostSlot));
+      }, [suggestedPostSlot]);
+
+      const openNotePostModal = () => {
+        if (selectedPostTargets.length === 0) {
+          showToast('記事を選択してください', 'error');
+          return;
+        }
+        setNotePostMode('now');
+        setNotePostModalOpen(true);
+        setTimeout(() => applySuggestedPostSlot(), 0);
+      };
+
+      const handleNotePostSubmit = async (mode = notePostMode) => {
+        const targets = selectedPostTargets;
+        if (targets.length === 0) { showToast('記事を選択してください', 'error'); return; }
+
+        if (hasChanges) {
+          const shouldSave = confirm('未保存の変更があります。先に保存してから公開投稿を開始しますか？');
+          if (!shouldSave) return;
+          await handleSave();
+        }
+
+        let publishAt = '';
+        if (mode === 'schedule') {
+          if (!/^\d{2}:\d{2}$/.test(notePostTime)) {
+            showToast('時間はXX:XX形式で入力してください', 'error');
+            return;
+          }
+          const localDate = new Date(`${notePostSelectedDate}T${notePostTime}:00`);
+          if (Number.isNaN(localDate.getTime())) {
+            showToast('予約日時を確認してください', 'error');
+            return;
+          }
+          if (localDate.getTime() <= Date.now() + 60_000) {
+            showToast('予約日時は現在時刻より後にしてください', 'error');
+            return;
+          }
+          publishAt = localDate.toISOString();
+        }
+
+        setNotePostRunning(true);
+        try {
+          await triggerNotePost(targets.map(target => target.id), {
+            mode,
+            publishAt,
+            articles: targets,
+          });
+          if (mode === 'schedule') {
+            showToast(`${targets.length}件のnote公開予約を登録しました`, 'success');
+            await loadNotePostSchedules();
+          } else {
+            showToast(`${targets.length}件のnote公開投稿を開始しました。GitHub Actionsで進捗を確認してください。`, 'info');
+            setNotePostModalOpen(false);
+          }
+          if (selectMode) { setSelectMode(false); setSelectedIds(new Set()); }
+        } catch (e) {
+          showToast('note公開投稿に失敗: ' + e.message, 'error');
+        } finally {
+          setNotePostRunning(false);
+        }
+      };
+
+      const handleCancelNotePostSchedule = async (scheduleId) => {
+        try {
+          const data = await cancelNotePostSchedule(scheduleId);
+          setNotePostSchedules(data.schedules || []);
+          showToast('note公開予約をキャンセルしました', 'success');
+        } catch (e) {
+          showToast('予約キャンセルに失敗: ' + e.message, 'error');
+        }
+      };
+
       // note下書き投稿（単体 or 複数選択）
       const handleNoteDraft = async () => {
         // 複数選択モード
@@ -3412,6 +3666,237 @@
             </div>
           )}
 
+          {notePostModalOpen && (
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/45 px-4"
+              onClick={() => { if (!notePostRunning) setNotePostModalOpen(false); }}
+            >
+              <div
+                className="w-full max-w-5xl overflow-hidden rounded-lg border border-purple-100 bg-white shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
+                  <div className="min-w-0">
+                    <h3 className="text-base font-bold text-slate-900">公開投稿</h3>
+                    <p className="mt-1 truncate text-xs text-slate-500">
+                      {selectedPostTargets.length === 1
+                        ? selectedPostTargets[0]?.title
+                        : `${selectedPostTargets.length}件の記事`}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setNotePostModalOpen(false)}
+                    disabled={notePostRunning}
+                    className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600 disabled:opacity-50"
+                    title="閉じる"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
+                      <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+
+                <div className="grid max-h-[78vh] grid-cols-1 overflow-y-auto lg:grid-cols-[340px_1fr]">
+                  <div className="border-b border-slate-200 p-5 lg:border-b-0 lg:border-r">
+                    <div className="grid grid-cols-2 rounded-lg bg-slate-100 p-1">
+                      <button
+                        type="button"
+                        onClick={() => setNotePostMode('now')}
+                        className={`rounded-md px-3 py-2 text-xs font-bold transition-colors ${notePostMode === 'now' ? 'bg-white text-[#7C4DFF] shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                      >
+                        今すぐ投稿
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setNotePostMode('schedule')}
+                        className={`rounded-md px-3 py-2 text-xs font-bold transition-colors ${notePostMode === 'schedule' ? 'bg-white text-[#7C4DFF] shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                      >
+                        日付・時間指定
+                      </button>
+                    </div>
+
+                    <div className="mt-5">
+                      <div className="mb-2 flex items-center justify-between">
+                        <span className="text-xs font-bold text-slate-500">対象記事</span>
+                        <span className="rounded-full bg-purple-50 px-2 py-0.5 text-[11px] font-bold text-[#7C4DFF]">{selectedPostTargets.length}件</span>
+                      </div>
+                      <div className="max-h-32 space-y-2 overflow-y-auto">
+                        {selectedPostTargets.map((target) => (
+                          <div key={target.id} className="rounded-md border border-slate-200 bg-slate-50 px-3 py-2">
+                            <p className="truncate text-xs font-bold text-slate-700">{target.title}</p>
+                            <p className="mt-0.5 truncate text-[11px] text-slate-400">{target.path || 'Blog_Articles'}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {notePostMode === 'schedule' && (
+                      <div className="mt-5 space-y-4">
+                        <div>
+                          <label className="mb-1.5 block text-xs font-bold text-slate-500">日付</label>
+                          <input
+                            type="date"
+                            value={notePostSelectedDate}
+                            onChange={(e) => {
+                              setNotePostSelectedDate(e.target.value);
+                              const date = new Date(`${e.target.value}T00:00:00`);
+                              if (!Number.isNaN(date.getTime())) setNotePostMonth(new Date(date.getFullYear(), date.getMonth(), 1));
+                            }}
+                            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 outline-none focus:border-[#7C4DFF] focus:ring-2 focus:ring-purple-100"
+                          />
+                        </div>
+                        <div>
+                          <label className="mb-1.5 block text-xs font-bold text-slate-500">時間</label>
+                          <input
+                            type="text"
+                            inputMode="numeric"
+                            value={notePostTime}
+                            onChange={(e) => setNotePostTime(e.target.value)}
+                            placeholder="XX:XX"
+                            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 outline-none focus:border-[#7C4DFF] focus:ring-2 focus:ring-purple-100"
+                          />
+                        </div>
+                        <button
+                          type="button"
+                          onClick={applySuggestedPostSlot}
+                          className="w-full rounded-lg border border-purple-200 bg-purple-50 px-3 py-2 text-left text-xs font-bold text-[#7C4DFF] transition-colors hover:bg-purple-100"
+                        >
+                          次の目安: {formatDateTimeJa(suggestedPostSlot)}
+                        </button>
+                      </div>
+                    )}
+
+                    <div className="mt-6 flex items-center justify-end gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setNotePostModalOpen(false)}
+                        disabled={notePostRunning}
+                        className="rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-500 hover:bg-slate-50 disabled:opacity-50"
+                      >
+                        閉じる
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleNotePostSubmit(notePostMode)}
+                        disabled={notePostRunning || selectedPostTargets.length === 0}
+                        className="rounded-lg bg-[#7C4DFF] px-4 py-2 text-xs font-bold text-white shadow-sm shadow-purple-200 transition-colors hover:bg-[#651FFF] disabled:bg-slate-300 disabled:shadow-none"
+                      >
+                        {notePostRunning ? '起動中...' : notePostMode === 'schedule' ? '予約する' : '今すぐ投稿'}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="p-5">
+                    <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                      <div>
+                        <p className="text-xs font-bold text-slate-500">予約カレンダー</p>
+                        <h4 className="mt-1 text-lg font-bold text-slate-900">{monthLabelJa(notePostMonth)}</h4>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setNotePostMonth(prev => new Date(prev.getFullYear(), prev.getMonth() - 1, 1))}
+                          className="rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-bold text-slate-500 hover:bg-slate-50"
+                          title="前の月"
+                        >
+                          &lt;
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setNotePostMonth(prev => new Date(prev.getFullYear(), prev.getMonth() + 1, 1))}
+                          className="rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-bold text-slate-500 hover:bg-slate-50"
+                          title="次の月"
+                        >
+                          &gt;
+                        </button>
+                        <button
+                          type="button"
+                          onClick={loadNotePostSchedules}
+                          disabled={notePostScheduleLoading}
+                          className="rounded-lg border border-purple-200 px-3 py-1.5 text-xs font-bold text-[#7C4DFF] hover:bg-purple-50 disabled:opacity-50"
+                        >
+                          {notePostScheduleLoading ? '更新中' : '更新'}
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-7 gap-1 text-center text-[11px] font-bold text-slate-400">
+                      {['日', '月', '火', '水', '木', '金', '土'].map(day => <div key={day} className="py-1">{day}</div>)}
+                    </div>
+                    <div className="mt-1 grid grid-cols-7 gap-1">
+                      {notePostCalendarDays.map((day) => {
+                        const key = toDateInputValue(day);
+                        const schedules = notePostSchedulesByDate[key] || [];
+                        const isCurrentMonth = day.getMonth() === notePostMonth.getMonth();
+                        const isSelected = key === notePostSelectedDate;
+                        const isToday = key === toDateInputValue(new Date());
+                        return (
+                          <button
+                            key={key}
+                            type="button"
+                            onClick={() => {
+                              setNotePostSelectedDate(key);
+                              setNotePostMode('schedule');
+                            }}
+                            className={`min-h-[86px] rounded-md border p-1.5 text-left transition-colors ${isSelected
+                                ? 'border-[#7C4DFF] bg-purple-50'
+                                : 'border-slate-200 bg-white hover:border-purple-200 hover:bg-purple-50/40'
+                              } ${isCurrentMonth ? 'opacity-100' : 'opacity-40'}`}
+                          >
+                            <div className="mb-1 flex items-center justify-between">
+                              <span className={`text-xs font-bold ${isToday ? 'text-[#7C4DFF]' : 'text-slate-500'}`}>{day.getDate()}</span>
+                              {schedules.length > 0 && <span className="rounded-full bg-[#7C4DFF] px-1.5 py-0.5 text-[10px] font-bold text-white">{schedules.length}</span>}
+                            </div>
+                            <div className="space-y-1">
+                              {schedules.slice(0, 2).map((item) => (
+                                <div key={item.id} className="overflow-hidden rounded bg-white px-1.5 py-1 shadow-sm">
+                                  <p className="truncate text-[10px] font-bold text-slate-700">{formatTimeJa(item.publishAt)} {getScheduleTitle(item)}</p>
+                                  <p className="truncate text-[9px] text-slate-400">登録 {formatDateTimeJa(item.createdAt)}</p>
+                                </div>
+                              ))}
+                              {schedules.length > 2 && <p className="text-[10px] font-bold text-slate-400">+{schedules.length - 2}</p>}
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <div className="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-3">
+                      <div className="mb-2 flex items-center justify-between">
+                        <p className="text-xs font-bold text-slate-600">{notePostSelectedDate} の予約</p>
+                        <span className="text-[11px] font-semibold text-slate-400">{selectedDateSchedules.length}件</span>
+                      </div>
+                      {selectedDateSchedules.length === 0 ? (
+                        <p className="py-4 text-center text-xs text-slate-400">予約はありません</p>
+                      ) : (
+                        <div className="max-h-44 space-y-2 overflow-y-auto">
+                          {selectedDateSchedules.map((item) => (
+                            <div key={item.id} className="flex items-start justify-between gap-3 rounded-md border border-slate-200 bg-white px-3 py-2">
+                              <div className="min-w-0">
+                                <p className="truncate text-xs font-bold text-slate-800">{formatTimeJa(item.publishAt)} {getScheduleTitle(item)}</p>
+                                <p className="mt-0.5 text-[11px] text-slate-400">登録 {formatDateTimeJa(item.createdAt)} / {item.status}</p>
+                              </div>
+                              {item.status === 'scheduled' && (
+                                <button
+                                  type="button"
+                                  onClick={() => handleCancelNotePostSchedule(item.id)}
+                                  className="rounded border border-rose-100 bg-rose-50 px-2 py-1 text-[11px] font-bold text-rose-500 hover:bg-rose-100"
+                                >
+                                  取消
+                                </button>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* メインコンテンツ */}
           <main className="flex-1 flex flex-col min-w-0 h-screen">
             {/* ツールバー */}
@@ -3520,6 +4005,26 @@
                     <span className="hidden lg:inline">解除</span>
                   </button>
                 )}
+                {/* note公開投稿ボタン */}
+                <button
+                  onClick={openNotePostModal}
+                  disabled={notePostRunning || selectedPostTargets.length === 0}
+                  className={`flex items-center gap-1.5 font-bold rounded-lg px-3 py-2 text-xs transition-all shadow-sm ${notePostRunning || selectedPostTargets.length === 0
+                      ? 'bg-slate-300 text-slate-500 cursor-not-allowed shadow-none'
+                      : 'bg-[#7C4DFF] text-white hover:bg-[#651FFF] shadow-purple-200'
+                    }`}
+                  title={selectedPostTargets.length > 1 ? `${selectedPostTargets.length}件をnoteに公開投稿` : 'この記事をnoteに公開投稿'}
+                  id="note-post-btn"
+                >
+                  {notePostRunning ? (
+                    <svg className="animate-spin" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 11-6.219-8.56" /></svg>
+                  ) : (
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M12 5v14M5 12h14" /><path d="M17 7l-5-5-5 5" /></svg>
+                  )}
+                  <span className="hidden sm:inline">
+                    {selectedPostTargets.length > 1 ? `公開投稿(${selectedPostTargets.length})` : '公開投稿'}
+                  </span>
+                </button>
                 {/* note下書きボタン */}
                 <button
                   onClick={handleNoteDraft}

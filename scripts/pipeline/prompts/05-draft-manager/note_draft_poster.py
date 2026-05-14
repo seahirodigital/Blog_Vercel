@@ -56,6 +56,21 @@ UA = (
     "Chrome/125.0.0.0 Safari/537.36"
 )
 
+NOTE_DISCLOSURE_PREFIX = "Amazonのアソシエイトとして本アカウントは適格販売により収入を得ています"
+NOTE_POST_TAGS = (
+    "エッセイ 写真 毎日note 小説 イラスト 競艇予想屋 ボートレース予想 競輪予想 "
+    "スキしてみて note 毎日更新  仕事 音楽 マンガ コラム 人生 自分 競艇投資 "
+    "毎日投稿 読書 ビジネス AI 投資 競輪 映画 日常 note毎日更新 予想 副業  "
+    "恋愛 絵 的中 ギャンブル 言葉 ブログ 地方競馬予想 ゲーム ダイエット  "
+    "健康 ラジオ 英語 大学生 youtube  教育 創作 人工知能 生き方 プログラミング "
+    "猫 最近の学び  料理 漫画 旅行 勉強 競艇予想士 お金 動画 python 短編小説 "
+    "中央競馬予想 コミュニケーション デザイン  人間関係 アート 本 分析 音声配信 "
+    "スピリチュアル 転職 生活 家族 機械学習 起業 ショートショート 占い  "
+    "ビッグデータ 幸せ  時間 オリジナル コーチング 心理学 オートレース予想 "
+    "マーケティング 旅 夢  哲学  フリーランス  自己啓発 ライフスタイル カメラ "
+    "Youtube動画 SNS ネットビジネス 記事 アニメ キャリア 学校 エンタメ"
+)
+
 # ── OGP展開設定 ────────────────────────────────────────
 EDITOR_CONTENT_SELECTOR  = ".ProseMirror p, .ProseMirror h2, .ProseMirror h3"
 EDITOR_LOAD_TIMEOUT_SEC  = 60
@@ -811,6 +826,278 @@ def _save_editor_draft(page) -> str:
     return strategy
 
 
+def _editor_has_table_of_contents(page) -> bool:
+    return bool(page.evaluate(
+        """
+        () => {
+          const editor = document.querySelector('.note-editable, [contenteditable="true"]') || document.querySelector('.ProseMirror');
+          if (!editor) return false;
+          const normalize = (value) => (value || '').replace(/\\s+/g, ' ').trim();
+          return Array.from(editor.querySelectorAll('*')).some((el) => {
+            const text = normalize(el.innerText || el.textContent || '');
+            return text === '目次' || text.startsWith('目次 ');
+          });
+        }
+        """
+    ))
+
+
+def _place_caret_after_disclosure(page) -> bool:
+    return bool(page.evaluate(
+        """
+        (prefix) => {
+          const editor = document.querySelector('.note-editable, [contenteditable="true"]') || document.querySelector('.ProseMirror');
+          if (!editor) return false;
+          const normalize = (value) => (value || '').replace(/\\u200B/g, '').replace(/\\s+/g, ' ').trim();
+          const nodes = Array.from(editor.querySelectorAll('p, div, li, h2, h3'));
+          const target = nodes.find((el) => normalize(el.innerText || el.textContent || '').includes(prefix));
+          if (!target) return false;
+          target.scrollIntoView({ block: 'center', inline: 'nearest' });
+          const range = document.createRange();
+          range.selectNodeContents(target);
+          range.collapse(false);
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+          editor.focus();
+          return true;
+        }
+        """,
+        NOTE_DISCLOSURE_PREFIX,
+    ))
+
+
+def _insert_table_of_contents(page) -> dict:
+    """アソシエイト表記の直後にnote標準の目次ブロックを挿入する。"""
+    result = {"success": False, "strategy": "", "already_exists": False}
+    if _editor_has_table_of_contents(page):
+        result["success"] = True
+        result["already_exists"] = True
+        result["strategy"] = "already_exists"
+        print("   ✅ 目次は既に挿入済みです")
+        return result
+
+    if not _place_caret_after_disclosure(page):
+        print("   ⚠️ アソシエイト表記が見つからないため、目次挿入をスキップします")
+        result["strategy"] = "disclosure_not_found"
+        return result
+
+    page.wait_for_timeout(500)
+    page.keyboard.press("Enter")
+    page.wait_for_timeout(900)
+
+    # noteのエディタは、カーソル位置にあるブロック操作ボタンか左側の目次ボタンから挿入できる。
+    direct_candidates = [
+        ("role_button_目次", page.get_by_role("button", name="目次")),
+        ("aria_label_目次", page.locator("button[aria-label='目次']")),
+        ("button_text_目次", page.locator("button").filter(has_text="目次")),
+    ]
+    try:
+        result["strategy"] = _click_visible_candidate(
+            page,
+            candidates=direct_candidates,
+            description="目次挿入",
+            timeout_ms=4000,
+        )
+        page.wait_for_timeout(1800)
+    except Exception as direct_error:
+        print(f"   ⚠️ 目次の直接挿入に失敗しました。ブロックメニューから再試行します: {direct_error}")
+        result["strategy"] = f"direct_failed: {direct_error}"
+
+    if not _editor_has_table_of_contents(page):
+        try:
+            menu_strategy = _click_visible_candidate(
+                page,
+                candidates=[
+                    ("aria_label_ブロック追加", page.locator("button[aria-label*='ブロック']")),
+                    ("aria_label_追加", page.locator("button[aria-label*='追加']")),
+                    ("button_text_plus", page.locator("button").filter(has_text=re.compile(r"^\\+$"))),
+                ],
+                description="目次用ブロックメニュー",
+                timeout_ms=2500,
+            )
+            page.wait_for_timeout(700)
+            toc_strategy = _click_visible_candidate(
+                page,
+                candidates=direct_candidates,
+                description="ブロックメニュー内の目次",
+                timeout_ms=3000,
+            )
+            result["strategy"] = f"{menu_strategy}->{toc_strategy}"
+            page.wait_for_timeout(1800)
+        except Exception as menu_error:
+            result["strategy"] = f"{result['strategy']} / menu_failed: {menu_error}"
+
+    result["success"] = _editor_has_table_of_contents(page)
+    if result["success"]:
+        print(f"   ✅ 目次挿入完了: {result['strategy']}")
+    else:
+        print(f"   ⚠️ 目次挿入を確認できませんでした: {result['strategy']}")
+    return result
+
+
+def _click_publish_next(page) -> str:
+    strategy = _click_visible_candidate(
+        page,
+        candidates=[
+            ("role_button_公開に進む", page.get_by_role("button", name="公開に進む")),
+            ("header_button_公開に進む", page.locator("header button").filter(has_text="公開に進む")),
+            ("button_text_公開に進む", page.locator("button").filter(has_text="公開に進む")),
+        ],
+        description="公開に進む",
+        timeout_ms=8000,
+    )
+    page.wait_for_timeout(3500)
+    return strategy
+
+
+def _fill_text_like_locator(locator, text: str) -> None:
+    locator.scroll_into_view_if_needed()
+    locator.click(timeout=4000)
+    try:
+        locator.fill(text, timeout=4000)
+        return
+    except Exception:
+        pass
+    locator.evaluate(
+        """
+        (el, value) => {
+          if ('value' in el) {
+            el.value = value;
+            el.dispatchEvent(new Event('input', { bubbles: true }));
+            el.dispatchEvent(new Event('change', { bubbles: true }));
+            return;
+          }
+          el.textContent = value;
+          el.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'insertText', data: value }));
+        }
+        """,
+        text,
+    )
+
+
+def _fill_note_hashtags(page, tags: str) -> str:
+    candidates = [
+        ("input_placeholder_ハッシュタグ", page.locator("input[placeholder*='ハッシュタグ'], textarea[placeholder*='ハッシュタグ']")),
+        ("input_aria_ハッシュタグ", page.locator("input[aria-label*='ハッシュタグ'], textarea[aria-label*='ハッシュタグ']")),
+        ("contenteditable_aria_ハッシュタグ", page.locator("[contenteditable='true'][aria-label*='ハッシュタグ']")),
+        (
+            "xpath_after_ハッシュタグ_input",
+            page.locator(
+                "xpath=//*[contains(normalize-space(.), 'ハッシュタグ')]"
+                "/following::*[self::input or self::textarea or @contenteditable='true'][1]"
+            ),
+        ),
+        (
+            "xpath_after_タグ_input",
+            page.locator(
+                "xpath=//*[contains(normalize-space(.), 'タグ')]"
+                "/following::*[self::input or self::textarea or @contenteditable='true'][1]"
+            ),
+        ),
+    ]
+    strategy, locator = _find_visible_candidate(candidates, "ハッシュタグ入力", timeout_ms=3000)
+    _fill_text_like_locator(locator, tags)
+    page.wait_for_timeout(1500)
+    print(f"   ✅ ハッシュタグ入力完了: {strategy}")
+    return strategy
+
+
+def _add_gadget_magazine(page) -> str:
+    tab_strategy = ""
+    try:
+        tab_strategy = _click_visible_candidate(
+            page,
+            candidates=[
+                ("role_tab_マガジン", page.get_by_role("tab", name="マガジン")),
+                ("role_button_マガジン", page.get_by_role("button", name="マガジン")),
+                ("button_text_マガジン", page.locator("button").filter(has_text="マガジン")),
+                ("text_マガジン", page.locator("text=マガジン")),
+            ],
+            description="マガジンタブ",
+            timeout_ms=4000,
+        )
+        page.wait_for_timeout(1500)
+    except Exception as exc:
+        print(f"   ⚠️ マガジンタブのクリックをスキップします: {exc}")
+
+    strategy, locator = _find_visible_candidate(
+        candidates=[
+            (
+                "xpath_gadget_row_add_button",
+                page.locator(
+                    "xpath=//*[contains(normalize-space(.), 'ガジェット')]"
+                    "/ancestor::*[self::div or self::li or self::section][.//button[contains(normalize-space(.), '追加')]][1]"
+                    "//button[contains(normalize-space(.), '追加')]"
+                ),
+            ),
+            (
+                "xpath_gadget_following_add_button",
+                page.locator(
+                    "xpath=//*[contains(normalize-space(.), 'ガジェット')]"
+                    "/following::button[contains(normalize-space(.), '追加')][1]"
+                ),
+            ),
+        ],
+        description="ガジェットマガジン追加",
+        timeout_ms=5000,
+    )
+    _click_locator_with_fallback(page, locator, strategy, "ガジェットマガジン追加", timeout_ms=5000)
+    page.wait_for_timeout(1000)
+    print(f"   ✅ ガジェットマガジン追加完了: {strategy}")
+    return f"{tab_strategy}->{strategy}" if tab_strategy else strategy
+
+
+def _click_final_post_button(page, dry_run: bool = False) -> str:
+    if dry_run:
+        print("   🧪 dry-run のため「投稿する」はクリックしません")
+        return "dry_run"
+
+    strategy = ""
+    for attempt in range(2):
+        try:
+            strategy = _click_visible_candidate(
+                page,
+                candidates=[
+                    ("role_button_投稿する", page.get_by_role("button", name="投稿する")),
+                    ("button_text_投稿する", page.locator("button").filter(has_text="投稿する")),
+                ],
+                description="投稿する",
+                timeout_ms=8000,
+            )
+            page.wait_for_timeout(4000)
+        except Exception as exc:
+            if attempt == 0:
+                raise
+            print(f"   ℹ️ 追加の投稿確認ボタンはありませんでした: {exc}")
+        else:
+            # 確認モーダルなどで同名ボタンが残る場合だけ、もう一度押せるようにする。
+            continue
+        break
+    return strategy
+
+
+def _publish_editor_page(page, tags: str = NOTE_POST_TAGS, dry_run: bool = False) -> dict:
+    result = {
+        "success": False,
+        "publish_next_strategy": "",
+        "tag_strategy": "",
+        "magazine_strategy": "",
+        "post_strategy": "",
+        "final_url": "",
+        "dry_run": dry_run,
+    }
+    result["publish_next_strategy"] = _click_publish_next(page)
+    result["tag_strategy"] = _fill_note_hashtags(page, tags)
+    result["magazine_strategy"] = _add_gadget_magazine(page)
+    result["post_strategy"] = _click_final_post_button(page, dry_run=dry_run)
+    page.wait_for_timeout(5000)
+    result["final_url"] = page.url
+    result["success"] = True
+    print(f"   ✅ 公開投稿フロー完了: {result['final_url']}")
+    return result
+
+
 def _run_direct_note_image_upload(page, image_path: Path, artifacts_dir: Path, previous_count: int) -> dict:
     controls_after_menu = _collect_control_snapshot(page)
     _write_json(artifacts_dir / "controls_after_top_image_menu.json", controls_after_menu)
@@ -1299,7 +1586,12 @@ def _select_note_top_image_for_upload(fetch_result) -> tuple[object, str]:
     return fetch_result.api_image, "api"
 
 
-def _attach_amazon_top_image_to_page(page, source_markdown: str, artifacts_dir: Path | None = None) -> dict:
+def _attach_amazon_top_image_to_page(
+    page,
+    source_markdown: str,
+    artifacts_dir: Path | None = None,
+    save_draft_after_upload: bool = True,
+) -> dict:
     artifacts_dir = artifacts_dir or NOTE_TOP_IMAGE_ARTIFACTS_DIR
     force_direct_upload = os.getenv("NOTE_TOP_IMAGE_FORCE_DIRECT", "").strip().lower() in {"1", "true", "yes", "on"}
     use_adobe_upload = NOTE_TOP_IMAGE_USE_ADOBE
@@ -1449,8 +1741,12 @@ def _attach_amazon_top_image_to_page(page, source_markdown: str, artifacts_dir: 
         image_flow = f"direct_{selected_upload_kind}"
         selected_image_path = str(selected_upload_image.local_path)
 
-    draft_save_strategy = _save_editor_draft(page)
-    _dump_page_artifacts(page, artifacts_dir, "after_top_image_draft_save")
+    if save_draft_after_upload:
+        draft_save_strategy = _save_editor_draft(page)
+        _dump_page_artifacts(page, artifacts_dir, "after_top_image_draft_save")
+    else:
+        draft_save_strategy = "skipped_for_publish"
+        _dump_page_artifacts(page, artifacts_dir, "after_top_image_before_publish")
 
     result = {
         "image_flow": image_flow,
@@ -1826,11 +2122,15 @@ def _run_ogp_expansion_on_draft(
     source_markdown: str = "",
     run_ogp: bool = True,
     run_top_image: bool = True,
+    insert_toc: bool = True,
+    publish_after: bool = False,
+    dry_run_publish: bool = False,
+    publish_tags: str = NOTE_POST_TAGS,
     artifacts_dir: Path | None = None,
 ) -> dict:
     """
     下書き作成後のエディタURLへPlaywrightでアクセスし、OGP展開とトップ画像処理を実行する。
-    OGP処理後に Amazon トップ画像挿入を行い、最後に note の下書き保存を押す。
+    OGP処理後に目次挿入と Amazon トップ画像処理を行い、最後に下書き保存または公開投稿へ進む。
     """
     from playwright.sync_api import sync_playwright
 
@@ -1838,11 +2138,13 @@ def _run_ogp_expansion_on_draft(
     result = {
         "editor_url": editor_url,
         "ogp_processed_count": 0,
+        "toc": {},
         "top_image": {},
+        "publish": {},
         "success": False,
     }
 
-    print(f"\n── Phase 4: OGP展開 + トップ画像（Playwright） ──")
+    print(f"\n── Phase 4: OGP展開 + 目次 + トップ画像（Playwright） ──")
     print(f"   対象URL: {editor_url}")
 
     playwright_cookies = _cookies_to_playwright(cookies_dict)
@@ -1891,11 +2193,22 @@ def _run_ogp_expansion_on_draft(
         print("   ⏳ OGP反映待機（5秒）...")
         page.wait_for_timeout(5000)
 
+        if insert_toc:
+            try:
+                result["toc"] = _insert_table_of_contents(page)
+            except Exception as e:
+                result["toc"] = {"success": False, "strategy": f"error: {e}"}
+                print(f"   ⚠️ 目次挿入エラー: {e}")
+        else:
+            result["toc"] = {"success": False, "strategy": "skipped_by_option"}
+            print("   ⏭️ 目次挿入はオプション指定によりスキップします")
+
         if run_top_image:
             top_image_result = _attach_amazon_top_image_to_page(
                 page,
                 source_markdown=source_markdown,
                 artifacts_dir=artifacts_dir,
+                save_draft_after_upload=not publish_after,
             )
         else:
             top_image_result = {"image_flow": "skipped_by_option"}
@@ -1915,10 +2228,23 @@ def _run_ogp_expansion_on_draft(
             print("   ⏳ トップ画像保存後の安定待機（8秒）...")
             page.wait_for_timeout(8000)
 
+        if publish_after:
+            try:
+                result["publish"] = _publish_editor_page(
+                    page,
+                    tags=publish_tags,
+                    dry_run=dry_run_publish,
+                )
+            except Exception as e:
+                result["publish"] = {"success": False, "error": str(e), "final_url": page.url}
+                print(f"   ❌ 公開投稿フロー失敗: {e}")
+                browser.close()
+                return result
+
         result["success"] = True
         browser.close()
 
-    print("   ✅ OGP展開 + トップ画像保存が完了しました。")
+    print("   ✅ OGP展開 + 目次 + トップ画像処理が完了しました。")
     return result
 
 
@@ -2217,7 +2543,15 @@ def keepalive():
 
 
 # ── メイン処理 ────────────────────────────────────────
-def post_draft_to_note(markdown: str, run_ogp: bool = True, run_top_image: bool = True) -> dict:
+def post_draft_to_note(
+    markdown: str,
+    run_ogp: bool = True,
+    run_top_image: bool = True,
+    insert_toc: bool = True,
+    publish: bool = False,
+    dry_run_publish: bool = False,
+    publish_tags: str = NOTE_POST_TAGS,
+) -> dict:
     title, body = extract_title_and_body(markdown)
     if not title or not body:
         print("❌ タイトルまたは本文が空です")
@@ -2271,8 +2605,17 @@ def post_draft_to_note(markdown: str, run_ogp: bool = True, run_top_image: bool 
             source_markdown=markdown,
             run_ogp=run_ogp,
             run_top_image=run_top_image,
+            insert_toc=insert_toc,
+            publish_after=publish,
+            dry_run_publish=dry_run_publish,
+            publish_tags=publish_tags,
         )
         result["editor_result"] = editor_result
+        publish_result = editor_result.get("publish") or {}
+        if publish:
+            result["success"] = bool(publish_result.get("success"))
+            if publish_result.get("final_url"):
+                result["published_url"] = publish_result["final_url"]
 
     return result
 
@@ -2290,6 +2633,12 @@ if __name__ == "__main__":
                         help="OGP展開をスキップして下書き保存のみ実行")
     parser.add_argument("--no-top-image", action="store_true",
                         help="Amazonトップ画像の添付をスキップする")
+    parser.add_argument("--no-toc", action="store_true",
+                        help="目次挿入をスキップする")
+    parser.add_argument("--publish", action="store_true",
+                        help="下書き処理後に公開投稿まで進める")
+    parser.add_argument("--dry-run-publish", action="store_true",
+                        help="公開画面まで進めるが、最後の「投稿する」は押さない")
     args = parser.parse_args()
 
     if args.save_cookies:
@@ -2310,9 +2659,19 @@ if __name__ == "__main__":
         print("   初回セットアップ: python prompts/05-draft-manager/note_draft_poster.py --save-cookies")
         sys.exit(1)
 
-    result = post_draft_to_note(md, run_ogp=not args.no_ogp, run_top_image=not args.no_top_image)
+    result = post_draft_to_note(
+        md,
+        run_ogp=not args.no_ogp,
+        run_top_image=not args.no_top_image,
+        insert_toc=not args.no_toc,
+        publish=args.publish or args.dry_run_publish,
+        dry_run_publish=args.dry_run_publish,
+    )
     if result["success"]:
-        print(f"\n🎉 下書き投稿成功！\n   タイトル: {result['title']}\n   URL: {result['url']}")
+        label = "公開投稿" if (args.publish or args.dry_run_publish) else "下書き投稿"
+        print(f"\n🎉 {label}成功！\n   タイトル: {result['title']}\n   URL: {result['url']}")
+        if result.get("published_url"):
+            print(f"   公開後URL: {result['published_url']}")
         file_id = os.getenv("FILE_ID", "")
         if file_id:
             _save_draft_url_to_github_var(file_id, result["url"])
