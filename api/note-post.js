@@ -151,27 +151,36 @@ async function dispatchNotePostWorkflow(repo, token, item) {
 }
 
 function buildScheduleItems(ids, body, noteTarget) {
-  const publishAt = toIsoString(body.publishAt || body.scheduledAt || body.scheduleAt);
-  if (!publishAt) {
-    throw new Error('publishAt は必須です');
-  }
-  if (new Date(publishAt).getTime() <= Date.now() - 60_000) {
-    throw new Error('予約日時は現在時刻より後にしてください');
-  }
-
   const now = new Date().toISOString();
   const articleMap = normalizeArticleMap(body.articles);
+  const scheduleMap = new Map();
+  if (Array.isArray(body.scheduleItems)) {
+    for (const item of body.scheduleItems) {
+      if (!item || typeof item !== 'object') continue;
+      const fileId = firstString(item.fileId || item.id, '');
+      if (!fileId) continue;
+      scheduleMap.set(String(fileId), item);
+    }
+  }
   return ids.map((fileId) => {
     const meta = articleMap.get(String(fileId)) || {};
+    const scheduleMeta = scheduleMap.get(String(fileId)) || {};
+    const publishAt = toIsoString(scheduleMeta.publishAt || scheduleMeta.scheduledAt || body.publishAt || body.scheduledAt || body.scheduleAt);
+    if (!publishAt) {
+      throw new Error(`publishAt は必須です: ${fileId}`);
+    }
+    if (new Date(publishAt).getTime() <= Date.now() - 60_000) {
+      throw new Error(`予約日時は現在時刻より後にしてください: ${firstString(meta.title, firstString(meta.name, fileId))}`);
+    }
     return {
       id: randomUUID(),
       status: 'scheduled',
       fileId: String(fileId),
-      title: firstString(meta.title, firstString(body.articleTitle, '')),
-      name: firstString(meta.name, firstString(body.articleName, '')),
-      path: firstString(meta.path, ''),
+      title: firstString(scheduleMeta.title, firstString(meta.title, firstString(body.articleTitle, ''))),
+      name: firstString(scheduleMeta.name, firstString(meta.name, firstString(body.articleName, ''))),
+      path: firstString(scheduleMeta.path, firstString(meta.path, '')),
       noteTarget,
-      noTopImage: Boolean(body.noTopImage || body.no_top_image),
+      noTopImage: Boolean(scheduleMeta.noTopImage || scheduleMeta.no_top_image || body.noTopImage || body.no_top_image),
       publishAt,
       createdAt: now,
       queuedAt: '',

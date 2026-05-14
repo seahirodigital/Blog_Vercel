@@ -867,6 +867,7 @@
         articles: options.articles || [],
       };
       if (options.publishAt) body.publishAt = options.publishAt;
+      if (Array.isArray(options.scheduleItems)) body.scheduleItems = options.scheduleItems;
       if (options.noTopImage !== undefined) body.noTopImage = Boolean(options.noTopImage);
       const res = await fetch(`${API_BASE}/note-post`, {
         method: 'POST',
@@ -1000,6 +1001,18 @@
       date.setMinutes(0, 0, 0);
       date.setHours(date.getHours() + 1);
       return date;
+    }
+
+    function buildNotePostScheduleDrafts(ids, startSlot) {
+      const base = startSlot || nextRoundedHour();
+      return (ids || []).reduce((drafts, id, index) => {
+        const slot = addHours(base, index * 2);
+        drafts[id] = {
+          date: toDateInputValue(slot),
+          time: toTimeInputValue(slot),
+        };
+        return drafts;
+      }, {});
     }
 
     function getScheduleTitle(item) {
@@ -1136,7 +1149,7 @@
     }
 
     // === フォルダツリー コンポーネント ===
-    function FolderTree({ articles, selectedId, onSelect, loading, onDeleteArticle, onDuplicateArticle, onMoveArticle, hiddenFolders, onHideFolder, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, onMultiSelect, onRangeSelect, multiSelectedIds, articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder }) {
+    function FolderTree({ articles, selectedId, onSelect, loading, onDeleteArticle, onDuplicateArticle, onMoveArticle, onSchedulePost, hiddenFolders, onHideFolder, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, onMultiSelect, onRangeSelect, multiSelectedIds, articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder }) {
       const [openFolders, setOpenFolders] = useState({});
       const [ctxMenu, setCtxMenu] = useState({ visible: false, x: 0, y: 0, article: null });
       const [folderCtxMenu, setFolderCtxMenu] = useState({ visible: false, x: 0, y: 0, path: '' });
@@ -1288,10 +1301,21 @@
       const handleContextMenu = (e, article) => {
         e.preventDefault();
         e.stopPropagation();
-        const MENU_W = 190, MENU_H = 170;
+        const MENU_W = 190, MENU_H = 220;
         const x = Math.min(e.clientX, window.innerWidth - MENU_W - 8);
         const y = Math.min(e.clientY, window.innerHeight - MENU_H - 8);
         setCtxMenu({ visible: true, x, y, article });
+      };
+
+      const getContextTargetIds = (article) => {
+        if (!article) return [];
+        if (selectMode && selectedIds && selectedIds.has(article.id) && selectedIds.size > 0) {
+          return Array.from(selectedIds);
+        }
+        if (multiSelectedIds && multiSelectedIds.has(article.id) && multiSelectedIds.size > 0) {
+          return Array.from(multiSelectedIds);
+        }
+        return [article.id];
       };
 
       const handleFolderContextMenu = (e, folderPath) => {
@@ -1579,6 +1603,17 @@
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="3" y="5" width="4" height="4" rx="1" /><path d="M10 7h11M10 12h11M10 17h11" /><rect x="3" y="10" width="4" height="4" rx="1" /><rect x="3" y="15" width="4" height="4" rx="1" /></svg>
                 選択
               </button>
+              <button
+                onClick={() => {
+                  onSchedulePost && onSchedulePost(getContextTargetIds(ctxMenu.article));
+                  setCtxMenu(m => ({ ...m, visible: false }));
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = '#f5f3ff'} onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '9px 14px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '13px', color: '#7C4DFF', textAlign: 'left', fontWeight: 600 }}
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01" /></svg>
+                予約投稿{getContextTargetIds(ctxMenu.article).length > 1 ? `（${getContextTargetIds(ctxMenu.article).length}件）` : ''}
+              </button>
               <div style={{ height: '1px', background: '#e2e8f0', margin: '4px 0' }} />
               <button
                 onClick={() => { onDuplicateArticle(ctxMenu.article); setCtxMenu(m => ({ ...m, visible: false })); }}
@@ -1669,7 +1704,7 @@
     }
 
     // === サイドバー コンポーネント ===
-    function Sidebar({ articles, selectedId, onSelect, onNewArticle, onAmazonCreate, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle, mobileSidebarOpen, onMobileClose, onDeleteArticle, onDuplicateArticle, onMoveArticle, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, multiSelectedIds, onMultiSelect, onRangeSelect, setAffModalOpen, articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder, externalFolderUrls = [], setExternalFolderUrls, onRefreshArticles }) {
+    function Sidebar({ articles, selectedId, onSelect, onNewArticle, onAmazonCreate, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle, mobileSidebarOpen, onMobileClose, onDeleteArticle, onDuplicateArticle, onMoveArticle, onSchedulePost, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, multiSelectedIds, onMultiSelect, onRangeSelect, setAffModalOpen, articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder, externalFolderUrls = [], setExternalFolderUrls, onRefreshArticles }) {
       // 非表示フォルダ管理（localStorageで永続化）
       const [hiddenFolders, setHiddenFolders] = useState(() => {
         try { return new Set(JSON.parse(localStorage.getItem('sb_hiddenFolders') || '[]')); }
@@ -1861,7 +1896,7 @@
 
       const folderTreeProps = {
         articles, selectedId, loading,
-        onDeleteArticle, onDuplicateArticle, onMoveArticle,
+        onDeleteArticle, onDuplicateArticle, onMoveArticle, onSchedulePost,
         hiddenFolders, onHideFolder: toggleFolderVisibility,
         selectMode, selectedIds, onToggleSelect, onEnterSelectMode,
         multiSelectedIds, onMultiSelect, onRangeSelect,
@@ -2484,6 +2519,9 @@
       const [notePostRunning, setNotePostRunning] = useState(false);
       const [notePostModalOpen, setNotePostModalOpen] = useState(false);
       const [notePostMode, setNotePostMode] = useState('now');
+      const [notePostTargetIds, setNotePostTargetIds] = useState([]);
+      const [notePostActiveTargetId, setNotePostActiveTargetId] = useState('');
+      const [notePostScheduleDrafts, setNotePostScheduleDrafts] = useState({});
       const [notePostSchedules, setNotePostSchedules] = useState([]);
       const [notePostScheduleLoading, setNotePostScheduleLoading] = useState(false);
       const [notePostSelectedDate, setNotePostSelectedDate] = useState(() => toDateInputValue(new Date()));
@@ -3118,12 +3156,19 @@
         }
       };
 
+      const currentPostTargetIds = useMemo(() => {
+        if (selectMode && selectedIds.size > 0) return Array.from(selectedIds);
+        return selectedArticle ? [selectedArticle.id] : [];
+      }, [selectMode, selectedIds, selectedArticle]);
+
+      const activePostTargetIds = useMemo(() => (
+        notePostModalOpen && notePostTargetIds.length > 0
+          ? notePostTargetIds
+          : currentPostTargetIds
+      ), [notePostModalOpen, notePostTargetIds, currentPostTargetIds]);
+
       const selectedPostTargets = useMemo(() => {
-        const ids = selectMode && selectedIds.size > 0
-          ? Array.from(selectedIds)
-          : selectedArticle
-            ? [selectedArticle.id]
-            : [];
+        const ids = activePostTargetIds;
         return ids.map((id) => {
           const article = articles.find(a => a.id === id) || (selectedArticle?.id === id ? selectedArticle : null);
           if (!article) return null;
@@ -3134,7 +3179,20 @@
             path: article.path || '',
           };
         }).filter(Boolean);
-      }, [selectMode, selectedIds, selectedArticle, articles, articleH1Cache]);
+      }, [activePostTargetIds, selectedArticle, articles, articleH1Cache]);
+
+      const activeNotePostTarget = useMemo(() => (
+        selectedPostTargets.find(target => target.id === notePostActiveTargetId) || selectedPostTargets[0] || null
+      ), [selectedPostTargets, notePostActiveTargetId]);
+
+      const activeNotePostDraft = activeNotePostTarget ? notePostScheduleDrafts[activeNotePostTarget.id] : null;
+
+      const notePostConfiguredCount = useMemo(() => (
+        selectedPostTargets.filter((target) => {
+          const draft = notePostScheduleDrafts[target.id];
+          return draft && draft.date && normalizeNotePostTime(draft.time);
+        }).length
+      ), [selectedPostTargets, notePostScheduleDrafts]);
 
       const activeNotePostSchedules = useMemo(() => (
         notePostSchedules.filter(item => item && item.status !== 'cancelled')
@@ -3192,11 +3250,57 @@
         if (notePostModalOpen) loadNotePostSchedules();
       }, [notePostModalOpen, loadNotePostSchedules]);
 
+      useEffect(() => {
+        if (!notePostModalOpen) return;
+        if (selectedPostTargets.length === 0) {
+          setNotePostActiveTargetId('');
+          return;
+        }
+        if (!selectedPostTargets.some(target => target.id === notePostActiveTargetId)) {
+          setNotePostActiveTargetId(selectedPostTargets[0].id);
+        }
+      }, [notePostModalOpen, selectedPostTargets, notePostActiveTargetId]);
+
+      useEffect(() => {
+        if (!notePostModalOpen || !activeNotePostTarget || !activeNotePostDraft) return;
+        setNotePostSelectedDate(activeNotePostDraft.date);
+        setNotePostTime(activeNotePostDraft.time);
+        const date = new Date(`${activeNotePostDraft.date}T00:00:00`);
+        if (!Number.isNaN(date.getTime())) {
+          setNotePostMonth(prev => (
+            prev.getFullYear() === date.getFullYear() && prev.getMonth() === date.getMonth()
+              ? prev
+              : new Date(date.getFullYear(), date.getMonth(), 1)
+          ));
+        }
+      }, [notePostModalOpen, activeNotePostTarget, activeNotePostDraft]);
+
+      const updateActiveNotePostDraft = useCallback((patch) => {
+        if (!activeNotePostTarget) return;
+        const targetId = activeNotePostTarget.id;
+        setNotePostScheduleDrafts(prev => ({
+          ...prev,
+          [targetId]: {
+            ...(prev[targetId] || {}),
+            ...patch,
+          },
+        }));
+        if (patch.date !== undefined) {
+          setNotePostSelectedDate(patch.date);
+          const date = new Date(`${patch.date}T00:00:00`);
+          if (!Number.isNaN(date.getTime())) {
+            setNotePostMonth(new Date(date.getFullYear(), date.getMonth(), 1));
+          }
+        }
+        if (patch.time !== undefined) setNotePostTime(patch.time);
+      }, [activeNotePostTarget]);
+
       const applySuggestedPostSlot = useCallback(() => {
-        setNotePostSelectedDate(toDateInputValue(suggestedPostSlot));
-        setNotePostMonth(new Date(suggestedPostSlot.getFullYear(), suggestedPostSlot.getMonth(), 1));
-        setNotePostTime(toTimeInputValue(suggestedPostSlot));
-      }, [suggestedPostSlot]);
+        updateActiveNotePostDraft({
+          date: toDateInputValue(suggestedPostSlot),
+          time: toTimeInputValue(suggestedPostSlot),
+        });
+      }, [suggestedPostSlot, updateActiveNotePostDraft]);
 
       const addNotePostTimeShortcut = () => {
         const normalized = normalizeNotePostTime(notePostTime);
@@ -3205,6 +3309,7 @@
           return;
         }
         setNotePostTime(normalized);
+        updateActiveNotePostDraft({ time: normalized });
         if (notePostTimeShortcuts.includes(normalized)) {
           showToast(`${formatShortcutTime(normalized)} は既にショートカットにあります`, 'info');
           return;
@@ -3215,14 +3320,42 @@
         showToast(`${formatShortcutTime(normalized)} をショートカットに追加しました`, 'success');
       };
 
-      const openNotePostModal = () => {
-        if (selectedPostTargets.length === 0) {
+      const resetNotePostModal = useCallback(() => {
+        setNotePostModalOpen(false);
+        setNotePostTargetIds([]);
+        setNotePostActiveTargetId('');
+        setNotePostScheduleDrafts({});
+      }, []);
+
+      const closeNotePostModal = useCallback(() => {
+        if (notePostRunning) return;
+        resetNotePostModal();
+      }, [notePostRunning, resetNotePostModal]);
+
+      const openNotePostModal = (options = {}) => {
+        const requestedIds = Array.isArray(options.ids) && options.ids.length > 0
+          ? options.ids
+          : currentPostTargetIds;
+        const knownIds = Array.from(new Set(requestedIds.map(String))).filter(id =>
+          articles.some(article => article.id === id) || selectedArticle?.id === id
+        );
+        if (knownIds.length === 0) {
           showToast('記事を選択してください', 'error');
           return;
         }
-        setNotePostMode('now');
+        const initialDrafts = buildNotePostScheduleDrafts(knownIds, suggestedPostSlot);
+        const firstDraft = initialDrafts[knownIds[0]];
+        setNotePostTargetIds(knownIds);
+        setNotePostActiveTargetId(knownIds[0]);
+        setNotePostScheduleDrafts(initialDrafts);
+        if (firstDraft) {
+          setNotePostSelectedDate(firstDraft.date);
+          setNotePostTime(firstDraft.time);
+          const firstDate = new Date(`${firstDraft.date}T00:00:00`);
+          if (!Number.isNaN(firstDate.getTime())) setNotePostMonth(new Date(firstDate.getFullYear(), firstDate.getMonth(), 1));
+        }
+        setNotePostMode(options.mode || 'now');
         setNotePostModalOpen(true);
-        setTimeout(() => applySuggestedPostSlot(), 0);
       };
 
       const handleNotePostSubmit = async (mode = notePostMode) => {
@@ -3236,21 +3369,36 @@
         }
 
         let publishAt = '';
+        let scheduleItems = [];
         if (mode === 'schedule') {
-          if (!/^\d{2}:\d{2}$/.test(notePostTime)) {
-            showToast('時間はXX:XX形式で入力してください', 'error');
-            return;
+          for (const target of targets) {
+            const draft = notePostScheduleDrafts[target.id];
+            const normalizedTime = normalizeNotePostTime(draft?.time);
+            if (!draft?.date || !normalizedTime) {
+              setNotePostActiveTargetId(target.id);
+              showToast(`「${target.title}」の予約日時を確認してください`, 'error');
+              return;
+            }
+            const localDate = new Date(`${draft.date}T${normalizedTime}:00`);
+            if (Number.isNaN(localDate.getTime())) {
+              setNotePostActiveTargetId(target.id);
+              showToast(`「${target.title}」の予約日時を確認してください`, 'error');
+              return;
+            }
+            if (localDate.getTime() <= Date.now() + 60_000) {
+              setNotePostActiveTargetId(target.id);
+              showToast(`「${target.title}」の予約日時は現在時刻より後にしてください`, 'error');
+              return;
+            }
+            scheduleItems.push({
+              fileId: target.id,
+              title: target.title,
+              name: target.name,
+              path: target.path,
+              publishAt: localDate.toISOString(),
+            });
           }
-          const localDate = new Date(`${notePostSelectedDate}T${notePostTime}:00`);
-          if (Number.isNaN(localDate.getTime())) {
-            showToast('予約日時を確認してください', 'error');
-            return;
-          }
-          if (localDate.getTime() <= Date.now() + 60_000) {
-            showToast('予約日時は現在時刻より後にしてください', 'error');
-            return;
-          }
-          publishAt = localDate.toISOString();
+          publishAt = scheduleItems[0]?.publishAt || '';
         }
 
         setNotePostRunning(true);
@@ -3258,6 +3406,7 @@
           await triggerNotePost(targets.map(target => target.id), {
             mode,
             publishAt,
+            scheduleItems,
             articles: targets,
           });
           if (mode === 'schedule') {
@@ -3265,7 +3414,7 @@
             await loadNotePostSchedules();
           } else {
             showToast(`${targets.length}件のnote公開投稿を開始しました。GitHub Actionsで進捗を確認してください。`, 'info');
-            setNotePostModalOpen(false);
+            resetNotePostModal();
           }
           if (selectMode) { setSelectMode(false); setSelectedIds(new Set()); }
         } catch (e) {
@@ -3665,6 +3814,7 @@
             onDeleteArticle={handleDeleteArticle}
             onDuplicateArticle={handleDuplicateArticle}
             onMoveArticle={handleMoveArticle}
+            onSchedulePost={(ids) => openNotePostModal({ ids, mode: 'schedule' })}
             selectMode={selectMode}
             selectedIds={selectedIds}
             onToggleSelect={(id) => {
@@ -3738,7 +3888,7 @@
           {notePostModalOpen && (
             <div
               className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/45 px-4"
-              onClick={() => { if (!notePostRunning) setNotePostModalOpen(false); }}
+              onClick={closeNotePostModal}
             >
               <div
                 className="w-full max-w-7xl overflow-hidden rounded-lg border border-purple-100 bg-white shadow-2xl"
@@ -3755,7 +3905,7 @@
                   </div>
                   <button
                     type="button"
-                    onClick={() => setNotePostModalOpen(false)}
+                    onClick={closeNotePostModal}
                     disabled={notePostRunning}
                     className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600 disabled:opacity-50"
                     title="閉じる"
@@ -3766,8 +3916,53 @@
                   </button>
                 </div>
 
-                <div className="grid max-h-[78vh] grid-cols-1 overflow-y-auto lg:grid-cols-[360px_minmax(0,1fr)]">
+                <div className="grid max-h-[78vh] grid-cols-1 overflow-y-auto lg:grid-cols-[280px_340px_minmax(0,1fr)]">
+                  <div className="border-b border-slate-200 p-4 lg:border-b-0 lg:border-r">
+                    <div className="mb-3 flex items-center justify-between">
+                      <div>
+                        <p className="text-xs font-bold text-slate-500">対象記事</p>
+                        <p className="mt-1 text-[11px] font-semibold text-slate-400">
+                          {notePostMode === 'schedule' ? `${notePostConfiguredCount}/${selectedPostTargets.length}件 設定済み` : `${selectedPostTargets.length}件`}
+                        </p>
+                      </div>
+                      <span className="rounded-full bg-purple-50 px-2 py-0.5 text-[11px] font-bold text-[#7C4DFF]">{selectedPostTargets.length}件</span>
+                    </div>
+                    <div className="max-h-[64vh] space-y-2 overflow-y-auto pr-1">
+                      {selectedPostTargets.map((target, index) => {
+                        const draft = notePostScheduleDrafts[target.id];
+                        const normalizedTime = normalizeNotePostTime(draft?.time);
+                        const isActive = activeNotePostTarget?.id === target.id;
+                        return (
+                          <button
+                            key={target.id}
+                            type="button"
+                            onClick={() => setNotePostActiveTargetId(target.id)}
+                            className={`w-full rounded-md border px-3 py-2 text-left transition-colors ${isActive
+                                ? 'border-[#7C4DFF] bg-purple-50 shadow-sm'
+                                : 'border-slate-200 bg-white hover:border-purple-200 hover:bg-purple-50/40'
+                              }`}
+                          >
+                            <div className="flex items-center gap-2">
+                              <span className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${isActive ? 'bg-[#7C4DFF] text-white' : 'bg-slate-100 text-slate-400'}`}>{index + 1}</span>
+                              <p className={`min-w-0 truncate text-xs font-bold ${isActive ? 'text-[#5B2EEB]' : 'text-slate-700'}`}>{target.title}</p>
+                            </div>
+                            <p className="mt-1 truncate pl-7 text-[11px] text-slate-400">{target.path || 'Blog_Articles'}</p>
+                            {notePostMode === 'schedule' && (
+                              <p className={`mt-1 truncate pl-7 text-[11px] font-semibold ${draft?.date && normalizedTime ? 'text-slate-600' : 'text-rose-500'}`}>
+                                {draft?.date && normalizedTime ? `${draft.date} ${formatShortcutTime(normalizedTime)}` : '未設定'}
+                              </p>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
                   <div className="border-b border-slate-200 p-5 lg:border-b-0 lg:border-r">
+                    <div className="mb-4 min-w-0">
+                      <p className="text-xs font-bold text-slate-500">投稿設定</p>
+                      <h4 className="mt-1 truncate text-sm font-bold text-slate-900">{activeNotePostTarget?.title || '記事を選択してください'}</h4>
+                    </div>
                     <div className="grid grid-cols-2 rounded-lg bg-slate-100 p-1">
                       <button
                         type="button"
@@ -3785,32 +3980,15 @@
                       </button>
                     </div>
 
-                    <div className="mt-5">
-                      <div className="mb-2 flex items-center justify-between">
-                        <span className="text-xs font-bold text-slate-500">対象記事</span>
-                        <span className="rounded-full bg-purple-50 px-2 py-0.5 text-[11px] font-bold text-[#7C4DFF]">{selectedPostTargets.length}件</span>
-                      </div>
-                      <div className="max-h-32 space-y-2 overflow-y-auto">
-                        {selectedPostTargets.map((target) => (
-                          <div key={target.id} className="rounded-md border border-slate-200 bg-slate-50 px-3 py-2">
-                            <p className="truncate text-xs font-bold text-slate-700">{target.title}</p>
-                            <p className="mt-0.5 truncate text-[11px] text-slate-400">{target.path || 'Blog_Articles'}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
                     {notePostMode === 'schedule' && (
                       <div className="mt-5 space-y-4">
                         <div>
                           <label className="mb-1.5 block text-xs font-bold text-slate-500">日付</label>
                           <input
                             type="date"
-                            value={notePostSelectedDate}
+                            value={activeNotePostDraft?.date || notePostSelectedDate}
                             onChange={(e) => {
-                              setNotePostSelectedDate(e.target.value);
-                              const date = new Date(`${e.target.value}T00:00:00`);
-                              if (!Number.isNaN(date.getTime())) setNotePostMonth(new Date(date.getFullYear(), date.getMonth(), 1));
+                              updateActiveNotePostDraft({ date: e.target.value });
                             }}
                             className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 outline-none focus:border-[#7C4DFF] focus:ring-2 focus:ring-purple-100"
                           />
@@ -3820,19 +3998,19 @@
                           <input
                             type="text"
                             inputMode="numeric"
-                            value={notePostTime}
-                            onChange={(e) => setNotePostTime(e.target.value)}
+                            value={activeNotePostDraft?.time || notePostTime}
+                            onChange={(e) => updateActiveNotePostDraft({ time: e.target.value })}
                             placeholder="XX:XX"
                             className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 outline-none focus:border-[#7C4DFF] focus:ring-2 focus:ring-purple-100"
                           />
                           <div className="mt-2 flex flex-wrap items-center gap-1.5">
                             {notePostTimeShortcuts.map((time) => {
-                              const active = normalizeNotePostTime(notePostTime) === time;
+                              const active = normalizeNotePostTime(activeNotePostDraft?.time || notePostTime) === time;
                               return (
                                 <button
                                   key={time}
                                   type="button"
-                                  onClick={() => setNotePostTime(time)}
+                                  onClick={() => updateActiveNotePostDraft({ time })}
                                   className={`rounded-full border px-2 py-1 text-[11px] font-bold transition-colors ${active
                                       ? 'border-[#7C4DFF] bg-[#7C4DFF] text-white'
                                       : 'border-slate-200 bg-white text-slate-500 hover:border-purple-200 hover:bg-purple-50 hover:text-[#7C4DFF]'
@@ -3858,7 +4036,7 @@
                           onClick={applySuggestedPostSlot}
                           className="w-full rounded-lg border border-purple-200 bg-purple-50 px-3 py-2 text-left text-xs font-bold text-[#7C4DFF] transition-colors hover:bg-purple-100"
                         >
-                          次の目安: {formatDateTimeJa(suggestedPostSlot)}
+                          次の目安をこの記事へ反映: {formatDateTimeJa(suggestedPostSlot)}
                         </button>
                       </div>
                     )}
@@ -3877,7 +4055,7 @@
                       )}
                       <button
                         type="button"
-                        onClick={() => setNotePostModalOpen(false)}
+                        onClick={closeNotePostModal}
                         disabled={notePostRunning}
                         className="rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-500 hover:bg-slate-50 disabled:opacity-50"
                       >
@@ -3889,7 +4067,7 @@
                         disabled={notePostRunning || selectedPostTargets.length === 0}
                         className="rounded-lg bg-[#7C4DFF] px-4 py-2 text-xs font-bold text-white shadow-sm shadow-purple-200 transition-colors hover:bg-[#651FFF] disabled:bg-slate-300 disabled:shadow-none"
                       >
-                        {notePostRunning ? '起動中...' : notePostMode === 'schedule' ? '予約する' : '今すぐ投稿'}
+                        {notePostRunning ? '起動中...' : notePostMode === 'schedule' ? `予約する（${notePostConfiguredCount}/${selectedPostTargets.length}）` : '今すぐ投稿'}
                       </button>
                     </div>
                   </div>
@@ -3959,13 +4137,13 @@
                             role="button"
                             tabIndex={0}
                             onClick={() => {
-                              setNotePostSelectedDate(key);
+                              updateActiveNotePostDraft({ date: key });
                               setNotePostMode('schedule');
                             }}
                             onKeyDown={(e) => {
                               if (e.key === 'Enter' || e.key === ' ') {
                                 e.preventDefault();
-                                setNotePostSelectedDate(key);
+                                updateActiveNotePostDraft({ date: key });
                                 setNotePostMode('schedule');
                               }
                             }}
