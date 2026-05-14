@@ -764,7 +764,7 @@
   },
   {
     "id": "6d31221a-25c5-4723-9d0f-ff8c40b0224d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se58b715c52d44cdc960c1f71319d6970",
     "title": "Shark(シャーク) FA222JBKNC FlexBreeze レビュー比較まとめ",
     "name": "Shark シャーク 扇風機 FlexBreeze コードレスサーキュレーター ファン FA222JBKNC レビュー比.md",
@@ -776,7 +776,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-14T13:44:03.467Z"
   },
   {
     "id": "3deebb54-8c8c-4571-be48-7e5a1be6add8",
