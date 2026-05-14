@@ -628,7 +628,7 @@
   },
   {
     "id": "d20338a4-1a26-458b-b1db-6d1c9ab75ebb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa48f95ef90a94c2492663fdeea2f79bc",
     "title": "Shark LC350JWH EVOPOWER SYSTEM NEO+ レビュー比較まとめ",
     "name": "Shark 掃除機 自動ゴミ収集ドック付き スティッククリーナー LC350JWH EVOPOWER SYSTEM NE.md",
@@ -640,7 +640,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-14T13:48:10.188Z"
   },
   {
     "id": "d3dbab5a-7bba-42c7-829a-253595cb65c3",
