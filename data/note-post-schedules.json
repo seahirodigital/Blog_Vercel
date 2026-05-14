@@ -1089,7 +1089,7 @@
   },
   {
     "id": "58cf226d-ade8-4efb-8d28-17aaf694e95f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf12a4d8829e043ab9dc96f4ba8874b28",
     "title": "Reencle Prime 家庭用 生ごみ処理機 ハイブリッド式 レビュー比較まとめ",
     "name": "Reencle Prime 家庭用 生ごみ処理機 ハイブリッド式 レビュー比較まとめ.md",
@@ -1101,7 +1101,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-14T13:44:18.362Z"
   },
   {
     "id": "3a99c605-8c41-4c19-b943-dbb225beee09",
