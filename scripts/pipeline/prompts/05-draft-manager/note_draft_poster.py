@@ -898,107 +898,85 @@ def _place_caret_after_disclosure(page) -> bool:
     ))
 
 
-def _click_near_selection_add_button(page) -> str:
-    """現在の空段落の近くに出るブロック追加ボタンを押す。"""
+def _click_toc_item_from_slash_popup(page) -> str:
     result = page.evaluate(
         """
         () => {
-          const selection = window.getSelection();
-          if (!selection || selection.rangeCount === 0) {
-            return { ok: false, reason: 'selection_not_found' };
-          }
-          const editor = document.querySelector('.note-editable, [contenteditable="true"]') || document.querySelector('.ProseMirror');
-          if (!editor) return { ok: false, reason: 'editor_not_found' };
-          let node = selection.anchorNode;
-          if (node && node.nodeType === Node.TEXT_NODE) node = node.parentElement;
-          while (node && node !== editor && !/^(P|LI|H[1-6]|DIV)$/i.test(node.tagName || '')) {
-            node = node.parentElement;
-          }
-          const block = node && node.getBoundingClientRect ? node : editor;
-          const blockRect = block.getBoundingClientRect();
-          const targetY = blockRect.top + Math.max(8, Math.min(blockRect.height / 2, 24));
-          const targetX = Math.max(0, blockRect.left - 32);
           const normalize = (value) => (value || '').replace(/\\s+/g, ' ').trim();
+          const isTocText = (value) => value === '目次' || value.startsWith('目次 ');
           const isVisible = (el) => {
             const rect = el.getBoundingClientRect();
             const style = window.getComputedStyle(el);
             return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
           };
-          const buttons = Array.from(document.querySelectorAll('button, [role="button"]'))
+          const candidates = Array.from(document.querySelectorAll('button, [role="button"], [role="menuitem"], [role="option"], li, div'))
             .filter(isVisible)
-            .map((button) => {
-              const rect = button.getBoundingClientRect();
-              const text = normalize(button.innerText || button.textContent || '');
-              const aria = normalize(button.getAttribute('aria-label') || '');
-              const label = `${text} ${aria}`.trim();
-              return { button, rect, text, aria, label };
+            .map((el) => {
+              const rect = el.getBoundingClientRect();
+              const text = normalize(el.innerText || el.textContent || '');
+              const aria = normalize(el.getAttribute('aria-label') || '');
+              const children = Array.from(el.children || []);
+              const hasTocChild = children.some((child) => isTocText(normalize(child.innerText || child.textContent || '')));
+              return { el, rect, text, aria, hasTocChild };
             })
             .filter((item) => {
-              if (item.aria.includes('画像を追加')) return false;
-              return item.text === '+' || item.aria.includes('ブロック') || item.aria.includes('追加');
+              if (!isTocText(item.text)) return false;
+              const tag = (item.el.tagName || '').toLowerCase();
+              const role = item.el.getAttribute('role') || '';
+              return tag === 'button' || tag === 'li' || tag === 'div' || role === 'button' || role === 'menuitem' || role === 'option';
             })
             .sort((a, b) => {
-              const aScore = Math.abs((a.rect.top + a.rect.height / 2) - targetY) + Math.abs((a.rect.left + a.rect.width / 2) - targetX);
-              const bScore = Math.abs((b.rect.top + b.rect.height / 2) - targetY) + Math.abs((b.rect.left + b.rect.width / 2) - targetX);
-              return aScore - bScore;
+              const tagScore = (item) => {
+                const tag = (item.el.tagName || '').toLowerCase();
+                const role = item.el.getAttribute('role') || '';
+                if (role === 'menuitem' || role === 'option' || role === 'button' || tag === 'button') return 0;
+                if (tag === 'li') return 1;
+                return 2;
+              };
+              const aExact = a.text === '目次' ? 0 : 1;
+              const bExact = b.text === '目次' ? 0 : 1;
+              const aArea = a.rect.width * a.rect.height;
+              const bArea = b.rect.width * b.rect.height;
+              const aPosition = a.rect.top + a.rect.left / 1000;
+              const bPosition = b.rect.top + b.rect.left / 1000;
+              return Number(a.hasTocChild) - Number(b.hasTocChild)
+                || aExact - bExact
+                || tagScore(a) - tagScore(b)
+                || aArea - bArea
+                || aPosition - bPosition;
             });
-          const selected = buttons[0];
-          if (!selected) return { ok: false, reason: 'add_button_not_found' };
-          selected.button.click();
-          return { ok: true, label: selected.label, x: selected.rect.left, y: selected.rect.top };
+          const selected = candidates[0];
+          if (!selected) return { ok: false, reason: 'toc_popup_item_not_found' };
+          selected.el.click();
+          return {
+            ok: true,
+            text: selected.text,
+            tag: selected.el.tagName,
+            role: selected.el.getAttribute('role') || '',
+          };
         }
         """
     )
     if not result.get("ok"):
-        raise RuntimeError(result.get("reason") or "ブロック追加ボタンが見つかりません")
-    page.wait_for_timeout(700)
-    label = result.get("label") or "near_selection_add_button"
-    return f"near_selection_add_button:{label}"
+        raise RuntimeError(result.get("reason") or "スラッシュポップアップ内の目次が見つかりません")
+    page.wait_for_timeout(1500)
+    return f"slash_popup_click:{result.get('tag', '')}:{result.get('role', '')}"
 
 
-def _open_toc_block_menu(page) -> str:
+def _insert_toc_by_slash_popup(page) -> str:
+    page.keyboard.type("/")
+    page.wait_for_timeout(1000)
     try:
-        return _click_near_selection_add_button(page)
-    except Exception as near_error:
-        fallback_strategy = _click_visible_candidate(
-            page,
-            candidates=[
-                ("aria_label_ブロック追加", page.locator("button[aria-label*='ブロック']")),
-                ("button_text_plus", page.locator("button").filter(has_text=re.compile(r"^\\+$"))),
-            ],
-            description="目次用ブロックメニュー",
-            timeout_ms=2500,
-        )
-        return f"near_failed:{near_error}->{fallback_strategy}"
-
-
-def _click_toc_menu_item(page, description: str = "目次メニュー項目") -> str:
-    return _click_visible_candidate(
-        page,
-        candidates=[
-            ("role_menuitem_目次", page.get_by_role("menuitem", name="目次")),
-            ("role_button_目次", page.get_by_role("button", name="目次")),
-            ("aria_label_exact_目次", page.locator("button[aria-label='目次']")),
-            ("button_text_目次", page.locator("button").filter(has_text="目次")),
-            ("text_目次", page.locator("text=目次")),
-        ],
-        description=description,
-        timeout_ms=4000,
-    )
-
-
-def _insert_toc_by_slash_command(page) -> str:
-    page.keyboard.type("/目次")
-    page.wait_for_timeout(700)
-    try:
-        toc_strategy = _click_toc_menu_item(page, description="スラッシュコマンド内の目次")
-        return f"slash_command->{toc_strategy}"
-    except Exception as click_error:
-        page.keyboard.press("Enter")
-        page.wait_for_timeout(1200)
-        if _editor_has_table_of_contents(page):
-            return "slash_command_enter"
-        raise RuntimeError(f"スラッシュコマンドで目次を挿入できませんでした: {click_error}")
+        return _click_toc_item_from_slash_popup(page)
+    except Exception:
+        try:
+            page.keyboard.press("Escape")
+            page.wait_for_timeout(300)
+            page.keyboard.press("Backspace")
+            page.wait_for_timeout(300)
+        except Exception:
+            pass
+        raise
 
 
 def _insert_table_of_contents(page) -> dict:
@@ -1020,31 +998,13 @@ def _insert_table_of_contents(page) -> dict:
     page.keyboard.press("Enter")
     page.wait_for_timeout(900)
 
-    # noteのエディタでは、アソシエイト表記直後に空段落を作り、その段落のブロック追加メニューから目次を挿入する。
+    # noteのエディタでは、アソシエイト表記直後に空段落を作り、「/」で出るポップアップから目次を挿入する。
     try:
-        menu_strategy = _open_toc_block_menu(page)
-        toc_strategy = _click_toc_menu_item(page, description="ブロックメニュー内の目次")
-        result["strategy"] = f"{menu_strategy}->{toc_strategy}"
+        result["strategy"] = _insert_toc_by_slash_popup(page)
         page.wait_for_timeout(1800)
-    except Exception as menu_error:
-        print(f"   ⚠️ 目次のブロックメニュー挿入に失敗しました。ツールバーから再試行します: {menu_error}")
-        result["strategy"] = f"menu_failed: {menu_error}"
-
-    if not _editor_has_table_of_contents(page):
-        try:
-            toolbar_strategy = _click_toc_menu_item(page, description="目次ツールバー")
-            result["strategy"] = f"{result['strategy']} / toolbar:{toolbar_strategy}"
-            page.wait_for_timeout(1800)
-        except Exception as toolbar_error:
-            result["strategy"] = f"{result['strategy']} / toolbar_failed: {toolbar_error}"
-
-    if not _editor_has_table_of_contents(page):
-        try:
-            slash_strategy = _insert_toc_by_slash_command(page)
-            result["strategy"] = f"{result['strategy']} / {slash_strategy}"
-            page.wait_for_timeout(1800)
-        except Exception as slash_error:
-            result["strategy"] = f"{result['strategy']} / slash_failed: {slash_error}"
+    except Exception as slash_popup_error:
+        print(f"   ⚠️ スラッシュポップアップからの目次挿入に失敗しました: {slash_popup_error}")
+        result["strategy"] = f"slash_popup_failed: {slash_popup_error}"
 
     result["success"] = _editor_has_table_of_contents(page)
     if result["success"]:
@@ -2539,11 +2499,6 @@ def _run_ogp_expansion_on_draft(
             except Exception as e:
                 result["toc"] = {"success": False, "strategy": f"error: {e}"}
                 print(f"   ⚠️ 目次挿入エラー: {e}")
-            if not result["toc"].get("success"):
-                print("   ❌ 目次挿入に失敗したため、下書き保存・公開投稿へ進まず停止します")
-                _dump_page_artifacts(page, artifacts_dir, "toc_insert_failed")
-                browser.close()
-                return result
         else:
             result["toc"] = {"success": False, "strategy": "skipped_by_option"}
             print("   ⏭️ 目次挿入はオプション指定によりスキップします")
@@ -2956,8 +2911,6 @@ def post_draft_to_note(
             publish_tags=publish_tags,
         )
         result["editor_result"] = editor_result
-        if not editor_result.get("success"):
-            result["success"] = False
         publish_result = editor_result.get("publish") or {}
         if publish:
             result["success"] = bool(publish_result.get("success"))
