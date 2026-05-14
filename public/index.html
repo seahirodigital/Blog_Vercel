@@ -3291,7 +3291,6 @@
           showToast('削除できる予約はありません', 'info');
           return;
         }
-        if (!confirm(`${notePostSelectedDate} の予約 ${targets.length}件を削除しますか？`)) return;
 
         setNotePostRunning(true);
         try {

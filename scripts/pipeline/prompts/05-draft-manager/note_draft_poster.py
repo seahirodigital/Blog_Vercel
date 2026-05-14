@@ -57,6 +57,11 @@ UA = (
 )
 
 NOTE_DISCLOSURE_PREFIX = "Amazonのアソシエイトとして本アカウントは適格販売により収入を得ています"
+NOTE_DISCLOSURE_FULL_TEXT = (
+    "Amazonのアソシエイトとして本アカウントは適格販売により収入を得ています。"
+    "文章にはAIの整形・編集が含まれます。"
+)
+NOTE_DISCLOSURE_MARKERS = [NOTE_DISCLOSURE_FULL_TEXT, NOTE_DISCLOSURE_PREFIX]
 NOTE_POST_TAGS = (
     "エッセイ 写真 毎日note 小説 イラスト 競艇予想屋 ボートレース予想 競輪予想 "
     "スキしてみて note 毎日更新  仕事 音楽 マンガ コラム 人生 自分 競艇投資 "
@@ -369,7 +374,7 @@ def _click_locator_with_fallback(page, locator, strategy: str, description: str,
 
 
 def _click_visible_candidate(page, candidates, description: str, timeout_ms: int = 4000) -> str:
-    strategy, locator = _find_visible_candidate(candidates, description)
+    strategy, locator = _find_visible_candidate(candidates, description, timeout_ms=timeout_ms)
     _click_locator_with_fallback(page, locator, strategy, description, timeout_ms=timeout_ms)
     return strategy
 
@@ -845,12 +850,38 @@ def _editor_has_table_of_contents(page) -> bool:
 def _place_caret_after_disclosure(page) -> bool:
     return bool(page.evaluate(
         """
-        (prefix) => {
+        (markers) => {
           const editor = document.querySelector('.note-editable, [contenteditable="true"]') || document.querySelector('.ProseMirror');
           if (!editor) return false;
-          const normalize = (value) => (value || '').replace(/\\u200B/g, '').replace(/\\s+/g, ' ').trim();
-          const nodes = Array.from(editor.querySelectorAll('p, div, li, h2, h3'));
-          const target = nodes.find((el) => normalize(el.innerText || el.textContent || '').includes(prefix));
+          const normalize = (value) => (value || '')
+            .replace(/\\u200B/g, '')
+            .replace(/\\s+/g, ' ')
+            .trim();
+          const normalizedMarkers = (markers || []).map(normalize).filter(Boolean);
+          const matchesMarker = (el) => {
+            const text = normalize(el.innerText || el.textContent || '');
+            return normalizedMarkers.some((marker) => text.includes(marker));
+          };
+          const isVisible = (el) => {
+            const rect = el.getBoundingClientRect();
+            const style = window.getComputedStyle(el);
+            return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
+          };
+          const isBlockish = (el) => /^(P|LI|H[1-6]|DIV)$/i.test(el.tagName || '');
+          const nodes = Array.from(editor.querySelectorAll('p, li, h1, h2, h3, h4, h5, h6, [data-block-id], [data-block], div'))
+            .filter((el) => isVisible(el) && matchesMarker(el));
+          if (nodes.length === 0) return false;
+
+          const leafNodes = nodes.filter((el) => !Array.from(el.children || []).some((child) => isBlockish(child) && matchesMarker(child)));
+          const candidates = leafNodes.length > 0 ? leafNodes : nodes;
+          candidates.sort((a, b) => {
+            const aText = normalize(a.innerText || a.textContent || '');
+            const bText = normalize(b.innerText || b.textContent || '');
+            const aTag = /^(P|LI|H[1-6])$/i.test(a.tagName || '') ? 0 : 1;
+            const bTag = /^(P|LI|H[1-6])$/i.test(b.tagName || '') ? 0 : 1;
+            return aTag - bTag || aText.length - bText.length;
+          });
+          const target = candidates[0];
           if (!target) return false;
           target.scrollIntoView({ block: 'center', inline: 'nearest' });
           const range = document.createRange();
@@ -863,8 +894,111 @@ def _place_caret_after_disclosure(page) -> bool:
           return true;
         }
         """,
-        NOTE_DISCLOSURE_PREFIX,
+        NOTE_DISCLOSURE_MARKERS,
     ))
+
+
+def _click_near_selection_add_button(page) -> str:
+    """現在の空段落の近くに出るブロック追加ボタンを押す。"""
+    result = page.evaluate(
+        """
+        () => {
+          const selection = window.getSelection();
+          if (!selection || selection.rangeCount === 0) {
+            return { ok: false, reason: 'selection_not_found' };
+          }
+          const editor = document.querySelector('.note-editable, [contenteditable="true"]') || document.querySelector('.ProseMirror');
+          if (!editor) return { ok: false, reason: 'editor_not_found' };
+          let node = selection.anchorNode;
+          if (node && node.nodeType === Node.TEXT_NODE) node = node.parentElement;
+          while (node && node !== editor && !/^(P|LI|H[1-6]|DIV)$/i.test(node.tagName || '')) {
+            node = node.parentElement;
+          }
+          const block = node && node.getBoundingClientRect ? node : editor;
+          const blockRect = block.getBoundingClientRect();
+          const targetY = blockRect.top + Math.max(8, Math.min(blockRect.height / 2, 24));
+          const targetX = Math.max(0, blockRect.left - 32);
+          const normalize = (value) => (value || '').replace(/\\s+/g, ' ').trim();
+          const isVisible = (el) => {
+            const rect = el.getBoundingClientRect();
+            const style = window.getComputedStyle(el);
+            return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
+          };
+          const buttons = Array.from(document.querySelectorAll('button, [role="button"]'))
+            .filter(isVisible)
+            .map((button) => {
+              const rect = button.getBoundingClientRect();
+              const text = normalize(button.innerText || button.textContent || '');
+              const aria = normalize(button.getAttribute('aria-label') || '');
+              const label = `${text} ${aria}`.trim();
+              return { button, rect, text, aria, label };
+            })
+            .filter((item) => {
+              if (item.aria.includes('画像を追加')) return false;
+              return item.text === '+' || item.aria.includes('ブロック') || item.aria.includes('追加');
+            })
+            .sort((a, b) => {
+              const aScore = Math.abs((a.rect.top + a.rect.height / 2) - targetY) + Math.abs((a.rect.left + a.rect.width / 2) - targetX);
+              const bScore = Math.abs((b.rect.top + b.rect.height / 2) - targetY) + Math.abs((b.rect.left + b.rect.width / 2) - targetX);
+              return aScore - bScore;
+            });
+          const selected = buttons[0];
+          if (!selected) return { ok: false, reason: 'add_button_not_found' };
+          selected.button.click();
+          return { ok: true, label: selected.label, x: selected.rect.left, y: selected.rect.top };
+        }
+        """
+    )
+    if not result.get("ok"):
+        raise RuntimeError(result.get("reason") or "ブロック追加ボタンが見つかりません")
+    page.wait_for_timeout(700)
+    label = result.get("label") or "near_selection_add_button"
+    return f"near_selection_add_button:{label}"
+
+
+def _open_toc_block_menu(page) -> str:
+    try:
+        return _click_near_selection_add_button(page)
+    except Exception as near_error:
+        fallback_strategy = _click_visible_candidate(
+            page,
+            candidates=[
+                ("aria_label_ブロック追加", page.locator("button[aria-label*='ブロック']")),
+                ("button_text_plus", page.locator("button").filter(has_text=re.compile(r"^\\+$"))),
+            ],
+            description="目次用ブロックメニュー",
+            timeout_ms=2500,
+        )
+        return f"near_failed:{near_error}->{fallback_strategy}"
+
+
+def _click_toc_menu_item(page, description: str = "目次メニュー項目") -> str:
+    return _click_visible_candidate(
+        page,
+        candidates=[
+            ("role_menuitem_目次", page.get_by_role("menuitem", name="目次")),
+            ("role_button_目次", page.get_by_role("button", name="目次")),
+            ("aria_label_exact_目次", page.locator("button[aria-label='目次']")),
+            ("button_text_目次", page.locator("button").filter(has_text="目次")),
+            ("text_目次", page.locator("text=目次")),
+        ],
+        description=description,
+        timeout_ms=4000,
+    )
+
+
+def _insert_toc_by_slash_command(page) -> str:
+    page.keyboard.type("/目次")
+    page.wait_for_timeout(700)
+    try:
+        toc_strategy = _click_toc_menu_item(page, description="スラッシュコマンド内の目次")
+        return f"slash_command->{toc_strategy}"
+    except Exception as click_error:
+        page.keyboard.press("Enter")
+        page.wait_for_timeout(1200)
+        if _editor_has_table_of_contents(page):
+            return "slash_command_enter"
+        raise RuntimeError(f"スラッシュコマンドで目次を挿入できませんでした: {click_error}")
 
 
 def _insert_table_of_contents(page) -> dict:
@@ -886,47 +1020,31 @@ def _insert_table_of_contents(page) -> dict:
     page.keyboard.press("Enter")
     page.wait_for_timeout(900)
 
-    # noteのエディタは、カーソル位置にあるブロック操作ボタンか左側の目次ボタンから挿入できる。
-    direct_candidates = [
-        ("role_button_目次", page.get_by_role("button", name="目次")),
-        ("aria_label_目次", page.locator("button[aria-label='目次']")),
-        ("button_text_目次", page.locator("button").filter(has_text="目次")),
-    ]
+    # noteのエディタでは、アソシエイト表記直後に空段落を作り、その段落のブロック追加メニューから目次を挿入する。
     try:
-        result["strategy"] = _click_visible_candidate(
-            page,
-            candidates=direct_candidates,
-            description="目次挿入",
-            timeout_ms=4000,
-        )
+        menu_strategy = _open_toc_block_menu(page)
+        toc_strategy = _click_toc_menu_item(page, description="ブロックメニュー内の目次")
+        result["strategy"] = f"{menu_strategy}->{toc_strategy}"
         page.wait_for_timeout(1800)
-    except Exception as direct_error:
-        print(f"   ⚠️ 目次の直接挿入に失敗しました。ブロックメニューから再試行します: {direct_error}")
-        result["strategy"] = f"direct_failed: {direct_error}"
+    except Exception as menu_error:
+        print(f"   ⚠️ 目次のブロックメニュー挿入に失敗しました。ツールバーから再試行します: {menu_error}")
+        result["strategy"] = f"menu_failed: {menu_error}"
 
     if not _editor_has_table_of_contents(page):
         try:
-            menu_strategy = _click_visible_candidate(
-                page,
-                candidates=[
-                    ("aria_label_ブロック追加", page.locator("button[aria-label*='ブロック']")),
-                    ("aria_label_追加", page.locator("button[aria-label*='追加']")),
-                    ("button_text_plus", page.locator("button").filter(has_text=re.compile(r"^\\+$"))),
-                ],
-                description="目次用ブロックメニュー",
-                timeout_ms=2500,
-            )
-            page.wait_for_timeout(700)
-            toc_strategy = _click_visible_candidate(
-                page,
-                candidates=direct_candidates,
-                description="ブロックメニュー内の目次",
-                timeout_ms=3000,
-            )
-            result["strategy"] = f"{menu_strategy}->{toc_strategy}"
+            toolbar_strategy = _click_toc_menu_item(page, description="目次ツールバー")
+            result["strategy"] = f"{result['strategy']} / toolbar:{toolbar_strategy}"
             page.wait_for_timeout(1800)
-        except Exception as menu_error:
-            result["strategy"] = f"{result['strategy']} / menu_failed: {menu_error}"
+        except Exception as toolbar_error:
+            result["strategy"] = f"{result['strategy']} / toolbar_failed: {toolbar_error}"
+
+    if not _editor_has_table_of_contents(page):
+        try:
+            slash_strategy = _insert_toc_by_slash_command(page)
+            result["strategy"] = f"{result['strategy']} / {slash_strategy}"
+            page.wait_for_timeout(1800)
+        except Exception as slash_error:
+            result["strategy"] = f"{result['strategy']} / slash_failed: {slash_error}"
 
     result["success"] = _editor_has_table_of_contents(page)
     if result["success"]:
@@ -2421,6 +2539,11 @@ def _run_ogp_expansion_on_draft(
             except Exception as e:
                 result["toc"] = {"success": False, "strategy": f"error: {e}"}
                 print(f"   ⚠️ 目次挿入エラー: {e}")
+            if not result["toc"].get("success"):
+                print("   ❌ 目次挿入に失敗したため、下書き保存・公開投稿へ進まず停止します")
+                _dump_page_artifacts(page, artifacts_dir, "toc_insert_failed")
+                browser.close()
+                return result
         else:
             result["toc"] = {"success": False, "strategy": "skipped_by_option"}
             print("   ⏭️ 目次挿入はオプション指定によりスキップします")
@@ -2833,6 +2956,8 @@ def post_draft_to_note(
             publish_tags=publish_tags,
         )
         result["editor_result"] = editor_result
+        if not editor_result.get("success"):
+            result["success"] = False
         publish_result = editor_result.get("publish") or {}
         if publish:
             result["success"] = bool(publish_result.get("success"))
