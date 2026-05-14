@@ -1106,7 +1106,7 @@
   },
   {
     "id": "3a99c605-8c41-4c19-b943-dbb225beee09",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9356b096d1924a1583acae3f5a827d2e",
     "title": "アイリスオーヤマ シェフドラム 自動調理鍋 レビュー比較まとめ：忙しい毎日を劇的に変える時短家電の真価",
     "name": "アイリスオーヤマ シェフドラム 自動調理鍋 レビュー比較まとめ：忙しい毎日を劇的に変える時短家電の真価.md",
@@ -1118,7 +1118,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-14T13:44:33.420Z"
   },
   {
     "id": "bff93971-54b9-4341-8e5b-d860e2d192ae",
