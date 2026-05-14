@@ -942,6 +942,30 @@
       return `${pad2(date.getHours())}:${pad2(date.getMinutes())}`;
     }
 
+    const DEFAULT_NOTE_POST_TIME_SHORTCUTS = ['07:00', '11:30', '16:30', '21:00', '22:00', '23:00'];
+
+    function normalizeNotePostTime(value) {
+      const match = String(value || '').trim().match(/^(\d{1,2}):(\d{2})$/);
+      if (!match) return '';
+      const hour = Number(match[1]);
+      const minute = Number(match[2]);
+      if (!Number.isInteger(hour) || !Number.isInteger(minute) || hour < 0 || hour > 23 || minute < 0 || minute > 59) return '';
+      return `${pad2(hour)}:${pad2(minute)}`;
+    }
+
+    function formatShortcutTime(value) {
+      const normalized = normalizeNotePostTime(value);
+      if (!normalized) return value;
+      return `${Number(normalized.slice(0, 2))}:${normalized.slice(3)}`;
+    }
+
+    function mergeNotePostTimeShortcuts(extra = []) {
+      const merged = [...DEFAULT_NOTE_POST_TIME_SHORTCUTS, ...(Array.isArray(extra) ? extra : [])]
+        .map(normalizeNotePostTime)
+        .filter(Boolean);
+      return Array.from(new Set(merged));
+    }
+
     function formatDateTimeJa(value) {
       if (!value) return '';
       const date = new Date(value);
@@ -2468,6 +2492,10 @@
         return new Date(date.getFullYear(), date.getMonth(), 1);
       });
       const [notePostTime, setNotePostTime] = useState(() => toTimeInputValue(nextRoundedHour()));
+      const [notePostTimeShortcuts, setNotePostTimeShortcuts] = useState(() => {
+        try { return mergeNotePostTimeShortcuts(JSON.parse(localStorage.getItem('sb_notePostTimeShortcuts') || '[]')); }
+        catch { return mergeNotePostTimeShortcuts(); }
+      });
       // note下書きURL（localStorageで永続化: ページリロード後も保持）
       const [noteDraftUrls, setNoteDraftUrls] = useState(() => {
         try { return JSON.parse(localStorage.getItem('sb_noteDraftUrls') || '{}'); }
@@ -3137,7 +3165,7 @@
       const notePostCalendarDays = useMemo(() => {
         const first = new Date(notePostMonth.getFullYear(), notePostMonth.getMonth(), 1);
         const start = new Date(first);
-        start.setDate(first.getDate() - first.getDay());
+        start.setDate(first.getDate() - ((first.getDay() + 6) % 7));
         return Array.from({ length: 42 }, (_, index) => {
           const date = new Date(start);
           date.setDate(start.getDate() + index);
@@ -3146,6 +3174,7 @@
       }, [notePostMonth]);
 
       const selectedDateSchedules = notePostSchedulesByDate[notePostSelectedDate] || [];
+      const selectedDateCancellableSchedules = selectedDateSchedules.filter(item => item.status === 'scheduled');
 
       const loadNotePostSchedules = useCallback(async () => {
         setNotePostScheduleLoading(true);
@@ -3168,6 +3197,23 @@
         setNotePostMonth(new Date(suggestedPostSlot.getFullYear(), suggestedPostSlot.getMonth(), 1));
         setNotePostTime(toTimeInputValue(suggestedPostSlot));
       }, [suggestedPostSlot]);
+
+      const addNotePostTimeShortcut = () => {
+        const normalized = normalizeNotePostTime(notePostTime);
+        if (!normalized) {
+          showToast('時間はXX:XX形式で入力してください', 'error');
+          return;
+        }
+        setNotePostTime(normalized);
+        if (notePostTimeShortcuts.includes(normalized)) {
+          showToast(`${formatShortcutTime(normalized)} は既にショートカットにあります`, 'info');
+          return;
+        }
+        const next = [...notePostTimeShortcuts, normalized];
+        setNotePostTimeShortcuts(next);
+        try { localStorage.setItem('sb_notePostTimeShortcuts', JSON.stringify(next)); } catch { }
+        showToast(`${formatShortcutTime(normalized)} をショートカットに追加しました`, 'success');
+      };
 
       const openNotePostModal = () => {
         if (selectedPostTargets.length === 0) {
@@ -3236,6 +3282,30 @@
           showToast('note公開予約をキャンセルしました', 'success');
         } catch (e) {
           showToast('予約キャンセルに失敗: ' + e.message, 'error');
+        }
+      };
+
+      const handleCancelSelectedDateSchedules = async () => {
+        const targets = selectedDateSchedules.filter(item => item.status === 'scheduled');
+        if (targets.length === 0) {
+          showToast('削除できる予約はありません', 'info');
+          return;
+        }
+        if (!confirm(`${notePostSelectedDate} の予約 ${targets.length}件を削除しますか？`)) return;
+
+        setNotePostRunning(true);
+        try {
+          let schedules = notePostSchedules;
+          for (const item of targets) {
+            const data = await cancelNotePostSchedule(item.id);
+            schedules = data.schedules || schedules;
+          }
+          setNotePostSchedules(schedules);
+          showToast(`${targets.length}件のnote公開予約を削除しました`, 'success');
+        } catch (e) {
+          showToast('予約削除に失敗: ' + e.message, 'error');
+        } finally {
+          setNotePostRunning(false);
         }
       };
 
@@ -3672,7 +3742,7 @@
               onClick={() => { if (!notePostRunning) setNotePostModalOpen(false); }}
             >
               <div
-                className="w-full max-w-5xl overflow-hidden rounded-lg border border-purple-100 bg-white shadow-2xl"
+                className="w-full max-w-7xl overflow-hidden rounded-lg border border-purple-100 bg-white shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
@@ -3697,7 +3767,7 @@
                   </button>
                 </div>
 
-                <div className="grid max-h-[78vh] grid-cols-1 overflow-y-auto lg:grid-cols-[340px_1fr]">
+                <div className="grid max-h-[78vh] grid-cols-1 overflow-y-auto lg:grid-cols-[360px_minmax(0,1fr)]">
                   <div className="border-b border-slate-200 p-5 lg:border-b-0 lg:border-r">
                     <div className="grid grid-cols-2 rounded-lg bg-slate-100 p-1">
                       <button
@@ -3756,6 +3826,33 @@
                             placeholder="XX:XX"
                             className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 outline-none focus:border-[#7C4DFF] focus:ring-2 focus:ring-purple-100"
                           />
+                          <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                            {notePostTimeShortcuts.map((time) => {
+                              const active = normalizeNotePostTime(notePostTime) === time;
+                              return (
+                                <button
+                                  key={time}
+                                  type="button"
+                                  onClick={() => setNotePostTime(time)}
+                                  className={`rounded-full border px-2 py-1 text-[11px] font-bold transition-colors ${active
+                                      ? 'border-[#7C4DFF] bg-[#7C4DFF] text-white'
+                                      : 'border-slate-200 bg-white text-slate-500 hover:border-purple-200 hover:bg-purple-50 hover:text-[#7C4DFF]'
+                                    }`}
+                                  title={`${formatShortcutTime(time)} を反映`}
+                                >
+                                  {formatShortcutTime(time)}
+                                </button>
+                              );
+                            })}
+                            <button
+                              type="button"
+                              onClick={addNotePostTimeShortcut}
+                              className="flex h-6 w-6 items-center justify-center rounded-full border border-purple-200 bg-purple-50 text-xs font-bold text-[#7C4DFF] transition-colors hover:bg-purple-100"
+                              title="現在の時間をショートカットに追加"
+                            >
+                              ＋
+                            </button>
+                          </div>
                         </div>
                         <button
                           type="button"
@@ -3768,6 +3865,17 @@
                     )}
 
                     <div className="mt-6 flex items-center justify-end gap-2">
+                      {notePostMode === 'schedule' && (
+                        <button
+                          type="button"
+                          onClick={handleCancelSelectedDateSchedules}
+                          disabled={notePostRunning || selectedDateCancellableSchedules.length === 0}
+                          className="rounded-lg bg-rose-500 px-3 py-2 text-xs font-bold text-white shadow-sm shadow-rose-100 transition-colors hover:bg-rose-600 disabled:bg-slate-300 disabled:shadow-none"
+                          title={`${notePostSelectedDate} の予約を削除`}
+                        >
+                          予約削除
+                        </button>
+                      )}
                       <button
                         type="button"
                         onClick={() => setNotePostModalOpen(false)}
@@ -3787,7 +3895,7 @@
                     </div>
                   </div>
 
-                  <div className="p-5">
+                  <div className="min-w-0 p-5">
                     <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                       <div>
                         <p className="text-xs font-bold text-slate-500">予約カレンダー</p>
@@ -3821,8 +3929,15 @@
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-7 gap-1 text-center text-[11px] font-bold text-slate-400">
-                      {['日', '月', '火', '水', '木', '金', '土'].map(day => <div key={day} className="py-1">{day}</div>)}
+                    <div className="grid grid-cols-7 gap-1 text-center text-[11px] font-bold">
+                      {['月', '火', '水', '木', '金', '土', '日'].map((day, index) => (
+                        <div
+                          key={day}
+                          className={`py-1 ${index === 5 ? 'text-blue-500' : index === 6 ? 'text-rose-500' : 'text-slate-400'}`}
+                        >
+                          {day}
+                        </div>
+                      ))}
                     </div>
                     <div className="mt-1 grid grid-cols-7 gap-1">
                       {notePostCalendarDays.map((day) => {
@@ -3831,33 +3946,62 @@
                         const isCurrentMonth = day.getMonth() === notePostMonth.getMonth();
                         const isSelected = key === notePostSelectedDate;
                         const isToday = key === toDateInputValue(new Date());
+                        const dayOfWeek = day.getDay();
+                        const dateTextClass = dayOfWeek === 6
+                          ? 'text-blue-500'
+                          : dayOfWeek === 0
+                            ? 'text-rose-500'
+                            : isToday
+                              ? 'text-[#7C4DFF]'
+                              : 'text-slate-500';
                         return (
-                          <button
+                          <div
                             key={key}
-                            type="button"
+                            role="button"
+                            tabIndex={0}
                             onClick={() => {
                               setNotePostSelectedDate(key);
                               setNotePostMode('schedule');
                             }}
-                            className={`min-h-[86px] rounded-md border p-1.5 text-left transition-colors ${isSelected
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                setNotePostSelectedDate(key);
+                                setNotePostMode('schedule');
+                              }
+                            }}
+                            className={`min-h-[86px] min-w-0 cursor-pointer rounded-md border p-1.5 text-left transition-colors ${isSelected
                                 ? 'border-[#7C4DFF] bg-purple-50'
                                 : 'border-slate-200 bg-white hover:border-purple-200 hover:bg-purple-50/40'
                               } ${isCurrentMonth ? 'opacity-100' : 'opacity-40'}`}
                           >
                             <div className="mb-1 flex items-center justify-between">
-                              <span className={`text-xs font-bold ${isToday ? 'text-[#7C4DFF]' : 'text-slate-500'}`}>{day.getDate()}</span>
+                              <span className={`text-xs font-bold ${dateTextClass}`}>{day.getDate()}</span>
                               {schedules.length > 0 && <span className="rounded-full bg-[#7C4DFF] px-1.5 py-0.5 text-[10px] font-bold text-white">{schedules.length}</span>}
                             </div>
                             <div className="space-y-1">
                               {schedules.slice(0, 2).map((item) => (
-                                <div key={item.id} className="overflow-hidden rounded bg-white px-1.5 py-1 shadow-sm">
+                                <div key={item.id} className="relative min-w-0 overflow-hidden rounded bg-white py-1 pl-1.5 pr-5 shadow-sm">
+                                  {item.status === 'scheduled' && (
+                                    <button
+                                      type="button"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleCancelNotePostSchedule(item.id);
+                                      }}
+                                      className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-rose-50 text-[10px] font-bold text-rose-500 hover:bg-rose-100"
+                                      title="この予約を削除"
+                                    >
+                                      ✗
+                                    </button>
+                                  )}
                                   <p className="truncate text-[10px] font-bold text-slate-700">{formatTimeJa(item.publishAt)} {getScheduleTitle(item)}</p>
                                   <p className="truncate text-[9px] text-slate-400">登録 {formatDateTimeJa(item.createdAt)}</p>
                                 </div>
                               ))}
                               {schedules.length > 2 && <p className="text-[10px] font-bold text-slate-400">+{schedules.length - 2}</p>}
                             </div>
-                          </button>
+                          </div>
                         );
                       })}
                     </div>

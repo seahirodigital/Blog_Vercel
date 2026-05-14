@@ -976,6 +976,106 @@ def _fill_text_like_locator(locator, text: str) -> None:
     )
 
 
+def _paste_text_like_locator(page, locator, text: str) -> str:
+    """note側のタグ入力を「貼り付け」として処理させる。"""
+    locator.scroll_into_view_if_needed()
+    locator.click(timeout=4000)
+    modifier = "Meta" if sys.platform == "darwin" else "Control"
+    errors = []
+
+    try:
+        page.context.grant_permissions(
+            ["clipboard-read", "clipboard-write"],
+            origin="https://editor.note.com",
+        )
+    except Exception:
+        pass
+
+    try:
+        page.keyboard.press(f"{modifier}+A")
+        page.evaluate("(value) => navigator.clipboard.writeText(value)", text)
+        page.keyboard.press(f"{modifier}+V")
+        page.wait_for_timeout(1800)
+        return "clipboard_paste"
+    except Exception as exc:
+        errors.append(f"clipboard_paste={exc}")
+
+    try:
+        locator.evaluate(
+            """
+            (el, value) => {
+              el.focus();
+              const data = new DataTransfer();
+              data.setData('text/plain', value);
+              const event = new ClipboardEvent('paste', {
+                bubbles: true,
+                cancelable: true,
+                clipboardData: data
+              });
+              el.dispatchEvent(event);
+            }
+            """,
+            text,
+        )
+        page.wait_for_timeout(1800)
+        return "clipboard_event"
+    except Exception as exc:
+        errors.append(f"clipboard_event={exc}")
+
+    try:
+        page.keyboard.insert_text(text)
+        page.wait_for_timeout(1800)
+        return "keyboard_insert_text"
+    except Exception as exc:
+        errors.append(f"keyboard_insert_text={exc}")
+
+    _fill_text_like_locator(locator, text)
+    page.wait_for_timeout(1800)
+    return "fill_fallback:" + " / ".join(errors[:3])
+
+
+def _collect_hashtag_surface_text(page) -> str:
+    return page.evaluate(
+        """
+        () => {
+          const parts = [];
+          document.querySelectorAll('input, textarea, [contenteditable="true"]').forEach((el) => {
+            parts.push(el.value || el.innerText || el.textContent || '');
+          });
+          if (document.body) parts.push(document.body.innerText || document.body.textContent || '');
+          return parts.join('\\n').replace(/\\s+/g, ' ').trim();
+        }
+        """
+    )
+
+
+def _verify_note_hashtags(page, tags: str) -> dict:
+    expected = [tag for tag in tags.split() if tag]
+    compact_expected = re.sub(r"\s+", " ", tags).strip()
+    last_missing = expected
+
+    for _ in range(10):
+        surface = _collect_hashtag_surface_text(page)
+        compact_surface = re.sub(r"\s+", " ", surface).strip()
+        if compact_expected and compact_expected in compact_surface:
+            return {"expected": len(expected), "missing": []}
+
+        missing = [
+            tag for tag in expected
+            if tag not in compact_surface and f"#{tag}" not in compact_surface
+        ]
+        if not missing:
+            return {"expected": len(expected), "missing": []}
+        last_missing = missing
+        page.wait_for_timeout(500)
+
+    raise RuntimeError(
+        "指定ハッシュタグの反映を確認できませんでした: "
+        + ", ".join(last_missing[:12])
+        + (f" 他{len(last_missing) - 12}件" if len(last_missing) > 12 else "")
+    )
+
+
 def _fill_note_hashtags(page, tags: str) -> str:
     candidates = [
         ("input_placeholder_ハッシュタグ", page.locator("input[placeholder*='ハッシュタグ'], textarea[placeholder*='ハッシュタグ']")),
@@ -997,10 +1097,112 @@ def _fill_note_hashtags(page, tags: str) -> str:
         ),
     ]
     strategy, locator = _find_visible_candidate(candidates, "ハッシュタグ入力", timeout_ms=3000)
-    _fill_text_like_locator(locator, tags)
+    paste_strategy = _paste_text_like_locator(page, locator, tags)
+    verification = _verify_note_hashtags(page, tags)
+    print(f"   ✅ ハッシュタグ入力完了: {strategy}->{paste_strategy} ({verification['expected']}件確認)")
+    return f"{strategy}->{paste_strategy}"
+
+
+def _get_gadget_magazine_status(page) -> dict:
+    return page.evaluate(
+        """
+        () => {
+          const normalize = (value) => (value || '').replace(/\\s+/g, ' ').trim();
+          const isVisible = (el) => {
+            const rect = el.getBoundingClientRect();
+            const style = window.getComputedStyle(el);
+            return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
+          };
+          const buttonText = (el) => normalize(el.innerText || el.textContent || el.getAttribute('aria-label') || '');
+          const labels = Array.from(document.querySelectorAll('body *')).filter((el) => {
+            if (!isVisible(el)) return false;
+            const text = normalize(el.innerText || el.textContent || '');
+            return text === 'ガジェット';
+          });
+
+          for (const label of labels) {
+            let row = label;
+            for (let depth = 0; row && depth < 8; depth += 1, row = row.parentElement) {
+              const rowText = normalize(row.innerText || row.textContent || '');
+              if (!rowText.includes('ガジェット')) continue;
+              if (!rowText.includes('追加') && !rowText.includes('追加済')) continue;
+              const buttons = Array.from(row.querySelectorAll('button, [role="button"]')).filter(isVisible);
+              const already = rowText.includes('追加済') || buttons.some((button) => buttonText(button).includes('追加済'));
+              const canAdd = buttons.some((button) => {
+                const text = buttonText(button);
+                return (text === '追加' || text.includes('追加')) && !text.includes('追加済');
+              });
+              return {
+                found: true,
+                already,
+                canAdd,
+                depth,
+                rowText: rowText.slice(0, 300),
+              };
+            }
+          }
+          return { found: false, already: false, canAdd: false, rowText: '' };
+        }
+        """
+    )
+
+
+def _click_gadget_magazine_by_dom(page) -> str:
+    result = page.evaluate(
+        """
+        () => {
+          const normalize = (value) => (value || '').replace(/\\s+/g, ' ').trim();
+          const isVisible = (el) => {
+            const rect = el.getBoundingClientRect();
+            const style = window.getComputedStyle(el);
+            return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
+          };
+          const buttonText = (el) => normalize(el.innerText || el.textContent || el.getAttribute('aria-label') || '');
+          const labels = Array.from(document.querySelectorAll('body *')).filter((el) => {
+            if (!isVisible(el)) return false;
+            const text = normalize(el.innerText || el.textContent || '');
+            return text === 'ガジェット';
+          });
+
+          for (const label of labels) {
+            let row = label;
+            for (let depth = 0; row && depth < 8; depth += 1, row = row.parentElement) {
+              const rowText = normalize(row.innerText || row.textContent || '');
+              if (!rowText.includes('ガジェット')) continue;
+              if (!rowText.includes('追加') && !rowText.includes('追加済')) continue;
+              const buttons = Array.from(row.querySelectorAll('button, [role="button"]')).filter(isVisible);
+              const already = rowText.includes('追加済') || buttons.some((button) => buttonText(button).includes('追加済'));
+              if (already) {
+                return { ok: true, already: true, strategy: `dom_gadget_already_added_depth_${depth}`, rowText };
+              }
+              const addButton = buttons.find((button) => {
+                const text = buttonText(button);
+                return (text === '追加' || text.includes('追加')) && !text.includes('追加済');
+              });
+              if (addButton) {
+                addButton.click();
+                return { ok: true, already: false, strategy: `dom_gadget_row_add_depth_${depth}`, rowText };
+              }
+            }
+          }
+          return { ok: false, already: false, strategy: '', rowText: '', reason: 'ガジェット行の追加ボタンが見つかりません' };
+        }
+        """
+    )
+    if not result.get("ok"):
+        raise RuntimeError(result.get("reason") or "ガジェット行の追加ボタンが見つかりません")
     page.wait_for_timeout(1500)
-    print(f"   ✅ ハッシュタグ入力完了: {strategy}")
-    return strategy
+    return result.get("strategy") or "dom_gadget_row_add"
+
+
+def _wait_for_gadget_magazine_added(page) -> dict:
+    status = {}
+    for _ in range(12):
+        status = _get_gadget_magazine_status(page)
+        if status.get("already"):
+            return status
+        page.wait_for_timeout(500)
+    raise RuntimeError(f"ガジェットマガジンの追加済みを確認できませんでした: {status}")
 
 
 def _add_gadget_magazine(page) -> str:
@@ -1021,31 +1223,51 @@ def _add_gadget_magazine(page) -> str:
     except Exception as exc:
         print(f"   ⚠️ マガジンタブのクリックをスキップします: {exc}")
 
-    strategy, locator = _find_visible_candidate(
-        candidates=[
-            (
-                "xpath_gadget_row_add_button",
-                page.locator(
-                    "xpath=//*[contains(normalize-space(.), 'ガジェット')]"
-                    "/ancestor::*[self::div or self::li or self::section][.//button[contains(normalize-space(.), '追加')]][1]"
-                    "//button[contains(normalize-space(.), '追加')]"
+    status = _get_gadget_magazine_status(page)
+    if status.get("already"):
+        strategy = "gadget_already_added"
+        print(f"   ✅ ガジェットマガジンは既に追加済みです: {status.get('rowText', '')[:80]}")
+        return f"{tab_strategy}->{strategy}" if tab_strategy else strategy
+
+    try:
+        strategy = _click_gadget_magazine_by_dom(page)
+    except Exception as dom_exc:
+        print(f"   ⚠️ DOM指定でのガジェット追加に失敗しました。XPathで再試行します: {dom_exc}")
+        strategy, locator = _find_visible_candidate(
+            candidates=[
+                (
+                    "xpath_gadget_exact_row_add_button",
+                    page.locator(
+                        "xpath=//*[normalize-space(.)='ガジェット']"
+                        "/ancestor::*[self::div or self::li or self::section][.//button[normalize-space(.)='追加']][1]"
+                        "//button[normalize-space(.)='追加']"
+                    ),
                 ),
-            ),
-            (
-                "xpath_gadget_following_add_button",
-                page.locator(
-                    "xpath=//*[contains(normalize-space(.), 'ガジェット')]"
-                    "/following::button[contains(normalize-space(.), '追加')][1]"
+                (
+                    "xpath_gadget_row_add_button",
+                    page.locator(
+                        "xpath=//*[contains(normalize-space(.), 'ガジェット')]"
+                        "/ancestor::*[self::div or self::li or self::section][.//button[contains(normalize-space(.), '追加')]][1]"
+                        "//button[contains(normalize-space(.), '追加') and not(contains(normalize-space(.), '追加済'))]"
+                    ),
                 ),
-            ),
-        ],
-        description="ガジェットマガジン追加",
-        timeout_ms=5000,
-    )
-    _click_locator_with_fallback(page, locator, strategy, "ガジェットマガジン追加", timeout_ms=5000)
-    page.wait_for_timeout(1000)
-    print(f"   ✅ ガジェットマガジン追加完了: {strategy}")
+                (
+                    "xpath_gadget_following_add_button",
+                    page.locator(
+                        "xpath=//*[normalize-space(.)='ガジェット']"
+                        "/following::button[normalize-space(.)='追加'][1]"
+                    ),
+                ),
+            ],
+            description="ガジェットマガジン追加",
+            timeout_ms=5000,
+        )
+        _click_locator_with_fallback(page, locator, strategy, "ガジェットマガジン追加", timeout_ms=5000)
+
+    added_status = _wait_for_gadget_magazine_added(page)
+    print(f"   ✅ ガジェットマガジン追加完了: {strategy} / {added_status.get('rowText', '')[:80]}")
     return f"{tab_strategy}->{strategy}" if tab_strategy else strategy
+
 
 
 def _click_final_post_button(page, dry_run: bool = False) -> str:
