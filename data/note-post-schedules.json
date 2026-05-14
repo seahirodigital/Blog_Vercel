@@ -1173,7 +1173,7 @@
   },
   {
     "id": "5c937164-f71c-4eec-a64a-8835157b3b1e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd6698e44fd7342a2b17d4019656025cb",
     "title": "パナソニック オートクッカー ビストロ 自動調理なべ NF-AC1000-K レビュー比較まとめ",
     "name": "パナソニック オートクッカー ビストロ 自動調理なべ NF-AC1000-K レビュー比較まとめ.md",
@@ -1185,7 +1185,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-14T13:48:40.639Z"
   },
   {
     "id": "249249c8-ed38-4d6c-8ec5-ff65f7073dc3",
