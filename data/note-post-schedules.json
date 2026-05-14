@@ -69,7 +69,7 @@
   },
   {
     "id": "4055dc4e-e7ea-4bd4-9861-b687269b6b3a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s1beab885177d4e3386178c5fe60490f9",
     "title": "シャープ ヘルシオ ホットクック KN-HW24G-W レビュー比較まとめ",
     "name": "シャープ 水なし自動調理鍋 ヘルシオ ホットクック KN-HW24G-W レビュー比較まとめ.md",
@@ -81,7 +81,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-14T13:44:08.606Z"
   },
   {
     "id": "c85598a6-6c2b-4609-abf4-43e0a400342f",
