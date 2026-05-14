@@ -858,35 +858,62 @@ def _place_caret_after_disclosure(page) -> bool:
             .replace(/\\s+/g, ' ')
             .trim();
           const normalizedMarkers = (markers || []).map(normalize).filter(Boolean);
-          const matchesMarker = (el) => {
-            const text = normalize(el.innerText || el.textContent || '');
-            return normalizedMarkers.some((marker) => text.includes(marker));
-          };
           const isVisible = (el) => {
             const rect = el.getBoundingClientRect();
             const style = window.getComputedStyle(el);
             return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
           };
-          const isBlockish = (el) => /^(P|LI|H[1-6]|DIV)$/i.test(el.tagName || '');
-          const nodes = Array.from(editor.querySelectorAll('p, li, h1, h2, h3, h4, h5, h6, [data-block-id], [data-block], div'))
-            .filter((el) => isVisible(el) && matchesMarker(el));
-          if (nodes.length === 0) return false;
-
-          const leafNodes = nodes.filter((el) => !Array.from(el.children || []).some((child) => isBlockish(child) && matchesMarker(child)));
-          const candidates = leafNodes.length > 0 ? leafNodes : nodes;
-          candidates.sort((a, b) => {
-            const aText = normalize(a.innerText || a.textContent || '');
-            const bText = normalize(b.innerText || b.textContent || '');
-            const aTag = /^(P|LI|H[1-6])$/i.test(a.tagName || '') ? 0 : 1;
-            const bTag = /^(P|LI|H[1-6])$/i.test(b.tagName || '') ? 0 : 1;
-            return aTag - bTag || aText.length - bText.length;
+          const isIgnored = (el) => /^(SCRIPT|STYLE|NOSCRIPT)$/i.test(el.tagName || '');
+          const findBlock = (node) => {
+            let current = node && node.parentElement;
+            while (current && current !== editor) {
+              if (/^(P|LI|H[1-6]|DIV)$/i.test(current.tagName || '') || current.getAttribute('data-block-id') || current.getAttribute('data-block')) {
+                return current;
+              }
+              current = current.parentElement;
+            }
+            return node && node.parentElement ? node.parentElement : editor;
+          };
+          const candidates = [];
+          const walker = document.createTreeWalker(editor, NodeFilter.SHOW_TEXT, {
+            acceptNode: (node) => {
+              const parent = node.parentElement;
+              if (!parent || isIgnored(parent) || !isVisible(parent)) return NodeFilter.FILTER_REJECT;
+              const text = normalize(node.nodeValue || '');
+              return normalizedMarkers.some((marker) => text.includes(marker))
+                ? NodeFilter.FILTER_ACCEPT
+                : NodeFilter.FILTER_SKIP;
+            },
           });
+          while (walker.nextNode()) {
+            const node = walker.currentNode;
+            const rawText = node.nodeValue || '';
+            const normalizedText = normalize(rawText);
+            for (const marker of normalizedMarkers) {
+              const normalizedIndex = normalizedText.indexOf(marker);
+              if (normalizedIndex < 0) continue;
+              const rawIndex = rawText.indexOf(marker);
+              let offset = rawIndex >= 0 ? rawIndex + marker.length : rawText.length;
+              while (offset < rawText.length && /[\\s\\u200B\\)）]/.test(rawText[offset])) {
+                offset += 1;
+              }
+              const block = findBlock(node);
+              candidates.push({
+                node,
+                offset,
+                block,
+                markerLength: marker.length,
+                textLength: normalize(block.innerText || block.textContent || '').length,
+              });
+            }
+          }
+          if (candidates.length === 0) return false;
+          candidates.sort((a, b) => b.markerLength - a.markerLength || a.textLength - b.textLength);
           const target = candidates[0];
-          if (!target) return false;
-          target.scrollIntoView({ block: 'center', inline: 'nearest' });
+          target.block.scrollIntoView({ block: 'center', inline: 'nearest' });
           const range = document.createRange();
-          range.selectNodeContents(target);
-          range.collapse(false);
+          range.setStart(target.node, target.offset);
+          range.collapse(true);
           const selection = window.getSelection();
           selection.removeAllRanges();
           selection.addRange(range);
