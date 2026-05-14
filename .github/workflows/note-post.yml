@@ -479,3 +479,73 @@ jobs:
           )
           print(f'予約状態をpublishedへ更新しました: {schedule_id}')
           PY
+
+      - name: 予約公開完了後に記事をnoteアップ済へ移動
+        if: ${{ inputs.schedule_id != '' }}
+        env:
+          ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
+          ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
+          ONEDRIVE_REFRESH_TOKEN: ${{ secrets.ONEDRIVE_REFRESH_TOKEN }}
+          FILE_ID: ${{ inputs.file_id }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import urllib.parse
+          import urllib.request
+          import urllib.error
+
+          TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
+          GRAPH_API = 'https://graph.microsoft.com/v1.0'
+          DEST_FOLDER_PATH = 'Obsidian in Onedrive 202602/Vercel_Blog/noteアップ済'
+
+          file_id = os.environ.get('FILE_ID', '')
+          if not file_id:
+              raise SystemExit('FILE_ID が空のため移動をスキップします')
+
+          def request_json(method, url, token='', payload=None):
+              data = None if payload is None else json.dumps(payload).encode('utf-8')
+              headers = {'Content-Type': 'application/json'}
+              if token:
+                  headers['Authorization'] = f'Bearer {token}'
+              req = urllib.request.Request(url, data=data, method=method, headers=headers)
+              try:
+                  with urllib.request.urlopen(req, timeout=60) as response:
+                      body = response.read().decode('utf-8')
+                      return json.loads(body) if body else {}
+              except urllib.error.HTTPError as error:
+                  body = error.read().decode('utf-8')
+                  raise RuntimeError(f'{method} {url} failed: {error.code} {body[:500]}')
+
+          token_body = urllib.parse.urlencode({
+              'client_id': os.environ['ONEDRIVE_CLIENT_ID'],
+              'client_secret': os.environ['ONEDRIVE_CLIENT_SECRET'],
+              'refresh_token': os.environ['ONEDRIVE_REFRESH_TOKEN'],
+              'grant_type': 'refresh_token',
+              'scope': 'Files.ReadWrite.All offline_access',
+          }).encode('utf-8')
+          token_req = urllib.request.Request(
+              TOKEN_URL,
+              data=token_body,
+              method='POST',
+              headers={'Content-Type': 'application/x-www-form-urlencoded'},
+          )
+          with urllib.request.urlopen(token_req, timeout=60) as response:
+              token_data = json.loads(response.read().decode('utf-8'))
+          token = token_data.get('access_token')
+          if not token:
+              raise RuntimeError('OneDrive access_token を取得できませんでした')
+
+          encoded_path = urllib.parse.quote(DEST_FOLDER_PATH, safe='/')
+          folder = request_json('GET', f'{GRAPH_API}/me/drive/root:/{encoded_path}?$select=id,name,folder', token)
+          if not folder.get('id') or not folder.get('folder'):
+              raise RuntimeError(f'移動先フォルダを確認できません: {DEST_FOLDER_PATH}')
+
+          moved = request_json(
+              'PATCH',
+              f'{GRAPH_API}/me/drive/items/{urllib.parse.quote(file_id)}',
+              token,
+              {'parentReference': {'id': folder['id']}},
+          )
+          print(f"✅ noteアップ済へ移動しました: {moved.get('name', file_id)}")
+          PY
