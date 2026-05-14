@@ -56,9 +56,11 @@ jobs:
           REPOSITORY: ${{ github.repository }}
         run: |
           python - <<'PY'
+          import base64
           import json
           import os
           import urllib.error
+          import urllib.parse
           import urllib.request
           from datetime import datetime, timezone
 
@@ -69,6 +71,8 @@ jobs:
 
           api_base = f'https://api.github.com/repos/{repo}'
           var_name = 'NOTE_POST_SCHEDULES'
+          schedule_path = 'data/note-post-schedules.json'
+          schedule_url = f"{api_base}/contents/{urllib.parse.quote(schedule_path, safe='/')}"
 
           def request_json(method, url, payload=None, accept_404=False):
               data = None if payload is None else json.dumps(payload).encode('utf-8')
@@ -93,15 +97,40 @@ jobs:
                       return 404, {}
                   raise RuntimeError(f'{method} {url} failed: {error.code} {body[:300]}')
 
-          status, variable = request_json('GET', f'{api_base}/actions/variables/{var_name}', accept_404=True)
-          schedules = []
-          if status == 200:
+          def parse_schedules(raw):
               try:
-                  schedules = json.loads(variable.get('value') or '[]')
+                  parsed = json.loads(raw or '[]')
               except Exception:
-                  schedules = []
-          if not isinstance(schedules, list):
-              schedules = []
+                  return []
+              return parsed if isinstance(parsed, list) else []
+
+          def load_schedules():
+              status, file_data = request_json('GET', schedule_url, accept_404=True)
+              if status == 200:
+                  raw = base64.b64decode((file_data.get('content') or '').replace('\n', '')).decode('utf-8')
+                  file_schedules = parse_schedules(raw)
+                  if file_schedules:
+                      return file_schedules, file_data.get('sha') or ''
+
+              status, variable = request_json('GET', f'{api_base}/actions/variables/{var_name}', accept_404=True)
+              if status == 200:
+                  variable_schedules = parse_schedules(variable.get('value') or '[]')
+                  file_sha = (file_data.get('sha') or '') if isinstance(file_data, dict) else ''
+                  return variable_schedules, file_sha
+              return [], ''
+
+          def save_schedules(schedules, sha=''):
+              payload = {
+                  'message': 'Update note post schedules',
+                  'content': base64.b64encode(
+                      (json.dumps(schedules, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
+                  ).decode('ascii'),
+              }
+              if sha:
+                  payload['sha'] = sha
+              request_json('PUT', schedule_url, payload)
+
+          schedules, schedules_sha = load_schedules()
 
           now = datetime.now(timezone.utc)
           due = []
@@ -155,11 +184,7 @@ jobs:
                   print(f"起動失敗: {inputs['file_id']} / {exc}")
               next_schedules.append(item)
 
-          payload = {'name': var_name, 'value': json.dumps(next_schedules, ensure_ascii=False)}
-          if status == 200:
-              request_json('PATCH', f'{api_base}/actions/variables/{var_name}', payload)
-          else:
-              request_json('POST', f'{api_base}/actions/variables', payload)
+          save_schedules(next_schedules, schedules_sha)
           PY
 
   post-to-note:
@@ -381,9 +406,11 @@ jobs:
           SCHEDULE_ID: ${{ inputs.schedule_id }}
         run: |
           python - <<'PY'
+          import base64
           import json
           import os
           import urllib.error
+          import urllib.parse
           import urllib.request
           from datetime import datetime, timezone
           from pathlib import Path
@@ -395,7 +422,8 @@ jobs:
               raise SystemExit(0)
 
           api_base = f'https://api.github.com/repos/{repo}'
-          var_name = 'NOTE_POST_SCHEDULES'
+          schedule_path = 'data/note-post-schedules.json'
+          schedule_url = f"{api_base}/contents/{urllib.parse.quote(schedule_path, safe='/')}"
           result_path = Path('/tmp/note_post_result.json')
           result = {}
           if result_path.exists():
@@ -424,10 +452,12 @@ jobs:
                       return 404, {}
                   raise RuntimeError(f'{method} {url} failed: {error.code} {body[:300]}')
 
-          status, variable = request_json('GET', f'{api_base}/actions/variables/{var_name}', accept_404=True)
+          status, file_data = request_json('GET', schedule_url, accept_404=True)
           if status != 200:
               raise SystemExit(0)
-          schedules = json.loads(variable.get('value') or '[]')
+          schedules = json.loads(base64.b64decode((file_data.get('content') or '').replace('\n', '')).decode('utf-8') or '[]')
+          if not isinstance(schedules, list):
+              schedules = []
           now = datetime.now(timezone.utc).isoformat()
           for item in schedules:
               if isinstance(item, dict) and item.get('id') == schedule_id:
@@ -437,9 +467,15 @@ jobs:
                   item['error'] = ''
 
           request_json(
-              'PATCH',
-              f'{api_base}/actions/variables/{var_name}',
-              {'name': var_name, 'value': json.dumps(schedules, ensure_ascii=False)},
+              'PUT',
+              schedule_url,
+              {
+                  'message': 'Update note post schedule status',
+                  'sha': file_data.get('sha') or '',
+                  'content': base64.b64encode(
+                      (json.dumps(schedules, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
+                  ).decode('ascii'),
+              },
           )
           print(f'予約状態をpublishedへ更新しました: {schedule_id}')
           PY

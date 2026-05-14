@@ -12,6 +12,7 @@ const GITHUB_API = 'https://api.github.com';
 const DEFAULT_NOTE_TARGET = 'blog_main';
 const ALLOWED_NOTE_TARGETS = new Set(['blog_main', 'xpost_tech']);
 const SCHEDULE_VAR_NAME = 'NOTE_POST_SCHEDULES';
+const SCHEDULE_FILE_PATH = 'data/note-post-schedules.json';
 
 function firstString(value, fallback = '') {
   if (Array.isArray(value)) return value[0] || fallback;
@@ -58,6 +59,18 @@ function toIsoString(value) {
   return date.toISOString();
 }
 
+function encodeContent(value) {
+  return Buffer.from(value, 'utf8').toString('base64');
+}
+
+function decodeContent(value) {
+  return Buffer.from(String(value || '').replace(/\n/g, ''), 'base64').toString('utf8');
+}
+
+function encodeRepoPath(path) {
+  return String(path || '').split('/').map(encodeURIComponent).join('/');
+}
+
 async function githubFetch(repo, token, path, options = {}) {
   return await fetch(`${GITHUB_API}/repos/${repo}${path}`, {
     ...options,
@@ -81,40 +94,24 @@ async function readGithubVariable(repo, token, name) {
   return data.value || '';
 }
 
-async function upsertGithubVariable(repo, token, name, value) {
-  const check = await githubFetch(repo, token, `/actions/variables/${name}`);
-  const body = JSON.stringify({ name, value });
-  if (check.status === 200) {
-    const response = await githubFetch(repo, token, `/actions/variables/${name}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body,
-    });
-    if (!response.ok) {
-      const text = await response.text();
-      throw new Error(`GitHub Variable更新失敗: ${response.status} ${text.slice(0, 200)}`);
-    }
-    return;
-  }
-  if (check.status !== 404 && !check.ok) {
-    const text = await check.text();
-    throw new Error(`GitHub Variable確認失敗: ${check.status} ${text.slice(0, 200)}`);
-  }
-
-  const response = await githubFetch(repo, token, '/actions/variables', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body,
-  });
-  if (!response.ok) {
-    const text = await response.text();
-    throw new Error(`GitHub Variable作成失敗: ${response.status} ${text.slice(0, 200)}`);
-  }
-}
-
 async function loadSchedules(repo, token) {
+  const file = await readSchedulesFile(repo, token);
+  if (file.exists && file.schedules.length > 0) return file.schedules;
+
   const raw = await readGithubVariable(repo, token, SCHEDULE_VAR_NAME);
-  return parseSchedules(raw);
+  const variableSchedules = parseSchedules(raw);
+  if (file.exists) {
+    if (variableSchedules.length > 0) {
+      await saveSchedules(repo, token, variableSchedules);
+      return variableSchedules;
+    }
+    return file.schedules;
+  }
+
+  if (variableSchedules.length > 0) {
+    await saveSchedules(repo, token, variableSchedules);
+  }
+  return variableSchedules;
 }
 
 async function saveSchedules(repo, token, schedules) {
@@ -123,8 +120,37 @@ async function saveSchedules(repo, token, schedules) {
     const right = new Date(b.publishAt || 0).getTime();
     return left - right;
   });
-  await upsertGithubVariable(repo, token, SCHEDULE_VAR_NAME, JSON.stringify(sorted));
+  const file = await readSchedulesFile(repo, token);
+  const body = {
+    message: 'Update note post schedules',
+    content: encodeContent(`${JSON.stringify(sorted, null, 2)}\n`),
+  };
+  if (file.sha) body.sha = file.sha;
+  const response = await githubFetch(repo, token, `/contents/${encodeRepoPath(SCHEDULE_FILE_PATH)}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`予約ファイル更新失敗: ${response.status} ${text.slice(0, 200)}`);
+  }
   return sorted;
+}
+
+async function readSchedulesFile(repo, token) {
+  const response = await githubFetch(repo, token, `/contents/${encodeRepoPath(SCHEDULE_FILE_PATH)}`);
+  if (response.status === 404) return { exists: false, sha: '', schedules: [] };
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`予約ファイル取得失敗: ${response.status} ${text.slice(0, 200)}`);
+  }
+  const data = await response.json();
+  return {
+    exists: true,
+    sha: data.sha || '',
+    schedules: parseSchedules(decodeContent(data.content || '')),
+  };
 }
 
 async function dispatchNotePostWorkflow(repo, token, item) {

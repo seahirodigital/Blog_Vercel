@@ -943,7 +943,7 @@
       return `${pad2(date.getHours())}:${pad2(date.getMinutes())}`;
     }
 
-    const DEFAULT_NOTE_POST_TIME_SHORTCUTS = ['07:00', '11:30', '16:30', '21:00', '22:00', '23:00'];
+    const DEFAULT_NOTE_POST_TIME_SHORTCUTS = ['07:30', '11:30', '21:00'];
 
     function normalizeNotePostTime(value) {
       const match = String(value || '').trim().match(/^(\d{1,2}):(\d{2})$/);
@@ -990,12 +990,6 @@
       return `${date.getFullYear()}年 ${date.getMonth() + 1}月`;
     }
 
-    function addHours(date, hours) {
-      const next = new Date(date);
-      next.setHours(next.getHours() + hours);
-      return next;
-    }
-
     function nextRoundedHour() {
       const date = new Date();
       date.setMinutes(0, 0, 0);
@@ -1003,16 +997,63 @@
       return date;
     }
 
-    function buildNotePostScheduleDrafts(ids, startSlot) {
-      const base = startSlot || nextRoundedHour();
-      return (ids || []).reduce((drafts, id, index) => {
-        const slot = addHours(base, index * 2);
-        drafts[id] = {
-          date: toDateInputValue(slot),
-          time: toTimeInputValue(slot),
-        };
-        return drafts;
-      }, {});
+    const NOTE_POST_DAILY_SLOTS = ['07:30', '11:30', '21:00'];
+
+    function makeNotePostDraft(date, time) {
+      return { date, time };
+    }
+
+    function getNextDailyNotePostSlot(occupiedKeys = new Set(), occupiedDateCounts = new Map(), afterDate = new Date()) {
+      const todayKey = toDateInputValue(new Date());
+      const startKey = toDateInputValue(afterDate);
+      const cursor = new Date(`${startKey}T00:00:00`);
+      for (let dayOffset = 0; dayOffset < 370; dayOffset++) {
+        const dateKey = toDateInputValue(cursor);
+        if (dateKey < todayKey) {
+          cursor.setDate(cursor.getDate() + 1);
+          continue;
+        }
+        if ((occupiedDateCounts.get(dateKey) || 0) >= NOTE_POST_DAILY_SLOTS.length) {
+          cursor.setDate(cursor.getDate() + 1);
+          continue;
+        }
+        for (const time of NOTE_POST_DAILY_SLOTS) {
+          const candidate = new Date(`${dateKey}T${time}:00`);
+          if (candidate.getTime() <= Date.now() + 60_000) continue;
+          if (!occupiedKeys.has(`${dateKey} ${time}`)) {
+            return makeNotePostDraft(dateKey, time);
+          }
+        }
+        cursor.setDate(cursor.getDate() + 1);
+      }
+      const fallback = nextRoundedHour();
+      return makeNotePostDraft(toDateInputValue(fallback), toTimeInputValue(fallback));
+    }
+
+    function collectNotePostOccupiedSlots(schedules = [], drafts = {}, excludeDraftId = '') {
+      const keys = new Set();
+      const dateCounts = new Map();
+      const add = (dateKey, time) => {
+        const normalizedTime = normalizeNotePostTime(time);
+        if (!dateKey || !normalizedTime) return;
+        keys.add(`${dateKey} ${normalizedTime}`);
+        dateCounts.set(dateKey, (dateCounts.get(dateKey) || 0) + 1);
+      };
+
+      schedules.forEach((item) => {
+        if (!item || item.status !== 'scheduled' || !item.publishAt) return;
+        const date = new Date(item.publishAt);
+        if (Number.isNaN(date.getTime()) || date.getTime() <= Date.now() + 60_000) return;
+        add(toDateInputValue(date), toTimeInputValue(date));
+      });
+
+      Object.entries(drafts || {}).forEach(([id, draft]) => {
+        if (String(id) === String(excludeDraftId)) return;
+        if (!draft || !draft.date) return;
+        add(draft.date, draft.time);
+      });
+
+      return { keys, dateCounts };
     }
 
     function getScheduleTitle(item) {
@@ -3198,13 +3239,26 @@
         notePostSchedules.filter(item => item && item.status !== 'cancelled')
       ), [notePostSchedules]);
 
-      const suggestedPostSlot = useMemo(() => {
-        const future = activeNotePostSchedules
-          .filter(item => item.status === 'scheduled' && new Date(item.publishAt).getTime() > Date.now())
-          .sort((a, b) => new Date(a.publishAt) - new Date(b.publishAt));
-        if (future.length === 0) return nextRoundedHour();
-        return addHours(new Date(future[future.length - 1].publishAt), 2);
-      }, [activeNotePostSchedules]);
+      const getNextNotePostDraft = useCallback((drafts = notePostScheduleDrafts, excludeDraftId = '') => {
+        const occupied = collectNotePostOccupiedSlots(activeNotePostSchedules, drafts, excludeDraftId);
+        return getNextDailyNotePostSlot(occupied.keys, occupied.dateCounts);
+      }, [activeNotePostSchedules, notePostScheduleDrafts]);
+
+      const suggestedPostDraft = useMemo(() => getNextNotePostDraft(), [getNextNotePostDraft]);
+
+      const activateNotePostTarget = useCallback((targetId) => {
+        setNotePostActiveTargetId(targetId);
+        setNotePostScheduleDrafts(prev => {
+          const current = prev[targetId];
+          if (current && current.date && normalizeNotePostTime(current.time)) return prev;
+          const draft = getNextNotePostDraft(prev, targetId);
+          setNotePostSelectedDate(draft.date);
+          setNotePostTime(draft.time);
+          const date = new Date(`${draft.date}T00:00:00`);
+          if (!Number.isNaN(date.getTime())) setNotePostMonth(new Date(date.getFullYear(), date.getMonth(), 1));
+          return { ...prev, [targetId]: draft };
+        });
+      }, [getNextNotePostDraft]);
 
       const notePostSchedulesByDate = useMemo(() => {
         const map = {};
@@ -3297,10 +3351,10 @@
 
       const applySuggestedPostSlot = useCallback(() => {
         updateActiveNotePostDraft({
-          date: toDateInputValue(suggestedPostSlot),
-          time: toTimeInputValue(suggestedPostSlot),
+          date: suggestedPostDraft.date,
+          time: suggestedPostDraft.time,
         });
-      }, [suggestedPostSlot, updateActiveNotePostDraft]);
+      }, [suggestedPostDraft, updateActiveNotePostDraft]);
 
       const addNotePostTimeShortcut = () => {
         const normalized = normalizeNotePostTime(notePostTime);
@@ -3343,8 +3397,8 @@
           showToast('記事を選択してください', 'error');
           return;
         }
-        const initialDrafts = buildNotePostScheduleDrafts(knownIds, suggestedPostSlot);
-        const firstDraft = initialDrafts[knownIds[0]];
+        const firstDraft = getNextNotePostDraft({}, knownIds[0]);
+        const initialDrafts = { [knownIds[0]]: firstDraft };
         setNotePostTargetIds(knownIds);
         setNotePostActiveTargetId(knownIds[0]);
         setNotePostScheduleDrafts(initialDrafts);
@@ -3371,6 +3425,8 @@
         let publishAt = '';
         let scheduleItems = [];
         if (mode === 'schedule') {
+          const existingOccupied = collectNotePostOccupiedSlots(activeNotePostSchedules, {});
+          const submitDateCounts = new Map(existingOccupied.dateCounts);
           for (const target of targets) {
             const draft = notePostScheduleDrafts[target.id];
             const normalizedTime = normalizeNotePostTime(draft?.time);
@@ -3390,6 +3446,13 @@
               showToast(`「${target.title}」の予約日時は現在時刻より後にしてください`, 'error');
               return;
             }
+            const nextDateCount = (submitDateCounts.get(draft.date) || 0) + 1;
+            if (nextDateCount > NOTE_POST_DAILY_SLOTS.length) {
+              setNotePostActiveTargetId(target.id);
+              showToast(`${draft.date} は1日3記事までです。別の日にしてください`, 'error');
+              return;
+            }
+            submitDateCounts.set(draft.date, nextDateCount);
             scheduleItems.push({
               fileId: target.id,
               title: target.title,
@@ -3936,7 +3999,7 @@
                           <button
                             key={target.id}
                             type="button"
-                            onClick={() => setNotePostActiveTargetId(target.id)}
+                            onClick={() => activateNotePostTarget(target.id)}
                             className={`w-full rounded-md border px-3 py-2 text-left transition-colors ${isActive
                                 ? 'border-[#7C4DFF] bg-purple-50 shadow-sm'
                                 : 'border-slate-200 bg-white hover:border-purple-200 hover:bg-purple-50/40'
@@ -4036,7 +4099,7 @@
                           onClick={applySuggestedPostSlot}
                           className="w-full rounded-lg border border-purple-200 bg-purple-50 px-3 py-2 text-left text-xs font-bold text-[#7C4DFF] transition-colors hover:bg-purple-100"
                         >
-                          次の目安をこの記事へ反映: {formatDateTimeJa(suggestedPostSlot)}
+                          次の予約枠をこの記事へ反映: {suggestedPostDraft.date} {formatShortcutTime(suggestedPostDraft.time)}
                         </button>
                       </div>
                     )}
