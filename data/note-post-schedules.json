@@ -118,7 +118,7 @@
   },
   {
     "id": "ddd10573-8eee-4f27-b004-b17adc927358",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s725c5bc5208d40029d0085b869500366",
     "title": "リファビューテック ドライヤー SE レビュー比較まとめ：効率的な美髪ケアを実現する新体験",
     "name": "ティファール 自動調理鍋 かきまぜ機能 レビュー比較まとめ：時短と効率を叶える新時代のキッチン家電レビュー.md",
@@ -130,7 +130,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-14T13:43:54.687Z"
   },
   {
     "id": "932626b2-5a3a-4ea2-ad9d-2f111371f2b0",
