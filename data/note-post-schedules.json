@@ -1172,7 +1172,7 @@
   },
   {
     "id": "65b95e94-6db9-4fdb-9147-8729b69d8281",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8a99bd00ecfb440b91453c29e62329f9",
     "title": "リファバイタルテックモイストスムーススタンドカラースリープウェアの選び方と効果的な活用法をレビュー比較まとめ",
     "name": "リファバイタルテックモイストスムーススタンドカラースリープウェアWOMENの選び方と効果的な活用法をレビュー比較まとめ.md",
@@ -1184,7 +1184,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-14T13:44:31.513Z"
   },
   {
     "id": "03a0cfb8-3b61-4536-8681-7505dd8e663d",
