@@ -909,56 +909,86 @@ def _click_toc_item_from_slash_popup(page) -> str:
             const style = window.getComputedStyle(el);
             return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
           };
-          const candidates = Array.from(document.querySelectorAll('button, [role="button"], [role="menuitem"], [role="option"], li, div'))
+          const tagScore = (el) => {
+            const tag = (el.tagName || '').toLowerCase();
+            const role = el.getAttribute('role') || '';
+            if (role === 'menuitem' || role === 'option' || role === 'button' || tag === 'button') return 0;
+            if (tag === 'li') return 1;
+            if (tag === 'div') return 2;
+            return 3;
+          };
+          const findClickTarget = (source) => {
+            const targets = [];
+            let node = source;
+            for (let depth = 0; node && depth < 8; depth += 1, node = node.parentElement) {
+              if (!isVisible(node)) continue;
+              const text = normalize(node.innerText || node.textContent || '');
+              if (!isTocText(text)) continue;
+              const tag = (node.tagName || '').toLowerCase();
+              const role = node.getAttribute('role') || '';
+              if (!(tag === 'button' || tag === 'li' || tag === 'div' || role === 'button' || role === 'menuitem' || role === 'option')) continue;
+              const rect = node.getBoundingClientRect();
+              const widthPenalty = rect.width >= 120 ? 0 : 8;
+              const heightPenalty = rect.height >= 28 && rect.height <= 90 ? 0 : 8;
+              const hugePenalty = rect.width * rect.height > 220000 ? 30 : 0;
+              targets.push({
+                el: node,
+                rect,
+                text,
+                tag,
+                role,
+                score: tagScore(node) + widthPenalty + heightPenalty + hugePenalty + depth / 10,
+              });
+            }
+            targets.sort((a, b) => a.score - b.score || b.rect.width - a.rect.width || a.rect.top - b.rect.top);
+            return targets[0] || null;
+          };
+          const seen = new Set();
+          const candidates = Array.from(document.querySelectorAll('body *'))
             .filter(isVisible)
-            .map((el) => {
-              const rect = el.getBoundingClientRect();
-              const text = normalize(el.innerText || el.textContent || '');
-              const aria = normalize(el.getAttribute('aria-label') || '');
-              const children = Array.from(el.children || []);
-              const hasTocChild = children.some((child) => isTocText(normalize(child.innerText || child.textContent || '')));
-              return { el, rect, text, aria, hasTocChild };
-            })
-            .filter((item) => {
-              if (!isTocText(item.text)) return false;
-              const tag = (item.el.tagName || '').toLowerCase();
-              const role = item.el.getAttribute('role') || '';
-              return tag === 'button' || tag === 'li' || tag === 'div' || role === 'button' || role === 'menuitem' || role === 'option';
-            })
-            .sort((a, b) => {
-              const tagScore = (item) => {
-                const tag = (item.el.tagName || '').toLowerCase();
-                const role = item.el.getAttribute('role') || '';
-                if (role === 'menuitem' || role === 'option' || role === 'button' || tag === 'button') return 0;
-                if (tag === 'li') return 1;
-                return 2;
+            .map((source) => {
+              const text = normalize(source.innerText || source.textContent || '');
+              if (!isTocText(text)) return null;
+              const target = findClickTarget(source);
+              if (!target) return null;
+              if (seen.has(target.el)) return null;
+              seen.add(target.el);
+              return {
+                el: target.el,
+                rect: target.rect,
+                text: target.text,
+                tag: target.tag,
+                role: target.role,
+                score: target.score,
+                sourceExact: text === '目次',
               };
-              const aExact = a.text === '目次' ? 0 : 1;
-              const bExact = b.text === '目次' ? 0 : 1;
-              const aArea = a.rect.width * a.rect.height;
-              const bArea = b.rect.width * b.rect.height;
+            })
+            .filter(Boolean)
+            .sort((a, b) => {
               const aPosition = a.rect.top + a.rect.left / 1000;
               const bPosition = b.rect.top + b.rect.left / 1000;
-              return Number(a.hasTocChild) - Number(b.hasTocChild)
-                || aExact - bExact
-                || tagScore(a) - tagScore(b)
-                || aArea - bArea
+              return Number(!a.sourceExact) - Number(!b.sourceExact)
+                || a.score - b.score
                 || aPosition - bPosition;
             });
           const selected = candidates[0];
           if (!selected) return { ok: false, reason: 'toc_popup_item_not_found' };
-          selected.el.click();
+          selected.el.scrollIntoView({ block: 'center', inline: 'nearest' });
+          const rect = selected.el.getBoundingClientRect();
           return {
             ok: true,
             text: selected.text,
-            tag: selected.el.tagName,
-            role: selected.el.getAttribute('role') || '',
+            tag: selected.tag,
+            role: selected.role,
+            x: rect.left + Math.min(Math.max(rect.width * 0.35, 32), Math.max(rect.width - 8, 1)),
+            y: rect.top + rect.height / 2,
           };
         }
         """
     )
     if not result.get("ok"):
         raise RuntimeError(result.get("reason") or "スラッシュポップアップ内の目次が見つかりません")
+    page.mouse.click(result["x"], result["y"])
     page.wait_for_timeout(1500)
     return f"slash_popup_click:{result.get('tag', '')}:{result.get('role', '')}"
 
@@ -996,6 +1026,8 @@ def _insert_table_of_contents(page) -> dict:
 
     page.wait_for_timeout(500)
     page.keyboard.press("Enter")
+    page.wait_for_timeout(500)
+    page.keyboard.press("Enter")
     page.wait_for_timeout(900)
 
     # noteのエディタでは、アソシエイト表記直後に空段落を作り、「/」で出るポップアップから目次を挿入する。
@@ -1010,6 +1042,13 @@ def _insert_table_of_contents(page) -> dict:
     if result["success"]:
         print(f"   ✅ 目次挿入完了: {result['strategy']}")
     else:
+        try:
+            page.keyboard.press("Escape")
+            page.wait_for_timeout(250)
+            page.keyboard.press("Backspace")
+            page.wait_for_timeout(250)
+        except Exception:
+            pass
         print(f"   ⚠️ 目次挿入を確認できませんでした: {result['strategy']}")
     return result
 
