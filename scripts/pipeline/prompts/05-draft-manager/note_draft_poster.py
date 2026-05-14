@@ -847,6 +847,25 @@ def _editor_has_table_of_contents(page) -> bool:
     ))
 
 
+def _extract_first_h2_after_disclosure(markdown: str) -> str:
+    """アソシエイト表記より後にある最初のH2見出しを取得する。"""
+    lines = (markdown or "").replace("\r\n", "\n").replace("\r", "\n").split("\n")
+    marker_seen = False
+    marker_exists = any(NOTE_DISCLOSURE_PREFIX in line for line in lines)
+
+    for line in lines:
+        stripped = line.strip()
+        if NOTE_DISCLOSURE_PREFIX in stripped:
+            marker_seen = True
+            continue
+        if marker_exists and not marker_seen:
+            continue
+        if stripped.startswith("## ") and not stripped.startswith("### "):
+            return re.sub(r"<[^>]+>", "", stripped[3:].strip())
+
+    return ""
+
+
 def _place_caret_after_disclosure(page) -> bool:
     return bool(page.evaluate(
         """
@@ -923,6 +942,88 @@ def _place_caret_after_disclosure(page) -> bool:
         """,
         NOTE_DISCLOSURE_MARKERS,
     ))
+
+
+def _restore_first_h2_after_toc(page, first_heading_text: str) -> dict:
+    """目次直下の最初のH2が通常テキスト化していた場合だけH2へ戻す。"""
+    if not first_heading_text:
+        return {"restored": False, "reason": "heading_not_found"}
+
+    return page.evaluate(
+        """
+        (headingText) => {
+          const editor = document.querySelector('.note-editable, [contenteditable="true"]') || document.querySelector('.ProseMirror');
+          if (!editor) return { restored: false, reason: 'editor_not_found' };
+          const normalize = (value) => (value || '').replace(/\\s+/g, ' ').trim();
+          const heading = normalize(headingText);
+          if (!heading) return { restored: false, reason: 'heading_empty' };
+          const isVisible = (el) => {
+            const rect = el.getBoundingClientRect();
+            const style = window.getComputedStyle(el);
+            return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
+          };
+          const editorRect = editor.getBoundingClientRect();
+          const tocContainers = Array.from(editor.querySelectorAll('*'))
+            .filter((el) => {
+              if (!isVisible(el)) return false;
+              const text = normalize(el.innerText || el.textContent || '');
+              if (!text.includes('目次') || !text.includes(heading)) return false;
+              const rect = el.getBoundingClientRect();
+              if (rect.height <= 80 || rect.height >= editorRect.height * 0.8) return false;
+              return rect.width <= editorRect.width + 40;
+            })
+            .map((el) => ({ el, rect: el.getBoundingClientRect() }))
+            .sort((a, b) => (b.rect.width * b.rect.height) - (a.rect.width * a.rect.height));
+          const tocBottom = tocContainers[0] ? tocContainers[0].rect.bottom : -Infinity;
+          const findEditableBlock = (el) => {
+            let node = el;
+            while (node && node !== editor) {
+              const tag = (node.tagName || '').toUpperCase();
+              if (/^(P|DIV|H1|H2|H3|H4|H5|H6)$/.test(tag)) return node;
+              node = node.parentElement;
+            }
+            return null;
+          };
+          const isInsideTocLikeBlock = (el) => {
+            let node = el.parentElement;
+            while (node && node !== editor) {
+              const text = normalize(node.innerText || node.textContent || '');
+              if (text.includes('目次') && text.includes(heading) && text.length > heading.length + 10) {
+                return true;
+              }
+              node = node.parentElement;
+            }
+            return false;
+          };
+          const candidates = Array.from(editor.querySelectorAll('p, div, h1, h2, h3, h4, h5, h6, span'))
+            .filter((el) => {
+              if (!isVisible(el)) return false;
+              if (normalize(el.innerText || el.textContent || '') !== heading) return false;
+              if (isInsideTocLikeBlock(el)) return false;
+              const rect = el.getBoundingClientRect();
+              return rect.top > tocBottom + 4;
+            })
+            .map((el) => {
+              const block = findEditableBlock(el);
+              if (!block) return null;
+              return { el, block, rect: block.getBoundingClientRect() };
+            })
+            .filter(Boolean)
+            .sort((a, b) => a.rect.top - b.rect.top);
+          const target = candidates[0];
+          if (!target) return { restored: false, reason: 'target_not_found', tocBottom };
+          const tag = (target.block.tagName || '').toUpperCase();
+          if (tag === 'H2') return { restored: false, reason: 'already_h2', tocBottom };
+
+          const h2 = document.createElement('h2');
+          h2.innerHTML = target.block.innerHTML;
+          target.block.parentNode.replaceChild(h2, target.block);
+          editor.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'formatBlock' }));
+          return { restored: true, previousTag: tag, text: heading, tocBottom };
+        }
+        """,
+        first_heading_text,
+    )
 
 
 def _click_toc_item_from_slash_popup(page) -> str:
@@ -1029,20 +1130,20 @@ def _insert_toc_by_slash_popup(page) -> str:
         try:
             page.keyboard.press("Escape")
             page.wait_for_timeout(300)
-            page.keyboard.press("Backspace")
-            page.wait_for_timeout(300)
         except Exception:
             pass
         raise
 
 
-def _insert_table_of_contents(page) -> dict:
+def _insert_table_of_contents(page, source_markdown: str = "") -> dict:
     """アソシエイト表記の直後にnote標準の目次ブロックを挿入する。"""
     result = {"success": False, "strategy": "", "already_exists": False}
+    first_h2_after_disclosure = _extract_first_h2_after_disclosure(source_markdown)
     if _editor_has_table_of_contents(page):
         result["success"] = True
         result["already_exists"] = True
         result["strategy"] = "already_exists"
+        result["heading_restore"] = _restore_first_h2_after_toc(page, first_h2_after_disclosure)
         print("   ✅ 目次は既に挿入済みです")
         return result
 
@@ -1067,15 +1168,11 @@ def _insert_table_of_contents(page) -> dict:
 
     result["success"] = _editor_has_table_of_contents(page)
     if result["success"]:
+        result["heading_restore"] = _restore_first_h2_after_toc(page, first_h2_after_disclosure)
+        if result["heading_restore"].get("restored"):
+            print(f"   ✅ 目次直下のH2見出しを復元しました: {first_h2_after_disclosure}")
         print(f"   ✅ 目次挿入完了: {result['strategy']}")
     else:
-        try:
-            page.keyboard.press("Escape")
-            page.wait_for_timeout(250)
-            page.keyboard.press("Backspace")
-            page.wait_for_timeout(250)
-        except Exception:
-            pass
         print(f"   ⚠️ 目次挿入を確認できませんでした: {result['strategy']}")
     return result
 
@@ -2561,7 +2658,7 @@ def _run_ogp_expansion_on_draft(
 
         if insert_toc:
             try:
-                result["toc"] = _insert_table_of_contents(page)
+                result["toc"] = _insert_table_of_contents(page, source_markdown=source_markdown)
             except Exception as e:
                 result["toc"] = {"success": False, "strategy": f"error: {e}"}
                 print(f"   ⚠️ 目次挿入エラー: {e}")
