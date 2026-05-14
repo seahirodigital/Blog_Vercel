@@ -1220,7 +1220,7 @@
   },
   {
     "id": "443630d9-8ede-46c8-985c-7cbc6c01e257",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se76861e3a2a24295890d63cd6297ed35",
     "title": "Dyson PencilVac Fluffycones SV50 レビュー比較まとめ",
     "name": "Dyson掃除機 コードレス PencilVac Fluffycones SV50 レビュー比較まとめ.md",
@@ -1232,6 +1232,7 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-14T13:44:24.872Z"
   }
 ]
