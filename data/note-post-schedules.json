@@ -851,7 +851,7 @@
   },
   {
     "id": "7e09a768-69a8-4ac9-8749-d2a6170ef5da",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s850c4cc2691b4526a7592cb363def8e4",
     "title": "Shark シャーク 扇風機 サーキュレーター TF200SJBKNC TURBOBLADE ハイパワー タワーファン",
     "name": "Shark シャーク 扇風機 サーキュレーター TF200SJBKNC TURBOBLADE ハイパワー タワーファン.md",
@@ -863,7 +863,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-14T13:44:11.323Z"
   },
   {
     "id": "53f0ff5e-3e27-4374-a6f8-9bb6b3bf149a",
