@@ -985,7 +985,7 @@
   },
   {
     "id": "bb3ad5a5-6546-4d16-a50f-05c22a088822",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s41f088be7dab48599c30b25eade4695b",
     "title": "リファファインバブル U+ レビュー比較まとめ：効率的なバスタイムで美と節約を両立する新体験",
     "name": "リファファインバブル U+ シャワーヘッド レビュー比較まとめ：効率的なバスタイムで美と節約を両立する新体験.md",
@@ -995,8 +995,8 @@
     "publishAt": "2026-05-15T12:00:00.000Z",
     "createdAt": "2026-05-14T13:55:07.252Z",
     "queuedAt": "2026-05-15T12:04:17.189959+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-15T12:06:46.953392+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n3705e4da2e3b?app_launch=false",
     "error": "",
     "queuedBy": "github-primary-schedule",
     "dispatchAttempts": 1
