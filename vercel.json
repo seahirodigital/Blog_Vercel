@@ -2,6 +2,9 @@
   "version": 2,
   "buildCommand": "",
   "outputDirectory": "public",
+  "crons": [
+    { "path": "/api/note-post-cron", "schedule": "*/5 * * * *" }
+  ],
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" }
   ],
