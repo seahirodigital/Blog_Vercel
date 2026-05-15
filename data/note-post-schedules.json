@@ -1326,7 +1326,7 @@
   },
   {
     "id": "6f56e140-3c6c-4293-9476-b508002c0b2f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s8a99bd00ecfb440b91453c29e62329f9",
     "title": "リファバイタルテックモイストスムーススタンドカラースリープウェアの選び方と効果的な活用法をレビュー比較まとめ",
     "name": "リファバイタルテックモイストスムーススタンドカラースリープウェアWOMENの選び方と効果的な活用法をレビュー比較まとめ.md",
@@ -1336,8 +1336,8 @@
     "publishAt": "2026-05-15T22:00:00.000Z",
     "createdAt": "2026-05-14T13:55:07.252Z",
     "queuedAt": "2026-05-15T22:33:49.740439+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-15T22:36:11.151217+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n4262c9693bd5?app_launch=false",
     "error": "",
     "queuedBy": "github-backup-schedule",
     "dispatchAttempts": 1
