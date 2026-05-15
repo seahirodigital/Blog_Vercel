@@ -255,3 +255,80 @@ AppSheetのボタンから直接 GitHub Actions（パイプラインなど）を
     カラムの値を更新するActionで、枠に `=[Caption]="実行"` と書くと文字列の上書きではなく比較式（合っているかどうかのTrue/False）になってしまいます。純粋に `"実行"` とだけ入力します。
 *   **罠⑤：ボタンが画面に出ない（テーブル不一致）**
     「ボタンが表示されない！」という場合の9割は、アクション設定の `For a record of this table` と、いま自分がアプリで見ているプレビュー画面の対象テーブルが異なっていることが原因です。
+
+---
+
+## 7. note予約投稿をGitHub Actionsで実行する仕組み
+
+### なぜこの方式にしたか
+
+以前の予約投稿は、GitHub Actionsの定期実行からVercelの`/api/note-post-cron`を呼び出し、Vercel側で予約ファイルを確認してからGitHub Actionsの投稿ジョブを起動する構成でした。
+
+この構成では、Vercel Cron、VercelのServerless Function、Vercel側の環境変数、認証ヘッダーのどれかが崩れると予約投稿が止まります。そこで、予約監視と投稿ジョブ起動をGitHub Actions内で完結させる構成へ変更しました。
+
+### 全体の流れ
+
+1. `.github/workflows/note-post.yml` の `schedule` が定期的に起動する。
+2. `.github/scripts/note_post_schedule_dispatch.py` が `data/note-post-schedules.json` をGitHub API経由で読む。
+3. `status` が `scheduled` で、`publishAt` が現在時刻を過ぎた予約を探す。
+4. 対象予約を `queued` に更新し、`queuedAt`、`queuedBy`、`dispatchAttempts` を記録する。
+5. GitHub APIで `.github/workflows/note-post.yml` の `workflow_dispatch` を起動する。
+6. `post-to-note` ジョブがOneDriveから記事本文を取得し、note.comへ投稿する。
+7. 投稿成功後、同じ予約IDの状態を `published` に更新し、`publishedAt` と `publishedUrl` を保存する。
+
+### 何分おきに予約を見に行くか
+
+主監視は `.github/workflows/note-post.yml` の以下の設定で動きます。
+
+```yaml
+schedule:
+  - cron: '*/5 * * * *'
+```
+
+これはUTC基準で5分おきに予約ファイルを確認する設定です。GitHub Actionsのscheduleは厳密な秒単位の実行保証ではないため、実際の起動は数分遅れることがあります。
+
+バックアップ監視は `.github/workflows/note-post-schedule-backup.yml` の以下の設定で動きます。
+
+```yaml
+schedule:
+  - cron: '2-59/5 * * * *'
+```
+
+これは毎時2分、7分、12分、17分のように、主監視から約2分ずらして5分おきに確認する設定です。主監視が混雑やGitHub側の都合で遅れた場合でも、バックアップ監視が近いタイミングで拾えるようにしています。
+
+### 二重投稿を防ぐ仕組み
+
+予約監視ジョブには以下の同時実行制御を入れています。
+
+```yaml
+concurrency:
+  group: note-post-schedule-dispatch
+  cancel-in-progress: false
+```
+
+主監視とバックアップ監視が同時に走っても、同じ `note-post-schedule-dispatch` グループとして直列化されます。これにより、同じ `data/note-post-schedules.json` を同時に更新して二重投稿するリスクを下げています。
+
+また、期限到来した予約は投稿ジョブを起動する前に `queued` に更新されます。これにより、次の監視ジョブは同じ予約を通常の `scheduled` として扱わず、同じ記事を重複起動しにくくなります。
+
+### 必要な権限とSecrets
+
+予約監視ジョブには、以下の権限が必要です。
+
+```yaml
+permissions:
+  actions: write
+  contents: write
+```
+
+`contents: write` は `data/note-post-schedules.json` の状態を `scheduled`、`queued`、`published`、`error` に更新するために使います。
+
+`actions: write` はGitHub APIから `workflow_dispatch` を呼び出し、投稿ジョブを起動するために使います。
+
+Secretsは `GH_PAT` を優先して使います。`GH_PAT` が空の場合は `GITHUB_TOKEN` を使う設計です。ただし、リポジトリ設定や権限設定によっては `GITHUB_TOKEN` だけではworkflow dispatchが制限される可能性があるため、本番運用では `GH_PAT` をGitHub Actions Secretsに設定しておくことを推奨します。
+
+### 関連ファイル
+
+- `C:\Users\mahha\OneDrive\開発\Blog_Vercel\.github\workflows\note-post.yml`
+- `C:\Users\mahha\OneDrive\開発\Blog_Vercel\.github\workflows\note-post-schedule-backup.yml`
+- `C:\Users\mahha\OneDrive\開発\Blog_Vercel\.github\scripts\note_post_schedule_dispatch.py`
+- `C:\Users\mahha\OneDrive\開発\Blog_Vercel\data\note-post-schedules.json`

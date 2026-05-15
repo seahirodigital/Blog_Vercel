@@ -43,43 +43,26 @@ on:
 
 jobs:
   dispatch-due-schedules:
-    if: github.event_name == 'schedule'
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.file_id == '')
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    concurrency:
+      group: note-post-schedule-dispatch
+      cancel-in-progress: false
     permissions:
-      contents: read
+      actions: write
+      contents: write
     steps:
-      - name: Vercel Cronエンドポイントで期限到来予約を確認
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: GitHub上の予約ファイルを確認して対象を起動
         env:
-          VERCEL_URL: https://blog-vercel-dun.vercel.app
-          CRON_SECRET: ${{ secrets.CRON_SECRET }}
           GH_PAT: ${{ secrets.GH_PAT }}
-        run: |
-          python - <<'PY'
-          import os
-          import urllib.error
-          import urllib.request
-
-          base_url = os.environ.get('VERCEL_URL', 'https://blog-vercel-dun.vercel.app').rstrip('/')
-          cron_url = f'{base_url}/api/note-post-cron?source=github-schedule'
-          secret = os.environ.get('CRON_SECRET', '') or os.environ.get('GH_PAT', '')
-          headers = {
-              'Accept': 'application/json',
-              'User-Agent': 'github-actions-note-post-schedule',
-          }
-          if secret:
-              headers['Authorization'] = f'Bearer {secret}'
-
-          req = urllib.request.Request(cron_url, method='GET', headers=headers)
-          try:
-              with urllib.request.urlopen(req, timeout=60) as response:
-                  body = response.read().decode('utf-8')
-                  print(body)
-          except urllib.error.HTTPError as error:
-              body = error.read().decode('utf-8')
-              print(f'Cronエンドポイント呼び出し失敗: HTTP {error.code} {body[:1000]}')
-              raise
-          PY
+          GITHUB_TOKEN: ${{ github.token }}
+          NOTE_POST_SCHEDULE_SOURCE: github-primary-schedule
+          NOTE_POST_QUEUE_STALE_MINUTES: "90"
+        run: python .github/scripts/note_post_schedule_dispatch.py
 
   post-to-note:
     if: github.event_name == 'workflow_dispatch' && inputs.file_id != ''
