@@ -17,7 +17,7 @@ const RESERVATION_WORKFLOW_PATH = '.github/workflows/note-post-reservations.yml'
 const RESERVATION_PRESTART_MINUTES = [27, 7];
 const RESERVATION_TRIGGER_WINDOW_MINUTES = 35;
 const RESERVATION_DIRECT_DISPATCH_MAX_WAIT_SECONDS = 2400;
-const RESERVATION_LATE_GRACE_MINUTES = 360;
+const RESERVATION_LATE_GRACE_MINUTES = 720;
 const RESERVATION_DIRECT_SOURCE = 'github-reservation-direct';
 
 function firstString(value, fallback = '') {

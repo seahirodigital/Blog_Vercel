@@ -52,5 +52,5 @@ jobs:
           NOTE_POST_SCHEDULE_SOURCE: github-reservation-schedule
           NOTE_POST_QUEUE_STALE_MINUTES: "90"
           NOTE_POST_PRESTART_WINDOW_MINUTES: "35"
-          NOTE_POST_LATE_GRACE_MINUTES: "360"
+          NOTE_POST_LATE_GRACE_MINUTES: "720"
         run: python .github/scripts/note_post_schedule_dispatch.py
