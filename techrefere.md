@@ -1140,3 +1140,132 @@ artifact:
 
 このため、2026年4月10日以降は「本番記事フローの Gemini 枠」と
 「`info_viewer` の Gemini 枠」は別管理として扱う。
+
+---
+
+## 予約投稿システム仕様（2026-05-16 改修版）
+
+### 背景
+
+旧方式では、GitHub Actions の `schedule` を 5 分おき、または 2 分ずらしのバックアップ監視として実行し、予約時刻を過ぎた投稿を拾う方式だった。
+
+しかし GitHub Actions の `schedule` は時刻保証がない。cron に `*/5 * * * *` と書いても、GitHub 側の共有基盤、runner 割り当て、キュー混雑、workflow の遅延により、指定時刻ぴったりに実行されないことがある。遅延は自分のリポジトリ内だけではなく、世界中の GitHub Actions 利用者が共有する基盤側の混雑にも影響される。
+
+そのため、5 分おきや 2 分おきに監視しても、その監視 workflow 自体が遅れれば予約投稿も遅れる。今回の改修では「細かく監視する」考え方をやめ、予約ごとに事前起動する方式へ変更した。
+
+### 旧方式で起きた問題
+
+例として、2026 年 5 月 16 日の投稿では以下の遅延が発生した。
+
+- 予約時刻: 2026-05-16 11:30 JST
+- キュー投入: 2026-05-16 13:39 JST
+- note 公開完了: 2026-05-16 13:41 JST
+- `queuedBy`: `github-backup-schedule`
+
+これは 13:41 を狙って投稿したのではなく、旧バックアップ監視 workflow が約 2 時間 9 分遅れて起動し、その時点で「予約時刻を過ぎている投稿」として処理した結果である。
+
+### 新方式の基本方針
+
+Vercel Cron は使わない。予約投稿は GitHub Actions のみで処理する。
+
+ただし GitHub Actions の `schedule` を定期監視として信用しない。予約登録時に、予約一覧から予約専用 workflow を生成し、各予約の少し前にだけ dispatcher を起動する。
+
+対象ファイルは以下。
+
+- `C:\Users\mahha\OneDrive\開発\Blog_Vercel\api\note-post.js`
+- `C:\Users\mahha\OneDrive\開発\Blog_Vercel\.github\workflows\note-post-reservations.yml`
+- `C:\Users\mahha\OneDrive\開発\Blog_Vercel\.github\scripts\note_post_schedule_dispatch.py`
+- `C:\Users\mahha\OneDrive\開発\Blog_Vercel\.github\workflows\note-post.yml`
+- `C:\Users\mahha\OneDrive\開発\Blog_Vercel\public\index.html`
+
+### 予約登録時の処理
+
+`C:\Users\mahha\OneDrive\開発\Blog_Vercel\api\note-post.js` が予約登録を受け付ける。
+
+予約は `C:\Users\mahha\OneDrive\開発\Blog_Vercel\data\note-post-schedules.json` に保存する。予約登録後、同じ予約一覧をもとに `C:\Users\mahha\OneDrive\開発\Blog_Vercel\.github\workflows\note-post-reservations.yml` を自動生成または更新する。
+
+生成される cron は、各予約に対して概ね以下の 2 本。
+
+- 予約時刻の約 27 分前
+- 予約時刻の約 7 分前
+
+この 2 本は「投稿時刻そのものに起動するため」ではなく、GitHub Actions の遅延を見込んで、投稿ジョブを前もって起動するための入口である。
+
+### dispatcher の判定仕様
+
+`C:\Users\mahha\OneDrive\開発\Blog_Vercel\.github\scripts\note_post_schedule_dispatch.py` が予約一覧を確認し、起動対象だけを claim する。
+
+現在の主要設定は以下。
+
+- `NOTE_POST_PRESTART_WINDOW_MINUTES`: `35`
+- `NOTE_POST_QUEUE_STALE_MINUTES`: `90`
+- `NOTE_POST_LATE_GRACE_MINUTES`: `720`
+
+claim 対象は以下。
+
+- `status: scheduled` かつ、予約時刻が現在から 35 分以内に入っている投稿
+- `status: scheduled` かつ、予約時刻を過ぎてから 12 時間以内の投稿
+- `status: queued` だが、90 分以上 stale になっており、かつ予約時刻から 12 時間以内の投稿
+
+claim された予約は `queued` に更新され、`C:\Users\mahha\OneDrive\開発\Blog_Vercel\.github\workflows\note-post.yml` が `workflow_dispatch` で起動される。
+
+手動実行時に `claimed: 0` と出る場合は、基本的には正常である。これは「予約ファイルは読めたが、今起動対象になる予約がない」という意味である。
+
+### 投稿 workflow 側の待機仕様
+
+`C:\Users\mahha\OneDrive\開発\Blog_Vercel\.github\workflows\note-post.yml` は `publish_mode: scheduled_due` で起動された場合、投稿処理の前に予約時刻を確認する。
+
+予約時刻より早く起動された場合は、ジョブ内で予約時刻まで待機する。待機上限は `MAX_WAIT_SECONDS: 2400`、つまり最大 40 分である。
+
+投稿直前には `C:\Users\mahha\OneDrive\開発\Blog_Vercel\data\note-post-schedules.json` を再確認し、対象予約が `cancelled`、`published`、`error` になっている場合は投稿をスキップする。これにより、予約後にキャンセルされた投稿や、重複起動による二重投稿を避ける。
+
+### 12 時間以内の遅延救済
+
+GitHub Actions 側の遅延や一時的な停止があっても、予約時刻から 12 時間以内であれば dispatcher が拾える。
+
+この 12 時間は「投稿ジョブ内で 12 時間待つ」という意味ではない。dispatcher が「予約時刻を過ぎた投稿をまだ自動救済対象として扱う時間」である。
+
+予約時刻を過ぎた投稿が 12 時間以内に見つかった場合は、予約時刻まで待たず即時投稿対象になる。
+
+### 12 時間を超えた場合
+
+予約時刻から 12 時間を超えても `scheduled` または `queued` のまま残っている投稿は、自動投稿対象から外す。
+
+この状態は「予約失敗」として扱う。UI 側では `C:\Users\mahha\OneDrive\開発\Blog_Vercel\public\index.html` で予約一覧を見て、対象記事の `YT` / `AMZN` タグ位置を赤い `予約失敗` タグに上書き表示する。
+
+対象になるのは以下のみ。
+
+- `status: scheduled` で予約時刻から 12 時間超過
+- `status: queued` で予約時刻から 12 時間超過
+
+対象外は以下。
+
+- `published`
+- `cancelled`
+- `error`
+
+### 手動実行の見方
+
+`C:\Users\mahha\OneDrive\開発\Blog_Vercel\.github\workflows\note-post-reservations.yml` を手動実行したとき、ログに以下のように出る場合がある。
+
+```json
+{
+  "success": true,
+  "checked": 106,
+  "claimed": 0,
+  "dispatched": [],
+  "failures": []
+}
+```
+
+これは正常終了である。`claimed: 0` は「今起動すべき予約がない」という意味。
+
+投稿テストをしたい場合は、現在時刻から 35 分以内、できれば 10 分から 20 分後くらいの予約を 1 件作ってから手動実行する。その場合は `claimed` が 1 以上になり、`dispatched` に対象予約が出る。
+
+### この方式の限界
+
+GitHub Actions の `schedule` 自体は引き続き時刻保証がない。そのため、予約専用 cron がまったく起動しない可能性はゼロではない。
+
+ただし旧方式と違い、常時 5 分監視に依存せず、予約ごとに事前起動し、投稿ジョブ内で予約時刻まで待つ。これにより、GitHub Actions の遅延が数分から数十分程度であれば、投稿時刻のズレを抑えやすくなる。
+
+厳密な秒単位、または絶対時刻保証が必要な場合は、GitHub Actions の `schedule` だけでは不十分である。その場合は外部の時刻保証に近いジョブ基盤が必要になるが、本プロジェクトでは Vercel Cron は使わない方針とする。
