@@ -11,7 +11,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from typing import Any
 
 
@@ -59,12 +59,14 @@ def request_json(method: str, url: str, token: str, payload: dict[str, Any] | No
 
 
 def parse_schedules(raw: str) -> list[dict[str, Any]]:
+    if not raw.strip():
+        return []
     try:
-        parsed = json.loads(raw or "[]")
-    except Exception:
-        return []
+        parsed = json.loads(raw)
+    except Exception as exc:
+        raise RuntimeError(f"予約ファイルJSONを解析できません: {exc}") from exc
     if not isinstance(parsed, list):
-        return []
+        raise RuntimeError("予約ファイルJSONのルートが配列ではありません")
     return [item for item in parsed if isinstance(item, dict)]
 
 
@@ -103,6 +105,10 @@ def env_int(name: str, fallback: int) -> int:
     except ValueError:
         return fallback
     return value if value > 0 else fallback
+
+
+def env_bool(name: str) -> bool:
+    return os.environ.get(name, "").strip().lower() in {"1", "true", "yes", "on"}
 
 
 def parse_publish_at(item: dict[str, Any]) -> datetime | None:
@@ -257,7 +263,7 @@ def mark_dispatch_failures(repo: str, token: str, failures: list[dict[str, str]]
             time.sleep(1.5 * attempt)
 
 
-def main() -> int:
+def run_once_from_env() -> int:
     token = os.environ.get("GH_PAT") or os.environ.get("GITHUB_TOKEN") or ""
     repo = os.environ.get("GITHUB_REPOSITORY") or os.environ.get("REPOSITORY") or "seahirodigital/Blog_Vercel"
     source = os.environ.get("NOTE_POST_SCHEDULE_SOURCE") or "github-schedule"
@@ -320,6 +326,99 @@ def main() -> int:
     }, ensure_ascii=False, indent=2))
 
     return 0 if not failures else 1
+
+
+def count_pending_before_deadline(repo: str, token: str, deadline: datetime, late_grace_minutes: int) -> int:
+    schedules, _ = load_schedules(repo, token)
+    now = datetime.now(timezone.utc)
+    late_grace_seconds = late_grace_minutes * 60
+    pending = 0
+
+    for item in schedules:
+        if item.get("publishedAt"):
+            continue
+        if item.get("status") not in {"scheduled", "queued"}:
+            continue
+
+        publish_at = parse_publish_at(item)
+        if publish_at is None:
+            pending += 1
+            continue
+        if publish_at > deadline:
+            continue
+        if (now - publish_at).total_seconds() > late_grace_seconds:
+            continue
+        pending += 1
+
+    return pending
+
+
+def run_monitor_from_env() -> int:
+    token = os.environ.get("GH_PAT") or os.environ.get("GITHUB_TOKEN") or ""
+    repo = os.environ.get("GITHUB_REPOSITORY") or os.environ.get("REPOSITORY") or "seahirodigital/Blog_Vercel"
+    duration_minutes = env_int("NOTE_POST_MONITOR_DURATION_MINUTES", 330)
+    poll_seconds = env_int("NOTE_POST_MONITOR_POLL_SECONDS", 60)
+    late_grace_minutes = env_int("NOTE_POST_LATE_GRACE_MINUTES", DEFAULT_LATE_GRACE_MINUTES)
+
+    if not token:
+        print("GH_PAT または GITHUB_TOKEN が未設定です", file=sys.stderr)
+        return 1
+
+    started_at = datetime.now(timezone.utc)
+    deadline = started_at + timedelta(minutes=duration_minutes)
+    cycle = 0
+    final_code = 0
+    summaries: list[dict[str, Any]] = []
+
+    log(
+        "note予約監視セッションを開始します: "
+        f"repo={repo}, durationMinutes={duration_minutes}, pollSeconds={poll_seconds}, "
+        f"startedAt={started_at.isoformat()}, deadline={deadline.isoformat()}"
+    )
+
+    while True:
+        cycle += 1
+        log(f"note予約監視サイクルを実行します: cycle={cycle}")
+        code = run_once_from_env()
+        final_code = final_code or code
+
+        pending = count_pending_before_deadline(repo, token, deadline, late_grace_minutes)
+        now = datetime.now(timezone.utc)
+        summaries.append({
+            "cycle": cycle,
+            "exitCode": code,
+            "pendingBeforeDeadline": pending,
+            "checkedAt": now.isoformat(),
+        })
+
+        if pending <= 0:
+            log("監視セッション内に残っている予約はありません。終了します。")
+            break
+        if now >= deadline:
+            log("監視セッションの期限に到達しました。終了します。")
+            break
+
+        remaining_seconds = max(0, int((deadline - now).total_seconds()))
+        sleep_seconds = min(poll_seconds, remaining_seconds)
+        if sleep_seconds <= 0:
+            break
+        log(f"次の確認まで待機します: sleepSeconds={sleep_seconds}, pending={pending}")
+        time.sleep(sleep_seconds)
+
+    print(json.dumps({
+        "success": final_code == 0,
+        "monitor": True,
+        "startedAt": started_at.isoformat(),
+        "deadline": deadline.isoformat(),
+        "cycles": summaries,
+    }, ensure_ascii=False, indent=2))
+    return final_code
+
+
+def main() -> int:
+    if env_bool("NOTE_POST_MONITOR_MODE"):
+        return run_monitor_from_env()
+    return run_once_from_env()
 
 
 if __name__ == "__main__":

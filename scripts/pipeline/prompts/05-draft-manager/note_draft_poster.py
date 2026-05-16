@@ -77,6 +77,9 @@ NOTE_POST_TAGS = (
 )
 
 # ── OGP展開設定 ────────────────────────────────────────
+NOTE_PUBLISH_SETTINGS_READY_TIMEOUT_MS = int(os.getenv("NOTE_PUBLISH_SETTINGS_READY_TIMEOUT_MS", "45000"))
+NOTE_PUBLISH_SETTINGS_READY_POLL_MS = int(os.getenv("NOTE_PUBLISH_SETTINGS_READY_POLL_MS", "500"))
+
 EDITOR_CONTENT_SELECTOR  = ".ProseMirror p, .ProseMirror h2, .ProseMirror h3"
 EDITOR_LOAD_TIMEOUT_SEC  = 60
 OGP_TARGET_DOMAINS       = ["amzn.to", "amazon.co.jp", "apple.com", "youtube.com"]
@@ -1188,7 +1191,7 @@ def _click_publish_next(page) -> str:
         description="公開に進む",
         timeout_ms=8000,
     )
-    page.wait_for_timeout(3500)
+    page.wait_for_timeout(500)
     return strategy
 
 
@@ -1317,27 +1320,156 @@ def _verify_note_hashtags(page, tags: str) -> dict:
     )
 
 
+def _get_publish_settings_ready_state(page) -> dict:
+    try:
+        return page.evaluate(
+            """
+            () => {
+              const normalize = (value) => (value || '').replace(/\\s+/g, ' ').trim();
+              const isVisible = (el) => {
+                if (!el || !(el instanceof Element)) return false;
+                const rect = el.getBoundingClientRect();
+                const style = window.getComputedStyle(el);
+                return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
+              };
+              const textOf = (el) => normalize(el.innerText || el.textContent || el.getAttribute('aria-label') || '');
+              const attr = (el, name) => el.getAttribute(name) || '';
+              const dataText = (el) => Object.entries(el.dataset || {}).map(([key, value]) => `${key} ${value || ''}`).join(' ');
+              const directFieldText = (el) => normalize([
+                attr(el, 'placeholder'),
+                attr(el, 'aria-label'),
+                attr(el, 'title'),
+                attr(el, 'name'),
+                attr(el, 'id'),
+                attr(el, 'class'),
+                attr(el, 'data-testid'),
+                dataText(el),
+              ].join(' '));
+              const contextText = (el) => {
+                const parts = [directFieldText(el)];
+                let node = el;
+                for (let depth = 0; node && depth < 4; depth += 1, node = node.parentElement) {
+                  parts.push(textOf(node));
+                  if (node.tagName && node.tagName.toLowerCase() === 'label') break;
+                }
+                return normalize(parts.join(' '));
+              };
+              const buttons = Array.from(document.querySelectorAll('button, [role="button"]')).filter(isVisible);
+              const finalButton = buttons.find((button) => {
+                const text = textOf(button);
+                return text.includes('投稿する') && !text.includes('公開に進む');
+              });
+              const fields = Array.from(document.querySelectorAll(
+                'input, textarea, [contenteditable="true"], [role="textbox"], [role="combobox"]'
+              )).filter(isVisible);
+              const tagField = fields.find((field) => {
+                const role = attr(field, 'role');
+                const isPlainEditable = field.getAttribute('contenteditable') === 'true' && role !== 'textbox' && role !== 'combobox';
+                const text = isPlainEditable ? directFieldText(field) : contextText(field);
+                return text.includes('ハッシュタグ') || text.includes('タグ') || /(^|[^a-z])tag([^a-z]|$)/i.test(text);
+              });
+              const labels = Array.from(document.querySelectorAll('label, span, div, p')).filter(isVisible);
+              const tagLabel = labels.find((label) => {
+                const text = textOf(label);
+                return text.includes('ハッシュタグ') || text.includes('タグを入力') || text.includes('タグを追加') || text.includes('タグ設定');
+              });
+              const magazineLabel = labels.find((label) => textOf(label).includes('マガジン'));
+              const ready = Boolean(finalButton || tagField || tagLabel || magazineLabel);
+              const reason = finalButton
+                ? 'final_post_button'
+                : tagField
+                  ? 'tag_input_candidate'
+                  : tagLabel
+                    ? 'tag_label'
+                    : magazineLabel
+                      ? 'magazine_label'
+                      : 'not_ready';
+              return {
+                ready,
+                reason,
+                fieldCount: fields.length,
+                buttonCount: buttons.length,
+                url: window.location.href,
+                sampleText: normalize((document.body && document.body.innerText) || '').slice(0, 300),
+              };
+            }
+            """
+        )
+    except Exception as exc:
+        return {"ready": False, "reason": f"evaluate_error:{exc}", "fieldCount": 0, "buttonCount": 0}
+
+
+def _wait_for_publish_settings_ready(
+    page,
+    timeout_ms: int = NOTE_PUBLISH_SETTINGS_READY_TIMEOUT_MS,
+    poll_ms: int = NOTE_PUBLISH_SETTINGS_READY_POLL_MS,
+) -> str:
+    started_at = time.monotonic()
+    deadline = started_at + (timeout_ms / 1000)
+    last_state = {}
+
+    while time.monotonic() < deadline:
+        last_state = _get_publish_settings_ready_state(page)
+        if last_state.get("ready"):
+            elapsed = time.monotonic() - started_at
+            print(f"   ✅ 公開設定画面を検出: {last_state.get('reason')} ({elapsed:.1f}秒後)")
+            return str(last_state.get("reason") or "ready")
+        page.wait_for_timeout(max(100, poll_ms))
+
+    if NOTE_TOP_IMAGE_DEBUG:
+        _dump_page_artifacts(page, NOTE_TOP_IMAGE_ARTIFACTS_DIR, "publish_settings_wait_timeout")
+        _write_json(NOTE_TOP_IMAGE_ARTIFACTS_DIR / "publish_settings_wait_timeout.json", last_state)
+    raise RuntimeError(
+        "公開設定画面の表示を確認できませんでした: "
+        f"{last_state.get('reason', 'unknown')} "
+        f"(fields={last_state.get('fieldCount', 0)}, buttons={last_state.get('buttonCount', 0)})"
+    )
+
+
 def _fill_note_hashtags(page, tags: str) -> str:
     candidates = [
         ("input_placeholder_ハッシュタグ", page.locator("input[placeholder*='ハッシュタグ'], textarea[placeholder*='ハッシュタグ']")),
         ("input_aria_ハッシュタグ", page.locator("input[aria-label*='ハッシュタグ'], textarea[aria-label*='ハッシュタグ']")),
+        ("input_placeholder_タグ", page.locator("input[placeholder*='タグ'], textarea[placeholder*='タグ']")),
+        ("input_aria_タグ", page.locator("input[aria-label*='タグ'], textarea[aria-label*='タグ']")),
+        ("role_textbox_ハッシュタグ", page.locator("[role='textbox'][aria-label*='ハッシュタグ'], [role='combobox'][aria-label*='ハッシュタグ']")),
+        ("role_textbox_タグ", page.locator("[role='textbox'][aria-label*='タグ'], [role='combobox'][aria-label*='タグ']")),
+        ("tag_attr_ascii", page.locator("input[name*='tag'], textarea[name*='tag'], input[id*='tag'], textarea[id*='tag'], [role='textbox'][data-testid*='tag'], [role='combobox'][data-testid*='tag'], [contenteditable='true'][data-testid*='tag']")),
         ("contenteditable_aria_ハッシュタグ", page.locator("[contenteditable='true'][aria-label*='ハッシュタグ']")),
+        ("contenteditable_aria_タグ", page.locator("[contenteditable='true'][aria-label*='タグ']")),
         (
             "xpath_after_ハッシュタグ_input",
             page.locator(
                 "xpath=//*[contains(normalize-space(.), 'ハッシュタグ')]"
-                "/following::*[self::input or self::textarea or @contenteditable='true'][1]"
+                "/following::*[self::input or self::textarea or @contenteditable='true' or @role='textbox' or @role='combobox'][1]"
             ),
         ),
         (
             "xpath_after_タグ_input",
             page.locator(
                 "xpath=//*[contains(normalize-space(.), 'タグ')]"
-                "/following::*[self::input or self::textarea or @contenteditable='true'][1]"
+                "/following::*[self::input or self::textarea or @contenteditable='true' or @role='textbox' or @role='combobox'][1]"
+            ),
+        ),
+        (
+            "xpath_tag_attr_input",
+            page.locator(
+                "xpath=//*[self::input or self::textarea or @contenteditable='true' or @role='textbox' or @role='combobox']"
+                "[contains(@placeholder, 'タグ') or contains(@aria-label, 'タグ') or contains(@title, 'タグ') "
+                "or contains(@name, 'tag') or contains(@id, 'tag') or contains(@class, 'tag') or contains(@data-testid, 'tag')]"
             ),
         ),
     ]
-    strategy, locator = _find_visible_candidate(candidates, "ハッシュタグ入力", timeout_ms=3000)
+    try:
+        strategy, locator = _find_visible_candidate(candidates, "ハッシュタグ入力", timeout_ms=5000)
+    except Exception:
+        if NOTE_TOP_IMAGE_DEBUG:
+            _dump_page_artifacts(page, NOTE_TOP_IMAGE_ARTIFACTS_DIR, "hashtag_input_not_found")
+            _write_json(
+                NOTE_TOP_IMAGE_ARTIFACTS_DIR / "hashtag_input_not_found_controls.json",
+                _collect_control_snapshot(page),
+            )
+        raise
     paste_strategy = _paste_text_like_locator(page, locator, tags)
     verification = _verify_note_hashtags(page, tags)
     print(f"   ✅ ハッシュタグ入力完了: {strategy}->{paste_strategy} ({verification['expected']}件確認)")
@@ -1544,6 +1676,7 @@ def _publish_editor_page(page, tags: str = NOTE_POST_TAGS, dry_run: bool = False
     result = {
         "success": False,
         "publish_next_strategy": "",
+        "publish_settings_ready_strategy": "",
         "tag_strategy": "",
         "magazine_strategy": "",
         "post_strategy": "",
@@ -1551,6 +1684,7 @@ def _publish_editor_page(page, tags: str = NOTE_POST_TAGS, dry_run: bool = False
         "dry_run": dry_run,
     }
     result["publish_next_strategy"] = _click_publish_next(page)
+    result["publish_settings_ready_strategy"] = _wait_for_publish_settings_ready(page)
     result["tag_strategy"] = _fill_note_hashtags(page, tags)
     result["magazine_strategy"] = _add_gadget_magazine(page)
     result["post_strategy"] = _click_final_post_button(page, dry_run=dry_run)

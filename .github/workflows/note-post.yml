@@ -222,6 +222,8 @@ jobs:
           NO_TOP_IMAGE: ${{ inputs.no_top_image }}
           NOTE_TARGET: ${{ inputs.note_target }}
           SCHEDULE_ID: ${{ inputs.schedule_id }}
+          NOTE_TOP_IMAGE_DEBUG: "1"
+          NOTE_PUBLISH_SETTINGS_READY_TIMEOUT_MS: "45000"
         working-directory: scripts/pipeline
         run: |
           echo "note 保存先: ${NOTE_TARGET_LABEL}"
@@ -362,6 +364,16 @@ jobs:
           else
             python prompts/06-note-post/note_post_publisher.py /tmp/article.md --result-json /tmp/note_post_result.json
           fi
+
+      - name: note公開投稿デバッグ成果物を保存
+        if: always() && steps.schedule_gate.outputs.skip != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: note-post-debug-${{ github.run_id }}
+          if-no-files-found: ignore
+          path: |
+            /tmp/note_post_result.json
+            scripts/pipeline/debug/note_gazo_test/artifacts/**
 
       - name: 予約状態を完了へ更新
         if: ${{ inputs.schedule_id != '' && steps.schedule_gate.outputs.skip != 'true' }}

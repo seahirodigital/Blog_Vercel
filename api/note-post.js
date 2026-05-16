@@ -14,8 +14,10 @@ const ALLOWED_NOTE_TARGETS = new Set(['blog_main', 'xpost_tech']);
 const SCHEDULE_VAR_NAME = 'NOTE_POST_SCHEDULES';
 const SCHEDULE_FILE_PATH = 'data/note-post-schedules.json';
 const RESERVATION_WORKFLOW_PATH = '.github/workflows/note-post-reservations.yml';
-const RESERVATION_PRESTART_MINUTES = [27, 7];
-const RESERVATION_TRIGGER_WINDOW_MINUTES = 35;
+const RESERVATION_MONITOR_LEAD_MINUTES = 35;
+const RESERVATION_MONITOR_SESSION_MINUTES = 330;
+const RESERVATION_MONITOR_POLL_SECONDS = 60;
+const RESERVATION_TRIGGER_WINDOW_MINUTES = RESERVATION_MONITOR_LEAD_MINUTES;
 const RESERVATION_DIRECT_DISPATCH_MAX_WAIT_SECONDS = 2400;
 const RESERVATION_LATE_GRACE_MINUTES = 720;
 const RESERVATION_DIRECT_SOURCE = 'github-reservation-direct';
@@ -83,37 +85,44 @@ function cronFromDate(date) {
 
 function generateReservationCrons(schedules, now = new Date()) {
   const nowMs = now.getTime();
-  const entries = new Map();
+  const leadMs = RESERVATION_MONITOR_LEAD_MINUTES * 60 * 1000;
+  const sessionMs = RESERVATION_MONITOR_SESSION_MINUTES * 60 * 1000;
+  const entries = (schedules || [])
+    .filter(item => item && item.status === 'scheduled')
+    .map((item) => {
+      const publishMs = Date.parse(item.publishAt || '');
+      return Number.isFinite(publishMs) ? { item, publishMs } : null;
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.publishMs - b.publishMs);
 
-  for (const item of schedules || []) {
-    if (!item || item.status !== 'scheduled') continue;
-    const publishMs = Date.parse(item.publishAt || '');
-    if (!Number.isFinite(publishMs)) continue;
+  const sessions = [];
+  for (const entry of entries) {
+    const monitorStartMs = entry.publishMs - leadMs;
+    if (monitorStartMs <= nowMs) continue;
 
-    for (const minutes of RESERVATION_PRESTART_MINUTES) {
-      const dispatchMs = publishMs - minutes * 60 * 1000;
-      if (dispatchMs <= nowMs) continue;
-      const dispatchDate = new Date(dispatchMs);
-      const cron = cronFromDate(dispatchDate);
-      const current = entries.get(cron);
-      if (!current || dispatchMs < current.dispatchMs) {
-        entries.set(cron, { cron, dispatchMs });
-      }
+    const current = sessions[sessions.length - 1];
+    if (current && entry.publishMs <= current.monitorEndMs) {
+      continue;
     }
+
+    sessions.push({
+      monitorStartMs,
+      monitorEndMs: monitorStartMs + sessionMs,
+      cron: cronFromDate(new Date(monitorStartMs)),
+    });
   }
 
-  return [...entries.values()]
-    .sort((a, b) => a.dispatchMs - b.dispatchMs)
-    .map(entry => entry.cron);
+  return sessions.map(session => session.cron);
 }
 
 function buildReservationWorkflow(schedules) {
   const crons = generateReservationCrons(schedules);
   const lines = [
-    'name: Note 公開投稿 予約事前起動',
+    'name: Note 公開投稿 予約監視セッション',
     '',
-    '# このファイルは /api/note-post が予約一覧から自動生成します。',
-    '# 予約時刻の少し前に note-post.yml を起動し、投稿ジョブ内で予約時刻まで待機します。',
+    '# このファイルは予約一覧から自動生成します。',
+    '# 1回起動した監視ジョブが、セッション中に定期確認して対象予約を起動します。',
     '',
     'on:',
     '  workflow_dispatch:',
@@ -131,7 +140,7 @@ function buildReservationWorkflow(schedules) {
     'jobs:',
     '  dispatch-reserved-posts:',
     '    runs-on: ubuntu-latest',
-    '    timeout-minutes: 5',
+    `    timeout-minutes: ${RESERVATION_MONITOR_SESSION_MINUTES + 10}`,
     '    concurrency:',
     '      group: note-post-reservation-dispatch',
     '      cancel-in-progress: false',
@@ -142,14 +151,17 @@ function buildReservationWorkflow(schedules) {
     '      - name: リポジトリをチェックアウト',
     '        uses: actions/checkout@v4',
     '',
-    '      - name: 予約時刻が近い投稿ジョブを起動',
+    '      - name: 予約時刻が近い投稿ジョブを監視して起動',
     '        env:',
     '          GH_PAT: ${{ secrets.GH_PAT }}',
     '          GITHUB_TOKEN: ${{ github.token }}',
-    '          NOTE_POST_SCHEDULE_SOURCE: github-reservation-schedule',
+    '          NOTE_POST_SCHEDULE_SOURCE: github-reservation-monitor',
     `          NOTE_POST_QUEUE_STALE_MINUTES: "90"`,
     `          NOTE_POST_PRESTART_WINDOW_MINUTES: "${RESERVATION_TRIGGER_WINDOW_MINUTES}"`,
     `          NOTE_POST_LATE_GRACE_MINUTES: "${RESERVATION_LATE_GRACE_MINUTES}"`,
+    `          NOTE_POST_MONITOR_MODE: "true"`,
+    `          NOTE_POST_MONITOR_DURATION_MINUTES: "${RESERVATION_MONITOR_SESSION_MINUTES}"`,
+    `          NOTE_POST_MONITOR_POLL_SECONDS: "${RESERVATION_MONITOR_POLL_SECONDS}"`,
     '        run: python .github/scripts/note_post_schedule_dispatch.py',
   );
 
