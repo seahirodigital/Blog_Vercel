@@ -1447,7 +1447,7 @@
   },
   {
     "id": "a4251cd6-7f1c-48b6-91c3-cfc689358799",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1b8298e1cb8148ca857e6a807c13dfdd",
     "title": "リファビューテック ドライヤー SE レビュー比較まとめ：効率的な美髪ケアを実現する新体験",
     "name": "リファビューテック ドライヤー SE レビュー比較まとめ：効率的な美髪ケアを実現する新体験をレビュー比較.md",
@@ -1456,10 +1456,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-16T12:00:00.000Z",
     "createdAt": "2026-05-14T13:55:07.252Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-16T12:39:13.598098+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-schedule",
+    "dispatchAttempts": 1
   },
   {
     "id": "5c86a2a5-8123-4f9a-a8b6-4c2cdbd754a5",
