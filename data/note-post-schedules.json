@@ -1465,7 +1465,7 @@
   },
   {
     "id": "5c86a2a5-8123-4f9a-a8b6-4c2cdbd754a5",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!se76861e3a2a24295890d63cd6297ed35",
     "title": "Dyson PencilVac Fluffycones SV50 レビュー比較まとめ",
     "name": "Dyson掃除機 コードレス PencilVac Fluffycones SV50 レビュー比較まとめ.md",
@@ -1475,8 +1475,8 @@
     "publishAt": "2026-05-16T22:00:00.000Z",
     "createdAt": "2026-05-14T13:55:07.252Z",
     "queuedAt": "2026-05-16T22:07:58.909305+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-16T22:10:25.637398+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n719bc9492ec3?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
