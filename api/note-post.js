@@ -13,6 +13,12 @@ const DEFAULT_NOTE_TARGET = 'blog_main';
 const ALLOWED_NOTE_TARGETS = new Set(['blog_main', 'xpost_tech']);
 const SCHEDULE_VAR_NAME = 'NOTE_POST_SCHEDULES';
 const SCHEDULE_FILE_PATH = 'data/note-post-schedules.json';
+const RESERVATION_WORKFLOW_PATH = '.github/workflows/note-post-reservations.yml';
+const RESERVATION_PRESTART_MINUTES = [27, 7];
+const RESERVATION_TRIGGER_WINDOW_MINUTES = 35;
+const RESERVATION_DIRECT_DISPATCH_MAX_WAIT_SECONDS = 2400;
+const RESERVATION_LATE_GRACE_MINUTES = 360;
+const RESERVATION_DIRECT_SOURCE = 'github-reservation-direct';
 
 function firstString(value, fallback = '') {
   if (Array.isArray(value)) return value[0] || fallback;
@@ -71,6 +77,111 @@ function encodeRepoPath(path) {
   return String(path || '').split('/').map(encodeURIComponent).join('/');
 }
 
+function cronFromDate(date) {
+  return `${date.getUTCMinutes()} ${date.getUTCHours()} ${date.getUTCDate()} ${date.getUTCMonth() + 1} *`;
+}
+
+function generateReservationCrons(schedules, now = new Date()) {
+  const nowMs = now.getTime();
+  const entries = new Map();
+
+  for (const item of schedules || []) {
+    if (!item || item.status !== 'scheduled') continue;
+    const publishMs = Date.parse(item.publishAt || '');
+    if (!Number.isFinite(publishMs)) continue;
+
+    for (const minutes of RESERVATION_PRESTART_MINUTES) {
+      const dispatchMs = publishMs - minutes * 60 * 1000;
+      if (dispatchMs <= nowMs) continue;
+      const dispatchDate = new Date(dispatchMs);
+      const cron = cronFromDate(dispatchDate);
+      const current = entries.get(cron);
+      if (!current || dispatchMs < current.dispatchMs) {
+        entries.set(cron, { cron, dispatchMs });
+      }
+    }
+  }
+
+  return [...entries.values()]
+    .sort((a, b) => a.dispatchMs - b.dispatchMs)
+    .map(entry => entry.cron);
+}
+
+function buildReservationWorkflow(schedules) {
+  const crons = generateReservationCrons(schedules);
+  const lines = [
+    'name: Note 公開投稿 予約事前起動',
+    '',
+    '# このファイルは /api/note-post が予約一覧から自動生成します。',
+    '# 予約時刻の少し前に note-post.yml を起動し、投稿ジョブ内で予約時刻まで待機します。',
+    '',
+    'on:',
+    '  workflow_dispatch:',
+  ];
+
+  if (crons.length > 0) {
+    lines.push('  schedule:');
+    for (const cron of crons) {
+      lines.push(`    - cron: '${cron}'`);
+    }
+  }
+
+  lines.push(
+    '',
+    'jobs:',
+    '  dispatch-reserved-posts:',
+    '    runs-on: ubuntu-latest',
+    '    timeout-minutes: 5',
+    '    concurrency:',
+    '      group: note-post-reservation-dispatch',
+    '      cancel-in-progress: false',
+    '    permissions:',
+    '      actions: write',
+    '      contents: write',
+    '    steps:',
+    '      - name: リポジトリをチェックアウト',
+    '        uses: actions/checkout@v4',
+    '',
+    '      - name: 予約時刻が近い投稿ジョブを起動',
+    '        env:',
+    '          GH_PAT: ${{ secrets.GH_PAT }}',
+    '          GITHUB_TOKEN: ${{ github.token }}',
+    '          NOTE_POST_SCHEDULE_SOURCE: github-reservation-schedule',
+    `          NOTE_POST_QUEUE_STALE_MINUTES: "90"`,
+    `          NOTE_POST_PRESTART_WINDOW_MINUTES: "${RESERVATION_TRIGGER_WINDOW_MINUTES}"`,
+    `          NOTE_POST_LATE_GRACE_MINUTES: "${RESERVATION_LATE_GRACE_MINUTES}"`,
+    '        run: python .github/scripts/note_post_schedule_dispatch.py',
+  );
+
+  return `${lines.join('\n')}\n`;
+}
+
+function selectDirectDispatchItems(items, now = new Date()) {
+  const nowMs = now.getTime();
+  return (items || []).filter((item) => {
+    const publishMs = Date.parse(item.publishAt || '');
+    if (!Number.isFinite(publishMs)) return false;
+    const waitMs = publishMs - nowMs;
+    return waitMs <= RESERVATION_DIRECT_DISPATCH_MAX_WAIT_SECONDS * 1000 && waitMs >= -60_000;
+  });
+}
+
+function markSchedulesQueued(schedules, ids, source, now = new Date()) {
+  const targetIds = new Set(ids);
+  const queuedAt = now.toISOString();
+  return schedules.map((item) => {
+    if (!item || !targetIds.has(item.id)) return item;
+    return {
+      ...item,
+      status: 'queued',
+      queuedAt,
+      queuedBy: source,
+      dispatchAttempts: Number(item.dispatchAttempts || 0) + 1,
+      error: '',
+    };
+  });
+}
+
 async function githubFetch(repo, token, path, options = {}) {
   return await fetch(`${GITHUB_API}/repos/${repo}${path}`, {
     ...options,
@@ -81,6 +192,46 @@ async function githubFetch(repo, token, path, options = {}) {
       ...(options.headers || {}),
     },
   });
+}
+
+async function readRepoFile(repo, token, path) {
+  const response = await githubFetch(repo, token, `/contents/${encodeRepoPath(path)}`);
+  if (response.status === 404) return { exists: false, sha: '', content: '' };
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`${path} 取得失敗: ${response.status} ${text.slice(0, 200)}`);
+  }
+  const data = await response.json();
+  return {
+    exists: true,
+    sha: data.sha || '',
+    content: decodeContent(data.content || ''),
+  };
+}
+
+async function syncReservationWorkflow(repo, token, schedules) {
+  const content = buildReservationWorkflow(schedules);
+  const current = await readRepoFile(repo, token, RESERVATION_WORKFLOW_PATH);
+  if (current.exists && current.content === content) {
+    return { updated: false, cronCount: generateReservationCrons(schedules).length };
+  }
+
+  const body = {
+    message: 'Update note post reservation workflow',
+    content: encodeContent(content),
+  };
+  if (current.sha) body.sha = current.sha;
+
+  const response = await githubFetch(repo, token, `/contents/${encodeRepoPath(RESERVATION_WORKFLOW_PATH)}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`予約専用Workflow更新失敗: ${response.status} ${text.slice(0, 300)}`);
+  }
+  return { updated: true, cronCount: generateReservationCrons(schedules).length };
 }
 
 async function readGithubVariable(repo, token, name) {
@@ -163,7 +314,7 @@ async function dispatchNotePostWorkflow(repo, token, item) {
         file_id: item.fileId,
         no_top_image: String(Boolean(item.noTopImage)),
         note_target: item.noteTarget || DEFAULT_NOTE_TARGET,
-        publish_mode: item.mode || 'now',
+        publish_mode: item.mode || (item.id ? 'scheduled_due' : 'now'),
         scheduled_at: item.publishAt || '',
         schedule_id: item.id || '',
         article_title: item.title || item.name || '',
@@ -243,8 +394,9 @@ export default async function handler(req, res) {
       const next = schedules.map((item) => item.id === scheduleId
         ? { ...item, status: 'cancelled', cancelledAt: new Date().toISOString() }
         : item);
-      await saveSchedules(repo, githubToken, next);
-      return res.status(200).json({ success: true, schedules: next });
+      const saved = await saveSchedules(repo, githubToken, next);
+      const reservationWorkflow = await syncReservationWorkflow(repo, githubToken, saved);
+      return res.status(200).json({ success: true, schedules: saved, reservationWorkflow });
     }
 
     if (req.method !== 'POST') {
@@ -267,12 +419,53 @@ export default async function handler(req, res) {
     if (mode === 'schedule') {
       const existing = await loadSchedules(repo, githubToken);
       const items = buildScheduleItems(ids, body, noteTarget);
-      const schedules = await saveSchedules(repo, githubToken, [...existing, ...items]);
+      const directDispatchItems = selectDirectDispatchItems(items);
+      const directIds = directDispatchItems.map(item => item.id);
+      const prepared = directIds.length > 0
+        ? markSchedulesQueued([...existing, ...items], directIds, RESERVATION_DIRECT_SOURCE)
+        : [...existing, ...items];
+      let schedules = await saveSchedules(repo, githubToken, prepared);
+      let reservationWorkflow = await syncReservationWorkflow(repo, githubToken, schedules);
+      const directDispatched = [];
+      const directFailures = [];
+
+      for (const item of directDispatchItems) {
+        const queuedItem = schedules.find(schedule => schedule.id === item.id) || item;
+        const result = await dispatchNotePostWorkflow(repo, githubToken, queuedItem);
+        if (result.success) {
+          directDispatched.push({ id: item.id, fileId: item.fileId, title: item.title || item.name || '' });
+        } else {
+          directFailures.push({
+            id: item.id,
+            fileId: item.fileId,
+            title: item.title || item.name || '',
+            error: result.error,
+          });
+        }
+      }
+
+      if (directFailures.length > 0) {
+        const failureMap = new Map(directFailures.map(item => [item.id, item.error]));
+        schedules = await saveSchedules(
+          repo,
+          githubToken,
+          schedules.map((item) => failureMap.has(item.id)
+            ? { ...item, status: 'error', error: failureMap.get(item.id) }
+            : item),
+        );
+        reservationWorkflow = await syncReservationWorkflow(repo, githubToken, schedules);
+      }
+
       return res.status(200).json({
-        success: true,
-        message: `${items.length}件のnote公開予約を登録しました。`,
+        success: directFailures.length === 0,
+        message: directFailures.length === 0
+          ? `${items.length}件のnote公開予約を登録しました。`
+          : `予約登録後の事前起動に一部失敗しました: ${directFailures.map(item => item.fileId).join(', ')}`,
         schedules,
         created: items,
+        directDispatched,
+        directFailures,
+        reservationWorkflow,
       });
     }
 

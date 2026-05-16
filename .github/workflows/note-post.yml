@@ -38,36 +38,12 @@ on:
         required: false
         default: ''
         type: string
-  schedule:
-    - cron: '*/5 * * * *'
 
 jobs:
-  dispatch-due-schedules:
-    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.file_id == '')
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    concurrency:
-      group: note-post-schedule-dispatch
-      cancel-in-progress: false
-    permissions:
-      actions: write
-      contents: write
-    steps:
-      - name: リポジトリをチェックアウト
-        uses: actions/checkout@v4
-
-      - name: GitHub上の予約ファイルを確認して対象を起動
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
-          GITHUB_TOKEN: ${{ github.token }}
-          NOTE_POST_SCHEDULE_SOURCE: github-primary-schedule
-          NOTE_POST_QUEUE_STALE_MINUTES: "90"
-        run: python .github/scripts/note_post_schedule_dispatch.py
-
   post-to-note:
     if: github.event_name == 'workflow_dispatch' && inputs.file_id != ''
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 60
     permissions:
       contents: read
 
@@ -75,7 +51,115 @@ jobs:
       - name: リポジトリをチェックアウト
         uses: actions/checkout@v4
 
+      - name: 予約時刻まで待機し直前状態を確認
+        id: schedule_gate
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          REPOSITORY: ${{ github.repository }}
+          PUBLISH_MODE: ${{ inputs.publish_mode }}
+          SCHEDULED_AT: ${{ inputs.scheduled_at }}
+          SCHEDULE_ID: ${{ inputs.schedule_id }}
+          MAX_WAIT_SECONDS: "2400"
+        run: |
+          python - <<'PY'
+          import base64
+          import json
+          import os
+          import time
+          import urllib.error
+          import urllib.parse
+          import urllib.request
+          from datetime import datetime, timezone
+
+          publish_mode = os.environ.get('PUBLISH_MODE', '')
+          scheduled_at = os.environ.get('SCHEDULED_AT', '')
+          schedule_id = os.environ.get('SCHEDULE_ID', '')
+          output_path = os.environ.get('GITHUB_OUTPUT', '')
+
+          def set_output(name, value):
+              if output_path:
+                  with open(output_path, 'a', encoding='utf-8') as f:
+                      f.write(f'{name}={value}\n')
+
+          set_output('skip', 'false')
+          if publish_mode != 'scheduled_due' or not scheduled_at:
+              print('即時投稿のため待機なしで続行します')
+              raise SystemExit(0)
+
+          token = os.environ.get('GH_PAT', '')
+          repo = os.environ.get('REPOSITORY', 'seahirodigital/Blog_Vercel')
+          api_base = f'https://api.github.com/repos/{repo}'
+          schedule_path = 'data/note-post-schedules.json'
+          schedule_url = f"{api_base}/contents/{urllib.parse.quote(schedule_path, safe='/')}"
+
+          def request_json(method, url, payload=None, accept_404=False):
+              data = None if payload is None else json.dumps(payload).encode('utf-8')
+              req = urllib.request.Request(
+                  url,
+                  data=data,
+                  method=method,
+                  headers={
+                      'Authorization': f'Bearer {token}',
+                      'Accept': 'application/vnd.github+json',
+                      'X-GitHub-Api-Version': '2022-11-28',
+                      'Content-Type': 'application/json',
+                  },
+              )
+              try:
+                  with urllib.request.urlopen(req, timeout=30) as response:
+                      body = response.read().decode('utf-8')
+                      return response.status, json.loads(body) if body else {}
+              except urllib.error.HTTPError as error:
+                  body = error.read().decode('utf-8')
+                  if accept_404 and error.code == 404:
+                      return 404, {}
+                  raise RuntimeError(f'{method} {url} failed: {error.code} {body[:300]}')
+
+          def load_schedule_item():
+              if not token or not schedule_id:
+                  return None
+              status, file_data = request_json('GET', schedule_url, accept_404=True)
+              if status != 200:
+                  return None
+              schedules = json.loads(base64.b64decode((file_data.get('content') or '').replace('\n', '')).decode('utf-8') or '[]')
+              if not isinstance(schedules, list):
+                  return None
+              for item in schedules:
+                  if isinstance(item, dict) and item.get('id') == schedule_id:
+                      return item
+              return None
+
+          def stop_if_not_publishable(phase):
+              item = load_schedule_item()
+              if not item:
+                  print(f'{phase}: 予約状態を確認できないため続行します')
+                  return
+              status = item.get('status')
+              if status in ('cancelled', 'published', 'error'):
+                  print(f'{phase}: 予約状態が {status} のため投稿をスキップします')
+                  set_output('skip', 'true')
+                  raise SystemExit(0)
+              print(f'{phase}: 予約状態 {status} を確認しました')
+
+          stop_if_not_publishable('待機前')
+
+          publish_at = datetime.fromisoformat(scheduled_at.replace('Z', '+00:00'))
+          now = datetime.now(timezone.utc)
+          wait_seconds = int((publish_at - now).total_seconds())
+          max_wait_seconds = int(os.environ.get('MAX_WAIT_SECONDS', '2400'))
+          if wait_seconds > max_wait_seconds:
+              raise RuntimeError(f'予約時刻までの待機が長すぎます: {wait_seconds}秒')
+          if wait_seconds > 0:
+              print(f'予約時刻まで {wait_seconds} 秒待機します')
+              time.sleep(wait_seconds)
+          else:
+              print(f'予約時刻を {abs(wait_seconds)} 秒過ぎているため直ちに投稿します')
+
+          stop_if_not_publishable('投稿直前')
+          PY
+
       - name: Python 3.13 セットアップ
+        if: steps.schedule_gate.outputs.skip != 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
@@ -83,12 +167,15 @@ jobs:
           cache-dependency-path: scripts/pipeline/requirements.txt
 
       - name: Python 依存パッケージをインストール
+        if: steps.schedule_gate.outputs.skip != 'true'
         run: pip install -r scripts/pipeline/requirements.txt
 
       - name: Playwright ブラウザをインストール（Chromium）
+        if: steps.schedule_gate.outputs.skip != 'true'
         run: playwright install --with-deps chromium
 
       - name: note 保存先の認証情報を選択
+        if: steps.schedule_gate.outputs.skip != 'true'
         env:
           NOTE_TARGET: ${{ inputs.note_target }}
           BLOG_NOTE_EMAIL: ${{ secrets.NOTE_EMAIL }}
@@ -121,6 +208,7 @@ jobs:
           fi
 
       - name: OneDriveから記事を取得し note に公開投稿
+        if: steps.schedule_gate.outputs.skip != 'true'
         env:
           ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
           ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
@@ -276,7 +364,7 @@ jobs:
           fi
 
       - name: 予約状態を完了へ更新
-        if: ${{ inputs.schedule_id != '' }}
+        if: ${{ inputs.schedule_id != '' && steps.schedule_gate.outputs.skip != 'true' }}
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
           REPOSITORY: ${{ github.repository }}
@@ -358,7 +446,7 @@ jobs:
           PY
 
       - name: 予約公開完了後に記事をnoteアップ済へ移動
-        if: ${{ inputs.schedule_id != '' }}
+        if: ${{ inputs.schedule_id != '' && steps.schedule_gate.outputs.skip != 'true' }}
         env:
           ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
           ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}

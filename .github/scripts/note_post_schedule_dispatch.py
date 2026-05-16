@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""note公開予約をGitHub Actions内で確認して、期限到来分を投稿ジョブへ渡す。"""
+"""note公開予約をGitHub Actions内で確認して、事前起動対象を投稿ジョブへ渡す。"""
 
 from __future__ import annotations
 
@@ -20,6 +20,8 @@ WORKFLOW_FILE = "note-post.yml"
 SCHEDULE_PATH = "data/note-post-schedules.json"
 MAX_CLAIM_RETRIES = 3
 DEFAULT_QUEUE_STALE_MINUTES = 90
+DEFAULT_PRESTART_WINDOW_MINUTES = 35
+DEFAULT_LATE_GRACE_MINUTES = 360
 
 
 class ScheduleConflictError(RuntimeError):
@@ -111,12 +113,25 @@ def parse_publish_at(item: dict[str, Any]) -> datetime | None:
         return None
 
 
-def should_claim(item: dict[str, Any], now: datetime, queue_stale_seconds: int) -> bool:
+def should_claim(
+    item: dict[str, Any],
+    now: datetime,
+    queue_stale_seconds: int,
+    prestart_seconds: int,
+    late_grace_seconds: int,
+) -> bool:
+    publish_at = parse_publish_at(item)
+
     if item.get("status") == "scheduled":
-        publish_at = parse_publish_at(item)
-        return publish_at is None or publish_at <= now
+        if publish_at is None:
+            return True
+        seconds_until_publish = (publish_at - now).total_seconds()
+        return -late_grace_seconds <= seconds_until_publish <= prestart_seconds
 
     if item.get("status") != "queued" or item.get("publishedAt"):
+        return False
+
+    if publish_at is not None and (now - publish_at).total_seconds() > late_grace_seconds:
         return False
 
     raw_queued_at = str(item.get("queuedAt") or "")
@@ -127,8 +142,17 @@ def should_claim(item: dict[str, Any], now: datetime, queue_stale_seconds: int) 
     return (now - queued_at).total_seconds() >= queue_stale_seconds
 
 
-def claim_due_schedules(repo: str, token: str, source: str, queue_stale_minutes: int) -> tuple[list[dict[str, Any]], int]:
+def claim_due_schedules(
+    repo: str,
+    token: str,
+    source: str,
+    queue_stale_minutes: int,
+    prestart_window_minutes: int,
+    late_grace_minutes: int,
+) -> tuple[list[dict[str, Any]], int]:
     queue_stale_seconds = queue_stale_minutes * 60
+    prestart_seconds = prestart_window_minutes * 60
+    late_grace_seconds = late_grace_minutes * 60
 
     for attempt in range(1, MAX_CLAIM_RETRIES + 1):
         schedules, sha = load_schedules(repo, token)
@@ -150,7 +174,7 @@ def claim_due_schedules(repo: str, token: str, source: str, queue_stale_minutes:
                 })
                 continue
 
-            if not should_claim(item, now, queue_stale_seconds):
+            if not should_claim(item, now, queue_stale_seconds, prestart_seconds, late_grace_seconds):
                 next_schedules.append(item)
                 continue
 
@@ -238,6 +262,8 @@ def main() -> int:
     repo = os.environ.get("GITHUB_REPOSITORY") or os.environ.get("REPOSITORY") or "seahirodigital/Blog_Vercel"
     source = os.environ.get("NOTE_POST_SCHEDULE_SOURCE") or "github-schedule"
     queue_stale_minutes = env_int("NOTE_POST_QUEUE_STALE_MINUTES", DEFAULT_QUEUE_STALE_MINUTES)
+    prestart_window_minutes = env_int("NOTE_POST_PRESTART_WINDOW_MINUTES", DEFAULT_PRESTART_WINDOW_MINUTES)
+    late_grace_minutes = env_int("NOTE_POST_LATE_GRACE_MINUTES", DEFAULT_LATE_GRACE_MINUTES)
 
     if not token:
         print("GH_PAT または GITHUB_TOKEN が未設定です", file=sys.stderr)
@@ -246,10 +272,19 @@ def main() -> int:
     checked_at = datetime.now(timezone.utc).isoformat()
     log(
         "note予約監視を開始します: "
-        f"repo={repo}, source={source}, queueStaleMinutes={queue_stale_minutes}, checkedAt={checked_at}"
+        f"repo={repo}, source={source}, queueStaleMinutes={queue_stale_minutes}, "
+        f"prestartWindowMinutes={prestart_window_minutes}, lateGraceMinutes={late_grace_minutes}, "
+        f"checkedAt={checked_at}"
     )
 
-    claimed, checked = claim_due_schedules(repo, token, source, queue_stale_minutes)
+    claimed, checked = claim_due_schedules(
+        repo,
+        token,
+        source,
+        queue_stale_minutes,
+        prestart_window_minutes,
+        late_grace_minutes,
+    )
     dispatched: list[dict[str, str]] = []
     failures: list[dict[str, str]] = []
 
@@ -276,6 +311,8 @@ def main() -> int:
         "repository": repo,
         "source": source,
         "queueStaleMinutes": queue_stale_minutes,
+        "prestartWindowMinutes": prestart_window_minutes,
+        "lateGraceMinutes": late_grace_minutes,
         "checked": checked,
         "claimed": len(claimed),
         "dispatched": dispatched,

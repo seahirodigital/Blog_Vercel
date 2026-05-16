@@ -1,0 +1,56 @@
+name: Note 公開投稿 予約事前起動
+
+# このファイルは /api/note-post が予約一覧から自動生成します。
+# 予約時刻の少し前に note-post.yml を起動し、投稿ジョブ内で予約時刻まで待機します。
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '33 11 16 5 *'
+    - cron: '53 11 16 5 *'
+    - cron: '33 21 16 5 *'
+    - cron: '53 21 16 5 *'
+    - cron: '3 2 17 5 *'
+    - cron: '23 2 17 5 *'
+    - cron: '33 11 17 5 *'
+    - cron: '53 11 17 5 *'
+    - cron: '33 21 17 5 *'
+    - cron: '53 21 17 5 *'
+    - cron: '3 2 18 5 *'
+    - cron: '23 2 18 5 *'
+    - cron: '33 11 18 5 *'
+    - cron: '53 11 18 5 *'
+    - cron: '33 21 18 5 *'
+    - cron: '53 21 18 5 *'
+    - cron: '3 2 19 5 *'
+    - cron: '23 2 19 5 *'
+    - cron: '33 11 19 5 *'
+    - cron: '53 11 19 5 *'
+    - cron: '3 22 19 5 *'
+    - cron: '23 22 19 5 *'
+    - cron: '3 2 20 5 *'
+    - cron: '23 2 20 5 *'
+
+jobs:
+  dispatch-reserved-posts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    concurrency:
+      group: note-post-reservation-dispatch
+      cancel-in-progress: false
+    permissions:
+      actions: write
+      contents: write
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: 予約時刻が近い投稿ジョブを起動
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ github.token }}
+          NOTE_POST_SCHEDULE_SOURCE: github-reservation-schedule
+          NOTE_POST_QUEUE_STALE_MINUTES: "90"
+          NOTE_POST_PRESTART_WINDOW_MINUTES: "35"
+          NOTE_POST_LATE_GRACE_MINUTES: "360"
+        run: python .github/scripts/note_post_schedule_dispatch.py
