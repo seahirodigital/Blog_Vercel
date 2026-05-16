@@ -2722,6 +2722,7 @@
       const undoStack = useRef([]);
       const lastSavedText = useRef('');
       const undoDebounce = useRef(null);
+      const undoScopeKey = useRef('');
       // スクロール同期（相互ロックで無限ループ防止）
       const editorScrolling = useRef(false);
       const previewScrolling = useRef(false);
@@ -2739,6 +2740,13 @@
       const hasChanges = content !== originalContent;
       const selectedArticleRef = useRef(null);
       useEffect(() => { selectedArticleRef.current = selectedArticle; }, [selectedArticle]);
+
+      const resetUndoHistory = useCallback((initialText = '', scopeKey = '') => {
+        clearTimeout(undoDebounce.current);
+        undoStack.current = [];
+        lastSavedText.current = initialText;
+        undoScopeKey.current = scopeKey;
+      }, []);
 
       // 記事H1キャッシュ（localStorageで永続化: サイドバータイトル表示に使用）
       const [articleH1Cache, setArticleH1Cache] = useState(() => {
@@ -2915,12 +2923,13 @@
             setContent('');
             setOriginalContent('');
             setIsNewArticle(false);
+            resetUndoHistory('', '');
           }
           showToast('記事を削除しました', 'success');
         } catch (e) {
           showToast(e.message, 'error');
         }
-      }, [selectedArticle]);
+      }, [selectedArticle, resetUndoHistory]);
 
       // 記事複製
       const handleDuplicateArticle = useCallback(async (article) => {
@@ -2995,6 +3004,7 @@
         setIsEditingTitle(false);
         try {
           const text = await fetchArticleContent(article.id);
+          resetUndoHistory(text, `article:${article.id}`);
           setContent(text);
           setOriginalContent(text);
           setSelectedArticle(article);
@@ -3041,15 +3051,18 @@
       // 新規記事
       const handleNewArticle = () => {
         if (hasChanges && !confirm('未保存の変更があります。破棄しますか？')) return;
-        setIsNewArticle(true);
-        setSelectedArticle(null);
-        setContent('# 新しい記事\n\nここに記事を書いてください...\n');
-        setOriginalContent('');
-        setIsEditingTitle(false);
         const now = new Date();
         const dateStr = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
         const timeStr = `${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}`;
-        setNewFilename(`${dateStr}_${timeStr}_新しい記事.md`);
+        const draftFilename = `${dateStr}_${timeStr}_新しい記事.md`;
+        const draftContent = '# 新しい記事\n\nここに記事を書いてください...\n';
+        resetUndoHistory(draftContent, `new:${draftFilename}`);
+        setIsNewArticle(true);
+        setSelectedArticle(null);
+        setContent(draftContent);
+        setOriginalContent('');
+        setIsEditingTitle(false);
+        setNewFilename(draftFilename);
       };
 
       // 保存（既存記事はfileIDで上書き、新規はルートフォルダに作成）
@@ -3089,6 +3102,7 @@
             };
             setSelectedArticle(newArticle);
             setArticles(prev => [newArticle, ...prev]);
+            resetUndoHistory(content, `article:${result.id}`);
             // 新規記事保存後にH1キャッシュを更新
             updateH1CacheFromContent(result.id, content);
           } else {
@@ -4000,8 +4014,32 @@
           if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
             const active = document.activeElement;
             if (active && active.closest && active.closest('.aff-modal')) return;
+            const isEditorFocused = active === textareaRef.current;
+            const isTextInput = active && (
+              active.tagName === 'INPUT' ||
+              active.tagName === 'TEXTAREA' ||
+              active.isContentEditable
+            );
+            if (!isEditorFocused) {
+              if (!isTextInput) e.preventDefault();
+              return;
+            }
+
+            e.preventDefault();
+            const currentScopeKey = isNewArticle
+              ? `new:${newFilename || ''}`
+              : selectedArticle?.id ? `article:${selectedArticle.id}` : '';
+            if (!currentScopeKey) return;
+            if (undoScopeKey.current !== currentScopeKey) {
+              resetUndoHistory(content, currentScopeKey);
+              return;
+            }
+            clearTimeout(undoDebounce.current);
+            if (content !== lastSavedText.current) {
+              undoStack.current = [...undoStack.current.slice(-99), lastSavedText.current];
+              lastSavedText.current = content;
+            }
             if (undoStack.current.length > 0) {
-              e.preventDefault();
               const prev = undoStack.current.pop();
               lastSavedText.current = prev;
               setContent(prev);
@@ -4010,7 +4048,7 @@
         };
         window.addEventListener('keydown', handler);
         return () => window.removeEventListener('keydown', handler);
-      }, [content, selectedArticle, isNewArticle, newFilename, isEditingTitle, showFindReplace, multiSelectedIds]);
+      }, [content, selectedArticle, isNewArticle, newFilename, isEditingTitle, showFindReplace, multiSelectedIds, resetUndoHistory]);
 
       // タイトル編集フォーカス
       useEffect(() => {
@@ -4846,13 +4884,20 @@
                     value={content}
                     onChange={(e) => {
                       const newVal = e.target.value;
+                      const scopeKey = isNewArticle
+                        ? `new:${newFilename || ''}`
+                        : selectedArticle?.id ? `article:${selectedArticle.id}` : '';
+                      if (scopeKey && undoScopeKey.current !== scopeKey) {
+                        resetUndoHistory(content, scopeKey);
+                      }
                       // debounce で 500ms 後に現在値を undo スタックに積む
                       clearTimeout(undoDebounce.current);
                       undoDebounce.current = setTimeout(() => {
-                        if (newVal !== lastSavedText.current) {
+                        if (scopeKey && undoScopeKey.current === scopeKey && newVal !== lastSavedText.current) {
                           undoStack.current = [...undoStack.current.slice(-99), lastSavedText.current];
                           lastSavedText.current = newVal;
                         }
+                        undoDebounce.current = null;
                       }, 500);
                       setContent(newVal);
                     }}
