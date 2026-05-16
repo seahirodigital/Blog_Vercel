@@ -2718,11 +2718,6 @@
       const titleInputRef = useRef(null);
       const findInputRef = useRef(null);
       const replaceInputRef = useRef(null);
-      // Undo 履歴管理
-      const undoStack = useRef([]);
-      const lastSavedText = useRef('');
-      const undoDebounce = useRef(null);
-      const undoScopeKey = useRef('');
       // スクロール同期（相互ロックで無限ループ防止）
       const editorScrolling = useRef(false);
       const previewScrolling = useRef(false);
@@ -2740,13 +2735,9 @@
       const hasChanges = content !== originalContent;
       const selectedArticleRef = useRef(null);
       useEffect(() => { selectedArticleRef.current = selectedArticle; }, [selectedArticle]);
-
-      const resetUndoHistory = useCallback((initialText = '', scopeKey = '') => {
-        clearTimeout(undoDebounce.current);
-        undoStack.current = [];
-        lastSavedText.current = initialText;
-        undoScopeKey.current = scopeKey;
-      }, []);
+      const editorInstanceKey = selectedArticle?.id
+        ? `article:${selectedArticle.id}`
+        : isNewArticle ? `new:${newFilename || 'draft'}` : 'empty';
 
       // 記事H1キャッシュ（localStorageで永続化: サイドバータイトル表示に使用）
       const [articleH1Cache, setArticleH1Cache] = useState(() => {
@@ -2923,13 +2914,12 @@
             setContent('');
             setOriginalContent('');
             setIsNewArticle(false);
-            resetUndoHistory('', '');
           }
           showToast('記事を削除しました', 'success');
         } catch (e) {
           showToast(e.message, 'error');
         }
-      }, [selectedArticle, resetUndoHistory]);
+      }, [selectedArticle]);
 
       // 記事複製
       const handleDuplicateArticle = useCallback(async (article) => {
@@ -3004,7 +2994,6 @@
         setIsEditingTitle(false);
         try {
           const text = await fetchArticleContent(article.id);
-          resetUndoHistory(text, `article:${article.id}`);
           setContent(text);
           setOriginalContent(text);
           setSelectedArticle(article);
@@ -3056,7 +3045,6 @@
         const timeStr = `${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}`;
         const draftFilename = `${dateStr}_${timeStr}_新しい記事.md`;
         const draftContent = '# 新しい記事\n\nここに記事を書いてください...\n';
-        resetUndoHistory(draftContent, `new:${draftFilename}`);
         setIsNewArticle(true);
         setSelectedArticle(null);
         setContent(draftContent);
@@ -3102,7 +3090,6 @@
             };
             setSelectedArticle(newArticle);
             setArticles(prev => [newArticle, ...prev]);
-            resetUndoHistory(content, `article:${result.id}`);
             // 新規記事保存後にH1キャッシュを更新
             updateH1CacheFromContent(result.id, content);
           } else {
@@ -3125,6 +3112,10 @@
       useEffect(() => {
         if (!selectedArticle || isNewArticle) return;
         if (content === originalContent) return;
+        if (originalContent.trim() && content.trim() === '') {
+          setAutoSaveStatus('idle');
+          return;
+        }
         setAutoSaveStatus('pending');
         clearTimeout(autoSaveTimer.current);
         autoSaveTimer.current = setTimeout(async () => {
@@ -3981,7 +3972,7 @@
         setMatchIndex(0);
       }, [findMatches, content, findText, replaceText]);
 
-      // キーボードショートカット（Ctrl+S / Ctrl+B / Ctrl+Z / Ctrl+F）
+      // キーボードショートカット（Ctrl+S / Ctrl+B / Ctrl+F）
       useEffect(() => {
         const handler = (e) => {
           if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); handleSave(); }
@@ -4005,50 +3996,15 @@
               setTimeout(() => { ta.selectionStart = start + 2; ta.selectionEnd = end + 2; ta.focus(); }, 0);
             }
           }
-          // Ctrl+Z: Undo（アフィリエイトモーダルにフォーカスがある場合はネイティブundoに任せる）
           // Esc: 複数選択解除
           if (e.key === 'Escape' && multiSelectedIds.size > 0) {
             setMultiSelectedIds(new Set());
             return;
           }
-          if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
-            const active = document.activeElement;
-            if (active && active.closest && active.closest('.aff-modal')) return;
-            const isEditorFocused = active === textareaRef.current;
-            const isTextInput = active && (
-              active.tagName === 'INPUT' ||
-              active.tagName === 'TEXTAREA' ||
-              active.isContentEditable
-            );
-            if (!isEditorFocused) {
-              if (!isTextInput) e.preventDefault();
-              return;
-            }
-
-            e.preventDefault();
-            const currentScopeKey = isNewArticle
-              ? `new:${newFilename || ''}`
-              : selectedArticle?.id ? `article:${selectedArticle.id}` : '';
-            if (!currentScopeKey) return;
-            if (undoScopeKey.current !== currentScopeKey) {
-              resetUndoHistory(content, currentScopeKey);
-              return;
-            }
-            clearTimeout(undoDebounce.current);
-            if (content !== lastSavedText.current) {
-              undoStack.current = [...undoStack.current.slice(-99), lastSavedText.current];
-              lastSavedText.current = content;
-            }
-            if (undoStack.current.length > 0) {
-              const prev = undoStack.current.pop();
-              lastSavedText.current = prev;
-              setContent(prev);
-            }
-          }
         };
         window.addEventListener('keydown', handler);
         return () => window.removeEventListener('keydown', handler);
-      }, [content, selectedArticle, isNewArticle, newFilename, isEditingTitle, showFindReplace, multiSelectedIds, resetUndoHistory]);
+      }, [content, selectedArticle, isNewArticle, newFilename, isEditingTitle, showFindReplace, multiSelectedIds]);
 
       // タイトル編集フォーカス
       useEffect(() => {
@@ -4878,29 +4834,12 @@
                     </button>
                   </div>
                   <textarea
+                    key={editorInstanceKey}
                     ref={textareaRef}
                     onScroll={handleEditorScroll}
                     onKeyDown={handleKeyDown}
                     value={content}
-                    onChange={(e) => {
-                      const newVal = e.target.value;
-                      const scopeKey = isNewArticle
-                        ? `new:${newFilename || ''}`
-                        : selectedArticle?.id ? `article:${selectedArticle.id}` : '';
-                      if (scopeKey && undoScopeKey.current !== scopeKey) {
-                        resetUndoHistory(content, scopeKey);
-                      }
-                      // debounce で 500ms 後に現在値を undo スタックに積む
-                      clearTimeout(undoDebounce.current);
-                      undoDebounce.current = setTimeout(() => {
-                        if (scopeKey && undoScopeKey.current === scopeKey && newVal !== lastSavedText.current) {
-                          undoStack.current = [...undoStack.current.slice(-99), lastSavedText.current];
-                          lastSavedText.current = newVal;
-                        }
-                        undoDebounce.current = null;
-                      }, 500);
-                      setContent(newVal);
-                    }}
+                    onChange={(e) => setContent(e.target.value)}
                     className="editor-textarea flex-1 w-full p-4 bg-white text-slate-700 focus:outline-none"
                     placeholder="Markdownを入力..."
                     spellCheck={false}
