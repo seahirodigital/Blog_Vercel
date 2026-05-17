@@ -1838,7 +1838,7 @@
   },
   {
     "id": "bf7f94c1-01e4-448e-8f48-2fdedc08f20a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7abc5325f9d942138200c0b19c7acdf9",
     "title": "InnAIO T10 音声翻訳機 レビュー比較まとめ",
     "name": "InnAIO T10 音声翻訳機 レビュー比較まとめ.md",
@@ -1850,7 +1850,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:51:45.776Z"
   },
   {
     "id": "298df4b5-c007-4559-a399-6b76e1e6e229",
