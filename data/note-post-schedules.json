@@ -1766,7 +1766,7 @@
   },
   {
     "id": "4071f58d-912b-4f25-9960-ede3bd0d25e4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf48ce10f38354a4893bb9cb34e62bec5",
     "title": "シャーク エボパワーシステム ブーストプラス コードレス掃除機 スティック掃除機 レビュー比較まとめ",
     "name": "20260515_0227_【高評価製品検証】ネットで話題のシャークの最強コードレス掃除機「BOOST+」は本物か試したら衝撃の結末に！【Shark.md",
@@ -1778,11 +1778,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:16:21.922Z"
   },
   {
     "id": "8817235a-5b9e-4366-9c93-05f8b0185582",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4673910949e54f418a0cd158a27b322c",
     "title": "FreeStyle リブレ2 血糖値測定器 レビュー比較まとめ：効率的な健康管理を実現する最新デバイスの全貌をレビュー比較",
     "name": "FreeStyle リブレ2 血糖値測定器 レビュー比較まとめ：効率的な健康管理を実現する最新デバイスの全貌をレビュー比.md",
@@ -1794,7 +1795,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:16:21.922Z"
   },
   {
     "id": "5cf54f25-8663-45e0-a8fa-51e7430741d2",
