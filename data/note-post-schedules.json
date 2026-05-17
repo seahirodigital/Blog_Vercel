@@ -1500,7 +1500,7 @@
   },
   {
     "id": "de4a43c2-02d6-47d4-8a62-00ae0dfd100f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sc7114b75b35e4ecd87a912eac0e1c0f8",
     "title": "クワッズ BISARA PRO ハンズフリースタンドドライヤー、ながら乾かし美髪ケアの最新レビュー比較をまとめます",
     "name": "BISARA PRO ハンズフリースタンドドライヤー、ながら乾かし美髪ケアの最新レビュー比較をまとめます.md",
@@ -1510,8 +1510,8 @@
     "publishAt": "2026-05-17T02:30:00.000Z",
     "createdAt": "2026-05-14T13:55:07.252Z",
     "queuedAt": "2026-05-17T01:55:54.847295+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-17T02:32:26.961052+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n27f258c57145?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
