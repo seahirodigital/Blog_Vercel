@@ -1831,7 +1831,7 @@
   },
   {
     "id": "da1a41f1-0e52-4eab-b8e6-d3dc6a3828c1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s67e0930c528941dcac97c553239df380",
     "title": "アイリスオーヤマ IPP-2226U-W ポータブルエアコン レビュー比較まとめ",
     "name": "ポータブルエアコン 湿気対策 冷風 送風 アイリスオーヤマ IPP-2226U-W レビュー比較まとめ.md",
@@ -1843,7 +1843,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T05:39:25.125Z"
   },
   {
     "id": "07abc143-c261-43d0-8ac2-69e1808d2b95",
