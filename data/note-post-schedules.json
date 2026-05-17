@@ -1617,7 +1617,7 @@
   },
   {
     "id": "53cdad03-9cbd-4146-9ada-653dc4f96b0d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa6fe59ff5d5e49bdb1138759f6b5d42a",
     "title": "SIXPAD 88-SIXPAD マッサージャー レビュー比較まとめ",
     "name": "SIXPAD 88-SIXPAD マッサージャー レビュー比較まとめ.md",
@@ -1629,7 +1629,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "8d6e26da-0070-46ec-a220-5bcec22050c6",
@@ -1667,7 +1668,7 @@
   },
   {
     "id": "8424eb2e-72e7-4dd4-99c5-3cd1b6a4a536",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd958abfdf0ee4f20b7d48ac40cb07162",
     "title": "WaJiu B8 マッサージャー レビュー比較まとめ",
     "name": "WaJiu B8 マッサージャー レビュー比較まとめ.md",
@@ -1679,11 +1680,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "badb369b-dc33-4a0b-81f6-0e052ebaa73c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd2404950a9604add92d9666ff2e3bbbb",
     "title": "NIPLUX B9 マッサージャー レビュー比較まとめ",
     "name": "NIPLUX B9 マッサージャー レビュー比較まとめ.md",
@@ -1695,7 +1697,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "c43fd9c9-b6c1-4c27-8dda-30d9808a928a",
@@ -1716,7 +1719,7 @@
   },
   {
     "id": "c83da24b-a0f8-4e35-bdf2-1e694a0250b5",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4f682ee27ec140809f6dc25bcd37fec0",
     "title": "MYTREX MT-DRHN21W ネックマッサージャー レビュー比較まとめ",
     "name": "MYTREX MT-DRHN21W ネックマッサージャー レビュー比較まとめ.md",
@@ -1728,7 +1731,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "65b95e94-6db9-4fdb-9147-8729b69d8281",
@@ -1783,7 +1787,7 @@
   },
   {
     "id": "76b775b7-a8ca-4b08-8cf9-45db0bffe7c3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s76c074e70e244c5f8b66e6aee28a2470",
     "title": "ドクターエア MN-05 マッサージャー レビュー比較まとめ",
     "name": "ドクターエア MN-05 マッサージャー レビュー比較まとめ.md",
@@ -1795,7 +1799,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "298df4b5-c007-4559-a399-6b76e1e6e229",
@@ -1850,7 +1855,7 @@
   },
   {
     "id": "251b84e8-e7d8-45a0-8544-88e92f2f8f20",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8243be3709da48f2968fb5cdfcb86b48",
     "title": "アイリスオーヤマIRIS OHYAMA ISHT-5000-W 食器洗い乾燥機 レビュー比較まとめ",
     "name": "アイリスオーヤマIRIS OHYAMA ISHT-5000-W 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -1862,7 +1867,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "443630d9-8ede-46c8-985c-7cbc6c01e257",
@@ -1900,7 +1906,7 @@
   },
   {
     "id": "825947ac-db71-4437-ac92-73ac4430bc7a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s618f9695ffde4a778f8592cd67ac4c5f",
     "title": "SAMKYO T40 食器洗い乾燥機 レビュー比較まとめ",
     "name": "SAMKYO T40 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -1912,7 +1918,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "32dedfe9-ce63-4937-936d-d4429bb24991",
@@ -1950,7 +1957,7 @@
   },
   {
     "id": "db87124d-cf27-4fb3-9b6e-cb795152d2f2",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3ca4a4742074443795e62f88ea8747b2",
     "title": "sirocaシロカ PDW-M151 食器洗い乾燥機 レビュー比較まとめ",
     "name": "sirocaシロカ PDW-M151 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -1962,7 +1969,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "8817235a-5b9e-4366-9c93-05f8b0185582",
@@ -1983,7 +1991,7 @@
   },
   {
     "id": "50f4b6e1-c54c-453f-87d1-1cc612cba5af",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s98a1618e33eb495d8ffdae8399622d90",
     "title": "パナソニックPanasonic NP-TML1-W 食器洗い乾燥機 レビュー比較まとめ",
     "name": "パナソニックPanasonic NP-TML1-W 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -1995,11 +2003,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "91696384-492a-4752-8579-48310a5693da",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb194fee5c51e47ce9e3e5bca9663ada9",
     "title": "SAMKYO T60 食器洗い乾燥機 レビュー比較まとめ",
     "name": "SAMKYO T60 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -2011,11 +2020,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "ea34a15c-156e-487a-af67-accf725f9692",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa33a06398b81421897cd47c1436eb67d",
     "title": "コンフィーCOMFEE' 2WAY 食器洗い乾燥機 レビュー比較まとめ",
     "name": "コンフィーCOMFEE' 2WAY 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -2027,7 +2037,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "5cf54f25-8663-45e0-a8fa-51e7430741d2",
@@ -2048,7 +2059,7 @@
   },
   {
     "id": "0a0ca33e-af9e-4bed-8e03-5d0f2b5dd6eb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb338443c58c84fb6a82238aba6132730",
     "title": "SAMKYO T80 食器洗い乾燥機 レビュー比較まとめ",
     "name": "SAMKYO T80 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -2060,7 +2071,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "38cb4a96-f62b-4bad-8727-4d10747dc3e9",
@@ -2081,7 +2093,7 @@
   },
   {
     "id": "ff4543fe-25da-4d40-8bc0-f08e77ae09c4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbdd2679daca245e4828d0742541ba9e1",
     "title": "SAMKYO SAMKYO-49 食器洗い乾燥機 レビュー比較まとめ",
     "name": "SAMKYO SAMKYO-49 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -2093,11 +2105,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "84f7f465-3df2-416e-8652-047bacd45397",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s537ddc869057429fa57864f92b23792c",
     "title": "パナソニックPanasonic NP-TCR4-W 食器洗い乾燥機 レビュー比較まとめ",
     "name": "パナソニックPanasonic NP-TCR4-W 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -2109,7 +2122,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "da1a41f1-0e52-4eab-b8e6-d3dc6a3828c1",
@@ -2130,7 +2144,7 @@
   },
   {
     "id": "b3029f3e-429c-46b6-b54e-a76a620de92b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8203a4f1a2804db2b423ab3836ef98e0",
     "title": "パナソニックPanasonic NP-TH5-W 食器洗い乾燥機 レビュー比較まとめ",
     "name": "パナソニックPanasonic NP-TH5-W 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -2142,7 +2156,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "07abc143-c261-43d0-8ac2-69e1808d2b95",
@@ -2163,7 +2178,7 @@
   },
   {
     "id": "c2dac2bf-891f-46ea-bd2f-6a978347960d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s1fd485d0776648c7a1ded36e69f6aeba",
     "title": "パナソニックPanasonic NP-TA5-W 食器洗い乾燥機 レビュー比較まとめ",
     "name": "パナソニックPanasonic NP-TA5-W 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -2175,11 +2190,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "5450b131-bc6c-41cb-bb33-eb3dc5c80baa",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s36b8f676cc4f4818934ed060a24f915b",
     "title": "パナソニックPanasonic NP-TH4-W 食器洗い乾燥機 レビュー比較まとめ",
     "name": "パナソニックPanasonic NP-TH4-W 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -2191,11 +2207,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "84d124a5-dddf-43ce-a404-85b44118a1a3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc4235f5490744b519104678736ccf200",
     "title": "AiMY AIM-265LG AiMY マッサージチェア レビュー比較まとめ",
     "name": "AiMY AIM-265LG AiMY マッサージチェア レビュー比較まとめ.md",
@@ -2207,11 +2224,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "52761f2b-dcd2-4b52-bb6d-f9751d37236e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0526b7a50af149c59bdfeb598044ce8e",
     "title": "THRIVEスライヴ CHD-3810 THRIVEスライヴ スライヴ レビュー比較まとめ",
     "name": "THRIVEスライヴ CHD-3810 THRIVEスライヴ スライヴ レビュー比較まとめ.md",
@@ -2223,7 +2241,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "116c1987-bf80-405e-bab7-7daa2009f71a",
@@ -2244,7 +2263,7 @@
   },
   {
     "id": "3ffa7b8a-5368-4f05-b2c8-e11758ec15b7",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s067105e3f2c144418804f39d4829b905",
     "title": "THRIVEスライヴ CHD-9120 マッサージャー レビュー比較まとめ",
     "name": "THRIVEスライヴ CHD-9120 マッサージャー レビュー比較まとめ.md",
@@ -2256,11 +2275,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "ffbee3cd-2912-4b90-8db8-26144242a69b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7a48cc1b41bd4f25a55766eec6197558",
     "title": "THRIVEスライヴ CHD-9220 フットマッサージャー レビュー比較まとめ",
     "name": "THRIVEスライヴ CHD-9220 フットマッサージャー レビュー比較まとめ.md",
@@ -2272,11 +2292,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "dfa0e9d1-14f6-4b4b-8974-effab57d2e58",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4f28074a864e4d81a45d273c5d232fde",
     "title": "Medifeel RM010S Medifeel 寝ながらストレッチ レビュー比較まとめ",
     "name": "Medifeel RM010S Medifeel 寝ながらストレッチ レビュー比較まとめ.md",
@@ -2288,11 +2309,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "ad40431a-94c4-4d6c-be9b-ab38344ba4be",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5cd391c8128444219a2231c9804d83b0",
     "title": "アテックスAtex 12cm マッサージャー レビュー比較まとめ",
     "name": "アテックスAtex 12cm マッサージャー レビュー比較まとめ.md",
@@ -2304,11 +2326,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "e5839b04-4cf4-40f1-bffc-f95eef00aee0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s734a2802ba9f4c22a4bc55ff79762f0e",
     "title": "ブランド LESIR 150-180cm マッサージャー レビュー比較まとめ",
     "name": "ブランド LESIR 150-180cm マッサージャー レビュー比較まとめ.md",
@@ -2320,11 +2343,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "4b5257ad-2a34-4161-9ebc-ed858c16cf95",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc990cf07110245e1ab541166f01840be",
     "title": "フジ医療器 ZZ-10000 フジ医療器 シートマッサ－ジャー レビュー比較まとめ",
     "name": "フジ医療器 ZZ-10000 フジ医療器 シートマッサ－ジャー レビュー比較まとめ.md",
@@ -2336,11 +2360,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "3f071fc3-189e-45a1-91e0-c53ff7391f97",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s09a0be79d9f1475089c0f2a2276f959c",
     "title": "STEADY ST155 STEADY 3Dエアストレッチシート レビュー比較まとめ",
     "name": "STEADY ST155 STEADY 3Dエアストレッチシート レビュー比較まとめ.md",
@@ -2352,11 +2377,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "93a6ec75-c97b-4973-a668-b366351b897f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s80e0e681ce9248d88dfc09a415e20d06",
     "title": "ドクターエア MS-07 マッサージャー レビュー比較まとめ",
     "name": "ドクターエア MS-07 マッサージャー レビュー比較まとめ.md",
@@ -2368,11 +2394,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "9bd5c72d-c87e-4e6b-ace1-5b1f24380134",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s35b675e45e69436a9b0b9236f44ef1e8",
     "title": "アテックスAtex AX-HC231 アテックスAtex アテックス レビュー比較まとめ",
     "name": "アテックスAtex AX-HC231 アテックスAtex アテックス レビュー比較まとめ.md",
@@ -2384,11 +2411,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "21e879ac-2df3-4474-b3ea-accb9f83aadf",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se4c94dde60104af6871bd010d1763be0",
     "title": "アテックスAtex AX-HCL348rd アテックスAtex アテックス レビュー比較まとめ",
     "name": "アテックスAtex AX-HCL348rd アテックスAtex アテックス レビュー比較まとめ.md",
@@ -2400,11 +2428,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "5c0f0015-ee9b-45b3-ad75-552fda3bff71",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sab808789d47a451ba16a9df5ef7b76d5",
     "title": "アテックスAtex AX-HCL320nv フットマッサージャー レビュー比較まとめ",
     "name": "アテックスAtex AX-HCL320nv フットマッサージャー レビュー比較まとめ.md",
@@ -2416,11 +2445,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "a63d2028-07ac-4ede-b33d-4550df1d4efd",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfdfe92cd5e2a48a985356fee853a1ee2",
     "title": "アテックスAtex AX-HPL368dg マッサージャー レビュー比較まとめ",
     "name": "アテックスAtex AX-HPL368dg マッサージャー レビュー比較まとめ.md",
@@ -2432,11 +2462,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "819ff6cc-3809-4110-a54a-7881c450a1eb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s25cf30257e1248178107124dc7faff66",
     "title": "アイリスオーヤマ ISHT-5000-W 食器洗い乾燥機 レビュー比較まとめ",
     "name": "アイリスオーヤマ ISHT-5000-W 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -2448,11 +2479,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "8fce6db1-ba93-4ce6-a1ff-e5c62d234b60",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4673910949e54f418a0cd158a27b322c",
     "title": "FreeStyle リブレ2 血糖値測定器 レビュー比較まとめ：効率的な健康管理を実現する最新デバイスの全貌をレビュー比較",
     "name": "FreeStyle リブレ2 血糖値測定器 レビュー比較まとめ：効率的な健康管理を実現する最新デバイスの全貌をレビュー比.md",
@@ -2464,11 +2496,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "a31f3396-16b7-4396-ab5a-1f7b27cfcfc1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf48ce10f38354a4893bb9cb34e62bec5",
     "title": "Shark(シャーク)CS850JBLAE EVOPOWER SYSTEM iQ+ レビュー比較まとめ",
     "name": "20260515_0227_【高評価製品検証】ネットで話題のシャークの最強コードレス掃除機「BOOST+」は本物か試したら衝撃の結末に！【Shark.md",
@@ -2480,11 +2513,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "1655788e-a214-4466-a349-4f1ad0e4eda8",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc2d4556a074a442ea6c9faa1b4534432",
     "title": "KWASYO 12層フードドライヤー レビュー比較まとめ：効率的な食品乾燥で食生活を豊かにする方法",
     "name": "KWASYO 12層フードドライヤー レビュー比較まとめ：効率的な食品乾燥で食生活を豊かにする方法.md",
@@ -2496,11 +2530,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "b073e9fe-0efe-4e9f-83eb-be54599e7370",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa48f95ef90a94c2492663fdeea2f79bc",
     "title": "Shark 掃除機 自動ゴミ収集ドック付き スティッククリーナー LC350JWH EVOPOWER SYSTEM NE",
     "name": "Shark 掃除機 自動ゴミ収集ドック付き スティッククリーナー LC350JWH EVOPOWER SYSTEM NE.md",
@@ -2512,11 +2547,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "ef77a07b-123c-4e22-a7d0-8b363a768f83",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se58b715c52d44cdc960c1f71319d6970",
     "title": "Shark シャーク 扇風機 FlexBreeze コードレスサーキュレーター ファン FA222JBKNC レビュー比",
     "name": "Shark シャーク 扇風機 FlexBreeze コードレスサーキュレーター ファン FA222JBKNC レビュー比.md",
@@ -2528,11 +2564,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "fc3b913f-4802-4ad1-aa27-47dae21d3a06",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s850c4cc2691b4526a7592cb363def8e4",
     "title": "Shark シャーク 扇風機 サーキュレーター TF200SJBKNC TURBOBLADE ハイパワー タワーファン",
     "name": "Shark シャーク 扇風機 サーキュレーター TF200SJBKNC TURBOBLADE ハイパワー タワーファン.md",
@@ -2544,11 +2581,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "74cbb87f-2977-46a6-97f5-17d94e91f54b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5d91e5d54f004fbfb447382d36601e3f",
     "title": "Mindoo AquaX Plus 水拭き掃除機 レビュー比較まとめ：効率的なお掃除を実現する新常識",
     "name": "Mindoo AquaX Plus 水拭き掃除機 レビュー比較まとめ：効率的なお掃除を実現する新常識.md",
@@ -2560,11 +2598,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "6cd356db-60b8-401a-8bb4-261089cbf9a1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf12a4d8829e043ab9dc96f4ba8874b28",
     "title": "Reencle Prime 家庭用 生ごみ処理機 ハイブリッド式 レビュー比較まとめ",
     "name": "Reencle Prime 家庭用 生ごみ処理機 ハイブリッド式 レビュー比較まとめ.md",
@@ -2576,11 +2615,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "6e374df0-a6fb-4ecb-95e9-79dc720f5f56",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9356b096d1924a1583acae3f5a827d2e",
     "title": "アイリスオーヤマ シェフドラム 自動調理鍋 レビュー比較まとめ：忙しい毎日を劇的に変える時短家電の真価",
     "name": "アイリスオーヤマ シェフドラム 自動調理鍋 レビュー比較まとめ：忙しい毎日を劇的に変える時短家電の真価.md",
@@ -2592,11 +2632,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   },
   {
     "id": "eedbb4b4-0642-496a-8089-9e06879db7f5",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd6698e44fd7342a2b17d4019656025cb",
     "title": "パナソニック オートクッカー ビストロ 自動調理なべ NF-AC1000-K レビュー比較まとめ",
     "name": "パナソニック オートクッカー ビストロ 自動調理なべ NF-AC1000-K レビュー比較まとめ.md",
@@ -2608,6 +2649,7 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:33.780Z"
   }
 ]
