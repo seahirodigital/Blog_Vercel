@@ -1025,6 +1025,15 @@
       return isActiveNotePostReservation(item);
     }
 
+    function shuffleNotePostTargets(items = []) {
+      const shuffled = [...items];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
     function makeNotePostDraft(date, time, manual = false) {
       return { date, time, manual };
     }
@@ -2728,6 +2737,7 @@
       });
       const [notePostCalendarSelectMode, setNotePostCalendarSelectMode] = useState(false);
       const [selectedNotePostDates, setSelectedNotePostDates] = useState(new Set());
+      const [notePostRandomOrder, setNotePostRandomOrder] = useState(true);
       // note下書きURL（localStorageで永続化: ページリロード後も保持）
       const [noteDraftUrls, setNoteDraftUrls] = useState(() => {
         try { return JSON.parse(localStorage.getItem('sb_noteDraftUrls') || '{}'); }
@@ -3435,8 +3445,6 @@
         return getNextDailyNotePostSlot(occupied.keys, occupied.dateCounts, new Date(), notePostDailySlots);
       }, [activeNotePostSchedules, notePostScheduleDrafts, notePostDailySlots]);
 
-      const suggestedPostDraft = useMemo(() => getNextNotePostDraft(), [getNextNotePostDraft]);
-
       const activateNotePostTarget = useCallback((targetId) => {
         setNotePostActiveTargetId(targetId);
         setNotePostScheduleDrafts(prev => {
@@ -3598,13 +3606,6 @@
         if (patch.time !== undefined) setNotePostTime(patch.time);
       }, [activeNotePostTarget, notePostDailySlots, selectedPostTargets]);
 
-      const applySuggestedPostSlot = useCallback(() => {
-        updateActiveNotePostDraft({
-          date: suggestedPostDraft.date,
-          time: suggestedPostDraft.time,
-        });
-      }, [suggestedPostDraft, updateActiveNotePostDraft]);
-
       const addNotePostTimeShortcut = () => {
         const normalized = normalizeNotePostTime(notePostTime);
         if (!normalized) {
@@ -3640,6 +3641,42 @@
           return rebuildSequentialNotePostDrafts(targetIds, prev, startId, next);
         });
         try { localStorage.setItem('sb_notePostTimeShortcuts', JSON.stringify(next)); } catch { }
+      };
+
+      const removeNotePostTimeShortcut = () => {
+        const normalized = normalizeNotePostTime(activeNotePostDraft?.time || notePostTime);
+        if (!normalized) {
+          showToast('削除する時間を選択してください', 'error');
+          return;
+        }
+        if (DEFAULT_NOTE_POST_TIME_SHORTCUTS.includes(normalized)) {
+          showToast(`${formatShortcutTime(normalized)} は既定時間のため削除できません`, 'info');
+          return;
+        }
+        if (!notePostTimeShortcuts.includes(normalized)) {
+          showToast(`${formatShortcutTime(normalized)} は保存済みの時間枠ではありません`, 'info');
+          return;
+        }
+
+        const next = mergeNotePostTimeShortcuts(notePostTimeShortcuts.filter(time => time !== normalized));
+        const fallbackTime = next.find(time => time > normalized) || next[0] || DEFAULT_NOTE_POST_TIME_SHORTCUTS[0];
+        setNotePostTimeShortcuts(next);
+        setNotePostTime(fallbackTime);
+        setNotePostScheduleDrafts(prev => {
+          const targetIds = selectedPostTargets.map(target => target.id);
+          const startId = activeNotePostTarget?.id || targetIds[0];
+          const updated = { ...(prev || {}) };
+          if (activeNotePostTarget) {
+            updated[activeNotePostTarget.id] = {
+              ...(updated[activeNotePostTarget.id] || {}),
+              time: fallbackTime,
+              manual: true,
+            };
+          }
+          return rebuildSequentialNotePostDrafts(targetIds, updated, startId, next);
+        });
+        try { localStorage.setItem('sb_notePostTimeShortcuts', JSON.stringify(next)); } catch { }
+        showToast(`${formatShortcutTime(normalized)} を時間枠から削除しました`, 'success');
       };
 
       const resetNotePostModal = useCallback(() => {
@@ -3694,31 +3731,36 @@
 
         let publishAt = '';
         let scheduleItems = [];
+        let postTargets = targets;
         if (mode === 'schedule') {
           const existingOccupied = collectNotePostOccupiedSlots(activeNotePostSchedules, {});
           const submitDateCounts = new Map(existingOccupied.dateCounts);
-          for (const target of targets) {
-            const draft = notePostScheduleDrafts[target.id];
+          const scheduleDrafts = targets.map(target => notePostScheduleDrafts[target.id]);
+          postTargets = notePostRandomOrder && targets.length > 1 ? shuffleNotePostTargets(targets) : targets;
+          for (let i = 0; i < postTargets.length; i++) {
+            const slotTarget = targets[i];
+            const target = postTargets[i];
+            const draft = scheduleDrafts[i];
             const normalizedTime = normalizeNotePostTime(draft?.time);
             if (!draft?.date || !normalizedTime) {
-              setNotePostActiveTargetId(target.id);
-              showToast(`「${target.title}」の予約日時を確認してください`, 'error');
+              setNotePostActiveTargetId(slotTarget.id);
+              showToast(`「${slotTarget.title}」の予約日時を確認してください`, 'error');
               return;
             }
             const localDate = new Date(`${draft.date}T${normalizedTime}:00`);
             if (Number.isNaN(localDate.getTime())) {
-              setNotePostActiveTargetId(target.id);
-              showToast(`「${target.title}」の予約日時を確認してください`, 'error');
+              setNotePostActiveTargetId(slotTarget.id);
+              showToast(`「${slotTarget.title}」の予約日時を確認してください`, 'error');
               return;
             }
             if (localDate.getTime() <= Date.now() + 60_000) {
-              setNotePostActiveTargetId(target.id);
-              showToast(`「${target.title}」の予約日時は現在時刻より後にしてください`, 'error');
+              setNotePostActiveTargetId(slotTarget.id);
+              showToast(`「${slotTarget.title}」の予約日時は現在時刻より後にしてください`, 'error');
               return;
             }
             const nextDateCount = (submitDateCounts.get(draft.date) || 0) + 1;
             if (nextDateCount > notePostDailySlots.length) {
-              setNotePostActiveTargetId(target.id);
+              setNotePostActiveTargetId(slotTarget.id);
               showToast(`${draft.date} は1日${notePostDailySlots.length}件までです。時間枠を追加するか別の日にしてください`, 'error');
               return;
             }
@@ -3736,11 +3778,11 @@
 
         setNotePostRunning(true);
         try {
-          await triggerNotePost(targets.map(target => target.id), {
+          await triggerNotePost(postTargets.map(target => target.id), {
             mode,
             publishAt,
             scheduleItems,
-            articles: targets,
+            articles: postTargets,
           });
           if (mode === 'schedule') {
             showToast(`${targets.length}件のnote公開予約を登録しました`, 'success');
@@ -4402,14 +4444,27 @@
                             >
                               ＋
                             </button>
+                            <button
+                              type="button"
+                              onClick={removeNotePostTimeShortcut}
+                              className="flex h-6 w-6 items-center justify-center rounded-full border border-rose-200 bg-rose-50 text-xs font-bold text-rose-500 transition-colors hover:bg-rose-100"
+                              title="選択中の手動時間を削除"
+                            >
+                              -
+                            </button>
                           </div>
                         </div>
                         <button
                           type="button"
-                          onClick={applySuggestedPostSlot}
-                          className="w-full rounded-lg border border-purple-200 bg-purple-50 px-3 py-2 text-left text-xs font-bold text-[#7C4DFF] transition-colors hover:bg-purple-100"
+                          onClick={() => setNotePostRandomOrder(prev => !prev)}
+                          role="switch"
+                          aria-checked={notePostRandomOrder}
+                          className="flex w-full items-center justify-between overflow-hidden rounded-lg border border-purple-100 bg-purple-50 px-3 py-2 text-xs font-bold text-[#7C4DFF] transition-colors hover:bg-purple-100"
                         >
-                          次の予約枠をこの記事へ反映: {suggestedPostDraft.date} {formatShortcutTime(suggestedPostDraft.time)}
+                          <span className="text-xs">ランダム投稿</span>
+                          <span className={`relative h-6 w-11 rounded-full transition-colors ${notePostRandomOrder ? 'bg-[#7C4DFF]' : 'bg-slate-300'}`}>
+                            <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow-sm transition-transform ${notePostRandomOrder ? 'translate-x-5' : 'translate-x-0.5'}`} />
+                          </span>
                         </button>
                       </div>
                     )}
@@ -4456,7 +4511,7 @@
                           type="button"
                           onClick={handleCancelAllNotePostSchedules}
                           disabled={notePostRunning || allCancellableNotePostSchedules.length === 0}
-                          className="rounded-lg border border-rose-200 px-3 py-1.5 text-xs font-bold text-rose-500 hover:bg-rose-50 disabled:border-slate-200 disabled:text-slate-300 disabled:hover:bg-transparent"
+                          className={`rounded-lg border border-rose-200 px-3 py-1.5 text-xs font-bold text-rose-500 hover:bg-rose-50 disabled:border-slate-200 disabled:text-slate-300 disabled:hover:bg-transparent ${notePostCalendarSelectMode ? 'hidden' : ''}`}
                           title="現在予約されている投稿をすべて削除"
                         >
                           予約を全て削除
