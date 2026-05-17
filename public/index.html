@@ -3704,10 +3704,22 @@
           showToast('記事を選択してください', 'error');
           return;
         }
-        const firstDraft = getNextNotePostDraft({}, knownIds[0]);
-        const initialDrafts = { [knownIds[0]]: firstDraft };
-        setNotePostTargetIds(knownIds);
-        setNotePostActiveTargetId(knownIds[0]);
+        const isScheduleMode = (options.mode || 'now') === 'schedule';
+        const availableIds = isScheduleMode
+          ? knownIds.filter(id => !scheduledPostIds.has(String(id)))
+          : knownIds;
+        const excludedCount = knownIds.length - availableIds.length;
+        if (excludedCount > 0) {
+          showToast(`${excludedCount}件は既に予約済みのため対象から外しました`, 'info');
+        }
+        if (availableIds.length === 0) {
+          showToast('選択した記事はすべて予約済みです', 'info');
+          return;
+        }
+        const firstDraft = getNextNotePostDraft({}, availableIds[0]);
+        const initialDrafts = { [availableIds[0]]: firstDraft };
+        setNotePostTargetIds(availableIds);
+        setNotePostActiveTargetId(availableIds[0]);
         setNotePostScheduleDrafts(initialDrafts);
         if (firstDraft) {
           setNotePostSelectedDate(firstDraft.date);
@@ -4459,11 +4471,11 @@
                           onClick={() => setNotePostRandomOrder(prev => !prev)}
                           role="switch"
                           aria-checked={notePostRandomOrder}
-                          className="flex w-full items-center justify-between overflow-hidden rounded-lg border border-purple-100 bg-purple-50 px-3 py-2 text-xs font-bold text-[#7C4DFF] transition-colors hover:bg-purple-100"
+                          className="flex w-full items-center justify-between rounded-lg border border-purple-100 bg-purple-50 px-3 py-2 text-xs font-bold text-[#7C4DFF] transition-colors hover:bg-purple-100"
                         >
                           <span className="text-xs">ランダム投稿</span>
-                          <span className={`relative h-6 w-11 rounded-full transition-colors ${notePostRandomOrder ? 'bg-[#7C4DFF]' : 'bg-slate-300'}`}>
-                            <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow-sm transition-transform ${notePostRandomOrder ? 'translate-x-5' : 'translate-x-0.5'}`} />
+                          <span className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${notePostRandomOrder ? 'bg-[#7C4DFF]' : 'bg-slate-300'}`}>
+                            <span className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow-sm transition-transform ${notePostRandomOrder ? 'translate-x-5' : 'translate-x-0'}`} />
                           </span>
                         </button>
                       </div>
