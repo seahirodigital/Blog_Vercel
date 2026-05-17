@@ -194,6 +194,10 @@ function markSchedulesQueued(schedules, ids, source, now = new Date()) {
   });
 }
 
+function isCancellableSchedule(item) {
+  return item && (item.status === 'scheduled' || item.status === 'queued');
+}
+
 async function githubFetch(repo, token, path, options = {}) {
   return await fetch(`${GITHUB_API}/repos/${repo}${path}`, {
     ...options,
@@ -400,15 +404,41 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'DELETE') {
-      const scheduleId = firstString(req.body?.scheduleId || req.query?.scheduleId, '');
-      if (!scheduleId) return res.status(400).json({ error: 'scheduleId は必須です' });
+      const bodyIds = Array.isArray(req.body?.scheduleIds) ? req.body.scheduleIds : [];
+      const queryIds = Array.isArray(req.query?.scheduleIds)
+        ? req.query.scheduleIds
+        : firstString(req.query?.scheduleIds, '').split(',');
+      const scheduleIds = [
+        firstString(req.body?.scheduleId || req.query?.scheduleId, ''),
+        ...bodyIds,
+        ...queryIds,
+      ].map(id => String(id || '').trim()).filter(Boolean);
+      const cancelAll = Boolean(req.body?.cancelAll || req.query?.cancelAll === 'true');
       const schedules = await loadSchedules(repo, githubToken);
-      const next = schedules.map((item) => item.id === scheduleId
-        ? { ...item, status: 'cancelled', cancelledAt: new Date().toISOString() }
-        : item);
+      const targetIds = new Set(cancelAll
+        ? schedules.filter(isCancellableSchedule).map(item => item.id)
+        : scheduleIds);
+
+      if (targetIds.size === 0) {
+        return res.status(400).json({ error: 'scheduleId は必須です' });
+      }
+
+      const cancelledAt = new Date().toISOString();
+      const cancelledIds = [];
+      const next = schedules.map((item) => {
+        if (!item || !targetIds.has(item.id) || !isCancellableSchedule(item)) return item;
+        cancelledIds.push(item.id);
+        return { ...item, status: 'cancelled', cancelledAt };
+      });
       const saved = await saveSchedules(repo, githubToken, next);
       const reservationWorkflow = await syncReservationWorkflow(repo, githubToken, saved);
-      return res.status(200).json({ success: true, schedules: saved, reservationWorkflow });
+      return res.status(200).json({
+        success: true,
+        schedules: saved,
+        cancelledIds,
+        cancelledCount: cancelledIds.length,
+        reservationWorkflow,
+      });
     }
 
     if (req.method !== 'POST') {
