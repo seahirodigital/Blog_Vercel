@@ -1702,7 +1702,7 @@
   },
   {
     "id": "94eff276-7948-4227-92ae-456920c79d53",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa6fe59ff5d5e49bdb1138759f6b5d42a",
     "title": "SIXPAD 88-SIXPAD マッサージャー レビュー比較まとめ",
     "name": "SIXPAD 88-SIXPAD マッサージャー レビュー比較まとめ.md",
@@ -1714,7 +1714,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:51:40.503Z"
   },
   {
     "id": "c43fd9c9-b6c1-4c27-8dda-30d9808a928a",
