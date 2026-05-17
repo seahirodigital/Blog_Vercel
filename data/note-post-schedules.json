@@ -1568,7 +1568,7 @@
   },
   {
     "id": "a2772c6f-82d0-4ce0-9089-956419effc21",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se58b715c52d44cdc960c1f71319d6970",
     "title": "Shark(シャーク) FA222JBKNC FlexBreeze レビュー比較まとめ",
     "name": "Shark シャーク 扇風機 FlexBreeze コードレスサーキュレーター ファン FA222JBKNC レビュー比.md",
@@ -1580,7 +1580,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:16:44.267Z"
   },
   {
     "id": "8d6e26da-0070-46ec-a220-5bcec22050c6",
@@ -1601,7 +1602,7 @@
   },
   {
     "id": "89afcf62-ad94-424b-8201-3576b1550019",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s850c4cc2691b4526a7592cb363def8e4",
     "title": "Shark シャーク 扇風機 サーキュレーター TF200SJBKNC TURBOBLADE ハイパワー タワーファン",
     "name": "Shark シャーク 扇風機 サーキュレーター TF200SJBKNC TURBOBLADE ハイパワー タワーファン.md",
@@ -1613,11 +1614,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:16:44.267Z"
   },
   {
     "id": "c43fd9c9-b6c1-4c27-8dda-30d9808a928a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5d91e5d54f004fbfb447382d36601e3f",
     "title": "Mindoo AquaX Plus 水拭き掃除機 レビュー比較まとめ：効率的なお掃除を実現する新常識",
     "name": "Mindoo AquaX Plus 水拭き掃除機 レビュー比較まとめ：効率的なお掃除を実現する新常識.md",
@@ -1629,7 +1631,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:16:44.267Z"
   },
   {
     "id": "65b95e94-6db9-4fdb-9147-8729b69d8281",
