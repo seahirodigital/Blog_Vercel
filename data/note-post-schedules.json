@@ -1567,7 +1567,7 @@
   },
   {
     "id": "289a5862-bcd5-4639-9f38-6b5088061bf5",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s14f979094e014b31a0425dc9bcc022ff",
     "title": "THRIVEスライヴ MD-022 マッサージャー レビュー比較まとめ",
     "name": "THRIVEスライヴ MD-022 マッサージャー レビュー比較まとめ.md",
@@ -1579,7 +1579,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T07:17:01.889Z"
   },
   {
     "id": "0674ac7d-01c7-4503-a412-8f0bd89d641d",
