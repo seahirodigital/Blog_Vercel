@@ -1634,7 +1634,7 @@
   },
   {
     "id": "c31c3b6e-2ceb-4fb6-9df4-005f9f79b387",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd2404950a9604add92d9666ff2e3bbbb",
     "title": "NIPLUX B9 マッサージャー レビュー比較まとめ",
     "name": "NIPLUX B9 マッサージャー レビュー比較まとめ.md",
@@ -1646,7 +1646,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:59:16.457Z"
   },
   {
     "id": "8d6e26da-0070-46ec-a220-5bcec22050c6",
@@ -1701,7 +1702,7 @@
   },
   {
     "id": "1dec8041-fb29-462b-868a-6dc0dbd8c67f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd958abfdf0ee4f20b7d48ac40cb07162",
     "title": "WaJiu B8 マッサージャー レビュー比較まとめ",
     "name": "WaJiu B8 マッサージャー レビュー比較まとめ.md",
@@ -1713,7 +1714,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:59:16.457Z"
   },
   {
     "id": "badb369b-dc33-4a0b-81f6-0e052ebaa73c",
@@ -1751,7 +1753,7 @@
   },
   {
     "id": "0a32204f-31b0-471f-ad20-03ec66170cde",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s14f979094e014b31a0425dc9bcc022ff",
     "title": "THRIVEスライヴ MD-022 マッサージャー レビュー比較まとめ",
     "name": "THRIVEスライヴ MD-022 マッサージャー レビュー比較まとめ.md",
@@ -1763,7 +1765,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:59:16.457Z"
   },
   {
     "id": "c43fd9c9-b6c1-4c27-8dda-30d9808a928a",
@@ -1818,7 +1821,7 @@
   },
   {
     "id": "4a9d5fc0-a1ef-427c-a39d-043f36d63bb7",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa6fe59ff5d5e49bdb1138759f6b5d42a",
     "title": "SIXPAD 88-SIXPAD マッサージャー レビュー比較まとめ",
     "name": "SIXPAD 88-SIXPAD マッサージャー レビュー比較まとめ.md",
@@ -1830,7 +1833,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:59:16.457Z"
   },
   {
     "id": "65b95e94-6db9-4fdb-9147-8729b69d8281",
@@ -1919,7 +1923,7 @@
   },
   {
     "id": "100b11b4-0e0d-45e8-87d8-4a565cfcd13c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7abc5325f9d942138200c0b19c7acdf9",
     "title": "InnAIO T10 音声翻訳機 レビュー比較まとめ",
     "name": "InnAIO T10 音声翻訳機 レビュー比較まとめ.md",
@@ -1931,7 +1935,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:59:16.457Z"
   },
   {
     "id": "298df4b5-c007-4559-a399-6b76e1e6e229",
@@ -1986,7 +1991,7 @@
   },
   {
     "id": "88bbd9c7-84c1-465e-92d4-ce701a4f64fa",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s97584f9e68944df48f28f7be31d5bbc7",
     "title": "iflytek A8 iflytek デュアルスクリーン レビュー比較まとめ",
     "name": "iflytek A8 iflytek デュアルスクリーン レビュー比較まとめ.md",
@@ -1998,7 +2003,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:59:16.457Z"
   },
   {
     "id": "251b84e8-e7d8-45a0-8544-88e92f2f8f20",
@@ -2019,7 +2025,7 @@
   },
   {
     "id": "e55f8f73-8c94-4379-9f6f-c2bab7e28b52",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0e601a3866124feaa2d00743d2abc08c",
     "title": "パナソニックPanasonic EW-RA192-H フットマッサージャー レビュー比較まとめ",
     "name": "パナソニックPanasonic EW-RA192-H フットマッサージャー レビュー比較まとめ.md",
@@ -2031,7 +2037,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:59:16.457Z"
   },
   {
     "id": "443630d9-8ede-46c8-985c-7cbc6c01e257",
