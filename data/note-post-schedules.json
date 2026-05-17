@@ -1667,7 +1667,7 @@
   },
   {
     "id": "53c24821-265c-4e3d-be93-d82354cf11a5",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf12a4d8829e043ab9dc96f4ba8874b28",
     "title": "Reencle Prime 家庭用 生ごみ処理機 ハイブリッド式 レビュー比較まとめ",
     "name": "Reencle Prime 家庭用 生ごみ処理機 ハイブリッド式 レビュー比較まとめ.md",
@@ -1679,7 +1679,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:16:35.712Z"
   },
   {
     "id": "298df4b5-c007-4559-a399-6b76e1e6e229",
@@ -1700,7 +1701,7 @@
   },
   {
     "id": "34a3ead2-ea9f-4a46-bae0-9f5dc662c101",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9356b096d1924a1583acae3f5a827d2e",
     "title": "アイリスオーヤマ シェフドラム 自動調理鍋 レビュー比較まとめ：忙しい毎日を劇的に変える時短家電の真価",
     "name": "アイリスオーヤマ シェフドラム 自動調理鍋 レビュー比較まとめ：忙しい毎日を劇的に変える時短家電の真価.md",
@@ -1712,7 +1713,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:16:35.712Z"
   },
   {
     "id": "443630d9-8ede-46c8-985c-7cbc6c01e257",
@@ -1733,7 +1735,7 @@
   },
   {
     "id": "20e81cf6-8d6f-4e67-a651-488dbc2f533d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd6698e44fd7342a2b17d4019656025cb",
     "title": "パナソニック オートクッカー ビストロ 自動調理なべ NF-AC1000-K レビュー比較まとめ",
     "name": "パナソニック オートクッカー ビストロ 自動調理なべ NF-AC1000-K レビュー比較まとめ.md",
@@ -1745,7 +1747,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:16:35.712Z"
   },
   {
     "id": "32dedfe9-ce63-4937-936d-d4429bb24991",
