@@ -7,8 +7,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '25 11 17 5 *'
-    - cron: '25 21 17 5 *'
-    - cron: '25 11 18 5 *'
 
 jobs:
   dispatch-reserved-posts:
