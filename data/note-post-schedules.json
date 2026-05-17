@@ -2227,7 +2227,7 @@
   },
   {
     "id": "116c1987-bf80-405e-bab7-7daa2009f71a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s177a6b13402445bb80bca7032a0eb260",
     "title": "THRIVEスライヴ CHD-3810 フットマッサージャー レビュー比較まとめ",
     "name": "THRIVEスライヴ CHD-3810 フットマッサージャー レビュー比較まとめ.md",
@@ -2239,7 +2239,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-17T06:19:29.300Z"
   },
   {
     "id": "3ffa7b8a-5368-4f05-b2c8-e11758ec15b7",
