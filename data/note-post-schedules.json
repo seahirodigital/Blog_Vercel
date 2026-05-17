@@ -1674,7 +1674,7 @@
   },
   {
     "id": "40fb6418-4884-48a4-abcc-511f54f24eb2",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa33a06398b81421897cd47c1436eb67d",
     "title": "コンフィーCOMFEE' 2WAY 食器洗い乾燥機 レビュー比較まとめ",
     "name": "コンフィーCOMFEE' 2WAY 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -1684,8 +1684,8 @@
     "publishAt": "2026-05-17T22:30:00.000Z",
     "createdAt": "2026-05-17T07:13:37.539Z",
     "queuedAt": "2026-05-17T22:39:14.475612+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-17T22:41:36.244274+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5d5459cdb9f2?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
