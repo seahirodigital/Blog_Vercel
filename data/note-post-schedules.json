@@ -1518,7 +1518,7 @@
   },
   {
     "id": "969d9092-f40c-4707-bba9-64fa74483cb0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0e601a3866124feaa2d00743d2abc08c",
     "title": "パナソニックPanasonic EW-RA192-H フットマッサージャー レビュー比較まとめ",
     "name": "パナソニックPanasonic EW-RA192-H フットマッサージャー レビュー比較まとめ.md",
@@ -1527,10 +1527,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-17T08:00:00.000Z",
     "createdAt": "2026-05-17T06:17:32.814Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-17T08:31:27.323787+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "aae7cfe9-25ad-498a-b073-5d3021047d28",
