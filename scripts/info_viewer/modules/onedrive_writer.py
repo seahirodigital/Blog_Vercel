@@ -2,6 +2,7 @@ import base64
 import json
 import os
 import re
+import time
 from datetime import datetime
 from typing import Any, Optional
 from urllib.parse import parse_qs, quote, urlencode, urlparse
@@ -10,6 +11,8 @@ import requests
 
 GRAPH_API_BASE = "https://graph.microsoft.com/v1.0"
 TOKEN_URL = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
+READ_RETRY_DELAYS = (2, 5, 10)
 PRIMARY_BASE_FOLDER = str(
     os.getenv(
         "INFO_VIEWER_ONEDRIVE_FOLDER",
@@ -288,6 +291,30 @@ def _request(method: str, url: str, token: str, **kwargs):
     return requests.request(method, url, headers=headers, timeout=120, **kwargs)
 
 
+def _is_retryable_response(response: requests.Response) -> bool:
+    return response.status_code in RETRYABLE_STATUS_CODES
+
+
+def _request_with_retries(method: str, url: str, token: str, **kwargs):
+    last_error: requests.RequestException | None = None
+    for attempt, wait_seconds in enumerate((0, *READ_RETRY_DELAYS), start=1):
+        if wait_seconds:
+            time.sleep(wait_seconds)
+        try:
+            response = _request(method, url, token, **kwargs)
+            if _is_retryable_response(response) and attempt <= len(READ_RETRY_DELAYS):
+                continue
+            return response
+        except requests.RequestException as error:
+            last_error = error
+            if attempt > len(READ_RETRY_DELAYS):
+                raise
+
+    if last_error:
+        raise last_error
+    raise RuntimeError(f"OneDrive request failed without response: {method} {url}")
+
+
 def _ensure_folder_path(path: str, token: str):
     clean_path = str(path or "").strip("/ ")
     if not clean_path:
@@ -419,7 +446,7 @@ def upload_markdown(
 
 def _list_children(path: str, token: str) -> list[dict[str, Any]]:
     url = f"{GRAPH_API_BASE}/me/drive/root:/{_encode_path(path)}:/children?$top=200"
-    response = _request("GET", url, token)
+    response = _request_with_retries("GET", url, token)
     if response.status_code == 404:
         return []
     response.raise_for_status()
@@ -431,7 +458,7 @@ def _download_item_text(item_id: str, token: str, byte_range: Optional[str] = No
     if byte_range:
         headers["Range"] = byte_range
     url = f"{GRAPH_API_BASE}/me/drive/items/{item_id}/content"
-    response = _request("GET", url, token, headers=headers)
+    response = _request_with_retries("GET", url, token, headers=headers)
     if not response.ok and response.status_code != 206:
         response.raise_for_status()
     return response.text
@@ -453,7 +480,15 @@ def list_saved_articles() -> list[dict[str, Any]]:
                 file_name = file_item.get("name", "")
                 if not file_name.endswith(".md"):
                     continue
-                preview_text = _download_item_text(file_item["id"], token, byte_range="bytes=0-8191")
+                try:
+                    preview_text = _download_item_text(file_item["id"], token, byte_range="bytes=0-8191")
+                except requests.RequestException as error:
+                    status_code = error.response.status_code if getattr(error, "response", None) is not None else "network"
+                    print(
+                        "   ⚠️ OneDrive記事プレビュー取得をスキップしました: "
+                        f"{base_folder}/{folder_name}/{file_name} ({status_code})"
+                    )
+                    continue
                 metadata, _ = parse_frontmatter(preview_text)
                 youtube_url_normalized = normalize_youtube_url(metadata.get("video_url", ""))
                 dedupe_key = youtube_url_normalized or file_item.get("id", "") or f"{folder_name}/{file_name}"
