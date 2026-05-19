@@ -2286,7 +2286,7 @@
   },
   {
     "id": "cffb12e9-49cc-424c-a298-a07fcb5df05e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa6a54ba760cf4e2684df607191fcccab",
     "title": "AIRMORN one 吸着式衣類スチーマー レビュー比較まとめ",
     "name": "AIRMORN 5000Pa AIRMORN one 吸着式衣類スチーマー レビュー比較まとめ.md",
@@ -2298,7 +2298,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-19T05:45:22.347Z"
   },
   {
     "id": "251b84e8-e7d8-45a0-8544-88e92f2f8f20",
