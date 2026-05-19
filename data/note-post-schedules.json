@@ -2531,7 +2531,7 @@
   },
   {
     "id": "01639914-d9ea-4084-aafa-96213aa18f46",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s5e4dc0bc795f416da4c7a9e74e7afe41",
     "title": "シャープ CV-S71-W レビュー比較まとめ",
     "name": "シャープ CV-S71-W シャープ SHARP レビュー比較まとめ.md",
@@ -2541,8 +2541,8 @@
     "publishAt": "2026-05-19T12:00:00.000Z",
     "createdAt": "2026-05-19T05:43:07.514Z",
     "queuedAt": "2026-05-19T11:25:03.483127+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-19T12:02:29.416938+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n205ac51082c0?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
