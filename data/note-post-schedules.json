@@ -2773,7 +2773,7 @@
   },
   {
     "id": "b5218989-9831-4f6a-a3d0-9ea3fc71471b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s22e99cfad7a249ad9b90b974061568f1",
     "title": "MYTREX MT-MDN24B マッサージャー レビュー比較まとめ",
     "name": "MYTREX MT-MDN24B マッサージャー レビュー比較まとめ.md",
@@ -2782,10 +2782,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-20T00:00:00.000Z",
     "createdAt": "2026-05-19T05:37:58.079Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-19T23:25:52.031367+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8817235a-5b9e-4366-9c93-05f8b0185582",
