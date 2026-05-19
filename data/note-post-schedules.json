@@ -2584,7 +2584,7 @@
   },
   {
     "id": "155d107f-225a-47af-b15e-e4e46bfdb167",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa6a54ba760cf4e2684df607191fcccab",
     "title": "AIRMORN one 吸着式衣類スチーマー レビュー比較まとめ",
     "name": "AIRMORN 5000Pa AIRMORN one 吸着式衣類スチーマー レビュー比較まとめ.md",
@@ -2594,8 +2594,8 @@
     "publishAt": "2026-05-19T13:00:00.000Z",
     "createdAt": "2026-05-19T05:45:55.279Z",
     "queuedAt": "2026-05-19T12:25:36.516864+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-19T13:02:19.949367+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n8d7c610f48a4?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
