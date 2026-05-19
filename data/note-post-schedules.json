@@ -2393,7 +2393,7 @@
   },
   {
     "id": "7aebcf1c-365a-4f6b-b6ad-f78df02b1423",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se54dc06e4a634b09a6928887d0cc8b02",
     "title": "uwant 18000Pa リンサークリーナー レビュー比較まとめ",
     "name": "uwant 18000Pa uwant uwantリンサークリーナー レビュー比較まとめ.md",
@@ -2402,10 +2402,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-19T10:00:00.000Z",
     "createdAt": "2026-05-19T05:43:07.514Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-19T09:25:29.682300+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b1593dec-ff27-4912-8d25-71514c358e51",
