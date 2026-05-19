@@ -2566,7 +2566,7 @@
   },
   {
     "id": "735b3ccf-316c-4b33-9ce0-08b2be2c2965",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1ab0c0f4ca3b40a59f6ae58dd85b9b63",
     "title": "リファフィンガーアイロン ST6 レビュー比較まとめ",
     "name": "リファ ST6 リファ ReFa レビュー比較まとめ.md",
@@ -2575,14 +2575,16 @@
     "noTopImage": false,
     "publishAt": "2026-05-19T13:00:00.000Z",
     "createdAt": "2026-05-19T05:43:07.514Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-19T12:25:36.516864+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "155d107f-225a-47af-b15e-e4e46bfdb167",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa6a54ba760cf4e2684df607191fcccab",
     "title": "AIRMORN one 吸着式衣類スチーマー レビュー比較まとめ",
     "name": "AIRMORN 5000Pa AIRMORN one 吸着式衣類スチーマー レビュー比較まとめ.md",
@@ -2591,10 +2593,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-19T13:00:00.000Z",
     "createdAt": "2026-05-19T05:45:55.279Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-19T12:25:36.516864+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7eecd9d0-5cfe-4a1a-8016-86599547a830",
