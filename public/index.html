@@ -1356,7 +1356,7 @@
     }
 
     // === フォルダツリー コンポーネント ===
-    function FolderTree({ articles, selectedId, onSelect, loading, onDeleteArticle, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, hiddenFolders, onHideFolder, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, onMultiSelect, onRangeSelect, multiSelectedIds, scheduledPostIds = new Set(), scheduledPostMap = new Map(), missedNotePostMap = new Map(), articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder }) {
+    function FolderTree({ articles, selectedId, onSelect, loading, onDeleteArticle, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, hiddenFolders, onHideFolder, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, onMultiSelect, onRangeSelect, multiSelectedIds, scheduledPostIds = new Set(), scheduledPostMap = new Map(), missedNotePostMap = new Map(), articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder, flatMode = false, searchQuery = '', contextArticles = null }) {
       const [openFolders, setOpenFolders] = useState({});
       const [ctxMenu, setCtxMenu] = useState({ visible: false, x: 0, y: 0, article: null });
       const [folderCtxMenu, setFolderCtxMenu] = useState({ visible: false, x: 0, y: 0, path: '' });
@@ -1524,7 +1524,8 @@
       };
 
       const getContextTargetArticles = (article) => {
-        const byId = new Map(articles.map(item => [item.id, item]));
+        const sourceArticles = contextArticles || articles;
+        const byId = new Map(sourceArticles.map(item => [item.id, item]));
         return getContextTargetIds(article).map(id => byId.get(id)).filter(Boolean);
       };
 
@@ -1682,7 +1683,7 @@
                   >
                     <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><path d="M14 2v6h6" />
                   </svg>
-                  {displayName}
+                  {searchQuery ? <HighlightedTitle text={displayName} keyword={searchQuery} /> : displayName}
                 </div>
                 <div className={`text-xs mt-0.5 article-date flex items-center gap-1 ${isActive && !selectMode && !highlighted ? 'text-purple-200' : 'text-slate-400'}`}>
                   <span className="min-w-0 truncate">{date}{scheduledPostLabel ? ` · ${scheduledPostLabel}` : ''}</span>
@@ -1793,31 +1794,40 @@
             className="px-2 pb-2"
             onTouchStart={(e) => { if (swipedId && !e.target.closest('.swipe-row')) setSwipedId(null); }}
           >
-            {/* ルート直下のフォルダを再帰レンダリング */}
-            {rootSubKeys.map(k => renderFolderNode(rootNode.subfolders[k], k, k, 0))}
+            {flatMode ? (
+              <>
+                <div className="px-2 pb-2 text-[11px] font-bold text-slate-400">{articles.length}件</div>
+                {articles.slice(0, visibleArticleLimit).map(a => renderArticle(a))}
+              </>
+            ) : (
+              <>
+                {/* ルート直下のフォルダを再帰レンダリング */}
+                {rootSubKeys.map(k => renderFolderNode(rootNode.subfolders[k], k, k, 0))}
 
-            {/* ルート直下の記事（フォルダなし） */}
-            {rootNode._articles.length > 0 && (
-              <div
-                data-folder-path=""
-                onDragOver={(e) => { e.preventDefault(); setDragOver(''); }}
-                onDragLeave={() => setDragOver(null)}
-                onDrop={(e) => {
-                  e.preventDefault();
-                  setDragOver(null);
-                  const dragged = dragArticleRef.current;
-                  if (!dragged) return;
-                  const targets = Array.isArray(dragged) ? dragged : [dragged];
-                  const toMove = targets.filter(a => a.path !== '');
-                  if (toMove.length === 0) return;
-                  onMoveArticle && onMoveArticle(toMove, '');
-                }}
-                className={touchDragOver === '' ? 'touch-drag-folder-target' : ''}
-                style={{ borderRadius: '6px', outline: dragOver === '' ? '2px dashed #7C4DFF' : undefined, outlineOffset: '-2px' }}
-              >
-                <div className="px-2 py-1 text-xs text-slate-400 font-semibold">その他</div>
-                {rootNode._articles.slice(0, visibleArticleLimit).map(a => renderArticle(a))}
-              </div>
+                {/* ルート直下の記事（フォルダなし） */}
+                {rootNode._articles.length > 0 && (
+                  <div
+                    data-folder-path=""
+                    onDragOver={(e) => { e.preventDefault(); setDragOver(''); }}
+                    onDragLeave={() => setDragOver(null)}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      setDragOver(null);
+                      const dragged = dragArticleRef.current;
+                      if (!dragged) return;
+                      const targets = Array.isArray(dragged) ? dragged : [dragged];
+                      const toMove = targets.filter(a => a.path !== '');
+                      if (toMove.length === 0) return;
+                      onMoveArticle && onMoveArticle(toMove, '');
+                    }}
+                    className={touchDragOver === '' ? 'touch-drag-folder-target' : ''}
+                    style={{ borderRadius: '6px', outline: dragOver === '' ? '2px dashed #7C4DFF' : undefined, outlineOffset: '-2px' }}
+                  >
+                    <div className="px-2 py-1 text-xs text-slate-400 font-semibold">その他</div>
+                    {rootNode._articles.slice(0, visibleArticleLimit).map(a => renderArticle(a))}
+                  </div>
+                )}
+              </>
             )}
           </div>
 
@@ -1952,99 +1962,6 @@
             </div>
           )}
         </>
-      );
-    }
-
-    function SidebarSearchResults({ articles, query, selectedId, onSelect, articleH1Cache, loading }) {
-      const trimmedQuery = String(query || '').trim();
-      const normalizedQuery = normalizeArticleSearchText(trimmedQuery);
-      const results = useMemo(() => {
-        if (!normalizedQuery) return [];
-        return (articles || [])
-          .filter((article) => {
-            const title = getArticleDisplayTitle(article, articleH1Cache);
-            return normalizeArticleSearchText(title).includes(normalizedQuery);
-          })
-          .sort((a, b) => {
-            const aTitle = getArticleDisplayTitle(a, articleH1Cache);
-            const bTitle = getArticleDisplayTitle(b, articleH1Cache);
-            return normalizeArticleSearchText(aTitle).indexOf(normalizedQuery)
-              - normalizeArticleSearchText(bTitle).indexOf(normalizedQuery);
-          });
-      }, [articles, articleH1Cache, normalizedQuery]);
-
-      if (!trimmedQuery) {
-        return (
-          <div className="px-4 py-8 text-center text-xs text-slate-400">
-            検索ワードを入力してください
-          </div>
-        );
-      }
-
-      if (loading) {
-        return (
-          <div className="space-y-2 px-3 py-2">
-            {[1, 2, 3].map(i => <div key={i} className="skeleton h-10 w-full" />)}
-          </div>
-        );
-      }
-
-      if (results.length === 0) {
-        return (
-          <div className="px-4 py-8 text-center text-xs text-slate-400">
-            一致する記事がありません
-          </div>
-        );
-      }
-
-      return (
-        <div className="px-2 pb-2">
-          <div className="px-2 pb-2 text-[11px] font-bold text-slate-400">{results.length}件</div>
-          <div className="space-y-1">
-            {results.map((article) => {
-              const title = getArticleDisplayTitle(article, articleH1Cache);
-              const isActive = article.id === selectedId;
-              const sourceType = getArticleSourceType(article);
-              return (
-                <button
-                  key={article.id}
-                  type="button"
-                  onClick={() => onSelect(article)}
-                  className={`w-full rounded-md px-2 py-2 text-left article-item ${isActive ? 'active' : ''}`}
-                  id={`search-result-${article.id}`}
-                >
-                  <div className={`flex items-start gap-1.5 text-xs font-medium ${isActive ? 'text-white' : 'text-slate-700'}`}>
-                    <svg
-                      className="mt-0.5 flex-shrink-0 opacity-60"
-                      width="11"
-                      height="11"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><path d="M14 2v6h6" />
-                    </svg>
-                    <span className="min-w-0 flex-1 break-words leading-relaxed">
-                      <HighlightedTitle text={title} keyword={trimmedQuery} />
-                    </span>
-                  </div>
-                  <div className={`mt-0.5 flex items-center gap-1 text-xs ${isActive ? 'text-purple-200' : 'text-slate-400'}`}>
-                    <span className="min-w-0 truncate">{article.path || 'その他'}</span>
-                    <span
-                      className="ml-auto flex-shrink-0 rounded px-1.5 py-0.5 text-[10px] font-bold leading-none"
-                      style={sourceType === 'amazon'
-                        ? { background: '#ffedd5', color: '#c2410c' }
-                        : { background: '#f1f5f9', color: '#64748b' }}
-                    >
-                      {sourceType === 'amazon' ? 'AMZN' : 'YT'}
-                    </span>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
       );
     }
 
@@ -2221,6 +2138,25 @@
         return [...paths].sort((a, b) => a.localeCompare(b));
       }, [articles, folderMeta]);
 
+      const sidebarSearchQuery = sidebarSearchText.trim();
+      const normalizedSidebarSearchQuery = normalizeArticleSearchText(sidebarSearchQuery);
+      const sidebarSearchResults = useMemo(() => {
+        if (!normalizedSidebarSearchQuery) return [];
+        return (articles || [])
+          .filter((article) => {
+            const title = getArticleDisplayTitle(article, articleH1Cache);
+            return normalizeArticleSearchText(title).includes(normalizedSidebarSearchQuery);
+          })
+          .sort((a, b) => {
+            const aTitle = getArticleDisplayTitle(a, articleH1Cache);
+            const bTitle = getArticleDisplayTitle(b, articleH1Cache);
+            return normalizeArticleSearchText(aTitle).indexOf(normalizedSidebarSearchQuery)
+              - normalizeArticleSearchText(bTitle).indexOf(normalizedSidebarSearchQuery);
+          });
+      }, [articles, articleH1Cache, normalizedSidebarSearchQuery]);
+      const emptySearchHiddenFolders = useMemo(() => new Set(), []);
+      const emptySearchFolderMeta = useMemo(() => ({}), []);
+
       const openSidebarSearch = useCallback(() => {
         setSidebarSearchOpen(true);
         setTimeout(() => sidebarSearchInputRef.current?.focus(), 50);
@@ -2294,6 +2230,36 @@
           </div>
         </div>
       ) : null;
+
+      const renderSearchResults = (selectArticle) => {
+        if (!sidebarSearchQuery) {
+          return (
+            <div className="px-4 py-8 text-center text-xs text-slate-400">
+              検索ワードを入力してください
+            </div>
+          );
+        }
+        if (sidebarSearchResults.length === 0) {
+          return (
+            <div className="px-4 py-8 text-center text-xs text-slate-400">
+              一致する記事がありません
+            </div>
+          );
+        }
+        return (
+          <FolderTree
+            {...folderTreeProps}
+            articles={sidebarSearchResults}
+            contextArticles={articles}
+            hiddenFolders={emptySearchHiddenFolders}
+            folderMeta={emptySearchFolderMeta}
+            loading={false}
+            onSelect={selectArticle}
+            flatMode
+            searchQuery={sidebarSearchQuery}
+          />
+        );
+      };
 
       // サイドバー下部フッター（＋ボタン + フォルダピッカー）
       const SidebarFooter = () => (
@@ -2605,14 +2571,7 @@
             {renderSearchPanel()}
             <div className="flex-1 overflow-y-auto py-2">
               {sidebarSearchOpen ? (
-                <SidebarSearchResults
-                  articles={articles}
-                  query={sidebarSearchText}
-                  selectedId={selectedId}
-                  onSelect={(a) => { onSelect(a); onMobileClose(); }}
-                  articleH1Cache={articleH1Cache}
-                  loading={false}
-                />
+                renderSearchResults((a) => { onSelect(a); onMobileClose(); })
               ) : (
                 <FolderTree {...folderTreeProps} onSelect={(a) => { onSelect(a); onMobileClose(); }} />
               )}
@@ -2649,14 +2608,7 @@
               {renderSearchPanel()}
               <div className="flex-1 overflow-y-auto py-2">
                 {sidebarSearchOpen ? (
-                  <SidebarSearchResults
-                    articles={articles}
-                    query={sidebarSearchText}
-                    selectedId={selectedId}
-                    onSelect={onSelect}
-                    articleH1Cache={articleH1Cache}
-                    loading={false}
-                  />
+                  renderSearchResults(onSelect)
                 ) : (
                   <FolderTree {...folderTreeProps} onSelect={onSelect} />
                 )}
