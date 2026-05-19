@@ -2375,7 +2375,7 @@
   },
   {
     "id": "9cd362fa-595f-49f1-8540-f291c381ec50",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbda41b42072e4b27a31a0dbf5f070a42",
     "title": "エムケー精工 SM-500W 炊飯器 レビュー比較まとめ",
     "name": "ブランド エムケー精工 SM-500W 炊飯器 レビュー比較まとめ.md",
@@ -2384,10 +2384,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-19T08:30:00.000Z",
     "createdAt": "2026-05-19T05:45:15.380Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-19T07:55:18.875300+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7aebcf1c-365a-4f6b-b6ad-f78df02b1423",
