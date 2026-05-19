@@ -2537,7 +2537,7 @@
   },
   {
     "id": "bf6faac8-485e-429d-9493-4470c75c965f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s20b025b9c42f41b9ad1f9b8036096847",
     "title": "富士通ゼネラル DAS-15R-W レビュー比較まとめ",
     "name": "ブランド 富士通ゼネラル DAS-15R-W ブランド 富士通ゼネラル レビュー比較まとめ.md",
@@ -2549,7 +2549,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-05-19T05:46:06.683Z"
   },
   {
     "id": "735b3ccf-316c-4b33-9ce0-08b2be2c2965",
