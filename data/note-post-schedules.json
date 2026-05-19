@@ -2755,7 +2755,7 @@
   },
   {
     "id": "516b6168-fa82-4614-b141-0c57767ae23e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd477e4deb8fa476c9e40f23f6406fd77",
     "title": "TWINBIRD(ツインバード) SA-D719B ハンディクリーナー レビュー比較まとめ",
     "name": "TWINBIRD(ツインバード) SA-D719B ハンディクリーナー レビュー比較まとめ.md",
@@ -2764,10 +2764,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-19T22:30:00.000Z",
     "createdAt": "2026-05-19T05:37:58.079Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-19T21:55:19.732607+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b5218989-9831-4f6a-a3d0-9ea3fc71471b",
