@@ -1244,6 +1244,49 @@
         .replace(/\.md$/i, '');
     }
 
+    function getArticleDisplayTitle(article, articleH1Cache = {}) {
+      if (!article) return '';
+      return article.h1Title
+        || (articleH1Cache && articleH1Cache[article.id])
+        || getArticleFilenameTitle(article.name);
+    }
+
+    function normalizeArticleSearchText(value) {
+      return String(value || '').toLocaleLowerCase('ja-JP');
+    }
+
+    function countPlainTextMatches(text, keyword) {
+      if (!keyword) return 0;
+      let count = 0;
+      let index = 0;
+      const source = String(text || '');
+      while (index < source.length) {
+        const found = source.indexOf(keyword, index);
+        if (found === -1) break;
+        count++;
+        index = found + keyword.length;
+      }
+      return count;
+    }
+
+    function HighlightedTitle({ text, keyword }) {
+      const title = String(text || '');
+      const query = String(keyword || '').trim();
+      if (!query) return <>{title}</>;
+      const normalizedTitle = normalizeArticleSearchText(title);
+      const normalizedQuery = normalizeArticleSearchText(query);
+      const start = normalizedTitle.indexOf(normalizedQuery);
+      if (start === -1) return <>{title}</>;
+      const end = start + query.length;
+      return (
+        <>
+          {title.slice(0, start)}
+          <span className="rounded bg-purple-100 px-0.5 text-purple-900">{title.slice(start, end)}</span>
+          {title.slice(end)}
+        </>
+      );
+    }
+
     // ノード以下の全記事数を再帰的に合計
     function countArticles(node) {
       const knownCount = node._articles.length +
@@ -1313,7 +1356,7 @@
     }
 
     // === フォルダツリー コンポーネント ===
-    function FolderTree({ articles, selectedId, onSelect, loading, onDeleteArticle, onDuplicateArticle, onMoveArticle, onSchedulePost, hiddenFolders, onHideFolder, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, onMultiSelect, onRangeSelect, multiSelectedIds, scheduledPostIds = new Set(), scheduledPostMap = new Map(), missedNotePostMap = new Map(), articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder }) {
+    function FolderTree({ articles, selectedId, onSelect, loading, onDeleteArticle, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, hiddenFolders, onHideFolder, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, onMultiSelect, onRangeSelect, multiSelectedIds, scheduledPostIds = new Set(), scheduledPostMap = new Map(), missedNotePostMap = new Map(), articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder }) {
       const [openFolders, setOpenFolders] = useState({});
       const [ctxMenu, setCtxMenu] = useState({ visible: false, x: 0, y: 0, article: null });
       const [folderCtxMenu, setFolderCtxMenu] = useState({ visible: false, x: 0, y: 0, path: '' });
@@ -1463,7 +1506,7 @@
       const handleContextMenu = (e, article) => {
         e.preventDefault();
         e.stopPropagation();
-        const MENU_W = 190, MENU_H = 220;
+        const MENU_W = 190, MENU_H = 270;
         const x = Math.min(e.clientX, window.innerWidth - MENU_W - 8);
         const y = Math.min(e.clientY, window.innerHeight - MENU_H - 8);
         setCtxMenu({ visible: true, x, y, article });
@@ -1524,9 +1567,7 @@
         const isMultiSelected = multiSelectedIds && multiSelectedIds.has(article.id);
         const highlighted = isChecked || isMultiSelected;
         // 優先順位: APIのh1Title > ローカルH1キャッシュ > ファイル名フォールバック
-        const displayName = article.h1Title
-          || (articleH1Cache && articleH1Cache[article.id])
-          || getArticleFilenameTitle(article.name);
+        const displayName = getArticleDisplayTitle(article, articleH1Cache);
         const date = new Date(article.lastModified).toLocaleDateString('ja-JP', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
         const sourceType = getArticleSourceType(article);
         const baseSourceLabel = sourceType === 'amazon' ? 'AMZN' : 'YT';
@@ -1812,6 +1853,19 @@
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01" /></svg>
                 予約投稿{getContextTargetIds(ctxMenu.article).length > 1 ? `（${getContextTargetIds(ctxMenu.article).length}件）` : ''}
               </button>
+              {getContextTargetIds(ctxMenu.article).length > 1 && (
+                <button
+                  onClick={() => {
+                    onBulkReplace && onBulkReplace(getContextTargetIds(ctxMenu.article));
+                    setCtxMenu(m => ({ ...m, visible: false }));
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.background = '#f5f3ff'} onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '9px 14px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '13px', color: '#7C4DFF', textAlign: 'left', fontWeight: 600 }}
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3"><path d="M4 7h16M4 12h10M4 17h13" /><path d="M20 14l-3 3 3 3" /></svg>
+                  一括置換（{getContextTargetIds(ctxMenu.article).length}件）
+                </button>
+              )}
               <div style={{ height: '1px', background: '#e2e8f0', margin: '4px 0' }} />
               <button
                 onClick={() => { onDuplicateArticle(getContextTargetArticles(ctxMenu.article)); setCtxMenu(m => ({ ...m, visible: false })); }}
@@ -1901,8 +1955,101 @@
       );
     }
 
+    function SidebarSearchResults({ articles, query, selectedId, onSelect, articleH1Cache, loading }) {
+      const trimmedQuery = String(query || '').trim();
+      const normalizedQuery = normalizeArticleSearchText(trimmedQuery);
+      const results = useMemo(() => {
+        if (!normalizedQuery) return [];
+        return (articles || [])
+          .filter((article) => {
+            const title = getArticleDisplayTitle(article, articleH1Cache);
+            return normalizeArticleSearchText(title).includes(normalizedQuery);
+          })
+          .sort((a, b) => {
+            const aTitle = getArticleDisplayTitle(a, articleH1Cache);
+            const bTitle = getArticleDisplayTitle(b, articleH1Cache);
+            return normalizeArticleSearchText(aTitle).indexOf(normalizedQuery)
+              - normalizeArticleSearchText(bTitle).indexOf(normalizedQuery);
+          });
+      }, [articles, articleH1Cache, normalizedQuery]);
+
+      if (!trimmedQuery) {
+        return (
+          <div className="px-4 py-8 text-center text-xs text-slate-400">
+            検索ワードを入力してください
+          </div>
+        );
+      }
+
+      if (loading) {
+        return (
+          <div className="space-y-2 px-3 py-2">
+            {[1, 2, 3].map(i => <div key={i} className="skeleton h-10 w-full" />)}
+          </div>
+        );
+      }
+
+      if (results.length === 0) {
+        return (
+          <div className="px-4 py-8 text-center text-xs text-slate-400">
+            一致する記事がありません
+          </div>
+        );
+      }
+
+      return (
+        <div className="px-2 pb-2">
+          <div className="px-2 pb-2 text-[11px] font-bold text-slate-400">{results.length}件</div>
+          <div className="space-y-1">
+            {results.map((article) => {
+              const title = getArticleDisplayTitle(article, articleH1Cache);
+              const isActive = article.id === selectedId;
+              const sourceType = getArticleSourceType(article);
+              return (
+                <button
+                  key={article.id}
+                  type="button"
+                  onClick={() => onSelect(article)}
+                  className={`w-full rounded-md px-2 py-2 text-left article-item ${isActive ? 'active' : ''}`}
+                  id={`search-result-${article.id}`}
+                >
+                  <div className={`flex items-start gap-1.5 text-xs font-medium ${isActive ? 'text-white' : 'text-slate-700'}`}>
+                    <svg
+                      className="mt-0.5 flex-shrink-0 opacity-60"
+                      width="11"
+                      height="11"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><path d="M14 2v6h6" />
+                    </svg>
+                    <span className="min-w-0 flex-1 break-words leading-relaxed">
+                      <HighlightedTitle text={title} keyword={trimmedQuery} />
+                    </span>
+                  </div>
+                  <div className={`mt-0.5 flex items-center gap-1 text-xs ${isActive ? 'text-purple-200' : 'text-slate-400'}`}>
+                    <span className="min-w-0 truncate">{article.path || 'その他'}</span>
+                    <span
+                      className="ml-auto flex-shrink-0 rounded px-1.5 py-0.5 text-[10px] font-bold leading-none"
+                      style={sourceType === 'amazon'
+                        ? { background: '#ffedd5', color: '#c2410c' }
+                        : { background: '#f1f5f9', color: '#64748b' }}
+                    >
+                      {sourceType === 'amazon' ? 'AMZN' : 'YT'}
+                    </span>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      );
+    }
+
     // === サイドバー コンポーネント ===
-    function Sidebar({ articles, selectedId, onSelect, onNewArticle, onAmazonCreate, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle, mobileSidebarOpen, onMobileClose, onDeleteArticle, onDuplicateArticle, onMoveArticle, onSchedulePost, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, multiSelectedIds, onMultiSelect, onRangeSelect, scheduledPostIds = new Set(), scheduledPostMap = new Map(), missedNotePostMap = new Map(), setAffModalOpen, articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder, externalFolderUrls = [], setExternalFolderUrls, onRefreshArticles }) {
+    function Sidebar({ articles, selectedId, onSelect, onNewArticle, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle, mobileSidebarOpen, onMobileClose, onDeleteArticle, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onLoadAllArticlesForSearch, searchLoading, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, multiSelectedIds, onMultiSelect, onRangeSelect, scheduledPostIds = new Set(), scheduledPostMap = new Map(), missedNotePostMap = new Map(), setAffModalOpen, articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder, externalFolderUrls = [], setExternalFolderUrls, onRefreshArticles }) {
       // 非表示フォルダ管理（localStorageで永続化）
       const [hiddenFolders, setHiddenFolders] = useState(() => {
         try { return new Set(JSON.parse(localStorage.getItem('sb_hiddenFolders') || '[]')); }
@@ -1910,6 +2057,9 @@
       });
       const [showFolderPicker, setShowFolderPicker] = useState(false);
       const [showLinkPicker, setShowLinkPicker] = useState(false);
+      const [sidebarSearchOpen, setSidebarSearchOpen] = useState(false);
+      const [sidebarSearchText, setSidebarSearchText] = useState('');
+      const sidebarSearchInputRef = useRef(null);
       // リンク集のドラッグ＆ドロップ（HTML5対応）用ステート
       const [customLinks, setCustomLinks] = useState(() => {
         try {
@@ -2071,6 +2221,17 @@
         return [...paths].sort((a, b) => a.localeCompare(b));
       }, [articles, folderMeta]);
 
+      const openSidebarSearch = useCallback(() => {
+        setSidebarSearchOpen(true);
+        if (onLoadAllArticlesForSearch) onLoadAllArticlesForSearch();
+        setTimeout(() => sidebarSearchInputRef.current?.focus(), 50);
+      }, [onLoadAllArticlesForSearch]);
+
+      const closeSidebarSearch = useCallback(() => {
+        setSidebarSearchOpen(false);
+        setSidebarSearchText('');
+      }, []);
+
       const toggleFolderVisibility = useCallback((folderPath) => {
         setHiddenFolders(prev => {
           const next = new Set(prev);
@@ -2094,7 +2255,7 @@
 
       const folderTreeProps = {
         articles, selectedId, loading,
-        onDeleteArticle, onDuplicateArticle, onMoveArticle, onSchedulePost,
+        onDeleteArticle, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace,
         hiddenFolders, onHideFolder: toggleFolderVisibility,
         selectMode, selectedIds, onToggleSelect, onEnterSelectMode,
         multiSelectedIds, onMultiSelect, onRangeSelect,
@@ -2104,6 +2265,41 @@
         articleH1Cache,
         folderMeta, folderLoading, onLoadFolder,
       };
+
+      const SearchPanel = () => sidebarSearchOpen ? (
+        <div className="border-b border-slate-100 bg-white px-2 py-2">
+          <div className="flex items-center gap-1 rounded-lg border border-slate-200 bg-slate-50 px-2 py-1.5 shadow-sm">
+            <svg className="flex-shrink-0 text-slate-400" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
+            </svg>
+            <input
+              ref={sidebarSearchInputRef}
+              type="text"
+              value={sidebarSearchText}
+              onChange={(e) => setSidebarSearchText(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Escape') closeSidebarSearch();
+              }}
+              placeholder="記事タイトルを検索"
+              className="min-w-0 flex-1 bg-transparent text-xs text-slate-700 outline-none placeholder:text-slate-400"
+              id="sidebar-search-input"
+            />
+            {searchLoading && (
+              <svg className="animate-spin flex-shrink-0 text-[#7C4DFF]" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <path d="M21 12a9 9 0 11-6.219-8.56" />
+              </svg>
+            )}
+            <button
+              type="button"
+              onClick={closeSidebarSearch}
+              className="rounded p-0.5 text-slate-400 hover:bg-slate-200 hover:text-slate-600"
+              title="検索を閉じる"
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12" /></svg>
+            </button>
+          </div>
+        </div>
+      ) : null;
 
       // サイドバー下部フッター（＋ボタン + フォルダピッカー）
       const SidebarFooter = () => (
@@ -2400,18 +2596,32 @@
                 新規作成
               </button>
               <button
-                onClick={() => { onAmazonCreate && onAmazonCreate(); onMobileClose(); }}
-                className="flex-1 flex items-center justify-center bg-orange-400/90 hover:bg-orange-400 text-white font-bold rounded-lg px-3 py-2.5 transition-colors text-sm"
-                title="Amazon URLから記事作成"
+                onClick={openSidebarSearch}
+                className="flex-1 flex items-center justify-center bg-white/20 hover:bg-white/30 text-white font-bold rounded-lg px-3 py-2.5 transition-colors text-sm"
+                title="記事を検索"
               >
-                AMZN
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
+                </svg>
               </button>
               <button onClick={onMobileClose} className="text-white/70 hover:text-white p-1.5 rounded-lg hover:bg-white/20 transition-colors flex-shrink-0" title="閉じる">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12" /></svg>
               </button>
             </div>
+            <SearchPanel />
             <div className="flex-1 overflow-y-auto py-2">
-              <FolderTree {...folderTreeProps} onSelect={(a) => { onSelect(a); onMobileClose(); }} />
+              {sidebarSearchOpen ? (
+                <SidebarSearchResults
+                  articles={articles}
+                  query={sidebarSearchText}
+                  selectedId={selectedId}
+                  onSelect={(a) => { onSelect(a); onMobileClose(); }}
+                  articleH1Cache={articleH1Cache}
+                  loading={searchLoading}
+                />
+              ) : (
+                <FolderTree {...folderTreeProps} onSelect={(a) => { onSelect(a); onMobileClose(); }} />
+              )}
             </div>
             <SidebarFooter />
           </div>
@@ -2432,16 +2642,30 @@
                   新規作成
                 </button>
                 <button
-                  onClick={onAmazonCreate}
-                  className="flex-1 flex items-center justify-center bg-orange-400/90 hover:bg-orange-400 text-white font-bold rounded-lg px-3 py-2.5 transition-colors text-sm"
-                  title="Amazon URL"
-                  id="amazon-create-btn"
+                  onClick={openSidebarSearch}
+                  className="flex-1 flex items-center justify-center bg-white/20 hover:bg-white/30 text-white font-bold rounded-lg px-3 py-2.5 transition-colors text-sm"
+                  title="記事を検索"
+                  id="sidebar-search-btn"
                 >
-                  AMZN
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
+                  </svg>
                 </button>
               </div>
+              <SearchPanel />
               <div className="flex-1 overflow-y-auto py-2">
-                <FolderTree {...folderTreeProps} onSelect={onSelect} />
+                {sidebarSearchOpen ? (
+                  <SidebarSearchResults
+                    articles={articles}
+                    query={sidebarSearchText}
+                    selectedId={selectedId}
+                    onSelect={onSelect}
+                    articleH1Cache={articleH1Cache}
+                    loading={searchLoading}
+                  />
+                ) : (
+                  <FolderTree {...folderTreeProps} onSelect={onSelect} />
+                )}
               </div>
               <SidebarFooter />
             </aside>
@@ -2704,6 +2928,7 @@
       const [content, setContent] = useState('');
       const [originalContent, setOriginalContent] = useState('');
       const [loading, setLoading] = useState(true);
+      const [articleSearchLoading, setArticleSearchLoading] = useState(false);
       const [contentLoading, setContentLoading] = useState(false);
       const [saving, setSaving] = useState(false);
       const [mobileTab, setMobileTab] = useState('editor');
@@ -2762,12 +2987,20 @@
       const [findText, setFindText] = useState('');
       const [replaceText, setReplaceText] = useState('');
       const [matchIndex, setMatchIndex] = useState(0);
+      const [bulkReplaceOpen, setBulkReplaceOpen] = useState(false);
+      const [bulkReplaceTargetIds, setBulkReplaceTargetIds] = useState([]);
+      const [bulkFindText, setBulkFindText] = useState('');
+      const [bulkReplaceText, setBulkReplaceText] = useState('');
+      const [bulkReplaceRunning, setBulkReplaceRunning] = useState(false);
+      const [bulkReplacePreview, setBulkReplacePreview] = useState({ loading: false, totalMatches: null, matchedArticles: [] });
 
       const textareaRef = useRef(null);
       const previewRef = useRef(null);
       const titleInputRef = useRef(null);
       const findInputRef = useRef(null);
       const replaceInputRef = useRef(null);
+      const bulkFindInputRef = useRef(null);
+      const bulkReplaceContentCacheRef = useRef(new Map());
       // スクロール同期（相互ロックで無限ループ防止）
       const editorScrolling = useRef(false);
       const previewScrolling = useRef(false);
@@ -2942,6 +3175,22 @@
           });
         }
       }, []);
+
+      const loadAllArticlesForSearch = useCallback(async () => {
+        setArticleSearchLoading(true);
+        try {
+          const data = await fetchArticles(externalFolderUrls, { raw: true });
+          const fullArticles = data.articles || [];
+          const selected = selectedArticleRef.current;
+          setArticles(selected && !fullArticles.some(article => article.id === selected.id)
+            ? mergeArticlesById(fullArticles, [selected])
+            : fullArticles);
+        } catch (e) {
+          showToast('検索用の記事一覧取得に失敗しました', 'error');
+        } finally {
+          setArticleSearchLoading(false);
+        }
+      }, [externalFolderUrls]);
 
       useEffect(() => { loadArticles(); }, [loadArticles]);
 
@@ -3421,6 +3670,158 @@
           };
         }).filter(Boolean);
       }, [activePostTargetIds, selectedArticle, articles, articleH1Cache]);
+
+      const bulkReplaceTargets = useMemo(() => (
+        bulkReplaceTargetIds.map((id) => (
+          articles.find(a => a.id === id) || (selectedArticle?.id === id ? selectedArticle : null)
+        )).filter(Boolean)
+      ), [bulkReplaceTargetIds, articles, selectedArticle]);
+
+      const resetBulkReplacePreview = useCallback(() => {
+        setBulkReplacePreview({ loading: false, totalMatches: null, matchedArticles: [] });
+      }, []);
+
+      useEffect(() => {
+        if (!bulkReplaceOpen) return;
+        resetBulkReplacePreview();
+      }, [bulkFindText, bulkReplaceOpen, resetBulkReplacePreview]);
+
+      const openBulkReplaceModal = useCallback((ids = []) => {
+        const uniqueIds = Array.from(new Set((ids || []).filter(Boolean)));
+        if (uniqueIds.length < 2) {
+          showToast('一括置換する記事を複数選択してください', 'error');
+          return;
+        }
+        bulkReplaceContentCacheRef.current = new Map();
+        setBulkReplaceTargetIds(uniqueIds);
+        setBulkFindText('');
+        setBulkReplaceText('');
+        setBulkReplacePreview({ loading: false, totalMatches: null, matchedArticles: [] });
+        setBulkReplaceOpen(true);
+        setTimeout(() => bulkFindInputRef.current?.focus(), 50);
+      }, []);
+
+      const closeBulkReplaceModal = useCallback(() => {
+        if (bulkReplaceRunning) return;
+        setBulkReplaceOpen(false);
+        setBulkReplaceTargetIds([]);
+        setBulkFindText('');
+        setBulkReplaceText('');
+        setBulkReplacePreview({ loading: false, totalMatches: null, matchedArticles: [] });
+        bulkReplaceContentCacheRef.current = new Map();
+      }, [bulkReplaceRunning]);
+
+      const getBulkReplaceContent = useCallback(async (article) => {
+        if (!article) return '';
+        if (selectedArticleRef.current?.id === article.id && !isNewArticle) return content;
+        if (bulkReplaceContentCacheRef.current.has(article.id)) {
+          return bulkReplaceContentCacheRef.current.get(article.id);
+        }
+        const text = await fetchArticleContent(article.id);
+        bulkReplaceContentCacheRef.current.set(article.id, text);
+        return text;
+      }, [content, isNewArticle]);
+
+      const handleBulkReplaceSearch = useCallback(async () => {
+        if (!bulkFindText) {
+          showToast('検索ワードを入力してください', 'error');
+          return;
+        }
+        setBulkReplacePreview({ loading: true, totalMatches: null, matchedArticles: [] });
+        try {
+          const matchedArticles = [];
+          let totalMatches = 0;
+          for (const article of bulkReplaceTargets) {
+            const articleContent = await getBulkReplaceContent(article);
+            const count = countPlainTextMatches(articleContent, bulkFindText);
+            if (count > 0) {
+              totalMatches += count;
+              matchedArticles.push({
+                id: article.id,
+                title: getArticleDisplayTitle(article, articleH1Cache),
+                count,
+              });
+            }
+          }
+          setBulkReplacePreview({ loading: false, totalMatches, matchedArticles });
+        } catch (e) {
+          setBulkReplacePreview({ loading: false, totalMatches: null, matchedArticles: [] });
+          showToast('一括検索に失敗しました: ' + e.message, 'error');
+        }
+      }, [bulkFindText, bulkReplaceTargets, getBulkReplaceContent, articleH1Cache]);
+
+      const handleBulkReplaceAll = useCallback(async () => {
+        if (!bulkFindText) {
+          showToast('検索ワードを入力してください', 'error');
+          return;
+        }
+        if (bulkReplaceTargets.length < 2) {
+          showToast('一括置換する記事を複数選択してください', 'error');
+          return;
+        }
+
+        setBulkReplaceRunning(true);
+        clearTimeout(autoSaveTimer.current);
+        setAutoSaveStatus('idle');
+        try {
+          const prepared = [];
+          let totalMatches = 0;
+          for (const article of bulkReplaceTargets) {
+            const articleContent = await getBulkReplaceContent(article);
+            const count = countPlainTextMatches(articleContent, bulkFindText);
+            const nextContent = count > 0
+              ? articleContent.split(bulkFindText).join(bulkReplaceText)
+              : articleContent;
+            totalMatches += count;
+            prepared.push({ article, nextContent, count });
+          }
+
+          if (totalMatches === 0) {
+            setBulkReplacePreview({ loading: false, totalMatches: 0, matchedArticles: [] });
+            showToast('一致する文字が見つかりません', 'error');
+            return;
+          }
+
+          const errors = [];
+          let savedCount = 0;
+          for (const item of prepared) {
+            try {
+              const result = await saveArticle(item.article.name, item.nextContent, item.article.id);
+              savedCount++;
+              updateH1CacheFromContent(item.article.id, item.nextContent);
+              if (selectedArticleRef.current?.id === item.article.id) {
+                setContent(item.nextContent);
+                setOriginalContent(item.nextContent);
+              }
+              setArticles(prev => prev.map(article => article.id === item.article.id
+                ? { ...article, lastModified: result.lastModified || new Date().toISOString() }
+                : article
+              ));
+            } catch (e) {
+              errors.push(`「${getArticleDisplayTitle(item.article, articleH1Cache)}」: ${e.message}`);
+            }
+          }
+
+          if (savedCount > 0) {
+            showToast(`${savedCount}件の記事を保存し、${totalMatches}箇所を置換しました`, 'success');
+            setSelectMode(false);
+            setSelectedIds(new Set());
+            setMultiSelectedIds(new Set());
+            setBulkReplaceOpen(false);
+            setBulkReplaceTargetIds([]);
+            bulkReplaceContentCacheRef.current = new Map();
+            setTimeout(async () => {
+              try { await loadArticles(); }
+              catch (e) { console.warn('一覧再取得失敗（一括置換は完了）:', e); }
+            }, 1200);
+          }
+          if (errors.length > 0) {
+            showToast(errors[0], 'error');
+          }
+        } finally {
+          setBulkReplaceRunning(false);
+        }
+      }, [bulkFindText, bulkReplaceText, bulkReplaceTargets, getBulkReplaceContent, updateH1CacheFromContent, articleH1Cache, loadArticles]);
 
       const activeNotePostTarget = useMemo(() => (
         selectedPostTargets.find(target => target.id === notePostActiveTargetId) || selectedPostTargets[0] || null
@@ -4228,8 +4629,8 @@
             selectedId={selectedArticle?.id}
             onSelect={handleSelect}
             onNewArticle={handleNewArticle}
-            onAmazonCreate={openAmazonInput}
             loading={loading}
+            searchLoading={articleSearchLoading}
             sidebarWidth={sidebarWidth}
             onResizeStart={onSidebarResizeStart}
             isCollapsed={sidebarCollapsed}
@@ -4240,6 +4641,8 @@
             onDuplicateArticle={handleDuplicateArticle}
             onMoveArticle={handleMoveArticle}
             onSchedulePost={(ids) => openNotePostModal({ ids, mode: 'schedule' })}
+            onBulkReplace={openBulkReplaceModal}
+            onLoadAllArticlesForSearch={loadAllArticlesForSearch}
             selectMode={selectMode}
             selectedIds={selectedIds}
             onToggleSelect={(id) => {
@@ -4268,6 +4671,143 @@
             setExternalFolderUrls={setExternalFolderUrls}
             onRefreshArticles={loadArticles}
           />
+
+          {bulkReplaceOpen && (
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/45 px-4"
+              onClick={closeBulkReplaceModal}
+            >
+              <div
+                className="w-full max-w-2xl overflow-hidden rounded-lg border border-purple-100 bg-white shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
+                  <div className="min-w-0">
+                    <h3 className="text-base font-bold text-slate-900">一括記事置換</h3>
+                    <p className="mt-1 truncate text-xs text-slate-500">{bulkReplaceTargets.length}件の記事を対象にしています</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={closeBulkReplaceModal}
+                    disabled={bulkReplaceRunning}
+                    className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600 disabled:opacity-50"
+                    title="閉じる"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
+                      <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="p-5">
+                  <div className="rounded-lg border border-slate-200 bg-white shadow-sm">
+                    <div className="flex items-center gap-1 px-2 py-2 border-b border-slate-100">
+                      <svg className="text-slate-400 shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
+                      </svg>
+                      <input
+                        ref={bulkFindInputRef}
+                        value={bulkFindText}
+                        onChange={(e) => setBulkFindText(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') { e.preventDefault(); handleBulkReplaceSearch(); }
+                          if (e.key === 'Escape') closeBulkReplaceModal();
+                        }}
+                        placeholder="検索"
+                        disabled={bulkReplaceRunning}
+                        className="flex-1 border border-slate-200 rounded px-1.5 py-1 text-slate-700 focus:outline-none focus:border-[#7C4DFF] text-xs disabled:bg-slate-50"
+                        style={{ minWidth: 0 }}
+                      />
+                      <span className="text-slate-400 text-xs whitespace-nowrap shrink-0 min-w-[3rem] text-right">
+                        {bulkReplacePreview.loading
+                          ? '検索中'
+                          : bulkReplacePreview.totalMatches !== null
+                            ? `${bulkReplacePreview.totalMatches}件`
+                            : ''}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={handleBulkReplaceSearch}
+                        disabled={!bulkFindText || bulkReplaceRunning || bulkReplacePreview.loading}
+                        className="flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-600 disabled:opacity-30 whitespace-nowrap"
+                        title="複数記事内を検索"
+                      >
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg>
+                        検索
+                      </button>
+                    </div>
+                    <div className="flex items-center gap-1 px-2 py-2">
+                      <svg className="text-slate-400 shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M4 7h16M4 12h10M4 17h13" /><path d="M20 14l-3 3 3 3" />
+                      </svg>
+                      <input
+                        value={bulkReplaceText}
+                        onChange={(e) => setBulkReplaceText(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') { e.preventDefault(); handleBulkReplaceAll(); }
+                          if (e.key === 'Escape') closeBulkReplaceModal();
+                        }}
+                        placeholder="置換"
+                        disabled={bulkReplaceRunning}
+                        className="flex-1 border border-slate-200 rounded px-1.5 py-1 text-slate-700 focus:outline-none focus:border-[#7C4DFF] text-xs disabled:bg-slate-50"
+                        style={{ minWidth: 0 }}
+                      />
+                      <button
+                        type="button"
+                        onClick={handleBulkReplaceAll}
+                        disabled={!bulkFindText || bulkReplaceRunning || bulkReplacePreview.loading}
+                        className="flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-600 disabled:opacity-30 whitespace-nowrap"
+                        title="対象記事すべてに置換を実行して保存"
+                      >
+                        {bulkReplaceRunning ? (
+                          <svg className="animate-spin" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 11-6.219-8.56" /></svg>
+                        ) : (
+                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 16V4m0 0L1 7m3-3l3 3" /><path d="M10 16V4m0 0L7 7m3-3l3 3" /><path d="M20 8v12m0 0l-3-3m3 3l3-3" /></svg>
+                        )}
+                        全て
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 grid gap-3 lg:grid-cols-[220px_minmax(0,1fr)]">
+                    <div className="min-w-0">
+                      <p className="mb-2 text-xs font-bold text-slate-500">対象記事</p>
+                      <div className="max-h-56 space-y-1 overflow-y-auto rounded-lg border border-slate-200 p-2">
+                        {bulkReplaceTargets.map((article, index) => (
+                          <div key={article.id} className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-slate-600">
+                            <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-purple-50 text-[10px] font-bold text-[#7C4DFF]">{index + 1}</span>
+                            <span className="min-w-0 truncate font-semibold">{getArticleDisplayTitle(article, articleH1Cache)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="min-w-0">
+                      <p className="mb-2 text-xs font-bold text-slate-500">検索結果</p>
+                      <div className="max-h-56 overflow-y-auto rounded-lg border border-slate-200 p-2">
+                        {bulkReplacePreview.loading ? (
+                          <div className="space-y-2">
+                            {[1, 2, 3].map(i => <div key={i} className="skeleton h-8 w-full" />)}
+                          </div>
+                        ) : bulkReplacePreview.totalMatches === null ? (
+                          <div className="px-3 py-8 text-center text-xs text-slate-400">検索すると一致件数を確認できます</div>
+                        ) : bulkReplacePreview.totalMatches === 0 ? (
+                          <div className="px-3 py-8 text-center text-xs text-slate-400">一致する文字がありません</div>
+                        ) : (
+                          <div className="space-y-1">
+                            {bulkReplacePreview.matchedArticles.map(item => (
+                              <div key={item.id} className="flex items-center gap-2 rounded-md bg-purple-50 px-2 py-1.5 text-xs">
+                                <span className="min-w-0 flex-1 truncate font-semibold text-slate-700">{item.title}</span>
+                                <span className="flex-shrink-0 rounded-full bg-white px-2 py-0.5 font-bold text-[#7C4DFF]">{item.count}件</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {amazonInputOpen && (
             <div
