@@ -2272,7 +2272,7 @@
   },
   {
     "id": "8805d704-cbbd-40a6-aefa-b42217208067",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0b385a43a8be4b22b6674fa182b9ffe6",
     "title": "SALONIA SAL25119WH ヘアドライヤー レビュー比較まとめ",
     "name": "SALONIA SAL25119WH ヘアドライヤー レビュー比較まとめ.md",
@@ -2281,10 +2281,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-19T07:30:00.000Z",
     "createdAt": "2026-05-19T05:43:07.514Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-19T06:55:33.291088+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cffb12e9-49cc-424c-a298-a07fcb5df05e",
