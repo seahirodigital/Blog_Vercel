@@ -3138,7 +3138,7 @@
   },
   {
     "id": "a66fc4f4-ccd6-4cbb-8b3a-6bb8dc3e1025",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s26813dfdb9a64502b79ca335fa2fdd29",
     "title": "リテーク A5-90 生ごみ処理機 レビュー比較まとめ",
     "name": "リテーク A5-90 生ごみ処理機 レビュー比較まとめ.md",
@@ -3147,10 +3147,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-20T15:30:00.000Z",
     "createdAt": "2026-05-19T05:37:58.079Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-20T14:55:29.392714+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "34eb1698-7e6f-44dd-8b5c-8eec60a09cfb",
