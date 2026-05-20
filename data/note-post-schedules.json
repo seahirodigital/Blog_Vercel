@@ -2947,7 +2947,7 @@
   },
   {
     "id": "dddf6ca4-1dd0-4384-923e-bbebe41e2051",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2b7b7f63171c42ffa86fced3d596e8a7",
     "title": "パナソニック EH-SA3C-N ヘアドライヤー レビュー比較まとめ",
     "name": "パナソニック EH-SA3C-N ヘアドライヤー レビュー比較まとめ.md",
@@ -2956,10 +2956,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-20T10:00:00.000Z",
     "createdAt": "2026-05-19T05:37:58.079Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-20T09:25:51.497265+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e12027da-8afa-40e0-8097-dae710068f19",
