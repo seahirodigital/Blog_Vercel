@@ -3033,7 +3033,7 @@
   },
   {
     "id": "63f8913d-8ae1-4a27-8af8-b0bcb9403dc2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sebfd65256b1f4f0480877a9bf3d0b4df",
     "title": "ヤーマン MS32G マッサージャー レビュー比較まとめ",
     "name": "ヤーマン MS32G マッサージャー レビュー比較まとめ.md",
@@ -3042,10 +3042,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-20T12:00:00.000Z",
     "createdAt": "2026-05-19T05:37:58.079Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-20T11:25:06.222921+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "dac1dc34-550e-40dd-ad1d-554970632241",
