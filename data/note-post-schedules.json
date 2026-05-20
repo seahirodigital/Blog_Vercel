@@ -3295,7 +3295,7 @@
   },
   {
     "id": "784d3484-fb88-4ceb-9c76-0aeb5fd2314b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s992bc15bed91459dbb14db8085ceb6a8",
     "title": "uwant 18000Pa 掃除機 レビュー比較まとめ",
     "name": "uwant 18000Pa 掃除機 レビュー比較まとめ.md",
@@ -3304,10 +3304,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-20T22:30:00.000Z",
     "createdAt": "2026-05-19T05:37:58.079Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-20T21:55:21.277654+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "eba1c78a-51b6-4d22-b9b6-d7e3d8ba3d2f",
