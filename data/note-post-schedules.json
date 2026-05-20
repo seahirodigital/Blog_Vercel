@@ -2860,7 +2860,7 @@
   },
   {
     "id": "0defa3b9-dd89-4152-a2ef-ff46e84919af",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s76c074e70e244c5f8b66e6aee28a2470",
     "title": "ドクターエア MN-05 マッサージャー レビュー比較まとめ",
     "name": "ドクターエア MN-05 マッサージャー レビュー比較まとめ.md",
@@ -2869,10 +2869,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-20T02:30:00.000Z",
     "createdAt": "2026-05-19T05:37:58.079Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-20T01:55:26.541912+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0585512b-44a8-4bcd-86d4-591fc737641c",
