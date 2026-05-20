@@ -3209,7 +3209,7 @@
   },
   {
     "id": "e99b980a-231a-42ed-baf2-9cc947953280",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5d2ae5b5311a4c2586105c9b0054df3c",
     "title": "Corona CD-P63A3 サーキュレーター レビュー比較まとめ",
     "name": "Corona CD-P63A3 サーキュレーター レビュー比較まとめ.md",
@@ -3218,10 +3218,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-20T21:00:00.000Z",
     "createdAt": "2026-05-19T05:37:58.079Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-20T20:25:34.517314+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5cf54f25-8663-45e0-a8fa-51e7430741d2",
