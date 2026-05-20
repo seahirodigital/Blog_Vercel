@@ -2878,7 +2878,7 @@
   },
   {
     "id": "0585512b-44a8-4bcd-86d4-591fc737641c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s61771120e3ca4d108932ea94167071e1",
     "title": "パナソニック EW-RA180-H フットマッサージャー レビュー比較まとめ",
     "name": "パナソニック EW-RA180-H フットマッサージャー レビュー比較まとめ.md",
@@ -2887,10 +2887,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-20T07:30:00.000Z",
     "createdAt": "2026-05-19T05:37:58.079Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-20T06:55:09.006768+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "91696384-492a-4752-8579-48310a5693da",
