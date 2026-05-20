@@ -3191,7 +3191,7 @@
   },
   {
     "id": "50ebf3c3-f0be-4f09-8d5e-d812da99b696",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2e75e7f387b7464ebc1c204a3a5cf5c1",
     "title": "orage RR35 スティッククリーナー レビュー比較まとめ",
     "name": "orage RR35 スティッククリーナー レビュー比較まとめ.md",
@@ -3201,8 +3201,8 @@
     "publishAt": "2026-05-20T20:30:00.000Z",
     "createdAt": "2026-05-19T05:37:58.079Z",
     "queuedAt": "2026-05-20T19:55:24.801161+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-20T20:32:20.599375+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7c2d2f09adbc?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
