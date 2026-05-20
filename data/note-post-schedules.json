@@ -3051,7 +3051,7 @@
   },
   {
     "id": "dac1dc34-550e-40dd-ad1d-554970632241",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb0567be9bee14709af125a136fe5f154",
     "title": "VENTOTA vo410531 扇風機 レビュー比較まとめ",
     "name": "VENTOTA vo410531 扇風機 レビュー比較まとめ.md",
@@ -3060,10 +3060,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-20T13:00:00.000Z",
     "createdAt": "2026-05-19T05:37:58.079Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-20T12:25:29.281108+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "61d7e028-13c6-496b-b887-981164a8fea6",
