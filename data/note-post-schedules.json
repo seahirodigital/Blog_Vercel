@@ -3103,7 +3103,7 @@
   },
   {
     "id": "3969c3f0-1571-4bfb-89aa-7e1c24f1a516",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s521d39450f6244eaba8dbacc258c40fc",
     "title": "アイリスオーヤマ FBD-4AZ1 布団クリーナー レビュー比較まとめ",
     "name": "アイリスオーヤマ FBD-4AZ1 布団クリーナー レビュー比較まとめ.md",
@@ -3112,10 +3112,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-20T14:00:00.000Z",
     "createdAt": "2026-05-19T05:37:58.079Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-20T13:25:52.972340+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "90a65cf9-e07c-495c-878d-3601b3792f1f",
