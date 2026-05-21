@@ -3672,7 +3672,7 @@
   },
   {
     "id": "9a188e86-795c-4b48-848e-179dcef6ae1c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6039499fca484bceae1cdd1d211ec8a2",
     "title": "パナソニック MC-SB34J-C スティッククリーナー レビュー比較まとめ",
     "name": "パナソニック MC-SB34J-C スティッククリーナー レビュー比較まとめ.md",
@@ -3681,10 +3681,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-21T15:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-21T15:47:35.934273+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "771ab9b1-1452-4fc8-8f0c-d191aa314ff9",
@@ -3722,7 +3724,7 @@
   },
   {
     "id": "dea29e9a-9510-4a8b-93a8-f3d08775556a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6f5822da1c0d4ff69ac17e988fdbab68",
     "title": "パナソニック EH-KN9L-H ヘアドライヤー レビュー比較まとめ",
     "name": "パナソニック EH-KN9L-H ヘアドライヤー レビュー比較まとめ.md",
@@ -3731,10 +3733,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-21T16:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-21T15:47:35.934273+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a7199f87-7e3a-4b89-a2d6-72c8b0a5cd8e",
