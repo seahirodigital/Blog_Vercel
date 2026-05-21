@@ -4039,7 +4039,7 @@
   },
   {
     "id": "68c7f22d-944b-4927-b1a6-c01c7fbf8719",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc990cf07110245e1ab541166f01840be",
     "title": "フジ医療器 ZZ-10000 フジ医療器 シートマッサ－ジャー レビュー比較まとめ",
     "name": "フジ医療器 ZZ-10000 フジ医療器 シートマッサ－ジャー レビュー比較まとめ.md",
@@ -4048,10 +4048,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-21T23:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-21T22:25:33.176590+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2b3a6ccc-bf92-4b93-b744-3a779e59c43c",
