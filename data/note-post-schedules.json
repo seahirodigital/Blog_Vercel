@@ -3742,7 +3742,7 @@
   },
   {
     "id": "a7199f87-7e3a-4b89-a2d6-72c8b0a5cd8e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2084493d64dc45cf9c94a0dfb2275efd",
     "title": "THRIVE(スライヴ) MD-6220 フットマッサージャー レビュー比較まとめ",
     "name": "THRIVE(スライヴ) MD-6220 フットマッサージャー レビュー比較まとめ.md",
@@ -3751,10 +3751,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-21T16:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-21T15:55:41.916124+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f05a8e8c-b69c-43d1-9953-cc1a96ecf24e",
