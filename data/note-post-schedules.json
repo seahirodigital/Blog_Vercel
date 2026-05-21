@@ -3812,7 +3812,7 @@
   },
   {
     "id": "253015e6-fcff-49b9-bc88-1c2b21daa9dd",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbf22396acff64994aba9c80a8e21ac7f",
     "title": "Dyson(ダイソン) V8 SV10K スティッククリーナー レビュー比較まとめ",
     "name": "Dyson(ダイソン) V8 SV10K スティッククリーナー レビュー比較まとめ.md",
@@ -3821,10 +3821,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-21T17:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-21T16:55:05.361991+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "be10dc8e-288b-4c46-afff-1db2351e7915",
