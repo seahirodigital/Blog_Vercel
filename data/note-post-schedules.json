@@ -4021,7 +4021,7 @@
   },
   {
     "id": "a7e457c3-b2be-4c8d-99bf-b9b6a11de83b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7a472381b068429d94d4444a935ad8a7",
     "title": "フジ医療器 R22 KC-330 フットマッサージャー レビュー比較まとめ",
     "name": "フジ医療器 R22 KC-330 フットマッサージャー レビュー比較まとめ.md",
@@ -4030,10 +4030,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-21T22:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-21T21:55:03.095227+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "68c7f22d-944b-4927-b1a6-c01c7fbf8719",
