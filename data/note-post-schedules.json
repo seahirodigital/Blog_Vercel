@@ -3830,7 +3830,7 @@
   },
   {
     "id": "be10dc8e-288b-4c46-afff-1db2351e7915",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4a23f36238584bb6a67e7265c1f5f9be",
     "title": "象印マホービン NW-YC10-BZ 炊飯器 レビュー比較まとめ",
     "name": "象印マホービン NW-YC10-BZ 炊飯器 レビュー比較まとめ.md",
@@ -3839,10 +3839,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-21T20:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-21T19:25:52.889923+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "86681812-9ab6-43ad-b016-139b1314be6a",
