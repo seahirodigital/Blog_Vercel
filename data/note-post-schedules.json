@@ -3900,7 +3900,7 @@
   },
   {
     "id": "67e3296d-e1d0-4fe5-ba7c-a3655a49a95d",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s95dfd5067d354e419e2657b6c98da2a6",
     "title": "Island land PPC-11-BK 生ごみ処理機 レビュー比較まとめ",
     "name": "Island land PPC-11-BK 生ごみ処理機 レビュー比較まとめ.md",
@@ -3910,8 +3910,8 @@
     "publishAt": "2026-05-21T21:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-21T20:25:14.527219+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-21T21:02:24.092991+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nae08c5c9bf72?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
