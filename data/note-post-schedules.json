@@ -3724,7 +3724,7 @@
   },
   {
     "id": "dea29e9a-9510-4a8b-93a8-f3d08775556a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s6f5822da1c0d4ff69ac17e988fdbab68",
     "title": "パナソニック EH-KN9L-H ヘアドライヤー レビュー比較まとめ",
     "name": "パナソニック EH-KN9L-H ヘアドライヤー レビュー比較まとめ.md",
@@ -3734,8 +3734,8 @@
     "publishAt": "2026-05-21T16:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-21T15:47:35.934273+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-21T16:02:34.928821+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n929fab832bb6?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
