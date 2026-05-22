@@ -281,6 +281,13 @@ def build_select_or_text_property(prop: dict[str, Any], value: str) -> dict[str,
     return {"rich_text": notion_rich_text(value)}
 
 
+def resolve_notion_date(video: dict[str, Any]) -> str:
+    raw_date = str(video.get("video_updated_at") or video.get("published_at") or "").strip()
+    if raw_date:
+        return raw_date
+    return datetime.now().date().isoformat()
+
+
 def analyze_database_schema(database: dict[str, Any]) -> dict[str, Any]:
     database_properties = database.get("properties", {})
     title_prop = find_property(database_properties, ["タイトル", "動画タイトル", "Name", "名前"], {"title"}, fallback_by_type=True)
@@ -321,9 +328,8 @@ def build_notion_properties(
     }
 
     date_prop = find_property(database_properties, ["日付", "動画更新日時", "投稿日", "公開日", "Date"], {"date"})
-    published_at = video.get("video_updated_at") or video.get("published_at") or ""
-    if date_prop and published_at:
-        properties[date_prop[0]] = {"date": {"start": published_at}}
+    if date_prop:
+        properties[date_prop[0]] = {"date": {"start": resolve_notion_date(video)}}
 
     channel_prop = find_property(
         database_properties,
