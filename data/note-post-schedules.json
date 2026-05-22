@@ -4265,7 +4265,7 @@
   },
   {
     "id": "b3646c1e-7191-43a8-81a9-21bcfdd7ab9b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!see4c1bcd317843e98bf0ad90d98b38e8",
     "title": "Hisense HPAC-22H 移動式エアコン レビュー比較まとめ",
     "name": "Hisense HPAC-22H 移動式エアコン レビュー比較まとめ.md",
@@ -4274,10 +4274,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T06:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T05:55:05.638046+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7158448a-96ba-4300-86f8-8489eb377e34",
