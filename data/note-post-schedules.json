@@ -4612,7 +4612,7 @@
   },
   {
     "id": "8f9b4d5d-6697-498c-871e-41e080cca87f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf1e0a04f91974bd284a1ce96dacb3905",
     "title": "Xperia 1 VIIIレビュー比較まとめ：プロ級カメラと高機能で日常を豊かに",
     "name": "20260513_0300_Xperia 1 VIII 徹底レビュー｜望遠レンズの進化とAI強化。これがソニー本気のフラッグシップ。.md",
@@ -4622,8 +4622,8 @@
     "publishAt": "2026-05-22T10:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-22T09:55:30.778763+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-22T10:32:28.076261+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n24a26346e303?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
