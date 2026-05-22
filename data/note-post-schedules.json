@@ -5167,7 +5167,7 @@
   },
   {
     "id": "02fa2861-90f9-405b-bc21-22fcd1a98c73",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s127fd003072e465895193cd27e017acb",
     "title": "BONIQ 3.0 低温調理器 レビュー比較まとめ",
     "name": "BONIQ 35dB 低温調理器 レビュー比較まとめ.md",
@@ -5176,10 +5176,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T16:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T15:55:51.885321+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "691259a9-869f-40de-8414-088019bed9a4",
