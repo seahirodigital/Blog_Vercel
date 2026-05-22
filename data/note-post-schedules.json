@@ -4820,7 +4820,7 @@
   },
   {
     "id": "53c9d1ca-e9ba-4640-b572-f4a72aacd5a0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s78476080d2b34e2fb0d44269a865b137",
     "title": "東芝 SCS-S300 掃除機 レビュー比較まとめ",
     "name": "東芝 SCS-S300 掃除機 レビュー比較まとめ.md",
@@ -4829,10 +4829,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T12:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T11:55:37.796806+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "987a06d2-2745-4b37-8951-4843766b1443",
