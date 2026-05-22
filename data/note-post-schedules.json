@@ -5445,7 +5445,7 @@
   },
   {
     "id": "80c7bc74-5075-4ee1-ac13-25b899735228",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4efb080fd6204f728f8dc118ad2c9ef8",
     "title": "パナソニック NP-TSK1-W 食器洗い乾燥機 レビュー比較まとめ",
     "name": "パナソニック NP-TSK1-W 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -5454,10 +5454,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T21:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T20:55:55.634499+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "116c1987-bf80-405e-bab7-7daa2009f71a",
