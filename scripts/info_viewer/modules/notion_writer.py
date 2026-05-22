@@ -398,6 +398,53 @@ def divider_block() -> dict[str, Any]:
     return {"object": "block", "type": "divider", "divider": {}}
 
 
+def _is_youtube_url_line(line: str) -> bool:
+    text = str(line or "").strip().strip("<>")
+    return bool(re.fullmatch(r"https?://(?:www\.)?(?:youtube\.com|youtu\.be)/\S+", text))
+
+
+def strip_notion_leading_metadata(markdown: str) -> str:
+    lines = str(markdown or "").splitlines()
+    index = 0
+
+    while index < len(lines) and not lines[index].strip():
+        index += 1
+
+    if index < len(lines) and lines[index].strip() == "## 動画情報":
+        body_start = None
+        scan_index = index + 1
+        while scan_index < len(lines):
+            if lines[scan_index].strip() == "## 整形記事":
+                body_start = scan_index + 1
+                break
+            scan_index += 1
+        if body_start is not None:
+            lines = lines[body_start:]
+
+    while lines and not lines[0].strip():
+        lines.pop(0)
+
+    if lines and lines[0].startswith("# "):
+        lines.pop(0)
+
+    while lines and not lines[0].strip():
+        lines.pop(0)
+
+    if lines and _is_youtube_url_line(lines[0]):
+        lines.pop(0)
+
+    while lines and not lines[0].strip():
+        lines.pop(0)
+
+    if lines and lines[0].strip() == "---":
+        lines.pop(0)
+
+    while lines and not lines[0].strip():
+        lines.pop(0)
+
+    return "\n".join(lines).strip()
+
+
 def markdown_to_notion_blocks(markdown: str) -> list[dict[str, Any]]:
     blocks: list[dict[str, Any]] = []
     in_code = False
@@ -438,14 +485,7 @@ def markdown_to_notion_blocks(markdown: str) -> list[dict[str, Any]]:
 
 
 def build_notion_children(markdown: str, transcript_text: str, video: dict[str, Any]) -> list[dict[str, Any]]:
-    blocks = [
-        heading_block(2, "動画情報"),
-        paragraph_block(f"チャンネル名: {video.get('channel_name', '')}"),
-        paragraph_block(f"動画URL: {video.get('video_url', '')}"),
-        divider_block(),
-        heading_block(2, "整形記事"),
-    ]
-    blocks.extend(markdown_to_notion_blocks(markdown))
+    blocks = markdown_to_notion_blocks(strip_notion_leading_metadata(markdown))
     blocks.append(divider_block())
     blocks.append(heading_block(2, "元の文字起こし"))
     for chunk in text_chunks(transcript_text):
