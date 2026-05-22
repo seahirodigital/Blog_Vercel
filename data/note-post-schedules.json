@@ -4473,7 +4473,7 @@
   },
   {
     "id": "cd0c9868-4c7e-42a1-8a49-6d438edda83b",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf48ce10f38354a4893bb9cb34e62bec5",
     "title": "【高評価製品検証】ネットで話題のシャークの最強コードレス掃除機「BOOST+」は本物か試したら衝撃の結末に！【Shark",
     "name": "20260515_0227_【高評価製品検証】ネットで話題のシャークの最強コードレス掃除機「BOOST+」は本物か試したら衝撃の結末に！【Shark.md",
@@ -4483,8 +4483,8 @@
     "publishAt": "2026-05-22T09:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-22T08:25:27.429807+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-22T09:02:19.125714+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n637f7cbdad29?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
