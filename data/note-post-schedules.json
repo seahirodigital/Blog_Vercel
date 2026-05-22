@@ -5583,7 +5583,7 @@
   },
   {
     "id": "3aff7339-f3a2-4c91-a8f8-0b9a24182e01",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9e6c7107040d45a7aa8063ed62b2bd03",
     "title": "Natridy 39dB 生ごみ処理機 レビュー比較まとめ",
     "name": "ブランド Natridy 39dB 生ごみ処理機 レビュー比較まとめ.md",
@@ -5592,10 +5592,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T23:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T22:25:55.091272+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "aba4e109-4473-4ac6-a1ab-f24029d2d65a",
