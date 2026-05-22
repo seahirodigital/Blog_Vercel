@@ -5548,7 +5548,7 @@
   },
   {
     "id": "47586895-f991-468c-a3fa-b3a36640c45f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s49359caf1c39450dba6cab250ac4bcb7",
     "title": "パナソニック SR-CR10Z1-K 炊飯器 レビュー比較まとめ",
     "name": "パナソニック SR-CR10Z1-K 炊飯器 レビュー比較まとめ.md",
@@ -5557,10 +5557,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T22:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T21:55:35.122124+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "dc4902e9-1972-474a-870e-3e8c52ab7419",
