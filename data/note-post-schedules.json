@@ -4092,7 +4092,7 @@
   },
   {
     "id": "7d3619bc-ec4c-4866-854f-daac880ddaef",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4f682ee27ec140809f6dc25bcd37fec0",
     "title": "MYTREX MT-DRHN21W ネックマッサージャー レビュー比較まとめ",
     "name": "MYTREX MT-DRHN21W ネックマッサージャー レビュー比較まとめ.md",
@@ -4101,10 +4101,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T01:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T00:25:21.374306+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e47f36d6-e463-4cc4-9afc-bac9947968e4",
