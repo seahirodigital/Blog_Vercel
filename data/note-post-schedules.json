@@ -4317,7 +4317,7 @@
   },
   {
     "id": "69262d19-74fc-4c6d-8963-155d2ba62ba0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb27c055a404c4e009bcf2090af1aaade",
     "title": "Corona CWH-A1823R-W タワーファン レビュー比較まとめ",
     "name": "ブランド Corona CWH-A1823R-W タワーファン レビュー比較まとめ.md",
@@ -4326,10 +4326,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T07:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T06:55:22.865710+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "84d124a5-dddf-43ce-a404-85b44118a1a3",
