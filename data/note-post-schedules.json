@@ -4074,7 +4074,7 @@
   },
   {
     "id": "ffe08b1f-3ec7-4889-b590-7704ab885d88",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb194fee5c51e47ce9e3e5bca9663ada9",
     "title": "SAMKYO T60 食器洗い乾燥機 レビュー比較まとめ",
     "name": "SAMKYO T60 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -4084,8 +4084,8 @@
     "publishAt": "2026-05-22T00:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-21T23:25:26.283118+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-22T00:02:17.155417+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n51b0624f806b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
