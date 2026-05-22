@@ -5132,7 +5132,7 @@
   },
   {
     "id": "3a6017cb-bb1d-455b-b9d5-2526df88373c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se72c366e7b3f455c9f17664b7e461059",
     "title": "FortSync 100-110V 食洗機 レビュー比較まとめ",
     "name": "FortSync 100-110V 食洗機 レビュー比較まとめ.md",
@@ -5141,10 +5141,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T16:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T15:25:40.984873+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bb447bf8-b8fa-4ef6-8309-c2127d0dac6f",
