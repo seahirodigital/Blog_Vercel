@@ -4647,7 +4647,7 @@
   },
   {
     "id": "e740342e-717d-40da-82b8-b4dc845e9427",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se2dbc20430984022973270b95d549655",
     "title": "三菱電機 TO-ST1-T トースター レビュー比較まとめ",
     "name": "三菱電機 TO-ST1-T トースター レビュー比較まとめ.md",
@@ -4656,10 +4656,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T11:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T10:25:25.677466+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b0d77f12-9f3c-404b-9165-2cbefc2e77f8",
