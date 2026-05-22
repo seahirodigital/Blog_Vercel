@@ -4560,7 +4560,7 @@
   },
   {
     "id": "e40d4a46-d2b5-4b2e-b68b-d2b911071e04",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s27f8758dcfce4c2fb8fe69fc1c8edc91",
     "title": "東芝 ER-60ZB オーブンレンジ レビュー比較まとめ",
     "name": "東芝 ER-60ZB オーブンレンジ レビュー比較まとめ.md",
@@ -4570,8 +4570,8 @@
     "publishAt": "2026-05-22T10:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-22T09:25:50.483636+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-22T10:02:18.928457+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n689248a20635?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
