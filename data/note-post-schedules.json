@@ -4403,7 +4403,7 @@
   },
   {
     "id": "2491aacf-e05a-4fba-ad13-2cd231cf8545",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8453493b4b264d47a002f154397a5129",
     "title": "タイガー魔法瓶 PIG-H300K レビュー比較まとめ",
     "name": "タイガー魔法瓶 PIG-H300K タイガー魔法瓶 TIGER レビュー比較まとめ.md",
@@ -4412,10 +4412,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T08:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T07:25:03.818464+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2af936e6-f760-431d-afbc-7d860882a4b6",
