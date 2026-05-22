@@ -5358,7 +5358,7 @@
   },
   {
     "id": "cc56e6d3-14bf-4b49-b24f-be8156ae78d8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s77a28e08f8544d5d9df9bba91aef28b1",
     "title": "パナソニック NP-TA5-W 食器洗い乾燥機 レビュー比較まとめ",
     "name": "パナソニック NP-TA5-W 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -5367,10 +5367,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T20:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T19:55:10.100522+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7206f5af-1349-4d97-bb8c-5d9f21a899c7",
