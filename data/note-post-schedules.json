@@ -4230,7 +4230,7 @@
   },
   {
     "id": "ee7186ef-484f-418c-a2c5-2da9c431904e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s27ffd2702aaa4364a4e4ad05b790b6b2",
     "title": "Yoquna GDZ40-518E 衣類乾燥機 レビュー比較まとめ",
     "name": "Yoquna GDZ40-518E 衣類乾燥機 レビュー比較まとめ.md",
@@ -4239,10 +4239,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T02:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T01:55:46.728528+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "18c5cab8-ded4-4405-8895-6f3040df9f5c",
