@@ -4941,7 +4941,7 @@
   },
   {
     "id": "7e6c7ff2-147c-44bd-a3a9-b102693e07f9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s39e6517a313648f29046c07ab6d76687",
     "title": "パナソニック MC-PJ23G-C 紙パック式掃除機 レビュー比較まとめ",
     "name": "パナソニック MC-PJ23G-C 紙パック式掃除機 レビュー比較まとめ.md",
@@ -4950,10 +4950,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T13:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T12:55:07.796521+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "aaaba293-adf1-4cc3-b531-64000d289ae1",
