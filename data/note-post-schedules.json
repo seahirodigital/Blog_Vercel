@@ -5306,7 +5306,7 @@
   },
   {
     "id": "6e843a94-3c4e-4564-9536-5e15431e728c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa51bbbb1d6e64a73a882fbdb9976cb69",
     "title": "ドクターエア MC-03 フットマッサージャー レビュー比較まとめ",
     "name": "ドクターエア MC-03 フットマッサージャー レビュー比較まとめ.md",
@@ -5316,8 +5316,8 @@
     "publishAt": "2026-05-22T20:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-22T19:25:00.459205+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-22T20:02:16.782474+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n390bc6f24bd4?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
