@@ -5635,7 +5635,7 @@
   },
   {
     "id": "9b04df1c-b0bf-4c28-954e-595633b5d370",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se8d479c019314d2ca8dd057d88f98acc",
     "title": "象印マホービン NW-QA10-BA 炊飯器 レビュー比較まとめ",
     "name": "象印マホービン NW-QA10-BA 炊飯器 レビュー比較まとめ.md",
@@ -5644,10 +5644,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T00:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T23:25:33.933824+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1f94760c-1eb8-4ca0-91ba-918ac5c44068",
