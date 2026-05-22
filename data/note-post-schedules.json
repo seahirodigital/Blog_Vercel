@@ -5028,7 +5028,7 @@
   },
   {
     "id": "9b09ffd8-0576-4bad-95d3-529c9f4a7ed9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb770b61c4bd642a7bff9d709b9895d26",
     "title": "パナソニック ES-L551D-K メンズシェーバー レビュー比較まとめ",
     "name": "パナソニック ES-L551D-K メンズシェーバー レビュー比較まとめ.md",
@@ -5037,10 +5037,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T14:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T13:55:42.357553+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6510aa80-731e-4acc-85f1-6bbcf70517b2",
