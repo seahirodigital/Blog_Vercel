@@ -5219,7 +5219,7 @@
   },
   {
     "id": "d22133b6-ef1e-44b6-b567-ee11861d11aa",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdcd6e5a369cb40bfb439623d54b5fab0",
     "title": "cado SAP003 サーキュレーター レビュー比較まとめ",
     "name": "cado SAP003 サーキュレーター レビュー比較まとめ.md",
@@ -5228,10 +5228,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T17:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T16:25:02.625963+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "018b1142-423c-4a72-b29d-66771d835266",
