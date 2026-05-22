@@ -5410,7 +5410,7 @@
   },
   {
     "id": "cb07154d-c30d-440a-aedb-9f723ca9efff",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3ca4a4742074443795e62f88ea8747b2",
     "title": "sirocaシロカ PDW-M151 食器洗い乾燥機 レビュー比較まとめ",
     "name": "sirocaシロカ PDW-M151 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -5420,8 +5420,8 @@
     "publishAt": "2026-05-22T21:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-22T20:25:22.756380+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-22T21:02:37.002768+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n31538e7c30a0?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
