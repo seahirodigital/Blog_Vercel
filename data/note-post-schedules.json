@@ -4508,7 +4508,7 @@
   },
   {
     "id": "dc9f08f2-856f-4536-b1ff-c530c1418a11",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s8ab7ede95ae64e81940bd35e6c8d03cf",
     "title": "Ulike Air10 光美容器 レビュー比較まとめ",
     "name": "Ulike Air10 光美容器 レビュー比較まとめ.md",
@@ -4518,8 +4518,8 @@
     "publishAt": "2026-05-22T09:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-22T08:55:07.598084+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-22T09:32:20.148247+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nfaa503c30255?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
