@@ -5271,7 +5271,7 @@
   },
   {
     "id": "241eb917-e841-46e3-a720-f7950789a596",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1d0b9c1e93f6465d92c9fce56e3ba02c",
     "title": "日立 CV-KP90M 掃除機 レビュー比較まとめ",
     "name": "日立 CV-KP90M 掃除機 レビュー比較まとめ.md",
@@ -5280,10 +5280,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T17:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T16:55:13.994403+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e1ac508f-ab9e-410a-90e4-1c0a39911bb8",
