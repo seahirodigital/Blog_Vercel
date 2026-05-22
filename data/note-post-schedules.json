@@ -5063,7 +5063,7 @@
   },
   {
     "id": "5585d092-856b-44c4-b2de-53d4ec72026c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfe3b8373fb054511b7efde499fbaa936",
     "title": "Cosori CAF-DC601 タワーファン レビュー比較まとめ",
     "name": "Cosori CAF-DC601 タワーファン レビュー比較まとめ.md",
@@ -5072,10 +5072,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T15:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T14:25:28.212846+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "96438af7-8f41-4550-8cb4-27cb2ea0306a",
