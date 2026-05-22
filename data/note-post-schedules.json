@@ -4872,7 +4872,7 @@
   },
   {
     "id": "7f5e16a1-7c5e-4b01-be32-7bbb3335245e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2a26b168f2c64f9aba4cddd4207649ea",
     "title": "東芝 VC-C7-R 掃除機 レビュー比較まとめ",
     "name": "東芝 VC-C7-R 掃除機 レビュー比較まとめ.md",
@@ -4882,8 +4882,8 @@
     "publishAt": "2026-05-22T13:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-22T12:25:21.700517+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-22T13:02:24.740327+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ned7b7cb361ce?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
