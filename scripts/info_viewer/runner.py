@@ -7,7 +7,7 @@ from typing import Any
 
 from dotenv import load_dotenv
 
-from modules import apify_fetcher, gemini_formatter, manifest_builder, onedrive_writer, sheet_reader, state_store
+from modules import apify_fetcher, gemini_formatter, manifest_builder, notion_writer, onedrive_writer, sheet_reader, state_store
 
 load_dotenv()
 
@@ -191,6 +191,7 @@ def _build_existing_article_map(saved_articles: list[dict[str, Any]]) -> dict[st
 def _sync_sheet_status_for_saved_articles(
     target_videos: list[dict[str, Any]],
     existing_article_map: dict[str, dict[str, Any]],
+    state: dict[str, Any],
     processing_logs: list[dict[str, Any]],
     run_id: str,
 ) -> int:
@@ -199,6 +200,18 @@ def _sync_sheet_status_for_saved_articles(
         normalized_url = _video_key(video.get("video_url", ""))
         if normalized_url not in existing_article_map or video.get("status") == COMPLETED_STATUS:
             continue
+        if notion_writer.is_configured():
+            queue_record = state.get("videos", {}).get(normalized_url, {}) if isinstance(state.get("videos"), dict) else {}
+            if not queue_record.get("notionPageId"):
+                _append_processing_log(
+                    processing_logs,
+                    run_id,
+                    video,
+                    "Notion",
+                    "pending",
+                    "OneDrive記事はありますがNotion保存が未確認のため、Sheets完了同期を保留しました",
+                )
+                continue
         try:
             sheet_reader.update_video_status(
                 SPREADSHEET_ID,
@@ -237,6 +250,8 @@ def _require_environment(run_mode: str):
         required.append("APIFY_API_KEY")
     if run_mode in {"process_queue", "full"} and not any(token for _, token in GEMINI_TOKEN_POOLS.values()):
         required.append("GEMINI_TOKEN_invest / GEMINI_TOKEN_INVESTsub / GEMINI_TOKEN_tech")
+    if run_mode in {"process_queue", "full"} and not notion_writer.is_configured():
+        required.append("NOTION_API_KEY / NOTION_TOKEN")
     if required:
         print(f"必要な環境変数が不足しています: {', '.join(required)}")
         sys.exit(1)
@@ -1426,6 +1441,76 @@ def _process_pending_videos(
             )
             continue
 
+        try:
+            notion_result = notion_writer.save_article(
+                video=video,
+                title=actual_title,
+                markdown=markdown,
+                transcript_text=transcript.get("captions", ""),
+                upload_result=upload_result,
+            )
+            upload_result["notionPageId"] = notion_result.get("pageId", "")
+            upload_result["notionDatabaseId"] = notion_result.get("databaseId", "")
+            upload_result["notionAction"] = notion_result.get("action", "")
+            _append_processing_log(
+                processing_logs,
+                run_id,
+                video,
+                "Notion",
+                "success",
+                "Markdown を Notion DB に保存しました",
+                notionPageId=notion_result.get("pageId"),
+                notionAction=notion_result.get("action"),
+                notionSchema=notion_writer.schema_summary(notion_result),
+                geminiRequestedProfile=requested_profile,
+                geminiResolvedProfile=resolved_profile,
+                geminiTokenEnv=gemini_token_name,
+                geminiCandidateOrder=candidate_order,
+            )
+            print(f"   Notion保存完了: {notion_writer.schema_summary(notion_result)}")
+        except Exception as error:
+            error_message = str(error)
+            retry_record = state_store.mark_retry(
+                state,
+                video["video_url"],
+                "Notion",
+                error_message,
+                run_id,
+                wait_seconds=state_store.resolve_retry_wait_seconds(),
+                status=state_store.FAILED_STATUS,
+            )
+            state_store.save_state(state)
+            _append_failure(
+                failures_this_run,
+                video,
+                "notion",
+                "Notion",
+                error_message,
+                fileId=upload_result.get("id"),
+                relativePath=upload_result.get("relativePath"),
+                geminiRequestedProfile=requested_profile,
+                geminiResolvedProfile=resolved_profile,
+                geminiTokenEnv=gemini_token_name,
+                geminiCandidateOrder=candidate_order,
+                nextRetryAt=retry_record.get("nextRetryAt"),
+            )
+            _append_processing_log(
+                processing_logs,
+                run_id,
+                video,
+                "Notion",
+                "failed",
+                error_message,
+                fileId=upload_result.get("id"),
+                relativePath=upload_result.get("relativePath"),
+                geminiRequestedProfile=requested_profile,
+                geminiResolvedProfile=resolved_profile,
+                geminiTokenEnv=gemini_token_name,
+                geminiCandidateOrder=candidate_order,
+                nextRetryAt=retry_record.get("nextRetryAt"),
+            )
+            continue
+
         success_count += 1
         state_store.mark_done(state, video["video_url"], run_id, upload_result=upload_result)
         state_store.save_state(state)
@@ -1435,9 +1520,11 @@ def _process_pending_videos(
             video,
             "OneDrive",
             "success",
-            "Markdown を OneDrive に保存しました",
+            "Markdown を OneDrive と Notion に保存しました",
             fileId=upload_result.get("id"),
             relativePath=upload_result.get("relativePath"),
+            notionPageId=upload_result.get("notionPageId"),
+            notionAction=upload_result.get("notionAction"),
             geminiRequestedProfile=requested_profile,
             geminiResolvedProfile=resolved_profile,
             geminiTokenEnv=gemini_token_name,
@@ -1528,6 +1615,7 @@ def main():
         synced_count = _sync_sheet_status_for_saved_articles(
             all_target_videos,
             existing_article_map,
+            state,
             processing_logs,
             run_id,
         )

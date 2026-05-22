@@ -8,6 +8,12 @@ STATE_FILE_PATH = os.getenv("INFO_VIEWER_STATE_FILE", "state/pipeline_state.json
 DEFAULT_RETRY_SECONDS = int(os.getenv("INFO_VIEWER_RETRY_SECONDS", "3600") or 3600)
 QUOTA_RETRY_SECONDS = int(os.getenv("INFO_VIEWER_QUOTA_RETRY_SECONDS", "7200") or 7200)
 PROCESSING_STALE_SECONDS = int(os.getenv("INFO_VIEWER_PROCESSING_STALE_SECONDS", "14400") or 14400)
+REQUIRE_NOTION_SAVE = str(os.getenv("INFO_VIEWER_REQUIRE_NOTION_SAVE", "true")).strip().lower() not in {
+    "0",
+    "false",
+    "no",
+    "n",
+}
 
 PENDING_STATUS = "pending"
 PROCESSING_STATUS = "processing"
@@ -201,7 +207,11 @@ def sync_target_videos(
             record["firstSeenAt"] = now_iso
 
         article = existing_article_map.get(key)
-        if video.get("status") == "完了" or article:
+        if article:
+            _copy_article_fields(record, article)
+
+        article_has_required_notion = not REQUIRE_NOTION_SAVE or bool(record.get("notionPageId"))
+        if video.get("status") == "完了" or (article and article_has_required_notion):
             if record.get("status") != DONE_STATUS:
                 stats["markedDone"] += 1
             record["status"] = DONE_STATUS
@@ -212,8 +222,6 @@ def sync_target_videos(
             record["processingStartedAt"] = ""
             record["lastCompletedAt"] = now_iso
             record["manualPriorityAt"] = ""
-            if article:
-                _copy_article_fields(record, article)
             continue
 
         if record.get("status") in ("", INACTIVE_STATUS, DONE_STATUS):
@@ -411,6 +419,9 @@ def mark_done(
         record["articleRelativePath"] = upload_result.get("relativePath", "")
         record["articleFileId"] = upload_result.get("id", "")
         record["articleTitle"] = upload_result.get("title", "")
+        record["notionPageId"] = upload_result.get("notionPageId", "")
+        record["notionDatabaseId"] = upload_result.get("notionDatabaseId", "")
+        record["notionAction"] = upload_result.get("notionAction", "")
     state["updatedAt"] = now_iso
     return record
 
