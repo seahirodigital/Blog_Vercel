@@ -4438,7 +4438,7 @@
   },
   {
     "id": "e420c9d5-b205-41cd-a590-9c360e08cc69",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s47a4a6f2c0a64f18bd5d2af6310b7459",
     "title": "パナソニック DL-RT50-WS 温水洗浄便座 レビュー比較まとめ",
     "name": "パナソニック DL-RT50-WS 温水洗浄便座 レビュー比較まとめ.md",
@@ -4447,10 +4447,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-22T08:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-22T07:55:45.780417+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6077250f-3409-4b06-88e4-4e16f06b0452",
