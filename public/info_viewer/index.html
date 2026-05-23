@@ -833,6 +833,53 @@
       font-weight: 600;
     }
 
+    .editor-textarea {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      line-height: 1.75;
+      resize: none;
+      tab-size: 2;
+    }
+
+    .editor-drop-active {
+      outline: 2px dashed #7C4DFF;
+      outline-offset: -8px;
+      background: #faf7ff;
+    }
+
+    .editor-drop-hint {
+      position: absolute;
+      left: 50%;
+      top: 18px;
+      transform: translateX(-50%);
+      z-index: 20;
+      pointer-events: none;
+      border: 1px solid #d9ccff;
+      border-radius: 9999px;
+      background: #ffffff;
+      color: #7C4DFF;
+      box-shadow: 0 14px 32px rgba(124, 77, 255, 0.18);
+      padding: 8px 13px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .article-status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 9999px;
+      background: #cbd5e1;
+      display: inline-block;
+    }
+
+    .article-status-dot.dirty {
+      background: #f59e0b;
+    }
+
+    .article-status-dot.saved {
+      background: #22c55e;
+    }
+
     .markdown-preview h1 {
       font-size: 1.4rem;
       font-weight: 700;
@@ -2032,10 +2079,22 @@
         const [manifestGeneratedAt, setManifestGeneratedAt] = useState('');
         const [selectedVideoIds, setSelectedVideoIds] = useState(new Set());
         const [videoContextMenu, setVideoContextMenu] = useState({ visible: false, x: 0, y: 0, video: null });
+        const [mobileArticleTab, setMobileArticleTab] = useState('editor');
+        const [editorMarkdown, setEditorMarkdown] = useState('');
+        const [originalEditorMarkdown, setOriginalEditorMarkdown] = useState('');
+        const [editorRatio, setEditorRatio] = useState(0.5);
+        const [savingArticle, setSavingArticle] = useState(false);
+        const [copiedArticle, setCopiedArticle] = useState(false);
+        const [saveMessage, setSaveMessage] = useState('');
+        const [draggingImage, setDraggingImage] = useState(false);
         const channelDragging = useRef(false);
         const videoDragging = useRef(false);
+        const editorDragging = useRef(false);
         const channelStartX = useRef(0);
         const videoStartX = useRef(0);
+        const editorAreaRef = useRef(null);
+        const textareaRef = useRef(null);
+        const previewRef = useRef(null);
         const channelStartW = useRef(0);
         const videoStartW = useRef(0);
         const touchStartX = useRef(null);
@@ -2043,6 +2102,9 @@
         const selectedChannelIdRef = useRef('');
         const selectedVideoIdRef = useRef('');
         const lastClickedVideoIdRef = useRef('');
+        const loadedEditorKeyRef = useRef('');
+        const editorScrolling = useRef(false);
+        const previewScrolling = useRef(false);
 
         const onChannelResizeStart = useCallback((e) => {
           if (e.button !== 0) return;
@@ -2068,6 +2130,13 @@
           document.body.style.userSelect = 'none';
         }, [videoCollapsed, videoWidth]);
 
+        const onEditorResizeStart = useCallback((e) => {
+          if (e.button !== 0) return;
+          editorDragging.current = true;
+          document.body.style.cursor = 'col-resize';
+          document.body.style.userSelect = 'none';
+        }, []);
+
         useEffect(() => {
           const onMove = (e) => {
             if (channelDragging.current) {
@@ -2078,11 +2147,17 @@
               const delta = e.clientX - videoStartX.current;
               setVideoWidth(Math.min(520, Math.max(240, videoStartW.current + delta)));
             }
+            if (editorDragging.current && editorAreaRef.current) {
+              const rect = editorAreaRef.current.getBoundingClientRect();
+              const ratio = (e.clientX - rect.left) / Math.max(1, rect.width);
+              setEditorRatio(Math.min(0.85, Math.max(0.15, ratio)));
+            }
           };
           const onUp = () => {
-            if (channelDragging.current || videoDragging.current) {
+            if (channelDragging.current || videoDragging.current || editorDragging.current) {
               channelDragging.current = false;
               videoDragging.current = false;
+              editorDragging.current = false;
               document.body.style.cursor = '';
               document.body.style.userSelect = '';
             }
@@ -2243,9 +2318,27 @@
           [articleCache, selectedVideo]
         );
 
+        const selectedEditorKey = selectedVideo?.articleId || selectedVideo?.id || '';
+        const editorDirty = editorMarkdown !== originalEditorMarkdown;
+        const canEditSelectedArticle = Boolean(selectedVideo?.articleId || selectedVideo?.markdown || selectedMarkdown);
+        const selectedArticleIsLoading = Boolean(articleLoadingId && articleLoadingId === selectedVideo.articleId && !selectedMarkdown && !editorMarkdown);
+
+        useEffect(() => {
+          const source = selectedMarkdown || '';
+          if (selectedEditorKey !== loadedEditorKeyRef.current || (!editorDirty && source !== originalEditorMarkdown)) {
+            loadedEditorKeyRef.current = selectedEditorKey;
+            setEditorMarkdown(source);
+            setOriginalEditorMarkdown(source);
+            setCopiedArticle(false);
+            setSaveMessage('');
+            setDraggingImage(false);
+            setMobileArticleTab('editor');
+          }
+        }, [editorDirty, originalEditorMarkdown, selectedEditorKey, selectedMarkdown]);
+
         const renderedHTML = useMemo(
-          () => selectedMarkdown ? marked.parse(selectedMarkdown) : '',
-          [selectedMarkdown]
+          () => editorMarkdown ? marked.parse(editorMarkdown) : '',
+          [editorMarkdown]
         );
 
         const handleSelectChannel = useCallback((channelId) => {
@@ -2345,6 +2438,157 @@
             })
           })));
         }, []);
+
+        const insertMarkdownAtCursor = useCallback((text) => {
+          const textarea = textareaRef.current;
+          const start = textarea ? textarea.selectionStart : editorMarkdown.length;
+          const end = textarea ? textarea.selectionEnd : editorMarkdown.length;
+          const inserted = String(text || '');
+          let nextCaret = start + inserted.length;
+
+          setEditorMarkdown((current) => {
+            const safeStart = Math.min(Math.max(0, start), current.length);
+            const safeEnd = Math.min(Math.max(safeStart, end), current.length);
+            nextCaret = safeStart + inserted.length;
+            return `${current.slice(0, safeStart)}${inserted}${current.slice(safeEnd)}`;
+          });
+          setCopiedArticle(false);
+
+          window.requestAnimationFrame(() => {
+            const nextTextarea = textareaRef.current;
+            if (!nextTextarea) return;
+            nextTextarea.focus();
+            nextTextarea.setSelectionRange(nextCaret, nextCaret);
+          });
+        }, [editorMarkdown.length]);
+
+        const readImageFileAsDataUrl = useCallback((file) => new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(String(reader.result || ''));
+          reader.onerror = () => reject(reader.error || new Error('画像の読み込みに失敗しました'));
+          reader.readAsDataURL(file);
+        }), []);
+
+        const handleEditorDragOver = useCallback((event) => {
+          const items = Array.from(event.dataTransfer?.items || []);
+          const hasImage = items.some((item) => item.kind === 'file' && String(item.type || '').startsWith('image/'));
+          if (!hasImage) return;
+          event.preventDefault();
+          event.dataTransfer.dropEffect = 'copy';
+          setDraggingImage(true);
+        }, []);
+
+        const handleEditorDragLeave = useCallback((event) => {
+          if (event.currentTarget.contains(event.relatedTarget)) return;
+          setDraggingImage(false);
+        }, []);
+
+        const handleEditorDrop = useCallback(async (event) => {
+          const files = Array.from(event.dataTransfer?.files || []);
+          const imageFiles = files.filter((file) => String(file.type || '').startsWith('image/'));
+          if (!imageFiles.length) {
+            setDraggingImage(false);
+            return;
+          }
+
+          event.preventDefault();
+          setDraggingImage(false);
+
+          try {
+            const imageMarkdown = await Promise.all(imageFiles.map(async (file) => {
+              const dataUrl = await readImageFileAsDataUrl(file);
+              const safeName = String(file.name || 'image').replace(/[\[\]()]/g, ' ').trim() || 'image';
+              return `![${safeName}](${dataUrl})`;
+            }));
+            insertMarkdownAtCursor(`\n\n${imageMarkdown.join('\n\n')}\n\n`);
+            setSaveMessage(`${imageMarkdown.length}枚の画像を挿入しました`);
+          } catch (error) {
+            setSaveMessage(error.message || '画像の読み込みに失敗しました');
+          }
+        }, [insertMarkdownAtCursor, readImageFileAsDataUrl]);
+
+        const handleEditorScroll = useCallback(() => {
+          if (previewScrolling.current) return;
+          const textarea = textareaRef.current;
+          const preview = previewRef.current;
+          if (!textarea || !preview) return;
+          editorScrolling.current = true;
+          const ratio = textarea.scrollTop / Math.max(1, textarea.scrollHeight - textarea.clientHeight);
+          preview.scrollTop = ratio * Math.max(0, preview.scrollHeight - preview.clientHeight);
+          window.setTimeout(() => {
+            editorScrolling.current = false;
+          }, 60);
+        }, []);
+
+        const handlePreviewScroll = useCallback(() => {
+          if (editorScrolling.current) return;
+          const textarea = textareaRef.current;
+          const preview = previewRef.current;
+          if (!textarea || !preview) return;
+          previewScrolling.current = true;
+          const ratio = preview.scrollTop / Math.max(1, preview.scrollHeight - preview.clientHeight);
+          textarea.scrollTop = ratio * Math.max(0, textarea.scrollHeight - textarea.clientHeight);
+          window.setTimeout(() => {
+            previewScrolling.current = false;
+          }, 60);
+        }, []);
+
+        const handleCopyArticle = useCallback(async () => {
+          try {
+            await navigator.clipboard.writeText(editorMarkdown);
+            setCopiedArticle(true);
+            setSaveMessage('Markdown をコピーしました');
+            window.setTimeout(() => setCopiedArticle(false), 1800);
+          } catch {
+            setSaveMessage('コピーに失敗しました');
+          }
+        }, [editorMarkdown]);
+
+        const handleSaveArticle = useCallback(async () => {
+          if (!canEditSelectedArticle) return;
+
+          if (!selectedVideo?.articleId) {
+            updateVideoInChannels(selectedVideo.id, { markdown: editorMarkdown });
+            setOriginalEditorMarkdown(editorMarkdown);
+            setSaveMessage('画面内のダミー記事を更新しました');
+            return;
+          }
+
+          try {
+            setSavingArticle(true);
+            setSaveMessage('');
+            setIndexError('');
+            const response = await fetch('/api/info-viewer?resource=article', {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                articleId: selectedVideo.articleId,
+                content: editorMarkdown,
+              }),
+            });
+            const payload = await response.json();
+            if (!response.ok || payload.success === false) {
+              throw new Error(payload.error || `save API ${response.status}`);
+            }
+
+            setArticleCache((current) => ({
+              ...current,
+              [selectedVideo.articleId]: editorMarkdown,
+            }));
+            updateVideoInChannels(selectedVideo.id, {
+              markdown: editorMarkdown,
+              hasArticle: true,
+              articleStatus: '記事あり',
+              articleUpdatedAt: payload.lastModified || new Date().toISOString(),
+            });
+            setOriginalEditorMarkdown(editorMarkdown);
+            setSaveMessage('OneDrive に保存しました');
+          } catch (error) {
+            setSaveMessage(`保存に失敗しました: ${error.message || '原因不明のエラー'}`);
+          } finally {
+            setSavingArticle(false);
+          }
+        }, [canEditSelectedArticle, editorMarkdown, selectedVideo, updateVideoInChannels]);
 
         const handlePrioritizeVideo = useCallback(async (video) => {
           if (!video?.youtubeUrl || priorityLoadingId) return;
@@ -2786,81 +3030,170 @@
                 </div>
               </header>
 
-              <div className="px-4 py-1.5 bg-slate-50 border-b border-slate-100 text-xs text-slate-400 font-medium flex items-center gap-2 shrink-0">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                  <circle cx="12" cy="12" r="3" />
-                </svg>
-                <span>プレビュー</span>
-                <span className="hidden ml-auto text-[11px] text-slate-400">
-                  {loadingIndex ? '読み込み中' : dataSource === 'api' ? '実データ' : 'ダミー'}
-                </span>
-                <span className="ml-auto text-[11px] text-slate-400">
-                  {loadingIndex ? '読み込み中' : dataSource === 'api' ? '実データ' : dataSource === 'error' ? 'エラー' : '未生成'}
-                </span>
-                <a
-                  href={selectedChannel.channelUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-5 h-5 rounded-full border border-slate-200 text-[#7C4DFF] hover:bg-purple-50 transition-colors inline-flex items-center justify-center flex-shrink-0"
-                  title="チャンネルを開く"
-                >
-                  <VideoGlyph size={10} />
-                </a>
-              </div>
+              {selectedArticleIsLoading ? (
+                <div className="flex-1 flex items-center justify-center bg-white animate-fade-in">
+                  <div className="text-center px-8">
+                    <h3 className="text-lg font-bold text-slate-800 mb-2">記事を読み込み中です</h3>
+                    <p className="text-slate-400 text-sm max-w-md leading-relaxed">
+                      {dataSource === 'api' ? 'OneDrive 上の記事本文を取得しています。' : 'manifest の更新結果を待っています。'}
+                    </p>
+                  </div>
+                </div>
+              ) : canEditSelectedArticle ? (
+                <>
+                  <div className="lg:hidden flex border-b border-slate-200 bg-white shrink-0">
+                    <button onClick={() => setMobileArticleTab('editor')} className={`flex-1 py-2.5 text-sm text-center transition-colors ${mobileArticleTab === 'editor' ? 'tab-active' : 'text-slate-400'}`}>エディタ</button>
+                    <button onClick={() => setMobileArticleTab('preview')} className={`flex-1 py-2.5 text-sm text-center transition-colors ${mobileArticleTab === 'preview' ? 'tab-active' : 'text-slate-400'}`}>プレビュー</button>
+                  </div>
 
-              <div
-                className="flex-1 min-h-0 mobile-swipe-surface"
-                onTouchStart={handlePreviewTouchStart}
-                onTouchEnd={handlePreviewTouchEnd}
-              >
-                {selectedMarkdown ? (
-                  <div className="h-full overflow-y-auto p-6 markdown-preview animate-fade-in bg-white" dangerouslySetInnerHTML={{ __html: renderedHTML }} />
-                ) : articleLoadingId && articleLoadingId === selectedVideo.articleId ? (
-                  <div className="h-full flex items-center justify-center bg-white animate-fade-in">
-                    <div className="text-center px-8">
-                      <h3 className="text-lg font-bold text-slate-800 mb-2">記事を読み込み中です</h3>
-                      <p className="text-slate-400 text-sm max-w-md leading-relaxed">
-                        {dataSource === 'api' ? 'OneDrive 上の記事本文を取得しています。' : 'manifest の更新結果を待っています。'}
-                      </p>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="h-full flex items-center justify-center bg-white animate-fade-in">
-                    <div className="text-center px-8">
-                      <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-[#7C4DFF] to-[#651FFF] flex items-center justify-center shadow-lg shadow-purple-200">
-                        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
-                          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-                          <path d="M14 2v6h6" />
-                          <path d="M9 15h6" />
+                  <div ref={editorAreaRef} className="flex-1 flex overflow-hidden min-h-0">
+                    <div
+                      className={`relative flex flex-col border-r border-slate-200 ${mobileArticleTab === 'preview' ? 'hidden lg:flex' : 'flex'}`}
+                      style={typeof window !== 'undefined' && window.innerWidth >= 1024 ? { width: `${editorRatio * 100}%`, flexShrink: 0 } : { width: '100%' }}
+                      onDragOver={handleEditorDragOver}
+                      onDragLeave={handleEditorDragLeave}
+                      onDrop={handleEditorDrop}
+                    >
+                      {draggingImage ? <div className="editor-drop-hint">画像を挿入</div> : null}
+                      <div className="px-4 py-1.5 bg-slate-50 border-b border-slate-100 text-xs text-slate-400 font-medium flex items-center gap-2 shrink-0">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
+                          <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
                         </svg>
-                      </div>
-                      <h3 className="text-lg font-bold text-slate-800 mb-2">記事はまだ生成されていません</h3>
-                      <p className="text-slate-400 text-sm max-w-md leading-relaxed">
-                        {dataSource === 'api'
-                          ? 'この動画はシート上の対象ですが、まだ記事ファイルが生成されていません。次回の自動取得で再試行されます。'
-                          : dataSource === 'error'
-                            ? 'manifest の取得に失敗しています。更新ボタンで再読込するか、Actions の状態をご確認ください。'
-                            : 'manifest 生成待ちです。更新ボタンからスプレッドシート再読込を実行できます。'}
-                      </p>
-                      {selectedVideo.lastFailureMessage ? (
-                        <div className="mt-4 max-w-xl rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-left">
-                          <p className="text-xs font-bold text-amber-700">
-                            最終失敗: {selectedVideo.lastFailureStage || '未分類'}
-                          </p>
-                          <p className="mt-1 text-xs leading-relaxed text-amber-900">
-                            {selectedVideo.lastFailureMessage}
-                          </p>
-                          <p className="mt-1 text-[11px] text-amber-700">
-                            {formatDateTime(selectedVideo.lastFailureAt)}
-                          </p>
+                        <span>MARKDOWN</span>
+                        <span className={`article-status-dot ${editorDirty ? 'dirty' : saveMessage.includes('保存') ? 'saved' : ''}`} title={editorDirty ? '未保存' : '保存済み'} />
+                        {saveMessage ? <span className="hidden sm:inline truncate text-[11px] text-slate-400">{saveMessage}</span> : null}
+                        <div className="ml-auto flex items-center gap-2">
+                          <span>{editorMarkdown.length.toLocaleString()} 文字</span>
+                          <button
+                            type="button"
+                            onClick={handleCopyArticle}
+                            disabled={!canEditSelectedArticle}
+                            className={`flex items-center gap-1 rounded px-1.5 py-0.5 transition-colors ${copiedArticle ? 'text-green-500' : 'hover:text-slate-600 hover:bg-slate-200'}`}
+                            title="全文をコピー"
+                          >
+                            {copiedArticle ? (
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6L9 17l-5-5" /></svg>
+                            ) : (
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="9" y="9" width="13" height="13" rx="2" /><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" /></svg>
+                            )}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={handleSaveArticle}
+                            disabled={savingArticle || !canEditSelectedArticle || !editorDirty}
+                            className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-bold transition-colors ${
+                              savingArticle || !editorDirty
+                                ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                                : 'bg-[#7C4DFF] text-white hover:bg-[#651FFF]'
+                            }`}
+                            title="OneDrive に保存"
+                          >
+                            {savingArticle ? (
+                              <svg className="animate-spin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 11-6.219-8.56" /></svg>
+                            ) : (
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" /><path d="M17 21v-8H7v8M7 3v5h8" /></svg>
+                            )}
+                            <span className="hidden sm:inline">{savingArticle ? '保存中' : '保存'}</span>
+                          </button>
                         </div>
-                      ) : null}
-                      {indexError ? <p className="mt-3 text-[11px] text-slate-400">{indexError}</p> : null}
+                      </div>
+                      <textarea
+                        ref={textareaRef}
+                        onScroll={handleEditorScroll}
+                        value={editorMarkdown}
+                        onChange={(event) => {
+                          setEditorMarkdown(event.target.value);
+                          setCopiedArticle(false);
+                        }}
+                        className={`editor-textarea flex-1 w-full p-4 bg-white text-slate-700 focus:outline-none ${draggingImage ? 'editor-drop-active' : ''}`}
+                        placeholder="Markdownを入力..."
+                        spellCheck={false}
+                      />
+                    </div>
+
+                    <div className="resize-handle hidden lg:block" onMouseDown={onEditorResizeStart} />
+
+                    <div
+                      className={`flex flex-col ${mobileArticleTab === 'editor' ? 'hidden lg:flex' : 'flex'}`}
+                      style={{ flex: 1, minWidth: 0 }}
+                    >
+                      <div className="px-4 py-1.5 bg-slate-50 border-b border-slate-100 text-xs text-slate-400 font-medium flex items-center gap-2 shrink-0">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                          <circle cx="12" cy="12" r="3" />
+                        </svg>
+                        <span>プレビュー</span>
+                        <span className="ml-auto text-[11px] text-slate-400">
+                          {loadingIndex ? '読み込み中' : dataSource === 'api' ? '実データ' : dataSource === 'error' ? 'エラー' : 'ダミー'}
+                        </span>
+                        <a
+                          href={selectedChannel.channelUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-5 h-5 rounded-full border border-slate-200 text-[#7C4DFF] hover:bg-purple-50 transition-colors inline-flex items-center justify-center flex-shrink-0"
+                          title="チャンネルを開く"
+                        >
+                          <VideoGlyph size={10} />
+                        </a>
+                      </div>
+                      {editorMarkdown ? (
+                        <div
+                          ref={previewRef}
+                          onScroll={handlePreviewScroll}
+                          onTouchStart={handlePreviewTouchStart}
+                          onTouchEnd={handlePreviewTouchEnd}
+                          className="flex-1 overflow-y-auto p-6 markdown-preview animate-fade-in bg-white mobile-swipe-surface"
+                          dangerouslySetInnerHTML={{ __html: renderedHTML }}
+                        />
+                      ) : (
+                        <div
+                          ref={previewRef}
+                          className="flex-1 overflow-y-auto p-6 bg-white text-sm text-slate-400"
+                          onTouchStart={handlePreviewTouchStart}
+                          onTouchEnd={handlePreviewTouchEnd}
+                        >
+                          プレビューは空です。
+                        </div>
+                      )}
                     </div>
                   </div>
-                )}
-              </div>
+                </>
+              ) : (
+                <div className="flex-1 flex items-center justify-center bg-white animate-fade-in">
+                  <div className="text-center px-8">
+                    <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-[#7C4DFF] to-[#651FFF] flex items-center justify-center shadow-lg shadow-purple-200">
+                      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
+                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                        <path d="M14 2v6h6" />
+                        <path d="M9 15h6" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-800 mb-2">記事はまだ生成されていません</h3>
+                    <p className="text-slate-400 text-sm max-w-md leading-relaxed">
+                      {dataSource === 'api'
+                        ? 'この動画はシート上の対象ですが、まだ記事ファイルが生成されていません。次回の自動取得で再試行されます。'
+                        : dataSource === 'error'
+                          ? 'manifest の取得に失敗しています。更新ボタンで再読込するか、Actions の状態をご確認ください。'
+                          : 'manifest 生成待ちです。更新ボタンからスプレッドシート再読込を実行できます。'}
+                    </p>
+                    {selectedVideo.lastFailureMessage ? (
+                      <div className="mt-4 max-w-xl rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-left">
+                        <p className="text-xs font-bold text-amber-700">
+                          最終失敗: {selectedVideo.lastFailureStage || '未分類'}
+                        </p>
+                        <p className="mt-1 text-xs leading-relaxed text-amber-900">
+                          {selectedVideo.lastFailureMessage}
+                        </p>
+                        <p className="mt-1 text-[11px] text-amber-700">
+                          {formatDateTime(selectedVideo.lastFailureAt)}
+                        </p>
+                      </div>
+                    ) : null}
+                    {indexError ? <p className="mt-3 text-[11px] text-slate-400">{indexError}</p> : null}
+                  </div>
+                </div>
+              )}
             </main>
 
             {videoContextMenu.visible && videoContextMenu.video ? (

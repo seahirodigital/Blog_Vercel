@@ -154,8 +154,16 @@ async function getAccessToken() {
 }
 
 function stripFrontmatter(markdownText = '') {
-  const match = markdownText.match(/^---\s*\n[\s\S]*?\n---\s*\n?/);
-  return match ? markdownText.slice(match[0].length) : markdownText;
+  return splitFrontmatter(markdownText).body;
+}
+
+function splitFrontmatter(markdownText = '') {
+  const text = String(markdownText || '');
+  const match = text.match(/^---\s*\n[\s\S]*?\n---\s*\n?/);
+  return {
+    frontmatter: match ? match[0] : '',
+    body: match ? text.slice(match[0].length) : text,
+  };
 }
 
 function toTimestamp(value = '') {
@@ -241,8 +249,8 @@ async function fetchManifest(token) {
   };
 }
 
-async function fetchArticleContent(token, itemId) {
-  const url = `${GRAPH_API}/me/drive/items/${itemId}/content`;
+async function fetchArticleRawContent(token, itemId) {
+  const url = `${GRAPH_API}/me/drive/items/${encodeURIComponent(itemId)}/content`;
   const response = await fetch(url, {
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -250,10 +258,35 @@ async function fetchArticleContent(token, itemId) {
     throw new Error(`記事本文の取得に失敗しました: ${response.status}`);
   }
 
-  const raw = await response.text();
+  return response.text();
+}
+
+async function fetchArticleContent(token, itemId) {
+  const raw = await fetchArticleRawContent(token, itemId);
   return {
     content: stripFrontmatter(raw),
   };
+}
+
+async function saveArticleContent(token, itemId, content) {
+  const raw = await fetchArticleRawContent(token, itemId);
+  const { frontmatter } = splitFrontmatter(raw);
+  const nextBody = String(content ?? '').replace(/^\uFEFF/, '');
+  const nextContent = `${frontmatter}${nextBody}`;
+  const response = await fetch(`${GRAPH_API}/me/drive/items/${encodeURIComponent(itemId)}/content`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'text/plain; charset=utf-8',
+    },
+    body: nextContent,
+  });
+
+  if (!response.ok) {
+    throw new Error(`記事本文の保存に失敗しました: ${response.status} ${await response.text()}`);
+  }
+
+  return response.json();
 }
 
 function normalizeYoutubeUrl(url = '') {
@@ -490,9 +523,29 @@ async function handleArticleDeleteRequest(req, res, token) {
   return res.status(200).json({ success: true });
 }
 
+async function handleArticleSaveRequest(req, res, token) {
+  const articleId = req.body?.articleId || '';
+  if (!articleId) {
+    return res.status(400).json({ success: false, error: 'articleId が不足しています。' });
+  }
+  if (req.body?.content === undefined || req.body?.content === null) {
+    return res.status(400).json({ success: false, error: 'content が不足しています。' });
+  }
+
+  const result = await saveArticleContent(token, articleId, req.body.content);
+  return res.status(200).json({
+    success: true,
+    id: result.id || articleId,
+    name: result.name || '',
+    webUrl: result.webUrl || '',
+    lastModified: result.lastModifiedDateTime || new Date().toISOString(),
+    size: result.size || 0,
+  });
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Cache-Control', 'no-store');
 
@@ -509,6 +562,9 @@ export default async function handler(req, res) {
     }
     if (req.method === 'POST' && resource === 'priority') {
       return await handlePriorityRequest(req, res, token);
+    }
+    if (req.method === 'PUT' && (resource === 'article' || resource === 'save')) {
+      return await handleArticleSaveRequest(req, res, token);
     }
     if (req.method === 'DELETE' && (resource === 'article' || resource === 'delete')) {
       return await handleArticleDeleteRequest(req, res, token);
