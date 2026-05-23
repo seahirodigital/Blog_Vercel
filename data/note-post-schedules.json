@@ -5670,7 +5670,7 @@
   },
   {
     "id": "13fa935a-1b67-4d93-b633-abf872c78762",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc8420ab2ca964c4bb470e60ba654fa95",
     "title": "medicube Allin1 美顔器 レビュー比較まとめ",
     "name": "medicube Allin1 美顔器 レビュー比較まとめ.md",
@@ -5679,10 +5679,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T01:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-23T00:25:09.141613+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ff655327-eb90-45e6-aeba-ea2343c32b87",
