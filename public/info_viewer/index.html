@@ -775,10 +775,10 @@
     .panel-toggle-button {
       position: absolute;
       left: 50%;
-      bottom: 12px;
-      transform: translateX(-50%);
-      width: 24px;
-      height: 24px;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 30px;
+      height: 30px;
       border-radius: 9999px;
       border: 1px solid #d9ccff;
       background: #ffffff;
@@ -793,7 +793,7 @@
 
     .panel-toggle-button:hover {
       background: #f5f3ff;
-      transform: translateX(-50%) scale(1.06);
+      transform: translate(-50%, -50%) scale(1.06);
       box-shadow: 0 14px 28px rgba(124, 77, 255, 0.24);
     }
 
@@ -2105,6 +2105,7 @@
         const loadedEditorKeyRef = useRef('');
         const editorScrolling = useRef(false);
         const previewScrolling = useRef(false);
+        const editorUndoStackRef = useRef([]);
 
         const onChannelResizeStart = useCallback((e) => {
           if (e.button !== 0) return;
@@ -2333,6 +2334,7 @@
             setSaveMessage('');
             setDraggingImage(false);
             setMobileArticleTab('editor');
+            editorUndoStackRef.current = [];
           }
         }, [editorDirty, originalEditorMarkdown, selectedEditorKey, selectedMarkdown]);
 
@@ -2439,10 +2441,47 @@
           })));
         }, []);
 
-        const insertMarkdownAtCursor = useCallback((text) => {
+        const getTextareaDropPosition = useCallback((event) => {
           const textarea = textareaRef.current;
-          const start = textarea ? textarea.selectionStart : editorMarkdown.length;
-          const end = textarea ? textarea.selectionEnd : editorMarkdown.length;
+          if (!textarea) return editorMarkdown.length;
+
+          const rect = textarea.getBoundingClientRect();
+          const style = window.getComputedStyle(textarea);
+          const paddingLeft = parseFloat(style.paddingLeft) || 0;
+          const paddingTop = parseFloat(style.paddingTop) || 0;
+          const lineHeight = parseFloat(style.lineHeight) || 24;
+          const font = `${style.fontSize} ${style.fontFamily}`;
+          const canvas = getTextareaDropPosition.canvas || document.createElement('canvas');
+          getTextareaDropPosition.canvas = canvas;
+          const context = canvas.getContext('2d');
+          context.font = font;
+          const charWidth = Math.max(1, context.measureText('あ').width || context.measureText('M').width || 8);
+
+          const lineIndex = Math.max(0, Math.floor((event.clientY - rect.top + textarea.scrollTop - paddingTop) / lineHeight));
+          const column = Math.max(0, Math.round((event.clientX - rect.left + textarea.scrollLeft - paddingLeft) / charWidth));
+          const lines = editorMarkdown.split('\n');
+          const clampedLine = Math.min(lineIndex, Math.max(0, lines.length - 1));
+          const clampedColumn = Math.min(column, Array.from(lines[clampedLine] || '').length);
+          let position = 0;
+          for (let index = 0; index < clampedLine; index += 1) {
+            position += lines[index].length + 1;
+          }
+          return position + clampedColumn;
+        }, [editorMarkdown]);
+
+        const focusEditorAtPosition = useCallback((position) => {
+          const textarea = textareaRef.current;
+          if (!textarea) return;
+          const caret = Math.min(Math.max(0, position), editorMarkdown.length);
+          textarea.focus();
+          textarea.setSelectionRange(caret, caret);
+        }, [editorMarkdown.length]);
+
+        const insertMarkdownAtCursor = useCallback((text, position = null, options = {}) => {
+          const textarea = textareaRef.current;
+          const explicitPosition = Number.isFinite(position);
+          const start = explicitPosition ? position : textarea ? textarea.selectionStart : editorMarkdown.length;
+          const end = explicitPosition ? position : textarea ? textarea.selectionEnd : editorMarkdown.length;
           const inserted = String(text || '');
           let nextCaret = start + inserted.length;
 
@@ -2450,7 +2489,19 @@
             const safeStart = Math.min(Math.max(0, start), current.length);
             const safeEnd = Math.min(Math.max(safeStart, end), current.length);
             nextCaret = safeStart + inserted.length;
-            return `${current.slice(0, safeStart)}${inserted}${current.slice(safeEnd)}`;
+            const nextValue = `${current.slice(0, safeStart)}${inserted}${current.slice(safeEnd)}`;
+            if (options.recordUndo) {
+              editorUndoStackRef.current.push({
+                markdown: current,
+                afterMarkdown: nextValue,
+                selectionStart: safeStart,
+                selectionEnd: safeEnd,
+              });
+              if (editorUndoStackRef.current.length > 50) {
+                editorUndoStackRef.current.shift();
+              }
+            }
+            return nextValue;
           });
           setCopiedArticle(false);
 
@@ -2469,14 +2520,68 @@
           reader.readAsDataURL(file);
         }), []);
 
+        const uploadImageDataUrl = useCallback(async ({ dataUrl, name, mimeType }) => {
+          const [header, data = ''] = String(dataUrl || '').split(',');
+          const resolvedMime = mimeType || (header.match(/^data:([^;]+);base64$/) || [])[1] || 'application/octet-stream';
+          if (!data || !resolvedMime.startsWith('image/')) {
+            throw new Error('画像データを読み取れませんでした');
+          }
+
+          const response = await fetch('/api/info-viewer?resource=image', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name,
+              mimeType: resolvedMime,
+              data,
+            }),
+          });
+          const payload = await response.json();
+          if (!response.ok || payload.success === false || !payload.src) {
+            throw new Error(payload.error || `image API ${response.status}`);
+          }
+          return payload;
+        }, []);
+
+        const uploadImageFile = useCallback(async (file) => {
+          const dataUrl = await readImageFileAsDataUrl(file);
+          return uploadImageDataUrl({
+            dataUrl,
+            name: file.name || 'image',
+            mimeType: file.type || '',
+          });
+        }, [readImageFileAsDataUrl, uploadImageDataUrl]);
+
+        const shortenEmbeddedDataImages = useCallback(async (markdown) => {
+          const pattern = /!\[([^\]]*)\]\((data:image\/[^;]+;base64,[^)]+)\)/g;
+          const matches = [...String(markdown || '').matchAll(pattern)];
+          if (!matches.length) return markdown;
+
+          let next = String(markdown || '');
+          for (const match of matches) {
+            const [fullMatch, altText, dataUrl] = match;
+            const mimeType = (dataUrl.match(/^data:([^;]+);base64,/) || [])[1] || 'image/png';
+            const ext = mimeType.split('/')[1] || 'png';
+            const upload = await uploadImageDataUrl({
+              dataUrl,
+              name: `${altText || 'image'}.${ext}`,
+              mimeType,
+            });
+            const label = upload.name || altText || 'image';
+            next = next.replace(fullMatch, `![${label}](${upload.src})`);
+          }
+          return next;
+        }, [uploadImageDataUrl]);
+
         const handleEditorDragOver = useCallback((event) => {
           const items = Array.from(event.dataTransfer?.items || []);
           const hasImage = items.some((item) => item.kind === 'file' && String(item.type || '').startsWith('image/'));
           if (!hasImage) return;
           event.preventDefault();
           event.dataTransfer.dropEffect = 'copy';
+          focusEditorAtPosition(getTextareaDropPosition(event));
           setDraggingImage(true);
-        }, []);
+        }, [focusEditorAtPosition, getTextareaDropPosition]);
 
         const handleEditorDragLeave = useCallback((event) => {
           if (event.currentTarget.contains(event.relatedTarget)) return;
@@ -2493,19 +2598,69 @@
 
           event.preventDefault();
           setDraggingImage(false);
+          const dropPosition = getTextareaDropPosition(event);
 
           try {
             const imageMarkdown = await Promise.all(imageFiles.map(async (file) => {
-              const dataUrl = await readImageFileAsDataUrl(file);
+              const upload = await uploadImageFile(file);
               const safeName = String(file.name || 'image').replace(/[\[\]()]/g, ' ').trim() || 'image';
-              return `![${safeName}](${dataUrl})`;
+              return `![${upload.name || safeName}](${upload.src})`;
             }));
-            insertMarkdownAtCursor(`\n\n${imageMarkdown.join('\n\n')}\n\n`);
-            setSaveMessage(`${imageMarkdown.length}枚の画像を挿入しました`);
+            insertMarkdownAtCursor(`\n\n${imageMarkdown.join('\n\n')}\n\n`, dropPosition, { recordUndo: true });
+            setSaveMessage(`${imageMarkdown.length}枚の画像をアップロードして挿入しました`);
           } catch (error) {
             setSaveMessage(error.message || '画像の読み込みに失敗しました');
           }
-        }, [insertMarkdownAtCursor, readImageFileAsDataUrl]);
+        }, [getTextareaDropPosition, insertMarkdownAtCursor, uploadImageFile]);
+
+        useEffect(() => {
+          if (!editorMarkdown.includes('](data:image/')) return undefined;
+          let cancelled = false;
+
+          shortenEmbeddedDataImages(editorMarkdown)
+            .then((nextMarkdown) => {
+              if (cancelled || nextMarkdown === editorMarkdown) return;
+              editorUndoStackRef.current.push({
+                markdown: editorMarkdown,
+                afterMarkdown: nextMarkdown,
+                selectionStart: textareaRef.current?.selectionStart || 0,
+                selectionEnd: textareaRef.current?.selectionEnd || 0,
+              });
+              setEditorMarkdown(nextMarkdown);
+              setCopiedArticle(false);
+              setSaveMessage('埋め込み画像を短いリンクへ変換しました');
+            })
+            .catch((error) => {
+              if (!cancelled) {
+                setSaveMessage(error.message || '埋め込み画像の変換に失敗しました');
+              }
+            });
+
+          return () => {
+            cancelled = true;
+          };
+        }, [editorMarkdown, shortenEmbeddedDataImages]);
+
+        const handleEditorKeyDown = useCallback((event) => {
+          if (!(event.ctrlKey || event.metaKey) || event.shiftKey || event.key.toLowerCase() !== 'z') {
+            return;
+          }
+          const previous = editorUndoStackRef.current[editorUndoStackRef.current.length - 1];
+          if (!previous) return;
+          if (previous.afterMarkdown && previous.afterMarkdown !== editorMarkdown) return;
+
+          event.preventDefault();
+          editorUndoStackRef.current.pop();
+          setEditorMarkdown(previous.markdown);
+          setCopiedArticle(false);
+          setSaveMessage('編集を戻しました');
+          window.requestAnimationFrame(() => {
+            const textarea = textareaRef.current;
+            if (!textarea) return;
+            textarea.focus();
+            textarea.setSelectionRange(previous.selectionStart, previous.selectionEnd);
+          });
+        }, [editorMarkdown]);
 
         const handleEditorScroll = useCallback(() => {
           if (previewScrolling.current) return;
@@ -3101,6 +3256,7 @@
                       <textarea
                         ref={textareaRef}
                         onScroll={handleEditorScroll}
+                        onKeyDown={handleEditorKeyDown}
                         value={editorMarkdown}
                         onChange={(event) => {
                           setEditorMarkdown(event.target.value);

@@ -7,6 +7,7 @@ const PRIMARY_FOLDER =
   process.env.INFO_VIEWER_ONEDRIVE_FOLDER || 'Obsidian in Onedrive 202602/Vercel_Blog/info_viewer';
 const LEGACY_FOLDER = 'Obsidian in Onedrive 202602/Vercel_Blog/情報取得/info_viewer';
 const STATE_RELATIVE_PATH = 'state/pipeline_state.json';
+const ASSET_RELATIVE_FOLDER = 'assets';
 
 function folderCandidates() {
   const configuredFallbacks = String(process.env.INFO_VIEWER_ONEDRIVE_FALLBACK_FOLDERS || '')
@@ -289,6 +290,82 @@ async function saveArticleContent(token, itemId, content) {
   return response.json();
 }
 
+function sanitizeAssetName(name = '', mimeType = '') {
+  const fallbackExt = String(mimeType || '').split('/')[1] || 'png';
+  const rawName = String(name || `image.${fallbackExt}`).replace(/[\\/:*?"<>|]+/g, '_').trim();
+  const normalized = rawName || `image.${fallbackExt}`;
+  const hasExt = /\.[A-Za-z0-9]{2,8}$/.test(normalized);
+  return hasExt ? normalized : `${normalized}.${fallbackExt}`;
+}
+
+function uniqueAssetName(name = '', mimeType = '') {
+  const safeName = sanitizeAssetName(name, mimeType);
+  const dotIndex = safeName.lastIndexOf('.');
+  const base = dotIndex > 0 ? safeName.slice(0, dotIndex) : safeName;
+  const ext = dotIndex > 0 ? safeName.slice(dotIndex) : '';
+  const timestamp = new Date().toISOString().replace(/[-:.TZ]/g, '').slice(0, 14);
+  const random = Math.random().toString(36).slice(2, 8);
+  return `${timestamp}_${random}_${base}${ext}`;
+}
+
+async function uploadImageAsset(token, body = {}) {
+  const mimeType = String(body.mimeType || '').trim();
+  if (!mimeType.startsWith('image/')) {
+    throw new Error('画像ファイルだけをアップロードできます。');
+  }
+
+  const rawData = String(body.data || '').replace(/^data:[^,]+,/, '');
+  if (!rawData) {
+    throw new Error('画像データが不足しています。');
+  }
+
+  const buffer = Buffer.from(rawData, 'base64');
+  if (!buffer.length) {
+    throw new Error('画像データを読み取れませんでした。');
+  }
+
+  const filename = uniqueAssetName(body.name || 'image', mimeType);
+  await ensureFolderPath(token, fullPath(PRIMARY_FOLDER, ASSET_RELATIVE_FOLDER));
+
+  const assetPath = fullPath(PRIMARY_FOLDER, `${ASSET_RELATIVE_FOLDER}/${filename}`);
+  const response = await fetch(`${GRAPH_API}/me/drive/root:/${encodeFolderPath(assetPath)}:/content`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': mimeType,
+    },
+    body: buffer,
+  });
+
+  if (!response.ok) {
+    throw new Error(`画像アップロードに失敗しました: ${response.status} ${await response.text()}`);
+  }
+
+  const result = await response.json();
+  const id = result.id || '';
+  return {
+    id,
+    name: result.name || filename,
+    mimeType,
+    src: `/api/info-viewer?resource=image&id=${encodeURIComponent(id)}&mime=${encodeURIComponent(mimeType)}`,
+  };
+}
+
+async function fetchImageAsset(token, itemId, mimeType = '') {
+  const safeMime = String(mimeType || '').startsWith('image/') ? String(mimeType) : 'image/png';
+  const response = await fetch(`${GRAPH_API}/me/drive/items/${encodeURIComponent(itemId)}/content`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!response.ok) {
+    throw new Error(`画像の取得に失敗しました: ${response.status}`);
+  }
+
+  return {
+    contentType: response.headers.get('content-type') || safeMime,
+    buffer: Buffer.from(await response.arrayBuffer()),
+  };
+}
+
 function normalizeYoutubeUrl(url = '') {
   const raw = String(url || '').trim();
   if (!raw) return '';
@@ -543,6 +620,26 @@ async function handleArticleSaveRequest(req, res, token) {
   });
 }
 
+async function handleImageUploadRequest(req, res, token) {
+  const image = await uploadImageAsset(token, req.body || {});
+  return res.status(200).json({
+    success: true,
+    ...image,
+  });
+}
+
+async function handleImageReadRequest(req, res, token) {
+  const imageId = req.query?.id || '';
+  if (!imageId) {
+    return res.status(400).json({ success: false, error: 'id が不足しています。' });
+  }
+
+  const image = await fetchImageAsset(token, imageId, req.query?.mime || '');
+  res.setHeader('Content-Type', image.contentType);
+  res.setHeader('Cache-Control', 'public, max-age=86400');
+  return res.status(200).send(image.buffer);
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
@@ -557,8 +654,14 @@ export default async function handler(req, res) {
     const token = await getAccessToken();
     const resource = resolveResource(req);
 
+    if (req.method === 'GET' && resource === 'image') {
+      return await handleImageReadRequest(req, res, token);
+    }
     if (req.method === 'GET') {
       return await handleIndexRequest(req, res, token);
+    }
+    if (req.method === 'POST' && resource === 'image') {
+      return await handleImageUploadRequest(req, res, token);
     }
     if (req.method === 'POST' && resource === 'priority') {
       return await handlePriorityRequest(req, res, token);
