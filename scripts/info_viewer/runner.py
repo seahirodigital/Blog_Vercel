@@ -28,6 +28,18 @@ GEMINI_TOKEN_POOLS = {
 }
 
 
+def _requires_notion_save() -> bool:
+    return str(os.getenv("INFO_VIEWER_REQUIRE_NOTION_SAVE", "true")).strip().lower() not in {
+        "0",
+        "false",
+        "no",
+        "n",
+    }
+
+
+state_store.REQUIRE_NOTION_SAVE = _requires_notion_save()
+
+
 def parse_args():
     parser = argparse.ArgumentParser(description="info_viewer 自動取得パイプライン")
     parser.add_argument("--max-items", type=int, default=int(os.getenv("INFO_VIEWER_MAX_ITEMS", "0") or 0))
@@ -200,7 +212,7 @@ def _sync_sheet_status_for_saved_articles(
         normalized_url = _video_key(video.get("video_url", ""))
         if normalized_url not in existing_article_map or video.get("status") == COMPLETED_STATUS:
             continue
-        if notion_writer.is_configured():
+        if _requires_notion_save() and notion_writer.is_configured():
             queue_record = state.get("videos", {}).get(normalized_url, {}) if isinstance(state.get("videos"), dict) else {}
             if not queue_record.get("notionPageId"):
                 _append_processing_log(
@@ -250,7 +262,7 @@ def _require_environment(run_mode: str):
         required.append("APIFY_API_KEY")
     if run_mode in {"process_queue", "full"} and not any(token for _, token in GEMINI_TOKEN_POOLS.values()):
         required.append("GEMINI_TOKEN_invest / GEMINI_TOKEN_INVESTsub / GEMINI_TOKEN_tech")
-    if run_mode in {"process_queue", "full"} and not notion_writer.is_configured():
+    if run_mode in {"process_queue", "full"} and _requires_notion_save() and not notion_writer.is_configured():
         required.append("NOTION_API_KEY / NOTION_TOKEN")
     if required:
         print(f"必要な環境変数が不足しています: {', '.join(required)}")
@@ -1441,86 +1453,123 @@ def _process_pending_videos(
             )
             continue
 
-        try:
-            notion_result = notion_writer.save_article(
-                video=video,
-                title=actual_title,
-                markdown=markdown,
-                transcript_text=transcript.get("captions", ""),
-                upload_result=upload_result,
-            )
-            upload_result["notionPageId"] = notion_result.get("pageId", "")
-            upload_result["notionDatabaseId"] = notion_result.get("databaseId", "")
-            upload_result["notionAction"] = notion_result.get("action", "")
+        notion_required = _requires_notion_save()
+        if notion_writer.is_configured():
+            try:
+                notion_result = notion_writer.save_article(
+                    video=video,
+                    title=actual_title,
+                    markdown=markdown,
+                    transcript_text=transcript.get("captions", ""),
+                    upload_result=upload_result,
+                )
+                upload_result["notionPageId"] = notion_result.get("pageId", "")
+                upload_result["notionDatabaseId"] = notion_result.get("databaseId", "")
+                upload_result["notionAction"] = notion_result.get("action", "")
+                _append_processing_log(
+                    processing_logs,
+                    run_id,
+                    video,
+                    "Notion",
+                    "success",
+                    "Markdown を Notion DB に保存しました",
+                    notionPageId=notion_result.get("pageId"),
+                    notionAction=notion_result.get("action"),
+                    notionSchema=notion_writer.schema_summary(notion_result),
+                    geminiRequestedProfile=requested_profile,
+                    geminiResolvedProfile=resolved_profile,
+                    geminiTokenEnv=gemini_token_name,
+                    geminiCandidateOrder=candidate_order,
+                )
+                print(f"   Notion保存完了: {notion_writer.schema_summary(notion_result)}")
+            except Exception as error:
+                error_message = str(error)
+                if notion_required:
+                    retry_record = state_store.mark_retry(
+                        state,
+                        video["video_url"],
+                        "Notion",
+                        error_message,
+                        run_id,
+                        wait_seconds=state_store.resolve_retry_wait_seconds(),
+                        status=state_store.FAILED_STATUS,
+                    )
+                    state_store.save_state(state)
+                    _append_failure(
+                        failures_this_run,
+                        video,
+                        "notion",
+                        "Notion",
+                        error_message,
+                        fileId=upload_result.get("id"),
+                        relativePath=upload_result.get("relativePath"),
+                        geminiRequestedProfile=requested_profile,
+                        geminiResolvedProfile=resolved_profile,
+                        geminiTokenEnv=gemini_token_name,
+                        geminiCandidateOrder=candidate_order,
+                        nextRetryAt=retry_record.get("nextRetryAt"),
+                    )
+                    _append_processing_log(
+                        processing_logs,
+                        run_id,
+                        video,
+                        "Notion",
+                        "failed",
+                        error_message,
+                        fileId=upload_result.get("id"),
+                        relativePath=upload_result.get("relativePath"),
+                        geminiRequestedProfile=requested_profile,
+                        geminiResolvedProfile=resolved_profile,
+                        geminiTokenEnv=gemini_token_name,
+                        geminiCandidateOrder=candidate_order,
+                        nextRetryAt=retry_record.get("nextRetryAt"),
+                    )
+                    continue
+
+                _append_processing_log(
+                    processing_logs,
+                    run_id,
+                    video,
+                    "Notion",
+                    "skipped",
+                    "Notion保存に失敗しましたが、任意保存のためOneDrive記事生成を続行しました",
+                    fileId=upload_result.get("id"),
+                    relativePath=upload_result.get("relativePath"),
+                    notionError=error_message,
+                    geminiRequestedProfile=requested_profile,
+                    geminiResolvedProfile=resolved_profile,
+                    geminiTokenEnv=gemini_token_name,
+                    geminiCandidateOrder=candidate_order,
+                )
+        else:
             _append_processing_log(
                 processing_logs,
                 run_id,
                 video,
                 "Notion",
-                "success",
-                "Markdown を Notion DB に保存しました",
-                notionPageId=notion_result.get("pageId"),
-                notionAction=notion_result.get("action"),
-                notionSchema=notion_writer.schema_summary(notion_result),
+                "skipped",
+                "Notion設定がないため、OneDrive記事生成のみ続行しました",
                 geminiRequestedProfile=requested_profile,
                 geminiResolvedProfile=resolved_profile,
                 geminiTokenEnv=gemini_token_name,
                 geminiCandidateOrder=candidate_order,
             )
-            print(f"   Notion保存完了: {notion_writer.schema_summary(notion_result)}")
-        except Exception as error:
-            error_message = str(error)
-            retry_record = state_store.mark_retry(
-                state,
-                video["video_url"],
-                "Notion",
-                error_message,
-                run_id,
-                wait_seconds=state_store.resolve_retry_wait_seconds(),
-                status=state_store.FAILED_STATUS,
-            )
-            state_store.save_state(state)
-            _append_failure(
-                failures_this_run,
-                video,
-                "notion",
-                "Notion",
-                error_message,
-                fileId=upload_result.get("id"),
-                relativePath=upload_result.get("relativePath"),
-                geminiRequestedProfile=requested_profile,
-                geminiResolvedProfile=resolved_profile,
-                geminiTokenEnv=gemini_token_name,
-                geminiCandidateOrder=candidate_order,
-                nextRetryAt=retry_record.get("nextRetryAt"),
-            )
-            _append_processing_log(
-                processing_logs,
-                run_id,
-                video,
-                "Notion",
-                "failed",
-                error_message,
-                fileId=upload_result.get("id"),
-                relativePath=upload_result.get("relativePath"),
-                geminiRequestedProfile=requested_profile,
-                geminiResolvedProfile=resolved_profile,
-                geminiTokenEnv=gemini_token_name,
-                geminiCandidateOrder=candidate_order,
-                nextRetryAt=retry_record.get("nextRetryAt"),
-            )
-            continue
 
         success_count += 1
         state_store.mark_done(state, video["video_url"], run_id, upload_result=upload_result)
         state_store.save_state(state)
+        save_message = (
+            "Markdown を OneDrive と Notion に保存しました"
+            if upload_result.get("notionPageId")
+            else "Markdown を OneDrive に保存しました"
+        )
         _append_processing_log(
             processing_logs,
             run_id,
             video,
             "OneDrive",
             "success",
-            "Markdown を OneDrive と Notion に保存しました",
+            save_message,
             fileId=upload_result.get("id"),
             relativePath=upload_result.get("relativePath"),
             notionPageId=upload_result.get("notionPageId"),
