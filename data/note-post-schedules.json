@@ -6571,7 +6571,7 @@
   },
   {
     "id": "917352f8-a860-4117-a2f4-f22513e54338",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf50904d97c0a4f1db24441019508ecf7",
     "title": "パナソニック NT-D700-K オーブントースター レビュー比較まとめ",
     "name": "パナソニック NT-D700-K オーブントースター レビュー比較まとめ.md",
@@ -6580,10 +6580,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T14:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-23T13:25:26.393016+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "26ebc6fa-7657-4b9d-b16e-1fad10113019",
