@@ -6936,7 +6936,7 @@
   },
   {
     "id": "a85398fb-0adb-4eeb-b7a2-1d2ac7cabf7b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfeef0edfe3d24738a5259f106429ce31",
     "title": "シャープ DY-S01-W 掃除機 レビュー比較まとめ",
     "name": "シャープ DY-S01-W 掃除機 レビュー比較まとめ.md",
@@ -6945,10 +6945,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T20:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-23T19:55:42.605944+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9309cd20-ef1a-4db8-9214-537722c2250d",
