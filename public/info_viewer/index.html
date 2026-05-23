@@ -2087,6 +2087,7 @@
         const [copiedArticle, setCopiedArticle] = useState(false);
         const [saveMessage, setSaveMessage] = useState('');
         const [draggingImage, setDraggingImage] = useState(false);
+        const [pendingImageUploads, setPendingImageUploads] = useState(0);
         const channelDragging = useRef(false);
         const videoDragging = useRef(false);
         const editorDragging = useRef(false);
@@ -2106,6 +2107,7 @@
         const editorScrolling = useRef(false);
         const previewScrolling = useRef(false);
         const editorUndoStackRef = useRef([]);
+        const temporaryImageUrlsRef = useRef(new Set());
 
         const onChannelResizeStart = useCallback((e) => {
           if (e.button !== 0) return;
@@ -2323,6 +2325,7 @@
         const editorDirty = editorMarkdown !== originalEditorMarkdown;
         const canEditSelectedArticle = Boolean(selectedVideo?.articleId || selectedVideo?.markdown || selectedMarkdown);
         const selectedArticleIsLoading = Boolean(articleLoadingId && articleLoadingId === selectedVideo.articleId && !selectedMarkdown && !editorMarkdown);
+        const hasPendingImages = pendingImageUploads > 0 || editorMarkdown.includes('blob:') || editorMarkdown.includes('](data:image/');
 
         useEffect(() => {
           const source = selectedMarkdown || '';
@@ -2335,6 +2338,9 @@
             setDraggingImage(false);
             setMobileArticleTab('editor');
             editorUndoStackRef.current = [];
+            temporaryImageUrlsRef.current.forEach((url) => URL.revokeObjectURL(url));
+            temporaryImageUrlsRef.current.clear();
+            setPendingImageUploads(0);
           }
         }, [editorDirty, originalEditorMarkdown, selectedEditorKey, selectedMarkdown]);
 
@@ -2441,42 +2447,6 @@
           })));
         }, []);
 
-        const getTextareaDropPosition = useCallback((event) => {
-          const textarea = textareaRef.current;
-          if (!textarea) return editorMarkdown.length;
-
-          const rect = textarea.getBoundingClientRect();
-          const style = window.getComputedStyle(textarea);
-          const paddingLeft = parseFloat(style.paddingLeft) || 0;
-          const paddingTop = parseFloat(style.paddingTop) || 0;
-          const lineHeight = parseFloat(style.lineHeight) || 24;
-          const font = `${style.fontSize} ${style.fontFamily}`;
-          const canvas = getTextareaDropPosition.canvas || document.createElement('canvas');
-          getTextareaDropPosition.canvas = canvas;
-          const context = canvas.getContext('2d');
-          context.font = font;
-          const charWidth = Math.max(1, context.measureText('あ').width || context.measureText('M').width || 8);
-
-          const lineIndex = Math.max(0, Math.floor((event.clientY - rect.top + textarea.scrollTop - paddingTop) / lineHeight));
-          const column = Math.max(0, Math.round((event.clientX - rect.left + textarea.scrollLeft - paddingLeft) / charWidth));
-          const lines = editorMarkdown.split('\n');
-          const clampedLine = Math.min(lineIndex, Math.max(0, lines.length - 1));
-          const clampedColumn = Math.min(column, Array.from(lines[clampedLine] || '').length);
-          let position = 0;
-          for (let index = 0; index < clampedLine; index += 1) {
-            position += lines[index].length + 1;
-          }
-          return position + clampedColumn;
-        }, [editorMarkdown]);
-
-        const focusEditorAtPosition = useCallback((position) => {
-          const textarea = textareaRef.current;
-          if (!textarea) return;
-          const caret = Math.min(Math.max(0, position), editorMarkdown.length);
-          textarea.focus();
-          textarea.setSelectionRange(caret, caret);
-        }, [editorMarkdown.length]);
-
         const insertMarkdownAtCursor = useCallback((text, position = null, options = {}) => {
           const textarea = textareaRef.current;
           const explicitPosition = Number.isFinite(position);
@@ -2573,15 +2543,26 @@
           return next;
         }, [uploadImageDataUrl]);
 
+        const replaceImageMarkdown = useCallback((fromMarkdown, toMarkdown) => {
+          setEditorMarkdown((current) => {
+            if (!current.includes(fromMarkdown)) return current;
+            const next = current.replace(fromMarkdown, toMarkdown);
+            editorUndoStackRef.current = editorUndoStackRef.current.map((entry) => ({
+              ...entry,
+              afterMarkdown: entry.afterMarkdown ? entry.afterMarkdown.replace(fromMarkdown, toMarkdown) : entry.afterMarkdown,
+            }));
+            return next;
+          });
+        }, []);
+
         const handleEditorDragOver = useCallback((event) => {
           const items = Array.from(event.dataTransfer?.items || []);
           const hasImage = items.some((item) => item.kind === 'file' && String(item.type || '').startsWith('image/'));
           if (!hasImage) return;
           event.preventDefault();
           event.dataTransfer.dropEffect = 'copy';
-          focusEditorAtPosition(getTextareaDropPosition(event));
           setDraggingImage(true);
-        }, [focusEditorAtPosition, getTextareaDropPosition]);
+        }, []);
 
         const handleEditorDragLeave = useCallback((event) => {
           if (event.currentTarget.contains(event.relatedTarget)) return;
@@ -2598,20 +2579,44 @@
 
           event.preventDefault();
           setDraggingImage(false);
-          const dropPosition = getTextareaDropPosition(event);
 
-          try {
-            const imageMarkdown = await Promise.all(imageFiles.map(async (file) => {
-              const upload = await uploadImageFile(file);
-              const safeName = String(file.name || 'image').replace(/[\[\]()]/g, ' ').trim() || 'image';
-              return `![${upload.name || safeName}](${upload.src})`;
-            }));
-            insertMarkdownAtCursor(`\n\n${imageMarkdown.join('\n\n')}\n\n`, dropPosition, { recordUndo: true });
-            setSaveMessage(`${imageMarkdown.length}枚の画像をアップロードして挿入しました`);
-          } catch (error) {
-            setSaveMessage(error.message || '画像の読み込みに失敗しました');
-          }
-        }, [getTextareaDropPosition, insertMarkdownAtCursor, uploadImageFile]);
+          const images = imageFiles.map((file) => {
+            const blobUrl = URL.createObjectURL(file);
+            temporaryImageUrlsRef.current.add(blobUrl);
+            const safeName = String(file.name || 'image').replace(/[\[\]()]/g, ' ').trim() || 'image';
+            return {
+              file,
+              safeName,
+              blobUrl,
+              markdown: `![${safeName}](${blobUrl})`,
+            };
+          });
+
+          insertMarkdownAtCursor(`\n\n${images.map((image) => image.markdown).join('\n\n')}\n\n`, null, { recordUndo: true });
+          setPendingImageUploads((count) => count + images.length);
+          setSaveMessage(`${images.length}枚の画像を表示しました。アップロード中です`);
+
+          images.forEach((image) => {
+            let uploaded = false;
+            uploadImageFile(image.file)
+              .then((upload) => {
+                uploaded = true;
+                const permanentMarkdown = `![${upload.name || image.safeName}](${upload.src})`;
+                replaceImageMarkdown(image.markdown, permanentMarkdown);
+                setSaveMessage('画像アップロードが完了しました');
+              })
+              .catch((error) => {
+                setSaveMessage(error.message || '画像アップロードに失敗しました。画像を削除して再度お試しください');
+              })
+              .finally(() => {
+                setPendingImageUploads((count) => Math.max(0, count - 1));
+                if (uploaded) {
+                  URL.revokeObjectURL(image.blobUrl);
+                  temporaryImageUrlsRef.current.delete(image.blobUrl);
+                }
+              });
+          });
+        }, [insertMarkdownAtCursor, replaceImageMarkdown, uploadImageFile]);
 
         useEffect(() => {
           if (!editorMarkdown.includes('](data:image/')) return undefined;
@@ -2701,6 +2706,10 @@
 
         const handleSaveArticle = useCallback(async () => {
           if (!canEditSelectedArticle) return;
+          if (hasPendingImages) {
+            setSaveMessage('画像アップロード完了後に保存できます');
+            return;
+          }
 
           if (!selectedVideo?.articleId) {
             updateVideoInChannels(selectedVideo.id, { markdown: editorMarkdown });
@@ -2743,7 +2752,7 @@
           } finally {
             setSavingArticle(false);
           }
-        }, [canEditSelectedArticle, editorMarkdown, selectedVideo, updateVideoInChannels]);
+        }, [canEditSelectedArticle, editorMarkdown, hasPendingImages, selectedVideo, updateVideoInChannels]);
 
         const handlePrioritizeVideo = useCallback(async (video) => {
           if (!video?.youtubeUrl || priorityLoadingId) return;
@@ -3216,7 +3225,7 @@
                           <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
                         </svg>
                         <span>MARKDOWN</span>
-                        <span className={`article-status-dot ${editorDirty ? 'dirty' : saveMessage.includes('保存') ? 'saved' : ''}`} title={editorDirty ? '未保存' : '保存済み'} />
+                        <span className={`article-status-dot ${editorDirty ? 'dirty' : saveMessage.includes('保存') ? 'saved' : ''}`} title={hasPendingImages ? '画像アップロード中' : editorDirty ? '未保存' : '保存済み'} />
                         {saveMessage ? <span className="hidden sm:inline truncate text-[11px] text-slate-400">{saveMessage}</span> : null}
                         <div className="ml-auto flex items-center gap-2">
                           <span>{editorMarkdown.length.toLocaleString()} 文字</span>
@@ -3236,13 +3245,13 @@
                           <button
                             type="button"
                             onClick={handleSaveArticle}
-                            disabled={savingArticle || !canEditSelectedArticle || !editorDirty}
+                            disabled={savingArticle || hasPendingImages || !canEditSelectedArticle || !editorDirty}
                             className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-bold transition-colors ${
-                              savingArticle || !editorDirty
+                              savingArticle || hasPendingImages || !editorDirty
                                 ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
                                 : 'bg-[#7C4DFF] text-white hover:bg-[#651FFF]'
                             }`}
-                            title="OneDrive に保存"
+                            title={hasPendingImages ? '画像アップロード完了後に保存できます' : 'OneDrive に保存'}
                           >
                             {savingArticle ? (
                               <svg className="animate-spin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 11-6.219-8.56" /></svg>
