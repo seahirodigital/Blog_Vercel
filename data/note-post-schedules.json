@@ -6710,7 +6710,7 @@
   },
   {
     "id": "bf266c33-2961-46b4-9924-4a238a051b6b",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sfdfe92cd5e2a48a985356fee853a1ee2",
     "title": "アテックスAtex AX-HPL368dg マッサージャー レビュー比較まとめ",
     "name": "アテックスAtex AX-HPL368dg マッサージャー レビュー比較まとめ.md",
@@ -6720,8 +6720,8 @@
     "publishAt": "2026-05-23T16:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-23T15:25:13.953277+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-23T16:02:18.296830+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n4cda1cb3da40?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
