@@ -6519,7 +6519,7 @@
   },
   {
     "id": "c4391735-4a11-4e58-8364-244f130081ff",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf03da1c0495d46509740a135886324b8",
     "title": "EUHOMY 3kw スポットクーラー レビュー比較まとめ",
     "name": "EUHOMY 3kw スポットクーラー レビュー比較まとめ.md",
@@ -6529,8 +6529,8 @@
     "publishAt": "2026-05-23T13:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-23T12:55:04.114598+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-23T13:32:22.491699+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n65f008d599bf?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
