@@ -6797,7 +6797,7 @@
   },
   {
     "id": "a087be4d-1f6a-4f4e-a11e-6894cca11d45",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s277713ec48fa4401a003319270df8ba9",
     "title": "パナソニック F-VC70XV-K パナソニック Panasonic レビュー比較まとめ",
     "name": "パナソニック F-VC70XV-K パナソニック Panasonic レビュー比較まとめ.md",
@@ -6807,8 +6807,8 @@
     "publishAt": "2026-05-23T17:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-23T16:25:39.439174+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-23T17:02:29.773374+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd98d7d365fd4?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
