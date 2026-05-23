@@ -6260,7 +6260,7 @@
   },
   {
     "id": "4afafd65-c5c9-4f21-90b0-85586b15e0ef",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s906866c1019e4e13862f4931ef9816fa",
     "title": "Brighte 91Brighte 美顔器 レビュー比較まとめ",
     "name": "Brighte 91Brighte 美顔器 レビュー比較まとめ.md",
@@ -6269,10 +6269,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T11:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-23T10:55:28.970198+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "dfa0e9d1-14f6-4b4b-8974-effab57d2e58",
