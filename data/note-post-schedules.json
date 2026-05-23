@@ -7161,7 +7161,7 @@
   },
   {
     "id": "b4271456-4570-4f24-aa32-631a3a0b7bf5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd428ba457b9f42bb9890e8caf7da769d",
     "title": "パナソニック EH-SP86-K 美顔器 レビュー比較まとめ",
     "name": "パナソニック EH-SP86-K 美顔器 レビュー比較まとめ.md",
@@ -7170,10 +7170,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T23:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-23T22:25:23.351442+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "be479c33-3ac0-467c-843d-5d1a9e1f7396",
