@@ -6398,7 +6398,7 @@
   },
   {
     "id": "7de47bdb-927f-41db-a028-537285ea9d56",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa4c8054f11274119aa8097264bfe8e45",
     "title": "パナソニック CH952SPF パナソニック Panasonic レビュー比較まとめ",
     "name": "パナソニック CH952SPF パナソニック Panasonic レビュー比較まとめ.md",
@@ -6407,10 +6407,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T12:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-23T11:55:16.815047+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c5b4460b-2657-4864-8a19-09b59827067e",
