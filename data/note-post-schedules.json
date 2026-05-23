@@ -6225,7 +6225,7 @@
   },
   {
     "id": "6ace302e-7d81-4dea-9a77-d61b95e31f3e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s80e0e681ce9248d88dfc09a415e20d06",
     "title": "ドクターエア MS-07 マッサージャー レビュー比較まとめ",
     "name": "ドクターエア MS-07 マッサージャー レビュー比較まとめ.md",
@@ -6234,10 +6234,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T11:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-23T10:25:04.294152+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e2fdd3b8-1858-46b8-979a-abc007e64cbf",
