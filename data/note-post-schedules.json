@@ -5843,7 +5843,7 @@
   },
   {
     "id": "79aa13b3-273a-4016-a674-c93f097d6c50",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd3c55f77bd664cf8af75be41f11d6ba4",
     "title": "パナソニック FD-F06A7-A 掃除機 レビュー比較まとめ",
     "name": "パナソニック FD-F06A7-A 掃除機 レビュー比較まとめ.md",
@@ -5852,10 +5852,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T06:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-23T05:55:04.005909+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7473c0f7-b2ed-48cd-bc22-7dd0fbbf68a9",
