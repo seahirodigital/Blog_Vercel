@@ -6086,7 +6086,7 @@
   },
   {
     "id": "0b53d033-c571-40c9-8e3f-87d367b57db3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s734a2802ba9f4c22a4bc55ff79762f0e",
     "title": "LESIR 150-180cm マッサージャー レビュー比較まとめ",
     "name": "ブランド LESIR 150-180cm マッサージャー レビュー比較まとめ.md",
@@ -6095,10 +6095,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T09:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-23T08:55:53.226664+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "484f1a7a-5be5-4f3b-bf29-b8321ad2d09a",
