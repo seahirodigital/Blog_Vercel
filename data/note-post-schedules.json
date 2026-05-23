@@ -5705,7 +5705,7 @@
   },
   {
     "id": "592a82ac-659c-42a6-b0fd-539d18c9d796",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s14e8a12f84294bb39ed4c508ff840d24",
     "title": "タイガー魔法瓶 JPF-G055KL 炊飯器 レビュー比較まとめ",
     "name": "タイガー魔法瓶 JPF-G055KL 炊飯器 レビュー比較まとめ.md",
@@ -5715,8 +5715,8 @@
     "publishAt": "2026-05-23T01:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-23T00:55:30.414733+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-23T01:32:25.820695+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n6a5b9def36a6?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
