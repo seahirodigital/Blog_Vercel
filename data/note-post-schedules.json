@@ -6745,7 +6745,7 @@
   },
   {
     "id": "2b468ea7-5112-41df-8533-798d7ddfd74f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s92da230849b44f3a945a637317eef7a0",
     "title": "東芝 VC-C7-R トルネオミニレビュー比較まとめ",
     "name": "ブランド ノーブランド品 VC-C7-R 掃除機 レビュー比較まとめ.md",
@@ -6755,8 +6755,8 @@
     "publishAt": "2026-05-23T16:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-23T15:55:56.992910+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-23T16:32:23.403586+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd0cb6c32c5bb?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
