@@ -5895,7 +5895,7 @@
   },
   {
     "id": "a2d5ffd4-fd1b-471f-a673-1133939dcb58",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6dbbc8396a364f72a5d3b458ca22c253",
     "title": "パナソニック NP-TH5-W 食器洗い乾燥機 レビュー比較まとめ",
     "name": "パナソニック NP-TH5-W 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -5904,10 +5904,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T07:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-23T06:55:25.513489+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ffbee3cd-2912-4b90-8db8-26144242a69b",
