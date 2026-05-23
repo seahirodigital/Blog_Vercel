@@ -7023,7 +7023,7 @@
   },
   {
     "id": "9daafe2f-28a8-4f46-9940-97019b828ee0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8362227741ea4695950c103d3f0f4a46",
     "title": "東芝 ER-D100A スチームオーブンレンジ レビュー比較まとめ",
     "name": "東芝 ER-D100A スチームオーブンレンジ レビュー比較まとめ.md",
@@ -7032,10 +7032,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T21:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-23T20:55:58.842963+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ad40431a-94c4-4d6c-be9b-ab38344ba4be",
