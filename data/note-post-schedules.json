@@ -5981,7 +5981,7 @@
   },
   {
     "id": "b0ddab8f-bd7e-4de0-b9f9-0c1d24e2eb66",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbe91be673d4e42998493c1d681591cee",
     "title": "MYTREX MT-MRA24B マッサージャー レビュー比較まとめ",
     "name": "MYTREX MT-MRA24B マッサージャー レビュー比較まとめ.md",
@@ -5990,10 +5990,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T08:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-23T07:25:37.018322+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "74e9657f-c2be-484e-a76e-d629cb938e26",
