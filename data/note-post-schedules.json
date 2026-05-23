@@ -6988,7 +6988,7 @@
   },
   {
     "id": "07f76654-75e4-462d-a537-2d8bf2a207c5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sacbde0e96337448cb7933c5b1865d4d7",
     "title": "NICHIDO SPC-25ACN スポットクーラー レビュー比較まとめ",
     "name": "ブランド NICHIDO SPC-25ACN スポットクーラー レビュー比較まとめ.md",
@@ -6997,10 +6997,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T21:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-23T20:25:50.952942+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8d3c7a52-5f13-4834-ac45-e14e399873db",
