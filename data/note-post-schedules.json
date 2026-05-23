@@ -7126,7 +7126,7 @@
   },
   {
     "id": "f6773eaf-56d9-4d88-9664-5080a8e20ba0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd89080cf3c6844f19f2acce7b4e10018",
     "title": "パナソニック NH-D603-W 衣類乾燥機 レビュー比較まとめ",
     "name": "パナソニック NH-D603-W 衣類乾燥機 レビュー比較まとめ.md",
@@ -7135,10 +7135,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T22:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-23T21:55:14.118657+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cd001780-ee11-49ef-94f5-5ba3fadbfe9b",
