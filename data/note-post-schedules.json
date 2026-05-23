@@ -6051,7 +6051,7 @@
   },
   {
     "id": "d343687a-f3e5-4a98-857c-38e74d5baf67",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9f46d455a28c411c8be541a5d2e908ab",
     "title": "タイガー魔法瓶 JPN-N100K 炊飯器 レビュー比較まとめ",
     "name": "タイガー魔法瓶 JPN-N100K 炊飯器 レビュー比較まとめ.md",
@@ -6060,10 +6060,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T09:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-23T08:25:28.934149+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "17f66c87-eadf-4def-a0c4-d89493957d79",
