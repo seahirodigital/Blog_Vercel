@@ -6849,7 +6849,7 @@
   },
   {
     "id": "ba67c61f-bb0f-4ecd-baa9-c98c69d59919",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sab808789d47a451ba16a9df5ef7b76d5",
     "title": "アテックスAtex AX-HCL320nv フットマッサージャー レビュー比較まとめ",
     "name": "アテックスAtex AX-HCL320nv フットマッサージャー レビュー比較まとめ.md",
@@ -6858,10 +6858,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T17:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-23T16:55:21.366647+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "adc2dfd8-6af2-43b2-a395-92fe6414494a",
