@@ -6138,7 +6138,7 @@
   },
   {
     "id": "ac106874-034d-4104-86d9-b3ac8471d1b3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s37a675b664354d88aec896872d0fb7ef",
     "title": "パナソニック NE-FS3D-W オーブンレンジ レビュー比較まとめ",
     "name": "パナソニック NE-FS3D-W オーブンレンジ レビュー比較まとめ.md",
@@ -6147,10 +6147,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T10:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-23T09:25:16.344606+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ed2d1364-29a1-45c3-be4c-7e62e91833e7",
