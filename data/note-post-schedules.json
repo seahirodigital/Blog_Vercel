@@ -6190,7 +6190,7 @@
   },
   {
     "id": "b406bf62-f72f-40a7-a987-d6c5bb7b049f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdbd7a7bbad3c43e596a6046a5f92cb48",
     "title": "シャープ FU-R50-W シャープ SHARP レビュー比較まとめ",
     "name": "シャープ FU-R50-W シャープ SHARP レビュー比較まとめ.md",
@@ -6199,10 +6199,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-23T10:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-23T09:55:40.787348+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "18474927-8093-40bc-9ce3-c1a68a6ee993",
