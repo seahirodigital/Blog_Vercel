@@ -132,6 +132,43 @@ def normalize_key(value: str) -> str:
     return str(value or "").strip().replace(" ", "").replace("_", "").replace("-", "").lower()
 
 
+def normalize_notion_date(value: str) -> str:
+    text = str(value or "").strip()
+    if not text:
+        return ""
+
+    try:
+        parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
+        if "T" in text or re.search(r"\d{1,2}:\d{2}", text):
+            return parsed.isoformat().replace("+00:00", "Z")
+        return parsed.date().isoformat()
+    except ValueError:
+        pass
+
+    normalized = re.sub(r"\s+", " ", text)
+    japanese_match = re.match(
+        r"^(\d{4})年\s*(\d{1,2})月\s*(\d{1,2})日(?:\s*(\d{1,2}):(\d{2})(?::(\d{2}))?)?",
+        normalized,
+    )
+    if japanese_match:
+        year, month, day, hour, minute, second = japanese_match.groups()
+        if hour is None:
+            return f"{int(year):04d}-{int(month):02d}-{int(day):02d}"
+        return f"{int(year):04d}-{int(month):02d}-{int(day):02d}T{int(hour):02d}:{int(minute):02d}:{int(second or 0):02d}"
+
+    slash_match = re.match(
+        r"^(\d{4})[/-](\d{1,2})[/-](\d{1,2})(?:[ T/](\d{1,2}):(\d{2})(?::(\d{2}))?)?",
+        normalized,
+    )
+    if slash_match:
+        year, month, day, hour, minute, second = slash_match.groups()
+        if hour is None:
+            return f"{int(year):04d}-{int(month):02d}-{int(day):02d}"
+        return f"{int(year):04d}-{int(month):02d}-{int(day):02d}T{int(hour):02d}:{int(minute):02d}:{int(second or 0):02d}"
+
+    return ""
+
+
 def notion_rich_text(text: str) -> list[dict[str, Any]]:
     cleaned = str(text or "").strip()
     if not cleaned:
@@ -283,8 +320,9 @@ def build_select_or_text_property(prop: dict[str, Any], value: str) -> dict[str,
 
 def resolve_notion_date(video: dict[str, Any]) -> str:
     raw_date = str(video.get("video_updated_at") or video.get("published_at") or "").strip()
-    if raw_date:
-        return raw_date
+    normalized_date = normalize_notion_date(raw_date)
+    if normalized_date:
+        return normalized_date
     return datetime.now().date().isoformat()
 
 
