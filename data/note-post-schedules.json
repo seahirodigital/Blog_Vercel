@@ -7283,7 +7283,7 @@
   },
   {
     "id": "b37c659f-4385-4678-a5ea-b23380648243",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s72346efcb46c4f518f0a041723e7f962",
     "title": "東芝 ER-X18 オーブンレンジ レビュー比較まとめ",
     "name": "東芝 ER-X18 オーブンレンジ レビュー比較まとめ.md",
@@ -7293,8 +7293,8 @@
     "publishAt": "2026-05-24T01:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-24T00:55:09.142899+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-24T01:32:23.677401+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ne81aad056d77?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
