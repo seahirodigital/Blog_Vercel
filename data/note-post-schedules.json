@@ -7942,7 +7942,7 @@
   },
   {
     "id": "3f325373-a695-4dee-94fe-e4d5793cb799",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!saff4cbcf6edb42f9ad8bd8f1ff0aaf5b",
     "title": "東芝 ER-D70A オーブンレンジ レビュー比較まとめ",
     "name": "東芝 ER-D70A オーブンレンジ レビュー比較まとめ.md",
@@ -7952,8 +7952,8 @@
     "publishAt": "2026-05-24T12:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-24T11:55:19.001274+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-24T12:32:28.700266+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n81bb51a21e7d?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
