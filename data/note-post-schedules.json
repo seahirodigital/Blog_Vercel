@@ -7664,7 +7664,7 @@
   },
   {
     "id": "ffa6b1d9-7567-4ee4-b026-9870fd7731f4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s38268410f0314eb9a65c9725520d9d94",
     "title": "Dreame L10s Ultra Gen 3 ロボット掃除機、自動掃除機、水拭きロボット、コスパ、時短家電、効率化、快適な暮らし",
     "name": "20260520_0022_【やっすい...】この性能の全部入りロボット掃除機がこの価格ならもうこれでよくないか？  Dreame L10s Ult.md",
@@ -7673,10 +7673,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T09:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T08:55:29.169060+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1bd0f278-d135-492e-925a-8d6d7c8ae6ed",
