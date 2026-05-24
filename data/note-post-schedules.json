@@ -7629,7 +7629,7 @@
   },
   {
     "id": "19e9c26d-db8e-49f5-bcc0-25d4d3f7b20a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb20e6fe24bc04fc799fab2f4860d65e5",
     "title": "SENTERN 9F-4-5kg SENTERN 衣類乾燥機 レビュー比較まとめ",
     "name": "SENTERN 9F-4-5kg SENTERN 衣類乾燥機 レビュー比較まとめ.md",
@@ -7638,10 +7638,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T09:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T08:25:20.338277+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "233b919f-c8e9-49ce-a8c1-06f8520bb001",
