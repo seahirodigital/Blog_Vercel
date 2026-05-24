@@ -8723,7 +8723,7 @@
   },
   {
     "id": "5ce43d58-eec8-4e91-af41-1f52f2e9fb86",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2afb5522dd2f426d83487a5996b26b9a",
     "title": "QAIS air-04A1J-OW QAIS サンスター レビュー比較まとめ",
     "name": "QAIS air-04A1J-OW QAIS サンスター レビュー比較まとめ.md",
@@ -8732,10 +8732,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-25T00:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T23:25:44.181619+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e049a304-e457-4ce6-9701-ad07b7d1bf87",
