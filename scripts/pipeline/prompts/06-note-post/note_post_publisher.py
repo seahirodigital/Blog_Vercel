@@ -95,6 +95,7 @@ def main() -> int:
     parser.add_argument("--editor-url", help="既存note下書きの編集URLを直接指定する")
     parser.add_argument("--no-ogp", action="store_true", help="OGP展開をスキップする")
     parser.add_argument("--no-top-image", action="store_true", help="Amazonトップ画像の添付をスキップする")
+    parser.add_argument("--top-image-path", default="", help="Amazon検索の代わりにトップ画像へ設定するローカル画像の絶対パス")
     parser.add_argument("--no-toc", action="store_true", help="目次挿入をスキップする")
     parser.add_argument("--dry-run-publish", action="store_true", help="最後の「投稿する」は押さない")
     parser.add_argument(
@@ -118,6 +119,7 @@ def main() -> int:
             insert_toc=not args.no_toc,
             publish_after=True,
             dry_run_publish=args.dry_run_publish,
+            top_image_path=args.top_image_path,
         )
         publish_result = editor_result.get("publish") or {}
         result = {
@@ -135,6 +137,7 @@ def main() -> int:
             insert_toc=not args.no_toc,
             publish=True,
             dry_run_publish=args.dry_run_publish,
+            top_image_path=args.top_image_path,
         )
 
     result_path = Path(args.result_json)

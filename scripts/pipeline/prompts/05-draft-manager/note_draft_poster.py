@@ -17,6 +17,8 @@ noteの内部APIにHTTPリクエストで直接下書き保存する。
   python prompts/05-draft-manager/note_draft_poster.py <file.md>
 """
 
+from __future__ import annotations
+
 import os
 import sys
 import json
@@ -2368,6 +2370,59 @@ def _attach_amazon_top_image_to_page(
     return result
 
 
+def _attach_local_top_image_to_page(
+    page,
+    image_path: str | Path,
+    artifacts_dir: Path | None = None,
+    save_draft_after_upload: bool = True,
+) -> dict:
+    """ローカル画像ファイルをnoteのトップ画像として設定する。"""
+    artifacts_dir = artifacts_dir or NOTE_TOP_IMAGE_ARTIFACTS_DIR
+    local_path = Path(image_path)
+    if not local_path.exists():
+        print(f"   ⚠️ ローカルトップ画像が見つからないためスキップします: {local_path}")
+        return {
+            "image_flow": "skipped",
+            "image_target_source": "local_file_missing",
+            "selected_image_path": str(local_path),
+            "draft_save_strategy": "",
+            "before_image_count": _count_page_images(page),
+        }
+
+    before_count = _count_page_images(page)
+    controls_before = _collect_control_snapshot(page)
+    _write_json(artifacts_dir / "controls_before_top_image.json", controls_before)
+
+    image_button_strategy = _click_top_image_button(page)
+    _dump_page_artifacts(page, artifacts_dir, "top_image_menu_open")
+    flow_result = _run_direct_note_image_upload(
+        page,
+        local_path,
+        artifacts_dir,
+        previous_count=before_count,
+    )
+
+    if save_draft_after_upload:
+        draft_save_strategy = _save_editor_draft(page)
+        _dump_page_artifacts(page, artifacts_dir, "after_top_image_draft_save")
+    else:
+        draft_save_strategy = "skipped_for_publish"
+        _dump_page_artifacts(page, artifacts_dir, "after_top_image_before_publish")
+
+    result = {
+        "image_flow": "direct_local",
+        "image_target_source": "local_file",
+        "image_button_strategy": image_button_strategy,
+        "draft_save_strategy": draft_save_strategy,
+        "selected_image_path": str(local_path),
+        "selected_image_kind": "local",
+        "before_image_count": before_count,
+    }
+    result.update(flow_result)
+    _write_json(artifacts_dir / "top_image_result.json", result)
+    return result
+
+
 # ── Markdown前処理 ─────────────────────────────────────
 def extract_title_and_body(markdown: str) -> tuple:
     """H1をタイトル、それ以降を本文として分離"""
@@ -2724,6 +2779,7 @@ def _run_ogp_expansion_on_draft(
     dry_run_publish: bool = False,
     publish_tags: str = NOTE_POST_TAGS,
     artifacts_dir: Path | None = None,
+    top_image_path: str = "",
 ) -> dict:
     """
     下書き作成後のエディタURLへPlaywrightでアクセスし、OGP展開とトップ画像処理を実行する。
@@ -2801,12 +2857,20 @@ def _run_ogp_expansion_on_draft(
             print("   ⏭️ 目次挿入はオプション指定によりスキップします")
 
         if run_top_image:
-            top_image_result = _attach_amazon_top_image_to_page(
-                page,
-                source_markdown=source_markdown,
-                artifacts_dir=artifacts_dir,
-                save_draft_after_upload=not publish_after,
-            )
+            if top_image_path:
+                top_image_result = _attach_local_top_image_to_page(
+                    page,
+                    image_path=top_image_path,
+                    artifacts_dir=artifacts_dir,
+                    save_draft_after_upload=not publish_after,
+                )
+            else:
+                top_image_result = _attach_amazon_top_image_to_page(
+                    page,
+                    source_markdown=source_markdown,
+                    artifacts_dir=artifacts_dir,
+                    save_draft_after_upload=not publish_after,
+                )
         else:
             top_image_result = {"image_flow": "skipped_by_option"}
             print("   ⏭️ Amazonトップ画像はオプション指定によりスキップします")
@@ -3148,6 +3212,7 @@ def post_draft_to_note(
     publish: bool = False,
     dry_run_publish: bool = False,
     publish_tags: str = NOTE_POST_TAGS,
+    top_image_path: str = "",
 ) -> dict:
     title, body = extract_title_and_body(markdown)
     if not title or not body:
@@ -3206,6 +3271,7 @@ def post_draft_to_note(
             publish_after=publish,
             dry_run_publish=dry_run_publish,
             publish_tags=publish_tags,
+            top_image_path=top_image_path,
         )
         result["editor_result"] = editor_result
         publish_result = editor_result.get("publish") or {}
@@ -3230,6 +3296,8 @@ if __name__ == "__main__":
                         help="OGP展開をスキップして下書き保存のみ実行")
     parser.add_argument("--no-top-image", action="store_true",
                         help="Amazonトップ画像の添付をスキップする")
+    parser.add_argument("--top-image-path", default="",
+                        help="Amazon検索の代わりにトップ画像へ設定するローカル画像の絶対パス")
     parser.add_argument("--no-toc", action="store_true",
                         help="目次挿入をスキップする")
     parser.add_argument("--publish", action="store_true",
@@ -3263,6 +3331,7 @@ if __name__ == "__main__":
         insert_toc=not args.no_toc,
         publish=args.publish or args.dry_run_publish,
         dry_run_publish=args.dry_run_publish,
+        top_image_path=args.top_image_path,
     )
     if result["success"]:
         label = "公開投稿" if (args.publish or args.dry_run_publish) else "下書き投稿"

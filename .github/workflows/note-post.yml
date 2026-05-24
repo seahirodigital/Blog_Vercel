@@ -14,7 +14,7 @@ on:
         default: 'false'
         type: string
       note_target:
-        description: 'note公開投稿先（blog_main / xpost_tech）'
+        description: 'note公開投稿先（blog_main / xpost_tech / info_viewer）'
         required: false
         default: 'blog_main'
         type: string
@@ -184,8 +184,21 @@ jobs:
           XPOST_NOTE_EMAIL: ${{ secrets.NOTE_EMAIL_XPOST_TECH }}
           XPOST_NOTE_PASSWORD: ${{ secrets.NOTE_PASSWORD_XPOST_TECH }}
           XPOST_NOTE_STORAGE_STATE: ${{ secrets.NOTE_STORAGE_STATE_XPOST_TECH }}
+          INFO_VIEWER_NOTE_EMAIL: ${{ secrets.NOTE_EMAIL_INFO_VIEWER }}
+          INFO_VIEWER_NOTE_PASSWORD: ${{ secrets.NOTE_PASSWORD_INFO_VIEWER }}
+          INFO_VIEWER_NOTE_STORAGE_STATE: ${{ secrets.NOTE_STORAGE_STATE_INFO_VIEWER }}
         run: |
-          if [ "$NOTE_TARGET" = "xpost_tech" ]; then
+          if [ "$NOTE_TARGET" = "info_viewer" ]; then
+            echo "NOTE_EMAIL=${INFO_VIEWER_NOTE_EMAIL}" >> "$GITHUB_ENV"
+            echo "NOTE_PASSWORD=${INFO_VIEWER_NOTE_PASSWORD}" >> "$GITHUB_ENV"
+            echo "NOTE_STORAGE_SECRET_NAME=NOTE_STORAGE_STATE_INFO_VIEWER" >> "$GITHUB_ENV"
+            echo "NOTE_TARGET_LABEL=info_viewer" >> "$GITHUB_ENV"
+            {
+              echo "NOTE_STORAGE_STATE<<__NOTE_STORAGE_STATE__"
+              echo "${INFO_VIEWER_NOTE_STORAGE_STATE}"
+              echo "__NOTE_STORAGE_STATE__"
+            } >> "$GITHUB_ENV"
+          elif [ "$NOTE_TARGET" = "xpost_tech" ]; then
             echo "NOTE_EMAIL=${XPOST_NOTE_EMAIL}" >> "$GITHUB_ENV"
             echo "NOTE_PASSWORD=${XPOST_NOTE_PASSWORD}" >> "$GITHUB_ENV"
             echo "NOTE_STORAGE_SECRET_NAME=NOTE_STORAGE_STATE_XPOST_TECH" >> "$GITHUB_ENV"
@@ -326,8 +339,9 @@ jobs:
 
           def _fetch_article_via_vercel(file_id):
               vercel_url = os.getenv('VERCEL_URL', 'https://blog-vercel-dun.vercel.app').rstrip('/')
+              endpoint = '/api/info-viewer' if os.getenv('NOTE_TARGET') == 'info_viewer' else '/api/articles'
               response = requests.get(
-                  f'{vercel_url}/api/articles',
+                  f'{vercel_url}{endpoint}',
                   params={'id': file_id},
                   timeout=120,
               )
@@ -359,10 +373,18 @@ jobs:
           print(f'✅ 記事取得完了: {len(content)} 文字')
           "
 
-          if [ "$NO_TOP_IMAGE" = "true" ]; then
-            python prompts/06-note-post/note_post_publisher.py /tmp/article.md --no-top-image --result-json /tmp/note_post_result.json
+          if [ "$NOTE_TARGET" = "info_viewer" ]; then
+            if [ "$NO_TOP_IMAGE" = "true" ]; then
+              python ../../info_viewer/note_upload/info_viewer_note_publisher.py /tmp/article.md --publish --no-top-image --result-json /tmp/note_post_result.json
+            else
+              python ../../info_viewer/note_upload/info_viewer_note_publisher.py /tmp/article.md --publish --result-json /tmp/note_post_result.json
+            fi
           else
-            python prompts/06-note-post/note_post_publisher.py /tmp/article.md --result-json /tmp/note_post_result.json
+            if [ "$NO_TOP_IMAGE" = "true" ]; then
+              python prompts/06-note-post/note_post_publisher.py /tmp/article.md --no-top-image --result-json /tmp/note_post_result.json
+            else
+              python prompts/06-note-post/note_post_publisher.py /tmp/article.md --result-json /tmp/note_post_result.json
+            fi
           fi
 
       - name: note公開投稿デバッグ成果物を保存
@@ -458,7 +480,7 @@ jobs:
           PY
 
       - name: 公開完了後に記事をnoteアップ済へ移動
-        if: ${{ steps.schedule_gate.outputs.skip != 'true' }}
+        if: ${{ steps.schedule_gate.outputs.skip != 'true' && inputs.note_target != 'info_viewer' }}
         env:
           ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
           ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}

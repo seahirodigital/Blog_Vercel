@@ -4,14 +4,14 @@
  * GET  /api/note-draft?fileId=xxx  → GitHub Variable からURLを返す
  * POST /api/note-draft             → GitHub Actions の note-draft ワークフローを起動
  *   Body: { fileId: "..." }  または { fileIds: ["...", "..."] }（複数一括）
- *         noteTarget: "blog_main" | "xpost_tech"
+ *         noteTarget: "blog_main" | "xpost_tech" | "info_viewer"
  */
 
 import { createHash } from 'crypto';
 
 const GITHUB_API = 'https://api.github.com';
 const DEFAULT_NOTE_TARGET = 'blog_main';
-const ALLOWED_NOTE_TARGETS = new Set(['blog_main', 'xpost_tech']);
+const ALLOWED_NOTE_TARGETS = new Set(['blog_main', 'xpost_tech', 'info_viewer']);
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');

@@ -10,7 +10,7 @@ import { randomUUID } from 'crypto';
 
 const GITHUB_API = 'https://api.github.com';
 const DEFAULT_NOTE_TARGET = 'blog_main';
-const ALLOWED_NOTE_TARGETS = new Set(['blog_main', 'xpost_tech']);
+const ALLOWED_NOTE_TARGETS = new Set(['blog_main', 'xpost_tech', 'info_viewer']);
 const SCHEDULE_VAR_NAME = 'NOTE_POST_SCHEDULES';
 const SCHEDULE_FILE_PATH = 'data/note-post-schedules.json';
 const RESERVATION_WORKFLOW_PATH = '.github/workflows/note-post-reservations.yml';

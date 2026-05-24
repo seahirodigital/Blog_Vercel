@@ -1767,6 +1767,30 @@
       }
 
       const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1cw6RC1XX4nAYvfZrBq7nmTtrr2oGFsSI0r_pVIxGxAc/edit?gid=1025543042#gid=1025543042';
+      const NOTE_TARGET_INFO_VIEWER = 'info_viewer';
+
+      function pad2(value) {
+        return String(value).padStart(2, '0');
+      }
+
+      function nextRoundedNotePublishDate() {
+        const date = new Date();
+        date.setMinutes(0, 0, 0);
+        date.setHours(date.getHours() + 1);
+        return date;
+      }
+
+      function formatNotePublishPromptValue(date) {
+        return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())} ${pad2(date.getHours())}:${pad2(date.getMinutes())}`;
+      }
+
+      function parseNotePublishPromptValue(value) {
+        const match = String(value || '').trim().match(/^(\d{4})[/-](\d{1,2})[/-](\d{1,2})[ T](\d{1,2}):(\d{2})$/);
+        if (!match) return null;
+        const [, year, month, day, hour, minute] = match;
+        const date = new Date(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minute), 0, 0);
+        return Number.isNaN(date.getTime()) ? null : date;
+      }
 
       function VideoGlyph({ size = 13, className = '' }) {
         return (
@@ -2084,6 +2108,7 @@
         const [originalEditorMarkdown, setOriginalEditorMarkdown] = useState('');
         const [editorRatio, setEditorRatio] = useState(0.5);
         const [savingArticle, setSavingArticle] = useState(false);
+        const [noteUploadMode, setNoteUploadMode] = useState('');
         const [copiedArticle, setCopiedArticle] = useState(false);
         const [saveMessage, setSaveMessage] = useState('');
         const [draggingImage, setDraggingImage] = useState(false);
@@ -2754,6 +2779,100 @@
           }
         }, [canEditSelectedArticle, editorMarkdown, hasPendingImages, selectedVideo, updateVideoInChannels]);
 
+        const ensureNoteUploadReady = useCallback(() => {
+          if (!selectedVideo?.articleId) {
+            setSaveMessage('noteへ送るOneDrive記事が見つかりません');
+            return false;
+          }
+          if (hasPendingImages) {
+            setSaveMessage('画像アップロード完了後にnoteへ送れます');
+            return false;
+          }
+          if (editorDirty) {
+            setSaveMessage('未保存の編集があります。保存してからnoteへ送ってください');
+            return false;
+          }
+          return true;
+        }, [editorDirty, hasPendingImages, selectedVideo]);
+
+        const handleNoteDraftUpload = useCallback(async () => {
+          if (noteUploadMode || !ensureNoteUploadReady()) return;
+
+          try {
+            setNoteUploadMode('draft');
+            setSaveMessage('note下書き投稿を起動しています');
+            const response = await fetch('/api/note-draft', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                fileIds: [selectedVideo.articleId],
+                noteTarget: NOTE_TARGET_INFO_VIEWER,
+              }),
+            });
+            const payload = await response.json();
+            if (!response.ok || payload.success === false) {
+              throw new Error(payload.error || payload.message || `note draft API ${response.status}`);
+            }
+            setSaveMessage(payload.message || 'note下書き投稿を開始しました');
+          } catch (error) {
+            setSaveMessage(`note下書き投稿に失敗しました: ${error.message || '原因不明のエラー'}`);
+          } finally {
+            setNoteUploadMode('');
+          }
+        }, [ensureNoteUploadReady, noteUploadMode, selectedVideo]);
+
+        const handleNoteScheduledPost = useCallback(async () => {
+          if (noteUploadMode || !ensureNoteUploadReady()) return;
+
+          const defaultValue = formatNotePublishPromptValue(nextRoundedNotePublishDate());
+          const input = window.prompt('note本番投稿の予約日時を入力してください（YYYY-MM-DD HH:mm）', defaultValue);
+          if (input === null) return;
+          const publishDate = parseNotePublishPromptValue(input);
+          if (!publishDate) {
+            setSaveMessage('予約日時の形式が正しくありません');
+            return;
+          }
+          if (publishDate.getTime() <= Date.now() + 60_000) {
+            setSaveMessage('予約日時は現在時刻より後にしてください');
+            return;
+          }
+
+          const publishAt = publishDate.toISOString();
+          const articleMeta = {
+            id: selectedVideo.articleId,
+            fileId: selectedVideo.articleId,
+            title: selectedVideo.title || 'info-viewer記事',
+            name: selectedVideo.title || 'info-viewer記事',
+            path: selectedChannel.name || '',
+          };
+
+          try {
+            setNoteUploadMode('post');
+            setSaveMessage('note本番投稿の予約を登録しています');
+            const response = await fetch('/api/note-post', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                fileIds: [selectedVideo.articleId],
+                mode: 'schedule',
+                noteTarget: NOTE_TARGET_INFO_VIEWER,
+                publishAt,
+                articles: [articleMeta],
+                scheduleItems: [{ ...articleMeta, publishAt }],
+              }),
+            });
+            const payload = await response.json();
+            if (!response.ok || payload.success === false) {
+              throw new Error(payload.error || payload.message || `note post API ${response.status}`);
+            }
+            setSaveMessage(payload.message || `note本番投稿を予約しました: ${formatNotePublishPromptValue(publishDate)}`);
+          } catch (error) {
+            setSaveMessage(`note本番投稿の予約に失敗しました: ${error.message || '原因不明のエラー'}`);
+          } finally {
+            setNoteUploadMode('');
+          }
+        }, [ensureNoteUploadReady, noteUploadMode, selectedChannel.name, selectedVideo]);
+
         const handlePrioritizeVideo = useCallback(async (video) => {
           if (!video?.youtubeUrl || priorityLoadingId) return;
 
@@ -3036,6 +3155,8 @@
           </label>
         );
 
+        const noteUploadDisabled = Boolean(noteUploadMode || !selectedVideo?.articleId || hasPendingImages);
+
         return (
           <div className="flex h-screen overflow-hidden">
             {mobileSidebarOpen && <div className="lg:hidden mobile-overlay" onClick={() => setMobileSidebarOpen(false)} />}
@@ -3174,6 +3295,42 @@
                 </div>
 
                 <div className="flex items-center gap-2 flex-shrink-0">
+                  <button
+                    type="button"
+                    onClick={handleNoteDraftUpload}
+                    disabled={noteUploadDisabled}
+                    className={`flex items-center gap-1.5 font-semibold rounded-lg px-3 py-2 text-xs border transition-all ${
+                      noteUploadDisabled
+                        ? 'border-slate-200 text-slate-300 cursor-not-allowed'
+                        : 'border-emerald-300 text-emerald-700 hover:bg-emerald-50'
+                    }`}
+                    title={selectedVideo?.articleId ? 'note下書き投稿を起動' : 'noteへ送れる記事がありません'}
+                  >
+                    {noteUploadMode === 'draft' ? (
+                      <svg className="animate-spin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 11-6.219-8.56" /></svg>
+                    ) : (
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><path d="M14 2v6h6" /></svg>
+                    )}
+                    <span className="hidden sm:inline">下書き</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNoteScheduledPost}
+                    disabled={noteUploadDisabled}
+                    className={`flex items-center gap-1.5 font-semibold rounded-lg px-3 py-2 text-xs border transition-all ${
+                      noteUploadDisabled
+                        ? 'border-slate-200 text-slate-300 cursor-not-allowed'
+                        : 'border-rose-300 text-rose-700 hover:bg-rose-50'
+                    }`}
+                    title={selectedVideo?.articleId ? 'note本番投稿を予約' : 'noteへ送れる記事がありません'}
+                  >
+                    {noteUploadMode === 'post' ? (
+                      <svg className="animate-spin" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 11-6.219-8.56" /></svg>
+                    ) : (
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 5v14" /><path d="M5 12h14" /></svg>
+                    )}
+                    <span className="hidden sm:inline">本番投稿</span>
+                  </button>
                   <a
                     href={SHEET_URL}
                     target="_blank"
