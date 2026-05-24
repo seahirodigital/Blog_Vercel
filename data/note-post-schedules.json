@@ -7716,7 +7716,7 @@
   },
   {
     "id": "07a2fe91-3b87-44fa-8c7e-ff09c0d004a2",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s5cd391c8128444219a2231c9804d83b0",
     "title": "アテックスAtex 12cm マッサージャー レビュー比較まとめ",
     "name": "アテックスAtex 12cm マッサージャー レビュー比較まとめ.md",
@@ -7726,8 +7726,8 @@
     "publishAt": "2026-05-24T10:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-24T09:25:37.602203+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-24T10:02:30.287842+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n51e22a319837?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
@@ -7751,7 +7751,7 @@
   },
   {
     "id": "a0a161ec-a3d7-46e0-ba09-839f30f3d357",
-    "status": "scheduled",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s59fbd43d6a1946f4ab4faf96a0229845",
     "title": "NIPLUX IPX7 NIPLUX EMS レビュー比較まとめ",
     "name": "NIPLUX IPX7 NIPLUX EMS レビュー比較まとめ.md",
@@ -7760,10 +7760,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T10:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
-    "publishedAt": "",
-    "publishedUrl": "",
-    "error": ""
+    "queuedAt": "2026-05-24T09:55:45.646393+00:00",
+    "publishedAt": "2026-05-24T10:32:19.053537+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nb462016ff228?app_launch=false",
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d0eaa384-9f5e-4d8f-8465-9aade605b5ed",
@@ -7784,7 +7786,7 @@
   },
   {
     "id": "d0bc15da-8726-40c3-ab4d-21592d7f3e17",
-    "status": "scheduled",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2ff609e6b9ce469abc753a4a17778360",
     "title": "THRIVE(スライヴ) MD-8707 フットマッサージャー レビュー比較まとめ",
     "name": "THRIVE(スライヴ) MD-8707 フットマッサージャー レビュー比較まとめ.md",
@@ -7793,10 +7795,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T11:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
-    "publishedAt": "",
-    "publishedUrl": "",
-    "error": ""
+    "queuedAt": "2026-05-24T10:25:53.951482+00:00",
+    "publishedAt": "2026-05-24T11:02:19.525505+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n1a3a3328b7f1?app_launch=false",
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "11b802be-137e-4bf4-9ef2-c6ee1c25adba",
@@ -7817,7 +7821,7 @@
   },
   {
     "id": "3e53dc81-6bb2-441e-a68f-75464bdd684e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3afa78781a0e4551876b9533f748e027",
     "title": "象印マホービン ES-GX26-BM オーブンレンジ レビュー比較まとめ",
     "name": "象印マホービン ES-GX26-BM オーブンレンジ レビュー比較まとめ.md",
@@ -7826,10 +7830,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T11:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T10:55:01.720817+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3f071fc3-189e-45a1-91e0-c53ff7391f97",
