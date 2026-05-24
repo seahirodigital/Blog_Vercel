@@ -7421,7 +7421,7 @@
   },
   {
     "id": "ea2c65a9-61c5-43cd-a481-f42c093e2363",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s98a1618e33eb495d8ffdae8399622d90",
     "title": "パナソニックPanasonic NP-TML1-W 食器洗い乾燥機 レビュー比較まとめ",
     "name": "パナソニックPanasonic NP-TML1-W 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -7430,10 +7430,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T06:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T08:10:11.818774+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "046ce8ba-93c9-4616-b0e0-9ad378aa38a2",
@@ -7471,7 +7473,7 @@
   },
   {
     "id": "e309cffd-36ba-4cd8-8380-0de3b0ed65a3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0df94191ce1c4be0a76a3d396cfb9d92",
     "title": "アイリスオーヤマ IJC-M120 アイリスオーヤマ IRIS レビュー比較まとめ",
     "name": "アイリスオーヤマ IJC-M120 アイリスオーヤマ IRIS レビュー比較まとめ.md",
@@ -7480,10 +7482,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T07:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T08:10:11.818774+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4b5257ad-2a34-4161-9ebc-ed858c16cf95",
@@ -7555,7 +7559,7 @@
   },
   {
     "id": "c32c2368-cef2-4c21-be76-d63925c0d07e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s353c948ff6704765bc0b44c984d867d5",
     "title": "SMEG Toaster2 トースター レビュー比較まとめ",
     "name": "SMEG Toaster2 トースター レビュー比較まとめ.md",
@@ -7564,10 +7568,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T08:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T08:10:11.818774+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cec132b0-b14f-4e1a-9998-2b12ee362157",
@@ -7588,7 +7594,7 @@
   },
   {
     "id": "edcc113e-e228-417a-bb12-645cdb58036e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7324d2ac66ac44a4b22a3d74828978d9",
     "title": "JUUE 40dB 生ごみ処理機 レビュー比較まとめ",
     "name": "ブランド JUUE 40dB 生ごみ処理機 レビュー比較まとめ.md",
@@ -7597,10 +7603,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T08:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T08:10:11.818774+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e22a007c-ff86-4e5e-9881-c46965a300c4",
