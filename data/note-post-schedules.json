@@ -8636,7 +8636,7 @@
   },
   {
     "id": "6ddc2ce1-7ba4-423e-b8c5-622dd8e5ef43",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s55039605919e4b1d93e628c3ba30c010",
     "title": "パナソニック ES-WG0B-H ヘアドライヤー レビュー比較まとめ",
     "name": "パナソニック ES-WG0B-H ヘアドライヤー レビュー比較まとめ.md",
@@ -8645,10 +8645,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T22:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T21:55:29.228363+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a40c0637-e65d-43af-a7bd-62692a27c56d",
