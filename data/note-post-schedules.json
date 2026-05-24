@@ -8533,7 +8533,7 @@
   },
   {
     "id": "021ee3f0-a62f-48c5-836e-64e3aaf453e1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s067105e3f2c144418804f39d4829b905",
     "title": "THRIVEスライヴ CHD-9120 マッサージャー レビュー比較まとめ",
     "name": "THRIVEスライヴ CHD-9120 マッサージャー レビュー比較まとめ.md",
@@ -8542,10 +8542,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T21:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T20:55:42.980816+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "93a6ec75-c97b-4973-a668-b366351b897f",
