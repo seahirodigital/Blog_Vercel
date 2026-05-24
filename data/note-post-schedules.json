@@ -8359,7 +8359,7 @@
   },
   {
     "id": "fb7121c8-ac83-4edb-a596-ee9ae2728cf1",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s0c7deb3dcf85418f8bf4ef408b8f25c8",
     "title": "Nayuoo ポータブルエアコン レビュー比較まとめ",
     "name": "Nayuoo 34KW ポータブルエアコン レビュー比較まとめ.md",
@@ -8369,8 +8369,8 @@
     "publishAt": "2026-05-24T17:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-24T16:55:50.569302+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-24T17:32:18.987452+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n563229cac439?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
