@@ -8671,7 +8671,7 @@
   },
   {
     "id": "7f98e425-74cc-4474-bb4a-ead50b1b2083",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!saaafce89f21b42d8aa239a3742944535",
     "title": "パナソニック MC-SB32J-W スティッククリーナー レビュー比較まとめ",
     "name": "パナソニック MC-SB32J-W スティッククリーナー レビュー比較まとめ.md",
@@ -8681,8 +8681,8 @@
     "publishAt": "2026-05-24T23:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-24T22:25:53.743146+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-24T23:02:18.677379+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nc3f67ed4b4ac?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
