@@ -7473,7 +7473,7 @@
   },
   {
     "id": "e309cffd-36ba-4cd8-8380-0de3b0ed65a3",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s0df94191ce1c4be0a76a3d396cfb9d92",
     "title": "アイリスオーヤマ IJC-M120 アイリスオーヤマ IRIS レビュー比較まとめ",
     "name": "アイリスオーヤマ IJC-M120 アイリスオーヤマ IRIS レビュー比較まとめ.md",
@@ -7483,8 +7483,8 @@
     "publishAt": "2026-05-24T07:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-24T08:10:11.818774+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-24T08:12:56.348632+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n0713b7500ec3?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
