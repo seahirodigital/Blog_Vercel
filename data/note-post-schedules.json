@@ -7386,7 +7386,7 @@
   },
   {
     "id": "2a5c8d26-b53f-47a8-91b6-2562b381c78c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4673910949e54f418a0cd158a27b322c",
     "title": "FreeStyle リブレ2 血糖値測定器 レビュー比較まとめ：効率的な健康管理を実現する最新デバイスの全貌をレビュー比",
     "name": "FreeStyle リブレ2 血糖値測定器 レビュー比較まとめ：効率的な健康管理を実現する最新デバイスの全貌をレビュー比.md",
@@ -7395,10 +7395,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T02:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T01:55:29.457886+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b222bcd0-8548-4c11-8801-9469982a94bf",
