@@ -7248,7 +7248,7 @@
   },
   {
     "id": "21fec7ff-0cec-403f-89bb-d2745054c8ef",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s8eb2d7312da4480691faf57675e61573",
     "title": "uwant M600 布団クリーナー レビュー比較まとめ",
     "name": "uwant M600 布団クリーナー レビュー比較まとめ.md",
@@ -7258,8 +7258,8 @@
     "publishAt": "2026-05-24T01:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-24T00:25:28.137081+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-24T01:02:22.475093+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ned1cb8c213f2?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
