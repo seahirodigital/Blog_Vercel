@@ -8394,7 +8394,7 @@
   },
   {
     "id": "35bf6e74-cfa0-4207-a9f5-e849074b888b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s25ec010567114131ad057de371732505",
     "title": "KINUJO LM225 シャワーヘッド レビュー比較まとめ",
     "name": "KINUJO LM225 シャワーヘッド レビュー比較まとめ.md",
@@ -8403,10 +8403,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T20:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T19:25:29.807757+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2fe1a324-5020-4cee-9636-af7ee16fed59",
