@@ -8498,7 +8498,7 @@
   },
   {
     "id": "f600916c-6e2a-4294-be2a-c79ed134183c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7f94882c750b4ed9ad511a809a21864c",
     "title": "Sun Ruck SR-ASMN206-W フードドライヤー レビュー比較まとめ",
     "name": "Sun Ruck SR-ASMN206-W フードドライヤー レビュー比較まとめ.md",
@@ -8507,10 +8507,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T21:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T20:25:18.168087+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0ebf7e0b-5fed-4a80-84c5-b4ace7a26ad2",
