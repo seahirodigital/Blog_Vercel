@@ -8098,7 +8098,7 @@
   },
   {
     "id": "da7849f1-2457-4cff-a590-0e2d8d529cc5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8243be3709da48f2968fb5cdfcb86b48",
     "title": "アイリスオーヤマIRIS OHYAMA ISHT-5000-W 食器洗い乾燥機 レビュー比較まとめ",
     "name": "アイリスオーヤマIRIS OHYAMA ISHT-5000-W 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -8107,10 +8107,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T14:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T13:25:44.521815+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "15eeffe9-7924-4382-a8bd-285420328fce",
