@@ -7821,7 +7821,7 @@
   },
   {
     "id": "3e53dc81-6bb2-441e-a68f-75464bdd684e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3afa78781a0e4551876b9533f748e027",
     "title": "象印マホービン ES-GX26-BM オーブンレンジ レビュー比較まとめ",
     "name": "象印マホービン ES-GX26-BM オーブンレンジ レビュー比較まとめ.md",
@@ -7831,8 +7831,8 @@
     "publishAt": "2026-05-24T11:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-24T10:55:01.720817+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-24T11:32:24.830254+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n48a0b412201e?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
@@ -7907,7 +7907,7 @@
   },
   {
     "id": "54152352-0247-4bad-b4b5-698454f4743c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7abc5325f9d942138200c0b19c7acdf9",
     "title": "InnAIO T10 音声翻訳機 レビュー比較まとめ",
     "name": "InnAIO T10 音声翻訳機 レビュー比較まとめ.md",
@@ -7916,10 +7916,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T12:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T11:25:10.219158+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9cbf2ffa-fe6a-41b6-9cd8-b446da07a5b2",
