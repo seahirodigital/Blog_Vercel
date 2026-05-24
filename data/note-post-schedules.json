@@ -8446,7 +8446,7 @@
   },
   {
     "id": "f88eacc4-9ab7-4df0-9a99-efe2a172d42f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se4c94dde60104af6871bd010d1763be0",
     "title": "アテックスAtex AX-HCL348rd アテックスAtex アテックス レビュー比較まとめ",
     "name": "アテックスAtex AX-HCL348rd アテックスAtex アテックス レビュー比較まとめ.md",
@@ -8455,10 +8455,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T20:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T19:55:54.643356+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e182d681-fd7c-4c28-a3ac-520089d230e5",
