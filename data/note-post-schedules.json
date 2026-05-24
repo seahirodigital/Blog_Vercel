@@ -8307,7 +8307,7 @@
   },
   {
     "id": "ffa70cb9-dbb2-4e37-963d-7b58fe5e0d0e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3a10f19864734ace8b7807a6a6b45767",
     "title": "ダイニチ HD-RXC500C-T レビュー比較まとめ",
     "name": "ダイニチ HD-RXC500C-T ダイニチ Dainichi レビュー比較まとめ.md",
@@ -8316,10 +8316,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T17:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T16:25:42.214305+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ce90865b-7a36-4b83-8edd-18e0f8fda73a",
