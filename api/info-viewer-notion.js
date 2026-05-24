@@ -275,16 +275,12 @@ async function fetchArticleContent(accessToken, itemId) {
 }
 
 function getNotionToken() {
-  return process.env.INFO_VIEWER_NOTION_API_KEY || process.env.NOTION_API_KEY || process.env.NOTION_TOKEN || '';
+  return process.env.NOTION_API_KEY || '';
 }
 
 function getNotionDatabaseId() {
   return notionIdFromUrl(
-    process.env.INFO_VIEWER_NOTION_DATABASE_ID ||
-      process.env.INFO_VIEWER_NOTION_DATABASE_URL ||
-      process.env.NOTION_DATABASE_ID ||
-      process.env.NOTION_DATABASE_URL ||
-      DEFAULT_NOTION_DATABASE_ID
+    process.env.NOTION_DATABASE_ID || DEFAULT_NOTION_DATABASE_ID
   );
 }
 
@@ -392,7 +388,7 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'Method not allowed' });
   if (!isAuthorized(req)) return res.status(401).json({ success: false, error: 'Unauthorized' });
-  if (!getNotionToken()) return res.status(500).json({ success: false, error: 'Notion APIトークンが未設定です' });
+  if (!getNotionToken()) return res.status(500).json({ success: false, error: 'NOTION_API_KEY が未設定です' });
 
   try {
     const accessToken = await getOneDriveAccessToken();

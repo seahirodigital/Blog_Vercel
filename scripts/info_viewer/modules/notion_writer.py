@@ -29,13 +29,8 @@ LOCAL_NOTION_ENV_FILE = os.getenv(
     r"C:\Users\mahha\OneDrive\開発\Notion_skill\Youtube_archive_note\.env",
 )
 NOTION_ENV_KEYS = {
-    "INFO_VIEWER_NOTION_API_KEY",
-    "INFO_VIEWER_NOTION_DATABASE_ID",
-    "INFO_VIEWER_NOTION_DATABASE_URL",
     "NOTION_API_KEY",
-    "NOTION_TOKEN",
     "NOTION_DATABASE_ID",
-    "NOTION_DATABASE_URL",
 }
 
 YOUTUBE_URL_ALIASES = [
@@ -94,16 +89,13 @@ def _load_external_notion_env() -> None:
 
 def get_token() -> str:
     _load_external_notion_env()
-    return os.getenv("INFO_VIEWER_NOTION_API_KEY") or os.getenv("NOTION_API_KEY") or os.getenv("NOTION_TOKEN") or ""
+    return os.getenv("NOTION_API_KEY") or ""
 
 
 def get_database_id() -> str:
     _load_external_notion_env()
     raw = (
-        os.getenv("INFO_VIEWER_NOTION_DATABASE_ID")
-        or os.getenv("INFO_VIEWER_NOTION_DATABASE_URL")
-        or os.getenv("NOTION_DATABASE_ID")
-        or os.getenv("NOTION_DATABASE_URL")
+        os.getenv("NOTION_DATABASE_ID")
         or DEFAULT_NOTION_DATABASE_ID
     )
     return notion_id_from_url(raw)
@@ -563,7 +555,7 @@ def save_article(
 ) -> dict[str, Any]:
     token = get_token()
     if not token:
-        raise RuntimeError("Notion APIトークンが設定されていません。NOTION_API_KEY または NOTION_TOKEN を設定してください。")
+        raise RuntimeError("Notion APIトークンが設定されていません。NOTION_API_KEY を設定してください。")
 
     database_id = get_database_id()
     client = NotionClient(token)
