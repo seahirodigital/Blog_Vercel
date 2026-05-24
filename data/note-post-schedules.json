@@ -7716,7 +7716,7 @@
   },
   {
     "id": "07a2fe91-3b87-44fa-8c7e-ff09c0d004a2",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s5cd391c8128444219a2231c9804d83b0",
     "title": "アテックスAtex 12cm マッサージャー レビュー比較まとめ",
     "name": "アテックスAtex 12cm マッサージャー レビュー比較まとめ.md",
@@ -7726,8 +7726,8 @@
     "publishAt": "2026-05-24T10:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-24T09:25:37.602203+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-24T10:02:30.287842+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n51e22a319837?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
