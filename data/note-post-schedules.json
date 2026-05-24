@@ -8220,7 +8220,7 @@
   },
   {
     "id": "d11d68f0-3764-4591-aea0-3d5324aafce7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdb9093b6cf9b4f4dba4bf389bad1a619",
     "title": "JYWINA 35kW ポータブルエアコン レビュー比較まとめ",
     "name": "ブランド JYWINA 35kW ポータブルエアコン レビュー比較まとめ.md",
@@ -8229,10 +8229,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T16:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T15:25:25.362870+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "298d840b-724c-41e7-b698-a96449e6c98d",
