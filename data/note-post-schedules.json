@@ -8255,7 +8255,7 @@
   },
   {
     "id": "6ddd19c6-0438-460c-883a-ae51475ba2af",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!scb6f25482c144f0bb71a964905eccd03",
     "title": "パナソニック NP-TCR4-W 食器洗い乾燥機 レビュー比較まとめ",
     "name": "パナソニック NP-TCR4-W 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -8265,8 +8265,8 @@
     "publishAt": "2026-05-24T16:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-24T15:55:33.698607+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-24T16:32:23.851640+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n601e3b8ae30b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
