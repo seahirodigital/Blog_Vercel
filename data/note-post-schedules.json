@@ -7821,7 +7821,7 @@
   },
   {
     "id": "3e53dc81-6bb2-441e-a68f-75464bdd684e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3afa78781a0e4551876b9533f748e027",
     "title": "象印マホービン ES-GX26-BM オーブンレンジ レビュー比較まとめ",
     "name": "象印マホービン ES-GX26-BM オーブンレンジ レビュー比較まとめ.md",
@@ -7830,10 +7830,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-24T11:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-24T10:55:01.720817+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3f071fc3-189e-45a1-91e0-c53ff7391f97",
