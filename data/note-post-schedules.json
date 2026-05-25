@@ -9626,7 +9626,7 @@
   },
   {
     "id": "57f1d9f2-326e-4c6a-85f0-3b3177e82f78",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8e39cfa7980e458c8d00db351a160997",
     "title": "アテックス AX-HPL368dg フットマッサージャー レビュー比較まとめ",
     "name": "アテックス AX-HPL368dg フットマッサージャー レビュー比較まとめ.md",
@@ -9635,10 +9635,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-25T14:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-25T13:55:15.626129+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "caecf58a-ef8c-4967-864f-82dd0290e331",
