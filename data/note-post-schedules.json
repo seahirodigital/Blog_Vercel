@@ -8896,7 +8896,7 @@
   },
   {
     "id": "a0078ca9-ab5a-4a07-9467-3378753fab11",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s353be03d089e433f9a4b7080aab0d9df",
     "title": "タイガー魔法瓶 COK-N220KM 電気圧力鍋 レビュー比較まとめ",
     "name": "タイガー魔法瓶 COK-N220KM 電気圧力鍋 レビュー比較まとめ.md",
@@ -8905,10 +8905,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-25T02:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-25T01:55:15.060823+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "323403bd-7c7e-4496-bd74-570243e3cafa",
