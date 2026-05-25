@@ -9800,7 +9800,7 @@
   },
   {
     "id": "cfbd7a6a-799d-4755-ac93-86b127f1da6a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdc21591b565a430c879fd2869cfdc839",
     "title": "パナソニック MS-N53XD-S 生ごみ処理機 レビュー比較まとめ",
     "name": "パナソニック MS-N53XD-S 生ごみ処理機 レビュー比較まとめ.md",
@@ -9809,10 +9809,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-25T17:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-25T16:25:07.444687+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2a3fb22a-ecb0-446f-825f-7a759b31d867",
