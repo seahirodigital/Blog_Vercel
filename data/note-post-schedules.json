@@ -8983,7 +8983,7 @@
   },
   {
     "id": "bb022886-0891-4784-9793-605539da8332",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s41f88d0f30944e7cb765637b95729647",
     "title": "シャープ RE-SS7A-B オーブンレンジ レビュー比較まとめ",
     "name": "シャープ RE-SS7A-B オーブンレンジ レビュー比較まとめ.md",
@@ -8992,10 +8992,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-25T07:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-25T06:55:40.949000+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "21e879ac-2df3-4474-b3ea-accb9f83aadf",
