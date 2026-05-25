@@ -2592,6 +2592,23 @@
 
         const escapeRegExp = useCallback((value) => String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), []);
 
+        const dedupeImageFiles = useCallback((files) => {
+          const seen = new Set();
+          return Array.from(files || [])
+            .filter((file) => String(file?.type || '').startsWith('image/'))
+            .filter((file) => {
+              const key = [
+                file.name || 'image',
+                file.size || 0,
+                file.type || '',
+                file.lastModified || 0,
+              ].join('|');
+              if (seen.has(key)) return false;
+              seen.add(key);
+              return true;
+            });
+        }, []);
+
         const replaceImageMarkdown = useCallback((fromMarkdown, toMarkdown, imageUrl = '') => {
           setEditorMarkdown((current) => {
             const imagePattern = imageUrl ? new RegExp(`!\\[[^\\]]*\\]\\(${escapeRegExp(imageUrl)}\\)`, 'g') : null;
@@ -2626,7 +2643,7 @@
 
         const handleEditorDrop = useCallback(async (event) => {
           const files = Array.from(event.dataTransfer?.files || []);
-          const imageFiles = files.filter((file) => String(file.type || '').startsWith('image/'));
+          const imageFiles = dedupeImageFiles(files);
           if (!imageFiles.length) {
             setDraggingImage(false);
             return;
@@ -2671,7 +2688,7 @@
                 }
               });
           });
-        }, [insertMarkdownAtCursor, replaceImageMarkdown, uploadImageFile]);
+        }, [dedupeImageFiles, insertMarkdownAtCursor, replaceImageMarkdown, uploadImageFile]);
 
         const handleEditorPaste = useCallback((event) => {
           const files = Array.from(event.clipboardData?.files || []);
@@ -2679,8 +2696,8 @@
             .filter((item) => item.kind === 'file' && String(item.type || '').startsWith('image/'))
             .map((item) => item.getAsFile())
             .filter(Boolean);
-          const imageFiles = Array.from(new Set([...files, ...itemFiles]))
-            .filter((file) => String(file.type || '').startsWith('image/'));
+          const preferredFiles = files.some((file) => String(file.type || '').startsWith('image/')) ? files : itemFiles;
+          const imageFiles = dedupeImageFiles(preferredFiles);
           if (!imageFiles.length) return;
 
           event.preventDefault();
@@ -2721,7 +2738,7 @@
                 }
               });
           });
-        }, [insertMarkdownAtCursor, replaceImageMarkdown, uploadImageFile]);
+        }, [dedupeImageFiles, insertMarkdownAtCursor, replaceImageMarkdown, uploadImageFile]);
 
         useEffect(() => {
           if (!editorMarkdown.includes('](data:image/')) return undefined;
