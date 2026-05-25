@@ -10026,7 +10026,7 @@
   },
   {
     "id": "239a3771-820b-4396-a689-e8317ff48533",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2f378d77af6642c0a600ad8aed9bbb8f",
     "title": "ナカトミ MAC-10CG(スポットクーラー ポータブルエアコン ) レビュー比較まとめ：結論",
     "name": "スポットクーラー ポータブルエアコン レビュー比較まとめ：結論.md",
@@ -10035,10 +10035,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-25T21:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-25T20:55:31.313002+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a63d2028-07ac-4ede-b33d-4550df1d4efd",
