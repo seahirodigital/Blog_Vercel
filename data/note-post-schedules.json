@@ -9713,7 +9713,7 @@
   },
   {
     "id": "6d02aa50-e819-4761-9c8c-3ffc33cdc30e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s7bf1f7534031451e95ec97a0213b3167",
     "title": "BONIQ IEEE802 低温調理器 レビュー比較まとめ",
     "name": "BONIQ IEEE802 低温調理器 レビュー比較まとめ.md",
@@ -9723,8 +9723,8 @@
     "publishAt": "2026-05-25T16:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-25T15:25:48.447681+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-25T16:02:15.992039+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n456b1aa7e9ed?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
