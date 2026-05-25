@@ -9314,7 +9314,7 @@
   },
   {
     "id": "ff2c42bf-e4a2-4fb7-9144-d62bba5bf846",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s10ef952100a44f1cbc2137ad01df1fe1",
     "title": "パナソニック NE-MS4D-K オーブンレンジ レビュー比較まとめ",
     "name": "パナソニック NE-MS4D-K オーブンレンジ レビュー比較まとめ.md",
@@ -9323,10 +9323,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-25T11:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-25T10:55:04.954113+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5c0f0015-ee9b-45b3-ad75-552fda3bff71",
