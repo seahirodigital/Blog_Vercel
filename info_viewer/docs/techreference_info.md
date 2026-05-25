@@ -11,7 +11,7 @@
 - 調査の順番
 - 再発防止のための確認観点
 
-正式な最終仕様は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\info_viewer\仕様書.md` を参照してください。
+正式な最終仕様は `C:\Users\mahha\OneDrive\開発\Blog_Vercel\info_viewer\docs\仕様書.md` を参照してください。
 
 ## 2. 今回の事象
 ### 2.1 見えていた症状

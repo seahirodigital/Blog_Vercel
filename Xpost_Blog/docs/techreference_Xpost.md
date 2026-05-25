@@ -25,13 +25,13 @@
 ## 1. 文書の目的
 本書は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\Xpost_Blog` の実装中に得た技術メモ、成功、失敗、試行中の判断を蓄積するための記録である。
 
-仕様の正本は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\Xpost_Blog\仕様書.md` とし、本書は裏側の判断理由を残す。
+仕様の正本は `C:\Users\mahha\OneDrive\開発\Blog_Vercel\Xpost_Blog\docs\仕様書.md` とし、本書は裏側の判断理由を残す。
 
 ## 2. 2026-04-13 実装着手メモ
 ### 成功
 - `%USERPROFILE%\OneDrive\開発\Blog_Vercel\scripts\info_viewer\runner.py` の queue 設計は Xpost にも転用しやすく、`state -> processable -> deferred` の流れをそのまま使える見込みが高い。
 - OneDrive CRUD は `%USERPROFILE%\OneDrive\開発\Blog_Vercel\api\articles.js` を保存先差し替えで流用できる。
-- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\info_viewer\仕様書.md` の Gemini tech 運用ルールを参照することで、Xpost でも `GEMINI_TOKEN_tech` 専用運用に揃えやすい。
+- `C:\Users\mahha\OneDrive\開発\Blog_Vercel\info_viewer\docs\仕様書.md` の Gemini tech 運用ルールを参照することで、Xpost でも `GEMINI_TOKEN_tech` 専用運用に揃えやすい。
 
 ### 修正した認識
 - 将来差し替え先として最初に口頭で `Antigravity` と書いてしまったが、これは誤り。
@@ -54,7 +54,7 @@
 - 将来 `Apify` へ切り替えるときは、この取得層の差し替えで済むようにする。
 
 ### Gemini
-- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\info_viewer\仕様書.md` の `12.2 Gemini キー分離と quota 時の挙動` を参照。
+- `C:\Users\mahha\OneDrive\開発\Blog_Vercel\info_viewer\docs\仕様書.md` の `12.2 Gemini キー分離と quota 時の挙動` を参照。
 - 基本は `GEMINI_TOKEN_tech` を使う。
 - ただし検証を止めないため、`GEMINI_TOKEN_tech` の quota 到達時だけ `GEMINI_TOKEN_INVESTSUB` へ fallback する。
 - 本編の `GEMINI_API_KEY` や `GEMINI_TOKEN_SUB3` には逃がさない。
@@ -69,7 +69,7 @@
 - `%USERPROFILE%\OneDrive\開発\Blog_Vercel\public\xpost_blog\index.html` は frontmatter を保持しつつ本文だけ編集する方式にした。保存時に YAML を壊しにくい。
 
 ### 判断
-- `%USERPROFILE%\OneDrive\開発\Blog_Vercel\Xpost_Blog\仕様書.md` の `GEMINI_TOKEN_INVESTSUB` 記述は、当初いったん採用しない方針に寄せていた。
+- `C:\Users\mahha\OneDrive\開発\Blog_Vercel\Xpost_Blog\docs\仕様書.md` の `GEMINI_TOKEN_INVESTSUB` 記述は、当初いったん採用しない方針に寄せていた。
 - その後、検証中に pipeline 全体が止まる不都合を避けるため、最終的に `GEMINI_TOKEN_tech -> GEMINI_TOKEN_INVESTSUB` の順で fallback する実装へ修正した。
 - それでも fallback は 1 段だけに限定し、本編の Gemini キー群には広げない。
 
