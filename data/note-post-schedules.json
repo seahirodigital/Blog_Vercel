@@ -9539,7 +9539,7 @@
   },
   {
     "id": "7a2d3dd5-5ef1-4e33-9a5d-aa159584e7e2",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!se0b04154c1c0474cbdc10df6b2b61ccf",
     "title": "JYWINA スポットクーラー 家庭用 移動式エアコン レビュー比較まとめ：失敗しない選び方と活用術",
     "name": "スポットクーラー 家庭用 移動式エアコン レビュー比較まとめ：失敗しない選び方と活用術.md",
@@ -9549,8 +9549,8 @@
     "publishAt": "2026-05-25T13:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-25T12:55:53.618959+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-25T13:32:23.584692+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na5d07baa6398?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
