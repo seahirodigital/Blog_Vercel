@@ -9748,7 +9748,7 @@
   },
   {
     "id": "13e6c2a2-d1ca-44da-a6e0-c36eeb05a08d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7e701f6a5afb4384a16264011fb36b7d",
     "title": "Reencle A0 生ごみ処理機 レビュー比較まとめ",
     "name": "Reencle A0 生ごみ処理機 レビュー比較まとめ.md",
@@ -9757,10 +9757,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-25T16:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-25T15:55:57.635259+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d5af507f-00ad-4fbe-984e-04bc69c9ee2a",
