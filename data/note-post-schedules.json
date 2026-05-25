@@ -8758,7 +8758,7 @@
   },
   {
     "id": "2ad6b36b-929d-4f9c-b0b3-7003614cb824",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s93437f3258f64eee8f3c56fda90ea26d",
     "title": "ヤーマン YJSB0N メンズシェーバー レビュー比較まとめ",
     "name": "ヤーマン YJSB0N メンズシェーバー レビュー比較まとめ.md",
@@ -8768,8 +8768,8 @@
     "publishAt": "2026-05-25T01:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-25T00:25:19.349401+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-25T01:02:23.753977+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd00d0c094106?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
