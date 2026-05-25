@@ -9157,7 +9157,7 @@
   },
   {
     "id": "47dbb6fd-5eda-41ac-8bbd-8dd7402d1c5e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8f196bb8ba994e4e9d0681f89315e6e8",
     "title": "タンスのゲン 3kW スポットクーラー レビュー比較まとめ",
     "name": "タンスのゲン 3kW スポットクーラー レビュー比較まとめ.md",
@@ -9166,10 +9166,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-25T09:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-25T08:55:22.004346+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5f19dde9-7c2b-4519-9917-b97e5c548148",
