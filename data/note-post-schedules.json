@@ -9209,7 +9209,7 @@
   },
   {
     "id": "6f793e4d-d46a-4f0f-b3d5-9ab94fd33a81",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7253e4b035dd46b792cc2af1b1c4f850",
     "title": "THANKO 1kWh 食器洗い乾燥機 レビュー比較まとめ",
     "name": "THANKO 1kWh 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -9218,10 +9218,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-25T10:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-25T09:25:35.257824+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2d608973-082d-4835-ba20-516010bc2d1e",
