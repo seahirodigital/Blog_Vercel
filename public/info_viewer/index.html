@@ -1769,6 +1769,15 @@
       const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1cw6RC1XX4nAYvfZrBq7nmTtrr2oGFsSI0r_pVIxGxAc/edit?gid=1025543042#gid=1025543042';
       const NOTE_TARGET_INFO_VIEWER = 'info_viewer';
 
+      function buildNotionPageUrl(pageId) {
+        const raw = String(pageId || '').trim();
+        if (!raw) return '';
+        if (/^https?:\/\//i.test(raw)) return raw;
+        const normalized = raw.replace(/-/g, '');
+        if (!/^[0-9a-f]{32}$/i.test(normalized)) return '';
+        return `https://www.notion.so/${normalized}`;
+      }
+
       function pad2(value) {
         return String(value).padStart(2, '0');
       }
@@ -2073,6 +2082,9 @@
                 queueNextRetryAt: video.queueNextRetryAt || '',
                 queueAttemptCount: Number(video.queueAttemptCount || 0),
                 manualPriorityAt: video.manualPriorityAt || '',
+                notionPageId: video.notionPageId || '',
+                notionDatabaseId: video.notionDatabaseId || '',
+                notionAction: video.notionAction || '',
                 lastFailureStage: video.lastFailureStage || '',
                 lastFailureMessage: video.lastFailureMessage || '',
                 lastFailureAt: video.lastFailureAt || '',
@@ -2334,6 +2346,9 @@
             queueStatus: '',
             queueNextRetryAt: '',
             manualPriorityAt: '',
+            notionPageId: '',
+            notionDatabaseId: '',
+            notionAction: '',
             lastFailureStage: '',
             lastFailureMessage: '',
             lastFailureAt: ''
@@ -2350,7 +2365,11 @@
         const editorDirty = editorMarkdown !== originalEditorMarkdown;
         const canEditSelectedArticle = Boolean(selectedVideo?.articleId || selectedVideo?.markdown || selectedMarkdown);
         const selectedArticleIsLoading = Boolean(articleLoadingId && articleLoadingId === selectedVideo.articleId && !selectedMarkdown && !editorMarkdown);
-        const hasPendingImages = pendingImageUploads > 0 || editorMarkdown.includes('blob:') || editorMarkdown.includes('](data:image/');
+        const selectedNotionUrl = useMemo(
+          () => buildNotionPageUrl(selectedVideo?.notionPageId),
+          [selectedVideo?.notionPageId]
+        );
+        const hasPendingImages = pendingImageUploads > 0 || editorMarkdown.includes('blob:');
 
         useEffect(() => {
           const source = selectedMarkdown || '';
@@ -2516,7 +2535,10 @@
         }), []);
 
         const uploadImageDataUrl = useCallback(async ({ dataUrl, name, mimeType }) => {
-          const [header, data = ''] = String(dataUrl || '').split(',');
+          const raw = String(dataUrl || '');
+          const commaIndex = raw.indexOf(',');
+          const header = commaIndex >= 0 ? raw.slice(0, commaIndex) : '';
+          const data = commaIndex >= 0 ? raw.slice(commaIndex + 1) : raw.replace(/^data:[^,]+,/, '');
           const resolvedMime = mimeType || (header.match(/^data:([^;]+);base64$/) || [])[1] || 'application/octet-stream';
           if (!data || !resolvedMime.startsWith('image/')) {
             throw new Error('画像データを読み取れませんでした');
@@ -2568,17 +2590,25 @@
           return next;
         }, [uploadImageDataUrl]);
 
-        const replaceImageMarkdown = useCallback((fromMarkdown, toMarkdown) => {
+        const escapeRegExp = useCallback((value) => String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), []);
+
+        const replaceImageMarkdown = useCallback((fromMarkdown, toMarkdown, imageUrl = '') => {
           setEditorMarkdown((current) => {
-            if (!current.includes(fromMarkdown)) return current;
-            const next = current.replace(fromMarkdown, toMarkdown);
+            const imagePattern = imageUrl ? new RegExp(`!\\[[^\\]]*\\]\\(${escapeRegExp(imageUrl)}\\)`, 'g') : null;
+            const replaceOne = (value) => {
+              if (!value) return value;
+              if (value.includes(fromMarkdown)) return value.replace(fromMarkdown, toMarkdown);
+              return imagePattern ? value.replace(imagePattern, toMarkdown) : value;
+            };
+            const next = replaceOne(current);
+            if (next === current) return current;
             editorUndoStackRef.current = editorUndoStackRef.current.map((entry) => ({
               ...entry,
-              afterMarkdown: entry.afterMarkdown ? entry.afterMarkdown.replace(fromMarkdown, toMarkdown) : entry.afterMarkdown,
+              afterMarkdown: replaceOne(entry.afterMarkdown),
             }));
             return next;
           });
-        }, []);
+        }, [escapeRegExp]);
 
         const handleEditorDragOver = useCallback((event) => {
           const items = Array.from(event.dataTransfer?.items || []);
@@ -2627,7 +2657,57 @@
               .then((upload) => {
                 uploaded = true;
                 const permanentMarkdown = `![${upload.name || image.safeName}](${upload.src})`;
-                replaceImageMarkdown(image.markdown, permanentMarkdown);
+                replaceImageMarkdown(image.markdown, permanentMarkdown, image.blobUrl);
+                setSaveMessage('画像アップロードが完了しました');
+              })
+              .catch((error) => {
+                setSaveMessage(error.message || '画像アップロードに失敗しました。画像を削除して再度お試しください');
+              })
+              .finally(() => {
+                setPendingImageUploads((count) => Math.max(0, count - 1));
+                if (uploaded) {
+                  URL.revokeObjectURL(image.blobUrl);
+                  temporaryImageUrlsRef.current.delete(image.blobUrl);
+                }
+              });
+          });
+        }, [insertMarkdownAtCursor, replaceImageMarkdown, uploadImageFile]);
+
+        const handleEditorPaste = useCallback((event) => {
+          const files = Array.from(event.clipboardData?.files || []);
+          const itemFiles = Array.from(event.clipboardData?.items || [])
+            .filter((item) => item.kind === 'file' && String(item.type || '').startsWith('image/'))
+            .map((item) => item.getAsFile())
+            .filter(Boolean);
+          const imageFiles = Array.from(new Set([...files, ...itemFiles]))
+            .filter((file) => String(file.type || '').startsWith('image/'));
+          if (!imageFiles.length) return;
+
+          event.preventDefault();
+
+          const images = imageFiles.map((file) => {
+            const blobUrl = URL.createObjectURL(file);
+            temporaryImageUrlsRef.current.add(blobUrl);
+            const safeName = String(file.name || 'image').replace(/[\[\]()]/g, ' ').trim() || 'image';
+            return {
+              file,
+              safeName,
+              blobUrl,
+              markdown: `![${safeName}](${blobUrl})`,
+            };
+          });
+
+          insertMarkdownAtCursor(`\n\n${images.map((image) => image.markdown).join('\n\n')}\n\n`, textareaRef.current?.selectionStart ?? null, { recordUndo: true });
+          setPendingImageUploads((count) => count + images.length);
+          setSaveMessage(`${images.length}枚の画像を貼り付けました。アップロード中です`);
+
+          images.forEach((image) => {
+            let uploaded = false;
+            uploadImageFile(image.file)
+              .then((upload) => {
+                uploaded = true;
+                const permanentMarkdown = `![${upload.name || image.safeName}](${upload.src})`;
+                replaceImageMarkdown(image.markdown, permanentMarkdown, image.blobUrl);
                 setSaveMessage('画像アップロードが完了しました');
               })
               .catch((error) => {
@@ -2736,9 +2816,26 @@
             return;
           }
 
+          let markdownToSave = editorMarkdown;
+          if (markdownToSave.includes('](data:image/')) {
+            setSavingArticle(true);
+            setSaveMessage('画像をアップロードしてURLへ変換しています');
+            try {
+              markdownToSave = await shortenEmbeddedDataImages(markdownToSave);
+              if (markdownToSave !== editorMarkdown) {
+                setEditorMarkdown(markdownToSave);
+              }
+            } catch (error) {
+              setSaveMessage(error.message || '画像アップロードに失敗しました。画像を削除して再度お試しください');
+              setSavingArticle(false);
+              return;
+            }
+          }
+
           if (!selectedVideo?.articleId) {
-            updateVideoInChannels(selectedVideo.id, { markdown: editorMarkdown });
-            setOriginalEditorMarkdown(editorMarkdown);
+            updateVideoInChannels(selectedVideo.id, { markdown: markdownToSave });
+            setOriginalEditorMarkdown(markdownToSave);
+            setSavingArticle(false);
             setSaveMessage('画面内のダミー記事を更新しました');
             return;
           }
@@ -2752,7 +2849,7 @@
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
                 articleId: selectedVideo.articleId,
-                content: editorMarkdown,
+                content: markdownToSave,
               }),
             });
             const payload = await response.json();
@@ -2762,22 +2859,22 @@
 
             setArticleCache((current) => ({
               ...current,
-              [selectedVideo.articleId]: editorMarkdown,
+              [selectedVideo.articleId]: markdownToSave,
             }));
             updateVideoInChannels(selectedVideo.id, {
-              markdown: editorMarkdown,
+              markdown: markdownToSave,
               hasArticle: true,
               articleStatus: '記事あり',
               articleUpdatedAt: payload.lastModified || new Date().toISOString(),
             });
-            setOriginalEditorMarkdown(editorMarkdown);
+            setOriginalEditorMarkdown(markdownToSave);
             setSaveMessage('OneDrive に保存しました');
           } catch (error) {
             setSaveMessage(`保存に失敗しました: ${error.message || '原因不明のエラー'}`);
           } finally {
             setSavingArticle(false);
           }
-        }, [canEditSelectedArticle, editorMarkdown, hasPendingImages, selectedVideo, updateVideoInChannels]);
+        }, [canEditSelectedArticle, editorMarkdown, hasPendingImages, selectedVideo, shortenEmbeddedDataImages, updateVideoInChannels]);
 
         const ensureNoteUploadReady = useCallback(() => {
           if (!selectedVideo?.articleId) {
@@ -3385,6 +3482,24 @@
                         <span className={`article-status-dot ${editorDirty ? 'dirty' : saveMessage.includes('保存') ? 'saved' : ''}`} title={hasPendingImages ? '画像アップロード中' : editorDirty ? '未保存' : '保存済み'} />
                         {saveMessage ? <span className="hidden sm:inline truncate text-[11px] text-slate-400">{saveMessage}</span> : null}
                         <div className="ml-auto flex items-center gap-2">
+                          {selectedNotionUrl ? (
+                            <a
+                              href={selectedNotionUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-slate-200 bg-white text-[11px] font-black text-[#7C4DFF] hover:border-[#7C4DFF] hover:bg-purple-50 transition-colors"
+                              title="Notion で開く"
+                            >
+                              N
+                            </a>
+                          ) : (
+                            <span
+                              className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-[11px] font-black text-slate-300"
+                              title="Notion ページ未連携"
+                            >
+                              N
+                            </span>
+                          )}
                           <span>{editorMarkdown.length.toLocaleString()} 文字</span>
                           <button
                             type="button"
@@ -3423,6 +3538,7 @@
                         ref={textareaRef}
                         onScroll={handleEditorScroll}
                         onKeyDown={handleEditorKeyDown}
+                        onPaste={handleEditorPaste}
                         value={editorMarkdown}
                         onChange={(event) => {
                           setEditorMarkdown(event.target.value);
