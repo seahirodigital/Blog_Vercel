@@ -9661,7 +9661,7 @@
   },
   {
     "id": "d4c85d5c-8ea3-4d39-97aa-9996512baf87",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2044cada00b44250b29aeebaaa37335d",
     "title": "パナソニック NH-D503-W 衣類乾燥機 レビュー比較まとめ",
     "name": "パナソニック NH-D503-W 衣類乾燥機 レビュー比較まとめ.md",
@@ -9671,8 +9671,8 @@
     "publishAt": "2026-05-25T15:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-25T14:25:29.344818+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-25T15:02:22.028671+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n04604e232a9f?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
