@@ -9939,7 +9939,7 @@
   },
   {
     "id": "76422a3a-5c38-4085-afa8-ab9c65286532",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3a3f80eadcdd46499575bf9770da2075",
     "title": "パナソニック SD-BMT2000-W ホームベーカリー レビュー比較まとめ",
     "name": "パナソニック SD-BMT2000-W ホームベーカリー レビュー比較まとめ.md",
@@ -9949,8 +9949,8 @@
     "publishAt": "2026-05-25T20:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-25T19:55:12.778046+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-25T20:32:24.083783+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nbfcf606bee2f?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
