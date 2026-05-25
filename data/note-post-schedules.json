@@ -9122,7 +9122,7 @@
   },
   {
     "id": "24da7394-5de8-477f-85fe-f6405122541c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s15717d260d3d46a6968b0986be69d117",
     "title": "RAYCOP(レイコップ) PRO2 RS3-300JPWH 布団クリーナー レビュー比較まとめ",
     "name": "RAYCOP(レイコップ) PRO2 RS3-300JPWH 布団クリーナー レビュー比較まとめ.md",
@@ -9131,10 +9131,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-25T09:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-25T08:25:10.929298+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "02aaa4bc-0784-4a5a-8fe3-9c01f8b30ad2",
