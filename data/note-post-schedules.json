@@ -9400,7 +9400,7 @@
   },
   {
     "id": "3f121410-a617-4e85-a545-db48f587d8f6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sca2345ca156a48dc8aad11b12b54a4bc",
     "title": "MYTREX REBIVE MINI XS2 MT-RX2-24マッサージャー レビュー比較まとめ",
     "name": "MYTREX XS2 MT-RX2-24 マッサージャー レビュー比較まとめ.md",
@@ -9409,10 +9409,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-25T12:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-25T11:25:16.409382+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f5b1c800-68a0-4ea5-8555-2e6097e287c8",
