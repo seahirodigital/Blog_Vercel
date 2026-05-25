@@ -9852,7 +9852,7 @@
   },
   {
     "id": "be0299fe-e11c-41da-a2f3-60fa4814932e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6154bd34c96d4c77aaf8173070aa5288",
     "title": "récolte RDP-2 生ごみ処理機 レビュー比較まとめ",
     "name": "récolte RDP-2 生ごみ処理機 レビュー比較まとめ.md",
@@ -9861,10 +9861,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-25T17:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-25T16:55:17.646458+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "378f389d-c189-4507-8099-a9a983c9d97f",
