@@ -9244,7 +9244,7 @@
   },
   {
     "id": "915517f5-7c99-4cf6-9752-25bbe7524fa8",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s618f9695ffde4a778f8592cd67ac4c5f",
     "title": "SAMKYO T40 食器洗い乾燥機 レビュー比較まとめ",
     "name": "SAMKYO T40 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -9254,8 +9254,8 @@
     "publishAt": "2026-05-25T10:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-25T09:55:45.598537+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-25T10:32:24.309226+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nba395e20ef65?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
