@@ -9087,7 +9087,7 @@
   },
   {
     "id": "27ce5313-0565-4078-9227-26e265fed5d6",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s9bb9cc2fb834444cbb057945c4bf9039",
     "title": "日立 MRO-F6C オーブンレンジ レビュー比較まとめ",
     "name": "日立 MRO-F6C オーブンレンジ レビュー比較まとめ.md",
@@ -9097,8 +9097,8 @@
     "publishAt": "2026-05-25T08:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-25T07:55:00.332351+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-25T08:32:19.694284+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n046106052e85?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
