@@ -9496,12 +9496,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-25T13:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "2026-05-25T12:25:43.679215+00:00",
+    "queuedAt": "2026-05-25T13:56:18.153453+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "38814347-9bec-4ab9-8d62-bb8a049c535f",
