@@ -4,7 +4,7 @@
  * PUT  /api/affiliate-links → MEMOを動的に保存（OneDrive Graph API経由）
  */
 
-import { syncGitHubActionsRefreshToken } from './_onedrive-token-sync.js';
+import { syncGitHubActionsRefreshToken } from '../lib/onedrive-token-sync.js';
 
 const GRAPH_API = 'https://graph.microsoft.com/v1.0';
 const TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';

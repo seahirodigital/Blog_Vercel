@@ -1,4 +1,5 @@
-import { syncGitHubActionsRefreshToken } from './_onedrive-token-sync.js';
+import notionHandler from '../lib/info-viewer-notion.js';
+import { syncGitHubActionsRefreshToken } from '../lib/onedrive-token-sync.js';
 
 const GRAPH_API = 'https://graph.microsoft.com/v1.0';
 const TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
@@ -643,7 +644,7 @@ async function handleImageReadRequest(req, res, token) {
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-info-viewer-admin-secret');
   res.setHeader('Cache-Control', 'no-store');
 
   if (req.method === 'OPTIONS') {
@@ -651,8 +652,12 @@ export default async function handler(req, res) {
   }
 
   try {
-    const token = await getAccessToken();
     const resource = resolveResource(req);
+    if (resource === 'notion') {
+      return await notionHandler(req, res);
+    }
+
+    const token = await getAccessToken();
 
     if (req.method === 'GET' && resource === 'image') {
       return await handleImageReadRequest(req, res, token);

@@ -1,5 +1,5 @@
 import { timingSafeEqual } from 'node:crypto';
-import { syncGitHubActionsRefreshToken } from './_onedrive-token-sync.js';
+import { syncGitHubActionsRefreshToken } from '../lib/onedrive-token-sync.js';
 
 const TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
 const VERCEL_API = 'https://api.vercel.com';

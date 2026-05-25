@@ -3,7 +3,7 @@
  * Vercel Hobby の Function 数を抑えるため、resource query で処理を分岐する。
  */
 
-import { syncGitHubActionsRefreshToken } from './_onedrive-token-sync.js';
+import { syncGitHubActionsRefreshToken } from '../lib/onedrive-token-sync.js';
 
 const GRAPH_API = 'https://graph.microsoft.com/v1.0';
 const TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
