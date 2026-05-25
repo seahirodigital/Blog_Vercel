@@ -9052,7 +9052,7 @@
   },
   {
     "id": "3a465285-645f-49a3-adfb-5304db8a0ecb",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf9bd1adf22e34274bcb64ce370bbe9ed",
     "title": "象印マホービン EU-FB23-BA オーブンレンジ レビュー比較まとめ",
     "name": "象印マホービン EU-FB23-BA オーブンレンジ レビュー比較まとめ.md",
@@ -9061,10 +9061,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-25T08:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-25T07:25:50.923568+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5f404dc4-ca9f-4925-b98f-17ed98212f86",
