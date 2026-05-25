@@ -8931,7 +8931,7 @@
   },
   {
     "id": "953411d3-5f52-4a81-95a2-8d75d8579071",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s133f0ed21e7c4c3f871e94d817ccfed0",
     "title": "パナソニック NP-TSP1-W 食器洗い乾燥機 レビュー比較まとめ",
     "name": "パナソニック NP-TSP1-W 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -8940,10 +8940,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-25T06:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-25T06:12:26.507809+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d0841027-e9d4-454e-b1fd-0429af7bb7f6",
