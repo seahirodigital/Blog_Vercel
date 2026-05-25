@@ -9435,7 +9435,7 @@
   },
   {
     "id": "96d62187-e97c-420e-91ba-df8374dbae63",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s97584f9e68944df48f28f7be31d5bbc7",
     "title": "iflytek A8 iflytek デュアルスクリーン レビュー比較まとめ",
     "name": "iflytek A8 iflytek デュアルスクリーン レビュー比較まとめ.md",
@@ -9444,10 +9444,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-25T12:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-25T11:55:33.624380+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5dd0a19c-83fa-48b5-95cf-014a4b783c6f",
