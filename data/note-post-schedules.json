@@ -10547,7 +10547,7 @@
   },
   {
     "id": "5dbe53a4-2a44-46ce-8a0f-d6b956755e7c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb2844b309a8b48e0a59e6ea963518b6e",
     "title": "PHILIPS PPM2701 マッサージャー レビュー比較まとめ",
     "name": "PHILIPS PPM2701 マッサージャー レビュー比較まとめ.md",
@@ -10557,8 +10557,8 @@
     "publishAt": "2026-05-26T09:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-26T08:59:09.499104+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-26T09:02:23.823586+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n8983207f7386?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
