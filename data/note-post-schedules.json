@@ -11226,7 +11226,7 @@
   },
   {
     "id": "b12e5436-a55b-4210-b669-f49a4abadaf0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1bf2c4198e554f58bb93f15cfb4f41e6",
     "title": "Vaculim ポータブルエアコン レビュー比較まとめ",
     "name": "Vaculim 24H ポータブルエアコン レビュー比較まとめ.md",
@@ -11235,10 +11235,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T17:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-26T16:55:26.659649+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "93395e98-4e0a-42e7-97b5-033ddd09a3da",
