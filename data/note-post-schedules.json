@@ -10477,7 +10477,7 @@
   },
   {
     "id": "48ccfb6d-4752-46ea-aba4-4012ec258403",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc16d249ec6f145e5a27058d0622b974d",
     "title": "LOWYA B9 生ごみ処理機 レビュー比較まとめ",
     "name": "LOWYA B9 生ごみ処理機 レビュー比較まとめ.md",
@@ -10486,10 +10486,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T08:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-26T07:25:37.788667+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "45435459-89fc-4291-bc4d-37c871fb824d",
