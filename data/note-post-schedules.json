@@ -10234,7 +10234,7 @@
   },
   {
     "id": "e9722fc8-0ff5-4527-8c55-331a8fa6f17f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se7cb783a84f3475cb58afa01f5dab76e",
     "title": "コンフィー CFM-BA252 スチームオーブンレンジ レビュー比較まとめ",
     "name": "コンフィー CFM-BA252 スチームオーブンレンジ レビュー比較まとめ.md",
@@ -10243,10 +10243,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T01:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-26T00:25:34.169122+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f88186a5-0738-4ac8-abbf-a8e500cbd204",
