@@ -11313,7 +11313,7 @@
   },
   {
     "id": "35409630-759b-4b20-8ac8-4216f3f0925c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc2d4556a074a442ea6c9faa1b4534432",
     "title": "KWASYO 12層フードドライヤー レビュー比較まとめ：効率的な食品乾燥で食生活を豊かにする方法",
     "name": "KWASYO 12層フードドライヤー レビュー比較まとめ：効率的な食品乾燥で食生活を豊かにする方法.md",
@@ -11322,10 +11322,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T20:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-26T19:55:12.006620+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b0b6cae8-fa93-41cd-8e71-d0e2cfe3ae5b",
