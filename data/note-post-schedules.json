@@ -11052,7 +11052,7 @@
   },
   {
     "id": "99d7aa81-4e59-434e-ade2-d016f89ecafc",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se7fcffb2d1e14b3b865a2c12254de0ad",
     "title": "富士通ゼネラル DAS-15R-B レビュー比較まとめ",
     "name": "ブランド 富士通ゼネラル DAS-15R-B ブランド 富士通ゼネラル レビュー比較まとめ.md",
@@ -11061,10 +11061,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T15:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-26T14:25:19.315515+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ca1571eb-6965-4850-99e4-6d4f5dfd4c2b",
