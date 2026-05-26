@@ -10425,7 +10425,7 @@
   },
   {
     "id": "8f159b64-f6f9-4f5a-8b77-de2c5cc67d8c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s58fe5277e6084680b422bba3020d765a",
     "title": "シャープ KC-S50W-W レビュー比較まとめ",
     "name": "シャープ KC-S50W-W シャープ SHARP レビュー比較まとめ.md",
@@ -10434,10 +10434,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T07:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-26T06:55:25.044770+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8fce6db1-ba93-4ce6-a1ff-e5c62d234b60",
