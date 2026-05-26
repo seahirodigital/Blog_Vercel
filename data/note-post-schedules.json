@@ -10982,7 +10982,7 @@
   },
   {
     "id": "35f44062-25a3-4d65-870c-dfb852e2530f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd2404950a9604add92d9666ff2e3bbbb",
     "title": "NIPLUX B9 マッサージャー レビュー比較まとめ",
     "name": "NIPLUX B9 マッサージャー レビュー比較まとめ.md",
@@ -10991,10 +10991,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T14:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-26T13:25:37.296054+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8403d378-a8e4-40b3-8392-d9955318d431",
