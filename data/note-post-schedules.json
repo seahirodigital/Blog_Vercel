@@ -10199,7 +10199,7 @@
   },
   {
     "id": "b238c762-384d-49f7-b4ee-0db550072f00",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s9790a0873f884ea187aea0286dee28d7",
     "title": "Jimmy JV35 布団クリーナー レビュー比較まとめ",
     "name": "Jimmy JV35 布団クリーナー レビュー比較まとめ.md",
@@ -10209,8 +10209,8 @@
     "publishAt": "2026-05-26T00:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-25T23:25:18.017271+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-26T00:02:32.496977+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na8e9de7c7c40?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
