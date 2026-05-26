@@ -10547,7 +10547,7 @@
   },
   {
     "id": "5dbe53a4-2a44-46ce-8a0f-d6b956755e7c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb2844b309a8b48e0a59e6ea963518b6e",
     "title": "PHILIPS PPM2701 マッサージャー レビュー比較まとめ",
     "name": "PHILIPS PPM2701 マッサージャー レビュー比較まとめ.md",
@@ -10556,10 +10556,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T09:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-26T08:59:09.499104+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ee3bb742-701f-4a22-8c92-f366a798a667",
@@ -10580,7 +10582,7 @@
   },
   {
     "id": "294488f1-92b4-432d-9567-d97147d585cc",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd628bb34e67442898526ca16c915de6f",
     "title": "Haier JM-WFVH20A オーブンレンジ レビュー比較まとめ",
     "name": "Haier JM-WFVH20A オーブンレンジ レビュー比較まとめ.md",
@@ -10589,10 +10591,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T09:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-26T08:59:09.499104+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3388a540-b23d-49cd-bd8f-96927f66dc4e",
