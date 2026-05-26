@@ -11191,7 +11191,7 @@
   },
   {
     "id": "e16d7602-1878-443f-a746-5e4b78d6323c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb338443c58c84fb6a82238aba6132730",
     "title": "SAMKYO T80 食器洗い乾燥機 レビュー比較まとめ",
     "name": "SAMKYO T80 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -11200,10 +11200,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T17:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-26T16:25:13.732618+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "458cd096-9608-4fb1-896f-01a909b48195",
