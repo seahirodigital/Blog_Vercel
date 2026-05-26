@@ -10634,7 +10634,7 @@
   },
   {
     "id": "a52b2bb8-6203-436f-8462-0aaeb13fe8a7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7e7eba89adb34891b8d027f812a65902",
     "title": "アイリスオーヤマ SCD-23AZP1-W スティッククリーナー レビュー比較まとめ",
     "name": "アイリスオーヤマ SCD-23AZP1-W スティッククリーナー レビュー比較まとめ.md",
@@ -10643,10 +10643,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T10:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-26T09:25:24.976485+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "505470c1-8a29-4e02-989f-c84695f2ef87",
