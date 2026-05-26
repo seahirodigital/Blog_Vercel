@@ -11261,7 +11261,7 @@
   },
   {
     "id": "f78b95bd-1f95-4b85-8e6a-3b3d478957e0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s69d844038d164a37a20666154e8d34dd",
     "title": "Ulike 22J 光美容器 レビュー比較まとめ",
     "name": "Ulike 22J 光美容器 レビュー比較まとめ.md",
@@ -11270,10 +11270,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T20:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-26T19:25:00.727740+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3dee57c4-71b4-463b-bbdc-5edc55238817",
