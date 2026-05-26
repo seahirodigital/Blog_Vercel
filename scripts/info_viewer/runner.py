@@ -11,6 +11,8 @@ from modules import apify_fetcher, gemini_formatter, manifest_builder, notion_wr
 
 load_dotenv()
 
+_created_notion_urls: list[str] = []
+
 COMPLETED_STATUS = "完了"
 SPREADSHEET_ID = os.getenv("SPREADSHEET_ID", "")
 CHANNEL_SHEET_NAME = os.getenv("INFO_VIEWER_CHANNEL_SHEET_NAME", "チャンネル設定")
@@ -1558,6 +1560,10 @@ def _process_pending_videos(
         success_count += 1
         state_store.mark_done(state, video["video_url"], run_id, upload_result=upload_result)
         state_store.save_state(state)
+        if upload_result.get("notionPageId"):
+            page_id = upload_result.get("notionPageId").replace("-", "")
+            _created_notion_urls.append(f"https://notion.so/{page_id}")
+
         save_message = (
             "Markdown を OneDrive と Notion に保存しました"
             if upload_result.get("notionPageId")
@@ -1740,6 +1746,12 @@ def main():
     print(f"失敗: {len(failures_this_run)}件")
     print(f"manifest 更新完了: {manifest.get('generatedAt')}")
     print("-" * 72)
+
+    if _created_notion_urls:
+        github_output = os.getenv("GITHUB_OUTPUT")
+        if github_output:
+            with open(github_output, "a", encoding="utf-8") as f:
+                f.write(f"notion_urls={','.join(_created_notion_urls)}\n")
 
     for failure in failures_this_run:
         print(f"失敗: {failure['title']} / {failure['stage']} / {failure['error']}")

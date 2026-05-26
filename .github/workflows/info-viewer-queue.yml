@@ -60,6 +60,7 @@ jobs:
         run: python scripts/pipeline/sync_onedrive_refresh_token_from_vercel.py
 
       - name: info_viewer パイプラインを実行
+        id: info_viewer
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
@@ -124,3 +125,19 @@ jobs:
           fi
 
           "${CMD[@]}"
+
+      - name: Discord Notification
+        if: always() && steps.info_viewer.outputs.notion_urls != ''
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          if [ -z "$DISCORD_WEBHOOK" ]; then
+            echo "DISCORD_WEBHOOK is not set, skipping Discord notification."
+            exit 0
+          fi
+          
+          IFS=',' read -ra URLS <<< "${{ steps.info_viewer.outputs.notion_urls }}"
+          for URL in "${URLS[@]}"; do
+            MESSAGE="Notionに新しい記事が保存されました: $URL"
+            curl -H "Content-Type: application/json" -d "{\"content\": \"$MESSAGE\"}" $DISCORD_WEBHOOK
+          done
