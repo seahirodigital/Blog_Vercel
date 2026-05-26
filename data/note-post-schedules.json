@@ -10930,7 +10930,7 @@
   },
   {
     "id": "9959ba28-1eb5-449b-9ce0-5446bc7daf93",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3ff1412d9ac944368a7adc9cc59f2f11",
     "title": "Vasco Electronics V4 音声翻訳機 レビュー比較まとめ",
     "name": "Vasco Electronics V4 音声翻訳機 レビュー比較まとめ.md",
@@ -10939,10 +10939,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T13:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-26T12:55:19.993437+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a77af291-379a-452d-9c4d-81cd070b2563",
