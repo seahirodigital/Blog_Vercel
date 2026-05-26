@@ -1563,7 +1563,8 @@ def _process_pending_videos(
         if upload_result.get("notionPageId"):
             page_id = upload_result.get("notionPageId").replace("-", "")
             safe_title = actual_title.replace(",", "，").replace("|", "｜")
-            _created_notion_urls.append(f"{safe_title}|https://notion.so/{page_id}")
+            safe_channel = video.get("channel_name", "").replace(",", "，").replace("|", "｜")
+            _created_notion_urls.append(f"{safe_channel}|{safe_title}|https://notion.so/{page_id}")
 
         save_message = (
             "Markdown を OneDrive と Notion に保存しました"

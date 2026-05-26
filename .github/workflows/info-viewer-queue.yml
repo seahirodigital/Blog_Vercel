@@ -138,9 +138,10 @@ jobs:
           
           IFS=',' read -ra ITEMS <<< "${{ steps.info_viewer.outputs.notion_urls }}"
           for ITEM in "${ITEMS[@]}"; do
-            TITLE="${ITEM%%|*}"
-            URL="${ITEM##*|}"
-            # Escape quotes if necessary
-            MESSAGE="Notionに新しい記事が保存されました！\n**${TITLE}**\n${URL}"
+            CHANNEL="${ITEM%%|*}"
+            REST="${ITEM#*|}"
+            TITLE="${REST%%|*}"
+            URL="${REST##*|}"
+            MESSAGE="【Notion記事更新】\n${CHANNEL}\n${TITLE}\n${URL}"
             curl -H "Content-Type: application/json" -d "{\"content\": \"$MESSAGE\"}" "$DISCORD_WEBHOOK"
           done
