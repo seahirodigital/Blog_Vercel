@@ -10739,7 +10739,7 @@
   },
   {
     "id": "fa39be87-c3ab-4401-ac8d-73136542f7ea",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se42a606499e549728dbed771cccda3ee",
     "title": "エペイオス EPAO248 食洗機 レビュー比較まとめ",
     "name": "エペイオス EPAO248 食洗機 レビュー比較まとめ.md",
@@ -10748,10 +10748,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T11:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-26T10:55:09.764628+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a31f3396-16b7-4396-ab5a-1f7b27cfcfc1",
