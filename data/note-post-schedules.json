@@ -10512,7 +10512,7 @@
   },
   {
     "id": "d18935e8-9071-4429-a94c-655633f5abd5",
-    "status": "queued",
+    "status": "error",
     "fileId": "FFCC26DEDBBA4E70!s56157a7f4a384e77bf3dfef1fdd978fb",
     "title": "パナソニック 9C-ES-NWHJC-HdpB0GN1XY9LP 光美容器 レビュー比較まとめ",
     "name": "パナソニック 9C-ES-NWHJC-HdpB0GN1XY9LP 光美容器 レビュー比較まとめ.md",
@@ -10524,7 +10524,7 @@
     "queuedAt": "2026-05-26T10:57:17.409092+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": "",
+    "error": "POST https://api.github.com/repos/seahirodigital/Blog_Vercel/actions/workflows/note-post.yml/dispatches failed: 500 {\"message\":\"Failed to run workflow dispatch\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\",\"status\":\"500\"}",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 3
   },
