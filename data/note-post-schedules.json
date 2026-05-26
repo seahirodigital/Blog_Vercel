@@ -10808,7 +10808,7 @@
   },
   {
     "id": "a13b3717-3b4c-433d-9c79-130809b4ab35",
-    "status": "queued",
+    "status": "error",
     "fileId": "FFCC26DEDBBA4E70!s783ff84aef57442a9486544a7666e8cd",
     "title": "パナソニック SD-BH1001-R ホームベーカリー レビュー比較まとめ",
     "name": "パナソニック SD-BH1001-R ホームベーカリー レビュー比較まとめ.md",
@@ -10820,7 +10820,7 @@
     "queuedAt": "2026-05-26T11:25:33.234908+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": "",
+    "error": "POST https://api.github.com/repos/seahirodigital/Blog_Vercel/actions/workflows/note-post.yml/dispatches failed: 500 {\"message\":\"Failed to run workflow dispatch\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\",\"status\":\"500\"}",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
   },
