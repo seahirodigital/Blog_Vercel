@@ -10269,7 +10269,7 @@
   },
   {
     "id": "027fa263-26ee-45f7-9119-fb1e6c448e36",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbdd2679daca245e4828d0742541ba9e1",
     "title": "SAMKYO SAMKYO-49 食器洗い乾燥機 レビュー比較まとめ",
     "name": "SAMKYO SAMKYO-49 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -10278,10 +10278,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T01:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-26T00:55:42.890062+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "819ff6cc-3809-4110-a54a-7881c450a1eb",
