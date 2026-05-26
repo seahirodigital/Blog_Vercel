@@ -10895,7 +10895,7 @@
   },
   {
     "id": "c79cee66-ac29-472a-8bb4-2e357a601970",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s0526b7a50af149c59bdfeb598044ce8e",
     "title": "THRIVEスライヴ CHD-3810 THRIVEスライヴ スライヴ レビュー比較まとめ",
     "name": "THRIVEスライヴ CHD-3810 THRIVEスライヴ スライヴ レビュー比較まとめ.md",
@@ -10905,8 +10905,8 @@
     "publishAt": "2026-05-26T13:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-26T13:55:53.795251+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-26T13:58:32.842366+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na7f964c48bf5?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
