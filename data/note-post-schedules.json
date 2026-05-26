@@ -10669,7 +10669,7 @@
   },
   {
     "id": "921ce5c2-ff3f-47b3-b234-e4f6129a74d4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s104006444d1d4b35aa71098585eb6744",
     "title": "ヤーマン YJEA4N3AM メンズシェーバー レビュー比較まとめ",
     "name": "ヤーマン YJEA4N3AM メンズシェーバー レビュー比較まとめ.md",
@@ -10679,8 +10679,8 @@
     "publishAt": "2026-05-26T10:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-26T09:55:42.410948+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-26T10:32:36.644564+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nb2a098d2fd77?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
