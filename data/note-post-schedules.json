@@ -10373,7 +10373,7 @@
   },
   {
     "id": "83f9eb5c-3a0e-4898-82ea-cc0e363c3039",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s35b675e45e69436a9b0b9236f44ef1e8",
     "title": "アテックスAtex AX-HC231 アテックスAtex アテックス レビュー比較まとめ",
     "name": "アテックスAtex AX-HC231 アテックスAtex アテックス レビュー比較まとめ.md",
@@ -10383,8 +10383,8 @@
     "publishAt": "2026-05-26T06:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
     "queuedAt": "2026-05-26T05:55:04.563392+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-26T06:32:24.680448+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n3278c6246d8f?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
