@@ -10904,12 +10904,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T13:00:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "2026-05-26T12:25:05.595842+00:00",
+    "queuedAt": "2026-05-26T13:55:53.795251+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "620e1c96-d6dc-45bd-8e9f-adce594195c2",
@@ -11017,7 +11017,7 @@
   },
   {
     "id": "31ffe93c-a28f-4ad6-a489-8dd8970ba4c7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s249e0ff99dbc4c1b8b7f85bf6bb87898",
     "title": "パナソニック EH-SA3B-N ヘアドライヤー レビュー比較まとめ",
     "name": "パナソニック EH-SA3B-N ヘアドライヤー レビュー比較まとめ.md",
@@ -11026,10 +11026,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T14:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-26T13:55:53.795251+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c440bb94-07ad-4aeb-b626-33cef326ba18",
