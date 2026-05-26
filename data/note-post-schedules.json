@@ -10843,7 +10843,7 @@
   },
   {
     "id": "418b5e47-21a9-4746-bdef-c7670340ba5f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s032a2401ecd84bbf9f486d618f19a830",
     "title": "パナソニック ES-LVG8-K メンズシェーバー レビュー比較まとめ",
     "name": "パナソニック ES-LVG8-K メンズシェーバー レビュー比較まとめ.md",
@@ -10852,10 +10852,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T12:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-26T11:55:48.832700+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c64165cb-dd12-42f6-a709-955a4747c81f",
