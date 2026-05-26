@@ -10843,7 +10843,7 @@
   },
   {
     "id": "418b5e47-21a9-4746-bdef-c7670340ba5f",
-    "status": "queued",
+    "status": "error",
     "fileId": "FFCC26DEDBBA4E70!s032a2401ecd84bbf9f486d618f19a830",
     "title": "パナソニック ES-LVG8-K メンズシェーバー レビュー比較まとめ",
     "name": "パナソニック ES-LVG8-K メンズシェーバー レビュー比較まとめ.md",
@@ -10855,7 +10855,7 @@
     "queuedAt": "2026-05-26T11:55:48.832700+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": "",
+    "error": "POST https://api.github.com/repos/seahirodigital/Blog_Vercel/actions/workflows/note-post.yml/dispatches failed: 500 {\"message\":\"Failed to run workflow dispatch\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\",\"status\":\"500\"}",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
   },
