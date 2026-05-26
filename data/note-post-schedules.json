@@ -10512,7 +10512,7 @@
   },
   {
     "id": "d18935e8-9071-4429-a94c-655633f5abd5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s56157a7f4a384e77bf3dfef1fdd978fb",
     "title": "パナソニック 9C-ES-NWHJC-HdpB0GN1XY9LP 光美容器 レビュー比較まとめ",
     "name": "パナソニック 9C-ES-NWHJC-HdpB0GN1XY9LP 光美容器 レビュー比較まとめ.md",
@@ -10521,10 +10521,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-26T08:30:00.000Z",
     "createdAt": "2026-05-21T05:37:07.700Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-26T07:55:48.804691+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "976f3727-d4c3-4e46-8ed8-5fe1303dd64e",
