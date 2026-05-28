@@ -11893,7 +11893,7 @@
   },
   {
     "id": "2e84b07c-69d8-4868-bc41-27a5d6977480",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s4b1fd1e55cb24c17875858afe7c98453",
     "title": "SALONIA(サロニア) IPX5 SAL22207SL 3DSALONIA 美顔器 レビュー比較まとめ",
     "name": "SALONIA(サロニア) IPX5 SAL22207SL 3DSALONIA 美顔器 レビュー比較まとめ.md",
@@ -11903,8 +11903,8 @@
     "publishAt": "2026-05-28T08:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-28T11:04:07.017099+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-28T11:06:49.814394+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n4b5e3b30777d/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
