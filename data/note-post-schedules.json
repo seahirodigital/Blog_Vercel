@@ -12324,7 +12324,7 @@
   },
   {
     "id": "f4a699e8-23b0-4d04-a8b3-4141e6bb0b29",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2565d89ea3034220bd4ddcd52fc71fe3",
     "title": "Corona CW-1626R 窓用エアコン レビュー比較まとめ",
     "name": "Corona CW-1626R 窓用エアコン レビュー比較まとめ.md",
@@ -12334,8 +12334,8 @@
     "publishAt": "2026-05-28T20:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-28T19:25:27.872675+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-28T20:02:27.268577+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n88af6d9da77a?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
