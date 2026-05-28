@@ -12414,7 +12414,7 @@
   },
   {
     "id": "5310e25b-e874-492d-8610-7fea15884ac8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s428c0a314f6e4e8c89a08ed2999917cf",
     "title": "Denon AVR-X3800Hテレビ レビュー比較まとめ",
     "name": "Denon AVR-X3800H 4ch HDR10 Auro-3D AVR-X3800HK テレビ レビュー比較まとめ.md",
@@ -12423,10 +12423,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-28T22:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-28T21:55:16.868884+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "21893ff1-fb3b-4038-8a03-da5941b25335",
