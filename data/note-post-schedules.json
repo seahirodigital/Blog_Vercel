@@ -12234,7 +12234,7 @@
   },
   {
     "id": "e637437f-02d3-42b3-8555-b9795fc25705",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s783ff84aef57442a9486544a7666e8cd",
     "title": "パナソニック SD-BH1001-R ホームベーカリー レビュー比較まとめ",
     "name": "パナソニック SD-BH1001-R ホームベーカリー レビュー比較まとめ.md",
@@ -12244,8 +12244,8 @@
     "publishAt": "2026-05-28T17:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-28T16:55:30.194690+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-28T17:32:21.576609+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n9d5e8c26618f?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
