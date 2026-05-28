@@ -12486,7 +12486,7 @@
   },
   {
     "id": "7626bef3-a75e-4a07-b0bd-693dec8a32e8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc89bf446073e4c8da4e2a730ec058bd9",
     "title": "日立 DE-N50HV 2way 衣類乾燥機 レビュー比較まとめ",
     "name": "日立 DE-N50HV 2way 衣類乾燥機 レビュー比較まとめ.md",
@@ -12495,10 +12495,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-29T00:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-28T23:55:54.352509+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "23879e55-3195-46c4-b7f2-7e4e93d09e27",
