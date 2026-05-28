@@ -11929,7 +11929,7 @@
   },
   {
     "id": "dd9ce48c-8214-42d1-bd41-4189f2bfe8e6",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s95c92ee955354ad5ba6b7aff40def1a2",
     "title": "三菱電機 TK-TS20Aレビュー比較まとめ",
     "name": "三菱電機 TK-TS20A TK-TS20A-H 三菱 外せて洗える レビュー比較まとめ.md",
@@ -11939,8 +11939,8 @@
     "publishAt": "2026-05-28T09:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-28T12:34:56.424548+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-28T12:37:39.165157+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd6ffb3444ceb?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
