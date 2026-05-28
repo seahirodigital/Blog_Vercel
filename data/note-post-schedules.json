@@ -12270,7 +12270,7 @@
   },
   {
     "id": "c3ccb3f4-0aad-4de2-be4b-28e0eb152e82",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5ba6f02b45ea4f7f9a53b42603f3bdb8",
     "title": "パナソニック NP-TMLK1-K 食器洗い乾燥機 レビュー比較まとめ",
     "name": "パナソニック NP-TMLK1-K 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -12279,10 +12279,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-28T18:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-28T17:55:42.612844+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0607d3e8-cbfe-4a09-bdcd-9d5773f0abee",
