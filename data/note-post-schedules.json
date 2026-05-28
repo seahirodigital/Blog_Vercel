@@ -11947,7 +11947,7 @@
   },
   {
     "id": "9c8bc0d9-0877-4f96-adeb-7c180bcdfc59",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb84b583a0de2487bb43c1da7237485e2",
     "title": "シャープ KI-RX75-T 加湿空気清浄機 レビュー比較まとめ",
     "name": "シャープ KI-RX75-T 加湿空気清浄機 レビュー比較まとめ.md",
@@ -11957,8 +11957,8 @@
     "publishAt": "2026-05-28T10:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-28T12:34:56.424548+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-28T12:37:53.002101+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nabec7b3319e9?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
