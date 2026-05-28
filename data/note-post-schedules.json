@@ -12144,7 +12144,7 @@
   },
   {
     "id": "59c12bdd-9d31-4f85-87db-efb5ac14d033",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa5916ec27d8b4d2f8e8af1e2542ffdb8",
     "title": "Yurioo Drytank-3600 除湿機 レビュー比較まとめ",
     "name": "Yurioo Drytank-3600 除湿機 レビュー比較まとめ.md",
@@ -12154,8 +12154,8 @@
     "publishAt": "2026-05-28T15:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-28T14:25:58.433529+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-28T15:02:22.150505+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nb43c23ed4540?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
