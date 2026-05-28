@@ -12010,12 +12010,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-28T11:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "2026-05-28T12:34:56.424548+00:00",
+    "queuedAt": "2026-05-28T14:05:47.279487+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 2
+    "dispatchAttempts": 3
   },
   {
     "id": "eedbb4b4-0642-496a-8089-9e06879db7f5",
