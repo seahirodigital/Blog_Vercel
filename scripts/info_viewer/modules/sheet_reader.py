@@ -233,8 +233,8 @@ def get_target_channels(
     channels: list[dict[str, Any]] = []
 
     for row in rows:
-        viewer_flag = _pick_value(row, ["info_viewer", "info viewer", "viewer"])
-        if viewer_flag != "取得":
+        viewer_flag = _pick_value(row, ["info_viewer", "info-viewer", "info viewer", "viewer"])
+        if not viewer_flag:
             continue
 
         channel_name = _pick_value(row, ["チャンネル", "チャンネル名", "channel", "channel name"])
@@ -248,6 +248,7 @@ def get_target_channels(
                 "name": channel_name or channel_url,
                 "channel_name": channel_name or channel_url,
                 "channel_url": channel_url,
+                "title_filter": "" if viewer_flag == "取得" else viewer_flag,
                 "gemini_profile": _resolve_gemini_profile(row),
                 "_row_number": row["_row_number"],
                 "_raw": row,
@@ -281,6 +282,11 @@ def get_target_videos(
         if not matched_channel:
             continue
 
+        video_title = _pick_value(row, VIDEO_TITLE_ALIASES)
+        title_filter = str(matched_channel.get("title_filter") or "").strip()
+        if title_filter and title_filter.casefold() not in video_title.casefold():
+            continue
+
         status = _pick_value(row, ["状況", "status"], "")
         if not include_completed and status == "完了":
             continue
@@ -292,7 +298,7 @@ def get_target_videos(
             {
                 "row_number": row["_row_number"],
                 "video_url": video_url,
-                "video_title": _pick_value(row, VIDEO_TITLE_ALIASES),
+                "video_title": video_title,
                 "published_at": published_at,
                 "video_updated_at": video_updated_at,
                 "duration": _pick_value(row, DURATION_ALIASES),
