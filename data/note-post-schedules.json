@@ -12054,7 +12054,7 @@
   },
   {
     "id": "2772cd5c-dfc7-4625-a42d-ba5e6e0605c7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa5177137fcdc4663a52e07c4fd99fb1a",
     "title": "roborock Saros10R 20000Pa 8way 掃除機 レビュー比較まとめ",
     "name": "roborock Saros10R 20000Pa 8way 掃除機 レビュー比較まとめ.md",
@@ -12063,10 +12063,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-28T12:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-28T11:55:38.465627+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "95f2b13a-350e-4734-a4c1-0f404bf021f3",
