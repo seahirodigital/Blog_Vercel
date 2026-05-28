@@ -12450,7 +12450,7 @@
   },
   {
     "id": "6af22254-e4d9-4b43-8e9f-e433355270c9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s331511a111514d92a5e9e521810c32a8",
     "title": "パナソニック MS-N53-S 生ごみ処理機 レビュー比較まとめ",
     "name": "パナソニック MS-N53-S 生ごみ処理機 レビュー比較まとめ.md",
@@ -12459,10 +12459,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-28T23:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-28T22:55:32.572736+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7a5f6253-eea0-43a3-9561-7e0dfce5b80e",
