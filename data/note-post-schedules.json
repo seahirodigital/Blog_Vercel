@@ -11875,7 +11875,7 @@
   },
   {
     "id": "55ce0e46-e514-4ddd-90f0-94b128317e07",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s091f016cabd845c0883ba33d1f663992",
     "title": "タイガー魔法瓶 JPV-N100K 炊飯器 レビュー比較まとめ",
     "name": "タイガー魔法瓶 JPV-N100K 炊飯器 レビュー比較まとめ.md",
@@ -11884,14 +11884,16 @@
     "noTopImage": false,
     "publishAt": "2026-05-28T08:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-28T11:04:07.017099+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2e84b07c-69d8-4868-bc41-27a5d6977480",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4b1fd1e55cb24c17875858afe7c98453",
     "title": "SALONIA(サロニア) IPX5 SAL22207SL 3DSALONIA 美顔器 レビュー比較まとめ",
     "name": "SALONIA(サロニア) IPX5 SAL22207SL 3DSALONIA 美顔器 レビュー比較まとめ.md",
@@ -11900,14 +11902,16 @@
     "noTopImage": false,
     "publishAt": "2026-05-28T08:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-28T11:04:07.017099+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8216708e-99fa-4e00-8b02-1f433dddc82e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7e679b1b7a304e3a817a6cbe07e47509",
     "title": "三菱電機 MJ-P180RX-W 衣類乾燥除湿機 レビュー比較まとめ",
     "name": "三菱電機 MJ-P180RX-W 衣類乾燥除湿機 レビュー比較まとめ.md",
@@ -11916,14 +11920,16 @@
     "noTopImage": false,
     "publishAt": "2026-05-28T09:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-28T11:04:07.017099+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "dd9ce48c-8214-42d1-bd41-4189f2bfe8e6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s95c92ee955354ad5ba6b7aff40def1a2",
     "title": "三菱電機 TK-TS20Aレビュー比較まとめ",
     "name": "三菱電機 TK-TS20A TK-TS20A-H 三菱 外せて洗える レビュー比較まとめ.md",
@@ -11932,14 +11938,16 @@
     "noTopImage": false,
     "publishAt": "2026-05-28T09:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-28T11:04:07.017099+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9c8bc0d9-0877-4f96-adeb-7c180bcdfc59",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb84b583a0de2487bb43c1da7237485e2",
     "title": "シャープ KI-RX75-T 加湿空気清浄機 レビュー比較まとめ",
     "name": "シャープ KI-RX75-T 加湿空気清浄機 レビュー比較まとめ.md",
@@ -11948,14 +11956,16 @@
     "noTopImage": false,
     "publishAt": "2026-05-28T10:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-28T11:04:07.017099+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5a85a1ea-d413-4b7a-adf8-438c8c983eb8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8bcffe934ac14032974c7c0de529c171",
     "title": "COWSAR 6kW ポータブルエアコン レビュー比較まとめ",
     "name": "COWSAR 6kW ポータブルエアコン レビュー比較まとめ.md",
@@ -11964,14 +11974,16 @@
     "noTopImage": false,
     "publishAt": "2026-05-28T10:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-28T11:04:07.017099+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d5115ee8-d536-4f60-87b4-045b75b28e5e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s244d96bb1e554913b7c3862010725b1e",
     "title": "ナカトミ SAC-612NG ポータブルエアコン レビュー比較まとめ",
     "name": "ナカトミ SAC-612NG ポータブルエアコン レビュー比較まとめ.md",
@@ -11980,14 +11992,16 @@
     "noTopImage": false,
     "publishAt": "2026-05-28T11:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-28T11:04:07.017099+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9cb9fd4e-98c9-42c1-9455-25ebd221dd00",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s56157a7f4a384e77bf3dfef1fdd978fb",
     "title": "パナソニック 9C-ES-NWHJC-HdpB0GN1XY9LP 光美容器 レビュー比較まとめ",
     "name": "パナソニック 9C-ES-NWHJC-HdpB0GN1XY9LP 光美容器 レビュー比較まとめ.md",
@@ -11996,10 +12010,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-28T11:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-28T11:04:07.017099+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "eedbb4b4-0642-496a-8089-9e06879db7f5",
