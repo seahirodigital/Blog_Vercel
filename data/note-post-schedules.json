@@ -12288,7 +12288,7 @@
   },
   {
     "id": "0607d3e8-cbfe-4a09-bdcd-9d5773f0abee",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s67bb4fadee544165946321cb7a712cf1",
     "title": "パナソニック NH-D605-W 衣類乾燥機 レビュー比較まとめ",
     "name": "パナソニック NH-D605-W 衣類乾燥機 レビュー比較まとめ.md",
@@ -12298,8 +12298,8 @@
     "publishAt": "2026-05-28T19:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-28T18:25:16.270111+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-28T19:02:31.937517+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n9794263912d4?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
