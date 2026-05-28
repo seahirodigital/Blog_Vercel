@@ -12216,7 +12216,7 @@
   },
   {
     "id": "3b350320-cb97-4ca3-af79-c4263556912f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s6984ddc2e9fa4989bacb63cc0f957f81",
     "title": "Corona CWH-A1826R 窓用エアコン レビュー比較まとめ",
     "name": "Corona CWH-A1826R 窓用エアコン レビュー比較まとめ.md",
@@ -12226,8 +12226,8 @@
     "publishAt": "2026-05-28T17:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-28T16:25:00.072652+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-28T17:02:30.306253+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7d3a634c98f9?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
