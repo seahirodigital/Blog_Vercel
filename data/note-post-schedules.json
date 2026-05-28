@@ -12162,7 +12162,7 @@
   },
   {
     "id": "2ae270ec-0092-44b3-8eb0-525aa3e1e263",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd8bc9a259b764f5aaab59919ef44f25c",
     "title": "Dyson(ダイソン) V8 SV25 RD2 スティッククリーナー レビュー比較まとめ",
     "name": "Dyson(ダイソン) V8 SV25 RD2 スティッククリーナー レビュー比較まとめ.md",
@@ -12172,8 +12172,8 @@
     "publishAt": "2026-05-28T15:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-28T14:55:13.671949+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-28T15:32:30.319262+00:00",
+    "publishedUrl": "https://note.com/notes/n5210736ff73a/landing?puid=e84829ee-43be-4ba8-8a54-d122b9588a6f",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
