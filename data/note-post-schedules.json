@@ -12828,7 +12828,7 @@
   },
   {
     "id": "be436919-b87e-4e25-8ea2-2a64eb0d55dd",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s48e54052706f47b290b3380fb85527d0",
     "title": "ダイニチ GD-28A 0N04000 生ごみ処理機 レビュー比較まとめ",
     "name": "ダイニチ GD-28A 0N04000 生ごみ処理機 レビュー比較まとめ.md",
@@ -12838,8 +12838,8 @@
     "publishAt": "2026-05-29T09:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-29T08:55:59.498291+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-29T09:32:31.824925+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n1311b74a9cdf?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
