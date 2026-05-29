@@ -12792,7 +12792,7 @@
   },
   {
     "id": "dafa249e-874e-4e03-94db-6ab95eafd3a8",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf2d8da36a44d432a82a45935815d3558",
     "title": "東芝 ED-60A4-W 衣類乾燥機 レビュー比較まとめ",
     "name": "東芝 ED-60A4-W 衣類乾燥機 レビュー比較まとめ.md",
@@ -12802,8 +12802,8 @@
     "publishAt": "2026-05-29T08:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-29T07:55:29.915081+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-29T08:32:22.652228+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd842406c1487?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
