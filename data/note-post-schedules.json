@@ -12504,7 +12504,7 @@
   },
   {
     "id": "23879e55-3195-46c4-b7f2-7e4e93d09e27",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sedb94226ee2849d289554ad653c8f18f",
     "title": "LG S3BNF 衣類乾燥機 レビュー比較まとめ",
     "name": "LG S3BNF 衣類乾燥機 レビュー比較まとめ.md",
@@ -12514,8 +12514,8 @@
     "publishAt": "2026-05-29T01:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-29T00:25:03.710045+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-29T01:02:33.402358+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n962a2866ca5f?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
