@@ -2,7 +2,7 @@ import json
 import os
 import re
 import time
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from collections.abc import Callable
 from typing import Any
 
@@ -26,6 +26,7 @@ PUBLISHED_AT_ALIASES = ["投稿日", "公開日", "published_at", "publishedAt"]
 VIDEO_UPDATED_AT_ALIASES = ["動画更新日時", "更新日時", "updated_at", "updatedAt", "video_updated_at", "videoUpdatedAt"]
 DURATION_ALIASES = ["長さ", "動画時間", "再生時間", "duration"]
 THUMBNAIL_ALIASES = ["サムネイル", "thumbnail", "thumb", "thumbnail_url"]
+JST = timezone(timedelta(hours=9))
 
 
 def _normalize_key(value: str) -> str:
@@ -164,6 +165,35 @@ def _normalize_datetime_value(value: str) -> str:
     return text
 
 
+def _parse_date_value(value: str):
+    normalized = _normalize_datetime_value(value)
+    if not normalized:
+        return None
+
+    try:
+        return datetime.fromisoformat(normalized.replace("Z", "+00:00")).date()
+    except ValueError:
+        return None
+
+
+def _title_filter_start_date():
+    configured = os.getenv("INFO_VIEWER_TITLE_FILTER_START_DATE", "").strip()
+    if configured:
+        configured_date = _parse_date_value(configured)
+        if configured_date:
+            return configured_date
+
+    return datetime.now(JST).date()
+
+
+def _is_new_title_filter_video(published_at: str, video_updated_at: str) -> bool:
+    candidate_date = _parse_date_value(video_updated_at) or _parse_date_value(published_at)
+    if candidate_date is None:
+        return False
+
+    return candidate_date >= _title_filter_start_date()
+
+
 def _normalize_gemini_profile(value: str) -> str:
     text = _normalize_key(value)
     if not text:
@@ -293,6 +323,8 @@ def get_target_videos(
 
         published_at = _normalize_datetime_value(_pick_value(row, PUBLISHED_AT_ALIASES))
         video_updated_at = _normalize_datetime_value(_pick_value(row, VIDEO_UPDATED_AT_ALIASES)) or published_at
+        if title_filter and not _is_new_title_filter_video(published_at, video_updated_at):
+            continue
 
         selected_videos.append(
             {
