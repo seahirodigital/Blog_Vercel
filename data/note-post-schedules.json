@@ -13080,7 +13080,7 @@
   },
   {
     "id": "a91233ad-6bc9-470c-b3f4-ae3e68f16fd0",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd6aa36ffccac40dabefdc5a72a2cbfca",
     "title": "フジ医療器 ZZ-10000 マッサージチェア レビュー比較まとめ",
     "name": "フジ医療器 ZZ-10000 マッサージチェア レビュー比較まとめ.md",
@@ -13090,8 +13090,8 @@
     "publishAt": "2026-05-29T16:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-29T18:45:56.442203+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-29T18:48:25.649557+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n00457a8346ee?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
