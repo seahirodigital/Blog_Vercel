@@ -12540,7 +12540,7 @@
   },
   {
     "id": "82438105-dc79-4376-9488-e0e3a8987c2b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6e68d32636f3440c88fed1480893ea21",
     "title": "Denon AVR-X580BT レビュー比較まとめ",
     "name": "Denon AVR-X580BT 2ch HDR10 AVR-X580BTK デノン 5 レビュー比較まとめ.md",
@@ -12549,10 +12549,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-29T02:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-29T01:25:23.171724+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2ac85eeb-bf67-4dc4-aabc-9faa2a20596b",
