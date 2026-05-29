@@ -12774,7 +12774,7 @@
   },
   {
     "id": "9c3d8716-82a0-401a-80c1-dade1d6c2d96",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s33c71b753079455bbee69ba1f67247a5",
     "title": "DISM(ディズム) 5in1 3in1 4in1 美顔器 レビュー比較まとめ",
     "name": "DISM(ディズム) 5in1 3in1 4in1 美顔器 レビュー比較まとめ.md",
@@ -12783,10 +12783,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-29T08:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-29T07:25:45.760595+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "dafa249e-874e-4e03-94db-6ab95eafd3a8",
