@@ -12882,7 +12882,7 @@
   },
   {
     "id": "7d057cd1-284b-4bda-b5a2-4a17126e3ee6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5677c9ac265549108b9c39910205e22f",
     "title": "BRAUN PL-5243 Pro5 光美容器 レビュー比較まとめ",
     "name": "BRAUN PL-5243 Pro5 光美容器 レビュー比較まとめ.md",
@@ -12891,10 +12891,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-29T11:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-29T10:25:25.055021+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "59ce9360-d7ee-4c41-8ad3-3dce61fcd5bf",
