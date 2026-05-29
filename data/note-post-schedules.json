@@ -12576,7 +12576,7 @@
   },
   {
     "id": "f07ea803-6cbe-447e-891c-900efd28ffba",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s25ebd4ea53a34711881d2e02417fa110",
     "title": "DJI B3 CR810 240fps 掃除機 レビュー比較まとめ",
     "name": "DJI B3 CR810 240fps 掃除機 レビュー比較まとめ.md",
@@ -12586,8 +12586,8 @@
     "publishAt": "2026-05-29T02:30:00.000Z",
     "createdAt": "2026-05-29T01:02:35.785Z",
     "queuedAt": "2026-05-29T01:55:33.099646+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-29T02:32:35.080165+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ne5f67c482bc5?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
