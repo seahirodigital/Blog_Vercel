@@ -12612,7 +12612,7 @@
   },
   {
     "id": "b2cbc880-7717-4619-8a3a-c5439895560e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7a0a8f16358d49e3b9c940fa9fff42a7",
     "title": "パナソニック PHI-A35 ポケット型補聴器 簡単操作 レビュー比較まとめ",
     "name": "パナソニック PHI-A35 ポケット型補聴器 簡単操作 レビュー比較まとめ.md",
@@ -12621,10 +12621,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-29T03:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-29T02:55:52.670815+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4347bde9-df27-4c21-bd7d-af0bf92a9b7f",
