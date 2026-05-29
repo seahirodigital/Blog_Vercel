@@ -13008,7 +13008,7 @@
   },
   {
     "id": "f2e21378-d206-4c00-b92a-14d89dca80ce",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb9e6c94bec3b48d7a543581cd83183ac",
     "title": "WHDPETS 42dB 生ごみ処理機 レビュー比較まとめ",
     "name": "WHDPETS 42dB 生ごみ処理機 レビュー比較まとめ.md",
@@ -13018,8 +13018,8 @@
     "publishAt": "2026-05-29T14:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-29T13:55:09.866213+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-29T14:32:21.189993+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n8012b64d3317?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
