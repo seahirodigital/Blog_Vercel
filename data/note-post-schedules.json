@@ -13080,7 +13080,7 @@
   },
   {
     "id": "a91233ad-6bc9-470c-b3f4-ae3e68f16fd0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd6aa36ffccac40dabefdc5a72a2cbfca",
     "title": "フジ医療器 ZZ-10000 マッサージチェア レビュー比較まとめ",
     "name": "フジ医療器 ZZ-10000 マッサージチェア レビュー比較まとめ.md",
@@ -13089,14 +13089,16 @@
     "noTopImage": false,
     "publishAt": "2026-05-29T16:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-29T18:45:56.442203+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "98710d5a-0e1a-413d-ac28-879ff2382b9a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc6e78e39cf724cf186f80b782c0e1a25",
     "title": "パナソニック EH-NA0K-K ヘアドライヤー レビュー比較まとめ",
     "name": "パナソニック EH-NA0K-K ヘアドライヤー レビュー比較まとめ.md",
@@ -13105,14 +13107,16 @@
     "noTopImage": false,
     "publishAt": "2026-05-29T17:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-29T18:45:56.442203+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cc6f3670-654f-47d3-b2ed-2f90557fa3ad",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd79faf761752424dab85ee3c6e8f42d9",
     "title": "Corona CW-1622R 窓用エアコン レビュー比較まとめ",
     "name": "Corona CW-1622R 窓用エアコン レビュー比較まとめ.md",
@@ -13121,14 +13125,16 @@
     "noTopImage": false,
     "publishAt": "2026-05-29T17:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-29T18:45:56.442203+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "549d762b-4246-4183-bcf1-5fb38837ded0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb7cec4abd5e14d5e97c561335dea553a",
     "title": "パナソニック NB-DT52-W トースター レビュー比較まとめ",
     "name": "パナソニック NB-DT52-W トースター レビュー比較まとめ.md",
@@ -13137,14 +13143,16 @@
     "noTopImage": false,
     "publishAt": "2026-05-29T18:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-29T18:45:56.442203+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f135d477-a9c8-43d7-9414-5ed11b79810f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf721ff2974714a55ba973aec79a6a7e5",
     "title": "Island land PPC-15F2-MB 生ごみ処理機 レビュー比較まとめ",
     "name": "Island land PPC-15F2-MB 生ごみ処理機 レビュー比較まとめ.md",
@@ -13153,14 +13161,16 @@
     "noTopImage": false,
     "publishAt": "2026-05-29T18:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-29T18:45:56.442203+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "882a5eb6-efe4-40e4-a119-cff902c027b2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2e6084c10f83410d85b968862586ddbf",
     "title": "RAYCOP(レイコップ) PRO3-100 布団クリーナー レビュー比較まとめ",
     "name": "RAYCOP(レイコップ) PRO3 000Pa PRO3-100 布団クリーナー レビュー比較まとめ.md",
@@ -13169,10 +13179,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-29T19:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-29T18:45:56.442203+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4dcc78fb-a2ea-4fe8-81fd-75c3e903e286",
