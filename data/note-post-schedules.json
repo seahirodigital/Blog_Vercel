@@ -13062,7 +13062,7 @@
   },
   {
     "id": "845bfc76-02cf-4a51-a448-7d687bcf6f81",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s653cf6dad7c74b04b7b6fc3945ec3617",
     "title": "Shark CS850JBLAE EVOPOWER SYSTEM iQ+掃除機 レビュー比較まとめ",
     "name": "Shark CS850JBLAE cs850J 掃除機 レビュー比較まとめ.md",
@@ -13071,10 +13071,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-29T16:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-29T15:25:49.006993+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a91233ad-6bc9-470c-b3f4-ae3e68f16fd0",
