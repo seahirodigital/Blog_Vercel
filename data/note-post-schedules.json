@@ -12810,7 +12810,7 @@
   },
   {
     "id": "37509e54-d897-4693-b24d-ab7fddbcfca9",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s99aa5744c2264113bc327b807e46ff38",
     "title": "LESIR 150-180cm レザイヤ 全自動 レビュー比較まとめ",
     "name": "LESIR 150-180cm レザイヤ 全自動 レビュー比較まとめ.md",
@@ -12820,8 +12820,8 @@
     "publishAt": "2026-05-29T09:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-29T08:25:14.165256+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-29T09:02:23.739036+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n3e0b3965a0c2?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
