@@ -12648,7 +12648,7 @@
   },
   {
     "id": "8550485a-384e-4517-be18-a850b8c0e14e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s06969e92613548f28de00ed7571216cc",
     "title": "パナソニック SD-MDX4-K ホームベーカリー レビュー比較まとめ",
     "name": "パナソニック SD-MDX4-K ホームベーカリー レビュー比較まとめ.md",
@@ -12657,10 +12657,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-29T04:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-29T03:55:44.071455+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ef89abf2-34d8-4a08-9f84-00a47035760c",
