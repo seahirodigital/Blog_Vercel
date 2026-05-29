@@ -13332,7 +13332,7 @@
   },
   {
     "id": "8dd0e8a6-5cf5-43eb-974a-e3164eed545a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!scdabf030c6ce46d28d65a188e08fec7a",
     "title": "Haier JA-16V 窓用エアコン レビュー比較まとめ",
     "name": "Haier JA-16V 窓用エアコン レビュー比較まとめ.md",
@@ -13342,8 +13342,8 @@
     "publishAt": "2026-05-29T23:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-29T22:55:37.796493+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-29T23:32:18.914808+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nb9bc6cb49eb6?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
