@@ -12666,7 +12666,7 @@
   },
   {
     "id": "ef89abf2-34d8-4a08-9f84-00a47035760c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sefa5e5da537b4a93b357d866cd88b3e5",
     "title": "TOTO TCF8FM46 SC1 温水洗浄便座 レビュー比較まとめ",
     "name": "TOTO TCF8FM46 SC1 温水洗浄便座 レビュー比較まとめ.md",
@@ -12675,10 +12675,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-29T05:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-29T04:25:26.781647+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8401e00e-9fd8-4b91-bb2d-58da26ef820f",
