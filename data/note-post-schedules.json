@@ -12972,7 +12972,7 @@
   },
   {
     "id": "b454a6ad-29b3-463a-b1f4-98589d6ef095",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s068f3872c04d4beca840865b74200684",
     "title": "XPOWER FC-420 サーキュレーター レビュー比較まとめ",
     "name": "XPOWER FC-420 サーキュレーター レビュー比較まとめ.md",
@@ -12981,10 +12981,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-29T13:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-29T12:55:21.469294+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6636e19d-9b8b-48a3-912b-03c71e6c1db9",
