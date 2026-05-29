@@ -12558,7 +12558,7 @@
   },
   {
     "id": "2ac85eeb-bf67-4dc4-aabc-9faa2a20596b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6293efe85e8d45c7a9cfe370a745e85a",
     "title": "パナソニック F-ML4000B-W ジアイーノ ~18畳 レビュー比較まとめ",
     "name": "パナソニック F-ML4000B-W ジアイーノ ~18畳 レビュー比較まとめ.md",
@@ -12567,14 +12567,16 @@
     "noTopImage": false,
     "publishAt": "2026-05-29T02:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-29T01:55:33.099646+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f07ea803-6cbe-447e-891c-900efd28ffba",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s25ebd4ea53a34711881d2e02417fa110",
     "title": "DJI B3 CR810 240fps 掃除機 レビュー比較まとめ",
     "name": "DJI B3 CR810 240fps 掃除機 レビュー比較まとめ.md",
@@ -12583,10 +12585,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-29T02:30:00.000Z",
     "createdAt": "2026-05-29T01:02:35.785Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-29T01:55:33.099646+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d6b811fe-53c8-47c1-8d47-2296739905ea",
