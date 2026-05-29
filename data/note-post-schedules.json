@@ -13206,7 +13206,7 @@
   },
   {
     "id": "65521a72-8acb-4090-9e6a-5d6e1c3abf78",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s93f2413173a54d208f637efe6ddd468f",
     "title": "パナソニック EH-SR86-T 美顔器 レビュー比較まとめ",
     "name": "パナソニック EH-SR86-T 美顔器 レビュー比較まとめ.md",
@@ -13216,8 +13216,8 @@
     "publishAt": "2026-05-29T20:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-29T19:25:20.181297+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-29T20:02:27.408824+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n580178c9cf2b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
