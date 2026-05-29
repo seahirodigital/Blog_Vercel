@@ -12684,7 +12684,7 @@
   },
   {
     "id": "8401e00e-9fd8-4b91-bb2d-58da26ef820f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sbe4ffc0aec6b482594297c411848d6e4",
     "title": "ドクターエア MS-07 フットマッサージャー レビュー比較まとめ",
     "name": "ドクターエア MS-07 フットマッサージャー レビュー比較まとめ.md",
@@ -12694,8 +12694,8 @@
     "publishAt": "2026-05-29T05:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-29T04:55:09.069325+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-29T05:32:25.948740+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7eef65a1d2ac?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
