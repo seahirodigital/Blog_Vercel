@@ -26,6 +26,7 @@ PUBLISHED_AT_ALIASES = ["投稿日", "公開日", "published_at", "publishedAt"]
 VIDEO_UPDATED_AT_ALIASES = ["動画更新日時", "更新日時", "updated_at", "updatedAt", "video_updated_at", "videoUpdatedAt"]
 DURATION_ALIASES = ["長さ", "動画時間", "再生時間", "duration"]
 THUMBNAIL_ALIASES = ["サムネイル", "thumbnail", "thumb", "thumbnail_url"]
+EXCLUDE_ALIASES = ["不要判定", "除外", "skip", "exclude"]
 JST = timezone(timedelta(hours=9))
 
 
@@ -304,6 +305,8 @@ def get_target_videos(
     for row in video_rows:
         video_url = _pick_value(row, ["動画URL", "video_url", "url"])
         if not video_url:
+            continue
+        if _pick_value(row, EXCLUDE_ALIASES):
             continue
 
         row_channel_name = _pick_value(row, ["チャンネル", "チャンネル名", "channel", "channel name"])
