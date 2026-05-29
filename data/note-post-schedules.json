@@ -12990,7 +12990,7 @@
   },
   {
     "id": "6636e19d-9b8b-48a3-912b-03c71e6c1db9",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s7365fe0000a34f38bc71be67921db230",
     "title": "Denon AVR-X1800H 2ch HDR10 AVR-X1800HK テレビ レビュー比較まとめ",
     "name": "Denon AVR-X1800H 2ch HDR10 AVR-X1800HK テレビ レビュー比較まとめ.md",
@@ -13000,8 +13000,8 @@
     "publishAt": "2026-05-29T14:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-29T13:25:46.733595+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-29T14:02:21.733435+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ne5d505858b44?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
