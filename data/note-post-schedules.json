@@ -12720,7 +12720,7 @@
   },
   {
     "id": "3230a68b-4dde-49e9-851d-9873237f8055",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sce95c4bdb1594b87b08102099d4363da",
     "title": "コンフィー 2WAY CDWMT0602S 食器洗い乾燥機 レビュー比較まとめ",
     "name": "コンフィー 2WAY CDWMT0602S 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -12729,10 +12729,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-29T06:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-29T05:55:34.883645+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2605e674-37b4-4fb2-a6fb-d56222579ad7",
