@@ -13170,7 +13170,7 @@
   },
   {
     "id": "882a5eb6-efe4-40e4-a119-cff902c027b2",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2e6084c10f83410d85b968862586ddbf",
     "title": "RAYCOP(レイコップ) PRO3-100 布団クリーナー レビュー比較まとめ",
     "name": "RAYCOP(レイコップ) PRO3 000Pa PRO3-100 布団クリーナー レビュー比較まとめ.md",
@@ -13180,8 +13180,8 @@
     "publishAt": "2026-05-29T19:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-29T18:45:56.442203+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-29T19:02:26.869993+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5129b6aa8ed7?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
