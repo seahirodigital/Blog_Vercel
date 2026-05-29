@@ -13350,7 +13350,7 @@
   },
   {
     "id": "19402bbb-2629-45cb-ae2e-c76cb6e56b2e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!scf89d309ce1447e2b31630160bcb8a69",
     "title": "Corona CW-1826R 窓用エアコン レビュー比較まとめ",
     "name": "Corona CW-1826R 窓用エアコン レビュー比較まとめ.md",
@@ -13359,10 +13359,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-30T00:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-29T23:25:47.209048+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "855062cf-7175-4f5c-9692-d2b131d9dcdd",
