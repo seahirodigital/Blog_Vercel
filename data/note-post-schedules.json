@@ -13494,7 +13494,7 @@
   },
   {
     "id": "c55cb6c3-0811-4b7a-a631-e3aaf498a23a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s314e7b6b133a41eda3280aa1ce3f833f",
     "title": "DREAME SF25 生ごみ処理機 レビュー比較まとめ",
     "name": "DREAME SF25 生ごみ処理機 レビュー比較まとめ.md",
@@ -13504,8 +13504,8 @@
     "publishAt": "2026-05-30T04:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-30T03:25:06.036126+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-30T04:02:25.551713+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nda68c90a78db?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
