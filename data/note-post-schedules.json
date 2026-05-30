@@ -13710,7 +13710,7 @@
   },
   {
     "id": "2199bbd0-0cde-406c-a7f2-eca417ff8698",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s6bb574b05b174871863c904521f7533d",
     "title": "Corona CW-F1622R-WS 窓用エアコン レビュー比較まとめ",
     "name": "Corona CW-F1622R-WS 窓用エアコン レビュー比較まとめ.md",
@@ -13720,8 +13720,8 @@
     "publishAt": "2026-05-30T10:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-30T09:25:04.594453+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-30T10:02:17.139609+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nb91711cbcdbb?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
