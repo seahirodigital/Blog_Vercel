@@ -13944,7 +13944,7 @@
   },
   {
     "id": "22213ebb-c25f-43f3-9584-ad2b0ca67be5",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd3f913038d59417fbeb32a3c65f0bbf6",
     "title": "ECOVACS A4 W1S comimages 掃除機 レビュー比較まとめ",
     "name": "ECOVACS A4 W1S comimages 掃除機 レビュー比較まとめ.md",
@@ -13954,8 +13954,8 @@
     "publishAt": "2026-05-30T16:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-30T15:55:09.490039+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-30T16:32:14.378941+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n99890949a603?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
