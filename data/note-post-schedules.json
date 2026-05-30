@@ -14070,7 +14070,7 @@
   },
   {
     "id": "ec3d7b78-e539-4767-a2cd-b1cea503fc95",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1d391a9921094a979fbedb1eb7a75b66",
     "title": "TWINBIRD(ツインバード) CM-D457B ハンディクリーナー レビュー比較まとめ",
     "name": "TWINBIRD(ツインバード) CM-D457B ハンディクリーナー レビュー比較まとめ.md",
@@ -14079,10 +14079,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-30T20:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-30T19:25:34.065266+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "431356eb-f50c-4426-93e8-f9be116850b8",
