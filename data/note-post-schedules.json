@@ -13458,7 +13458,7 @@
   },
   {
     "id": "64cc35e7-354e-4379-b9c7-feb0c8144836",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3c0d8ff30d5246b5b7a39832dab7988d",
     "title": "ECOVACS N20 8000Pa 掃除機 レビュー比較まとめ",
     "name": "ECOVACS N20 8000Pa 掃除機 レビュー比較まとめ.md",
@@ -13468,8 +13468,8 @@
     "publishAt": "2026-05-30T03:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-30T02:25:14.234028+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-30T03:02:21.404598+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nb4780069939c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
