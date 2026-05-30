@@ -13638,7 +13638,7 @@
   },
   {
     "id": "cff292e5-449e-49e9-87ac-028816a259aa",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sdd5c65c64fc94b308170d7620dd60088",
     "title": "JONR X9 20000Pa ロボット掃除機 レビュー比較まとめ",
     "name": "JONR X9 20000Pa ロボット掃除機 レビュー比較まとめ.md",
@@ -13648,8 +13648,8 @@
     "publishAt": "2026-05-30T08:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-30T07:25:29.510021+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-30T08:02:23.079950+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n269004f3236a?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
