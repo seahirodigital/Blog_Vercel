@@ -13530,7 +13530,7 @@
   },
   {
     "id": "4c0ab92f-326f-4b71-86b0-7f1685ff19de",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sbd4485b657a941c881cac5b221d0f62e",
     "title": "Speedypress 80HD デジタルスチームプレス - レビュー比較まとめ",
     "name": "Speedypress 80HD デジタルスチームプレス - レビュー比較まとめ.md",
@@ -13540,8 +13540,8 @@
     "publishAt": "2026-05-30T05:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-30T04:25:59.496800+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-30T05:02:27.702374+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nbdbaa625c684?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
