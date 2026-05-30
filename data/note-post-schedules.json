@@ -13656,7 +13656,7 @@
   },
   {
     "id": "e7538b84-991f-439e-9709-724cb4ab146e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s542bce855d034534861976ce944d1ce8",
     "title": "シャープ KI-SS50-H 空気清浄機 レビュー比較まとめ",
     "name": "シャープ KI-SS50-H 空気清浄機 レビュー比較まとめ.md",
@@ -13666,8 +13666,8 @@
     "publishAt": "2026-05-30T08:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-30T07:55:38.688917+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-30T08:32:21.631729+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nba99f7b2fd81?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
