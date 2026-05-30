@@ -14034,7 +14034,7 @@
   },
   {
     "id": "d48b8590-0348-45a9-8e2d-b5a72f5b4d19",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb7ef42f5c4524fb59290bee83ce766a0",
     "title": "象印マホービン BR-WB10-WA 精米機 家庭用精米機 レビュー比較まとめ",
     "name": "象印マホービン BR-WB10-WA 精米機 家庭用精米機 レビュー比較まとめ.md",
@@ -14043,10 +14043,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-30T19:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-30T18:25:08.362003+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3a29d63d-ef66-4ba8-b0d3-185a2fcdcfac",
