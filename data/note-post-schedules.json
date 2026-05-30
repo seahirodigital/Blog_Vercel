@@ -14142,7 +14142,7 @@
   },
   {
     "id": "1260a971-9ec5-494b-b7e7-43f22c5fb728",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3745091c27314f8ead3a17f38b6fceb6",
     "title": "日立 CV-KP900M 掃除機 レビュー比較まとめ",
     "name": "日立 CV-KP900M 掃除機 レビュー比較まとめ.md",
@@ -14152,8 +14152,8 @@
     "publishAt": "2026-05-30T22:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-30T21:25:23.022600+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-30T22:02:25.288724+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n1a8557d67c76?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
