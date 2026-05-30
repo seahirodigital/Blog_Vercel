@@ -13476,7 +13476,7 @@
   },
   {
     "id": "b7915dc8-9599-4ed5-b4a4-bcb74c8c3394",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7549e710364b417daa1e0d39729ff412",
     "title": "象印マホービン NW-PV18-BZ 炊飯器 レビュー比較まとめ",
     "name": "象印マホービン NW-PV18-BZ 炊飯器 レビュー比較まとめ.md",
@@ -13485,10 +13485,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-30T03:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-30T02:55:39.957058+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c55cb6c3-0811-4b7a-a631-e3aaf498a23a",
