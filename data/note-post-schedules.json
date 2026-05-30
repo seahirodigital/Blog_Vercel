@@ -13818,7 +13818,7 @@
   },
   {
     "id": "f95f3240-6144-45b9-a018-8e6f08cc97a4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0d75c2f9f7104ecc89d6f7d5debb4bc9",
     "title": "パナソニック NP-TML1-W 食器洗い乾燥機 レビュー比較まとめ",
     "name": "パナソニック NP-TML1-W 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -13827,10 +13827,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-30T13:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-30T12:25:05.500501+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0ac78a4d-43ae-402b-adef-f942a7894a87",
