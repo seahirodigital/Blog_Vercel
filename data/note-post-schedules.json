@@ -13890,7 +13890,7 @@
   },
   {
     "id": "06380ec5-8551-41c9-88ad-89125dd2bacd",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sadf00ed65d0243e0b01c5298b7e78eb9",
     "title": "Braun Pro5 PL5387 光美容器 レビュー比較まとめ",
     "name": "Braun Pro5 PL5387 光美容器 レビュー比較まとめ.md",
@@ -13900,8 +13900,8 @@
     "publishAt": "2026-05-30T15:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-30T14:25:43.110643+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-30T15:02:16.551588+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n68e9830e645a?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
