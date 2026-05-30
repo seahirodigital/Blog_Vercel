@@ -13728,7 +13728,7 @@
   },
   {
     "id": "942bcd50-7d55-4ef3-8f7e-c6496c7dee5f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa37ef64f0e0640a99c0aa6baebebdb27",
     "title": "loofen 30db 40db 20db 生ごみ処理機 レビュー比較まとめ",
     "name": "loofen 30db 40db 20db 生ごみ処理機 レビュー比較まとめ.md",
@@ -13737,10 +13737,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-30T10:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-30T09:55:13.837207+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "26ecaf5b-cb2a-40b5-a514-bdc314977392",
