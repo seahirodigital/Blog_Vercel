@@ -13440,7 +13440,7 @@
   },
   {
     "id": "6772e26f-a741-4877-9fbc-7da899fff3ea",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s1c0be9df303348299dd43d28acf6f48d",
     "title": "東芝 ER-D70B-W オーブンレンジ レビュー比較まとめ",
     "name": "東芝 ER-D70B-W オーブンレンジ レビュー比較まとめ.md",
@@ -13450,8 +13450,8 @@
     "publishAt": "2026-05-30T02:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-30T01:55:48.048285+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-30T02:32:24.755935+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n496e1c5bd5ff?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
