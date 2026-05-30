@@ -14124,7 +14124,7 @@
   },
   {
     "id": "defd6dfb-09b2-47ed-9ea4-be614d67f471",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s05a33f7e178449b8b123a83eb7a54b11",
     "title": "Marantz SR6015AVレシーバー レビュー比較まとめ",
     "name": "Marantz SR6015 9ch SR6015FB マランツ AVレシーバー レビュー比較まとめ.md",
@@ -14133,10 +14133,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-30T21:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-30T20:55:40.740219+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1260a971-9ec5-494b-b7e7-43f22c5fb728",
