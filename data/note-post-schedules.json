@@ -14160,7 +14160,7 @@
   },
   {
     "id": "d78d3bd5-7607-4da2-966f-8d25f0b10509",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sba30a4df619a4fce90355548eac25654",
     "title": "Eufy(ユーフィ) X8 Pro ハンディクリーナー レビュー比較まとめ",
     "name": "Eufy(ユーフィ) X8 4000Pa ハンディクリーナー レビュー比較まとめ.md",
@@ -14169,9 +14169,11 @@
     "noTopImage": false,
     "publishAt": "2026-05-30T22:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-30T21:55:04.253290+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   }
 ]
