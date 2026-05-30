@@ -13854,7 +13854,7 @@
   },
   {
     "id": "45a2b3a7-e2b2-44b1-8195-c33fced9687e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0318e58f931745c99c03a4a22f4f35dc",
     "title": "Haier JA-W16A R32 窓用エアコン レビュー比較まとめ",
     "name": "Haier JA-W16A R32 窓用エアコン レビュー比較まとめ.md",
@@ -13863,10 +13863,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-30T14:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-30T13:25:24.795922+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9c0a8418-1cdb-4f98-8ceb-f9bc071dd616",
