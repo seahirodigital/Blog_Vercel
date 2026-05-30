@@ -13764,7 +13764,7 @@
   },
   {
     "id": "76ccfc17-3537-4ae2-b5fa-c488ed7bf0b5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2aa43de945a440ecbe45cb6234a00631",
     "title": "パナソニック NP-TH4-W 食器洗い乾燥機 レビュー比較まとめ",
     "name": "パナソニック NP-TH4-W 食器洗い乾燥機 レビュー比較まとめ.md",
@@ -13773,10 +13773,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-30T11:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-30T10:55:32.060119+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "42650763-b866-42b4-8996-315b77fc3f45",
