@@ -13908,7 +13908,7 @@
   },
   {
     "id": "370ac7e9-3009-41b1-bcfe-4c4ec0e1df15",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s26cb3659751a4e9f8d38e361e8b666bf",
     "title": "アイライフ 3000Pa 2in1 V9 ロボット掃除機 レビュー比較まとめ",
     "name": "アイライフ 3000Pa 2in1 V9 ロボット掃除機 レビュー比較まとめ.md",
@@ -13918,8 +13918,8 @@
     "publishAt": "2026-05-30T15:30:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-30T14:55:51.786589+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-30T15:32:20.488327+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ncf7ac75b4fe1?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
