@@ -13782,7 +13782,7 @@
   },
   {
     "id": "42650763-b866-42b4-8996-315b77fc3f45",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sdae2b0307de046b39fdcd67acf8f20a9",
     "title": "BougeRV PC35 3500BTU AC100V IPX5 ポータブルエアコン レビュー比較まとめ",
     "name": "BougeRV PC35 3500BTU AC100V IPX5 ポータブルエアコン レビュー比較まとめ.md",
@@ -13792,8 +13792,8 @@
     "publishAt": "2026-05-30T12:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
     "queuedAt": "2026-05-30T11:25:47.484533+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-05-30T12:02:20.490127+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nfa94a837c8a1?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
