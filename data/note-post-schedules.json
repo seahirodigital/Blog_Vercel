@@ -13422,7 +13422,7 @@
   },
   {
     "id": "664accbd-73f3-4bc5-986e-f730d1143dd3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se1a29df3aca346269bc82207ffe988c9",
     "title": "TOTO TCF8GM24 NW1 ウォシュレット レビュー比較まとめ",
     "name": "TOTO TCF8GM24 NW1 ウォシュレット レビュー比較まとめ.md",
@@ -13431,10 +13431,12 @@
     "noTopImage": false,
     "publishAt": "2026-05-30T02:00:00.000Z",
     "createdAt": "2026-05-28T04:28:51.111Z",
-    "queuedAt": "",
+    "queuedAt": "2026-05-30T01:25:20.443574+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6772e26f-a741-4877-9fbc-7da899fff3ea",
