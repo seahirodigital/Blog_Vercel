@@ -14178,7 +14178,7 @@
   },
   {
     "id": "c232fff7-686d-4218-9f91-ea54a4eccbd3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s85282e29c4604d929372599a65062309",
     "title": "Xiaomi Smart Band 10 Pro スマートウォッチ レビュー比較まとめ",
     "name": "xiaomi(シャオミ) 6M46 1500nits S4 イヤホン レビュー比較まとめ.md",
@@ -14187,10 +14187,12 @@
     "noTopImage": false,
     "publishAt": "2026-06-01T02:30:00.000Z",
     "createdAt": "2026-05-31T14:14:33.488Z",
-    "queuedAt": "",
+    "queuedAt": "2026-06-01T06:46:32.716425+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b03ec02d-b27d-43f6-b4f2-911f846b6455",
