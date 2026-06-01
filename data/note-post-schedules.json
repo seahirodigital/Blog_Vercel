@@ -14196,7 +14196,7 @@
   },
   {
     "id": "b03ec02d-b27d-43f6-b4f2-911f846b6455",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s69857e28a3fe4b32b8ffa12cd19d0312",
     "title": "Oura Ring 5 レビュー比較まとめ",
     "name": "Oura JZ90-61403-08 M1 M2 Ring 5 レビュー比較まとめ.md",
@@ -14206,8 +14206,8 @@
     "publishAt": "2026-06-01T08:00:00.000Z",
     "createdAt": "2026-05-31T14:14:33.488Z",
     "queuedAt": "2026-06-01T07:25:06.722577+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-06-01T08:02:27.209653+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n31431fb9a465?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
