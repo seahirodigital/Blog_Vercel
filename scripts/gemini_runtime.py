@@ -5,7 +5,7 @@ Gemini 呼び出しの共通設定と transport ラッパー。
 本編パイプラインと info_viewer の両方から再利用する。
 
 デフォルト transport は安定した models.generate_content を使用。
-interactions.create は環境変数 GEMINI_TRANSPORT で明示指定した場合のみ利用可能。
+interactions.create の旧指定は models.generate_content に正規化する。
 """
 
 from __future__ import annotations
@@ -20,9 +20,18 @@ DEFAULT_TEXT_MODEL = "gemini-2.5-flash"
 DEFAULT_INTERACTIONS_TRANSPORT = "interactions.create"
 DEFAULT_GENERATE_CONTENT_TRANSPORT = "models.generate_content"
 SUPPORTED_TRANSPORTS = (
-    DEFAULT_INTERACTIONS_TRANSPORT,
     DEFAULT_GENERATE_CONTENT_TRANSPORT,
 )
+LEGACY_TRANSPORT_ALIASES = {
+    DEFAULT_INTERACTIONS_TRANSPORT: DEFAULT_GENERATE_CONTENT_TRANSPORT,
+}
+
+
+def _normalize_transport_default(default: str) -> str:
+    fallback = LEGACY_TRANSPORT_ALIASES.get(str(default or "").strip(), str(default or "").strip())
+    if fallback in SUPPORTED_TRANSPORTS:
+        return fallback
+    return DEFAULT_GENERATE_CONTENT_TRANSPORT
 
 
 def get_text_model_name(*override_env_names: str, default: str = DEFAULT_TEXT_MODEL) -> str:
@@ -41,9 +50,11 @@ def normalize_transport_name(
     default: str = DEFAULT_GENERATE_CONTENT_TRANSPORT,
 ) -> str:
     normalized = str(value or "").strip()
+    if normalized in LEGACY_TRANSPORT_ALIASES:
+        return LEGACY_TRANSPORT_ALIASES[normalized]
     if normalized in SUPPORTED_TRANSPORTS:
         return normalized
-    return default
+    return _normalize_transport_default(default)
 
 
 def get_text_transport(
@@ -190,33 +201,8 @@ def run_text_generation(
     generation_config: dict[str, Any] | None = None,
     previous_interaction_id: str | None = None,
 ) -> tuple[Any, str]:
-    transport_name = normalize_transport_name(transport)
+    normalize_transport_name(transport)
     config = generation_config or {}
-
-    if transport_name == DEFAULT_INTERACTIONS_TRANSPORT:
-        request: dict[str, Any] = {
-            "model": model,
-            "input": input_text,
-            "generation_config": config,
-        }
-        if prompt:
-            request["system_instruction"] = prompt
-        if previous_interaction_id:
-            request["previous_interaction_id"] = previous_interaction_id
-        response = client.interactions.create(**request)
-        text = extract_text_from_response(response)
-        if not text:
-            print("   [DIAGNOSTICS] interactions.create returned empty text.")
-            print(f"   [DIAGNOSTICS] type(response) = {type(response)}")
-            try:
-                import json
-                dump_val = _as_mapping(response)
-                print("   [DIAGNOSTICS] response structure:")
-                print(json.dumps(dump_val, default=str, indent=2, ensure_ascii=False))
-            except Exception as e:
-                print(f"   [DIAGNOSTICS] could not dump response: {e}")
-                print(f"   [DIAGNOSTICS] repr(response) = {repr(response)}")
-        return response, text
 
     contents = input_text
     if prompt:
