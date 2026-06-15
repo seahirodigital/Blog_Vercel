@@ -14322,7 +14322,7 @@
   },
   {
     "id": "498d12af-0e05-415e-be4a-bba572a1d5a1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s717623d8997842299f14eb3c6d820237",
     "title": "ゼンハイザー モメンタム5 ワイヤレスヘッドホン レビュー比較まとめ：高音質ノイズキャンセリングヘッドホンの真価",
     "name": "20260613_0254_【約4年ぶり】ゼンハイザー最新フラッグシップヘッドホン「MOMENTUM 5 Wireless」 を試してみた.md",
@@ -14331,10 +14331,12 @@
     "noTopImage": false,
     "publishAt": "2026-06-15T08:00:00.000Z",
     "createdAt": "2026-06-14T23:12:25.992Z",
-    "queuedAt": "",
+    "queuedAt": "2026-06-15T13:28:26.093316+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b1573d10-cf4f-419d-925f-84ae11f7d0ab",
