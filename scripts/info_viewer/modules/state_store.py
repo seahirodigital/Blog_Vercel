@@ -22,6 +22,10 @@ FAILED_STATUS = "failed"
 DONE_STATUS = "done"
 INACTIVE_STATUS = "inactive"
 
+# AppSheet からロケットボタンで手動起動したときにスプレッドシートに書かれるステータス値
+# この値が検出された行をキューの最優先に引き上げる
+MANUAL_TRIGGER_STATUS = os.getenv("INFO_VIEWER_MANUAL_TRIGGER_STATUS", "投資動画")
+
 
 def _now() -> datetime:
     return datetime.now(timezone.utc)
@@ -222,6 +226,17 @@ def sync_target_videos(
             record["processingStartedAt"] = ""
             record["lastCompletedAt"] = now_iso
             record["manualPriorityAt"] = ""
+            continue
+
+        # AppSheetのロケットボタンで手動トリガーされた行（状況列 = MANUAL_TRIGGER_STATUS）を
+        # キューの最優先に引き上げる。エラー残りや古い動画より先に処理される。
+        if video.get("status") == MANUAL_TRIGGER_STATUS:
+            record["status"] = PENDING_STATUS
+            record["manualPriorityAt"] = now_iso
+            record["nextRetryAt"] = now_iso
+            record["processingStartedAt"] = ""
+            if record.get("status") != PENDING_STATUS:
+                stats["pending"] += 1
             continue
 
         if record.get("status") in ("", INACTIVE_STATUS, DONE_STATUS):
