@@ -14349,11 +14349,11 @@
     "noTopImage": false,
     "publishAt": "2026-06-16T07:45:00.000Z",
     "createdAt": "2026-06-14T23:15:29.452Z",
-    "queuedAt": "2026-06-16T12:20:43.029154+00:00",
+    "queuedAt": "2026-06-16T13:50:54.422495+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   }
 ]
