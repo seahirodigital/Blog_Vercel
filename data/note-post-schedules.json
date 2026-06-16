@@ -14340,7 +14340,7 @@
   },
   {
     "id": "b1573d10-cf4f-419d-925f-84ae11f7d0ab",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s1f522657e5fa4b3b9787ba09f143ed3e",
     "title": "arrows V3 レビュー比較まとめ",
     "name": "20260611_0519_【爆誕】arrows We3発表キタァーー！We2との違いは？わかりやすくスペック仕様を比較解説【価格】【発売日】【感想.md",
@@ -14350,8 +14350,8 @@
     "publishAt": "2026-06-16T07:45:00.000Z",
     "createdAt": "2026-06-14T23:15:29.452Z",
     "queuedAt": "2026-06-16T13:50:54.422495+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-06-16T13:53:49.284849+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ndc13fba993e5?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
