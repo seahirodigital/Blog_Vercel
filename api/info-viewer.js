@@ -8,6 +8,7 @@ const GRAPH_RETRY_STATUS_CODES = new Set([429, 500, 502, 503, 504]);
 const GRAPH_MAX_RETRIES = 3;
 const GRAPH_BASE_DELAY_MS = 750;
 const GRAPH_MAX_DELAY_MS = 5000;
+const INFO_VIEWER_LOOKBACK_DAYS = Number.parseInt(process.env.INFO_VIEWER_LOOKBACK_DAYS || '21', 10);
 const PRIMARY_FOLDER =
   process.env.INFO_VIEWER_ONEDRIVE_FOLDER || 'Obsidian in Onedrive 202602/Vercel_Blog/info_viewer';
 const LEGACY_FOLDER = 'Obsidian in Onedrive 202602/Vercel_Blog/情報取得/info_viewer';
@@ -239,6 +240,70 @@ function toTimestamp(value = '') {
   return 0;
 }
 
+function lookbackCutoffTime() {
+  return Date.now() - INFO_VIEWER_LOOKBACK_DAYS * 24 * 60 * 60 * 1000;
+}
+
+function manifestItemTime(item = {}) {
+  const candidates = [
+    item.articleUpdatedAt,
+    item.videoUpdatedAt,
+    item.publishedAt,
+    item.lastFailureAt,
+    item.queueNextRetryAt,
+    item.manualPriorityAt,
+  ];
+  return candidates.reduce((latest, value) => Math.max(latest, toTimestamp(value)), 0);
+}
+
+function shouldTrackManifestItem(item = {}) {
+  const time = manifestItemTime(item);
+  return !time || time >= lookbackCutoffTime();
+}
+
+function filterManifestLookback(manifest) {
+  const channels = Array.isArray(manifest.channels) ? manifest.channels : [];
+  const filteredChannels = channels
+    .map((channel) => ({
+      ...channel,
+      videos: Array.isArray(channel.videos)
+        ? channel.videos.filter(shouldTrackManifestItem)
+        : [],
+    }))
+    .filter((channel) => channel.videos.length > 0);
+
+  const recent = Array.isArray(manifest.recent)
+    ? manifest.recent.filter(shouldTrackManifestItem)
+    : [];
+  const failures = Array.isArray(manifest.failures)
+    ? manifest.failures.filter(shouldTrackManifestItem)
+    : [];
+  const videoCount = filteredChannels.reduce((count, channel) => count + channel.videos.length, 0);
+  const articleCount = filteredChannels.reduce(
+    (count, channel) => count + channel.videos.filter((video) => video.hasArticle || video.articleId).length,
+    0
+  );
+
+  return {
+    ...manifest,
+    channels: filteredChannels,
+    recent,
+    failures,
+    stats: {
+      ...(manifest.stats || {}),
+      channelCount: filteredChannels.length,
+      videoCount,
+      articleCount,
+      failureCount: failures.length,
+    },
+    filter: {
+      ...(manifest.filter || {}),
+      lookbackDays: INFO_VIEWER_LOOKBACK_DAYS,
+      cutoffAt: new Date(lookbackCutoffTime()).toISOString(),
+    },
+  };
+}
+
 function compareFreshness(left, right, selector) {
   const leftTime = toTimestamp(selector(left));
   const rightTime = toTimestamp(selector(right));
@@ -277,10 +342,10 @@ async function fetchManifest(token) {
     manifests.sort((left, right) =>
       compareFreshness(left, right, (item) => item.generatedAt || item.updatedAt || item.runId)
     );
-    return manifests[0];
+    return filterManifestLookback(manifests[0]);
   }
 
-  return {
+  return filterManifestLookback({
     generatedAt: null,
     baseFolder: PRIMARY_FOLDER,
     source: 'manifest_missing',
@@ -288,7 +353,7 @@ async function fetchManifest(token) {
     recent: [],
     stats: { channelCount: 0, videoCount: 0, articleCount: 0, failureCount: 0 },
     failures: [],
-  };
+  });
 }
 
 async function fetchArticleRawContent(token, itemId) {

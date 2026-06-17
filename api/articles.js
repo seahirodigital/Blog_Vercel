@@ -17,6 +17,8 @@ const GRAPH_RETRY_STATUS_CODES = new Set([429, 500, 502, 503, 504]);
 const GRAPH_MAX_RETRIES = 3;
 const GRAPH_BASE_DELAY_MS = 750;
 const GRAPH_MAX_DELAY_MS = 5000;
+const ARTICLE_LOOKBACK_DAYS = Number.parseInt(process.env.ARTICLE_LOOKBACK_DAYS || '21', 10);
+const SKIPPED_FOLDER_KEYWORDS = ['noteアップ済', 'noteアップ済み', 'note_uploaded', 'note upload'];
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -178,6 +180,52 @@ function firstQueryValue(value, fallback = '') {
   return value ?? fallback;
 }
 
+function lookbackCutoffTime() {
+  return Date.now() - ARTICLE_LOOKBACK_DAYS * 24 * 60 * 60 * 1000;
+}
+
+function parseDateFromText(value = '') {
+  const text = String(value || '');
+  const compact = text.match(/(?:^|[^\d])(\d{4})(\d{2})(\d{2})(?:[_-]?(\d{2})(\d{2}))?/);
+  if (compact) {
+    const [, year, month, day, hour = '00', minute = '00'] = compact;
+    const time = Date.UTC(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minute));
+    return Number.isNaN(time) ? 0 : time;
+  }
+
+  const separated = text.match(/(\d{4})[-/.年](\d{1,2})[-/.月](\d{1,2})/);
+  if (separated) {
+    const [, year, month, day] = separated;
+    const time = Date.UTC(Number(year), Number(month) - 1, Number(day));
+    return Number.isNaN(time) ? 0 : time;
+  }
+
+  return 0;
+}
+
+function itemTrackingTime(item) {
+  const nameTime = parseDateFromText(item?.name || '');
+  if (nameTime) return nameTime;
+
+  const modifiedTime = Date.parse(item?.lastModifiedDateTime || '');
+  return Number.isNaN(modifiedTime) ? 0 : modifiedTime;
+}
+
+function shouldTrackArticle(item) {
+  const time = itemTrackingTime(item);
+  return !time || time >= lookbackCutoffTime();
+}
+
+function shouldSkipFolderPath(path = '') {
+  const normalized = String(path || '').toLowerCase();
+  if (SKIPPED_FOLDER_KEYWORDS.some((keyword) => normalized.includes(keyword.toLowerCase()))) {
+    return true;
+  }
+
+  const folderDate = parseDateFromText(normalized);
+  return Boolean(folderDate && folderDate < lookbackCutoffTime());
+}
+
 function safeNumber(value, fallback = 0, max = 20) {
   const n = Number.parseInt(firstQueryValue(value, String(fallback)), 10);
   if (!Number.isFinite(n) || n < 0) return fallback;
@@ -254,8 +302,11 @@ async function buildShallowListing(token, items, relativePath, options = {}) {
 
   for (const item of items) {
     if (item.folder) {
-      folders.push(toFolder(item, relativePath));
-    } else if (isMarkdownArticle(item)) {
+      const nextPath = relativePath ? `${relativePath}/${item.name}` : item.name;
+      if (!shouldSkipFolderPath(nextPath)) {
+        folders.push(toFolder(item, relativePath));
+      }
+    } else if (isMarkdownArticle(item) && shouldTrackArticle(item)) {
       articles.push(toArticle(item, relativePath));
     }
   }
@@ -284,6 +335,7 @@ async function buildShallowListing(token, items, relativePath, options = {}) {
  */
 async function listArticlesRecursive(token, folderPath, relativePath = '', depth = 0) {
   if (depth > 5) return []; // 安全のため最大5階層まで
+  if (shouldSkipFolderPath(folderPath) || shouldSkipFolderPath(relativePath)) return [];
 
   const encoded = encodeFolderPath(folderPath);
   const url = `${GRAPH_API}/me/drive/root:/${encoded}:/children?$select=id,name,lastModifiedDateTime,webUrl,size,folder&$top=200`;
@@ -310,11 +362,14 @@ async function listArticlesRecursive(token, folderPath, relativePath = '', depth
     if (item.folder) {
       // サブフォルダ → 再帰取得（Graph 429を避けるため順次処理）
       const subRelative = relativePath ? `${relativePath}/${item.name}` : item.name;
-      subFolders.push({
-        folderPath: `${folderPath}/${item.name}`,
-        relativePath: subRelative,
-      });
-    } else if (item.name && item.name.endsWith('.md')) {
+      const subFolderPath = `${folderPath}/${item.name}`;
+      if (!shouldSkipFolderPath(subFolderPath) && !shouldSkipFolderPath(subRelative)) {
+        subFolders.push({
+          folderPath: subFolderPath,
+          relativePath: subRelative,
+        });
+      }
+    } else if (item.name && item.name.endsWith('.md') && shouldTrackArticle(item)) {
       // Markdownファイル → 記事として追加（H1はあとで並列取得）
       articles.push({
         id: item.id,
@@ -395,6 +450,7 @@ async function resolveFolderFromUrl(token, urlStr) {
 // 追加: フォルダID起点での再帰取得
 async function listArticlesRecursiveById(token, folderId, relativePath, depth = 0) {
   if (depth > 5) return [];
+  if (shouldSkipFolderPath(relativePath)) return [];
 
   const url = `${GRAPH_API}/me/drive/items/${folderId}/children?$select=id,name,lastModifiedDateTime,webUrl,size,folder&$top=200`;
   const res = await graphFetch(url, { headers: { Authorization: `Bearer ${token}` } }, `recursive list by id depth ${depth}`);
@@ -412,8 +468,10 @@ async function listArticlesRecursiveById(token, folderId, relativePath, depth = 
   for (const item of items) {
     if (item.folder) {
       const subRelative = relativePath ? `${relativePath}/${item.name}` : item.name;
-      subFolders.push({ id: item.id, relativePath: subRelative });
-    } else if (item.name && item.name.endsWith('.md')) {
+      if (!shouldSkipFolderPath(subRelative)) {
+        subFolders.push({ id: item.id, relativePath: subRelative });
+      }
+    } else if (item.name && item.name.endsWith('.md') && shouldTrackArticle(item)) {
       articles.push({
         id: item.id,
         name: item.name,
