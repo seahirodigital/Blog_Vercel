@@ -36,8 +36,13 @@
 
 ## 実装した対策
 - `C:\Users\mahha\OneDrive\開発\Blog_Vercel\lib\onedrive-token-sync.js`
-  - `import('libsodium-wrappers')` をやめ、`createRequire(import.meta.url)` から `require('libsodium-wrappers')` を呼ぶ形へ変更。
-  - Vercel が ESM 側の `dist/modules-esm` を解決して失敗する経路を避ける。
+  - `import('libsodium-wrappers')` をやめ、静的 import で `libsodium-wrappers` を読む形へ変更。
+  - Vercel が ESM 側の `dist/modules-esm` を解決して失敗する経路を避けつつ、Vercel のファイルトレーサーに依存を確実に拾わせる。
 - `C:\Users\mahha\OneDrive\開発\Blog_Vercel\package.json`
   - `libsodium-wrappers` を `0.7.15` に固定。
   - `libsodium` を `0.7.15` として明示追加。
+
+## 追加確認
+- コミット `e070956dedc85045cc56b4baa0ff698dd65a020c` を push 後、GitHub main 反映は確認できた。
+- その直後の Vercel 本番 `/api/articles` と `/api/info-viewer` は HTTP 500 `FUNCTION_INVOCATION_FAILED` になった。
+- `createRequire(import.meta.url)` 経由の `require('libsodium-wrappers')` が Vercel の関数ファイルトレースに拾われない可能性があるため、静的 import へ切り替えた。
