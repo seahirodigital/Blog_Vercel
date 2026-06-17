@@ -14355,5 +14355,21 @@
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
+  },
+  {
+    "id": "8e9cf659-d49f-4629-9553-06b96b75ed9e",
+    "status": "scheduled",
+    "fileId": "FFCC26DEDBBA4E70!sc06dd1d98a4f43a18c469f48106a6321",
+    "title": "シャーク パワークリーン360Proレビューまとめ：コードレス掃除機の新常識",
+    "name": "20260617_2245_【最強】ダイソン超え!新型Sharkの吸引力が異次元すぎる.md",
+    "path": "",
+    "noteTarget": "blog_main",
+    "noTopImage": false,
+    "publishAt": "2026-06-18T08:00:00.000Z",
+    "createdAt": "2026-06-17T23:46:52.867Z",
+    "queuedAt": "",
+    "publishedAt": "",
+    "publishedUrl": "",
+    "error": ""
   }
 ]
