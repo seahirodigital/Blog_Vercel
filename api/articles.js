@@ -590,7 +590,8 @@ export default async function handler(req, res) {
       }
       const folder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
 
-      if (firstQueryValue(mode) === 'shallow' || folderPath !== undefined || folderId) {
+      const requestedMode = firstQueryValue(mode, 'shallow');
+      if (requestedMode !== 'recursive' || folderPath !== undefined || folderId) {
         const targetPath = firstQueryValue(folderPath, '').trim().replace(/^\/+|\/+$/g, '');
         const limit = safeNumber(h1Limit, 0, 20);
         const listing = folderId
