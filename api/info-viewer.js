@@ -4,11 +4,51 @@ import { syncGitHubActionsRefreshToken } from '../lib/onedrive-token-sync.js';
 const GRAPH_API = 'https://graph.microsoft.com/v1.0';
 const TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
 const VERCEL_API = 'https://api.vercel.com';
+const GRAPH_RETRY_STATUS_CODES = new Set([429, 500, 502, 503, 504]);
+const GRAPH_MAX_RETRIES = 3;
+const GRAPH_BASE_DELAY_MS = 750;
+const GRAPH_MAX_DELAY_MS = 5000;
 const PRIMARY_FOLDER =
   process.env.INFO_VIEWER_ONEDRIVE_FOLDER || 'Obsidian in Onedrive 202602/Vercel_Blog/info_viewer';
 const LEGACY_FOLDER = 'Obsidian in Onedrive 202602/Vercel_Blog/情報取得/info_viewer';
 const STATE_RELATIVE_PATH = 'state/pipeline_state.json';
 const ASSET_RELATIVE_FOLDER = 'assets';
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function graphRetryDelayMs(response, attempt) {
+  const retryAfter = response.headers.get('retry-after');
+  if (retryAfter) {
+    const seconds = Number(retryAfter);
+    if (Number.isFinite(seconds) && seconds >= 0) {
+      return Math.min(seconds * 1000, GRAPH_MAX_DELAY_MS);
+    }
+
+    const retryAt = Date.parse(retryAfter);
+    if (!Number.isNaN(retryAt)) {
+      return Math.min(Math.max(retryAt - Date.now(), 0), GRAPH_MAX_DELAY_MS);
+    }
+  }
+
+  return Math.min(GRAPH_BASE_DELAY_MS * 2 ** attempt, GRAPH_MAX_DELAY_MS);
+}
+
+async function graphFetch(url, options = {}, label = 'graph') {
+  for (let attempt = 0; attempt <= GRAPH_MAX_RETRIES; attempt += 1) {
+    const response = await fetch(url, options);
+    if (!GRAPH_RETRY_STATUS_CODES.has(response.status) || attempt === GRAPH_MAX_RETRIES) {
+      return response;
+    }
+
+    const waitMs = graphRetryDelayMs(response, attempt);
+    console.warn(`${label} returned ${response.status}; retrying in ${waitMs}ms`);
+    await sleep(waitMs);
+  }
+
+  return fetch(url, options);
+}
 
 function folderCandidates() {
   const configuredFallbacks = String(process.env.INFO_VIEWER_ONEDRIVE_FALLBACK_FOLDERS || '')
@@ -46,11 +86,11 @@ async function graphRequest(method, url, accessToken, options = {}) {
     ...(options.headers || {}),
   };
 
-  return fetch(url, {
+  return graphFetch(url, {
     ...options,
     method,
     headers,
-  });
+  }, `graph ${method}`);
 }
 
 async function ensureFolderPath(accessToken, folderPath) {
@@ -215,9 +255,9 @@ async function fetchManifest(token) {
   const manifests = [];
   for (const folder of folderCandidates()) {
     const url = `${GRAPH_API}/me/drive/root:/${encodeFolderPath(folder)}/manifest.json:/content`;
-    const response = await fetch(url, {
+    const response = await graphFetch(url, {
       headers: { Authorization: `Bearer ${token}` },
-    });
+    }, 'info-viewer manifest');
 
     if (response.status === 404) {
       continue;
@@ -253,9 +293,9 @@ async function fetchManifest(token) {
 
 async function fetchArticleRawContent(token, itemId) {
   const url = `${GRAPH_API}/me/drive/items/${encodeURIComponent(itemId)}/content`;
-  const response = await fetch(url, {
+  const response = await graphFetch(url, {
     headers: { Authorization: `Bearer ${token}` },
-  });
+  }, 'info-viewer article content');
   if (!response.ok) {
     throw new Error(`記事本文の取得に失敗しました: ${response.status}`);
   }
@@ -275,14 +315,14 @@ async function saveArticleContent(token, itemId, content) {
   const { frontmatter } = splitFrontmatter(raw);
   const nextBody = String(content ?? '').replace(/^\uFEFF/, '');
   const nextContent = `${frontmatter}${nextBody}`;
-  const response = await fetch(`${GRAPH_API}/me/drive/items/${encodeURIComponent(itemId)}/content`, {
+  const response = await graphFetch(`${GRAPH_API}/me/drive/items/${encodeURIComponent(itemId)}/content`, {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'text/plain; charset=utf-8',
     },
     body: nextContent,
-  });
+  }, 'info-viewer article save');
 
   if (!response.ok) {
     throw new Error(`記事本文の保存に失敗しました: ${response.status} ${await response.text()}`);
@@ -329,14 +369,14 @@ async function uploadImageAsset(token, body = {}) {
   await ensureFolderPath(token, fullPath(PRIMARY_FOLDER, ASSET_RELATIVE_FOLDER));
 
   const assetPath = fullPath(PRIMARY_FOLDER, `${ASSET_RELATIVE_FOLDER}/${filename}`);
-  const response = await fetch(`${GRAPH_API}/me/drive/root:/${encodeFolderPath(assetPath)}:/content`, {
+  const response = await graphFetch(`${GRAPH_API}/me/drive/root:/${encodeFolderPath(assetPath)}:/content`, {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': mimeType,
     },
     body: buffer,
-  });
+  }, 'info-viewer image upload');
 
   if (!response.ok) {
     throw new Error(`画像アップロードに失敗しました: ${response.status} ${await response.text()}`);
@@ -354,9 +394,9 @@ async function uploadImageAsset(token, body = {}) {
 
 async function fetchImageAsset(token, itemId, mimeType = '') {
   const safeMime = String(mimeType || '').startsWith('image/') ? String(mimeType) : 'image/png';
-  const response = await fetch(`${GRAPH_API}/me/drive/items/${encodeURIComponent(itemId)}/content`, {
+  const response = await graphFetch(`${GRAPH_API}/me/drive/items/${encodeURIComponent(itemId)}/content`, {
     headers: { Authorization: `Bearer ${token}` },
-  });
+  }, 'info-viewer image read');
   if (!response.ok) {
     throw new Error(`画像の取得に失敗しました: ${response.status}`);
   }
@@ -543,10 +583,10 @@ async function dispatchPriorityWorkflow(videoUrl) {
 }
 
 async function deleteArticle(token, articleId) {
-  const response = await fetch(`${GRAPH_API}/me/drive/items/${encodeURIComponent(articleId)}`, {
+  const response = await graphFetch(`${GRAPH_API}/me/drive/items/${encodeURIComponent(articleId)}`, {
     method: 'DELETE',
     headers: { Authorization: `Bearer ${token}` },
-  });
+  }, 'info-viewer article delete');
 
   if (response.status === 404) {
     return;

@@ -13,6 +13,46 @@ import { syncGitHubActionsRefreshToken } from '../lib/onedrive-token-sync.js';
 const GRAPH_API = 'https://graph.microsoft.com/v1.0';
 const TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
 const VERCEL_API = 'https://api.vercel.com';
+const GRAPH_RETRY_STATUS_CODES = new Set([429, 500, 502, 503, 504]);
+const GRAPH_MAX_RETRIES = 3;
+const GRAPH_BASE_DELAY_MS = 750;
+const GRAPH_MAX_DELAY_MS = 5000;
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function graphRetryDelayMs(response, attempt) {
+  const retryAfter = response.headers.get('retry-after');
+  if (retryAfter) {
+    const seconds = Number(retryAfter);
+    if (Number.isFinite(seconds) && seconds >= 0) {
+      return Math.min(seconds * 1000, GRAPH_MAX_DELAY_MS);
+    }
+
+    const retryAt = Date.parse(retryAfter);
+    if (!Number.isNaN(retryAt)) {
+      return Math.min(Math.max(retryAt - Date.now(), 0), GRAPH_MAX_DELAY_MS);
+    }
+  }
+
+  return Math.min(GRAPH_BASE_DELAY_MS * 2 ** attempt, GRAPH_MAX_DELAY_MS);
+}
+
+async function graphFetch(url, options = {}, label = 'graph') {
+  for (let attempt = 0; attempt <= GRAPH_MAX_RETRIES; attempt += 1) {
+    const response = await fetch(url, options);
+    if (!GRAPH_RETRY_STATUS_CODES.has(response.status) || attempt === GRAPH_MAX_RETRIES) {
+      return response;
+    }
+
+    const waitMs = graphRetryDelayMs(response, attempt);
+    console.warn(`${label} returned ${response.status}; retrying in ${waitMs}ms`);
+    await sleep(waitMs);
+  }
+
+  return fetch(url, options);
+}
 
 // リフレッシュトークンをVercel環境変数に自動更新する
 async function updateVercelEnvToken(newRefreshToken) {
@@ -115,12 +155,12 @@ function inferSourceTypeFromName(name) {
 async function fetchArticlePreviewMeta(token, fileId) {
   try {
     const url = `${GRAPH_API}/me/drive/items/${fileId}/content`;
-    const res = await fetch(url, {
+    const res = await graphFetch(url, {
       headers: {
         Authorization: `Bearer ${token}`,
         Range: 'bytes=0-1023',
       },
-    });
+    }, 'article preview');
     // 206 Partial Content or 200 OK どちらも受け入れる
     if (!res.ok && res.status !== 206) return { h1Title: '', sourceType: '' };
     const text = stripSourceTypeMetadata(await res.text());
@@ -178,7 +218,7 @@ async function fetchGraphChildren(token, initialUrl) {
   const items = [];
 
   while (url) {
-    const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+    const res = await graphFetch(url, { headers: { Authorization: `Bearer ${token}` } }, 'children list');
 
     if (!res.ok) {
       if (res.status === 404) return [];
@@ -225,13 +265,11 @@ async function buildShallowListing(token, items, relativePath, options = {}) {
 
   const h1Limit = safeNumber(options.h1Limit, 0, 20);
   if (h1Limit > 0) {
-    await Promise.all(
-      articles.slice(0, h1Limit).map(async (article) => {
-        const meta = await fetchArticlePreviewMeta(token, article.id);
-        article.h1Title = meta.h1Title;
-        article.sourceType = meta.sourceType || article.sourceType;
-      })
-    );
+    for (const article of articles.slice(0, h1Limit)) {
+      const meta = await fetchArticlePreviewMeta(token, article.id);
+      article.h1Title = meta.h1Title;
+      article.sourceType = meta.sourceType || article.sourceType;
+    }
   }
 
   return { folders, articles };
@@ -251,7 +289,7 @@ async function listArticlesRecursive(token, folderPath, relativePath = '', depth
   const url = `${GRAPH_API}/me/drive/root:/${encoded}:/children?$select=id,name,lastModifiedDateTime,webUrl,size,folder&$top=200`;
 
   console.log(`LIST (depth=${depth}):`, folderPath);
-  const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+  const res = await graphFetch(url, { headers: { Authorization: `Bearer ${token}` } }, `recursive list depth ${depth}`);
 
   if (!res.ok) {
     if (res.status === 404) {
@@ -266,15 +304,16 @@ async function listArticlesRecursive(token, folderPath, relativePath = '', depth
   const data = await res.json();
   const items = data.value || [];
   let articles = [];
-  const subFolderPromises = [];
+  const subFolders = [];
 
   for (const item of items) {
     if (item.folder) {
-      // サブフォルダ → 再帰取得（並列化）
+      // サブフォルダ → 再帰取得（Graph 429を避けるため順次処理）
       const subRelative = relativePath ? `${relativePath}/${item.name}` : item.name;
-      subFolderPromises.push(
-        listArticlesRecursive(token, `${folderPath}/${item.name}`, subRelative, depth + 1)
-      );
+      subFolders.push({
+        folderPath: `${folderPath}/${item.name}`,
+        relativePath: subRelative,
+      });
     } else if (item.name && item.name.endsWith('.md')) {
       // Markdownファイル → 記事として追加（H1はあとで並列取得）
       articles.push({
@@ -290,20 +329,18 @@ async function listArticlesRecursive(token, folderPath, relativePath = '', depth
     }
   }
 
-  // サブフォルダを並列取得してマージ
-  const subResults = await Promise.all(subFolderPromises);
-  for (const sub of subResults) articles = articles.concat(sub);
+  // サブフォルダを順次取得してマージ
+  for (const subFolder of subFolders) {
+    const sub = await listArticlesRecursive(token, subFolder.folderPath, subFolder.relativePath, depth + 1);
+    articles = articles.concat(sub);
+  }
 
-  // 各記事のH1タイトルを並列取得（先頭1KBのみ）
-  await Promise.all(
-    articles
-      .filter(a => !a.h1Title) // サブフォルダからの記事は既に取得済みの場合スキップ
-      .map(async (article) => {
-        const meta = await fetchArticlePreviewMeta(token, article.id);
-        article.h1Title = meta.h1Title;
-        article.sourceType = meta.sourceType || article.sourceType;
-      })
-  );
+  // 各記事のH1タイトルを順次取得（先頭1KBのみ）
+  for (const article of articles.filter(a => !a.h1Title)) {
+    const meta = await fetchArticlePreviewMeta(token, article.id);
+    article.h1Title = meta.h1Title;
+    article.sourceType = meta.sourceType || article.sourceType;
+  }
 
   // 新しい順にソート
   articles.sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified));
@@ -324,7 +361,7 @@ async function resolveFolderFromUrl(token, urlStr) {
     try {
       const base64Value = Buffer.from(urlStr).toString('base64');
       const encodedUrl = 'u!' + base64Value.replace(/\+/g, '-', 'g').replace(/\//g, '_', 'g').replace(/=+$/, '');
-      const res = await fetch(`${GRAPH_API}/shares/${encodedUrl}/driveItem`, { headers: { Authorization: `Bearer ${token}` } });
+      const res = await graphFetch(`${GRAPH_API}/shares/${encodedUrl}/driveItem`, { headers: { Authorization: `Bearer ${token}` } }, 'shared folder resolve');
       if (res.ok) {
         const data = await res.json();
         folderId = data.id;
@@ -344,7 +381,7 @@ async function resolveFolderFromUrl(token, urlStr) {
       }
     }
 
-    const res = await fetch(apiUrl, { headers: { Authorization: `Bearer ${token}` } });
+    const res = await graphFetch(apiUrl, { headers: { Authorization: `Bearer ${token}` } }, 'folder resolve');
     if (res.ok) {
       const data = await res.json();
       return { id: data.id, name: data.name, childCount: data.folder?.childCount || 0 };
@@ -360,7 +397,7 @@ async function listArticlesRecursiveById(token, folderId, relativePath, depth = 
   if (depth > 5) return [];
 
   const url = `${GRAPH_API}/me/drive/items/${folderId}/children?$select=id,name,lastModifiedDateTime,webUrl,size,folder&$top=200`;
-  const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+  const res = await graphFetch(url, { headers: { Authorization: `Bearer ${token}` } }, `recursive list by id depth ${depth}`);
 
   if (!res.ok) {
     console.warn('listArticlesRecursiveById error', await res.text());
@@ -370,12 +407,12 @@ async function listArticlesRecursiveById(token, folderId, relativePath, depth = 
   const data = await res.json();
   const items = data.value || [];
   let articles = [];
-  const subFolderPromises = [];
+  const subFolders = [];
 
   for (const item of items) {
     if (item.folder) {
       const subRelative = relativePath ? `${relativePath}/${item.name}` : item.name;
-      subFolderPromises.push(listArticlesRecursiveById(token, item.id, subRelative, depth + 1));
+      subFolders.push({ id: item.id, relativePath: subRelative });
     } else if (item.name && item.name.endsWith('.md')) {
       articles.push({
         id: item.id,
@@ -390,18 +427,16 @@ async function listArticlesRecursiveById(token, folderId, relativePath, depth = 
     }
   }
 
-  const subResults = await Promise.all(subFolderPromises);
-  for (const sub of subResults) articles = articles.concat(sub);
+  for (const subFolder of subFolders) {
+    const sub = await listArticlesRecursiveById(token, subFolder.id, subFolder.relativePath, depth + 1);
+    articles = articles.concat(sub);
+  }
 
-  await Promise.all(
-    articles
-      .filter(a => !a.h1Title)
-      .map(async (article) => {
-        const meta = await fetchArticlePreviewMeta(token, article.id);
-        article.h1Title = meta.h1Title;
-        article.sourceType = meta.sourceType || article.sourceType;
-      })
-  );
+  for (const article of articles.filter(a => !a.h1Title)) {
+    const meta = await fetchArticlePreviewMeta(token, article.id);
+    article.h1Title = meta.h1Title;
+    article.sourceType = meta.sourceType || article.sourceType;
+  }
 
   return articles;
 }
@@ -409,7 +444,7 @@ async function listArticlesRecursiveById(token, folderId, relativePath, depth = 
 // 記事内容取得（ファイルID使用）
 async function getArticle(token, fileId) {
   const url = `${GRAPH_API}/me/drive/items/${fileId}/content`;
-  const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+  const res = await graphFetch(url, { headers: { Authorization: `Bearer ${token}` } }, 'article content');
   if (!res.ok) {
     const errBody = await res.text();
     console.error('Get error:', res.status, errBody);
@@ -433,14 +468,14 @@ async function saveArticle(token, filename, content, fileId = null) {
   }
 
   console.log('SAVE:', url);
-  const res = await fetch(url, {
+  const res = await graphFetch(url, {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'text/plain; charset=utf-8',
     },
     body: stripSourceTypeMetadata(content),
-  });
+  }, 'article save');
 
   if (!res.ok) {
     const err = await res.text();
@@ -456,7 +491,7 @@ async function moveArticle(token, fileId, destRelativePath) {
   const destPath = destRelativePath ? `${baseFolder}/${destRelativePath}` : baseFolder;
   // 移動先フォルダのIDを取得
   const folderUrl = `${GRAPH_API}/me/drive/root:/${encodeFolderPath(destPath)}`;
-  const folderRes = await fetch(folderUrl, { headers: { Authorization: `Bearer ${token}` } });
+  const folderRes = await graphFetch(folderUrl, { headers: { Authorization: `Bearer ${token}` } }, 'move folder lookup');
   if (!folderRes.ok) {
     const err = await folderRes.text();
     throw new Error(`移動先フォルダ取得失敗: ${folderRes.status}: ${err}`);
@@ -464,11 +499,11 @@ async function moveArticle(token, fileId, destRelativePath) {
   const folderData = await folderRes.json();
   // ファイルを移動（parentReference.idを書き換えるだけ）
   const moveUrl = `${GRAPH_API}/me/drive/items/${fileId}`;
-  const res = await fetch(moveUrl, {
+  const res = await graphFetch(moveUrl, {
     method: 'PATCH',
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({ parentReference: { id: folderData.id } }),
-  });
+  }, 'article move');
   if (!res.ok) {
     const err = await res.text();
     console.error('Move error:', res.status, err);
@@ -481,14 +516,14 @@ async function moveArticle(token, fileId, destRelativePath) {
 async function renameArticle(token, fileId, newName) {
   const url = `${GRAPH_API}/me/drive/items/${fileId}`;
   console.log('RENAME:', fileId, '->', newName);
-  const res = await fetch(url, {
+  const res = await graphFetch(url, {
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ name: newName }),
-  });
+  }, 'article rename');
   if (!res.ok) {
     const err = await res.text();
     console.error('Rename error:', res.status, err);
@@ -500,10 +535,10 @@ async function renameArticle(token, fileId, newName) {
 // 記事削除（ファイルID指定）
 async function deleteArticle(token, fileId) {
   const url = `${GRAPH_API}/me/drive/items/${fileId}`;
-  const res = await fetch(url, {
+  const res = await graphFetch(url, {
     method: 'DELETE',
     headers: { Authorization: `Bearer ${token}` },
-  });
+  }, 'article delete');
   if (!res.ok && res.status !== 204) {
     const err = await res.text();
     console.error('Delete error:', res.status, err);
@@ -520,14 +555,14 @@ async function duplicateArticle(token, fileId, newName, folderPath) {
   const encodedFile = encodeURIComponent(newName);
   const url = `${GRAPH_API}/me/drive/root:/${encoded}/${encodedFile}:/content`;
   console.log('DUPLICATE:', url);
-  const res = await fetch(url, {
+  const res = await graphFetch(url, {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'text/plain; charset=utf-8',
     },
     body: content,
-  });
+  }, 'article duplicate');
   if (!res.ok) {
     const err = await res.text();
     console.error('Duplicate error:', res.status, err);
