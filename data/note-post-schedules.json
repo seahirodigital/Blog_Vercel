@@ -14376,7 +14376,7 @@
   },
   {
     "id": "b0215204-43fe-420d-82df-d6e7882e6cc2",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s904418bc40d54ac3a40d77a76d12c343",
     "title": "Galaxy Buds4 ProとGalaxy Buds4：最適なワイヤレスイヤホンの選び方まとめ",
     "name": "20260618_1414_iPhoneユーザーが Galaxy Buds4 Pro  Galaxy Buds4 をガチでレビュー！前作とも比較して.md",
@@ -14386,8 +14386,8 @@
     "publishAt": "2026-06-22T09:30:00.000Z",
     "createdAt": "2026-06-22T07:32:54.975Z",
     "queuedAt": "2026-06-22T14:18:31.660858+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-06-22T14:21:12.904718+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n236e8974cb2e?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
