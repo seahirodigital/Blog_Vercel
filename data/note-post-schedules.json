@@ -14376,7 +14376,7 @@
   },
   {
     "id": "b0215204-43fe-420d-82df-d6e7882e6cc2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s904418bc40d54ac3a40d77a76d12c343",
     "title": "Galaxy Buds4 ProとGalaxy Buds4：最適なワイヤレスイヤホンの選び方まとめ",
     "name": "20260618_1414_iPhoneユーザーが Galaxy Buds4 Pro  Galaxy Buds4 をガチでレビュー！前作とも比較して.md",
@@ -14385,14 +14385,16 @@
     "noTopImage": false,
     "publishAt": "2026-06-22T09:30:00.000Z",
     "createdAt": "2026-06-22T07:32:54.975Z",
-    "queuedAt": "",
+    "queuedAt": "2026-06-22T14:18:31.660858+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1fd30bf4-00df-489a-89de-66a8ede9978c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s904418bc40d54ac3a40d77a76d12c343",
     "title": "Galaxy Buds4 ProとGalaxy Buds4：最適なワイヤレスイヤホンの選び方まとめ",
     "name": "20260618_1414_iPhoneユーザーが Galaxy Buds4 Pro  Galaxy Buds4 をガチでレビュー！前作とも比較して.md",
@@ -14401,10 +14403,12 @@
     "noTopImage": false,
     "publishAt": "2026-06-22T09:30:00.000Z",
     "createdAt": "2026-06-22T07:34:08.927Z",
-    "queuedAt": "",
+    "queuedAt": "2026-06-22T14:18:31.660858+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a86f4650-b90c-435b-9569-be419468c0d6",
