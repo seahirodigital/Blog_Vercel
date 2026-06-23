@@ -14412,7 +14412,7 @@
   },
   {
     "id": "a86f4650-b90c-435b-9569-be419468c0d6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s36ea53eb496c494ca6e8d8c54abe5bcf",
     "title": "MOFT 8-in-1多機能スタンド 紛失防止「探す」機能付き レビュー比較まとめ：スマホアクセサリーの決定版",
     "name": "20260618_1412_あの超人気スマホスタンドがまさかの進化をした件.md",
@@ -14421,10 +14421,12 @@
     "noTopImage": false,
     "publishAt": "2026-06-23T02:30:00.000Z",
     "createdAt": "2026-06-22T07:36:57.893Z",
-    "queuedAt": "",
+    "queuedAt": "2026-06-23T05:54:52.227884+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "aa5b4caa-97a9-48f1-8b66-d51bbde9d0e6",
