@@ -14430,7 +14430,7 @@
   },
   {
     "id": "aa5b4caa-97a9-48f1-8b66-d51bbde9d0e6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s291635590e024cd3866c18785b2915b4",
     "title": "DJI Osmo Mobile 8P レビュー比較まとめ：Vlog撮影を劇的に変えるスマホジンバルの実力",
     "name": "20260612_0328_【DJI OM8P】スマホジンバルは本当に必要なのか？タイ出張でOsmo Mobile 8Pをガチ使いして分かったメリッ.md",
@@ -14439,9 +14439,11 @@
     "noTopImage": false,
     "publishAt": "2026-06-23T08:00:00.000Z",
     "createdAt": "2026-06-22T07:37:49.480Z",
-    "queuedAt": "",
+    "queuedAt": "2026-06-23T07:25:21.967272+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   }
 ]
