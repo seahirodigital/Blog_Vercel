@@ -14448,7 +14448,7 @@
   },
   {
     "id": "45091e84-efb2-4cd0-9abb-ef089024cb03",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!scde03815e539419098ec872732bb777b",
     "title": "タムロン 25-200mm F/2.8-5.6 Di III VXD G2 レビュー比較まとめ",
     "name": "タムロン 25-200mm G2 A075S F 2.8-5.6 レビュー比較まとめ.md",
@@ -14457,10 +14457,12 @@
     "noTopImage": false,
     "publishAt": "2026-06-24T02:30:00.000Z",
     "createdAt": "2026-06-23T23:57:22.523Z",
-    "queuedAt": "",
+    "queuedAt": "2026-06-24T06:02:24.560118+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e50b7e55-0b17-4dff-8abb-ff540ff9815c",
