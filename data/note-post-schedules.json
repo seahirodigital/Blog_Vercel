@@ -14484,7 +14484,7 @@
   },
   {
     "id": "fcabb788-d7ed-4375-b02c-7f83626663e1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa79aab3ea87b4d9b8a7baf73c4c5bcf4",
     "title": "ケルヒャー(Karcher) スチームクリーナー SC 1 Multi  レビュー比較まとめ",
     "name": "KÄRCHER 9F-1-516-419-0dpB0GN8TNX1B 00Duration 00Loaded ケルヒャー.md",
@@ -14493,9 +14493,11 @@
     "noTopImage": false,
     "publishAt": "2026-06-25T02:30:00.000Z",
     "createdAt": "2026-06-23T23:57:22.523Z",
-    "queuedAt": "",
+    "queuedAt": "2026-06-25T05:52:59.954769+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   }
 ]
