@@ -14502,7 +14502,7 @@
   },
   {
     "id": "32c5a219-67df-4859-8d0e-133433a7fa1d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s89ef9af8f69d4fd09f8482a0caa03940",
     "title": "ダイキン S225ATES-Wレビュー比較まとめ",
     "name": "ダイキン S225ATES-W 工事保証3年付属 エアコン レビュー比較まとめ.md",
@@ -14511,10 +14511,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-03T09:00:00.000Z",
     "createdAt": "2026-07-03T08:12:47.318Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-03T11:06:02.086981+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "23411c9b-b219-4f4a-ad2f-24e347252733",
