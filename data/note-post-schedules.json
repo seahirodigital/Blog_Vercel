@@ -14556,7 +14556,7 @@
   },
   {
     "id": "b3e6b276-9fd8-406f-9bd9-eabe9f499449",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s084b769cbd9c495c819eb94734daa858",
     "title": "Viture Beast XRグラスレビュー比較まとめ：その真価とメリットを徹底解説",
     "name": "20260624_0248_コレなしの生活にはもう戻れない！究極の『VITURE Beast』をLuma Ultraと比べたら進化がヤバすぎた！【X.md",
@@ -14566,8 +14566,8 @@
     "publishAt": "2026-07-04T23:00:00.000Z",
     "createdAt": "2026-07-03T08:12:47.318Z",
     "queuedAt": "2026-07-04T23:17:11.821814+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-04T23:19:48.766905+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n12ab3c5de970?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
