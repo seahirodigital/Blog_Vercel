@@ -14574,7 +14574,7 @@
   },
   {
     "id": "04ec4659-cf48-4e69-9d39-8b7c285d48c8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf342dbf4372a41daba8212c684d06059",
     "title": "Haier JAA-HS286AS ルームエアコン 10畳 レビュー比較まとめ",
     "name": "Haier JAA-HS286AS ルームエアコン 10畳 レビュー比較まとめ.md",
@@ -14583,10 +14583,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-05T08:00:00.000Z",
     "createdAt": "2026-07-03T08:12:47.318Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-05T09:53:43.927648+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b82a46ee-46e3-4d0a-8ab5-e376a6e7ddf6",
