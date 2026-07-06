@@ -15257,7 +15257,7 @@
   },
   {
     "id": "b12c6960-5f06-475a-b125-a5030a975baf",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s808dd77f200645ee9fbce29e5c204c49",
     "title": "Dyson(ダイソン) 掃除機 コードレス Dyson Micro Plus (SV33 FF PL AM) レビュー比較まとめ",
     "name": "Dyson SV33 スティッククリーナー レビュー比較まとめ.md",
@@ -15269,11 +15269,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:45:30.567Z"
   },
   {
     "id": "09813941-f959-4031-be24-adfc0d0beda3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s28cbdafe615e452f9ae2ebf754955084",
     "title": "Jackery 3600Plus 5kWh 50Hz60Hz 炊飯器 レビュー比較まとめ",
     "name": "Jackery 3600Plus 5kWh 50Hz60Hz 炊飯器 レビュー比較まとめ.md",
@@ -15285,11 +15286,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:45:30.567Z"
   },
   {
     "id": "ce7274ac-85b7-4977-9e26-0b8f1ea5cda5",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s28cbdafe615e452f9ae2ebf754955084",
     "title": "Jackery 3600Plus 5kWh 50Hz60Hz 炊飯器 レビュー比較まとめ",
     "name": "Jackery 3600Plus 5kWh 50Hz60Hz 炊飯器 レビュー比較まとめ.md",
@@ -15301,11 +15303,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:45:30.567Z"
   },
   {
     "id": "e83bfba2-c1fa-41c5-9f23-71472d61a56d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s808dd77f200645ee9fbce29e5c204c49",
     "title": "Dyson(ダイソン) 掃除機 コードレス Dyson Micro Plus (SV33 FF PL AM) レビュー比較まとめ",
     "name": "Dyson SV33 スティッククリーナー レビュー比較まとめ.md",
@@ -15317,7 +15320,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:45:30.567Z"
   },
   {
     "id": "ba69be80-2ef0-49ee-8806-a6eda2eb6695",
