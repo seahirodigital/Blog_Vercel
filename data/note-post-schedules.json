@@ -15019,7 +15019,7 @@
   },
   {
     "id": "43578902-9736-40ed-8ee2-70bb9847927a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scf26c6f8785846049d1cb8901960e709",
     "title": "JBL TOUR PRO3 イヤホン レビュー比較まとめ",
     "name": "JBL JBLTOURPRO3GRN イヤホン レビュー比較まとめ.md",
@@ -15031,7 +15031,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:46:58.969Z"
   },
   {
     "id": "476531a1-2715-49d1-9ef1-b59e0cdddd0c",
@@ -15069,7 +15070,7 @@
   },
   {
     "id": "9228cf26-6adb-43e5-a74f-4e76072b70c0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s93bacd945eb34e15b94805d939d4b6f6",
     "title": "MINISFORUM MS-S1 MAX ミニpc レビュー比較まとめ",
     "name": "MINISFORUM MS-S1 LPDDR5X 8060S USB4 V2 10GbE LANx2 MAX ミニpc.md",
@@ -15081,7 +15082,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:46:58.969Z"
   },
   {
     "id": "2817b0d8-c24d-4ff6-a114-d602f1052442",
@@ -15119,7 +15121,7 @@
   },
   {
     "id": "42cad088-19b4-4793-819a-99f9a30698bb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8466a1e303274bb28362ad5c3465d044",
     "title": "TCL(ティーシーエル)  98Q7Cテレビ レビュー比較まとめ",
     "name": "TCL(ティーシーエル) 98Q7C 3000nits AirPlay2 テレビ レビュー比較まとめ.md",
@@ -15131,7 +15133,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:46:58.969Z"
   },
   {
     "id": "54026da2-de57-49b7-9664-66bb4244e315",
@@ -15169,7 +15172,7 @@
   },
   {
     "id": "4e943b4c-275f-4b87-b3c1-39f07a728cd6",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s77aab821b9924933b6064ea1becb2e0f",
     "title": "HAIGE YS-SK9950 掃除機 レビュー比較まとめ",
     "name": "HAIGE YS-SK9950 掃除機 レビュー比較まとめ.md",
@@ -15181,7 +15184,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:46:58.969Z"
   },
   {
     "id": "bb383e64-175d-4b51-b6d8-ede43560e0a7",
@@ -15219,7 +15223,7 @@
   },
   {
     "id": "9b94eccd-3d96-4b22-aa0f-392eedd2f91d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2fcc71dea65e4aafbf35a554a71f88e2",
     "title": "HAIGE HG-RCGC501-2 掃除機 レビュー比較まとめ",
     "name": "HAIGE 30-120mm HG-RCGC501-2 掃除機 レビュー比較まとめ.md",
@@ -15231,7 +15235,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:46:58.969Z"
   },
   {
     "id": "5c377a93-0dd2-481f-ac59-2afa8b6b2c50",
@@ -15269,7 +15274,7 @@
   },
   {
     "id": "24da4e85-5a05-4e27-82c7-f0c3e7b9c475",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!seb3b7bb122d34a7ca9cc48e842f26026",
     "title": "XGIMI TITAN 4K ホームプロジェクター レビュー比較まとめ",
     "name": "XGIMI 8BDMDdpB0GJBZBZW8 MT9681 X1 TITAN 4K ホームプロジェクター レビュー比較.md",
@@ -15281,7 +15286,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:46:58.969Z"
   },
   {
     "id": "fbc7bf9d-c8e3-49ae-9e83-285f22eb56a2",
@@ -15336,7 +15342,7 @@
   },
   {
     "id": "8767a252-424f-458f-a5e0-cbecdb183054",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0b530d11f5cb4432b038f628528bb206",
     "title": "xTool F2 Ultra レーザー彫刻機 レビュー比較まとめ",
     "name": "xTool F2 48MP Ultra レーザー彫刻機 レビュー比較まとめ.md",
@@ -15348,7 +15354,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:46:58.969Z"
   },
   {
     "id": "d23b415d-ce1f-4937-871c-6a246ef1b323",
@@ -15369,7 +15376,7 @@
   },
   {
     "id": "b70a72c0-dbd5-4c68-919e-acd9bde36403",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sed677df8401643d99fac3dca5bd887ce",
     "title": "EENOUR GT8000iOTE インバーター発電機レビュー比較まとめ",
     "name": "EENOUR GT8000iOTE 7kVA スポットクーラー レビュー比較まとめ.md",
@@ -15381,11 +15388,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:46:58.969Z"
   },
   {
     "id": "41afc282-6ef2-47dc-b5dc-91f881bf49f0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s78521694c3cc42c9860c192ce59e2694",
     "title": "ゼンハイザー HD800 Sレビュー比較まとめ",
     "name": "ゼンハイザー 91-506911dpB07KZKNRP1 1kHz1Vrms HD800 Sennheiser オープン.md",
@@ -15397,11 +15405,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:46:58.969Z"
   },
   {
     "id": "d7f3571a-0a9b-48bb-92d4-7f5a446c8810",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9748cbde7b9946ddafe1fb62130d2a73",
     "title": "Dyson(ダイソン) 掃除機 コードレス Dyson V12レビュー比較まとめ",
     "name": "Dyson(ダイソン) V12 SV46 掃除機 レビュー比較まとめ.md",
@@ -15413,11 +15422,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:46:58.969Z"
   },
   {
     "id": "9fbc5540-59f3-4fb2-973f-f9b8a0c0d3fb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc47a7fb9cd3f46098b982cf6069221eb",
     "title": "ECOFLOW DELTA Pro3 電源レビュー比較まとめ",
     "name": "EF ECOFLOW Pro3 ポータブルエアコン レビュー比較まとめ.md",
@@ -15429,7 +15439,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:46:58.969Z"
   },
   {
     "id": "b12c6960-5f06-475a-b125-a5030a975baf",
@@ -15467,7 +15478,7 @@
   },
   {
     "id": "29903c5a-1785-4ff4-9111-8364c28f16f3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa757f40adb5c49b4923849f3cecffb57",
     "title": "ルンバ（Roomba） Plus 575 Comboレビュー比較まとめ",
     "name": "アイロボット R285060 ロボット掃除機 レビュー比較まとめ.md",
@@ -15479,7 +15490,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:46:58.969Z"
   },
   {
     "id": "ce7274ac-85b7-4977-9e26-0b8f1ea5cda5",
@@ -15517,7 +15529,7 @@
   },
   {
     "id": "6a71c20b-4006-45b9-b005-c1d296ed997d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5271d6ab2a1f4d5db65b693c58cef7df",
     "title": "XGIMI HORIZON 20 Maxレビュー比較まとめ",
     "name": "XGIMI VGP2026 1ms HORIZON 20 レビュー比較まとめ.md",
@@ -15529,7 +15541,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:46:58.969Z"
   },
   {
     "id": "ba69be80-2ef0-49ee-8806-a6eda2eb6695",
