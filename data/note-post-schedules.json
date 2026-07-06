@@ -15803,7 +15803,7 @@
   },
   {
     "id": "6c0bcf85-18f6-4dd0-87d2-ef8ce7032161",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfc17964f19604ad29f2cfea285d67f2b",
     "title": "Beats Powerbeats Pro 2レビュー比較まとめ",
     "name": "Beats H2 イヤホン レビュー比較まとめ.md",
@@ -15815,7 +15815,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "ba69be80-2ef0-49ee-8806-a6eda2eb6695",
@@ -15870,7 +15871,7 @@
   },
   {
     "id": "ab875807-8b73-470d-96e5-a4d80064bcd1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd57d783997b2425e9f6758a85c9bc4e7",
     "title": "レグザ 100E670R テレビ レビュー比較まとめ",
     "name": "レグザ 100E670R AirPlay2 テレビ レビュー比較まとめ.md",
@@ -15882,7 +15883,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "6d0a3a63-0ee2-463f-96ca-49676d7cd49d",
@@ -15937,7 +15939,7 @@
   },
   {
     "id": "1548f8aa-c35c-40da-8905-e4ca14dbfaaf",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s49ec2290070a4a9184aaddd8f4d21862",
     "title": "アイリスオーヤマ IPF-2202S-W ルームエアコン 6畳 レビュー比較まとめ",
     "name": "アイリスオーヤマ IPF-2202S-W ルームエアコン 6畳 レビュー比較まとめ.md",
@@ -15949,7 +15951,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "7535506d-4b15-4f28-a293-50db1e97f9e1",
@@ -16004,7 +16007,7 @@
   },
   {
     "id": "fe7958a9-34ce-4882-a56f-d58629d4b41a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4586b9a92af14a63bbcbca87beb40469",
     "title": "BOSE(ボーズ) 75dBSPL Module02 Module03 イヤホン レビュー比較まとめ",
     "name": "BOSE(ボーズ) 75dBSPL Module02 Module03 イヤホン レビュー比較まとめ.md",
@@ -16016,7 +16019,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "2e49ca43-d492-49c4-aa81-b7787889720e",
@@ -16071,7 +16075,7 @@
   },
   {
     "id": "c5780d0d-7887-4375-aac3-7304d1eeda2b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbaab0f99e9064ce29568f222e5a30f28",
     "title": "マウスコンピューター DGI7A7XB83SJW116AZ mouse ゲーミングPC レビュー比較まとめ",
     "name": "マウスコンピューター DGI7A7XB83SJW116AZ mouse ゲーミングPC レビュー比較まとめ.md",
@@ -16083,7 +16087,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "fb6f684c-dc93-4c0c-9caa-1962bdca5289",
@@ -16138,7 +16143,7 @@
   },
   {
     "id": "49053f58-8035-4471-8714-94bfe14fa1b5",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfdedd32d1cab42ff9784ce4ef7a2047d",
     "title": "ゼンハイザー 660S2 HDレビュー比較まとめ",
     "name": "ゼンハイザー 660S2 HD Headphone レビュー比較まとめ.md",
@@ -16150,7 +16155,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "27c9d55a-affa-4228-b9d8-e7c94c473cc1",
@@ -16205,7 +16211,7 @@
   },
   {
     "id": "c2af046d-bde2-4428-9b77-7826b7b0fc7e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se00f1cb77b394365ac1ef8464c12d121",
     "title": "HAIGE HG-RMA1601 掃除機 レビュー比較まとめ",
     "name": "HAIGE HG-RMA1601 掃除機 レビュー比較まとめ.md",
@@ -16217,7 +16223,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "f7579f76-3b4a-4a0f-8f1f-dcb3312cc2bc",
@@ -16272,7 +16279,7 @@
   },
   {
     "id": "f55ea983-468d-4838-b7fd-6cf54f85200f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4e1b75c1a53c4ce98529259482b91de4",
     "title": "HAIGE YS-SK9950K 掃除機 レビュー比較まとめ",
     "name": "HAIGE YS-SK9950K 掃除機 レビュー比較まとめ.md",
@@ -16284,7 +16291,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "626aa033-bf16-48ad-bcb2-c8e9b14596b8",
@@ -16339,7 +16347,7 @@
   },
   {
     "id": "cd45847a-f46b-4ea1-a3bc-0c8131388d7e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s77aab821b9924933b6064ea1becb2e0f",
     "title": "HAIGE YS-SK9950 掃除機 レビュー比較まとめ",
     "name": "HAIGE YS-SK9950 掃除機 レビュー比較まとめ.md",
@@ -16351,7 +16359,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "351948c0-c6d7-4fdb-aed3-26963797adc0",
@@ -16406,7 +16415,7 @@
   },
   {
     "id": "67d1049e-a4fb-472a-8652-0441b31219d0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sed677df8401643d99fac3dca5bd887ce",
     "title": "EENOUR GT8000iOTE インバーター発電機レビュー比較まとめ",
     "name": "EENOUR GT8000iOTE 7kVA スポットクーラー レビュー比較まとめ.md",
@@ -16418,7 +16427,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "c75172cd-c77d-4f5c-803b-d7c4d47428a1",
@@ -16473,7 +16483,7 @@
   },
   {
     "id": "e8bf5df7-bd93-4e61-9a70-1943df8c253a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se0c7c64c6b9f4de4b3f95c1d4e6e4ca3",
     "title": "Bowers & Wilkins Px8 レビュー比較まとめ",
     "name": "バウワースアンドウィルキンス Px8 PX8RB ロイヤル・バーガンディ ワイヤレス・ヘッドフォン レビュー比較まとめ.md",
@@ -16485,7 +16495,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "8a44a537-7df7-414e-a6d7-6f65fcecb1ff",
@@ -16540,7 +16551,7 @@
   },
   {
     "id": "e4b23304-9997-4acd-b73f-4a3707a05fe8",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s97ed1ec924184d20b00f0ce64a966ba4",
     "title": "Sonos Ace レビュー比較まとめ",
     "name": "Sonos VGP2026 サウンドバー レビュー比較まとめ.md",
@@ -16552,7 +16563,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "eafdeac2-9484-4f59-92ef-12a1ad8b6844",
@@ -16607,7 +16619,7 @@
   },
   {
     "id": "c1e60692-dde3-4289-8dea-70f6f3ad9f50",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb31361c77e1a446294184f3c8cb3e089",
     "title": "Apple AirPods Pro3イヤホン レビュー比較まとめ",
     "name": "Apple(アップル) comimages 61kX MI8wvL イヤホン レビュー比較まとめ.md",
@@ -16619,7 +16631,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "14d3551d-de9c-4250-8708-3d0fd347917e",
@@ -16674,7 +16687,7 @@
   },
   {
     "id": "7e5c687f-8d68-448f-a073-9bb90beffdf4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s47ad591f96fa46659a2a17c8ff3204fe",
     "title": "Jackery 5000Plus ポータブル電源 拡張バッテリー レビュー比較まとめ",
     "name": "Jackery 5000Plus ポータブル電源 拡張バッテリー レビュー比較まとめ.md",
@@ -16686,7 +16699,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "0ae6beca-b763-4652-87d2-040fdcff28d1",
@@ -16741,7 +16755,7 @@
   },
   {
     "id": "013f2917-70d7-4fdb-9831-bc68cdeb0350",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2fcc71dea65e4aafbf35a554a71f88e2",
     "title": "HAIGE HG-RCGC501-2 掃除機 レビュー比較まとめ",
     "name": "HAIGE 30-120mm HG-RCGC501-2 掃除機 レビュー比較まとめ.md",
@@ -16753,7 +16767,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "0b73131f-431b-4b9d-8611-50c484e62b16",
@@ -16808,7 +16823,7 @@
   },
   {
     "id": "4bb031eb-fe6a-458a-90af-cbadb1c47989",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s803a8a39d1af4d649e8df3d6d28a2026",
     "title": "Anker Eufy SmartTrack Card E40 レビュー比較まとめ：カード型紛失防止トラッカーの決定版",
     "name": "20260704_0047_Ankerの超人気カードガジェットが実はめっちゃ進化してる件.md",
@@ -16820,7 +16835,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "7bae068e-76e6-4853-89af-e3ed7a6414a4",
@@ -16875,7 +16891,7 @@
   },
   {
     "id": "87d371bf-5c4a-494b-9b67-0a9db3bcc1c6",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa757f40adb5c49b4923849f3cecffb57",
     "title": "ルンバ（Roomba） Plus 575 Comboレビュー比較まとめ",
     "name": "アイロボット R285060 ロボット掃除機 レビュー比較まとめ.md",
@@ -16887,7 +16903,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "d86735d8-0e36-42a3-819f-038bacf9f5be",
@@ -16942,7 +16959,7 @@
   },
   {
     "id": "22c15948-6da8-4d87-93c1-bdc9886bf223",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9dc37fd74a1143c39a71b451cf9d0d06",
     "title": "東芝 RAS-V221TE ルームエアコン 6畳用 レビュー比較まとめ",
     "name": "東芝 RAS-V221TE ルームエアコン 6畳用 レビュー比較まとめ.md",
@@ -16954,7 +16971,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "563506c4-921a-4b2c-af5e-f9e9ff5a586e",
@@ -17009,7 +17027,7 @@
   },
   {
     "id": "2bb46eda-aedb-41d6-86d2-c5c1b9b19add",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s93bacd945eb34e15b94805d939d4b6f6",
     "title": "MINISFORUM MS-S1 MAX ミニpc レビュー比較まとめ",
     "name": "MINISFORUM MS-S1 LPDDR5X 8060S USB4 V2 10GbE LANx2 MAX ミニpc.md",
@@ -17021,7 +17039,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "1fdda51e-bc12-4144-9bc5-d537d7df30ac",
@@ -17076,7 +17095,7 @@
   },
   {
     "id": "0e07792d-0d25-4d63-ac47-ed5c1f03d3a9",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc4939b964ca7491f98923cd5c1129bdc",
     "title": "HUTT HUTT10 自動窓掃除ロボット レビュー比較まとめ",
     "name": "HUTT HUTT10 55N 窓拭きロボット 自動窓掃除ロボット レビュー比較まとめ.md",
@@ -17088,7 +17107,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "dfb9e48d-8159-49f5-b58e-3d8f75a7e42d",
@@ -17143,7 +17163,7 @@
   },
   {
     "id": "c07e4ce2-a487-4d89-aa6d-e508bede6f8a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9748cbde7b9946ddafe1fb62130d2a73",
     "title": "Dyson(ダイソン) 掃除機 コードレス Dyson V12レビュー比較まとめ",
     "name": "Dyson(ダイソン) V12 SV46 掃除機 レビュー比較まとめ.md",
@@ -17155,7 +17175,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "b5c041b6-9028-432d-8725-7029ed7ee2d3",
@@ -17210,7 +17231,7 @@
   },
   {
     "id": "647eab70-6c8a-4282-87d5-fdb97b6857a6",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0b530d11f5cb4432b038f628528bb206",
     "title": "xTool F2 Ultra レーザー彫刻機 レビュー比較まとめ",
     "name": "xTool F2 48MP Ultra レーザー彫刻機 レビュー比較まとめ.md",
@@ -17222,7 +17243,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-06T23:47:43.888Z"
   },
   {
     "id": "0555842c-7b85-4753-b274-99959f2ee2b1",
