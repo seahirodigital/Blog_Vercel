@@ -16446,7 +16446,7 @@
   },
   {
     "id": "2d8db30a-ae79-4ed1-a799-d986e005e366",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5f2c749fd67549ac8fe7055279b0ba6c",
     "title": "ルンバ（Roomba）105 Comboレビュー比較まとめ",
     "name": "アイロボット Y311260 水拭き掃除機 レビュー比較まとめ.md",
@@ -16455,10 +16455,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-07T16:00:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-07T15:25:20.586538+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6d0a3a63-0ee2-463f-96ca-49676d7cd49d",
