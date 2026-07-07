@@ -16099,7 +16099,7 @@
   },
   {
     "id": "6bcc1776-76ef-43e8-9376-456759f9cb4e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc47a7fb9cd3f46098b982cf6069221eb",
     "title": "ECOFLOW DELTA Pro3 電源レビュー比較まとめ",
     "name": "EF ECOFLOW Pro3 ポータブルエアコン レビュー比較まとめ.md",
@@ -16108,10 +16108,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-07T12:30:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-07T11:55:03.654325+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "38992f10-dcf4-4eed-a1f9-1c9fe253bae7",
