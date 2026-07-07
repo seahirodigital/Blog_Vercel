@@ -15924,7 +15924,7 @@
   },
   {
     "id": "699959d3-ac0e-4b7a-a44f-7ac066a6423d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc4939b964ca7491f98923cd5c1129bdc",
     "title": "HUTT HUTT10 自動窓掃除ロボット レビュー比較まとめ",
     "name": "HUTT HUTT10 55N 窓拭きロボット 自動窓掃除ロボット レビュー比較まとめ.md",
@@ -15933,10 +15933,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-07T10:00:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-07T09:25:31.644033+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "41afc282-6ef2-47dc-b5dc-91f881bf49f0",
