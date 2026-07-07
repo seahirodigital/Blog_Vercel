@@ -15959,7 +15959,7 @@
   },
   {
     "id": "8e6917c6-982a-4e6f-9f31-bcc3a74e67ab",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se00f1cb77b394365ac1ef8464c12d121",
     "title": "HAIGE HG-RMA1601 掃除機 レビュー比較まとめ",
     "name": "HAIGE HG-RMA1601 掃除機 レビュー比較まとめ.md",
@@ -15968,10 +15968,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-07T10:30:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-07T09:55:51.723676+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "36b6f402-909a-4827-b181-b726f13791dd",
