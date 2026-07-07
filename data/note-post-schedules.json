@@ -15213,7 +15213,7 @@
   },
   {
     "id": "e40f1ed2-f1a7-42d3-ac3f-04fcdc940c31",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7fb23e2164474f7aa9cbda4084ae26d0",
     "title": "Bowers & Wilkins Px7 S2e レビュー比較まとめ",
     "name": "バウワースアンドウィルキンス Px7 S2e PX S2ECG クラウド ワイヤレス・ヘッドフォン レビュー比較まとめ.md",
@@ -15222,10 +15222,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-07T03:00:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-07T02:25:47.479533+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "baab3611-ec6d-47ec-b4b6-6a279e95d3a9",
