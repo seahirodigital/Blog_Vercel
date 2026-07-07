@@ -15750,7 +15750,7 @@
   },
   {
     "id": "858b1780-6aa4-4948-9475-e2a553e63347",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8466a1e303274bb28362ad5c3465d044",
     "title": "TCL(ティーシーエル)  98Q7Cテレビ レビュー比較まとめ",
     "name": "TCL(ティーシーエル) 98Q7C 3000nits AirPlay2 テレビ レビュー比較まとめ.md",
@@ -15759,10 +15759,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-07T08:00:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-07T07:25:21.772884+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7e73c8ae-d43d-4f58-917a-976bd3fcc4c0",
