@@ -16203,7 +16203,7 @@
   },
   {
     "id": "e5d0d927-72a0-4d70-9ba2-e5141fed1db1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s803a8a39d1af4d649e8df3d6d28a2026",
     "title": "Anker Eufy SmartTrack Card E40 レビュー比較まとめ：カード型紛失防止トラッカーの決定版",
     "name": "20260704_0047_Ankerの超人気カードガジェットが実はめっちゃ進化してる件.md",
@@ -16212,10 +16212,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-07T13:30:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-07T12:55:38.330753+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "69a24519-2c5b-41f5-a10b-67cfe88d6439",
