@@ -16307,7 +16307,7 @@
   },
   {
     "id": "53887204-633f-489d-8d60-99b5c2812040",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4e1b75c1a53c4ce98529259482b91de4",
     "title": "HAIGE YS-SK9950K 掃除機 レビュー比較まとめ",
     "name": "HAIGE YS-SK9950K 掃除機 レビュー比較まとめ.md",
@@ -16316,10 +16316,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-07T14:30:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-07T13:55:27.445861+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6c0bcf85-18f6-4dd0-87d2-ef8ce7032161",
