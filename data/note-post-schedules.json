@@ -15022,7 +15022,7 @@
   },
   {
     "id": "59b93c7b-6e62-4b8f-b899-c9225c71b53b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s28cbdafe615e452f9ae2ebf754955084",
     "title": "Jackery 3600Plus 5kWh 50Hz60Hz 炊飯器 レビュー比較まとめ",
     "name": "Jackery 3600Plus 5kWh 50Hz60Hz 炊飯器 レビュー比較まとめ.md",
@@ -15031,10 +15031,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-07T01:00:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-07T01:21:27.327275+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b66906e7-e1d8-4d81-95e8-8ad4d0d05042",
@@ -15055,7 +15057,7 @@
   },
   {
     "id": "2ee86923-f263-4c57-913e-f989fb5abdfe",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0b530d11f5cb4432b038f628528bb206",
     "title": "xTool F2 Ultra レーザー彫刻機 レビュー比較まとめ",
     "name": "xTool F2 48MP Ultra レーザー彫刻機 レビュー比較まとめ.md",
@@ -15064,10 +15066,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-07T01:30:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-07T01:21:27.327275+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7e625e2b-3469-49a5-b66e-026882443a42",
