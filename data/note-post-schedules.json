@@ -16515,7 +16515,7 @@
   },
   {
     "id": "b932c7ae-9974-4819-a508-3a4a3bb34ca3",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s34ca09a21be3499998f31fecb7c43969",
     "title": "Shark IW4171JCPNC スティッククリーナー レビュー比較まとめ",
     "name": "Shark IW4171JCPNC IW4171JCP スティッククリーナー レビュー比較まとめ.md",
@@ -16525,8 +16525,8 @@
     "publishAt": "2026-07-07T16:30:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
     "queuedAt": "2026-07-07T15:55:16.312583+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-07T16:33:00.797739+00:00",
+    "publishedUrl": "https://editor.note.com/notes/nf249e6edf333/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
