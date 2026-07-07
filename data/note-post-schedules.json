@@ -15265,7 +15265,7 @@
   },
   {
     "id": "0f721a53-e5eb-4014-8223-c3c03524ffbc",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb31361c77e1a446294184f3c8cb3e089",
     "title": "Apple AirPods Pro3イヤホン レビュー比較まとめ",
     "name": "Apple(アップル) comimages 61kX MI8wvL イヤホン レビュー比較まとめ.md",
@@ -15274,10 +15274,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-07T03:30:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-07T02:55:23.281672+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2817b0d8-c24d-4ff6-a114-d602f1052442",
