@@ -15629,7 +15629,7 @@
   },
   {
     "id": "cc25c8f3-b149-4fa1-ab07-824ab9dd4e52",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s5271d6ab2a1f4d5db65b693c58cef7df",
     "title": "XGIMI HORIZON 20 Maxレビュー比較まとめ",
     "name": "XGIMI VGP2026 1ms HORIZON 20 レビュー比較まとめ.md",
@@ -15639,8 +15639,8 @@
     "publishAt": "2026-07-07T07:00:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
     "queuedAt": "2026-07-07T06:25:35.152794+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-07T07:03:51.968584+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na6af6ffb0e1c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
