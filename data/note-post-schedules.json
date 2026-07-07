@@ -15161,7 +15161,7 @@
   },
   {
     "id": "376dd505-3bb7-492c-8a48-b5aeb44f4a74",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s78521694c3cc42c9860c192ce59e2694",
     "title": "ゼンハイザー HD800 Sレビュー比較まとめ",
     "name": "ゼンハイザー 91-506911dpB07KZKNRP1 1kHz1Vrms HD800 Sennheiser オープン.md",
@@ -15171,8 +15171,8 @@
     "publishAt": "2026-07-07T02:30:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
     "queuedAt": "2026-07-07T01:55:10.077263+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-07T02:32:22.393210+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n6c7d33089002?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
