@@ -15889,7 +15889,7 @@
   },
   {
     "id": "c0b8ce70-99a5-47a1-8327-ff8a649d8da9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s47ad591f96fa46659a2a17c8ff3204fe",
     "title": "Jackery 5000Plus ポータブル電源 拡張バッテリー レビュー比較まとめ",
     "name": "Jackery 5000Plus ポータブル電源 拡張バッテリー レビュー比較まとめ.md",
@@ -15898,10 +15898,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-07T09:30:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-07T08:55:13.504428+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ab65894b-0594-4dea-b0f3-cc9bf9db2b0c",
