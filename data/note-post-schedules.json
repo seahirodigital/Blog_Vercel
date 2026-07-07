@@ -15854,7 +15854,7 @@
   },
   {
     "id": "b1a8bec5-744f-4bfc-aebd-1d58651e6416",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sed677df8401643d99fac3dca5bd887ce",
     "title": "EENOUR GT8000iOTE インバーター発電機レビュー比較まとめ",
     "name": "EENOUR GT8000iOTE 7kVA スポットクーラー レビュー比較まとめ.md",
@@ -15863,10 +15863,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-07T09:00:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-07T08:25:56.873880+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b70a72c0-dbd5-4c68-919e-acd9bde36403",
