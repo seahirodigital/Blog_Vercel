@@ -15473,7 +15473,7 @@
   },
   {
     "id": "25b1b769-b01f-4cff-8838-7b013e8e2f45",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s4586b9a92af14a63bbcbca87beb40469",
     "title": "BOSE(ボーズ) 75dBSPL Module02 Module03 イヤホン レビュー比較まとめ",
     "name": "BOSE(ボーズ) 75dBSPL Module02 Module03 イヤホン レビュー比較まとめ.md",
@@ -15483,8 +15483,8 @@
     "publishAt": "2026-07-07T05:30:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
     "queuedAt": "2026-07-07T04:55:48.399879+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-07T05:32:22.033752+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n1cc487a0d4f5?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
