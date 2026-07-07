@@ -14970,7 +14970,7 @@
   },
   {
     "id": "c4c827f8-d717-4ba7-96db-a6fa6d0dc590",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa757f40adb5c49b4923849f3cecffb57",
     "title": "ルンバ（Roomba） Plus 575 Comboレビュー比較まとめ",
     "name": "アイロボット R285060 ロボット掃除機 レビュー比較まとめ.md",
@@ -14980,8 +14980,8 @@
     "publishAt": "2026-07-07T00:30:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
     "queuedAt": "2026-07-07T00:12:44.160Z",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-07T00:32:21.824694+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n31f13e2ee714?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-direct",
     "dispatchAttempts": 1
