@@ -18421,7 +18421,7 @@
   },
   {
     "id": "49102e70-ed24-4d53-8da3-3998ce14e150",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se00f1cb77b394365ac1ef8464c12d121",
     "title": "HAIGE HG-RMA1601 掃除機 レビュー比較まとめ",
     "name": "HAIGE HG-RMA1601 掃除機 レビュー比較まとめ.md",
@@ -18433,11 +18433,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-07T00:12:27.117Z"
   },
   {
     "id": "30c42fd0-58fb-4380-bcf4-e419336acc32",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s34ca09a21be3499998f31fecb7c43969",
     "title": "Shark IW4171JCPNC スティッククリーナー レビュー比較まとめ",
     "name": "Shark IW4171JCPNC IW4171JCP スティッククリーナー レビュー比較まとめ.md",
@@ -18449,7 +18450,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-07T00:12:27.117Z"
   },
   {
     "id": "e018fc46-4c85-47c9-ad04-734522336a6d",
@@ -18487,7 +18489,7 @@
   },
   {
     "id": "9b4637f1-7fc0-4524-b2ed-3e1b73f44e77",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb47be87453344113925d57166228e2b9",
     "title": "ゼンハイザー 620S Sennheiser ヘッドホン レビュー比較まとめ",
     "name": "ゼンハイザー 620S Sennheiser ヘッドホン レビュー比較まとめ.md",
@@ -18499,11 +18501,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-07T00:12:27.117Z"
   },
   {
     "id": "2f27fdd6-a31f-4994-81a8-2467c35f7297",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s271f198b01794467b46d92aadf24f1b5",
     "title": "FOSSiBOT F7200 AC100V200V 66kWh ポータブル電源 大容量 レビュー比較まとめ",
     "name": "FOSSiBOT F7200 AC100V200V 66kWh ポータブル電源 大容量 レビュー比較まとめ.md",
@@ -18515,11 +18518,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-07T00:12:27.117Z"
   },
   {
     "id": "1f350751-8980-4417-a7a6-13ab19b76102",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s28cbdafe615e452f9ae2ebf754955084",
     "title": "Jackery 3600Plus 5kWh 50Hz60Hz 炊飯器 レビュー比較まとめ",
     "name": "Jackery 3600Plus 5kWh 50Hz60Hz 炊飯器 レビュー比較まとめ.md",
@@ -18531,11 +18535,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-07T00:12:27.117Z"
   },
   {
     "id": "93577e4f-6499-4a52-9b86-ea5f89d1adf9",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sed677df8401643d99fac3dca5bd887ce",
     "title": "EENOUR GT8000iOTE インバーター発電機レビュー比較まとめ",
     "name": "EENOUR GT8000iOTE 7kVA スポットクーラー レビュー比較まとめ.md",
@@ -18547,7 +18552,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-07T00:12:27.117Z"
   },
   {
     "id": "585fc69d-99d1-4af9-bc59-fc60c67f3adb",
@@ -18585,7 +18591,7 @@
   },
   {
     "id": "71f006be-3644-4a4f-ac20-f057e897244b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s803a8a39d1af4d649e8df3d6d28a2026",
     "title": "Anker Eufy SmartTrack Card E40 レビュー比較まとめ：カード型紛失防止トラッカーの決定版",
     "name": "20260704_0047_Ankerの超人気カードガジェットが実はめっちゃ進化してる件.md",
@@ -18597,11 +18603,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-07T00:12:27.117Z"
   },
   {
     "id": "a7707517-bced-434c-85dd-e80b904b5404",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s28cbdafe615e452f9ae2ebf754955084",
     "title": "Jackery 3600Plus 5kWh 50Hz60Hz 炊飯器 レビュー比較まとめ",
     "name": "Jackery 3600Plus 5kWh 50Hz60Hz 炊飯器 レビュー比較まとめ.md",
@@ -18613,11 +18620,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-07T00:12:27.117Z"
   },
   {
     "id": "b536f3e1-5b0b-4f50-91c4-e86d97dcdc73",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s93bacd945eb34e15b94805d939d4b6f6",
     "title": "MINISFORUM MS-S1 MAX ミニpc レビュー比較まとめ",
     "name": "MINISFORUM MS-S1 LPDDR5X 8060S USB4 V2 10GbE LANx2 MAX ミニpc.md",
@@ -18629,11 +18637,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-07T00:12:27.117Z"
   },
   {
     "id": "7f462df4-600a-43c7-9250-d4baf23ac756",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4e1b75c1a53c4ce98529259482b91de4",
     "title": "HAIGE YS-SK9950K 掃除機 レビュー比較まとめ",
     "name": "HAIGE YS-SK9950K 掃除機 レビュー比較まとめ.md",
@@ -18645,7 +18654,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-07T00:12:27.117Z"
   },
   {
     "id": "99893517-dee5-43aa-a805-6a6e58e408a3",
@@ -18683,7 +18693,7 @@
   },
   {
     "id": "ab9a80b4-3639-4d54-81c6-45205b76a6a9",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4e1b75c1a53c4ce98529259482b91de4",
     "title": "HAIGE YS-SK9950K 掃除機 レビュー比較まとめ",
     "name": "HAIGE YS-SK9950K 掃除機 レビュー比較まとめ.md",
@@ -18695,11 +18705,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-07T00:12:27.117Z"
   },
   {
     "id": "42071d04-2121-444a-a309-a48e20c911a4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbaab0f99e9064ce29568f222e5a30f28",
     "title": "マウスコンピューター DGI7A7XB83SJW116AZ mouse ゲーミングPC レビュー比較まとめ",
     "name": "マウスコンピューター DGI7A7XB83SJW116AZ mouse ゲーミングPC レビュー比較まとめ.md",
@@ -18711,11 +18722,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-07T00:12:27.117Z"
   },
   {
     "id": "6d7a9c87-2ca3-4b35-993b-ef111d755c6a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2fcc71dea65e4aafbf35a554a71f88e2",
     "title": "HAIGE HG-RCGC501-2 掃除機 レビュー比較まとめ",
     "name": "HAIGE 30-120mm HG-RCGC501-2 掃除機 レビュー比較まとめ.md",
@@ -18727,11 +18739,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-07T00:12:27.117Z"
   },
   {
     "id": "07a3bf71-d48d-4731-b240-3b95142fcb2b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scf26c6f8785846049d1cb8901960e709",
     "title": "JBL TOUR PRO3 イヤホン レビュー比較まとめ",
     "name": "JBL JBLTOURPRO3GRN イヤホン レビュー比較まとめ.md",
@@ -18743,7 +18756,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-07T00:12:27.117Z"
   },
   {
     "id": "6f52897f-6f6f-452e-b714-d57b3585ee7f",
