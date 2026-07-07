@@ -15681,7 +15681,7 @@
   },
   {
     "id": "8e7e830d-5c99-4587-8c1b-2566067a7b04",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9748cbde7b9946ddafe1fb62130d2a73",
     "title": "Dyson(ダイソン) 掃除機 コードレス Dyson V12レビュー比較まとめ",
     "name": "Dyson(ダイソン) V12 SV46 掃除機 レビュー比較まとめ.md",
@@ -15690,10 +15690,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-07T07:30:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-07T06:55:04.360392+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fbc7bf9d-c8e3-49ae-9e83-285f22eb56a2",
