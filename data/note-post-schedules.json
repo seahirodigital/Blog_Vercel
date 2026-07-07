@@ -16064,7 +16064,7 @@
   },
   {
     "id": "ef66fb9c-4a64-4b1f-b7fd-e5c2d20b2092",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb47be87453344113925d57166228e2b9",
     "title": "ゼンハイザー 620S Sennheiser ヘッドホン レビュー比較まとめ",
     "name": "ゼンハイザー 620S Sennheiser ヘッドホン レビュー比較まとめ.md",
@@ -16073,10 +16073,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-07T12:00:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-07T11:25:46.780925+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9fbc5540-59f3-4fb2-973f-f9b8a0c0d3fb",
