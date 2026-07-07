@@ -15577,7 +15577,7 @@
   },
   {
     "id": "99d705f3-1107-411f-acae-54a1e9c60123",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2fcc71dea65e4aafbf35a554a71f88e2",
     "title": "HAIGE HG-RCGC501-2 掃除機 レビュー比較まとめ",
     "name": "HAIGE 30-120mm HG-RCGC501-2 掃除機 レビュー比較まとめ.md",
@@ -15587,8 +15587,8 @@
     "publishAt": "2026-07-07T06:30:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
     "queuedAt": "2026-07-07T05:55:58.436405+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-07T06:32:29.078629+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ne63b7abe37b0?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
