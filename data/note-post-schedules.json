@@ -16550,7 +16550,7 @@
   },
   {
     "id": "a55f122c-26d5-45e6-8fa3-b53be1c836cb",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s97ed1ec924184d20b00f0ce64a966ba4",
     "title": "Sonos Ace レビュー比較まとめ",
     "name": "Sonos VGP2026 サウンドバー レビュー比較まとめ.md",
@@ -16559,10 +16559,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-07T17:00:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-07T16:25:10.157432+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7535506d-4b15-4f28-a293-50db1e97f9e1",
