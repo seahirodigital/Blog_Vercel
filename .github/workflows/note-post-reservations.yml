@@ -5,6 +5,11 @@ name: Note 公開投稿 予約監視セッション
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '25 0 7 7 *'
+    - cron: '25 5 7 7 *'
+    - cron: '25 10 7 7 *'
+    - cron: '25 15 7 7 *'
 
 jobs:
   dispatch-reserved-posts:
