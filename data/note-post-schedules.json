@@ -15057,7 +15057,7 @@
   },
   {
     "id": "2ee86923-f263-4c57-913e-f989fb5abdfe",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s0b530d11f5cb4432b038f628528bb206",
     "title": "xTool F2 Ultra レーザー彫刻機 レビュー比較まとめ",
     "name": "xTool F2 48MP Ultra レーザー彫刻機 レビュー比較まとめ.md",
@@ -15067,8 +15067,8 @@
     "publishAt": "2026-07-07T01:30:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
     "queuedAt": "2026-07-07T01:21:27.327275+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-07T01:32:25.132979+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n8a9ae0816ccb?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
