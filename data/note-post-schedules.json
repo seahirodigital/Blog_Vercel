@@ -15317,7 +15317,7 @@
   },
   {
     "id": "d0ed0291-8a33-4a98-a0c0-de7b57af2198",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfdedd32d1cab42ff9784ce4ef7a2047d",
     "title": "ゼンハイザー 660S2 HDレビュー比較まとめ",
     "name": "ゼンハイザー 660S2 HD Headphone レビュー比較まとめ.md",
@@ -15326,10 +15326,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-07T04:00:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-07T03:25:59.099833+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bfc31b45-71e0-49ab-937d-543da3441763",
