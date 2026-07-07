@@ -16342,7 +16342,7 @@
   },
   {
     "id": "248da9c9-bdcc-4ce0-baae-12a47b1c7139",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!se0c7c64c6b9f4de4b3f95c1d4e6e4ca3",
     "title": "Bowers & Wilkins Px8 レビュー比較まとめ",
     "name": "バウワースアンドウィルキンス Px8 PX8RB ロイヤル・バーガンディ ワイヤレス・ヘッドフォン レビュー比較まとめ.md",
@@ -16352,8 +16352,8 @@
     "publishAt": "2026-07-07T15:00:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
     "queuedAt": "2026-07-07T14:25:29.031900+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-07T15:02:29.772955+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf641a9de5c0d?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
