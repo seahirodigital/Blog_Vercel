@@ -15369,7 +15369,7 @@
   },
   {
     "id": "7089c1ba-0be3-4415-96a5-fba36a011d10",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s808dd77f200645ee9fbce29e5c204c49",
     "title": "Dyson(ダイソン) 掃除機 コードレス Dyson Micro Plus (SV33 FF PL AM) レビュー比較まとめ",
     "name": "Dyson SV33 スティッククリーナー レビュー比較まとめ.md",
@@ -15378,10 +15378,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-07T04:30:00.000Z",
     "createdAt": "2026-07-07T00:12:44.159Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-07T03:55:34.389812+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "54026da2-de57-49b7-9664-66bb4244e315",
