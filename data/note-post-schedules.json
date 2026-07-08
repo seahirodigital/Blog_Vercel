@@ -17406,7 +17406,7 @@
   },
   {
     "id": "c7c9a96d-2be9-483b-8746-ae244a35cbad",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3736e13294e747fb92284219e686dffc",
     "title": "roborock Saros20 ロボット掃除機 レビュー比較まとめ",
     "name": "roborock Saros20 ロボット掃除機 レビュー比較まとめ.md",
@@ -17416,8 +17416,8 @@
     "publishAt": "2026-07-08T02:00:00.000Z",
     "createdAt": "2026-07-08T01:41:32.038Z",
     "queuedAt": "2026-07-08T01:41:32.039Z",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-08T02:02:31.201525+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ncf9338eaa703?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-direct",
     "dispatchAttempts": 1
