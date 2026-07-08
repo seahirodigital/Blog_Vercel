@@ -22869,7 +22869,7 @@
   },
   {
     "id": "8a97b97e-30ed-4745-9d6c-52ee0f21b4f6",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3736e13294e747fb92284219e686dffc",
     "title": "roborock Saros20 ロボット掃除機 レビュー比較まとめ",
     "name": "roborock Saros20 ロボット掃除機 レビュー比較まとめ.md",
@@ -22881,11 +22881,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:42:25.906Z"
   },
   {
     "id": "a70930be-2619-4b05-8740-61f9a7f8618e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6c7b00bdf1b14042bf8a860c101048e7",
     "title": "CYCPLUS T7 スマートバイク レビュー比較まとめ",
     "name": "CYCPLUS T7 スマートバイク レビュー比較まとめ.md",
@@ -22897,11 +22898,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:42:25.906Z"
   },
   {
     "id": "12ee5c81-8bf0-4abe-a30e-01ebc4c5c3af",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4fc4ce56bf324987984b92df41a2f2e4",
     "title": "サムスンサムスン Galaxy Tab S10 Lite レビュー比較まとめ",
     "name": "Galaxy S10 SM-X400NZAAXJP Samsung Tab レビュー比較まとめ.md",
@@ -22913,11 +22915,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:42:25.906Z"
   },
   {
     "id": "1ec38dc8-bf0d-4429-b01e-dc8024581f66",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa4d5f8c47f2e49b280556946344e49f7",
     "title": "ヤーマン YJSA0B フェイススチーマーレビュー比較まとめ",
     "name": "ヤーマン YJSA0B メンズシェーバー レビュー比較まとめ.md",
@@ -22929,6 +22932,7 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:42:25.906Z"
   }
 ]
