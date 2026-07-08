@@ -17526,7 +17526,7 @@
   },
   {
     "id": "ba92b74d-3a5e-4f78-8027-1eb0451476fc",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s91617d25ab0f4b0c8823d71a40c0d8e4",
     "title": "Dyson Supersonic ヘアドライヤー レビュー比較まとめ",
     "name": "Dyson HD08 ヘアドライヤー レビュー比較まとめ.md",
@@ -17535,10 +17535,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-08T02:30:00.000Z",
     "createdAt": "2026-07-08T01:41:32.038Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-08T04:53:33.622991+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c1e60692-dde3-4289-8dea-70f6f3ad9f50",
@@ -17610,7 +17612,7 @@
   },
   {
     "id": "da59dd24-57ae-4b73-a44e-fdcce6c57fe8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2f73566f12b14001834dbd2088141ec2",
     "title": "レグザ 55Z770R テレビ レビュー比較まとめ",
     "name": "レグザ 55Z770R テレビ レビュー比較まとめ.md",
@@ -17619,10 +17621,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-08T03:00:00.000Z",
     "createdAt": "2026-07-08T01:41:32.038Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-08T04:53:33.622991+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "14d3551d-de9c-4250-8708-3d0fd347917e",
@@ -17728,7 +17732,7 @@
   },
   {
     "id": "779fa5e0-8ad0-43c6-91f2-7ff1dc1e0166",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0b49b6f603bc451996d7e43281323ea9",
     "title": "Samsung Galaxy S26 Ultra Ultra レビュー比較まとめ",
     "name": "Galaxy S26 SM-S948QZWESJP Samsung Ultra レビュー比較まとめ.md",
@@ -17737,10 +17741,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-08T03:30:00.000Z",
     "createdAt": "2026-07-08T01:41:32.038Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-08T04:53:33.622991+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7e5c687f-8d68-448f-a073-9bb90beffdf4",
@@ -17812,7 +17818,7 @@
   },
   {
     "id": "4fad557e-e3f5-4917-a173-3b4bb6653e80",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc35e3965bc7c4976b9736071a90d966a",
     "title": "CIOハンディファン レビュー比較まとめ",
     "name": "CIO 8B-Type-CdpB0H398W4RB NovaSafety2 Qi2 扇風機 レビュー比較まとめ.md",
@@ -17821,10 +17827,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-08T04:00:00.000Z",
     "createdAt": "2026-07-08T01:41:32.038Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-08T04:53:33.622991+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0ae6beca-b763-4652-87d2-040fdcff28d1",
@@ -17930,7 +17938,7 @@
   },
   {
     "id": "caa433d5-e02d-46bc-a50e-9baa89351056",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbc099448a55743999bd9094f5d1024d0",
     "title": "HAIGE HG-MKWR37T 掃除機 レビュー比較まとめ",
     "name": "HAIGE HG-MKWR37T 掃除機 レビュー比較まとめ.md",
@@ -17939,10 +17947,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-08T04:30:00.000Z",
     "createdAt": "2026-07-08T01:41:32.038Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-08T04:53:33.622991+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "013f2917-70d7-4fdb-9831-bc68cdeb0350",
@@ -18014,7 +18024,7 @@
   },
   {
     "id": "f3ac03dd-0701-4eb2-8e9f-0c7a13f80154",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9c10a00f1f15473fa3a3223330befd12",
     "title": "Jackery ポータブル電源 2000 Plusレビュー比較まとめ",
     "name": "Jackery 50Hz60Hz ポータブル電源 2000 レビュー比較まとめ.md",
@@ -18023,10 +18033,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-08T05:00:00.000Z",
     "createdAt": "2026-07-08T01:41:32.038Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-08T04:53:33.622991+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0b73131f-431b-4b9d-8611-50c484e62b16",
