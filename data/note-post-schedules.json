@@ -19054,7 +19054,7 @@
   },
   {
     "id": "62f0bb03-f886-46de-bf30-e1eb737ed070",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa4d5f8c47f2e49b280556946344e49f7",
     "title": "ヤーマン YJSA0B フェイススチーマーレビュー比較まとめ",
     "name": "ヤーマン YJSA0B メンズシェーバー レビュー比較まとめ.md",
@@ -19064,8 +19064,8 @@
     "publishAt": "2026-07-08T10:00:00.000Z",
     "createdAt": "2026-07-08T01:41:32.038Z",
     "queuedAt": "2026-07-08T09:25:58.023038+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-08T10:02:27.385071+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ne6f2452f9d4d?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
