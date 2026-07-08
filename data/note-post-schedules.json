@@ -23481,7 +23481,7 @@
   },
   {
     "id": "5c72fef8-f876-4493-917e-a39e47b53b78",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0b49b6f603bc451996d7e43281323ea9",
     "title": "Samsung Galaxy S26 Ultra Ultra レビュー比較まとめ",
     "name": "Galaxy S26 SM-S948QZWESJP Samsung Ultra レビュー比較まとめ.md",
@@ -23493,11 +23493,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:42:45.031Z"
   },
   {
     "id": "b510f273-2103-42cd-94a2-58691cd9542a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scbaced6ff8904bf1a08ad1fc00e64e97",
     "title": "デロンギ リヴェリア EXAM44055G レビュー比較まとめ",
     "name": "De'Longhi(デロンギ) EXAM44055G 全自動コーヒーマシン リヴェリア レビュー比較まとめ.md",
@@ -23509,11 +23510,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:42:45.031Z"
   },
   {
     "id": "a061b22b-aeb5-4b50-a466-ea626885f66b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s23c2d0fd6b3d425db67b0712b78ea9b4",
     "title": "アイリスオーヤマ SCD-23AZP1-W スティッククリーナー レビュー比較まとめ",
     "name": "アイリスオーヤマ SCD-23AZP1-W スティッククリーナー レビュー比較まとめ.md",
@@ -23525,11 +23527,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:42:45.031Z"
   },
   {
     "id": "29288374-4e29-4678-b50b-4c018b737526",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb58004c26c6a4e7aabe39683cbf337c4",
     "title": "ルンバ(Roomba)205 DustCompactor Combo ロボット掃除機 レビュー比較まとめ",
     "name": "アイロボット L121260 ロボット掃除機 レビュー比較まとめ.md",
@@ -23541,11 +23544,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:42:45.031Z"
   },
   {
     "id": "41db40d7-28a7-47eb-8d14-ee8af5c33b4b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7b93e2677ef5430b865e82fd624b8a00",
     "title": "シャープ KN-HW16G-W 電気圧力鍋 レビュー比較まとめ",
     "name": "シャープ KN-HW16G-W 電気圧力鍋 レビュー比較まとめ.md",
@@ -23557,11 +23561,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:42:45.031Z"
   },
   {
     "id": "080a0f1f-de02-46f7-b366-9dfbd543ffbc",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s65239c3f519e4764b14ca0fd4598f2a5",
     "title": "東芝 ER-D3000A オーブンレンジ レビュー比較まとめ",
     "name": "東芝 ER-D3000A オーブンレンジ レビュー比較まとめ.md",
@@ -23573,6 +23578,7 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:42:45.031Z"
   }
 ]
