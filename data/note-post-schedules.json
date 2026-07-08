@@ -20883,7 +20883,7 @@
   },
   {
     "id": "df5a11e7-8520-4270-b154-f8a44d4bdccd",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sad91ba9bf89e4f72a6b904b472f16d50",
     "title": "東芝 GR-Y550FZ 冷蔵庫 幅68.5㎝ レビュー比較まとめ",
     "name": "東芝 GR-Y550FZ 冷蔵庫 幅68.5㎝ レビュー比較まとめ.md",
@@ -20892,10 +20892,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-08T21:00:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-08T21:39:04.235278+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a9171ea7-b54b-4b67-8905-f7d3f1279407",
@@ -20984,7 +20986,7 @@
   },
   {
     "id": "5e625e6e-46f2-4dbc-9905-776dc4e7bceb",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa4d5f8c47f2e49b280556946344e49f7",
     "title": "ヤーマン YJSA0B フェイススチーマーレビュー比較まとめ",
     "name": "ヤーマン YJSA0B メンズシェーバー レビュー比較まとめ.md",
@@ -20993,10 +20995,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-08T21:30:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-08T21:39:04.235278+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7742380b-071c-4165-bcb0-cbecc32a7dce",
@@ -21034,7 +21038,7 @@
   },
   {
     "id": "30861c40-45be-45fb-a6b5-abc49155b56e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9edab5523ee74fdb9d5910550f676edd",
     "title": "ルンバ（Roomba）Max 705 Combo ロボット掃除機 レビュー比較まとめ",
     "name": "アイロボット X185060 ロボット掃除機 レビュー比較まとめ.md",
@@ -21043,10 +21047,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-08T22:00:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-08T21:39:04.235278+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "95e7c530-d33a-46cb-8fe2-f963e9c8e895",
