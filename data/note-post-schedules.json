@@ -18024,7 +18024,7 @@
   },
   {
     "id": "f3ac03dd-0701-4eb2-8e9f-0c7a13f80154",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s9c10a00f1f15473fa3a3223330befd12",
     "title": "Jackery ポータブル電源 2000 Plusレビュー比較まとめ",
     "name": "Jackery 50Hz60Hz ポータブル電源 2000 レビュー比較まとめ.md",
@@ -18034,8 +18034,8 @@
     "publishAt": "2026-07-08T05:00:00.000Z",
     "createdAt": "2026-07-08T01:41:32.038Z",
     "queuedAt": "2026-07-08T04:53:33.622991+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-08T05:02:24.325912+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ne394d5d9dc14?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
