@@ -19775,7 +19775,7 @@
   },
   {
     "id": "5c468f9d-a92b-4e91-82eb-c7dfcdca6b20",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s78bb5dea12fb4975b35553c2dfa0dc80",
     "title": "AMOS JP-EX 家庭用全自動点数表示麻雀卓 レビュー比較まとめ",
     "name": "AMOS JP2 comimages 51APtBWXaML 家庭用全自動点数表示麻雀卓 アモス レビュー比較まとめ.md",
@@ -19785,8 +19785,8 @@
     "publishAt": "2026-07-08T13:30:00.000Z",
     "createdAt": "2026-07-08T01:41:32.038Z",
     "queuedAt": "2026-07-08T12:55:26.383816+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-08T13:32:25.925406+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n48b6fc722768?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
