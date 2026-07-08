@@ -21107,7 +21107,7 @@
   },
   {
     "id": "cd1f33fa-29cb-4841-9520-9e2ddc55d2ed",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb58004c26c6a4e7aabe39683cbf337c4",
     "title": "ルンバ(Roomba)205 DustCompactor Combo ロボット掃除機 レビュー比較まとめ",
     "name": "アイロボット L121260 ロボット掃除機 レビュー比較まとめ.md",
@@ -21116,10 +21116,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-08T22:30:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-08T21:55:16.213064+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "16645597-9148-44df-b26c-382bf344d679",
