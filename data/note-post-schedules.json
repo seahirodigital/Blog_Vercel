@@ -17732,7 +17732,7 @@
   },
   {
     "id": "779fa5e0-8ad0-43c6-91f2-7ff1dc1e0166",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s0b49b6f603bc451996d7e43281323ea9",
     "title": "Samsung Galaxy S26 Ultra Ultra レビュー比較まとめ",
     "name": "Galaxy S26 SM-S948QZWESJP Samsung Ultra レビュー比較まとめ.md",
@@ -17742,8 +17742,8 @@
     "publishAt": "2026-07-08T03:30:00.000Z",
     "createdAt": "2026-07-08T01:41:32.038Z",
     "queuedAt": "2026-07-08T04:53:33.622991+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-08T04:56:12.637121+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n19016c615c38?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
