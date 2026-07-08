@@ -19521,7 +19521,7 @@
   },
   {
     "id": "4921f82b-c330-445b-91e1-b318842e5c90",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf8aec9ba55994e9ca92ef736155c0ab5",
     "title": "HAIGE HG-SK9950 掃除機 レビュー比較まとめ",
     "name": "HAIGE HG-SK9950 掃除機 レビュー比較まとめ.md",
@@ -19533,7 +19533,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:40:00.777Z"
   },
   {
     "id": "e018fc46-4c85-47c9-ad04-734522336a6d",
@@ -19605,7 +19606,7 @@
   },
   {
     "id": "98088e61-6e19-422c-9975-dae22011db3c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9c10a00f1f15473fa3a3223330befd12",
     "title": "Jackery ポータブル電源 2000 Plusレビュー比較まとめ",
     "name": "Jackery 50Hz60Hz ポータブル電源 2000 レビュー比較まとめ.md",
@@ -19617,7 +19618,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:40:00.777Z"
   },
   {
     "id": "1f350751-8980-4417-a7a6-13ab19b76102",
@@ -19655,7 +19657,7 @@
   },
   {
     "id": "e299d399-a2c6-440d-971d-72cdb6f530d7",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc35e3965bc7c4976b9736071a90d966a",
     "title": "CIOハンディファン レビュー比較まとめ",
     "name": "CIO 8B-Type-CdpB0H398W4RB NovaSafety2 Qi2 扇風機 レビュー比較まとめ.md",
@@ -19667,7 +19669,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:40:00.777Z"
   },
   {
     "id": "585fc69d-99d1-4af9-bc59-fc60c67f3adb",
@@ -19739,7 +19742,7 @@
   },
   {
     "id": "a0bbcf31-b6ae-4c38-8213-e252a977cb0a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4fc4ce56bf324987984b92df41a2f2e4",
     "title": "サムスンサムスン Galaxy Tab S10 Lite レビュー比較まとめ",
     "name": "Galaxy S10 SM-X400NZAAXJP Samsung Tab レビュー比較まとめ.md",
@@ -19751,7 +19754,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:40:00.777Z"
   },
   {
     "id": "b536f3e1-5b0b-4f50-91c4-e86d97dcdc73",
@@ -19789,7 +19793,7 @@
   },
   {
     "id": "077c27b7-fc74-4859-bb16-9ecc95670643",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6c7b00bdf1b14042bf8a860c101048e7",
     "title": "CYCPLUS T7 スマートバイク レビュー比較まとめ",
     "name": "CYCPLUS T7 スマートバイク レビュー比較まとめ.md",
@@ -19801,7 +19805,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:40:00.777Z"
   },
   {
     "id": "99893517-dee5-43aa-a805-6a6e58e408a3",
@@ -20043,7 +20048,7 @@
   },
   {
     "id": "cb6acb1c-338b-4a1d-9eaa-c3ce68b5fe09",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s82d290c208a94dd7917200b9ddd77342",
     "title": "シャープ AX-LSX3A-T ウォーターオーブン レビュー比較まとめ",
     "name": "シャープ AX-LSX3A-T ウォーターオーブン レビュー比較まとめ.md",
@@ -20055,11 +20060,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:40:00.777Z"
   },
   {
     "id": "02b70ee5-5c4e-4a2d-a21f-0ada6b579e4e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s1073cd92003f4883a666d532312aa146",
     "title": "シャープ CV-TH150-W 除湿機 レビュー比較まとめ",
     "name": "シャープ CV-TH150-W 除湿機 レビュー比較まとめ.md",
@@ -20071,7 +20077,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:40:00.777Z"
   },
   {
     "id": "22b7bd09-f1c0-4bb5-bb21-ead60f527930",
@@ -20109,7 +20116,7 @@
   },
   {
     "id": "236c6163-75f9-4b8f-8109-69f43d9a0681",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8e766823068a4427a3e7db420af975a0",
     "title": "LaserPecker 4 レーザー彫刻機家庭用 レビュー比較まとめ",
     "name": "LaserPecker 240000mmmin 4 レーザー彫刻機家庭用 レビュー比較まとめ.md",
@@ -20121,11 +20128,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:40:00.777Z"
   },
   {
     "id": "9c1af955-d155-4ef4-bac1-f07426f9b69f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s752ce457a8c74e1298aaf78a4be6fe0e",
     "title": "Apple Watch SE3 レビュー比較まとめ",
     "name": "Apple(アップル) comimages 61aTLgZHqCL SX342 Watch SE レビュー比較まとめ.md",
@@ -20137,7 +20145,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:40:00.777Z"
   },
   {
     "id": "a9171ea7-b54b-4b67-8905-f7d3f1279407",
@@ -20175,7 +20184,7 @@
   },
   {
     "id": "a5271ddb-81aa-4223-a149-703a3c262936",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s91617d25ab0f4b0c8823d71a40c0d8e4",
     "title": "Dyson Supersonic ヘアドライヤー レビュー比較まとめ",
     "name": "Dyson HD08 ヘアドライヤー レビュー比較まとめ.md",
@@ -20187,11 +20196,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:40:00.777Z"
   },
   {
     "id": "7742380b-071c-4165-bcb0-cbecc32a7dce",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scdb1946620d841fc812e6b5c287e1d1d",
     "title": "リズム(RHYTHM) ハンディファン扇風機 レビュー比較まとめ",
     "name": "リズム 9ZF042AZ82 扇風機 レビュー比較まとめ.md",
@@ -20203,7 +20213,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:40:00.777Z"
   },
   {
     "id": "95e7c530-d33a-46cb-8fe2-f963e9c8e895",
