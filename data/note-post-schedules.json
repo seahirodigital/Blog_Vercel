@@ -22174,7 +22174,7 @@
   },
   {
     "id": "383ecaac-46b8-47d7-a12e-eccf7a8982f7",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6c7b00bdf1b14042bf8a860c101048e7",
     "title": "CYCPLUS T7 スマートバイク レビュー比較まとめ",
     "name": "CYCPLUS T7 スマートバイク レビュー比較まとめ.md",
@@ -22186,7 +22186,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:42:05.956Z"
   },
   {
     "id": "94ae6e5c-3b8a-4254-8e0d-a3b74bd466c0",
@@ -22207,7 +22208,7 @@
   },
   {
     "id": "dc3e5eb5-5251-4d51-b86b-3dcd8cd0c443",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4fc4ce56bf324987984b92df41a2f2e4",
     "title": "サムスンサムスン Galaxy Tab S10 Lite レビュー比較まとめ",
     "name": "Galaxy S10 SM-X400NZAAXJP Samsung Tab レビュー比較まとめ.md",
@@ -22219,7 +22220,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:42:05.956Z"
   },
   {
     "id": "56ac5c7f-6891-4d92-856f-38abcaaa1187",
@@ -22240,7 +22242,7 @@
   },
   {
     "id": "64a6f4a0-f21c-403f-932d-01e632827af4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5a8f20eeec2447ca897c6be731c1a29e",
     "title": "𝐉𝐚𝐜𝐤𝐞𝐫𝐲 𝐒𝐨𝐥𝐚𝐫 𝐆𝐞𝐧𝐞𝐫𝐚𝐭𝐨𝐫 𝟑𝟎𝟎𝟎レビュー比較まとめ",
     "name": "Jackery 50Hz60Hz ポータブルエアコン レビュー比較まとめ.md",
@@ -22252,7 +22254,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:42:05.956Z"
   },
   {
     "id": "99bf12bc-a7ef-478b-8729-f53ac2448183",
@@ -22273,7 +22276,7 @@
   },
   {
     "id": "656d6a01-1737-4abb-a38f-cc91fe6f8fba",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0b49b6f603bc451996d7e43281323ea9",
     "title": "Samsung Galaxy S26 Ultra Ultra レビュー比較まとめ",
     "name": "Galaxy S26 SM-S948QZWESJP Samsung Ultra レビュー比較まとめ.md",
@@ -22285,6 +22288,7 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:42:05.956Z"
   }
 ]
