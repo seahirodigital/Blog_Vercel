@@ -18968,7 +18968,7 @@
   },
   {
     "id": "d9aadcd4-9716-4b32-aeda-9c54497a44ad",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s82d290c208a94dd7917200b9ddd77342",
     "title": "シャープ AX-LSX3A-T ウォーターオーブン レビュー比較まとめ",
     "name": "シャープ AX-LSX3A-T ウォーターオーブン レビュー比較まとめ.md",
@@ -18977,10 +18977,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-08T09:30:00.000Z",
     "createdAt": "2026-07-08T01:41:32.038Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-08T08:55:22.653147+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0e07792d-0d25-4d63-ac47-ed5c1f03d3a9",
