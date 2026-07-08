@@ -19924,7 +19924,7 @@
   },
   {
     "id": "b23df8a0-2aae-4881-b414-ebe4968abb2a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2f73566f12b14001834dbd2088141ec2",
     "title": "レグザ 55Z770R テレビ レビュー比較まとめ",
     "name": "レグザ 55Z770R テレビ レビュー比較まとめ.md",
@@ -19936,7 +19936,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:39:46.110Z"
   },
   {
     "id": "6f52897f-6f6f-452e-b714-d57b3585ee7f",
