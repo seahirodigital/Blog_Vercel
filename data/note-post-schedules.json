@@ -21246,7 +21246,7 @@
   },
   {
     "id": "623583a1-43e4-48b3-894c-2b633f8a5bed",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s00cbd3a4c45a4718b86681513ed9f817",
     "title": "Samsung Galaxy A11+レビュー比較まとめ",
     "name": "Galaxy A11 SM-X230NZAAXJP Samsung Tab レビュー比較まとめ.md",
@@ -21255,10 +21255,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-09T00:00:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-08T23:25:06.071046+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "104bd0f3-568c-46c2-beae-8be33072d50c",
