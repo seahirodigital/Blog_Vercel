@@ -24127,7 +24127,7 @@
   },
   {
     "id": "eab9e3fb-3bca-4601-8dbd-563a66604860",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7b93e2677ef5430b865e82fd624b8a00",
     "title": "シャープ KN-HW16G-W 電気圧力鍋 レビュー比較まとめ",
     "name": "シャープ KN-HW16G-W 電気圧力鍋 レビュー比較まとめ.md",
@@ -24139,11 +24139,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:43:00.278Z"
   },
   {
     "id": "aaf6d66d-35e6-47a2-adec-cc1e8d972de6",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf8aec9ba55994e9ca92ef736155c0ab5",
     "title": "HAIGE HG-SK9950 掃除機 レビュー比較まとめ",
     "name": "HAIGE HG-SK9950 掃除機 レビュー比較まとめ.md",
@@ -24155,11 +24156,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:43:00.278Z"
   },
   {
     "id": "8604aa33-9838-49fe-8c9b-7288d28b59c4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbe501442e39f47dc83f111b5d6af8563",
     "title": "Dabbsson 3500 ポータブル電源 レビュー比較まとめ",
     "name": "Dabbsson 15ms 50Hz60Hz DBS3500 ポータブル電源 レビュー比較まとめ.md",
@@ -24171,11 +24173,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:43:00.278Z"
   },
   {
     "id": "24dd6ea5-ca70-4dc9-bcf1-eb77da80f8ac",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s1073cd92003f4883a666d532312aa146",
     "title": "シャープ CV-TH150-W 除湿機 レビュー比較まとめ",
     "name": "シャープ CV-TH150-W 除湿機 レビュー比較まとめ.md",
@@ -24187,11 +24190,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:43:00.278Z"
   },
   {
     "id": "d9759dfe-8599-49ff-9518-dae865a2f95d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2f73566f12b14001834dbd2088141ec2",
     "title": "レグザ 55Z770R テレビ レビュー比較まとめ",
     "name": "レグザ 55Z770R テレビ レビュー比較まとめ.md",
@@ -24203,11 +24207,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:43:00.278Z"
   },
   {
     "id": "715a916e-d215-4b68-97c0-99bbc7e7506a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3361f7698a6a4c5f83da136f05bc0a62",
     "title": "LG 16Z90U-GU88J gram Pro レビュー比較まとめ",
     "name": "LG 16Z90U-GU88J gram Pro レビュー比較まとめ.md",
@@ -24219,6 +24224,7 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:43:00.278Z"
   }
 ]
