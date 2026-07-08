@@ -19873,7 +19873,7 @@
   },
   {
     "id": "e5a08ee2-aebb-4bb4-8b79-bfb7fdf8f939",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7b93e2677ef5430b865e82fd624b8a00",
     "title": "シャープ KN-HW16G-W 電気圧力鍋 レビュー比較まとめ",
     "name": "シャープ KN-HW16G-W 電気圧力鍋 レビュー比較まとめ.md",
@@ -19885,7 +19885,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-08T01:39:42.179Z"
   },
   {
     "id": "6d7a9c87-2ca3-4b35-993b-ef111d755c6a",
