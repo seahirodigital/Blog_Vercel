@@ -19655,7 +19655,7 @@
   },
   {
     "id": "e4324f7d-b777-468c-9a19-6ef4d0497370",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6c7b00bdf1b14042bf8a860c101048e7",
     "title": "CYCPLUS T7 スマートバイク レビュー比較まとめ",
     "name": "CYCPLUS T7 スマートバイク レビュー比較まとめ.md",
@@ -19664,10 +19664,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-08T13:00:00.000Z",
     "createdAt": "2026-07-08T01:41:32.038Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-08T12:25:49.110843+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "59dbaf09-0a87-43ba-a587-7d35330da340",
