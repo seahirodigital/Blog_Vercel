@@ -18848,7 +18848,7 @@
   },
   {
     "id": "35e78356-6cb2-4154-8441-6ea4aaf0e274",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4fc4ce56bf324987984b92df41a2f2e4",
     "title": "サムスンサムスン Galaxy Tab S10 Lite レビュー比較まとめ",
     "name": "Galaxy S10 SM-X400NZAAXJP Samsung Tab レビュー比較まとめ.md",
@@ -18857,10 +18857,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-08T09:00:00.000Z",
     "createdAt": "2026-07-08T01:41:32.038Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-08T08:25:48.146144+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1fdda51e-bc12-4144-9bc5-d537d7df30ac",
