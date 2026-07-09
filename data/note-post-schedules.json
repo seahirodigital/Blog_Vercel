@@ -22191,7 +22191,7 @@
   },
   {
     "id": "5d4791ea-cbf3-477f-8ad9-5e7398021263",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s19060ab4fcde4c91b750bcd34245560c",
     "title": "ECOVACS T50 OMNI ロボット掃除機 レビュー比較まとめ",
     "name": "ECOVACS T50 OMNI ロボット掃除機 レビュー比較まとめ.md",
@@ -22200,10 +22200,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-09T13:30:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-09T12:55:40.718334+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1f78b6b8-11b2-44d1-aaa6-b22ac2f3ad66",
