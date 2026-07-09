@@ -22415,7 +22415,7 @@
   },
   {
     "id": "ab2226c6-23af-459b-8e24-2a4aa3410114",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb970d73140ea4c9b877db2b0cdd82670",
     "title": "マウスコンピューター ゲーミングPC レビュー比較まとめ",
     "name": "マウスコンピューター 5700X DGA7A6XB53SJW115AZ mouse ゲーミングPC レビュー比較まとめ.md",
@@ -22425,8 +22425,8 @@
     "publishAt": "2026-07-09T21:00:00.000Z",
     "createdAt": "2026-07-08T01:42:15.092Z",
     "queuedAt": "2026-07-09T20:47:20.536371+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-09T21:02:23.027159+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n6c551a01aebf?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
