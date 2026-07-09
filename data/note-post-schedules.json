@@ -21526,7 +21526,7 @@
   },
   {
     "id": "914964df-5743-4f80-aebe-3df9fc4f7514",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbe501442e39f47dc83f111b5d6af8563",
     "title": "Dabbsson 3500 ポータブル電源 レビュー比較まとめ",
     "name": "Dabbsson 15ms 50Hz60Hz DBS3500 ポータブル電源 レビュー比較まとめ.md",
@@ -21535,10 +21535,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-09T04:00:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-09T05:16:35.599772+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3de4e853-c499-4713-8912-c2e00394f464",
@@ -21559,7 +21561,7 @@
   },
   {
     "id": "cad01bad-7fc5-407e-9502-f1ee52ddb329",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3361f7698a6a4c5f83da136f05bc0a62",
     "title": "LG 16Z90U-GU88J gram Pro レビュー比較まとめ",
     "name": "LG 16Z90U-GU88J gram Pro レビュー比較まとめ.md",
@@ -21568,10 +21570,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-09T04:30:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-09T05:16:35.599772+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "895d0f33-37e5-47a5-b36d-bfd304cd23fb",
@@ -21592,7 +21596,7 @@
   },
   {
     "id": "51d9c8e5-ea11-43ef-8946-e81489fada86",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s752ce457a8c74e1298aaf78a4be6fe0e",
     "title": "Apple Watch SE3 レビュー比較まとめ",
     "name": "Apple(アップル) comimages 61aTLgZHqCL SX342 Watch SE レビュー比較まとめ.md",
@@ -21601,10 +21605,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-09T05:00:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-09T05:16:35.599772+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ab2e734d-d417-4880-a8ed-6c9a50eada61",
@@ -21625,7 +21631,7 @@
   },
   {
     "id": "f58da49b-1d2c-480e-adf1-0d5fd0cb1f28",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7b93e2677ef5430b865e82fd624b8a00",
     "title": "シャープ KN-HW16G-W 電気圧力鍋 レビュー比較まとめ",
     "name": "シャープ KN-HW16G-W 電気圧力鍋 レビュー比較まとめ.md",
@@ -21634,10 +21640,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-09T05:30:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-09T05:16:35.599772+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "907d2117-b569-44d5-9963-c1a74bb17ac4",
