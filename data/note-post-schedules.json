@@ -21946,7 +21946,7 @@
   },
   {
     "id": "4558111c-eef2-49f0-9410-50b9b6c7c759",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2f73566f12b14001834dbd2088141ec2",
     "title": "レグザ 55Z770R テレビ レビュー比較まとめ",
     "name": "レグザ 55Z770R テレビ レビュー比較まとめ.md",
@@ -21956,8 +21956,8 @@
     "publishAt": "2026-07-09T10:00:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
     "queuedAt": "2026-07-09T10:55:54.467503+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-09T10:58:28.385529+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7b6aaf85b5f7?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
