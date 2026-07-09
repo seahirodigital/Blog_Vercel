@@ -21456,7 +21456,7 @@
   },
   {
     "id": "8838fad7-c39b-4f77-a320-c3409f5c178b",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!scdb1946620d841fc812e6b5c287e1d1d",
     "title": "リズム(RHYTHM) ハンディファン扇風機 レビュー比較まとめ",
     "name": "リズム 9ZF042AZ82 扇風機 レビュー比較まとめ.md",
@@ -21466,8 +21466,8 @@
     "publishAt": "2026-07-09T03:00:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
     "queuedAt": "2026-07-09T02:25:47.847708+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-09T03:02:25.992841+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n9f7c0a1789da?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
