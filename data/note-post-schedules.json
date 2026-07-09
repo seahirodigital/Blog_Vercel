@@ -22016,7 +22016,7 @@
   },
   {
     "id": "e3501922-075a-4070-8127-a8057bf4a997",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s91617d25ab0f4b0c8823d71a40c0d8e4",
     "title": "Dyson Supersonic ヘアドライヤー レビュー比較まとめ",
     "name": "Dyson HD08 ヘアドライヤー レビュー比較まとめ.md",
@@ -22025,10 +22025,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-09T11:00:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-09T10:25:16.548459+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e09556aa-b0b1-4ae0-8b74-c2d24c894061",
