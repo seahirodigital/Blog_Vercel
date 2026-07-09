@@ -22086,7 +22086,7 @@
   },
   {
     "id": "e2d829de-3eee-4621-86f1-271d98a99193",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s510556e6c18642d6b32f7430499f9441",
     "title": "Galaxy Fold7 Sレビュー比較まとめ",
     "name": "Galaxy Fold7 SM-F966QDBFSJP Samsung Z レビュー比較まとめ.md",
@@ -22096,8 +22096,8 @@
     "publishAt": "2026-07-09T12:00:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
     "queuedAt": "2026-07-09T11:25:21.902084+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-09T12:02:22.636352+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n952e5d81f348?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
