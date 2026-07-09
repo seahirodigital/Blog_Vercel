@@ -22156,7 +22156,7 @@
   },
   {
     "id": "d0815386-2810-4f87-ac00-b9ef7c8f395a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!scbaced6ff8904bf1a08ad1fc00e64e97",
     "title": "デロンギ リヴェリア EXAM44055G レビュー比較まとめ",
     "name": "De'Longhi(デロンギ) EXAM44055G 全自動コーヒーマシン リヴェリア レビュー比較まとめ.md",
@@ -22165,10 +22165,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-09T13:00:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-09T12:25:14.247938+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3843c6f2-16b5-448e-8e9f-bae447141672",
