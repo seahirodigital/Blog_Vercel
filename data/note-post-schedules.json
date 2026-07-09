@@ -22523,7 +22523,7 @@
   },
   {
     "id": "30b8e7d0-8b11-4c8e-97cb-d19acde99272",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf8aec9ba55994e9ca92ef736155c0ab5",
     "title": "HAIGE HG-SK9950 掃除機 レビュー比較まとめ",
     "name": "HAIGE HG-SK9950 掃除機 レビュー比較まとめ.md",
@@ -22532,10 +22532,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T00:00:00.000Z",
     "createdAt": "2026-07-08T01:42:15.092Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-09T23:25:44.649389+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "51e1cdc6-8b53-4c3c-8e27-7bc91dfd2ba1",
