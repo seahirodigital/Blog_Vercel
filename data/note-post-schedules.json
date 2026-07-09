@@ -21736,7 +21736,7 @@
   },
   {
     "id": "91fbd649-e814-4a97-b23d-94b8c3ef761e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s277424af25ca4d469a27d3db839cf69e",
     "title": "EcoFlow DELTA 3 Ultra Plusポータブルエアコン レビュー比較まとめ",
     "name": "EF ECOFLOW A0 10ms 1Kwh ポータブルエアコン レビュー比較まとめ.md",
@@ -21746,8 +21746,8 @@
     "publishAt": "2026-07-09T07:00:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
     "queuedAt": "2026-07-09T06:25:52.596972+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-09T07:02:26.337461+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n88b937e5c8a7?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
