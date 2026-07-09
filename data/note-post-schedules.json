@@ -21526,7 +21526,7 @@
   },
   {
     "id": "914964df-5743-4f80-aebe-3df9fc4f7514",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sbe501442e39f47dc83f111b5d6af8563",
     "title": "Dabbsson 3500 ポータブル電源 レビュー比較まとめ",
     "name": "Dabbsson 15ms 50Hz60Hz DBS3500 ポータブル電源 レビュー比較まとめ.md",
@@ -21536,8 +21536,8 @@
     "publishAt": "2026-07-09T04:00:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
     "queuedAt": "2026-07-09T05:16:35.599772+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-09T05:19:20.177367+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf3322b03cb3b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
