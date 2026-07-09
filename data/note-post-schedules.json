@@ -21666,7 +21666,7 @@
   },
   {
     "id": "8b758c94-d6dd-4056-92f6-1cd5a41e9bdd",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sbc099448a55743999bd9094f5d1024d0",
     "title": "HAIGE HG-MKWR37T 掃除機 レビュー比較まとめ",
     "name": "HAIGE HG-MKWR37T 掃除機 レビュー比較まとめ.md",
@@ -21676,8 +21676,8 @@
     "publishAt": "2026-07-09T06:00:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
     "queuedAt": "2026-07-09T05:25:50.204301+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-09T06:02:44.102682+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7b70a2580cdf?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
