@@ -21351,7 +21351,7 @@
   },
   {
     "id": "6c60f962-ca75-43c1-9106-0005b74ac9f0",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa174bde623634d3f8617ad75e82856a9",
     "title": "EcoFlow WAVE 3 ポータブルエアコン レビュー比較まとめ",
     "name": "EF ECOFLOW comimages 61-sGmasF0L SX342 ポータブルエアコン レビュー比較まとめ.md",
@@ -21361,8 +21361,8 @@
     "publishAt": "2026-07-09T01:30:00.000Z",
     "createdAt": "2026-07-08T01:41:56.093Z",
     "queuedAt": "2026-07-09T00:55:57.378880+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-09T01:32:31.850859+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n51e832354b7d?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
