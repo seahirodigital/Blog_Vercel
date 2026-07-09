@@ -22451,7 +22451,7 @@
   },
   {
     "id": "1052daee-b4b9-4082-a4d7-2e96b3c899e2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s65239c3f519e4764b14ca0fd4598f2a5",
     "title": "東芝 ER-D3000A オーブンレンジ レビュー比較まとめ",
     "name": "東芝 ER-D3000A オーブンレンジ レビュー比較まとめ.md",
@@ -22460,10 +22460,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-09T22:00:00.000Z",
     "createdAt": "2026-07-08T01:42:15.092Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-09T21:25:05.603588+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "99e833f2-675c-4b27-8325-90ede00665b8",
