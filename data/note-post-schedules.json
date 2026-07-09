@@ -22487,7 +22487,7 @@
   },
   {
     "id": "9394aed6-c278-4c4a-a578-538da78095fa",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s848e0e2f22bd44e1b11526e2b0e5495d",
     "title": "Sony WF-G700Nイヤホン レビュー比較まとめ",
     "name": "Sony WF-G700N PS5 イヤホン レビュー比較まとめ.md",
@@ -22496,10 +22496,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-09T23:00:00.000Z",
     "createdAt": "2026-07-08T01:42:15.092Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-09T22:25:53.271023+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "08e11f0f-c46f-4037-a50b-4bb280ea1293",
