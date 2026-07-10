@@ -2854,7 +2854,7 @@
   },
   {
     "id": "fa5cb96d-be8f-4747-b610-a984b9e95d7d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se0c7c64c6b9f4de4b3f95c1d4e6e4ca3",
     "title": "バウワースアンドウィルキンス Px8 PX8RB ロイヤル・バーガンディ ワイヤレス・ヘッドフォン レビュー比較まとめ",
     "name": "バウワースアンドウィルキンス Px8 PX8RB ロイヤル・バーガンディ ワイヤレス・ヘッドフォン レビュー比較まとめ.md",
@@ -2863,10 +2863,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T23:30:00.000Z",
     "createdAt": "2026-07-10T01:56:06.704Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T22:55:45.060468+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ab2b44ae-bd90-41d5-afb7-2decaeb46726",
