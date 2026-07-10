@@ -2584,7 +2584,7 @@
   },
   {
     "id": "7d3b1120-1da4-424c-ba1d-e44685f71c56",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s400f3bb1ebdd4fa39fc05982061b6974",
     "title": "ECOVACS T80 OMNIロボット掃除機 レビュー比較まとめ",
     "name": "ECOVACS T80 18000Pa ロボット掃除機 レビュー比較まとめ.md",
@@ -2593,10 +2593,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T20:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T20:10:02.061154+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e77c704d-aa68-4d41-aa6d-cb4a1abcbaca",
