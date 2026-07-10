@@ -2206,7 +2206,7 @@
   },
   {
     "id": "fe541efa-bc2b-4f60-9ed3-d92468cfc888",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s60085b794df04026900d46d91e99d5a2",
     "title": "JBL Live Beam 4  ワイヤレスイヤホンレビュー比較まとめ",
     "name": "20260620_0253_【JBL最新作】ディスプレイが超進化！フラッグシップ級のノイキャンを搭載した「JBL LIVE BUDS 4」をご紹介！.md",
@@ -2215,10 +2215,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T13:45:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T13:10:44.315880+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f38aa145-014f-4432-b27d-1185d7a21f00",
