@@ -2782,7 +2782,7 @@
   },
   {
     "id": "c06ee8f8-7672-42e7-ba77-4dbb62f159b9",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s58853adece484c2aa6fd29ce7e0d312c",
     "title": "Anker Anker Nano Power Strip レビュー比較まとめ",
     "name": "20260705_0410_【Anker新作】デスクの配線地獄終了。机の下に隠せる最強の電源タップがキタ！.md",
@@ -2792,8 +2792,8 @@
     "publishAt": "2026-07-10T23:00:00.000Z",
     "createdAt": "2026-07-10T01:56:06.704Z",
     "queuedAt": "2026-07-10T22:25:31.799520+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T23:02:24.863019+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na8ec8cb6b63b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
