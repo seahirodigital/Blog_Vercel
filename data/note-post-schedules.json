@@ -2800,7 +2800,7 @@
   },
   {
     "id": "d895bf3c-e6e9-4c10-a17a-f4f08c0cf7fa",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s70d0b75672b14d16a942a62a158f592b",
     "title": "象印マホービン NX-AA10-BZ 炊飯器 レビュー比較まとめ",
     "name": "象印マホービン NX-AA10-BZ 炊飯器 レビュー比較まとめ.md",
@@ -2809,10 +2809,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T23:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T22:30:54.187759+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "50b020dc-bc99-423b-a3c9-b8c8e0a097c5",
