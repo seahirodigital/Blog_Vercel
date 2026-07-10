@@ -2458,7 +2458,7 @@
   },
   {
     "id": "a6eaa541-f9a3-461c-b8f9-586e7da29ff1",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s581d9152e56b46229340512b18208ef7",
     "title": "Eufy(ユーフィ) C10 ハンディクリーナー レビュー比較まとめ",
     "name": "Eufy(ユーフィ) C10 ハンディクリーナー レビュー比較まとめ.md",
@@ -2468,8 +2468,8 @@
     "publishAt": "2026-07-10T18:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-10T19:22:05.077127+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T19:24:37.543009+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n954fde7d774b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
