@@ -1518,7 +1518,7 @@
   },
   {
     "id": "e3db9dc9-1939-41db-82a3-a129cce416ec",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s8e766823068a4427a3e7db420af975a0",
     "title": "LaserPecker 4 レーザー彫刻機家庭用 レビュー比較まとめ",
     "name": "LaserPecker 240000mmmin 4 レーザー彫刻機家庭用 レビュー比較まとめ.md",
@@ -1528,8 +1528,8 @@
     "publishAt": "2026-07-10T06:45:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
     "queuedAt": "2026-07-10T06:25:07.833288+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T06:47:13.009628+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n5bc334179743/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
