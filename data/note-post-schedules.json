@@ -2278,7 +2278,7 @@
   },
   {
     "id": "2e5e31ed-ef73-4c41-b218-6d0992137666",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sef1d7a746f0b4c84b179ecd56335041b",
     "title": "出た！Insta360 Lune Ultraついに誕生／ジンバルカメラに革命起きた",
     "name": "20260616_0116_出た！Insta360 Lune Ultraついに誕生／ジンバルカメラに革命起きた.md",
@@ -2288,8 +2288,8 @@
     "publishAt": "2026-07-10T15:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-10T14:30:33.067873+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T15:07:21.378203+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nb1ffb7205530?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
