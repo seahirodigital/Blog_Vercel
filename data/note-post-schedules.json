@@ -2098,7 +2098,7 @@
   },
   {
     "id": "a7a0b104-d290-427d-b699-0d8ee9331cd9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3cf97c955ae64004a621a4a534976d86",
     "title": "Hisense HR-K350LS テレビ レビュー比較まとめ",
     "name": "Hisense HR-K350LS テレビ レビュー比較まとめ.md",
@@ -2107,10 +2107,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T13:00:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T12:25:41.997097+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "813bfa11-8630-4e06-9f99-b07345b4f9e1",
