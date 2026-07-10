@@ -2746,7 +2746,7 @@
   },
   {
     "id": "801ae404-35d9-44c1-b927-c89e585c4c8c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4586b9a92af14a63bbcbca87beb40469",
     "title": "BOSE(ボーズ) 75dBSPL Module02 Module03 イヤホン レビュー比較まとめ",
     "name": "BOSE(ボーズ) 75dBSPL Module02 Module03 イヤホン レビュー比較まとめ.md",
@@ -2755,14 +2755,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T22:45:00.000Z",
     "createdAt": "2026-07-10T01:56:06.704Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T22:11:00.428161+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fe97f0f9-8fa5-45d8-9596-65537917208d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s69c7afd8150247d9b7dd6af1406e6ef7",
     "title": "DREAME F20 水拭き掃除機 レビュー比較まとめ",
     "name": "DREAME F20 水拭き掃除機 レビュー比較まとめ.md",
@@ -2771,10 +2773,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T22:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T22:11:00.428161+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c06ee8f8-7672-42e7-ba77-4dbb62f159b9",
