@@ -2602,7 +2602,7 @@
   },
   {
     "id": "e77c704d-aa68-4d41-aa6d-cb4a1abcbaca",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s77dfc205c46241a894278b92f954ab34",
     "title": "roborock Saros10R ロボット掃除機 レビュー比較まとめ",
     "name": "roborock Saros10R ロボット掃除機 レビュー比較まとめ.md",
@@ -2611,10 +2611,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T21:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T20:30:40.869337+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e1e034e0-a418-4d6a-9971-261e3ee88127",
