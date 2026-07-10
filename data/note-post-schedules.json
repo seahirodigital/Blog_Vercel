@@ -2692,7 +2692,7 @@
   },
   {
     "id": "bdbf201d-29f0-4a6d-8f95-afc6ce34adfa",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2e8ad93dd40848459cbcc34743bf4674",
     "title": "ECOVACS エコバックス Winbot W2 窓拭きロボット レビュー比較まとめ：高所窓掃除の負担を軽減し快適な毎日へ",
     "name": "20260624_0251_危険な作業とさようなら　窓拭きロボットが便利すぎる！エコバックス Winbot W2 Omni.md",
@@ -2702,8 +2702,8 @@
     "publishAt": "2026-07-10T22:15:00.000Z",
     "createdAt": "2026-07-10T01:56:06.704Z",
     "queuedAt": "2026-07-10T21:40:06.101484+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T22:17:20.387008+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n437f06d7dc8c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
