@@ -1792,7 +1792,7 @@
   },
   {
     "id": "3b2b897e-ff94-4dc6-b6fa-951349d1bb05",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s752ce457a8c74e1298aaf78a4be6fe0e",
     "title": "Apple(アップル) comimages 61aTLgZHqCL SX342 Watch SE レビュー比較まとめ",
     "name": "Apple(アップル) comimages 61aTLgZHqCL SX342 Watch SE レビュー比較まとめ.md",
@@ -1801,16 +1801,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T10:15:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T10:12:15.925183+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
-    "queuedBy": "",
-    "dispatchAttempts": 0
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2c025875-c1d4-403a-a1d1-f2fcb4537569",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0b49b6f603bc451996d7e43281323ea9",
     "title": "Galaxy S26 SM-S948QZWESJP Samsung Ultra レビュー比較まとめ",
     "name": "Galaxy S26 SM-S948QZWESJP Samsung Ultra レビュー比較まとめ.md",
@@ -1819,14 +1819,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T10:30:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T10:12:15.925183+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "84030d9a-b920-4141-b969-cd71df5bf18c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s62c442a5f2b7406886bfb2abb1166e71",
     "title": "Sony WF-1000XM5 VGP2025 イヤホン レビュー比較まとめ",
     "name": "Sony WF-1000XM5 VGP2025 イヤホン レビュー比較まとめ.md",
@@ -1835,10 +1837,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T10:45:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T10:12:15.925183+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3ce68d8b-4005-44c5-82aa-31533c7c608c",
