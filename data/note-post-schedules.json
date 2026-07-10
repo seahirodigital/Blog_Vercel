@@ -26423,7 +26423,7 @@
   },
   {
     "id": "e7755df8-7401-4a29-bcc8-4a06afd87ab1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa174bde623634d3f8617ad75e82856a9",
     "title": "EcoFlow WAVE 3 ポータブルエアコン レビュー比較まとめ",
     "name": "EF ECOFLOW comimages 61-sGmasF0L SX342 ポータブルエアコン レビュー比較まとめ.md",
@@ -26435,11 +26435,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-10T01:52:04.620Z"
   },
   {
     "id": "53e87b4e-5096-4610-9e20-e0f8d53607cb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbc099448a55743999bd9094f5d1024d0",
     "title": "HAIGE HG-MKWR37T 掃除機 レビュー比較まとめ",
     "name": "HAIGE HG-MKWR37T 掃除機 レビュー比較まとめ.md",
@@ -26451,11 +26452,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-10T01:52:04.620Z"
   },
   {
     "id": "603b7178-4127-486c-8cd1-2cc05b1cbd9a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s89f47b86dd224b309e487a694a908a42",
     "title": "シャープ ES-X12C-TL ドラム式洗濯乾燥機 レビュー比較まとめ",
     "name": "シャープ ES-X12C-TL ドラム式洗濯乾燥機 レビュー比較まとめ.md",
@@ -26467,11 +26469,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-10T01:52:04.620Z"
   },
   {
     "id": "6461ab2e-b187-4a3b-84eb-2db5d185f649",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9c10a00f1f15473fa3a3223330befd12",
     "title": "Jackery ポータブル電源 2000 Plusレビュー比較まとめ",
     "name": "Jackery 50Hz60Hz ポータブル電源 2000 レビュー比較まとめ.md",
@@ -26483,11 +26486,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-10T01:52:04.620Z"
   },
   {
     "id": "d49a3968-e872-4303-abbd-59c3fcd5d10a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0b49b6f603bc451996d7e43281323ea9",
     "title": "Samsung Galaxy S26 Ultra Ultra レビュー比較まとめ",
     "name": "Galaxy S26 SM-S948QZWESJP Samsung Ultra レビュー比較まとめ.md",
@@ -26499,11 +26503,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-10T01:52:04.620Z"
   },
   {
     "id": "cc25592b-7531-4623-9b22-4f9f9c5d94c3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5a8f20eeec2447ca897c6be731c1a29e",
     "title": "𝐉𝐚𝐜𝐤𝐞𝐫𝐲 𝐒𝐨𝐥𝐚𝐫 𝐆𝐞𝐧𝐞𝐫𝐚𝐭𝐨𝐫 𝟑𝟎𝟎𝟎レビュー比較まとめ",
     "name": "Jackery 50Hz60Hz ポータブルエアコン レビュー比較まとめ.md",
@@ -26515,11 +26520,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-10T01:52:04.620Z"
   },
   {
     "id": "076271ad-a552-467a-8c80-ba778e994c37",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb58004c26c6a4e7aabe39683cbf337c4",
     "title": "ルンバ(Roomba)205 DustCompactor Combo ロボット掃除機 レビュー比較まとめ",
     "name": "アイロボット L121260 ロボット掃除機 レビュー比較まとめ.md",
@@ -26531,11 +26537,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-10T01:52:04.620Z"
   },
   {
     "id": "01f70a13-ce25-456a-8c75-e00ed9060c56",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0b49b6f603bc451996d7e43281323ea9",
     "title": "Samsung Galaxy S26 Ultra Ultra レビュー比較まとめ",
     "name": "Galaxy S26 SM-S948QZWESJP Samsung Ultra レビュー比較まとめ.md",
@@ -26547,6 +26554,7 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-10T01:52:04.620Z"
   }
 ]
