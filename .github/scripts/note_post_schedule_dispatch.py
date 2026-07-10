@@ -22,6 +22,9 @@ MAX_CLAIM_RETRIES = 3
 DEFAULT_QUEUE_STALE_MINUTES = 90
 DEFAULT_PRESTART_WINDOW_MINUTES = 35
 DEFAULT_LATE_GRACE_MINUTES = 720
+TRANSIENT_HTTP_STATUS_CODES = {502, 503, 504}
+MAX_HTTP_REQUEST_ATTEMPTS = 6
+
 
 
 class ScheduleConflictError(RuntimeError):
@@ -34,28 +37,44 @@ def log(message: str) -> None:
 
 def request_json(method: str, url: str, token: str, payload: dict[str, Any] | None = None, accept_404: bool = False) -> tuple[int, dict[str, Any]]:
     data = None if payload is None else json.dumps(payload).encode("utf-8")
-    req = urllib.request.Request(
-        url,
-        data=data,
-        method=method,
-        headers={
-            "Authorization": f"Bearer {token}",
-            "Accept": "application/vnd.github+json",
-            "X-GitHub-Api-Version": "2022-11-28",
-            "Content-Type": "application/json",
-        },
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=30) as response:
-            body = response.read().decode("utf-8")
-            return response.status, json.loads(body) if body else {}
-    except urllib.error.HTTPError as error:
-        body = error.read().decode("utf-8")
-        if accept_404 and error.code == 404:
-            return 404, {}
-        if error.code == 409:
-            raise ScheduleConflictError(body[:300])
-        raise RuntimeError(f"{method} {url} failed: {error.code} {body[:500]}") from error
+
+    for attempt in range(1, MAX_HTTP_REQUEST_ATTEMPTS + 1):
+        req = urllib.request.Request(
+            url,
+            data=data,
+            method=method,
+            headers={
+                "Authorization": f"Bearer {token}",
+                "Accept": "application/vnd.github+json",
+                "X-GitHub-Api-Version": "2022-11-28",
+                "Content-Type": "application/json",
+            },
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=30) as response:
+                body = response.read().decode("utf-8")
+                return response.status, json.loads(body) if body else {}
+        except urllib.error.HTTPError as error:
+            body = error.read().decode("utf-8", errors="replace")
+            if accept_404 and error.code == 404:
+                return 404, {}
+            if error.code == 409:
+                raise ScheduleConflictError(body[:300])
+            if error.code in TRANSIENT_HTTP_STATUS_CODES and attempt < MAX_HTTP_REQUEST_ATTEMPTS:
+                sleep_seconds = min(30, 2 ** attempt)
+                log(f"GitHub API ???????????????????: method={method}, status={error.code}, attempt={attempt}, sleepSeconds={sleep_seconds}")
+                time.sleep(sleep_seconds)
+                continue
+            raise RuntimeError(f"{method} {url} failed: {error.code} {body[:500]}") from error
+        except urllib.error.URLError as error:
+            if attempt < MAX_HTTP_REQUEST_ATTEMPTS:
+                sleep_seconds = min(30, 2 ** attempt)
+                log(f"GitHub API ??????????????????: method={method}, attempt={attempt}, sleepSeconds={sleep_seconds}, error={error}")
+                time.sleep(sleep_seconds)
+                continue
+            raise RuntimeError(f"{method} {url} failed: {error}") from error
+
+    raise RuntimeError(f"{method} {url} failed after retries")
 
 
 def parse_schedules(raw: str) -> list[dict[str, Any]]:
