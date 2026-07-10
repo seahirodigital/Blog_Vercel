@@ -2134,7 +2134,7 @@
   },
   {
     "id": "943b5d48-ec31-4fff-99a5-8362f708eae6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s277424af25ca4d469a27d3db839cf69e",
     "title": "EF ECOFLOW A0 10ms 1Kwh ポータブルエアコン レビュー比較まとめ",
     "name": "EF ECOFLOW A0 10ms 1Kwh ポータブルエアコン レビュー比較まとめ.md",
@@ -2143,10 +2143,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T13:15:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T12:40:19.479988+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8a2fbf9b-d871-46a5-b279-18cfa296785e",
