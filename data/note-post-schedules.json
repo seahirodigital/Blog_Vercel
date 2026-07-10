@@ -2314,7 +2314,7 @@
   },
   {
     "id": "744226da-f1c7-4c51-ab4b-0b18e58f0ef0",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s7c9343dff30543339105aa64af51fbee",
     "title": "Shark FA022JBRNC FA022J 扇風機 レビュー比較まとめ",
     "name": "Shark FA022JBRNC FA022J 扇風機 レビュー比較まとめ.md",
@@ -2324,8 +2324,8 @@
     "publishAt": "2026-07-10T15:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-10T15:10:23.488760+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T15:47:28.609454+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n91d7f332af1a?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
