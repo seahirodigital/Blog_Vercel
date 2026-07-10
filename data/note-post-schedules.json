@@ -2656,7 +2656,7 @@
   },
   {
     "id": "bc5b9c5c-932a-499d-893f-4661ff0d0dcf",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfc17964f19604ad29f2cfea285d67f2b",
     "title": "Beats H2 イヤホン レビュー比較まとめ",
     "name": "Beats H2 イヤホン レビュー比較まとめ.md",
@@ -2665,10 +2665,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T22:00:00.000Z",
     "createdAt": "2026-07-10T01:56:06.704Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T21:25:41.584793+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e97c68c7-3759-4e24-8914-bbb214cb2cff",
