@@ -1918,7 +1918,7 @@
   },
   {
     "id": "8f41fc82-42c1-48f0-90ce-e0b4c7622503",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3361f7698a6a4c5f83da136f05bc0a62",
     "title": "LG 16Z90U-GU88J gram Pro レビュー比較まとめ",
     "name": "LG 16Z90U-GU88J gram Pro レビュー比較まとめ.md",
@@ -1927,10 +1927,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T11:45:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T11:10:50.835251+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c4216e92-2c47-4ee8-8519-1c94bc9dad55",
