@@ -2440,7 +2440,7 @@
   },
   {
     "id": "974cd7c7-be51-4683-92a0-2d2b4244b202",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2c80dcac0db04c23bbd6be258e4039b8",
     "title": "Notta Memo AIボイスレコーダー レビュー比較まとめ",
     "name": "notta 000C comimages 61jI8KHjxhL Memo AIボイスレコーダー レビュー比較まとめ.md",
@@ -2450,8 +2450,8 @@
     "publishAt": "2026-07-10T18:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-10T17:30:23.387803+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T18:07:30.186973+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n75c12a50af1f?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
