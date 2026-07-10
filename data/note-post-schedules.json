@@ -1230,7 +1230,7 @@
   },
   {
     "id": "183ff8e9-97a7-4ae2-9237-4feac04031ee",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4fc4ce56bf324987984b92df41a2f2e4",
     "title": "Galaxy S10 SM-X400NZAAXJP Samsung Tab レビュー比較まとめ",
     "name": "Galaxy S10 SM-X400NZAAXJP Samsung Tab レビュー比較まとめ.md",
@@ -1239,14 +1239,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T02:45:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2b9e4efa-4746-447a-96d6-1e547b2eed50",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se03dc4ab338c4c3db77bf88be0a69604",
     "title": "Anker EufyCam S4 防犯カメラとEufy Security HomeBase S380 レビュー比較まとめ：最上位モデルの魅力を徹底解説",
     "name": "20260708_0443_【月額0円】配線不要で夜間もフルカラー！Anker最高峰の防犯カメラ「Eufy eufyCam S4」がAmazon プ.md",
@@ -1255,14 +1257,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T03:00:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a4dff5f9-632d-497e-a2f6-13516deb15c2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbc099448a55743999bd9094f5d1024d0",
     "title": "HAIGE HG-MKWR37T 掃除機 レビュー比較まとめ",
     "name": "HAIGE HG-MKWR37T 掃除機 レビュー比較まとめ.md",
@@ -1271,14 +1275,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T03:15:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b32d2cee-717c-4f90-bed6-61351a2b9d1c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa174bde623634d3f8617ad75e82856a9",
     "title": "EcoFlow WAVE 3 ポータブルエアコン レビュー比較まとめ",
     "name": "EF ECOFLOW comimages 61-sGmasF0L SX342 ポータブルエアコン レビュー比較まとめ.md",
@@ -1287,14 +1293,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T03:30:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "34c44815-e910-4a89-a394-9fe6a9ccdc7f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sad91ba9bf89e4f72a6b904b472f16d50",
     "title": "東芝 GR-Y550FZ 冷蔵庫 幅68.5㎝ レビュー比較まとめ",
     "name": "東芝 GR-Y550FZ 冷蔵庫 幅68.5㎝ レビュー比較まとめ.md",
@@ -1303,14 +1311,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T03:45:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4cd83a2c-643b-4e37-b541-968f0689c73e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2f71b3336cf4403689aae26bedfb2ee7",
     "title": "Revopoint 20fps MIRACO Plus 3Dスキャナー レビュー比較まとめ",
     "name": "Revopoint 20fps MIRACO Plus 3Dスキャナー レビュー比較まとめ.md",
@@ -1319,14 +1329,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T04:00:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5a435f4b-ecdc-4843-9455-b6846b54dc75",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9c10a00f1f15473fa3a3223330befd12",
     "title": "Jackery 50Hz60Hz ポータブル電源 2000 レビュー比較まとめ",
     "name": "Jackery 50Hz60Hz ポータブル電源 2000 レビュー比較まとめ.md",
@@ -1335,14 +1347,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T04:15:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4e3cf396-d29e-4a5d-84bc-53919d87744c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2f73566f12b14001834dbd2088141ec2",
     "title": "レグザ 55Z770R テレビ レビュー比較まとめ",
     "name": "レグザ 55Z770R テレビ レビュー比較まとめ.md",
@@ -1351,14 +1365,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T04:30:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e7728765-dd9d-4e06-a6c2-407ecc1a2d21",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf8aec9ba55994e9ca92ef736155c0ab5",
     "title": "HAIGE HG-SK9950 掃除機 レビュー比較まとめ",
     "name": "HAIGE HG-SK9950 掃除機 レビュー比較まとめ.md",
@@ -1367,14 +1383,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T04:45:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "216ac7b1-4d17-4f72-8574-1a3cdc733c0a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6c7b00bdf1b14042bf8a860c101048e7",
     "title": "CYCPLUS T7 スマートバイク レビュー比較まとめ",
     "name": "CYCPLUS T7 スマートバイク レビュー比較まとめ.md",
@@ -1383,14 +1401,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T05:00:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9ed8795f-eaec-4f55-8cbf-cea217c70e85",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s009e870095894ea894b0be23683acd40",
     "title": "Anker F3000 Solix Portable レビュー比較まとめ",
     "name": "Anker F3000 Solix Portable レビュー比較まとめ.md",
@@ -1399,14 +1419,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T05:15:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fb56a6ed-ac7a-4bdb-aaa9-fafa7cab84a6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9edab5523ee74fdb9d5910550f676edd",
     "title": "アイロボット X185060 ロボット掃除機 レビュー比較まとめ",
     "name": "アイロボット X185060 ロボット掃除機 レビュー比較まとめ.md",
@@ -1415,14 +1437,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T05:30:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6541abf2-f5f5-4f37-bf56-f7c4cc27b6e8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3736e13294e747fb92284219e686dffc",
     "title": "roborock Saros20 ロボット掃除機 レビュー比較まとめ",
     "name": "roborock Saros20 ロボット掃除機 レビュー比較まとめ.md",
@@ -1431,14 +1455,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T05:45:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "197e28da-6b15-4ab2-b442-e1ba31b2f8ec",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!scbaced6ff8904bf1a08ad1fc00e64e97",
     "title": "De'Longhi(デロンギ) EXAM44055G 全自動コーヒーマシン リヴェリア レビュー比較まとめ",
     "name": "De'Longhi(デロンギ) EXAM44055G 全自動コーヒーマシン リヴェリア レビュー比較まとめ.md",
@@ -1447,14 +1473,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T06:00:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "be834056-47bb-421c-8464-c654c489c63a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s084b769cbd9c495c819eb94734daa858",
     "title": "Viture Beast XRグラスレビュー比較まとめ：その真価とメリットを徹底解説",
     "name": "20260624_0248_コレなしの生活にはもう戻れない！究極の『VITURE Beast』をLuma Ultraと比べたら進化がヤバすぎた！【X.md",
@@ -1463,14 +1491,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T06:15:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2827e496-36fb-4a5c-b222-e435072bf74a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s91617d25ab0f4b0c8823d71a40c0d8e4",
     "title": "Dyson HD08 ヘアドライヤー レビュー比較まとめ",
     "name": "Dyson HD08 ヘアドライヤー レビュー比較まとめ.md",
@@ -1479,14 +1509,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T06:30:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e3db9dc9-1939-41db-82a3-a129cce416ec",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8e766823068a4427a3e7db420af975a0",
     "title": "LaserPecker 4 レーザー彫刻機家庭用 レビュー比較まとめ",
     "name": "LaserPecker 240000mmmin 4 レーザー彫刻機家庭用 レビュー比較まとめ.md",
@@ -1495,14 +1527,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T06:45:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "47ac787f-25af-4921-9b19-2ee91e343e26",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!scde03815e539419098ec872732bb777b",
     "title": "タムロン 25-200mm G2 A075S F 2.8-5.6 レビュー比較まとめ",
     "name": "タムロン 25-200mm G2 A075S F 2.8-5.6 レビュー比較まとめ.md",
@@ -1511,10 +1545,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T07:00:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c40d47fb-420e-4c66-837f-cbd2159fa201",
