@@ -2926,7 +2926,7 @@
   },
   {
     "id": "ceceec28-b25e-4064-9abd-eeec92f2472e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9e2d7056eb504f658fa9a318278ac3fd",
     "title": "Anker Soundcore Liberty 5 Pro レビュー比較まとめ",
     "name": "Soundcore 5Pro 4NC 4Pro イヤホン レビュー比較まとめ.md",
@@ -2935,10 +2935,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T00:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T23:30:31.821986+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b45473af-b6c2-4c18-ba8b-0a532239b1ee",
