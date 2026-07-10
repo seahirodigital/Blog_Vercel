@@ -211,17 +211,19 @@ function itemTrackingTime(item) {
   return Number.isNaN(modifiedTime) ? 0 : modifiedTime;
 }
 
-function shouldTrackArticle(item) {
+function shouldTrackArticle(item, options = {}) {
+  if (options.includeAll) return true;
   const time = itemTrackingTime(item);
   return !time || time >= lookbackCutoffTime();
 }
 
-function shouldSkipFolderPath(path = '') {
+function shouldSkipFolderPath(path = '', options = {}) {
   const normalized = String(path || '').toLowerCase();
   if (SKIPPED_FOLDER_KEYWORDS.some((keyword) => normalized.includes(keyword.toLowerCase()))) {
     return true;
   }
 
+  if (options.includeAll) return false;
   const folderDate = parseDateFromText(normalized);
   return Boolean(folderDate && folderDate < lookbackCutoffTime());
 }
@@ -303,10 +305,10 @@ async function buildShallowListing(token, items, relativePath, options = {}) {
   for (const item of items) {
     if (item.folder) {
       const nextPath = relativePath ? `${relativePath}/${item.name}` : item.name;
-      if (!shouldSkipFolderPath(nextPath)) {
+      if (!shouldSkipFolderPath(nextPath, options)) {
         folders.push(toFolder(item, relativePath));
       }
-    } else if (isMarkdownArticle(item) && shouldTrackArticle(item)) {
+    } else if (isMarkdownArticle(item) && shouldTrackArticle(item, options)) {
       articles.push(toArticle(item, relativePath));
     }
   }
@@ -314,16 +316,18 @@ async function buildShallowListing(token, items, relativePath, options = {}) {
   folders.sort((a, b) => b.name.localeCompare(a.name));
   articles.sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified));
 
+  const articleLimit = safeNumber(options.articleLimit, 0, 2000);
+  const visibleArticles = articleLimit > 0 ? articles.slice(0, articleLimit) : articles;
   const h1Limit = safeNumber(options.h1Limit, 0, 20);
   if (h1Limit > 0) {
-    for (const article of articles.slice(0, h1Limit)) {
+    for (const article of visibleArticles.slice(0, h1Limit)) {
       const meta = await fetchArticlePreviewMeta(token, article.id);
       article.h1Title = meta.h1Title;
       article.sourceType = meta.sourceType || article.sourceType;
     }
   }
 
-  return { folders, articles };
+  return { folders, articles: visibleArticles, totalArticles: articles.length, articleLimit };
 }
 
 /**
@@ -641,7 +645,7 @@ export default async function handler(req, res) {
 
     // GET: 記事一覧 or 記事内容
     if (req.method === 'GET') {
-      const { id, externalUrls, mode, folderPath, folderId, h1Limit } = req.query;
+      const { id, externalUrls, mode, folderPath, folderId, h1Limit, includeAll, articleLimit } = req.query;
       if (id) {
         const content = await getArticle(token, id);
         return res.status(200).json({ content });
@@ -652,9 +656,11 @@ export default async function handler(req, res) {
       if (requestedMode !== 'recursive' || folderPath !== undefined || folderId) {
         const targetPath = firstQueryValue(folderPath, '').trim().replace(/^\/+|\/+$/g, '');
         const limit = safeNumber(h1Limit, 0, 20);
+        const allPeriods = String(firstQueryValue(includeAll, '')).toLowerCase() === 'true';
+        const maxArticles = safeNumber(articleLimit, 0, 2000);
         const listing = folderId
-          ? await listArticlesShallowById(token, firstQueryValue(folderId), targetPath, { h1Limit: limit })
-          : await listArticlesShallow(token, targetPath ? `${folder}/${targetPath}` : folder, targetPath, { h1Limit: limit });
+          ? await listArticlesShallowById(token, firstQueryValue(folderId), targetPath, { h1Limit: limit, includeAll: allPeriods, articleLimit: maxArticles })
+          : await listArticlesShallow(token, targetPath ? `${folder}/${targetPath}` : folder, targetPath, { h1Limit: limit, includeAll: allPeriods, articleLimit: maxArticles });
 
         if (!targetPath && !folderId && externalUrls) {
           try {
@@ -686,6 +692,9 @@ export default async function handler(req, res) {
           articles: listing.articles,
           folders: listing.folders,
           lazy: true,
+          totalArticles: listing.totalArticles,
+          articleLimit: listing.articleLimit,
+          includeAll: allPeriods,
         });
       }
 
