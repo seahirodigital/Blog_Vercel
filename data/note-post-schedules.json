@@ -2242,7 +2242,7 @@
   },
   {
     "id": "05ac3507-b7ba-4e5b-ba79-6f50fa018c7a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s14f9cb1d183f45d9abeb0e88febb26ea",
     "title": "Anker 26PD C1000 C2000 扇風機 レビュー比較まとめ",
     "name": "Anker 26PD C1000 C2000 扇風機 レビュー比較まとめ.md",
@@ -2251,10 +2251,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T14:10:00.000Z",
     "createdAt": "2026-07-10T01:54:49.371Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T13:35:25.964519+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a18258ea-17f9-43dc-9874-77ca29e9b3b4",
