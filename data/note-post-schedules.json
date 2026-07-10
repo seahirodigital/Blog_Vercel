@@ -22559,7 +22559,7 @@
   },
   {
     "id": "c22b3542-fefd-4255-bd79-75613669d048",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s752ce457a8c74e1298aaf78a4be6fe0e",
     "title": "Apple Watch SE3 レビュー比較まとめ",
     "name": "Apple(アップル) comimages 61aTLgZHqCL SX342 Watch SE レビュー比較まとめ.md",
@@ -22569,8 +22569,8 @@
     "publishAt": "2026-07-10T01:00:00.000Z",
     "createdAt": "2026-07-08T01:42:15.092Z",
     "queuedAt": "2026-07-10T00:25:32.443883+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T01:02:17.730287+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf5e3f1602381?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
