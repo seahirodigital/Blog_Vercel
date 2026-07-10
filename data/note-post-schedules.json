@@ -2872,7 +2872,7 @@
   },
   {
     "id": "ab2b44ae-bd90-41d5-afb7-2decaeb46726",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8dee6cef0c1a4301b74b12979cb0fa65",
     "title": "DJI Osmo Pocket 4Pついに出た！この進化を待ってた。",
     "name": "20260629_1436_DJI Osmo Pocket 4Pついに出た！この進化を待ってた。.md",
@@ -2881,14 +2881,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T23:45:00.000Z",
     "createdAt": "2026-07-10T01:56:06.704Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T23:10:01.464358+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "21befa93-df2e-4865-bafb-c40f5b383247",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2fa8d53a140b4aefb93a8f51675240b2",
     "title": "トヨトミ TIW-A18P-W 窓用エアコン レビュー比較まとめ",
     "name": "トヨトミ TIW-A18P-W 窓用エアコン レビュー比較まとめ.md",
@@ -2897,10 +2899,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T23:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T23:10:01.464358+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e641adec-f341-47b8-ad0c-971fc1cc5a5c",
