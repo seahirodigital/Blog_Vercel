@@ -2215,12 +2215,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T13:45:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "2026-07-10T13:10:44.315880+00:00",
+    "queuedAt": "2026-07-10T14:41:44.651999+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "f38aa145-014f-4432-b27d-1185d7a21f00",
