@@ -2350,7 +2350,7 @@
   },
   {
     "id": "0afc9427-661a-4f7e-b636-0967c47beebf",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s90e240d560a8480d84b6b168720e621a",
     "title": "スイッチボット  空気清浄機 レビュー比較まとめ",
     "name": "スイッチボット 20dB S20 10000Pa 空気清浄機 レビュー比較まとめ.md",
@@ -2360,8 +2360,8 @@
     "publishAt": "2026-07-10T16:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-10T15:50:59.750151+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T16:27:29.223810+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n3e879841c6ad?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
