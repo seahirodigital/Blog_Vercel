@@ -2008,7 +2008,7 @@
   },
   {
     "id": "029b6e10-8e58-408d-91a0-0d9c022f97ac",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5ea693c4d2fc41c8800d0ac456daae12",
     "title": "Anker 91iPhonedpB0D7D8JP6Q 3-in-1 Qi2 Prime Power レビュー比較まとめ",
     "name": "Anker 91iPhonedpB0D7D8JP6Q 3-in-1 Qi2 Prime Power レビュー比較まとめ.md",
@@ -2017,10 +2017,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T12:25:00.000Z",
     "createdAt": "2026-07-10T01:54:49.371Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T11:50:13.645311+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8c63d376-0201-4ac2-8545-b028636fa3d8",
