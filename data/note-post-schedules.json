@@ -1239,12 +1239,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T02:45:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
+    "queuedAt": "2026-07-10T09:48:18.772632+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "2b9e4efa-4746-447a-96d6-1e547b2eed50",
@@ -1257,12 +1257,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T03:00:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
+    "queuedAt": "2026-07-10T09:48:18.772632+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "a4dff5f9-632d-497e-a2f6-13516deb15c2",
@@ -1275,12 +1275,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T03:15:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
+    "queuedAt": "2026-07-10T09:48:18.772632+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "b32d2cee-717c-4f90-bed6-61351a2b9d1c",
@@ -1293,12 +1293,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T03:30:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
+    "queuedAt": "2026-07-10T09:48:18.772632+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "34c44815-e910-4a89-a394-9fe6a9ccdc7f",
@@ -1311,12 +1311,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T03:45:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
+    "queuedAt": "2026-07-10T09:48:18.772632+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "4cd83a2c-643b-4e37-b541-968f0689c73e",
@@ -1347,12 +1347,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T04:15:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
+    "queuedAt": "2026-07-10T09:48:18.772632+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "4e3cf396-d29e-4a5d-84bc-53919d87744c",
@@ -1419,12 +1419,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T05:15:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
+    "queuedAt": "2026-07-10T09:48:18.772632+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "fb56a6ed-ac7a-4bdb-aaa9-fafa7cab84a6",
@@ -1455,12 +1455,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T05:45:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
+    "queuedAt": "2026-07-10T09:48:18.772632+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "197e28da-6b15-4ab2-b442-e1ba31b2f8ec",
@@ -1491,12 +1491,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T06:15:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "2026-07-10T06:25:07.833288+00:00",
+    "queuedAt": "2026-07-10T09:48:18.772632+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "2827e496-36fb-4a5c-b222-e435072bf74a",
@@ -1626,7 +1626,7 @@
   },
   {
     "id": "4c995e80-a39d-4c08-87a4-b0217c9375ca",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s19060ab4fcde4c91b750bcd34245560c",
     "title": "ECOVACS T50 OMNI ロボット掃除機 レビュー比較まとめ",
     "name": "ECOVACS T50 OMNI ロボット掃除機 レビュー比較まとめ.md",
@@ -1635,14 +1635,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T08:15:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T09:48:18.772632+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "933e1035-53b9-4af0-a564-f3ddf3bb9fe0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s00cbd3a4c45a4718b86681513ed9f817",
     "title": "Galaxy A11 SM-X230NZAAXJP Samsung Tab レビュー比較まとめ",
     "name": "Galaxy A11 SM-X230NZAAXJP Samsung Tab レビュー比較まとめ.md",
@@ -1651,14 +1653,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T08:30:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T09:48:18.772632+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "329c41d4-29b3-49cf-bc47-68e777c7e36b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s89f47b86dd224b309e487a694a908a42",
     "title": "シャープ ES-X12C-TL ドラム式洗濯乾燥機 レビュー比較まとめ",
     "name": "シャープ ES-X12C-TL ドラム式洗濯乾燥機 レビュー比較まとめ.md",
@@ -1667,14 +1671,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T08:45:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T09:48:18.772632+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "daee0000-2e6a-438f-8e53-1225655f7548",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!scdb1946620d841fc812e6b5c287e1d1d",
     "title": "リズム(RHYTHM) ハンディファン扇風機 レビュー比較まとめ",
     "name": "リズム 9ZF042AZ82 扇風機 レビュー比較まとめ.md",
@@ -1683,14 +1689,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T09:00:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T09:48:18.772632+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d3943fbf-45bf-46f5-bf3c-532490bb2d3b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7b93e2677ef5430b865e82fd624b8a00",
     "title": "シャープ KN-HW16G-W 電気圧力鍋 レビュー比較まとめ",
     "name": "シャープ KN-HW16G-W 電気圧力鍋 レビュー比較まとめ.md",
@@ -1699,14 +1707,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T09:15:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T09:48:18.772632+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d4101e27-4e0f-4f06-b36f-23b386389e82",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s23c2d0fd6b3d425db67b0712b78ea9b4",
     "title": "アイリスオーヤマ SCD-23AZP1-W スティッククリーナー レビュー比較まとめ",
     "name": "アイリスオーヤマ SCD-23AZP1-W スティッククリーナー レビュー比較まとめ.md",
@@ -1715,14 +1725,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T09:30:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T09:48:18.772632+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9bd44aca-d2de-46c2-b365-4c0341ae1624",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb970d73140ea4c9b877db2b0cdd82670",
     "title": "マウスコンピューター ゲーミングPC レビュー比較まとめ",
     "name": "マウスコンピューター 5700X DGA7A6XB53SJW115AZ mouse ゲーミングPC レビュー比較まとめ.md",
@@ -1731,14 +1743,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T09:45:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T09:48:18.772632+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "65b2ce34-109a-4b44-b02c-f0d976f26e71",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s65239c3f519e4764b14ca0fd4598f2a5",
     "title": "東芝 ER-D3000A オーブンレンジ レビュー比較まとめ",
     "name": "東芝 ER-D3000A オーブンレンジ レビュー比較まとめ.md",
@@ -1747,14 +1761,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T10:00:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T09:48:18.772632+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3b2b897e-ff94-4dc6-b6fa-951349d1bb05",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s752ce457a8c74e1298aaf78a4be6fe0e",
     "title": "Apple(アップル) comimages 61aTLgZHqCL SX342 Watch SE レビュー比較まとめ",
     "name": "Apple(アップル) comimages 61aTLgZHqCL SX342 Watch SE レビュー比較まとめ.md",
@@ -1763,10 +1779,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T10:15:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T09:48:18.772632+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2c025875-c1d4-403a-a1d1-f2fcb4537569",
