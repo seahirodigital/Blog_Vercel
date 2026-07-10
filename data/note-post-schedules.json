@@ -1864,7 +1864,7 @@
   },
   {
     "id": "d3b621f9-5254-4446-956a-ba6aa157fe26",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc35e3965bc7c4976b9736071a90d966a",
     "title": "CIOハンディファン レビュー比較まとめ",
     "name": "CIO 8B-Type-CdpB0H398W4RB NovaSafety2 Qi2 扇風機 レビュー比較まとめ.md",
@@ -1873,10 +1873,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T11:15:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T10:40:35.823652+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "578273ac-b0c3-451e-903c-285e90c8ec28",
