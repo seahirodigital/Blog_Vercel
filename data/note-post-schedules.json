@@ -2044,7 +2044,7 @@
   },
   {
     "id": "160a0e1c-3597-4b87-a6a5-3bb92c4e5d56",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s19a5938df33940b18187579e0953ce0c",
     "title": "エコバックス DEEBOT T90 OMNI ロボット掃除機 レビュー比較まとめ：あなたの生活を豊かにする時短家電",
     "name": "20260709_0231_【Amazonプライムデー爆安】20万円超えの性能がこの価格！？ECOVACS DEEBOT T90 OMNIが全自動す.md",
@@ -2053,10 +2053,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T12:40:00.000Z",
     "createdAt": "2026-07-10T01:54:49.371Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T12:05:53.298631+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bf576050-af54-4859-afbd-59612126fa29",
