@@ -1572,7 +1572,7 @@
   },
   {
     "id": "2323898e-2cb7-48b2-b052-a2c49a6be856",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s78bb5dea12fb4975b35553c2dfa0dc80",
     "title": "AMOS JP2 comimages 51APtBWXaML 家庭用全自動点数表示麻雀卓 アモス レビュー比較まとめ",
     "name": "AMOS JP2 comimages 51APtBWXaML 家庭用全自動点数表示麻雀卓 アモス レビュー比較まとめ.md",
@@ -1581,10 +1581,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T07:30:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T06:55:01.608810+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0305b9ff-0d1c-4178-917a-1060c73e0778",
