@@ -2872,7 +2872,7 @@
   },
   {
     "id": "ab2b44ae-bd90-41d5-afb7-2decaeb46726",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s8dee6cef0c1a4301b74b12979cb0fa65",
     "title": "DJI Osmo Pocket 4Pついに出た！この進化を待ってた。",
     "name": "20260629_1436_DJI Osmo Pocket 4Pついに出た！この進化を待ってた。.md",
@@ -2882,8 +2882,8 @@
     "publishAt": "2026-07-10T23:45:00.000Z",
     "createdAt": "2026-07-10T01:56:06.704Z",
     "queuedAt": "2026-07-10T23:10:01.464358+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T23:47:28.157799+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nbd0829e521a2?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
