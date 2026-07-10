@@ -1882,7 +1882,7 @@
   },
   {
     "id": "578273ac-b0c3-451e-903c-285e90c8ec28",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb719e6a7673a4248b78f8cc50346f3e4",
     "title": "OBSBOT 60FPS Tail 2 カメラ レビュー比較まとめ",
     "name": "OBSBOT 60FPS Tail 2 カメラ レビュー比較まとめ.md",
@@ -1891,10 +1891,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T11:30:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T10:55:16.374079+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e828a2bd-d179-46d5-98e8-4c85fe885477",
