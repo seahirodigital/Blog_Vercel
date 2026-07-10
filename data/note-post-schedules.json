@@ -1428,7 +1428,7 @@
   },
   {
     "id": "fb56a6ed-ac7a-4bdb-aaa9-fafa7cab84a6",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s9edab5523ee74fdb9d5910550f676edd",
     "title": "アイロボット X185060 ロボット掃除機 レビュー比較まとめ",
     "name": "アイロボット X185060 ロボット掃除機 レビュー比較まとめ.md",
@@ -1438,8 +1438,8 @@
     "publishAt": "2026-07-10T05:30:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
     "queuedAt": "2026-07-10T06:25:07.833288+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T06:27:42.894834+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n087101c778bd/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
