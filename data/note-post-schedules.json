@@ -2062,7 +2062,7 @@
   },
   {
     "id": "bf576050-af54-4859-afbd-59612126fa29",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s88935ef9f46949c498fdc36444afe41b",
     "title": "JM5 N34K プロジェクターのレビュー比較まとめ：映画館級の体験を自宅で",
     "name": "20260625_2221_映画館に迫る黒に最新AI！20万円台の常識を覆す4Kジンバルプロジェクター「JMGO N3 4K」がヤバすぎる！【レビュ.md",
@@ -2071,10 +2071,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T12:45:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T12:10:00.633924+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6b0a5f54-228f-43a4-b8a5-c797db76ca98",
