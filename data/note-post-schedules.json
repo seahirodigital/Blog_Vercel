@@ -1248,7 +1248,7 @@
   },
   {
     "id": "2b9e4efa-4746-447a-96d6-1e547b2eed50",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!se03dc4ab338c4c3db77bf88be0a69604",
     "title": "Anker EufyCam S4 防犯カメラとEufy Security HomeBase S380 レビュー比較まとめ：最上位モデルの魅力を徹底解説",
     "name": "20260708_0443_【月額0円】配線不要で夜間もフルカラー！Anker最高峰の防犯カメラ「Eufy eufyCam S4」がAmazon プ.md",
@@ -1258,8 +1258,8 @@
     "publishAt": "2026-07-10T03:00:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
     "queuedAt": "2026-07-10T09:48:18.772632+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T09:50:51.318226+00:00",
+    "publishedUrl": "https://editor.note.com/notes/nb1467ee7d563/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
