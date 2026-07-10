@@ -1972,7 +1972,7 @@
   },
   {
     "id": "30e949ad-361e-4c33-8177-6bf5582b07ff",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sad3ce8f244fd4d339f39d0fded311493",
     "title": "Anker C2000 BP2000 ドライヤー レビュー比較まとめ",
     "name": "Anker C2000 BP2000 ドライヤー レビュー比較まとめ.md",
@@ -1981,10 +1981,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T12:10:00.000Z",
     "createdAt": "2026-07-10T01:54:49.371Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T11:35:45.723087+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6b9fdaaa-c90f-4a1f-9094-2f58d08285d0",
