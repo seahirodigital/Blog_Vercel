@@ -2962,7 +2962,7 @@
   },
   {
     "id": "0ee6d366-3a4e-4631-9556-c6587a87d763",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8bcffe934ac14032974c7c0de529c171",
     "title": "COWSAR 6kW ポータブルエアコン レビュー比較まとめ",
     "name": "COWSAR 6kW ポータブルエアコン レビュー比較まとめ.md",
@@ -2971,10 +2971,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T00:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T23:50:53.867536+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0d445df8-b27f-400d-8906-cf6b7986430a",
