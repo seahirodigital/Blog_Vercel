@@ -2080,7 +2080,7 @@
   },
   {
     "id": "6b0a5f54-228f-43a4-b8a5-c797db76ca98",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8ef78f2ec15c4e43b7474eede5609001",
     "title": "【Amazonプライムデー爆安】20万円超えの性能がこの価格！？ECOVACS DEEBOT T90 OMNIが全自動す",
     "name": "20260708_0436_【Amazonプライムデー爆安】20万円超えの性能がこの価格！？ECOVACS DEEBOT T90 OMNIが全自動す.md",
@@ -2089,10 +2089,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T12:55:00.000Z",
     "createdAt": "2026-07-10T01:54:49.371Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T12:20:30.613377+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a7a0b104-d290-427d-b699-0d8ee9331cd9",
