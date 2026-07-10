@@ -1936,7 +1936,7 @@
   },
   {
     "id": "c4216e92-2c47-4ee8-8519-1c94bc9dad55",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2c6313f0e2674ab5bf1407631e9bdd02",
     "title": "Anker 14-in-1 10Gbps Prime ドッキングステーション レビュー比較まとめ",
     "name": "Anker 14-in-1 10Gbps Prime ドッキングステーション レビュー比較まとめ.md",
@@ -1946,8 +1946,8 @@
     "publishAt": "2026-07-10T11:55:00.000Z",
     "createdAt": "2026-07-10T01:54:49.371Z",
     "queuedAt": "2026-07-10T12:50:42.297949+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T12:53:04.315522+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n9db1e55ea6d8/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
