@@ -1900,7 +1900,7 @@
   },
   {
     "id": "e828a2bd-d179-46d5-98e8-4c85fe885477",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s6b77d604c41941b8946f7970706b9d2f",
     "title": "Anker B3 USB-C1 3-in-1 Prime Charger レビュー比較まとめ",
     "name": "Anker B3 USB-C1 3-in-1 Prime Charger レビュー比較まとめ.md",
@@ -1910,8 +1910,8 @@
     "publishAt": "2026-07-10T11:40:00.000Z",
     "createdAt": "2026-07-10T01:54:49.371Z",
     "queuedAt": "2026-07-10T11:05:41.924046+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T11:42:18.962076+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n61f198fbd96b/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
