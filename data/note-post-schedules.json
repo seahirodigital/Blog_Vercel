@@ -2116,7 +2116,7 @@
   },
   {
     "id": "813bfa11-8630-4e06-9f99-b07345b4f9e1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd0c7dd717d3a4fb380eaea2dcad7df87",
     "title": "Anker 10-in-1 Nano Power 電源タップ レビュー比較まとめ",
     "name": "Anker 10-in-1 Nano Power 電源タップ レビュー比較まとめ.md",
@@ -2125,10 +2125,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T13:10:00.000Z",
     "createdAt": "2026-07-10T01:54:49.371Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T12:35:01.557345+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "943b5d48-ec31-4fff-99a5-8362f708eae6",
