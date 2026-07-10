@@ -2296,7 +2296,7 @@
   },
   {
     "id": "4f1da8d2-8a21-41f6-8eb3-2a0f812c2735",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s6e8596995340456299a3096f48194f38",
     "title": "Aladdin AEM-G14A オーブンレンジ レビュー比較まとめ",
     "name": "Aladdin AEM-G14A オーブンレンジ レビュー比較まとめ.md",
@@ -2306,8 +2306,8 @@
     "publishAt": "2026-07-10T15:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-10T14:50:54.667428+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T15:27:15.825106+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na8e8b1f929cc?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
