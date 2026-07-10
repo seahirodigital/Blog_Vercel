@@ -2620,7 +2620,7 @@
   },
   {
     "id": "e1e034e0-a418-4d6a-9971-261e3ee88127",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2204a1f3eb464849b1ca74e8e19dfb5a",
     "title": "Plaud NotePin S AIボイスレコーダーレビュー比較まとめ",
     "name": "Plaud GPT-5 W2 Q1 NotePin S レビュー比較まとめ.md",
@@ -2630,8 +2630,8 @@
     "publishAt": "2026-07-10T21:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-10T20:50:18.615653+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T21:27:24.634516+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n068ff1d9ed77?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
