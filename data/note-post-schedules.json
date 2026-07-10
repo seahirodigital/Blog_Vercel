@@ -1846,7 +1846,7 @@
   },
   {
     "id": "3ce68d8b-4005-44c5-82aa-31533c7c608c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5a8f20eeec2447ca897c6be731c1a29e",
     "title": "Jackery 50Hz60Hz ポータブルエアコン レビュー比較まとめ",
     "name": "Jackery 50Hz60Hz ポータブルエアコン レビュー比較まとめ.md",
@@ -1855,10 +1855,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-10T11:00:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-10T10:25:57.250974+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d3b621f9-5254-4446-956a-ba6aa157fe26",
