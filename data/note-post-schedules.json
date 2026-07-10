@@ -1230,7 +1230,7 @@
   },
   {
     "id": "183ff8e9-97a7-4ae2-9237-4feac04031ee",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s4fc4ce56bf324987984b92df41a2f2e4",
     "title": "Galaxy S10 SM-X400NZAAXJP Samsung Tab レビュー比較まとめ",
     "name": "Galaxy S10 SM-X400NZAAXJP Samsung Tab レビュー比較まとめ.md",
@@ -1240,8 +1240,8 @@
     "publishAt": "2026-07-10T02:45:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
     "queuedAt": "2026-07-10T09:48:18.772632+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T09:50:36.795503+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n5f9d28637234/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
