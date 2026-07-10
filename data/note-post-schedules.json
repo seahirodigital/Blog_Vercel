@@ -1792,7 +1792,7 @@
   },
   {
     "id": "3b2b897e-ff94-4dc6-b6fa-951349d1bb05",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s752ce457a8c74e1298aaf78a4be6fe0e",
     "title": "Apple(アップル) comimages 61aTLgZHqCL SX342 Watch SE レビュー比較まとめ",
     "name": "Apple(アップル) comimages 61aTLgZHqCL SX342 Watch SE レビュー比較まとめ.md",
@@ -1802,8 +1802,8 @@
     "publishAt": "2026-07-10T10:15:00.000Z",
     "createdAt": "2026-07-10T01:54:01.554Z",
     "queuedAt": "2026-07-10T10:12:15.925183+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T10:17:14.499980+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n8dedfb7020b1/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
