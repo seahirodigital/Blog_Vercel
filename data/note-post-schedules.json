@@ -2152,7 +2152,7 @@
   },
   {
     "id": "8a2fbf9b-d871-46a5-b279-18cfa296785e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3e068ffae5b34cc195707a89e181da1f",
     "title": "Anker 7-in-1 Nano Charging レビュー比較まとめ",
     "name": "Anker 7-in-1 Nano Charging レビュー比較まとめ.md",
@@ -2162,8 +2162,8 @@
     "publishAt": "2026-07-10T13:25:00.000Z",
     "createdAt": "2026-07-10T01:54:49.371Z",
     "queuedAt": "2026-07-10T12:50:42.297949+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T13:27:26.340473+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n02ae26babdf1?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
