@@ -2566,7 +2566,7 @@
   },
   {
     "id": "7504ff8b-dcce-4e2d-924a-ac1280ff399b",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s461d0e60f65140048dd7f4ee25547a9e",
     "title": "【この値段でいいの？笑】見た目・音質・ノイキャン良し！今もっとも勢いあるメーカーの最新モデルが安いのに優秀すぎ  EDI",
     "name": "20260531_0855_【この値段でいいの？笑】見た目・音質・ノイキャン良し！今もっとも勢いあるメーカーの最新モデルが安いのに優秀すぎ  EDI.md",
@@ -2576,8 +2576,8 @@
     "publishAt": "2026-07-10T20:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-10T19:50:44.246747+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-10T20:27:24.138609+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n26baeb894f07?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
