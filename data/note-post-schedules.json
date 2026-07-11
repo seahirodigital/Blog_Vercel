@@ -4060,7 +4060,7 @@
   },
   {
     "id": "8df0e9fa-55a7-40f7-9dc7-b41edd927cb9",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb85a610280b24741b032073ebce1361d",
     "title": "エプソン WXGA EB-W05 ビジネスプロジェクターレビュー比較まとめ",
     "name": "エプソン 3300lmWXGA EB-W05 ビジネスプロジェクター 液晶 レビュー比較まとめ.md",
@@ -4070,8 +4070,8 @@
     "publishAt": "2026-07-11T19:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T19:10:14.436597+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T19:47:13.791952+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n6ac9f2d1a957?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
