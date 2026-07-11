@@ -3772,7 +3772,7 @@
   },
   {
     "id": "a8272097-b349-483e-bcc2-fad98e93d750",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sada3c2277c0040d98c4e3a472845d97f",
     "title": "TCL C8L レビュー比較まとめ：2026年最新ミニLEDテレビの真価",
     "name": "20260524_2305_映像ヤバ…。新型4Kテレビ「TCL C8L」が想像以上だった.md",
@@ -3781,10 +3781,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T14:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T13:50:47.774689+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b8d9e206-1f1b-45d2-9348-06f971109845",
