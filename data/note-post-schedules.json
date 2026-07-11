@@ -4114,7 +4114,7 @@
   },
   {
     "id": "553e6b9e-7604-4c0f-9edb-958a0f7b19a3",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s77f767b4898d453082ecec4cca90a8b1",
     "title": "roborock Qrevo L Pro 掃除機 レビュー比較まとめ",
     "name": "roborock B8 100OrOCk 5O0OrOck 掃除機 レビュー比較まとめ.md",
@@ -4124,8 +4124,8 @@
     "publishAt": "2026-07-11T20:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T20:10:43.121087+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T20:47:20.985123+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n81cc7af7a879?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
