@@ -3556,7 +3556,7 @@
   },
   {
     "id": "f73a9653-0e89-4a27-be98-ee7cd7877542",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sc6d690919c0e4f9aa989549d93712eca",
     "title": "STEADY ST155 3Dエアストレッチシートレビュー比較まとめ",
     "name": "STEADY ST155 3Dエアストレッチシート 父の日 レビュー比較まとめ.md",
@@ -3566,8 +3566,8 @@
     "publishAt": "2026-07-11T10:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T09:50:50.625462+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T10:27:10.635602+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ndcbaf354a076?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
