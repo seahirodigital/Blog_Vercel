@@ -4294,7 +4294,7 @@
   },
   {
     "id": "579bef37-73a2-4210-9091-ca59a07b3347",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s525c8355c36b44daacb51bdbf08e4331",
     "title": "ロジクール Mobi Fold レビューまとめ：折りたたみモバイルマウスの真価",
     "name": "20260703_0804_ロジクール新型キター！まさかの折りたたみマウスがよすぎるんだが.md",
@@ -4303,14 +4303,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T23:45:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T23:10:19.163612+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1a5dc0f1-7f4e-4bc0-b412-ced35b358c15",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa1675e42a08c49fbbe88343910c09bad",
     "title": "画面のない新型Googleキター！1.6万で専属コーチ付くとか想像超えてたw",
     "name": "20260530_0502_画面のない新型Googleキター！1.6万で専属コーチ付くとか想像超えてたw.md",
@@ -4319,10 +4321,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T23:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T23:10:19.163612+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "31ad7bcb-80ed-4a59-bfac-9e1f6c081cc4",
