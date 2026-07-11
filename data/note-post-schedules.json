@@ -3664,7 +3664,7 @@
   },
   {
     "id": "dbcba4e2-205e-489c-8dfa-4be2d2c8c018",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s28a63de930fb43af9302d41d6d67c1b4",
     "title": "Anker Soundcore Liberty 5 Pro / 5 Pro Max レビュー比較まとめ：AI搭載完全ワイヤレスイヤホンで集中力と効率を最大化",
     "name": "20260528_0254_ケースにマイク搭載..？Ankerの新イヤホン『Soundcore Liberty 5 Pro』が別次元なのでご紹介しま.md",
@@ -3673,10 +3673,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T12:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T11:50:41.463470+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4742c867-1e0a-4184-b673-764025b81583",
