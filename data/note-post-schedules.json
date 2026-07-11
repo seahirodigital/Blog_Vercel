@@ -3718,7 +3718,7 @@
   },
   {
     "id": "81889271-b88e-44d9-8af3-e3a70ed13572",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s19e390c90f064eeaab39cf19eb76eb5e",
     "title": "Ulanzi D200X ストリームコントローラー レビュー比較まとめ",
     "name": "ウランジ D200X USB3 Ulanzi ストリームコントローラー レビュー比較まとめ.md",
@@ -3727,10 +3727,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T13:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T12:50:04.721268+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "790f39d4-c4e9-4924-9c60-ae715c50e43d",
