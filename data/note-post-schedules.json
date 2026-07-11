@@ -3016,7 +3016,7 @@
   },
   {
     "id": "f00f9aec-bd9b-4261-aad7-8b56142714e7",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s04c34e3b25ef4cc38c5224f9898fccea",
     "title": "Plaud NotePin S レビュー比較まとめ：AIボイスレコーダーで情報整理と時短を叶える",
     "name": "20260529_0047_唯一無二の神機能。あの『AIボイスレコーダー』が人気の理由がわかりました。｜Plaud NotePin S.md",
@@ -3026,8 +3026,8 @@
     "publishAt": "2026-07-11T00:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T00:10:42.159154+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T00:47:20.697926+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ne97c873c3fc4?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
