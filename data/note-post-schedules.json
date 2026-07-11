@@ -4222,7 +4222,7 @@
   },
   {
     "id": "468cba67-4582-4ada-a4f4-f2428afdaac3",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s4f922a6f42534ac1a6968cbc8983a4e6",
     "title": "HAWEI FreeBuds Pro 5 ワイヤレスイヤホン レビュー比較まとめ",
     "name": "20260522_0008_HUAWEIの最新フラッグシップTWS「HUAWEI  FreeBuds Pro 5」を試してみた.md",
@@ -4232,8 +4232,8 @@
     "publishAt": "2026-07-11T22:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T22:10:35.606951+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T22:47:29.503858+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n25c5525f90f3?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
