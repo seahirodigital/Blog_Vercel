@@ -3268,7 +3268,7 @@
   },
   {
     "id": "08a643eb-7114-4d35-a66e-bd69785406f6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4102e3255e5b4c35ab81dcf399acef2d",
     "title": "PloudNote Pro AIボイスレコーダー のレビュー比較まとめ：スマホ録音との違いやメリット・デメリット、評判",
     "name": "20260529_0051_【通話録音も!】Plaud Note Proを実機レビュー! 録音・文字起こし・AI要約まで使って分かった便利さ.md",
@@ -3277,10 +3277,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T05:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T04:30:47.449541+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "12d1754f-7699-4ab9-9295-74f5839d756b",
