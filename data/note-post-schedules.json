@@ -3286,7 +3286,7 @@
   },
   {
     "id": "12d1754f-7699-4ab9-9295-74f5839d756b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf6f74529f1c841eca3c94543c52b626a",
     "title": "パナソニック MC-RSC10-W 掃除機 レビュー比較まとめ",
     "name": "パナソニック MC-RSC10-W 掃除機 レビュー比較まとめ.md",
@@ -3295,10 +3295,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T05:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T04:50:12.412913+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4d50f119-d7a0-4d51-968c-a4007b71130e",
