@@ -3160,7 +3160,7 @@
   },
   {
     "id": "59bcd555-5109-454a-afae-4c77d9dcaa87",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1f522657e5fa4b3b9787ba09f143ed3e",
     "title": "【爆誕】arrows We3発表キタァーー！We2との違いは？わかりやすくスペック仕様を比較解説【価格】【発売日】【感想",
     "name": "20260611_0519_【爆誕】arrows We3発表キタァーー！We2との違いは？わかりやすくスペック仕様を比較解説【価格】【発売日】【感想.md",
@@ -3169,10 +3169,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T03:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T02:30:04.597182+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "603ad8c9-143f-4acb-ade2-670808af5fe3",
