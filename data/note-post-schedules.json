@@ -3142,7 +3142,7 @@
   },
   {
     "id": "1050a623-79e1-4982-bf8c-cf8950caa0df",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb19f13ec250e48e1a07678f68de7c0e6",
     "title": "DJI Osmo Mobile 8PとInsta360 Flow 2 Proをまとめ：最適なスマホジンバルを見つける方法",
     "name": "20260522_0013_新型DJI Osmo Mobile 8PとInsta360 Flow 2 Proを比較！スマホジンバル買うならどっち？.md",
@@ -3152,8 +3152,8 @@
     "publishAt": "2026-07-11T02:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T02:10:28.440267+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T02:47:33.308883+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n63184f496288?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
