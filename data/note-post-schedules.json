@@ -3232,7 +3232,7 @@
   },
   {
     "id": "44215323-918b-41dd-9e3a-d3f807ac6650",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb5f622198401458199a436891972d9e5",
     "title": "Comulytic Note Pro AIボイスレコーダー レビュー比較まとめ",
     "name": "comulytic ChatGPT-5 Gemini-2 2LDK Note Pro レビュー比較まとめ.md",
@@ -3241,10 +3241,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T04:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T03:50:05.346820+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8434d027-0537-4d61-bb84-10ebece0f0c8",
