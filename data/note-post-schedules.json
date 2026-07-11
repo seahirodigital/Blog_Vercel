@@ -3214,7 +3214,7 @@
   },
   {
     "id": "344a22b3-db20-4bcd-acb3-ac395e233114",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd1ca61570ebd4b9a9d4300637bf02b27",
     "title": "ソニー ポータブルデータトランスミッター PDT-FP1 レビューまとめ：映像制作の課題を解決する一台",
     "name": "20260611_0046_【ソニーの神アイテム】スマホのようでスマホじゃない。ワンオペの強い味方、ポータブルデータトランスミッター PDT-FP1.md",
@@ -3224,8 +3224,8 @@
     "publishAt": "2026-07-11T04:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T03:30:53.660198+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T04:07:43.624653+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na5f69675336b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
