@@ -3862,7 +3862,7 @@
   },
   {
     "id": "fc855648-5239-492b-a318-e8cfd7ac6977",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sc8da7f96743a4a6290d4adff59ae6af5",
     "title": "Soundcore 2-in-1 イヤホン レビュー比較まとめ",
     "name": "Soundcore 2-in-1 イヤホン レビュー比較まとめ.md",
@@ -3872,8 +3872,8 @@
     "publishAt": "2026-07-11T16:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T15:30:05.518231+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T16:07:27.148729+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n2b354d5bba30?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
