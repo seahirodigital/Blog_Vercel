@@ -3934,7 +3934,7 @@
   },
   {
     "id": "36f3e871-a679-4ffa-b1cd-29a866011d66",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s369925b4cae544f6a839c48de8814d3c",
     "title": "SOOMFON Stream Studio Control Deck 6 Stream Controller レビュー比較まとめ",
     "name": "SOOMFON 64bit 4KCU comimages Stream Controller レビュー比較まとめ.md",
@@ -3943,10 +3943,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T17:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T16:50:39.351059+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9453b2c6-9d0f-420f-8b85-54e428957371",
