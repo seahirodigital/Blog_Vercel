@@ -4258,7 +4258,7 @@
   },
   {
     "id": "455a4029-f0c9-49bf-a602-dc6a4e34fd8d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbaab0f99e9064ce29568f222e5a30f28",
     "title": "マウスコンピューター DGI7A7XB83SJW116AZ mouse ゲーミングPC レビュー比較まとめ",
     "name": "マウスコンピューター DGI7A7XB83SJW116AZ mouse ゲーミングPC レビュー比較まとめ.md",
@@ -4267,10 +4267,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T23:15:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T22:40:35.052007+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "392a7445-47d2-44dd-9ae4-756506092acd",
