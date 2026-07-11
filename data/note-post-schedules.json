@@ -4294,7 +4294,7 @@
   },
   {
     "id": "579bef37-73a2-4210-9091-ca59a07b3347",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s525c8355c36b44daacb51bdbf08e4331",
     "title": "ロジクール Mobi Fold レビューまとめ：折りたたみモバイルマウスの真価",
     "name": "20260703_0804_ロジクール新型キター！まさかの折りたたみマウスがよすぎるんだが.md",
@@ -4304,8 +4304,8 @@
     "publishAt": "2026-07-11T23:45:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
     "queuedAt": "2026-07-11T23:10:19.163612+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T23:47:24.616899+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd3542f6595cc?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
