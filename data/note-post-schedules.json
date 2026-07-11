@@ -3898,7 +3898,7 @@
   },
   {
     "id": "d25fc3aa-c8bf-48aa-b98f-22209efdd223",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se69117cc31a6462bade01db2911008b4",
     "title": "パナソニック ラムダッシュ PRO ES-L690U-K レビュー比較まとめ",
     "name": "20260610_0124_やっぱパナソニックすげぇ…最新シェーバーが別次元に進化してるんだが／ラムダッシュPRO 6枚刃.md",
@@ -3907,10 +3907,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T16:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T16:10:59.647910+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7a38300f-0707-4671-b978-b614b01715af",
