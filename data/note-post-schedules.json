@@ -3484,7 +3484,7 @@
   },
   {
     "id": "fea32860-e789-46f7-a43a-2d8cb0576d28",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7ff98f95eee84549ae554cf37fda9dd8",
     "title": "ソニー Xperia 1 VIII レビュー比較まとめ：あなたの生活を豊かにする最高の選択",
     "name": "20260602_0330_Xperia 1 VIIIの実機キタァー！手にとって感じたこと！ソニー本気のフラグシップモデルが凄すぎるｗｗｗ.md",
@@ -3493,10 +3493,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T09:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T08:30:55.067818+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d6280804-c9c0-475b-b78d-2e4e6910ec2c",
