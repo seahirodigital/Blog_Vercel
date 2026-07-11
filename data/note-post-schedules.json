@@ -3106,7 +3106,7 @@
   },
   {
     "id": "c61631d8-f006-47df-9cb9-bb33465ed103",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3ac27185b5f5485f8d232ff557b5ede0",
     "title": "Eufy(ユーフィ) E40 Anker SmartTrack レビュー比較まとめ",
     "name": "Eufy(ユーフィ) E40 Anker SmartTrack レビュー比較まとめ.md",
@@ -3115,10 +3115,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T02:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T01:30:39.325991+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "dee56a4a-8114-4753-bf4f-a7779578fdc5",
