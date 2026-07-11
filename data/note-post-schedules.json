@@ -4276,7 +4276,7 @@
   },
   {
     "id": "392a7445-47d2-44dd-9ae4-756506092acd",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s84a1ace6923540a5a9a5b73f746e5475",
     "title": "THRIVE(スライヴ) CHD-3810 マッサージチェア レビュー比較まとめ",
     "name": "THRIVE(スライヴ) CHD-3810 マッサージチェア レビュー比較まとめ.md",
@@ -4286,8 +4286,8 @@
     "publishAt": "2026-07-11T23:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T22:50:46.027396+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T23:27:25.208327+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nc8569a2342a9?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
