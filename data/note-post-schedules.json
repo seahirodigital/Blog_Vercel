@@ -3700,7 +3700,7 @@
   },
   {
     "id": "df1b7a21-20ca-443f-a126-b5fecb3887e8",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd10c38727fcb480eba0d50dc28670ebf",
     "title": "【今年の覇権取るかも】業界初のガラス振動板採用のワイヤレスイヤホンが凄すぎた。／ KENWOOD『GLASS Core",
     "name": "20260617_2249_【今年の覇権取るかも】業界初のガラス振動板採用のワイヤレスイヤホンが凄すぎた。／ KENWOOD『GLASS Core.md",
@@ -3710,8 +3710,8 @@
     "publishAt": "2026-07-11T13:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T12:30:47.463286+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T13:07:19.375591+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nc2d976a96a21?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
