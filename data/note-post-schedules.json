@@ -3538,7 +3538,7 @@
   },
   {
     "id": "1efbdecb-9754-40e0-b83b-7291d9682d80",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf721ff2974714a55ba973aec79a6a7e5",
     "title": "Island land PPC-15F2-MB 生ごみ処理機 レビュー比較まとめ",
     "name": "Island land PPC-15F2-MB 生ごみ処理機 レビュー比較まとめ.md",
@@ -3548,8 +3548,8 @@
     "publishAt": "2026-07-11T10:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T09:31:00.336374+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T10:07:13.713329+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na6cff3ce902f?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
