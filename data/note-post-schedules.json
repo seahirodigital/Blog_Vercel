@@ -3466,7 +3466,7 @@
   },
   {
     "id": "41eec17a-844f-49e8-a119-f849ff09289e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd67ab528c0fa4be2a7aa523b64e8be5f",
     "title": "今スマホ買い替えるならこれ。Xiaomi 17T Proが圧倒的すぎる",
     "name": "20260530_0057_今スマホ買い替えるならこれ。Xiaomi 17T Proが圧倒的すぎる.md",
@@ -3476,8 +3476,8 @@
     "publishAt": "2026-07-11T08:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T08:10:06.293889+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T08:47:29.051634+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n87ce1375cfb4?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
