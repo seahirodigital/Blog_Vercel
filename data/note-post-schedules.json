@@ -3970,7 +3970,7 @@
   },
   {
     "id": "4130b680-3561-4b38-b71a-20ded8bd05dd",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf584121dfca842908980da408e80a121",
     "title": "Panasonic LUMIX DC-TX3 (DCTX3) コンデジ レビュー比較まとめ",
     "name": "20260523_0237_最近発売になったとあるカメラを買いました.md",
@@ -3980,8 +3980,8 @@
     "publishAt": "2026-07-11T18:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T17:30:57.480649+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T18:07:44.619186+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na6c806bda67d?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
