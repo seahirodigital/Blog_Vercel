@@ -3088,7 +3088,7 @@
   },
   {
     "id": "f8d7bb5a-0009-47d9-9bde-f1f1b867f7ad",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc06dd1d98a4f43a18c469f48106a6321",
     "title": "Shark シャーク IW4271JBKNC Power Clean 360レビューまとめ：コードレス掃除機の新常識",
     "name": "20260617_2245_【最強】ダイソン超え!新型Sharkの吸引力が異次元すぎる.md",
@@ -3097,10 +3097,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T01:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T01:10:10.601059+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c61631d8-f006-47df-9cb9-bb33465ed103",
