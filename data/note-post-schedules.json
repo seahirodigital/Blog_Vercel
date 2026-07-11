@@ -3628,7 +3628,7 @@
   },
   {
     "id": "15141139-cf3a-4b3d-be2a-572b5deb7582",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s85282e29c4604d929372599a65062309",
     "title": "xiaomi(シャオミ) 6M46 1500nits S4 イヤホン レビュー比較まとめ",
     "name": "xiaomi(シャオミ) 6M46 1500nits S4 イヤホン レビュー比較まとめ.md",
@@ -3638,8 +3638,8 @@
     "publishAt": "2026-07-11T11:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T11:10:17.451782+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T11:47:30.026312+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n743afe79fd5d?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
