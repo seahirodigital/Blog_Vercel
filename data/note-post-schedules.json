@@ -4024,7 +4024,7 @@
   },
   {
     "id": "de97f750-eca9-4d5e-abde-ea71a2bdce47",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd9223c7fea9c40dc9a70f44f1fc0f7c9",
     "title": "HUTT HUTT10 6500Pa 55N 窓拭きロボット 自動窓掃除ロボット レビュー比較まとめ",
     "name": "HUTT HUTT10 6500Pa 55N 窓拭きロボット 自動窓掃除ロボット レビュー比較まとめ.md",
@@ -4034,8 +4034,8 @@
     "publishAt": "2026-07-11T19:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T18:30:24.666697+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T19:07:30.711231+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n714553824e93?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
