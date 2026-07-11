@@ -3520,7 +3520,7 @@
   },
   {
     "id": "8a8aa305-bb3e-4bc7-a7ca-04aaefa07384",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf7a27212451c4ce59f9ea3bd7b115758",
     "title": "Saluyar 3in1 ポータブルエアコン レビュー比較まとめ",
     "name": "Saluyar 3in1 ポータブルエアコン レビュー比較まとめ.md",
@@ -3529,10 +3529,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T09:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T09:10:45.584519+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1efbdecb-9754-40e0-b83b-7291d9682d80",
