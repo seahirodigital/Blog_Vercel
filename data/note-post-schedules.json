@@ -4096,7 +4096,7 @@
   },
   {
     "id": "d8b77847-f040-4676-8195-c5b985c6b31f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb864acca908d4eeda494fe19107655ab",
     "title": "Xperia 1 VIIIついに買ったぞぉおお！開封していく！",
     "name": "20260614_1007_Xperia 1 VIIIついに買ったぞぉおお！開封していく！.md",
@@ -4106,8 +4106,8 @@
     "publishAt": "2026-07-11T20:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T19:50:10.776018+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T20:27:23.265991+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5854b8c8fb1c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
