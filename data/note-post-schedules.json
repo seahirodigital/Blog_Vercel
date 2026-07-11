@@ -4312,7 +4312,7 @@
   },
   {
     "id": "1a5dc0f1-7f4e-4bc0-b412-ced35b358c15",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa1675e42a08c49fbbe88343910c09bad",
     "title": "画面のない新型Googleキター！1.6万で専属コーチ付くとか想像超えてたw",
     "name": "20260530_0502_画面のない新型Googleキター！1.6万で専属コーチ付くとか想像超えてたw.md",
@@ -4322,8 +4322,8 @@
     "publishAt": "2026-07-11T23:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T23:10:19.163612+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T23:47:22.815668+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n69f639b7774b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
