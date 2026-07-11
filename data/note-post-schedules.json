@@ -3376,7 +3376,7 @@
   },
   {
     "id": "312ed449-f38d-4c3a-8d18-8ae6972b27b3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8dc404cebd9b4179907df7e50a8ecd76",
     "title": "パナソニック SD-SB1-W ホームベーカリー レビュー比較まとめ",
     "name": "パナソニック SD-SB1-W ホームベーカリー レビュー比較まとめ.md",
@@ -3385,10 +3385,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T07:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T06:30:27.478017+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2ad0cb66-fd06-4235-b29e-d50e84f65c51",
