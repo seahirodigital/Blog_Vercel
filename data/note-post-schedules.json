@@ -3988,7 +3988,7 @@
   },
   {
     "id": "0777c722-40c9-4655-8c2d-46264ca34bc7",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s244d96bb1e554913b7c3862010725b1e",
     "title": "ナカトミ SAC-612NG ポータブルエアコン レビュー比較まとめ",
     "name": "ナカトミ SAC-612NG ポータブルエアコン レビュー比較まとめ.md",
@@ -3998,8 +3998,8 @@
     "publishAt": "2026-07-11T18:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T17:50:15.764091+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T18:27:39.732520+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n4e1ea16838e4?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
