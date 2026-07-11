@@ -3178,7 +3178,7 @@
   },
   {
     "id": "603ad8c9-143f-4acb-ade2-670808af5fe3",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s6453dc7a545e4d619dbdd147cd1e3ae7",
     "title": "NEOLEAD NL-AR2900 ポータブルエアコン レビュー比較まとめ",
     "name": "NEOLEAD 4way 9Kw NL-AR2900 ポータブルエアコン レビュー比較まとめ.md",
@@ -3188,8 +3188,8 @@
     "publishAt": "2026-07-11T03:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T02:50:20.974906+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T03:27:30.228704+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n50e773a20e93?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
