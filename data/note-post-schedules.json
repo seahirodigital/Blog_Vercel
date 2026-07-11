@@ -3574,7 +3574,7 @@
   },
   {
     "id": "7344d136-8637-40e0-8d4f-fb0943b5cf46",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s838dd8825e6d45d08d5bde4da47e4e83",
     "title": "GoPro Mission 1 Pro レビュー：次世代アクションカムの性能を徹底まとめ",
     "name": "20260527_0153_【新型】GoPro MISSION1PROがキタ！.md",
@@ -3583,10 +3583,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T10:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T10:10:20.235753+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e4785c57-bac6-44b7-a3bd-00d03dc93ba8",
