@@ -3304,7 +3304,7 @@
   },
   {
     "id": "4d50f119-d7a0-4d51-968c-a4007b71130e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sac24139f66bb4e4eb842fbad8c785cad",
     "title": "シャープ KI-PS50-H 加湿空気清浄機 レビュー比較まとめ",
     "name": "シャープ KI-PS50-H 加湿空気清浄機 レビュー比較まとめ.md",
@@ -3313,10 +3313,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-11T05:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-11T05:10:43.310478+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "be9fd6f1-8f26-42b3-a010-90a5345515e6",
