@@ -4132,7 +4132,7 @@
   },
   {
     "id": "71069819-f785-4740-82f3-436cbbba814a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s48f833f0691d495e8c354536ec876874",
     "title": "Dyson(ダイソン) V12 SV46 スティッククリーナー レビュー比較まとめ",
     "name": "Dyson(ダイソン) V12 SV46 スティッククリーナー レビュー比較まとめ.md",
@@ -4142,8 +4142,8 @@
     "publishAt": "2026-07-11T21:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T20:30:07.490715+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-11T21:07:20.092686+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n054a8b753fba?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
