@@ -4582,7 +4582,7 @@
   },
   {
     "id": "45be91bd-819c-42fa-9d87-bc303ea4e43c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sbd6e41e451214198b0d5ae0dbf9a7a45",
     "title": "パナソニック NC-A58-K コーヒーメーカー 全自動 レビュー比較まとめ",
     "name": "パナソニック NC-A58-K コーヒーメーカー 全自動 レビュー比較まとめ.md",
@@ -4592,8 +4592,8 @@
     "publishAt": "2026-07-12T02:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-12T07:12:33.703584+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-12T07:15:15.171293+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n5428b52a32d8/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
