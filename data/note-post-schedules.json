@@ -5600,7 +5600,7 @@
   },
   {
     "id": "e739d9e8-3115-4353-8889-ed9cba8daa0d",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb76a83e1e33e44f68361eadc6ddab294",
     "title": "アイロボット R285060 ロボット掃除機 レビュー比較まとめ",
     "name": "アイロボット R285060 ロボット掃除機 レビュー比較まとめ.md",
@@ -5610,8 +5610,8 @@
     "publishAt": "2026-07-12T20:25:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
     "queuedAt": "2026-07-12T19:50:38.764093+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-12T20:27:21.442755+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd8554e0ccd52?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
