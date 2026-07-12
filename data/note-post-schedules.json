@@ -6344,7 +6344,7 @@
   },
   {
     "id": "b098c39b-b12d-42f0-88f7-a367a714452e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sff5539cc65914b9b8192d2a99ab56105",
     "title": "Anker C1000 ドライヤー レビュー比較まとめ",
     "name": "Anker C1000 ドライヤー レビュー比較まとめ.md",
@@ -6354,8 +6354,8 @@
     "publishAt": "2026-07-12T23:20:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
     "queuedAt": "2026-07-12T22:45:42.883851+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-12T23:22:25.976133+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf575ad5072a1?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
