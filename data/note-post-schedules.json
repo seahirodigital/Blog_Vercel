@@ -5014,7 +5014,7 @@
   },
   {
     "id": "72d5f544-8b10-44f3-8409-4e3fad94e1b6",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s28cbdafe615e452f9ae2ebf754955084",
     "title": "Jackery 3600Plus 5kWh 50Hz60Hz 炊飯器 レビュー比較まとめ",
     "name": "Jackery 3600Plus 5kWh 50Hz60Hz 炊飯器 レビュー比較まとめ.md",
@@ -5024,8 +5024,8 @@
     "publishAt": "2026-07-12T12:45:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
     "queuedAt": "2026-07-12T12:10:28.464768+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-12T12:47:20.517355+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd8b3d6ed8e2d?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
