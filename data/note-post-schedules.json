@@ -4438,7 +4438,7 @@
   },
   {
     "id": "d222eff0-5aa2-4b59-b1ef-42c01bc41a60",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s78521694c3cc42c9860c192ce59e2694",
     "title": "ゼンハイザー 91-506911dpB07KZKNRP1 1kHz1Vrms HD800 Sennheiser オープン",
     "name": "ゼンハイザー 91-506911dpB07KZKNRP1 1kHz1Vrms HD800 Sennheiser オープン.md",
@@ -4447,10 +4447,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T01:15:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T00:40:17.786330+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "dd16c265-a5a8-4ccd-8c10-4844558f6964",
