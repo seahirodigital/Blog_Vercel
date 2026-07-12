@@ -5050,7 +5050,7 @@
   },
   {
     "id": "f8c94303-ffc4-4d7b-a5b0-f02c6e27ccb8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf62af0a4901a4589ae92a06aca5b1c5a",
     "title": "Haier JAA-HS406A2Sレビュー比較まとめ",
     "name": "Haier JAA-HS406A2S ルームエアコン 14畳 レビュー比較まとめ.md",
@@ -5059,10 +5059,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T13:45:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T13:11:04.525959+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e0efd0e6-b49a-42a2-a904-6f6164b999b7",
