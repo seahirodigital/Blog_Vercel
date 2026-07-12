@@ -1,22 +1,17 @@
-name: Note ???? ?????????
+name: Note 公開投稿 予約監視セッション
 
-# ?????????????????????
-# 1????????????????????????????????????
+# このファイルは予約一覧から自動生成します。
+# 1回起動した監視ジョブが、セッション中に定期確認して対象予約を起動します。
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '25 10 10 7 *'
-    - cron: '30 15 10 7 *'
-    - cron: '30 20 10 7 *'
-    - cron: '30 1 11 7 *'
-    - cron: '30 6 11 7 *'
-    - cron: '30 11 11 7 *'
-    - cron: '30 16 11 7 *'
-    - cron: '30 21 11 7 *'
-    - cron: '30 2 12 7 *'
     - cron: '40 7 12 7 *'
     - cron: '40 12 12 7 *'
+    - cron: '55 17 12 7 *'
+    - cron: '55 22 12 7 *'
+    - cron: '55 3 13 7 *'
+    - cron: '55 8 13 7 *'
 
 jobs:
   dispatch-reserved-posts:
@@ -29,10 +24,10 @@ jobs:
       actions: write
       contents: write
     steps:
-      - name: ?????????????
+      - name: リポジトリをチェックアウト
         uses: actions/checkout@v4
 
-      - name: ???????????????????
+      - name: 予約時刻が近い投稿ジョブを監視して起動
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
           GITHUB_TOKEN: ${{ github.token }}
