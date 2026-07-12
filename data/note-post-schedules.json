@@ -4816,7 +4816,7 @@
   },
   {
     "id": "61cf5541-dc4f-4ac7-9aab-176ea07518f0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc47a7fb9cd3f46098b982cf6069221eb",
     "title": "EF ECOFLOW Pro3 ポータブルエアコン レビュー比較まとめ",
     "name": "EF ECOFLOW Pro3 ポータブルエアコン レビュー比較まとめ.md",
@@ -4825,10 +4825,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T07:15:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T06:40:39.472146+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bea3c4ff-67ec-40bb-9802-aa68cbc5409e",
