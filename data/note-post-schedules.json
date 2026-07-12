@@ -4888,7 +4888,7 @@
   },
   {
     "id": "2ecee17e-bc94-4ef0-be19-ca8536a05f78",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5f2c749fd67549ac8fe7055279b0ba6c",
     "title": "アイロボット Y311260 水拭き掃除機 レビュー比較まとめ",
     "name": "アイロボット Y311260 水拭き掃除機 レビュー比較まとめ.md",
@@ -4897,10 +4897,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T09:15:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T08:40:32.948996+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "099c87fc-a1be-4c61-a8b1-689983539040",
