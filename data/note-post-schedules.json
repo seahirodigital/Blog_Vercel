@@ -5068,7 +5068,7 @@
   },
   {
     "id": "e0efd0e6-b49a-42a2-a904-6f6164b999b7",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s803a8a39d1af4d649e8df3d6d28a2026",
     "title": "Ankerの超人気カードガジェットが実はめっちゃ進化してる件",
     "name": "20260704_0047_Ankerの超人気カードガジェットが実はめっちゃ進化してる件.md",
@@ -5078,8 +5078,8 @@
     "publishAt": "2026-07-12T14:15:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
     "queuedAt": "2026-07-12T13:40:58.126749+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-12T14:17:28.484746+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n998da585da69?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
