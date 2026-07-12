@@ -6032,7 +6032,7 @@
   },
   {
     "id": "f01c5c6a-bc0f-4828-afde-62cbecf34bd8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s05dac02e52e6499b93e25d4f67299d8e",
     "title": "バウワースアンドウィルキンス Px7 S2e PX S2ECG クラウド ワイヤレス・ヘッドフォン レビュー比較まとめ",
     "name": "バウワースアンドウィルキンス Px7 S2e PX S2ECG クラウド ワイヤレス・ヘッドフォン レビュー比較まとめ.md",
@@ -6041,14 +6041,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T22:05:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T21:30:01.072789+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cf4e96b3-1fdd-42ef-bc92-6940a1031c12",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s91617d25ab0f4b0c8823d71a40c0d8e4",
     "title": "Dyson HD08 ヘアドライヤー レビュー比較まとめ",
     "name": "Dyson HD08 ヘアドライヤー レビュー比較まとめ.md",
@@ -6057,10 +6059,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T22:05:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T21:30:01.072789+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "909f14d5-6ebb-44ea-9898-744eb74183ae",
