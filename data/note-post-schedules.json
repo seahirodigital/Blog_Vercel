@@ -5603,7 +5603,7 @@
   },
   {
     "id": "f37179bd-f4ec-4257-b26e-929fc9a6cdf3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sead9f19f22b342a897c49346fa367af3",
     "title": "東芝 GR-Y550FZ 冷蔵庫 幅68.5㎝ レビュー比較まとめ",
     "name": "東芝 GR-Y550FZ 冷蔵庫 幅68.5㎝ レビュー比較まとめ.md",
@@ -5615,7 +5615,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "6f4c709f-89e1-4a15-aeb6-22147c7d1424",
@@ -5653,7 +5654,7 @@
   },
   {
     "id": "b20840b1-3b0b-4da4-afaf-78958a2b38f0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s009e870095894ea894b0be23683acd40",
     "title": "Anker F3000 Solix Portable レビュー比較まとめ",
     "name": "Anker F3000 Solix Portable レビュー比較まとめ.md",
@@ -5665,7 +5666,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "a6fb5089-44dc-4c62-8eb9-58e51f0038a0",
@@ -5703,7 +5705,7 @@
   },
   {
     "id": "b42f209e-c658-4440-aae7-6469a71de71f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sddd6fb1843ba427bbfc403bd6af5878c",
     "title": "Dyson SV33 スティッククリーナー レビュー比較まとめ",
     "name": "Dyson SV33 スティッククリーナー レビュー比較まとめ.md",
@@ -5715,7 +5717,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "d7f9c051-a9d8-434b-a794-fb8ae31cf350",
@@ -5753,7 +5756,7 @@
   },
   {
     "id": "290be8df-9f59-48af-8515-07f5e5e8985b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9abf72964527478aae6bb234d4851ea4",
     "title": "Anker C2000 ドライヤー レビュー比較まとめ",
     "name": "Anker C2000 ドライヤー レビュー比較まとめ.md",
@@ -5765,7 +5768,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "909f14d5-6ebb-44ea-9898-744eb74183ae",
@@ -5786,7 +5790,7 @@
   },
   {
     "id": "4c07e029-90cf-4931-9650-4b129dc77cf6",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc11e4b30c2c74f1a80ef7b7b50247e6e",
     "title": "レグザ 55Z770R テレビ レビュー比較まとめ",
     "name": "レグザ 55Z770R テレビ レビュー比較まとめ.md",
@@ -5798,7 +5802,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "8f29f4f5-fffc-4dbf-8c6f-b03ddd673a4b",
@@ -5836,7 +5841,7 @@
   },
   {
     "id": "5b1ddf93-62f8-4ec1-8865-3667d0efdd60",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf19ee20fa83746d4ad2481ad06e9b443",
     "title": "レグザ 100E670R AirPlay2 テレビ レビュー比較まとめ",
     "name": "レグザ 100E670R AirPlay2 テレビ レビュー比較まとめ.md",
@@ -5848,7 +5853,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "febc41fd-1227-44c3-b62b-d60cd271148b",
@@ -5886,7 +5892,7 @@
   },
   {
     "id": "77bfffdf-4a50-48f3-9857-8bc2d5d748d3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s64a686044dbe4c23aebe2e181a8bc0fe",
     "title": "東芝 RAS-V221TE ルームエアコン 6畳用 レビュー比較まとめ",
     "name": "東芝 RAS-V221TE ルームエアコン 6畳用 レビュー比較まとめ.md",
@@ -5898,7 +5904,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "c7d20d69-e15f-4453-98a5-4480ea2b4997",
@@ -5919,7 +5926,7 @@
   },
   {
     "id": "bdeef09b-e103-40fc-9aa4-55db2af21c63",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sff5539cc65914b9b8192d2a99ab56105",
     "title": "Anker C1000 ドライヤー レビュー比較まとめ",
     "name": "Anker C1000 ドライヤー レビュー比較まとめ.md",
@@ -5931,7 +5938,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "59a002fe-cf47-4d17-8070-e847ad42f64d",
@@ -5969,7 +5977,7 @@
   },
   {
     "id": "6170ab37-2424-4b59-892e-33efd13416a2",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9f3e84871a1d439c899cce3056c13add",
     "title": "Bose QuietComfort Headphones LE レビュー比較まとめ",
     "name": "BOSE(ボーズ) B3 1xPlayback comimages サウンドバー レビュー比較まとめ.md",
@@ -5981,7 +5989,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "a514ef4a-40e9-4b0a-b4ce-74cac4712358",
@@ -6019,7 +6028,7 @@
   },
   {
     "id": "ff19d6eb-dc7c-463c-8cd3-0ec670c99168",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sde7490570b3e4682908e4a50b228bad5",
     "title": "EF ECOFLOW A0 10ms 1Kwh ポータブルエアコン レビュー比較まとめ",
     "name": "EF ECOFLOW A0 10ms 1Kwh ポータブルエアコン レビュー比較まとめ.md",
@@ -6031,7 +6040,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "1f5f4d7f-a61f-4a3e-80ee-e37558a0209f",
@@ -6052,7 +6062,7 @@
   },
   {
     "id": "2a57ee77-0c51-44cc-9656-3a43b6f9e24c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb76a83e1e33e44f68361eadc6ddab294",
     "title": "アイロボット R285060 ロボット掃除機 レビュー比較まとめ",
     "name": "アイロボット R285060 ロボット掃除機 レビュー比較まとめ.md",
@@ -6064,7 +6074,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "ec9e4895-360b-449a-9a9b-4dbb818be570",
@@ -6102,7 +6113,7 @@
   },
   {
     "id": "3ccb02fc-ca33-42b4-89e3-d19e6b1bcae5",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s28a44bda077f4400aef1968f1c85d957",
     "title": "デロンギ リヴェリア EXAM44055G レビュー比較まとめ",
     "name": "De'Longhi(デロンギ) EXAM44055G 全自動コーヒーマシン リヴェリア レビュー比較まとめ.md",
@@ -6114,7 +6125,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "4f446919-dd3b-42ca-8a60-810451abf978",
@@ -6152,7 +6164,7 @@
   },
   {
     "id": "0cc8fbbc-0109-46d1-8d95-638e0e6f31b9",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!saf383aa52d114e12b6cf5d80c3245b72",
     "title": "シャープ CV-TH150-W 除湿機 レビュー比較まとめ",
     "name": "シャープ CV-TH150-W 除湿機 レビュー比較まとめ.md",
@@ -6164,7 +6176,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "aed3890c-c0c8-4f48-b023-9cb9724e25c5",
@@ -6185,7 +6198,7 @@
   },
   {
     "id": "8554d8f1-a0c6-4bcb-a1bf-039c974e5d9a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s797b3e9517d14c6098bf93ce4975c3f5",
     "title": "Sonos VGP2026 サウンドバー レビュー比較まとめ",
     "name": "Sonos VGP2026 サウンドバー レビュー比較まとめ.md",
@@ -6197,7 +6210,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "6cb0f4a3-1523-4c57-b8b5-c77d8bca63e4",
@@ -6235,7 +6249,7 @@
   },
   {
     "id": "6e03c974-04d2-4841-8cb6-5f77b99406a3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se86d563e56314ae58506d9ae62b93e2b",
     "title": "JBL JBLTOURPRO3GRN イヤホン レビュー比較まとめ",
     "name": "JBL JBLTOURPRO3GRN イヤホン レビュー比較まとめ.md",
@@ -6247,7 +6261,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "bd58b1e4-eeed-40e5-aeb8-35f4f6575ef4",
@@ -6285,7 +6300,7 @@
   },
   {
     "id": "d9d35076-8026-412a-aff3-923700c3ee38",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scebb37f070b0430d91c870f72a41ad20",
     "title": "Beats Powerbeats Pro 2レビュー比較まとめ",
     "name": "Beats H2 イヤホン レビュー比較まとめ.md",
@@ -6297,7 +6312,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "a97d9381-d78f-45b7-a96e-b6ead5bae337",
@@ -6318,7 +6334,7 @@
   },
   {
     "id": "64939fad-b655-4374-8333-8c637842b527",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s05dac02e52e6499b93e25d4f67299d8e",
     "title": "バウワースアンドウィルキンス Px7 S2e PX S2ECG クラウド ワイヤレス・ヘッドフォン レビュー比較まとめ",
     "name": "バウワースアンドウィルキンス Px7 S2e PX S2ECG クラウド ワイヤレス・ヘッドフォン レビュー比較まとめ.md",
@@ -6330,7 +6346,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "60c77345-7089-4c34-b1f2-72441caa4438",
@@ -6368,7 +6385,7 @@
   },
   {
     "id": "80eaa483-7791-44af-9301-fcdf172df542",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3e068ffae5b34cc195707a89e181da1f",
     "title": "Anker 7-in-1 Nano Charging レビュー比較まとめ",
     "name": "Anker 7-in-1 Nano Charging レビュー比較まとめ.md",
@@ -6380,7 +6397,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "d3a1a9bf-4cf5-417d-9ac0-7e289415ea38",
@@ -6418,7 +6436,7 @@
   },
   {
     "id": "5a0ea29f-9f33-4190-bfb3-392e17202ceb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa6880c99a9f1428cbbbf3f5740e6baec",
     "title": "Jackery 50Hz60Hz ポータブル電源 2000 レビュー比較まとめ",
     "name": "Jackery 50Hz60Hz ポータブル電源 2000 レビュー比較まとめ.md",
@@ -6430,7 +6448,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "4efe015c-a62d-41d0-b507-4fac0de41802",
@@ -6451,7 +6470,7 @@
   },
   {
     "id": "03414a9e-1a7b-4afd-8c88-5ad42d5a629f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s706a38f990604d48b1ec59078be35c33",
     "title": "シャープ ES-X12C-TL ドラム式洗濯乾燥機 レビュー比較まとめ",
     "name": "シャープ ES-X12C-TL ドラム式洗濯乾燥機 レビュー比較まとめ.md",
@@ -6463,7 +6482,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "9466ddac-488b-4405-ad2a-b0d5e53222c5",
@@ -6501,7 +6521,7 @@
   },
   {
     "id": "6d1769dc-a745-49ce-b30d-8ddd338d2cb0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s91617d25ab0f4b0c8823d71a40c0d8e4",
     "title": "Dyson HD08 ヘアドライヤー レビュー比較まとめ",
     "name": "Dyson HD08 ヘアドライヤー レビュー比較まとめ.md",
@@ -6513,7 +6533,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "5d3e49ef-f589-4e24-a05b-171d86fcbc9e",
@@ -6551,7 +6572,7 @@
   },
   {
     "id": "87ef7a70-cdc3-4076-ab00-685000a1ef07",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb931abe866bd4ff98ee4a264d8410f8a",
     "title": "アイロボット X185060 ロボット掃除機 レビュー比較まとめ",
     "name": "アイロボット X185060 ロボット掃除機 レビュー比較まとめ.md",
@@ -6563,7 +6584,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "8c76327d-8d84-4565-9627-ef9da74d48c2",
@@ -6584,7 +6606,7 @@
   },
   {
     "id": "2cd79237-dc2e-4299-9411-14e7a1b938dc",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb52d3ee3c8be431da1b535f75f7e1797",
     "title": "アイロボット L121260 ロボット掃除機 レビュー比較まとめ",
     "name": "アイロボット L121260 ロボット掃除機 レビュー比較まとめ.md",
@@ -6596,7 +6618,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "207a4337-4bb7-4007-8497-0fdc103ba408",
@@ -6634,7 +6657,7 @@
   },
   {
     "id": "2b55724e-bb6c-42a8-ab42-26f3f28b638a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s203598e7d4994af48d88b04a5f350fe6",
     "title": "Dyson(ダイソン) V12 SV46 掃除機 レビュー比較まとめ",
     "name": "Dyson(ダイソン) V12 SV46 掃除機 レビュー比較まとめ.md",
@@ -6646,7 +6669,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "6cc2b3a8-d02d-48b9-af30-0f99d5fffaab",
@@ -6684,7 +6708,7 @@
   },
   {
     "id": "97e1f343-8d3e-4c01-b0fe-774b1e43be7e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s44d9a40be85640fe8b998ed44b21f93f",
     "title": "ゼンハイザー 660S2 HD Headphone レビュー比較まとめ",
     "name": "ゼンハイザー 660S2 HD Headphone レビュー比較まとめ.md",
@@ -6696,7 +6720,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "eaed50ad-d128-423e-a5cc-4fffe7de5625",
@@ -6717,7 +6742,7 @@
   },
   {
     "id": "2af66c69-e8aa-4949-9279-d2b53b5b82c4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9023438a5a1f4efbb15dae5453387279",
     "title": "Hisense HR-K350LS テレビ レビュー比較まとめ",
     "name": "Hisense HR-K350LS テレビ レビュー比較まとめ.md",
@@ -6729,7 +6754,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "04f250e7-9fc9-4418-9442-b57d78186ded",
@@ -6767,7 +6793,7 @@
   },
   {
     "id": "f389d7f3-c5f1-498e-abdb-f30984290e61",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s180a12e677724669996140b676655dc0",
     "title": "Sony WF-1000XM5 VGP2025 イヤホン レビュー比較まとめ",
     "name": "Sony WF-1000XM5 VGP2025 イヤホン レビュー比較まとめ.md",
@@ -6779,7 +6805,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "774c4651-c3ee-4ce2-867e-52f37a6ca0ab",
@@ -6817,7 +6844,7 @@
   },
   {
     "id": "e4805e9b-45c7-492d-b4f8-a548e252ffc4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc5eeb5761a9b432589b6660434ddff67",
     "title": "バウワースアンドウィルキンス Px8 PX8RB ロイヤル・バーガンディ ワイヤレス・ヘッドフォン レビュー比較まとめ",
     "name": "バウワースアンドウィルキンス Px8 PX8RB ロイヤル・バーガンディ ワイヤレス・ヘッドフォン レビュー比較まとめ.md",
@@ -6829,7 +6856,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "81f474ab-2039-4cf7-814b-e96ad69a7d23",
@@ -6850,7 +6878,7 @@
   },
   {
     "id": "64fb4c1b-bcaa-4ce8-926e-e3586b093084",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s944cf0483c9a484cbbc4b2b80d5bb595",
     "title": "ベンキュージャパン TK705i VGP2026 3000ANSI Rec709 BenQ 4K レビュー比較まとめ",
     "name": "ベンキュージャパン TK705i VGP2026 3000ANSI Rec709 BenQ 4K レビュー比較まとめ.md",
@@ -6862,7 +6890,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "0e45cc87-4d00-4fd6-9622-b6d0f0c51d49",
@@ -6900,7 +6929,7 @@
   },
   {
     "id": "79543773-5129-422e-9103-2566e2620e3e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s904e02d29ebd407f8b69ac324ddf6d3d",
     "title": "Sony WF-G700N PS5 イヤホン レビュー比較まとめ",
     "name": "Sony WF-G700N PS5 イヤホン レビュー比較まとめ.md",
@@ -6912,7 +6941,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "965b14ce-aeee-44e9-bde3-957f3de8ffe8",
@@ -6950,7 +6980,7 @@
   },
   {
     "id": "ebfbbbe5-d571-4eba-85f9-8342b04defc1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa4d5f8c47f2e49b280556946344e49f7",
     "title": "ヤーマン YJSA0B メンズシェーバー レビュー比較まとめ",
     "name": "ヤーマン YJSA0B メンズシェーバー レビュー比較まとめ.md",
@@ -6962,7 +6992,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "b896be9d-eff2-480d-afa8-3c27539484c1",
@@ -6983,7 +7014,7 @@
   },
   {
     "id": "a9b9c39d-40f6-46b9-a876-a9a7915f1706",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4021b4c7de1f44429dd5a6b46e33dcf5",
     "title": "roborock Saros20 ロボット掃除機 レビュー比較まとめ",
     "name": "roborock Saros20 ロボット掃除機 レビュー比較まとめ.md",
@@ -6995,7 +7026,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "7958c854-7761-487f-821b-7d86ceb507ad",
@@ -7016,7 +7048,7 @@
   },
   {
     "id": "9f97276c-d70b-4e1c-8496-0998d7a3df9f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf066556e44cc4d39987a6d300b7f2039",
     "title": "アイロボット Y311260 水拭き掃除機 レビュー比較まとめ",
     "name": "アイロボット Y311260 水拭き掃除機 レビュー比較まとめ.md",
@@ -7028,7 +7060,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "7c90f3b1-838d-4d03-b62b-c4292dbc4914",
@@ -7049,7 +7082,7 @@
   },
   {
     "id": "c2a11313-fe39-4206-b6ac-9e0938addf29",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7250b1eb17904ae2b8f471f66ab8c683",
     "title": "ゼンハイザー 91-506911dpB07KZKNRP1 1kHz1Vrms HD800 Sennheiser オープン",
     "name": "ゼンハイザー 91-506911dpB07KZKNRP1 1kHz1Vrms HD800 Sennheiser オープン.md",
@@ -7061,11 +7094,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "2260632e-297d-473a-8fb5-b683a2068d45",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6b4147d15c53432da62f73b4cabd3a99",
     "title": "シャープ AX-LSX3A-T ウォーターオーブン レビュー比較まとめ",
     "name": "シャープ AX-LSX3A-T ウォーターオーブン レビュー比較まとめ.md",
@@ -7077,7 +7111,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "41e9db45-05f8-40bf-87b9-3f104275c20d",
@@ -7098,7 +7133,7 @@
   },
   {
     "id": "bed53de1-29f0-4654-955e-19a98e837d48",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s23c2d0fd6b3d425db67b0712b78ea9b4",
     "title": "アイリスオーヤマ SCD-23AZP1-W スティッククリーナー レビュー比較まとめ",
     "name": "アイリスオーヤマ SCD-23AZP1-W スティッククリーナー レビュー比較まとめ.md",
@@ -7110,7 +7145,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "56fe8c3d-0b14-4566-8f5c-1784c6550ab4",
@@ -7131,7 +7167,7 @@
   },
   {
     "id": "f9d7617e-6496-4c6a-a31c-2180bbb7d224",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd9efbd9f0050425baaeae16742ebc828",
     "title": "CIOが出したハンディファンが革新的すぎるんだが",
     "name": "20260709_0440_CIOが出したハンディファンが革新的すぎるんだが.md",
@@ -7143,11 +7179,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "4e297b00-23b8-4df3-801f-ddced6fd23b4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s453c67324e8148fb9715329fda5088a8",
     "title": "ゼンハイザー 620S Sennheiser ヘッドホン レビュー比較まとめ",
     "name": "ゼンハイザー 620S Sennheiser ヘッドホン レビュー比較まとめ.md",
@@ -7159,7 +7196,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:19:31.976Z"
   },
   {
     "id": "7e6c3739-0f15-4797-8d42-52095423e6b7",
