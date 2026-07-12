@@ -4474,7 +4474,7 @@
   },
   {
     "id": "e4ec1590-8ff3-4433-b6ac-9bdb9de96437",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2fcc71dea65e4aafbf35a554a71f88e2",
     "title": "HAIGE 30-120mm HG-RCGC501-2 掃除機 レビュー比較まとめ",
     "name": "HAIGE 30-120mm HG-RCGC501-2 掃除機 レビュー比較まとめ.md",
@@ -4483,14 +4483,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T01:45:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T05:41:57.609517+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2e895271-282c-4c1e-9b41-aac04b97c14a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s93f2413173a54d208f637efe6ddd468f",
     "title": "パナソニック EH-SR86-T 美顔器 レビュー比較まとめ",
     "name": "パナソニック EH-SR86-T 美顔器 レビュー比較まとめ.md",
@@ -4499,14 +4501,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T01:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T05:41:57.609517+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0d807677-735c-423a-b9a7-d3519efa2ddf",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf1ef14e5b316428386c9f2c248bb44a0",
     "title": "Anker Eufy (ユーフィ) Robot Vacuum Omni S2 レビュー比較まとめ",
     "name": "Eufy Omni S2 ロボット掃除機 レビュー比較まとめ.md",
@@ -4515,14 +4519,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T02:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T05:41:57.609517+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7dc265bf-a472-4fa3-9185-898ba535d267",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfdedd32d1cab42ff9784ce4ef7a2047d",
     "title": "ゼンハイザー 660S2 HD Headphone レビュー比較まとめ",
     "name": "ゼンハイザー 660S2 HD Headphone レビュー比較まとめ.md",
@@ -4531,14 +4537,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T02:15:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T05:41:57.609517+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "aa64fcac-16f9-4bd1-aaf2-43f0b67c301a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf2d8da36a44d432a82a45935815d3558",
     "title": "東芝 ED-60A4-W 衣類乾燥機 レビュー比較まとめ",
     "name": "東芝 ED-60A4-W 衣類乾燥機 レビュー比較まとめ.md",
@@ -4547,14 +4555,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T02:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T05:41:57.609517+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f995f190-ffea-4628-9c38-2d56fb187194",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sed677df8401643d99fac3dca5bd887ce",
     "title": "EENOUR GT8000iOTE 7kVA スポットクーラー レビュー比較まとめ",
     "name": "EENOUR GT8000iOTE 7kVA スポットクーラー レビュー比較まとめ.md",
@@ -4563,14 +4573,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T02:45:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T05:41:57.609517+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "45be91bd-819c-42fa-9d87-bc303ea4e43c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbd6e41e451214198b0d5ae0dbf9a7a45",
     "title": "パナソニック NC-A58-K コーヒーメーカー 全自動 レビュー比較まとめ",
     "name": "パナソニック NC-A58-K コーヒーメーカー 全自動 レビュー比較まとめ.md",
@@ -4579,14 +4591,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T02:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T05:41:57.609517+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1fb0c9af-b914-4bd2-884f-0fda00510603",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s428c0a314f6e4e8c89a08ed2999917cf",
     "title": "Denon AVR-X3800Hテレビ レビュー比較まとめ",
     "name": "Denon AVR-X3800H 4ch HDR10 Auro-3D AVR-X3800HK テレビ レビュー比較まとめ.md",
@@ -4595,14 +4609,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T03:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T05:41:57.609517+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8a38e477-1244-4e8c-bc4f-293ab16d5790",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!seb3b7bb122d34a7ca9cc48e842f26026",
     "title": "XGIMI 8BDMDdpB0GJBZBZW8 MT9681 X1 TITAN 4K ホームプロジェクター レビュー比較",
     "name": "XGIMI 8BDMDdpB0GJBZBZW8 MT9681 X1 TITAN 4K ホームプロジェクター レビュー比較.md",
@@ -4611,14 +4627,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T03:15:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T05:41:57.609517+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "75833044-6557-4c04-8952-f03daf63fab1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbd4485b657a941c881cac5b221d0f62e",
     "title": "Speedypress 80HD デジタルスチームプレス - レビュー比較まとめ",
     "name": "Speedypress 80HD デジタルスチームプレス - レビュー比較まとめ.md",
@@ -4627,14 +4645,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T03:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T05:41:57.609517+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a14b8808-4296-416b-949c-901f8b61122a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s808dd77f200645ee9fbce29e5c204c49",
     "title": "Dyson SV33 スティッククリーナー レビュー比較まとめ",
     "name": "Dyson SV33 スティッククリーナー レビュー比較まとめ.md",
@@ -4643,14 +4663,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T03:45:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T05:41:57.609517+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fca04a49-7c9c-410c-84bd-b4bb1b8c0b8e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s62155fdece7141aa8499130269ce3d9d",
     "title": "パナソニック NC-A58-W コーヒーメーカー 全自動 レビュー比較まとめ",
     "name": "パナソニック NC-A58-W コーヒーメーカー 全自動 レビュー比較まとめ.md",
@@ -4659,14 +4681,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T03:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T05:41:57.609517+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ff22db15-2f72-4039-869a-72632e45bb8f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd1e6a35cce85492dbd46d4f7c6fe1006",
     "title": "【1000X THE COLLEXION】ソニー ワイヤレスヘッドホンプレミアムモデル 1000X THE COLLEX",
     "name": "20260529_1106_【1000X THE COLLEXION】ソニー ワイヤレスヘッドホンプレミアムモデル 1000X THE COLLEX.md",
@@ -4675,14 +4699,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T04:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T05:41:57.609517+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "651311d9-6dfe-417c-92c3-4cf242a1eb4e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s93bacd945eb34e15b94805d939d4b6f6",
     "title": "MINISFORUM MS-S1 LPDDR5X 8060S USB4 V2 10GbE LANx2 MAX ミニpc",
     "name": "MINISFORUM MS-S1 LPDDR5X 8060S USB4 V2 10GbE LANx2 MAX ミニpc.md",
@@ -4691,14 +4717,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T04:15:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T05:41:57.609517+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "df512068-4f93-449c-bf05-c3e2e14281b1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9748cbde7b9946ddafe1fb62130d2a73",
     "title": "Dyson(ダイソン) V12 SV46 掃除機 レビュー比較まとめ",
     "name": "Dyson(ダイソン) V12 SV46 掃除機 レビュー比較まとめ.md",
@@ -4707,14 +4735,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T04:45:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T05:41:57.609517+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "95724486-d1ae-41f9-b6f2-a47d124a0847",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb31361c77e1a446294184f3c8cb3e089",
     "title": "Apple(アップル) comimages 61kX MI8wvL イヤホン レビュー比較まとめ",
     "name": "Apple(アップル) comimages 61kX MI8wvL イヤホン レビュー比較まとめ.md",
@@ -4723,14 +4753,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T05:15:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T05:41:57.609517+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "946af466-3faf-4ea2-aaec-d9e625bed419",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s47ad591f96fa46659a2a17c8ff3204fe",
     "title": "Jackery 5000Plus ポータブル電源 拡張バッテリー レビュー比較まとめ",
     "name": "Jackery 5000Plus ポータブル電源 拡張バッテリー レビュー比較まとめ.md",
@@ -4739,14 +4771,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T05:45:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T05:41:57.609517+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a62260ed-d1f2-4e29-946c-55973db04e1b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc9b11e477b654579a6f2f61171cc53d3",
     "title": "パナソニック CS-364DGX-W レビュー比較まとめ",
     "name": "パナソニック CS-364DGX-W 工事保証3年付属 ルームエアコン レビュー比較まとめ.md",
@@ -4755,10 +4789,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T06:15:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T05:41:57.609517+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "af0ac878-40af-4b3f-bc37-7f6b4d83d38f",
