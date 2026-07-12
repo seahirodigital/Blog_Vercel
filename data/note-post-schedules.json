@@ -4744,7 +4744,7 @@
   },
   {
     "id": "95724486-d1ae-41f9-b6f2-a47d124a0847",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb31361c77e1a446294184f3c8cb3e089",
     "title": "Apple(アップル) comimages 61kX MI8wvL イヤホン レビュー比較まとめ",
     "name": "Apple(アップル) comimages 61kX MI8wvL イヤホン レビュー比較まとめ.md",
@@ -4754,8 +4754,8 @@
     "publishAt": "2026-07-12T05:15:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
     "queuedAt": "2026-07-12T07:12:33.703584+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-12T07:15:24.157723+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n3138c2767cb6/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
