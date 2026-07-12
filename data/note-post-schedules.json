@@ -4960,7 +4960,7 @@
   },
   {
     "id": "b98ec7bd-1afc-4b83-8039-9ff2f96722d8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s271f198b01794467b46d92aadf24f1b5",
     "title": "FOSSiBOT F7200 AC100V200V 66kWh ポータブル電源 大容量 レビュー比較まとめ",
     "name": "FOSSiBOT F7200 AC100V200V 66kWh ポータブル電源 大容量 レビュー比較まとめ.md",
@@ -4969,10 +4969,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T11:15:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T10:40:14.261340+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cfdfe510-f235-4e3a-bad6-6b798a71bb40",
