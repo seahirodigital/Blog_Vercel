@@ -4942,7 +4942,7 @@
   },
   {
     "id": "efffb7c6-c8ad-4dbd-82df-afc61d6ba216",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s043db8902c4641debd8adca2eefe6ea4",
     "title": "BOSE(ボーズ) B3 1xPlayback comimages サウンドバー レビュー比較まとめ",
     "name": "BOSE(ボーズ) B3 1xPlayback comimages サウンドバー レビュー比較まとめ.md",
@@ -4951,10 +4951,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T10:45:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T10:10:05.525906+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b98ec7bd-1afc-4b83-8039-9ff2f96722d8",
