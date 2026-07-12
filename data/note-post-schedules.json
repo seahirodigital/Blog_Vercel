@@ -6032,7 +6032,7 @@
   },
   {
     "id": "f01c5c6a-bc0f-4828-afde-62cbecf34bd8",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s05dac02e52e6499b93e25d4f67299d8e",
     "title": "バウワースアンドウィルキンス Px7 S2e PX S2ECG クラウド ワイヤレス・ヘッドフォン レビュー比較まとめ",
     "name": "バウワースアンドウィルキンス Px7 S2e PX S2ECG クラウド ワイヤレス・ヘッドフォン レビュー比較まとめ.md",
@@ -6042,8 +6042,8 @@
     "publishAt": "2026-07-12T22:05:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
     "queuedAt": "2026-07-12T23:00:52.083244+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-12T23:03:31.703093+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf9acce867677?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
