@@ -7863,7 +7863,7 @@
   },
   {
     "id": "d46597bf-cb50-449f-9f5c-108c5f18be64",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd9efbd9f0050425baaeae16742ebc828",
     "title": "CIOが出したハンディファンが革新的すぎるんだが",
     "name": "20260709_0440_CIOが出したハンディファンが革新的すぎるんだが.md",
@@ -7875,6 +7875,7 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-07-12T07:20:18.136Z"
   }
 ]
