@@ -4618,7 +4618,7 @@
   },
   {
     "id": "8a38e477-1244-4e8c-bc4f-293ab16d5790",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!seb3b7bb122d34a7ca9cc48e842f26026",
     "title": "XGIMI 8BDMDdpB0GJBZBZW8 MT9681 X1 TITAN 4K ホームプロジェクター レビュー比較",
     "name": "XGIMI 8BDMDdpB0GJBZBZW8 MT9681 X1 TITAN 4K ホームプロジェクター レビュー比較.md",
@@ -4628,8 +4628,8 @@
     "publishAt": "2026-07-12T03:15:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
     "queuedAt": "2026-07-12T07:12:33.703584+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-12T07:15:01.161537+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n3bf244bd3500/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
