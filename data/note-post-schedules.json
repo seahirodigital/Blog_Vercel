@@ -4708,7 +4708,7 @@
   },
   {
     "id": "651311d9-6dfe-417c-92c3-4cf242a1eb4e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s93bacd945eb34e15b94805d939d4b6f6",
     "title": "MINISFORUM MS-S1 LPDDR5X 8060S USB4 V2 10GbE LANx2 MAX ミニpc",
     "name": "MINISFORUM MS-S1 LPDDR5X 8060S USB4 V2 10GbE LANx2 MAX ミニpc.md",
@@ -4718,8 +4718,8 @@
     "publishAt": "2026-07-12T04:15:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
     "queuedAt": "2026-07-12T05:41:57.609517+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-12T05:44:40.509147+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n9e1830c49fa0/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
