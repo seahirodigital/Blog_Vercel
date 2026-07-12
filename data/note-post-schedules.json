@@ -4555,12 +4555,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T02:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "2026-07-12T07:12:33.703584+00:00",
+    "queuedAt": "2026-07-12T08:42:40.844187+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 2
+    "dispatchAttempts": 3
   },
   {
     "id": "f995f190-ffea-4628-9c38-2d56fb187194",
@@ -4699,12 +4699,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T04:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "2026-07-12T07:12:33.703584+00:00",
+    "queuedAt": "2026-07-12T08:42:40.844187+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 2
+    "dispatchAttempts": 3
   },
   {
     "id": "651311d9-6dfe-417c-92c3-4cf242a1eb4e",
