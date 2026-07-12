@@ -6448,7 +6448,7 @@
   },
   {
     "id": "4ed28ce2-8776-4d98-a5b6-f5c10888009b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa4d5f8c47f2e49b280556946344e49f7",
     "title": "ヤーマン YJSA0B メンズシェーバー レビュー比較まとめ",
     "name": "ヤーマン YJSA0B メンズシェーバー レビュー比較まとめ.md",
@@ -6457,14 +6457,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T23:45:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T23:10:58.870163+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ce5dfd67-745a-470f-bbc7-6008f29d9cec",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd9efbd9f0050425baaeae16742ebc828",
     "title": "CIOが出したハンディファンが革新的すぎるんだが",
     "name": "20260709_0440_CIOが出したハンディファンが革新的すぎるんだが.md",
@@ -6473,10 +6475,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T23:45:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T23:10:58.870163+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a514ef4a-40e9-4b0a-b4ce-74cac4712358",
