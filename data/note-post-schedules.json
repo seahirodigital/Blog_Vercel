@@ -5687,7 +5687,7 @@
   },
   {
     "id": "0fc8198d-15dd-4b10-95f6-319ab2dc5340",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s180a12e677724669996140b676655dc0",
     "title": "Sony WF-1000XM5 VGP2025 イヤホン レビュー比較まとめ",
     "name": "Sony WF-1000XM5 VGP2025 イヤホン レビュー比較まとめ.md",
@@ -5697,8 +5697,8 @@
     "publishAt": "2026-07-12T20:50:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
     "queuedAt": "2026-07-12T20:15:14.839582+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-12T20:52:22.925323+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n3ac41c0bcb69?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
