@@ -4456,7 +4456,7 @@
   },
   {
     "id": "dd16c265-a5a8-4ccd-8c10-4844558f6964",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2d4058e9777247009e7ebc109951dc40",
     "title": "Corona CW-1621-WS WT-8 窓用エアコン レビュー比較まとめ",
     "name": "Corona CW-1621-WS WT-8 窓用エアコン レビュー比較まとめ.md",
@@ -4465,10 +4465,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T01:25:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T00:50:29.652002+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e4ec1590-8ff3-4433-b6ac-9bdb9de96437",
