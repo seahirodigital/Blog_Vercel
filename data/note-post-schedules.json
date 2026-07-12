@@ -4330,7 +4330,7 @@
   },
   {
     "id": "31ad7bcb-80ed-4a59-bfac-9e1f6c081cc4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s5ae0c5610959427c93ea5ad68e9df13d",
     "title": "TENTIAL BAKUNE Dry Pro レビュー比較まとめ：疲労回復パジャマで夏の睡眠改善",
     "name": "20260608_0333_初めてのTENTIAL使ったら流行ってる理由がわかった。／BAKUNE Dry Pro.md",
@@ -4340,8 +4340,8 @@
     "publishAt": "2026-07-12T00:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-11T23:30:08.666503+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-12T00:07:33.800099+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nc844199496f4?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
