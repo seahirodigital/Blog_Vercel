@@ -4798,7 +4798,7 @@
   },
   {
     "id": "af0ac878-40af-4b3f-bc37-7f6b4d83d38f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s49ec2290070a4a9184aaddd8f4d21862",
     "title": "アイリスオーヤマ IPF-2202S-W ルームエアコン 6畳 レビュー比較まとめ",
     "name": "アイリスオーヤマ IPF-2202S-W ルームエアコン 6畳 レビュー比較まとめ.md",
@@ -4807,10 +4807,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T06:45:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T06:10:21.618515+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "61cf5541-dc4f-4ac7-9aab-176ea07518f0",
