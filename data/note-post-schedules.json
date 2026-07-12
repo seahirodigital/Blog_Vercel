@@ -4420,7 +4420,7 @@
   },
   {
     "id": "2604620e-40f5-4cfc-953f-206d999078c7",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2794a905c2b64334a486a6b48426c456",
     "title": "HUAWEI Watch Fit 5 Pro スマートウォッチ レビューまとめ：健康管理と運動記録の次世代パートナー",
     "name": "20260522_0011_【超絶進化】新型スマートウォッチ「HUAWEI WATCH FIT 5 Pro」誕生.md",
@@ -4430,8 +4430,8 @@
     "publishAt": "2026-07-12T01:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-12T00:30:59.875268+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-12T01:07:30.716405+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7ad4a71008e4?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
