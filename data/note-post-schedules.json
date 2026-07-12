@@ -5512,7 +5512,7 @@
   },
   {
     "id": "2d8b82b8-8062-4853-ad1a-39d4c4f60aa0",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s797b3e9517d14c6098bf93ce4975c3f5",
     "title": "Sonos VGP2026 サウンドバー レビュー比較まとめ",
     "name": "Sonos VGP2026 サウンドバー レビュー比較まとめ.md",
@@ -5522,8 +5522,8 @@
     "publishAt": "2026-07-12T20:00:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
     "queuedAt": "2026-07-12T19:25:59.485689+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-12T20:02:28.036142+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n3e9631424a28?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
