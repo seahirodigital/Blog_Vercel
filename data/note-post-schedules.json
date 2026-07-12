@@ -5512,7 +5512,7 @@
   },
   {
     "id": "2d8b82b8-8062-4853-ad1a-39d4c4f60aa0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s797b3e9517d14c6098bf93ce4975c3f5",
     "title": "Sonos VGP2026 サウンドバー レビュー比較まとめ",
     "name": "Sonos VGP2026 サウンドバー レビュー比較まとめ.md",
@@ -5521,14 +5521,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T20:00:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T19:25:59.485689+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d57da356-4d5a-4d53-8037-a13976939b51",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sddd6fb1843ba427bbfc403bd6af5878c",
     "title": "Dyson SV33 スティッククリーナー レビュー比較まとめ",
     "name": "Dyson SV33 スティッククリーナー レビュー比較まとめ.md",
@@ -5537,10 +5539,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T20:00:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T19:25:59.485689+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "79b900be-e833-4b0f-be10-8b6cecf34ac1",
