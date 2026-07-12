@@ -4978,7 +4978,7 @@
   },
   {
     "id": "cfdfe510-f235-4e3a-bad6-6b798a71bb40",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9dc37fd74a1143c39a71b451cf9d0d06",
     "title": "東芝 RAS-V221TE ルームエアコン 6畳用 レビュー比較まとめ",
     "name": "東芝 RAS-V221TE ルームエアコン 6畳用 レビュー比較まとめ.md",
@@ -4987,10 +4987,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T11:45:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T11:10:10.509951+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8a0cd418-e2d2-48e7-a495-ef2177dd8af4",
