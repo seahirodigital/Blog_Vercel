@@ -6041,12 +6041,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T22:05:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "2026-07-12T21:30:01.072789+00:00",
+    "queuedAt": "2026-07-12T23:00:52.083244+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "cf4e96b3-1fdd-42ef-bc92-6940a1031c12",
