@@ -5790,7 +5790,7 @@
   },
   {
     "id": "7cbf32b0-a121-4980-af5a-59def0c86bfb",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!saf383aa52d114e12b6cf5d80c3245b72",
     "title": "シャープ CV-TH150-W 除湿機 レビュー比較まとめ",
     "name": "シャープ CV-TH150-W 除湿機 レビュー比較まとめ.md",
@@ -5799,14 +5799,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T21:15:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T20:40:30.516894+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "10b92072-b443-423d-a97c-25871b4d39e5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9f3e84871a1d439c899cce3056c13add",
     "title": "Bose QuietComfort Headphones LE レビュー比較まとめ",
     "name": "BOSE(ボーズ) B3 1xPlayback comimages サウンドバー レビュー比較まとめ.md",
@@ -5815,10 +5817,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T21:15:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T20:40:30.516894+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6e152e25-9447-4c9e-b746-e5e22f79585e",
