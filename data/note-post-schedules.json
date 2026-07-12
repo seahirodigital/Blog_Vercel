@@ -4690,7 +4690,7 @@
   },
   {
     "id": "ff22db15-2f72-4039-869a-72632e45bb8f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd1e6a35cce85492dbd46d4f7c6fe1006",
     "title": "【1000X THE COLLEXION】ソニー ワイヤレスヘッドホンプレミアムモデル 1000X THE COLLEX",
     "name": "20260529_1106_【1000X THE COLLEXION】ソニー ワイヤレスヘッドホンプレミアムモデル 1000X THE COLLEX.md",
@@ -4700,8 +4700,8 @@
     "publishAt": "2026-07-12T04:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-12T08:42:40.844187+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-12T08:45:25.881766+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n872573d31f72?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 3
