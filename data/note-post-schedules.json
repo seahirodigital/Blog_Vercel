@@ -4906,7 +4906,7 @@
   },
   {
     "id": "099c87fc-a1be-4c61-a8b1-689983539040",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4823bca7e5e34f339a0cabdbcf9dcbfd",
     "title": "山善 AE-02SS2 スポットクーラー レビュー比較まとめ",
     "name": "山善 AE-02SS2 スポットクーラー レビュー比較まとめ.md",
@@ -4915,10 +4915,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-12T09:45:00.000Z",
     "createdAt": "2026-07-10T01:53:08.150Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T09:10:33.361828+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "40be02de-8af3-4326-b982-725d25fc9ea4",
