@@ -4402,7 +4402,7 @@
   },
   {
     "id": "1d75ba9c-0231-4dc8-b7b4-b9ae66542dc2",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s66edd43e850d4ac28ceb4969900ea324",
     "title": "Anker C2000 ドライヤー レビュー比較まとめ",
     "name": "Anker C2000 ドライヤー レビュー比較まとめ.md",
@@ -4412,8 +4412,8 @@
     "publishAt": "2026-07-12T00:45:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-12T00:10:04.968030+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-12T00:47:08.638220+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n20b3dd2fa163/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
