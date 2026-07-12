@@ -6050,7 +6050,7 @@
   },
   {
     "id": "cf4e96b3-1fdd-42ef-bc92-6940a1031c12",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s91617d25ab0f4b0c8823d71a40c0d8e4",
     "title": "Dyson HD08 ヘアドライヤー レビュー比較まとめ",
     "name": "Dyson HD08 ヘアドライヤー レビュー比較まとめ.md",
@@ -6060,8 +6060,8 @@
     "publishAt": "2026-07-12T22:05:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
     "queuedAt": "2026-07-12T21:30:01.072789+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-12T22:07:25.685745+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n6e438cfe1778?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
