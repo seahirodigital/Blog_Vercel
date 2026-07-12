@@ -8,10 +8,6 @@ on:
   schedule:
     - cron: '40 7 12 7 *'
     - cron: '40 12 12 7 *'
-    - cron: '55 17 12 7 *'
-    - cron: '55 22 12 7 *'
-    - cron: '55 3 13 7 *'
-    - cron: '55 8 13 7 *'
 
 jobs:
   dispatch-reserved-posts:
