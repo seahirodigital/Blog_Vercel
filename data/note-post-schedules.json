@@ -4510,7 +4510,7 @@
   },
   {
     "id": "0d807677-735c-423a-b9a7-d3519efa2ddf",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf1ef14e5b316428386c9f2c248bb44a0",
     "title": "Anker Eufy (ユーフィ) Robot Vacuum Omni S2 レビュー比較まとめ",
     "name": "Eufy Omni S2 ロボット掃除機 レビュー比較まとめ.md",
@@ -4520,8 +4520,8 @@
     "publishAt": "2026-07-12T02:05:00.000Z",
     "createdAt": "2026-07-10T02:24:15.592Z",
     "queuedAt": "2026-07-12T05:41:57.609517+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-12T05:44:29.100712+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nfedae61b3557?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
