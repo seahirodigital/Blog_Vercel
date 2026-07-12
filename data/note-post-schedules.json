@@ -6552,7 +6552,7 @@
   },
   {
     "id": "8eba8eee-92b3-4877-8c02-a63785ad9c86",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3e068ffae5b34cc195707a89e181da1f",
     "title": "Anker 7-in-1 Nano Charging レビュー比較まとめ",
     "name": "Anker 7-in-1 Nano Charging レビュー比較まとめ.md",
@@ -6561,14 +6561,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T00:10:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T23:35:13.199263+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "67d4f922-2451-4260-a1fb-9084b3f143ed",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!scebb37f070b0430d91c870f72a41ad20",
     "title": "Beats Powerbeats Pro 2レビュー比較まとめ",
     "name": "Beats H2 イヤホン レビュー比較まとめ.md",
@@ -6577,10 +6579,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T00:10:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-12T23:35:13.199263+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1f5f4d7f-a61f-4a3e-80ee-e37558a0209f",
