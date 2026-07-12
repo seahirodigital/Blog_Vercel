@@ -5582,7 +5582,7 @@
   },
   {
     "id": "190c7b19-1343-415d-b2c7-f70262bec0f4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!scebb37f070b0430d91c870f72a41ad20",
     "title": "Beats Powerbeats Pro 2レビュー比較まとめ",
     "name": "Beats H2 イヤホン レビュー比較まとめ.md",
@@ -5592,8 +5592,8 @@
     "publishAt": "2026-07-12T20:25:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
     "queuedAt": "2026-07-12T19:50:38.764093+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-12T20:30:17.433146+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n12728711f29b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
