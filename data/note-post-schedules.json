@@ -9052,7 +9052,7 @@
   },
   {
     "id": "1bc98634-eeba-4bbe-a6ea-1a37eb016fbc",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9f3e84871a1d439c899cce3056c13add",
     "title": "Bose QuietComfort Headphones LE レビュー比較まとめ",
     "name": "BOSE(ボーズ) B3 1xPlayback comimages サウンドバー レビュー比較まとめ.md",
@@ -9061,14 +9061,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T11:00:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T10:25:25.617845+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e5c9e0c4-e1d1-4f12-a7af-2d887f5910f4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6b4147d15c53432da62f73b4cabd3a99",
     "title": "シャープ AX-LSX3A-T ウォーターオーブン レビュー比較まとめ",
     "name": "シャープ AX-LSX3A-T ウォーターオーブン レビュー比較まとめ.md",
@@ -9077,10 +9079,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T11:00:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T10:25:25.617845+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cab89667-de6d-4282-a0f4-0bbdcfe07908",
