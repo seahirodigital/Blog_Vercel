@@ -8562,7 +8562,7 @@
   },
   {
     "id": "f8f18521-46b5-4300-b045-2e07749332a1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc11e4b30c2c74f1a80ef7b7b50247e6e",
     "title": "レグザ 55Z770R テレビ レビュー比較まとめ",
     "name": "レグザ 55Z770R テレビ レビュー比較まとめ.md",
@@ -8571,14 +8571,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T08:05:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T07:30:03.776186+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "66f35651-2164-4c15-a965-4084a6a6955c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3e068ffae5b34cc195707a89e181da1f",
     "title": "Anker 7-in-1 Nano Charging レビュー比較まとめ",
     "name": "Anker 7-in-1 Nano Charging レビュー比較まとめ.md",
@@ -8587,10 +8589,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T08:05:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T07:30:03.776186+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2260632e-297d-473a-8fb5-b683a2068d45",
