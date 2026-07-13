@@ -8146,7 +8146,7 @@
   },
   {
     "id": "a9a0dc50-4955-4935-b450-47b1ea0c6856",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sead9f19f22b342a897c49346fa367af3",
     "title": "東芝 GR-Y550FZ 冷蔵庫 幅68.5㎝ レビュー比較まとめ",
     "name": "東芝 GR-Y550FZ 冷蔵庫 幅68.5㎝ レビュー比較まとめ.md",
@@ -8156,8 +8156,8 @@
     "publishAt": "2026-07-13T06:25:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
     "queuedAt": "2026-07-13T05:50:12.565680+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-13T06:27:25.515674+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7dd871c566e5?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
