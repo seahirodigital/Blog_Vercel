@@ -6674,7 +6674,7 @@
   },
   {
     "id": "8a9e4b4f-481d-4853-bff1-4cb3c9865398",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb52d3ee3c8be431da1b535f75f7e1797",
     "title": "アイロボット L121260 ロボット掃除機 レビュー比較まとめ",
     "name": "アイロボット L121260 ロボット掃除機 レビュー比較まとめ.md",
@@ -6684,8 +6684,8 @@
     "publishAt": "2026-07-13T00:35:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
     "queuedAt": "2026-07-13T01:31:21.544066+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-13T01:34:04.730921+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd3b2a9095313?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
