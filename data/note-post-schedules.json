@@ -9088,7 +9088,7 @@
   },
   {
     "id": "cab89667-de6d-4282-a0f4-0bbdcfe07908",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s706a38f990604d48b1ec59078be35c33",
     "title": "シャープ ES-X12C-TL ドラム式洗濯乾燥機 レビュー比較まとめ",
     "name": "シャープ ES-X12C-TL ドラム式洗濯乾燥機 レビュー比較まとめ.md",
@@ -9097,14 +9097,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T11:25:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T10:50:22.667356+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "63ca9aed-c8f1-4a93-991c-16cc5fe3e1e2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s28a44bda077f4400aef1968f1c85d957",
     "title": "デロンギ リヴェリア EXAM44055G レビュー比較まとめ",
     "name": "De'Longhi(デロンギ) EXAM44055G 全自動コーヒーマシン リヴェリア レビュー比較まとめ.md",
@@ -9113,10 +9115,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T11:25:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T10:50:22.667356+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2143eb59-417d-4bf7-9917-bd317a82fbab",
