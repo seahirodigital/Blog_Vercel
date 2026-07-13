@@ -7237,12 +7237,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T02:40:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "2026-07-13T04:06:57.164150+00:00",
+    "queuedAt": "2026-07-13T05:37:45.440720+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "d3a1a9bf-4cf5-417d-9ac0-7e289415ea38",
@@ -7323,12 +7323,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T03:05:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "2026-07-13T04:06:57.164150+00:00",
+    "queuedAt": "2026-07-13T05:37:45.440720+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "377b68c1-a1f3-4ec4-b722-2deee1e96724",
@@ -7445,12 +7445,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T03:30:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "2026-07-13T04:06:57.164150+00:00",
+    "queuedAt": "2026-07-13T05:37:45.440720+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "728eaa30-c120-4b16-b741-53c09881e840",
@@ -7497,12 +7497,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T03:55:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "2026-07-13T04:06:57.164150+00:00",
+    "queuedAt": "2026-07-13T05:37:45.440720+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "3a36055f-89da-4bb7-94f2-cdd304bea5ce",
@@ -7515,12 +7515,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T03:55:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "2026-07-13T04:06:57.164150+00:00",
+    "queuedAt": "2026-07-13T05:37:45.440720+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "5d3e49ef-f589-4e24-a05b-171d86fcbc9e",
