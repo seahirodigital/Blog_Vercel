@@ -9052,7 +9052,7 @@
   },
   {
     "id": "1bc98634-eeba-4bbe-a6ea-1a37eb016fbc",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s9f3e84871a1d439c899cce3056c13add",
     "title": "Bose QuietComfort Headphones LE レビュー比較まとめ",
     "name": "BOSE(ボーズ) B3 1xPlayback comimages サウンドバー レビュー比較まとめ.md",
@@ -9062,8 +9062,8 @@
     "publishAt": "2026-07-13T11:00:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
     "queuedAt": "2026-07-13T10:25:25.617845+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-13T11:25:00.339369+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ncdf9effb352c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
