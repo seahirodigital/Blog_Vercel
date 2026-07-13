@@ -7644,7 +7644,7 @@
   },
   {
     "id": "1a7ee3bc-c08c-438c-8c4c-8fb9ec233773",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!saf383aa52d114e12b6cf5d80c3245b72",
     "title": "シャープ CV-TH150-W 除湿機 レビュー比較まとめ",
     "name": "シャープ CV-TH150-W 除湿機 レビュー比較まとめ.md",
@@ -7654,8 +7654,8 @@
     "publishAt": "2026-07-13T04:20:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
     "queuedAt": "2026-07-13T04:06:57.164150+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-13T04:22:22.078949+00:00",
+    "publishedUrl": "https://editor.note.com/notes/nded64a868eb3/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
