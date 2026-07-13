@@ -7730,7 +7730,7 @@
   },
   {
     "id": "18327d28-54ea-475a-bf6d-c42e78a2cbe7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sddd6fb1843ba427bbfc403bd6af5878c",
     "title": "Dyson SV33 スティッククリーナー レビュー比較まとめ",
     "name": "Dyson SV33 スティッククリーナー レビュー比較まとめ.md",
@@ -7739,14 +7739,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T04:45:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T04:10:18.988902+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f6f84831-6efa-4cce-a075-24586b063752",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf19ee20fa83746d4ad2481ad06e9b443",
     "title": "レグザ 100E670R AirPlay2 テレビ レビュー比較まとめ",
     "name": "レグザ 100E670R AirPlay2 テレビ レビュー比較まとめ.md",
@@ -7755,10 +7757,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T04:45:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T04:10:18.988902+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6cc2b3a8-d02d-48b9-af30-0f99d5fffaab",
