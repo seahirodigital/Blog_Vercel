@@ -6656,7 +6656,7 @@
   },
   {
     "id": "35b9664d-4773-4d15-9fbc-030d18784b27",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7250b1eb17904ae2b8f471f66ab8c683",
     "title": "ゼンハイザー 91-506911dpB07KZKNRP1 1kHz1Vrms HD800 Sennheiser オープン",
     "name": "ゼンハイザー 91-506911dpB07KZKNRP1 1kHz1Vrms HD800 Sennheiser オープン.md",
@@ -6665,14 +6665,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T00:35:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T00:00:44.449512+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8a9e4b4f-481d-4853-bff1-4cb3c9865398",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb52d3ee3c8be431da1b535f75f7e1797",
     "title": "アイロボット L121260 ロボット掃除機 レビュー比較まとめ",
     "name": "アイロボット L121260 ロボット掃除機 レビュー比較まとめ.md",
@@ -6681,10 +6683,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T00:35:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T00:00:44.449512+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bcda684c-fcb0-4f1d-ad22-4081952f6fc2",
