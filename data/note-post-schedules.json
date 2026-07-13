@@ -8475,7 +8475,7 @@
   },
   {
     "id": "88cc73e2-528f-4101-af16-41d00515bbf1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s009e870095894ea894b0be23683acd40",
     "title": "Anker F3000 Solix Portable レビュー比較まとめ",
     "name": "Anker F3000 Solix Portable レビュー比較まとめ.md",
@@ -8484,14 +8484,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T07:40:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T07:05:36.315618+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2917fd56-295f-4600-9bec-5bc270978f9b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc5eeb5761a9b432589b6660434ddff67",
     "title": "バウワースアンドウィルキンス Px8 PX8RB ロイヤル・バーガンディ ワイヤレス・ヘッドフォン レビュー比較まとめ",
     "name": "バウワースアンドウィルキンス Px8 PX8RB ロイヤル・バーガンディ ワイヤレス・ヘッドフォン レビュー比較まとめ.md",
@@ -8500,10 +8502,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T07:40:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T07:05:36.315618+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7c90f3b1-838d-4d03-b62b-c4292dbc4914",
