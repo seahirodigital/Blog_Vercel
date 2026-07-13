@@ -7418,7 +7418,7 @@
   },
   {
     "id": "6922abaa-d1c8-4f0b-8800-5ecc65d4ee31",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd9efbd9f0050425baaeae16742ebc828",
     "title": "CIOが出したハンディファンが革新的すぎるんだが",
     "name": "20260709_0440_CIOが出したハンディファンが革新的すぎるんだが.md",
@@ -7428,8 +7428,8 @@
     "publishAt": "2026-07-13T03:30:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
     "queuedAt": "2026-07-13T04:06:57.164150+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-13T04:09:39.295235+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5676be5229a5?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
