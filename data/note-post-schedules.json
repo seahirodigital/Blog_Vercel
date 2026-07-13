@@ -8502,12 +8502,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T07:40:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "2026-07-13T07:05:36.315618+00:00",
+    "queuedAt": "2026-07-13T08:36:32.576217+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "7c90f3b1-838d-4d03-b62b-c4292dbc4914",
