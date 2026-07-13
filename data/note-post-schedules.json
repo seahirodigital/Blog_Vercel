@@ -6683,12 +6683,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T00:35:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "2026-07-13T00:00:44.449512+00:00",
+    "queuedAt": "2026-07-13T01:31:21.544066+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "bcda684c-fcb0-4f1d-ad22-4081952f6fc2",
