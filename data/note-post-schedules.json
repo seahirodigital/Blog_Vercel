@@ -7072,7 +7072,7 @@
   },
   {
     "id": "aba543f6-2d9a-4933-84fc-2ed4adfc3fc6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s91617d25ab0f4b0c8823d71a40c0d8e4",
     "title": "Dyson HD08 ヘアドライヤー レビュー比較まとめ",
     "name": "Dyson HD08 ヘアドライヤー レビュー比較まとめ.md",
@@ -7081,14 +7081,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T02:15:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T01:40:33.678099+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "49612cbc-cf97-433c-a63a-b4aba4463eee",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4021b4c7de1f44429dd5a6b46e33dcf5",
     "title": "roborock Saros20 ロボット掃除機 レビュー比較まとめ",
     "name": "roborock Saros20 ロボット掃除機 レビュー比較まとめ.md",
@@ -7097,10 +7099,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T02:15:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T01:40:33.678099+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a97d9381-d78f-45b7-a96e-b6ead5bae337",
