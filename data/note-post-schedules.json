@@ -6794,7 +6794,7 @@
   },
   {
     "id": "e26c4e8c-22cc-4c8e-93f4-d2372c04aa42",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s64a686044dbe4c23aebe2e181a8bc0fe",
     "title": "東芝 RAS-V221TE ルームエアコン 6畳用 レビュー比較まとめ",
     "name": "東芝 RAS-V221TE ルームエアコン 6畳用 レビュー比較まとめ.md",
@@ -6803,14 +6803,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T01:00:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T00:25:49.274261+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1504136e-850e-43c6-8617-4c1da8011a11",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sead9f19f22b342a897c49346fa367af3",
     "title": "東芝 GR-Y550FZ 冷蔵庫 幅68.5㎝ レビュー比較まとめ",
     "name": "東芝 GR-Y550FZ 冷蔵庫 幅68.5㎝ レビュー比較まとめ.md",
@@ -6819,10 +6821,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T01:00:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T00:25:49.274261+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "aed3890c-c0c8-4f48-b023-9cb9724e25c5",
