@@ -8658,12 +8658,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T08:30:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "2026-07-13T07:55:50.453786+00:00",
+    "queuedAt": "2026-07-13T09:42:12.609433+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "f44ecfe5-76f8-4437-b460-e57fc6dc70d7",
@@ -8876,7 +8876,7 @@
   },
   {
     "id": "cbf6585e-7441-4f87-9dde-0401e8b99882",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb76a83e1e33e44f68361eadc6ddab294",
     "title": "アイロボット R285060 ロボット掃除機 レビュー比較まとめ",
     "name": "アイロボット R285060 ロボット掃除機 レビュー比較まとめ.md",
@@ -8885,14 +8885,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T09:45:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T09:42:12.609433+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "813c0f5e-3598-48ad-a6e9-9cbca64c838f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sff5539cc65914b9b8192d2a99ab56105",
     "title": "Anker C1000 ドライヤー レビュー比較まとめ",
     "name": "Anker C1000 ドライヤー レビュー比較まとめ.md",
@@ -8901,10 +8903,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T09:45:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T09:42:12.609433+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "04408c31-41c4-4674-859c-36bba6efcd5f",
@@ -8942,7 +8946,7 @@
   },
   {
     "id": "8eec7285-5513-45b9-b079-d87f6234ecb6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s180a12e677724669996140b676655dc0",
     "title": "Sony WF-1000XM5 VGP2025 イヤホン レビュー比較まとめ",
     "name": "Sony WF-1000XM5 VGP2025 イヤホン レビュー比較まとめ.md",
@@ -8951,14 +8955,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T10:10:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T09:42:12.609433+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "737531ad-9eeb-413d-9956-784fc17d4483",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s44d9a40be85640fe8b998ed44b21f93f",
     "title": "ゼンハイザー 660S2 HD Headphone レビュー比較まとめ",
     "name": "ゼンハイザー 660S2 HD Headphone レビュー比較まとめ.md",
@@ -8967,10 +8973,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T10:10:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T09:42:12.609433+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "12070931-fa8c-4e55-b8aa-016259cf7940",
