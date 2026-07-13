@@ -6968,7 +6968,7 @@
   },
   {
     "id": "d9a53050-1754-43fd-b5b4-4c469d3079dd",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s944cf0483c9a484cbbc4b2b80d5bb595",
     "title": "ベンキュージャパン TK705i VGP2026 3000ANSI Rec709 BenQ 4K レビュー比較まとめ",
     "name": "ベンキュージャパン TK705i VGP2026 3000ANSI Rec709 BenQ 4K レビュー比較まとめ.md",
@@ -6977,14 +6977,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T01:50:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T01:15:51.406880+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ab0ad77e-8dc3-48cb-905d-fe7c1b4dc3a0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s944cf0483c9a484cbbc4b2b80d5bb595",
     "title": "ベンキュージャパン TK705i VGP2026 3000ANSI Rec709 BenQ 4K レビュー比較まとめ",
     "name": "ベンキュージャパン TK705i VGP2026 3000ANSI Rec709 BenQ 4K レビュー比較まとめ.md",
@@ -6993,10 +6995,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T01:50:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T01:15:51.406880+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bd58b1e4-eeed-40e5-aeb8-35f4f6575ef4",
