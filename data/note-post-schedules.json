@@ -6891,12 +6891,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T01:25:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "2026-07-13T00:50:51.118410+00:00",
+    "queuedAt": "2026-07-13T04:06:57.164150+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "6cb0f4a3-1523-4c57-b8b5-c77d8bca63e4",
@@ -7210,7 +7210,7 @@
   },
   {
     "id": "ee99f319-93ec-43cb-b684-cb7e1e7b1247",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s28a44bda077f4400aef1968f1c85d957",
     "title": "デロンギ リヴェリア EXAM44055G レビュー比較まとめ",
     "name": "De'Longhi(デロンギ) EXAM44055G 全自動コーヒーマシン リヴェリア レビュー比較まとめ.md",
@@ -7219,14 +7219,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T02:40:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T04:06:57.164150+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a1ed4a84-6977-4647-819f-f8a0844e6b93",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s203598e7d4994af48d88b04a5f350fe6",
     "title": "Dyson(ダイソン) V12 SV46 掃除機 レビュー比較まとめ",
     "name": "Dyson(ダイソン) V12 SV46 掃除機 レビュー比較まとめ.md",
@@ -7235,10 +7237,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T02:40:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T04:06:57.164150+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d3a1a9bf-4cf5-417d-9ac0-7e289415ea38",
@@ -7310,7 +7314,7 @@
   },
   {
     "id": "6906798b-771d-4e8c-9132-fc47c0bf27a4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s904e02d29ebd407f8b69ac324ddf6d3d",
     "title": "Sony WF-G700N PS5 イヤホン レビュー比較まとめ",
     "name": "Sony WF-G700N PS5 イヤホン レビュー比較まとめ.md",
@@ -7319,14 +7323,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T03:05:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T04:06:57.164150+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "377b68c1-a1f3-4ec4-b722-2deee1e96724",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s904e02d29ebd407f8b69ac324ddf6d3d",
     "title": "Sony WF-G700N PS5 イヤホン レビュー比較まとめ",
     "name": "Sony WF-G700N PS5 イヤホン レビュー比較まとめ.md",
@@ -7335,10 +7341,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T03:05:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T04:06:57.164150+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4efe015c-a62d-41d0-b507-4fac0de41802",
@@ -7410,7 +7418,7 @@
   },
   {
     "id": "6922abaa-d1c8-4f0b-8800-5ecc65d4ee31",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd9efbd9f0050425baaeae16742ebc828",
     "title": "CIOが出したハンディファンが革新的すぎるんだが",
     "name": "20260709_0440_CIOが出したハンディファンが革新的すぎるんだが.md",
@@ -7419,14 +7427,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T03:30:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T04:06:57.164150+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ee9f1c43-a4eb-46d6-8134-47683a724656",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa6880c99a9f1428cbbbf3f5740e6baec",
     "title": "Jackery 50Hz60Hz ポータブル電源 2000 レビュー比較まとめ",
     "name": "Jackery 50Hz60Hz ポータブル電源 2000 レビュー比較まとめ.md",
@@ -7435,10 +7445,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T03:30:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T04:06:57.164150+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "728eaa30-c120-4b16-b741-53c09881e840",
@@ -7476,7 +7488,7 @@
   },
   {
     "id": "f49f79e0-bfd7-4e3b-ab19-17a5458beed7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb931abe866bd4ff98ee4a264d8410f8a",
     "title": "アイロボット X185060 ロボット掃除機 レビュー比較まとめ",
     "name": "アイロボット X185060 ロボット掃除機 レビュー比較まとめ.md",
@@ -7485,14 +7497,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T03:55:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T04:06:57.164150+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3a36055f-89da-4bb7-94f2-cdd304bea5ce",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se86d563e56314ae58506d9ae62b93e2b",
     "title": "JBL JBLTOURPRO3GRN イヤホン レビュー比較まとめ",
     "name": "JBL JBLTOURPRO3GRN イヤホン レビュー比較まとめ.md",
@@ -7501,10 +7515,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T03:55:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T04:06:57.164150+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5d3e49ef-f589-4e24-a05b-171d86fcbc9e",
@@ -7610,7 +7626,7 @@
   },
   {
     "id": "c38b2b39-17e2-46a7-be32-64bf856c410b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9abf72964527478aae6bb234d4851ea4",
     "title": "Anker C2000 ドライヤー レビュー比較まとめ",
     "name": "Anker C2000 ドライヤー レビュー比較まとめ.md",
@@ -7619,14 +7635,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T04:20:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T04:06:57.164150+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1a7ee3bc-c08c-438c-8c4c-8fb9ec233773",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!saf383aa52d114e12b6cf5d80c3245b72",
     "title": "シャープ CV-TH150-W 除湿機 レビュー比較まとめ",
     "name": "シャープ CV-TH150-W 除湿機 レビュー比較まとめ.md",
@@ -7635,10 +7653,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T04:20:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T04:06:57.164150+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "207a4337-4bb7-4007-8497-0fdc103ba408",
