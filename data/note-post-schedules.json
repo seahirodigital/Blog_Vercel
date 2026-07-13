@@ -6986,7 +6986,7 @@
   },
   {
     "id": "ab0ad77e-8dc3-48cb-905d-fe7c1b4dc3a0",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s944cf0483c9a484cbbc4b2b80d5bb595",
     "title": "ベンキュージャパン TK705i VGP2026 3000ANSI Rec709 BenQ 4K レビュー比較まとめ",
     "name": "ベンキュージャパン TK705i VGP2026 3000ANSI Rec709 BenQ 4K レビュー比較まとめ.md",
@@ -6996,8 +6996,8 @@
     "publishAt": "2026-07-13T01:50:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
     "queuedAt": "2026-07-13T01:15:51.406880+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-13T01:52:17.112845+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n57c15fa77587/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
