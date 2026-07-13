@@ -7938,7 +7938,7 @@
   },
   {
     "id": "460c7f92-5dda-4ace-9785-38b561693957",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se86d563e56314ae58506d9ae62b93e2b",
     "title": "JBL JBLTOURPRO3GRN イヤホン レビュー比較まとめ",
     "name": "JBL JBLTOURPRO3GRN イヤホン レビュー比較まとめ.md",
@@ -7947,14 +7947,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T05:35:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T05:00:16.464388+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b183f981-349a-4faa-9c28-a8d184d2b76e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb931abe866bd4ff98ee4a264d8410f8a",
     "title": "アイロボット X185060 ロボット掃除機 レビュー比較まとめ",
     "name": "アイロボット X185060 ロボット掃除機 レビュー比較まとめ.md",
@@ -7963,10 +7965,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T05:35:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T05:00:16.464388+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "de89be84-00b1-42fe-947b-aa328a703787",
