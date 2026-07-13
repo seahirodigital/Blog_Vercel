@@ -7938,7 +7938,7 @@
   },
   {
     "id": "460c7f92-5dda-4ace-9785-38b561693957",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!se86d563e56314ae58506d9ae62b93e2b",
     "title": "JBL JBLTOURPRO3GRN イヤホン レビュー比較まとめ",
     "name": "JBL JBLTOURPRO3GRN イヤホン レビュー比較まとめ.md",
@@ -7948,8 +7948,8 @@
     "publishAt": "2026-07-13T05:35:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
     "queuedAt": "2026-07-13T05:00:16.464388+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-13T05:37:28.019960+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n73f5eb2c85ef?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
