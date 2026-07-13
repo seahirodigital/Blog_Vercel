@@ -9088,7 +9088,7 @@
   },
   {
     "id": "cab89667-de6d-4282-a0f4-0bbdcfe07908",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s706a38f990604d48b1ec59078be35c33",
     "title": "シャープ ES-X12C-TL ドラム式洗濯乾燥機 レビュー比較まとめ",
     "name": "シャープ ES-X12C-TL ドラム式洗濯乾燥機 レビュー比較まとめ.md",
@@ -9098,8 +9098,8 @@
     "publishAt": "2026-07-13T11:25:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
     "queuedAt": "2026-07-13T10:50:22.667356+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-13T11:27:16.935871+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ne682b4b0f3ae?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
