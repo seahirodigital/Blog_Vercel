@@ -8806,7 +8806,7 @@
   },
   {
     "id": "f6794e23-3fc2-4898-989f-e3db241dc062",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf19ee20fa83746d4ad2481ad06e9b443",
     "title": "レグザ 100E670R AirPlay2 テレビ レビュー比較まとめ",
     "name": "レグザ 100E670R AirPlay2 テレビ レビュー比較まとめ.md",
@@ -8815,14 +8815,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T09:20:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T08:45:06.727747+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5ba5c2f9-9c51-4e67-a8c5-7e9242236159",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9abf72964527478aae6bb234d4851ea4",
     "title": "Anker C2000 ドライヤー レビュー比較まとめ",
     "name": "Anker C2000 ドライヤー レビュー比較まとめ.md",
@@ -8831,10 +8833,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T09:20:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T08:45:06.727747+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7e6c3739-0f15-4797-8d42-52095423e6b7",
