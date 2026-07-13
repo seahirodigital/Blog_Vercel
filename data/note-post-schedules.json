@@ -8259,12 +8259,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T06:50:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "2026-07-13T06:15:47.568914+00:00",
+    "queuedAt": "2026-07-13T07:46:18.134461+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "7e26a764-8fc4-4d0c-87e8-b3bdb4d12f71",
