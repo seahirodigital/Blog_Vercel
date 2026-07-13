@@ -8702,7 +8702,7 @@
   },
   {
     "id": "c46b47e0-2b8f-4526-af7a-1ed39a505fd9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa6880c99a9f1428cbbbf3f5740e6baec",
     "title": "Jackery 50Hz60Hz ポータブル電源 2000 レビュー比較まとめ",
     "name": "Jackery 50Hz60Hz ポータブル電源 2000 レビュー比較まとめ.md",
@@ -8711,14 +8711,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T08:55:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T08:20:18.625570+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "335ddbe2-591d-4dd0-8075-9198ed8cbd80",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s64a686044dbe4c23aebe2e181a8bc0fe",
     "title": "東芝 RAS-V221TE ルームエアコン 6畳用 レビュー比較まとめ",
     "name": "東芝 RAS-V221TE ルームエアコン 6畳用 レビュー比較まとめ.md",
@@ -8727,10 +8729,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T08:55:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T08:20:18.625570+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "56fe8c3d-0b14-4566-8f5c-1784c6550ab4",
