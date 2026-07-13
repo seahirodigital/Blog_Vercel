@@ -8806,7 +8806,7 @@
   },
   {
     "id": "f6794e23-3fc2-4898-989f-e3db241dc062",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf19ee20fa83746d4ad2481ad06e9b443",
     "title": "レグザ 100E670R AirPlay2 テレビ レビュー比較まとめ",
     "name": "レグザ 100E670R AirPlay2 テレビ レビュー比較まとめ.md",
@@ -8816,8 +8816,8 @@
     "publishAt": "2026-07-13T09:20:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
     "queuedAt": "2026-07-13T08:45:06.727747+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-13T09:22:31.203898+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n3a5fb9953bd4?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
