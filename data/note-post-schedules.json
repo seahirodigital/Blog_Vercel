@@ -8146,7 +8146,7 @@
   },
   {
     "id": "a9a0dc50-4955-4935-b450-47b1ea0c6856",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sead9f19f22b342a897c49346fa367af3",
     "title": "東芝 GR-Y550FZ 冷蔵庫 幅68.5㎝ レビュー比較まとめ",
     "name": "東芝 GR-Y550FZ 冷蔵庫 幅68.5㎝ レビュー比較まとめ.md",
@@ -8155,14 +8155,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T06:25:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T05:50:12.565680+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2d026823-100d-4201-8e71-81212bcd9ab5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s453c67324e8148fb9715329fda5088a8",
     "title": "ゼンハイザー 620S Sennheiser ヘッドホン レビュー比較まとめ",
     "name": "ゼンハイザー 620S Sennheiser ヘッドホン レビュー比較まとめ.md",
@@ -8171,10 +8173,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T06:25:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T05:50:12.565680+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0e45cc87-4d00-4fd6-9622-b6d0f0c51d49",
