@@ -8999,7 +8999,7 @@
   },
   {
     "id": "0638e290-8925-4a13-b59f-06cf74682f32",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9023438a5a1f4efbb15dae5453387279",
     "title": "Hisense HR-K350LS テレビ レビュー比較まとめ",
     "name": "Hisense HR-K350LS テレビ レビュー比較まとめ.md",
@@ -9008,14 +9008,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T10:35:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T10:00:54.845833+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4dd190af-dbd8-4701-af34-9fdaf12579d6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s23c2d0fd6b3d425db67b0712b78ea9b4",
     "title": "アイリスオーヤマ SCD-23AZP1-W スティッククリーナー レビュー比較まとめ",
     "name": "アイリスオーヤマ SCD-23AZP1-W スティッククリーナー レビュー比較まとめ.md",
@@ -9024,10 +9026,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T10:35:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T10:00:54.845833+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "06a42dc0-ca24-4b87-bbf2-d59f9b6ff053",
