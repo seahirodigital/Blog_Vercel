@@ -6579,12 +6579,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T00:10:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "2026-07-12T23:35:13.199263+00:00",
+    "queuedAt": "2026-07-13T01:05:21.345813+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "1f5f4d7f-a61f-4a3e-80ee-e37558a0209f",
