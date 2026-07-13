@@ -8649,7 +8649,7 @@
   },
   {
     "id": "ef885cae-9cd9-4794-b152-bc70ab9d9dc2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc5eeb5761a9b432589b6660434ddff67",
     "title": "バウワースアンドウィルキンス Px8 PX8RB ロイヤル・バーガンディ ワイヤレス・ヘッドフォン レビュー比較まとめ",
     "name": "バウワースアンドウィルキンス Px8 PX8RB ロイヤル・バーガンディ ワイヤレス・ヘッドフォン レビュー比較まとめ.md",
@@ -8658,14 +8658,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T08:30:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T07:55:50.453786+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f44ecfe5-76f8-4437-b460-e57fc6dc70d7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s706a38f990604d48b1ec59078be35c33",
     "title": "シャープ ES-X12C-TL ドラム式洗濯乾燥機 レビュー比較まとめ",
     "name": "シャープ ES-X12C-TL ドラム式洗濯乾燥機 レビュー比較まとめ.md",
@@ -8674,10 +8676,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T08:30:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T07:55:50.453786+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bed53de1-29f0-4654-955e-19a98e837d48",
