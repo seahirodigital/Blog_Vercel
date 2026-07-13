@@ -8076,7 +8076,7 @@
   },
   {
     "id": "6c77ef92-fa2e-40b1-b073-ae5def767800",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sde7490570b3e4682908e4a50b228bad5",
     "title": "EF ECOFLOW A0 10ms 1Kwh ポータブルエアコン レビュー比較まとめ",
     "name": "EF ECOFLOW A0 10ms 1Kwh ポータブルエアコン レビュー比較まとめ.md",
@@ -8085,14 +8085,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T06:00:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T05:25:10.739478+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "aee71aee-aa17-41cc-970f-52c536630209",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7250b1eb17904ae2b8f471f66ab8c683",
     "title": "ゼンハイザー 91-506911dpB07KZKNRP1 1kHz1Vrms HD800 Sennheiser オープン",
     "name": "ゼンハイザー 91-506911dpB07KZKNRP1 1kHz1Vrms HD800 Sennheiser オープン.md",
@@ -8101,10 +8103,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T06:00:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T05:25:10.739478+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "81f474ab-2039-4cf7-814b-e96ad69a7d23",
