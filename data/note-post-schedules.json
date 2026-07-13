@@ -7834,7 +7834,7 @@
   },
   {
     "id": "2ccfc7d8-0877-4f23-92b7-1377864dbafe",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb52d3ee3c8be431da1b535f75f7e1797",
     "title": "アイロボット L121260 ロボット掃除機 レビュー比較まとめ",
     "name": "アイロボット L121260 ロボット掃除機 レビュー比較まとめ.md",
@@ -7843,14 +7843,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T05:10:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T04:35:49.555819+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5aad0ed8-409b-42f8-a706-dfd852278d5c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s797b3e9517d14c6098bf93ce4975c3f5",
     "title": "Sonos VGP2026 サウンドバー レビュー比較まとめ",
     "name": "Sonos VGP2026 サウンドバー レビュー比較まとめ.md",
@@ -7859,10 +7861,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T05:10:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T04:35:49.555819+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "eaed50ad-d128-423e-a5cc-4fffe7de5625",
