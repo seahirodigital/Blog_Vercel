@@ -8354,7 +8354,7 @@
   },
   {
     "id": "26fbbe0d-0ba6-4ca6-9cc3-e1db6e57b01c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s453c67324e8148fb9715329fda5088a8",
     "title": "ゼンハイザー 620S Sennheiser ヘッドホン レビュー比較まとめ",
     "name": "ゼンハイザー 620S Sennheiser ヘッドホン レビュー比較まとめ.md",
@@ -8363,14 +8363,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T07:15:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T06:40:26.547657+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5a50995a-9376-4591-900a-eed4cafc797d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sde7490570b3e4682908e4a50b228bad5",
     "title": "EF ECOFLOW A0 10ms 1Kwh ポータブルエアコン レビュー比較まとめ",
     "name": "EF ECOFLOW A0 10ms 1Kwh ポータブルエアコン レビュー比較まとめ.md",
@@ -8379,10 +8381,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T07:15:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T06:40:26.547657+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b896be9d-eff2-480d-afa8-3c27539484c1",
