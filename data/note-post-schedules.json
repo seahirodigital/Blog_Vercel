@@ -7730,7 +7730,7 @@
   },
   {
     "id": "18327d28-54ea-475a-bf6d-c42e78a2cbe7",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sddd6fb1843ba427bbfc403bd6af5878c",
     "title": "Dyson SV33 スティッククリーナー レビュー比較まとめ",
     "name": "Dyson SV33 スティッククリーナー レビュー比較まとめ.md",
@@ -7740,8 +7740,8 @@
     "publishAt": "2026-07-13T04:45:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
     "queuedAt": "2026-07-13T04:10:18.988902+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-13T04:47:38.943833+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n00762689d467/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
