@@ -6864,7 +6864,7 @@
   },
   {
     "id": "94c4b983-4779-4151-ae55-4718f4871a08",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s203598e7d4994af48d88b04a5f350fe6",
     "title": "Dyson(ダイソン) V12 SV46 掃除機 レビュー比較まとめ",
     "name": "Dyson(ダイソン) V12 SV46 掃除機 レビュー比較まとめ.md",
@@ -6873,14 +6873,16 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T01:25:00.000Z",
     "createdAt": "2026-07-12T07:20:30.002Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T00:50:51.118410+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "20c29347-33d9-4081-a59e-dd18e137275e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s009e870095894ea894b0be23683acd40",
     "title": "Anker F3000 Solix Portable レビュー比較まとめ",
     "name": "Anker F3000 Solix Portable レビュー比較まとめ.md",
@@ -6889,10 +6891,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-13T01:25:00.000Z",
     "createdAt": "2026-07-12T07:20:43.218Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-13T00:50:51.118410+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6cb0f4a3-1523-4c57-b8b5-c77d8bca63e4",
