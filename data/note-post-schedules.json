@@ -9277,7 +9277,7 @@
   },
   {
     "id": "ba51059f-77e5-4505-ac7a-0e12870a3e51",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sed83356ff12748219b09928113bd52de",
     "title": "ALADDIN X3 Laser 4K レビュー：天井プロジェクターで叶えるスマートなエンタメ空間",
     "name": "20260725_0250_ついに登場！Aladdin Xから待望の４Kプロジェクター出ました『Aladdin X3 Laser 4K』.md",
@@ -9286,10 +9286,12 @@
     "noTopImage": false,
     "publishAt": "2026-07-30T22:30:00.000Z",
     "createdAt": "2026-07-30T11:03:27.921Z",
-    "queuedAt": "",
+    "queuedAt": "2026-07-30T22:52:16.787903+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "255c3062-35d9-42c8-a489-d27ba7d60d11",
