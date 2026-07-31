@@ -9295,7 +9295,7 @@
   },
   {
     "id": "255c3062-35d9-42c8-a489-d27ba7d60d11",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s44f492d920cf46c58ba5b87132a5c2f9",
     "title": "Marshall ACTON IV BLACK レビュー口コミ比較まとめ",
     "name": "20260725_0248_新定番スピーカーが想像以上に進化してるぞ／Marshall Acton IV.md",
@@ -9305,8 +9305,8 @@
     "publishAt": "2026-07-31T08:00:00.000Z",
     "createdAt": "2026-07-30T11:05:52.901Z",
     "queuedAt": "2026-07-31T10:01:25.620574+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-07-31T10:04:10.023781+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd99745dd257c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
