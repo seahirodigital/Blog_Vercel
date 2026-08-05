@@ -9375,5 +9375,21 @@
     "publishedAt": "",
     "publishedUrl": "",
     "error": ""
+  },
+  {
+    "id": "4f7967d2-0710-4b13-b71b-3df1aaa0573f",
+    "status": "scheduled",
+    "fileId": "FFCC26DEDBBA4E70!sef083303b3df40ef929906a89b64edfd",
+    "title": "HIFIMA ANANDAレビュー比較まとめ",
+    "name": "HIFIMAN B3-ANANDAdpB07GRSFXZH comimages 51UeNf2jd4L ハイファイマン.md",
+    "path": "",
+    "noteTarget": "blog_main",
+    "noTopImage": false,
+    "publishAt": "2026-08-07T02:30:00.000Z",
+    "createdAt": "2026-08-05T03:59:41.296Z",
+    "queuedAt": "",
+    "publishedAt": "",
+    "publishedUrl": "",
+    "error": ""
   }
 ]
