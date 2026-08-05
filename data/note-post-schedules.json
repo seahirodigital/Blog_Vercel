@@ -9313,7 +9313,7 @@
   },
   {
     "id": "cde58040-b657-490c-aa09-ae94dc11c995",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0c272339b0c54478986ef40f624dfdd7",
     "title": "HIFIMAN HE1000 ハイファイマン Stealth レビュー比較まとめ",
     "name": "HIFIMAN HE1000 ハイファイマン Stealth レビュー比較まとめ.md",
@@ -9322,10 +9322,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-05T09:00:00.000Z",
     "createdAt": "2026-08-05T03:57:01.487Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-05T10:47:45.827605+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c5fee51a-5c37-4fcc-9dae-347620216e20",
