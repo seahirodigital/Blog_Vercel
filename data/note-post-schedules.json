@@ -9345,7 +9345,7 @@
   },
   {
     "id": "4627c803-570d-4290-87d5-e227d34c95bb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scef4ea1953a541e28333afc90c8a4dff",
     "title": "HiFiMAN(ハイファイマン) Ananda Nano レビュー比較まとめ",
     "name": "HIFIMAN 5Hz-55kHz JP3 comimages ハイファイマン Ananda レビュー比較まとめ.md",
@@ -9357,6 +9357,7 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-05T03:58:11.798Z"
   }
 ]
