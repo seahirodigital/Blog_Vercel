@@ -9366,7 +9366,7 @@
   },
   {
     "id": "721ffbfc-9098-430f-bffd-18eb79187d5d",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd523c5618c37471fb01f372cba820ac7",
     "title": "HIFIMAN ANANDA UNVEILED レビュー比較まとめ",
     "name": "HIFIMAN 5Hz-55kHz comimages 81YOJb5-F8L イヤホン レビュー比較まとめ.md",
@@ -9376,8 +9376,8 @@
     "publishAt": "2026-08-06T09:00:00.000Z",
     "createdAt": "2026-08-05T03:58:48.286Z",
     "queuedAt": "2026-08-06T08:25:30.657601+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-06T09:02:38.582764+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n05b41d292047?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
