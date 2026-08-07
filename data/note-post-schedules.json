@@ -9384,7 +9384,7 @@
   },
   {
     "id": "4f7967d2-0710-4b13-b71b-3df1aaa0573f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sef083303b3df40ef929906a89b64edfd",
     "title": "HIFIMA ANANDAレビュー比較まとめ",
     "name": "HIFIMAN B3-ANANDAdpB07GRSFXZH comimages 51UeNf2jd4L ハイファイマン.md",
@@ -9394,8 +9394,8 @@
     "publishAt": "2026-08-07T02:30:00.000Z",
     "createdAt": "2026-08-05T03:59:41.296Z",
     "queuedAt": "2026-08-07T04:15:11.091714+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-07T04:18:02.694420+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf9ae12cdc4e9?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
