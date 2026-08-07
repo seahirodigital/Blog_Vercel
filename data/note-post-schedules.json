@@ -9411,11 +9411,11 @@
     "noTopImage": false,
     "publishAt": "2026-08-07T09:00:00.000Z",
     "createdAt": "2026-08-05T04:00:21.648Z",
-    "queuedAt": "2026-08-07T08:25:21.163852+00:00",
+    "queuedAt": "2026-08-07T09:55:32.282086+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   }
 ]
