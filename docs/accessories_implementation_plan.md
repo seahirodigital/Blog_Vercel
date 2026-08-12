@@ -1342,3 +1342,12 @@ Windowsでは「MLXで作成」を無効表示してMLXジョブを登録しな�
 - JavaScript側のプレビュー用タイトル生成もPython側と同じH1規則になることを検査する。
 - Vercelビルド後、本番プレビューで `adapter` の表示名が `充電器`、生成予定タイトルが `M5 iPad Pro 充電器おすすめまとめ` になることを確認する。
 - 既存の生成済みバッテリー・充電器記事は、本文を再生成せずH1・全H2・免責文だけを移行し、親記事IDフォルダを可読フォルダ名へ変更する。
+
+実運用確認結果:
+
+- Python単体テスト25件、JavaScript構文検査、M5 iPad Proのタイトル変換検査、`git diff --check`、Vercelローカルビルドに合格した。
+- 実装コミット `dca12163` を `main` へpushし、Vercel Productionデプロイ `dpl_5U3jKQT3HuUQA4byvg1mTu5kgSQw` がReadyとなり、`https://blog-vercel-dun.vercel.app` へ反映された。
+- 本番プレビューで、親記事 `M5 iPad Pro レビュー比較違いまとめ` に対して `M5 iPad Pro バッテリーおすすめまとめ`、`M5 iPad Pro 充電器おすすめまとめ`、`M5 iPad Pro ケーブルおすすめまとめ` が返ることを確認した。既存シートの `adapter` 旧表記は、原文スナップショットとSHA-256を維持したまま実行時だけ「充電器」へ安全に読み替える。
+- Apps Scriptへ `migrateAdapterCategoryToCharger` をclasp pushし、version 5のAPI実行デプロイを作成した。claspからの関数直接実行はApps Script側の実行権限で拒否されたため、シート原文を破壊的に更新せず、Blog VercelとMLXの読込層で旧表記互換を有効にした。
+- 生成済み2記事を同じOneDrive item IDのまま更新し、バッテリー記事と充電器記事のH1完全一致、全22件のH2接頭辞、免責文非混入を再取得して確認した。
+- 既存の親記事IDフォルダを `20260812_2213_M5 iPad Pr` へ名称変更し、同フォルダ内に2記事が残ることをBlog Vercelの記事一覧APIで確認した。記事URLは同じOneDrive item IDのまま維持されている。
