@@ -1,0 +1,51 @@
+name: 周辺機器記事生成 - Gemini
+run-name: 周辺機器記事生成 Gemini ${{ inputs.job_id }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      job_id:
+        description: OneDrive周辺機器ジョブID
+        required: true
+        type: string
+
+concurrency:
+  group: accessories-gemini-${{ inputs.job_id }}
+  cancel-in-progress: false
+
+jobs:
+  generate-accessory-article:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Python 3.13をセットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Python依存パッケージをインストール
+        run: pip install -r scripts/pipeline/requirements.txt
+
+      - name: OneDrive refresh tokenをVercelから同期
+        env:
+          ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          VERCEL_URL: https://blog-vercel-dun.vercel.app
+        run: python scripts/pipeline/sync_onedrive_refresh_token_from_vercel.py
+
+      - name: Geminiだけで周辺機器記事を生成
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
+          ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
+          ONEDRIVE_FOLDER: ${{ secrets.ONEDRIVE_FOLDER }}
+          ACCESSORIES_CONTROL_FOLDER: Blog_Vercel_Accessories_Control
+          ACCESSORIES_GEMINI_MODEL: gemini-2.5-flash
+          PYTHONUNBUFFERED: "1"
+          PYTHONIOENCODING: UTF-8
+        run: python -m scripts.accessories.main --job-id "${{ inputs.job_id }}" --engine Gemini

@@ -2,6 +2,11 @@
   "version": 2,
   "buildCommand": "",
   "outputDirectory": "public",
+  "functions": {
+    "api/accessories.js": {
+      "includeFiles": "accessories/templates/**"
+    }
+  },
   "rewrites": [
     { "source": "/api/info-viewer-notion", "destination": "/api/info-viewer?resource=notion" },
     { "source": "/api/(.*)", "destination": "/api/$1" }

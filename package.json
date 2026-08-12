@@ -4,7 +4,7 @@
   "description": "Markdown ブログ編集・自動生成システム (YouTube → AI 3段階推敲 → OneDrive)",
   "private": true,
   "scripts": {
-    "dev": "vercel dev",
+    "dev:vercel": "vercel dev",
     "build": "echo 'Static site - no build needed'",
     "deploy": "vercel --prod"
   },
@@ -15,7 +15,8 @@
     "libsodium-wrappers": "0.7.15"
   },
   "devDependencies": {
-    "vercel": "^39.0.0"
+    "@babel/parser": "^7.29.8",
+    "vercel": "^58.9.4"
   },
   "engines": {
     "node": ">=18.0.0"

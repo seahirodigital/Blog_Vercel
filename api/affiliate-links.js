@@ -5,6 +5,7 @@
  */
 
 import { syncGitHubActionsRefreshToken } from '../lib/onedrive-token-sync.js';
+import { mergeAffiliateMemoContent } from '../lib/accessories-core.js';
 
 const GRAPH_API = 'https://graph.microsoft.com/v1.0';
 const TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
@@ -106,18 +107,6 @@ function parseMemos(content) {
 }
 
 // 動的なmemosオブジェクトからファイル内容を生成
-function buildFileContent(memos) {
-  const nums = Object.keys(memos)
-    .map(k => parseInt(k.replace('memo', ''), 10))
-    .sort((a, b) => a - b);
-  let out = '';
-  for (const n of nums) {
-    out += `===MEMO${n}===\n`;
-    out += (memos[`memo${n}`] || '') + '\n\n';
-  }
-  return out;
-}
-
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, OPTIONS');
@@ -146,10 +135,12 @@ export default async function handler(req, res) {
       const { memos } = req.body;
       if (!memos) return res.status(400).json({ error: 'memos は必須です' });
       const url = `${GRAPH_API}/me/drive/root:/${encoded}:/content`;
+      const existingResponse = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+      const existingContent = existingResponse.ok ? await existingResponse.text() : '';
       const r = await fetch(url, {
         method: 'PUT',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'text/plain; charset=utf-8' },
-        body: buildFileContent(memos),
+        body: mergeAffiliateMemoContent(memos, existingContent),
       });
       if (!r.ok) throw new Error(`保存失敗: ${r.status}`);
       return res.status(200).json({ success: true });
