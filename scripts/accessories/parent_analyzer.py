@@ -35,6 +35,12 @@ SPEC_EVIDENCE_RE = re.compile(
 )
 
 
+def _is_conclusion_heading(title: str) -> bool:
+    """「結論」単独と、既存SEO接頭辞付きの結論見出しを識別する。"""
+    value = str(title or "").strip()
+    return bool(re.search(r"(?:^|[:：│|])\s*結論(?:\s*[:：].*)?\s*$", value))
+
+
 def _derive_product_name(h1_title: str) -> str:
     left = re.split(r"[:：│|]", h1_title, maxsplit=1)[0].strip()
     # 親記事のSEO用記事軸は製品名に含めない。
@@ -70,7 +76,7 @@ def analyze_parent(markdown: str) -> ParentArticle:
         (
             heading
             for heading in h2s
-            if re.fullmatch(r"結論(?:[:：].*)?", heading.title.strip())
+            if _is_conclusion_heading(heading.title)
         ),
         None,
     )
@@ -98,7 +104,7 @@ def extract_generation_evidence(parent: ParentArticle, max_chars: int = 12000) -
         explicit = next(
             heading
             for heading in parent.h2_headings
-            if re.fullmatch(r"結論(?:[:：].*)?", heading.title.strip())
+            if _is_conclusion_heading(heading.title)
         )
         conclusion_start = explicit.end
     else:

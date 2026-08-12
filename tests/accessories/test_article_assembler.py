@@ -130,6 +130,14 @@ class ArticleAssemblerTest(unittest.TestCase):
         self.assertTrue(child.startswith("# M5 iPad Pro 充電器おすすめまとめ\n"))
         self.assertIn("## M5 iPad Pro 充電器おすすめ: 結論", child)
         self.assertIn("## M5 iPad Pro 充電器おすすめ: Captions", child)
+        self.assertGreater(
+            child.find(self.group.products[0].text),
+            child.find("## M5 iPad Pro 充電器おすすめ: 結論"),
+        )
+        self.assertLess(
+            child.find(self.group.products[0].text),
+            child.find("## M5 iPad Pro 充電器おすすめ: Captions"),
+        )
         self.assertNotIn("レビュー比較違いまとめ", "\n".join(
             line for line in child.splitlines() if line.startswith(("# ", "## "))
         ))
