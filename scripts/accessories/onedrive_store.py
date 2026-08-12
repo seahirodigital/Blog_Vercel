@@ -169,7 +169,15 @@ def download_article(file_id: str) -> str:
     response = _request("GET", f"{GRAPH_API}/me/drive/items/{quote(file_id, safe='')}/content", token=token)
     if not response.ok:
         raise RuntimeError(f"親記事取得失敗: HTTP {response.status_code}")
-    return response.text.lstrip("\ufeff")
+    return _decode_utf8_text(response.content)
+
+
+def _decode_utf8_text(content: bytes) -> str:
+    """OneDriveがcharsetを返さなくてもMarkdownをUTF-8として正しく復元する。"""
+    try:
+        return bytes(content).decode("utf-8-sig")
+    except UnicodeDecodeError as error:
+        raise RuntimeError("OneDriveテキストがUTF-8ではありません") from error
 
 
 def download_text_path(path: str) -> str:
@@ -181,7 +189,7 @@ def download_text_path(path: str) -> str:
     )
     if not response.ok:
         raise RuntimeError(f"OneDriveテキスト取得失敗: HTTP {response.status_code}")
-    return response.text.lstrip("\ufeff")
+    return _decode_utf8_text(response.content)
 
 
 def job_path(job_id: str) -> str:

@@ -1297,3 +1297,29 @@ Windowsでは「MLXで作成」を無効表示してMLXジョブを登録しな�
 - MacのChromeで「MLXで作成」を押し、最初の確認画面で「Blog Vercel MLX Launcher.appを開く」を選択する。
 - TerminalとBlog Vercelの両方で同じジョブの工程が進み、完了後に記事リンクが表示されることを確認する。
 - 完成した子記事がH1、対象H2、結論追記以外を変更せず、Frontmatterや管理情報を含まないことを確認する。
+
+### 2026-08-12: MLX経路からGemini SDK依存を分離
+
+確認した障害:
+
+- Blog VercelからMLXジョブ2件を起動すると、記事処理開始前に `cannot import name 'genai' from 'google' (unknown location)` で失敗した。
+- `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Gemma4_AMZN_Blog/.venv/bin/python3` では `google.genai` を利用できないが、既存 `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Gemma4_AMZN_Blog/start_mlx.command` はGemma E4BのOpenAI互換MLX APIを使うため、同SDKを必要としない。
+- 原因は共通実行器がMLX処理でもGeminiエンジンを起動時に無条件importしていたことであり、Gemma E4BモデルやMLXサーバーの障害ではない。
+
+修正内容:
+
+- `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/scripts/accessories/main.py` のGeminiエンジン読込を、`engine_name=Gemini` の分岐内だけで行う遅延importへ変更した。
+- MLX経路は `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Gemma4_AMZN_Blog/MLX/accessories_engine.py` から `http://127.0.0.1:8001/v1/chat/completions` と `mlx-community/gemma-4-e4b-it-8bit` を使い、Gemini SDKへ依存しない構成を維持した。
+- 共通実行器へGeminiのトップレベルimportが再混入しない回帰テストを追加した。
+- 同じジョブの再実行で、OneDrive応答にcharsetがない場合にPython `requests`が日本語の `▼` を誤判定し、商品ブロックを発見できない第二の問題を特定した。
+- 親記事と `affiliate_links.txt` はHTTPヘッダー推測に依存せず、UTF-8 BOM対応で明示デコードするよう修正した。UTF-8以外は文字化けしたまま処理せず停止する。
+
+実運用確認:
+
+- 修正後、失敗済みMLXジョブ `0b3d4e9b-229c-4b71-ac2a-f7ca658b0181` と `30b79975-f248-4341-b59f-6e02c87fbf15` を同じジョブIDで再実行した。
+- 既存 `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/MLX/start_MLX_discrod.command --server-only` でMLXサーバーが起動し、`mlx-community/gemma-4-e4b-it-8bit` によるバッテリー記事とアダプター記事の生成が完了した。
+- 両記事とも生成結果組立、Frontmatter・管理情報検査、OneDrive保存、`周辺機器DB_LLM` の完了日時・記事リンク更新まで成功した。
+- 本番状態APIで両ジョブの `state=completed` と `registrySync=completed` を確認した。
+- OneDriveへ保存されたMarkdownを再取得し、両記事ともH1開始、禁止メタ情報なし、Amazon商品リンクありを確認した。
+- Python単体テスト21件、MLX用仮想環境での共通実行器・Gemma E4Bアダプターimport、Vercelビルドに合格した。
+- `python-dotenv could not parse statement starting at line 11` は既存環境ファイルに対する警告として残るが、必要な認証値とMLX設定は読み込まれ、今回の2ジョブは完了している。秘密情報を含む既存環境ファイルは変更していない。

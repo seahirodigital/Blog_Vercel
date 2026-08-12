@@ -13,7 +13,6 @@ from .affiliate_group import extract_group
 from .article_assembler import assemble_article, immutable_content_sha256
 from .article_validator import validate_public_markdown
 from .conclusion_builder import build_conclusion_addition
-from .engines import gemini_engine
 from .job_schema import utc_now, validate_job
 from .metadata_store import save_metadata
 from .onedrive_store import (
@@ -101,6 +100,9 @@ def process_job(
                     f"{engine_name}で記事差分を生成しています（{attempt}/{MAX_GENERATION_ATTEMPTS}回目）",
                 )
                 if engine_name == "Gemini":
+                    # MLX実行時にGemini SDKを要求しない。各エンジンを依存関係も含めて独立させる。
+                    from .engines import gemini_engine
+
                     result = gemini_engine.generate(
                         product_name=parent.product_name,
                         category_name=job["category"]["name"],
