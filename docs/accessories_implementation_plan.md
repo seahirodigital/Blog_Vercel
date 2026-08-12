@@ -1285,11 +1285,15 @@ Windowsでは「MLXで作成」を無効表示してMLXジョブを登録しな�
 - `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/api/accessories.js` のNode.js構文と `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/public/index.html` のJSX構文は合格した。
 - `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/scripts/accessories/install_mlx_url_launcher.command` と `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/MLX/start_accessories_worker.command` は `bash -n` に合格した。
 - `/Users/user/Applications/Blog Vercel MLX Launcher.app` の署名、アプリ認識、`com.blogvercel.mlx-launcher`、`blogvercel-mlx` の登録を確認した。
+- 実装コミット `24bd9088` と実行権限修正コミット `f742be15` を `main` へpushした。
+- Vercel Productionデプロイ `dpl_BvPpXcLqaxHMhF9deX97BwXZK1oa` がReadyとなり、`https://blog-vercel-dun.vercel.app` へ反映された。
+- 本番配信HTMLに `blogvercel-mlx://run`、「Terminalをもう一度開く」、「ジョブを登録しています」、「今すぐ更新」、工程別進捗の実装が含まれることを確認した。
+- 本番の複数ジョブ状態APIが不正なジョブIDをHTTP 400で拒否することを確認した。Vercel Functionsは従来どおり12件である。
 - 実ジョブはユーザー試験に残し、この記事生成を伴わないランチャー登録だけを実施した。
 - `winmacsync` は実行していない。
 
 次の実行確認:
 
-- 本番へ反映後、MacのChromeで「MLXで作成」を押し、最初の確認画面で「Blog Vercel MLX Launcher.appを開く」を選択する。
+- MacのChromeで「MLXで作成」を押し、最初の確認画面で「Blog Vercel MLX Launcher.appを開く」を選択する。
 - TerminalとBlog Vercelの両方で同じジョブの工程が進み、完了後に記事リンクが表示されることを確認する。
 - 完成した子記事がH1、対象H2、結論追記以外を変更せず、Frontmatterや管理情報を含まないことを確認する。
