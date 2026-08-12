@@ -57,7 +57,7 @@ function seedAccessoryCategories() {
   const keywords = 'iPhone、iPad、MacBook、スマートフォン、タブレット、ノートパソコン、USB-C';
   const initialRows = [
     [keywords, 'battery', 'バッテリー', '製品名 バッテリーおすすめ：', 'battery', true, 'tpl_default.md', 10],
-    [keywords, 'adapter', 'アダプター', '製品名 アダプターおすすめ：', 'adapter', true, 'tpl_default.md', 20],
+    [keywords, 'adapter', '充電器', '製品名 充電器おすすめ：', 'adapter', true, 'tpl_default.md', 20],
     [keywords, 'cable', 'ケーブル', '製品名 ケーブルおすすめ：', 'cable', true, 'tpl_default.md', 30],
   ];
   const existingIds = new Set(
@@ -75,4 +75,22 @@ function seedAccessoryCategories() {
     addedCategoryIds: added.map((row) => row[1]),
     skippedCategoryIds: initialRows.filter((row) => existingIds.has(row[1])).map((row) => row[1]),
   };
+}
+
+// 既存のadapter行は内部IDを維持し、ユーザー向け名称とタイトル形式だけを充電器へ移行する。
+function migrateAdapterCategoryToCharger() {
+  ensureAccessoryHeaders();
+  const spreadsheet = SpreadsheetApp.openById(TARGET_SPREADSHEET_ID);
+  const sheet = spreadsheet.getSheetByName('周辺機器DB');
+  const values = sheet.getDataRange().getDisplayValues();
+  const matches = [];
+  for (let index = 1; index < values.length; index += 1) {
+    if (values[index][1] === 'adapter') matches.push(index + 1);
+  }
+  if (matches.length !== 1) {
+    throw new Error(`adapter行は1行だけ必要です: ${matches.length}行`);
+  }
+  sheet.getRange(matches[0], 3, 1, 2).setValues([['充電器', '製品名 充電器おすすめ：']]);
+  SpreadsheetApp.flush();
+  return { row: matches[0], categoryId: 'adapter', categoryName: '充電器' };
 }

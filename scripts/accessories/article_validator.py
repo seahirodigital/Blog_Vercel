@@ -49,9 +49,6 @@ def validate_public_markdown(
                 raise ValueError("商品ブロックの順番が変更されています")
             previous = position
 
-        if article.count("(Amazonのアソシエイトとして本アカウントは適格販売により収入を得ています。文章にはAIの整形・編集が含まれます。)") != 1:
-            raise ValueError("新規おすすめ商品群の免責事項は1件だけ必要です")
-
     for url in allowed_new_urls or ():
         if url not in article:
             raise ValueError(f"必要な商品URLがありません: {url}")

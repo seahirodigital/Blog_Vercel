@@ -7,11 +7,21 @@ import re
 from .parent_analyzer import ParentArticle
 
 
-def _suffix(title: str) -> str:
-    parts = re.split(r"([:：│|])", title, maxsplit=1)
-    if len(parts) >= 3:
-        return parts[2].strip()
-    return title.strip()
+def _configured_prefix(product_name: str, category_name: str, title_format: str) -> str:
+    prefix = str(title_format or "").strip()
+    prefix = prefix.replace("{製品名}", product_name)
+    prefix = re.sub(r"^製品名", product_name, prefix)
+    prefix = prefix or f"{product_name} {category_name}おすすめ"
+    return prefix.rstrip(":：│| ")
+
+
+def _heading_topic(title: str, product_name: str) -> str:
+    topic = str(title or "").strip()
+    if topic.startswith(product_name):
+        topic = topic[len(product_name) :].lstrip()
+        topic = re.sub(r"^(?:(?:レビュー|比較|違い|まとめ)(?:ます)?[。．.!！?？]?\s*)+", "", topic)
+        topic = topic.lstrip(":：│| ")
+    return topic or str(title or "").strip()
 
 
 def build_title(
@@ -20,14 +30,13 @@ def build_title(
     original_title: str,
     title_format: str = "",
 ) -> str:
-    suffix = _suffix(original_title)
-    prefix = str(title_format or "").strip()
-    prefix = prefix.replace("{製品名}", product_name)
-    prefix = re.sub(r"^製品名", product_name, prefix)
-    prefix = prefix or f"{product_name} {category_name}おすすめ："
-    if not suffix:
-        return prefix.rstrip(":：│| ")
-    return f"{prefix}{suffix}" if re.search(r"[:：│|]\s*$", prefix) else f"{prefix}：{suffix}"
+    prefix = _configured_prefix(product_name, category_name, title_format)
+    topic = _heading_topic(original_title, product_name)
+    return f"{prefix}: {topic}" if topic else prefix
+
+
+def build_h1_title(product_name: str, category_name: str, title_format: str = "") -> str:
+    return f"{_configured_prefix(product_name, category_name, title_format)}まとめ"
 
 
 def heading_replacements(
@@ -36,20 +45,17 @@ def heading_replacements(
     title_format: str = "",
 ) -> dict[int, str]:
     replacements = {
-        parent.h1.start: build_title(
+        parent.h1.start: build_h1_title(
             parent.product_name,
             category_name,
-            parent.h1.title,
             title_format,
         )
     }
     for heading in parent.h2_headings:
-        # 既存エディタ規則と同じく、結論より後ろのSEO形式H2だけを変換する。
-        if heading.start >= parent.conclusion_insert_at and heading.title.startswith(parent.product_name):
-            replacements[heading.start] = build_title(
-                parent.product_name,
-                category_name,
-                heading.title,
-                title_format,
-            )
+        replacements[heading.start] = build_title(
+            parent.product_name,
+            category_name,
+            heading.title,
+            title_format,
+        )
     return replacements

@@ -85,6 +85,12 @@ def parse_master_rows(headers: list[str], rows: list[list[Any]]) -> tuple[Master
             if not raw[required]:
                 raise ValueError(f"周辺機器DB {row_number}行目の{required}が空です")
         canonical = json.dumps(raw, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        # 既存シートの旧表記だけを読み替える移行互換。rawとSHA-256は原文を保持する。
+        legacy_adapter = (
+            category_id == "adapter"
+            and raw["周辺機器カテゴリ名"] == "アダプター"
+            and raw["タイトル形式"] == "製品名 アダプターおすすめ："
+        )
         try:
             priority = int(raw.get("表示優先度") or 999)
         except ValueError as error:
@@ -94,8 +100,8 @@ def parse_master_rows(headers: list[str], rows: list[list[Any]]) -> tuple[Master
                 row_number=row_number,
                 keywords=keywords,
                 category_id=category_id,
-                category_name=raw["周辺機器カテゴリ名"],
-                title_format=raw["タイトル形式"],
+                category_name="充電器" if legacy_adapter else raw["周辺機器カテゴリ名"],
+                title_format="製品名 充電器おすすめ：" if legacy_adapter else raw["タイトル形式"],
                 affiliate_section=raw["アフィリエイトセクション"],
                 default_enabled=_parse_bool(raw["デフォルト有効"], row_number),
                 template_file=raw["使用テンプレートファイル"],

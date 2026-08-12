@@ -23,6 +23,24 @@ class PromptAndJobTest(unittest.TestCase):
         )
         self.assertEqual(2, len(result["recommendation_reasons"]))
 
+    def test_engine_result_rejects_affiliate_disclaimer_in_reason(self):
+        with self.assertRaisesRegex(ValueError, "禁止値"):
+            parse_engine_result(
+                json.dumps(
+                    {
+                        "spec_summary": "USB-C充電に対応します。",
+                        "recommendations": [
+                            {
+                                "index": 1,
+                                "reason": "Amazonのアソシエイトとして適格販売により収入を得ています。",
+                            },
+                        ],
+                    },
+                    ensure_ascii=False,
+                ),
+                1,
+            )
+
     def test_job_schema_v2(self):
         master_values = {"周辺機器カテゴリID": "battery"}
         master_sha = hashlib.sha256(

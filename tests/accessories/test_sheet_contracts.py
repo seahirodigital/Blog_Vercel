@@ -29,6 +29,10 @@ class SheetContractsTest(unittest.TestCase):
         sample = (Path(__file__).resolve().parents[2] / "docs/accessories_sample_article.md").read_text(encoding="utf-8")
         matched = matching_categories(sample, parse_master_rows(headers, rows))
         self.assertEqual(["battery", "adapter", "cable"], [item.category_id for item in matched])
+        adapter = next(item for item in matched if item.category_id == "adapter")
+        self.assertEqual("充電器", adapter.category_name)
+        self.assertEqual("製品名 充電器おすすめ：", adapter.title_format)
+        self.assertEqual("アダプター", adapter.raw["周辺機器カテゴリ名"])
 
     def test_registry_headers_and_formula_injection(self):
         self.assertEqual(

@@ -7,9 +7,6 @@ from collections.abc import Sequence
 from .affiliate_group import AffiliateGroup
 
 
-DISCLAIMER = "(Amazonのアソシエイトとして本アカウントは適格販売により収入を得ています。文章にはAIの整形・編集が含まれます。)"
-
-
 def _clean_paragraph(value: str, label: str) -> str:
     cleaned = str(value or "").strip()
     if not cleaned:
@@ -39,8 +36,6 @@ def build_conclusion_addition(
         _clean_paragraph(spec_summary, "主要スペック要約"),
         "",
         f"**おすすめ{category_name}一覧**",
-        "",
-        DISCLAIMER,
         "",
     ]
 

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import time
 from datetime import datetime, timedelta, timezone
 from typing import Any
@@ -21,6 +22,7 @@ AFFILIATE_FILE_PATH = os.getenv(
     "開発/Blog_Vercel/scripts/pipeline/prompts/04-affiliate-link-manager/affiliate_links.txt",
 ).strip("/")
 _TOKEN_CACHE: dict[str, Any] = {"access_token": "", "expires_at": 0.0}
+JST = timezone(timedelta(hours=9))
 
 
 def _encode_path(path: str) -> str:
@@ -229,10 +231,26 @@ def acquire_job(job_id: str, owner: str, lease_minutes: int = 30) -> tuple[dict[
     return job, saved.get("eTag", "") or saved.get("@odata.etag", "")
 
 
-def save_child_article(parent_id: str, filename: str, markdown: str) -> dict[str, Any]:
+def child_folder_name(job: dict[str, Any]) -> str:
+    created_at = str(job.get("created_at", "")).strip()
+    try:
+        created = datetime.fromisoformat(created_at.replace("Z", "+00:00"))
+    except ValueError as error:
+        raise ValueError(f"ジョブ作成日時が不正です: {created_at}") from error
+    if created.tzinfo is None:
+        created = created.replace(tzinfo=timezone.utc)
+    timestamp = created.astimezone(JST).strftime("%Y%m%d_%H%M")
+    title = re.sub(r"[\\/:*?\"<>|\x00-\x1f]", " ", str(job.get("parent", {}).get("title", "")))
+    title = re.sub(r"\s+", " ", title).strip(" .")[:10].rstrip(" .")
+    if not title:
+        raise ValueError("親記事タイトルから保存フォルダ名を作成できません")
+    return f"{timestamp}_{title}"
+
+
+def save_child_article(job: dict[str, Any], filename: str, markdown: str) -> dict[str, Any]:
     article_root = os.getenv("ONEDRIVE_FOLDER", "Blog_Articles").strip("/")
     return upload_text(
-        f"{article_root}/周辺機器/{parent_id}/{filename}",
+        f"{article_root}/周辺機器/{child_folder_name(job)}/{filename}",
         markdown,
         content_type="text/markdown; charset=utf-8",
     )

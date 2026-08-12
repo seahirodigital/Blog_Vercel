@@ -36,12 +36,17 @@ class ArticleAssemblerTest(unittest.TestCase):
             conclusion_addition=addition,
         )
         validate_public_markdown(child, affiliate_group=self.group)
-        self.assertTrue(child.startswith("# iPad Pro M5 13インチ バッテリーおすすめ："))
-        self.assertLess(child.find(self.group.products[0].text), child.find("## iPad Pro M5 13インチ バッテリーおすすめ："))
+        self.assertTrue(child.startswith("# iPad Pro M5 13インチ バッテリーおすすめまとめ\n"))
+        self.assertLess(child.find(self.group.products[0].text), child.find("## iPad Pro M5 13インチ バッテリーおすすめ: 主要な課題と論点"))
         self.assertEqual(len(re.findall(r"(?m)^## ", self.parent)), len(re.findall(r"(?m)^## ", child)))
         self.assertEqual(len(re.findall(r"(?m)^### ", self.parent)), len(re.findall(r"(?m)^### ", child)))
+        self.assertTrue(all(
+            heading.startswith("## iPad Pro M5 13インチ バッテリーおすすめ: ")
+            for heading in re.findall(r"(?m)^## .+$", child)
+        ))
         self.assertIn("主要な課題と論点", child)
         self.assertEqual(parsed.product_name, "iPad Pro M5 13インチ")
+        self.assertNotIn("Amazonのアソシエイトとして", child)
 
     def test_frontmatter_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "H1|Frontmatter"):
@@ -64,7 +69,7 @@ class ArticleAssemblerTest(unittest.TestCase):
             immutable_content_sha256(changed_body, category_name="バッテリー"),
         )
 
-    def test_explicit_conclusion_keeps_earlier_h2_text(self):
+    def test_explicit_conclusion_converts_every_h2_text(self):
         parent = (
             "# 製品レビューまとめ：題意\n\n"
             "## 製品レビューまとめ：結論前の章\n本文A\n\n"
@@ -84,10 +89,38 @@ class ArticleAssemblerTest(unittest.TestCase):
             title_format="製品名 バッテリーおすすめ：",
             conclusion_addition=addition,
         )
-        self.assertIn("## 製品レビューまとめ：結論前の章", child)
-        self.assertIn("## 製品 バッテリーおすすめ：結論後の章", child)
-        self.assertNotIn("## 製品 バッテリーおすすめ：結論前の章", child)
-        self.assertLess(child.find(self.group.products[0].text), child.find("## 製品 バッテリーおすすめ：結論後の章"))
+        self.assertIn("# 製品 バッテリーおすすめまとめ", child)
+        self.assertIn("## 製品 バッテリーおすすめ: 結論前の章", child)
+        self.assertIn("## 製品 バッテリーおすすめ: 結論", child)
+        self.assertIn("## 製品 バッテリーおすすめ: 結論後の章", child)
+        self.assertLess(child.find(self.group.products[0].text), child.find("## 製品 バッテリーおすすめ: 結論後の章"))
+
+    def test_review_axis_is_removed_from_product_name_and_headings(self):
+        parent = (
+            "# M5 iPad Pro レビュー比較違いまとめます。\n\n"
+            "## M5 iPad Pro レビュー比較違いまとめ：結論\n本文A\n\n"
+            "## Captions\n本文B\n"
+        )
+        addition = build_conclusion_addition(
+            product_name="M5 iPad Pro",
+            category_name="充電器",
+            spec_summary="USB-C充電に対応します。",
+            recommendation_reasons=["45W出力です。", "67W出力です。"],
+            affiliate_group=self.group,
+        )
+        child, parsed = assemble_article(
+            parent,
+            category_name="充電器",
+            title_format="製品名 充電器おすすめ：",
+            conclusion_addition=addition,
+        )
+        self.assertEqual("M5 iPad Pro", parsed.product_name)
+        self.assertTrue(child.startswith("# M5 iPad Pro 充電器おすすめまとめ\n"))
+        self.assertIn("## M5 iPad Pro 充電器おすすめ: 結論", child)
+        self.assertIn("## M5 iPad Pro 充電器おすすめ: Captions", child)
+        self.assertNotIn("レビュー比較違いまとめ", "\n".join(
+            line for line in child.splitlines() if line.startswith(("# ", "## "))
+        ))
 
 
 if __name__ == "__main__":

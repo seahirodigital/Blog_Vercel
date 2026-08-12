@@ -214,6 +214,7 @@ async function createJobs(req, res, body) {
   }
 
   const batchId = randomUUID();
+  const batchCreatedAt = new Date().toISOString();
   const created = [];
   for (const category of selected) {
     const prompt = await promptSnapshot(engine, token, category.templateFile);
@@ -229,6 +230,7 @@ async function createJobs(req, res, body) {
       category,
       promptSnapshot: prompt,
       articleTitle: buildChildTitle(parentTitle, category.categoryName, category.titleFormat),
+      createdAt: batchCreatedAt,
     });
     await putJob(token, job);
     try {

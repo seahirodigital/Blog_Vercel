@@ -60,7 +60,17 @@ def parse_engine_result(text: str, product_count: int) -> dict[str, Any]:
         reason = str(item.get("reason", "")).strip()
         if not reason:
             raise ValueError(f"商品{expected_index}のおすすめ理由が空です")
-        if any(token in reason for token in ("http://", "https://", "<think>", "job_id")):
+        if any(
+            token in reason
+            for token in (
+                "http://",
+                "https://",
+                "<think>",
+                "job_id",
+                "Amazonのアソシエイトとして",
+                "AIの整形・編集",
+            )
+        ):
             raise ValueError(f"商品{expected_index}のおすすめ理由に禁止値があります")
         ordered.append(reason)
     return {"spec_summary": summary, "recommendation_reasons": ordered}

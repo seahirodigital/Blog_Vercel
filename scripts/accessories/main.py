@@ -155,7 +155,7 @@ def process_job(
             allowed_new_urls=[url for product in group.products for url in product.urls],
         )
         report("saving", "合格した子記事をOneDriveの周辺機器フォルダへ保存しています")
-        article_item = save_child_article(job["parent"]["id"], _filename(job), child_markdown)
+        article_item = save_child_article(job, _filename(job), child_markdown)
         product_titles = [product.title for product in group.products]
         management_seo = {
             "title": job["article_title"],

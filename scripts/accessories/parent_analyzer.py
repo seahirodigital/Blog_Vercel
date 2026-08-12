@@ -37,7 +37,10 @@ SPEC_EVIDENCE_RE = re.compile(
 
 def _derive_product_name(h1_title: str) -> str:
     left = re.split(r"[:：│|]", h1_title, maxsplit=1)[0].strip()
-    left = re.sub(r"(?:レビュー)?まとめ(?:おすすめ)?$", "", left).strip()
+    # 親記事のSEO用記事軸は製品名に含めない。
+    # 例: 「M5 iPad Pro レビュー比較違いまとめます。」→「M5 iPad Pro」
+    left = re.split(r"\s*(?:レビュー|比較|違い|まとめ)", left, maxsplit=1)[0].strip()
+    left = re.sub(r"[\s。．.!！?？:：│|]+$", "", left).strip()
     return left or h1_title.strip()
 
 
