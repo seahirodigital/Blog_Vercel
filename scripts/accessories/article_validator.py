@@ -23,6 +23,7 @@ def validate_public_markdown(
     article: str,
     *,
     affiliate_group: AffiliateGroup | None = None,
+    adapted_product_texts: Sequence[str] | None = None,
     allowed_new_urls: Sequence[str] | None = None,
 ) -> None:
     if article.startswith("\ufeff"):
@@ -37,13 +38,21 @@ def validate_public_markdown(
         if pattern.search(article):
             raise ValueError(f"完成Markdownに{label}が混入しています")
 
+    if "おすすめ商品のリンクまとめ" in article:
+        raise ValueError("おすすめ商品のリンクまとめを掲載することはできません")
+
     if affiliate_group:
+        normalized_article = article.replace("\r\n", "\n").replace("\r", "\n")
+        blocks = list(adapted_product_texts or [product.text for product in affiliate_group.products])
+        if len(blocks) != len(affiliate_group.products):
+            raise ValueError("商品ブロック件数が一致しません")
         previous = -1
-        for product in affiliate_group.products:
-            position = article.find(product.text)
+        for product, block in zip(affiliate_group.products, blocks):
+            normalized_block = str(block).replace("\r\n", "\n").replace("\r", "\n").strip()
+            position = normalized_article.find(normalized_block)
             if position < 0:
-                raise ValueError(f"商品ブロックが原文のまま掲載されていません: {product.title}")
-            if article.find(product.text, position + 1) >= 0:
+                raise ValueError(f"調整済み商品ブロックが掲載されていません: {product.title}")
+            if normalized_article.find(normalized_block, position + 1) >= 0:
                 raise ValueError(f"商品ブロックが重複しています: {product.title}")
             if position <= previous:
                 raise ValueError("商品ブロックの順番が変更されています")

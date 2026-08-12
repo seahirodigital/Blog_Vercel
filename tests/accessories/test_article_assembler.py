@@ -19,23 +19,27 @@ class ArticleAssemblerTest(unittest.TestCase):
             "battery",
         )
 
+    def adapted_blocks(self, product_name="iPad Pro M5 13インチ"):
+        return [
+            f"{product.text}\n\n{product_name}におすすめな理由として、持ち運びやすい選択肢です。"
+            for product in self.group.products
+        ]
+
     def test_only_headings_and_conclusion_are_extended(self):
         addition = build_conclusion_addition(
-            product_name="iPad Pro M5 13インチ",
-            category_name="バッテリー",
-            spec_summary="M5チップ、高速充電、メモリ増量が主要な特徴です。",
-            recommendation_reasons=[
-                "20000mAhと45W出力、USB-Cケーブル内蔵で持ち運びに適します。",
-                "20000mAhと67W出力で、複数端子を使い分けられます。",
-            ],
-            affiliate_group=self.group,
+            adapted_product_texts=self.adapted_blocks(),
         )
         child, parsed = assemble_article(
             self.parent,
             category_name="バッテリー",
+            intro_addition="iPad Pro M5 13インチにおすすめのバッテリーも紹介します。",
             conclusion_addition=addition,
         )
-        validate_public_markdown(child, affiliate_group=self.group)
+        validate_public_markdown(
+            child,
+            affiliate_group=self.group,
+            adapted_product_texts=self.adapted_blocks(),
+        )
         self.assertTrue(child.startswith("# iPad Pro M5 13インチ バッテリーおすすめまとめ\n"))
         self.assertLess(child.find(self.group.products[0].text), child.find("## iPad Pro M5 13インチ バッテリーおすすめ: 主要な課題と論点"))
         self.assertEqual(len(re.findall(r"(?m)^## ", self.parent)), len(re.findall(r"(?m)^## ", child)))
@@ -46,11 +50,27 @@ class ArticleAssemblerTest(unittest.TestCase):
         ))
         self.assertIn("主要な課題と論点", child)
         self.assertEqual(parsed.product_name, "iPad Pro M5 13インチ")
+        self.assertIn("iPad Pro M5 13インチにおすすめのバッテリーも紹介します。", child)
+        self.assertNotIn("おすすめ商品のリンクまとめ", child)
         self.assertNotIn("Amazonのアソシエイトとして", child)
 
     def test_frontmatter_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "H1|Frontmatter"):
             validate_public_markdown("---\ntitle: x\n---\n# 記事")
+
+    def test_product_validation_accepts_crlf_article(self):
+        blocks = self.adapted_blocks()
+        article = ("# 記事\n\n" + "\n\n".join(blocks)).replace("\n", "\r\n")
+        validate_public_markdown(
+            article,
+            affiliate_group=self.group,
+            adapted_product_texts=blocks,
+            allowed_new_urls=[url for product in self.group.products for url in product.urls],
+        )
+
+    def test_link_summary_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "リンクまとめ"):
+            validate_public_markdown("# 記事\n\n**おすすめ商品のリンクまとめ**")
 
     def test_immutable_hash_ignores_editable_heading_text_only(self):
         original_hash = immutable_content_sha256(self.parent, category_name="バッテリー")
@@ -77,11 +97,7 @@ class ArticleAssemblerTest(unittest.TestCase):
             "## 製品レビューまとめ：結論後の章\n本文C\n"
         )
         addition = build_conclusion_addition(
-            product_name="製品",
-            category_name="バッテリー",
-            spec_summary="USB-C充電に対応します。",
-            recommendation_reasons=["45W出力に対応します。", "67W出力に対応します。"],
-            affiliate_group=self.group,
+            adapted_product_texts=self.adapted_blocks("製品"),
         )
         child, _ = assemble_article(
             parent,
@@ -102,11 +118,7 @@ class ArticleAssemblerTest(unittest.TestCase):
             "## Captions\n本文B\n"
         )
         addition = build_conclusion_addition(
-            product_name="M5 iPad Pro",
-            category_name="充電器",
-            spec_summary="USB-C充電に対応します。",
-            recommendation_reasons=["45W出力です。", "67W出力です。"],
-            affiliate_group=self.group,
+            adapted_product_texts=self.adapted_blocks("M5 iPad Pro"),
         )
         child, parsed = assemble_article(
             parent,

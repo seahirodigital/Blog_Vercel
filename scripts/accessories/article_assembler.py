@@ -37,6 +37,7 @@ def assemble_article(
     *,
     category_name: str,
     title_format: str = "",
+    intro_addition: str = "",
     conclusion_addition: str,
 ) -> tuple[str, ParentArticle]:
     parent = analyze_parent(parent_markdown)
@@ -51,7 +52,16 @@ def assemble_article(
         edits.append((heading.start, heading.end, f"{marker} {replacement}{heading.newline}"))
 
     newline = "\r\n" if "\r\n" in parent_markdown else "\n"
+    intro = intro_addition.replace("\r\n", "\n").replace("\r", "\n").replace("\n", newline).strip()
     addition = conclusion_addition.replace("\n", newline).strip()
+    if intro:
+        edits.append(
+            (
+                parent.h1.end,
+                parent.h1.end,
+                f"{newline}{intro}{newline}{newline}",
+            )
+        )
     prefix = "" if parent.conclusion_insert_at == 0 else newline
     suffix = newline * 2
     edits.append(

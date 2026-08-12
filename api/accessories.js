@@ -21,11 +21,12 @@ import {
   downloadArticle,
   downloadTextPath,
 } from '../lib/accessories-onedrive.js';
-import { appendRegistryJob, loadAccessoryMaster, updateRegistryJob } from '../lib/accessories-sheets.js';
+import { appendRegistryJob, listRegistryJobs, loadAccessoryMaster, updateRegistryJob } from '../lib/accessories-sheets.js';
 
 const GITHUB_API = 'https://api.github.com';
 const AFFILIATE_FILE_PATH = process.env.ACCESSORIES_AFFILIATE_FILE_PATH
   || '開発/Blog_Vercel/scripts/pipeline/prompts/04-affiliate-link-manager/affiliate_links.txt';
+const PROMPT_CONTRACT_VERSION = 2;
 
 function queryValue(value, fallback = '') {
   return Array.isArray(value) ? value[0] ?? fallback : value ?? fallback;
@@ -62,13 +63,26 @@ function workerSnapshot(record) {
   };
 }
 
-function statusJobIds(req) {
+async function statusJobIds(req) {
+  const batchId = String(queryValue(req.query.batchId) || '').trim();
+  if (batchId) {
+    if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(batchId)) {
+      throw new Error('batchIdの形式が不正です');
+    }
+    const rows = await listRegistryJobs();
+    const ids = [...new Set(rows
+      .filter((row) => row['バッチID'] === batchId)
+      .map((row) => row['ジョブID'])
+      .filter(Boolean))];
+    if (!ids.length) throw new Error(`バッチのジョブが見つかりません: ${batchId}`);
+    return { ids, batch: true, batchId };
+  }
   const single = String(queryValue(req.query.jobId) || '').trim();
   const multiple = String(queryValue(req.query.jobIds) || '').trim();
   const values = multiple ? multiple.split(',') : single ? [single] : [];
   const ids = [...new Set(values.map((value) => value.trim()).filter(Boolean))];
-  if (ids.length < 1 || ids.length > 5) {
-    throw new Error('jobIdまたは1〜5件のjobIdsは必須です');
+  if (ids.length < 1) {
+    throw new Error('batchId、jobId、jobIdsのいずれかは必須です');
   }
   if (ids.some((id) => !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id))) {
     throw new Error('jobIdの形式が不正です');
@@ -85,13 +99,18 @@ async function promptSnapshot(engine, token = null, templateFile = 'tpl_default.
   const defaultContent = await loadPromptTemplate(templateFile);
   const oneDriveToken = token || await getOneDriveToken();
   const stored = await getJson(oneDriveToken, promptPath(engine, templateFile));
-  if (stored?.value?.content && stored.value.sha256 === sha256(stored.value.content)) {
+  if (
+    stored?.value?.content
+    && stored.value.sha256 === sha256(stored.value.content)
+    && stored.value.contract_version === PROMPT_CONTRACT_VERSION
+  ) {
     return stored.value;
   }
   const content = defaultContent;
   const initial = {
-    id: `${engine.toLowerCase()}-${templateFile.replace(/\.md$/, '')}`,
-    revision: 1,
+    id: stored?.value?.id || `${engine.toLowerCase()}-${templateFile.replace(/\.md$/, '')}`,
+    revision: Number(stored?.value?.revision || 0) + 1,
+    contract_version: PROMPT_CONTRACT_VERSION,
     sha256: sha256(content),
     content,
   };
@@ -114,6 +133,7 @@ async function promptAction(req, res, body) {
     const next = {
       ...current,
       revision: Number(current.revision || 0) + 1,
+      contract_version: PROMPT_CONTRACT_VERSION,
       sha256: sha256(content),
       content,
       updated_at: new Date().toISOString(),
@@ -191,45 +211,75 @@ async function createJobs(req, res, body) {
   if (engine === 'MLX' && !isMac(req, body)) {
     return res.status(400).json({ error: 'MLXはMacからだけ依頼できます' });
   }
-  const parentId = String(body.parentId || '').trim();
-  const categoryIds = [...new Set(Array.isArray(body.categoryIds) ? body.categoryIds.map(String) : [])];
-  if (!parentId || categoryIds.length < 1 || categoryIds.length > 5) {
-    return res.status(400).json({ error: 'parentIdと1〜5件のcategoryIdsは必須です' });
-  }
+  const requestedParents = Array.isArray(body.parents) && body.parents.length
+    ? body.parents
+    : [{
+        parentId: body.parentId,
+        parentWebUrl: body.parentWebUrl,
+        parentPath: body.parentPath,
+        categoryIds: body.categoryIds,
+      }];
+  if (!requestedParents.length) return res.status(400).json({ error: '親記事の選択が必要です' });
 
   const token = await getOneDriveToken();
-  const markdown = await downloadArticle(token, parentId);
   const affiliateText = await downloadTextPath(token, AFFILIATE_FILE_PATH);
-  const parentTitle = extractH1(markdown);
   const categories = await loadAccessoryMaster();
-  const available = new Map(matchingCategories(markdown, categories).map((category) => [category.categoryId, category]));
-  const selected = categoryIds.map((id) => {
-    const category = available.get(id);
-    if (!category) throw new Error(`親記事に対応しない周辺機器カテゴリです: ${id}`);
-    return category;
-  });
-  for (const category of selected) {
-    parseAffiliateText(affiliateText, category.affiliateSection);
-    await loadPromptTemplate(category.templateFile);
+  const prepared = [];
+  const seenPairs = new Set();
+  const validatedTemplates = new Set();
+  for (const requested of requestedParents) {
+    const parentId = String(requested?.parentId || '').trim();
+    const categoryIds = [...new Set(Array.isArray(requested?.categoryIds) ? requested.categoryIds.map(String) : [])];
+    if (!parentId || !categoryIds.length) {
+      return res.status(400).json({ error: '各親記事のparentIdとcategoryIdsは必須です' });
+    }
+    const markdown = await downloadArticle(token, parentId);
+    const parentTitle = extractH1(markdown);
+    const available = new Map(matchingCategories(markdown, categories).map((category) => [category.categoryId, category]));
+    for (const categoryId of categoryIds) {
+      const pairKey = `${parentId}:${categoryId}`;
+      if (seenPairs.has(pairKey)) continue;
+      seenPairs.add(pairKey);
+      const category = available.get(categoryId);
+      if (!category) throw new Error(`${parentTitle}に対応しない周辺機器カテゴリです: ${categoryId}`);
+      parseAffiliateText(affiliateText, category.affiliateSection);
+      if (!validatedTemplates.has(category.templateFile)) {
+        await loadPromptTemplate(category.templateFile);
+        validatedTemplates.add(category.templateFile);
+      }
+      prepared.push({
+        parentId,
+        parentTitle,
+        parentWebUrl: String(requested.parentWebUrl || ''),
+        parentPath: String(requested.parentPath || ''),
+        category,
+      });
+    }
   }
+  if (!prepared.length) return res.status(400).json({ error: '周辺機器カテゴリが選択されていません' });
 
   const batchId = randomUUID();
   const batchCreatedAt = new Date().toISOString();
   const created = [];
-  for (const category of selected) {
-    const prompt = await promptSnapshot(engine, token, category.templateFile);
+  const promptCache = new Map();
+  for (const item of prepared) {
+    const { category } = item;
+    if (!promptCache.has(category.templateFile)) {
+      promptCache.set(category.templateFile, await promptSnapshot(engine, token, category.templateFile));
+    }
+    const prompt = promptCache.get(category.templateFile);
     const job = createJob({
       batchId,
       engine,
       parent: {
-        id: parentId,
-        title: parentTitle,
-        web_url: String(body.parentWebUrl || ''),
-        original_path: String(body.parentPath || ''),
+        id: item.parentId,
+        title: item.parentTitle,
+        web_url: item.parentWebUrl,
+        original_path: item.parentPath,
       },
       category,
       promptSnapshot: prompt,
-      articleTitle: buildChildTitle(parentTitle, category.categoryName, category.titleFormat),
+      articleTitle: buildChildTitle(item.parentTitle, category.categoryName, category.titleFormat),
       createdAt: batchCreatedAt,
     });
     await putJob(token, job);
@@ -243,6 +293,8 @@ async function createJobs(req, res, body) {
       await putJob(token, job);
       created.push({
         jobId: job.job_id,
+        parentId: job.parent.id,
+        parentTitle: job.parent.title,
         title: job.article_title,
         category: job.category.name,
         state: job.state,
@@ -274,6 +326,8 @@ async function createJobs(req, res, body) {
     }
     created.push({
       jobId: job.job_id,
+      parentId: job.parent.id,
+      parentTitle: job.parent.title,
       title: job.article_title,
       category: job.category.name,
       state: job.state,
@@ -301,7 +355,7 @@ async function createJobs(req, res, body) {
 async function status(req, res) {
   let request;
   try {
-    request = statusJobIds(req);
+    request = await statusJobIds(req);
   } catch (error) {
     return res.status(400).json({ error: safePublicError(error) });
   }

@@ -1949,14 +1949,14 @@
               </button>
               <button
                 onClick={() => {
-                  onCreateAccessory && onCreateAccessory(ctxMenu.article);
+                  onCreateAccessory && onCreateAccessory(getContextTargetArticles(ctxMenu.article));
                   setCtxMenu(m => ({ ...m, visible: false }));
                 }}
                 onMouseEnter={e => e.currentTarget.style.background = '#ecfeff'} onMouseLeave={e => e.currentTarget.style.background = 'none'}
                 style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '9px 14px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '13px', color: '#0891b2', textAlign: 'left', fontWeight: 600 }}
               >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3"><path d="M12 2v20M2 12h20" /><circle cx="12" cy="12" r="9" /></svg>
-                周辺機器記事作成
+                周辺機器記事作成{getContextTargetIds(ctxMenu.article).length > 1 ? `（${getContextTargetIds(ctxMenu.article).length}件）` : ''}
               </button>
               <button
                 onClick={() => {
@@ -3100,7 +3100,7 @@
       const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
       const [copied, setCopied] = useState(false);
       const [affModalOpen, setAffModalOpen] = useState(false);
-      const [accessoryModal, setAccessoryModal] = useState({ open: false, parent: null, loading: false, error: '', categories: [], prompts: [], jobs: [] });
+      const [accessoryModal, setAccessoryModal] = useState({ open: false, parents: [], loading: false, error: '', prompts: [], jobs: [] });
       const [accessorySelectedIds, setAccessorySelectedIds] = useState(new Set());
       const [accessoryCreating, setAccessoryCreating] = useState(false);
       const [accessoryPolling, setAccessoryPolling] = useState(false);
@@ -3332,29 +3332,52 @@
 
       const showToast = (message, type = 'info') => setToast({ message, type });
 
-      const openAccessoryModal = useCallback(async (article) => {
+      const accessorySelectionKey = useCallback((parentId, categoryId) => `${parentId}::${categoryId}`, []);
+
+      const openAccessoryModal = useCallback(async (articleTargets) => {
+        const targets = (Array.isArray(articleTargets) ? articleTargets : [articleTargets])
+          .filter(Boolean)
+          .filter((article, index, values) => values.findIndex(item => item.id === article.id) === index);
+        if (!targets.length) return;
         setAccessorySelectedIds(new Set());
-        setAccessoryModal({ open: true, parent: article, loading: true, error: '', categories: [], prompts: [], jobs: [] });
+        setAccessoryModal({ open: true, parents: targets, loading: true, error: '', prompts: [], jobs: [] });
         try {
-          const params = new URLSearchParams({ action: 'preview', parentId: article.id });
-          const response = await fetch(`/api/accessories?${params.toString()}`, { cache: 'no-store' });
-          const data = await response.json();
-          if (!response.ok) throw new Error(data.error || '周辺機器候補の取得に失敗しました');
-          const selected = new Set((data.categories || []).filter(item => item.defaultEnabled && item.available).map(item => item.id));
+          const previews = await Promise.all(targets.map(async (article) => {
+            const params = new URLSearchParams({ action: 'preview', parentId: article.id });
+            const response = await fetch(`/api/accessories?${params.toString()}`, { cache: 'no-store' });
+            const data = await response.json();
+            if (!response.ok) throw new Error(`${getArticleDisplayTitle(article, articleH1Cache)}: ${data.error || '周辺機器候補の取得に失敗しました'}`);
+            return {
+              ...article,
+              title: data.parent?.title || getArticleDisplayTitle(article, articleH1Cache),
+              categories: data.categories || [],
+              prompts: data.prompts || [],
+            };
+          }));
+          const selected = new Set();
+          previews.forEach(parent => parent.categories
+            .filter(item => item.defaultEnabled && item.available)
+            .forEach(item => selected.add(accessorySelectionKey(parent.id, item.id))));
           setAccessorySelectedIds(selected);
-          setAccessoryModal(prev => ({ ...prev, loading: false, parent: { ...article, title: data.parent?.title || getArticleDisplayTitle(article, articleH1Cache) }, categories: data.categories || [], prompts: data.prompts || [] }));
+          setAccessoryModal(prev => ({
+            ...prev,
+            loading: false,
+            parents: previews,
+            prompts: previews[0]?.prompts || [],
+          }));
         } catch (error) {
           setAccessoryModal(prev => ({ ...prev, loading: false, error: error.message }));
         }
-      }, [articleH1Cache]);
+      }, [articleH1Cache, accessorySelectionKey]);
 
-      const toggleAccessoryCategory = useCallback((categoryId) => {
+      const toggleAccessoryCategory = useCallback((parentId, categoryId) => {
+        const selectionKey = accessorySelectionKey(parentId, categoryId);
         setAccessorySelectedIds(prev => {
           const next = new Set(prev);
-          next.has(categoryId) ? next.delete(categoryId) : next.add(categoryId);
+          next.has(selectionKey) ? next.delete(selectionKey) : next.add(selectionKey);
           return next;
         });
-      }, []);
+      }, [accessorySelectionKey]);
 
       const openAccessoryPrompt = useCallback(async (engine, templateFile = 'tpl_default.md') => {
         setAccessoryPrompt({ open: true, engine, templateFile, loading: true, saving: false, content: '', revision: 0, error: '' });
@@ -3471,17 +3494,14 @@
         return '状態を確認しています';
       }, [accessoryModal.worker]);
 
-      const mlxLauncherUrl = useCallback((jobs) => {
-        const parameters = new URLSearchParams();
-        jobs
-          .filter(job => job.engine === 'MLX' && !['failed', 'registration_failed', 'completed'].includes(job.state))
-          .slice(0, 5)
-          .forEach(job => parameters.append('job_id', job.jobId));
-        return parameters.toString() ? `blogvercel-mlx://run?${parameters.toString()}` : '';
+      const mlxLauncherUrl = useCallback((batchId) => {
+        if (!batchId) return '';
+        const parameters = new URLSearchParams({ batch_id: batchId });
+        return `blogvercel-mlx://run?${parameters.toString()}`;
       }, []);
 
-      const requestMlxTerminal = useCallback((jobs, launcherWindow = null) => {
-        const url = mlxLauncherUrl(jobs);
+      const requestMlxTerminal = useCallback((batchId, launcherWindow = null) => {
+        const url = mlxLauncherUrl(batchId);
         if (!url) return false;
         setAccessoryModal(prev => ({
           ...prev,
@@ -3504,7 +3524,7 @@
       }, [mlxLauncherUrl]);
 
       const createAccessoryJobs = useCallback(async (engine) => {
-        if (!accessoryModal.parent || accessorySelectedIds.size === 0) return;
+        if (!accessoryModal.parents?.length || accessorySelectedIds.size === 0) return;
         if (engine === 'MLX' && !/Mac/i.test(navigator.platform || navigator.userAgent || '')) {
           showToast('MLXはMacからだけ依頼できます', 'error');
           return;
@@ -3534,14 +3554,21 @@
           lastCheckedAt: '',
         }));
         try {
+          const selectedParents = accessoryModal.parents
+            .map(parent => ({
+              parentId: parent.id,
+              parentWebUrl: parent.webUrl || '',
+              parentPath: parent.path || '',
+              categoryIds: (parent.categories || [])
+                .filter(category => accessorySelectedIds.has(accessorySelectionKey(parent.id, category.id)))
+                .map(category => category.id),
+            }))
+            .filter(parent => parent.categoryIds.length > 0);
           const response = await fetch('/api/accessories?action=create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              parentId: accessoryModal.parent.id,
-              parentWebUrl: accessoryModal.parent.webUrl || '',
-              parentPath: accessoryModal.parent.path || '',
-              categoryIds: [...accessorySelectedIds],
+              parents: selectedParents,
               engine,
               platform: navigator.platform || '',
             }),
@@ -3549,17 +3576,18 @@
           const data = await response.json();
           if (!response.ok) throw new Error(data.error || '周辺機器ジョブの登録に失敗しました');
           const jobs = (data.jobs || []).map(job => ({ ...job, state: job.state || 'pending', engine, articleUrl: '', error: job.error || '' }));
-          const launcherUrl = engine === 'MLX' ? mlxLauncherUrl(jobs) : '';
+          const launcherUrl = engine === 'MLX' ? mlxLauncherUrl(data.batchId) : '';
           setAccessoryModal(prev => ({
             ...prev,
             jobs,
+            batchId: data.batchId || '',
             worker: data.worker || null,
             launcherUrl,
             launchStatus: engine === 'MLX' ? 'ready' : '',
             statusMessage: data.message || '周辺機器ジョブを登録しました。',
             lastCheckedAt: new Date().toISOString(),
           }));
-          if (engine === 'MLX' && launcherUrl) requestMlxTerminal(jobs, launcherWindow);
+          if (engine === 'MLX' && launcherUrl) requestMlxTerminal(data.batchId, launcherWindow);
           else if (launcherWindow && !launcherWindow.closed) launcherWindow.close();
           showToast(data.message || '周辺機器ジョブを登録しました', data.hasFailures ? 'error' : data.automatic ? 'success' : 'info');
         } catch (error) {
@@ -3568,7 +3596,7 @@
         } finally {
           setAccessoryCreating(false);
         }
-      }, [accessoryModal.parent, accessorySelectedIds, mlxLauncherUrl, requestMlxTerminal]);
+      }, [accessoryModal.parents, accessorySelectedIds, accessorySelectionKey, mlxLauncherUrl, requestMlxTerminal]);
 
       const refreshAccessoryJobs = useCallback(async () => {
         const current = accessoryJobsRef.current;
@@ -3577,7 +3605,9 @@
         accessoryPollingRef.current = true;
         setAccessoryPolling(true);
         try {
-          const parameters = new URLSearchParams({ action: 'status', jobIds: active.map(job => job.jobId).join(',') });
+          const parameters = accessoryModal.batchId
+            ? new URLSearchParams({ action: 'status', batchId: accessoryModal.batchId })
+            : new URLSearchParams({ action: 'status', jobIds: active.map(job => job.jobId).join(',') });
           const response = await fetch(`/api/accessories?${parameters.toString()}`, { cache: 'no-store' });
           const data = await response.json();
           if (!response.ok) throw new Error(data.error || '生成状態を取得できませんでした');
@@ -3597,7 +3627,7 @@
           accessoryPollingRef.current = false;
           setAccessoryPolling(false);
         }
-      }, [loadArticles]);
+      }, [loadArticles, accessoryModal.batchId]);
 
       const accessoryActiveJobKey = accessoryModal.jobs
         .filter(job => !['completed', 'failed', 'registration_failed'].includes(job.state))
@@ -5188,7 +5218,6 @@
                 <div className="flex items-start justify-between border-b border-slate-200 px-5 py-4">
                   <div className="min-w-0">
                     <h3 className="text-base font-bold text-slate-900">周辺機器記事作成</h3>
-                    <p className="mt-1 truncate text-xs text-slate-500">{accessoryModal.parent?.title || getArticleDisplayTitle(accessoryModal.parent || {}, articleH1Cache)}</p>
                   </div>
                   <button type="button" disabled={accessoryCreating} onClick={() => setAccessoryModal(prev => ({ ...prev, open: false }))} className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 disabled:opacity-40" title="閉じる">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M18 6L6 18M6 6l12 12" /></svg>
@@ -5199,23 +5228,20 @@
                     <div className="space-y-3">{[1, 2, 3].map(item => <div key={item} className="skeleton h-16 w-full" />)}</div>
                   ) : accessoryModal.error ? (
                     <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">{accessoryModal.error}</div>
-                  ) : accessoryModal.categories.length === 0 ? (
-                    <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">周辺機器DBでこの親記事に一致するカテゴリがありません。</div>
                   ) : (
                     <div className="space-y-3">
-                      <p className="text-xs font-semibold text-slate-500">作成する周辺機器をチェックしてください（最大5件）。</p>
-                      {accessoryModal.categories.map(category => (
-                        <label key={category.id} className={`block rounded-lg border p-3 ${category.available ? 'cursor-pointer border-slate-200 hover:border-cyan-300' : 'border-red-100 bg-red-50 opacity-75'}`}>
-                          <div className="flex items-start gap-3">
-                            <input type="checkbox" className="mt-1" checked={accessorySelectedIds.has(category.id)} disabled={!category.available} onChange={() => toggleAccessoryCategory(category.id)} />
-                            <div className="min-w-0 flex-1">
-                              <div className="font-bold text-slate-800">{category.name}<span className="ml-2 text-xs font-normal text-slate-400">{category.productCount}商品</span></div>
-                              <div className="mt-1 text-xs text-slate-500">{category.title}</div>
-                              {category.validationError && <div className="mt-1 text-xs text-red-600">{category.validationError}</div>}
-                              {category.products?.length > 0 && <ul className="mt-2 space-y-1 text-xs text-slate-500">{category.products.map(product => <li key={product.title}>・{product.title}</li>)}</ul>}
-                            </div>
+                      {(accessoryModal.parents || []).map(parent => (
+                        <div key={parent.id}>
+                          <div className="truncate text-xs font-bold text-slate-700">{parent.title || getArticleDisplayTitle(parent, articleH1Cache)}</div>
+                          <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
+                            {(parent.categories || []).map(category => (
+                              <label key={`${parent.id}:${category.id}`} className={`inline-flex items-center gap-1.5 text-xs ${category.available ? 'cursor-pointer text-slate-700' : 'cursor-not-allowed text-slate-300'}`} title={category.validationError || ''}>
+                                <input type="checkbox" checked={accessorySelectedIds.has(accessorySelectionKey(parent.id, category.id))} disabled={!category.available} onChange={() => toggleAccessoryCategory(parent.id, category.id)} />
+                                <span>{category.name}</span>
+                              </label>
+                            ))}
                           </div>
-                        </label>
+                        </div>
                       ))}
                     </div>
                   )}
@@ -5307,7 +5333,7 @@
             <div className="fixed inset-0 z-[60] flex items-center justify-center bg-slate-900/50 px-4" onClick={() => { if (!accessoryPrompt.saving) setAccessoryPrompt(prev => ({ ...prev, open: false })); }}>
               <div className="w-full max-w-3xl rounded-xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
                 <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
-                  <div className="flex items-center gap-2"><select value={accessoryPrompt.engine} onChange={(event) => openAccessoryPrompt(event.target.value, accessoryPrompt.templateFile)} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-800"><option value="MLX">MLX</option><option value="Gemini">Gemini</option></select><select value={accessoryPrompt.templateFile} onChange={(event) => openAccessoryPrompt(accessoryPrompt.engine, event.target.value)} className="max-w-44 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-700">{[...new Set(['tpl_default.md', ...(accessoryModal.categories || []).map(category => category.templateFile).filter(Boolean)])].map(templateFile => <option key={templateFile} value={templateFile}>{templateFile}</option>)}</select><div><h3 className="font-bold text-slate-900">周辺機器生成プロンプト</h3><p className="mt-1 text-xs text-slate-400">改訂 {accessoryPrompt.revision || '-'}</p></div></div>
+                  <div className="flex items-center gap-2"><select value={accessoryPrompt.engine} onChange={(event) => openAccessoryPrompt(event.target.value, accessoryPrompt.templateFile)} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-800"><option value="MLX">MLX</option><option value="Gemini">Gemini</option></select><select value={accessoryPrompt.templateFile} onChange={(event) => openAccessoryPrompt(accessoryPrompt.engine, event.target.value)} className="max-w-44 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-700">{[...new Set(['tpl_default.md', ...(accessoryModal.parents || []).flatMap(parent => parent.categories || []).map(category => category.templateFile).filter(Boolean)])].map(templateFile => <option key={templateFile} value={templateFile}>{templateFile}</option>)}</select><div><h3 className="font-bold text-slate-900">周辺機器生成プロンプト</h3><p className="mt-1 text-xs text-slate-400">改訂 {accessoryPrompt.revision || '-'}</p></div></div>
                   <button onClick={() => setAccessoryPrompt(prev => ({ ...prev, open: false }))} className="p-2 text-slate-400">✕</button>
                 </div>
                 <div className="p-5">

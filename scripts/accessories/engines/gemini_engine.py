@@ -1,4 +1,4 @@
-"""Geminiだけで仕様要約と商品別理由を生成する。"""
+"""Geminiだけで冒頭案内文と商品文の限定調整を生成する。"""
 
 from __future__ import annotations
 
@@ -46,4 +46,9 @@ def generate(
         input_text=input_text,
         generation_config=build_generation_config(temperature=0.2, max_output_tokens=4096),
     )
-    return parse_engine_result(output, len(affiliate_group.products))
+    return parse_engine_result(
+        output,
+        product_name=product_name,
+        category_name=category_name,
+        affiliate_group=affiliate_group,
+    )

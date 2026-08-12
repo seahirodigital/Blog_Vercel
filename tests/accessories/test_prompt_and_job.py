@@ -1,44 +1,65 @@
 import json
 import hashlib
 import unittest
+from pathlib import Path
 
+from scripts.accessories.affiliate_group import load_group
 from scripts.accessories.job_schema import new_job, validate_job
 from scripts.accessories.prompt_builder import parse_engine_result
 
 
 class PromptAndJobTest(unittest.TestCase):
+    def setUp(self):
+        root = Path(__file__).resolve().parents[2]
+        self.group = load_group(
+            root / "scripts/pipeline/prompts/04-affiliate-link-manager/affiliate_links.txt",
+            "battery",
+        )
+
+    def valid_engine_json(self):
+        return json.dumps(
+            {
+                "intro_sentence": "M5 iPad Proにおすすめのバッテリーを紹介します。",
+                "products": [
+                    {
+                        "index": product.index,
+                        "adapted_text": f"{product.text}\n\nM5 iPad Proにおすすめな理由として、持ち運びやすい選択肢です。",
+                    }
+                    for product in self.group.products
+                ],
+            },
+            ensure_ascii=False,
+        )
+
     def test_engine_result_must_match_product_order(self):
         result = parse_engine_result(
-            json.dumps(
-                {
-                    "spec_summary": "USB-C充電に対応します。",
-                    "recommendations": [
-                        {"index": 1, "reason": "45W出力です。"},
-                        {"index": 2, "reason": "67W出力です。"},
-                    ],
-                },
-                ensure_ascii=False,
-            ),
-            2,
+            self.valid_engine_json(),
+            product_name="M5 iPad Pro",
+            category_name="バッテリー",
+            affiliate_group=self.group,
         )
-        self.assertEqual(2, len(result["recommendation_reasons"]))
+        self.assertEqual(2, len(result["adapted_product_texts"]))
 
     def test_engine_result_rejects_affiliate_disclaimer_in_reason(self):
         with self.assertRaisesRegex(ValueError, "禁止値"):
+            data = json.loads(self.valid_engine_json())
+            data["products"][0]["adapted_text"] += "\nAmazonのアソシエイトとして適格販売により収入を得ています。"
             parse_engine_result(
-                json.dumps(
-                    {
-                        "spec_summary": "USB-C充電に対応します。",
-                        "recommendations": [
-                            {
-                                "index": 1,
-                                "reason": "Amazonのアソシエイトとして適格販売により収入を得ています。",
-                            },
-                        ],
-                    },
-                    ensure_ascii=False,
-                ),
-                1,
+                json.dumps(data, ensure_ascii=False),
+                product_name="M5 iPad Pro",
+                category_name="バッテリー",
+                affiliate_group=self.group,
+            )
+
+    def test_engine_result_rejects_changed_url(self):
+        data = json.loads(self.valid_engine_json())
+        data["products"][0]["adapted_text"] = data["products"][0]["adapted_text"].replace("B0FS5XT48F", "B000000000")
+        with self.assertRaisesRegex(ValueError, "URL"):
+            parse_engine_result(
+                json.dumps(data, ensure_ascii=False),
+                product_name="M5 iPad Pro",
+                category_name="バッテリー",
+                affiliate_group=self.group,
             )
 
     def test_job_schema_v2(self):

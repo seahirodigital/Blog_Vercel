@@ -97,7 +97,7 @@ def process_job(
             try:
                 report(
                     "generating",
-                    f"{engine_name}で記事差分を生成しています（{attempt}/{MAX_GENERATION_ATTEMPTS}回目）",
+                    f"{engine_name}で冒頭文と商品文を調整しています（{attempt}/{MAX_GENERATION_ATTEMPTS}回目）",
                 )
                 if engine_name == "Gemini":
                     # MLX実行時にGemini SDKを要求しない。各エンジンを依存関係も含めて独立させる。
@@ -121,7 +121,12 @@ def process_job(
                         affiliate_group=group,
                         attempt=attempt,
                     )
-                    result = parse_engine_result(raw_result, len(group.products))
+                    result = parse_engine_result(
+                        raw_result,
+                        product_name=parent.product_name,
+                        category_name=job["category"]["name"],
+                        affiliate_group=group,
+                    )
                 else:
                     raise ValueError(f"非対応の生成エンジンです: {engine_name}")
                 break
@@ -134,24 +139,22 @@ def process_job(
         if result is None:
             raise RuntimeError(f"{engine_name}生成結果を取得できませんでした: {last_generation_error}")
 
-        report("assembling", "生成結果を親記事へ反映し、結論の商品一覧を組み立てています")
+        report("assembling", "冒頭案内文と調整済み商品ブロックを親記事へ反映しています")
         addition = build_conclusion_addition(
-            product_name=parent.product_name,
-            category_name=job["category"]["name"],
-            spec_summary=result["spec_summary"],
-            recommendation_reasons=result["recommendation_reasons"],
-            affiliate_group=group,
+            adapted_product_texts=result["adapted_product_texts"],
         )
         child_markdown, _ = assemble_article(
             parent_markdown,
             category_name=job["category"]["name"],
             title_format=job["category"].get("title_format", ""),
+            intro_addition=result["intro_sentence"],
             conclusion_addition=addition,
         )
         report("validating", "本文外メタ情報・Frontmatter・リンク構成を検査しています")
         validate_public_markdown(
             child_markdown,
             affiliate_group=group,
+            adapted_product_texts=result["adapted_product_texts"],
             allowed_new_urls=[url for product in group.products for url in product.urls],
         )
         report("saving", "合格した子記事をOneDriveの周辺機器フォルダへ保存しています")
@@ -161,12 +164,12 @@ def process_job(
             "title": job["article_title"],
             "keyword": f"{parent.product_name} {job['category']['name']} おすすめ",
             "description": (
-                f"{parent.product_name}の主要仕様と、おすすめ{job['category']['name']}を紹介します。"
-                f"{result['spec_summary']}"
+                f"{parent.product_name}におすすめの{job['category']['name']}を、"
+                "商品情報を維持して紹介します。"
             )[:160],
             "product_name": parent.product_name,
             "recommended_products": product_titles,
-            "source": "parent-title-and-validated-engine-result",
+            "source": "parent-title-and-minimally-adapted-affiliate-text",
         }
         integrity = {
             "parent_immutable_sha256": immutable_content_sha256(
@@ -174,7 +177,7 @@ def process_job(
                 category_name=job["category"]["name"],
                 title_format=job["category"].get("title_format", ""),
             ),
-            "editable_regions": ["h1_text", "matched_h2_text_after_conclusion", "conclusion_append"],
+            "editable_regions": ["h1_text", "all_h2_text", "intro_append", "conclusion_append"],
         }
         job["state"] = "completed"
         job["completed_at"] = utc_now()

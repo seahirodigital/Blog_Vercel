@@ -16,7 +16,7 @@ class ApiLimitTest(unittest.TestCase):
         html = (ROOT / "public/index.html").read_text(encoding="utf-8")
         required_fragments = [
             "onContextMenu={(e) => handleContextMenu(e, article)}",
-            "onCreateAccessory && onCreateAccessory(ctxMenu.article)",
+            "onCreateAccessory && onCreateAccessory(getContextTargetArticles(ctxMenu.article))",
             "onCreateAccessory={openAccessoryModal}",
             "createAccessoryJobs('MLX')",
             "createAccessoryJobs('Gemini')",
@@ -26,14 +26,28 @@ class ApiLimitTest(unittest.TestCase):
             "Terminalをもう一度開く",
             "refreshAccessoryJobs",
             "accessoryProgressPercent",
+            "周辺機器記事作成{getContextTargetIds(ctxMenu.article).length > 1",
+            "batch_id",
+            "parents: selectedParents",
+            "accessorySelectionKey(parent.id, category.id)",
         ]
         for fragment in required_fragments:
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, html)
+        self.assertNotIn("作成する周辺機器をチェックしてください（最大5件）。", html)
+        self.assertNotIn("category.productCount", html)
+        self.assertNotIn("category.products?.length", html)
 
     def test_accessory_creation_calls_single_api_function(self):
         html = (ROOT / "public/index.html").read_text(encoding="utf-8")
         self.assertIn("fetch('/api/accessories?action=create'", html)
+
+    def test_api_accepts_batch_status_without_fixed_job_limit(self):
+        source = (ROOT / "api/accessories.js").read_text(encoding="utf-8")
+        self.assertIn("queryValue(req.query.batchId)", source)
+        self.assertIn("await listRegistryJobs()", source)
+        self.assertNotIn("ids.length > 5", source)
+        self.assertNotIn("categoryIds.length > 5", source)
 
 
 if __name__ == "__main__":

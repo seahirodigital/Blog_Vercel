@@ -241,7 +241,7 @@ def child_folder_name(job: dict[str, Any]) -> str:
         created = created.replace(tzinfo=timezone.utc)
     timestamp = created.astimezone(JST).strftime("%Y%m%d_%H%M")
     title = re.sub(r"[\\/:*?\"<>|\x00-\x1f]", " ", str(job.get("parent", {}).get("title", "")))
-    title = re.sub(r"\s+", " ", title).strip(" .")[:10].rstrip(" .")
+    title = re.sub(r"\s+", " ", title).strip(" .")[:20].rstrip(" .")
     if not title:
         raise ValueError("親記事タイトルから保存フォルダ名を作成できません")
     return f"{timestamp}_{title}"
