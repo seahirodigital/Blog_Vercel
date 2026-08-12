@@ -1030,7 +1030,7 @@ Windowsでは「MLXで作成」を無効表示してMLXジョブを登録しな�
 | clasp・シート契約準備 | 完了 | 2026-08-12 | ユーザーが `seedAccessoryCategories` を実行。実APIプレビューで `battery`、`adapter`、`cable` と各商品数を確認 |
 | フェーズ0 | 完了 | 2026-08-12 | 契約、Function枠、右クリックUI、チェックボック、MLX/Geminiボタン、単体テストを実装。ユーザーによる実クリック試験を残す |
 | フェーズ1 | 進行中 | 2026-08-12 | Gemini縦断ソースを実装。GitHub Actions・OneDrive・本番UIの実ジョブ確認待ち |
-| フェーズ2 | 進行中 | 2026-08-12 | MLXエンジン、ポーラー、`.command`、launchd定義を実装。秘密情報を使う実ジョブと自動起動確認待ち |
+| フェーズ2 | 進行中 | 2026-08-12 | MLXエンジン、ポーラー、`.command`、launchd定義、Blog VercelからTerminalを開くMac URLランチャー、ライブ進捗を実装。実MLXジョブの完走確認待ち |
 | フェーズ3 | 進行中 | 2026-08-12 | Vercel本番公開と本番読み取り専用プレビューまで完了。ユーザーによる右クリック操作とGemini/MLX各1ジョブの確認を残す |
 
 進捗状態は `未着手`、`進行中`、`保留`、`完了` のいずれかで更新する。`完了` にする場合は、対応する検証結果または根拠を開発履歴へ記録する。
@@ -1263,6 +1263,33 @@ Windowsでは「MLXで作成」を無効表示してMLXジョブを登録しな�
 
 現在の残作業:
 
-- ユーザーが本番UIで左サイドパネルの記事を右クリックし、カテゴリチェックボックと両生成ボタンが操作できることを確認する。
+- ユーザーが本番UIで左サイドパネルの記事を右クリックし、「MLXで作成」からChromeの確認を許可してTerminalが開くことを確認する。
 - Geminiと1ジョブ、MLXと1ジョブを登録し、`周辺機器DB_LLM` の進捗、OneDriveの子記事保存、本文不変契約、Frontmatter非出力を確認する。
 - MLXの手動実ジョブが成功した後、必要であればlaunchdを登録して常駐ポーリングを有効化する。
+
+### 2026-08-12: MLXボタンからのTerminal起動とライブ進捗を実装
+
+実施内容:
+
+- Blog Vercelの「MLXで作成」でジョブ登録した後、`blogvercel-mlx://run` を呼び出す導線を追加した。
+- `/Users/user/Applications/Blog Vercel MLX Launcher.app` を生成・登録し、許可されたURL形式と1〜5件のUUIDだけを `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/MLX/start_accessories_worker.command` へ渡すようにした。
+- ブラウザの外部アプリ起動確認やポップアップ制限に備え、生成進捗内へ「Terminalをもう一度開く」を追加した。
+- `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/MLX/accessories_worker.py` を複数の `--job-id` に対応させ、一つのTerminalで選択カテゴリを順番に処理するようにした。
+- Terminalへジョブ内容、MLX起動、生成、組立、本文検査、OneDrive保存、周辺機器DB_LLM更新を日本語の段階ログとして表示するようにした。
+- ワーカーheartbeatへ現在工程とメッセージを追加し、Blog Vercelの生成進捗へ3秒間隔で反映するようにした。
+- 生成進捗へスピナー、進捗バー、経過時間、最終確認時刻、「今すぐ更新」を追加した。
+
+検証結果:
+
+- Python単体テスト18件に合格し、URLスキーム、操作名、未知パラメータ、UUID件数・形式、固定ワーカー以外を実行できないことを検査した。
+- `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/api/accessories.js` のNode.js構文と `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/public/index.html` のJSX構文は合格した。
+- `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/scripts/accessories/install_mlx_url_launcher.command` と `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/MLX/start_accessories_worker.command` は `bash -n` に合格した。
+- `/Users/user/Applications/Blog Vercel MLX Launcher.app` の署名、アプリ認識、`com.blogvercel.mlx-launcher`、`blogvercel-mlx` の登録を確認した。
+- 実ジョブはユーザー試験に残し、この記事生成を伴わないランチャー登録だけを実施した。
+- `winmacsync` は実行していない。
+
+次の実行確認:
+
+- 本番へ反映後、MacのChromeで「MLXで作成」を押し、最初の確認画面で「Blog Vercel MLX Launcher.appを開く」を選択する。
+- TerminalとBlog Vercelの両方で同じジョブの工程が進み、完了後に記事リンクが表示されることを確認する。
+- 完成した子記事がH1、対象H2、結論追記以外を変更せず、Frontmatterや管理情報を含まないことを確認する。

@@ -70,7 +70,9 @@ Blog Vercelの左サイドパネルにある親記事上で右クリックし、
 ・生成確認画面には使用するプロンプト名と改訂番号を表示し、ジョブにはその識別子を記録する。ただし記事本文にはプロンプト名、改訂番号、エンジン名を出力しない。
 ・MLXはE4BなのでGeminiAPIのほうが賢いため、トークン消費の無い賢くない側のMLX側を基本としたいためだ。
 
-尚、MacにしかMLXは搭載していないため、Windowsでは「MLXで作成」を無効表示し、MLXジョブを登録しない。WindowsではGeminiだけを利用できる。MacではMLXワーカーのheartbeatが失効していても、OneDriveジョブJSONと「周辺機器DB_LLM」の `記事化` 行までは登録し、「自動処理は待機中です。Macで手動復旧できます」と表示する。その後、Macで `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/MLX/start_accessories_worker.command` をダブルクリックして処理できるようにする。
+尚、MacにしかMLXは搭載していないため、Windowsでは「MLXで作成」を無効表示し、MLXジョブを登録しない。WindowsではGeminiだけを利用できる。Macで「MLXで作成」を押した場合は、OneDriveジョブJSONと「周辺機器DB_LLM」の `記事化` 行を登録した後、Mac専用URL `blogvercel-mlx://run` を介して `/Users/user/Applications/Blog Vercel MLX Launcher.app` を開く。ランチャーは検証済みジョブIDだけを `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/MLX/start_accessories_worker.command` へ渡し、Terminalを表示した状態で処理する。ブラウザによる自動起動が止められた場合は、生成進捗内の「Terminalをもう一度開く」から同じジョブだけを再開できるようにする。
+
+生成進捗には、ジョブ登録、MLX起動待ち、親記事・商品・プロンプト読込、生成、本文検査、OneDrive保存、周辺機器DB_LLM更新、完了・失敗の状態を表示する。未完了中はスピナー、進捗バー、経過時間、最終確認時刻を更新し、MLXワーカーのheartbeatにある現在工程と日本語メッセージを表示する。これにより、ジョブが `記事化` のまま止まっているのか、ローカルMLXが実際に生成中なのかを区別できるようにする。
 
 ### 記事本文と管理情報の分離
 

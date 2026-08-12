@@ -3103,6 +3103,8 @@
       const [accessoryModal, setAccessoryModal] = useState({ open: false, parent: null, loading: false, error: '', categories: [], prompts: [], jobs: [] });
       const [accessorySelectedIds, setAccessorySelectedIds] = useState(new Set());
       const [accessoryCreating, setAccessoryCreating] = useState(false);
+      const [accessoryPolling, setAccessoryPolling] = useState(false);
+      const [accessoryProgressClock, setAccessoryProgressClock] = useState(() => Date.now());
       const [accessoryPrompt, setAccessoryPrompt] = useState({ open: false, engine: 'MLX', templateFile: 'tpl_default.md', loading: false, saving: false, content: '', revision: 0, error: '' });
       const [externalFolderUrls, setExternalFolderUrls] = useState(() => {
         try { return JSON.parse(localStorage.getItem('sb_externalFolderUrls') || '[]'); }
@@ -3128,6 +3130,8 @@
       const replaceInputRef = useRef(null);
       const bulkFindInputRef = useRef(null);
       const bulkReplaceContentCacheRef = useRef(new Map());
+      const accessoryJobsRef = useRef([]);
+      const accessoryPollingRef = useRef(false);
       // スクロール同期（相互ロックで無限ループ防止）
       const editorScrolling = useRef(false);
       const previewScrolling = useRef(false);
@@ -3145,6 +3149,7 @@
       const hasChanges = content !== originalContent;
       const selectedArticleRef = useRef(null);
       useEffect(() => { selectedArticleRef.current = selectedArticle; }, [selectedArticle]);
+      useEffect(() => { accessoryJobsRef.current = accessoryModal.jobs; }, [accessoryModal.jobs]);
       const editorInstanceKey = selectedArticle?.id
         ? `article:${selectedArticle.id}`
         : isNewArticle ? `new:${newFilename || 'draft'}` : 'empty';
@@ -3403,14 +3408,131 @@
         completed: '完了',
       }[state] || state || '不明'), []);
 
+      const accessoryProgressPercent = useCallback((job) => {
+        if (['pending', 'processing'].includes(job.state) && accessoryModal.worker?.currentJobId === job.jobId) {
+          return ({
+            mlx_starting: 36,
+            engine_ready: 42,
+            job_check: 46,
+            job_lock: 49,
+            source_loading: 54,
+            generating: 68,
+            assembling: 78,
+            validating: 84,
+            saving: 92,
+            registry: 97,
+            completed: 100,
+          }[accessoryModal.worker?.stage] || 60);
+        }
+        return ({
+          registration_pending: 12,
+          pending: 28,
+          processing: 60,
+          completed: 100,
+          failed: 100,
+          registration_failed: 100,
+        }[job.state] || 0);
+      }, [accessoryModal.worker]);
+
+      const accessoryElapsedLabel = useCallback((createdAt, completedAt = '') => {
+        const started = Date.parse(createdAt || '');
+        if (!Number.isFinite(started)) return '経過時間を計測中';
+        const ended = Date.parse(completedAt || '') || accessoryProgressClock;
+        const seconds = Math.max(0, Math.floor((ended - started) / 1000));
+        const minutes = Math.floor(seconds / 60);
+        const remainder = String(seconds % 60).padStart(2, '0');
+        return `経過 ${minutes}:${remainder}`;
+      }, [accessoryProgressClock]);
+
+      const accessoryJobDetail = useCallback((job) => {
+        if (job.state === 'registration_pending') return '周辺機器DB_LLMへジョブを登録しています';
+        if (job.state === 'pending') {
+          if (job.engine === 'MLX') {
+            if (accessoryModal.worker?.state === 'error' && accessoryModal.worker?.currentJobId === job.jobId) {
+              return accessoryModal.worker.error || 'MLX処理に失敗しました。Terminalのログを確認してください';
+            }
+            if (accessoryModal.worker?.currentJobId === job.jobId && accessoryModal.worker?.message) {
+              return accessoryModal.worker.message;
+            }
+            if (accessoryModal.worker?.active) return 'MLXワーカーがこのジョブを開始するのを待っています';
+            return 'ローカルTerminalの起動待ちです';
+          }
+          return 'Geminiの処理開始を待っています';
+        }
+        if (job.state === 'processing') {
+          if (accessoryModal.worker?.currentJobId === job.jobId && accessoryModal.worker?.message) {
+            return accessoryModal.worker.message;
+          }
+          return `${job.engine || '生成エンジン'}が記事を生成・検査しています`;
+        }
+        if (job.state === 'completed') return 'OneDrive保存と周辺機器DB_LLM更新が完了しました';
+        if (job.state === 'registration_failed') return '周辺機器DB_LLMへの登録に失敗しました';
+        if (job.state === 'failed') return job.error || '記事生成に失敗しました';
+        return '状態を確認しています';
+      }, [accessoryModal.worker]);
+
+      const mlxLauncherUrl = useCallback((jobs) => {
+        const parameters = new URLSearchParams();
+        jobs
+          .filter(job => job.engine === 'MLX' && !['failed', 'registration_failed', 'completed'].includes(job.state))
+          .slice(0, 5)
+          .forEach(job => parameters.append('job_id', job.jobId));
+        return parameters.toString() ? `blogvercel-mlx://run?${parameters.toString()}` : '';
+      }, []);
+
+      const requestMlxTerminal = useCallback((jobs, launcherWindow = null) => {
+        const url = mlxLauncherUrl(jobs);
+        if (!url) return false;
+        setAccessoryModal(prev => ({
+          ...prev,
+          launcherUrl: url,
+          launchStatus: 'requested',
+          statusMessage: 'Terminalの起動を要求しました。Chromeの確認画面で「開く」を選択してください。',
+        }));
+        try {
+          if (launcherWindow && !launcherWindow.closed) launcherWindow.location.href = url;
+          else window.location.href = url;
+          return true;
+        } catch (error) {
+          setAccessoryModal(prev => ({
+            ...prev,
+            launchStatus: 'manual_required',
+            statusMessage: 'Terminalを自動起動できませんでした。下の「Terminalをもう一度開く」を押してください。',
+          }));
+          return false;
+        }
+      }, [mlxLauncherUrl]);
+
       const createAccessoryJobs = useCallback(async (engine) => {
         if (!accessoryModal.parent || accessorySelectedIds.size === 0) return;
         if (engine === 'MLX' && !/Mac/i.test(navigator.platform || navigator.userAgent || '')) {
           showToast('MLXはMacからだけ依頼できます', 'error');
           return;
         }
+        let launcherWindow = null;
+        if (engine === 'MLX') {
+          try {
+            launcherWindow = window.open('', 'blogVercelMlxLauncher', 'popup,width=520,height=280');
+            if (launcherWindow) {
+              launcherWindow.document.title = 'Blog Vercel MLX起動';
+              launcherWindow.document.body.style.cssText = 'font-family:-apple-system,BlinkMacSystemFont,sans-serif;padding:32px;line-height:1.7;color:#0f172a;background:#f8fafc';
+              launcherWindow.document.body.textContent = '周辺機器ジョブを登録しています。登録後にMLXターミナルを起動します。';
+            }
+          } catch {
+            launcherWindow = null;
+          }
+        }
         setAccessoryCreating(true);
-        setAccessoryModal(prev => ({ ...prev, error: '' }));
+        setAccessoryModal(prev => ({
+          ...prev,
+          error: '',
+          jobs: [],
+          worker: null,
+          launcherUrl: '',
+          launchStatus: engine === 'MLX' ? 'registering' : '',
+          statusMessage: `${engine}用ジョブをOneDriveと周辺機器DB_LLMへ登録しています。`,
+          lastCheckedAt: '',
+        }));
         try {
           const response = await fetch('/api/accessories?action=create', {
             method: 'POST',
@@ -3427,31 +3549,74 @@
           const data = await response.json();
           if (!response.ok) throw new Error(data.error || '周辺機器ジョブの登録に失敗しました');
           const jobs = (data.jobs || []).map(job => ({ ...job, state: job.state || 'pending', engine, articleUrl: '', error: job.error || '' }));
-          setAccessoryModal(prev => ({ ...prev, jobs }));
+          const launcherUrl = engine === 'MLX' ? mlxLauncherUrl(jobs) : '';
+          setAccessoryModal(prev => ({
+            ...prev,
+            jobs,
+            worker: data.worker || null,
+            launcherUrl,
+            launchStatus: engine === 'MLX' ? 'ready' : '',
+            statusMessage: data.message || '周辺機器ジョブを登録しました。',
+            lastCheckedAt: new Date().toISOString(),
+          }));
+          if (engine === 'MLX' && launcherUrl) requestMlxTerminal(jobs, launcherWindow);
+          else if (launcherWindow && !launcherWindow.closed) launcherWindow.close();
           showToast(data.message || '周辺機器ジョブを登録しました', data.hasFailures ? 'error' : data.automatic ? 'success' : 'info');
         } catch (error) {
+          if (launcherWindow && !launcherWindow.closed) launcherWindow.close();
           setAccessoryModal(prev => ({ ...prev, error: error.message }));
         } finally {
           setAccessoryCreating(false);
         }
-      }, [accessoryModal.parent, accessorySelectedIds]);
+      }, [accessoryModal.parent, accessorySelectedIds, mlxLauncherUrl, requestMlxTerminal]);
+
+      const refreshAccessoryJobs = useCallback(async () => {
+        const current = accessoryJobsRef.current;
+        const active = current.filter(job => !['completed', 'failed', 'registration_failed'].includes(job.state));
+        if (active.length === 0 || accessoryPollingRef.current) return;
+        accessoryPollingRef.current = true;
+        setAccessoryPolling(true);
+        try {
+          const parameters = new URLSearchParams({ action: 'status', jobIds: active.map(job => job.jobId).join(',') });
+          const response = await fetch(`/api/accessories?${parameters.toString()}`, { cache: 'no-store' });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || '生成状態を取得できませんでした');
+          const updates = new Map((data.jobs || []).map(job => [job.jobId, job]));
+          const newlyCompleted = (data.jobs || []).some(job => job.state === 'completed' && !current.some(previous => previous.jobId === job.jobId && previous.state === 'completed'));
+          setAccessoryModal(prev => ({
+            ...prev,
+            jobs: prev.jobs.map(job => updates.has(job.jobId) ? { ...job, ...updates.get(job.jobId) } : job),
+            worker: data.worker || prev.worker,
+            lastCheckedAt: data.checkedAt || new Date().toISOString(),
+            statusMessage: data.worker?.error || data.worker?.message || prev.statusMessage,
+          }));
+          if (newlyCompleted) loadArticles();
+        } catch (error) {
+          setAccessoryModal(prev => ({ ...prev, statusMessage: `進捗の再取得に失敗しました: ${error.message}` }));
+        } finally {
+          accessoryPollingRef.current = false;
+          setAccessoryPolling(false);
+        }
+      }, [loadArticles]);
+
+      const accessoryActiveJobKey = accessoryModal.jobs
+        .filter(job => !['completed', 'failed', 'registration_failed'].includes(job.state))
+        .map(job => job.jobId)
+        .join(',');
 
       useEffect(() => {
-        if (!accessoryModal.open || !accessoryModal.jobs.some(job => !['completed', 'failed', 'registration_failed'].includes(job.state))) return undefined;
-        const timer = setInterval(async () => {
-          const next = await Promise.all(accessoryModal.jobs.map(async (job) => {
-            if (['completed', 'failed', 'registration_failed'].includes(job.state)) return job;
-            try {
-              const response = await fetch(`/api/accessories?action=status&jobId=${encodeURIComponent(job.jobId)}`, { cache: 'no-store' });
-              const data = await response.json();
-              return response.ok ? { ...job, ...data } : job;
-            } catch { return job; }
-          }));
-          setAccessoryModal(prev => ({ ...prev, jobs: next }));
-          if (next.some(job => job.state === 'completed')) loadArticles();
-        }, 5000);
+        if (!accessoryModal.open || !accessoryActiveJobKey) return undefined;
+        refreshAccessoryJobs();
+        const timer = setInterval(refreshAccessoryJobs, 3000);
         return () => clearInterval(timer);
-      }, [accessoryModal.open, accessoryModal.jobs]);
+      }, [accessoryModal.open, accessoryActiveJobKey, refreshAccessoryJobs]);
+
+      useEffect(() => {
+        if (!accessoryModal.open || accessoryModal.jobs.length === 0) return undefined;
+        setAccessoryProgressClock(Date.now());
+        const timer = setInterval(() => setAccessoryProgressClock(Date.now()), 1000);
+        return () => clearInterval(timer);
+      }, [accessoryModal.open, accessoryModal.jobs.length]);
 
       // 記事削除
       const handleDeleteArticle = useCallback(async (articleOrArray) => {
@@ -5055,19 +5220,69 @@
                     </div>
                   )}
 
+                  {accessoryCreating && accessoryModal.jobs.length === 0 && (
+                    <div className="mt-5 flex items-center gap-3 rounded-lg border border-cyan-200 bg-cyan-50 p-4 text-sm text-cyan-900">
+                      <span className="inline-block h-5 w-5 shrink-0 animate-spin rounded-full border-2 border-cyan-600 border-t-transparent" />
+                      <div>
+                        <div className="font-bold">ジョブを登録しています</div>
+                        <div className="mt-1 text-xs text-cyan-800">{accessoryModal.statusMessage || 'OneDriveと周辺機器DB_LLMへ生成内容を保存しています。'}</div>
+                      </div>
+                    </div>
+                  )}
+
                   {accessoryModal.jobs.length > 0 && (
                     <div className="mt-5 rounded-lg border border-slate-200 bg-slate-50 p-3">
-                      <div className="mb-2 text-xs font-bold text-slate-600">生成進捗</div>
-                      <div className="space-y-2">
+                      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                          <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                            生成進捗
+                            {accessoryPolling && <span className="inline-block h-3 w-3 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent" aria-label="進捗を更新中" />}
+                          </div>
+                          <div className="mt-1 text-[11px] text-slate-500">
+                            {accessoryModal.statusMessage || 'ジョブの状態を確認しています。'}
+                          </div>
+                        </div>
+                        <button type="button" onClick={refreshAccessoryJobs} disabled={accessoryPolling || !accessoryActiveJobKey} className="rounded-md border border-slate-200 bg-white px-2.5 py-1.5 text-[11px] font-bold text-slate-600 disabled:opacity-40">
+                          {accessoryPolling ? '更新中...' : '今すぐ更新'}
+                        </button>
+                      </div>
+                      <div className="space-y-3">
                         {accessoryModal.jobs.map(job => (
-                          <div key={job.jobId} className="flex items-center gap-2 text-xs">
-                            <span className={`rounded-full px-2 py-0.5 font-bold ${job.state === 'completed' ? 'bg-green-100 text-green-700' : job.state === 'failed' || job.state === 'registration_failed' ? 'bg-red-100 text-red-700' : 'bg-cyan-100 text-cyan-700'}`}>{accessoryStateLabel(job.state)}</span>
-                            <span className="min-w-0 flex-1 truncate text-slate-600">{job.title}</span>
-                            {job.articleUrl && <a href={job.articleUrl} target="_blank" rel="noopener noreferrer" className="font-bold text-[#7C4DFF] hover:underline">記事を開く</a>}
-                            {job.error && <span className="text-red-600" title={job.error}>失敗</span>}
+                          <div key={job.jobId} className="rounded-lg border border-slate-200 bg-white p-3 text-xs">
+                            <div className="flex items-start gap-2">
+                              {!['completed', 'failed', 'registration_failed'].includes(job.state) && <span className="mt-0.5 inline-block h-3.5 w-3.5 shrink-0 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent" />}
+                              <div className="min-w-0 flex-1">
+                                <div className="flex flex-wrap items-center gap-2">
+                                  <span className={`rounded-full px-2 py-0.5 font-bold ${job.state === 'completed' ? 'bg-green-100 text-green-700' : job.state === 'failed' || job.state === 'registration_failed' ? 'bg-red-100 text-red-700' : 'bg-cyan-100 text-cyan-700'}`}>{accessoryStateLabel(job.state)}</span>
+                                  <span className="min-w-0 flex-1 truncate font-semibold text-slate-700">{job.title}</span>
+                                  <span className="text-[11px] tabular-nums text-slate-400">{accessoryElapsedLabel(job.createdAt, job.completedAt)}</span>
+                                  {job.articleUrl && <a href={job.articleUrl} target="_blank" rel="noopener noreferrer" className="font-bold text-[#7C4DFF] hover:underline">記事を開く</a>}
+                                </div>
+                                <div className={`mt-2 text-[11px] ${job.state === 'failed' || job.state === 'registration_failed' ? 'text-red-600' : 'text-slate-500'}`}>{accessoryJobDetail(job)}</div>
+                                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-slate-100">
+                                  <div className={`h-full rounded-full transition-all duration-500 ${job.state === 'completed' ? 'bg-green-500' : job.state === 'failed' || job.state === 'registration_failed' ? 'bg-red-400' : 'bg-cyan-500'}`} style={{ width: `${accessoryProgressPercent(job)}%` }} />
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         ))}
                       </div>
+                      {accessoryModal.jobs.some(job => job.engine === 'MLX') && accessoryModal.launcherUrl && (
+                        <div className="mt-3 rounded-lg border border-cyan-200 bg-cyan-50 p-3">
+                          <div className="text-xs font-bold text-cyan-900">ローカルMLXターミナル</div>
+                          <div className="mt-1 text-[11px] leading-relaxed text-cyan-800">
+                            Chromeに確認が出たら「Blog Vercel MLX Launcher.appを開く」を選択してください。ターミナルには現在の工程とログ保存先が表示されます。
+                          </div>
+                          <a href={accessoryModal.launcherUrl} onClick={() => setAccessoryModal(prev => ({ ...prev, launchStatus: 'requested', statusMessage: 'Terminalの再起動を要求しました。Chromeの確認画面で「開く」を選択してください。' }))} className="mt-2 inline-flex rounded-md bg-slate-800 px-3 py-2 text-[11px] font-bold text-white hover:bg-slate-700">
+                            Terminalをもう一度開く
+                          </a>
+                        </div>
+                      )}
+                      {accessoryModal.lastCheckedAt && (
+                        <div className="mt-2 text-right text-[10px] text-slate-400">
+                          最終確認 {new Date(accessoryModal.lastCheckedAt).toLocaleTimeString('ja-JP')}
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -5080,8 +5295,8 @@
                   </div>
                   <div className="flex gap-2">
                     <button type="button" onClick={() => setAccessoryModal(prev => ({ ...prev, open: false }))} disabled={accessoryCreating} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-500 disabled:opacity-40">戻る</button>
-                    <button type="button" onClick={() => createAccessoryJobs('MLX')} disabled={accessoryCreating || accessorySelectedIds.size === 0 || !/Mac/i.test(navigator.platform || navigator.userAgent || '')} className="rounded-lg bg-slate-800 px-3 py-2 text-xs font-bold text-white disabled:opacity-35">MLXで作成</button>
-                    <button type="button" onClick={() => createAccessoryJobs('Gemini')} disabled={accessoryCreating || accessorySelectedIds.size === 0} className="rounded-lg bg-[#7C4DFF] px-3 py-2 text-xs font-bold text-white disabled:opacity-35">Geminiで作成</button>
+                    <button type="button" onClick={() => createAccessoryJobs('MLX')} disabled={accessoryCreating || accessorySelectedIds.size === 0 || !/Mac/i.test(navigator.platform || navigator.userAgent || '')} className="rounded-lg bg-slate-800 px-3 py-2 text-xs font-bold text-white disabled:opacity-35">{accessoryCreating ? 'ジョブ登録中...' : 'MLXで作成'}</button>
+                    <button type="button" onClick={() => createAccessoryJobs('Gemini')} disabled={accessoryCreating || accessorySelectedIds.size === 0} className="rounded-lg bg-[#7C4DFF] px-3 py-2 text-xs font-bold text-white disabled:opacity-35">{accessoryCreating ? 'ジョブ登録中...' : 'Geminiで作成'}</button>
                   </div>
                 </div>
               </div>

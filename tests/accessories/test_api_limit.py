@@ -22,6 +22,10 @@ class ApiLimitTest(unittest.TestCase):
             "createAccessoryJobs('Gemini')",
             "MLXで作成",
             "Geminiで作成",
+            "blogvercel-mlx://run?",
+            "Terminalをもう一度開く",
+            "refreshAccessoryJobs",
+            "accessoryProgressPercent",
         ]
         for fragment in required_fragments:
             with self.subTest(fragment=fragment):

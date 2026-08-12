@@ -52,8 +52,14 @@ def process_job(
     *,
     engine_name: str,
     mlx_generator: Callable[..., str] | None = None,
+    progress_callback: Callable[[str, str], None] | None = None,
 ) -> dict:
+    def report(stage: str, message: str) -> None:
+        if progress_callback is not None:
+            progress_callback(stage, message)
+
     owner = f"{engine_name.lower()}:{socket.gethostname()}:{os.getpid()}"
+    report("job_check", "OneDriveのジョブ内容を確認しています")
     candidate, candidate_etag = read_job(job_id)
     validate_job(candidate)
     if candidate["engine"].casefold() != engine_name.casefold():
@@ -72,9 +78,11 @@ def process_job(
         candidate["registry"].pop("last_error", None)
         save_job(candidate, if_match=candidate_etag)
         return candidate
+    report("job_lock", "このジョブの処理権を確保しています")
     job, etag = acquire_job(job_id, owner)
 
     try:
+        report("source_loading", "親記事・おすすめ商品・プロンプトを読み込んでいます")
         parent_markdown = download_article(job["parent"]["id"])
         parent = analyze_parent(parent_markdown)
         group = extract_group(
@@ -88,6 +96,10 @@ def process_job(
         result = None
         for attempt in range(1, MAX_GENERATION_ATTEMPTS + 1):
             try:
+                report(
+                    "generating",
+                    f"{engine_name}で記事差分を生成しています（{attempt}/{MAX_GENERATION_ATTEMPTS}回目）",
+                )
                 if engine_name == "Gemini":
                     result = gemini_engine.generate(
                         product_name=parent.product_name,
@@ -120,6 +132,7 @@ def process_job(
         if result is None:
             raise RuntimeError(f"{engine_name}生成結果を取得できませんでした: {last_generation_error}")
 
+        report("assembling", "生成結果を親記事へ反映し、結論の商品一覧を組み立てています")
         addition = build_conclusion_addition(
             product_name=parent.product_name,
             category_name=job["category"]["name"],
@@ -133,11 +146,13 @@ def process_job(
             title_format=job["category"].get("title_format", ""),
             conclusion_addition=addition,
         )
+        report("validating", "本文外メタ情報・Frontmatter・リンク構成を検査しています")
         validate_public_markdown(
             child_markdown,
             affiliate_group=group,
             allowed_new_urls=[url for product in group.products for url in product.urls],
         )
+        report("saving", "合格した子記事をOneDriveの周辺機器フォルダへ保存しています")
         article_item = save_child_article(job["parent"]["id"], _filename(job), child_markdown)
         product_titles = [product.title for product in group.products]
         management_seo = {
@@ -173,6 +188,7 @@ def process_job(
         job["registry"]["sync"] = "pending"
         save_job(job, if_match=etag)
         save_metadata(job, article_item)
+        report("registry", "周辺機器DB_LLMへ完了日時と記事リンクを反映しています")
         try:
             update_job(
                 _service_account_info(),
@@ -187,6 +203,7 @@ def process_job(
             job["registry"]["sync"] = "pending"
             job["registry"]["last_error"] = str(registry_error)[:300]
             save_job(job)
+        report("completed", "子記事の生成と保存が完了しました")
         return job
     except Exception as error:
         job["state"] = "failed"

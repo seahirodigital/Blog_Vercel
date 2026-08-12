@@ -49,6 +49,33 @@ function heartbeatActive(record) {
   return Number.isFinite(timestamp) && Date.now() - timestamp < 90_000;
 }
 
+function workerSnapshot(record) {
+  const value = record?.value || {};
+  return {
+    active: heartbeatActive(record),
+    state: String(value.state || ''),
+    currentJobId: String(value.current_job_id || ''),
+    stage: String(value.stage || ''),
+    message: String(value.message || ''),
+    updatedAt: String(value.updated_at || value.timestamp || ''),
+    error: String(value.error || ''),
+  };
+}
+
+function statusJobIds(req) {
+  const single = String(queryValue(req.query.jobId) || '').trim();
+  const multiple = String(queryValue(req.query.jobIds) || '').trim();
+  const values = multiple ? multiple.split(',') : single ? [single] : [];
+  const ids = [...new Set(values.map((value) => value.trim()).filter(Boolean))];
+  if (ids.length < 1 || ids.length > 5) {
+    throw new Error('jobIdまたは1〜5件のjobIdsは必須です');
+  }
+  if (ids.some((id) => !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id))) {
+    throw new Error('jobIdの形式が不正です');
+  }
+  return { ids, batch: Boolean(multiple) };
+}
+
 function promptPath(engine, templateFile = 'tpl_default.md') {
   const templateId = String(templateFile).replace(/\.md$/, '');
   return `${controlFolder()}/prompts/${engine.toLowerCase()}/${templateId}.json`;
@@ -217,6 +244,7 @@ async function createJobs(req, res, body) {
         title: job.article_title,
         category: job.category.name,
         state: job.state,
+        createdAt: job.created_at,
         error: job.result.error_summary,
       });
       continue;
@@ -247,16 +275,19 @@ async function createJobs(req, res, body) {
       title: job.article_title,
       category: job.category.name,
       state: job.state,
+      createdAt: job.created_at,
       error: job.result.error_summary,
     });
   }
   const heartbeat = engine === 'MLX' ? await getWorkerHeartbeat(token) : null;
+  const worker = engine === 'MLX' ? workerSnapshot(heartbeat) : null;
   return res.status(201).json({
     success: true,
     hasFailures: created.some((job) => ['failed', 'registration_failed'].includes(job.state)),
     batchId,
     jobs: created,
     automatic: engine === 'Gemini' || heartbeatActive(heartbeat),
+    worker,
     message: created.some((job) => ['failed', 'registration_failed'].includes(job.state))
       ? '一部のジョブ登録または起動に失敗しました。生成進捗を確認してください。'
       : engine === 'MLX' && !heartbeatActive(heartbeat)
@@ -266,25 +297,41 @@ async function createJobs(req, res, body) {
 }
 
 async function status(req, res) {
-  const jobId = String(queryValue(req.query.jobId) || '').trim();
-  if (!jobId) return res.status(400).json({ error: 'jobIdは必須です' });
+  let request;
+  try {
+    request = statusJobIds(req);
+  } catch (error) {
+    return res.status(400).json({ error: safePublicError(error) });
+  }
   const token = await getOneDriveToken();
-  const record = await getJob(token, jobId);
-  if (!record) return res.status(404).json({ error: 'ジョブが見つかりません' });
-  const job = record.value;
-  return res.status(200).json({
-    jobId: job.job_id,
-    batchId: job.batch_id,
-    title: job.article_title,
-    state: job.state,
-    engine: job.engine,
-    category: job.category?.name || '',
-    createdAt: job.created_at,
-    completedAt: job.completed_at,
-    articleUrl: job.result?.article_url || '',
-    error: job.result?.error_summary || '',
-    registrySync: job.registry?.sync || '',
+  const records = await Promise.all(request.ids.map((jobId) => getJob(token, jobId)));
+  const missingIndex = records.findIndex((record) => !record);
+  if (missingIndex >= 0) {
+    return res.status(404).json({ error: `ジョブが見つかりません: ${request.ids[missingIndex]}` });
+  }
+  const jobs = records.map((record) => {
+    const job = record.value;
+    return {
+      jobId: job.job_id,
+      batchId: job.batch_id,
+      title: job.article_title,
+      state: job.state,
+      engine: job.engine,
+      category: job.category?.name || '',
+      createdAt: job.created_at,
+      completedAt: job.completed_at,
+      articleUrl: job.result?.article_url || '',
+      error: job.result?.error_summary || '',
+      registrySync: job.registry?.sync || '',
+    };
   });
+  const heartbeat = jobs.some((job) => job.engine === 'MLX') ? await getWorkerHeartbeat(token) : null;
+  const response = {
+    jobs,
+    worker: heartbeat ? workerSnapshot(heartbeat) : null,
+    checkedAt: new Date().toISOString(),
+  };
+  return res.status(200).json(request.batch ? response : { ...jobs[0], ...response });
 }
 
 export default async function handler(req, res) {
