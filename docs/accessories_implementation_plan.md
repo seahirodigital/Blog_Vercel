@@ -1668,7 +1668,14 @@ Windowsでは「MLXで作成」を無効表示してMLXジョブを登録しな�
 - 周辺機器記事作成とタイトル変更の両生成結果に二つのリンクがあり、旧表示 `記事を開く` が存在しないUI契約テストに合格した。
 - JSX構文、Node.js構文、Python構文、`git diff --check`、Vercel Productionビルドに合格した。
 
-本番反映結果:
+今回の本番反映結果:
+
+- 修正コミット `2399c61e` を `main` へpushした。
+- Vercel Productionデプロイ `dpl_EEXFQ7RnZsUjiVr5GNqZaN4c2wyG` が `Ready` となり、`https://blog-vercel-dun.vercel.app` へ反映された。
+- 本番配信HTMLを直接取得し、「OneDriveブラウザで開く」2件、「エディターで開く」2件、旧表示 `記事を開く` 0件、タイトル変更画面を閉じて生成記事をエディターへ渡す処理が配信されていることを確認した。
+- 実MLXジョブとOneDrive記事の再生成は行っていない。修正前に生成済みの記事は自動更新されないため、同じ入力で再生成して確認する。
+
+SEOタイトル派生機能の初回本番反映結果:
 
 - 実装コミット `b30d893d` を `main` へpushした。
 - Vercel Productionデプロイ `dpl_B7VP9cwepLrQVbGMbqVzufy54Fq1` が `Ready` となり、`https://blog-vercel-dun.vercel.app` へ反映された。
