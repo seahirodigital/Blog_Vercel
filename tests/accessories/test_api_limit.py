@@ -73,7 +73,7 @@ class ApiLimitTest(unittest.TestCase):
             "周辺機器の生成結果",
             "onOpenAccessoryReport && onOpenAccessoryReport(folderCtxMenu.path)",
             "const openAccessoryReport = useCallback(async (folderPath = '') =>",
-            "new URLSearchParams({ action: 'status', batchId: report.batchId })",
+            "new URLSearchParams({ action: 'status', folderPath: normalizedPath })",
             "onOpenAccessoryReport={openAccessoryReport}",
         ):
             with self.subTest(fragment=fragment):
@@ -108,11 +108,30 @@ class ApiLimitTest(unittest.TestCase):
             "const accessoryBulkCategories = useMemo",
             "const toggleAccessoryScope = useCallback((categoryId = '') =>",
             "[{ id: '', name: 'すべて' }, ...accessoryBulkCategories]",
-            "onClick={() => toggleAccessoryScope(scope.id)}",
-            "{scope.name} {allSelected ? 'OFF' : 'ON'}",
+            "onChange={() => toggleAccessoryScope(scope.id)}",
+            "aria-label={`${scope.name}を一括選択`}",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, html)
+
+    def test_folder_report_lookup_uses_server_registry_and_returns_parent_identity(self):
+        source = (ROOT / "api/accessories.js").read_text(encoding="utf-8")
+        for fragment in (
+            "function accessoryFolderPathFromRegistry(row)",
+            "function matchingFolderBatch(rows, folderPath)",
+            "const folderPath = normalizeFolderPath(queryValue(req.query.folderPath))",
+            "matchingFolderBatch(await listRegistryJobs(), folderPath)",
+            "parentId: job.parent?.id || ''",
+            "parentTitle: job.parent?.title || ''",
+            "batchId: request.batchId || jobs[0]?.batchId || ''",
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, source)
+
+    def test_root_html_is_not_cached_after_deploy(self):
+        config = (ROOT / "vercel.json").read_text(encoding="utf-8")
+        self.assertIn('"source": "/"', config)
+        self.assertIn('"value": "no-store, max-age=0"', config)
 
     def test_folder_all_period_setting_is_inherited_and_child_count_is_refreshed(self):
         html = (ROOT / "public/index.html").read_text(encoding="utf-8")

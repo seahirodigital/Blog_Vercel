@@ -21,7 +21,7 @@ class PromptAndJobTest(unittest.TestCase):
         intro_lines[0] = "M5 iPad Proにおすすめの" + intro_lines[0].replace("のおすすめ", "", 1)
         return json.dumps(
             {
-                "intro_sentence": "M5 iPad Proにおすすめのバッテリーを紹介します。",
+                "intro_sentence": "M5 iPad Proにおすすめのバッテリーをお探しではありませんか？この記事では、M5 iPad Proにおすすめのバッテリーと商品情報をあわせて紹介します。",
                 "adapted_section_intro": "\n".join(intro_lines),
                 "products": [
                     {
@@ -43,6 +43,28 @@ class PromptAndJobTest(unittest.TestCase):
         )
         self.assertEqual(len(self.group.products), len(result["adapted_product_texts"]))
         self.assertIn("M5 iPad Pro", result["adapted_section_intro"])
+
+    def test_engine_result_intro_starts_with_product_and_addresses_search_intent(self):
+        result = parse_engine_result(
+            self.valid_engine_json(),
+            product_name="M5 iPad Pro",
+            category_name="バッテリー",
+            affiliate_group=self.group,
+        )
+        self.assertTrue(result["intro_sentence"].startswith("M5 iPad Pro"))
+        self.assertIn("お探しではありませんか", result["intro_sentence"])
+        self.assertIn("商品情報をあわせて紹介", result["intro_sentence"])
+
+    def test_engine_result_rejects_intro_starting_with_this_article(self):
+        data = json.loads(self.valid_engine_json())
+        data["intro_sentence"] = "この記事では、M5 iPad Proにおすすめのバッテリーと商品情報をあわせて紹介します。"
+        with self.assertRaisesRegex(ValueError, "親製品名から開始"):
+            parse_engine_result(
+                json.dumps(data, ensure_ascii=False),
+                product_name="M5 iPad Pro",
+                category_name="バッテリー",
+                affiliate_group=self.group,
+            )
 
     def test_engine_result_accepts_unchanged_subject_text(self):
         data = json.loads(self.valid_engine_json())

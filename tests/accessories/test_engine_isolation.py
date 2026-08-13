@@ -43,7 +43,9 @@ class EngineIsolationTest(unittest.TestCase):
         self.assertEqual(group.section_intro, result["adapted_section_intro"])
         self.assertEqual([group.products[0].text], result["adapted_product_texts"])
         self.assertNotIn("<br>", result["adapted_section_intro"])
-        self.assertIn("Insta360 X6", result["intro_sentence"])
+        self.assertTrue(result["intro_sentence"].startswith("Insta360 X6"))
+        self.assertIn("お探しではありませんか", result["intro_sentence"])
+        self.assertIn("商品情報をあわせて紹介", result["intro_sentence"])
 
     def test_mlx_retry_receives_accumulated_validation_errors(self):
         worker = Path(
@@ -57,6 +59,12 @@ class EngineIsolationTest(unittest.TestCase):
         self.assertIn("generation_errors.append", runner)
         self.assertIn("validation_feedback=validation_feedback", worker)
         self.assertIn("これまでの検査エラーをすべて修正", engine)
+        self.assertIn("validation_feedback=tuple(generation_errors)", runner)
+
+    def test_generation_attempts_default_to_two(self):
+        runner = (ROOT / "scripts/accessories/main.py").read_text(encoding="utf-8")
+        self.assertIn("MAX_GENERATION_ATTEMPTS = 2", runner)
+        self.assertNotIn("生成は3回不合格", runner)
 
 
 if __name__ == "__main__":

@@ -26,7 +26,7 @@ import { appendRegistryJob, listRegistryJobs, loadAccessoryMaster, updateRegistr
 const GITHUB_API = 'https://api.github.com';
 const AFFILIATE_FILE_PATH = process.env.ACCESSORIES_AFFILIATE_FILE_PATH
   || '開発/Blog_Vercel/scripts/pipeline/prompts/04-affiliate-link-manager/affiliate_links.txt';
-const PROMPT_CONTRACT_VERSION = 5;
+const PROMPT_CONTRACT_VERSION = 6;
 
 function queryValue(value, fallback = '') {
   return Array.isArray(value) ? value[0] ?? fallback : value ?? fallback;
@@ -63,7 +63,58 @@ function workerSnapshot(record) {
   };
 }
 
+function normalizeFolderPath(value) {
+  return String(value || '').normalize('NFC').trim().replace(/\\/g, '/').replace(/^\/+|\/+$/g, '');
+}
+
+function accessoryFolderPathFromRegistry(row) {
+  const createdAt = new Date(String(row?.['作成日時'] || ''));
+  const parentTitle = String(row?.['大元記事タイトル'] || '')
+    .normalize('NFC')
+    .replace(/[\\/:*?"<>|\x00-\x1f]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(/[ .]+$/g, '');
+  if (Number.isNaN(createdAt.getTime()) || !parentTitle) return '';
+  const jst = new Date(createdAt.getTime() + (9 * 60 * 60 * 1000));
+  const pad = (value) => String(value).padStart(2, '0');
+  const timestamp = `${jst.getUTCFullYear()}${pad(jst.getUTCMonth() + 1)}${pad(jst.getUTCDate())}_${pad(jst.getUTCHours())}${pad(jst.getUTCMinutes())}`;
+  const titlePrefix = [...parentTitle].slice(0, 20).join('').replace(/[ .]+$/g, '');
+  return titlePrefix ? `周辺機器/${timestamp}_${titlePrefix}` : '';
+}
+
+function matchingFolderBatch(rows, folderPath) {
+  const normalizedPath = normalizeFolderPath(folderPath);
+  if (!normalizedPath || normalizedPath === '周辺機器') return null;
+  const matches = rows.filter((row) => {
+    const expectedPath = accessoryFolderPathFromRegistry(row);
+    return expectedPath && (
+      normalizedPath === expectedPath
+      || normalizedPath.startsWith(`${expectedPath}/`)
+      || expectedPath.startsWith(`${normalizedPath}/`)
+    );
+  });
+  if (!matches.length) return null;
+  matches.sort((left, right) => Date.parse(right['作成日時'] || '') - Date.parse(left['作成日時'] || ''));
+  const batchId = String(matches[0]['バッチID'] || '').trim();
+  if (!batchId) return null;
+  return {
+    batchId,
+    folderPath: accessoryFolderPathFromRegistry(matches[0]),
+    ids: [...new Set(matches
+      .filter((row) => row['バッチID'] === batchId)
+      .map((row) => row['ジョブID'])
+      .filter(Boolean))],
+  };
+}
+
 async function statusJobIds(req) {
+  const folderPath = normalizeFolderPath(queryValue(req.query.folderPath));
+  if (folderPath) {
+    const matched = matchingFolderBatch(await listRegistryJobs(), folderPath);
+    if (!matched?.ids.length) throw new Error(`フォルダの生成結果が見つかりません: ${folderPath}`);
+    return { ids: matched.ids, batch: true, batchId: matched.batchId, folderPath: matched.folderPath };
+  }
   const batchId = String(queryValue(req.query.batchId) || '').trim();
   if (batchId) {
     if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(batchId)) {
@@ -374,6 +425,8 @@ async function status(req, res) {
       state: job.state,
       engine: job.engine,
       category: job.category?.name || '',
+      parentId: job.parent?.id || '',
+      parentTitle: job.parent?.title || '',
       createdAt: job.created_at,
       completedAt: job.completed_at,
       articleId: job.result?.article_id || '',
@@ -387,6 +440,8 @@ async function status(req, res) {
   });
   const heartbeat = jobs.some((job) => job.engine === 'MLX') ? await getWorkerHeartbeat(token) : null;
   const response = {
+    batchId: request.batchId || jobs[0]?.batchId || '',
+    folderPath: request.folderPath || '',
     jobs,
     worker: heartbeat ? workerSnapshot(heartbeat) : null,
     checkedAt: new Date().toISOString(),

@@ -3996,45 +3996,76 @@
 
       const openAccessoryReport = useCallback(async (folderPath = '') => {
         const normalizedPath = String(folderPath || '').trim().replace(/^\/+|\/+$/g, '');
-        const folderArticleIds = new Set(
-          articles
-            .filter(article => !normalizedPath || article.path === normalizedPath || String(article.path || '').startsWith(`${normalizedPath}/`))
-            .map(article => String(article.id))
-        );
-        const reports = loadAccessoryReports();
-        const matched = reports.find(report => (report.jobs || []).some(job => {
-          const jobFolderPath = accessoryJobFolderPath(job);
-          return (job.articleId && folderArticleIds.has(String(job.articleId)))
-            || (jobFolderPath && (normalizedPath === jobFolderPath || normalizedPath.startsWith(`${jobFolderPath}/`) || jobFolderPath.startsWith(`${normalizedPath}/`)));
-        }));
-        const active = reports.find(report => (report.jobs || []).some(job => !['completed', 'failed', 'registration_failed'].includes(job.state)));
-        const report = matched || active || reports[0];
-        if (!report?.batchId) {
-          showToast('表示できる周辺機器の生成結果がありません', 'info');
-          return;
-        }
-
         setAccessorySelectedIds(new Set());
-        setAccessoryModal(prev => ({ ...prev, ...report, open: true, loading: false, error: '', statusMessage: '生成結果の最新状態を確認しています。' }));
-        try {
-          const parameters = new URLSearchParams({ action: 'status', batchId: report.batchId });
-          const response = await fetch(`/api/accessories?${parameters.toString()}`, { cache: 'no-store' });
-          const data = await response.json();
-          if (!response.ok) throw new Error(data.error || '生成状態を取得できませんでした');
+        setAccessoryModal(prev => ({
+          ...prev,
+          open: true,
+          loading: true,
+          error: '',
+          jobs: [],
+          statusMessage: 'フォルダに対応する生成結果を確認しています。',
+        }));
+
+        const applyStatusReport = (data, cached = {}) => {
+          const jobs = data.jobs || cached.jobs || [];
+          const batchId = data.batchId || jobs[0]?.batchId || cached.batchId || '';
+          const parentsById = new Map();
+          jobs.forEach(job => {
+            if (!job.parentId || parentsById.has(job.parentId)) return;
+            parentsById.set(job.parentId, { id: job.parentId, title: job.parentTitle || '', categories: [] });
+          });
+          const hasMlx = jobs.some(job => job.engine === 'MLX');
           const nextReport = {
-            ...report,
+            ...cached,
             open: true,
-            jobs: data.jobs || report.jobs || [],
-            worker: data.worker || report.worker || null,
+            loading: false,
+            error: '',
+            batchId,
+            parents: cached.parents?.length ? cached.parents : [...parentsById.values()],
+            jobs,
+            worker: data.worker || cached.worker || null,
+            launcherUrl: cached.launcherUrl || (hasMlx ? mlxLauncherUrl(batchId) : ''),
             lastCheckedAt: data.checkedAt || new Date().toISOString(),
-            statusMessage: data.worker?.error || data.worker?.message || report.statusMessage || '生成結果を取得しました。',
+            statusMessage: data.worker?.error || data.worker?.message || '生成結果を取得しました。',
           };
           setAccessoryModal(prev => ({ ...prev, ...nextReport }));
           saveAccessoryReport(nextReport);
-        } catch (error) {
-          setAccessoryModal(prev => ({ ...prev, statusMessage: `生成結果の再取得に失敗しました: ${error.message}` }));
+        };
+
+        try {
+          const parameters = new URLSearchParams({ action: 'status', folderPath: normalizedPath });
+          const response = await fetch(`/api/accessories?${parameters.toString()}`, { cache: 'no-store' });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || 'フォルダの生成結果を取得できませんでした');
+          applyStatusReport(data);
+          return;
+        } catch (serverError) {
+          const folderArticleIds = new Set(
+            articles
+              .filter(article => !normalizedPath || article.path === normalizedPath || String(article.path || '').startsWith(`${normalizedPath}/`))
+              .map(article => String(article.id))
+          );
+          const reports = loadAccessoryReports();
+          const matched = reports.find(report => (report.jobs || []).some(job => {
+            const jobFolderPath = accessoryJobFolderPath(job);
+            return (job.articleId && folderArticleIds.has(String(job.articleId)))
+              || (jobFolderPath && (normalizedPath === jobFolderPath || normalizedPath.startsWith(`${jobFolderPath}/`) || jobFolderPath.startsWith(`${normalizedPath}/`)));
+          }));
+          if (!matched?.batchId) {
+            setAccessoryModal(prev => ({ ...prev, loading: false, error: serverError.message || '表示できる周辺機器の生成結果がありません' }));
+            return;
+          }
+          try {
+            const parameters = new URLSearchParams({ action: 'status', batchId: matched.batchId });
+            const response = await fetch(`/api/accessories?${parameters.toString()}`, { cache: 'no-store' });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || '生成状態を取得できませんでした');
+            applyStatusReport(data, matched);
+          } catch (fallbackError) {
+            setAccessoryModal(prev => ({ ...prev, ...matched, open: true, loading: false, error: '', statusMessage: `最新状態の再取得に失敗したため、保存済みの生成結果を表示します: ${fallbackError.message}` }));
+          }
         }
-      }, [articles]);
+      }, [articles, mlxLauncherUrl]);
 
       const accessoryActiveJobKey = accessoryModal.jobs
         .filter(job => !['completed', 'failed', 'registration_failed'].includes(job.state))
@@ -5673,20 +5704,24 @@
                     <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">{accessoryModal.error}</div>
                   ) : (
                     <div className="space-y-3">
-                      {accessoryAvailableSelections.length > 0 && accessoryModal.jobs.length === 0 && (
-                        <div className="flex flex-wrap gap-1.5 rounded-lg border border-slate-200 bg-slate-50 p-2">
+                      {accessoryModal.jobs.length === 0 && accessoryBulkCategories.length > 0 && (
+                        <div className="flex flex-wrap gap-x-4 gap-y-1 rounded-lg border border-purple-200 bg-purple-50 p-2">
                           {[{ id: '', name: 'すべて' }, ...accessoryBulkCategories].map(scope => {
                             const targets = accessoryAvailableSelections.filter(item => !scope.id || item.categoryId === scope.id);
                             const allSelected = targets.length > 0 && targets.every(item => accessorySelectedIds.has(item.key));
                             return (
-                              <button
+                              <label
                                 key={scope.id || 'all'}
-                                type="button"
-                                onClick={() => toggleAccessoryScope(scope.id)}
-                                className={`rounded-md border px-2 py-1 text-[11px] font-bold transition-colors ${allSelected ? 'border-purple-300 bg-purple-100 text-purple-700' : 'border-slate-200 bg-white text-slate-600 hover:border-purple-200 hover:text-purple-700'}`}
+                                className="inline-flex cursor-pointer items-center gap-1.5 text-xs font-bold text-purple-700"
                               >
-                                {scope.name} {allSelected ? 'OFF' : 'ON'}
-                              </button>
+                                <input
+                                  type="checkbox"
+                                  checked={allSelected}
+                                  onChange={() => toggleAccessoryScope(scope.id)}
+                                  aria-label={`${scope.name}を一括選択`}
+                                />
+                                <span>{scope.name}</span>
+                              </label>
                             );
                           })}
                         </div>

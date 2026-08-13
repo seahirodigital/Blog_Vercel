@@ -25,6 +25,7 @@ def generate(
     template_path: str | Path | None = None,
     prompt_content: str = "",
     api_key: str | None = None,
+    validation_feedback: tuple[str, ...] | list[str] = (),
 ) -> dict:
     key = str(api_key or os.getenv("GEMINI_API_KEY", "")).strip()
     if not key:
@@ -37,6 +38,13 @@ def generate(
         evidence=evidence,
         affiliate_group=affiliate_group,
     )
+    if validation_feedback:
+        feedback_lines = "\n".join(f"- {str(message)[:500]}" for message in validation_feedback)
+        prompt = (
+            f"{prompt}\n\n前回までの応答は検査に不合格でした。"
+            "説明やコードフェンスを付けず、指定JSONだけを返してください。"
+            f"\nこれまでの検査エラーをすべて修正してください:\n{feedback_lines}"
+        )
     client = create_client(key)
     _, output = run_text_generation(
         client,

@@ -215,6 +215,11 @@ def parse_engine_result(
     )
     if not intro or product_name not in intro or category_name not in intro:
         raise ValueError("冒頭案内文に親製品名または周辺機器名がありません")
+    if not intro.startswith(product_name):
+        raise ValueError("冒頭案内文は親製品名から開始する必要があります")
+    required_intro_phrases = ("お探しではありませんか", "商品情報", "あわせて紹介")
+    if any(phrase not in intro for phrase in required_intro_phrases):
+        raise ValueError("冒頭案内文に商品を探すユーザー向けの案内がありません")
     if any(token in intro for token in ("http://", "https://", "\n", "<think>", "job_id", "<br>")) or re.search(r"<br\s*/?>", intro, re.I):
         raise ValueError("冒頭案内文に禁止値があります")
     if not isinstance(products, list) or len(products) != len(affiliate_group.products):

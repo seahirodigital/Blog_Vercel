@@ -30,13 +30,16 @@ from .prompt_store import verified_prompt
 from .sheet_registry import update_job
 
 
-MAX_GENERATION_ATTEMPTS = 3
+MAX_GENERATION_ATTEMPTS = 2
 
 
 def source_fallback_result(product_name: str, category_name: str, group) -> dict:
     """LLMが不合格でも、創作せず原文で記事化する。"""
     return {
-        "intro_sentence": f"この記事では、{product_name}におすすめの{category_name}も紹介します。",
+        "intro_sentence": (
+            f"{product_name}におすすめの{category_name}をお探しではありませんか？"
+            f"この記事では、{product_name}におすすめの{category_name}と商品情報をあわせて紹介します。"
+        ),
         "adapted_section_intro": group.section_intro,
         "adapted_product_texts": [product.text for product in group.products],
     }
@@ -120,6 +123,7 @@ def process_job(
                         evidence=evidence,
                         affiliate_group=group,
                         prompt_content=prompt_content,
+                        validation_feedback=tuple(generation_errors),
                     )
                 elif engine_name == "MLX":
                     if mlx_generator is None:
@@ -146,21 +150,17 @@ def process_job(
                 last_generation_error = generation_error
                 generation_errors.append(f"{attempt}回目: {str(generation_error)[:500]}")
                 if attempt == MAX_GENERATION_ATTEMPTS:
-                    if engine_name == "MLX":
-                        fallback_used = True
-                        result = source_fallback_result(
-                            parent.product_name,
-                            job["category"]["name"],
-                            group,
-                        )
-                        report(
-                            "fallback",
-                            "MLX生成は3回不合格のため、原文を保った安全な記事を出力します",
-                        )
-                        break
-                    raise RuntimeError(
-                        f"{engine_name}生成結果が{MAX_GENERATION_ATTEMPTS}回とも不合格でした: {generation_error}"
-                    ) from generation_error
+                    fallback_used = True
+                    result = source_fallback_result(
+                        parent.product_name,
+                        job["category"]["name"],
+                        group,
+                    )
+                    report(
+                        "fallback",
+                        f"{engine_name}生成は{MAX_GENERATION_ATTEMPTS}回不合格のため、原文を保った安全な記事を出力します",
+                    )
+                    break
         if result is None:
             raise RuntimeError(f"{engine_name}生成結果を取得できませんでした: {last_generation_error}")
 
