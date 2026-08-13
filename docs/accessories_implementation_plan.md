@@ -1397,3 +1397,23 @@ Windowsでは「MLXで作成」を無効表示してMLXジョブを登録しな�
 - OneDrive実ファイルで、`battery`の共通説明文16行・ `▼` 14ブロック、`adapter`の共通説明文18行・ `▼` 19ブロック、`cable`の共通説明文14行・ `▼` 13ブロックを欠落なく取得した。
 - MLXとGeminiのOneDrive保存プロンプトはどちらも契約v3・改訂3となり、`adapted_section_intro` を含むことを確認した。
 - Python単体テス35件、全セクション往復保存、API構文、JSX構文、Python構文、Vercel本番相当ビルドに合格した。
+
+### 2026-08-13: MLXの主語必須検査とJSON出力不合格を修正
+
+確認した原因:
+
+- `scripts/accessories/prompt_builder.py` で、各商品ブロックとカテゴリ共通説明文の両方に親製品名が必ず含まれることを合格条件にしていた。これは主語調整を nice to have とする運用と矛盾していた。
+- MLX応答は返答全体をそのまま `json.loads()` に渡していた。前後の説明、Markdownコードフェンス、JSON構文崩れをすべて同じ「LLM応答が指定JSONではありません」としており、原因を判別できなかった。
+- vMLXの `http://127.0.0.1:8001/openapi.json` で `response_format` の `json_schema` 対応を確認し、Gemma E4Bの実応答でも有効なJSONだけを返せることを確認した。
+
+修正内容:
+
+- 商品ブロックとカテゴリ共通説明文は、親製品名を含まない原文のままでも合格とする。主語調整を行う場合だけ、従来どおり変更範囲、URL、数値、行数を検査する。
+- 保存プロンプト契約をv4とし、「自然にできる場合のみ主語を調整し、不自然な場合は原文を返す」と明記する。
+- `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Gemma4_AMZN_Blog/MLX/accessories_engine.py` にvMLXの厳密JSON Schemaを設定し、3キーと商品配列の型を生成時点で強制する。
+- 応答解析はコードフェンスと前後説明付きJSONを回収し、回収できない場合はJSON解析エラーの行・列を表示する。
+
+検証結果:
+
+- Python単体テス38件に合格した。原文のままの共通説明文・商品ブロックを合格にする回帰テストを含む。
+- 起動中の `mlx-community/gemma-4-e4b-it-8bit` へ厳密JSON Schemaを付けて実リクエストし、前後文のない有効JSON、指定3キー、商品配列を確認した。

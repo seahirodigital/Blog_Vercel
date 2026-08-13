@@ -44,6 +44,40 @@ class PromptAndJobTest(unittest.TestCase):
         self.assertEqual(len(self.group.products), len(result["adapted_product_texts"]))
         self.assertIn("M5 iPad Pro", result["adapted_section_intro"])
 
+    def test_engine_result_accepts_unchanged_subject_text(self):
+        data = json.loads(self.valid_engine_json())
+        data["adapted_section_intro"] = self.group.section_intro
+        data["products"] = [
+            {"index": product.index, "adapted_text": product.text}
+            for product in self.group.products
+        ]
+        result = parse_engine_result(
+            json.dumps(data, ensure_ascii=False),
+            product_name="M5 iPad Pro",
+            category_name="バッテリー",
+            affiliate_group=self.group,
+        )
+        self.assertEqual(self.group.section_intro.strip(), result["adapted_section_intro"])
+        self.assertEqual(self.group.products[0].text.strip(), result["adapted_product_texts"][0])
+
+    def test_engine_result_extracts_json_with_explanatory_prefix(self):
+        result = parse_engine_result(
+            f"以下が結果です。\n{self.valid_engine_json()}\n以上です。",
+            product_name="M5 iPad Pro",
+            category_name="バッテリー",
+            affiliate_group=self.group,
+        )
+        self.assertEqual(len(self.group.products), len(result["adapted_product_texts"]))
+
+    def test_engine_result_reports_json_position(self):
+        with self.assertRaisesRegex(ValueError, r"JSON解析に失敗.*\d+行\d+列"):
+            parse_engine_result(
+                '{"intro_sentence": "途中で終了',
+                product_name="M5 iPad Pro",
+                category_name="バッテリー",
+                affiliate_group=self.group,
+            )
+
     def test_engine_result_rejects_changed_section_intro_body(self):
         data = json.loads(self.valid_engine_json())
         data["adapted_section_intro"] = data["adapted_section_intro"].replace("通勤中", "自宅")

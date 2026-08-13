@@ -51,8 +51,6 @@ def _validate_adapted_product(source: str, adapted: str, product_name: str, prod
     adapted_text = _normalize_newlines(adapted)
     if not adapted_text.startswith(f"▼{product_title}"):
         raise ValueError(f"商品名行が変更されています: {product_title}")
-    if product_name not in adapted_text:
-        raise ValueError(f"親製品名を主語にした説明がありません: {product_title}")
     source_urls = re.findall(r"https?://[^\s)\]]+", source_text)
     adapted_urls = re.findall(r"https?://[^\s)\]]+", adapted_text)
     if adapted_urls != source_urls:
@@ -76,24 +74,20 @@ def _validate_adapted_section_intro(source: str, adapted: str, product_name: str
         if adapted_text:
             raise ValueError("元文のないカテゴリ共通説明文は追加できません")
         return ""
-    if not adapted_text or product_name not in adapted_text:
-        raise ValueError("カテゴリ共通説明文に親製品名がありません")
+    if not adapted_text:
+        raise ValueError("カテゴリ共通説明文が空です")
     source_lines = source_text.split("\n")
     adapted_lines = adapted_text.split("\n")
     if len(source_lines) != len(adapted_lines):
         raise ValueError("カテゴリ共通説明文の行数が変更されています")
-    changed = 0
     for line_number, (source_line, adapted_line) in enumerate(zip(source_lines, adapted_lines), start=1):
         if source_line == adapted_line:
             continue
-        changed += 1
         if "おすすめ" not in source_line or product_name not in adapted_line:
             raise ValueError(f"カテゴリ共通説明文{line_number}行目は主語以外を変更できません")
         similarity = SequenceMatcher(None, source_line, adapted_line).ratio()
         if similarity < 0.65:
             raise ValueError(f"カテゴリ共通説明文{line_number}行目の変更範囲が大きすぎます")
-    if changed < 1:
-        raise ValueError("カテゴリ共通説明文の主語が調整されていません")
     source_urls = re.findall(r"https?://[^\s)\]]+", source_text)
     adapted_urls = re.findall(r"https?://[^\s)\]]+", adapted_text)
     if adapted_urls != source_urls:
@@ -109,6 +103,42 @@ def _validate_adapted_section_intro(source: str, adapted: str, product_name: str
     return adapted_text
 
 
+def _parse_json_object(text: str) -> dict[str, Any]:
+    """JSON本体と、前後に説明が付いたJSON応答を安全に読み取る。"""
+    raw = str(text or "").strip()
+    if not raw:
+        raise ValueError("LLM応答が空です")
+    if raw.startswith("```"):
+        lines = raw.splitlines()
+        if lines and lines[-1].strip() == "```":
+            raw = "\n".join(lines[1:-1]).strip()
+            if raw.casefold().startswith("json"):
+                raw = raw[4:].lstrip()
+
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError as original_error:
+        decoder = json.JSONDecoder()
+        data = None
+        for match in re.finditer(r"\{", raw):
+            try:
+                candidate, _ = decoder.raw_decode(raw[match.start():])
+            except json.JSONDecodeError:
+                continue
+            if isinstance(candidate, dict):
+                data = candidate
+                break
+        if data is None:
+            detail = (
+                f"{original_error.msg}、"
+                f"{original_error.lineno}行{original_error.colno}列"
+            )
+            raise ValueError(f"LLM応答のJSON解析に失敗しました（{detail}）") from original_error
+    if not isinstance(data, dict):
+        raise ValueError("LLM応答のJSONルートはオブジェクトである必要があります")
+    return data
+
+
 def parse_engine_result(
     text: str,
     *,
@@ -116,17 +146,7 @@ def parse_engine_result(
     category_name: str,
     affiliate_group: AffiliateGroup,
 ) -> dict[str, Any]:
-    raw = str(text or "").strip()
-    if raw.startswith("```"):
-        lines = raw.splitlines()
-        if lines and lines[-1].strip() == "```":
-            raw = "\n".join(lines[1:-1]).strip()
-            if raw.startswith("json"):
-                raw = raw[4:].lstrip()
-    try:
-        data = json.loads(raw)
-    except json.JSONDecodeError as error:
-        raise ValueError("LLM応答が指定JSONではありません") from error
+    data = _parse_json_object(text)
     if set(data) != {"intro_sentence", "adapted_section_intro", "products"}:
         raise ValueError("LLM応答のキーが指定と一致しません")
     intro = str(data.get("intro_sentence", "")).strip()
