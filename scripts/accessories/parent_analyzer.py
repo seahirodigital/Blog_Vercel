@@ -8,6 +8,10 @@ from dataclasses import dataclass
 
 HEADING_RE = re.compile(r"(?m)^(#{1,6})[ \t]+(.+?)[ \t]*(\r?\n|$)")
 PRODUCT_BLOCK_RE = re.compile(r"(?m)^[ \t]*(?:\*\*)?▼")
+AMAZON_URL_RE = re.compile(
+    r"https?://(?:www\.)?(?:amazon\.co\.jp|amzn\.to)/[^\s)\]]+",
+    re.I,
+)
 
 
 @dataclass(frozen=True)
@@ -101,7 +105,13 @@ def analyze_parent(markdown: str) -> ParentArticle:
             )
             if position is not None
         ]
-        first_product_insert_at = min(boundaries) if boundaries else len(markdown)
+        fallback_insert_at = min(boundaries) if boundaries else len(markdown)
+        amazon_url = AMAZON_URL_RE.search(markdown, first_product.start(), fallback_insert_at)
+        if amazon_url:
+            line_end = markdown.find("\n", amazon_url.end(), fallback_insert_at)
+            first_product_insert_at = line_end + 1 if line_end >= 0 else fallback_insert_at
+        else:
+            first_product_insert_at = fallback_insert_at
     else:
         following_h2 = next((heading for heading in h2s if heading.start > h1.start), None)
         first_product_insert_at = following_h2.start if following_h2 else len(markdown)

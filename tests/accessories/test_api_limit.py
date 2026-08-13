@@ -110,6 +110,25 @@ class ApiLimitTest(unittest.TestCase):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, html)
 
+    def test_accessory_context_order_and_generated_article_editor_links(self):
+        html = (ROOT / "public/index.html").read_text(encoding="utf-8")
+        accessory_position = html.find("周辺機器記事作成{")
+        report_position = html.find("周辺機器の生成結果", accessory_position)
+        title_variant_position = html.find("タイトル変更", report_position)
+        self.assertGreaterEqual(accessory_position, 0)
+        self.assertGreater(report_position, accessory_position)
+        self.assertGreater(title_variant_position, report_position)
+        for fragment in (
+            "OneDriveブラウザで開く",
+            "エディターで開く",
+            "const openGeneratedArticleInEditor = async (job) =>",
+            "const articleId = String(job?.articleId || '').trim()",
+            "const opened = await handleSelect(generatedArticle)",
+            "setAccessoryModal(prev => ({ ...prev, open: false }))",
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, html)
+
     def test_root_article_limit_supports_manual_input_and_steps_of_five(self):
         html = (ROOT / "public/index.html").read_text(encoding="utf-8")
         api = (ROOT / "api/articles.js").read_text(encoding="utf-8")

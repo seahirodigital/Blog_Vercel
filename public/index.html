@@ -2233,17 +2233,6 @@
               </button>
               <button
                 onClick={() => {
-                  onCreateTitleVariant && onCreateTitleVariant(ctxMenu.article);
-                  setCtxMenu(m => ({ ...m, visible: false }));
-                }}
-                onMouseEnter={e => e.currentTarget.style.background = '#f5f3ff'} onMouseLeave={e => e.currentTarget.style.background = 'none'}
-                style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '9px 14px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '13px', color: '#6d28d9', textAlign: 'left', fontWeight: 600 }}
-              >
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M4 7h16M4 12h10M4 17h8" /><path d="M17 14l3 3-3 3M20 17h-6" /></svg>
-                タイトル変更
-              </button>
-              <button
-                onClick={() => {
                   onOpenAccessoryReport && onOpenAccessoryReport({
                     articleId: ctxMenu.article.id,
                     folderPath: ctxMenu.article.path || '',
@@ -2255,6 +2244,17 @@
               >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M4 19V9M10 19V5M16 19v-7M22 19V2" /></svg>
                 周辺機器の生成結果
+              </button>
+              <button
+                onClick={() => {
+                  onCreateTitleVariant && onCreateTitleVariant(ctxMenu.article);
+                  setCtxMenu(m => ({ ...m, visible: false }));
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = '#f5f3ff'} onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '9px 14px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '13px', color: '#6d28d9', textAlign: 'left', fontWeight: 600 }}
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M4 7h16M4 12h10M4 17h8" /><path d="M17 14l3 3-3 3M20 17h-6" /></svg>
+                タイトル変更
               </button>
               <button
                 onClick={() => {
@@ -4517,7 +4517,7 @@
 
       // 記事選択
       const handleSelect = async (article) => {
-        if (hasChanges && !confirm('未保存の変更があります。破棄しますか？')) return;
+        if (hasChanges && !confirm('未保存の変更があります。破棄しますか？')) return false;
         setContentLoading(true);
         setIsNewArticle(false);
         setIsEditingTitle(false);
@@ -4559,11 +4559,34 @@
               return next;
             });
           }).catch(() => { });
+          return true;
         } catch (e) {
           showToast('記事の読み込みに失敗しました', 'error');
+          return false;
         } finally {
           setContentLoading(false);
         }
+      };
+
+      const openGeneratedArticleInEditor = async (job) => {
+        const articleId = String(job?.articleId || '').trim();
+        if (!articleId) {
+          showToast('生成記事のOneDrive item IDがないため、エディターで開けません', 'error');
+          return;
+        }
+        const existing = articles.find(article => String(article.id) === articleId);
+        const generatedArticle = existing || {
+          id: articleId,
+          name: `${String(job?.title || '生成記事').replace(/[\\/:*?"<>|\x00-\x1f]/g, ' ').trim()}.md`,
+          path: accessoryJobFolderPath(job),
+          lastModified: job?.completedAt || new Date().toISOString(),
+          webUrl: job?.articleUrl || '',
+        };
+        const opened = await handleSelect(generatedArticle);
+        if (!opened) return;
+        setArticles(prev => mergeArticlesById(prev, [generatedArticle]));
+        setAccessoryModal(prev => ({ ...prev, open: false }));
+        setMobileTab('editor');
       };
 
       // 新規記事
@@ -6160,8 +6183,13 @@
                                   <span className={`rounded-full px-2 py-0.5 font-bold ${job.state === 'completed' && job.warning ? 'bg-amber-100 text-amber-800' : job.state === 'completed' ? 'bg-green-100 text-green-700' : job.state === 'failed' || job.state === 'registration_failed' ? 'bg-red-100 text-red-700' : 'bg-cyan-100 text-cyan-700'}`}>{job.state === 'completed' && job.warning ? '警告あり・出力済み' : accessoryStateLabel(job.state)}</span>
                                   <span className="min-w-0 flex-1 truncate font-semibold text-slate-700">{job.title}</span>
                                   <span className="text-[11px] tabular-nums text-slate-400">{accessoryElapsedLabel(job.createdAt, job.completedAt)}</span>
-                                  {job.articleUrl && <a href={job.articleUrl} target="_blank" rel="noopener noreferrer" className="font-bold text-[#7C4DFF] hover:underline">記事を開く</a>}
                                 </div>
+                                {job.articleUrl && (
+                                  <div className="mt-2 flex flex-col items-start gap-1">
+                                    <a href={job.articleUrl} target="_blank" rel="noopener noreferrer" className="font-bold text-[#7C4DFF] hover:underline">OneDriveブラウザで開く</a>
+                                    <button type="button" onClick={() => openGeneratedArticleInEditor(job)} className="font-bold text-cyan-700 hover:underline">エディターで開く</button>
+                                  </div>
+                                )}
                                 <div className={`mt-2 text-[11px] ${job.warning ? 'text-amber-700' : job.state === 'failed' || job.state === 'registration_failed' ? 'text-red-600' : 'text-slate-500'}`}>{accessoryJobDetail(job)}</div>
                                 {job.warning && Array.isArray(job.generationErrors) && job.generationErrors.length > 0 && (
                                   <div className="mt-2 rounded-md border border-amber-200 bg-amber-50 p-2 text-[10px] leading-relaxed text-amber-800">

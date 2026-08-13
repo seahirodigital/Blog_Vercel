@@ -62,11 +62,12 @@ class ArticleAssemblerTest(unittest.TestCase):
         self.assertNotIn("おすすめ商品のリンクまとめ", child)
         self.assertNotIn("Amazonのアソシエイトとして", child)
 
-    def test_recommendation_section_is_inserted_after_first_parent_product_block(self):
+    def test_recommendation_section_is_inserted_immediately_after_first_amazon_url(self):
         parent = (
             "# Insta360 X6レビュー比較まとめ\n\n"
             "親記事の冒頭です。\n\n"
             "▼親商品の1件目\n説明1\nhttps://www.amazon.co.jp/dp/PARENT1\n\n"
+            "最初のURLより後にある親記事の文章です。\n\n"
             "▼親商品の2件目\n説明2\nhttps://www.amazon.co.jp/dp/PARENT2\n\n"
             "## 仕様\n本文\n"
         )
@@ -83,7 +84,25 @@ class ArticleAssemblerTest(unittest.TestCase):
         heading = "## Insta360 X6 バッテリーおすすめまとめ：結論"
         self.assertLess(child.find("https://www.amazon.co.jp/dp/PARENT1"), child.find(heading))
         self.assertLess(child.find(heading), child.find(self.group.products[0].text))
+        self.assertLess(child.find(self.group.products[-1].text), child.find("最初のURLより後にある親記事の文章です。"))
         self.assertLess(child.find(self.group.products[-1].text), child.find("▼親商品の2件目"))
+        self.assertEqual(
+            parsed.first_product_insert_at,
+            parent.find("https://www.amazon.co.jp/dp/PARENT1")
+            + len("https://www.amazon.co.jp/dp/PARENT1\n"),
+        )
+
+    def test_product_without_amazon_url_uses_original_block_boundary(self):
+        parent = (
+            "# 製品レビューまとめ\n\n"
+            "▼親商品の1件目\n説明だけです。\n\n"
+            "▼親商品の2件目\n説明2\n"
+        )
+        _, parsed = assemble_article(
+            parent,
+            category_name="バッテリー",
+            conclusion_addition="おすすめ商品です。",
+        )
         self.assertEqual(parsed.first_product_insert_at, parent.find("▼親商品の2件目"))
 
     def test_frontmatter_is_rejected(self):

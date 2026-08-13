@@ -10,6 +10,10 @@ HEADING_LINE_RE = re.compile(r"^(#{1,6})[ \t]+(.+?)[ \t]*(\r?\n|$)")
 FENCE_RE = re.compile(r"^[ \t]*(`{3,}|~{3,})")
 PRODUCT_RE = re.compile(r"^[ \t]*(?:\*\*)?▼")
 URL_RE = re.compile(r"https?://[^\s)\]]+")
+AMAZON_URL_RE = re.compile(
+    r"https?://(?:www\.)?(?:amazon\.co\.jp|amzn\.to)/[^\s)\]]+",
+    re.I,
+)
 
 
 @dataclass(frozen=True)
@@ -148,7 +152,12 @@ def _first_product_insert_at(markdown: str, h1: Heading, headings: tuple[Heading
     )
     next_heading = next((heading.start for heading in headings if heading.start > first_start), None)
     boundaries = [value for value in (next_product, next_heading) if value is not None]
-    return min(boundaries) if boundaries else len(markdown)
+    fallback_insert_at = min(boundaries) if boundaries else len(markdown)
+    amazon_url = AMAZON_URL_RE.search(markdown, first_start, fallback_insert_at)
+    if not amazon_url:
+        return fallback_insert_at
+    line_end = markdown.find("\n", amazon_url.end(), fallback_insert_at)
+    return line_end + 1 if line_end >= 0 else fallback_insert_at
 
 
 def analyze_variant_source(markdown: str, keyword: str) -> VariantSource:

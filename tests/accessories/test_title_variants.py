@@ -54,11 +54,12 @@ class TitleVariantTest(unittest.TestCase):
         self.assertIn(source.intro.text, article)
         self.assertIn(source.conclusion.text, article)
 
-    def test_article_without_conclusion_gets_one_after_first_product(self):
+    def test_article_without_conclusion_gets_one_immediately_after_first_amazon_url(self):
         source = (
             "# Insta360 X6レビューまとめ\n\n冒頭です。\n\n"
-            "▼最初の商品\n説明\nhttps://example.com/first\n\n"
-            "▼二つ目の商品\n説明\nhttps://example.com/second\n\n"
+            "▼最初の商品\n説明\nhttps://www.amazon.co.jp/dp/FIRST\n\n"
+            "最初のURLより後にある元記事の文章です。\n\n"
+            "▼二つ目の商品\n説明\nhttps://www.amazon.co.jp/dp/SECOND\n\n"
             "## Insta360 X6レビューまとめ：まとめ\n\n既存のまとめです。\n"
         )
         article, parsed = assemble_variant(
@@ -69,7 +70,8 @@ class TitleVariantTest(unittest.TestCase):
         validate_variant(article, source, "insta360 x6 スペック")
         heading = "## insta360 x6 スペックまとめ：結論"
         self.assertIsNone(parsed.conclusion_heading)
-        self.assertLess(article.find("https://example.com/first"), article.find(heading))
+        self.assertLess(article.find("https://www.amazon.co.jp/dp/FIRST"), article.find(heading))
+        self.assertLess(article.find(heading), article.find("最初のURLより後にある元記事の文章です。"))
         self.assertLess(article.find(heading), article.find("▼二つ目の商品"))
 
     def test_target_filename_is_safe(self):
