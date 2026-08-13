@@ -376,6 +376,7 @@ async function status(req, res) {
       category: job.category?.name || '',
       createdAt: job.created_at,
       completedAt: job.completed_at,
+      articleId: job.result?.article_id || '',
       articleUrl: job.result?.article_url || '',
       error: job.result?.error_summary || '',
       warning: job.result?.warning_summary || '',

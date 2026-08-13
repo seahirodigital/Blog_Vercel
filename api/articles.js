@@ -212,7 +212,7 @@ function itemTrackingTime(item) {
 }
 
 function shouldTrackArticle(item, options = {}) {
-  if (options.includeAll) return true;
+  if (options.includeAll || options.includeAllArticles) return true;
   const time = itemTrackingTime(item);
   return !time || time >= lookbackCutoffTime();
 }
@@ -684,7 +684,7 @@ export default async function handler(req, res) {
 
     // GET: 記事一覧 or 記事内容
     if (req.method === 'GET') {
-      const { id, externalUrls, mode, folderPath, folderId, h1Limit, includeAll, articleLimit } = req.query;
+      const { id, externalUrls, mode, folderPath, folderId, h1Limit, includeAll, includeAllArticles, articleLimit } = req.query;
       if (id) {
         const content = await getArticle(token, id);
         return res.status(200).json({ content });
@@ -696,10 +696,11 @@ export default async function handler(req, res) {
         const targetPath = firstQueryValue(folderPath, '').trim().replace(/^\/+|\/+$/g, '');
         const limit = safeNumber(h1Limit, 0, 20);
         const allPeriods = String(firstQueryValue(includeAll, '')).toLowerCase() === 'true';
+        const allArticles = allPeriods || String(firstQueryValue(includeAllArticles, '')).toLowerCase() === 'true';
         const maxArticles = safeNumber(articleLimit, 0, 2000);
         const listing = folderId
-          ? await listArticlesShallowById(token, firstQueryValue(folderId), targetPath, { h1Limit: limit, includeAll: allPeriods, articleLimit: maxArticles })
-          : await listArticlesShallow(token, targetPath ? `${folder}/${targetPath}` : folder, targetPath, { h1Limit: limit, includeAll: allPeriods, articleLimit: maxArticles });
+          ? await listArticlesShallowById(token, firstQueryValue(folderId), targetPath, { h1Limit: limit, includeAll: allPeriods, includeAllArticles: allArticles, articleLimit: maxArticles })
+          : await listArticlesShallow(token, targetPath ? `${folder}/${targetPath}` : folder, targetPath, { h1Limit: limit, includeAll: allPeriods, includeAllArticles: allArticles, articleLimit: maxArticles });
 
         if (!targetPath && !folderId && externalUrls) {
           try {
@@ -735,6 +736,7 @@ export default async function handler(req, res) {
           articleLimit: listing.articleLimit,
           currentChildCount: listing.currentChildCount,
           includeAll: allPeriods,
+          includeAllArticles: allArticles,
         });
       }
 

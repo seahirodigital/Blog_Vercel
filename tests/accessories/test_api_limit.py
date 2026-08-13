@@ -58,8 +58,61 @@ class ApiLimitTest(unittest.TestCase):
         source = (ROOT / "api/accessories.js").read_text(encoding="utf-8")
         self.assertIn("queryValue(req.query.batchId)", source)
         self.assertIn("await listRegistryJobs()", source)
+        self.assertIn("articleId: job.result?.article_id || ''", source)
         self.assertNotIn("ids.length > 5", source)
         self.assertNotIn("categoryIds.length > 5", source)
+
+    def test_accessory_generation_report_can_be_reopened_from_folder_menu(self):
+        html = (ROOT / "public/index.html").read_text(encoding="utf-8")
+        for fragment in (
+            "const ACCESSORY_REPORTS_STORAGE_KEY = 'sb_accessoryReports'",
+            "function loadAccessoryReports()",
+            "function saveAccessoryReport(report)",
+            "function accessoryJobFolderPath(job)",
+            "`\u5468\u8fba\u6a5f\u5668/${timestamp}_${titlePrefix}`",
+            "周辺機器の生成結果",
+            "onOpenAccessoryReport && onOpenAccessoryReport(folderCtxMenu.path)",
+            "const openAccessoryReport = useCallback(async (folderPath = '') =>",
+            "new URLSearchParams({ action: 'status', batchId: report.batchId })",
+            "onOpenAccessoryReport={openAccessoryReport}",
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, html)
+
+    def test_root_article_limit_is_configurable_in_steps_of_five(self):
+        html = (ROOT / "public/index.html").read_text(encoding="utf-8")
+        api = (ROOT / "api/articles.js").read_text(encoding="utf-8")
+        for fragment in (
+            "const ROOT_ARTICLE_LIMIT_STORAGE_KEY = 'sb_rootArticleLimit'",
+            "const ROOT_ARTICLE_DEFAULT_LIMIT = 5",
+            "function normalizeRootArticleLimit(value)",
+            "OneDrive直下の読み込む記事数",
+            "changeRootArticleLimit(-5)",
+            "changeRootArticleLimit(5)",
+            "includeAllArticles: true",
+            "articleLimit: rootArticleLimit",
+            "onContextMenu={handleRootContextMenu}",
+            "onChangeRootArticleLimit={changeRootArticleLimit}",
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, html)
+        self.assertIn("const articleLimit = safeNumber(options.articleLimit, 0, 2000)", api)
+        self.assertIn("articles.slice(0, articleLimit)", api)
+        self.assertIn("if (options.includeAll || options.includeAllArticles) return true", api)
+        self.assertIn("includeAllArticles: allArticles", api)
+
+    def test_accessory_checkbox_selection_supports_all_and_category_toggles(self):
+        html = (ROOT / "public/index.html").read_text(encoding="utf-8")
+        for fragment in (
+            "const accessoryAvailableSelections = useMemo",
+            "const accessoryBulkCategories = useMemo",
+            "const toggleAccessoryScope = useCallback((categoryId = '') =>",
+            "[{ id: '', name: 'すべて' }, ...accessoryBulkCategories]",
+            "onClick={() => toggleAccessoryScope(scope.id)}",
+            "{scope.name} {allSelected ? 'OFF' : 'ON'}",
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, html)
 
     def test_folder_all_period_setting_is_inherited_and_child_count_is_refreshed(self):
         html = (ROOT / "public/index.html").read_text(encoding="utf-8")

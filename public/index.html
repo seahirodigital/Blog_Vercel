@@ -750,10 +750,14 @@
     const API_BASE = '/api';
     const FOLDER_LOAD_SETTINGS_STORAGE_KEY = 'sb_folderLoadSettings';
     const NOTE_UPLOADED_VISIBILITY_MIGRATION_KEY = 'sb_noteUploadedVisibleV1';
+    const ROOT_ARTICLE_LIMIT_STORAGE_KEY = 'sb_rootArticleLimit';
+    const ACCESSORY_REPORTS_STORAGE_KEY = 'sb_accessoryReports';
     const FOLDER_LOAD_STEP = 50;
     const DEFAULT_FOLDER_LOAD_LIMIT = 100;
     const NOTE_UPLOADED_DEFAULT_LIMIT = 5;
     const FOLDER_LOAD_LIMIT_OPTIONS = [5, 10, 25, 50, 100];
+    const ROOT_ARTICLE_DEFAULT_LIMIT = 5;
+    const ACCESSORY_REPORT_HISTORY_LIMIT = 10;
 
     function isNoteUploadedFolderPath(folderPath) {
       return String(folderPath || '')
@@ -771,6 +775,56 @@
     function collapseFolderSelectionPaths(values = []) {
       const paths = [...new Set(values)].sort((a, b) => a.split('/').length - b.split('/').length || a.localeCompare(b));
       return paths.filter((path, index) => !paths.slice(0, index).some(parent => path.startsWith(`${parent}/`)));
+    }
+
+    function normalizeRootArticleLimit(value) {
+      const parsed = Number.parseInt(value || ROOT_ARTICLE_DEFAULT_LIMIT, 10);
+      if (!Number.isFinite(parsed)) return ROOT_ARTICLE_DEFAULT_LIMIT;
+      return Math.min(2000, Math.max(5, Math.ceil(parsed / 5) * 5));
+    }
+
+    function loadAccessoryReports() {
+      try {
+        const reports = JSON.parse(localStorage.getItem(ACCESSORY_REPORTS_STORAGE_KEY) || '[]');
+        return Array.isArray(reports) ? reports.filter(report => report?.batchId).slice(0, ACCESSORY_REPORT_HISTORY_LIMIT) : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveAccessoryReport(report) {
+      if (!report?.batchId || !Array.isArray(report.jobs) || report.jobs.length === 0) return;
+      const stored = loadAccessoryReports().filter(item => item.batchId !== report.batchId);
+      const snapshot = {
+        batchId: report.batchId,
+        parents: report.parents || [],
+        prompts: report.prompts || [],
+        jobs: report.jobs,
+        worker: report.worker || null,
+        launcherUrl: report.launcherUrl || '',
+        launchStatus: report.launchStatus || '',
+        statusMessage: report.statusMessage || '',
+        lastCheckedAt: report.lastCheckedAt || new Date().toISOString(),
+        savedAt: new Date().toISOString(),
+      };
+      try {
+        localStorage.setItem(ACCESSORY_REPORTS_STORAGE_KEY, JSON.stringify([snapshot, ...stored].slice(0, ACCESSORY_REPORT_HISTORY_LIMIT)));
+      } catch { }
+    }
+
+    function accessoryJobFolderPath(job) {
+      const created = new Date(job?.createdAt || '');
+      const parentTitle = String(job?.parentTitle || '')
+        .replace(/[\\/:*?"<>|\x00-\x1f]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .replace(/[ .]+$/g, '');
+      if (Number.isNaN(created.getTime()) || !parentTitle) return '';
+      const jst = new Date(created.getTime() + (9 * 60 * 60 * 1000));
+      const pad = value => String(value).padStart(2, '0');
+      const timestamp = `${jst.getUTCFullYear()}${pad(jst.getUTCMonth() + 1)}${pad(jst.getUTCDate())}_${pad(jst.getUTCHours())}${pad(jst.getUTCMinutes())}`;
+      const titlePrefix = [...parentTitle].slice(0, 20).join('').replace(/[ .]+$/g, '');
+      return titlePrefix ? `周辺機器/${timestamp}_${titlePrefix}` : '';
     }
 
     function normalizeFolderLoadSetting(value = {}, fallback = DEFAULT_FOLDER_LOAD_LIMIT) {
@@ -808,6 +862,7 @@
       if (options.folderId) params.set('folderId', options.folderId);
       if (options.h1Limit !== undefined) params.set('h1Limit', String(options.h1Limit));
       if (options.includeAll !== undefined) params.set('includeAll', String(options.includeAll));
+      if (options.includeAllArticles !== undefined) params.set('includeAllArticles', String(options.includeAllArticles));
       if (options.articleLimit !== undefined) params.set('articleLimit', String(options.articleLimit));
       const qs = params.toString() ? `?${params.toString()}` : '';
       const res = await fetch(`${API_BASE}/articles${qs}`);
@@ -1474,10 +1529,11 @@
     }
 
     // === フォルダツリー コンポーネント ===
-    function FolderTree({ articles, selectedId, onSelect, loading, onDeleteArticle, onDeleteFolders, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onCreateAccessory, hiddenFolders, onHideFolder, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, onMultiSelect, onRangeSelect, multiSelectedIds, scheduledPostIds = new Set(), scheduledPostMap = new Map(), missedNotePostMap = new Map(), articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder, folderLoadSettings = {}, onChangeFolderLoadSetting, flatMode = false, searchQuery = '', contextArticles = null }) {
+    function FolderTree({ articles, selectedId, onSelect, loading, onDeleteArticle, onDeleteFolders, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onCreateAccessory, onOpenAccessoryReport, hiddenFolders, onHideFolder, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, onMultiSelect, onRangeSelect, multiSelectedIds, scheduledPostIds = new Set(), scheduledPostMap = new Map(), missedNotePostMap = new Map(), articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder, folderLoadSettings = {}, onChangeFolderLoadSetting, rootArticleLimit = ROOT_ARTICLE_DEFAULT_LIMIT, onChangeRootArticleLimit, flatMode = false, searchQuery = '', contextArticles = null }) {
       const [openFolders, setOpenFolders] = useState({});
       const [ctxMenu, setCtxMenu] = useState({ visible: false, x: 0, y: 0, article: null });
       const [folderCtxMenu, setFolderCtxMenu] = useState({ visible: false, x: 0, y: 0, path: '' });
+      const [rootCtxMenu, setRootCtxMenu] = useState({ visible: false, x: 0, y: 0 });
       const [confirmDelete, setConfirmDelete] = useState(null);
       const [confirmFolderDelete, setConfirmFolderDelete] = useState(null);
       const [folderDeleteRunning, setFolderDeleteRunning] = useState(false);
@@ -1561,15 +1617,16 @@
 
       // コンテキストメニュー外クリックで閉じる
       useEffect(() => {
-        if (!ctxMenu.visible && !folderCtxMenu.visible) return;
+        if (!ctxMenu.visible && !folderCtxMenu.visible && !rootCtxMenu.visible) return;
         const close = () => {
           setCtxMenu(m => ({ ...m, visible: false }));
           setFolderCtxMenu(m => ({ ...m, visible: false }));
+          setRootCtxMenu(m => ({ ...m, visible: false }));
         };
         window.addEventListener('click', close);
         window.addEventListener('contextmenu', close);
         return () => { window.removeEventListener('click', close); window.removeEventListener('contextmenu', close); };
-      }, [ctxMenu.visible, folderCtxMenu.visible]);
+      }, [ctxMenu.visible, folderCtxMenu.visible, rootCtxMenu.visible]);
 
       const toggleFolder = (path, meta) => {
         const willOpen = !openFolders[path];
@@ -1651,7 +1708,7 @@
       const handleContextMenu = (e, article) => {
         e.preventDefault();
         e.stopPropagation();
-        const MENU_W = 190, MENU_H = 270;
+        const MENU_W = 230, MENU_H = article?.path ? 270 : 370;
         const x = Math.min(e.clientX, window.innerWidth - MENU_W - 8);
         const y = Math.min(e.clientY, window.innerHeight - MENU_H - 8);
         setCtxMenu({ visible: true, x, y, article });
@@ -1687,6 +1744,32 @@
         const y = Math.max(8, Math.min(e.clientY, window.innerHeight - menuHeight - 8));
         setFolderCtxMenu({ visible: true, x, y, path: folderPath });
       };
+
+      const handleRootContextMenu = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const x = Math.min(e.clientX, window.innerWidth - 230 - 8);
+        const y = Math.max(8, Math.min(e.clientY, window.innerHeight - 190 - 8));
+        setRootCtxMenu({ visible: true, x, y });
+      };
+
+      const changeRootArticleLimit = (delta) => {
+        if (!onChangeRootArticleLimit) return;
+        onChangeRootArticleLimit(normalizeRootArticleLimit(rootArticleLimit + delta));
+        setRootCtxMenu(m => ({ ...m, visible: false }));
+        setCtxMenu(m => ({ ...m, visible: false }));
+      };
+
+      const rootLoadControls = (
+        <div style={{ padding: '9px 14px' }}>
+          <div style={{ marginBottom: '7px', fontSize: '11px', fontWeight: 700, color: '#64748b' }}>OneDrive直下の読み込む記事数</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <button disabled={rootArticleLimit <= 5} onClick={() => changeRootArticleLimit(-5)} style={{ padding: '6px 10px', borderRadius: '6px', border: '1px solid #e2e8f0', background: 'white', color: rootArticleLimit <= 5 ? '#cbd5e1' : '#7C4DFF', cursor: rootArticleLimit <= 5 ? 'not-allowed' : 'pointer', fontSize: '11px', fontWeight: 700 }}>−5</button>
+            <span style={{ minWidth: '52px', textAlign: 'center', fontSize: '12px', fontWeight: 800, color: '#334155' }}>{rootArticleLimit}件</span>
+            <button onClick={() => changeRootArticleLimit(5)} style={{ padding: '6px 10px', borderRadius: '6px', border: '1px solid #e2e8f0', background: 'white', color: '#7C4DFF', cursor: 'pointer', fontSize: '11px', fontWeight: 700 }}>+5</button>
+          </div>
+        </div>
+      );
 
       const toggleFolderSelection = (folderPath) => {
         setSelectedFolderPaths(prev => {
@@ -2000,6 +2083,7 @@
             ref={sbTouchContainerRef}
             className="px-2 pb-2"
             onTouchStart={(e) => { if (swipedId && !e.target.closest('.swipe-row')) setSwipedId(null); }}
+            onContextMenu={(e) => { if (e.target === e.currentTarget) handleRootContextMenu(e); }}
           >
             {folderSelectMode && !flatMode && (
               <div className="mb-2 flex items-center gap-2 rounded-lg border border-purple-100 bg-purple-50 px-2 py-1.5 text-[11px] font-bold text-purple-700">
@@ -2024,6 +2108,7 @@
                 {rootNode._articles.length > 0 && (
                   <div
                     data-folder-path=""
+                    onContextMenu={handleRootContextMenu}
                     onDragOver={(e) => { e.preventDefault(); setDragOver(''); }}
                     onDragLeave={() => setDragOver(null)}
                     onDrop={(e) => {
@@ -2040,7 +2125,7 @@
                     style={{ borderRadius: '6px', outline: dragOver === '' ? '2px dashed #7C4DFF' : undefined, outlineOffset: '-2px' }}
                   >
                     <div className="px-2 py-1 text-xs text-slate-400 font-semibold">その他</div>
-                    {rootNode._articles.slice(0, visibleArticleLimit).map(a => renderArticle(a))}
+                    {rootNode._articles.map(a => renderArticle(a))}
                   </div>
                 )}
               </>
@@ -2060,6 +2145,12 @@
               onClick={e => e.stopPropagation()}
               style={{ position: 'fixed', top: ctxMenu.y, left: ctxMenu.x, zIndex: 9999, background: 'white', borderRadius: '8px', boxShadow: '0 4px 24px rgba(0,0,0,0.15)', border: '1px solid #e2e8f0', minWidth: '190px', padding: '4px 0', overflow: 'hidden' }}
             >
+              {!ctxMenu.article?.path && (
+                <>
+                  {rootLoadControls}
+                  <div style={{ height: '1px', background: '#e2e8f0', margin: '4px 0' }} />
+                </>
+              )}
               <button
                 onClick={() => { onEnterSelectMode(ctxMenu.article); setCtxMenu(m => ({ ...m, visible: false })); }}
                 onMouseEnter={e => e.currentTarget.style.background = '#f5f3ff'} onMouseLeave={e => e.currentTarget.style.background = 'none'}
@@ -2150,6 +2241,16 @@
             </div>
           )}
 
+          {/* ── OneDrive直下の空欄右クリックメニュー ── */}
+          {rootCtxMenu.visible && (
+            <div
+              onClick={e => e.stopPropagation()}
+              style={{ position: 'fixed', top: rootCtxMenu.y, left: rootCtxMenu.x, zIndex: 9999, background: 'white', borderRadius: '8px', boxShadow: '0 4px 24px rgba(0,0,0,0.15)', border: '1px solid #e2e8f0', minWidth: '230px', padding: '4px 0' }}
+            >
+              {rootLoadControls}
+            </div>
+          )}
+
           {/* ── フォルダ右クリックメニュー ── */}
           {folderCtxMenu.visible && (
             <div
@@ -2236,6 +2337,17 @@
               </button>
               <button
                 onClick={() => {
+                  onOpenAccessoryReport && onOpenAccessoryReport(folderCtxMenu.path);
+                  setFolderCtxMenu(m => ({ ...m, visible: false }));
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = '#ecfeff'} onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '9px 14px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '13px', color: '#0891b2', textAlign: 'left', fontWeight: 600 }}
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M4 19V9M10 19V5M16 19v-7M22 19V2" /></svg>
+                周辺機器の生成結果
+              </button>
+              <button
+                onClick={() => {
                   setConfirmFolderDelete(getFolderContextTargets(folderCtxMenu.path));
                   setFolderCtxMenu(m => ({ ...m, visible: false }));
                 }}
@@ -2310,7 +2422,7 @@
     }
 
     // === サイドバー コンポーネント ===
-    function Sidebar({ articles, selectedId, onSelect, onNewArticle, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle, mobileSidebarOpen, onMobileClose, onDeleteArticle, onDeleteFolders, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onCreateAccessory, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, multiSelectedIds, onMultiSelect, onRangeSelect, scheduledPostIds = new Set(), scheduledPostMap = new Map(), missedNotePostMap = new Map(), setAffModalOpen, articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder, externalFolderUrls = [], setExternalFolderUrls, onRefreshArticles }) {
+    function Sidebar({ articles, selectedId, onSelect, onNewArticle, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle, mobileSidebarOpen, onMobileClose, onDeleteArticle, onDeleteFolders, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onCreateAccessory, onOpenAccessoryReport, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, multiSelectedIds, onMultiSelect, onRangeSelect, scheduledPostIds = new Set(), scheduledPostMap = new Map(), missedNotePostMap = new Map(), setAffModalOpen, articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder, rootArticleLimit = ROOT_ARTICLE_DEFAULT_LIMIT, onChangeRootArticleLimit, externalFolderUrls = [], setExternalFolderUrls, onRefreshArticles }) {
       // 非表示フォルダ管理（localStorageで永続化）
       const [hiddenFolders, setHiddenFolders] = useState(() => {
         try {
@@ -2567,7 +2679,7 @@
 
       const folderTreeProps = {
         articles, selectedId, loading,
-        onDeleteArticle, onDeleteFolders, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onCreateAccessory,
+        onDeleteArticle, onDeleteFolders, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onCreateAccessory, onOpenAccessoryReport,
         hiddenFolders, onHideFolder: toggleFolderVisibility,
         selectMode, selectedIds, onToggleSelect, onEnterSelectMode,
         multiSelectedIds, onMultiSelect, onRangeSelect,
@@ -2578,6 +2690,8 @@
         folderMeta, folderLoading, onLoadFolder,
         folderLoadSettings,
         onChangeFolderLoadSetting: changeFolderLoadSetting,
+        rootArticleLimit,
+        onChangeRootArticleLimit,
       };
 
       const renderSearchPanel = () => sidebarSearchOpen ? (
@@ -3243,6 +3357,10 @@
       const [articles, setArticles] = useState([]);
       const [folderMeta, setFolderMeta] = useState({});
       const [folderLoading, setFolderLoading] = useState({});
+      const [rootArticleLimit, setRootArticleLimit] = useState(() => {
+        try { return normalizeRootArticleLimit(localStorage.getItem(ROOT_ARTICLE_LIMIT_STORAGE_KEY)); }
+        catch { return ROOT_ARTICLE_DEFAULT_LIMIT; }
+      });
       const [selectedArticle, setSelectedArticle] = useState(null);
       const [content, setContent] = useState('');
       const [originalContent, setOriginalContent] = useState('');
@@ -3301,7 +3419,10 @@
       const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
       const [copied, setCopied] = useState(false);
       const [affModalOpen, setAffModalOpen] = useState(false);
-      const [accessoryModal, setAccessoryModal] = useState({ open: false, parents: [], loading: false, error: '', prompts: [], jobs: [] });
+      const [accessoryModal, setAccessoryModal] = useState(() => {
+        const latest = loadAccessoryReports()[0] || {};
+        return { open: false, parents: [], loading: false, error: '', prompts: [], jobs: [], ...latest, open: false };
+      });
       const [accessorySelectedIds, setAccessorySelectedIds] = useState(new Set());
       const [accessoryCreating, setAccessoryCreating] = useState(false);
       const [accessoryPolling, setAccessoryPolling] = useState(false);
@@ -3351,6 +3472,9 @@
       const selectedArticleRef = useRef(null);
       useEffect(() => { selectedArticleRef.current = selectedArticle; }, [selectedArticle]);
       useEffect(() => { accessoryJobsRef.current = accessoryModal.jobs; }, [accessoryModal.jobs]);
+      useEffect(() => {
+        if (accessoryModal.batchId && accessoryModal.jobs?.length) saveAccessoryReport(accessoryModal);
+      }, [accessoryModal.batchId, accessoryModal.jobs, accessoryModal.worker, accessoryModal.statusMessage, accessoryModal.lastCheckedAt, accessoryModal.launcherUrl]);
       const editorInstanceKey = selectedArticle?.id
         ? `article:${selectedArticle.id}`
         : isNewArticle ? `new:${newFilename || 'draft'}` : 'empty';
@@ -3465,10 +3589,10 @@
         setLoading(true);
         try {
           const targetUrls = exUrls !== null ? exUrls : externalFolderUrls;
-          const data = await fetchArticles(targetUrls, { raw: true, mode: 'shallow', h1Limit: 3 });
+          const data = await fetchArticles(targetUrls, { raw: true, mode: 'shallow', h1Limit: 3, includeAllArticles: true, articleLimit: rootArticleLimit });
           const initialArticles = data.articles || [];
           const selected = selectedArticleRef.current;
-          setArticles(selected && !initialArticles.some(article => article.id === selected.id)
+          setArticles(selected && selected.path && !initialArticles.some(article => article.id === selected.id)
             ? mergeArticlesById(initialArticles, [selected])
             : initialArticles);
           setFolderMeta(foldersToMeta(data.folders || [], {}));
@@ -3478,7 +3602,13 @@
         } finally {
           setLoading(false);
         }
-      }, [externalFolderUrls]);
+      }, [externalFolderUrls, rootArticleLimit]);
+
+      const changeRootArticleLimit = useCallback((value) => {
+        const next = normalizeRootArticleLimit(value);
+        setRootArticleLimit(next);
+        try { localStorage.setItem(ROOT_ARTICLE_LIMIT_STORAGE_KEY, String(next)); } catch { }
+      }, []);
 
       const loadFolder = useCallback(async (folderPath, meta = {}, options = {}) => {
         const normalizedPath = (folderPath || '').trim().replace(/^\/+|\/+$/g, '');
@@ -3582,6 +3712,36 @@
           return next;
         });
       }, [accessorySelectionKey]);
+
+      const accessoryAvailableSelections = useMemo(() => (
+        (accessoryModal.parents || []).flatMap(parent => (parent.categories || [])
+          .filter(category => category.available)
+          .map(category => ({
+            parentId: parent.id,
+            categoryId: category.id,
+            categoryName: category.name,
+            key: accessorySelectionKey(parent.id, category.id),
+          })))
+      ), [accessoryModal.parents, accessorySelectionKey]);
+
+      const accessoryBulkCategories = useMemo(() => {
+        const categories = new Map();
+        accessoryAvailableSelections.forEach(item => {
+          if (!categories.has(item.categoryId)) categories.set(item.categoryId, item.categoryName);
+        });
+        return [...categories.entries()].map(([id, name]) => ({ id, name }));
+      }, [accessoryAvailableSelections]);
+
+      const toggleAccessoryScope = useCallback((categoryId = '') => {
+        const targets = accessoryAvailableSelections.filter(item => !categoryId || item.categoryId === categoryId);
+        if (!targets.length) return;
+        setAccessorySelectedIds(prev => {
+          const next = new Set(prev);
+          const allSelected = targets.every(item => next.has(item.key));
+          targets.forEach(item => allSelected ? next.delete(item.key) : next.add(item.key));
+          return next;
+        });
+      }, [accessoryAvailableSelections]);
 
       const openAccessoryPrompt = useCallback(async (engine, templateFile = 'tpl_default.md') => {
         setAccessoryPrompt({ open: true, engine, templateFile, loading: true, saving: false, content: '', revision: 0, error: '' });
@@ -3833,6 +3993,48 @@
           setAccessoryPolling(false);
         }
       }, [loadArticles, accessoryModal.batchId]);
+
+      const openAccessoryReport = useCallback(async (folderPath = '') => {
+        const normalizedPath = String(folderPath || '').trim().replace(/^\/+|\/+$/g, '');
+        const folderArticleIds = new Set(
+          articles
+            .filter(article => !normalizedPath || article.path === normalizedPath || String(article.path || '').startsWith(`${normalizedPath}/`))
+            .map(article => String(article.id))
+        );
+        const reports = loadAccessoryReports();
+        const matched = reports.find(report => (report.jobs || []).some(job => {
+          const jobFolderPath = accessoryJobFolderPath(job);
+          return (job.articleId && folderArticleIds.has(String(job.articleId)))
+            || (jobFolderPath && (normalizedPath === jobFolderPath || normalizedPath.startsWith(`${jobFolderPath}/`) || jobFolderPath.startsWith(`${normalizedPath}/`)));
+        }));
+        const active = reports.find(report => (report.jobs || []).some(job => !['completed', 'failed', 'registration_failed'].includes(job.state)));
+        const report = matched || active || reports[0];
+        if (!report?.batchId) {
+          showToast('表示できる周辺機器の生成結果がありません', 'info');
+          return;
+        }
+
+        setAccessorySelectedIds(new Set());
+        setAccessoryModal(prev => ({ ...prev, ...report, open: true, loading: false, error: '', statusMessage: '生成結果の最新状態を確認しています。' }));
+        try {
+          const parameters = new URLSearchParams({ action: 'status', batchId: report.batchId });
+          const response = await fetch(`/api/accessories?${parameters.toString()}`, { cache: 'no-store' });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || '生成状態を取得できませんでした');
+          const nextReport = {
+            ...report,
+            open: true,
+            jobs: data.jobs || report.jobs || [],
+            worker: data.worker || report.worker || null,
+            lastCheckedAt: data.checkedAt || new Date().toISOString(),
+            statusMessage: data.worker?.error || data.worker?.message || report.statusMessage || '生成結果を取得しました。',
+          };
+          setAccessoryModal(prev => ({ ...prev, ...nextReport }));
+          saveAccessoryReport(nextReport);
+        } catch (error) {
+          setAccessoryModal(prev => ({ ...prev, statusMessage: `生成結果の再取得に失敗しました: ${error.message}` }));
+        }
+      }, [articles]);
 
       const accessoryActiveJobKey = accessoryModal.jobs
         .filter(job => !['completed', 'failed', 'registration_failed'].includes(job.state))
@@ -5421,6 +5623,7 @@
             onSchedulePost={(ids) => openNotePostModal({ ids, mode: 'schedule' })}
             onBulkReplace={openBulkReplaceModal}
             onCreateAccessory={openAccessoryModal}
+            onOpenAccessoryReport={openAccessoryReport}
             selectMode={selectMode}
             selectedIds={selectedIds}
             onToggleSelect={(id) => {
@@ -5445,6 +5648,8 @@
             folderMeta={folderMeta}
             folderLoading={folderLoading}
             onLoadFolder={loadFolder}
+            rootArticleLimit={rootArticleLimit}
+            onChangeRootArticleLimit={changeRootArticleLimit}
             externalFolderUrls={externalFolderUrls}
             setExternalFolderUrls={setExternalFolderUrls}
             onRefreshArticles={loadArticles}
@@ -5468,6 +5673,24 @@
                     <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">{accessoryModal.error}</div>
                   ) : (
                     <div className="space-y-3">
+                      {accessoryAvailableSelections.length > 0 && accessoryModal.jobs.length === 0 && (
+                        <div className="flex flex-wrap gap-1.5 rounded-lg border border-slate-200 bg-slate-50 p-2">
+                          {[{ id: '', name: 'すべて' }, ...accessoryBulkCategories].map(scope => {
+                            const targets = accessoryAvailableSelections.filter(item => !scope.id || item.categoryId === scope.id);
+                            const allSelected = targets.length > 0 && targets.every(item => accessorySelectedIds.has(item.key));
+                            return (
+                              <button
+                                key={scope.id || 'all'}
+                                type="button"
+                                onClick={() => toggleAccessoryScope(scope.id)}
+                                className={`rounded-md border px-2 py-1 text-[11px] font-bold transition-colors ${allSelected ? 'border-purple-300 bg-purple-100 text-purple-700' : 'border-slate-200 bg-white text-slate-600 hover:border-purple-200 hover:text-purple-700'}`}
+                              >
+                                {scope.name} {allSelected ? 'OFF' : 'ON'}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
                       {(accessoryModal.parents || []).map(parent => (
                         <div key={parent.id}>
                           <div className="truncate text-xs font-bold text-slate-700">{parent.title || getArticleDisplayTitle(parent, articleH1Cache)}</div>
