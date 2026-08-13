@@ -44,10 +44,14 @@ def new_job(
     master_snapshot: dict[str, Any],
     prompt_snapshot: dict[str, Any],
     article_title: str,
+    max_generation_attempts: int | None = None,
 ) -> dict[str, Any]:
     if engine not in ENGINES:
         raise ValueError(f"生成エンジンが不正です: {engine}")
     job_id = str(uuid4())
+    attempts = max_generation_attempts if max_generation_attempts is not None else (1 if engine == "MLX" else 2)
+    if attempts not in (1, 2, 3):
+        raise ValueError("記事作成・修正回数は1回から3回で指定してください")
     job = {
         "schema_version": SCHEMA_VERSION,
         "job_id": job_id,
@@ -60,6 +64,7 @@ def new_job(
         "article_title": article_title,
         "parent": parent,
         "category": category,
+        "generation_options": {"max_attempts": attempts},
         "master_snapshot": master_snapshot,
         "prompt_snapshot": prompt_snapshot,
         "registry": {
@@ -100,6 +105,13 @@ def validate_job(job: dict[str, Any]) -> None:
         raise ValueError(f"生成エンジンが不正です: {job['engine']}")
     if job["state"] not in JOB_STATES:
         raise ValueError(f"ジョブ状態が不正です: {job['state']}")
+    if "generation_options" in job:
+        try:
+            max_attempts = int(job["generation_options"].get("max_attempts"))
+        except (AttributeError, TypeError, ValueError) as error:
+            raise ValueError("記事作成・修正回数は1回から3回で指定してください") from error
+        if max_attempts not in (1, 2, 3):
+            raise ValueError("記事作成・修正回数は1回から3回で指定してください")
     if job["registry"].get("status") not in SHEET_STATUSES:
         raise ValueError(f"シート進捗が不正です: {job['registry'].get('status')}")
     for parent_key in ("id", "title"):

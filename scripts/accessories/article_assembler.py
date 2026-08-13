@@ -62,13 +62,17 @@ def assemble_article(
                 f"{newline}{intro}{newline}{newline}",
             )
         )
-    prefix = "" if parent.conclusion_insert_at == 0 else newline
-    suffix = newline * 2
+    recommendation_heading = f"## {parent.product_name} {category_name}おすすめまとめ：結論"
+    insertion_at = parent.first_product_insert_at
+    before = parent_markdown[:insertion_at]
+    after = parent_markdown[insertion_at:]
+    prefix = "" if before.endswith(newline * 2) else newline if before.endswith(newline) else newline * 2
+    suffix = "" if after.startswith(newline * 2) else newline if after.startswith(newline) else newline * 2
     edits.append(
         (
-            parent.conclusion_insert_at,
-            parent.conclusion_insert_at,
-            f"{prefix}{addition}{suffix}",
+            insertion_at,
+            insertion_at,
+            f"{prefix}{recommendation_heading}{newline}{newline}{addition}{suffix}",
         )
     )
 

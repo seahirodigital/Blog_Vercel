@@ -108,7 +108,33 @@ function matchingFolderBatch(rows, folderPath) {
   };
 }
 
-async function statusJobIds(req) {
+function matchingArticleBatch(rows, articleTitle) {
+  const normalizedTitle = String(articleTitle || '').normalize('NFC').trim();
+  if (!normalizedTitle) return null;
+  const matches = rows.filter((row) => (
+    String(row['記事タイトル'] || '').normalize('NFC').trim() === normalizedTitle
+    || String(row['大元記事タイトル'] || '').normalize('NFC').trim() === normalizedTitle
+  ));
+  if (!matches.length) return null;
+  matches.sort((left, right) => Date.parse(right['作成日時'] || '') - Date.parse(left['作成日時'] || ''));
+  const batchId = String(matches[0]['バッチID'] || '').trim();
+  if (!batchId) return null;
+  const batchRows = rows.filter((row) => String(row['バッチID'] || '').trim() === batchId);
+  return {
+    batchId,
+    folderPath: accessoryFolderPathFromRegistry(matches[0]),
+    ids: [...new Set(batchRows.map((row) => row['ジョブID']).filter(Boolean))],
+  };
+}
+
+async function statusJobIds(req, token) {
+  const articleId = String(queryValue(req.query.articleId) || '').trim();
+  if (articleId) {
+    const articleTitle = extractH1(await downloadArticle(token, articleId));
+    const matched = matchingArticleBatch(await listRegistryJobs(), articleTitle);
+    if (!matched?.ids.length) throw new Error(`記事の生成結果が見つかりません: ${articleTitle}`);
+    return { ids: matched.ids, batch: true, batchId: matched.batchId, folderPath: matched.folderPath };
+  }
   const folderPath = normalizeFolderPath(queryValue(req.query.folderPath));
   if (folderPath) {
     const matched = matchingFolderBatch(await listRegistryJobs(), folderPath);
@@ -271,6 +297,11 @@ async function createJobs(req, res, body) {
         categoryIds: body.categoryIds,
       }];
   if (!requestedParents.length) return res.status(400).json({ error: '親記事の選択が必要です' });
+  const requestedMlxAttempts = Number.parseInt(body.mlxGenerationAttempts ?? 1, 10);
+  if (engine === 'MLX' && ![1, 2, 3].includes(requestedMlxAttempts)) {
+    return res.status(400).json({ error: 'MLXの記事作成・修正回数は1回から3回で指定してください' });
+  }
+  const maxGenerationAttempts = engine === 'MLX' ? requestedMlxAttempts : 2;
 
   const token = await getOneDriveToken();
   const affiliateText = await downloadTextPath(token, AFFILIATE_FILE_PATH);
@@ -331,6 +362,7 @@ async function createJobs(req, res, body) {
       category,
       promptSnapshot: prompt,
       articleTitle: buildChildTitle(item.parentTitle, category.categoryName, category.titleFormat),
+      maxGenerationAttempts,
       createdAt: batchCreatedAt,
     });
     await putJob(token, job);
@@ -404,13 +436,13 @@ async function createJobs(req, res, body) {
 }
 
 async function status(req, res) {
+  const token = await getOneDriveToken();
   let request;
   try {
-    request = await statusJobIds(req);
+    request = await statusJobIds(req, token);
   } catch (error) {
     return res.status(400).json({ error: safePublicError(error) });
   }
-  const token = await getOneDriveToken();
   const records = await Promise.all(request.ids.map((jobId) => getJob(token, jobId)));
   const missingIndex = records.findIndex((record) => !record);
   if (missingIndex >= 0) {

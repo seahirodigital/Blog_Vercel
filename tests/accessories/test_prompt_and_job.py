@@ -227,10 +227,24 @@ class PromptAndJobTest(unittest.TestCase):
         validate_job(job)
         self.assertEqual(2, job["schema_version"])
         self.assertEqual("記事化", job["registry"]["status"])
+        self.assertEqual(1, job["generation_options"]["max_attempts"])
 
         job["master_snapshot"]["values"]["周辺機器カテゴリID"] = "cable"
         with self.assertRaisesRegex(ValueError, "スナップショット"):
             validate_job(job)
+
+    def test_job_schema_rejects_invalid_generation_attempts(self):
+        with self.assertRaisesRegex(ValueError, "1回から3回"):
+            new_job(
+                batch_id="batch-1",
+                engine="MLX",
+                parent={"id": "p1", "title": "親"},
+                category={"id": "battery", "name": "バッテリー", "affiliate_section": "battery", "template_file": "tpl_default.md"},
+                master_snapshot={"spreadsheet_id": "sheet", "sheet_name": "周辺機器DB", "row_number": 2, "values": {}, "sha256": hashlib.sha256(b"{}").hexdigest()},
+                prompt_snapshot={"content": "x", "sha256": hashlib.sha256(b"x").hexdigest()},
+                article_title="親 バッテリーおすすめまとめ",
+                max_generation_attempts=4,
+            )
 
 
 if __name__ == "__main__":

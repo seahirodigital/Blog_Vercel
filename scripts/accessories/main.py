@@ -30,7 +30,21 @@ from .prompt_store import verified_prompt
 from .sheet_registry import update_job
 
 
-MAX_GENERATION_ATTEMPTS = 2
+DEFAULT_MLX_GENERATION_ATTEMPTS = 1
+DEFAULT_GEMINI_GENERATION_ATTEMPTS = 2
+
+
+def generation_attempt_limit(job: dict, engine_name: str) -> int:
+    """ジョブへ固定した生成回数を返す。旧ジョブは現在の既定値で処理する。"""
+    default = DEFAULT_MLX_GENERATION_ATTEMPTS if engine_name == "MLX" else DEFAULT_GEMINI_GENERATION_ATTEMPTS
+    raw_value = job.get("generation_options", {}).get("max_attempts", default)
+    try:
+        value = int(raw_value)
+    except (TypeError, ValueError) as error:
+        raise ValueError("記事作成・修正回数は1回から3回で指定してください") from error
+    if value not in (1, 2, 3):
+        raise ValueError("記事作成・修正回数は1回から3回で指定してください")
+    return value
 
 
 def source_fallback_result(product_name: str, category_name: str, group) -> dict:
@@ -107,11 +121,12 @@ def process_job(
         generation_errors: list[str] = []
         fallback_used = False
         result = None
-        for attempt in range(1, MAX_GENERATION_ATTEMPTS + 1):
+        max_generation_attempts = generation_attempt_limit(job, engine_name)
+        for attempt in range(1, max_generation_attempts + 1):
             try:
                 report(
                     "generating",
-                    f"{engine_name}で冒頭文と商品文を調整しています（{attempt}/{MAX_GENERATION_ATTEMPTS}回目）",
+                    f"{engine_name}で冒頭文と商品文を調整しています（{attempt}/{max_generation_attempts}回目）",
                 )
                 if engine_name == "Gemini":
                     # MLX実行時にGemini SDKを要求しない。各エンジンを依存関係も含めて独立させる。
@@ -149,7 +164,7 @@ def process_job(
             except Exception as generation_error:
                 last_generation_error = generation_error
                 generation_errors.append(f"{attempt}回目: {str(generation_error)[:500]}")
-                if attempt == MAX_GENERATION_ATTEMPTS:
+                if attempt == max_generation_attempts:
                     fallback_used = True
                     result = source_fallback_result(
                         parent.product_name,
@@ -158,7 +173,7 @@ def process_job(
                     )
                     report(
                         "fallback",
-                        f"{engine_name}生成は{MAX_GENERATION_ATTEMPTS}回不合格のため、原文を保った安全な記事を出力します",
+                        f"{engine_name}生成は{max_generation_attempts}回不合格のため、原文を保った安全な記事を出力します",
                     )
                     break
         if result is None:
@@ -234,7 +249,7 @@ def process_job(
                 category_name=job["category"]["name"],
                 title_format=job["category"].get("title_format", ""),
             ),
-            "editable_regions": ["h1_text", "all_h2_text", "intro_append", "conclusion_append"],
+            "editable_regions": ["h1_text", "all_h2_text", "intro_append", "first_product_append"],
         }
         job["state"] = "completed"
         job["completed_at"] = utc_now()

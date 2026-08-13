@@ -49,10 +49,11 @@ class ArticleAssemblerTest(unittest.TestCase):
         )
         self.assertTrue(child.startswith("# iPad Pro M5 13インチ バッテリーおすすめまとめ\n"))
         self.assertLess(child.find(self.group.products[0].text), child.find("## iPad Pro M5 13インチ バッテリーおすすめ: 主要な課題と論点"))
-        self.assertEqual(len(re.findall(r"(?m)^## ", self.parent)), len(re.findall(r"(?m)^## ", child)))
+        self.assertEqual(len(re.findall(r"(?m)^## ", self.parent)) + 1, len(re.findall(r"(?m)^## ", child)))
         self.assertEqual(len(re.findall(r"(?m)^### ", self.parent)), len(re.findall(r"(?m)^### ", child)))
         self.assertTrue(all(
-            heading.startswith("## iPad Pro M5 13インチ バッテリーおすすめ: ")
+            heading == "## iPad Pro M5 13インチ バッテリーおすすめまとめ：結論"
+            or heading.startswith("## iPad Pro M5 13インチ バッテリーおすすめ: ")
             for heading in re.findall(r"(?m)^## .+$", child)
         ))
         self.assertIn("主要な課題と論点", child)
@@ -60,6 +61,30 @@ class ArticleAssemblerTest(unittest.TestCase):
         self.assertIn("iPad Pro M5 13インチにおすすめのバッテリーも紹介します。", child)
         self.assertNotIn("おすすめ商品のリンクまとめ", child)
         self.assertNotIn("Amazonのアソシエイトとして", child)
+
+    def test_recommendation_section_is_inserted_after_first_parent_product_block(self):
+        parent = (
+            "# Insta360 X6レビュー比較まとめ\n\n"
+            "親記事の冒頭です。\n\n"
+            "▼親商品の1件目\n説明1\nhttps://www.amazon.co.jp/dp/PARENT1\n\n"
+            "▼親商品の2件目\n説明2\nhttps://www.amazon.co.jp/dp/PARENT2\n\n"
+            "## 仕様\n本文\n"
+        )
+        addition = build_conclusion_addition(
+            adapted_section_intro=self.adapted_section_intro("Insta360 X6"),
+            adapted_product_texts=self.adapted_blocks("Insta360 X6"),
+        )
+        child, parsed = assemble_article(
+            parent,
+            category_name="バッテリー",
+            intro_addition="Insta360 X6におすすめのバッテリーを紹介します。",
+            conclusion_addition=addition,
+        )
+        heading = "## Insta360 X6 バッテリーおすすめまとめ：結論"
+        self.assertLess(child.find("https://www.amazon.co.jp/dp/PARENT1"), child.find(heading))
+        self.assertLess(child.find(heading), child.find(self.group.products[0].text))
+        self.assertLess(child.find(self.group.products[-1].text), child.find("▼親商品の2件目"))
+        self.assertEqual(parsed.first_product_insert_at, parent.find("▼親商品の2件目"))
 
     def test_frontmatter_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "H1|Frontmatter"):
@@ -141,10 +166,11 @@ class ArticleAssemblerTest(unittest.TestCase):
         self.assertTrue(child.startswith("# M5 iPad Pro 充電器おすすめまとめ\n"))
         self.assertIn("## M5 iPad Pro 充電器おすすめ: 結論", child)
         self.assertIn("## M5 iPad Pro 充電器おすすめ: Captions", child)
-        self.assertGreater(
+        self.assertLess(
             child.find(self.group.products[0].text),
             child.find("## M5 iPad Pro 充電器おすすめ: 結論"),
         )
+        self.assertIn("## M5 iPad Pro 充電器おすすめまとめ：結論", child)
         self.assertLess(
             child.find(self.group.products[0].text),
             child.find("## M5 iPad Pro 充電器おすすめ: Captions"),

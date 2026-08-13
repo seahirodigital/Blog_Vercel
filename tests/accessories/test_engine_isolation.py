@@ -3,7 +3,7 @@ from pathlib import Path
 import unittest
 
 from scripts.accessories.affiliate_group import AffiliateGroup, AffiliateProduct
-from scripts.accessories.main import source_fallback_result
+from scripts.accessories.main import generation_attempt_limit, source_fallback_result
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -61,10 +61,16 @@ class EngineIsolationTest(unittest.TestCase):
         self.assertIn("これまでの検査エラーをすべて修正", engine)
         self.assertIn("validation_feedback=tuple(generation_errors)", runner)
 
-    def test_generation_attempts_default_to_two(self):
+    def test_generation_attempts_default_to_one_for_mlx_and_two_for_gemini(self):
         runner = (ROOT / "scripts/accessories/main.py").read_text(encoding="utf-8")
-        self.assertIn("MAX_GENERATION_ATTEMPTS = 2", runner)
+        self.assertIn("DEFAULT_MLX_GENERATION_ATTEMPTS = 1", runner)
+        self.assertIn("DEFAULT_GEMINI_GENERATION_ATTEMPTS = 2", runner)
         self.assertNotIn("生成は3回不合格", runner)
+        self.assertEqual(1, generation_attempt_limit({}, "MLX"))
+        self.assertEqual(2, generation_attempt_limit({}, "Gemini"))
+        self.assertEqual(3, generation_attempt_limit({"generation_options": {"max_attempts": 3}}, "MLX"))
+        with self.assertRaisesRegex(ValueError, "1回から3回"):
+            generation_attempt_limit({"generation_options": {"max_attempts": 4}}, "MLX")
 
 
 if __name__ == "__main__":

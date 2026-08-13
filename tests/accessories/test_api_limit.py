@@ -72,14 +72,16 @@ class ApiLimitTest(unittest.TestCase):
             "`\u5468\u8fba\u6a5f\u5668/${timestamp}_${titlePrefix}`",
             "周辺機器の生成結果",
             "onOpenAccessoryReport && onOpenAccessoryReport(folderCtxMenu.path)",
-            "const openAccessoryReport = useCallback(async (folderPath = '') =>",
-            "new URLSearchParams({ action: 'status', folderPath: normalizedPath })",
+            "const openAccessoryReport = useCallback(async (target = '') =>",
+            "if (articleId) parameters.set('articleId', articleId)",
+            "onOpenAccessoryReport({",
+            "articleId: ctxMenu.article.id",
             "onOpenAccessoryReport={openAccessoryReport}",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, html)
 
-    def test_root_article_limit_is_configurable_in_steps_of_five(self):
+    def test_root_article_limit_supports_manual_input_and_steps_of_five(self):
         html = (ROOT / "public/index.html").read_text(encoding="utf-8")
         api = (ROOT / "api/articles.js").read_text(encoding="utf-8")
         for fragment in (
@@ -89,6 +91,10 @@ class ApiLimitTest(unittest.TestCase):
             "OneDrive直下の読み込む記事数",
             "changeRootArticleLimit(-5)",
             "changeRootArticleLimit(5)",
+            "rootArticleLimitInput",
+            "applyRootArticleLimitInput",
+            'aria-label="OneDrive直下の記事読込数"',
+            ">適用</button>",
             "includeAllArticles: true",
             "articleLimit: rootArticleLimit",
             "onContextMenu={handleRootContextMenu}",
@@ -121,12 +127,34 @@ class ApiLimitTest(unittest.TestCase):
             "function matchingFolderBatch(rows, folderPath)",
             "const folderPath = normalizeFolderPath(queryValue(req.query.folderPath))",
             "matchingFolderBatch(await listRegistryJobs(), folderPath)",
+            "function matchingArticleBatch(rows, articleTitle)",
+            "const articleId = String(queryValue(req.query.articleId)",
+            "extractH1(await downloadArticle(token, articleId))",
             "parentId: job.parent?.id || ''",
             "parentTitle: job.parent?.title || ''",
             "batchId: request.batchId || jobs[0]?.batchId || ''",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, source)
+
+    def test_mlx_generation_attempt_setting_is_selectable_and_saved_in_job(self):
+        html = (ROOT / "public/index.html").read_text(encoding="utf-8")
+        api = (ROOT / "api/accessories.js").read_text(encoding="utf-8")
+        core = (ROOT / "lib/accessories-core.js").read_text(encoding="utf-8")
+        for fragment in (
+            "ACCESSORY_MLX_ATTEMPTS_STORAGE_KEY",
+            "MLX生成設定を開く",
+            "記事作成・修正回数",
+            "1回（速度優先・デフォルト）",
+            "2回（バランス）",
+            "3回（修正優先）",
+            "mlxGenerationAttempts",
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, html)
+        self.assertIn("MLXの記事作成・修正回数は1回から3回で指定してください", api)
+        self.assertIn("maxGenerationAttempts", api)
+        self.assertIn("generation_options: { max_attempts: normalizedAttempts }", core)
 
     def test_root_html_is_not_cached_after_deploy(self):
         config = (ROOT / "vercel.json").read_text(encoding="utf-8")

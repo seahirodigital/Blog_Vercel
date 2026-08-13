@@ -7,6 +7,7 @@ from dataclasses import dataclass
 
 
 HEADING_RE = re.compile(r"(?m)^(#{1,6})[ \t]+(.+?)[ \t]*(\r?\n|$)")
+PRODUCT_BLOCK_RE = re.compile(r"(?m)^[ \t]*(?:\*\*)?▼")
 
 
 @dataclass(frozen=True)
@@ -25,6 +26,7 @@ class ParentArticle:
     headings: tuple[Heading, ...]
     h2_headings: tuple[Heading, ...]
     conclusion_insert_at: int
+    first_product_insert_at: int
     explicit_conclusion: bool
     product_name: str
 
@@ -87,12 +89,30 @@ def analyze_parent(markdown: str) -> ParentArticle:
         following = next((heading for heading in h2s if heading.start > h1.start), None)
         insert_at = following.start if following else len(markdown)
 
+    first_product = PRODUCT_BLOCK_RE.search(markdown, h1.end)
+    if first_product:
+        next_product = PRODUCT_BLOCK_RE.search(markdown, first_product.end())
+        next_h2 = next((heading for heading in h2s if heading.start > first_product.start()), None)
+        boundaries = [
+            position
+            for position in (
+                next_product.start() if next_product else None,
+                next_h2.start if next_h2 else None,
+            )
+            if position is not None
+        ]
+        first_product_insert_at = min(boundaries) if boundaries else len(markdown)
+    else:
+        following_h2 = next((heading for heading in h2s if heading.start > h1.start), None)
+        first_product_insert_at = following_h2.start if following_h2 else len(markdown)
+
     return ParentArticle(
         markdown=markdown,
         h1=h1,
         headings=headings,
         h2_headings=h2s,
         conclusion_insert_at=insert_at,
+        first_product_insert_at=first_product_insert_at,
         explicit_conclusion=explicit is not None,
         product_name=_derive_product_name(h1.title),
     )
