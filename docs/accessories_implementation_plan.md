@@ -1510,3 +1510,11 @@ Windowsでは「MLXで作成」を無効表示してMLXジョブを登録しな�
 - ローカル配信HTMLに「周辺機器の生成結果」「OneDrive直下の読み込む記事数」「すべて」一括選択が含まれることを確認した。
 - ブラウザ操作による視覚確認は、実行環境のブラウザ接続情報が不足したため実施できなかった。データ削除と生成ジョブ実行は行っていない。
 - `winmacsync` は実行していない。
+
+本番反映結果:
+
+- 実装コミット `5164af82` を `main` へpushした。
+- Vercel Productionデプロイ `dpl_E4dcqsj94i1aEgoBWUTeWcm4uCEr` が `READY` となり、`https://blog-vercel-dun.vercel.app` へ反映された。Vercel Functionsは12件で上限内を維持した。
+- 本番配信HTMLに「周辺機器の生成結果」「OneDrive直下の読み込む記事数」「すべて」一括選択と `includeAllArticles` が含まれることを確認した。
+- 本番OneDriveデータ45記事に対し、上限5指定で5記事、上限10指定で10記事が返ることを確認した。どちらもフォルダ数10、`includeAll=false`、`includeAllArticles=true` である。
+- 完了済みバッチ `676acc4a-1d3b-4437-9159-f43c36d304c9` の本番状態APIが2ジョブとも `state=completed`、完成記事の `articleId`と `articleUrl` を返すことを確認した。
