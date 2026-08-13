@@ -48,24 +48,20 @@ def validate_public_markdown(
         blocks = list(adapted_product_texts or [product.text for product in affiliate_group.products])
         if len(blocks) != len(affiliate_group.products):
             raise ValueError("商品ブロック件数が一致しません")
-        previous = -1
+        search_from = 0
         if affiliate_group.section_intro:
             if not normalized_intro:
                 raise ValueError("カテゴリ共通説明文がありません")
             intro_position = normalized_article.find(normalized_intro)
             if intro_position < 0 or normalized_article.find(normalized_intro, intro_position + 1) >= 0:
                 raise ValueError("カテゴリ共通説明文は1回だけ掲載してください")
-            previous = intro_position
+            search_from = intro_position + len(normalized_intro)
         for product, block in zip(affiliate_group.products, blocks):
             normalized_block = str(block).replace("\r\n", "\n").replace("\r", "\n").strip()
-            position = normalized_article.find(normalized_block)
+            position = normalized_article.find(normalized_block, search_from)
             if position < 0:
                 raise ValueError(f"調整済み商品ブロックが掲載されていません: {product.title}")
-            if normalized_article.find(normalized_block, position + 1) >= 0:
-                raise ValueError(f"商品ブロックが重複しています: {product.title}")
-            if position <= previous:
-                raise ValueError("カテゴリ共通説明文または商品ブロックの順番が変更されています")
-            previous = position
+            search_from = position + len(normalized_block)
 
     for url in allowed_new_urls or ():
         if url not in article:

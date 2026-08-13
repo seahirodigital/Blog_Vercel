@@ -124,6 +124,55 @@ class ArticleAssemblerTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "リンクまとめ"):
             validate_public_markdown("# 記事\n\n**おすすめ商品のリンクまとめ**")
 
+    def test_duplicate_product_blocks_are_allowed_in_source_order(self):
+        adapter_group = load_group(
+            ROOT / "scripts/pipeline/prompts/04-affiliate-link-manager/affiliate_links.txt",
+            "adapter",
+        )
+        article = (
+            "# 充電器記事\n\n"
+            + adapter_group.section_intro
+            + "\n\n"
+            + "\n\n".join(product.text for product in adapter_group.products)
+        )
+        validate_public_markdown(
+            article,
+            affiliate_group=adapter_group,
+            adapted_section_intro=adapter_group.section_intro,
+        )
+
+        duplicate = next(
+            product.text
+            for product in adapter_group.products
+            if sum(candidate.text == product.text for candidate in adapter_group.products) > 1
+        )
+        article_with_extra_duplicate = f"{article}\n\n{duplicate}\n"
+        validate_public_markdown(
+            article_with_extra_duplicate,
+            affiliate_group=adapter_group,
+            adapted_section_intro=adapter_group.section_intro,
+        )
+
+    def test_missing_second_identical_product_is_rejected(self):
+        adapter_group = load_group(
+            ROOT / "scripts/pipeline/prompts/04-affiliate-link-manager/affiliate_links.txt",
+            "adapter",
+        )
+        blocks = [product.text for product in adapter_group.products]
+        duplicate_index = next(
+            index
+            for index, block in enumerate(blocks)
+            if block in blocks[:index]
+        )
+        del blocks[duplicate_index]
+        article = f"# 充電器記事\n\n{adapter_group.section_intro}\n\n" + "\n\n".join(blocks)
+        with self.assertRaisesRegex(ValueError, "調整済み商品ブロックが掲載されていません"):
+            validate_public_markdown(
+                article,
+                affiliate_group=adapter_group,
+                adapted_section_intro=adapter_group.section_intro,
+            )
+
     def test_immutable_hash_ignores_editable_heading_text_only(self):
         original_hash = immutable_content_sha256(self.parent, category_name="バッテリー")
         changed_heading = self.parent.replace(
