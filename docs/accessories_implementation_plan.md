@@ -1458,3 +1458,4 @@ Windowsでは「MLXで作成」を無効表示してMLXジョブを登録しな�
 - 実装コミット `4ba4f685` を `main` へpushし、Vercel Productionデプロイ `dpl_6Ua46rvPrNecqWHsTctW9o6XQgyR` がReadyとなり、`https://blog-vercel-dun.vercel.app` へ反映された。
 - 本番HTMLで表示専用の `breaks: true` と警告表示UIを確認した。本番ステータスAPIでも対象ジョブが `completed`、`outputMode=safe_source_fallback`、警告、3回分のエラー、記事URLを返すことを確認した。
 - MLXとGeminiのOneDrive保存プロンプトを契約v5・改訂5へ更新した。両方のSHA-256は `0ca282e4a0bd1004052e4248a31bdacd38e239d554cf53411ace9759e0ae135c` で一致し、通常改行維持とHTML `<br>` 禁止を含む。
+- 保存記事を本番記事APIから再取得し、401行、空行140行、箇条書き19行が個別行として保持され、リテラルの `<br>` が0件、Frontmatterがないことを確認した。
