@@ -1417,3 +1417,6 @@ Windowsでは「MLXで作成」を無効表示してMLXジョブを登録しな�
 
 - Python単体テス38件に合格した。原文のままの共通説明文・商品ブロックを合格にする回帰テストを含む。
 - 起動中の `mlx-community/gemma-4-e4b-it-8bit` へ厳密JSON Schemaを付けて実リクエストし、前後文のない有効JSON、指定3キー、商品配列を確認した。
+- Python構文、Node.js構文、`git diff --check`、Vercel本番相当ビルドに合格した。
+- 実装コミット `e73e1d07` を `main` へpushし、Vercel Productionデプロイ `dpl_EYKyGRDC4CTASw1btgKkhKLBjP2k` がReadyとなり、`https://blog-vercel-dun.vercel.app` へ反映された。
+- 本番APIからMLX・Gemini両方のOneDrive保存プロンプトを更新し、どちらも契約v4・改訂4・同一SHA-256であることを確認した。
