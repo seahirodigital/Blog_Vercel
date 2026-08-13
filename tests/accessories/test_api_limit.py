@@ -49,6 +49,22 @@ class ApiLimitTest(unittest.TestCase):
         self.assertNotIn("ids.length > 5", source)
         self.assertNotIn("categoryIds.length > 5", source)
 
+    def test_folder_all_period_setting_is_inherited_and_child_count_is_refreshed(self):
+        html = (ROOT / "public/index.html").read_text(encoding="utf-8")
+        api = (ROOT / "api/articles.js").read_text(encoding="utf-8")
+        for fragment in (
+            "function resolveFolderLoadSetting(folderPath, settings = {})",
+            "inheritedFrom: candidate !== normalizedPath ? candidate : ''",
+            "resolveFolderLoadSetting(path, folderLoadSettings)",
+            "typeof updater === 'function' ? updater(current) : updater",
+            "onChangeFolderLoadSetting(path, requested)",
+            "childCount: Number.isFinite(data.currentChildCount)",
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, html)
+        self.assertIn("currentChildCount: items.length", api)
+        self.assertIn("currentChildCount: listing.currentChildCount", api)
+
 
 if __name__ == "__main__":
     unittest.main()

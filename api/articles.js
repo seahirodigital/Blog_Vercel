@@ -327,7 +327,14 @@ async function buildShallowListing(token, items, relativePath, options = {}) {
     }
   }
 
-  return { folders, articles: visibleArticles, totalArticles: articles.length, articleLimit };
+  return {
+    folders,
+    articles: visibleArticles,
+    totalArticles: articles.length,
+    articleLimit,
+    // Graphが返した全ページの直下要素数。開く前の古いchildCountを上書きする。
+    currentChildCount: items.length,
+  };
 }
 
 /**
@@ -694,6 +701,7 @@ export default async function handler(req, res) {
           lazy: true,
           totalArticles: listing.totalArticles,
           articleLimit: listing.articleLimit,
+          currentChildCount: listing.currentChildCount,
           includeAll: allPeriods,
         });
       }

@@ -760,6 +760,22 @@
       };
     }
 
+    function resolveFolderLoadSetting(folderPath, settings = {}) {
+      const normalizedPath = String(folderPath || '').trim().replace(/^\/+|\/+$/g, '');
+      const parts = normalizedPath.split('/').filter(Boolean);
+      for (let length = parts.length; length > 0; length--) {
+        const candidate = parts.slice(0, length).join('/');
+        if (Object.prototype.hasOwnProperty.call(settings || {}, candidate)) {
+          return {
+            ...normalizeFolderLoadSetting(settings[candidate]),
+            inherited: candidate !== normalizedPath,
+            inheritedFrom: candidate !== normalizedPath ? candidate : '',
+          };
+        }
+      }
+      return { ...normalizeFolderLoadSetting({}), inherited: false, inheritedFrom: '' };
+    }
+
     async function fetchArticles(externalUrls = [], options = {}) {
       const params = new URLSearchParams();
       if (externalUrls && externalUrls.length > 0) params.set('externalUrls', JSON.stringify(externalUrls));
@@ -1450,7 +1466,8 @@
 
       const rootNode = useMemo(() => buildFolderTree(articles, folderMeta), [articles, folderMeta]);
 
-      const getFolderLoadSetting = (path) => normalizeFolderLoadSetting(folderLoadSettings[path] || {});
+      // 子に明示設定がなければ、最も近い親フォルダの設定を継承する。
+      const getFolderLoadSetting = (path) => resolveFolderLoadSetting(path, folderLoadSettings);
 
       const loadFolderWithSetting = (path, meta = {}, setting = getFolderLoadSetting(path)) => {
         if (!onLoadFolder) return;
@@ -1462,9 +1479,12 @@
 
       const updateFolderLoadSetting = (path, updater, meta = {}) => {
         const current = getFolderLoadSetting(path);
+        const requested = normalizeFolderLoadSetting(
+          typeof updater === 'function' ? updater(current) : updater
+        );
         const next = onChangeFolderLoadSetting
-          ? onChangeFolderLoadSetting(path, updater)
-          : normalizeFolderLoadSetting(typeof updater === 'function' ? updater(current) : updater);
+          ? onChangeFolderLoadSetting(path, requested)
+          : requested;
         setOpenFolders(prev => ({ ...prev, [path]: true }));
         loadFolderWithSetting(path, meta, next || current);
       };
@@ -2045,7 +2065,9 @@
                     <div style={{ padding: '8px 14px 6px', borderBottom: '1px solid #f1f5f9' }}>
                       <div style={{ fontSize: '12px', fontWeight: 700, color: '#334155', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{path || 'ルート'}</div>
                       <div style={{ marginTop: '3px', fontSize: '11px', color: '#64748b' }}>
-                        {setting.includeAll ? `全期間 ON / ${setting.limit}件まで` : '通常読み込み'}
+                        {setting.includeAll
+                          ? `全期間 ON / ${setting.limit}件まで${setting.inherited ? `（${setting.inheritedFrom}から継承）` : ''}`
+                          : `通常読み込み${setting.inherited ? `（${setting.inheritedFrom}から継承）` : ''}`}
                       </div>
                     </div>
                     <button
@@ -3303,6 +3325,9 @@
               ...meta,
               path: normalizedPath,
               loaded: true,
+              childCount: Number.isFinite(data.currentChildCount)
+                ? data.currentChildCount
+                : Number(next[normalizedPath]?.childCount || meta.childCount || 0),
               includeAll,
               loadedArticleLimit: data.articleLimit || 0,
               loadedArticleCount: (data.articles || []).length,
