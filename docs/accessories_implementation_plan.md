@@ -1455,3 +1455,6 @@ Windowsでは「MLXで作成」を無効表示してMLXジョブを登録しな�
 - 失敗済みジョブ `05e63c3f-8933-4c0e-8106-1f1b54a03d10` を再実行した。1回目は原文14行に対し11行、2回目と3回目は13行で不合格となり、各回の検査エラーを次回へ累積して3回処理した。
 - 3回不合格後、安全な原文フォールバックへ移行し、記事 `Insta360 X6 ケーブルおすすめまとめ` をOneDrive item ID `FFCC26DEDBBA4E70!s8cf2915f22aa4a83bc1a60c2e0d56c45` として保存した。
 - ターミナルに `警告`、原文で出力した旨、3回分の行数エラー、記事URLを表示し、`周辺機器DB_LLM` は記事URLを持つ `完了` へ更新した。
+- 実装コミット `4ba4f685` を `main` へpushし、Vercel Productionデプロイ `dpl_6Ua46rvPrNecqWHsTctW9o6XQgyR` がReadyとなり、`https://blog-vercel-dun.vercel.app` へ反映された。
+- 本番HTMLで表示専用の `breaks: true` と警告表示UIを確認した。本番ステータスAPIでも対象ジョブが `completed`、`outputMode=safe_source_fallback`、警告、3回分のエラー、記事URLを返すことを確認した。
+- MLXとGeminiのOneDrive保存プロンプトを契約v5・改訂5へ更新した。両方のSHA-256は `0ca282e4a0bd1004052e4248a31bdacd38e239d554cf53411ace9759e0ae135c` で一致し、通常改行維持とHTML `<br>` 禁止を含む。
