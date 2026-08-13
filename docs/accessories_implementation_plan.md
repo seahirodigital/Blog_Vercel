@@ -1389,3 +1389,11 @@ Windowsでは「MLXで作成」を無効表示してMLXジョブを登録しな�
 - 管理APIのMEMO専用解析を廃止し、`affiliate_links.txt` にある全 `===名前===` セクションを記載順で読込み・往復保存する。画面は `MEMO1 / MEMO2 / battery / adapter / cable` を「メモ1 / メモ2 / バッテリー / 充電器 / ケーブル」と表示する。
 - 名前付きセクション直後から最初の `▼` までをカテゴリ共通説明文とし、各 `▼` から次の `▼` までをURLの有無にかかわらず一ブロックとして欠落なく保持する。
 - MLXとGeminiのプロンプト契約をv3に上げ、カテゴリ共通説明文を限定JSONで返す。変更は `おすすめ`行の主語を親製品名へ切り替える範囲に限定し、その他の行は完全一致、行数、URL、数値・英数字の保持を保存前に検査する。
+
+実運用確認結果:
+
+- コミット `54995eb3` を `main` へpushし、Vercel Productionデプロイ `dpl_GrGWU3MNZzJDgfNyywqG1Ug5h7C8` がReadyとなった。
+- 公開APIから `MEMO1 / MEMO2 / battery / adapter / cable` が記載順で返り、表示名が「メモ1 / メモ2 / バッテリー / 充電器 / ケーブル」であることを確認した。
+- OneDrive実ファイルで、`battery`の共通説明文16行・ `▼` 14ブロック、`adapter`の共通説明文18行・ `▼` 19ブロック、`cable`の共通説明文14行・ `▼` 13ブロックを欠落なく取得した。
+- MLXとGeminiのOneDrive保存プロンプトはどちらも契約v3・改訂3となり、`adapted_section_intro` を含むことを確認した。
+- Python単体テス35件、全セクション往復保存、API構文、JSX構文、Python構文、Vercel本番相当ビルドに合格した。
