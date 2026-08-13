@@ -118,6 +118,9 @@ class ApiLimitTest(unittest.TestCase):
         self.assertGreaterEqual(accessory_position, 0)
         self.assertGreater(report_position, accessory_position)
         self.assertGreater(title_variant_position, report_position)
+        self.assertGreaterEqual(html.count("OneDriveブラウザで開く"), 2)
+        self.assertGreaterEqual(html.count("エディターで開く"), 2)
+        self.assertNotIn(">記事を開く</a>", html)
         for fragment in (
             "OneDriveブラウザで開く",
             "エディターで開く",
@@ -125,6 +128,7 @@ class ApiLimitTest(unittest.TestCase):
             "const articleId = String(job?.articleId || '').trim()",
             "const opened = await handleSelect(generatedArticle)",
             "setAccessoryModal(prev => ({ ...prev, open: false }))",
+            "setTitleVariantModal(prev => ({ ...prev, open: false }))",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, html)

@@ -1,4 +1,5 @@
 import json
+import re
 import subprocess
 import unittest
 from pathlib import Path
@@ -57,9 +58,8 @@ class TitleVariantTest(unittest.TestCase):
     def test_article_without_conclusion_gets_one_immediately_after_first_amazon_url(self):
         source = (
             "# Insta360 X6レビューまとめ\n\n冒頭です。\n\n"
-            "▼最初の商品\n説明\nhttps://www.amazon.co.jp/dp/FIRST\n\n"
-            "最初のURLより後にある元記事の文章です。\n\n"
-            "▼二つ目の商品\n説明\nhttps://www.amazon.co.jp/dp/SECOND\n\n"
+            "https://www.amazon.co.jp/dp/FIRST\n\n"
+            "▼脅威の65％OFF!? 元記事の商品\nhttps://amzn.to/SECOND\n\n"
             "## Insta360 X6レビューまとめ：まとめ\n\n既存のまとめです。\n"
         )
         article, parsed = assemble_variant(
@@ -71,8 +71,37 @@ class TitleVariantTest(unittest.TestCase):
         heading = "## insta360 x6 スペックまとめ：結論"
         self.assertIsNone(parsed.conclusion_heading)
         self.assertLess(article.find("https://www.amazon.co.jp/dp/FIRST"), article.find(heading))
-        self.assertLess(article.find(heading), article.find("最初のURLより後にある元記事の文章です。"))
-        self.assertLess(article.find(heading), article.find("▼二つ目の商品"))
+        self.assertLess(article.find(heading), article.find("▼脅威の65％OFF!? 元記事の商品"))
+        self.assertLess(article.find(heading), article.find("https://amzn.to/SECOND"))
+
+    def test_existing_conclusion_is_moved_before_product_after_first_amazon_url(self):
+        source = (
+            "# Insta360 X6 バッテリーおすすめまとめ\n\n冒頭です。\n\n"
+            "https://www.amazon.co.jp/dp/FIRST\n\n"
+            "▼脅威の65％OFF!?ルンバ Plus 575 Combo\nhttps://amzn.to/ROOMBA\n\n"
+            "## Insta360 X6 バッテリーおすすめまとめ：結論\n\n"
+            "既存のカテゴリ説明です。\n\n"
+            "▼おすすめバッテリー\nhttps://www.amazon.co.jp/dp/BATTERY\n\n"
+            "## Insta360 X6 バッテリーおすすめ: 仕様\n\n既存本文です。\n"
+        )
+        article, _ = assemble_variant(
+            source,
+            keyword="insta360 x6 アクセサリー",
+            conclusion_text="アクセサリーの結論です。",
+        )
+        validate_variant(article, source, "insta360 x6 アクセサリー")
+        heading = "## insta360 x6 アクセサリーまとめ：結論"
+        self.assertLess(article.find("https://www.amazon.co.jp/dp/FIRST"), article.find(heading))
+        self.assertLess(article.find(heading), article.find("▼おすすめバッテリー"))
+        self.assertLess(article.find("▼おすすめバッテリー"), article.find("▼脅威の65％OFF!?ルンバ"))
+        self.assertEqual(
+            [
+                "https://www.amazon.co.jp/dp/FIRST",
+                "https://www.amazon.co.jp/dp/BATTERY",
+                "https://amzn.to/ROOMBA",
+            ],
+            re.findall(r"https?://[^\s)\]]+", article),
+        )
 
     def test_target_filename_is_safe(self):
         self.assertEqual("insta360 x6 sonyまとめ.md", target_filename("insta360 x6 sony"))

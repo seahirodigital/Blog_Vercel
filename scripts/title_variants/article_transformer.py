@@ -134,6 +134,11 @@ def _is_summary(title: str) -> bool:
 
 
 def _first_product_insert_at(markdown: str, h1: Heading, headings: tuple[Heading, ...]) -> int:
+    first_amazon_url = AMAZON_URL_RE.search(markdown, h1.end)
+    if first_amazon_url:
+        line_end = markdown.find("\n", first_amazon_url.end())
+        return line_end + 1 if line_end >= 0 else len(markdown)
+
     lines: list[tuple[int, str]] = []
     offset = 0
     for line in markdown.splitlines(keepends=True):
@@ -152,12 +157,49 @@ def _first_product_insert_at(markdown: str, h1: Heading, headings: tuple[Heading
     )
     next_heading = next((heading.start for heading in headings if heading.start > first_start), None)
     boundaries = [value for value in (next_product, next_heading) if value is not None]
-    fallback_insert_at = min(boundaries) if boundaries else len(markdown)
-    amazon_url = AMAZON_URL_RE.search(markdown, first_start, fallback_insert_at)
-    if not amazon_url:
-        return fallback_insert_at
-    line_end = markdown.find("\n", amazon_url.end(), fallback_insert_at)
-    return line_end + 1 if line_end >= 0 else fallback_insert_at
+    return min(boundaries) if boundaries else len(markdown)
+
+
+def _conclusion_section_end(
+    markdown: str,
+    heading: Heading,
+    headings: tuple[Heading, ...],
+) -> int:
+    following = next(
+        (
+            candidate
+            for candidate in headings
+            if candidate.start > heading.start and candidate.level <= heading.level
+        ),
+        None,
+    )
+    return following.start if following else len(markdown)
+
+
+def _relocate_existing_conclusion(markdown: str, keyword: str) -> str:
+    """既存の結論セクション全体を最初のAmazon URL行直後へ移す。"""
+    source = analyze_variant_source(markdown, keyword)
+    heading = source.conclusion_heading
+    if heading is None:
+        return markdown
+    h1 = next(candidate for candidate in source.headings if candidate.level == 1)
+    target = _first_product_insert_at(markdown, h1, source.headings)
+    section_end = _conclusion_section_end(markdown, heading, source.headings)
+    if heading.start <= target <= section_end:
+        return markdown
+    if target < heading.start and not markdown[target : heading.start].strip():
+        return markdown
+
+    newline = "\r\n" if "\r\n" in markdown else "\n"
+    section = markdown[heading.start:section_end].strip("\r\n")
+    without_section = f"{markdown[:heading.start]}{markdown[section_end:]}"
+    if section_end <= target:
+        target -= section_end - heading.start
+    before = without_section[:target]
+    after = without_section[target:]
+    prefix = "" if before.endswith(newline * 2) else newline if before.endswith(newline) else newline * 2
+    suffix = "" if after.startswith(newline * 2) else newline if after.startswith(newline) else newline * 2
+    return f"{before}{prefix}{section}{suffix}{after}"
 
 
 def analyze_variant_source(markdown: str, keyword: str) -> VariantSource:
@@ -251,8 +293,9 @@ def assemble_variant(
     intro_text: str | None = None,
     conclusion_text: str | None = None,
 ) -> tuple[str, VariantSource]:
-    source = analyze_variant_source(markdown, keyword)
-    newline = "\r\n" if "\r\n" in markdown else "\n"
+    working_markdown = _relocate_existing_conclusion(markdown, keyword)
+    source = analyze_variant_source(working_markdown, keyword)
+    newline = "\r\n" if "\r\n" in working_markdown else "\n"
     edits: list[tuple[int, int, str]] = []
     for heading in source.headings:
         marker = "#" * heading.level
@@ -267,7 +310,7 @@ def assemble_variant(
             (
                 source.intro.start,
                 source.intro.end,
-                _region_replacement(markdown, source.intro, intro_text, newline),
+                _region_replacement(working_markdown, source.intro, intro_text, newline),
             )
         )
     if conclusion_text is not None and source.conclusion.text and source.conclusion_heading is not None:
@@ -275,7 +318,7 @@ def assemble_variant(
             (
                 source.conclusion.start,
                 source.conclusion.end,
-                _region_replacement(markdown, source.conclusion, conclusion_text, newline),
+                _region_replacement(working_markdown, source.conclusion, conclusion_text, newline),
             )
         )
     if source.conclusion_heading is None:
@@ -283,20 +326,21 @@ def assemble_variant(
             conclusion_text if conclusion_text is not None else source.conclusion.text,
             newline,
         )
-        before = markdown[: source.conclusion_insert_at]
-        after = markdown[source.conclusion_insert_at :]
+        before = working_markdown[: source.conclusion_insert_at]
+        after = working_markdown[source.conclusion_insert_at :]
         prefix = "" if before.endswith(newline * 2) else newline if before.endswith(newline) else newline * 2
         suffix = "" if after.startswith(newline * 2) else newline if after.startswith(newline) else newline * 2
         insertion = f"{prefix}## {source.target_title}：結論{newline}{newline}{inserted_conclusion}{suffix}"
         edits.append((source.conclusion_insert_at, source.conclusion_insert_at, insertion))
-    article = markdown
+    article = working_markdown
     for start, end, replacement in sorted(edits, key=lambda item: item[0], reverse=True):
         article = f"{article[:start]}{replacement}{article[end:]}"
     return article, source
 
 
 def validate_variant(markdown: str, source_markdown: str, keyword: str) -> None:
-    source = analyze_variant_source(source_markdown, keyword)
+    canonical_source = _relocate_existing_conclusion(source_markdown, keyword)
+    source = analyze_variant_source(canonical_source, keyword)
     headings = _headings(markdown)
     h1s = [heading for heading in headings if heading.level == 1]
     if len(h1s) != 1 or h1s[0].title != source.target_title:
@@ -307,11 +351,11 @@ def validate_variant(markdown: str, source_markdown: str, keyword: str) -> None:
         raise ValueError("保存本文へHTML改行を出力できません")
     if markdown.lstrip().startswith(("```json", "```yaml")):
         raise ValueError("記事本文へLLM応答形式を出力できません")
-    source_urls = URL_RE.findall(source_markdown)
+    source_urls = URL_RE.findall(canonical_source)
     output_urls = URL_RE.findall(markdown)
     if source_urls != output_urls:
         raise ValueError("元記事のURLが変更または欠落しています")
-    source_products = [line.strip() for line in source_markdown.splitlines() if PRODUCT_RE.match(line)]
+    source_products = [line.strip() for line in canonical_source.splitlines() if PRODUCT_RE.match(line)]
     output_products = [line.strip() for line in markdown.splitlines() if PRODUCT_RE.match(line)]
     if source_products != output_products:
         raise ValueError("元記事の商品ブロック見出しが変更または欠落しています")

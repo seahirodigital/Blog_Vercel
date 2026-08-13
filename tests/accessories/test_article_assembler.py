@@ -66,9 +66,8 @@ class ArticleAssemblerTest(unittest.TestCase):
         parent = (
             "# Insta360 X6レビュー比較まとめ\n\n"
             "親記事の冒頭です。\n\n"
-            "▼親商品の1件目\n説明1\nhttps://www.amazon.co.jp/dp/PARENT1\n\n"
-            "最初のURLより後にある親記事の文章です。\n\n"
-            "▼親商品の2件目\n説明2\nhttps://www.amazon.co.jp/dp/PARENT2\n\n"
+            "https://www.amazon.co.jp/dp/PARENT1\n\n"
+            "▼脅威の65％OFF!? 親商品の案内\nhttps://amzn.to/PARENT2\n\n"
             "## 仕様\n本文\n"
         )
         addition = build_conclusion_addition(
@@ -84,8 +83,8 @@ class ArticleAssemblerTest(unittest.TestCase):
         heading = "## Insta360 X6 バッテリーおすすめまとめ：結論"
         self.assertLess(child.find("https://www.amazon.co.jp/dp/PARENT1"), child.find(heading))
         self.assertLess(child.find(heading), child.find(self.group.products[0].text))
-        self.assertLess(child.find(self.group.products[-1].text), child.find("最初のURLより後にある親記事の文章です。"))
-        self.assertLess(child.find(self.group.products[-1].text), child.find("▼親商品の2件目"))
+        self.assertLess(child.find(self.group.products[-1].text), child.find("▼脅威の65％OFF!? 親商品の案内"))
+        self.assertLess(child.find(self.group.products[-1].text), child.find("https://amzn.to/PARENT2"))
         self.assertEqual(
             parsed.first_product_insert_at,
             parent.find("https://www.amazon.co.jp/dp/PARENT1")

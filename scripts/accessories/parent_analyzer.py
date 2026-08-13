@@ -93,28 +93,27 @@ def analyze_parent(markdown: str) -> ParentArticle:
         following = next((heading for heading in h2s if heading.start > h1.start), None)
         insert_at = following.start if following else len(markdown)
 
-    first_product = PRODUCT_BLOCK_RE.search(markdown, h1.end)
-    if first_product:
-        next_product = PRODUCT_BLOCK_RE.search(markdown, first_product.end())
-        next_h2 = next((heading for heading in h2s if heading.start > first_product.start()), None)
-        boundaries = [
-            position
-            for position in (
-                next_product.start() if next_product else None,
-                next_h2.start if next_h2 else None,
-            )
-            if position is not None
-        ]
-        fallback_insert_at = min(boundaries) if boundaries else len(markdown)
-        amazon_url = AMAZON_URL_RE.search(markdown, first_product.start(), fallback_insert_at)
-        if amazon_url:
-            line_end = markdown.find("\n", amazon_url.end(), fallback_insert_at)
-            first_product_insert_at = line_end + 1 if line_end >= 0 else fallback_insert_at
-        else:
-            first_product_insert_at = fallback_insert_at
+    first_amazon_url = AMAZON_URL_RE.search(markdown, h1.end)
+    if first_amazon_url:
+        line_end = markdown.find("\n", first_amazon_url.end())
+        first_product_insert_at = line_end + 1 if line_end >= 0 else len(markdown)
     else:
-        following_h2 = next((heading for heading in h2s if heading.start > h1.start), None)
-        first_product_insert_at = following_h2.start if following_h2 else len(markdown)
+        first_product = PRODUCT_BLOCK_RE.search(markdown, h1.end)
+        if first_product:
+            next_product = PRODUCT_BLOCK_RE.search(markdown, first_product.end())
+            next_h2 = next((heading for heading in h2s if heading.start > first_product.start()), None)
+            boundaries = [
+                position
+                for position in (
+                    next_product.start() if next_product else None,
+                    next_h2.start if next_h2 else None,
+                )
+                if position is not None
+            ]
+            first_product_insert_at = min(boundaries) if boundaries else len(markdown)
+        else:
+            following_h2 = next((heading for heading in h2s if heading.start > h1.start), None)
+            first_product_insert_at = following_h2.start if following_h2 else len(markdown)
 
     return ParentArticle(
         markdown=markdown,
