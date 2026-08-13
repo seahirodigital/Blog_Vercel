@@ -4,6 +4,7 @@
  * GET    /api/articles?id=xxx  → 記事内容取得
  * PUT    /api/articles         → 記事保存（新規 or 上書き）
  * PATCH  /api/articles         → 記事リネーム
+ * DELETE /api/articles         → 記事または記事ルート配下フォルダをごみ箱へ移動
  *
  * ★ トークン自動ローテーション実装済み
  */
@@ -18,7 +19,6 @@ const GRAPH_MAX_RETRIES = 3;
 const GRAPH_BASE_DELAY_MS = 750;
 const GRAPH_MAX_DELAY_MS = 5000;
 const ARTICLE_LOOKBACK_DAYS = Number.parseInt(process.env.ARTICLE_LOOKBACK_DAYS || '21', 10);
-const SKIPPED_FOLDER_KEYWORDS = ['noteアップ済', 'noteアップ済み', 'note_uploaded', 'note upload'];
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -219,13 +219,25 @@ function shouldTrackArticle(item, options = {}) {
 
 function shouldSkipFolderPath(path = '', options = {}) {
   const normalized = String(path || '').toLowerCase();
-  if (SKIPPED_FOLDER_KEYWORDS.some((keyword) => normalized.includes(keyword.toLowerCase()))) {
-    return true;
-  }
-
   if (options.includeAll) return false;
   const folderDate = parseDateFromText(normalized);
   return Boolean(folderDate && folderDate < lookbackCutoffTime());
+}
+
+function normalizeDeletableFolderPath(value) {
+  const raw = String(value || '').trim().replace(/\\/g, '/').replace(/^\/+|\/+$/g, '');
+  const parts = raw.split('/').filter(Boolean);
+  if (!raw || parts.length === 0) throw new Error('記事ルートフォルダは削除できません');
+  if (parts.some((part) => part === '.' || part === '..' || part.includes('\0'))) {
+    throw new Error(`フォルダパスが不正です: ${raw}`);
+  }
+  return parts.join('/');
+}
+
+function collapseNestedFolderPaths(values) {
+  const paths = [...new Set((Array.isArray(values) ? values : []).map(normalizeDeletableFolderPath))]
+    .sort((a, b) => a.split('/').length - b.split('/').length || a.localeCompare(b));
+  return paths.filter((path, index) => !paths.slice(0, index).some((parent) => path.startsWith(`${parent}/`)));
 }
 
 function safeNumber(value, fallback = 0, max = 20) {
@@ -615,6 +627,26 @@ async function deleteArticle(token, fileId) {
   }
 }
 
+// 記事ルート配下のフォルダだけをパスで解決し、ごみ箱へ移動する。
+async function deleteFolder(token, relativePath) {
+  const baseFolder = String(process.env.ONEDRIVE_FOLDER || 'Blog_Articles').trim().replace(/^\/+|\/+$/g, '');
+  const safePath = normalizeDeletableFolderPath(relativePath);
+  const fullPath = `${baseFolder}/${safePath}`;
+  const lookupUrl = `${GRAPH_API}/me/drive/root:/${encodeFolderPath(fullPath)}?$select=id,name,folder`;
+  const lookup = await graphFetch(lookupUrl, {
+    headers: { Authorization: `Bearer ${token}` },
+  }, 'folder delete lookup');
+  if (!lookup.ok) {
+    throw new Error(`フォルダ確認失敗: ${safePath} (HTTP ${lookup.status})`);
+  }
+  const item = await lookup.json();
+  if (!item?.id || !item.folder) {
+    throw new Error(`削除対象はフォルダではありません: ${safePath}`);
+  }
+  await deleteArticle(token, item.id);
+  return safePath;
+}
+
 // 記事複製（コンテンツ読み込み → 同フォルダに新規保存）
 async function duplicateArticle(token, fileId, newName, folderPath) {
   const content = await getArticle(token, fileId);
@@ -784,7 +816,31 @@ export default async function handler(req, res) {
 
     // DELETE: 記事削除
     if (req.method === 'DELETE') {
-      const { fileId } = req.body;
+      const { fileId, folderPaths } = req.body || {};
+      if (Array.isArray(folderPaths)) {
+        let targets;
+        try {
+          targets = collapseNestedFolderPaths(folderPaths);
+        } catch (error) {
+          return res.status(400).json({ error: error.message });
+        }
+        if (targets.length === 0) return res.status(400).json({ error: '削除するフォルダを選択してください' });
+
+        const deletedPaths = [];
+        const errors = [];
+        for (const folderPath of targets) {
+          try {
+            deletedPaths.push(await deleteFolder(token, folderPath));
+          } catch (error) {
+            errors.push({ path: folderPath, error: String(error?.message || error) });
+          }
+        }
+        return res.status(200).json({
+          success: errors.length === 0,
+          deletedPaths,
+          errors,
+        });
+      }
       if (!fileId) return res.status(400).json({ error: 'fileId は必須です' });
       await deleteArticle(token, fileId);
       return res.status(200).json({ success: true });

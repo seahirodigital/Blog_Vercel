@@ -77,6 +77,43 @@ class ApiLimitTest(unittest.TestCase):
         self.assertIn("currentChildCount: items.length", api)
         self.assertIn("currentChildCount: listing.currentChildCount", api)
 
+    def test_note_uploaded_folder_is_visible_and_defaults_to_latest_five(self):
+        html = (ROOT / "public/index.html").read_text(encoding="utf-8")
+        api = (ROOT / "api/articles.js").read_text(encoding="utf-8")
+        self.assertNotIn("SKIPPED_FOLDER_KEYWORDS", api)
+        self.assertIn("const NOTE_UPLOADED_DEFAULT_LIMIT = 5", html)
+        self.assertIn("function isNoteUploadedFolderPath(folderPath)", html)
+        self.assertIn("? { includeAll: true, limit: NOTE_UPLOADED_DEFAULT_LIMIT }", html)
+        self.assertIn("const FOLDER_LOAD_LIMIT_OPTIONS = [5, 10, 25, 50, 100]", html)
+        self.assertIn("NOTE_UPLOADED_VISIBILITY_MIGRATION_KEY", html)
+        self.assertIn("if (isNoteUploadedFolderPath(path)) saved.delete(path)", html)
+        self.assertIn("allFolderPaths.map(fp =>", html)
+
+    def test_folder_delete_is_scoped_confirmed_and_supports_multiple_selection(self):
+        html = (ROOT / "public/index.html").read_text(encoding="utf-8")
+        api = (ROOT / "api/articles.js").read_text(encoding="utf-8")
+        for fragment in (
+            "function normalizeDeletableFolderPath(value)",
+            "記事ルートフォルダは削除できません",
+            "function collapseNestedFolderPaths(values)",
+            "const fullPath = `${baseFolder}/${safePath}`",
+            "if (!item?.id || !item.folder)",
+            "if (Array.isArray(folderPaths))",
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, api)
+        for fragment in (
+            "const [folderSelectMode, setFolderSelectMode] = useState(false)",
+            "const [selectedFolderPaths, setSelectedFolderPaths] = useState(new Set())",
+            "フォルダ {selectedFolderPaths.size}件選択",
+            "setConfirmFolderDelete(getFolderContextTargets(folderCtxMenu.path))",
+            "その中の記事・子フォルダをOneDriveのごみ箱へ移動します",
+            "onDeleteFolders={handleDeleteFolders}",
+            "deleteFoldersApi(targets)",
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, html)
+
 
 if __name__ == "__main__":
     unittest.main()
