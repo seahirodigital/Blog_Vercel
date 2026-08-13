@@ -1623,3 +1623,12 @@ Windowsでは「MLXで作成」を無効表示してMLXジョブを登録しな�
 - ローカル配信HTMLに右クリック「タイトル変更」、整形後プレビュー、複数件MLX作成、進捗、警告、記事リンク、Terminal再起動、専用プロンプト編集の各導線が含まれることを確認した。
 - ブラウザ内自動操作は実行環境の接続情報不足で開始できなかったため、実クリック確認は配信HTMLとJSX契約テストで代替した。生成ジョブとOneDrive記事はまだ実作成していない。
 - 秘密情報を含む環境ファイルは読み取り・変更していない。`winmacsync` は実行していない。
+
+本番反映結果:
+
+- 実装コミット `b30d893d` を `main` へpushした。
+- Vercel Productionデプロイ `dpl_B7VP9cwepLrQVbGMbqVzufy54Fq1` が `Ready` となり、`https://blog-vercel-dun.vercel.app` へ反映された。
+- 本番配信HTMLに記事右クリックの「タイトル変更」、整形後タイトル一覧、複数件のMLX作成、進捗、警告、完成記事リンク、Terminal再起動、`tpl_title_variant.md` のプロンプト編集導線が含まれることを確認した。
+- 本番の `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/api/accessories.js` 相当APIで、空の元記事要求がOneDriveジョブを作らず `元記事の選択が必要です` と拒否されることを確認した。
+- OneDrive管理領域へMLX用 `mlx-tpl_title_variant` を契約v6・改訂1・SHA-256付きで初期化した。プロンプト本文とハッシュ長だけを確認し、秘密情報は出力していない。
+- 実MLXジョブ、完成記事保存、`周辺機器DB_LLM` の完了更新はユーザーの本番クリック試験用として実行していない。
