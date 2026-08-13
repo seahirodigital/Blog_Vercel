@@ -1641,6 +1641,9 @@ Windowsでは「MLXで作成」を無効表示してMLXジョブを登録しな�
 - Amazon URLがない場合の代替位置が従来どおり維持されることを確認した。
 - JSX構文、Node.js構文、Python構文、`git diff --check`、Vercel本番相当ビルドに合格した。
 - UI契約テストで、右クリックメニュー順、「OneDriveブラウザで開く」「エディターで開く」、OneDrive item IDを既存の記事選択処理へ渡すことを確認した。
+- 実装コミット `527bea8c` を `main` へpushした。
+- Vercel Productionデプロイ `dpl_ArMsuMGsa2fvRromLiP9EkbqFpcy` が `Ready` となり、`https://blog-vercel-dun.vercel.app` へ反映された。
+- 本番配信HTMLで、右クリック項目が「周辺機器記事作成」「周辺機器の生成結果」「タイトル変更」の順であることと、「OneDriveブラウザで開く」「エディターで開く」、OneDrive item IDを使う編集処理が配信されていることを確認した。
 
 本番反映結果:
 
