@@ -26,7 +26,7 @@ import { appendRegistryJob, listRegistryJobs, loadAccessoryMaster, updateRegistr
 const GITHUB_API = 'https://api.github.com';
 const AFFILIATE_FILE_PATH = process.env.ACCESSORIES_AFFILIATE_FILE_PATH
   || '開発/Blog_Vercel/scripts/pipeline/prompts/04-affiliate-link-manager/affiliate_links.txt';
-const PROMPT_CONTRACT_VERSION = 4;
+const PROMPT_CONTRACT_VERSION = 5;
 
 function queryValue(value, fallback = '') {
   return Array.isArray(value) ? value[0] ?? fallback : value ?? fallback;
@@ -378,6 +378,9 @@ async function status(req, res) {
       completedAt: job.completed_at,
       articleUrl: job.result?.article_url || '',
       error: job.result?.error_summary || '',
+      warning: job.result?.warning_summary || '',
+      generationErrors: Array.isArray(job.result?.generation_errors) ? job.result.generation_errors : [],
+      outputMode: job.result?.output_mode || 'generated',
       registrySync: job.registry?.sync || '',
     };
   });

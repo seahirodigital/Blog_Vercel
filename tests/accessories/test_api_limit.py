@@ -42,6 +42,18 @@ class ApiLimitTest(unittest.TestCase):
         html = (ROOT / "public/index.html").read_text(encoding="utf-8")
         self.assertIn("fetch('/api/accessories?action=create'", html)
 
+    def test_markdown_soft_breaks_are_rendered_without_modifying_saved_content(self):
+        html = (ROOT / "public/index.html").read_text(encoding="utf-8")
+        self.assertIn("breaks: true", html)
+        self.assertIn("保存するMarkdown本文に<br>は追加しない", html)
+        self.assertIn("警告あり・出力済み", html)
+        self.assertIn("job.generationErrors.map", html)
+
+        conclusion_builder = (ROOT / "scripts/accessories/conclusion_builder.py").read_text(encoding="utf-8")
+        article_assembler = (ROOT / "scripts/accessories/article_assembler.py").read_text(encoding="utf-8")
+        self.assertNotIn("<br>", conclusion_builder)
+        self.assertNotIn("<br>", article_assembler)
+
     def test_api_accepts_batch_status_without_fixed_job_limit(self):
         source = (ROOT / "api/accessories.js").read_text(encoding="utf-8")
         self.assertIn("queryValue(req.query.batchId)", source)

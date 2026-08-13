@@ -81,13 +81,68 @@ class PromptAndJobTest(unittest.TestCase):
     def test_engine_result_rejects_changed_section_intro_body(self):
         data = json.loads(self.valid_engine_json())
         data["adapted_section_intro"] = data["adapted_section_intro"].replace("通勤中", "自宅")
-        with self.assertRaisesRegex(ValueError, "主語以外"):
+        with self.assertRaisesRegex(ValueError, "削除または大きく書き換え"):
             parse_engine_result(
                 json.dumps(data, ensure_ascii=False),
                 product_name="M5 iPad Pro",
                 category_name="バッテリー",
                 affiliate_group=self.group,
             )
+
+    def test_engine_result_accepts_added_section_intro_lines(self):
+        data = json.loads(self.valid_engine_json())
+        data["adapted_section_intro"] += "\n\n追加行は後から削除できます。"
+        result = parse_engine_result(
+            json.dumps(data, ensure_ascii=False),
+            product_name="M5 iPad Pro",
+            category_name="バッテリー",
+            affiliate_group=self.group,
+        )
+        self.assertIn("追加行は後から削除できます。", result["adapted_section_intro"])
+
+    def test_engine_result_rejects_reduced_section_intro_lines(self):
+        data = json.loads(self.valid_engine_json())
+        data["adapted_section_intro"] = "\n".join(data["adapted_section_intro"].splitlines()[:-1])
+        with self.assertRaisesRegex(ValueError, "行数が減少"):
+            parse_engine_result(
+                json.dumps(data, ensure_ascii=False),
+                product_name="M5 iPad Pro",
+                category_name="バッテリー",
+                affiliate_group=self.group,
+            )
+
+    def test_engine_result_rejects_literal_html_break(self):
+        data = json.loads(self.valid_engine_json())
+        data["adapted_section_intro"] = data["adapted_section_intro"].replace("\n", "<br>\n", 1)
+        with self.assertRaisesRegex(ValueError, "HTML改行"):
+            parse_engine_result(
+                json.dumps(data, ensure_ascii=False),
+                product_name="M5 iPad Pro",
+                category_name="バッテリー",
+                affiliate_group=self.group,
+            )
+
+    def test_engine_result_rejects_reduced_product_lines(self):
+        data = json.loads(self.valid_engine_json())
+        data["products"][0]["adapted_text"] = data["products"][0]["adapted_text"].replace("\n", " ")
+        with self.assertRaisesRegex(ValueError, "商品紹介文の行数が減少"):
+            parse_engine_result(
+                json.dumps(data, ensure_ascii=False),
+                product_name="M5 iPad Pro",
+                category_name="バッテリー",
+                affiliate_group=self.group,
+            )
+
+    def test_engine_result_accepts_added_product_lines_when_source_is_preserved(self):
+        data = json.loads(self.valid_engine_json())
+        data["products"][0]["adapted_text"] = self.group.products[0].text + "\n\n後から削除できる補足です。"
+        result = parse_engine_result(
+            json.dumps(data, ensure_ascii=False),
+            product_name="M5 iPad Pro",
+            category_name="バッテリー",
+            affiliate_group=self.group,
+        )
+        self.assertIn("後から削除できる補足です。", result["adapted_product_texts"][0])
 
     def test_engine_result_rejects_affiliate_disclaimer_in_reason(self):
         with self.assertRaisesRegex(ValueError, "禁止値"):

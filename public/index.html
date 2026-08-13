@@ -711,6 +711,9 @@
 
     // Marked.js: リンクを別タブで開く（v5 API：オブジェクト引数）
     marked.use({
+      // 表示時だけ通常改行を改行として描画する。
+      // OneDriveやnoteへ保存するMarkdown本文に<br>は追加しない。
+      breaks: true,
       renderer: {
         link({ href, title, text }) {
           const safeHref = href || '';
@@ -3509,6 +3512,7 @@
           }
           return `${job.engine || '生成エンジン'}が記事を生成・検査しています`;
         }
+        if (job.state === 'completed' && job.warning) return job.warning;
         if (job.state === 'completed') return 'OneDrive保存と周辺機器DB_LLM更新が完了しました';
         if (job.state === 'registration_failed') return '周辺機器DB_LLMへの登録に失敗しました';
         if (job.state === 'failed') return job.error || '記事生成に失敗しました';
@@ -5300,14 +5304,19 @@
                               {!['completed', 'failed', 'registration_failed'].includes(job.state) && <span className="mt-0.5 inline-block h-3.5 w-3.5 shrink-0 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent" />}
                               <div className="min-w-0 flex-1">
                                 <div className="flex flex-wrap items-center gap-2">
-                                  <span className={`rounded-full px-2 py-0.5 font-bold ${job.state === 'completed' ? 'bg-green-100 text-green-700' : job.state === 'failed' || job.state === 'registration_failed' ? 'bg-red-100 text-red-700' : 'bg-cyan-100 text-cyan-700'}`}>{accessoryStateLabel(job.state)}</span>
+                                  <span className={`rounded-full px-2 py-0.5 font-bold ${job.state === 'completed' && job.warning ? 'bg-amber-100 text-amber-800' : job.state === 'completed' ? 'bg-green-100 text-green-700' : job.state === 'failed' || job.state === 'registration_failed' ? 'bg-red-100 text-red-700' : 'bg-cyan-100 text-cyan-700'}`}>{job.state === 'completed' && job.warning ? '警告あり・出力済み' : accessoryStateLabel(job.state)}</span>
                                   <span className="min-w-0 flex-1 truncate font-semibold text-slate-700">{job.title}</span>
                                   <span className="text-[11px] tabular-nums text-slate-400">{accessoryElapsedLabel(job.createdAt, job.completedAt)}</span>
                                   {job.articleUrl && <a href={job.articleUrl} target="_blank" rel="noopener noreferrer" className="font-bold text-[#7C4DFF] hover:underline">記事を開く</a>}
                                 </div>
-                                <div className={`mt-2 text-[11px] ${job.state === 'failed' || job.state === 'registration_failed' ? 'text-red-600' : 'text-slate-500'}`}>{accessoryJobDetail(job)}</div>
+                                <div className={`mt-2 text-[11px] ${job.warning ? 'text-amber-700' : job.state === 'failed' || job.state === 'registration_failed' ? 'text-red-600' : 'text-slate-500'}`}>{accessoryJobDetail(job)}</div>
+                                {job.warning && Array.isArray(job.generationErrors) && job.generationErrors.length > 0 && (
+                                  <div className="mt-2 rounded-md border border-amber-200 bg-amber-50 p-2 text-[10px] leading-relaxed text-amber-800">
+                                    {job.generationErrors.map((message, index) => <div key={`${job.jobId}-warning-${index}`}>{message}</div>)}
+                                  </div>
+                                )}
                                 <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-slate-100">
-                                  <div className={`h-full rounded-full transition-all duration-500 ${job.state === 'completed' ? 'bg-green-500' : job.state === 'failed' || job.state === 'registration_failed' ? 'bg-red-400' : 'bg-cyan-500'}`} style={{ width: `${accessoryProgressPercent(job)}%` }} />
+                                  <div className={`h-full rounded-full transition-all duration-500 ${job.state === 'completed' && job.warning ? 'bg-amber-500' : job.state === 'completed' ? 'bg-green-500' : job.state === 'failed' || job.state === 'registration_failed' ? 'bg-red-400' : 'bg-cyan-500'}`} style={{ width: `${accessoryProgressPercent(job)}%` }} />
                                 </div>
                               </div>
                             </div>

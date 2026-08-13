@@ -51,19 +51,51 @@ def _validate_adapted_product(source: str, adapted: str, product_name: str, prod
     adapted_text = _normalize_newlines(adapted)
     if not adapted_text.startswith(f"▼{product_title}"):
         raise ValueError(f"商品名行が変更されています: {product_title}")
+    if re.search(r"<br\s*/?>", adapted_text, re.I):
+        raise ValueError(f"商品紹介文にHTML改行が含まれています: {product_title}")
     source_urls = re.findall(r"https?://[^\s)\]]+", source_text)
     adapted_urls = re.findall(r"https?://[^\s)\]]+", adapted_text)
     if adapted_urls != source_urls:
         raise ValueError(f"商品URLが変更されています: {product_title}")
+    source_lines = source_text.split("\n")
+    adapted_lines = adapted_text.split("\n")
+    if len(adapted_lines) < len(source_lines):
+        raise ValueError(
+            f"商品紹介文の行数が減少しています: {product_title} "
+            f"原文{len(source_lines)}行 / 生成{len(adapted_lines)}行"
+        )
+    if sum(not line.strip() for line in adapted_lines) < sum(not line.strip() for line in source_lines):
+        raise ValueError(f"商品紹介文の空行が削除されています: {product_title}")
+    adapted_cursor = 0
+    for line_number, source_line in enumerate(source_lines, start=1):
+        if not source_line.strip():
+            continue
+        matched = False
+        while adapted_cursor < len(adapted_lines):
+            adapted_line = adapted_lines[adapted_cursor]
+            adapted_cursor += 1
+            if adapted_line == source_line:
+                matched = True
+                break
+            subject_only_change = (
+                not source_line.startswith("▼")
+                and not re.search(r"https?://", source_line)
+                and product_name in adapted_line
+                and not (_fact_tokens(source_line) - _fact_tokens(adapted_line))
+                and not (_fact_tokens(adapted_line) - (_fact_tokens(source_line) | _fact_tokens(product_name)))
+                and SequenceMatcher(None, source_line, adapted_line).ratio() >= 0.45
+            )
+            if subject_only_change:
+                matched = True
+                break
+        if not matched:
+            raise ValueError(
+                f"商品紹介文{line_number}行目が削除または大きく書き換えられています: {product_title}"
+            )
     allowed_tokens = _fact_tokens(source_text) | _fact_tokens(product_name)
     added_tokens = _fact_tokens(adapted_text) - allowed_tokens
     if added_tokens:
         raise ValueError(f"入力にない数値・英数字仕様があります: {product_title}")
-    source_without_urls = re.sub(r"https?://\S+", "", source_text)
-    adapted_without_urls = re.sub(r"https?://\S+", "", adapted_text)
-    similarity = SequenceMatcher(None, source_without_urls, adapted_without_urls).ratio()
-    if similarity < 0.60:
-        raise ValueError(f"商品紹介文の変更範囲が大きすぎます: {product_title}")
     return adapted_text
 
 
@@ -76,18 +108,43 @@ def _validate_adapted_section_intro(source: str, adapted: str, product_name: str
         return ""
     if not adapted_text:
         raise ValueError("カテゴリ共通説明文が空です")
+    if re.search(r"<br\s*/?>", adapted_text, re.I):
+        raise ValueError("カテゴリ共通説明文にHTML改行が含まれています")
     source_lines = source_text.split("\n")
     adapted_lines = adapted_text.split("\n")
-    if len(source_lines) != len(adapted_lines):
-        raise ValueError("カテゴリ共通説明文の行数が変更されています")
-    for line_number, (source_line, adapted_line) in enumerate(zip(source_lines, adapted_lines), start=1):
-        if source_line == adapted_line:
+    if len(adapted_lines) < len(source_lines):
+        raise ValueError(
+            f"カテゴリ共通説明文の行数が減少しています: "
+            f"原文{len(source_lines)}行 / 生成{len(adapted_lines)}行"
+        )
+    if sum(not line.strip() for line in adapted_lines) < sum(not line.strip() for line in source_lines):
+        raise ValueError("カテゴリ共通説明文の空行が削除されています")
+
+    adapted_cursor = 0
+    for line_number, source_line in enumerate(source_lines, start=1):
+        if not source_line.strip():
             continue
-        if "おすすめ" not in source_line or product_name not in adapted_line:
-            raise ValueError(f"カテゴリ共通説明文{line_number}行目は主語以外を変更できません")
-        similarity = SequenceMatcher(None, source_line, adapted_line).ratio()
-        if similarity < 0.65:
-            raise ValueError(f"カテゴリ共通説明文{line_number}行目の変更範囲が大きすぎます")
+        matched = False
+        while adapted_cursor < len(adapted_lines):
+            adapted_line = adapted_lines[adapted_cursor]
+            adapted_cursor += 1
+            if adapted_line == source_line:
+                matched = True
+                break
+            subject_only_change = (
+                "おすすめ" in source_line
+                and product_name in adapted_line
+                and not (_fact_tokens(source_line) - _fact_tokens(adapted_line))
+                and not (_fact_tokens(adapted_line) - (_fact_tokens(source_line) | _fact_tokens(product_name)))
+                and SequenceMatcher(None, source_line, adapted_line).ratio() >= 0.45
+            )
+            if subject_only_change:
+                matched = True
+                break
+        if not matched:
+            raise ValueError(
+                f"カテゴリ共通説明文{line_number}行目が削除または大きく書き換えられています"
+            )
     source_urls = re.findall(r"https?://[^\s)\]]+", source_text)
     adapted_urls = re.findall(r"https?://[^\s)\]]+", adapted_text)
     if adapted_urls != source_urls:
@@ -158,7 +215,7 @@ def parse_engine_result(
     )
     if not intro or product_name not in intro or category_name not in intro:
         raise ValueError("冒頭案内文に親製品名または周辺機器名がありません")
-    if any(token in intro for token in ("http://", "https://", "\n", "<think>", "job_id")):
+    if any(token in intro for token in ("http://", "https://", "\n", "<think>", "job_id", "<br>")) or re.search(r"<br\s*/?>", intro, re.I):
         raise ValueError("冒頭案内文に禁止値があります")
     if not isinstance(products, list) or len(products) != len(affiliate_group.products):
         raise ValueError("LLM応答の商品ブロック件数が不正です")

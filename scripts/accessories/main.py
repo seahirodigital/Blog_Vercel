@@ -33,6 +33,15 @@ from .sheet_registry import update_job
 MAX_GENERATION_ATTEMPTS = 3
 
 
+def source_fallback_result(product_name: str, category_name: str, group) -> dict:
+    """LLMが不合格でも、創作せず原文で記事化する。"""
+    return {
+        "intro_sentence": f"この記事では、{product_name}におすすめの{category_name}も紹介します。",
+        "adapted_section_intro": group.section_intro,
+        "adapted_product_texts": [product.text for product in group.products],
+    }
+
+
 def _service_account_info() -> dict:
     raw = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON", "").strip()
     if not raw:
@@ -92,6 +101,8 @@ def process_job(
         prompt_content = verified_prompt(job["prompt_snapshot"])
 
         last_generation_error: Exception | None = None
+        generation_errors: list[str] = []
+        fallback_used = False
         result = None
         for attempt in range(1, MAX_GENERATION_ATTEMPTS + 1):
             try:
@@ -120,6 +131,7 @@ def process_job(
                         evidence=evidence,
                         affiliate_group=group,
                         attempt=attempt,
+                        validation_feedback=tuple(generation_errors),
                     )
                     result = parse_engine_result(
                         raw_result,
@@ -132,34 +144,77 @@ def process_job(
                 break
             except Exception as generation_error:
                 last_generation_error = generation_error
+                generation_errors.append(f"{attempt}回目: {str(generation_error)[:500]}")
                 if attempt == MAX_GENERATION_ATTEMPTS:
+                    if engine_name == "MLX":
+                        fallback_used = True
+                        result = source_fallback_result(
+                            parent.product_name,
+                            job["category"]["name"],
+                            group,
+                        )
+                        report(
+                            "fallback",
+                            "MLX生成は3回不合格のため、原文を保った安全な記事を出力します",
+                        )
+                        break
                     raise RuntimeError(
                         f"{engine_name}生成結果が{MAX_GENERATION_ATTEMPTS}回とも不合格でした: {generation_error}"
                     ) from generation_error
         if result is None:
             raise RuntimeError(f"{engine_name}生成結果を取得できませんでした: {last_generation_error}")
 
+        def assemble_and_validate(active_result: dict) -> str:
+            addition = build_conclusion_addition(
+                adapted_section_intro=active_result["adapted_section_intro"],
+                adapted_product_texts=active_result["adapted_product_texts"],
+            )
+            article, _ = assemble_article(
+                parent_markdown,
+                category_name=job["category"]["name"],
+                title_format=job["category"].get("title_format", ""),
+                intro_addition=active_result["intro_sentence"],
+                conclusion_addition=addition,
+            )
+            validate_public_markdown(
+                article,
+                affiliate_group=group,
+                adapted_section_intro=active_result["adapted_section_intro"],
+                adapted_product_texts=active_result["adapted_product_texts"],
+                allowed_new_urls=[url for product in group.products for url in product.urls],
+            )
+            return article
+
         report("assembling", "冒頭案内文と調整済み商品ブロックを親記事へ反映しています")
-        addition = build_conclusion_addition(
-            adapted_section_intro=result["adapted_section_intro"],
-            adapted_product_texts=result["adapted_product_texts"],
-        )
-        child_markdown, _ = assemble_article(
-            parent_markdown,
-            category_name=job["category"]["name"],
-            title_format=job["category"].get("title_format", ""),
-            intro_addition=result["intro_sentence"],
-            conclusion_addition=addition,
-        )
         report("validating", "本文外メタ情報・Frontmatter・リンク構成を検査しています")
-        validate_public_markdown(
-            child_markdown,
-            affiliate_group=group,
-            adapted_section_intro=result["adapted_section_intro"],
-            adapted_product_texts=result["adapted_product_texts"],
-            allowed_new_urls=[url for product in group.products for url in product.urls],
+        try:
+            child_markdown = assemble_and_validate(result)
+        except Exception as article_validation_error:
+            if engine_name != "MLX" or fallback_used:
+                raise
+            generation_errors.append(
+                f"保存前検査: {str(article_validation_error)[:500]}"
+            )
+            fallback_used = True
+            result = source_fallback_result(
+                parent.product_name,
+                job["category"]["name"],
+                group,
+            )
+            report(
+                "fallback",
+                "MLX調整結果が保存前検査に不合格のため、原文で安全に記事化します",
+            )
+            child_markdown = assemble_and_validate(result)
+        warning_summary = (
+            "MLX調整結果が検査に合格しなかったため、"
+            "アフィリエイト原文を使って記事を出力しました。"
+        ) if fallback_used else ""
+        report(
+            "saving",
+            "警告付き子記事をOneDriveへ保存しています"
+            if fallback_used else "合格した子記事をOneDriveの周辺機器フォルダへ保存しています",
         )
-        report("saving", "合格した子記事をOneDriveの周辺機器フォルダへ保存しています")
         article_item = save_child_article(job, _filename(job), child_markdown)
         product_titles = [product.title for product in group.products]
         management_seo = {
@@ -188,6 +243,9 @@ def process_job(
             "article_id": article_item.get("id", ""),
             "article_url": article_item.get("webUrl", ""),
             "error_summary": "",
+            "warning_summary": warning_summary,
+            "generation_errors": generation_errors,
+            "output_mode": "safe_source_fallback" if fallback_used else "generated",
             "management_seo": management_seo,
             "integrity": integrity,
         }
@@ -210,7 +268,11 @@ def process_job(
             job["registry"]["sync"] = "pending"
             job["registry"]["last_error"] = str(registry_error)[:300]
             save_job(job)
-        report("completed", "子記事の生成と保存が完了しました")
+        report(
+            "completed",
+            "MLX出力は不合格でしたが、原文を使った記事の保存が完了しました"
+            if fallback_used else "子記事の生成と保存が完了しました",
+        )
         return job
     except Exception as error:
         job["state"] = "failed"

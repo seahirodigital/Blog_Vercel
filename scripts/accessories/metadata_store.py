@@ -25,6 +25,11 @@ def save_metadata(job: dict[str, Any], article_item: dict[str, Any]) -> dict[str
         },
         "seo": job.get("result", {}).get("management_seo", {}),
         "integrity": job.get("result", {}).get("integrity", {}),
+        "generation": {
+            "output_mode": job.get("result", {}).get("output_mode", "generated"),
+            "warning_summary": job.get("result", {}).get("warning_summary", ""),
+            "errors": job.get("result", {}).get("generation_errors", []),
+        },
         "article": {
             "id": article_item.get("id", ""),
             "name": article_item.get("name", ""),
