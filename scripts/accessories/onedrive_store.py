@@ -117,7 +117,14 @@ def _ensure_folder(path: str, token: str) -> str:
     return parent_id
 
 
-def upload_text(path: str, text: str, *, content_type: str, if_match: str = "") -> dict[str, Any]:
+def upload_text(
+    path: str,
+    text: str,
+    *,
+    content_type: str,
+    if_match: str = "",
+    if_none_match: bool = False,
+) -> dict[str, Any]:
     token = _access_token()
     clean = path.strip("/")
     parent = clean.rsplit("/", 1)[0] if "/" in clean else ""
@@ -126,6 +133,8 @@ def upload_text(path: str, text: str, *, content_type: str, if_match: str = "") 
     headers = {"Content-Type": content_type}
     if if_match:
         headers["If-Match"] = if_match
+    if if_none_match:
+        headers["If-None-Match"] = "*"
     response = _request(
         "PUT",
         f"{GRAPH_API}/me/drive/root:/{_encode_path(clean)}:/content",
@@ -134,7 +143,11 @@ def upload_text(path: str, text: str, *, content_type: str, if_match: str = "") 
         data=text.encode("utf-8"),
     )
     if response.status_code == 412:
+        if if_none_match:
+            raise FileExistsError("同名の記事が既に存在するため上書きしません")
         raise RuntimeError("OneDriveジョブは他のワーカーが更新しました")
+    if response.status_code == 409 and if_none_match:
+        raise FileExistsError("同名の記事が既に存在するため上書きしません")
     if not response.ok:
         raise RuntimeError(f"OneDrive保存失敗: HTTP {response.status_code}")
     return response.json()
@@ -253,4 +266,25 @@ def save_child_article(job: dict[str, Any], filename: str, markdown: str) -> dic
         f"{article_root}/周辺機器/{child_folder_name(job)}/{filename}",
         markdown,
         content_type="text/markdown; charset=utf-8",
+    )
+
+
+def title_variant_article_path(job: dict[str, Any], filename: str) -> str:
+    """元記事の相対フォルダを維持した保存パスを返す。"""
+    article_root = os.getenv("ONEDRIVE_FOLDER", "Blog_Articles").strip("/")
+    parent_path = str(job.get("parent", {}).get("original_path", "")).strip("/")
+    if parent_path == article_root:
+        parent_path = ""
+    elif parent_path.startswith(f"{article_root}/"):
+        parent_path = parent_path[len(article_root) + 1 :]
+    return "/".join(part for part in (article_root, parent_path, filename) if part)
+
+
+def save_title_variant_article(job: dict[str, Any], filename: str, markdown: str) -> dict[str, Any]:
+    """元記事と同じフォルダへ、既存ファイルを上書きせず保存する。"""
+    return upload_text(
+        title_variant_article_path(job, filename),
+        markdown,
+        content_type="text/markdown; charset=utf-8",
+        if_none_match=True,
     )

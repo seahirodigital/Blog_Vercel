@@ -42,6 +42,35 @@ class ApiLimitTest(unittest.TestCase):
         html = (ROOT / "public/index.html").read_text(encoding="utf-8")
         self.assertIn("fetch('/api/accessories?action=create'", html)
 
+    def test_title_change_creates_multiple_mlx_variants_without_new_api_function(self):
+        html = (ROOT / "public/index.html").read_text(encoding="utf-8")
+        api = (ROOT / "api/accessories.js").read_text(encoding="utf-8")
+        required_html = (
+            "タイトル変更",
+            "onCreateTitleVariant && onCreateTitleVariant(ctxMenu.article)",
+            "normalizeTitleVariantKeywords",
+            "整形後の生成予定タイトル",
+            "fetch('/api/accessories?action=create-title-variants'",
+            "MLXで${titleVariantKeywords.length}件作成",
+            "titleVariantModal.jobs.map",
+            "Terminalをもう一度開く",
+            "tpl_title_variant.md",
+        )
+        for fragment in required_html:
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, html)
+        for fragment in (
+            "async function createTitleVariantJobs",
+            "normalizeTitleVariantKeywords",
+            "createTitleVariantJob",
+            "action === 'create-title-variants'",
+            "jobType: job.job_type || 'accessory'",
+            "keyword: job.target?.keyword || ''",
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, api)
+        self.assertLessEqual(len(list((ROOT / "api").glob("*.js"))), 12)
+
     def test_markdown_soft_breaks_are_rendered_without_modifying_saved_content(self):
         html = (ROOT / "public/index.html").read_text(encoding="utf-8")
         self.assertIn("breaks: true", html)

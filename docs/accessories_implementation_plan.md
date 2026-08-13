@@ -1034,6 +1034,7 @@ Windowsでは「MLXで作成」を無効表示してMLXジョブを登録しな�
 | 運用UI改善 | 完了 | 2026-08-13 | 生成結果の再表示、OneDrive直下記事の5件単位読込数、全件・カテゴリ別チェック一括切替を実装 |
 | 生成再試行・履歴復帰改善 | 完了 | 2026-08-13 | 生成を2回へ短縮し、商品名開始の文頭、シート正本の生成結果復帰、明示的な一括チェックボックスを本番で確認 |
 | 記事構成・MLX速度設定改善 | 完了 | 2026-08-13 | 最初の親商品ブロック直後への専用結論、読込数手入力、記事からの履歴復帰、MLX 1～3回設定を本番で確認 |
+| SEOタイトル派生生成 | 進行中 | 2026-08-13 | 右クリック「タイトル変更」、複数キーワード整形、一キーワード一ジョブ、限定MLX生成、同一フォルダ保存を実装。ユーザーによる本番実MLX試験待ち |
 
 進捗状態は `未着手`、`進行中`、`保留`、`完了` のいずれかで更新する。`完了` にする場合は、対応する検証結果または根拠を開発履歴へ記録する。
 
@@ -1586,3 +1587,39 @@ Windowsでは「MLXで作成」を無効表示してMLXジョブを登録しな�
 - 親記事ID `FFCC26DEDBBA4E70!s0ff8ff7a15054b74a074eb5899d2f83d` と、その最新子記事ID `FFCC26DEDBBA4E70!s31225b980bc44b8b83cd08c6d9925f4e` の両方から、同じバッチ `f4fec8fd-cc90-4fdb-8dd1-20e4c8454704` を復元できた。
 - MLX回数4回の要求は、OneDriveやシートへジョブを登録する前に本番APIがHTTP 400と日本語エラーで拒否した。新規の実MLX記事生成はユーザー試験用として実行していない。
 - ブラウザ自動操作は実行環境側の接続情報不足で開始できなかったため、配信HTML、状態API、記事API、JSX契約テストで確認した。秘密情報を含む環境ファイルは読み取り・変更せず、`winmacsync` も実行していない。
+
+### 2026-08-13: SEOキーワード別のタイトル派生生成
+
+確定した仕様:
+
+- 記事右クリックの「タイトル変更」は元記事のリネームではなく、一つの元記事から複数SEOキーワード版を同じOneDriveフォルダへ生成する。
+- Markdownリンク、Google検索URL、タブ列、`＋`、空欄、重複を除去し、整形後のキーワードと `{キーワード}まとめ` を登録前に一覧表示する。
+- H1とH2～H6はプログラムで一括変換する。本文、Amazon商品ブロック、アフィリエイトURLは原則として維持する。
+- MLXはH1直後の最初の冒頭段落と、結論直下の最初の短文だけを調整する。記事全文と商品ブロックは入力・出力対象にしない。
+- 元記事に専用結論がない場合は、最初のAmazon商品ブロック直後へ `{キーワード}まとめ：結論` と短文を追加する。既に専用結論があれば同じ位置を使う。
+- MLXが全試行で不合格でも、元の冒頭文・結論文を保持し、見出しだけを安全に変換した記事を警告付きで保存する。
+- 同名記事は上書きしない。一つのキーワードが保存衝突しても、バッチ内の別キーワード処理は継続する。
+- Vercel Function数を増やさず、`/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/api/accessories.js` の新操作として実装する。
+
+実装ファイル:
+
+- `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/public/index.html`
+- `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/api/accessories.js`
+- `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/lib/title-variants.js`
+- `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/scripts/title_variants/article_transformer.py`
+- `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/scripts/title_variants/job_schema.py`
+- `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/scripts/title_variants/prompt_builder.py`
+- `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/scripts/title_variants/main.py`
+- `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/accessories/templates/tpl_title_variant.md`
+- `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/MLX/accessories_worker.py`
+- `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Gemma4_AMZN_Blog/MLX/accessories_engine.py`
+
+ローカル検証結果:
+
+- Python単体テスト70件に合格した。SEO派生テストでは、キーワード整形、H1～H6変換、最初の商品ブロック直後への結論挿入、URL・商品行保持、MLX JSON制約、自然な語順変更の許容、同一フォルダ保存パスを確認した。
+- `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/public/index.html` のBabel JSX解析、`/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/api/accessories.js` と `/Users/user/Library/CloudStorage/OneDrive-個人用/開発/Blog_Vercel/lib/title-variants.js` のNode.js構文、Python構文、`git diff --check`に合格した。
+- ユーザー保有の既存記事サンプル820行を変換し、出力824行、元URL・全商品行維持、第一の商品URLより後かつ第二の商品より前に専用結論が入ることを確認した。サンプルファイル自体は変更していない。
+- Vercel本番相当ビルドが成功し、Functionsは既存の12ファイル以内を維持した。
+- ローカル配信HTMLに右クリック「タイトル変更」、整形後プレビュー、複数件MLX作成、進捗、警告、記事リンク、Terminal再起動、専用プロンプト編集の各導線が含まれることを確認した。
+- ブラウザ内自動操作は実行環境の接続情報不足で開始できなかったため、実クリック確認は配信HTMLとJSX契約テストで代替した。生成ジョブとOneDrive記事はまだ実作成していない。
+- 秘密情報を含む環境ファイルは読み取り・変更していない。`winmacsync` は実行していない。

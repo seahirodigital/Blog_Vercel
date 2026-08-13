@@ -1,6 +1,6 @@
 import unittest
 
-from scripts.accessories.onedrive_store import child_folder_name
+from scripts.accessories.onedrive_store import child_folder_name, title_variant_article_path
 
 
 class ChildFolderTest(unittest.TestCase):
@@ -17,6 +17,20 @@ class ChildFolderTest(unittest.TestCase):
             "parent": {"title": "製品/A:レビューまとめ"},
         }
         self.assertNotRegex(child_folder_name(job), r"[\\/:*?\"<>|]")
+
+    def test_title_variant_stays_in_source_folder(self):
+        job = {"parent": {"original_path": "周辺機器/既存フォルダ"}}
+        self.assertEqual(
+            "Blog_Articles/周辺機器/既存フォルダ/insta360 x6 ケースまとめ.md",
+            title_variant_article_path(job, "insta360 x6 ケースまとめ.md"),
+        )
+
+    def test_title_variant_does_not_duplicate_article_root(self):
+        job = {"parent": {"original_path": "Blog_Articles/周辺機器/既存フォルダ"}}
+        self.assertEqual(
+            "Blog_Articles/周辺機器/既存フォルダ/insta360 x6 sonyまとめ.md",
+            title_variant_article_path(job, "insta360 x6 sonyまとめ.md"),
+        )
 
 
 if __name__ == "__main__":

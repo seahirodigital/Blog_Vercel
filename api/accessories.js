@@ -22,6 +22,7 @@ import {
   downloadTextPath,
 } from '../lib/accessories-onedrive.js';
 import { appendRegistryJob, listRegistryJobs, loadAccessoryMaster, updateRegistryJob } from '../lib/accessories-sheets.js';
+import { createTitleVariantJob, normalizeTitleVariantKeywords } from '../lib/title-variants.js';
 
 const GITHUB_API = 'https://api.github.com';
 const AFFILIATE_FILE_PATH = process.env.ACCESSORIES_AFFILIATE_FILE_PATH
@@ -435,6 +436,79 @@ async function createJobs(req, res, body) {
   });
 }
 
+async function createTitleVariantJobs(req, res, body) {
+  if (!isMac(req, body)) {
+    return res.status(400).json({ error: 'タイトル変更のMLX生成はMacからだけ依頼できます' });
+  }
+  const parentId = String(body.parentId || '').trim();
+  if (!parentId) return res.status(400).json({ error: '元記事の選択が必要です' });
+  const keywords = normalizeTitleVariantKeywords(body.keywordInput || body.keywords?.join('\n') || '');
+  if (!keywords.length) return res.status(400).json({ error: '変換できるSEOキーワードがありません' });
+  const invalid = keywords.find((keyword) => keyword.length > 120);
+  if (invalid) return res.status(400).json({ error: `SEOキーワードは120文字以内にしてください: ${invalid.slice(0, 40)}` });
+  const maxGenerationAttempts = Number.parseInt(body.mlxGenerationAttempts ?? 1, 10);
+  if (![1, 2, 3].includes(maxGenerationAttempts)) {
+    return res.status(400).json({ error: 'MLXの記事作成・修正回数は1回から3回で指定してください' });
+  }
+
+  const token = await getOneDriveToken();
+  const parentMarkdown = await downloadArticle(token, parentId);
+  const parentTitle = extractH1(parentMarkdown);
+  const prompt = await promptSnapshot('MLX', token, 'tpl_title_variant.md');
+  const batchId = randomUUID();
+  const createdAt = new Date().toISOString();
+  const created = [];
+  for (const keyword of keywords) {
+    const job = createTitleVariantJob({
+      batchId,
+      parent: {
+        id: parentId,
+        title: parentTitle,
+        web_url: String(body.parentWebUrl || ''),
+        original_path: normalizeFolderPath(body.parentPath),
+      },
+      keyword,
+      promptSnapshot: prompt,
+      maxGenerationAttempts,
+      createdAt,
+    });
+    await putJob(token, job);
+    try {
+      await appendRegistryJob(job);
+      job.state = 'pending';
+      await putJob(token, job);
+    } catch (error) {
+      job.state = 'registration_failed';
+      job.result.error_summary = safePublicError(error);
+      await putJob(token, job);
+    }
+    created.push({
+      jobId: job.job_id,
+      parentId,
+      parentTitle,
+      title: job.article_title,
+      category: 'タイトル変更',
+      keyword,
+      jobType: job.job_type,
+      state: job.state,
+      createdAt: job.created_at,
+      error: job.result.error_summary,
+    });
+  }
+  const heartbeat = await getWorkerHeartbeat(token);
+  return res.status(201).json({
+    success: true,
+    hasFailures: created.some((job) => job.state === 'registration_failed'),
+    batchId,
+    jobs: created,
+    worker: workerSnapshot(heartbeat),
+    automatic: heartbeatActive(heartbeat),
+    message: created.some((job) => job.state === 'registration_failed')
+      ? '一部のタイトル変更ジョブ登録に失敗しました。生成進捗を確認してください。'
+      : `${created.length}件のタイトル変更ジョブを登録しました。`,
+  });
+}
+
 async function status(req, res) {
   const token = await getOneDriveToken();
   let request;
@@ -468,6 +542,8 @@ async function status(req, res) {
       generationErrors: Array.isArray(job.result?.generation_errors) ? job.result.generation_errors : [],
       outputMode: job.result?.output_mode || 'generated',
       registrySync: job.registry?.sync || '',
+      jobType: job.job_type || 'accessory',
+      keyword: job.target?.keyword || '',
     };
   });
   const heartbeat = jobs.some((job) => job.engine === 'MLX') ? await getWorkerHeartbeat(token) : null;
@@ -494,6 +570,7 @@ export default async function handler(req, res) {
     if (req.method === 'GET' && action === 'status') return await status(req, res);
     if (action === 'prompt') return await promptAction(req, res, body);
     if (req.method === 'POST' && action === 'create') return await createJobs(req, res, body);
+    if (req.method === 'POST' && action === 'create-title-variants') return await createTitleVariantJobs(req, res, body);
     return res.status(405).json({ error: '未対応の操作です' });
   } catch (error) {
     console.error('accessories error:', error);

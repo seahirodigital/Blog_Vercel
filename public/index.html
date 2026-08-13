@@ -789,6 +789,38 @@
       return [1, 2, 3].includes(parsed) ? parsed : 1;
     }
 
+    function normalizeTitleVariantKeywords(input) {
+      const source = String(input || '').normalize('NFKC').replace(/\r\n?/g, '\n');
+      const values = [];
+      const seen = new Set();
+      source.split('\n').forEach((row) => {
+        const markdownLabels = row.replace(/\[([^\]\n]+)\]\(https?:\/\/[^)\s]+\)/gi, '$1');
+        markdownLabels.split('\t').forEach((rawCell) => {
+          let value = rawCell
+            .replace(/https?:\/\/[^\s)\]]+/gi, ' ')
+            .replace(/[\u200B-\u200D\uFEFF]/g, '')
+            .replace(/^\s*(?:[-*•・●○■□▪▶▼+]+\s*)+/, '')
+            .replace(/(?:\s*[+]+\s*)+$/g, '')
+            .replace(/^['"`「『【\[]+|['"`」』】\]]+$/g, '')
+            .replace(/\s+/g, ' ')
+            .trim();
+          if (!value || /^[+\-–—]+$/.test(value) || /^www\./i.test(value)) return;
+          value = value.replace(/[\s:：|│。．]+$/g, '').trim();
+          if (!value || value.length > 120) return;
+          const key = value.toLocaleLowerCase('ja-JP');
+          if (seen.has(key)) return;
+          seen.add(key);
+          values.push(value);
+        });
+      });
+      return values;
+    }
+
+    function titleVariantArticleTitle(keyword) {
+      const value = String(keyword || '').trim();
+      return value.endsWith('まとめ') ? value : `${value}まとめ`;
+    }
+
     function loadAccessoryReports() {
       try {
         const reports = JSON.parse(localStorage.getItem(ACCESSORY_REPORTS_STORAGE_KEY) || '[]');
@@ -1535,7 +1567,7 @@
     }
 
     // === フォルダツリー コンポーネント ===
-    function FolderTree({ articles, selectedId, onSelect, loading, onDeleteArticle, onDeleteFolders, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onCreateAccessory, onOpenAccessoryReport, hiddenFolders, onHideFolder, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, onMultiSelect, onRangeSelect, multiSelectedIds, scheduledPostIds = new Set(), scheduledPostMap = new Map(), missedNotePostMap = new Map(), articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder, folderLoadSettings = {}, onChangeFolderLoadSetting, rootArticleLimit = ROOT_ARTICLE_DEFAULT_LIMIT, onChangeRootArticleLimit, flatMode = false, searchQuery = '', contextArticles = null }) {
+    function FolderTree({ articles, selectedId, onSelect, loading, onDeleteArticle, onDeleteFolders, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onCreateAccessory, onCreateTitleVariant, onOpenAccessoryReport, hiddenFolders, onHideFolder, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, onMultiSelect, onRangeSelect, multiSelectedIds, scheduledPostIds = new Set(), scheduledPostMap = new Map(), missedNotePostMap = new Map(), articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder, folderLoadSettings = {}, onChangeFolderLoadSetting, rootArticleLimit = ROOT_ARTICLE_DEFAULT_LIMIT, onChangeRootArticleLimit, flatMode = false, searchQuery = '', contextArticles = null }) {
       const [openFolders, setOpenFolders] = useState({});
       const [ctxMenu, setCtxMenu] = useState({ visible: false, x: 0, y: 0, article: null });
       const [folderCtxMenu, setFolderCtxMenu] = useState({ visible: false, x: 0, y: 0, path: '' });
@@ -1750,7 +1782,7 @@
       const handleFolderContextMenu = (e, folderPath) => {
         e.preventDefault();
         e.stopPropagation();
-        const menuHeight = 430;
+        const menuHeight = 470;
         const x = Math.min(e.clientX, window.innerWidth - 220 - 8);
         const y = Math.max(8, Math.min(e.clientY, window.innerHeight - menuHeight - 8));
         setFolderCtxMenu({ visible: true, x, y, path: folderPath });
@@ -2201,6 +2233,17 @@
               </button>
               <button
                 onClick={() => {
+                  onCreateTitleVariant && onCreateTitleVariant(ctxMenu.article);
+                  setCtxMenu(m => ({ ...m, visible: false }));
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = '#f5f3ff'} onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '9px 14px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '13px', color: '#6d28d9', textAlign: 'left', fontWeight: 600 }}
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M4 7h16M4 12h10M4 17h8" /><path d="M17 14l3 3-3 3M20 17h-6" /></svg>
+                タイトル変更
+              </button>
+              <button
+                onClick={() => {
                   onOpenAccessoryReport && onOpenAccessoryReport({
                     articleId: ctxMenu.article.id,
                     folderPath: ctxMenu.article.path || '',
@@ -2465,7 +2508,7 @@
     }
 
     // === サイドバー コンポーネント ===
-    function Sidebar({ articles, selectedId, onSelect, onNewArticle, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle, mobileSidebarOpen, onMobileClose, onDeleteArticle, onDeleteFolders, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onCreateAccessory, onOpenAccessoryReport, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, multiSelectedIds, onMultiSelect, onRangeSelect, scheduledPostIds = new Set(), scheduledPostMap = new Map(), missedNotePostMap = new Map(), setAffModalOpen, articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder, rootArticleLimit = ROOT_ARTICLE_DEFAULT_LIMIT, onChangeRootArticleLimit, externalFolderUrls = [], setExternalFolderUrls, onRefreshArticles }) {
+    function Sidebar({ articles, selectedId, onSelect, onNewArticle, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle, mobileSidebarOpen, onMobileClose, onDeleteArticle, onDeleteFolders, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onCreateAccessory, onCreateTitleVariant, onOpenAccessoryReport, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, multiSelectedIds, onMultiSelect, onRangeSelect, scheduledPostIds = new Set(), scheduledPostMap = new Map(), missedNotePostMap = new Map(), setAffModalOpen, articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder, rootArticleLimit = ROOT_ARTICLE_DEFAULT_LIMIT, onChangeRootArticleLimit, externalFolderUrls = [], setExternalFolderUrls, onRefreshArticles }) {
       // 非表示フォルダ管理（localStorageで永続化）
       const [hiddenFolders, setHiddenFolders] = useState(() => {
         try {
@@ -2722,7 +2765,7 @@
 
       const folderTreeProps = {
         articles, selectedId, loading,
-        onDeleteArticle, onDeleteFolders, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onCreateAccessory, onOpenAccessoryReport,
+        onDeleteArticle, onDeleteFolders, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onCreateAccessory, onCreateTitleVariant, onOpenAccessoryReport,
         hiddenFolders, onHideFolder: toggleFolderVisibility,
         selectMode, selectedIds, onToggleSelect, onEnterSelectMode,
         multiSelectedIds, onMultiSelect, onRangeSelect,
@@ -3476,6 +3519,20 @@
         try { return normalizeMlxGenerationAttempts(localStorage.getItem(ACCESSORY_MLX_ATTEMPTS_STORAGE_KEY)); }
         catch { return 1; }
       });
+      const [titleVariantModal, setTitleVariantModal] = useState({
+        open: false,
+        parent: null,
+        keywordInput: '',
+        jobs: [],
+        batchId: '',
+        worker: null,
+        launcherUrl: '',
+        statusMessage: '',
+        error: '',
+        lastCheckedAt: '',
+      });
+      const [titleVariantCreating, setTitleVariantCreating] = useState(false);
+      const [titleVariantPolling, setTitleVariantPolling] = useState(false);
       const [externalFolderUrls, setExternalFolderUrls] = useState(() => {
         try { return JSON.parse(localStorage.getItem('sb_externalFolderUrls') || '[]'); }
         catch { return []; }
@@ -3502,6 +3559,8 @@
       const bulkReplaceContentCacheRef = useRef(new Map());
       const accessoryJobsRef = useRef([]);
       const accessoryPollingRef = useRef(false);
+      const titleVariantJobsRef = useRef([]);
+      const titleVariantPollingRef = useRef(false);
       // スクロール同期（相互ロックで無限ループ防止）
       const editorScrolling = useRef(false);
       const previewScrolling = useRef(false);
@@ -3520,6 +3579,7 @@
       const selectedArticleRef = useRef(null);
       useEffect(() => { selectedArticleRef.current = selectedArticle; }, [selectedArticle]);
       useEffect(() => { accessoryJobsRef.current = accessoryModal.jobs; }, [accessoryModal.jobs]);
+      useEffect(() => { titleVariantJobsRef.current = titleVariantModal.jobs; }, [titleVariantModal.jobs]);
       useEffect(() => {
         if (accessoryModal.batchId && accessoryModal.jobs?.length) saveAccessoryReport(accessoryModal);
       }, [accessoryModal.batchId, accessoryModal.jobs, accessoryModal.worker, accessoryModal.statusMessage, accessoryModal.lastCheckedAt, accessoryModal.launcherUrl]);
@@ -3713,6 +3773,27 @@
       }, []);
 
       const showToast = (message, type = 'info') => setToast({ message, type });
+
+      const titleVariantKeywords = useMemo(
+        () => normalizeTitleVariantKeywords(titleVariantModal.keywordInput),
+        [titleVariantModal.keywordInput]
+      );
+
+      const openTitleVariantModal = useCallback((article) => {
+        if (!article) return;
+        setTitleVariantModal({
+          open: true,
+          parent: article,
+          keywordInput: '',
+          jobs: [],
+          batchId: '',
+          worker: null,
+          launcherUrl: '',
+          statusMessage: '',
+          error: '',
+          lastCheckedAt: '',
+        });
+      }, []);
 
       const accessorySelectionKey = useCallback((parentId, categoryId) => `${parentId}::${categoryId}`, []);
 
@@ -3936,6 +4017,142 @@
         }
       }, [mlxLauncherUrl]);
 
+      const requestTitleVariantTerminal = useCallback((batchId, launcherWindow = null) => {
+        const url = mlxLauncherUrl(batchId);
+        if (!url) return false;
+        setTitleVariantModal(prev => ({
+          ...prev,
+          launcherUrl: url,
+          statusMessage: 'Terminalの起動を要求しました。Chromeの確認画面で「開く」を選択してください。',
+        }));
+        try {
+          if (launcherWindow && !launcherWindow.closed) launcherWindow.location.href = url;
+          else window.location.href = url;
+          return true;
+        } catch {
+          setTitleVariantModal(prev => ({
+            ...prev,
+            statusMessage: 'Terminalを自動起動できませんでした。「Terminalをもう一度開く」を押してください。',
+          }));
+          return false;
+        }
+      }, [mlxLauncherUrl]);
+
+      const createTitleVariantJobs = useCallback(async () => {
+        const parent = titleVariantModal.parent;
+        if (!parent || titleVariantKeywords.length === 0) return;
+        if (!/Mac/i.test(navigator.platform || navigator.userAgent || '')) {
+          showToast('タイトル変更のMLX生成はMacからだけ依頼できます', 'error');
+          return;
+        }
+        let launcherWindow = null;
+        try {
+          launcherWindow = window.open('', 'blogVercelMlxLauncher', 'popup,width=520,height=280');
+          if (launcherWindow) {
+            launcherWindow.document.title = 'Blog Vercel MLX起動';
+            launcherWindow.document.body.style.cssText = 'font-family:-apple-system,BlinkMacSystemFont,sans-serif;padding:32px;line-height:1.7;color:#0f172a;background:#f8fafc';
+            launcherWindow.document.body.textContent = 'タイトル変更ジョブを登録しています。登録後にMLXターミナルを起動します。';
+          }
+        } catch {
+          launcherWindow = null;
+        }
+        setTitleVariantCreating(true);
+        setTitleVariantModal(prev => ({
+          ...prev,
+          jobs: [],
+          batchId: '',
+          worker: null,
+          launcherUrl: '',
+          error: '',
+          statusMessage: 'OneDriveと周辺機器DB_LLMへタイトル変更ジョブを登録しています。',
+          lastCheckedAt: '',
+        }));
+        try {
+          const response = await fetch('/api/accessories?action=create-title-variants', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              parentId: parent.id,
+              parentWebUrl: parent.webUrl || '',
+              parentPath: parent.path || '',
+              keywordInput: titleVariantModal.keywordInput,
+              platform: navigator.platform || '',
+              mlxGenerationAttempts,
+            }),
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || 'タイトル変更ジョブの登録に失敗しました');
+          const jobs = (data.jobs || []).map(job => ({
+            ...job,
+            state: job.state || 'pending',
+            engine: 'MLX',
+            articleUrl: '',
+            error: job.error || '',
+          }));
+          const launcherUrl = mlxLauncherUrl(data.batchId);
+          setTitleVariantModal(prev => ({
+            ...prev,
+            jobs,
+            batchId: data.batchId || '',
+            worker: data.worker || null,
+            launcherUrl,
+            statusMessage: data.message || 'タイトル変更ジョブを登録しました。',
+            lastCheckedAt: new Date().toISOString(),
+          }));
+          if (launcherUrl) requestTitleVariantTerminal(data.batchId, launcherWindow);
+          else if (launcherWindow && !launcherWindow.closed) launcherWindow.close();
+          showToast(data.message || 'タイトル変更ジョブを登録しました', data.hasFailures ? 'error' : 'success');
+        } catch (error) {
+          if (launcherWindow && !launcherWindow.closed) launcherWindow.close();
+          setTitleVariantModal(prev => ({ ...prev, error: error.message }));
+        } finally {
+          setTitleVariantCreating(false);
+        }
+      }, [titleVariantModal.parent, titleVariantModal.keywordInput, titleVariantKeywords, mlxGenerationAttempts, mlxLauncherUrl, requestTitleVariantTerminal]);
+
+      const refreshTitleVariantJobs = useCallback(async () => {
+        const current = titleVariantJobsRef.current;
+        const active = current.filter(job => !['completed', 'failed', 'registration_failed'].includes(job.state));
+        if (!titleVariantModal.batchId || active.length === 0 || titleVariantPollingRef.current) return;
+        titleVariantPollingRef.current = true;
+        setTitleVariantPolling(true);
+        try {
+          const parameters = new URLSearchParams({ action: 'status', batchId: titleVariantModal.batchId });
+          const response = await fetch(`/api/accessories?${parameters.toString()}`, { cache: 'no-store' });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || 'タイトル変更の生成状態を取得できませんでした');
+          const updates = new Map((data.jobs || []).map(job => [job.jobId, job]));
+          const newlyCompleted = (data.jobs || []).some(job => job.state === 'completed' && !current.some(previous => previous.jobId === job.jobId && previous.state === 'completed'));
+          setTitleVariantModal(prev => ({
+            ...prev,
+            jobs: prev.jobs.map(job => updates.has(job.jobId) ? { ...job, ...updates.get(job.jobId) } : job),
+            worker: data.worker || prev.worker,
+            statusMessage: data.worker?.error || data.worker?.message || prev.statusMessage,
+            lastCheckedAt: data.checkedAt || new Date().toISOString(),
+          }));
+          if (newlyCompleted) loadArticles();
+        } catch (error) {
+          setTitleVariantModal(prev => ({ ...prev, statusMessage: `進捗の再取得に失敗しました: ${error.message}` }));
+        } finally {
+          titleVariantPollingRef.current = false;
+          setTitleVariantPolling(false);
+        }
+      }, [loadArticles, titleVariantModal.batchId]);
+
+      const titleVariantJobDetail = useCallback((job) => {
+        if (job.state === 'registration_pending') return '周辺機器DB_LLMへジョブを登録しています';
+        if (job.state === 'pending') {
+          if (titleVariantModal.worker?.currentJobId === job.jobId && titleVariantModal.worker?.message) return titleVariantModal.worker.message;
+          return titleVariantModal.worker?.active ? 'MLXワーカーの処理開始を待っています' : 'ローカルTerminalの起動待ちです';
+        }
+        if (job.state === 'processing') return titleVariantModal.worker?.message || 'MLXが冒頭文と結論文を調整しています';
+        if (job.state === 'completed' && job.warning) return job.warning;
+        if (job.state === 'completed') return '元記事と同じOneDriveフォルダへの保存が完了しました';
+        if (job.state === 'registration_failed') return '周辺機器DB_LLMへの登録に失敗しました';
+        if (job.state === 'failed') return job.error || 'タイトル変更記事の生成に失敗しました';
+        return '状態を確認しています';
+      }, [titleVariantModal.worker]);
+
       const createAccessoryJobs = useCallback(async (engine) => {
         if (!accessoryModal.parents?.length || accessorySelectedIds.size === 0) return;
         if (engine === 'MLX' && !/Mac/i.test(navigator.platform || navigator.userAgent || '')) {
@@ -4139,6 +4356,18 @@
         const timer = setInterval(() => setAccessoryProgressClock(Date.now()), 1000);
         return () => clearInterval(timer);
       }, [accessoryModal.open, accessoryModal.jobs.length]);
+
+      const titleVariantActiveJobKey = titleVariantModal.jobs
+        .filter(job => !['completed', 'failed', 'registration_failed'].includes(job.state))
+        .map(job => job.jobId)
+        .join(',');
+
+      useEffect(() => {
+        if (!titleVariantModal.open || !titleVariantActiveJobKey) return undefined;
+        refreshTitleVariantJobs();
+        const timer = setInterval(refreshTitleVariantJobs, 3000);
+        return () => clearInterval(timer);
+      }, [titleVariantModal.open, titleVariantActiveJobKey, refreshTitleVariantJobs]);
 
       // 記事削除
       const handleDeleteArticle = useCallback(async (articleOrArray) => {
@@ -5708,6 +5937,7 @@
             onSchedulePost={(ids) => openNotePostModal({ ids, mode: 'schedule' })}
             onBulkReplace={openBulkReplaceModal}
             onCreateAccessory={openAccessoryModal}
+            onCreateTitleVariant={openTitleVariantModal}
             onOpenAccessoryReport={openAccessoryReport}
             selectMode={selectMode}
             selectedIds={selectedIds}
@@ -5739,6 +5969,99 @@
             setExternalFolderUrls={setExternalFolderUrls}
             onRefreshArticles={loadArticles}
           />
+
+          {titleVariantModal.open && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/45 px-4" onClick={() => { if (!titleVariantCreating) setTitleVariantModal(prev => ({ ...prev, open: false })); }}>
+              <div className="w-full max-w-2xl overflow-hidden rounded-xl border border-purple-100 bg-white shadow-2xl" onClick={(event) => event.stopPropagation()}>
+                <div className="flex items-start justify-between border-b border-slate-200 px-5 py-4">
+                  <div className="min-w-0">
+                    <h3 className="text-base font-bold text-slate-900">タイトル変更</h3>
+                    <p className="mt-1 truncate text-xs text-slate-500">{getArticleDisplayTitle(titleVariantModal.parent, articleH1Cache)}</p>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <button type="button" onClick={() => setAccessorySettingsOpen(true)} className="rounded-lg p-2 text-slate-500 hover:bg-slate-100" title="MLX生成設定" aria-label="タイトル変更のMLX生成設定を開く">
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1.08-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.6 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.6h.08A1.65 1.65 0 0010 3.09V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9v.08A1.65 1.65 0 0020.91 10H21a2 2 0 010 4h-.09A1.65 1.65 0 004.6 15z" /></svg>
+                    </button>
+                    <button type="button" disabled={titleVariantCreating} onClick={() => setTitleVariantModal(prev => ({ ...prev, open: false }))} className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 disabled:opacity-40" aria-label="タイトル変更を閉じる">✕</button>
+                  </div>
+                </div>
+                <div className="max-h-[68vh] overflow-y-auto p-5">
+                  {titleVariantModal.jobs.length === 0 && (
+                    <>
+                      <label htmlFor="title-variant-keywords" className="block text-sm font-bold text-slate-700">変換したいキーワード</label>
+                      <textarea
+                        id="title-variant-keywords"
+                        value={titleVariantModal.keywordInput}
+                        disabled={titleVariantCreating}
+                        onChange={(event) => setTitleVariantModal(prev => ({ ...prev, keywordInput: event.target.value, error: '' }))}
+                        placeholder={'[insta360 x6 空間キャプチャー](Google検索URL)\t＋\ninsta360 x6 アクセサリー\ninsta360 x6 スペック'}
+                        className="mt-2 h-36 w-full resize-y rounded-lg border border-slate-200 p-3 font-mono text-xs leading-relaxed outline-none focus:border-purple-400 disabled:bg-slate-50"
+                      />
+                      <div className="mt-4 flex items-center justify-between">
+                        <div className="text-xs font-bold text-slate-700">整形後の生成予定タイトル</div>
+                        <div className="text-[11px] font-bold text-purple-600">{titleVariantKeywords.length}件</div>
+                      </div>
+                      <div className="mt-2 max-h-48 space-y-1 overflow-y-auto rounded-lg border border-slate-200 bg-slate-50 p-2">
+                        {titleVariantKeywords.length > 0 ? titleVariantKeywords.map(keyword => (
+                          <div key={keyword.toLocaleLowerCase('ja-JP')} className="rounded-md bg-white px-3 py-2 text-xs text-slate-700">{titleVariantArticleTitle(keyword)}</div>
+                        )) : <div className="px-2 py-4 text-center text-xs text-slate-400">キーワードを貼り付けてください</div>}
+                      </div>
+                    </>
+                  )}
+
+                  {titleVariantCreating && titleVariantModal.jobs.length === 0 && (
+                    <div className="mt-5 flex items-center gap-3 rounded-lg border border-purple-200 bg-purple-50 p-4 text-sm text-purple-900">
+                      <span className="inline-block h-5 w-5 shrink-0 animate-spin rounded-full border-2 border-purple-600 border-t-transparent" />
+                      <div><div className="font-bold">ジョブを登録しています</div><div className="mt-1 text-xs">{titleVariantModal.statusMessage}</div></div>
+                    </div>
+                  )}
+                  {titleVariantModal.error && <div className="mt-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">{titleVariantModal.error}</div>}
+
+                  {titleVariantModal.jobs.length > 0 && (
+                    <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                      <div className="mb-3 flex items-start justify-between gap-2">
+                        <div><div className="text-xs font-bold text-slate-700">生成進捗</div><div className="mt-1 text-[11px] text-slate-500">{titleVariantModal.statusMessage || 'ジョブの状態を確認しています。'}</div></div>
+                        <button type="button" onClick={refreshTitleVariantJobs} disabled={titleVariantPolling || !titleVariantActiveJobKey} className="rounded-md border border-slate-200 bg-white px-2.5 py-1.5 text-[11px] font-bold text-slate-600 disabled:opacity-40">{titleVariantPolling ? '更新中...' : '今すぐ更新'}</button>
+                      </div>
+                      <div className="space-y-3">
+                        {titleVariantModal.jobs.map(job => (
+                          <div key={job.jobId} className="rounded-lg border border-slate-200 bg-white p-3 text-xs">
+                            <div className="flex items-start gap-2">
+                              {!['completed', 'failed', 'registration_failed'].includes(job.state) && <span className="mt-0.5 inline-block h-3.5 w-3.5 shrink-0 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />}
+                              <div className="min-w-0 flex-1">
+                                <div className="flex flex-wrap items-center gap-2">
+                                  <span className={`rounded-full px-2 py-0.5 font-bold ${job.state === 'completed' && job.warning ? 'bg-amber-100 text-amber-800' : job.state === 'completed' ? 'bg-green-100 text-green-700' : job.state === 'failed' || job.state === 'registration_failed' ? 'bg-red-100 text-red-700' : 'bg-purple-100 text-purple-700'}`}>{job.state === 'completed' && job.warning ? '警告あり・出力済み' : accessoryStateLabel(job.state)}</span>
+                                  <span className="min-w-0 flex-1 truncate font-semibold text-slate-700">{job.title}</span>
+                                  {job.articleUrl && <a href={job.articleUrl} target="_blank" rel="noopener noreferrer" className="font-bold text-[#7C4DFF] hover:underline">記事を開く</a>}
+                                </div>
+                                <div className={`mt-2 text-[11px] ${job.warning ? 'text-amber-700' : job.state === 'failed' || job.state === 'registration_failed' ? 'text-red-600' : 'text-slate-500'}`}>{titleVariantJobDetail(job)}</div>
+                                {job.warning && Array.isArray(job.generationErrors) && job.generationErrors.length > 0 && <div className="mt-2 rounded-md border border-amber-200 bg-amber-50 p-2 text-[10px] leading-relaxed text-amber-800">{job.generationErrors.map((message, index) => <div key={`${job.jobId}-warning-${index}`}>{message}</div>)}</div>}
+                                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-slate-100"><div className={`h-full rounded-full transition-all duration-500 ${job.state === 'completed' && job.warning ? 'bg-amber-500' : job.state === 'completed' ? 'bg-green-500' : job.state === 'failed' || job.state === 'registration_failed' ? 'bg-red-400' : 'bg-purple-500'}`} style={{ width: `${accessoryProgressPercent(job)}%` }} /></div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      {titleVariantModal.launcherUrl && (
+                        <div className="mt-3 rounded-lg border border-purple-200 bg-purple-50 p-3">
+                          <div className="text-xs font-bold text-purple-900">ローカルMLXターミナル</div>
+                          <a href={titleVariantModal.launcherUrl} onClick={() => setTitleVariantModal(prev => ({ ...prev, statusMessage: 'Terminalの再起動を要求しました。Chromeの確認画面で「開く」を選択してください。' }))} className="mt-2 inline-flex rounded-md bg-slate-800 px-3 py-2 text-[11px] font-bold text-white hover:bg-slate-700">Terminalをもう一度開く</a>
+                        </div>
+                      )}
+                      {titleVariantModal.lastCheckedAt && <div className="mt-2 text-right text-[10px] text-slate-400">最終確認 {new Date(titleVariantModal.lastCheckedAt).toLocaleTimeString('ja-JP')}</div>}
+                    </div>
+                  )}
+                </div>
+                <div className="flex items-center justify-between border-t border-slate-200 bg-slate-50 px-5 py-4">
+                  <button type="button" onClick={() => openAccessoryPrompt('MLX', 'tpl_title_variant.md')} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-600">⚙ プロンプト</button>
+                  <div className="flex gap-2">
+                    <button type="button" onClick={() => setTitleVariantModal(prev => ({ ...prev, open: false }))} disabled={titleVariantCreating} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-500 disabled:opacity-40">戻る</button>
+                    {titleVariantModal.jobs.length === 0 && <button type="button" onClick={createTitleVariantJobs} disabled={titleVariantCreating || titleVariantKeywords.length === 0 || !/Mac/i.test(navigator.platform || navigator.userAgent || '')} className="rounded-lg bg-[#7C4DFF] px-4 py-2 text-xs font-bold text-white disabled:opacity-35">{titleVariantCreating ? 'ジョブ登録中...' : `MLXで${titleVariantKeywords.length}件作成`}</button>}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {accessoryModal.open && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/45 px-4" onClick={() => { if (!accessoryCreating) setAccessoryModal(prev => ({ ...prev, open: false })); }}>
@@ -5925,7 +6248,7 @@
             <div className="fixed inset-0 z-[60] flex items-center justify-center bg-slate-900/50 px-4" onClick={() => { if (!accessoryPrompt.saving) setAccessoryPrompt(prev => ({ ...prev, open: false })); }}>
               <div className="w-full max-w-3xl rounded-xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
                 <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
-                  <div className="flex items-center gap-2"><select value={accessoryPrompt.engine} onChange={(event) => openAccessoryPrompt(event.target.value, accessoryPrompt.templateFile)} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-800"><option value="MLX">MLX</option><option value="Gemini">Gemini</option></select><select value={accessoryPrompt.templateFile} onChange={(event) => openAccessoryPrompt(accessoryPrompt.engine, event.target.value)} className="max-w-44 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-700">{[...new Set(['tpl_default.md', ...(accessoryModal.parents || []).flatMap(parent => parent.categories || []).map(category => category.templateFile).filter(Boolean)])].map(templateFile => <option key={templateFile} value={templateFile}>{templateFile}</option>)}</select><div><h3 className="font-bold text-slate-900">周辺機器生成プロンプト</h3><p className="mt-1 text-xs text-slate-400">改訂 {accessoryPrompt.revision || '-'}</p></div></div>
+                  <div className="flex items-center gap-2"><select value={accessoryPrompt.engine} onChange={(event) => openAccessoryPrompt(event.target.value, accessoryPrompt.templateFile)} className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-800"><option value="MLX">MLX</option><option value="Gemini">Gemini</option></select><select value={accessoryPrompt.templateFile} onChange={(event) => openAccessoryPrompt(accessoryPrompt.engine, event.target.value)} className="max-w-44 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-700">{[...new Set(['tpl_default.md', 'tpl_title_variant.md', ...(accessoryModal.parents || []).flatMap(parent => parent.categories || []).map(category => category.templateFile).filter(Boolean)])].map(templateFile => <option key={templateFile} value={templateFile}>{templateFile}</option>)}</select><div><h3 className="font-bold text-slate-900">{accessoryPrompt.templateFile === 'tpl_title_variant.md' ? 'タイトル変更プロンプト' : '周辺機器生成プロンプト'}</h3><p className="mt-1 text-xs text-slate-400">改訂 {accessoryPrompt.revision || '-'}</p></div></div>
                   <button onClick={() => setAccessoryPrompt(prev => ({ ...prev, open: false }))} className="p-2 text-slate-400">✕</button>
                 </div>
                 <div className="p-5">
