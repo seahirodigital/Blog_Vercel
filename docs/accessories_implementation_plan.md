@@ -1644,6 +1644,7 @@ Windowsでは「MLXで作成」を無効表示してMLXジョブを登録しな�
 - 実装コミット `527bea8c` を `main` へpushした。
 - Vercel Productionデプロイ `dpl_ArMsuMGsa2fvRromLiP9EkbqFpcy` が `Ready` となり、`https://blog-vercel-dun.vercel.app` へ反映された。
 - 本番配信HTMLで、右クリック項目が「周辺機器記事作成」「周辺機器の生成結果」「タイトル変更」の順であることと、「OneDriveブラウザで開く」「エディターで開く」、OneDrive item IDを使う編集処理が配信されていることを確認した。
+- ブラウザ内自動操作は実行環境側の接続情報不足で開始できなかったため、実クリックは行わず、本番配信HTML、UI契約テスト、JSX解析で確認した。記事生成やOneDriveへの書き込みは行っていない。
 
 本番反映結果:
 
