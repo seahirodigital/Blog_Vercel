@@ -17,9 +17,12 @@ class PromptAndJobTest(unittest.TestCase):
         )
 
     def valid_engine_json(self):
+        intro_lines = self.group.section_intro.splitlines()
+        intro_lines[0] = "M5 iPad Proにおすすめの" + intro_lines[0].replace("のおすすめ", "", 1)
         return json.dumps(
             {
                 "intro_sentence": "M5 iPad Proにおすすめのバッテリーを紹介します。",
+                "adapted_section_intro": "\n".join(intro_lines),
                 "products": [
                     {
                         "index": product.index,
@@ -38,7 +41,19 @@ class PromptAndJobTest(unittest.TestCase):
             category_name="バッテリー",
             affiliate_group=self.group,
         )
-        self.assertEqual(2, len(result["adapted_product_texts"]))
+        self.assertEqual(len(self.group.products), len(result["adapted_product_texts"]))
+        self.assertIn("M5 iPad Pro", result["adapted_section_intro"])
+
+    def test_engine_result_rejects_changed_section_intro_body(self):
+        data = json.loads(self.valid_engine_json())
+        data["adapted_section_intro"] = data["adapted_section_intro"].replace("通勤中", "自宅")
+        with self.assertRaisesRegex(ValueError, "主語以外"):
+            parse_engine_result(
+                json.dumps(data, ensure_ascii=False),
+                product_name="M5 iPad Pro",
+                category_name="バッテリー",
+                affiliate_group=self.group,
+            )
 
     def test_engine_result_rejects_affiliate_disclaimer_in_reason(self):
         with self.assertRaisesRegex(ValueError, "禁止値"):
@@ -53,7 +68,12 @@ class PromptAndJobTest(unittest.TestCase):
 
     def test_engine_result_rejects_changed_url(self):
         data = json.loads(self.valid_engine_json())
-        data["products"][0]["adapted_text"] = data["products"][0]["adapted_text"].replace("B0FS5XT48F", "B000000000")
+        product_index = next(index for index, product in enumerate(self.group.products) if product.urls)
+        source_url = self.group.products[product_index].urls[0]
+        data["products"][product_index]["adapted_text"] = data["products"][product_index]["adapted_text"].replace(
+            source_url,
+            "https://example.com/changed",
+        )
         with self.assertRaisesRegex(ValueError, "URL"):
             parse_engine_result(
                 json.dumps(data, ensure_ascii=False),

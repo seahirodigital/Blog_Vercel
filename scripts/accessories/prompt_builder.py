@@ -31,6 +31,7 @@ def build_prompt_input(
     input_text = (
         f"親製品名: {product_name}\n"
         f"対象周辺機器: {category_name}\n\n"
+        f"【カテゴリ共通説明文】\n{affiliate_group.section_intro}\n\n"
         f"【おすすめ商品ブロック】\n{blocks}"
     )
     return prompt, input_text
@@ -68,6 +69,46 @@ def _validate_adapted_product(source: str, adapted: str, product_name: str, prod
     return adapted_text
 
 
+def _validate_adapted_section_intro(source: str, adapted: str, product_name: str) -> str:
+    source_text = _normalize_newlines(source)
+    adapted_text = _normalize_newlines(adapted)
+    if not source_text:
+        if adapted_text:
+            raise ValueError("元文のないカテゴリ共通説明文は追加できません")
+        return ""
+    if not adapted_text or product_name not in adapted_text:
+        raise ValueError("カテゴリ共通説明文に親製品名がありません")
+    source_lines = source_text.split("\n")
+    adapted_lines = adapted_text.split("\n")
+    if len(source_lines) != len(adapted_lines):
+        raise ValueError("カテゴリ共通説明文の行数が変更されています")
+    changed = 0
+    for line_number, (source_line, adapted_line) in enumerate(zip(source_lines, adapted_lines), start=1):
+        if source_line == adapted_line:
+            continue
+        changed += 1
+        if "おすすめ" not in source_line or product_name not in adapted_line:
+            raise ValueError(f"カテゴリ共通説明文{line_number}行目は主語以外を変更できません")
+        similarity = SequenceMatcher(None, source_line, adapted_line).ratio()
+        if similarity < 0.65:
+            raise ValueError(f"カテゴリ共通説明文{line_number}行目の変更範囲が大きすぎます")
+    if changed < 1:
+        raise ValueError("カテゴリ共通説明文の主語が調整されていません")
+    source_urls = re.findall(r"https?://[^\s)\]]+", source_text)
+    adapted_urls = re.findall(r"https?://[^\s)\]]+", adapted_text)
+    if adapted_urls != source_urls:
+        raise ValueError("カテゴリ共通説明文のURLが変更されています")
+    source_tokens = _fact_tokens(source_text)
+    adapted_tokens = _fact_tokens(adapted_text)
+    missing_tokens = source_tokens - adapted_tokens
+    if missing_tokens:
+        raise ValueError("カテゴリ共通説明文の数値・英数字が削除されています")
+    added_tokens = adapted_tokens - (source_tokens | _fact_tokens(product_name))
+    if added_tokens:
+        raise ValueError("カテゴリ共通説明文に入力にない数値・英数字があります")
+    return adapted_text
+
+
 def parse_engine_result(
     text: str,
     *,
@@ -86,10 +127,15 @@ def parse_engine_result(
         data = json.loads(raw)
     except json.JSONDecodeError as error:
         raise ValueError("LLM応答が指定JSONではありません") from error
-    if set(data) != {"intro_sentence", "products"}:
+    if set(data) != {"intro_sentence", "adapted_section_intro", "products"}:
         raise ValueError("LLM応答のキーが指定と一致しません")
     intro = str(data.get("intro_sentence", "")).strip()
     products = data.get("products")
+    adapted_section_intro = _validate_adapted_section_intro(
+        affiliate_group.section_intro,
+        str(data.get("adapted_section_intro", "")),
+        product_name,
+    )
     if not intro or product_name not in intro or category_name not in intro:
         raise ValueError("冒頭案内文に親製品名または周辺機器名がありません")
     if any(token in intro for token in ("http://", "https://", "\n", "<think>", "job_id")):
@@ -111,4 +157,8 @@ def parse_engine_result(
                 source_product.title,
             )
         )
-    return {"intro_sentence": intro, "adapted_product_texts": ordered}
+    return {
+        "intro_sentence": intro,
+        "adapted_section_intro": adapted_section_intro,
+        "adapted_product_texts": ordered,
+    }

@@ -1,11 +1,11 @@
 /**
  * Vercel Serverless Function: アフィリエイトリンクメモ管理
- * GET  /api/affiliate-links → MEMOを動的に取得（OneDrive Graph API経由）
- * PUT  /api/affiliate-links → MEMOを動的に保存（OneDrive Graph API経由）
+ * GET  /api/affiliate-links → 全セクションを動的に取得（OneDrive Graph API経由）
+ * PUT  /api/affiliate-links → 全セクションを記載順で保存（OneDrive Graph API経由）
  */
 
 import { syncGitHubActionsRefreshToken } from '../lib/onedrive-token-sync.js';
-import { mergeAffiliateMemoContent } from '../lib/accessories-core.js';
+import { parseAffiliateSections, serializeAffiliateSections } from '../lib/accessories-core.js';
 
 const GRAPH_API = 'https://graph.microsoft.com/v1.0';
 const TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
@@ -94,19 +94,6 @@ function encodePath(p) {
   return p.split('/').map(encodeURIComponent).join('/');
 }
 
-// ===MEMOx=== を動的に検出してオブジェクト化
-function parseMemos(content) {
-  const memos = {};
-  const parts = content.split(/===MEMO(\d+)===/);
-  for (let i = 1; i < parts.length; i += 2) {
-    const n = parseInt(parts[i], 10);
-    memos[`memo${n}`] = (parts[i + 1] || '').trim();
-  }
-  if (Object.keys(memos).length === 0) memos['memo1'] = '';
-  return memos;
-}
-
-// 動的なmemosオブジェクトからファイル内容を生成
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, OPTIONS');
@@ -125,22 +112,20 @@ export default async function handler(req, res) {
       const storageUrl = itemResponse.ok ? (await itemResponse.json()).webUrl || '' : '';
       const r = await fetch(url, { headers });
       if (!r.ok) {
-        if (r.status === 404) return res.status(200).json({ memos: { memo1: '' }, storageUrl });
+        if (r.status === 404) return res.status(200).json({ sections: [{ id: 'MEMO1', label: 'メモ1', content: '' }], storageUrl });
         throw new Error(`読み込み失敗: ${r.status}`);
       }
-      return res.status(200).json({ memos: parseMemos(await r.text()), storageUrl });
+      return res.status(200).json({ sections: parseAffiliateSections(await r.text()), storageUrl });
     }
 
     if (req.method === 'PUT') {
-      const { memos } = req.body;
-      if (!memos) return res.status(400).json({ error: 'memos は必須です' });
+      const { sections } = req.body;
+      if (!Array.isArray(sections) || !sections.length) return res.status(400).json({ error: 'sections は必須です' });
       const url = `${GRAPH_API}/me/drive/root:/${encoded}:/content`;
-      const existingResponse = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
-      const existingContent = existingResponse.ok ? await existingResponse.text() : '';
       const r = await fetch(url, {
         method: 'PUT',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'text/plain; charset=utf-8' },
-        body: mergeAffiliateMemoContent(memos, existingContent),
+        body: serializeAffiliateSections(sections),
       });
       if (!r.ok) throw new Error(`保存失敗: ${r.status}`);
       return res.status(200).json({ success: true });

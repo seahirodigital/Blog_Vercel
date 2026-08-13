@@ -44,7 +44,8 @@ def generate(
         transport="models.generate_content",
         prompt=prompt,
         input_text=input_text,
-        generation_config=build_generation_config(temperature=0.2, max_output_tokens=4096),
+        # 商品数が増えても原文ブロックを省略させない。
+        generation_config=build_generation_config(temperature=0.2, max_output_tokens=16384),
     )
     return parse_engine_result(
         output,

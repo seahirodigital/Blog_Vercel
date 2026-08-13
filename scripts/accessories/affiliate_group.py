@@ -23,6 +23,7 @@ class AffiliateProduct:
 class AffiliateGroup:
     name: str
     raw_text: str
+    section_intro: str
     products: tuple[AffiliateProduct, ...]
 
 
@@ -55,8 +56,7 @@ def extract_group(text: str, section_name: str) -> AffiliateGroup:
     block_starts = [match.start() for match in re.finditer(r"(?m)^▼", raw)]
     if not block_starts:
         raise ValueError(f"商品ブロックの先頭「▼」がありません: {section_name}")
-    if raw[: block_starts[0]].strip():
-        raise ValueError(f"最初の「▼」より前に商品文があります: {section_name}")
+    section_intro = raw[: block_starts[0]].strip()
 
     products: list[AffiliateProduct] = []
     for index, block_start in enumerate(block_starts):
@@ -66,13 +66,16 @@ def extract_group(text: str, section_name: str) -> AffiliateGroup:
         urls = tuple(URL_RE.findall(block))
         if not first_line:
             raise ValueError(f"商品名が空です: {section_name} #{index + 1}")
-        if not urls:
-            raise ValueError(f"商品URLがありません: {section_name} #{index + 1}")
         products.append(
             AffiliateProduct(index=index + 1, title=first_line, text=block, urls=urls)
         )
 
-    return AffiliateGroup(name=section_name, raw_text=raw, products=tuple(products))
+    return AffiliateGroup(
+        name=section_name,
+        raw_text=raw,
+        section_intro=section_intro,
+        products=tuple(products),
+    )
 
 
 def load_group(path: str | Path, section_name: str) -> AffiliateGroup:

@@ -7,9 +7,11 @@ from collections.abc import Sequence
 
 def build_conclusion_addition(
     *,
+    adapted_section_intro: str = "",
     adapted_product_texts: Sequence[str],
 ) -> str:
     blocks = [str(value or "").strip() for value in adapted_product_texts]
     if not blocks or any(not block for block in blocks):
         raise ValueError("調整済み商品ブロックが空です")
-    return "\n\n".join(blocks)
+    intro = str(adapted_section_intro or "").strip()
+    return "\n\n".join(([intro] if intro else []) + blocks)

@@ -23,6 +23,7 @@ def validate_public_markdown(
     article: str,
     *,
     affiliate_group: AffiliateGroup | None = None,
+    adapted_section_intro: str = "",
     adapted_product_texts: Sequence[str] | None = None,
     allowed_new_urls: Sequence[str] | None = None,
 ) -> None:
@@ -43,10 +44,18 @@ def validate_public_markdown(
 
     if affiliate_group:
         normalized_article = article.replace("\r\n", "\n").replace("\r", "\n")
+        normalized_intro = str(adapted_section_intro or "").replace("\r\n", "\n").replace("\r", "\n").strip()
         blocks = list(adapted_product_texts or [product.text for product in affiliate_group.products])
         if len(blocks) != len(affiliate_group.products):
             raise ValueError("商品ブロック件数が一致しません")
         previous = -1
+        if affiliate_group.section_intro:
+            if not normalized_intro:
+                raise ValueError("カテゴリ共通説明文がありません")
+            intro_position = normalized_article.find(normalized_intro)
+            if intro_position < 0 or normalized_article.find(normalized_intro, intro_position + 1) >= 0:
+                raise ValueError("カテゴリ共通説明文は1回だけ掲載してください")
+            previous = intro_position
         for product, block in zip(affiliate_group.products, blocks):
             normalized_block = str(block).replace("\r\n", "\n").replace("\r", "\n").strip()
             position = normalized_article.find(normalized_block)
@@ -55,7 +64,7 @@ def validate_public_markdown(
             if normalized_article.find(normalized_block, position + 1) >= 0:
                 raise ValueError(f"商品ブロックが重複しています: {product.title}")
             if position <= previous:
-                raise ValueError("商品ブロックの順番が変更されています")
+                raise ValueError("カテゴリ共通説明文または商品ブロックの順番が変更されています")
             previous = position
 
     for url in allowed_new_urls or ():

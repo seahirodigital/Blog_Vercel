@@ -26,7 +26,7 @@ import { appendRegistryJob, listRegistryJobs, loadAccessoryMaster, updateRegistr
 const GITHUB_API = 'https://api.github.com';
 const AFFILIATE_FILE_PATH = process.env.ACCESSORIES_AFFILIATE_FILE_PATH
   || '開発/Blog_Vercel/scripts/pipeline/prompts/04-affiliate-link-manager/affiliate_links.txt';
-const PROMPT_CONTRACT_VERSION = 2;
+const PROMPT_CONTRACT_VERSION = 3;
 
 function queryValue(value, fallback = '') {
   return Array.isArray(value) ? value[0] ?? fallback : value ?? fallback;

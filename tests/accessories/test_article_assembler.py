@@ -25,8 +25,14 @@ class ArticleAssemblerTest(unittest.TestCase):
             for product in self.group.products
         ]
 
+    def adapted_section_intro(self, product_name="iPad Pro M5 13インチ"):
+        lines = self.group.section_intro.splitlines()
+        lines[0] = f"{product_name}におすすめの" + lines[0].replace("のおすすめ", "", 1)
+        return "\n".join(lines)
+
     def test_only_headings_and_conclusion_are_extended(self):
         addition = build_conclusion_addition(
+            adapted_section_intro=self.adapted_section_intro(),
             adapted_product_texts=self.adapted_blocks(),
         )
         child, parsed = assemble_article(
@@ -38,6 +44,7 @@ class ArticleAssemblerTest(unittest.TestCase):
         validate_public_markdown(
             child,
             affiliate_group=self.group,
+            adapted_section_intro=self.adapted_section_intro(),
             adapted_product_texts=self.adapted_blocks(),
         )
         self.assertTrue(child.startswith("# iPad Pro M5 13インチ バッテリーおすすめまとめ\n"))
@@ -60,10 +67,12 @@ class ArticleAssemblerTest(unittest.TestCase):
 
     def test_product_validation_accepts_crlf_article(self):
         blocks = self.adapted_blocks()
-        article = ("# 記事\n\n" + "\n\n".join(blocks)).replace("\n", "\r\n")
+        section_intro = self.adapted_section_intro()
+        article = ("# 記事\n\n" + section_intro + "\n\n" + "\n\n".join(blocks)).replace("\n", "\r\n")
         validate_public_markdown(
             article,
             affiliate_group=self.group,
+            adapted_section_intro=section_intro,
             adapted_product_texts=blocks,
             allowed_new_urls=[url for product in self.group.products for url in product.urls],
         )
@@ -97,6 +106,7 @@ class ArticleAssemblerTest(unittest.TestCase):
             "## 製品レビューまとめ：結論後の章\n本文C\n"
         )
         addition = build_conclusion_addition(
+            adapted_section_intro=self.adapted_section_intro("製品"),
             adapted_product_texts=self.adapted_blocks("製品"),
         )
         child, _ = assemble_article(
@@ -118,6 +128,7 @@ class ArticleAssemblerTest(unittest.TestCase):
             "## Captions\n本文B\n"
         )
         addition = build_conclusion_addition(
+            adapted_section_intro=self.adapted_section_intro("M5 iPad Pro"),
             adapted_product_texts=self.adapted_blocks("M5 iPad Pro"),
         )
         child, parsed = assemble_article(

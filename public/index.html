@@ -960,21 +960,23 @@
     }
 
     // === アフィリエイトリンク API（OneDrive Graph API 経由で同期） ===
-    async function fetchAffiliateMemos() {
+    async function fetchAffiliateSections() {
       const res = await fetch(`${API_BASE}/affiliate-links`);
       if (!res.ok) throw new Error('アフィリンクの取得に失敗しました');
       const data = await res.json();
       return {
-        memos: data.memos || { memo1: '' },
+        sections: Array.isArray(data.sections) && data.sections.length
+          ? data.sections
+          : [{ id: 'MEMO1', label: 'メモ1', content: '' }],
         storageUrl: data.storageUrl || '',
       };
     }
 
-    async function saveAffiliateMemos(memos) {
+    async function saveAffiliateSections(sections) {
       const res = await fetch(`${API_BASE}/affiliate-links`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ memos }),
+        body: JSON.stringify({ sections }),
       });
       if (!res.ok) throw new Error('アフィリンクの保存に失敗しました');
       return await res.json();
@@ -2829,11 +2831,10 @@
       );
     }
 
-    // === アフィリエイトリンクモーダル（動的MEMO・更新ボタン・紫配色） ===
+    // === アフィリエイトリンクモーダル（全セクション・更新ボタン・紫配色） ===
     function AffiliateLinkModal({ isOpen, onClose, showToast }) {
-      const [memos, setMemos] = useState({});
-      const [memoKeys, setMemoKeys] = useState(['memo1']);
-      const [act, setAct] = useState('memo1');
+      const [sections, setSections] = useState([{ id: 'MEMO1', label: 'メモ1', content: '' }]);
+      const [act, setAct] = useState('MEMO1');
       const [ld, setLd] = useState(false);
       const [sv, setSv] = useState(false);
       const [cp, setCp] = useState(false);
@@ -2850,15 +2851,12 @@
       const doLoad = useCallback(() => {
         setLd(true);
         affUserEdited.current = false; // ロード中はユーザー編集フラグをリセット
-        fetchAffiliateMemos()
-          .then(({ memos: nextMemos, storageUrl: nextStorageUrl }) => {
-            setMemos(nextMemos);
+        fetchAffiliateSections()
+          .then(({ sections: nextSections, storageUrl: nextStorageUrl }) => {
+            setSections(nextSections);
             setStorageUrl(nextStorageUrl);
-            const keys = Object.keys(nextMemos).sort((a, b) =>
-              parseInt(a.replace('memo', ''), 10) - parseInt(b.replace('memo', ''), 10)
-            );
-            setMemoKeys(keys.length > 0 ? keys : ['memo1']);
-            setAct(prev => keys.includes(prev) ? prev : (keys[0] || 'memo1'));
+            const ids = nextSections.map(section => section.id);
+            setAct(prev => ids.includes(prev) ? prev : (ids[0] || 'MEMO1'));
           })
           .catch(e => showToast('アフィリンク取得失敗: ' + e.message, 'error'))
           .finally(() => setLd(false));
@@ -2885,26 +2883,27 @@
         return () => { document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onUp); };
       }, []);
 
-      // memos変更時の自動保存（ユーザー編集時のみ・2秒デバウンス）
+      // sections変更時の自動保存（ユーザー編集時のみ・2秒デバウンス）
       // affUserEdited.current=true のときのみ保存（初回ロード時の上書きを防止）
       useEffect(() => {
         if (!affUserEdited.current) return;
         clearTimeout(affAutoSaveTimer.current);
         affAutoSaveTimer.current = setTimeout(() => {
-          saveAffiliateMemos(memos).catch(() => { });
+          saveAffiliateSections(sections).catch(() => { });
         }, 2000);
         return () => clearTimeout(affAutoSaveTimer.current);
-      }, [memos]);
+      }, [sections]);
 
       const doSave = async () => {
         setSv(true);
-        try { await saveAffiliateMemos(memos); showToast('💾 アフィリンクをOneDriveに保存しました！', 'success'); }
+        try { await saveAffiliateSections(sections); showToast('💾 アフィリンクをOneDriveに保存しました！', 'success'); }
         catch (e) { showToast('保存失敗: ' + e.message, 'error'); }
         finally { setSv(false); }
       };
 
       const doCopy = async () => {
-        try { await navigator.clipboard.writeText(memos[act] || ''); setCp(true); setTimeout(() => setCp(false), 2000); }
+        const activeSection = sections.find(section => section.id === act);
+        try { await navigator.clipboard.writeText(activeSection?.content || ''); setCp(true); setTimeout(() => setCp(false), 2000); }
         catch { showToast('コピーに失敗しました', 'error'); }
       };
 
@@ -2941,17 +2940,14 @@
                 </button>
               </div>
             </div>
-            {/* タブ（数字のみ・動的） */}
+            {/* タブ（ファイル内の全セクションを記載順で表示） */}
             <div style={{ display: 'flex', borderBottom: '1px solid #e2e8f0', paddingLeft: '1rem', flexShrink: 0, overflowX: 'auto' }}>
-              {memoKeys.map(k => {
-                const num = k.replace('memo', '');
-                return (
-                  <button key={k} onClick={() => setAct(k)} className={`aff-tab ${act === k ? 'active' : ''}`}>
-                    {num}
-                    {memos[k] && memos[k].trim() && <span style={{ marginLeft: '0.3rem', width: '5px', height: '5px', borderRadius: '50%', background: '#7C4DFF', display: 'inline-block', verticalAlign: 'middle' }} />}
-                  </button>
-                );
-              })}
+              {sections.map(section => (
+                <button key={section.id} onClick={() => setAct(section.id)} className={`aff-tab ${act === section.id ? 'active' : ''}`}>
+                  {section.label}
+                  {section.content && section.content.trim() && <span style={{ marginLeft: '0.3rem', width: '5px', height: '5px', borderRadius: '50%', background: '#7C4DFF', display: 'inline-block', verticalAlign: 'middle' }} />}
+                </button>
+              ))}
             </div>
             {/* 本文 */}
             {ld ? (
@@ -2963,7 +2959,7 @@
               </div>
             ) : (
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '0.75rem 1rem', overflow: 'hidden' }}>
-                <textarea className="aff-ta" value={memos[act] || ''} onChange={e => { affUserEdited.current = true; setMemos(p => ({ ...p, [act]: e.target.value })); }} placeholder="アフィリエイトリンクを入力..." spellCheck={false} id={`aff-textarea-${act}`} />
+                <textarea className="aff-ta" value={sections.find(section => section.id === act)?.content || ''} onChange={e => { affUserEdited.current = true; setSections(prev => prev.map(section => section.id === act ? { ...section, content: e.target.value } : section)); }} placeholder="アフィリエイトリンクを入力..." spellCheck={false} id={`aff-textarea-${act}`} />
               </div>
             )}
             {/* フッター */}

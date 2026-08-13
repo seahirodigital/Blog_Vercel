@@ -141,6 +141,7 @@ def process_job(
 
         report("assembling", "冒頭案内文と調整済み商品ブロックを親記事へ反映しています")
         addition = build_conclusion_addition(
+            adapted_section_intro=result["adapted_section_intro"],
             adapted_product_texts=result["adapted_product_texts"],
         )
         child_markdown, _ = assemble_article(
@@ -154,6 +155,7 @@ def process_job(
         validate_public_markdown(
             child_markdown,
             affiliate_group=group,
+            adapted_section_intro=result["adapted_section_intro"],
             adapted_product_texts=result["adapted_product_texts"],
             allowed_new_urls=[url for product in group.products for url in product.urls],
         )
