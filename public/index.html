@@ -1144,7 +1144,11 @@
 
     // === アフィリエイトリンク API（OneDrive Graph API 経由で同期） ===
     async function fetchAffiliateSections() {
-      const res = await fetch(`${API_BASE}/affiliate-links`);
+      const cacheBuster = Date.now();
+      const res = await fetch(`${API_BASE}/affiliate-links?refresh=${cacheBuster}`, {
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache', Pragma: 'no-cache' },
+      });
       if (!res.ok) throw new Error('アフィリンクの取得に失敗しました');
       const data = await res.json();
       return {
@@ -1152,6 +1156,7 @@
           ? data.sections
           : [{ id: 'MEMO1', label: 'メモ1', content: '' }],
         storageUrl: data.storageUrl || '',
+        sourceVersion: data.sourceVersion || null,
       };
     }
 
@@ -3277,6 +3282,7 @@
       const [sv, setSv] = useState(false);
       const [cp, setCp] = useState(false);
       const [storageUrl, setStorageUrl] = useState('');
+      const [sourceVersion, setSourceVersion] = useState(null);
       const [tabMenu, setTabMenu] = useState({ visible: false, x: 0, y: 0, sectionId: '' });
       // モーダルサイズ（リサイズ対応）
       const [modalW, setModalW] = useState(680);
@@ -3291,11 +3297,13 @@
         setLd(true);
         affUserEdited.current = false; // ロード中はユーザー編集フラグをリセット
         fetchAffiliateSections()
-          .then(({ sections: nextSections, storageUrl: nextStorageUrl }) => {
+          .then(({ sections: nextSections, storageUrl: nextStorageUrl, sourceVersion: nextSourceVersion }) => {
             setSections(nextSections);
             setStorageUrl(nextStorageUrl);
+            setSourceVersion(nextSourceVersion);
             const ids = nextSections.map(section => section.id);
             setAct(prev => ids.includes(prev) ? prev : (ids[0] || 'MEMO1'));
+            showToast(`OneDriveの最新内容を${nextSections.length}タブ読み込みました`, 'success');
           })
           .catch(e => showToast('アフィリンク取得失敗: ' + e.message, 'error'))
           .finally(() => setLd(false));
@@ -3440,6 +3448,11 @@
                   </a>
                 )}
                 <span style={{ fontSize: '0.65rem', color: '#7C4DFF', background: '#ede9fe', padding: '0.15rem 0.5rem', borderRadius: '9999px' }}>OneDrive同期</span>
+                {sourceVersion?.lastModified && (
+                  <span title={`OneDrive最終更新: ${sourceVersion.lastModified}`} style={{ fontSize: '0.62rem', color: '#64748b' }}>
+                    最新 {new Date(sourceVersion.lastModified).toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })}
+                  </span>
+                )}
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
                 {/* 更新ボタン */}

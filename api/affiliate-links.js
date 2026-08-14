@@ -102,6 +102,9 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   try {
@@ -110,17 +113,36 @@ export default async function handler(req, res) {
 
     if (req.method === 'GET') {
       const itemUrl = `${GRAPH_API}/me/drive/root:/${encoded}:`;
-      const url = `${GRAPH_API}/me/drive/root:/${encoded}:/content`;
-      const headers = { Authorization: `Bearer ${token}` };
-      const itemResponse = await fetch(itemUrl, { headers });
-      const storageUrl = itemResponse.ok ? (await itemResponse.json()).webUrl || '' : '';
-      const r = await fetch(url, { headers });
+      const graphHeaders = {
+        Authorization: `Bearer ${token}`,
+        'Cache-Control': 'no-cache',
+        Pragma: 'no-cache',
+      };
+      const itemResponse = await fetch(itemUrl, { headers: graphHeaders, cache: 'no-store' });
+      const item = itemResponse.ok ? await itemResponse.json() : {};
+      const storageUrl = item.webUrl || '';
+      // /contentの302先が古いダウンロードURLを再利用しないよう、
+      // 毎回取得したitem固有の最新downloadUrlを優先する。
+      const contentUrl = item['@microsoft.graph.downloadUrl']
+        || `${GRAPH_API}/me/drive/root:/${encoded}:/content?refresh=${Date.now()}`;
+      const r = await fetch(contentUrl, {
+        headers: item['@microsoft.graph.downloadUrl'] ? { 'Cache-Control': 'no-cache', Pragma: 'no-cache' } : graphHeaders,
+        cache: 'no-store',
+      });
       if (!r.ok) {
         if (r.status === 404) return res.status(200).json({ sections: [{ id: 'MEMO1', label: 'メモ1', content: '' }], storageUrl });
         throw new Error(`読み込み失敗: ${r.status}`);
       }
       const sections = normalizeAffiliateSectionsForEditing(parseAffiliateSections(await r.text()));
-      return res.status(200).json({ sections, storageUrl });
+      return res.status(200).json({
+        sections,
+        storageUrl,
+        sourceVersion: {
+          eTag: item.eTag || '',
+          size: Number(item.size || 0),
+          lastModified: item.lastModifiedDateTime || '',
+        },
+      });
     }
 
     if (req.method === 'PUT') {

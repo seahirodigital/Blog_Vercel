@@ -76,6 +76,11 @@ class AffiliateSectionsUiTest(unittest.TestCase):
         self.assertIn("normalizeAffiliateSectionsForEditing(parseAffiliateSections(await r.text()))", api)
         self.assertIn("parseAffiliateSections(await r.text())", api)
         self.assertIn("serializeAffiliateSections(sections)", api)
+        self.assertIn("item['@microsoft.graph.downloadUrl']", api)
+        self.assertIn("cache: 'no-store'", api)
+        self.assertIn("sourceVersion", api)
+        self.assertIn("affiliate-links?refresh=${cacheBuster}", html)
+        self.assertIn("OneDriveの最新内容を${nextSections.length}タブ読み込みました", html)
         self.assertNotIn("function parseMemos", api)
 
 
