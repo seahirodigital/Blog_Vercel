@@ -1738,3 +1738,26 @@ SEOタイトル派生機能の初回本番反映結果:
 - 本番配信HTMLに `+` タブの「新しいタブを追加」と右クリックメニューの「名前を編集」が含まれることを確認した。
 - 本番 `/api/affiliate-links` がOneDriveの直接編集済みテキストから `MEMO1`、`MEMO2`、`バッテリー`、`充電器`、`ケーブル` を同じ順序で返し、テキストからBlog Vercelへの反映経路が動作することを確認した。
 - Vercel CLIの直接デプロイは現在のCLI資格情報が `Not authorized` のため使用せず、GitHub連携による本番配信を使用した。
+
+### 2026-08-14: 直接編集したSSDタブの更新読込修正
+
+確認した原因:
+
+- Macローカルの `affiliate_links.txt` は2026-08-14 13:24:36更新、19,729 bytesで `===SSD===` を含んでいた。
+- 同時点の本番Microsoft Graphが返したOneDriveクラウド版は13:20:37更新、18,777 bytesで、SSD追加前の内容だった。このため、Blog Vercelのパーサーより前のデータ取得段階でSSDが存在しなかった。
+- OneDrive File Providerは起動中で停止・除外・競合状態ではなかったが、対象ファイルのFinder装飾状態が `Syncing` のままで、クラウド版が遅れていた。
+
+実装・対応内容:
+
+- Blog Vercelの更新ボタンは毎回異なるクエリを付け、ブラウザキャッシュを使わず `/api/affiliate-links` を取得する。
+- Vercel APIも `Cache-Control: no-store` を返し、Microsoft Graphのitemを毎回再取得してその最新 `@microsoft.graph.downloadUrl` から本文を読む。
+- API応答にOneDriveのETag、ファイルサイズ、最終更新を含め、UIにクラウド側の最終更新時刻と読込タブ数を表示する。
+- ローカルの6セクションを同一パーサーで検査後、本番PUT APIでOneDriveへ反映した。OneDriveのバージョン履歴で復元可能である。
+
+検証結果:
+
+- 本番APIで `MEMO1 / MEMO2 / バッテリー / 充電器 / ケーブル / SSD` の6タブを確認した。SSD本文は246文字で取得できた。
+- ローカルと本番APIの6セクションは、順序と本文がすべて完全一致した。
+- Python単体テス77件、JSX構文、Node.js構文、`git diff --check`、Vercel本番相当ビルドに合格した。
+- 実装コミット `a54f2fd2` を `main` へpushし、GitHub連携のVercel Production配信へ反映した。
+- 秘密情報を含む環境ファイルは表示・変更せず、`winmacsync` も使用していない。
