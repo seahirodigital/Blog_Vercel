@@ -7,8 +7,26 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
-SECTION_RE = re.compile(r"^===([A-Za-z0-9_-]+)===$", re.MULTILINE)
+SECTION_RE = re.compile(r"^===([^=\r\n]+)===$", re.MULTILINE)
 URL_RE = re.compile(r"https?://[^\s)\]]+")
+
+SECTION_LABELS = {
+    "battery": "バッテリー",
+    "adapter": "充電器",
+    "cable": "ケーブル",
+    "case": "ケース",
+    "film": "保護フィルム",
+    "keyboard": "キーボード",
+    "mouse": "マウス",
+    "stand": "スタンド",
+    "hub": "ハブ",
+    "earphone": "イヤホン",
+    "headphone": "ヘッドホン",
+    "speaker": "スピーカー",
+    "storage": "ストレージ",
+    "monitor": "モニター",
+}
+SECTION_EXTRA_ALIASES = {"adapter": ("アダプター",)}
 
 
 @dataclass(frozen=True)
@@ -31,6 +49,25 @@ def _normalized_text(value: str) -> str:
     return str(value or "").replace("\r\n", "\n").replace("\r", "\n")
 
 
+def _normalized_section_name(value: str) -> str:
+    return str(value or "").strip().casefold()
+
+
+def _canonical_section_name(value: str) -> str:
+    normalized = _normalized_section_name(value)
+    for section_id, label in SECTION_LABELS.items():
+        aliases = (section_id, label, *SECTION_EXTRA_ALIASES.get(section_id, ()))
+        if normalized in {_normalized_section_name(alias) for alias in aliases}:
+            return label
+    return str(value or "").strip()
+
+
+def _section_names_equal(left: str, right: str) -> bool:
+    return _normalized_section_name(_canonical_section_name(left)) == _normalized_section_name(
+        _canonical_section_name(right)
+    )
+
+
 def list_sections(text: str) -> tuple[str, ...]:
     """名前付きセクションを記載順で返す。"""
     return tuple(match.group(1) for match in SECTION_RE.finditer(_normalized_text(text)))
@@ -40,10 +77,12 @@ def extract_group(text: str, section_name: str) -> AffiliateGroup:
     """指定セクション内の全「▼」商品を原文順で返す。"""
     normalized = _normalized_text(text)
     matches = list(SECTION_RE.finditer(normalized))
-    target_index = next(
-        (index for index, match in enumerate(matches) if match.group(1) == section_name),
-        None,
-    )
+    target_index = next((index for index, match in enumerate(matches) if match.group(1) == section_name), None)
+    if target_index is None:
+        target_index = next(
+            (index for index, match in enumerate(matches) if _section_names_equal(match.group(1), section_name)),
+            None,
+        )
     if target_index is None:
         raise ValueError(f"アフィリエイトセクションがありません: {section_name}")
 

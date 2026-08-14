@@ -5,7 +5,11 @@
  */
 
 import { syncGitHubActionsRefreshToken } from '../lib/onedrive-token-sync.js';
-import { parseAffiliateSections, serializeAffiliateSections } from '../lib/accessories-core.js';
+import {
+  normalizeAffiliateSectionsForEditing,
+  parseAffiliateSections,
+  serializeAffiliateSections,
+} from '../lib/accessories-core.js';
 
 const GRAPH_API = 'https://graph.microsoft.com/v1.0';
 const TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
@@ -115,7 +119,8 @@ export default async function handler(req, res) {
         if (r.status === 404) return res.status(200).json({ sections: [{ id: 'MEMO1', label: 'メモ1', content: '' }], storageUrl });
         throw new Error(`読み込み失敗: ${r.status}`);
       }
-      return res.status(200).json({ sections: parseAffiliateSections(await r.text()), storageUrl });
+      const sections = normalizeAffiliateSectionsForEditing(parseAffiliateSections(await r.text()));
+      return res.status(200).json({ sections, storageUrl });
     }
 
     if (req.method === 'PUT') {

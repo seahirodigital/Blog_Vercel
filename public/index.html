@@ -503,6 +503,61 @@
       border-bottom-color: #7C4DFF;
     }
 
+    .aff-tab-add {
+      width: 40px;
+      min-width: 40px;
+      height: 40px;
+      border: none;
+      border-left: 1px solid #e2e8f0;
+      background: white;
+      color: #7C4DFF;
+      cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .aff-tab-add:hover {
+      background: #f5f3ff;
+    }
+
+    .aff-tab-context-menu {
+      position: fixed;
+      z-index: 120;
+      min-width: 132px;
+      padding: 0.3rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.625rem;
+      background: white;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18);
+    }
+
+    .aff-tab-context-menu button {
+      width: 100%;
+      padding: 0.5rem 0.65rem;
+      border: none;
+      border-radius: 0.4rem;
+      background: transparent;
+      color: #334155;
+      cursor: pointer;
+      text-align: left;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .aff-tab-context-menu button:hover {
+      background: #f5f3ff;
+      color: #7C4DFF;
+    }
+
+    .aff-tab-context-menu button.danger {
+      color: #ef4444;
+    }
+
+    .aff-tab-context-menu button.danger:hover {
+      background: #fef2f2;
+    }
+
     .aff-ta {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.8rem;
@@ -3222,6 +3277,7 @@
       const [sv, setSv] = useState(false);
       const [cp, setCp] = useState(false);
       const [storageUrl, setStorageUrl] = useState('');
+      const [tabMenu, setTabMenu] = useState({ visible: false, x: 0, y: 0, sectionId: '' });
       // モーダルサイズ（リサイズ対応）
       const [modalW, setModalW] = useState(680);
       const [modalH, setModalH] = useState(600);
@@ -3246,6 +3302,17 @@
       }, [showToast]);
 
       useEffect(() => { if (isOpen) doLoad(); }, [isOpen]);
+
+      useEffect(() => {
+        if (!tabMenu.visible) return undefined;
+        const closeMenu = () => setTabMenu({ visible: false, x: 0, y: 0, sectionId: '' });
+        window.addEventListener('click', closeMenu);
+        window.addEventListener('resize', closeMenu);
+        return () => {
+          window.removeEventListener('click', closeMenu);
+          window.removeEventListener('resize', closeMenu);
+        };
+      }, [tabMenu.visible]);
 
       // モーダルリサイズ用マウスイベント
       useEffect(() => {
@@ -3290,6 +3357,73 @@
         catch { showToast('コピーに失敗しました', 'error'); }
       };
 
+      const normalizeSectionName = (value) => String(value || '').normalize('NFKC').trim();
+      const sectionNameError = (name, excludedId = '') => {
+        if (!name) return 'タブ名を入力してください';
+        if (!/^[\p{L}\p{N}_-]+$/u.test(name)) return 'タブ名に使えるのは文字・数字・_ ・- だけです';
+        const duplicate = sections.some(section => (
+          section.id !== excludedId
+          && normalizeSectionName(section.id).toLocaleLowerCase('ja-JP') === name.toLocaleLowerCase('ja-JP')
+        ));
+        return duplicate ? `「${name}」タブはすでにあります` : '';
+      };
+
+      const addSection = () => {
+        const name = normalizeSectionName(window.prompt('新しいタブ名を入力してください。\n例: SSD', '') || '');
+        if (!name) return;
+        const error = sectionNameError(name);
+        if (error) {
+          showToast(error, 'error');
+          return;
+        }
+        affUserEdited.current = true;
+        setSections(prev => [...prev, { id: name, label: name, content: '' }]);
+        setAct(name);
+      };
+
+      const openTabMenu = (event, section) => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (/^MEMO\d+$/i.test(section.id)) return;
+        setAct(section.id);
+        setTabMenu({
+          visible: true,
+          x: Math.min(event.clientX, window.innerWidth - 150),
+          y: Math.min(event.clientY, window.innerHeight - 100),
+          sectionId: section.id,
+        });
+      };
+
+      const renameSection = () => {
+        const target = sections.find(section => section.id === tabMenu.sectionId);
+        if (!target) return;
+        const name = normalizeSectionName(window.prompt('新しいタブ名を入力してください。', target.id) || '');
+        if (!name || name === target.id) return;
+        const error = sectionNameError(name, target.id);
+        if (error) {
+          showToast(error, 'error');
+          return;
+        }
+        affUserEdited.current = true;
+        setSections(prev => prev.map(section => (
+          section.id === target.id ? { ...section, id: name, label: name } : section
+        )));
+        setAct(name);
+        setTabMenu({ visible: false, x: 0, y: 0, sectionId: '' });
+      };
+
+      const deleteSection = () => {
+        const target = sections.find(section => section.id === tabMenu.sectionId);
+        if (!target || !window.confirm(`「${target.id}」タブとその本文を削除しますか？`)) return;
+        const targetIndex = sections.findIndex(section => section.id === target.id);
+        const nextSections = sections.filter(section => section.id !== target.id);
+        const nextActive = nextSections[Math.min(targetIndex, nextSections.length - 1)]?.id || 'MEMO1';
+        affUserEdited.current = true;
+        setSections(nextSections);
+        setAct(nextActive);
+        setTabMenu({ visible: false, x: 0, y: 0, sectionId: '' });
+      };
+
       if (!isOpen) return null;
 
       return (
@@ -3324,14 +3458,29 @@
               </div>
             </div>
             {/* タブ（ファイル内の全セクションを記載順で表示） */}
-            <div style={{ display: 'flex', borderBottom: '1px solid #e2e8f0', paddingLeft: '1rem', flexShrink: 0, overflowX: 'auto' }}>
-              {sections.map(section => (
-                <button key={section.id} onClick={() => setAct(section.id)} className={`aff-tab ${act === section.id ? 'active' : ''}`}>
-                  {section.label}
-                  {section.content && section.content.trim() && <span style={{ marginLeft: '0.3rem', width: '5px', height: '5px', borderRadius: '50%', background: '#7C4DFF', display: 'inline-block', verticalAlign: 'middle' }} />}
-                </button>
-              ))}
+            <div style={{ display: 'flex', borderBottom: '1px solid #e2e8f0', paddingLeft: '1rem', flexShrink: 0 }}>
+              <div style={{ display: 'flex', minWidth: 0, flex: 1, overflowX: 'auto' }}>
+                {sections.map(section => (
+                  <button
+                    key={section.id}
+                    onClick={() => setAct(section.id)}
+                    onContextMenu={event => openTabMenu(event, section)}
+                    className={`aff-tab ${act === section.id ? 'active' : ''}`}
+                    title={/^MEMO\d+$/i.test(section.id) ? section.label : `${section.id}（右クリックで編集・削除）`}
+                  >
+                    {section.label}
+                    {section.content && section.content.trim() && <span style={{ marginLeft: '0.3rem', width: '5px', height: '5px', borderRadius: '50%', background: '#7C4DFF', display: 'inline-block', verticalAlign: 'middle' }} />}
+                  </button>
+                ))}
+              </div>
+              <button type="button" className="aff-tab-add" onClick={addSection} title="新しいタブを追加" aria-label="新しいタブを追加">+</button>
             </div>
+            {tabMenu.visible && (
+              <div className="aff-tab-context-menu" style={{ left: tabMenu.x, top: tabMenu.y }} onClick={event => event.stopPropagation()}>
+                <button type="button" onClick={renameSection}>名前を編集</button>
+                <button type="button" className="danger" onClick={deleteSection}>削除</button>
+              </div>
+            )}
             {/* 本文 */}
             {ld ? (
               <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

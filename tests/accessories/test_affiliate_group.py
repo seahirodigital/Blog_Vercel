@@ -1,7 +1,7 @@
 from pathlib import Path
 import unittest
 
-from scripts.accessories.affiliate_group import load_group
+from scripts.accessories.affiliate_group import extract_group, load_group
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -9,6 +9,12 @@ AFFILIATE_FILE = ROOT / "scripts/pipeline/prompts/04-affiliate-link-manager/affi
 
 
 class AffiliateGroupTest(unittest.TestCase):
+    def test_legacy_english_section_name_resolves_japanese_marker(self):
+        text = "===バッテリー===\n説明\n▼商品\nhttps://example.com/item\n"
+        group = extract_group(text, "battery")
+        self.assertEqual("battery", group.name)
+        self.assertEqual("商品", group.products[0].title)
+
     def test_named_groups_keep_intro_and_all_triangle_blocks(self):
         expected_asins = {
             "battery": ["B0FS5XT48F", "B0GMWVL8FD"],
