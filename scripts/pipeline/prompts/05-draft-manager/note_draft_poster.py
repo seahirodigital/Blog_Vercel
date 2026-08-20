@@ -613,40 +613,70 @@ def _dump_upload_retry_artifacts(page, artifacts_dir: Path | None, stem: str) ->
     _write_control_snapshot(artifacts_dir / f"{stem}_controls.json", page)
 
 
-def _click_top_image_button(page) -> str:
+def _click_top_image_button(page, artifacts_dir: Path | None = None) -> str:
     name_pattern = re.compile(
         r"画像\s*を?\s*追加|見出し画像|トップ画像|カバー画像|サムネイル画像|アイキャッチ"
     )
-    return _click_visible_candidate(
-        page,
-        candidates=[
-            ("role_button_top_image_name", page.get_by_role("button", name=name_pattern)),
-            ("button[aria-label='画像を追加']", page.locator(TOP_IMAGE_BUTTON_SELECTOR)),
-            (
-                "clickable_aria_top_image_name",
-                page.locator(
-                    "button[aria-label*='画像を追加'], [role='button'][aria-label*='画像を追加'], "
-                    "button[aria-label*='見出し画像'], [role='button'][aria-label*='見出し画像'], "
-                    "button[aria-label*='トップ画像'], [role='button'][aria-label*='トップ画像'], "
-                    "button[aria-label*='カバー画像'], [role='button'][aria-label*='カバー画像']"
-                ),
-            ),
-            (
-                "clickable_title_top_image_name",
-                page.locator(
-                    "button[title*='画像を追加'], [role='button'][title*='画像を追加'], "
-                    "button[title*='見出し画像'], [role='button'][title*='見出し画像'], "
-                    "button[title*='トップ画像'], [role='button'][title*='トップ画像'], "
-                    "button[title*='カバー画像'], [role='button'][title*='カバー画像']"
-                ),
-            ),
-            (
-                "clickable_text_top_image_name",
-                page.locator("button, [role='button']").filter(has_text=name_pattern),
-            ),
-        ],
-        description="トップ画像ボタン",
-    )
+    errors = []
+
+    for attempt in range(1, 4):
+        try:
+            page.keyboard.press("Escape")
+        except Exception:
+            pass
+        try:
+            page.evaluate(
+                """() => {
+                  window.scrollTo(0, 0);
+                  if (document.scrollingElement) document.scrollingElement.scrollTop = 0;
+                }"""
+            )
+        except Exception:
+            pass
+        page.wait_for_timeout(800)
+
+        try:
+            strategy = _click_visible_candidate(
+                page,
+                candidates=[
+                    ("role_button_top_image_name", page.get_by_role("button", name=name_pattern)),
+                    ("button[aria-label='画像を追加']", page.locator(TOP_IMAGE_BUTTON_SELECTOR)),
+                    (
+                        "clickable_aria_top_image_name",
+                        page.locator(
+                            "button[aria-label*='画像を追加'], [role='button'][aria-label*='画像を追加'], "
+                            "button[aria-label*='見出し画像'], [role='button'][aria-label*='見出し画像'], "
+                            "button[aria-label*='トップ画像'], [role='button'][aria-label*='トップ画像'], "
+                            "button[aria-label*='カバー画像'], [role='button'][aria-label*='カバー画像']"
+                        ),
+                    ),
+                    (
+                        "clickable_title_top_image_name",
+                        page.locator(
+                            "button[title*='画像を追加'], [role='button'][title*='画像を追加'], "
+                            "button[title*='見出し画像'], [role='button'][title*='見出し画像'], "
+                            "button[title*='トップ画像'], [role='button'][title*='トップ画像'], "
+                            "button[title*='カバー画像'], [role='button'][title*='カバー画像']"
+                        ),
+                    ),
+                    (
+                        "clickable_text_top_image_name",
+                        page.locator("button, [role='button']").filter(has_text=name_pattern),
+                    ),
+                ],
+                description="トップ画像ボタン",
+                timeout_ms=5000,
+            )
+            return f"attempt#{attempt}:{strategy}"
+        except Exception as exc:
+            errors.append(f"attempt#{attempt}={exc}")
+            _dump_upload_retry_artifacts(
+                page,
+                artifacts_dir,
+                f"top_image_button_attempt_{attempt}_failed",
+            )
+
+    raise RuntimeError(f"トップ画像ボタンを3回試しても特定できませんでした: {' / '.join(errors)}")
 
 
 def _choose_direct_upload_image_file(page, image_path: Path, artifacts_dir: Path | None = None) -> str:
@@ -783,7 +813,7 @@ def _choose_direct_upload_image_file(page, image_path: Path, artifacts_dir: Path
                 errors.append(f"attempt{attempt}: no_upload_entry_visible")
             if not has_visible_upload_entry():
                 try:
-                    reopen_strategy = _click_top_image_button(page)
+                    reopen_strategy = _click_top_image_button(page, artifacts_dir=artifacts_dir)
                     print(f"   🔄 トップ画像メニューを再オープン: {reopen_strategy} (attempt {attempt + 1})")
                     _dump_upload_retry_artifacts(page, artifacts_dir, f"top_image_menu_reopened_attempt{attempt + 1}")
                 except Exception as exc:
@@ -867,6 +897,13 @@ def _editor_has_table_of_contents(page) -> bool:
         () => {
           const editor = document.querySelector('.note-editable, [contenteditable="true"]') || document.querySelector('.ProseMirror');
           if (!editor) return false;
+          if (editor.querySelector([
+            'table-of-contents',
+            '[data-type="table-of-contents"]',
+            '[data-type="tableOfContents"]',
+            '[data-node-type="table-of-contents"]',
+            '[data-node-type="tableOfContents"]'
+          ].join(', '))) return true;
           const normalize = (value) => (value || '').replace(/\\s+/g, ' ').trim();
           return Array.from(editor.querySelectorAll('*')).some((el) => {
             const text = normalize(el.innerText || el.textContent || '');
@@ -2319,7 +2356,7 @@ def _attach_amazon_top_image_to_page(
     controls_before = _collect_control_snapshot(page)
     _write_json(artifacts_dir / "controls_before_top_image.json", controls_before)
 
-    image_button_strategy = _click_top_image_button(page)
+    image_button_strategy = _click_top_image_button(page, artifacts_dir=artifacts_dir)
     _dump_page_artifacts(page, artifacts_dir, "top_image_menu_open")
 
     selected_upload_image, selected_upload_kind = _select_note_top_image_for_upload(fetch_result)
@@ -2344,7 +2381,7 @@ def _attach_amazon_top_image_to_page(
             if not _wait_for_editor_content(page, timeout_sec=EDITOR_LOAD_TIMEOUT_SEC):
                 raise RuntimeError("Adobe Express 失敗後のエディタ再読込に失敗しました。")
             before_count = _count_page_images(page)
-            image_button_strategy = _click_top_image_button(page)
+            image_button_strategy = _click_top_image_button(page, artifacts_dir=artifacts_dir)
             _dump_page_artifacts(page, artifacts_dir, "top_image_menu_reopen_after_adobe_failure")
             flow_result = _run_direct_note_image_upload(
                 page,
@@ -2418,7 +2455,7 @@ def _attach_local_top_image_to_page(
     controls_before = _collect_control_snapshot(page)
     _write_json(artifacts_dir / "controls_before_top_image.json", controls_before)
 
-    image_button_strategy = _click_top_image_button(page)
+    image_button_strategy = _click_top_image_button(page, artifacts_dir=artifacts_dir)
     _dump_page_artifacts(page, artifacts_dir, "top_image_menu_open")
     flow_result = _run_direct_note_image_upload(
         page,
