@@ -6,26 +6,6 @@ ACTOR_ID = "1s7eXiaukVuOr4Ueg"
 APIFY_BASE_URL = "https://api.apify.com/v2"
 
 
-def _first_value(item: dict[str, Any], *keys: str) -> Any:
-    for key in keys:
-        value = item.get(key)
-        if value not in (None, ""):
-            return value
-    return ""
-
-
-def _channel_metadata(item: dict[str, Any]) -> tuple[str, str]:
-    channel = item.get("channel")
-    nested_channel = channel if isinstance(channel, dict) else {}
-    channel_name = _first_value(item, "channelName", "channelTitle", "authorName")
-    channel_url = _first_value(item, "channelUrl", "authorUrl")
-    if not channel_name:
-        channel_name = _first_value(nested_channel, "name", "title")
-    if not channel_url:
-        channel_url = _first_value(nested_channel, "url", "channelUrl")
-    return str(channel_name or "").strip(), str(channel_url or "").strip()
-
-
 def _read_response_text(response: requests.Response) -> str:
     try:
         return (response.text or "").strip()
@@ -90,12 +70,6 @@ def get_transcript(video_url: str, api_key: str, language: str = "ja") -> dict[s
                 "title": item.get("title", ""),
             }
 
-        channel_name, channel_url = _channel_metadata(item)
-        duration = _first_value(item, "duration", "durationSeconds")
-        thumbnail_url = _first_value(item, "thumbnailUrl", "thumbnail", "thumbnail_url")
-        published_at = _first_value(item, "publishedAt", "uploadDate", "date")
-        title = _first_value(item, "title", "videoTitle")
-
         return {
             "ok": True,
             "stage": "Apify",
@@ -104,15 +78,10 @@ def get_transcript(video_url: str, api_key: str, language: str = "ja") -> dict[s
             "itemCount": len(data) if isinstance(data, list) else 0,
             "captionChars": len(caption_text),
             "transcript": {
-                "title": str(title or "").strip(),
+                "title": item.get("title", ""),
                 "captions": caption_text,
                 "video_id": item.get("videoId", ""),
                 "url": video_url,
-                "channel_name": channel_name,
-                "channel_url": channel_url,
-                "published_at": str(published_at or "").strip(),
-                "duration": str(duration or "").strip(),
-                "thumbnail_url": str(thumbnail_url or "").strip(),
             },
         }
     except requests.RequestException as error:

@@ -68,7 +68,7 @@ def _resolve_run_mode(args) -> str:
 def _matches_filter(video: dict[str, Any], args) -> bool:
     if args.channel_name and video.get("channel_name") != args.channel_name:
         return False
-    if args.video_url and _video_key(video.get("video_url", "")) != _video_key(args.video_url):
+    if args.video_url and video.get("video_url") != args.video_url:
         return False
     return True
 
@@ -83,71 +83,6 @@ def _now_iso() -> str:
 
 def _video_key(video_url: str) -> str:
     return onedrive_writer.normalize_youtube_url(video_url or "")
-
-
-def _normalize_channel_reference(value: str) -> str:
-    text = str(value or "").strip().casefold().rstrip("/")
-    return "".join(text.split())
-
-
-def _find_target_channel(
-    target_channels: list[dict[str, Any]],
-    requested_channel_name: str,
-    transcript: dict[str, Any],
-) -> dict[str, Any] | None:
-    requested_key = _normalize_channel_reference(requested_channel_name)
-    detected_name_key = _normalize_channel_reference(transcript.get("channel_name", ""))
-    detected_url_key = _normalize_channel_reference(transcript.get("channel_url", ""))
-
-    if requested_key:
-        for channel in target_channels:
-            if _normalize_channel_reference(channel.get("channel_name", "")) == requested_key:
-                return channel
-
-    for channel in target_channels:
-        channel_name_key = _normalize_channel_reference(channel.get("channel_name", ""))
-        channel_url_key = _normalize_channel_reference(channel.get("channel_url", ""))
-        if detected_name_key and channel_name_key == detected_name_key:
-            return channel
-        if detected_url_key and channel_url_key == detected_url_key:
-            return channel
-    return None
-
-
-def _build_manual_video(
-    video_url: str,
-    target_channels: list[dict[str, Any]],
-    apify_result: dict[str, Any],
-    requested_channel_name: str = "",
-) -> dict[str, Any]:
-    if not apify_result.get("ok"):
-        raise ValueError(apify_result.get("error") or "手動URLの動画情報を取得できませんでした")
-
-    transcript = apify_result.get("transcript") or {}
-    channel = _find_target_channel(target_channels, requested_channel_name, transcript)
-    if channel is None:
-        detected_channel = transcript.get("channel_name") or transcript.get("channel_url") or "不明"
-        raise ValueError(
-            "手動URLのチャンネルを「チャンネル設定」と照合できませんでした: "
-            f"{detected_channel}。Run workflow の channel_name に登録済みチャンネル名を指定してください。"
-        )
-
-    normalized_url = _video_key(video_url)
-    return {
-        "row_number": None,
-        "video_url": normalized_url,
-        "video_title": transcript.get("title", ""),
-        "published_at": transcript.get("published_at", ""),
-        "video_updated_at": transcript.get("published_at", ""),
-        "duration": transcript.get("duration", ""),
-        "thumbnail_url": transcript.get("thumbnail_url", ""),
-        "status": "",
-        "channel_name": channel.get("channel_name", ""),
-        "channel_url": channel.get("channel_url", ""),
-        "channel_id": channel.get("id", ""),
-        "gemini_profile": channel.get("gemini_profile", ""),
-        "_manual_input": True,
-    }
 
 
 def _append_processing_log(
@@ -1206,9 +1141,7 @@ def _process_pending_videos(
             geminiCandidateOrder=candidate_order,
         )
 
-        apify_result = video.get("_prefetched_apify_result") or apify_fetcher.get_transcript(
-            video["video_url"], APIFY_API_KEY
-        )
+        apify_result = apify_fetcher.get_transcript(video["video_url"], APIFY_API_KEY)
         if not apify_result.get("ok"):
             error_message = apify_result.get("error") or "Apify から文字起こし取得に失敗しました"
             retry_record = state_store.mark_retry(
@@ -1655,59 +1588,45 @@ def _process_pending_videos(
             geminiCandidateOrder=candidate_order,
         )
 
-        if video.get("row_number"):
-            try:
-                sheet_reader.update_video_status(
-                    SPREADSHEET_ID,
-                    video["row_number"],
-                    COMPLETED_STATUS,
-                    sheet_name=VIDEO_SHEET_NAME,
-                )
-                video["status"] = COMPLETED_STATUS
-                _append_processing_log(
-                    processing_logs,
-                    run_id,
-                    video,
-                    "Sheet",
-                    "success",
-                    "Google Sheets の状態を完了へ更新しました",
-                    geminiRequestedProfile=requested_profile,
-                    geminiResolvedProfile=resolved_profile,
-                    geminiTokenEnv=gemini_token_name,
-                    geminiCandidateOrder=candidate_order,
-                )
-            except Exception as error:
-                _append_failure(
-                    failures_this_run,
-                    video,
-                    "sheet_update",
-                    "Sheet",
-                    str(error),
-                    geminiRequestedProfile=requested_profile,
-                    geminiResolvedProfile=resolved_profile,
-                    geminiTokenEnv=gemini_token_name,
-                    geminiCandidateOrder=candidate_order,
-                )
-                _append_processing_log(
-                    processing_logs,
-                    run_id,
-                    video,
-                    "Sheet",
-                    "failed",
-                    str(error),
-                    geminiRequestedProfile=requested_profile,
-                    geminiResolvedProfile=resolved_profile,
-                    geminiTokenEnv=gemini_token_name,
-                    geminiCandidateOrder=candidate_order,
-                )
-        else:
+        try:
+            sheet_reader.update_video_status(
+                SPREADSHEET_ID,
+                video["row_number"],
+                COMPLETED_STATUS,
+                sheet_name=VIDEO_SHEET_NAME,
+            )
+            video["status"] = COMPLETED_STATUS
             _append_processing_log(
                 processing_logs,
                 run_id,
                 video,
                 "Sheet",
-                "skipped",
-                "手動URLはまだ Google Sheets に行がないため、状態更新を後日の巡回に任せました",
+                "success",
+                "Google Sheets の状態を完了へ更新しました",
+                geminiRequestedProfile=requested_profile,
+                geminiResolvedProfile=resolved_profile,
+                geminiTokenEnv=gemini_token_name,
+                geminiCandidateOrder=candidate_order,
+            )
+        except Exception as error:
+            _append_failure(
+                failures_this_run,
+                video,
+                "sheet_update",
+                "Sheet",
+                str(error),
+                geminiRequestedProfile=requested_profile,
+                geminiResolvedProfile=resolved_profile,
+                geminiTokenEnv=gemini_token_name,
+                geminiCandidateOrder=candidate_order,
+            )
+            _append_processing_log(
+                processing_logs,
+                run_id,
+                video,
+                "Sheet",
+                "failed",
+                str(error),
                 geminiRequestedProfile=requested_profile,
                 geminiResolvedProfile=resolved_profile,
                 geminiTokenEnv=gemini_token_name,
@@ -1748,54 +1667,6 @@ def main():
     saved_articles_before = onedrive_writer.list_saved_articles()
     existing_article_map = _build_existing_article_map(saved_articles_before)
     state = state_store.load_state()
-    prefetched_apify_results: dict[str, dict[str, Any]] = {}
-    manual_article_already_exists = False
-
-    manual_url_key = _video_key(args.video_url)
-    direct_processing_mode = run_mode in {"process_queue", "full"}
-    sheet_has_manual_url = any(
-        _video_key(video.get("video_url", "")) == manual_url_key for video in all_target_videos
-    )
-
-    if (
-        args.video_url
-        and direct_processing_mode
-        and not manual_url_key.startswith("https://www.youtube.com/watch?v=")
-    ):
-        raise ValueError(f"YouTube 動画URLの形式が不正です: {args.video_url}")
-
-    if args.video_url and direct_processing_mode and not sheet_has_manual_url:
-        if manual_url_key in existing_article_map:
-            manual_article_already_exists = True
-            print("手動URLは生成済み記事と一致したため、重複処理をスキップします。")
-        else:
-            queue_record = state.get("videos", {}).get(manual_url_key, {})
-            stored_transcript = {
-                "title": queue_record.get("videoTitle", ""),
-                "channel_name": queue_record.get("channelName", ""),
-                "channel_url": queue_record.get("channelUrl", ""),
-                "published_at": queue_record.get("publishedAt", ""),
-                "duration": queue_record.get("duration", ""),
-                "thumbnail_url": queue_record.get("thumbnailUrl", ""),
-            }
-            stored_metadata_is_usable = bool(
-                queue_record and (stored_transcript["channel_name"] or args.channel_name)
-            )
-
-            if stored_metadata_is_usable:
-                metadata_result = {"ok": True, "transcript": stored_transcript}
-            else:
-                metadata_result = apify_fetcher.get_transcript(args.video_url, APIFY_API_KEY)
-                prefetched_apify_results[manual_url_key] = metadata_result
-
-            manual_video = _build_manual_video(
-                args.video_url,
-                target_channels,
-                metadata_result,
-                requested_channel_name=args.channel_name,
-            )
-            all_target_videos.append(manual_video)
-            print(f"手動URLを即時処理キューへ追加: {manual_video['video_url']}")
 
     if run_mode != "rebuild_manifest_only":
         synced_count = _sync_sheet_status_for_saved_articles(
@@ -1832,18 +1703,12 @@ def main():
     elif run_mode == "sync_only":
         print("Sheets 差分取得とキュー同期のみ実行しました。")
     else:
-        pending_videos = []
-        if not manual_article_already_exists:
-            pending_videos = state_store.list_processable_videos(
-                state,
-                max_items=args.max_items,
-                channel_name=args.channel_name,
-                video_url=args.video_url,
-            )
-        for video in pending_videos:
-            prefetched_result = prefetched_apify_results.get(_video_key(video.get("video_url", "")))
-            if prefetched_result:
-                video["_prefetched_apify_result"] = prefetched_result
+        pending_videos = state_store.list_processable_videos(
+            state,
+            max_items=args.max_items,
+            channel_name=args.channel_name,
+            video_url=args.video_url,
+        )
         if not pending_videos:
             print("今回処理できるキュー対象はありません。")
         else:

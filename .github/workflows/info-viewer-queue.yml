@@ -37,7 +37,28 @@ jobs:
           VERCEL_URL: https://blog-vercel-dun.vercel.app
         run: python scripts/pipeline/sync_onedrive_refresh_token_from_vercel.py
 
+      - name: 手動URLを単発処理
+        if: github.event_name == 'workflow_dispatch'
+        id: manual_info_viewer
+        env:
+          APIFY_API_KEY: ${{ secrets.APIFY_API_KEY }}
+          GEMINI_TOKEN_invest: ${{ secrets.GEMINI_TOKEN_INVEST }}
+          GEMINI_TOKEN_INVESTsub: ${{ secrets.GEMINI_TOKEN_INVESTSUB }}
+          GEMINI_TOKEN_tech: ${{ secrets.GEMINI_TOKEN_TECH }}
+          ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
+          ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          INFO_VIEWER_ONEDRIVE_FOLDER: Obsidian in Onedrive 202602/Vercel_Blog/info_viewer
+          INFO_VIEWER_REQUIRE_NOTION_SAVE: "false"
+          INFO_VIEWER_RETRY_SECONDS: "3600"
+          INFO_VIEWER_QUOTA_RETRY_SECONDS: "7200"
+          INPUT_VIDEO_URL: ${{ github.event.inputs.video_url }}
+        run: python scripts/info_viewer/manual_url.py --video-url "${INPUT_VIDEO_URL}"
+
       - name: info_viewer パイプラインを実行
+        if: github.event_name != 'workflow_dispatch'
         id: info_viewer
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
@@ -103,6 +124,26 @@ jobs:
           fi
 
           "${CMD[@]}"
+
+      - name: Discord Notification (手動URL)
+        if: always() && steps.manual_info_viewer.outputs.notion_urls != ''
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          if [ -z "$DISCORD_WEBHOOK" ]; then
+            echo "DISCORD_WEBHOOK is not set, skipping Discord notification."
+            exit 0
+          fi
+
+          IFS=',' read -ra ITEMS <<< "${{ steps.manual_info_viewer.outputs.notion_urls }}"
+          for ITEM in "${ITEMS[@]}"; do
+            CHANNEL="${ITEM%%|*}"
+            REST="${ITEM#*|}"
+            TITLE="${REST%%|*}"
+            URL="${REST##*|}"
+            MESSAGE="【Notion記事更新】\n${CHANNEL}\n${TITLE}\n${URL}"
+            curl -H "Content-Type: application/json" -d "{\"content\": \"$MESSAGE\"}" "$DISCORD_WEBHOOK"
+          done
 
       - name: Discord Notification
         if: always() && steps.info_viewer.outputs.notion_urls != ''

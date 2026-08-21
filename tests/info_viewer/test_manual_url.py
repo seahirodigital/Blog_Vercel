@@ -10,75 +10,122 @@ INFO_VIEWER_ROOT = PROJECT_ROOT / "scripts" / "info_viewer"
 if str(INFO_VIEWER_ROOT) not in sys.path:
     sys.path.insert(0, str(INFO_VIEWER_ROOT))
 
-import runner
-from modules import apify_fetcher, onedrive_writer, state_store
+import manual_url
+from modules import onedrive_writer, state_store
 
 
 class ManualUrlTest(unittest.TestCase):
-    def setUp(self):
-        self.channel = {
-            "id": "sample-channel",
-            "channel_name": "Sample Channel",
-            "channel_url": "https://www.youtube.com/@sample",
-            "gemini_profile": "invest",
-        }
-
-    def test_url_filter_compares_normalized_video_ids(self):
-        args = SimpleNamespace(channel_name="", video_url="https://youtu.be/abc123?t=30")
-        video = {"video_url": "https://www.youtube.com/watch?v=abc123"}
-
-        self.assertTrue(runner._matches_filter(video, args))
-
-    def test_manual_video_uses_detected_channel_metadata(self):
-        apify_result = {
-            "ok": True,
-            "transcript": {
-                "title": "手動処理テスト",
-                "channel_name": "Sample Channel",
-                "channel_url": "https://www.youtube.com/@sample",
-                "published_at": "2026-08-21T00:00:00Z",
-                "duration": "600",
-                "thumbnail_url": "https://example.com/thumbnail.jpg",
-            },
-        }
-
-        video = runner._build_manual_video(
-            "https://www.youtube.com/shorts/abc123?feature=share",
-            [self.channel],
-            apify_result,
+    def test_manual_url_is_normalized_without_using_regular_runner(self):
+        normalized = manual_url._normalized_video_url(
+            "https://www.youtube.com/shorts/abc123?feature=share"
         )
 
-        self.assertEqual(video["video_url"], "https://www.youtube.com/watch?v=abc123")
-        self.assertEqual(video["channel_name"], "Sample Channel")
-        self.assertEqual(video["gemini_profile"], "invest")
-        self.assertIsNone(video["row_number"])
+        self.assertEqual(normalized, "https://www.youtube.com/watch?v=abc123")
 
-    def test_apify_result_keeps_channel_metadata_for_manual_video(self):
+    def test_oembed_supplies_manual_channel_metadata(self):
         response = Mock()
-        response.status_code = 200
         response.raise_for_status.return_value = None
-        response.json.return_value = [
+        response.json.return_value = {
+            "title": "手動処理テスト",
+            "author_name": "Sample Channel",
+            "author_url": "https://www.youtube.com/@sample",
+            "thumbnail_url": "https://example.com/thumbnail.jpg",
+        }
+
+        with patch.object(manual_url.requests, "get", return_value=response) as request:
+            result = manual_url._fetch_oembed(
+                "https://www.youtube.com/watch?v=abc123"
+            )
+
+        request.assert_called_once()
+        self.assertEqual(result["title"], "手動処理テスト")
+        self.assertEqual(result["channel_name"], "Sample Channel")
+        self.assertEqual(result["channel_url"], "https://www.youtube.com/@sample")
+
+    def test_existing_article_is_found_by_normalized_url(self):
+        saved_articles = [
             {
-                "videoId": "abc123",
-                "title": "手動処理テスト",
-                "captions": "文字起こし本文",
-                "channelName": "Sample Channel",
-                "channelUrl": "https://www.youtube.com/@sample",
-                "publishedAt": "2026-08-21T00:00:00Z",
-                "durationSeconds": 600,
+                "youtubeUrlNormalized": "https://www.youtube.com/watch?v=abc123",
+                "relativePath": "Sample Channel/20260821_test.md",
             }
         ]
 
-        with patch.object(apify_fetcher.requests, "post", return_value=response):
-            result = apify_fetcher.get_transcript(
-                "https://www.youtube.com/watch?v=abc123",
-                "test-api-key",
-            )
+        article = manual_url._find_existing_article(saved_articles, "https://youtu.be/abc123?t=30")
 
-        self.assertTrue(result["ok"])
-        self.assertEqual(result["transcript"]["channel_name"], "Sample Channel")
-        self.assertEqual(result["transcript"]["channel_url"], "https://www.youtube.com/@sample")
-        self.assertEqual(result["transcript"]["duration"], "600")
+        self.assertEqual(article["relativePath"], "Sample Channel/20260821_test.md")
+
+    def test_gemini_candidates_remove_duplicate_tokens(self):
+        candidates = (
+            ("primary", "same-token"),
+            ("secondary", "same-token"),
+            ("tech", "different-token"),
+        )
+
+        with patch.object(manual_url, "GEMINI_TOKEN_CANDIDATES", candidates):
+            result = manual_url._gemini_candidates()
+
+        self.assertEqual(result, [("primary", "same-token"), ("tech", "different-token")])
+
+    def test_manual_main_completes_without_calling_regular_runner(self):
+        state = {"version": 1, "updatedAt": "", "videos": {}}
+        upload_result = {
+            "id": "article-1",
+            "relativePath": "Sample Channel/20260821_test.md",
+            "title": "手動処理テスト",
+        }
+
+        with (
+            patch.object(
+                manual_url,
+                "parse_args",
+                return_value=SimpleNamespace(video_url="https://youtu.be/abc123"),
+            ),
+            patch.object(manual_url, "APIFY_API_KEY", "test-apify-key"),
+            patch.object(manual_url, "GEMINI_TOKEN_CANDIDATES", (("primary", "test-gemini-key"),)),
+            patch.object(manual_url.onedrive_writer, "list_saved_articles", return_value=[]),
+            patch.object(
+                manual_url,
+                "_fetch_oembed",
+                return_value={
+                    "title": "手動処理テスト",
+                    "channel_name": "Sample Channel",
+                    "channel_url": "https://www.youtube.com/@sample",
+                    "thumbnail_url": "https://example.com/thumbnail.jpg",
+                },
+            ),
+            patch.object(manual_url.state_store, "load_state", return_value=state),
+            patch.object(manual_url.state_store, "save_state"),
+            patch.object(
+                manual_url.apify_fetcher,
+                "get_transcript",
+                return_value={
+                    "ok": True,
+                    "transcript": {
+                        "title": "手動処理テスト",
+                        "captions": "文字起こし本文",
+                        "url": "https://www.youtube.com/watch?v=abc123",
+                    },
+                },
+            ),
+            patch.object(
+                manual_url.gemini_formatter,
+                "format_transcript",
+                return_value={"ok": True, "markdown": "# 手動処理テスト"},
+            ),
+            patch.object(
+                manual_url.onedrive_writer,
+                "upload_markdown",
+                return_value=upload_result,
+            ) as upload,
+            patch.object(manual_url.notion_writer, "is_configured", return_value=False),
+            patch.object(manual_url, "_save_github_output"),
+        ):
+            result = manual_url.main()
+
+        self.assertEqual(result, 0)
+        upload.assert_called_once()
+        normalized_url = "https://www.youtube.com/watch?v=abc123"
+        self.assertEqual(state["videos"][normalized_url]["status"], state_store.DONE_STATUS)
 
     def test_later_sheet_row_merges_with_manual_video_without_reprocessing(self):
         state = {"version": 1, "updatedAt": "", "videos": {}}
