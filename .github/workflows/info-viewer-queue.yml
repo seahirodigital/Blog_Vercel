@@ -5,9 +5,6 @@ on:
     - cron: "0,30 * * * *"
     - cron: "15 * * * *"
   workflow_dispatch:
-  repository_dispatch:
-    types: [trigger-from-appsheet-info-viewer, trigger-from-appsheet]
-
     inputs:
       mode:
         description: "実行モード"
@@ -37,6 +34,8 @@ on:
         required: false
         type: boolean
         default: false
+  repository_dispatch:
+    types: [trigger-from-appsheet-info-viewer, trigger-from-appsheet]
 
 jobs:
   build-info-viewer:
