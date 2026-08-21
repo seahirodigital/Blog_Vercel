@@ -6,34 +6,10 @@ on:
     - cron: "15 * * * *"
   workflow_dispatch:
     inputs:
-      mode:
-        description: "実行モード"
-        required: false
-        type: choice
-        default: process_queue
-        options:
-          - process_queue
-          - sync_only
-          - full_pipeline
-          - rebuild_manifest_only
-          - notion_backfill
-      max_items:
-        description: "1回で処理する最大件数"
-        required: false
-        default: "2"
-      channel_name:
-        description: "特定チャンネルだけを処理する場合のチャンネル名"
-        required: false
-        default: ""
       video_url:
-        description: "単一動画だけを処理する場合の動画 URL"
-        required: false
-        default: ""
-      rebuild_manifest_only:
-        description: "manifest 再構築だけを強制する"
-        required: false
-        type: boolean
-        default: false
+        description: "今すぐ処理する YouTube 動画URL"
+        required: true
+        type: string
   repository_dispatch:
     types: [trigger-from-appsheet-info-viewer, trigger-from-appsheet]
 
@@ -82,11 +58,11 @@ jobs:
           INFO_VIEWER_GEMINI_SERIAL_DELAY_SECONDS: "20"
           INFO_VIEWER_RETRY_SECONDS: "3600"
           INFO_VIEWER_QUOTA_RETRY_SECONDS: "7200"
-          INPUT_MODE: ${{ github.event.inputs.mode || 'process_queue' }}
-          INPUT_MAX_ITEMS: ${{ github.event.inputs.max_items || '2' }}
-          INPUT_CHANNEL_NAME: ${{ github.event.inputs.channel_name || '' }}
+          INPUT_MODE: process_queue
+          INPUT_MAX_ITEMS: ${{ github.event_name == 'workflow_dispatch' && '1' || '2' }}
+          INPUT_CHANNEL_NAME: ""
           INPUT_VIDEO_URL: ${{ github.event.inputs.video_url || '' }}
-          INPUT_REBUILD_MANIFEST_ONLY: ${{ github.event.inputs.rebuild_manifest_only || 'false' }}
+          INPUT_REBUILD_MANIFEST_ONLY: "false"
           EVENT_NAME: ${{ github.event_name }}
           EVENT_SCHEDULE: ${{ github.event.schedule || '' }}
         run: |
