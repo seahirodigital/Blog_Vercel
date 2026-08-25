@@ -9835,7 +9835,7 @@
   },
   {
     "id": "11a4c488-5386-4eee-be6f-30221899d55f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1d68961af0944b228389b3b39de0e7f0",
     "title": "Jackery (ジャクリ) ポータブル電源 1500 New レビュー比較まとめ",
     "name": "Jackery A74000WdpB0FX4YBZV4 40Ah38 330x221x242mm ジャクリ ポータブル電.md",
@@ -9844,10 +9844,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-25T16:00:00.000Z",
     "createdAt": "2026-08-25T12:24:00.984Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-25T15:25:09.978527+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "27df3bd1-edba-4827-9c1a-5776af4321ed",
