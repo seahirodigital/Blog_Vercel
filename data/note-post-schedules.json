@@ -9692,7 +9692,7 @@
   },
   {
     "id": "86c7c695-a27d-4998-b6cf-5e81201288b8",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa36db44c05104dcdb14499019752eeb5",
     "title": "BLUETTI AORA300 ドライヤー レビュー比較まとめ",
     "name": "BLUETTI AORA300 ドライヤー レビュー比較まとめ.md",
@@ -9704,6 +9704,7 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-25T04:38:30.348Z"
   }
 ]
