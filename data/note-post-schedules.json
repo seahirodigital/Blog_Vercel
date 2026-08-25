@@ -9853,7 +9853,7 @@
   },
   {
     "id": "27df3bd1-edba-4827-9c1a-5776af4321ed",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6eb20ffd295348d2b1e83a5c7a0392fd",
     "title": "Jackery 20Ah25 LiFePO4 UL94-V0 炊飯器 レビュー比較まとめ",
     "name": "Jackery 20Ah25 LiFePO4 UL94-V0 炊飯器 レビュー比較まとめ.md",
@@ -9862,10 +9862,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-25T16:30:00.000Z",
     "createdAt": "2026-08-25T12:24:00.984Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-25T15:55:38.734814+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "052f3e74-6deb-4a7d-a1f0-835e54701166",
