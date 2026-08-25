@@ -10253,7 +10253,7 @@
   },
   {
     "id": "e0c483ad-13ce-462d-830e-aa5b3cdadddf",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbe3a76b1c0e94dbdbc4de1fcf4be7e4f",
     "title": "Jackery (ジャクリ) ポータブル電源 2000 New 200W ソーラーパネル 1枚 2点セット 2042Wh レビュー比較まとめ",
     "name": "Jackery A74400WdpB0DBQCN7HZ 2000Pro UL1778 ポータブルエアコン レビュー比較ま.md",
@@ -10265,7 +10265,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-25T12:23:19.667Z"
   },
   {
     "id": "247f57a2-01ad-40f1-b9dc-b77e94a2cb77",
