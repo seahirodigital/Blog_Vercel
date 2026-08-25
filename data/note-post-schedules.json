@@ -9871,7 +9871,7 @@
   },
   {
     "id": "052f3e74-6deb-4a7d-a1f0-835e54701166",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb4eb545805d944089885526164ca6363",
     "title": "DJI 1000V2 DY2000 power1000V2 Power 2000 ポータブル電源 レビュー比較まとめ",
     "name": "DJI 1000V2 DY2000 power1000V2 Power 2000 ポータブル電源 レビュー比較まとめ.md",
@@ -9880,10 +9880,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-25T17:00:00.000Z",
     "createdAt": "2026-08-25T12:24:00.984Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-25T16:25:05.292626+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "32dd0e1e-cb6e-4195-a1ca-6da66a786dd2",
