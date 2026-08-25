@@ -9907,7 +9907,7 @@
   },
   {
     "id": "acf10b67-f91d-4a22-acb4-c234d5cd0d41",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf45b85ba48ca45a1ba2f3953810804b8",
     "title": "DJI Power 1000 V2 ポータブル電源 レビュー比較まとめ",
     "name": "DJI Power 1000 V2 ポータブル電源 レビュー比較まとめ.md",
@@ -9916,10 +9916,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-25T18:00:00.000Z",
     "createdAt": "2026-08-25T12:24:00.984Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-25T17:25:01.534959+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8efc5eb3-349b-4b10-a500-81c43da1fc5c",
