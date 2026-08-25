@@ -9624,7 +9624,7 @@
   },
   {
     "id": "e3bef5d2-bb9c-4033-908d-bab6b16af12b",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s0e94e052ff3c41be94f18aba34d3a6a7",
     "title": "タンスのゲン B3-100985dpB0B1PXB3WT 32x 31x ポータブルエアコン レビュー比較まとめ",
     "name": "タンスのゲン B3-100985dpB0B1PXB3WT 32x 31x ポータブルエアコン レビュー比較まとめ.md",
@@ -9634,8 +9634,8 @@
     "publishAt": "2026-08-25T12:30:00.000Z",
     "createdAt": "2026-08-25T12:24:00.984Z",
     "queuedAt": "2026-08-25T12:24:00.985Z",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-25T12:32:25.264243+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nfcfac8dab3e3?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-direct",
     "dispatchAttempts": 1
