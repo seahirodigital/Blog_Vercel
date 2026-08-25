@@ -9817,7 +9817,7 @@
   },
   {
     "id": "0be6d2fc-822e-42e5-b4a6-d3381dfb67e9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s663dbdc5f74c4f27b619d06ed57aabbc",
     "title": "DJI A8 1000V2 power1000V2 トースター レビュー比較まとめ",
     "name": "DJI A8 1000V2 power1000V2 トースター レビュー比較まとめ.md",
@@ -9826,10 +9826,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-25T15:30:00.000Z",
     "createdAt": "2026-08-25T12:24:00.984Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-25T14:55:43.476965+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "11a4c488-5386-4eee-be6f-30221899d55f",
