@@ -9799,7 +9799,7 @@
   },
   {
     "id": "25595973-a524-4c3c-8541-1342f3cf13e8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1a948ddfc8494dc0910497ebcf2babc0",
     "title": "Jackery 3600Plus 50Hz60Hz 炊飯器 レビュー比較まとめ",
     "name": "Jackery 3600Plus 50Hz60Hz 炊飯器 レビュー比較まとめ.md",
@@ -9808,10 +9808,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-25T15:00:00.000Z",
     "createdAt": "2026-08-25T12:24:00.984Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-25T14:25:15.209498+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0be6d2fc-822e-42e5-b4a6-d3381dfb67e9",
