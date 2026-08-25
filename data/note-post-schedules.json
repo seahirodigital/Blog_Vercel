@@ -9764,7 +9764,7 @@
   },
   {
     "id": "ec83a29b-f076-48dd-80c2-b334495025f1",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2e155485c06845aea0c0a68fa1919982",
     "title": "Jackery A76000WdpB0DWSL6GJ4 3000Pro UL1778 ポータブルエアコン レビュー比較ま",
     "name": "Jackery A76000WdpB0DWSL6GJ4 3000Pro UL1778 ポータブルエアコン レビュー比較ま.md",
@@ -9774,8 +9774,8 @@
     "publishAt": "2026-08-25T14:30:00.000Z",
     "createdAt": "2026-08-25T12:24:00.984Z",
     "queuedAt": "2026-08-25T13:55:47.184563+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-25T14:32:46.525589+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n9295e67394fe?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
