@@ -9889,7 +9889,7 @@
   },
   {
     "id": "32dd0e1e-cb6e-4195-a1ca-6da66a786dd2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se6af66683ef9481e9b55ccf54920bfa0",
     "title": "ZAPJQL SF-80 ポータブルエアコン レビュー比較まとめ",
     "name": "ZAPJQL SF-80 ポータブルエアコン レビュー比較まとめ.md",
@@ -9898,10 +9898,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-25T17:30:00.000Z",
     "createdAt": "2026-08-25T12:24:00.984Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-25T16:55:33.759849+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "acf10b67-f91d-4a22-acb4-c234d5cd0d41",
