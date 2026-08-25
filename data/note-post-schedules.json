@@ -9694,7 +9694,7 @@
   },
   {
     "id": "83b1656e-2180-4583-97f6-22f0011b0433",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s26ce532da17a4be488e05a699e933e7f",
     "title": "MAXZEN MSC-ST25TH-WHTH ポータブルエアコン レビュー比較まとめ",
     "name": "MAXZEN MSC-ST25TH-WHTH ポータブルエアコン レビュー比較まとめ.md",
@@ -9704,8 +9704,8 @@
     "publishAt": "2026-08-25T13:30:00.000Z",
     "createdAt": "2026-08-25T12:24:00.984Z",
     "queuedAt": "2026-08-25T13:37:27.376341+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-25T13:40:45.386186+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n6b44cc7b839c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
