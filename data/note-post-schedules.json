@@ -9997,7 +9997,7 @@
   },
   {
     "id": "22df8fdf-78a4-4976-a51f-dd2cf1fab92c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa36db44c05104dcdb14499019752eeb5",
     "title": "BLUETTI AORA300 ドライヤー レビュー比較まとめ",
     "name": "BLUETTI AORA300 ドライヤー レビュー比較まとめ.md",
@@ -10006,10 +10006,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-25T20:30:00.000Z",
     "createdAt": "2026-08-25T12:24:00.984Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-25T19:55:02.880660+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "feb718d0-4f6e-4a68-8c89-171b9dd9ac7f",
