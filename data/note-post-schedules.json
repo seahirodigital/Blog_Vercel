@@ -9925,7 +9925,7 @@
   },
   {
     "id": "8efc5eb3-349b-4b10-a500-81c43da1fc5c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5ac25531824b4a8daf85ee9c971d5f0a",
     "title": "シャープ CV-T71-W 衣類乾燥除湿機 レビュー比較まとめ",
     "name": "シャープ CV-T71-W 衣類乾燥除湿機 レビュー比較まとめ.md",
@@ -9934,10 +9934,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-25T18:30:00.000Z",
     "createdAt": "2026-08-25T12:24:00.984Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-25T17:55:31.491611+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d70758e4-095c-4d1b-9806-489d573ed7ac",
