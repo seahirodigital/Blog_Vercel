@@ -9420,7 +9420,7 @@
   },
   {
     "id": "8407308c-46c6-4524-b2fa-2f6a39a2be05",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se6af66683ef9481e9b55ccf54920bfa0",
     "title": "ZAPJQL SF-80 ポータブルエアコン レビュー比較まとめ",
     "name": "ZAPJQL SF-80 ポータブルエアコン レビュー比較まとめ.md",
@@ -9432,11 +9432,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-25T04:38:26.056Z"
   },
   {
     "id": "c5e7c0f6-c807-4d77-a6c9-ffecd4ee79f1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s003bc3d38d4c4baf99f04bb2bf66789e",
     "title": "Jackery (ジャクリ) ポータブル電源 2000 New V2 200W レビュー比較まとめ",
     "name": "Jackery V2 ジャクリ ポータブル電源 レビュー比較まとめ.md",
@@ -9448,11 +9449,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-25T04:38:26.056Z"
   },
   {
     "id": "d9c08339-730a-47bf-99ab-bbd2efda5601",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6eb20ffd295348d2b1e83a5c7a0392fd",
     "title": "Jackery (ジャクリ) ポータブル電源 500 New レビュー比較まとめ",
     "name": "Jackery 20Ah25 LiFePO4 UL94-V0 炊飯器 レビュー比較まとめ.md",
@@ -9464,11 +9466,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-25T04:38:26.056Z"
   },
   {
     "id": "97bb953f-c1b3-4b38-9188-56f6d20eb1a0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5ac25531824b4a8daf85ee9c971d5f0a",
     "title": "シャープ CV-T71-W 衣類乾燥除湿機 レビュー比較まとめ",
     "name": "シャープ CV-T71-W 衣類乾燥除湿機 レビュー比較まとめ.md",
@@ -9480,11 +9483,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-25T04:38:26.056Z"
   },
   {
     "id": "9d6c0d26-e5e1-4c33-8b67-1466888ce001",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sff5539cc65914b9b8192d2a99ab56105",
     "title": "Anker Solix C1000 Gen 2 Portable Power Station レビュー比較まとめ",
     "name": "Anker C1000 ドライヤー レビュー比較まとめ.md",
@@ -9496,11 +9500,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-25T04:38:26.056Z"
   },
   {
     "id": "197a25e8-122a-4195-9892-f8fdd097e3f8",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc7bbde2575d24da1a9cd8bd427e05b17",
     "title": "Jackery (ジャクリ) ポータブル電源 1000 New レビュー比較まとめ",
     "name": "Jackery A73000WdpB0D3HLP1NM JS-100F UL1778 ポータブルエアコン レビュー比較ま.md",
@@ -9512,11 +9517,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-25T04:38:26.056Z"
   },
   {
     "id": "6f8d0b4a-a822-4d2c-a978-f3a06408c07e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s663dbdc5f74c4f27b619d06ed57aabbc",
     "title": "DJI Power 500 ポータブル電源 レビュー比較まとめ",
     "name": "DJI A8 1000V2 power1000V2 トースター レビュー比較まとめ.md",
@@ -9528,11 +9534,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-25T04:38:26.056Z"
   },
   {
     "id": "f27673d4-6764-42c0-b7dc-94e737180d7d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc46adc58f39d4459ab8f348a8940e978",
     "title": "EcoFlow ポータブル電源 DELTA 3 Max レビュー比較まとめ",
     "name": "EF ECOFLOW SiC1 D3C 300DC ポータブルエアコン レビュー比較まとめ.md",
@@ -9544,11 +9551,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-25T04:38:26.056Z"
   },
   {
     "id": "4d29a6ee-bfa1-47fc-a827-c7906429c42c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb4eb545805d944089885526164ca6363",
     "title": "DJI 1000V2 DY2000 power1000V2 Power 2000 ポータブル電源 レビュー比較まとめ",
     "name": "DJI 1000V2 DY2000 power1000V2 Power 2000 ポータブル電源 レビュー比較まとめ.md",
@@ -9560,11 +9568,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-25T04:38:26.056Z"
   },
   {
     "id": "76c4e468-05ee-4105-8a43-fa6114912358",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf45b85ba48ca45a1ba2f3953810804b8",
     "title": "DJI Power 1000 V2 ポータブル電源 レビュー比較まとめ",
     "name": "DJI Power 1000 V2 ポータブル電源 レビュー比較まとめ.md",
@@ -9576,11 +9585,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-25T04:38:26.056Z"
   },
   {
     "id": "2b4f04b8-0d04-4a63-bc51-ebe0cbfe23b9",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2e155485c06845aea0c0a68fa1919982",
     "title": "ackery (ジャクリ) ポータブル電源 3000 New レビュー比較まとめ",
     "name": "Jackery A76000WdpB0DWSL6GJ4 3000Pro UL1778 ポータブルエアコン レビュー比較ま.md",
@@ -9592,11 +9602,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-25T04:38:26.056Z"
   },
   {
     "id": "422ac43f-0a5c-4727-8db5-94d40bfa01cc",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s1a948ddfc8494dc0910497ebcf2babc0",
     "title": "Jackery (ジャクリ) ポータブル電源 3600Plus 3584Wh レビュー比較まとめ",
     "name": "Jackery 3600Plus 50Hz60Hz 炊飯器 レビュー比較まとめ.md",
@@ -9608,11 +9619,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-25T04:38:26.056Z"
   },
   {
     "id": "5744efc5-0890-4046-847b-d33caeb2e64b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s1d68961af0944b228389b3b39de0e7f0",
     "title": "Jackery (ジャクリ) ポータブル電源 1500 New レビュー比較まとめ",
     "name": "Jackery A74000WdpB0FX4YBZV4 40Ah38 330x221x242mm ジャクリ ポータブル電.md",
@@ -9624,11 +9636,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-25T04:38:26.056Z"
   },
   {
     "id": "db67a37d-fe8d-43c1-b1b7-ddaadea9f95e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0e94e052ff3c41be94f18aba34d3a6a7",
     "title": "タンスのゲン79800000(119653)スポットクーラー  レビュー比較まとめ",
     "name": "タンスのゲン B3-100985dpB0B1PXB3WT 32x 31x ポータブルエアコン レビュー比較まとめ.md",
@@ -9640,11 +9653,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-25T04:38:26.056Z"
   },
   {
     "id": "9cb34bf0-4d15-46ee-b703-9899f2e622f9",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbe3a76b1c0e94dbdbc4de1fcf4be7e4f",
     "title": "Jackery (ジャクリ) ポータブル電源 2000 New 200W ソーラーパネル 1枚 2点セット 2042Wh レビュー比較まとめ",
     "name": "Jackery A74400WdpB0DBQCN7HZ 2000Pro UL1778 ポータブルエアコン レビュー比較ま.md",
@@ -9656,11 +9670,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-25T04:38:26.056Z"
   },
   {
     "id": "716e13cc-6d2e-48e4-8e80-70f297f58b66",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s26ce532da17a4be488e05a699e933e7f",
     "title": "MAXZEN MSC-ST25TH-WHTH スポットクーラー 業務用 レビュー比較まとめ",
     "name": "MAXZEN MSC-ST25TH-WHTH ポータブルエアコン レビュー比較まとめ.md",
@@ -9672,7 +9687,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-25T04:38:26.056Z"
   },
   {
     "id": "86c7c695-a27d-4998-b6cf-5e81201288b8",
