@@ -10610,7 +10610,7 @@
   },
   {
     "id": "61547233-460c-4d56-bd3e-6160d8099cfc",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s706a38f990604d48b1ec59078be35c33",
     "title": "シャープ ES-X12C-TL ドラム式洗濯乾燥機 レビュー比較まとめ",
     "name": "シャープ ES-X12C-TL ドラム式洗濯乾燥機 レビュー比較まとめ.md",
@@ -10619,14 +10619,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-27T08:00:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-27T18:19:13.048676+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2308c371-0317-4bb2-80b3-84471255912e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9041012584f84e4381bf32062edd4ac5",
     "title": "タイガー魔法瓶 JPI-S10NK 炊飯器 レビュー比較まとめ",
     "name": "タイガー魔法瓶 JPI-S10NK 炊飯器 レビュー比較まとめ.md",
@@ -10635,14 +10637,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-27T09:00:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-27T18:19:13.048676+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ea381932-aef8-4133-9ae2-005c9c088425",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9e2c930b0a314a398d2d1de768bc9550",
     "title": "Eufy(ユーフィ) S4 Anker eufyCam レビュー比較まとめ",
     "name": "Eufy(ユーフィ) S4 Anker eufyCam レビュー比較まとめ.md",
@@ -10651,14 +10655,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-27T12:00:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-27T18:19:13.048676+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "38812c61-a413-4b1e-a8c9-0b162e0cac18",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s910f80994c2f4d80aa03eff994c49aa0",
     "title": "xiaomi(シャオミ) X20Max 掃除機 レビュー比較まとめ",
     "name": "xiaomi(シャオミ) X20Max 掃除機 レビュー比較まとめ.md",
@@ -10667,14 +10673,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-27T12:30:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-27T18:19:13.048676+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "09373002-1e53-4c8f-8f96-3692e27bc28c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s67d1a2e8fac04b7b91e08c47171fdaab",
     "title": "De'Longhi(デロンギ) ECAM22062W 全自動コーヒーマシン マグニフィカスタート レビュー比較まとめ",
     "name": "De'Longhi(デロンギ) ECAM22062W 全自動コーヒーマシン マグニフィカスタート レビュー比較まとめ.md",
@@ -10683,10 +10691,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-27T13:00:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-27T18:19:13.048676+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8695fcea-e4ef-4561-841d-61ff60249904",
