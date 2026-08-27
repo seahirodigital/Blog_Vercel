@@ -10682,7 +10682,7 @@
   },
   {
     "id": "09373002-1e53-4c8f-8f96-3692e27bc28c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s67d1a2e8fac04b7b91e08c47171fdaab",
     "title": "De'Longhi(デロンギ) ECAM22062W 全自動コーヒーマシン マグニフィカスタート レビュー比較まとめ",
     "name": "De'Longhi(デロンギ) ECAM22062W 全自動コーヒーマシン マグニフィカスタート レビュー比較まとめ.md",
@@ -10692,8 +10692,8 @@
     "publishAt": "2026-08-27T13:00:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
     "queuedAt": "2026-08-27T18:19:13.048676+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-27T18:22:10.538837+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n3286cb507eb8?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
