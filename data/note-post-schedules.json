@@ -10664,7 +10664,7 @@
   },
   {
     "id": "38812c61-a413-4b1e-a8c9-0b162e0cac18",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s910f80994c2f4d80aa03eff994c49aa0",
     "title": "xiaomi(シャオミ) X20Max 掃除機 レビュー比較まとめ",
     "name": "xiaomi(シャオミ) X20Max 掃除機 レビュー比較まとめ.md",
@@ -10674,8 +10674,8 @@
     "publishAt": "2026-08-27T12:30:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
     "queuedAt": "2026-08-27T18:19:13.048676+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-27T18:21:53.106149+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n640e949b8880?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
