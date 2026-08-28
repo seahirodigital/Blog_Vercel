@@ -1537,6 +1537,42 @@
         .trim();
     }
 
+    const SEO_RENAME_TITLE_LENGTH_STORAGE_KEY = 'sb_seoRenameTitleLength';
+    const SEO_RENAME_DEFAULT_TITLE_LENGTH = 40;
+
+    function normalizeSeoRenameTitleLength(value) {
+      const parsed = Number.parseInt(String(value || ''), 10);
+      if (!Number.isInteger(parsed)) return SEO_RENAME_DEFAULT_TITLE_LENGTH;
+      return Math.min(200, Math.max(1, parsed));
+    }
+
+    function isAmazonUrlValue(value) {
+      return /https?:\/\/(?:www\.)?(?:amazon\.(?:co\.jp|com|co\.uk|de|fr)|amzn\.(?:to|asia))\//i.test(String(value || ''));
+    }
+
+    function findFirstAmazonUrl(markdown) {
+      const match = String(markdown || '').match(/https?:\/\/(?:www\.)?(?:amazon\.(?:co\.jp|com|co\.uk|de|fr)|amzn\.(?:to|asia))\/[^\s)\]>"']+/i);
+      return match ? match[0].replace(/&amp;/gi, '&').replace(/[、。,.]+$/g, '') : '';
+    }
+
+    function normalizeSeoOgpTitle(value) {
+      const withoutAmazonPageName = String(value || '')
+        .replace(/^Amazon(?:\.(?:co\.jp|com))?\s*[:：|－-]\s*/i, '')
+        .replace(/\s*[:：|]\s*Amazon(?:\.(?:co\.jp|com))?(?::.*)?$/i, '');
+      return normalizeFindReplaceReplacement(withoutAmazonPageName)
+        .replace(/^[\s　:：|－-]+|[\s　:：|－-]+$/g, '')
+        .trim();
+    }
+
+    function truncateUnicodeText(value, length) {
+      return Array.from(String(value || '')).slice(0, normalizeSeoRenameTitleLength(length)).join('');
+    }
+
+    function replacePlainText(content, findText, replaceText) {
+      if (!findText) return String(content || '');
+      return String(content || '').split(findText).join(String(replaceText || ''));
+    }
+
     function getFindReplaceHighlightedText(textarea, preview) {
       if (textarea && document.activeElement === textarea) {
         const start = Number(textarea.selectionStart);
@@ -1668,7 +1704,7 @@
     }
 
     // === フォルダツリー コンポーネント ===
-    function FolderTree({ articles, selectedId, onSelect, loading, onDeleteArticle, onDeleteFolders, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onCreateAccessory, onCreateTitleVariant, onOpenAccessoryReport, hiddenFolders, onHideFolder, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, onMultiSelect, onRangeSelect, multiSelectedIds, scheduledPostIds = new Set(), scheduledPostMap = new Map(), missedNotePostMap = new Map(), articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder, folderLoadSettings = {}, onChangeFolderLoadSetting, rootArticleLimit = ROOT_ARTICLE_DEFAULT_LIMIT, onChangeRootArticleLimit, flatMode = false, searchQuery = '', contextArticles = null }) {
+    function FolderTree({ articles, selectedId, onSelect, loading, onDeleteArticle, onDeleteFolders, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onSeoRename, onCreateAccessory, onCreateTitleVariant, onOpenAccessoryReport, hiddenFolders, onHideFolder, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, onMultiSelect, onRangeSelect, multiSelectedIds, scheduledPostIds = new Set(), scheduledPostMap = new Map(), missedNotePostMap = new Map(), articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder, folderLoadSettings = {}, onChangeFolderLoadSetting, rootArticleLimit = ROOT_ARTICLE_DEFAULT_LIMIT, onChangeRootArticleLimit, flatMode = false, searchQuery = '', contextArticles = null }) {
       const [openFolders, setOpenFolders] = useState({});
       const [ctxMenu, setCtxMenu] = useState({ visible: false, x: 0, y: 0, article: null });
       const [folderCtxMenu, setFolderCtxMenu] = useState({ visible: false, x: 0, y: 0, path: '' });
@@ -1852,9 +1888,9 @@
       const handleContextMenu = (e, article) => {
         e.preventDefault();
         e.stopPropagation();
-        const MENU_W = 250, MENU_H = 440;
+        const MENU_W = 250, MENU_H = 490;
         const x = Math.min(e.clientX, window.innerWidth - MENU_W - 8);
-        const y = Math.min(e.clientY, window.innerHeight - MENU_H - 8);
+        const y = Math.max(8, Math.min(e.clientY, window.innerHeight - MENU_H - 8));
         setCtxMenu({ visible: true, x, y, article });
       };
 
@@ -2309,7 +2345,7 @@
           {ctxMenu.visible && (
             <div
               onClick={e => e.stopPropagation()}
-              style={{ position: 'fixed', top: ctxMenu.y, left: ctxMenu.x, zIndex: 9999, background: 'white', borderRadius: '8px', boxShadow: '0 4px 24px rgba(0,0,0,0.15)', border: '1px solid #e2e8f0', minWidth: '190px', padding: '4px 0', overflow: 'hidden' }}
+              style={{ position: 'fixed', top: ctxMenu.y, left: ctxMenu.x, zIndex: 9999, background: 'white', borderRadius: '8px', boxShadow: '0 4px 24px rgba(0,0,0,0.15)', border: '1px solid #e2e8f0', minWidth: '190px', maxHeight: 'calc(100vh - 16px)', padding: '4px 0', overflowY: 'auto' }}
             >
               {rootLoadControls}
               <div style={{ height: '1px', background: '#e2e8f0', margin: '4px 0' }} />
@@ -2356,6 +2392,17 @@
               >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M4 7h16M4 12h10M4 17h8" /><path d="M17 14l3 3-3 3M20 17h-6" /></svg>
                 タイトル変更
+              </button>
+              <button
+                onClick={() => {
+                  onSeoRename && onSeoRename(getContextTargetArticles(ctxMenu.article));
+                  setCtxMenu(m => ({ ...m, visible: false }));
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = '#f0fdfa'} onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '9px 14px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '13px', color: '#0f766e', textAlign: 'left', fontWeight: 600 }}
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M4 5h16M4 12h10M4 19h8" /><path d="M16 15l4 4M20 15l-4 4" /></svg>
+                SEO名称変更{getContextTargetIds(ctxMenu.article).length > 1 ? `（${getContextTargetIds(ctxMenu.article).length}件）` : ''}
               </button>
               <button
                 onClick={() => {
@@ -2609,7 +2656,7 @@
     }
 
     // === サイドバー コンポーネント ===
-    function Sidebar({ articles, selectedId, onSelect, onNewArticle, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle, mobileSidebarOpen, onMobileClose, onDeleteArticle, onDeleteFolders, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onCreateAccessory, onCreateTitleVariant, onOpenAccessoryReport, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, multiSelectedIds, onMultiSelect, onRangeSelect, scheduledPostIds = new Set(), scheduledPostMap = new Map(), missedNotePostMap = new Map(), setAffModalOpen, articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder, rootArticleLimit = ROOT_ARTICLE_DEFAULT_LIMIT, onChangeRootArticleLimit, externalFolderUrls = [], setExternalFolderUrls, onRefreshArticles }) {
+    function Sidebar({ articles, selectedId, onSelect, onNewArticle, loading, sidebarWidth, onResizeStart, isCollapsed, onToggle, mobileSidebarOpen, onMobileClose, onDeleteArticle, onDeleteFolders, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onSeoRename, onCreateAccessory, onCreateTitleVariant, onOpenAccessoryReport, selectMode, selectedIds, onToggleSelect, onEnterSelectMode, multiSelectedIds, onMultiSelect, onRangeSelect, scheduledPostIds = new Set(), scheduledPostMap = new Map(), missedNotePostMap = new Map(), setAffModalOpen, articleH1Cache, folderMeta = {}, folderLoading = {}, onLoadFolder, rootArticleLimit = ROOT_ARTICLE_DEFAULT_LIMIT, onChangeRootArticleLimit, externalFolderUrls = [], setExternalFolderUrls, onRefreshArticles }) {
       // 非表示フォルダ管理（localStorageで永続化）
       const [hiddenFolders, setHiddenFolders] = useState(() => {
         try {
@@ -2866,7 +2913,7 @@
 
       const folderTreeProps = {
         articles, selectedId, loading,
-        onDeleteArticle, onDeleteFolders, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onCreateAccessory, onCreateTitleVariant, onOpenAccessoryReport,
+        onDeleteArticle, onDeleteFolders, onDuplicateArticle, onMoveArticle, onSchedulePost, onBulkReplace, onSeoRename, onCreateAccessory, onCreateTitleVariant, onOpenAccessoryReport,
         hiddenFolders, onHideFolder: toggleFolderVisibility,
         selectMode, selectedIds, onToggleSelect, onEnterSelectMode,
         multiSelectedIds, onMultiSelect, onRangeSelect,
@@ -3626,6 +3673,67 @@
       return text === href || text === href.replace(/^https?:\/\//, '');
     }
 
+    const seoViewerOgpCache = new Map();
+
+    function SeoArticleViewer({ markdown }) {
+      const viewerRef = useRef(null);
+      const html = useMemo(() => {
+        try {
+          const processed = String(markdown || '').replace(/\n{3,}/g, (matched) => {
+            const extra = matched.length - 2;
+            return '\n\n' + Array(extra).fill('<br>').join('\n') + '\n\n';
+          });
+          return marked.parse(processed);
+        } catch {
+          return '<p>Markdownの解析に失敗しました</p>';
+        }
+      }, [markdown]);
+
+      useEffect(() => {
+        const viewer = viewerRef.current;
+        if (!viewer) return;
+        let cancelled = false;
+        const anchors = [...viewer.querySelectorAll('a[href^="http"]')].filter(isOgpUrl);
+
+        const renderCards = async () => {
+          for (const anchor of anchors) {
+            if (cancelled || !anchor.isConnected) return;
+            const href = anchor.getAttribute('href') || '';
+            try {
+              if (!seoViewerOgpCache.has(href)) {
+                const request = fetch(`/api/ogp?url=${encodeURIComponent(href)}`)
+                  .then((response) => {
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    return response.json();
+                  })
+                  .catch((error) => {
+                    seoViewerOgpCache.delete(href);
+                    throw error;
+                  });
+                seoViewerOgpCache.set(href, request);
+              }
+              const { title, description, image, domain } = await seoViewerOgpCache.get(href);
+              if (!cancelled && anchor.isConnected) {
+                insertOgpCard(anchor, buildOgpCard(href, title, description, image, domain));
+              }
+            } catch { }
+            if (isAmazonUrlValue(href)) await new Promise(resolve => setTimeout(resolve, 500));
+          }
+        };
+
+        renderCards();
+        return () => { cancelled = true; };
+      }, [html]);
+
+      return (
+        <div
+          ref={viewerRef}
+          className="markdown-preview h-full overflow-y-auto p-5"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      );
+    }
+
     function mergeArticlesById(current, incoming) {
       const map = new Map((current || []).map(article => [article.id, article]));
       (incoming || []).forEach(article => map.set(article.id, { ...(map.get(article.id) || {}), ...article }));
@@ -3752,6 +3860,21 @@
       const [bulkReplaceText, setBulkReplaceText] = useState('');
       const [bulkReplaceRunning, setBulkReplaceRunning] = useState(false);
       const [bulkReplacePreview, setBulkReplacePreview] = useState({ loading: false, totalMatches: null, matchedArticles: [] });
+      const [seoRenameOpen, setSeoRenameOpen] = useState(false);
+      const [seoRenameRows, setSeoRenameRows] = useState([]);
+      const [seoRenameActiveId, setSeoRenameActiveId] = useState('');
+      const [seoRenamePreviewMode, setSeoRenamePreviewMode] = useState('after');
+      const [seoRenameLoading, setSeoRenameLoading] = useState(false);
+      const [seoRenameRunning, setSeoRenameRunning] = useState(false);
+      const [seoRenameSettingsOpen, setSeoRenameSettingsOpen] = useState(false);
+      const [seoRenameTitleLength, setSeoRenameTitleLength] = useState(() => {
+        try {
+          return normalizeSeoRenameTitleLength(localStorage.getItem(SEO_RENAME_TITLE_LENGTH_STORAGE_KEY));
+        } catch {
+          return SEO_RENAME_DEFAULT_TITLE_LENGTH;
+        }
+      });
+      const [seoRenameTitleLengthDraft, setSeoRenameTitleLengthDraft] = useState(String(SEO_RENAME_DEFAULT_TITLE_LENGTH));
 
       const textareaRef = useRef(null);
       const previewRef = useRef(null);
@@ -3760,6 +3883,8 @@
       const replaceInputRef = useRef(null);
       const bulkFindInputRef = useRef(null);
       const bulkReplaceContentCacheRef = useRef(new Map());
+      const seoRenameRowsRef = useRef([]);
+      const seoRenameSessionRef = useRef(0);
       const accessoryJobsRef = useRef([]);
       const accessoryPollingRef = useRef(false);
       const titleVariantJobsRef = useRef([]);
@@ -5248,6 +5373,299 @@
         }
       }, [bulkFindText, bulkReplaceText, bulkReplaceTargets, getBulkReplaceContent, updateH1CacheFromContent, articleH1Cache, loadArticles]);
 
+      const replaceSeoRenameRows = useCallback((updater) => {
+        const currentRows = seoRenameRowsRef.current;
+        const nextRows = typeof updater === 'function' ? updater(currentRows) : updater;
+        seoRenameRowsRef.current = nextRows;
+        setSeoRenameRows(nextRows);
+        return nextRows;
+      }, []);
+
+      const updateSeoRenameRow = useCallback((articleId, updater) => {
+        replaceSeoRenameRows((rows) => rows.map((row) => {
+          if (row.id !== articleId) return row;
+          return typeof updater === 'function' ? updater(row) : { ...row, ...updater };
+        }));
+      }, [replaceSeoRenameRows]);
+
+      const closeSeoRenameModal = useCallback(() => {
+        if (seoRenameRunning) return;
+        seoRenameSessionRef.current += 1;
+        setSeoRenameOpen(false);
+        setSeoRenameSettingsOpen(false);
+      }, [seoRenameRunning]);
+
+      const openSeoRenameModal = useCallback(async (articleTargets = []) => {
+        const seen = new Set();
+        const targets = (articleTargets || []).filter((article) => {
+          if (!article?.id || seen.has(article.id)) return false;
+          seen.add(article.id);
+          return true;
+        });
+        if (targets.length === 0) {
+          showToast('SEO名称変更する記事を選択してください', 'error');
+          return;
+        }
+        const sessionId = seoRenameSessionRef.current + 1;
+        seoRenameSessionRef.current = sessionId;
+
+        const initialRows = targets.map((article) => ({
+          id: article.id,
+          article,
+          title: getArticleDisplayTitle(article, articleH1Cache),
+          searchText: normalizeFindReplaceTitle(getArticleDisplayTitle(article, articleH1Cache)),
+          replaceText: '',
+          content: '',
+          amazonUrl: '',
+          ogpTitle: '',
+          replaceReady: false,
+          checked: true,
+          loading: true,
+          saving: false,
+          error: '',
+          status: '記事を読み込み中...',
+          history: [],
+        }));
+        replaceSeoRenameRows(initialRows);
+        setSeoRenameActiveId(initialRows[0].id);
+        setSeoRenamePreviewMode('after');
+        setSeoRenameTitleLengthDraft(String(seoRenameTitleLength));
+        setSeoRenameSettingsOpen(false);
+        setSeoRenameOpen(true);
+        setSeoRenameLoading(true);
+
+        try {
+          await Promise.all(targets.map(async (article) => {
+            try {
+              const articleContent = selectedArticleRef.current?.id === article.id && !isNewArticle
+                ? content
+                : await fetchArticleContent(article.id);
+              if (seoRenameSessionRef.current !== sessionId) return;
+              const amazonUrl = findFirstAmazonUrl(articleContent);
+              const h1Match = articleContent.match(/^#\s+(.+)$/m);
+              const articleTitle = h1Match?.[1]?.trim() || getArticleDisplayTitle(article, articleH1Cache);
+              updateSeoRenameRow(article.id, (row) => ({
+                ...row,
+                title: articleTitle,
+                searchText: normalizeFindReplaceTitle(articleTitle),
+                content: articleContent,
+                amazonUrl,
+                checked: Boolean(amazonUrl),
+                loading: Boolean(amazonUrl),
+                error: amazonUrl ? '' : 'Amazonリンクが見つかりません',
+                status: amazonUrl ? 'Amazonの商品名を取得中...' : '',
+              }));
+            } catch (error) {
+              if (seoRenameSessionRef.current !== sessionId) return;
+              updateSeoRenameRow(article.id, (row) => ({
+                ...row,
+                checked: false,
+                loading: false,
+                error: `記事の読み込みに失敗しました: ${error.message}`,
+                status: '',
+              }));
+            }
+          }));
+
+          for (const article of targets) {
+            if (seoRenameSessionRef.current !== sessionId) return;
+            const row = seoRenameRowsRef.current.find((item) => item.id === article.id);
+            const amazonUrl = row?.amazonUrl || '';
+            if (!amazonUrl) continue;
+            try {
+              const response = await fetch(`/api/ogp?url=${encodeURIComponent(amazonUrl)}`);
+              if (!response.ok) throw new Error(`HTTP ${response.status}`);
+              const ogp = await response.json();
+              if (seoRenameSessionRef.current !== sessionId) return;
+              const ogpTitle = normalizeSeoOgpTitle(ogp.title || '');
+              if (!ogpTitle) throw new Error('商品名が空でした');
+              updateSeoRenameRow(article.id, (currentRow) => ({
+                ...currentRow,
+                ogpTitle,
+                replaceText: truncateUnicodeText(ogpTitle, seoRenameTitleLength),
+                replaceReady: true,
+                loading: false,
+                error: '',
+                status: '置換候補を取得しました',
+              }));
+            } catch (error) {
+              if (seoRenameSessionRef.current !== sessionId) return;
+              updateSeoRenameRow(article.id, (currentRow) => ({
+                ...currentRow,
+                checked: false,
+                loading: false,
+                error: `Amazonの商品名を取得できませんでした: ${error.message}`,
+                status: '',
+              }));
+            }
+            await new Promise((resolve) => setTimeout(resolve, 500));
+          }
+        } finally {
+          if (seoRenameSessionRef.current === sessionId) setSeoRenameLoading(false);
+        }
+      }, [articleH1Cache, content, isNewArticle, replaceSeoRenameRows, seoRenameTitleLength, updateSeoRenameRow]);
+
+      const applySeoTitleLengthSetting = useCallback(() => {
+        const nextLength = normalizeSeoRenameTitleLength(seoRenameTitleLengthDraft);
+        setSeoRenameTitleLength(nextLength);
+        setSeoRenameTitleLengthDraft(String(nextLength));
+        try { localStorage.setItem(SEO_RENAME_TITLE_LENGTH_STORAGE_KEY, String(nextLength)); } catch { }
+        replaceSeoRenameRows((rows) => rows.map((row) => row.ogpTitle
+          ? { ...row, replaceText: truncateUnicodeText(row.ogpTitle, nextLength), status: `${nextLength}文字を適用しました` }
+          : row
+        ));
+        setSeoRenameSettingsOpen(false);
+      }, [replaceSeoRenameRows, seoRenameTitleLengthDraft]);
+
+      const getSeoRenamePreviewContent = useCallback((row) => {
+        if (!row) return '';
+        if (seoRenamePreviewMode === 'current') return row.content || '';
+        return replacePlainText(row.content, row.searchText, row.replaceText);
+      }, [seoRenamePreviewMode]);
+
+      const persistSeoRenameRow = useCallback(async (row, nextContent, nextHistory, successMessage) => {
+        try {
+          const result = await saveArticle(row.article.name, nextContent, row.article.id);
+          updateH1CacheFromContent(row.id, nextContent);
+          if (selectedArticleRef.current?.id === row.id) {
+            setContent(nextContent);
+            setOriginalContent(nextContent);
+          }
+          setArticles((currentArticles) => currentArticles.map((article) => article.id === row.id
+            ? { ...article, lastModified: result.lastModified || new Date().toISOString() }
+            : article
+          ));
+          updateSeoRenameRow(row.id, (currentRow) => ({
+            ...currentRow,
+            content: nextContent,
+            history: nextHistory,
+            saving: false,
+            error: '',
+            status: successMessage,
+          }));
+          return { saved: true };
+        } catch (error) {
+          updateSeoRenameRow(row.id, (currentRow) => ({
+            ...currentRow,
+            saving: false,
+            error: `保存に失敗しました: ${error.message}`,
+            status: '',
+          }));
+          return { saved: false, error };
+        }
+      }, [updateH1CacheFromContent, updateSeoRenameRow]);
+
+      const handleSeoReplaceRow = useCallback(async (articleId, options = {}) => {
+        const row = seoRenameRowsRef.current.find((item) => item.id === articleId);
+        if (!row || row.loading || row.saving) return { saved: false, count: 0 };
+        if (!row.searchText) {
+          updateSeoRenameRow(articleId, { error: '検索キーワードを入力してください', status: '' });
+          if (!options.quiet) showToast('検索キーワードを入力してください', 'error');
+          return { saved: false, count: 0 };
+        }
+        if (!row.replaceReady) {
+          updateSeoRenameRow(articleId, { error: '置換候補を取得できていません。置換欄を確認・編集してください', status: '' });
+          if (!options.quiet) showToast('置換欄を確認・編集してください', 'error');
+          return { saved: false, count: 0 };
+        }
+        const count = countPlainTextMatches(row.content, row.searchText);
+        if (count === 0) {
+          updateSeoRenameRow(articleId, { error: '記事内に一致する文字がありません', status: '' });
+          if (!options.quiet) showToast('記事内に一致する文字がありません', 'error');
+          return { saved: false, count: 0 };
+        }
+
+        const nextContent = replacePlainText(row.content, row.searchText, row.replaceText);
+        updateSeoRenameRow(articleId, { saving: true, error: '', status: `${count}箇所を保存中...` });
+        clearTimeout(autoSaveTimer.current);
+        setAutoSaveStatus('idle');
+        const result = await persistSeoRenameRow(
+          row,
+          nextContent,
+          [...row.history, row.content],
+          `${count}箇所を置換して保存しました`
+        );
+        if (result.saved && !options.quiet) {
+          setSeoRenameActiveId(articleId);
+          setSeoRenamePreviewMode('current');
+          showToast(`${count}箇所を置換して保存しました`, 'success');
+        } else if (!result.saved && !options.quiet) {
+          showToast(`保存に失敗しました: ${result.error?.message || '不明なエラー'}`, 'error');
+        }
+        return { ...result, count };
+      }, [persistSeoRenameRow, updateSeoRenameRow]);
+
+      const handleSeoUndoRow = useCallback(async (articleId) => {
+        const row = seoRenameRowsRef.current.find((item) => item.id === articleId);
+        if (!row || row.loading || row.saving || row.history.length === 0) return;
+        const previousContent = row.history[row.history.length - 1];
+        updateSeoRenameRow(articleId, { saving: true, error: '', status: '1つ前の状態を保存中...' });
+        clearTimeout(autoSaveTimer.current);
+        setAutoSaveStatus('idle');
+        const result = await persistSeoRenameRow(
+          row,
+          previousContent,
+          row.history.slice(0, -1),
+          '1つ前の状態に戻して保存しました'
+        );
+        if (result.saved) {
+          setSeoRenameActiveId(articleId);
+          setSeoRenamePreviewMode('current');
+          showToast('1つ前の状態に戻して保存しました', 'success');
+        } else {
+          showToast(`保存に失敗しました: ${result.error?.message || '不明なエラー'}`, 'error');
+        }
+      }, [persistSeoRenameRow, updateSeoRenameRow]);
+
+      const runSeoRenameRows = useCallback(async (articleIds, label) => {
+        if (seoRenameRunning) return;
+        const uniqueIds = Array.from(new Set(articleIds || []));
+        if (uniqueIds.length === 0) {
+          showToast('置換する記事を選択してください', 'error');
+          return;
+        }
+        setSeoRenameRunning(true);
+        let savedArticles = 0;
+        let replacedCount = 0;
+        let failedArticles = 0;
+        try {
+          for (const articleId of uniqueIds) {
+            const result = await handleSeoReplaceRow(articleId, { quiet: true });
+            if (result.saved) {
+              savedArticles += 1;
+              replacedCount += result.count || 0;
+            } else {
+              failedArticles += 1;
+            }
+          }
+          if (savedArticles > 0) {
+            showToast(`${label}: ${savedArticles}件を保存し、${replacedCount}箇所を置換しました`, 'success');
+          }
+          if (failedArticles > 0) {
+            showToast(`${failedArticles}件は未処理です。各行の内容を確認してください`, 'error');
+          }
+        } finally {
+          setSeoRenameRunning(false);
+        }
+      }, [handleSeoReplaceRow, seoRenameRunning]);
+
+      const handleSeoReplaceChecked = useCallback(() => {
+        const checkedIds = seoRenameRowsRef.current.filter((row) => row.checked).map((row) => row.id);
+        return runSeoRenameRows(checkedIds, '選択記事');
+      }, [runSeoRenameRows]);
+
+      const handleSeoReplaceAll = useCallback(() => {
+        return runSeoRenameRows(seoRenameRowsRef.current.map((row) => row.id), '全記事');
+      }, [runSeoRenameRows]);
+
+      const activeSeoRenameRow = useMemo(() => (
+        seoRenameRows.find((row) => row.id === seoRenameActiveId) || seoRenameRows[0] || null
+      ), [seoRenameActiveId, seoRenameRows]);
+
+      const seoRenameCheckedCount = useMemo(() => (
+        seoRenameRows.filter((row) => row.checked).length
+      ), [seoRenameRows]);
+
       const activeNotePostTarget = useMemo(() => (
         selectedPostTargets.find(target => target.id === notePostActiveTargetId) || selectedPostTargets[0] || null
       ), [selectedPostTargets, notePostActiveTargetId]);
@@ -6174,6 +6592,7 @@
             onMoveArticle={handleMoveArticle}
             onSchedulePost={(ids) => openNotePostModal({ ids, mode: 'schedule' })}
             onBulkReplace={openBulkReplaceModal}
+            onSeoRename={openSeoRenameModal}
             onCreateAccessory={openAccessoryModal}
             onCreateTitleVariant={openTitleVariantModal}
             onOpenAccessoryReport={openAccessoryReport}
@@ -6506,6 +6925,231 @@
                 <div className="flex justify-between border-t border-slate-200 px-5 py-4">
                   <button type="button" onClick={deleteAccessoryPrompt} disabled={accessoryPrompt.loading || accessoryPrompt.saving} className="rounded-lg border border-red-200 px-3 py-2 text-xs font-bold text-red-600 disabled:opacity-40">削除</button>
                   <div className="flex gap-2"><button onClick={() => setAccessoryPrompt(prev => ({ ...prev, open: false }))} className="rounded-lg border border-slate-200 px-3 py-2 text-xs font-bold text-slate-500">戻る</button><button onClick={saveAccessoryPrompt} disabled={accessoryPrompt.loading || accessoryPrompt.saving || !accessoryPrompt.content.trim()} className="rounded-lg bg-[#7C4DFF] px-4 py-2 text-xs font-bold text-white disabled:opacity-40">{accessoryPrompt.saving ? '保存中...' : '保存'}</button></div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {seoRenameOpen && (
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/45 px-4 py-5"
+              onClick={closeSeoRenameModal}
+            >
+              <div
+                className="flex h-[86vh] w-full max-w-7xl flex-col overflow-hidden rounded-xl border border-teal-100 bg-white shadow-2xl"
+                onClick={(event) => event.stopPropagation()}
+              >
+                <div className="relative flex items-center justify-between border-b border-slate-200 px-5 py-3.5">
+                  <div className="min-w-0">
+                    <h3 className="text-base font-bold text-slate-900">SEO名称変更</h3>
+                    <p className="mt-0.5 truncate text-xs text-slate-500">Amazonの商品名から置換候補を作り、記事ごとに確認して保存します</p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="relative">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSeoRenameTitleLengthDraft(String(seoRenameTitleLength));
+                          setSeoRenameSettingsOpen((open) => !open);
+                        }}
+                        disabled={seoRenameRunning}
+                        className="rounded-lg border border-slate-200 p-2 text-slate-500 transition-colors hover:border-teal-200 hover:bg-teal-50 hover:text-teal-700 disabled:opacity-40"
+                        title="Amazon商品名の取得文字数を設定"
+                        aria-label="設定"
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.7 1.7 0 00.34 1.88l.06.06-2.83 2.83-.06-.06A1.7 1.7 0 0015 19.4a1.7 1.7 0 00-1 .6 1.7 1.7 0 00-.4 1.1V21h-4v-.09A1.7 1.7 0 008.55 19.4a1.7 1.7 0 00-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 004.6 15a1.7 1.7 0 00-.6-1 1.7 1.7 0 00-1.1-.4H3v-4h.09A1.7 1.7 0 004.6 8.55a1.7 1.7 0 00-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 009 4.6a1.7 1.7 0 001-.6 1.7 1.7 0 00.4-1.1V3h4v.09A1.7 1.7 0 0015.45 4.6a1.7 1.7 0 001.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0019.4 9c.14.37.35.7.6 1 .29.26.68.4 1.1.4H21v4h-.09A1.7 1.7 0 0019.4 15z" /></svg>
+                      </button>
+                      {seoRenameSettingsOpen && (
+                        <div className="absolute right-0 top-11 z-10 w-72 rounded-xl border border-slate-200 bg-white p-4 shadow-xl">
+                          <label className="block text-xs font-bold text-slate-700" htmlFor="seo-title-length">商品タイトルの取得文字数</label>
+                          <p className="mt-1 text-[11px] leading-relaxed text-slate-400">Amazonの商品タイトルを先頭から何文字使うかを設定します。1〜200文字で保存されます。</p>
+                          <input
+                            id="seo-title-length"
+                            type="number"
+                            min="1"
+                            max="200"
+                            value={seoRenameTitleLengthDraft}
+                            onChange={(event) => setSeoRenameTitleLengthDraft(event.target.value)}
+                            onKeyDown={(event) => { if (event.key === 'Enter') applySeoTitleLengthSetting(); }}
+                            className="mt-3 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm font-bold text-slate-800 outline-none focus:border-teal-400"
+                          />
+                          <button
+                            type="button"
+                            onClick={applySeoTitleLengthSetting}
+                            className="mt-3 w-full rounded-lg bg-teal-600 px-3 py-2 text-xs font-bold text-white hover:bg-teal-700"
+                          >文字数を適用</button>
+                        </div>
+                      )}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={closeSeoRenameModal}
+                      disabled={seoRenameRunning}
+                      className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600 disabled:opacity-40"
+                      title="閉じる"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M18 6L6 18M6 6l12 12" /></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="grid min-h-0 flex-1 grid-cols-1 lg:grid-cols-[240px_minmax(520px,1.2fr)_minmax(360px,1fr)]">
+                  <aside className="min-h-0 overflow-y-auto border-r border-slate-200 bg-slate-50 p-3">
+                    <div className="mb-2 flex items-center justify-between px-1">
+                      <p className="text-xs font-bold text-slate-600">対象記事</p>
+                      <span className="rounded-full bg-white px-2 py-0.5 text-[10px] font-bold text-teal-700 shadow-sm">{seoRenameRows.length}件</span>
+                    </div>
+                    <div className="space-y-1.5">
+                      {seoRenameRows.map((row, index) => (
+                        <button
+                          type="button"
+                          key={row.id}
+                          onClick={() => setSeoRenameActiveId(row.id)}
+                          className={`w-full rounded-lg border px-2.5 py-2 text-left transition-colors ${activeSeoRenameRow?.id === row.id ? 'border-teal-300 bg-white shadow-sm' : 'border-transparent hover:border-slate-200 hover:bg-white'}`}
+                        >
+                          <div className="flex items-start gap-2">
+                            <span className={`mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${row.error ? 'bg-red-100 text-red-600' : row.saving ? 'bg-amber-100 text-amber-700' : 'bg-teal-100 text-teal-700'}`}>{index + 1}</span>
+                            <div className="min-w-0 flex-1">
+                              <p className="line-clamp-2 text-xs font-bold leading-relaxed text-slate-700">{row.title}</p>
+                              <p className={`mt-1 truncate text-[10px] ${row.error ? 'text-red-500' : 'text-slate-400'}`}>{row.error || row.status || (row.loading ? '読み込み中...' : '編集できます')}</p>
+                            </div>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </aside>
+
+                  <section className="flex min-h-0 min-w-0 flex-col border-r border-slate-200 bg-white">
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 px-4 py-3">
+                      <div>
+                        <p className="text-xs font-bold text-slate-700">検索・置換フォーム</p>
+                        <p className="mt-0.5 text-[10px] text-slate-400">入力内容は自由に編集できます</p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={handleSeoReplaceChecked}
+                          disabled={seoRenameRunning || seoRenameLoading || seoRenameCheckedCount === 0}
+                          className="rounded-lg border border-teal-200 bg-teal-50 px-3 py-2 text-xs font-bold text-teal-700 hover:bg-teal-100 disabled:cursor-not-allowed disabled:opacity-40"
+                        >選択記事を置換（{seoRenameCheckedCount}件）</button>
+                        <button
+                          type="button"
+                          onClick={handleSeoReplaceAll}
+                          disabled={seoRenameRunning || seoRenameLoading || seoRenameRows.length === 0}
+                          className="rounded-lg bg-teal-600 px-3 py-2 text-xs font-bold text-white hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-40"
+                        >{seoRenameRunning ? '置換・保存中...' : '全てを置換'}</button>
+                      </div>
+                    </div>
+                    <div className="min-h-0 flex-1 space-y-3 overflow-y-auto p-4">
+                      {seoRenameRows.map((row) => {
+                        const matchCount = countPlainTextMatches(row.content, row.searchText);
+                        return (
+                          <article key={row.id} className={`rounded-xl border p-3 transition-colors ${activeSeoRenameRow?.id === row.id ? 'border-teal-300 shadow-sm' : 'border-slate-200'}`}>
+                            <div className="mb-3 flex items-start gap-2">
+                              <input
+                                type="checkbox"
+                                checked={row.checked}
+                                onChange={(event) => updateSeoRenameRow(row.id, { checked: event.target.checked })}
+                                disabled={row.saving || seoRenameRunning}
+                                className="mt-0.5 h-4 w-4 rounded border-slate-300 text-teal-600 focus:ring-teal-400"
+                                aria-label={`${row.title}を選択`}
+                              />
+                              <div className="min-w-0 flex-1">
+                                <p className="truncate text-xs font-bold text-slate-700">{row.title}</p>
+                                <p className="mt-0.5 truncate text-[10px] text-slate-400">{row.amazonUrl || 'Amazonリンク未検出'}</p>
+                              </div>
+                              <button
+                                type="button"
+                                onClick={() => { setSeoRenameActiveId(row.id); setSeoRenamePreviewMode('after'); }}
+                                className="rounded-md border border-slate-200 p-1.5 text-slate-500 hover:border-teal-200 hover:bg-teal-50 hover:text-teal-700"
+                                title="目のアイコン: この記事を記事ビューアーに表示"
+                                aria-label="目のアイコンで記事ビューアーに表示"
+                              >
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" /><circle cx="12" cy="12" r="3" /></svg>
+                              </button>
+                            </div>
+                            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                              <label className="min-w-0 text-[11px] font-bold text-slate-600">
+                                検索キーワード
+                                <textarea
+                                  value={row.searchText}
+                                  onChange={(event) => updateSeoRenameRow(row.id, { searchText: event.target.value, error: '', status: '' })}
+                                  onFocus={() => setSeoRenameActiveId(row.id)}
+                                  disabled={row.saving || seoRenameRunning}
+                                  className="mt-1 h-24 w-full resize-y rounded-lg border border-slate-200 px-2.5 py-2 text-xs font-normal leading-relaxed text-slate-700 outline-none focus:border-teal-400 disabled:bg-slate-50"
+                                />
+                              </label>
+                              <label className="min-w-0 text-[11px] font-bold text-slate-600">
+                                置換
+                                <textarea
+                                  value={row.replaceText}
+                                  onChange={(event) => updateSeoRenameRow(row.id, { replaceText: event.target.value, replaceReady: true, error: '', status: '' })}
+                                  onFocus={() => setSeoRenameActiveId(row.id)}
+                                  disabled={row.saving || seoRenameRunning}
+                                  className="mt-1 h-24 w-full resize-y rounded-lg border border-slate-200 px-2.5 py-2 text-xs font-normal leading-relaxed text-slate-700 outline-none focus:border-teal-400 disabled:bg-slate-50"
+                                />
+                              </label>
+                            </div>
+                            <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+                              <div className="min-w-0 text-[10px]">
+                                {row.loading ? (
+                                  <span className="text-slate-400">候補を取得中...</span>
+                                ) : row.error ? (
+                                  <span className="text-red-600">{row.error}</span>
+                                ) : (
+                                  <span className="text-slate-500">一致 <strong className="text-teal-700">{matchCount}</strong> 箇所{row.status ? ` · ${row.status}` : ''}</span>
+                                )}
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <button
+                                  type="button"
+                                  onClick={() => handleSeoUndoRow(row.id)}
+                                  disabled={row.loading || row.saving || seoRenameRunning || row.history.length === 0}
+                                  className="rounded-lg border border-slate-200 px-3 py-1.5 text-[11px] font-bold text-slate-600 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-35"
+                                >戻る（{row.history.length}）</button>
+                                <button
+                                  type="button"
+                                  onClick={() => handleSeoReplaceRow(row.id)}
+                                  disabled={row.loading || row.saving || seoRenameRunning || !row.searchText || !row.replaceReady || matchCount === 0}
+                                  className="rounded-lg bg-slate-800 px-3 py-1.5 text-[11px] font-bold text-white hover:bg-slate-900 disabled:cursor-not-allowed disabled:opacity-35"
+                                >{row.saving ? '保存中...' : '置換'}</button>
+                              </div>
+                            </div>
+                          </article>
+                        );
+                      })}
+                    </div>
+                  </section>
+
+                  <section className="flex min-h-0 min-w-0 flex-col bg-white">
+                    <div className="flex items-center justify-between gap-2 border-b border-slate-200 px-4 py-3">
+                      <div className="min-w-0">
+                        <p className="text-xs font-bold text-slate-700">記事ビューアー</p>
+                        <p className="mt-0.5 truncate text-[10px] text-slate-400">{activeSeoRenameRow?.title || '記事を選択してください'}</p>
+                      </div>
+                      <div className="flex rounded-lg border border-slate-200 bg-slate-50 p-0.5">
+                        <button
+                          type="button"
+                          onClick={() => setSeoRenamePreviewMode('current')}
+                          className={`rounded-md px-2.5 py-1 text-[10px] font-bold ${seoRenamePreviewMode === 'current' ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-400'}`}
+                        >現状</button>
+                        <button
+                          type="button"
+                          onClick={() => setSeoRenamePreviewMode('after')}
+                          className={`rounded-md px-2.5 py-1 text-[10px] font-bold ${seoRenamePreviewMode === 'after' ? 'bg-teal-600 text-white shadow-sm' : 'text-slate-400'}`}
+                        >変換後</button>
+                      </div>
+                    </div>
+                    <div className="min-h-0 flex-1 overflow-hidden bg-white">
+                      {activeSeoRenameRow?.content ? (
+                        <SeoArticleViewer markdown={getSeoRenamePreviewContent(activeSeoRenameRow)} />
+                      ) : (
+                        <div className="flex h-full items-center justify-center px-6 text-center text-xs leading-relaxed text-slate-400">
+                          {activeSeoRenameRow?.error || '記事を読み込むと、ここに現状と変換後を表示します'}
+                        </div>
+                      )}
+                    </div>
+                  </section>
                 </div>
               </div>
             </div>
