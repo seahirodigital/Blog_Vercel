@@ -10808,7 +10808,7 @@
   },
   {
     "id": "cc914ed7-f3cb-41d8-8710-2e7cc0347981",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s85a137e8197c4fa59a8139a3083ab4c4",
     "title": "dreame L40Ultra CE ロボット掃除機 レビュー比較まとめ",
     "name": "dreame L40Ultra CE ロボット掃除機 レビュー比較まとめ.md",
@@ -10818,8 +10818,8 @@
     "publishAt": "2026-08-28T10:30:00.000Z",
     "createdAt": "2026-08-28T03:16:45.730Z",
     "queuedAt": "2026-08-28T19:14:17.262587+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-28T19:16:56.010513+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n30f18794a4aa/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
