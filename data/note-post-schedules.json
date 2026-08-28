@@ -10880,7 +10880,7 @@
   },
   {
     "id": "dd002af7-9004-418f-9b61-68def8dc4024",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf063ad1caee64d418507b7b6beca4913",
     "title": "roborock (ロボロック) Qrevo L Pro ロボット掃除機 水拭き レビュー比較まとめ",
     "name": "roborock Saros10R 掃除機 レビュー比較まとめ.md",
@@ -10890,8 +10890,8 @@
     "publishAt": "2026-08-28T12:30:00.000Z",
     "createdAt": "2026-08-28T03:16:45.730Z",
     "queuedAt": "2026-08-28T19:14:17.262587+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-28T19:16:50.033734+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na7f7cf295733?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
