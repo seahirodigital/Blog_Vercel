@@ -10934,7 +10934,7 @@
   },
   {
     "id": "e3403cd0-9cad-4e89-86b6-c4c29dc2457f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s6272e0f12f3145f4897cf1ccae39b3e0",
     "title": "日立(HITACHI) PKV-BK3K V 掃除機 かるパックスティック 紙パック式 スティッククリーナー  レビュー比較まとめ",
     "name": "日立 PKV-BK3K スティッククリーナー レビュー比較まとめ.md",
@@ -10944,8 +10944,8 @@
     "publishAt": "2026-08-28T13:30:00.000Z",
     "createdAt": "2026-08-28T03:16:45.730Z",
     "queuedAt": "2026-08-28T17:43:34.304253+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-28T17:46:23.683119+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n076600c9e939/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
