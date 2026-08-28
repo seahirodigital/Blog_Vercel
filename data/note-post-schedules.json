@@ -10718,7 +10718,7 @@
   },
   {
     "id": "7de3b356-fb0f-4aba-9f97-f112a7d13bc3",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sc960255201ba4f02bee6d559c39341ff",
     "title": "Dyson(ダイソン) V12s SV46 掃除機 レビュー比較まとめ",
     "name": "Dyson(ダイソン) V12s SV46 掃除機 レビュー比較まとめ.md",
@@ -10728,8 +10728,8 @@
     "publishAt": "2026-08-28T06:30:00.000Z",
     "createdAt": "2026-08-28T03:16:09.969Z",
     "queuedAt": "2026-08-28T17:43:34.304253+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-28T17:46:38.134200+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n5cee1d137bee/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
