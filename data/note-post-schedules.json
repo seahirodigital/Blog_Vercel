@@ -10844,7 +10844,7 @@
   },
   {
     "id": "6d4caf12-bc55-4da8-84e1-12d376bbd172",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!saeadcbfc77ad4f258eb230172c423a2d",
     "title": "シャープ SJ-PD31K-W 冷蔵庫 幅56cm レビュー比較まとめ",
     "name": "シャープ SJ-PD31K-W 冷蔵庫 幅56cm レビュー比較まとめ.md",
@@ -10854,8 +10854,8 @@
     "publishAt": "2026-08-28T12:00:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
     "queuedAt": "2026-08-28T17:43:34.304253+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-28T17:46:15.185205+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n62a3994e32b7?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
