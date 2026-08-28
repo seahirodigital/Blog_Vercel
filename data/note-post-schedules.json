@@ -11024,7 +11024,7 @@
   },
   {
     "id": "ea62fde2-555c-4a68-ae48-01e6fc14e2ba",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0a279c3191134fcfab366821c68abf57",
     "title": "Anker Nebula Capsule 3 Laser レビュー比較まとめ",
     "name": "NEBULA 4GHz5GHz 300ANSI FAT32 テレビ レビュー比較まとめ.md",
@@ -11033,10 +11033,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T19:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T18:25:34.238486+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "04fc274a-dd54-45c3-b38e-4bdda1c719a3",
