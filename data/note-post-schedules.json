@@ -10862,7 +10862,7 @@
   },
   {
     "id": "3c320f8e-2aef-4d17-b2d7-db213385132b",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa553cd3785fd473fa33a6038f60236da",
     "title": "エムテック ケノン KE-NON 光美容器 レビュー比較まとめ",
     "name": "KE-NON 0cm2 25cm2 30206U 光美容器 レビュー比較まとめ.md",
@@ -10872,8 +10872,8 @@
     "publishAt": "2026-08-28T12:30:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
     "queuedAt": "2026-08-28T17:43:34.304253+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-28T17:46:34.077129+00:00",
+    "publishedUrl": "https://editor.note.com/notes/ne0979fed4222/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
