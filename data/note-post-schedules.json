@@ -10718,7 +10718,7 @@
   },
   {
     "id": "7de3b356-fb0f-4aba-9f97-f112a7d13bc3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc960255201ba4f02bee6d559c39341ff",
     "title": "Dyson(ダイソン) V12s SV46 掃除機 レビュー比較まとめ",
     "name": "Dyson(ダイソン) V12s SV46 掃除機 レビュー比較まとめ.md",
@@ -10727,14 +10727,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T06:30:00.000Z",
     "createdAt": "2026-08-28T03:16:09.969Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T17:43:34.304253+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fa52785e-f556-46f6-b623-70aeb5a47ed5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s87a745e5e2804b4da118200b84bdcb70",
     "title": "Elgato Stream Deck+ レビュー比較まとめ",
     "name": "Elgato SM7BHyperX PS5Pro 8K60 Stream Deck レビュー比較まとめ.md",
@@ -10743,14 +10745,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T08:00:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T17:43:34.304253+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bb0ee99f-5282-4835-a1b6-1009cb58556f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa2f57869fe65409ba8773c37be09a8ec",
     "title": "TOSHIBA(東芝) コードレス スティック掃除機 強力パワー持続 軽量 サイ レビュー比較まとめ",
     "name": "東芝 VC-CLX52 スティッククリーナー レビュー比較まとめ.md",
@@ -10759,14 +10763,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T08:30:00.000Z",
     "createdAt": "2026-08-28T03:16:45.730Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T17:43:34.304253+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e8b23d99-82f3-4b5f-8fbf-aad9a92e920e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sadf1bf23a0e0466f99974b8b86d184e6",
     "title": "Nespresso F121-BK-W ネスプレッソ カプセル式コーヒーメーカー レビュー比較まとめ",
     "name": "Nespresso F121-BK-W ネスプレッソ カプセル式コーヒーメーカー レビュー比較まとめ.md",
@@ -10775,14 +10781,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T09:00:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T17:43:34.304253+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "34786974-322d-40f6-943a-c8783748f928",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf73084874401431597df9120ca2e7e61",
     "title": "roborock ロボロック Saros10R ロボット掃除機 黒 20000P レビュー比較まとめ",
     "name": "roborock Saros10R ロボット掃除機 レビュー比較まとめ.md",
@@ -10791,14 +10799,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T09:30:00.000Z",
     "createdAt": "2026-08-28T03:16:45.730Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T17:43:34.304253+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cc914ed7-f3cb-41d8-8710-2e7cc0347981",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s85a137e8197c4fa59a8139a3083ab4c4",
     "title": "dreame L40Ultra CE ロボット掃除機 レビュー比較まとめ",
     "name": "dreame L40Ultra CE ロボット掃除機 レビュー比較まとめ.md",
@@ -10807,14 +10817,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T10:30:00.000Z",
     "createdAt": "2026-08-28T03:16:45.730Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T17:43:34.304253+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1b78b701-0432-411d-a0f3-186839562709",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1bde59738d8f44eab8e6faa1026bff96",
     "title": "dreame F20 Plusロボット掃除機  レビュー比較まとめ",
     "name": "dreame F20 2-in-1 掃除機 レビュー比較まとめ.md",
@@ -10823,14 +10835,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T11:30:00.000Z",
     "createdAt": "2026-08-28T03:16:45.730Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T17:43:34.304253+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6d4caf12-bc55-4da8-84e1-12d376bbd172",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!saeadcbfc77ad4f258eb230172c423a2d",
     "title": "シャープ SJ-PD31K-W 冷蔵庫 幅56cm レビュー比較まとめ",
     "name": "シャープ SJ-PD31K-W 冷蔵庫 幅56cm レビュー比較まとめ.md",
@@ -10839,14 +10853,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T12:00:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T17:43:34.304253+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3c320f8e-2aef-4d17-b2d7-db213385132b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa553cd3785fd473fa33a6038f60236da",
     "title": "エムテック ケノン KE-NON 光美容器 レビュー比較まとめ",
     "name": "KE-NON 0cm2 25cm2 30206U 光美容器 レビュー比較まとめ.md",
@@ -10855,14 +10871,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T12:30:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T17:43:34.304253+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "dd002af7-9004-418f-9b61-68def8dc4024",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf063ad1caee64d418507b7b6beca4913",
     "title": "roborock (ロボロック) Qrevo L Pro ロボット掃除機 水拭き レビュー比較まとめ",
     "name": "roborock Saros10R 掃除機 レビュー比較まとめ.md",
@@ -10871,14 +10889,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T12:30:00.000Z",
     "createdAt": "2026-08-28T03:16:45.730Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T17:43:34.304253+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "dd6b2baf-fdd1-4c9b-b843-d2f5ed1dcabb",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s511d89f8aa494f0ca4cc7c17cd436d33",
     "title": "Galaxy S26 SM-S942QLBFSJP Samsung スカイ レビュー比較まとめ",
     "name": "Galaxy S26 SM-S942QLBFSJP Samsung スカイ レビュー比較まとめ.md",
@@ -10887,14 +10907,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T13:00:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T17:43:34.304253+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "96b790b6-e7b7-4a8f-a16f-e3cf1f5753ff",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s22e15ebcc78d47fb81d9df276610db5f",
     "title": "SanDisk SDSSDE30-2T00-GH26 SSD 外付け レビュー比較まとめ",
     "name": "SanDisk SDSSDE30-2T00-GH26 SSD 外付け レビュー比較まとめ.md",
@@ -10903,14 +10925,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T13:30:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T17:43:34.304253+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e3403cd0-9cad-4e89-86b6-c4c29dc2457f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6272e0f12f3145f4897cf1ccae39b3e0",
     "title": "日立(HITACHI) PKV-BK3K V 掃除機 かるパックスティック 紙パック式 スティッククリーナー  レビュー比較まとめ",
     "name": "日立 PKV-BK3K スティッククリーナー レビュー比較まとめ.md",
@@ -10919,14 +10943,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T13:30:00.000Z",
     "createdAt": "2026-08-28T03:16:45.730Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T17:43:34.304253+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a11c08ef-9362-47c7-9189-2f8f32a97228",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s30167661429a492fb882af7e82e64a21",
     "title": "JMGO N1S 4K 3色レーザー プロジェクター レビュー比較まとめ",
     "name": "JmGO N1S 1100ISO テレビ レビュー比較まとめ.md",
@@ -10935,14 +10961,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T15:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T17:43:34.304253+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "92a4f83e-b9fa-452d-8cc4-55c8189711ee",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s851c6460d7d14df1b6453a1b9790cae9",
     "title": "JMGO N1S Ultimate 4K レビュー比較まとめ",
     "name": "JmGO N1S 3300ISO テレビ レビュー比較まとめ.md",
@@ -10951,14 +10979,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T16:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T17:43:34.304253+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9ae151db-1444-49d3-8968-e04db0b8f5e6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4b09ecb2ca21480d885e345ef7df4ed6",
     "title": "iflytek SV18 OR2 掃除機 レビュー比較まとめ",
     "name": "iflytek SV18 OR2 掃除機 レビュー比較まとめ.md",
@@ -10967,14 +10997,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T17:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T17:43:34.304253+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "07da4ebe-2723-4442-870e-a84672f71235",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa10a0a3191284aacb0e69d28df2f0753",
     "title": "Anker  NEBULA X1 プロジェクター レビュー比較まとめ",
     "name": "NEBULA X1 Anker ホームプロジェクター レビュー比較まとめ.md",
@@ -10983,10 +11015,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T18:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T17:43:34.304253+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ea62fde2-555c-4a68-ae48-01e6fc14e2ba",
