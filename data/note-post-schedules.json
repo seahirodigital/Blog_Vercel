@@ -11078,7 +11078,7 @@
   },
   {
     "id": "8f8c5bd5-6833-4f92-9682-b3135ab12ae1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s148306ccf9dd4483a228e78ef58dea9d",
     "title": "Aladdin X2 Light プロジェクター レビュー比較まとめ",
     "name": "Aladdin X X2 テレビ レビュー比較まとめ.md",
@@ -11087,10 +11087,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T22:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T21:25:22.730251+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "932e348a-52ff-40dc-b340-beb9248ef0af",
