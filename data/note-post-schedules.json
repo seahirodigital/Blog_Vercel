@@ -10700,7 +10700,7 @@
   },
   {
     "id": "8695fcea-e4ef-4561-841d-61ff60249904",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6bd3a53cde904c65a5e32bac0f355014",
     "title": "アイリスオーヤマ IRSN-30A-W 冷蔵庫 幅59.5cm レビュー比較まとめ",
     "name": "アイリスオーヤマ IRSN-30A-W 冷蔵庫 幅59.5cm レビュー比較まとめ.md",
@@ -10709,10 +10709,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T02:30:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T01:55:05.628752+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fa52785e-f556-46f6-b623-70aeb5a47ed5",
