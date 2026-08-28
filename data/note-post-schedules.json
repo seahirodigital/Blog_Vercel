@@ -10826,7 +10826,7 @@
   },
   {
     "id": "1b78b701-0432-411d-a0f3-186839562709",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s1bde59738d8f44eab8e6faa1026bff96",
     "title": "dreame F20 Plusロボット掃除機  レビュー比較まとめ",
     "name": "dreame F20 2-in-1 掃除機 レビュー比較まとめ.md",
@@ -10836,8 +10836,8 @@
     "publishAt": "2026-08-28T11:30:00.000Z",
     "createdAt": "2026-08-28T03:16:45.730Z",
     "queuedAt": "2026-08-28T17:43:34.304253+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-28T17:46:26.043072+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7a17352dee1d?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
