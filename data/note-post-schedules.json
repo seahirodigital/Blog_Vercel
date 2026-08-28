@@ -10970,7 +10970,7 @@
   },
   {
     "id": "92a4f83e-b9fa-452d-8cc4-55c8189711ee",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s851c6460d7d14df1b6453a1b9790cae9",
     "title": "JMGO N1S Ultimate 4K レビュー比較まとめ",
     "name": "JmGO N1S 3300ISO テレビ レビュー比較まとめ.md",
@@ -10980,8 +10980,8 @@
     "publishAt": "2026-08-28T16:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
     "queuedAt": "2026-08-28T17:43:34.304253+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-28T17:48:20.210973+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n25c6fd409378/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
