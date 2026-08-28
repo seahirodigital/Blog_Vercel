@@ -11096,7 +11096,7 @@
   },
   {
     "id": "932e348a-52ff-40dc-b340-beb9248ef0af",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfa5fd1e92b514526aedde2c407d4588c",
     "title": "JBL JBLTOURPRO3BLU ワイヤレスイヤホン レビュー比較まとめ",
     "name": "JBL JBLTOURPRO3BLU ワイヤレスイヤホン レビュー比較まとめ.md",
@@ -11105,10 +11105,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T22:30:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T21:55:49.422722+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0ec39d2b-2ed0-4003-b6fe-cad8f27f164e",
