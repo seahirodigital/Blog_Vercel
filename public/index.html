@@ -1524,6 +1524,19 @@
         .trim();
     }
 
+    function normalizeFindReplaceReplacement(value) {
+      const amazonMarkdownLink = /\[\s*(?:\*\*)?[^\]]*?(?:\*\*)?\s*\]\(\s*https?:\/\/(?:(?:www\.)?amazon\.[^/\s)]+|amzn\.to)(?:\/[^)\s]*)?\s*\)(?:[ \t　]*(?:\*\*[ \t　]*[、,][ \t　]*\*\*|[、,]))?/gi;
+      return String(value || '')
+        .replace(/(?:&nbsp;|&#xA0;|&#160;)/gi, ' ')
+        .replace(amazonMarkdownLink, ' ')
+        .replace(/Amazon(?:\.(?:com|co\.jp))?(?:[ \t　]*\|[ \t　]*(?:【[^】]*】)?)?/gi, ' ')
+        .replace(/【[ \t　]*(?:\d{2,4}年)?\d{1,2}月(?:\d{1,2}日)?発売[ \t　]*】/g, ' ')
+        .replace(/\*\*[ \t　]*([、,])[ \t　]*\*\*/g, '$1')
+        .replace(/[ \t　]+/g, ' ')
+        .replace(/^[\s　|、,]+|[\s　|、,]+$/g, '')
+        .trim();
+    }
+
     function getFindReplaceHighlightedText(textarea, preview) {
       if (textarea && document.activeElement === textarea) {
         const start = Number(textarea.selectionStart);
@@ -6105,7 +6118,7 @@
                 ? getArticleFilenameTitle(newFilename)
                 : getArticleDisplayTitle(selectedArticle, articleH1Cache);
               setFindText(normalizeFindReplaceTitle(articleTitle));
-              setReplaceText(highlightedText);
+              setReplaceText(normalizeFindReplaceReplacement(highlightedText));
               setMatchIndex(0);
               setTimeout(() => replaceInputRef.current?.focus(), 50);
               return;
