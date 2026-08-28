@@ -1517,6 +1517,34 @@
         || getArticleFilenameTitle(article.name);
     }
 
+    function normalizeFindReplaceTitle(value) {
+      return String(value || '')
+        .replace(/[ \t　]*レビュー[ \t　]*比較まとめ[ \t　]*/g, ' ')
+        .replace(/[ \t　]+/g, ' ')
+        .trim();
+    }
+
+    function getFindReplaceHighlightedText(textarea, preview) {
+      if (textarea && document.activeElement === textarea) {
+        const start = Number(textarea.selectionStart);
+        const end = Number(textarea.selectionEnd);
+        if (Number.isInteger(start) && Number.isInteger(end) && end > start) {
+          return textarea.value.substring(start, end).trim();
+        }
+      }
+
+      const selection = window.getSelection?.();
+      if (!preview || !selection || selection.isCollapsed) return '';
+
+      const isInsidePreview = (node) => {
+        if (!node) return false;
+        const element = node.nodeType === 1 ? node : node.parentElement;
+        return Boolean(element && preview.contains(element));
+      };
+      if (!isInsidePreview(selection.anchorNode) || !isInsidePreview(selection.focusNode)) return '';
+      return selection.toString().trim();
+    }
+
     function normalizeArticleSearchText(value) {
       return String(value || '').toLocaleLowerCase('ja-JP');
     }
@@ -6068,9 +6096,20 @@
           if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); handleSave(); }
           if (e.key === 'Escape' && isEditingTitle) { setIsEditingTitle(false); }
           if (e.key === 'Escape' && showFindReplace) { setShowFindReplace(false); textareaRef.current?.focus(); }
-          // Ctrl+F: 検索パネルの開閉
-          if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+          // Ctrl+F: 開いているパネルへ選択文字と記事タイトルを取り込む。選択がなければ従来どおり開閉する
+          if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'f') {
             e.preventDefault();
+            const highlightedText = getFindReplaceHighlightedText(textareaRef.current, previewRef.current);
+            if (showFindReplace && highlightedText) {
+              const articleTitle = isNewArticle
+                ? getArticleFilenameTitle(newFilename)
+                : getArticleDisplayTitle(selectedArticle, articleH1Cache);
+              setFindText(normalizeFindReplaceTitle(articleTitle));
+              setReplaceText(highlightedText);
+              setMatchIndex(0);
+              setTimeout(() => replaceInputRef.current?.focus(), 50);
+              return;
+            }
             setShowFindReplace(v => { if (!v) setTimeout(() => findInputRef.current?.focus(), 50); return !v; });
           }
           // Ctrl+B: 太字
@@ -6094,7 +6133,7 @@
         };
         window.addEventListener('keydown', handler);
         return () => window.removeEventListener('keydown', handler);
-      }, [content, selectedArticle, isNewArticle, newFilename, isEditingTitle, showFindReplace, multiSelectedIds]);
+      }, [content, selectedArticle, articleH1Cache, isNewArticle, newFilename, isEditingTitle, showFindReplace, multiSelectedIds]);
 
       // タイトル編集フォーカス
       useEffect(() => {
