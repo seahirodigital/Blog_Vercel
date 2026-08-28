@@ -11114,7 +11114,7 @@
   },
   {
     "id": "0ec39d2b-2ed0-4003-b6fe-cad8f27f164e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9082f4f68c3e47dda360bd4320c7cf09",
     "title": "Aladdin Poca レビュー比較まとめ",
     "name": "Aladdin X 1080P c3 450ANSI レビュー比較まとめ.md",
@@ -11123,10 +11123,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-28T23:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-28T22:25:15.872196+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "88ca0522-71a8-4553-884a-bc0e6b28ff48",
