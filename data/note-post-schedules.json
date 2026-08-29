@@ -12014,5 +12014,21 @@
     "publishedUrl": "",
     "error": "",
     "cancelledAt": "2026-08-29T12:05:41.078Z"
+  },
+  {
+    "id": "775a89cc-067d-42bc-b931-a66feb7dae20",
+    "status": "scheduled",
+    "fileId": "FFCC26DEDBBA4E70!s23a8cb1314ae4b2f87c82f27d14ed2a8",
+    "title": "シャープ EC-KR1-B スティッククリーナー レビュー比較まとめ",
+    "name": "シャープ EC-KR1-B スティッククリーナー レビュー比較まとめ.md",
+    "path": "",
+    "noteTarget": "blog_main",
+    "noTopImage": false,
+    "publishAt": "2026-08-30T22:30:00.000Z",
+    "createdAt": "2026-08-29T12:06:09.678Z",
+    "queuedAt": "",
+    "publishedAt": "",
+    "publishedUrl": "",
+    "error": ""
   }
 ]
