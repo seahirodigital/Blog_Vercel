@@ -11330,7 +11330,7 @@
   },
   {
     "id": "cdc0c150-639b-4b4c-9065-bcc80aae70b4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s21274fdfa9414b6899fbad0692f00c73",
     "title": "シャープ ES-GV8J-N 乾燥機 レビュー比較まとめ",
     "name": "シャープ ES-GV8J-N 乾燥機 レビュー比較まとめ.md",
@@ -11340,8 +11340,8 @@
     "publishAt": "2026-08-29T09:00:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
     "queuedAt": "2026-08-29T08:25:42.701234+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-29T09:02:20.337458+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5e6d06356ff6?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
