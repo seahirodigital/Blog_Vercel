@@ -11585,7 +11585,7 @@
   },
   {
     "id": "a5520d19-2ddd-4628-9a77-452508b9abc3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf85ce46ff2ba4ae787a5781cf1406e0e",
     "title": "arrows Alpha2 レビュー比較まとめ",
     "name": "FCNT Alpha2 8GB256GB arrows インディゴ レビュー比較まとめ.md",
@@ -11597,7 +11597,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:06:23.055Z"
   },
   {
     "id": "9c3f309a-85e8-4b1f-92c3-da474496a450",
