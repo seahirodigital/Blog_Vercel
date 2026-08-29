@@ -11438,7 +11438,7 @@
   },
   {
     "id": "5ba3641c-bc45-4352-85ef-a267e10bc1af",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s17794760d4454b8fb7f9566d0fa04514",
     "title": "アイリスオーヤマ ITW-100B01-W 乾燥機 レビュー比較まとめ",
     "name": "アイリスオーヤマ ITW-100B01-W 乾燥機 レビュー比較まとめ.md",
@@ -11448,8 +11448,8 @@
     "publishAt": "2026-08-29T12:30:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
     "queuedAt": "2026-08-29T11:55:21.425268+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-29T12:32:28.830342+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n6cc285fad92e?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
