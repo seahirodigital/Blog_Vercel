@@ -11528,7 +11528,7 @@
   },
   {
     "id": "e43475d1-184c-42dc-b1c4-dfe9603b4217",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s1574470b6e084bb09c3025bedae50021",
     "title": "Anker Nebula (ネビュラ) Cosmos 4K SEレビュー比較まとめ",
     "name": "NEBULA 1800ANSI Anker ネビュラ レビュー比較まとめ.md",
@@ -11538,8 +11538,8 @@
     "publishAt": "2026-08-29T15:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
     "queuedAt": "2026-08-29T16:47:37.203560+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-29T16:50:10.193162+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n1ebfbffc5c43?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
