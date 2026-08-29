@@ -11186,7 +11186,7 @@
   },
   {
     "id": "1d576161-1915-458c-9a3a-c76279be7f3a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb5028570f0e949cb950d0c1e63a045ba",
     "title": "Oura M1 M2 M3 Ring 第4世代 レビュー比較まとめ",
     "name": "Oura M1 M2 M3 Ring 第4世代 レビュー比較まとめ.md",
@@ -11195,10 +11195,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T02:30:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T01:55:56.701715+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "49eb4e18-bb0c-4f44-b9b0-9207a2faabf5",
