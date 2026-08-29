@@ -11132,7 +11132,7 @@
   },
   {
     "id": "88ca0522-71a8-4553-884a-bc0e6b28ff48",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s6f2ef06889144d39bf2ff58c4a345bf1",
     "title": "Aladdin X3 Laser 4K プロジェクター レビュー比較まとめ",
     "name": "Aladdin X X3 プロジェクター レビュー比較まとめ.md",
@@ -11142,8 +11142,8 @@
     "publishAt": "2026-08-29T00:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
     "queuedAt": "2026-08-28T23:25:02.012215+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-29T00:03:00.828099+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n27aec3078ad8?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
