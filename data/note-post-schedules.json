@@ -11312,7 +11312,7 @@
   },
   {
     "id": "266c6d92-d36a-4d5e-adb4-b21aab01d3a1",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s65aee4fe62d2460badc84a23207e0d2f",
     "title": "Anker Nebula Mars 3 Air  レビュー比較まとめ",
     "name": "NEBULA 1080p 400ANSI D2325 Anker Mars レビュー比較まとめ.md",
@@ -11322,8 +11322,8 @@
     "publishAt": "2026-08-29T08:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
     "queuedAt": "2026-08-29T07:25:16.203894+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-29T08:02:32.212261+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n6386a348b848?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
