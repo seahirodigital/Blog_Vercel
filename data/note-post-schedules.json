@@ -11366,7 +11366,7 @@
   },
   {
     "id": "a77c7a5f-8837-4f52-897a-8abaa9d8f8b3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6036dabd35d54ce0aaaffeeba9694804",
     "title": "日立 PV-BH500A1 スティッククリーナー レビュー比較まとめ",
     "name": "日立 PV-BH500A1 スティッククリーナー レビュー比較まとめ.md",
@@ -11375,10 +11375,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T10:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T09:25:26.609218+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4d463b2e-62a2-4338-aa9b-887274eaf249",
