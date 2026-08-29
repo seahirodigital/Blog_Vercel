@@ -11510,7 +11510,7 @@
   },
   {
     "id": "5c9299b2-58bd-4c80-97e9-346e48b59bcd",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7ccdb682c6b745a7ba287020358226b5",
     "title": "BenQ GP520 4K ホームプロジェクター レビュー比較まとめ",
     "name": "ベンキュージャパン GP520 LED2600ANSI BenQ 4K レビュー比較まとめ.md",
@@ -11519,10 +11519,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T14:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T13:25:56.749953+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e43475d1-184c-42dc-b1c4-dfe9603b4217",
