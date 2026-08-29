@@ -11204,7 +11204,7 @@
   },
   {
     "id": "49eb4e18-bb0c-4f44-b9b0-9207a2faabf5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se4a6a0a70b1e4e81876dacf48c42ea58",
     "title": "Acer プロジェクター Android TVボックス付属 DLP レビュー比較まとめ",
     "name": "Acer 4000ANSI HDMI2 H6815ATV プロジェクター Android レビュー比較まとめ.md",
@@ -11213,10 +11213,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T03:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T02:25:08.161118+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9b079a8d-2e63-4b75-80fa-6281e5c4b0c0",
