@@ -12,6 +12,11 @@ on:
     - cron: '55 7 30 8 *'
     - cron: '55 12 30 8 *'
     - cron: '55 21 30 8 *'
+    - cron: '55 21 31 8 *'
+    - cron: '55 2 1 9 *'
+    - cron: '55 7 1 9 *'
+    - cron: '55 12 1 9 *'
+    - cron: '55 17 1 9 *'
 
 jobs:
   dispatch-reserved-posts:
