@@ -11636,7 +11636,7 @@
   },
   {
     "id": "09f17406-15e5-4af3-8a71-9ece74b1797a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd2f66da7d473412a990ff8140b1bed01",
     "title": "ECOVACS (エコバックス) DEEBOT mini ロボット掃除機 レビュー比較まとめ",
     "name": "ECOVACS 55X8900N 乾燥機 レビュー比較まとめ.md",
@@ -11648,7 +11648,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:06:32.427Z"
   },
   {
     "id": "8db86bf1-5ee2-4501-9a84-970c2306384f",
