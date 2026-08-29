@@ -11168,7 +11168,7 @@
   },
   {
     "id": "e9166cd8-671c-4f49-b89e-a608bd74e1ac",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sad8b9028eceb4f5c993a4ded35dd86a3",
     "title": "XGIMI Horizon 20 Max 4K ホームプロジェクター レビュー比較まとめ",
     "name": "XGIMI 5700ISO Horizon 20 ホームプロジェクター レビュー比較まとめ.md",
@@ -11177,10 +11177,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T02:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T01:25:45.078144+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1d576161-1915-458c-9a3a-c76279be7f3a",
