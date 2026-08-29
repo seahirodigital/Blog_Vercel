@@ -11751,7 +11751,7 @@
   },
   {
     "id": "8ddb25ef-16d2-4f3b-b41e-ea9800b2bfad",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbe1613e0ca664b6d805509245dcdefdc",
     "title": "SOUNDPEATS Air6 Pro",
     "name": "20260828_1003_【圧倒的コスパ】これは爆売れ確定です／SOUNDPEATS Air6 Pro誕生.md",
@@ -11760,14 +11760,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T22:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T23:38:48.181525+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "050e6c2f-7beb-4005-ac36-bf414313f5f6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s501895490afa432f999073224dc50546",
     "title": "Lefant M3 MAX ロボット掃除機 レビュー比較まとめ",
     "name": "Lefant M3 乾燥機 レビュー比較まとめ.md",
@@ -11776,10 +11778,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T23:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T23:38:48.181525+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5449a43c-2e7a-414d-b760-a16583b96d9c",
