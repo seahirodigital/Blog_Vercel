@@ -11546,7 +11546,7 @@
   },
   {
     "id": "de6bcfa7-488e-4d92-9dec-0317f79bced5",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3c6e5db26ef74972982ecb4e369aa19c",
     "title": "Xiaomi テレビ 75型 チューナーレステレビ A Pro 75 レビュー比較まとめ",
     "name": "xiaomi(シャオミ) PRO3 PRO3-100 テレビ レビュー比較まとめ.md",
@@ -11556,8 +11556,8 @@
     "publishAt": "2026-08-29T15:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
     "queuedAt": "2026-08-29T16:47:37.203560+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-29T16:50:13.050265+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ned1cac35176a?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
