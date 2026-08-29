@@ -11240,7 +11240,7 @@
   },
   {
     "id": "1988ca3e-8d85-45b3-9dcc-1719d3826472",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc0b1b0de92c548a3a900bc8030d37445",
     "title": "Acer BenQ TH575C ホームプロジェクター  Android TVボックス付属 DLP レビュー比較まとめ",
     "name": "ベンキュージャパン TH575C 3800ANSI BenQ ホームプロジェクター レビュー比較まとめ.md",
@@ -11249,10 +11249,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T05:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T04:25:57.681585+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "464284b2-5a31-48cb-8220-08bff0103848",
