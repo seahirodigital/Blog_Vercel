@@ -11294,7 +11294,7 @@
   },
   {
     "id": "664be91e-7e95-4f99-a5de-1fbba09f3dc6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd10715eb94064550b96c8424740da7d8",
     "title": "WalkingPad S1 ウォーキングパッドレビュー比較まとめ",
     "name": "ハヤブサプラス S1 テレビ レビュー比較まとめ.md",
@@ -11303,14 +11303,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T08:00:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T07:25:16.203894+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "266c6d92-d36a-4d5e-adb4-b21aab01d3a1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s65aee4fe62d2460badc84a23207e0d2f",
     "title": "Anker Nebula Mars 3 Air  レビュー比較まとめ",
     "name": "NEBULA 1080p 400ANSI D2325 Anker Mars レビュー比較まとめ.md",
@@ -11319,10 +11321,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T08:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T07:25:16.203894+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cdc0c150-639b-4b4c-9065-bcc80aae70b4",
