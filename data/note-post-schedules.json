@@ -11384,7 +11384,7 @@
   },
   {
     "id": "4d463b2e-62a2-4338-aa9b-887274eaf249",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s677b694173e645649f5073d11b41d84f",
     "title": "Xiaomi POCO  X8 Pro Max レビュー比較まとめ",
     "name": "xiaomi(シャオミ) X8 9500s POCO レビュー比較まとめ.md",
@@ -11394,8 +11394,8 @@
     "publishAt": "2026-08-29T11:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
     "queuedAt": "2026-08-29T10:25:47.661960+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-29T11:02:29.721011+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n1df28dfaf985?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
