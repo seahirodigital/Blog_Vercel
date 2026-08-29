@@ -11150,7 +11150,7 @@
   },
   {
     "id": "aacec0cf-04a4-4f0f-b93f-362ec8ded472",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s32a4c8e986954c0a96a78e77c93d462e",
     "title": "BenQ MW826STH 短焦点 DLPプロジェクター レビュー比較まとめ",
     "name": "ベンキュージャパン MW826STH WXGA3500ANSI BenQ 短焦点 レビュー比較まとめ.md",
@@ -11159,10 +11159,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T01:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T00:25:23.391473+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e9166cd8-671c-4f49-b89e-a608bd74e1ac",
