@@ -11294,7 +11294,7 @@
   },
   {
     "id": "664be91e-7e95-4f99-a5de-1fbba09f3dc6",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd10715eb94064550b96c8424740da7d8",
     "title": "WalkingPad S1 ウォーキングパッドレビュー比較まとめ",
     "name": "ハヤブサプラス S1 テレビ レビュー比較まとめ.md",
@@ -11304,8 +11304,8 @@
     "publishAt": "2026-08-29T08:00:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
     "queuedAt": "2026-08-29T07:25:16.203894+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-29T08:02:37.158298+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n83f70e3940ac?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
