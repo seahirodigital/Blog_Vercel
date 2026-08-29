@@ -11276,7 +11276,7 @@
   },
   {
     "id": "e52bf1ed-5b30-4bec-ab05-d928e4dd9619",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9201933d697e4661945723a531147d07",
     "title": "Aladdin X3 プロジェクター 700ANSIルーメン レビュー比較まとめ",
     "name": "Aladdin X 700ANSI 1080P プロジェクター レビュー比較まとめ.md",
@@ -11285,10 +11285,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T07:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T06:25:49.977190+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "664be91e-7e95-4f99-a5de-1fbba09f3dc6",
