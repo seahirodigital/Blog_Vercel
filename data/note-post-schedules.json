@@ -11492,7 +11492,7 @@
   },
   {
     "id": "588a802d-4219-4c83-9881-49d3011d3fc9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa953c67f55fe444b807d51cbba07bdf6",
     "title": "De'Longhi(デロンギ) EM450J-W エスプレッソカプチーノメーカー クラシック レビュー比較まとめ",
     "name": "De'Longhi(デロンギ) EM450J-W エスプレッソカプチーノメーカー クラシック レビュー比較まとめ.md",
@@ -11501,10 +11501,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T13:30:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T12:55:45.585029+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5c9299b2-58bd-4c80-97e9-346e48b59bcd",
