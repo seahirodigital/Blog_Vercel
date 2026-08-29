@@ -11330,7 +11330,7 @@
   },
   {
     "id": "cdc0c150-639b-4b4c-9065-bcc80aae70b4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s21274fdfa9414b6899fbad0692f00c73",
     "title": "シャープ ES-GV8J-N 乾燥機 レビュー比較まとめ",
     "name": "シャープ ES-GV8J-N 乾燥機 レビュー比較まとめ.md",
@@ -11339,14 +11339,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T09:00:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T08:25:42.701234+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "680faf8b-ff4f-4039-bc98-431c6f1e7aaf",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sedf1ad514c544384b875a6ff4e414c00",
     "title": "OPPO FIND N6 SIMフリー 折りたたみスマホ  レビュー比較まとめ",
     "name": "OPPO N6 イヤホン レビュー比較まとめ.md",
@@ -11355,10 +11357,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T09:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T08:25:42.701234+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a77c7a5f-8837-4f52-897a-8abaa9d8f8b3",
