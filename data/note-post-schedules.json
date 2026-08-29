@@ -11222,7 +11222,7 @@
   },
   {
     "id": "9b079a8d-2e63-4b75-80fa-6281e5c4b0c0",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s590fca0d3ecc401bac424b9529a08519",
     "title": "JMGO PicoFlix コンパクトモバイルプロジェクター レビュー比較まとめ",
     "name": "JmGO 420ISO テレビ レビュー比較まとめ.md",
@@ -11232,8 +11232,8 @@
     "publishAt": "2026-08-29T04:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
     "queuedAt": "2026-08-29T03:25:29.661143+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-29T04:02:25.292251+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na91049951c32?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
