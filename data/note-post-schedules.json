@@ -11769,7 +11769,7 @@
   },
   {
     "id": "050e6c2f-7beb-4005-ac36-bf414313f5f6",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s501895490afa432f999073224dc50546",
     "title": "Lefant M3 MAX ロボット掃除機 レビュー比較まとめ",
     "name": "Lefant M3 乾燥機 レビュー比較まとめ.md",
@@ -11779,8 +11779,8 @@
     "publishAt": "2026-08-29T23:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
     "queuedAt": "2026-08-29T23:38:48.181525+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-29T23:41:36.906829+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nebec99264aa5?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
