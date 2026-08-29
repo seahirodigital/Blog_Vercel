@@ -12418,7 +12418,7 @@
   },
   {
     "id": "94cc59fe-ed99-4803-ac25-c1f90105dc27",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scebb37f070b0430d91c870f72a41ad20",
     "title": "Beats Powerbeats Pro 2レビュー比較まとめ",
     "name": "Beats H2 イヤホン レビュー比較まとめ.md",
@@ -12430,11 +12430,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "4edb17ab-d76e-4158-87c9-a87a57c5a713",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd2f66da7d473412a990ff8140b1bed01",
     "title": "ECOVACS (エコバックス) DEEBOT mini ロボット掃除機 レビュー比較まとめ",
     "name": "ECOVACS 55X8900N 乾燥機 レビュー比較まとめ.md",
@@ -12446,11 +12447,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "57a20568-34a0-4da9-be39-144a59d5e24b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfb0b78ad653f4f23b02cd7a7d241061e",
     "title": "BenQ GV50 天井モバイルプロジェクター レビュー比較まとめ",
     "name": "ベンキュージャパン GV50 500ANSI テレビ レビュー比較まとめ.md",
@@ -12462,11 +12464,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "3a30cc97-f8f0-4718-8202-4281886a9467",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0795da6ac2ae4ec499ee357c1606c4af",
     "title": "Atomos Sumo Pro 19 / Atomos Shogun AV19 / NextorageセキュリティSSD レビュー比較まとめ：映像制作とデータ保護の最適解",
     "name": "20260812_0810_関西放送機器展でも大好評！？ATOMOS SUMO PRO-19 の実力とは？.md",
@@ -12478,11 +12481,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "de88169e-a073-4c52-9796-2115ee40e59c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd2f66da7d473412a990ff8140b1bed01",
     "title": "ECOVACS (エコバックス) DEEBOT mini ロボット掃除機 レビュー比較まとめ",
     "name": "ECOVACS 55X8900N 乾燥機 レビュー比較まとめ.md",
@@ -12494,11 +12498,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "bc03537d-6ca4-4e4f-bfc8-d1caedbe32eb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sab19011da72a4804a827811e0a39cfbf",
     "title": "XGIMI HORIZON Pro 4K テレビ レビュー比較まとめ",
     "name": "XGIMI 1500ISO テレビ レビュー比較まとめ.md",
@@ -12510,11 +12515,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "f5bd46b0-80ac-45b1-a8de-76ab291767bf",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7e059d25a1c6465f8a1d167e9c094419",
     "title": "REGZA 55インチ 有機EL 55X8900N スマートテレビ レビュー比較まとめ",
     "name": "レグザ 55X8900N テレビ レビュー比較まとめ.md",
@@ -12526,11 +12532,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "682aeb3d-6bef-4bf3-aa4d-c34d5f727d66",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb1ee62c642204e5e84a07070d5f776ee",
     "title": "ブラウン Silk-épil 9 フレックス脱毛器 レビュー比較まとめ",
     "name": "Braun SES9-041 テレビ レビュー比較まとめ.md",
@@ -12542,11 +12549,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "85edc499-f51d-4341-88ac-0515ad1bec7c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sedda578cd74e4578b547034109d2c9d6",
     "title": "Aladdin Marca Mic2カラオケマイクセット 超短焦点 プロジ レビュー比較まとめ",
     "name": "Aladdin X Mic2 テレビ レビュー比較まとめ.md",
@@ -12558,11 +12566,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "eca8f54e-38d7-43f1-ad25-76dba119f6a6",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4e3788d3619f4f6eb463853719997cd0",
     "title": "Audio Technica(オーディオテクニカ) ATH-ADX7000 A2DC ヘッドホン レビュー比較まとめ",
     "name": "Audio Technica(オーディオテクニカ) ATH-ADX7000 A2DC ヘッドホン レビュー比較まとめ.md",
@@ -12574,11 +12583,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "54a29140-6cf0-4611-821c-82aac06f7987",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0ff8ff7a15054b74a074eb5899d2f83d",
     "title": "Insta360 X6レビュー比較まとめ：360度カメラで撮影効率化と時短を実現",
     "name": "20260813_0325_Insta360 X6ついにキター！！.md",
@@ -12590,11 +12600,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "477ba0df-d7cf-41bf-b1ec-ebb606f4a740",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se0b26d5832184a9a944ef3a59ab42f7e",
     "title": "Anker Soundcore Nebula P1 レビュー比較まとめ",
     "name": "Soundcore P1 Anker Nebula レビュー比較まとめ.md",
@@ -12606,11 +12617,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "c43c6ab5-84c3-44c1-84f6-31961406fbb0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s93a11606760542a8874821cab5a117c6",
     "title": "Marshall Acton 4レビュー比較まとめ：自宅での音楽体験を格段に向上させるホームスピーカー",
     "name": "20260812_0814_Marshallの定番Bluetoothスピーカーが超進化！「Acton IV」を試してみた.md",
@@ -12622,11 +12634,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "06cbd63c-8dc6-40a8-ac0f-69119441c976",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scebb37f070b0430d91c870f72a41ad20",
     "title": "Beats Powerbeats Pro 2レビュー比較まとめ",
     "name": "Beats H2 イヤホン レビュー比較まとめ.md",
@@ -12638,11 +12651,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "d175a542-33f7-4564-8032-f6949a0389a2",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0ff8ff7a15054b74a074eb5899d2f83d",
     "title": "Insta360 X6レビュー比較まとめ：360度カメラで撮影効率化と時短を実現",
     "name": "20260813_0325_Insta360 X6ついにキター！！.md",
@@ -12654,11 +12668,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "a1a2361d-562e-4166-9530-1b0fa23446b2",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sff5539cc65914b9b8192d2a99ab56105",
     "title": "Anker C1000 ドライヤー レビュー比較まとめ",
     "name": "Anker C1000 ドライヤー レビュー比較まとめ.md",
@@ -12670,11 +12685,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "dbd77519-2cdd-4fdb-9223-01aeb9cd259a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf85ce46ff2ba4ae787a5781cf1406e0e",
     "title": "arrows Alpha2 レビュー比較まとめ",
     "name": "FCNT Alpha2 8GB256GB arrows インディゴ レビュー比較まとめ.md",
@@ -12686,11 +12702,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "f5d56031-fed8-4f78-877c-36d6e66e5cf0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4b068228b26a41f695540769236c04d8",
     "title": "Insta360 GO Ultra アクションカメラ レビュー比較まとめ",
     "name": "Insta360 GO Ultra アクションカメラ レビュー比較まとめ.md",
@@ -12702,11 +12719,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "fc3a6a94-0410-4ed4-a62f-a202b3152bab",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sedda578cd74e4578b547034109d2c9d6",
     "title": "Aladdin Marca Mic2カラオケマイクセット 超短焦点 プロジ レビュー比較まとめ",
     "name": "Aladdin X Mic2 テレビ レビュー比較まとめ.md",
@@ -12718,11 +12736,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "2e44315a-dc2f-4dbf-9c26-6d23b4ff6c89",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s39072698fea041859a4f24412cbc04d0",
     "title": "ルンバ(Roomba)Max 705  レビュー比較まとめ",
     "name": "アイロボット W155060 掃除機 レビュー比較まとめ.md",
@@ -12734,11 +12753,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "54494ccb-54bb-4e36-9b74-6e381c842a8b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s706a38f990604d48b1ec59078be35c33",
     "title": "シャープ ES-X12C-TL ドラム式洗濯乾燥機 レビュー比較まとめ",
     "name": "シャープ ES-X12C-TL ドラム式洗濯乾燥機 レビュー比較まとめ.md",
@@ -12750,11 +12770,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   },
   {
     "id": "cdc751f6-93d3-43e3-ad10-be11d80eb164",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf8fe491425984c93bdb83bbbe6a54ab0",
     "title": "M5 iPad Pro レビュー比較違いまとめ",
     "name": "M5 iPad Pro レビュー比較違いまとめ.md",
@@ -12766,6 +12787,7 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:10:22.340Z"
   }
 ]
