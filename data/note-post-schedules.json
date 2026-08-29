@@ -11258,7 +11258,7 @@
   },
   {
     "id": "464284b2-5a31-48cb-8220-08bff0103848",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa2cd123b51a841d9be7ce141353d4274",
     "title": "Motorola(モトローラ) motorola razr 60 レビュー比較まとめ",
     "name": "Motorola(モトローラ) 12GB512GB PB8E0002JP razr 60 レビュー比較まとめ.md",
@@ -11267,10 +11267,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T06:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T05:25:24.077230+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e52bf1ed-5b30-4bec-ab05-d928e4dd9619",
