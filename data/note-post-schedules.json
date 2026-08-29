@@ -11528,7 +11528,7 @@
   },
   {
     "id": "e43475d1-184c-42dc-b1c4-dfe9603b4217",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1574470b6e084bb09c3025bedae50021",
     "title": "Anker Nebula (ネビュラ) Cosmos 4K SEレビュー比較まとめ",
     "name": "NEBULA 1800ANSI Anker ネビュラ レビュー比較まとめ.md",
@@ -11537,14 +11537,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T15:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T16:47:37.203560+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "de6bcfa7-488e-4d92-9dec-0317f79bced5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3c6e5db26ef74972982ecb4e369aa19c",
     "title": "Xiaomi テレビ 75型 チューナーレステレビ A Pro 75 レビュー比較まとめ",
     "name": "xiaomi(シャオミ) PRO3 PRO3-100 テレビ レビュー比較まとめ.md",
@@ -11553,10 +11555,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T15:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T16:47:37.203560+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0d49aaad-9a02-4cc5-a0cc-63f1c4428092",
