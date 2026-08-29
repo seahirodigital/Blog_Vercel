@@ -11456,7 +11456,7 @@
   },
   {
     "id": "9d678296-0ec2-43c4-9e12-46ae89ceb893",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdf8ea6db4a764c879e1a04063bf3c61b",
     "title": "スイッチボット K11 4GWi-Fi サーキュレーター レビュー比較まとめ",
     "name": "スイッチボット K11 4GWi-Fi サーキュレーター レビュー比較まとめ.md",
@@ -11465,14 +11465,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T13:00:00.000Z",
     "createdAt": "2026-08-27T06:38:27.410Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T12:25:33.323857+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "65af20aa-3a4c-4c70-bdc7-cc02e2ded9b5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s465aa385f3ca4d068763b56307d55cc5",
     "title": "Galaxy S26 Samsung Ultra レビュー比較まとめ",
     "name": "Galaxy S26 SM-S948QZVESJP Samsung Ultra レビュー比較まとめ.md",
@@ -11481,10 +11483,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-29T13:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-29T12:25:33.323857+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "588a802d-4219-4c83-9881-49d3011d3fc9",
