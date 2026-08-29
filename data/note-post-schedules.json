@@ -11348,7 +11348,7 @@
   },
   {
     "id": "680faf8b-ff4f-4039-bc98-431c6f1e7aaf",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sedf1ad514c544384b875a6ff4e414c00",
     "title": "OPPO FIND N6 SIMフリー 折りたたみスマホ  レビュー比較まとめ",
     "name": "OPPO N6 イヤホン レビュー比較まとめ.md",
@@ -11358,8 +11358,8 @@
     "publishAt": "2026-08-29T09:00:00.000Z",
     "createdAt": "2026-08-28T01:45:56.724Z",
     "queuedAt": "2026-08-29T08:25:42.701234+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-29T09:02:24.021377+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nc1a42ecee423?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
