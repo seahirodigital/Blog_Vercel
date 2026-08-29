@@ -11704,7 +11704,7 @@
   },
   {
     "id": "e8ba50a4-2f6d-4a4f-9900-f6ffa126a6a3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!saca0769c457443c890ad74f9fff40cc2",
     "title": "roborock Q7B Q7BP52-04 掃除機 レビュー比較まとめ",
     "name": "roborock Q7B Q7BP52-04 掃除機 レビュー比較まとめ.md",
@@ -11716,7 +11716,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:06:44.632Z"
   },
   {
     "id": "69165122-13d5-425d-8f5d-41c742209c13",
