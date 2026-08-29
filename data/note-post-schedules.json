@@ -11602,7 +11602,7 @@
   },
   {
     "id": "9c3f309a-85e8-4b1f-92c3-da474496a450",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb1ee62c642204e5e84a07070d5f776ee",
     "title": "ブラウン Silk-épil 9 フレックス脱毛器 レビュー比較まとめ",
     "name": "Braun SES9-041 テレビ レビュー比較まとめ.md",
@@ -11614,7 +11614,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:06:26.097Z"
   },
   {
     "id": "e6e4223a-dbc8-4a15-bd53-61d6728676c3",
