@@ -11619,7 +11619,7 @@
   },
   {
     "id": "e6e4223a-dbc8-4a15-bd53-61d6728676c3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sedda578cd74e4578b547034109d2c9d6",
     "title": "Aladdin Marca Mic2カラオケマイクセット 超短焦点 プロジ レビュー比較まとめ",
     "name": "Aladdin X Mic2 テレビ レビュー比較まとめ.md",
@@ -11631,7 +11631,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-08-29T12:06:29.180Z"
   },
   {
     "id": "09f17406-15e5-4af3-8a71-9ece74b1797a",
