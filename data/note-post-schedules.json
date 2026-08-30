@@ -11787,7 +11787,7 @@
   },
   {
     "id": "5449a43c-2e7a-414d-b760-a16583b96d9c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!se9b04dc54d10414d91e17c634c226ebb",
     "title": "Plaud Note Pro AIボイスレコーダー レビュー比較まとめ",
     "name": "Plaud B3 GPT-5 comimages Note Pro レビュー比較まとめ.md",
@@ -11797,8 +11797,8 @@
     "publishAt": "2026-08-30T00:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
     "queuedAt": "2026-08-29T23:55:04.805626+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-30T00:32:22.826122+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n980cdac04b54?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
