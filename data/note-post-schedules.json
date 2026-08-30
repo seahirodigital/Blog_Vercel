@@ -11913,7 +11913,7 @@
   },
   {
     "id": "fd3caadf-11f1-4121-9cbf-0e4b32567a4d",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s04094f725205490eb554d00cdf1fcf90",
     "title": "88HOUSE ジャンプスターター レビュー比較まとめ",
     "name": "ファインビーム 88HOUSE ITO-42000 L1416 ジャンプスターター 大容量 レビュー比較まとめ.md",
@@ -11923,8 +11923,8 @@
     "publishAt": "2026-08-30T07:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
     "queuedAt": "2026-08-30T08:33:30.804484+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-30T08:36:07.538645+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nebc4cbfed2c9?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
