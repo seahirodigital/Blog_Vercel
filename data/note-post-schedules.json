@@ -11841,7 +11841,7 @@
   },
   {
     "id": "5eb3d8e2-b9e3-4d28-8990-de35e090170b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s10c19dfd30f54b39b9874e61573dc648",
     "title": "レイコップ  PRO3-100 コードレス 布団クリーナー レビュー比較まとめ",
     "name": "RAYCOP(レイコップ) PRO3 PRO3-100 布団クリーナー レビュー比較まとめ.md",
@@ -11850,10 +11850,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-30T03:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-30T02:55:38.714158+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4f4c24b1-ce35-497c-a59d-95b6d5e0449e",
