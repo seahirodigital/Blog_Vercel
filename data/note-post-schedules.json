@@ -11805,7 +11805,7 @@
   },
   {
     "id": "d14e81c5-c90a-414d-8767-047bb6313c17",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s147bfc04e33243f8840fd2e807390980",
     "title": "ECOVACS(エコバックス) WINBOT W2 窓掃除 窓拭きロボット レビュー比較まとめ",
     "name": "ECOVACS W2 掃除機 レビュー比較まとめ.md",
@@ -11815,8 +11815,8 @@
     "publishAt": "2026-08-30T01:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
     "queuedAt": "2026-08-30T00:55:57.709111+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-30T01:32:26.719658+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n69b1373fd4c2?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
