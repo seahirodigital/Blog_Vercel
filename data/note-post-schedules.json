@@ -11877,7 +11877,7 @@
   },
   {
     "id": "f5b84d35-8e34-437b-9eab-ef040a8fdb11",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7da62beda5fc4c2bb0fd5251400e2b82",
     "title": "ソニー(SONY) テレビ 65インチ 液晶 4K ブラビア KJ-65X81L レビュー比較まとめ",
     "name": "Sony KJ-65X81L テレビ レビュー比較まとめ.md",
@@ -11886,14 +11886,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-30T05:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-30T08:33:30.804484+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ce7533a8-aaee-4252-b79a-e9efd2e7eed8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5c70506c2a3d403caa3864c90583c14f",
     "title": "メディキューブ ブースタープロX2 レビュー比較まとめ",
     "name": "medicube ブースタープロX2 美顔器 レビュー比較まとめ.md",
@@ -11902,14 +11904,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-30T06:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-30T08:33:30.804484+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fd3caadf-11f1-4121-9cbf-0e4b32567a4d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s04094f725205490eb554d00cdf1fcf90",
     "title": "88HOUSE ジャンプスターター レビュー比較まとめ",
     "name": "ファインビーム 88HOUSE ITO-42000 L1416 ジャンプスターター 大容量 レビュー比較まとめ.md",
@@ -11918,14 +11922,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-30T07:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-30T08:33:30.804484+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3fdd8815-5c38-473e-8728-11f7ba530884",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5d8f82f301b743ee8197fb1495aa992e",
     "title": "シャープ 4K 43V型 倍速 液晶 テレビ AQUOS 4T-C43FN2 レビュー比較まとめ",
     "name": "シャープ 4T-C43FN2 テレビ レビュー比較まとめ.md",
@@ -11934,10 +11940,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-30T08:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-30T08:33:30.804484+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5d3563d5-bc5a-4593-8c54-5b007eb78d1f",
