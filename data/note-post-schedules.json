@@ -11859,7 +11859,7 @@
   },
   {
     "id": "4f4c24b1-ce35-497c-a59d-95b6d5e0449e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s5d72f09ed90b44b0b378dc7b6c115a7b",
     "title": "Haier JF-HSC20A 冷凍庫 レビュー比較まとめ",
     "name": "Haier JF-HSC20A 冷凍庫 幅82cm レビュー比較まとめ.md",
@@ -11869,8 +11869,8 @@
     "publishAt": "2026-08-30T04:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
     "queuedAt": "2026-08-30T03:55:29.437006+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-30T04:32:18.607921+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nfb374c47cf7e?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
