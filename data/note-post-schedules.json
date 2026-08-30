@@ -11877,7 +11877,7 @@
   },
   {
     "id": "f5b84d35-8e34-437b-9eab-ef040a8fdb11",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s7da62beda5fc4c2bb0fd5251400e2b82",
     "title": "ソニー(SONY) テレビ 65インチ 液晶 4K ブラビア KJ-65X81L レビュー比較まとめ",
     "name": "Sony KJ-65X81L テレビ レビュー比較まとめ.md",
@@ -11887,8 +11887,8 @@
     "publishAt": "2026-08-30T05:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
     "queuedAt": "2026-08-30T08:33:30.804484+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-30T08:35:59.674738+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n90a03741e0f8?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
