@@ -12003,7 +12003,7 @@
   },
   {
     "id": "73b4df79-260f-45a9-9bf7-d676307d7455",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!se3c1e06eabb6401b9f79f81092a4f0e6",
     "title": "GARMIN（ガーミン）GPSランニングウォッチ Forerunner 265   レビュー比較まとめ",
     "name": "ガーミン 135-205mm Forerunner170 Forerunner70 GARMIN GPSランニングウォッ.md",
@@ -12013,8 +12013,8 @@
     "publishAt": "2026-08-30T12:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
     "queuedAt": "2026-08-30T11:55:47.291019+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-30T12:32:30.279836+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ncebd67b11048?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
