@@ -11985,7 +11985,7 @@
   },
   {
     "id": "e58b519a-7034-4a4e-86fa-0eb99678f34d",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb2f0bb3dbf7443419e9df51a3dbc71af",
     "title": "Reencle Prime 家庭用 生ごみ処理機 レビュー比較まとめ",
     "name": "Reencle A0 TiO2 CO2 生ごみ処理機 レビュー比較まとめ.md",
@@ -11995,8 +11995,8 @@
     "publishAt": "2026-08-30T11:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
     "queuedAt": "2026-08-30T12:25:59.836813+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-30T12:28:41.584128+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n56d86ddedc85?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
