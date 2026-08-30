@@ -11967,7 +11967,7 @@
   },
   {
     "id": "3e820880-f84e-45a6-a6a1-ab840a0e9b50",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s41037eb6c4144ebd84d12d8ad8837b03",
     "title": "パナソニック ES-NLV7X-K ラムダッシュPRO 電動シェーバー  レビュー比較まとめ",
     "name": "パナソニック ES-NLV7X-K メンズシェーバー レビュー比較まとめ.md",
@@ -11976,10 +11976,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-30T10:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-30T09:55:03.619962+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e58b519a-7034-4a4e-86fa-0eb99678f34d",
