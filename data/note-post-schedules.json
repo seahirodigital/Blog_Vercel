@@ -11823,7 +11823,7 @@
   },
   {
     "id": "5e3bde6f-d1e9-4212-98d4-bd7f54a73147",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc33c4f5604624d4fa6c41a90de20e050",
     "title": "ルンバ(Roomba) 105 Combo ロボット レビュー比較まとめ",
     "name": "アイロボット Y351060 水拭き掃除機 レビュー比較まとめ.md",
@@ -11832,10 +11832,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-30T02:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-30T01:55:47.639928+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5eb3d8e2-b9e3-4d28-8990-de35e090170b",
