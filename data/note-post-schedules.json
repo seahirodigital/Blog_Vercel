@@ -11949,7 +11949,7 @@
   },
   {
     "id": "5d3563d5-bc5a-4593-8c54-5b007eb78d1f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb87f99a27ff4458f914bbf74ad0160af",
     "title": "OMEGA(オメガ)シーマスター ウォッチ マスターコーアクシャル自動巻  レビュー比較まとめ",
     "name": "OMEGA(オメガ) comimages 71vHPEUwQKL SX342 シーマスター ウォッチ レビュー比較まとめ.md",
@@ -11958,10 +11958,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-30T09:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-30T08:55:43.589729+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3e820880-f84e-45a6-a6a1-ab840a0e9b50",
