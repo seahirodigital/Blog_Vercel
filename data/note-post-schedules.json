@@ -12039,7 +12039,7 @@
   },
   {
     "id": "bde769dc-1c5a-4e50-8a89-281085be10d0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5db1f6034f8e4dd5a43dc59a61bbee2b",
     "title": "マキタ40Vmax用充電式クリーナ CL003GRDW レビュー比較まとめ",
     "name": "SHIBASHO CL003GRDW マキタ40Vmax用充電式クリーナ ECOVACS レビュー比較まとめ.md",
@@ -12048,10 +12048,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-30T14:30:00.000Z",
     "createdAt": "2026-08-29T12:05:21.201Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-30T13:55:49.338110+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f2608c6c-66c8-4ec1-b801-eff609b1e34a",
