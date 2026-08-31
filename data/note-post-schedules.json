@@ -12200,7 +12200,7 @@
   },
   {
     "id": "e185c064-c389-45c2-b67b-8e460b760f55",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s8b389526f8d444d18b727fdafc872282",
     "title": "ECOVACS(エコバックス) DEEBOT T50S OMNI 全自動 ロボッ レビュー比較まとめ",
     "name": "ECOVACS DEEBOT T50S OMNI ロボット掃除機 レビュー比較まとめ.md",
@@ -12210,8 +12210,8 @@
     "publishAt": "2026-08-31T12:15:00.000Z",
     "createdAt": "2026-08-31T08:04:53.071Z",
     "queuedAt": "2026-08-31T20:44:49.588830+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-31T20:47:31.442123+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n1bda43c86ee4?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 4
