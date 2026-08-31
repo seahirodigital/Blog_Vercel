@@ -12236,7 +12236,7 @@
   },
   {
     "id": "400f526e-0d51-4291-b7e0-8ee96aa0f6a5",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa4322404c3984e1a9a230b09a68cd849",
     "title": "Bambu Lab A1 mini Combo 3D プリンター レビュー比較まとめ",
     "name": "Bambu Lab A1 mini Combo 3D プリンター レビュー比較まとめ.md",
@@ -12246,8 +12246,8 @@
     "publishAt": "2026-08-31T13:35:00.000Z",
     "createdAt": "2026-08-31T08:04:53.071Z",
     "queuedAt": "2026-08-31T16:13:51.276036+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-31T16:17:23.894799+00:00",
+    "publishedUrl": "https://editor.note.com/notes/neb4ee6dacb6f/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
