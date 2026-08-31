@@ -12092,7 +12092,7 @@
   },
   {
     "id": "fdba0e04-c6c6-480c-954b-7a242ddc2fa0",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s069a6d678e8f4b4b82817654a3834dfd",
     "title": "デロンギ 全自動コーヒーマシン マグニフィカスタート 全4メニュー 豆挽き コー レビュー比較まとめ",
     "name": "De'Longhi マグニフィカスタート ECAM22062B コーヒーメーカー レビュー比較まとめ.md",
@@ -12102,8 +12102,8 @@
     "publishAt": "2026-08-31T08:15:00.000Z",
     "createdAt": "2026-08-31T08:04:53.071Z",
     "queuedAt": "2026-08-31T08:04:53.072Z",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-31T08:17:21.797080+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n2da2d7e6640b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-direct",
     "dispatchAttempts": 1
