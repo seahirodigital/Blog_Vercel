@@ -12182,7 +12182,7 @@
   },
   {
     "id": "e93a21a2-48df-4838-a2b9-29d758758209",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s5917b2070e2440d89a56f763f0f4194a",
     "title": "Logitech MX MASTER 3S Bluetooth Edition MX2300CRd マウス レビュー比較まとめ",
     "name": "Logitech MX MASTER 3S Bluetooth Edition MX2300CRd マウス レビュー比較.md",
@@ -12192,8 +12192,8 @@
     "publishAt": "2026-08-31T11:35:00.000Z",
     "createdAt": "2026-08-31T08:04:53.071Z",
     "queuedAt": "2026-08-31T16:13:51.276036+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-31T16:16:42.145253+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n73c49a335242?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
