@@ -6,12 +6,8 @@ name: Note 公開投稿 予約監視セッション
 on:
   workflow_dispatch:
   schedule:
-    - cron: '25 12 29 8 *'
-    - cron: '55 21 29 8 *'
-    - cron: '55 2 30 8 *'
-    - cron: '55 7 30 8 *'
-    - cron: '55 12 30 8 *'
-    - cron: '55 21 30 8 *'
+    - cron: '20 8 31 8 *'
+    - cron: '40 13 31 8 *'
     - cron: '55 1 1 9 *'
     - cron: '25 7 1 9 *'
     - cron: '25 12 1 9 *'
