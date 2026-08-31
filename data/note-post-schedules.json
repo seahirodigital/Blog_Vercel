@@ -12110,7 +12110,7 @@
   },
   {
     "id": "8a8bf15b-a975-41ad-a68c-41595e4bd347",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s7277819cb8df4e2eab707ce3526d0bee",
     "title": "Apple(アップル) Apple AirPods Pro 3 ワイヤレスイヤホン レビュー比較まとめ",
     "name": "Apple(アップル) Apple AirPods Pro 3 ワイヤレスイヤホン レビュー比較まとめ.md",
@@ -12120,8 +12120,8 @@
     "publishAt": "2026-08-31T08:55:00.000Z",
     "createdAt": "2026-08-31T08:04:53.071Z",
     "queuedAt": "2026-08-31T16:13:51.276036+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-08-31T16:16:35.681497+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n178fb7d7fb2d/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
