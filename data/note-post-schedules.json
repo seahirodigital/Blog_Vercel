@@ -12110,7 +12110,7 @@
   },
   {
     "id": "8a8bf15b-a975-41ad-a68c-41595e4bd347",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7277819cb8df4e2eab707ce3526d0bee",
     "title": "Apple(アップル) Apple AirPods Pro 3 ワイヤレスイヤホン レビュー比較まとめ",
     "name": "Apple(アップル) Apple AirPods Pro 3 ワイヤレスイヤホン レビュー比較まとめ.md",
@@ -12119,14 +12119,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-31T08:55:00.000Z",
     "createdAt": "2026-08-31T08:04:53.071Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-31T16:13:51.276036+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "93c04189-c51f-40bd-8241-0c75deeb48f5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa7ffc6d107ba482faac5cdeb77be668a",
     "title": "TOSHIBA(東芝) スチームオーブンレンジ  30L ER-D30 レビュー比較まとめ",
     "name": "東芝 石窯ドーム ER-D3000A オーブンレンジ レビュー比較まとめ.md",
@@ -12135,14 +12137,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-31T09:35:00.000Z",
     "createdAt": "2026-08-31T08:04:53.071Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-31T16:13:51.276036+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3492a931-05e9-480c-80ff-f9a24112284d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s61bad9865a9442a3b58603e76049d391",
     "title": "シャオミ(Xiaomi) タブレット Redmi Pad レビュー比較まとめ",
     "name": "xiaomi(シャオミ) Redmi Pad 2 タブレット レビュー比較まとめ.md",
@@ -12151,14 +12155,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-31T10:15:00.000Z",
     "createdAt": "2026-08-31T08:04:53.071Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-31T16:13:51.276036+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a9b36fe6-6aed-40fc-9f3f-a85bb50014da",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s391a6bc84e4747f592f29b3bf20566b8",
     "title": "ECOVACS(エコバックス) DEEBOT T90 OMNI レビュー比較まとめ",
     "name": "ECOVACS DEEBOT T90 OMNI ロボット掃除機 レビュー比較まとめ.md",
@@ -12167,14 +12173,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-31T10:55:00.000Z",
     "createdAt": "2026-08-31T08:04:53.071Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-31T16:13:51.276036+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e93a21a2-48df-4838-a2b9-29d758758209",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5917b2070e2440d89a56f763f0f4194a",
     "title": "Logitech MX MASTER 3S Bluetooth Edition MX2300CRd マウス レビュー比較まとめ",
     "name": "Logitech MX MASTER 3S Bluetooth Edition MX2300CRd マウス レビュー比較.md",
@@ -12183,14 +12191,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-31T11:35:00.000Z",
     "createdAt": "2026-08-31T08:04:53.071Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-31T16:13:51.276036+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e185c064-c389-45c2-b67b-8e460b760f55",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8b389526f8d444d18b727fdafc872282",
     "title": "ECOVACS(エコバックス) DEEBOT T50S OMNI 全自動 ロボッ レビュー比較まとめ",
     "name": "ECOVACS DEEBOT T50S OMNI ロボット掃除機 レビュー比較まとめ.md",
@@ -12199,14 +12209,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-31T12:15:00.000Z",
     "createdAt": "2026-08-31T08:04:53.071Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-31T16:13:51.276036+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a7065f35-da70-4009-80d0-3a4bcbd67197",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6793d267e2e94701816d9deae3eeb125",
     "title": "シャープ 衣類乾燥 除加湿空気清浄機 KI-TD50-W プラズマクラスター25 レビュー比較まとめ",
     "name": "シャープ KI-TD50-W 空気清浄機 レビュー比較まとめ.md",
@@ -12215,14 +12227,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-31T12:55:00.000Z",
     "createdAt": "2026-08-31T08:04:53.071Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-31T16:13:51.276036+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "400f526e-0d51-4291-b7e0-8ee96aa0f6a5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa4322404c3984e1a9a230b09a68cd849",
     "title": "Bambu Lab A1 mini Combo 3D プリンター レビュー比較まとめ",
     "name": "Bambu Lab A1 mini Combo 3D プリンター レビュー比較まとめ.md",
@@ -12231,14 +12245,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-31T13:35:00.000Z",
     "createdAt": "2026-08-31T08:04:53.071Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-31T16:13:51.276036+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a4539511-9791-4383-993c-3ebeab208792",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf83bbbf2d755442baef848ae4cf18a9f",
     "title": "Shark シャーク LC350JWH  スティッククリーナー掃除機レビュー比較まとめ",
     "name": "Shark LC350JWH EVOPOWER SYSTEM NEO+ スティッククリーナー レビュー比較まとめ.md",
@@ -12247,14 +12263,16 @@
     "noTopImage": false,
     "publishAt": "2026-08-31T14:15:00.000Z",
     "createdAt": "2026-08-31T08:04:53.071Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-31T16:13:51.276036+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9519a741-ede4-4e78-96b3-79702d4165b3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf73084874401431597df9120ca2e7e61",
     "title": "roborock ロボロック Saros10R ロボット掃除機 黒 20000P 黒 レビュー比較まとめ",
     "name": "roborock Saros10R ロボット掃除機 レビュー比較まとめ.md",
@@ -12263,10 +12281,12 @@
     "noTopImage": false,
     "publishAt": "2026-08-31T14:55:00.000Z",
     "createdAt": "2026-08-31T08:04:53.071Z",
-    "queuedAt": "",
+    "queuedAt": "2026-08-31T16:13:51.276036+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "36407c9e-9d09-4826-91a4-d59323ad78a3",
