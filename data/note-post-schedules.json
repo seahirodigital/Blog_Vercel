@@ -12670,7 +12670,7 @@
   },
   {
     "id": "0e888967-b9d5-4856-824e-d2ebe3924b1c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf8fe491425984c93bdb83bbbe6a54ab0",
     "title": "M5 iPad Pro レビュー比較違いまとめ",
     "name": "M5 iPad Pro レビュー比較違いまとめ.md",
@@ -12680,8 +12680,8 @@
     "publishAt": "2026-09-01T12:00:00.000Z",
     "createdAt": "2026-08-29T12:10:41.925Z",
     "queuedAt": "2026-09-01T11:25:00.896690+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-01T12:02:12.671518+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n91f4a8a684a7?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
