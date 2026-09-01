@@ -12341,7 +12341,7 @@
   },
   {
     "id": "91a79302-5a4d-4782-9fcd-a5a75baa649a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sab19011da72a4804a827811e0a39cfbf",
     "title": "XGIMI HORIZON Pro 4K テレビ レビュー比較まとめ",
     "name": "XGIMI 1500ISO テレビ レビュー比較まとめ.md",
@@ -12351,8 +12351,8 @@
     "publishAt": "2026-09-01T02:30:00.000Z",
     "createdAt": "2026-08-29T12:10:41.925Z",
     "queuedAt": "2026-09-01T06:49:36.243286+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-01T06:52:06.950615+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n61c681215c41?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
