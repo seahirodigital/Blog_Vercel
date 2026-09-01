@@ -12756,7 +12756,7 @@
   },
   {
     "id": "201ee113-a037-4421-b171-6eec6d58b13e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s39072698fea041859a4f24412cbc04d0",
     "title": "ルンバ(Roomba)Max 705  レビュー比較まとめ",
     "name": "アイロボット W155060 掃除機 レビュー比較まとめ.md",
@@ -12766,8 +12766,8 @@
     "publishAt": "2026-09-01T13:00:00.000Z",
     "createdAt": "2026-08-29T12:10:41.925Z",
     "queuedAt": "2026-09-01T12:38:57.246447+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-01T13:02:41.412144+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n46b6ea7653dd?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
