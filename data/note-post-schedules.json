@@ -12496,7 +12496,7 @@
   },
   {
     "id": "49af7122-cc8c-4e49-b49c-6eab64e3170e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s93a11606760542a8874821cab5a117c6",
     "title": "Marshall Acton 4レビュー比較まとめ：自宅での音楽体験を格段に向上させるホームスピーカー",
     "name": "20260812_0814_Marshallの定番Bluetoothスピーカーが超進化！「Acton IV」を試してみた.md",
@@ -12506,8 +12506,8 @@
     "publishAt": "2026-09-01T08:00:00.000Z",
     "createdAt": "2026-08-29T12:10:41.925Z",
     "queuedAt": "2026-09-01T07:25:27.179371+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-01T08:02:23.312863+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nced927b875ab?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
