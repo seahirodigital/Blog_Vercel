@@ -12600,7 +12600,7 @@
   },
   {
     "id": "7cc6338d-a125-4d55-b224-2b8b2cab42fb",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf85ce46ff2ba4ae787a5781cf1406e0e",
     "title": "arrows Alpha2 レビュー比較まとめ",
     "name": "FCNT Alpha2 8GB256GB arrows インディゴ レビュー比較まとめ.md",
@@ -12610,8 +12610,8 @@
     "publishAt": "2026-09-01T10:00:00.000Z",
     "createdAt": "2026-08-29T12:10:41.925Z",
     "queuedAt": "2026-09-01T09:25:15.231909+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-01T10:02:29.844817+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n9fa0ea570203?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
