@@ -13326,7 +13326,7 @@
   },
   {
     "id": "0b7511f6-71cf-42e4-bbc4-02eef3f483c3",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s4e3788d3619f4f6eb463853719997cd0",
     "title": "Audio Technica(オーディオテクニカ) ATH-ADX7000 A2DC ヘッドホン レビュー比較まとめ",
     "name": "Audio Technica(オーディオテクニカ) ATH-ADX7000 A2DC ヘッドホン レビュー比較まとめ.md",
@@ -13336,8 +13336,8 @@
     "publishAt": "2026-09-02T12:00:00.000Z",
     "createdAt": "2026-08-29T12:10:41.925Z",
     "queuedAt": "2026-09-02T11:25:57.537585+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-02T12:02:33.201093+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5c353ed4f2f4?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
