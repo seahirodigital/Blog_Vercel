@@ -13201,7 +13201,7 @@
   },
   {
     "id": "8f1332e0-b526-4f64-812a-f84598cdbb10",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7102dccfd9da4cb2b9429ed81b142bb2",
     "title": "XGIMI MoGo 2 Pro New プロジェクター レビュー比較まとめ",
     "name": "XGIMI 1080P MoGo 2 プロジェクター レビュー比較まとめ.md",
@@ -13210,10 +13210,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-02T02:30:00.000Z",
     "createdAt": "2026-08-29T12:10:41.925Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-02T01:55:25.184474+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cdc751f6-93d3-43e3-ad10-be11d80eb164",
