@@ -13254,7 +13254,7 @@
   },
   {
     "id": "e34dbba6-705a-4087-bdd9-ff5fefbdc9cd",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc94d3f27bd434190b344e2eeea22212b",
     "title": "スイッチボット K11 サーキュレーター レビュー比較まとめ",
     "name": "スイッチボット K11 サーキュレーター レビュー比較まとめ.md",
@@ -13263,10 +13263,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-02T08:00:00.000Z",
     "createdAt": "2026-08-29T12:10:41.925Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-02T07:25:59.893574+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7378d77d-0177-47e8-91af-0410c05de9fd",
