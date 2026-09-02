@@ -13272,7 +13272,7 @@
   },
   {
     "id": "7378d77d-0177-47e8-91af-0410c05de9fd",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6a55e179aa2e4316b5e3298255f350de",
     "title": "Dyson(ダイソン) SV18 OR2 スティッククリーナー レビュー比較まとめ",
     "name": "Dyson(ダイソン) SV18 OR2 スティッククリーナー レビュー比較まとめ.md",
@@ -13281,10 +13281,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-02T09:00:00.000Z",
     "createdAt": "2026-08-29T12:10:41.925Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-02T08:25:44.183116+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1c9bd27a-dc54-458b-8316-842b6c627d1a",
