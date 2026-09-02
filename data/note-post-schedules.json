@@ -13380,7 +13380,7 @@
   },
   {
     "id": "080429bf-193e-4ae1-8cf8-f8ac078d5ea2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfb0b78ad653f4f23b02cd7a7d241061e",
     "title": "BenQ GV50 天井モバイルプロジェクター レビュー比較まとめ",
     "name": "ベンキュージャパン GV50 500ANSI テレビ レビュー比較まとめ.md",
@@ -13389,10 +13389,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-02T21:30:00.000Z",
     "createdAt": "2026-08-29T12:10:41.925Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-02T20:55:57.651639+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e062be54-c83d-4321-b724-7adafa6ed353",
