@@ -13308,7 +13308,7 @@
   },
   {
     "id": "f32b7cab-2abf-4e0a-b6e7-49b9d3e71815",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7e059d25a1c6465f8a1d167e9c094419",
     "title": "REGZA 55インチ 有機EL 55X8900N スマートテレビ レビュー比較まとめ",
     "name": "レグザ 55X8900N テレビ レビュー比較まとめ.md",
@@ -13317,10 +13317,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-02T11:00:00.000Z",
     "createdAt": "2026-08-29T12:10:41.925Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-02T10:25:10.108715+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0b7511f6-71cf-42e4-bbc4-02eef3f483c3",
