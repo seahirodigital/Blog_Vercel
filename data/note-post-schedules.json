@@ -13416,7 +13416,7 @@
   },
   {
     "id": "18e00947-921d-4a06-9107-fe0eecdeb53a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0ff8ff7a15054b74a074eb5899d2f83d",
     "title": "Insta360 X6レビュー比較まとめ：360度カメラで撮影効率化と時短を実現",
     "name": "20260813_0325_Insta360 X6ついにキター！！.md",
@@ -13425,9 +13425,11 @@
     "noTopImage": false,
     "publishAt": "2026-09-03T03:30:00.000Z",
     "createdAt": "2026-08-29T12:10:41.925Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-03T02:55:57.791862+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   }
 ]
