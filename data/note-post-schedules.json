@@ -13398,7 +13398,7 @@
   },
   {
     "id": "e062be54-c83d-4321-b724-7adafa6ed353",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se0b26d5832184a9a944ef3a59ab42f7e",
     "title": "Anker Soundcore Nebula P1 レビュー比較まとめ",
     "name": "Soundcore P1 Anker Nebula レビュー比較まとめ.md",
@@ -13407,10 +13407,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-03T02:30:00.000Z",
     "createdAt": "2026-08-29T12:10:41.925Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-03T01:55:35.463121+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "18e00947-921d-4a06-9107-fe0eecdeb53a",
