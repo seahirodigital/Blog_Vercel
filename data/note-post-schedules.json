@@ -13434,7 +13434,7 @@
   },
   {
     "id": "cf56b83f-56bb-4cae-927a-e99e62bc9381",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa3f43532506b48c383c07964e29bf224",
     "title": "布団 収納 クローゼット コンパクトをどう選ぶ？条件別に違いを確認",
     "name": "布団 収納 クローゼット コンパクトをどう選ぶ？条件別に違いを確認_OPP-1A1E95BDAAE3_20260904_154859.md",
@@ -13443,10 +13443,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-04T21:30:00.000Z",
     "createdAt": "2026-09-04T13:05:32.407Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-04T22:34:04.475268+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ccc6edd0-d683-4eb0-83fb-f95777b7d634",
