@@ -13524,7 +13524,7 @@
   },
   {
     "id": "67f3f656-cf9b-4995-9bb3-11a567ee406f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s11636e5503b541e8a123c9d591909963",
     "title": "収納 引き出し 奥行30の選び方｜設置条件に合うサイズを判断するポイント",
     "name": "収納 引き出し 奥行30の選び方｜設置条件に合うサイズを判断するポイント_OPP-EAD19471733B_20260905_173503.md",
@@ -13534,8 +13534,8 @@
     "publishAt": "2026-09-05T15:30:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
     "queuedAt": "2026-09-05T16:52:33.471212+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-05T16:55:08.839105+00:00",
+    "publishedUrl": "https://editor.note.com/notes/na63bba92035d/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
