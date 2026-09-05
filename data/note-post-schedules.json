@@ -13470,7 +13470,7 @@
   },
   {
     "id": "94b52f04-e9b5-480d-9b54-950704a03779",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf63b8a652f4b444db2a38138f56f1f68",
     "title": "クローゼット収納 吊り下げ ズボンをどう選ぶ？条件別に違いを確認",
     "name": "クローゼット収納 吊り下げ ズボンをどう選ぶ？条件別に違いを確認_OPP-84AD9FB5D3D5_20260905_153700.md",
@@ -13479,14 +13479,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-05T15:00:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-05T16:52:33.471212+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1cc20632-3149-4934-a810-4821afa046bd",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s78a5b1577b4d4bb388e091113871137f",
     "title": "浮かせる 収納 キッチン 洗剤をどう選ぶ？条件別に違いを確認_OPP-BC71A256BBC2_20260905_163331",
     "name": "浮かせる 収納 キッチン 洗剤をどう選ぶ？条件別に違いを確認_OPP-BC71A256BBC2_20260905_163331.md",
@@ -13495,14 +13497,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-05T15:00:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-05T16:52:33.471212+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cfece82f-2d41-4016-951f-a30871c40302",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s72908ad8df7443c0bc7b80b226b4c79a",
     "title": "ベンチ 収納 屋外 安いで困りごとを解決するには？選ぶ条件を整理_OPP-113FD93B01B6_20260905_171256",
     "name": "ベンチ 収納 屋外 安いで困りごとを解決するには？選ぶ条件を整理_OPP-113FD93B01B6_20260905_171256.md",
@@ -13511,14 +13515,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-05T15:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-05T16:52:33.471212+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "67f3f656-cf9b-4995-9bb3-11a567ee406f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s11636e5503b541e8a123c9d591909963",
     "title": "収納 引き出し 奥行30の選び方｜設置条件に合うサイズを判断するポイント",
     "name": "収納 引き出し 奥行30の選び方｜設置条件に合うサイズを判断するポイント_OPP-EAD19471733B_20260905_173503.md",
@@ -13527,14 +13533,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-05T15:30:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-05T16:52:33.471212+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "808d6dcc-4ef5-4657-8a32-ac972a266328",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s129391b7c8564fbf91425080e980b5c2",
     "title": "クローゼット収納 吊り下げ バッグをどう選ぶ？条件別に違いを確認",
     "name": "クローゼット収納 吊り下げ バッグをどう選ぶ？条件別に違いを確認_OPP-255DAA1A4A23_20260905_153100.md",
@@ -13543,14 +13551,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-05T15:30:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-05T16:52:33.471212+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7a891021-5cb8-42cc-94e1-06af2df8d490",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb44d0f708b1446ce8dcbecfe712116ad",
     "title": "浮かせる 収納 キッチン 洗剤をどう選ぶ？条件別に違いを確認",
     "name": "浮かせる 収納 キッチン 洗剤をどう選ぶ？条件別に違いを確認_OPP-BC71A256BBC2_20260904_222054.md",
@@ -13559,14 +13569,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-05T15:30:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-05T16:52:33.471212+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "16b9b0f8-9d60-4307-8eb8-10ae61e4edb3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1e3453b721d54e9496bea07bd391fd55",
     "title": "収納付きベッド 子供部屋比較違いどう選ぶ？条件別に違いを確認",
     "name": "収納付きベッド 子供部屋をどう選ぶ？条件別に違いを確認_OPP-E52371B9A9F5_20260905_173048.md",
@@ -13575,14 +13587,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-05T16:00:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-05T16:52:33.471212+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3f7f5d4e-947b-454f-bcea-bcccbfe1bc0c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9c886a92a3404902840a5144a8eecc5d",
     "title": "キッチン 収納 スチールラック比較違いどう選ぶ？条件別に違いを確認",
     "name": "キッチン 収納 スチールラックをどう選ぶ？条件別に違いを確認_OPP-D04AE529E89F_20260905_181142.md",
@@ -13591,14 +13605,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-05T16:00:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-05T16:52:33.471212+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ab285142-aeab-45d1-b0ff-0353f8255867",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9159604fe97a433e994d7d141d8ac6d0",
     "title": "収納 クローゼット 吊り下げ比較違いどう選ぶ？条件別に違いを確認",
     "name": "収納 クローゼット 吊り下げをどう選ぶ？条件別に違いを確認_OPP-9AE6812112A2_20260905_180559.md",
@@ -13607,14 +13623,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-05T16:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-05T16:52:33.471212+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b11838b1-57c9-4461-97b2-242f0d75dd1e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7c978af1d6bf45e48c24695d079ca3d3",
     "title": "収納 チェスト スリムの選び方｜設置条件に合うサイズを判断するポイント",
     "name": "収納 チェスト スリムの選び方｜設置条件に合うサイズを判断するポイント_OPP-545107860B3D_20260904_224430.md",
@@ -13623,14 +13641,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-05T16:30:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-05T16:52:33.471212+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f2da1fc5-ee21-4fc8-b401-c9c900592666",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s780df4bfb6994a2896d28268e0aa4e48",
     "title": "2l ペットボトル 収納 ワゴンの選び方｜設置条件に合うサイズを判断するポイント",
     "name": "2l ペットボトル 収納 ワゴンの選び方｜設置条件に合うサイズを判断するポイント_OPP-20D476E04FFA_20260905_173928.md",
@@ -13639,14 +13659,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-05T16:30:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-05T16:52:33.471212+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "740dcf29-e752-4026-b64e-449fe4ba3be2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s11636e5503b541e8a123c9d591909963",
     "title": "収納 引き出し 奥行30の選び方｜設置条件に合うサイズを判断するポイント",
     "name": "収納 引き出し 奥行30の選び方｜設置条件に合うサイズを判断するポイント_OPP-EAD19471733B_20260905_173503.md",
@@ -13655,14 +13677,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-05T16:30:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-05T16:52:33.471212+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "175ae095-2d99-4bc7-b297-e20fb8ea2161",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa251889dee264e5cb2e9992370508722",
     "title": "クローゼット収納 吊り下げ 小物をどう選ぶ？条件別に違いを確認_OPP-F6161BA6D640_20260905_164440",
     "name": "クローゼット収納 吊り下げ 小物をどう選ぶ？条件別に違いを確認_OPP-F6161BA6D640_20260905_164440.md",
@@ -13671,10 +13695,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-05T17:00:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-05T16:52:33.471212+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "50693569-2c66-4720-8766-e5d7960706bf",
