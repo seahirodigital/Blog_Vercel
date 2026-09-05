@@ -13812,7 +13812,7 @@
   },
   {
     "id": "c8b59dc7-9de5-46de-ba53-39a189979fee",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!scf6dc3353b6e4167b64ed00126e9c1a5",
     "title": "ベンチ 収納 屋外 安いで後悔しないための選び方",
     "name": "ベンチ 収納 屋外 安いで後悔しないための選び方_OPP-113FD93B01B6_20260904_230600.md",
@@ -13821,10 +13821,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-05T20:30:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-05T19:55:26.262616+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "43d3a650-4e36-4e6f-84d3-8bef7c66fe34",
