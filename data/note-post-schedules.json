@@ -13848,7 +13848,7 @@
   },
   {
     "id": "e92e31ef-6a04-443d-9307-0ad2d32ff7a5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3d0d2d88bffe49bcb5bbf5885607d7a3",
     "title": "引き出し 収納 キッチン 小物をどう選ぶ？条件別に違いを確認",
     "name": "引き出し 収納 キッチン 小物をどう選ぶ？条件別に違いを確認_OPP-13FAA8977894_20260904_154117.md",
@@ -13857,14 +13857,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-05T21:30:00.000Z",
     "createdAt": "2026-09-04T13:05:32.407Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-05T20:55:58.168700+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "483b0416-050e-4736-8982-c5167bcfce28",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s705952f800214fe68d30f05d79999820",
     "title": "クローゼット収納 スチールラック比較違いどう選ぶ？条件別に違いを確認",
     "name": "クローゼット収納 スチールラックをどう選ぶ？条件別に違いを確認_OPP-2E0569CCCBE7_20260905_174556.md",
@@ -13873,10 +13875,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-05T21:30:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-05T20:55:58.168700+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d81e2093-a5ca-4f6a-845f-18e89d49e4c2",
