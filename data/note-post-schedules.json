@@ -13470,7 +13470,7 @@
   },
   {
     "id": "94b52f04-e9b5-480d-9b54-950704a03779",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf63b8a652f4b444db2a38138f56f1f68",
     "title": "クローゼット収納 吊り下げ ズボンをどう選ぶ？条件別に違いを確認",
     "name": "クローゼット収納 吊り下げ ズボンをどう選ぶ？条件別に違いを確認_OPP-84AD9FB5D3D5_20260905_153700.md",
@@ -13480,8 +13480,8 @@
     "publishAt": "2026-09-05T15:00:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
     "queuedAt": "2026-09-05T16:52:33.471212+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-05T16:55:10.391021+00:00",
+    "publishedUrl": "https://editor.note.com/notes/nd2dc728a0848/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
