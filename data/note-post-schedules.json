@@ -13614,7 +13614,7 @@
   },
   {
     "id": "ab285142-aeab-45d1-b0ff-0353f8255867",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s9159604fe97a433e994d7d141d8ac6d0",
     "title": "収納 クローゼット 吊り下げ比較違いどう選ぶ？条件別に違いを確認",
     "name": "収納 クローゼット 吊り下げをどう選ぶ？条件別に違いを確認_OPP-9AE6812112A2_20260905_180559.md",
@@ -13624,8 +13624,8 @@
     "publishAt": "2026-09-05T16:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
     "queuedAt": "2026-09-05T16:52:33.471212+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-05T16:55:03.169190+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n28b660e8ab96?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
