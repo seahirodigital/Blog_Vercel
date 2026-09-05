@@ -13578,7 +13578,7 @@
   },
   {
     "id": "16b9b0f8-9d60-4307-8eb8-10ae61e4edb3",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s1e3453b721d54e9496bea07bd391fd55",
     "title": "収納付きベッド 子供部屋比較違いどう選ぶ？条件別に違いを確認",
     "name": "収納付きベッド 子供部屋をどう選ぶ？条件別に違いを確認_OPP-E52371B9A9F5_20260905_173048.md",
@@ -13588,8 +13588,8 @@
     "publishAt": "2026-09-05T16:00:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
     "queuedAt": "2026-09-05T18:23:02.143640+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-05T18:25:29.633818+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nc439eec34511?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
