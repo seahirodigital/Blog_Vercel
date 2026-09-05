@@ -13704,7 +13704,7 @@
   },
   {
     "id": "50693569-2c66-4720-8766-e5d7960706bf",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa626664e850d4b5ab0182d57932e1296",
     "title": "収納 キッチン 引き出し比較違いどう選ぶ？条件別に違いを確認",
     "name": "収納 キッチン 引き出しをどう選ぶ？条件別に違いを確認_OPP-2F3F7ACE7583_20260905_175202.md",
@@ -13713,10 +13713,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-05T17:30:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-05T16:55:52.893739+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "87775eb9-f520-4ab8-a7dc-b4063d82fbde",
