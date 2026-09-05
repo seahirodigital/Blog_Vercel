@@ -13830,7 +13830,7 @@
   },
   {
     "id": "43d3a650-4e36-4e6f-84d3-8bef7c66fe34",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9159604fe97a433e994d7d141d8ac6d0",
     "title": "収納 クローゼット 吊り下げ比較違いどう選ぶ？条件別に違いを確認",
     "name": "収納 クローゼット 吊り下げをどう選ぶ？条件別に違いを確認_OPP-9AE6812112A2_20260905_180559.md",
@@ -13839,10 +13839,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-05T21:00:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-05T20:25:11.799950+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e92e31ef-6a04-443d-9307-0ad2d32ff7a5",
