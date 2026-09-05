@@ -13740,7 +13740,7 @@
   },
   {
     "id": "282eb3a5-b295-4ffe-8b07-a0a40cf43cdd",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s525e496ee0b1425b963cb2b1f646abf0",
     "title": "収納 チェスト 横長の選び方｜設置条件に合うサイズを判断するポイント_OPP-8C2FE005E40D_20260905_170140",
     "name": "収納 チェスト 横長の選び方｜設置条件に合うサイズを判断するポイント_OPP-8C2FE005E40D_20260905_170140.md",
@@ -13750,8 +13750,8 @@
     "publishAt": "2026-09-05T18:30:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
     "queuedAt": "2026-09-05T17:55:21.210364+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-05T18:32:20.447869+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n19761031ad05?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
