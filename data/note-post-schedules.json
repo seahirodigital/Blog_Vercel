@@ -13686,7 +13686,7 @@
   },
   {
     "id": "175ae095-2d99-4bc7-b297-e20fb8ea2161",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa251889dee264e5cb2e9992370508722",
     "title": "クローゼット収納 吊り下げ 小物をどう選ぶ？条件別に違いを確認_OPP-F6161BA6D640_20260905_164440",
     "name": "クローゼット収納 吊り下げ 小物をどう選ぶ？条件別に違いを確認_OPP-F6161BA6D640_20260905_164440.md",
@@ -13696,8 +13696,8 @@
     "publishAt": "2026-09-05T17:00:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
     "queuedAt": "2026-09-05T16:52:33.471212+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-05T17:02:02.330391+00:00",
+    "publishedUrl": "https://editor.note.com/notes/ndbcb441c8f22/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
