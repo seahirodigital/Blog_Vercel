@@ -13596,7 +13596,7 @@
   },
   {
     "id": "3f7f5d4e-947b-454f-bcea-bcccbfe1bc0c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s9c886a92a3404902840a5144a8eecc5d",
     "title": "キッチン 収納 スチールラック比較違いどう選ぶ？条件別に違いを確認",
     "name": "キッチン 収納 スチールラックをどう選ぶ？条件別に違いを確認_OPP-D04AE529E89F_20260905_181142.md",
@@ -13606,8 +13606,8 @@
     "publishAt": "2026-09-05T16:00:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
     "queuedAt": "2026-09-05T18:23:02.143640+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-05T18:25:21.377130+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n21a2681e3dfc?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
