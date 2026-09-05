@@ -13542,7 +13542,7 @@
   },
   {
     "id": "808d6dcc-4ef5-4657-8a32-ac972a266328",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s129391b7c8564fbf91425080e980b5c2",
     "title": "クローゼット収納 吊り下げ バッグをどう選ぶ？条件別に違いを確認",
     "name": "クローゼット収納 吊り下げ バッグをどう選ぶ？条件別に違いを確認_OPP-255DAA1A4A23_20260905_153100.md",
@@ -13552,8 +13552,8 @@
     "publishAt": "2026-09-05T15:30:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
     "queuedAt": "2026-09-05T16:52:33.471212+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-05T16:54:58.554084+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7ff5dedeb1f2?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
