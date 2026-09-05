@@ -13722,7 +13722,7 @@
   },
   {
     "id": "87775eb9-f520-4ab8-a7dc-b4063d82fbde",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s63d1cf322a0f41a49a805396b47f2c58",
     "title": "クローゼット収納 吊り下げ 小物で整理を快適に",
     "name": "クローゼット収納 吊り下げ 小物で整理を快適に_OPP-F6161BA6D640_20260904_223820.md",
@@ -13732,8 +13732,8 @@
     "publishAt": "2026-09-05T18:00:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
     "queuedAt": "2026-09-05T17:25:37.332290+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-05T18:02:06.726193+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nde05c92c48c0?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
