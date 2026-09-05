@@ -13776,7 +13776,7 @@
   },
   {
     "id": "2259d86e-a50b-491b-98e4-0454656d0df9",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s053ca37af19c43c099a551c127ca3bce",
     "title": "布団 収納 クローゼット コンパクトをどう選ぶ？条件別に違いを確認_OPP-1A1E95BDAAE3_20260905_152455",
     "name": "布団 収納 クローゼット コンパクトをどう選ぶ？条件別に違いを確認_OPP-1A1E95BDAAE3_20260905_152455.md",
@@ -13786,8 +13786,8 @@
     "publishAt": "2026-09-05T19:30:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
     "queuedAt": "2026-09-05T18:55:56.363539+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-05T19:32:09.830151+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nec12f5e457bd?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
