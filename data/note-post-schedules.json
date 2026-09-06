@@ -13920,7 +13920,7 @@
   },
   {
     "id": "8fb4617a-3085-47ff-90e3-f250f59932f7",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf42d2d495f7848a4872a5bceb1179f5c",
     "title": "収納ラック スリムの選び方｜設置条件に合うサイズを判断するポイント_OPP-5B20D3A0B384_20260905_165528",
     "name": "収納ラック スリムの選び方｜設置条件に合うサイズを判断するポイント_OPP-5B20D3A0B384_20260905_165528.md",
@@ -13930,8 +13930,8 @@
     "publishAt": "2026-09-06T15:30:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
     "queuedAt": "2026-09-06T18:42:10.818023+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-06T18:44:29.041551+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd8bca94e6b8c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
