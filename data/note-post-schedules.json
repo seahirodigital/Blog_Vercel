@@ -14280,7 +14280,7 @@
   },
   {
     "id": "03bc4301-0e83-4abf-a297-ec2119e83edd",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5cb04a2b3a064843a47448329632d836",
     "title": "洋服 収納 クローゼット 引き出しをどう選ぶ？条件別に違いを確認_OPP-E4CD47AEC3C5_20260905_163855",
     "name": "洋服 収納 クローゼット 引き出しをどう選ぶ？条件別に違いを確認_OPP-E4CD47AEC3C5_20260905_163855.md",
@@ -14289,10 +14289,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T21:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-06T20:25:56.691625+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4a9f0848-520b-482d-b5c6-6b3e56922eec",
