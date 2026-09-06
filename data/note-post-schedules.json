@@ -14100,7 +14100,7 @@
   },
   {
     "id": "b8b936d9-7fc7-4132-a446-b32c66b531a9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0eafefeab3204d5db3136cca62cc77cf",
     "title": "デスク 下 収納 ワゴンの選び方｜設置条件に合うサイズを判断するポイント_OPP-B22AB827FEFB_20260905_172629",
     "name": "デスク 下 収納 ワゴンの選び方｜設置条件に合うサイズを判断するポイント_OPP-B22AB827FEFB_20260905_172629.md",
@@ -14109,14 +14109,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T18:00:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-06T17:25:02.054692+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b0be3e87-817a-4681-aba3-455ff53f6783",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0df0584d6c8d4b92980ea0e80949e4c0",
     "title": "収納ラック キャスター付き クローゼット比較違いどう選ぶ？条件別に違いを確認",
     "name": "収納ラック キャスター付き クローゼットをどう選ぶ？条件別に違いを確認_OPP-D2131ABF41DC_20260905_181630.md",
@@ -14125,10 +14127,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T18:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-06T17:25:02.054692+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "df0626a5-4cf7-4237-b767-7c8f5c9a67e4",
