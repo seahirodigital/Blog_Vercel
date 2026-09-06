@@ -13884,7 +13884,7 @@
   },
   {
     "id": "d81e2093-a5ca-4f6a-845f-18e89d49e4c2",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s1d6beb509414484ab0f165b8dc439c96",
     "title": "スチールラック 収納 子供部屋をどう選ぶ？条件別に違いを確認_OPP-5D6EB286205B_20260905_171702",
     "name": "スチールラック 収納 子供部屋をどう選ぶ？条件別に違いを確認_OPP-5D6EB286205B_20260905_171702.md",
@@ -13894,8 +13894,8 @@
     "publishAt": "2026-09-06T15:00:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
     "queuedAt": "2026-09-06T17:11:36.733457+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-06T17:14:03.887978+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ne904dbf4ae3d?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
