@@ -14010,7 +14010,7 @@
   },
   {
     "id": "f7183d6c-a553-4a31-b9ad-51b732b11012",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s7c978af1d6bf45e48c24695d079ca3d3",
     "title": "収納 チェスト スリムの選び方｜設置条件に合うサイズを判断するポイント",
     "name": "収納 チェスト スリムの選び方｜設置条件に合うサイズを判断するポイント_OPP-545107860B3D_20260904_224430.md",
@@ -14020,8 +14020,8 @@
     "publishAt": "2026-09-06T16:30:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
     "queuedAt": "2026-09-06T20:12:42.299272+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-06T20:15:08.505560+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nbefb6ffa45ea?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 3
