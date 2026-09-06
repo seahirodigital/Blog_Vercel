@@ -14172,7 +14172,7 @@
   },
   {
     "id": "0d307a76-feef-486f-bd83-4e29df0f4464",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se897b55f0612484cadb497d325c1dacb",
     "title": "収納ボックス 引き出し クローゼット比較違いどう選ぶ？条件別に違いを確認",
     "name": "収納ボックス 引き出し クローゼットをどう選ぶ？条件別に違いを確認_OPP-5F00A19E7691_20260905_180010.md",
@@ -14181,14 +14181,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T19:00:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-06T18:25:54.951817+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ec70ec93-156a-494f-b6aa-1a8a4d1c042a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s63d1cf322a0f41a49a805396b47f2c58",
     "title": "クローゼット収納 吊り下げ 小物で整理を快適に",
     "name": "クローゼット収納 吊り下げ 小物で整理を快適に_OPP-F6161BA6D640_20260904_223820.md",
@@ -14197,10 +14199,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T19:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-06T18:25:54.951817+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "62caf8e6-df15-44f0-be04-431768ed5574",
