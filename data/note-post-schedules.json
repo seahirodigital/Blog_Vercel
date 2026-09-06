@@ -14298,7 +14298,7 @@
   },
   {
     "id": "4a9f0848-520b-482d-b5c6-6b3e56922eec",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s705952f800214fe68d30f05d79999820",
     "title": "クローゼット収納 スチールラック比較違いどう選ぶ？条件別に違いを確認",
     "name": "クローゼット収納 スチールラックをどう選ぶ？条件別に違いを確認_OPP-2E0569CCCBE7_20260905_174556.md",
@@ -14308,8 +14308,8 @@
     "publishAt": "2026-09-06T21:30:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
     "queuedAt": "2026-09-06T20:55:20.756957+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-06T21:32:11.265485+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n110354bc5add?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
