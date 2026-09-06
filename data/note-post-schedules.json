@@ -14289,12 +14289,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T21:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "2026-09-06T20:25:56.691625+00:00",
+    "queuedAt": "2026-09-06T21:56:03.825555+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "4a9f0848-520b-482d-b5c6-6b3e56922eec",
