@@ -14163,12 +14163,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T18:30:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "2026-09-06T17:55:28.031249+00:00",
+    "queuedAt": "2026-09-06T19:25:55.302779+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "0d307a76-feef-486f-bd83-4e29df0f4464",
@@ -14244,7 +14244,7 @@
   },
   {
     "id": "6cf5a75d-9f94-47af-a410-d91e55574ae0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s525e496ee0b1425b963cb2b1f646abf0",
     "title": "収納 チェスト 横長の選び方｜設置条件に合うサイズを判断するポイント_OPP-8C2FE005E40D_20260905_170140",
     "name": "収納 チェスト 横長の選び方｜設置条件に合うサイズを判断するポイント_OPP-8C2FE005E40D_20260905_170140.md",
@@ -14253,10 +14253,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T20:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-06T19:25:55.302779+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "91dac4b6-048f-4503-8484-d33e2160c6aa",
