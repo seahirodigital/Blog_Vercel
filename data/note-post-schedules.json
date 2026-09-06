@@ -13884,7 +13884,7 @@
   },
   {
     "id": "d81e2093-a5ca-4f6a-845f-18e89d49e4c2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1d6beb509414484ab0f165b8dc439c96",
     "title": "スチールラック 収納 子供部屋をどう選ぶ？条件別に違いを確認_OPP-5D6EB286205B_20260905_171702",
     "name": "スチールラック 収納 子供部屋をどう選ぶ？条件別に違いを確認_OPP-5D6EB286205B_20260905_171702.md",
@@ -13893,14 +13893,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T15:00:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-06T17:11:36.733457+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3f0932a7-c3e9-4abd-b7c0-a1eaac08f873",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s44f70d1cf17c47c7baa73c3f404f85f5",
     "title": "収納 チェスト キャスター 付きの選び方｜設置条件に合うサイズを判断するポイント_OPP-EC98A30F6917_20260905_170704",
     "name": "収納 チェスト キャスター 付きの選び方｜設置条件に合うサイズを判断するポイント_OPP-EC98A30F6917_20260905_170704.md",
@@ -13909,14 +13911,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T15:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-06T17:11:36.733457+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8fb4617a-3085-47ff-90e3-f250f59932f7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf42d2d495f7848a4872a5bceb1179f5c",
     "title": "収納ラック スリムの選び方｜設置条件に合うサイズを判断するポイント_OPP-5B20D3A0B384_20260905_165528",
     "name": "収納ラック スリムの選び方｜設置条件に合うサイズを判断するポイント_OPP-5B20D3A0B384_20260905_165528.md",
@@ -13925,14 +13929,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T15:30:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-06T17:11:36.733457+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "aa471fd2-07c2-4ed4-8f9e-4bc7afc86aa0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se1c8519b62384083a536551685b4290f",
     "title": "収納付きベッド 子供部屋をどう選ぶ？条件別に違いを確認",
     "name": "収納付きベッド 子供部屋をどう選ぶ？条件別に違いを確認_OPP-E52371B9A9F5_20260905_143017.md",
@@ -13941,14 +13947,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T15:30:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-06T17:11:36.733457+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1b6efb40-c234-4ff8-b3c3-e2b16cfbb4ff",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se1c8519b62384083a536551685b4290f",
     "title": "収納付きベッド 子供部屋をどう選ぶ？条件別に違いを確認",
     "name": "収納付きベッド 子供部屋をどう選ぶ？条件別に違いを確認_OPP-E52371B9A9F5_20260905_143017.md",
@@ -13957,14 +13965,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T16:00:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-06T17:11:36.733457+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5179f9e6-1035-4a11-95da-8ca3ea6d08ba",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s780df4bfb6994a2896d28268e0aa4e48",
     "title": "2l ペットボトル 収納 ワゴンの選び方｜設置条件に合うサイズを判断するポイント",
     "name": "2l ペットボトル 収納 ワゴンの選び方｜設置条件に合うサイズを判断するポイント_OPP-20D476E04FFA_20260905_173928.md",
@@ -13973,14 +13983,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T16:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-06T17:11:36.733457+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2a739d50-8e11-4137-b3e0-023b8f6729c8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0df0584d6c8d4b92980ea0e80949e4c0",
     "title": "収納ラック キャスター付き クローゼット比較違いどう選ぶ？条件別に違いを確認",
     "name": "収納ラック キャスター付き クローゼットをどう選ぶ？条件別に違いを確認_OPP-D2131ABF41DC_20260905_181630.md",
@@ -13989,14 +14001,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T16:30:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-06T17:11:36.733457+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f7183d6c-a553-4a31-b9ad-51b732b11012",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7c978af1d6bf45e48c24695d079ca3d3",
     "title": "収納 チェスト スリムの選び方｜設置条件に合うサイズを判断するポイント",
     "name": "収納 チェスト スリムの選び方｜設置条件に合うサイズを判断するポイント_OPP-545107860B3D_20260904_224430.md",
@@ -14005,14 +14019,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T16:30:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-06T17:11:36.733457+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6a72262f-b2ab-4944-838e-14418f92dd3d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s72908ad8df7443c0bc7b80b226b4c79a",
     "title": "ベンチ 収納 屋外 安いで困りごとを解決するには？選ぶ条件を整理_OPP-113FD93B01B6_20260905_171256",
     "name": "ベンチ 収納 屋外 安いで困りごとを解決するには？選ぶ条件を整理_OPP-113FD93B01B6_20260905_171256.md",
@@ -14021,14 +14037,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T17:00:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-06T17:11:36.733457+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cd62aad8-50f8-4573-b0f0-42aa740b16df",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s129391b7c8564fbf91425080e980b5c2",
     "title": "クローゼット収納 吊り下げ バッグをどう選ぶ？条件別に違いを確認",
     "name": "クローゼット収納 吊り下げ バッグをどう選ぶ？条件別に違いを確認_OPP-255DAA1A4A23_20260905_153100.md",
@@ -14037,14 +14055,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T17:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-06T17:11:36.733457+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3465cfa9-1f33-48c1-b74f-8f1b86102cd8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb44d0f708b1446ce8dcbecfe712116ad",
     "title": "浮かせる 収納 キッチン 洗剤をどう選ぶ？条件別に違いを確認",
     "name": "浮かせる 収納 キッチン 洗剤をどう選ぶ？条件別に違いを確認_OPP-BC71A256BBC2_20260904_222054.md",
@@ -14053,14 +14073,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T17:30:00.000Z",
     "createdAt": "2026-09-05T09:33:24.750Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-06T17:11:36.733457+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d36566ba-d0c2-4c27-b352-9adbdaeb0c3e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1d6beb509414484ab0f165b8dc439c96",
     "title": "スチールラック 収納 子供部屋をどう選ぶ？条件別に違いを確認_OPP-5D6EB286205B_20260905_171702",
     "name": "スチールラック 収納 子供部屋をどう選ぶ？条件別に違いを確認_OPP-5D6EB286205B_20260905_171702.md",
@@ -14069,10 +14091,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-06T17:30:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-06T17:11:36.733457+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b8b936d9-7fc7-4132-a446-b32c66b531a9",
