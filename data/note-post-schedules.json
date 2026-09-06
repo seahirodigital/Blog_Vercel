@@ -13902,7 +13902,7 @@
   },
   {
     "id": "3f0932a7-c3e9-4abd-b7c0-a1eaac08f873",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s44f70d1cf17c47c7baa73c3f404f85f5",
     "title": "収納 チェスト キャスター 付きの選び方｜設置条件に合うサイズを判断するポイント_OPP-EC98A30F6917_20260905_170704",
     "name": "収納 チェスト キャスター 付きの選び方｜設置条件に合うサイズを判断するポイント_OPP-EC98A30F6917_20260905_170704.md",
@@ -13912,8 +13912,8 @@
     "publishAt": "2026-09-06T15:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
     "queuedAt": "2026-09-06T17:11:36.733457+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-06T17:13:57.951889+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n9a9cd4fd8349?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
