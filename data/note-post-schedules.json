@@ -13974,7 +13974,7 @@
   },
   {
     "id": "5179f9e6-1035-4a11-95da-8ca3ea6d08ba",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s780df4bfb6994a2896d28268e0aa4e48",
     "title": "2l ペットボトル 収納 ワゴンの選び方｜設置条件に合うサイズを判断するポイント",
     "name": "2l ペットボトル 収納 ワゴンの選び方｜設置条件に合うサイズを判断するポイント_OPP-20D476E04FFA_20260905_173928.md",
@@ -13984,8 +13984,8 @@
     "publishAt": "2026-09-06T16:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
     "queuedAt": "2026-09-06T20:12:42.299272+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-06T20:15:12.398713+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nfac2c643b9bd?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 3
