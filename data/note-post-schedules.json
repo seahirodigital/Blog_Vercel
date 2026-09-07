@@ -14316,7 +14316,7 @@
   },
   {
     "id": "f31db862-b2a1-45e9-8e44-6dcf3625b1e1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1e3453b721d54e9496bea07bd391fd55",
     "title": "収納付きベッド 子供部屋比較違いどう選ぶ？条件別に違いを確認",
     "name": "収納付きベッド 子供部屋をどう選ぶ？条件別に違いを確認_OPP-E52371B9A9F5_20260905_173048.md",
@@ -14325,14 +14325,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-07T15:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-07T18:47:54.126113+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "837a8814-1c72-4b6c-ac2a-9b7aa3be0309",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!scf6dc3353b6e4167b64ed00126e9c1a5",
     "title": "ベンチ 収納 屋外 安いで後悔しないための選び方",
     "name": "ベンチ 収納 屋外 安いで後悔しないための選び方_OPP-113FD93B01B6_20260904_230600.md",
@@ -14341,14 +14343,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-07T15:30:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-07T18:47:54.126113+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fdedf554-0fb1-455e-a9c1-085b12bb5e17",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf42d2d495f7848a4872a5bceb1179f5c",
     "title": "収納ラック スリムの選び方｜設置条件に合うサイズを判断するポイント_OPP-5B20D3A0B384_20260905_165528",
     "name": "収納ラック スリムの選び方｜設置条件に合うサイズを判断するポイント_OPP-5B20D3A0B384_20260905_165528.md",
@@ -14357,14 +14361,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-07T16:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-07T18:47:54.126113+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "55dfd691-d7ee-4794-b6d1-1cd4e11fa9af",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa626664e850d4b5ab0182d57932e1296",
     "title": "収納 キッチン 引き出し比較違いどう選ぶ？条件別に違いを確認",
     "name": "収納 キッチン 引き出しをどう選ぶ？条件別に違いを確認_OPP-2F3F7ACE7583_20260905_175202.md",
@@ -14373,14 +14379,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-07T16:30:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-07T18:47:54.126113+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f14f01be-eafd-4022-afc8-285feae5ff55",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0eafefeab3204d5db3136cca62cc77cf",
     "title": "デスク 下 収納 ワゴンの選び方｜設置条件に合うサイズを判断するポイント_OPP-B22AB827FEFB_20260905_172629",
     "name": "デスク 下 収納 ワゴンの選び方｜設置条件に合うサイズを判断するポイント_OPP-B22AB827FEFB_20260905_172629.md",
@@ -14389,14 +14397,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-07T17:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-07T18:47:54.126113+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "99517191-1bc7-4b27-a38c-10320b5ecb08",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa251889dee264e5cb2e9992370508722",
     "title": "クローゼット収納 吊り下げ 小物をどう選ぶ？条件別に違いを確認_OPP-F6161BA6D640_20260905_164440",
     "name": "クローゼット収納 吊り下げ 小物をどう選ぶ？条件別に違いを確認_OPP-F6161BA6D640_20260905_164440.md",
@@ -14405,14 +14415,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-07T17:30:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-07T18:47:54.126113+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ff2cce22-7ac6-4ebe-93a0-93656287eaa0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sed6d439818ad425ca965af4562501d8b",
     "title": "収納 チェスト スリムの選び方｜設置条件に合うサイズを判断するポイント_OPP-545107860B3D_20260905_164932",
     "name": "収納 チェスト スリムの選び方｜設置条件に合うサイズを判断するポイント_OPP-545107860B3D_20260905_164932.md",
@@ -14421,14 +14433,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-07T18:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-07T18:47:54.126113+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d8e6a14b-b6ff-42c3-9810-a24d2ed25987",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf63b8a652f4b444db2a38138f56f1f68",
     "title": "クローゼット収納 吊り下げ ズボンをどう選ぶ？条件別に違いを確認",
     "name": "クローゼット収納 吊り下げ ズボンをどう選ぶ？条件別に違いを確認_OPP-84AD9FB5D3D5_20260905_153700.md",
@@ -14437,14 +14451,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-07T18:30:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-07T18:47:54.126113+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ebdad364-a78b-410d-a309-ff45ec04b283",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s78a5b1577b4d4bb388e091113871137f",
     "title": "浮かせる 収納 キッチン 洗剤をどう選ぶ？条件別に違いを確認_OPP-BC71A256BBC2_20260905_163331",
     "name": "浮かせる 収納 キッチン 洗剤をどう選ぶ？条件別に違いを確認_OPP-BC71A256BBC2_20260905_163331.md",
@@ -14453,10 +14469,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-07T19:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-07T18:47:54.126113+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0a201bae-ed84-40af-9261-654b1ea9bae6",
