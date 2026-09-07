@@ -14478,7 +14478,7 @@
   },
   {
     "id": "0a201bae-ed84-40af-9261-654b1ea9bae6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s324d0cc3a49c4a018af0d209e4df9fa9",
     "title": "クローゼット 収納 引き出し 安いで困りごとを解決するには？選ぶ条件を整理_OPP-95C0E72EDCA8_20260905_172128",
     "name": "クローゼット 収納 引き出し 安いで困りごとを解決するには？選ぶ条件を整理_OPP-95C0E72EDCA8_20260905_172128.md",
@@ -14487,10 +14487,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-07T19:30:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-07T18:55:09.520915+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f580eaaa-88f8-439f-a4ed-633f4c8a0d73",
