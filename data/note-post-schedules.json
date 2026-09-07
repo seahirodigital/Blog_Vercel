@@ -14388,7 +14388,7 @@
   },
   {
     "id": "f14f01be-eafd-4022-afc8-285feae5ff55",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s0eafefeab3204d5db3136cca62cc77cf",
     "title": "デスク 下 収納 ワゴンの選び方｜設置条件に合うサイズを判断するポイント_OPP-B22AB827FEFB_20260905_172629",
     "name": "デスク 下 収納 ワゴンの選び方｜設置条件に合うサイズを判断するポイント_OPP-B22AB827FEFB_20260905_172629.md",
@@ -14398,8 +14398,8 @@
     "publishAt": "2026-09-07T17:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
     "queuedAt": "2026-09-07T18:47:54.126113+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-07T18:50:21.956198+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n3b41b6f64365?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
