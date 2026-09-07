@@ -14460,7 +14460,7 @@
   },
   {
     "id": "ebdad364-a78b-410d-a309-ff45ec04b283",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s78a5b1577b4d4bb388e091113871137f",
     "title": "浮かせる 収納 キッチン 洗剤をどう選ぶ？条件別に違いを確認_OPP-BC71A256BBC2_20260905_163331",
     "name": "浮かせる 収納 キッチン 洗剤をどう選ぶ？条件別に違いを確認_OPP-BC71A256BBC2_20260905_163331.md",
@@ -14470,8 +14470,8 @@
     "publishAt": "2026-09-07T19:00:00.000Z",
     "createdAt": "2026-09-05T09:33:51.572Z",
     "queuedAt": "2026-09-07T18:47:54.126113+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-07T19:02:08.515354+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n2de436f01411/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
