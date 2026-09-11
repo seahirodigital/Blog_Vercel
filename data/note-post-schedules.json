@@ -14658,7 +14658,7 @@
   },
   {
     "id": "9397a415-3009-404e-97d9-f50621c1576f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb5dba33a1653494a991a3040c1fceb58",
     "title": "収納ボックス フタ付き 屋外をどう選ぶ？条件別に違いを確認_OPP-0C1C1AC95A5B_20260905_191021",
     "name": "収納ボックス フタ付き 屋外をどう選ぶ？条件別に違いを確認_OPP-0C1C1AC95A5B_20260905_191021.md",
@@ -14667,10 +14667,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-11T19:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-11T18:55:41.367115+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "855913c1-4baf-4aa1-a636-889f3a005a8f",
