@@ -14586,7 +14586,7 @@
   },
   {
     "id": "f548118d-ab9d-4ae2-9531-59239c2ac16f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3f8dac49be564e0eb79c0ef734217ded",
     "title": "押入れ 収納 チェスト キャスターをどう選ぶ？条件別に違いを確認_OPP-41CB721A4D4D_20260905_214059",
     "name": "押入れ 収納 チェスト キャスターをどう選ぶ？条件別に違いを確認_OPP-41CB721A4D4D_20260905_214059.md",
@@ -14596,8 +14596,8 @@
     "publishAt": "2026-09-11T17:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-11T17:48:02.467018+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-11T17:50:38.607119+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf8e58a21eb46?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
