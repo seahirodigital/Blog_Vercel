@@ -14496,7 +14496,7 @@
   },
   {
     "id": "f580eaaa-88f8-439f-a4ed-633f4c8a0d73",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf847e76b16294d5298678e8bd42017a9",
     "title": "収納ボックス フタ付き a4 プラスチックをどう選ぶ？条件別に違いを確認_OPP-14F9D15641DF_20260905_193938",
     "name": "収納ボックス フタ付き a4 プラスチックをどう選ぶ？条件別に違いを確認_OPP-14F9D15641DF_20260905_193938.md",
@@ -14505,14 +14505,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-11T15:00:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-11T17:48:02.467018+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c445bcf7-353d-423c-8dbe-36a4753e49c2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se816341f4bbb45e7a2842f255afafb5e",
     "title": "細い クローゼット 収納をどう選ぶ？条件別に違いを確認_OPP-328A41AEEEC8_20260905_210527",
     "name": "細い クローゼット 収納をどう選ぶ？条件別に違いを確認_OPP-328A41AEEEC8_20260905_210527.md",
@@ -14521,14 +14523,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-11T15:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-11T17:48:02.467018+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7271f124-781c-48df-9890-08f8fe41e72c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s866260294c05405e9398f8b2ae98c012",
     "title": "木製 ベンチ 収納 屋外をどう選ぶ？条件別に違いを確認_OPP-25DE094F65FB_20260905_202745",
     "name": "木製 ベンチ 収納 屋外をどう選ぶ？条件別に違いを確認_OPP-25DE094F65FB_20260905_202745.md",
@@ -14537,14 +14541,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-11T16:00:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-11T17:48:02.467018+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "31433269-24bb-4bc1-a270-f8f80ba71c65",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se75658e73fa04cc19cfa37564709ebf2",
     "title": "収納ボックス フタ付き キッチンをどう選ぶ？条件別に違いを確認_OPP-088FD3A80766_20260905_190542",
     "name": "収納ボックス フタ付き キッチンをどう選ぶ？条件別に違いを確認_OPP-088FD3A80766_20260905_190542.md",
@@ -14553,14 +14559,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-11T16:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-11T17:48:02.467018+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d16af528-3134-4722-b017-2aa4d1c221c6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2f0c977620db47dc9317c2d63176f8cd",
     "title": "収納ケース 引き出し 小物をどう選ぶ？条件別に違いを確認_OPP-38A3D91F597F_20260905_212818",
     "name": "収納ケース 引き出し 小物をどう選ぶ？条件別に違いを確認_OPP-38A3D91F597F_20260905_212818.md",
@@ -14569,14 +14577,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-11T17:00:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-11T17:48:02.467018+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f548118d-ab9d-4ae2-9531-59239c2ac16f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3f8dac49be564e0eb79c0ef734217ded",
     "title": "押入れ 収納 チェスト キャスターをどう選ぶ？条件別に違いを確認_OPP-41CB721A4D4D_20260905_214059",
     "name": "押入れ 収納 チェスト キャスターをどう選ぶ？条件別に違いを確認_OPP-41CB721A4D4D_20260905_214059.md",
@@ -14585,14 +14595,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-11T17:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-11T17:48:02.467018+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "43088b3c-54a5-44b0-95c7-e005ff529843",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc16def36d51a40cc971285bf1ef9ae3e",
     "title": "背面 収納 キッチン 引き戸をどう選ぶ？条件別に違いを確認_OPP-37FFD99DAA58_20260905_211937",
     "name": "背面 収納 キッチン 引き戸をどう選ぶ？条件別に違いを確認_OPP-37FFD99DAA58_20260905_211937.md",
@@ -14601,10 +14613,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-11T18:00:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-11T17:48:02.467018+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "222a1655-fe3f-4513-9502-7220fc7be7c5",
