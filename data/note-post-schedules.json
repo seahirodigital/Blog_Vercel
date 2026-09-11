@@ -14514,7 +14514,7 @@
   },
   {
     "id": "c445bcf7-353d-423c-8dbe-36a4753e49c2",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!se816341f4bbb45e7a2842f255afafb5e",
     "title": "細い クローゼット 収納をどう選ぶ？条件別に違いを確認_OPP-328A41AEEEC8_20260905_210527",
     "name": "細い クローゼット 収納をどう選ぶ？条件別に違いを確認_OPP-328A41AEEEC8_20260905_210527.md",
@@ -14524,8 +14524,8 @@
     "publishAt": "2026-09-11T15:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-11T17:48:02.467018+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-11T17:50:21.655613+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n83876804697f?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
