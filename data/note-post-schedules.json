@@ -14622,7 +14622,7 @@
   },
   {
     "id": "222a1655-fe3f-4513-9502-7220fc7be7c5",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb7b29f1244c243fc80301d22ef7eff97",
     "title": "クローゼット 収納 取っ手付きをどう選ぶ？条件別に違いを確認_OPP-30100C531DB8_20260905_204017",
     "name": "クローゼット 収納 取っ手付きをどう選ぶ？条件別に違いを確認_OPP-30100C531DB8_20260905_204017.md",
@@ -14632,8 +14632,8 @@
     "publishAt": "2026-09-11T18:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-11T17:55:15.103342+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-11T18:32:05.304016+00:00",
+    "publishedUrl": "https://editor.note.com/notes/nd52daf2b25e7/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
