@@ -14640,7 +14640,7 @@
   },
   {
     "id": "b519c249-16b9-49f8-9bb3-5cfb5e7a5d61",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s061dc24172594cdb9c06d5fea785a4d1",
     "title": "収納 引き出し 小物をどう選ぶ？条件別に違いを確認_OPP-450EABFB3D08_20260905_215054",
     "name": "収納 引き出し 小物をどう選ぶ？条件別に違いを確認_OPP-450EABFB3D08_20260905_215054.md",
@@ -14649,10 +14649,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-11T19:00:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-11T18:25:28.174277+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9397a415-3009-404e-97d9-f50621c1576f",
