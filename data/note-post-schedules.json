@@ -14730,7 +14730,7 @@
   },
   {
     "id": "ecf84adb-c597-4a61-9ce2-ec79d2a68402",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2165c6b2f5c842f2baaa4da0be38c054",
     "title": "収納付きベッド 服をどう選ぶ？条件別に違いを確認_OPP-30C1B77F69D5_20260905_205502",
     "name": "収納付きベッド 服をどう選ぶ？条件別に違いを確認_OPP-30C1B77F69D5_20260905_205502.md",
@@ -14740,8 +14740,8 @@
     "publishAt": "2026-09-11T21:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-11T20:55:39.163583+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-11T21:32:18.643082+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na50925bb462f?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
