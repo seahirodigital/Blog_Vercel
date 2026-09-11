@@ -14694,7 +14694,7 @@
   },
   {
     "id": "7644941e-9e9a-4f24-b2d8-8d09b7c05ce2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdcc3293237d440879e7ae6ebef0ed0ce",
     "title": "衣類 収納 チェスト 木製をどう選ぶ？条件別に違いを確認_OPP-238B3A45C5C8_20260905_201207",
     "name": "衣類 収納 チェスト 木製をどう選ぶ？条件別に違いを確認_OPP-238B3A45C5C8_20260905_201207.md",
@@ -14703,10 +14703,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-11T20:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-11T19:55:11.077015+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6063c9b5-c1d0-4c05-9926-5bf9de9c91ee",
