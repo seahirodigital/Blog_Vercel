@@ -14712,7 +14712,7 @@
   },
   {
     "id": "6063c9b5-c1d0-4c05-9926-5bf9de9c91ee",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s93b1851dfaa544a597985b8e83ac5b90",
     "title": "キッチン 収納 木製をどう選ぶ？条件別に違いを確認_OPP-0C504B716F94_20260905_191504",
     "name": "キッチン 収納 木製をどう選ぶ？条件別に違いを確認_OPP-0C504B716F94_20260905_191504.md",
@@ -14721,10 +14721,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-11T21:00:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-11T20:25:25.224098+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ecf84adb-c597-4a61-9ce2-ec79d2a68402",
