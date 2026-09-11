@@ -14496,7 +14496,7 @@
   },
   {
     "id": "f580eaaa-88f8-439f-a4ed-633f4c8a0d73",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf847e76b16294d5298678e8bd42017a9",
     "title": "収納ボックス フタ付き a4 プラスチックをどう選ぶ？条件別に違いを確認_OPP-14F9D15641DF_20260905_193938",
     "name": "収納ボックス フタ付き a4 プラスチックをどう選ぶ？条件別に違いを確認_OPP-14F9D15641DF_20260905_193938.md",
@@ -14506,8 +14506,8 @@
     "publishAt": "2026-09-11T15:00:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-11T17:48:02.467018+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-11T17:50:43.366640+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n166c484a95c2?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
