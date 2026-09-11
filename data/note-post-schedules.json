@@ -14676,7 +14676,7 @@
   },
   {
     "id": "855913c1-4baf-4aa1-a636-889f3a005a8f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s32ebf25d9f4d47708a62167fb4c7fa2e",
     "title": "スチールラック カバン 収納をどう選ぶ？条件別に違いを確認_OPP-0D6F7E183310_20260905_191954",
     "name": "スチールラック カバン 収納をどう選ぶ？条件別に違いを確認_OPP-0D6F7E183310_20260905_191954.md",
@@ -14686,8 +14686,8 @@
     "publishAt": "2026-09-11T20:00:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-11T19:25:58.070988+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-11T20:02:37.207386+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n64c1fbef73de?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
