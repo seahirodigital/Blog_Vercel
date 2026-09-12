@@ -14802,7 +14802,7 @@
   },
   {
     "id": "57b48cd6-3823-406e-a87c-f91121239804",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s5c48f83ee62c4ec9ad48e22154a167a7",
     "title": "収納ボックス ベッド下 引き出しをどう選ぶ？条件別に違いを確認_OPP-29EE4E975C05_20260905_203515",
     "name": "収納ボックス ベッド下 引き出しをどう選ぶ？条件別に違いを確認_OPP-29EE4E975C05_20260905_203515.md",
@@ -14812,8 +14812,8 @@
     "publishAt": "2026-09-12T16:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-12T17:20:00.403214+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-12T17:22:29.840810+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf4b9494c12a0?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
