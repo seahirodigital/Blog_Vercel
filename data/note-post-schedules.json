@@ -14928,7 +14928,7 @@
   },
   {
     "id": "90dbc924-7327-49fd-b108-eb7c79360398",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s68947ba2fc5f44f39911ead682bb1098",
     "title": "キッチン 調味料 収納 おしゃれをどう選ぶ？条件別に違いを確認_OPP-0FAB164B59CB_20260905_192351",
     "name": "キッチン 調味料 収納 おしゃれをどう選ぶ？条件別に違いを確認_OPP-0FAB164B59CB_20260905_192351.md",
@@ -14938,8 +14938,8 @@
     "publishAt": "2026-09-12T20:00:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-12T19:25:10.888002+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-12T20:02:15.923332+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na573b113b426?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
