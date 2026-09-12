@@ -14748,7 +14748,7 @@
   },
   {
     "id": "6d6a1321-f308-4f79-acf7-81e44f395b00",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa7bfbb0f38254fb4b1563be4babdec59",
     "title": "引き出し 収納ラック キッチンをどう選ぶ？条件別に違いを確認_OPP-3970515B3BFE_20260905_213206",
     "name": "引き出し 収納ラック キッチンをどう選ぶ？条件別に違いを確認_OPP-3970515B3BFE_20260905_213206.md",
@@ -14758,8 +14758,8 @@
     "publishAt": "2026-09-12T15:00:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-12T17:20:00.403214+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-12T17:22:16.529521+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nb7f96b27daf9?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
