@@ -14892,7 +14892,7 @@
   },
   {
     "id": "84f4f16b-50bb-45d8-8684-2d22650a76f2",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd2d0a90d869c40b6bddb4da4ad90bbdb",
     "title": "デスク下 収納ボックス 引き出し式をどう選ぶ？条件別に違いを確認_OPP-30ADFD246FD7_20260905_205010",
     "name": "デスク下 収納ボックス 引き出し式をどう選ぶ？条件別に違いを確認_OPP-30ADFD246FD7_20260905_205010.md",
@@ -14902,8 +14902,8 @@
     "publishAt": "2026-09-12T19:00:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-12T18:25:12.096895+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-12T19:02:11.463267+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf2f4a69c6227?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
