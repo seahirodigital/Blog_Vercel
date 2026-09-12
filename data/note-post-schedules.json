@@ -14784,7 +14784,7 @@
   },
   {
     "id": "90f7a688-3ec9-4d85-a6f9-d0ca0ff53465",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s459340a57bd24ebf96383c22e4d65cd7",
     "title": "収納 薬 引き出しをどう選ぶ？条件別に違いを確認_OPP-D379CEDFCD36_20260905_183754",
     "name": "収納 薬 引き出しをどう選ぶ？条件別に違いを確認_OPP-D379CEDFCD36_20260905_183754.md",
@@ -14794,8 +14794,8 @@
     "publishAt": "2026-09-12T16:00:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-12T17:20:00.403214+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-12T17:22:25.210799+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf9826cb375a9?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
