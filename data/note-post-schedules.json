@@ -14883,12 +14883,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-12T18:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "2026-09-12T17:55:42.103880+00:00",
+    "queuedAt": "2026-09-12T19:26:14.134263+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "84f4f16b-50bb-45d8-8684-2d22650a76f2",
