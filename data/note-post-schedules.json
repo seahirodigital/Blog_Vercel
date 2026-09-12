@@ -14874,7 +14874,7 @@
   },
   {
     "id": "71c056e1-3026-4b85-8d33-d116e92261bc",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb52a934c61504c60a71cff1f1a42e1e3",
     "title": "クローゼット 収納 チェスト キャスター 付きをどう選ぶ？条件別に違いを確認_OPP-0468A888D737_20260905_185204",
     "name": "クローゼット 収納 チェスト キャスター 付きをどう選ぶ？条件別に違いを確認_OPP-0468A888D737_20260905_185204.md",
@@ -14884,8 +14884,8 @@
     "publishAt": "2026-09-12T18:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-12T19:26:14.134263+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-12T19:28:30.007697+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n6ce1cf8d844b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
