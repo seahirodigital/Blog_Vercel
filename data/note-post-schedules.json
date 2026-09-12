@@ -14946,7 +14946,7 @@
   },
   {
     "id": "7487af59-35ea-4342-b8a1-ecd1dae203f9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbb8b329a59b540658b5aa5c85723f25d",
     "title": "収納棚 部屋仕切りをどう選ぶ？条件別に違いを確認_OPP-3025D541CD7B_20260905_204524",
     "name": "収納棚 部屋仕切りをどう選ぶ？条件別に違いを確認_OPP-3025D541CD7B_20260905_204524.md",
@@ -14955,10 +14955,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-12T20:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-12T19:55:42.725710+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "612159f8-c286-45f4-97e8-17528353bd6e",
