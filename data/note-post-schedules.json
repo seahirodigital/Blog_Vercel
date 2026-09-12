@@ -14766,7 +14766,7 @@
   },
   {
     "id": "9e8993a7-01b9-4d33-844c-fe8425953a88",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s22d8b2b9423d4e6caf439af2e246739a",
     "title": "収納ボックス 引き出し 洗面所をどう選ぶ？条件別に違いを確認",
     "name": "収納ボックス 引き出し 洗面所をどう選ぶ？条件別に違いを確認_OPP-4A73F576E26A_20260905_215353.md",
@@ -14776,8 +14776,8 @@
     "publishAt": "2026-09-12T15:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-12T17:20:00.403214+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-12T17:22:14.464785+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n754ca2fc51a8?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
