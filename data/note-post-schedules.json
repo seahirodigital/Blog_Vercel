@@ -14982,7 +14982,7 @@
   },
   {
     "id": "0378e521-741d-447d-a324-1ea1e1f783df",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s6d715604c3044b398768fd2e9c551e89",
     "title": "スチールラック 小物 収納をどう選ぶ？条件別に違いを確認_OPP-0487F245F23D_20260905_185649",
     "name": "スチールラック 小物 収納をどう選ぶ？条件別に違いを確認_OPP-0487F245F23D_20260905_185649.md",
@@ -14992,8 +14992,8 @@
     "publishAt": "2026-09-12T21:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-12T20:55:41.800578+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-12T21:32:30.106473+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ne6151e311fdc?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
