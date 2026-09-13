@@ -15126,7 +15126,7 @@
   },
   {
     "id": "a646a783-e3c4-4c79-a76d-63c0a9997b50",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s80ee918d371e4c3bb05ac0cd60391f83",
     "title": "トイレットペーパー 収納 かご ふた付きをどう選ぶ？条件別に違いを確認_OPP-1D8ED71488C6_20260905_195512",
     "name": "トイレットペーパー 収納 かご ふた付きをどう選ぶ？条件別に違いを確認_OPP-1D8ED71488C6_20260905_195512.md",
@@ -15135,10 +15135,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-13T18:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-13T17:55:00.124383+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f1c5e7c8-7603-44d2-a85a-726135088919",
