@@ -15198,7 +15198,7 @@
   },
   {
     "id": "e6b450fd-d84a-4ca5-aee2-de7c54f3808e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s99c95c24b07b49a097f6f6b4f1378523",
     "title": "衣類 収納 タンス 引き出しをどう選ぶ？条件別に違いを確認_OPP-28E0D7AA75B4_20260905_203134",
     "name": "衣類 収納 タンス 引き出しをどう選ぶ？条件別に違いを確認_OPP-28E0D7AA75B4_20260905_203134.md",
@@ -15208,8 +15208,8 @@
     "publishAt": "2026-09-13T20:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-13T19:55:09.632254+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-13T20:32:13.742537+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n73e1c19dd51c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
