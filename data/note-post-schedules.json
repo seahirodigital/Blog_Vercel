@@ -15180,7 +15180,7 @@
   },
   {
     "id": "553bd2ce-7376-4b65-99e2-8775352aa196",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s71fadff6e78149f98a01b5604f351575",
     "title": "キッチン 収納 棚 木製をどう選ぶ？条件別に違いを確認",
     "name": "キッチン 収納 棚 木製をどう選ぶ？条件別に違いを確認_OPP-4BBC89C0B7C0_20260905_215838.md",
@@ -15189,10 +15189,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-13T20:00:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-13T19:25:24.430521+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e6b450fd-d84a-4ca5-aee2-de7c54f3808e",
