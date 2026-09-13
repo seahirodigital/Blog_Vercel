@@ -15234,7 +15234,7 @@
   },
   {
     "id": "d69ab133-b7f2-4ca5-bed0-89791aeb0e49",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s533c19cbd5f249ae9de5c149e9c72c96",
     "title": "玄関 ベンチ 収納 スリムをどう選ぶ？条件別に違いを確認_OPP-4403922B5D5E_20260905_214430",
     "name": "玄関 ベンチ 収納 スリムをどう選ぶ？条件別に違いを確認_OPP-4403922B5D5E_20260905_214430.md",
@@ -15243,10 +15243,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-13T21:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-13T20:55:44.140004+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4ed506a3-1251-42fc-9aa8-f13fa1a6b507",
