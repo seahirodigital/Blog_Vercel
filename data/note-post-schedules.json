@@ -15162,7 +15162,7 @@
   },
   {
     "id": "d354ba05-89e4-42ee-9be0-9627c2665956",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s787b64672e5949bfb0d9a3d90cb1aa66",
     "title": "クローゼット収納 前開きをどう選ぶ？条件別に違いを確認_OPP-38A24FC3DFFD_20260905_212408",
     "name": "クローゼット収納 前開きをどう選ぶ？条件別に違いを確認_OPP-38A24FC3DFFD_20260905_212408.md",
@@ -15172,8 +15172,8 @@
     "publishAt": "2026-09-13T19:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-13T18:55:34.576409+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-13T19:32:39.654250+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf03afc7b9fd4?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
