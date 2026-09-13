@@ -15108,7 +15108,7 @@
   },
   {
     "id": "0b538f82-75ec-4891-a320-e654fc98a3d7",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s0cd5673d2a6f4584af8367c0aabc52f0",
     "title": "収納ボックス フタ付き ペットボトルをどう選ぶ？条件別に違いを確認_OPP-0FAEB61D3F25_20260905_192913",
     "name": "収納ボックス フタ付き ペットボトルをどう選ぶ？条件別に違いを確認_OPP-0FAEB61D3F25_20260905_192913.md",
@@ -15118,8 +15118,8 @@
     "publishAt": "2026-09-13T18:00:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-13T17:29:14.427996+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-13T18:02:05.236555+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n71c180072868/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
