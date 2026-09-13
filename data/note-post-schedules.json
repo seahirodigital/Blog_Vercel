@@ -15054,7 +15054,7 @@
   },
   {
     "id": "98670e53-67ae-4ff5-bc0b-ea3b4175648e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sbff2797723f44c4b9fb756771a89af66",
     "title": "収納ボックス フタ付き 小物をどう選ぶ？条件別に違いを確認_OPP-253F5065386E_20260905_202251",
     "name": "収納ボックス フタ付き 小物をどう選ぶ？条件別に違いを確認_OPP-253F5065386E_20260905_202251.md",
@@ -15064,8 +15064,8 @@
     "publishAt": "2026-09-13T16:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-13T17:29:14.427996+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-13T17:31:48.265798+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na0ef20bf220f?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
