@@ -15000,7 +15000,7 @@
   },
   {
     "id": "f89cc53c-be9f-4ad1-88f0-ce7bc93a44cd",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb90e2011847f40188783930857923b0e",
     "title": "キッチン 収納 プラスチック ケースをどう選ぶ？条件別に違いを確認_OPP-21C4E5BCCB87_20260905_200106",
     "name": "キッチン 収納 プラスチック ケースをどう選ぶ？条件別に違いを確認_OPP-21C4E5BCCB87_20260905_200106.md",
@@ -15010,8 +15010,8 @@
     "publishAt": "2026-09-13T15:00:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-13T20:30:05.841744+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-13T20:32:33.775510+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf3ca15c67b85?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 3
