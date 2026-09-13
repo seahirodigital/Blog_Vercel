@@ -15216,7 +15216,7 @@
   },
   {
     "id": "d534315d-0b4c-43d1-be31-a7e3cd6cc763",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc8927816790f4a8faf84022e069219fc",
     "title": "スチールラック ゲーム機 収納をどう選ぶ？条件別に違いを確認_OPP-18C44D10CF4C_20260905_194444",
     "name": "スチールラック ゲーム機 収納をどう選ぶ？条件別に違いを確認_OPP-18C44D10CF4C_20260905_194444.md",
@@ -15225,10 +15225,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-13T21:00:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-13T20:25:57.323020+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d69ab133-b7f2-4ca5-bed0-89791aeb0e49",
