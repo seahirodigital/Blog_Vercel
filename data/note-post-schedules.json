@@ -15144,7 +15144,7 @@
   },
   {
     "id": "f1c5e7c8-7603-44d2-a85a-726135088919",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6a7a51680e5e4914942fd4c29ea577f8",
     "title": "キッチン 収納 ワゴン スリムをどう選ぶ？条件別に違いを確認_OPP-1C394EEF89B1_20260905_194958",
     "name": "キッチン 収納 ワゴン スリムをどう選ぶ？条件別に違いを確認_OPP-1C394EEF89B1_20260905_194958.md",
@@ -15153,10 +15153,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-13T19:00:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-13T18:25:48.098051+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d354ba05-89e4-42ee-9be0-9627c2665956",
