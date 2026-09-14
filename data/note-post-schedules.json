@@ -15252,7 +15252,7 @@
   },
   {
     "id": "4ed506a3-1251-42fc-9aa8-f13fa1a6b507",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!see316f7c119844a5b3a04f6d64c97e7e",
     "title": "靴 収納 クローゼット おしゃれをどう選ぶ？条件別に違いを確認_OPP-D90BFEAA7502_20260905_184232",
     "name": "靴 収納 クローゼット おしゃれをどう選ぶ？条件別に違いを確認_OPP-D90BFEAA7502_20260905_184232.md",
@@ -15261,14 +15261,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-14T15:00:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-14T19:30:01.190830+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d36a6b36-9366-4277-87d1-988390fa2cef",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2b83cb4bb72d4a818421143e99fa8613",
     "title": "スリム 収納 キッチン 棚をどう選ぶ？条件別に違いを確認_OPP-FB1979C497CC_20260905_184714",
     "name": "スリム 収納 キッチン 棚をどう選ぶ？条件別に違いを確認_OPP-FB1979C497CC_20260905_184714.md",
@@ -15277,10 +15279,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-14T15:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-14T19:30:01.190830+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b4412f3b-9c67-4fc9-b6f0-7e762c7fdd95",
