@@ -15270,7 +15270,7 @@
   },
   {
     "id": "d36a6b36-9366-4277-87d1-988390fa2cef",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2b83cb4bb72d4a818421143e99fa8613",
     "title": "スリム 収納 キッチン 棚をどう選ぶ？条件別に違いを確認_OPP-FB1979C497CC_20260905_184714",
     "name": "スリム 収納 キッチン 棚をどう選ぶ？条件別に違いを確認_OPP-FB1979C497CC_20260905_184714.md",
@@ -15280,8 +15280,8 @@
     "publishAt": "2026-09-14T15:30:00.000Z",
     "createdAt": "2026-09-05T13:07:48.293Z",
     "queuedAt": "2026-09-14T22:31:34.510420+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-14T22:34:03.198168+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n3b06dcee9519?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 3
