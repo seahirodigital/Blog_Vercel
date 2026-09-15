@@ -15351,12 +15351,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-15T21:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "2026-09-15T22:19:19.244070+00:00",
+    "queuedAt": "2026-09-15T23:49:31.245831+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "833d2aa1-93a8-4219-a115-57c997f44067",
