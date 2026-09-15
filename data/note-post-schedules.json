@@ -15342,7 +15342,7 @@
   },
   {
     "id": "0e74fed2-793d-4ceb-b884-1f5fd5b3fcfa",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sc1205e50bb2a46c58a8e4ae899f54b71",
     "title": "納戸 収納 スチールラックをどう選ぶ？条件別に違いを確認_OPP-818C5D6C0CFB_20260906_002610",
     "name": "納戸 収納 スチールラックをどう選ぶ？条件別に違いを確認_OPP-818C5D6C0CFB_20260906_002610.md",
@@ -15352,8 +15352,8 @@
     "publishAt": "2026-09-15T21:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-15T23:49:31.245831+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-15T23:51:54.992593+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n3623feb1865c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
