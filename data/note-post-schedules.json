@@ -15288,7 +15288,7 @@
   },
   {
     "id": "b4412f3b-9c67-4fc9-b6f0-7e762c7fdd95",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfda4aa2971d347b8b18f0a474add110e",
     "title": "キッチン 引き出し スライド 収納をどう選ぶ？条件別に違いを確認_OPP-BA604E430CAD_20260906_015800",
     "name": "キッチン 引き出し スライド 収納をどう選ぶ？条件別に違いを確認_OPP-BA604E430CAD_20260906_015800.md",
@@ -15297,14 +15297,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-15T20:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-15T22:19:19.244070+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c7e79881-85cc-4c91-b7aa-c646dcdd1f26",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8fbaeff106fd43c88e264d147e092cff",
     "title": "スチールラック おもちゃ 収納をどう選ぶ？条件別に違いを確認_OPP-7FC76110018D_20260906_002244",
     "name": "スチールラック おもちゃ 収納をどう選ぶ？条件別に違いを確認_OPP-7FC76110018D_20260906_002244.md",
@@ -15313,14 +15315,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-15T20:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-15T22:19:19.244070+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "11cf1ab3-d768-48b8-abb6-745827a97a8d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s86e98dd569024391bc97d17390d44e3b",
     "title": "小さい クローゼット 収納をどう選ぶ？条件別に違いを確認_OPP-8FBD2626B2E3_20260906_004637",
     "name": "小さい クローゼット 収納をどう選ぶ？条件別に違いを確認_OPP-8FBD2626B2E3_20260906_004637.md",
@@ -15329,14 +15333,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-15T21:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-15T22:19:19.244070+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0e74fed2-793d-4ceb-b884-1f5fd5b3fcfa",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc1205e50bb2a46c58a8e4ae899f54b71",
     "title": "納戸 収納 スチールラックをどう選ぶ？条件別に違いを確認_OPP-818C5D6C0CFB_20260906_002610",
     "name": "納戸 収納 スチールラックをどう選ぶ？条件別に違いを確認_OPP-818C5D6C0CFB_20260906_002610.md",
@@ -15345,10 +15351,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-15T21:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-15T22:19:19.244070+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "833d2aa1-93a8-4219-a115-57c997f44067",
