@@ -15306,7 +15306,7 @@
   },
   {
     "id": "c7e79881-85cc-4c91-b7aa-c646dcdd1f26",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s8fbaeff106fd43c88e264d147e092cff",
     "title": "スチールラック おもちゃ 収納をどう選ぶ？条件別に違いを確認_OPP-7FC76110018D_20260906_002244",
     "name": "スチールラック おもちゃ 収納をどう選ぶ？条件別に違いを確認_OPP-7FC76110018D_20260906_002244.md",
@@ -15316,8 +15316,8 @@
     "publishAt": "2026-09-15T20:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-15T22:19:19.244070+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-15T22:21:41.827085+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n0e26d6094691?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
