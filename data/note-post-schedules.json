@@ -15594,7 +15594,7 @@
   },
   {
     "id": "12005f49-3ce7-405f-9aea-10487a821be8",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s568a0afa9c8b4e8492cb9bbd7ef8ae2a",
     "title": "収納ボックス 引き出し 小物をどう選ぶ？条件別に違いを確認_OPP-ADB227217585_20260906_013900",
     "name": "収納ボックス 引き出し 小物をどう選ぶ？条件別に違いを確認_OPP-ADB227217585_20260906_013900.md",
@@ -15604,8 +15604,8 @@
     "publishAt": "2026-09-16T21:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-16T20:55:10.753057+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-16T21:32:15.955652+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n2fb33101258f?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
