@@ -15450,7 +15450,7 @@
   },
   {
     "id": "2acdbe32-2cfd-4ebb-a0e4-1c060d524a4a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s0f960fbfe9f946249e1d25d9d961c344",
     "title": "収納 キッチン スライドをどう選ぶ？条件別に違いを確認_OPP-B426BE53A7B5_20260906_014657",
     "name": "収納 キッチン スライドをどう選ぶ？条件別に違いを確認_OPP-B426BE53A7B5_20260906_014657.md",
@@ -15460,8 +15460,8 @@
     "publishAt": "2026-09-16T17:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-16T18:14:47.834900+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-16T18:17:32.378893+00:00",
+    "publishedUrl": "https://editor.note.com/notes/nf9eb58f659d1/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
