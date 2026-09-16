@@ -15486,7 +15486,7 @@
   },
   {
     "id": "2780d304-9e7d-4738-9542-edb8c049ec01",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s66c15dece4c64f34ad6443d2d2323f7a",
     "title": "cd 収納ボックス 引き出しをどう選ぶ？条件別に違いを確認_OPP-BB2D259DA934_20260906_020049",
     "name": "cd 収納ボックス 引き出しをどう選ぶ？条件別に違いを確認_OPP-BB2D259DA934_20260906_020049.md",
@@ -15496,8 +15496,8 @@
     "publishAt": "2026-09-16T18:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-16T18:14:47.834900+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-16T18:31:54.502911+00:00",
+    "publishedUrl": "https://editor.note.com/notes/nb75476ae8f9f/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
