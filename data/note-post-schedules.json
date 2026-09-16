@@ -15378,7 +15378,7 @@
   },
   {
     "id": "ed93554a-33f3-4761-94dd-ce04cbec5c25",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s38ce32a992264d3dbac928e051ab1133",
     "title": "収納 キャスター付き ワゴンの選び方｜設置条件に合うサイズを判断するポイント_OPP-C4A5FC3D8D72_20260906_021433",
     "name": "収納 キャスター付き ワゴンの選び方｜設置条件に合うサイズを判断するポイント_OPP-C4A5FC3D8D72_20260906_021433.md",
@@ -15388,8 +15388,8 @@
     "publishAt": "2026-09-16T15:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-16T18:14:47.834900+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-16T18:17:13.820365+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n879371e5d52c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
