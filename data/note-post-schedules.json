@@ -15504,7 +15504,7 @@
   },
   {
     "id": "da94a80a-a740-4ffd-b454-361f6411872a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd4929be2ff5e4880b90ec1362b74980d",
     "title": "クローゼット収納 吊り下げラックをどう選ぶ？条件別に違いを確認_OPP-5330F0878A91_20260905_231824",
     "name": "クローゼット収納 吊り下げラックをどう選ぶ？条件別に違いを確認_OPP-5330F0878A91_20260905_231824.md",
@@ -15514,8 +15514,8 @@
     "publishAt": "2026-09-16T19:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-16T18:25:13.485869+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-16T19:02:02.046569+00:00",
+    "publishedUrl": "https://editor.note.com/notes/nb3f6f7b02d42/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
