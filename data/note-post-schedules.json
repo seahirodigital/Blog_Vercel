@@ -15576,7 +15576,7 @@
   },
   {
     "id": "620f089e-da60-40c7-99ac-57cbcfd0a15a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s26e2ec7535f1466895aba45aeae64ca6",
     "title": "クローゼット 収納 積み重ねをどう選ぶ？条件別に違いを確認_OPP-A2D7CFF0231A_20260906_012056",
     "name": "クローゼット 収納 積み重ねをどう選ぶ？条件別に違いを確認_OPP-A2D7CFF0231A_20260906_012056.md",
@@ -15585,10 +15585,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-16T21:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-16T20:25:22.427955+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "12005f49-3ce7-405f-9aea-10487a821be8",
