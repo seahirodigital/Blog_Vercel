@@ -15522,7 +15522,7 @@
   },
   {
     "id": "c4d10331-b836-415e-ba64-be1f5be8c888",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0e311b7ab87a4fc2be917f2c3e84adf6",
     "title": "玄関 ベンチ 収納 木製をどう選ぶ？条件別に違いを確認_OPP-CCC612A0AC40_20260906_022133",
     "name": "玄関 ベンチ 収納 木製をどう選ぶ？条件別に違いを確認_OPP-CCC612A0AC40_20260906_022133.md",
@@ -15531,10 +15531,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-16T19:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-16T18:56:01.403858+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6cef0279-4f85-4098-b1a0-57d2b7172fea",
