@@ -15540,7 +15540,7 @@
   },
   {
     "id": "6cef0279-4f85-4098-b1a0-57d2b7172fea",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s258be6acbf774cc4bf2074a12013d1ce",
     "title": "デスク 下 収納 ワゴン スリムをどう選ぶ？条件別に違いを確認_OPP-8B2232254017_20260906_003734",
     "name": "デスク 下 収納 ワゴン スリムをどう選ぶ？条件別に違いを確認_OPP-8B2232254017_20260906_003734.md",
@@ -15549,10 +15549,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-16T20:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-16T19:25:50.599193+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "756cff58-0cb5-4461-90be-20aeaaa22c76",
