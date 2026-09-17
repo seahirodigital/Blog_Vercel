@@ -15684,7 +15684,7 @@
   },
   {
     "id": "4415a09a-210b-40ce-bc55-0b9276c9be12",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s57b6c3e305b64337af18d5d229527819",
     "title": "パントリー 収納ボックス フタ付きをどう選ぶ？条件別に違いを確認_OPP-81CFF67215EE_20260906_002853",
     "name": "パントリー 収納ボックス フタ付きをどう選ぶ？条件別に違いを確認_OPP-81CFF67215EE_20260906_002853.md",
@@ -15693,10 +15693,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-17T16:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-17T15:55:15.246729+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8ccecd87-721d-4ebb-a2b7-15420d3b4a6e",
