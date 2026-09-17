@@ -15864,7 +15864,7 @@
   },
   {
     "id": "946287cf-2e1a-445f-b69f-bda6914395f6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1ff7005ef98b41408ebfbb001c9d80a4",
     "title": "服 収納ラック 大容量の選び方｜設置条件に合うサイズを判断するポイント_OPP-6FCDA279F50E_20260906_000042",
     "name": "服 収納ラック 大容量の選び方｜設置条件に合うサイズを判断するポイント_OPP-6FCDA279F50E_20260906_000042.md",
@@ -15873,10 +15873,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-17T21:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-17T20:55:33.588211+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d9195eba-fe54-4815-9bd1-7fd57ffbcb7f",
