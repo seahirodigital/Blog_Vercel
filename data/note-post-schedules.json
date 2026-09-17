@@ -15666,7 +15666,7 @@
   },
   {
     "id": "a707ee3d-613e-4dad-b01b-a46c164a5b4f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7636cd7189f041a7be582f53a3d78724",
     "title": "収納付きベッド ロフトをどう選ぶ？条件別に違いを確認_OPP-B96B81CB0C81_20260906_015455",
     "name": "収納付きベッド ロフトをどう選ぶ？条件別に違いを確認_OPP-B96B81CB0C81_20260906_015455.md",
@@ -15675,10 +15675,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-17T16:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-17T15:25:00.867232+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4415a09a-210b-40ce-bc55-0b9276c9be12",
