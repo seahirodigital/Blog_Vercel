@@ -15828,7 +15828,7 @@
   },
   {
     "id": "cadd0208-06f8-43fa-85e5-f17645cb4b0c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s100e4609b66a43aca3247449c58565b9",
     "title": "クローゼット収納ケース 引き出しをどう選ぶ？条件別に違いを確認_OPP-AE972FF579BB_20260906_014324",
     "name": "クローゼット収納ケース 引き出しをどう選ぶ？条件別に違いを確認_OPP-AE972FF579BB_20260906_014324.md",
@@ -15837,10 +15837,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-17T20:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-17T19:55:43.333278+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "03f1e409-8fd0-4816-9734-a2240186e36d",
