@@ -15612,7 +15612,7 @@
   },
   {
     "id": "f66d1557-4525-4452-9de2-da96f32062d4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s79a10fea4f59419c9841490509e2ad71",
     "title": "Noble FoKus Apollo Pro レビュー比較まとめ：高音質ワイヤレスヘッドホンで最高のオーディオ体験を",
     "name": "20260917_0453_【12万円の最終兵器】Noble Audio FoKus Apollo Pro 実機レビュー！平面駆動×DDの超高音質に.md",
@@ -15622,8 +15622,8 @@
     "publishAt": "2026-09-17T09:00:00.000Z",
     "createdAt": "2026-09-17T06:35:39.802Z",
     "queuedAt": "2026-09-17T13:35:10.305257+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-17T13:37:38.139648+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n8c7920896118?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
