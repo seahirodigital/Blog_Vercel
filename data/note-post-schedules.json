@@ -15846,7 +15846,7 @@
   },
   {
     "id": "03f1e409-8fd0-4816-9734-a2240186e36d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3bbbec1a6e4b456c873d8d597442d863",
     "title": "壁面 収納 クローゼット 薄型をどう選ぶ？条件別に違いを確認_OPP-566446A596C4_20260905_232051",
     "name": "壁面 収納 クローゼット 薄型をどう選ぶ？条件別に違いを確認_OPP-566446A596C4_20260905_232051.md",
@@ -15855,10 +15855,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-17T21:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-17T20:25:06.409586+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "946287cf-2e1a-445f-b69f-bda6914395f6",
