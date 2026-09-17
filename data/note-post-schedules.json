@@ -15720,7 +15720,7 @@
   },
   {
     "id": "881f8505-80a2-4985-a442-754b7ddb9885",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s6e72c2554a3b4b8aa4fe41fa128ee880",
     "title": "衣類 収納 チェスト スリムをどう選ぶ？条件別に違いを確認_OPP-4FF3617F6501_20260905_231207",
     "name": "衣類 収納 チェスト スリムをどう選ぶ？条件別に違いを確認_OPP-4FF3617F6501_20260905_231207.md",
@@ -15730,8 +15730,8 @@
     "publishAt": "2026-09-17T17:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-17T16:55:45.081722+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-17T17:32:01.467540+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na087b06840e2?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
