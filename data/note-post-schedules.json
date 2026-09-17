@@ -15630,7 +15630,7 @@
   },
   {
     "id": "cd031d4f-2f54-4453-890d-be80b0563001",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s72942a00525146438cefd2403576c590",
     "title": "収納ボックス フタ付き 玄関をどう選ぶ？条件別に違いを確認_OPP-9C05334FB993_20260906_010734",
     "name": "収納ボックス フタ付き 玄関をどう選ぶ？条件別に違いを確認_OPP-9C05334FB993_20260906_010734.md",
@@ -15639,10 +15639,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-17T15:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-17T14:25:32.263136+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c135928e-997f-4028-a58e-00dc86116548",
