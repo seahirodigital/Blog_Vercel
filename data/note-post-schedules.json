@@ -15702,7 +15702,7 @@
   },
   {
     "id": "8ccecd87-721d-4ebb-a2b7-15420d3b4a6e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s82b053ba85ff490c86045ad2295266cb",
     "title": "キッチン 収納ラック 木製をどう選ぶ？条件別に違いを確認_OPP-9F00EF198BD1_20260906_011722",
     "name": "キッチン 収納ラック 木製をどう選ぶ？条件別に違いを確認_OPP-9F00EF198BD1_20260906_011722.md",
@@ -15712,8 +15712,8 @@
     "publishAt": "2026-09-17T17:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-17T16:25:30.577966+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-17T17:02:14.225684+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nb2f20cb0b9b6?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
