@@ -15648,7 +15648,7 @@
   },
   {
     "id": "c135928e-997f-4028-a58e-00dc86116548",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf492495809e94a699c9c79ec9267ffc5",
     "title": "収納 ベンチ 屋外 防水をどう選ぶ？条件別に違いを確認_OPP-91A4B39BBD72_20260906_005111",
     "name": "収納 ベンチ 屋外 防水をどう選ぶ？条件別に違いを確認_OPP-91A4B39BBD72_20260906_005111.md",
@@ -15657,10 +15657,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-17T15:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-17T14:55:46.441447+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a707ee3d-613e-4dad-b01b-a46c164a5b4f",
