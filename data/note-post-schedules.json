@@ -15756,7 +15756,7 @@
   },
   {
     "id": "ffa339c4-14f8-47bb-821d-4c5241be4b30",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s89ecbf9661c749059f25be6db75e165f",
     "title": "収納付きベッド 机をどう選ぶ？条件別に違いを確認_OPP-C04C13C94C53_20260906_020401",
     "name": "収納付きベッド 机をどう選ぶ？条件別に違いを確認_OPP-C04C13C94C53_20260906_020401.md",
@@ -15765,10 +15765,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-17T18:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-17T17:55:18.690880+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "43fdec50-cb2a-42cf-adfe-5931ca2efdab",
