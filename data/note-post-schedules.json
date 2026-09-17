@@ -15774,7 +15774,7 @@
   },
   {
     "id": "43fdec50-cb2a-42cf-adfe-5931ca2efdab",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!se4421b27276f4ba3bf495f55ecb041e7",
     "title": "吊り 下げ 収納 クローゼット スリムをどう選ぶ？条件別に違いを確認_OPP-767CA231E10B_20260906_000715",
     "name": "吊り 下げ 収納 クローゼット スリムをどう選ぶ？条件別に違いを確認_OPP-767CA231E10B_20260906_000715.md",
@@ -15784,8 +15784,8 @@
     "publishAt": "2026-09-17T19:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-17T18:25:33.111024+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-17T19:02:09.185923+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n55fa9aaf372f?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
