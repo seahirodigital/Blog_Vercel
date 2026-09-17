@@ -15738,7 +15738,7 @@
   },
   {
     "id": "7f252de3-eb82-4f3f-b43e-2575280c9f37",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf2c6ce019fd44e43b89a6cba16dec74f",
     "title": "クローゼット 収納 伸縮をどう選ぶ？条件別に違いを確認_OPP-94992B5DED26_20260906_005422",
     "name": "クローゼット 収納 伸縮をどう選ぶ？条件別に違いを確認_OPP-94992B5DED26_20260906_005422.md",
@@ -15748,8 +15748,8 @@
     "publishAt": "2026-09-17T18:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-17T17:25:04.667678+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-17T18:02:03.583605+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nbc5a7f2184a6?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
