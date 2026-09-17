@@ -15792,7 +15792,7 @@
   },
   {
     "id": "e8920dd0-06e3-40a8-9c80-2670bf6981bc",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sab4ca46bd9d348ff8f94daf5c37dc728",
     "title": "スチールラック 調味料 収納をどう選ぶ？条件別に違いを確認_OPP-5845145EBB96_20260905_232340",
     "name": "スチールラック 調味料 収納をどう選ぶ？条件別に違いを確認_OPP-5845145EBB96_20260905_232340.md",
@@ -15801,10 +15801,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-17T19:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-17T18:55:47.336492+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "efa2a6e7-8c94-4400-a2f3-126c7ca00644",
