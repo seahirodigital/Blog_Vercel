@@ -16026,7 +16026,7 @@
   },
   {
     "id": "7fedd669-d32f-441b-b889-321fe8a311bf",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s704d36df6771412b941d7c2ac097846b",
     "title": "クローゼット 収納 ボックス 布製をどう選ぶ？条件別に違いを確認_OPP-A86F99262D48_20260906_013239",
     "name": "クローゼット 収納 ボックス 布製をどう選ぶ？条件別に違いを確認_OPP-A86F99262D48_20260906_013239.md",
@@ -16035,10 +16035,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-18T18:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-18T17:55:00.615937+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b6572658-0a50-4f5f-b670-21d065e0ed3e",
