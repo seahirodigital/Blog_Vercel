@@ -16134,7 +16134,7 @@
   },
   {
     "id": "75f49dba-ca48-4eb4-9610-fb6a2e83c860",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa9e0a96f3ff54ab589965705babdc1d3",
     "title": "収納ボックス フタ付き ベッド下をどう選ぶ？条件別に違いを確認_OPP-69C5CF322117_20260905_233846",
     "name": "収納ボックス フタ付き ベッド下をどう選ぶ？条件別に違いを確認_OPP-69C5CF322117_20260905_233846.md",
@@ -16144,8 +16144,8 @@
     "publishAt": "2026-09-18T21:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-18T20:55:51.347542+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-18T21:32:09.262732+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd512646e607f?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
