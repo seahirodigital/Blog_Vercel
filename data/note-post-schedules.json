@@ -15972,7 +15972,7 @@
   },
   {
     "id": "94bb81a4-d35f-4356-9e1f-0ac325523ae9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s259fe38872424db497f75ae2f07ce6be",
     "title": "玄関 スチールラック 収納をどう選ぶ？条件別に違いを確認_OPP-A86E4F42A42C_20260906_012827",
     "name": "玄関 スチールラック 収納をどう選ぶ？条件別に違いを確認_OPP-A86E4F42A42C_20260906_012827.md",
@@ -15981,10 +15981,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-18T17:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-18T16:25:42.205862+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cdbaddd7-12ef-426c-ac42-1e2efc1ae24e",
