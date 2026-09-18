@@ -16098,7 +16098,7 @@
   },
   {
     "id": "2ce0ab38-bf75-4d7f-8d37-7e30e292536f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s77ab6c08206544ebaccf5b736d6e4b32",
     "title": "クローゼット メタル ラック 収納をどう選ぶ？条件別に違いを確認_OPP-A9F4B028D7F9_20260906_013610",
     "name": "クローゼット メタル ラック 収納をどう選ぶ？条件別に違いを確認_OPP-A9F4B028D7F9_20260906_013610.md",
@@ -16107,10 +16107,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-18T20:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-18T19:55:40.969640+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f9adc672-f669-45b4-adca-f6c935161718",
