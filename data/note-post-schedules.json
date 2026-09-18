@@ -15882,7 +15882,7 @@
   },
   {
     "id": "d9195eba-fe54-4815-9bd1-7fd57ffbcb7f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf208572292964c89b5462e7a79a79a01",
     "title": "Hollyland Lark A2ワイヤレスマイク レビュー比較まとめ：高音質スマホVlogマイクの選び方",
     "name": "20260917_0456_【より手軽に】スマホやアクションカムの音質を手軽＆気軽にグレードアップ！AI技術が詰まったマイク、Hollyland L.md",
@@ -15891,14 +15891,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-18T11:00:00.000Z",
     "createdAt": "2026-09-17T06:36:07.761Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-18T14:34:06.772555+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "dc9ceddd-6466-4787-96c0-fa192e7fdaa6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s284cabd43d5948838be56cd90f04f687",
     "title": "収納 ワゴン キャスター 付き 押入れをどう選ぶ？条件別に違いを確認_OPP-66A8A781AD25_20260905_233602",
     "name": "収納 ワゴン キャスター 付き 押入れをどう選ぶ？条件別に違いを確認_OPP-66A8A781AD25_20260905_233602.md",
@@ -15907,10 +15909,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-18T15:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-18T14:34:06.772555+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0ae978aa-458b-4d39-bdb0-c34f8e98d9a1",
