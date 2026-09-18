@@ -16062,7 +16062,7 @@
   },
   {
     "id": "6c77c4cc-4de3-48dc-8827-c4e5af427c6f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sc2df15fc5b75439fa24ab7657104f63a",
     "title": "クローゼット 収納 引き出し 木製をどう選ぶ？条件別に違いを確認_OPP-9683A469C632_20260906_005739",
     "name": "クローゼット 収納 引き出し 木製をどう選ぶ？条件別に違いを確認_OPP-9683A469C632_20260906_005739.md",
@@ -16072,8 +16072,8 @@
     "publishAt": "2026-09-18T19:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-18T18:55:50.798087+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-18T19:32:05.477526+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n2d702f023124?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
