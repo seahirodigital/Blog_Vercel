@@ -15936,7 +15936,7 @@
   },
   {
     "id": "ace9c011-e56b-479b-84fd-1718c7a15f2f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf24ba72c84a64aacbb1d3080f1c693a2",
     "title": "スチールラック 部屋 収納をどう選ぶ？条件別に違いを確認_OPP-6A4D32192765_20260905_234230",
     "name": "スチールラック 部屋 収納をどう選ぶ？条件別に違いを確認_OPP-6A4D32192765_20260905_234230.md",
@@ -15946,8 +15946,8 @@
     "publishAt": "2026-09-18T16:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-18T15:25:52.967199+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-18T16:02:32.320445+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n53605cc6aca1?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
