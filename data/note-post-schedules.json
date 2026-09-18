@@ -15918,7 +15918,7 @@
   },
   {
     "id": "0ae978aa-458b-4d39-bdb0-c34f8e98d9a1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s159a491472984a1cb77353a40d15bf09",
     "title": "スチールラック ペットボトル 収納をどう選ぶ？条件別に違いを確認_OPP-6DEC6CD0883F_20260905_235324",
     "name": "スチールラック ペットボトル 収納をどう選ぶ？条件別に違いを確認_OPP-6DEC6CD0883F_20260905_235324.md",
@@ -15927,10 +15927,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-18T15:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-18T14:55:27.554491+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ace9c011-e56b-479b-84fd-1718c7a15f2f",
