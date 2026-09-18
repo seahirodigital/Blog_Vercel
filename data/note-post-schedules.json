@@ -16044,7 +16044,7 @@
   },
   {
     "id": "b6572658-0a50-4f5f-b670-21d065e0ed3e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa25d20f14830486cbe3835266662e64b",
     "title": "収納 キッチン スリムをどう選ぶ？条件別に違いを確認",
     "name": "収納 キッチン スリムをどう選ぶ？条件別に違いを確認_OPP-D449C965A875_20260906_022729.md",
@@ -16054,8 +16054,8 @@
     "publishAt": "2026-09-18T19:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-18T18:25:26.371374+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-18T19:02:09.876464+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nc6f26e0d9b75?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
