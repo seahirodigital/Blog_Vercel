@@ -16008,7 +16008,7 @@
   },
   {
     "id": "fd8ca3a0-2251-4082-b29a-f06361c7e62c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s60d2b45dfa87425fba8e3572fd57b477",
     "title": "細長い クローゼット 収納の選び方｜設置条件に合うサイズを判断するポイント_OPP-9EBA9B1AE31A_20260906_011339",
     "name": "細長い クローゼット 収納の選び方｜設置条件に合うサイズを判断するポイント_OPP-9EBA9B1AE31A_20260906_011339.md",
@@ -16018,8 +16018,8 @@
     "publishAt": "2026-09-18T18:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-18T17:25:35.286001+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-18T18:02:16.566382+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n8d491ca43787/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
