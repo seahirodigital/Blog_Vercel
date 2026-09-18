@@ -16116,7 +16116,7 @@
   },
   {
     "id": "f9adc672-f669-45b4-adca-f6c935161718",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc4ffa846d8f1443d96b5cc6cb36231de",
     "title": "キッチン 収納 ケース 引き出しをどう選ぶ？条件別に違いを確認_OPP-50A74C987A0B_20260905_231449",
     "name": "キッチン 収納 ケース 引き出しをどう選ぶ？条件別に違いを確認_OPP-50A74C987A0B_20260905_231449.md",
@@ -16125,10 +16125,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-18T21:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-18T20:25:19.219882+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "75f49dba-ca48-4eb4-9610-fb6a2e83c860",
