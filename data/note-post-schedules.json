@@ -15990,7 +15990,7 @@
   },
   {
     "id": "cdbaddd7-12ef-426c-ac42-1e2efc1ae24e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc15b8e49c6a249459bbe34b45e0432bf",
     "title": "クローゼット プラスチック 収納 ケースをどう選ぶ？条件別に違いを確認_OPP-5B75385DB31A_20260905_232733",
     "name": "クローゼット プラスチック 収納 ケースをどう選ぶ？条件別に違いを確認_OPP-5B75385DB31A_20260905_232733.md",
@@ -15999,10 +15999,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-18T17:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-18T16:55:07.659365+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fd8ca3a0-2251-4082-b29a-f06361c7e62c",
