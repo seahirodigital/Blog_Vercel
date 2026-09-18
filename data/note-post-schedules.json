@@ -15954,7 +15954,7 @@
   },
   {
     "id": "b19678f0-f4a5-40a3-854f-cbf6b8123b78",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s225d824cce1847bf94daa87cd3bee810",
     "title": "クローゼット収納棚 キャスター付きをどう選ぶ？条件別に違いを確認_OPP-6D37D645DF90_20260905_235027",
     "name": "クローゼット収納棚 キャスター付きをどう選ぶ？条件別に違いを確認_OPP-6D37D645DF90_20260905_235027.md",
@@ -15963,10 +15963,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-18T16:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-18T15:55:17.569117+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "94bb81a4-d35f-4356-9e1f-0ac325523ae9",
