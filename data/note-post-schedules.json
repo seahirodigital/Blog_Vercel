@@ -16080,7 +16080,7 @@
   },
   {
     "id": "eb7a24a4-e430-43a9-a109-47f9abe8b68b",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s7bbe2f1ec3ed494b8d688460b6b565bf",
     "title": "収納 キッチン キャスターをどう選ぶ？条件別に違いを確認_OPP-C4A4669CB800_20260906_021102",
     "name": "収納 キッチン キャスターをどう選ぶ？条件別に違いを確認_OPP-C4A4669CB800_20260906_021102.md",
@@ -16090,8 +16090,8 @@
     "publishAt": "2026-09-18T20:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-18T19:25:14.242862+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-18T20:02:17.323335+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n563ce2e841f3?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
