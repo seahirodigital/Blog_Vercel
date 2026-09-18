@@ -15900,7 +15900,7 @@
   },
   {
     "id": "dc9ceddd-6466-4787-96c0-fa192e7fdaa6",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s284cabd43d5948838be56cd90f04f687",
     "title": "収納 ワゴン キャスター 付き 押入れをどう選ぶ？条件別に違いを確認_OPP-66A8A781AD25_20260905_233602",
     "name": "収納 ワゴン キャスター 付き 押入れをどう選ぶ？条件別に違いを確認_OPP-66A8A781AD25_20260905_233602.md",
@@ -15910,8 +15910,8 @@
     "publishAt": "2026-09-18T15:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-18T14:34:06.772555+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-18T15:02:00.592245+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n1a426cc18e8c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
