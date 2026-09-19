@@ -16332,7 +16332,7 @@
   },
   {
     "id": "feb7f816-354a-402a-bd27-71a78a4e95ee",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se65d38039a194b3baf9df52edb376dbb",
     "title": "収納付きベッド 布団収納をどう選ぶ？条件別に違いを確認_OPP-CBFD6414B4CD_20260906_021832",
     "name": "収納付きベッド 布団収納をどう選ぶ？条件別に違いを確認_OPP-CBFD6414B4CD_20260906_021832.md",
@@ -16341,10 +16341,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-19T20:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-19T19:25:46.307396+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c94e67e5-992c-43d0-848b-efe8d63c4181",
