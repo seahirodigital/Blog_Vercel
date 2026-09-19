@@ -16206,7 +16206,7 @@
   },
   {
     "id": "a74fc90d-d663-464e-a681-e0f382636df0",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sdaf4349df2634ca99b8c5cb225ee789a",
     "title": "スチールラック 絵本 収納をどう選ぶ？条件別に違いを確認_OPP-789C09D6774B_20260906_001513",
     "name": "スチールラック 絵本 収納をどう選ぶ？条件別に違いを確認_OPP-789C09D6774B_20260906_001513.md",
@@ -16216,8 +16216,8 @@
     "publishAt": "2026-09-19T16:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-19T17:20:51.454906+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-19T17:23:15.069784+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd30af5c99ebf?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
