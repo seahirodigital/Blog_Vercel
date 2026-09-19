@@ -16260,7 +16260,7 @@
   },
   {
     "id": "cd3939a1-f665-49ba-9bac-b564e96146ac",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s96736ced3ea640958a8e4446664fc645",
     "title": "服 収納 タンス 大容量の選び方｜設置条件に合うサイズを判断するポイント_OPP-6E4E865FCBCC_20260905_235709",
     "name": "服 収納 タンス 大容量の選び方｜設置条件に合うサイズを判断するポイント_OPP-6E4E865FCBCC_20260905_235709.md",
@@ -16270,8 +16270,8 @@
     "publishAt": "2026-09-19T18:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-19T17:25:05.723103+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-19T18:01:58.607039+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n0236aa0abced/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
