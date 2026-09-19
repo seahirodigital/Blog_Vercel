@@ -16278,7 +16278,7 @@
   },
   {
     "id": "8c1891ed-16d8-487a-932e-bfb8e64b3cf7",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s449f42363bb240fb8f7c422c82d0ad4c",
     "title": "収納 ベンチ 屋外 薄型をどう選ぶ？条件別に違いを確認_OPP-772690C1DC90_20260906_001200",
     "name": "収納 ベンチ 屋外 薄型をどう選ぶ？条件別に違いを確認_OPP-772690C1DC90_20260906_001200.md",
@@ -16288,8 +16288,8 @@
     "publishAt": "2026-09-19T18:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-19T17:55:46.165599+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-19T18:32:01.917018+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n9c6093661b6d?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
