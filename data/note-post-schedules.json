@@ -16368,7 +16368,7 @@
   },
   {
     "id": "79f9ec15-f61a-4d39-a158-dec5d0e390f3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8f6da19689754da38cb878ffa13c697c",
     "title": "収納ボックス フタ付き トイレをどう選ぶ？条件別に違いを確認_OPP-86AC89BE14E8_20260906_003447",
     "name": "収納ボックス フタ付き トイレをどう選ぶ？条件別に違いを確認_OPP-86AC89BE14E8_20260906_003447.md",
@@ -16377,10 +16377,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-19T21:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-19T20:25:05.971909+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "30fc1e0b-8c7f-4a49-b6f9-436a6c63d3ea",
