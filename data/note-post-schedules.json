@@ -16152,7 +16152,7 @@
   },
   {
     "id": "f142de07-c8b8-4224-9626-34e309872859",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc18e9442b0674150b48d82d93953888e",
     "title": "服 収納 タンス プラスチックをどう選ぶ？条件別に違いを確認_OPP-6AFF59099454_20260905_234637",
     "name": "服 収納 タンス プラスチックをどう選ぶ？条件別に違いを確認_OPP-6AFF59099454_20260905_234637.md",
@@ -16161,14 +16161,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-19T15:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-19T17:20:51.454906+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5e00e42c-7065-426b-a75e-07a2b97bd325",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbf374576f6bf444dbd492b94f0cae944",
     "title": "クローゼット 吊り 下げ 収納 プラスチックをどう選ぶ？条件別に違いを確認_OPP-7A2F403E5DEE_20260906_001806",
     "name": "クローゼット 吊り 下げ 収納 プラスチックをどう選ぶ？条件別に違いを確認_OPP-7A2F403E5DEE_20260906_001806.md",
@@ -16177,14 +16179,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-19T15:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-19T17:20:51.454906+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fcbcd444-efbf-4f19-97c9-145ba1d38fb6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s881321c0d4a74771aa9ba7e74cf55c60",
     "title": "服 収納棚 プラスチックをどう選ぶ？条件別に違いを確認_OPP-A6E856F79887_20260906_012519",
     "name": "服 収納棚 プラスチックをどう選ぶ？条件別に違いを確認_OPP-A6E856F79887_20260906_012519.md",
@@ -16193,14 +16197,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-19T16:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-19T17:20:51.454906+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a74fc90d-d663-464e-a681-e0f382636df0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdaf4349df2634ca99b8c5cb225ee789a",
     "title": "スチールラック 絵本 収納をどう選ぶ？条件別に違いを確認_OPP-789C09D6774B_20260906_001513",
     "name": "スチールラック 絵本 収納をどう選ぶ？条件別に違いを確認_OPP-789C09D6774B_20260906_001513.md",
@@ -16209,14 +16215,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-19T16:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-19T17:20:51.454906+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fecf8f90-7dc6-4484-909c-b2279f9fd3e4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf25c42b8725641d2aa763ea7aaeba0f9",
     "title": "クローゼット 吊り下げ 収納 手作りをどう選ぶ？条件別に違いを確認",
     "name": "クローゼット 吊り下げ 収納 手作りをどう選ぶ？条件別に違いを確認_OPP-D45678756CE0_20260906_023108.md",
@@ -16225,14 +16233,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-19T17:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-19T17:20:51.454906+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "35bdeae9-0ffe-414c-9f15-3c06664e16b0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2c41c97b97c74af69a51b639cb43ef96",
     "title": "玄関 収納ラック スリムをどう選ぶ？条件別に違いを確認_OPP-9C30DA0B89FC_20260906_011034",
     "name": "玄関 収納ラック スリムをどう選ぶ？条件別に違いを確認_OPP-9C30DA0B89FC_20260906_011034.md",
@@ -16241,10 +16251,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-19T17:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-19T17:20:51.454906+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cd3939a1-f665-49ba-9bac-b564e96146ac",
