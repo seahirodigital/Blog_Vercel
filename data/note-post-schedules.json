@@ -16386,7 +16386,7 @@
   },
   {
     "id": "30fc1e0b-8c7f-4a49-b6f9-436a6c63d3ea",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s33bf155b638d452aaeb4c2eb676255b0",
     "title": "洗面所 収納ラック スリムをどう選ぶ？条件別に違いを確認_OPP-8BFF39169C51_20260906_004033",
     "name": "洗面所 収納ラック スリムをどう選ぶ？条件別に違いを確認_OPP-8BFF39169C51_20260906_004033.md",
@@ -16396,8 +16396,8 @@
     "publishAt": "2026-09-19T21:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-19T20:55:48.747880+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-19T21:32:09.633052+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n0ccb233494a0?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
