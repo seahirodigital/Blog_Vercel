@@ -16188,7 +16188,7 @@
   },
   {
     "id": "fcbcd444-efbf-4f19-97c9-145ba1d38fb6",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s881321c0d4a74771aa9ba7e74cf55c60",
     "title": "服 収納棚 プラスチックをどう選ぶ？条件別に違いを確認_OPP-A6E856F79887_20260906_012519",
     "name": "服 収納棚 プラスチックをどう選ぶ？条件別に違いを確認_OPP-A6E856F79887_20260906_012519.md",
@@ -16198,8 +16198,8 @@
     "publishAt": "2026-09-19T16:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-19T17:20:51.454906+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-19T17:23:25.632863+00:00",
+    "publishedUrl": "https://note.com/startupm/n/necc33ef29ae9?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
