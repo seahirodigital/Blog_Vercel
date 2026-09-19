@@ -16314,7 +16314,7 @@
   },
   {
     "id": "66bd184c-aa29-4b6d-ad01-bed9ffcd6583",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s718257354b414e6d9476bbdc96219abe",
     "title": "収納ボックス 引き出し キッチンをどう選ぶ？条件別に違いを確認_OPP-9A647980C756_20260906_010129",
     "name": "収納ボックス 引き出し キッチンをどう選ぶ？条件別に違いを確認_OPP-9A647980C756_20260906_010129.md",
@@ -16324,8 +16324,8 @@
     "publishAt": "2026-09-19T19:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-19T18:55:04.799127+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-19T19:32:11.740080+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n9294821b187b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
