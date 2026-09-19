@@ -16296,7 +16296,7 @@
   },
   {
     "id": "439f2dcf-536b-40c7-bafe-c1a5824cec10",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa52cc625e04945028b0cd585a1fbe2f7",
     "title": "クローゼット収納ケース スライドをどう選ぶ？条件別に違いを確認_OPP-8DED4F1C713D_20260906_004350",
     "name": "クローゼット収納ケース スライドをどう選ぶ？条件別に違いを確認_OPP-8DED4F1C713D_20260906_004350.md",
@@ -16305,10 +16305,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-19T19:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-19T18:25:25.298789+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "66bd184c-aa29-4b6d-ad01-bed9ffcd6583",
