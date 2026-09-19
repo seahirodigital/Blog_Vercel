@@ -16224,7 +16224,7 @@
   },
   {
     "id": "fecf8f90-7dc6-4484-909c-b2279f9fd3e4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf25c42b8725641d2aa763ea7aaeba0f9",
     "title": "クローゼット 吊り下げ 収納 手作りをどう選ぶ？条件別に違いを確認",
     "name": "クローゼット 吊り下げ 収納 手作りをどう選ぶ？条件別に違いを確認_OPP-D45678756CE0_20260906_023108.md",
@@ -16234,8 +16234,8 @@
     "publishAt": "2026-09-19T17:00:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-19T17:20:51.454906+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-19T17:23:13.213226+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nb6d5276e0cae?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
