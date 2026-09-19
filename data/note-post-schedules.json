@@ -16350,7 +16350,7 @@
   },
   {
     "id": "c94e67e5-992c-43d0-848b-efe8d63c4181",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s205984f0bb724a1285f210e45cf23ce5",
     "title": "ランドリー 収納 チェスト スリムをどう選ぶ？条件別に違いを確認_OPP-7BB09821A998_20260906_002043",
     "name": "ランドリー 収納 チェスト スリムをどう選ぶ？条件別に違いを確認_OPP-7BB09821A998_20260906_002043.md",
@@ -16359,10 +16359,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-19T20:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-19T19:55:25.694258+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "79f9ec15-f61a-4d39-a158-dec5d0e390f3",
