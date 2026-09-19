@@ -16170,7 +16170,7 @@
   },
   {
     "id": "5e00e42c-7065-426b-a75e-07a2b97bd325",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sbf374576f6bf444dbd492b94f0cae944",
     "title": "クローゼット 吊り 下げ 収納 プラスチックをどう選ぶ？条件別に違いを確認_OPP-7A2F403E5DEE_20260906_001806",
     "name": "クローゼット 吊り 下げ 収納 プラスチックをどう選ぶ？条件別に違いを確認_OPP-7A2F403E5DEE_20260906_001806.md",
@@ -16180,8 +16180,8 @@
     "publishAt": "2026-09-19T15:30:00.000Z",
     "createdAt": "2026-09-06T03:14:55.588Z",
     "queuedAt": "2026-09-19T17:20:51.454906+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-19T17:23:09.316060+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7a37edca2bc7?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
