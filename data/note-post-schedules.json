@@ -16458,7 +16458,7 @@
   },
   {
     "id": "fc2e57cd-10da-440a-83f7-4e8381dcb829",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s56ce8d294c7343068cf0f50be9321b28",
     "title": "ノートpcスタンド nps10シル ノートパソコンスタンド 1個 キングジムの選び方｜設置条件に合うサイズを判断_OPP-F7208DF20063_20260922_015219",
     "name": "ノートpcスタンド nps10シル ノートパソコンスタンド 1個 キングジムの選び方｜設置条件に合うサイズを判断_OPP-F7208DF20063_20260922_015219.md",
@@ -16468,8 +16468,8 @@
     "publishAt": "2026-09-23T18:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
     "queuedAt": "2026-09-23T18:26:26.348245+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-23T18:28:58.807033+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n117297a43967?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
