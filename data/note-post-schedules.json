@@ -16440,7 +16440,7 @@
   },
   {
     "id": "2215be2f-cf87-4945-b08a-45ca1078dd97",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!secb85e59c96549448d5f45f02731037b",
     "title": "ノートpcスタンド 放熱を選ぶ前に確認したい条件と考え方_OPP-FC052E1796D1_20260922_022958",
     "name": "ノートpcスタンド 放熱を選ぶ前に確認したい条件と考え方_OPP-FC052E1796D1_20260922_022958.md",
@@ -16450,8 +16450,8 @@
     "publishAt": "2026-09-23T17:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
     "queuedAt": "2026-09-23T18:26:26.348245+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-23T18:28:51.301212+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5733b68e5aa7?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
