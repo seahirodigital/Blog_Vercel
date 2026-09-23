@@ -16404,7 +16404,7 @@
   },
   {
     "id": "e69d1b14-4b3f-4f5d-93f2-a2f08308124e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3a831e6c16a14794bcac08c15395727a",
     "title": "ノートpcスタンド サブモニターを選ぶ前に確認したい条件と考え方_OPP-06AAAF201E71_20260922_025402",
     "name": "ノートpcスタンド サブモニターを選ぶ前に確認したい条件と考え方_OPP-06AAAF201E71_20260922_025402.md",
@@ -16413,14 +16413,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-23T15:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-23T18:26:26.348245+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2febf044-cdff-4a73-8921-6f6c9dcb4d02",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s307824bc297a42df9da463435d5758c5",
     "title": "ノートpcスタンド キーボードを選ぶ前に確認したい条件と考え方_OPP-38D557822E63_20260922_025842",
     "name": "ノートpcスタンド キーボードを選ぶ前に確認したい条件と考え方_OPP-38D557822E63_20260922_025842.md",
@@ -16429,14 +16431,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-23T16:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-23T18:26:26.348245+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2215be2f-cf87-4945-b08a-45ca1078dd97",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!secb85e59c96549448d5f45f02731037b",
     "title": "ノートpcスタンド 放熱を選ぶ前に確認したい条件と考え方_OPP-FC052E1796D1_20260922_022958",
     "name": "ノートpcスタンド 放熱を選ぶ前に確認したい条件と考え方_OPP-FC052E1796D1_20260922_022958.md",
@@ -16445,14 +16449,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-23T17:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-23T18:26:26.348245+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fc2e57cd-10da-440a-83f7-4e8381dcb829",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s56ce8d294c7343068cf0f50be9321b28",
     "title": "ノートpcスタンド nps10シル ノートパソコンスタンド 1個 キングジムの選び方｜設置条件に合うサイズを判断_OPP-F7208DF20063_20260922_015219",
     "name": "ノートpcスタンド nps10シル ノートパソコンスタンド 1個 キングジムの選び方｜設置条件に合うサイズを判断_OPP-F7208DF20063_20260922_015219.md",
@@ -16461,14 +16467,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-23T18:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-23T18:26:26.348245+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d4fdd302-f6ae-4575-80dc-699e1939be80",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3cf195c4cc734bf590e8aefc3422b0b2",
     "title": "ケーブル収納 デスク下の選び方｜用途や設置条件に合うタイプを判断_OPP-F2DAF417606A_20260922_011923",
     "name": "ケーブル収納 デスク下の選び方｜用途や設置条件に合うタイプを判断_OPP-F2DAF417606A_20260922_011923.md",
@@ -16477,10 +16485,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-23T19:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-23T18:26:26.348245+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9d830899-82c3-477c-b915-cdc3e8f9eff0",
