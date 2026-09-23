@@ -16494,7 +16494,7 @@
   },
   {
     "id": "9d830899-82c3-477c-b915-cdc3e8f9eff0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se930f065433d4d7994760555ae25e854",
     "title": "ケーブル収納 オフィスの選び方｜用途や設置条件に合うタイプを判断_OPP-076A86366DF6_20260922_010848",
     "name": "ケーブル収納 オフィスの選び方｜用途や設置条件に合うタイプを判断_OPP-076A86366DF6_20260922_010848.md",
@@ -16503,10 +16503,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-23T20:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-23T19:25:19.411745+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "de3ad53d-9afe-457c-ae99-8abdcdb00aa2",
