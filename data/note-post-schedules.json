@@ -16512,7 +16512,7 @@
   },
   {
     "id": "de3ad53d-9afe-457c-ae99-8abdcdb00aa2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb551fcba11be4883a4eb455bf5e1092b",
     "title": "ケーブル収納ボックス スリムをどう選ぶ？条件別に違いを確認_OPP-0CF120B5BA44_20260922_003547",
     "name": "ケーブル収納ボックス スリムをどう選ぶ？条件別に違いを確認_OPP-0CF120B5BA44_20260922_003547.md",
@@ -16521,10 +16521,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-23T21:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-23T20:25:08.858062+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8802c37b-302b-4d77-b1ff-940694ecc67b",
