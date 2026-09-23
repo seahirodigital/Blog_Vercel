@@ -16422,7 +16422,7 @@
   },
   {
     "id": "2febf044-cdff-4a73-8921-6f6c9dcb4d02",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s307824bc297a42df9da463435d5758c5",
     "title": "ノートpcスタンド キーボードを選ぶ前に確認したい条件と考え方_OPP-38D557822E63_20260922_025842",
     "name": "ノートpcスタンド キーボードを選ぶ前に確認したい条件と考え方_OPP-38D557822E63_20260922_025842.md",
@@ -16432,8 +16432,8 @@
     "publishAt": "2026-09-23T16:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
     "queuedAt": "2026-09-23T18:26:26.348245+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-23T18:28:44.418081+00:00",
+    "publishedUrl": "https://note.com/notes/n6337b404e5af/landing",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
