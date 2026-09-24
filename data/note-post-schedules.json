@@ -16566,7 +16566,7 @@
   },
   {
     "id": "75d0e1ac-cd21-4e11-9df8-7310c0ef46b6",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf0f4a980c8604e258f49230c8a94c39b",
     "title": "モニター台 固定をどう選ぶ？条件別に違いを確認_OPP-DFB31ED1EEDB_20260922_001800",
     "name": "モニター台 固定をどう選ぶ？条件別に違いを確認_OPP-DFB31ED1EEDB_20260922_001800.md",
@@ -16576,8 +16576,8 @@
     "publishAt": "2026-09-24T17:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
     "queuedAt": "2026-09-24T19:58:13.433179+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-24T20:00:40.526171+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n0abd4ffa16d9?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
