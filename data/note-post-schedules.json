@@ -16530,7 +16530,7 @@
   },
   {
     "id": "8802c37b-302b-4d77-b1ff-940694ecc67b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6b6e172fb2264b2599e16ca0b21a1bba",
     "title": "モニター台 卓上の選び方｜設置条件に合うサイズを判断するポイント_OPP-727EB26F104C_20260922_005731",
     "name": "モニター台 卓上の選び方｜設置条件に合うサイズを判断するポイント_OPP-727EB26F104C_20260922_005731.md",
@@ -16539,14 +16539,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-24T15:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-24T18:27:31.762343+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c4235a1f-3554-4e07-9236-ad037b28919d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5bb645cbce31422bbda39764e30b05fb",
     "title": "ノートpcスタンド 薄型を選ぶ前に確認したい条件と考え方_OPP-A1238C3C22C9_20260922_021934",
     "name": "ノートpcスタンド 薄型を選ぶ前に確認したい条件と考え方_OPP-A1238C3C22C9_20260922_021934.md",
@@ -16555,14 +16557,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-24T16:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-24T18:27:31.762343+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "75d0e1ac-cd21-4e11-9df8-7310c0ef46b6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf0f4a980c8604e258f49230c8a94c39b",
     "title": "モニター台 固定をどう選ぶ？条件別に違いを確認_OPP-DFB31ED1EEDB_20260922_001800",
     "name": "モニター台 固定をどう選ぶ？条件別に違いを確認_OPP-DFB31ED1EEDB_20260922_001800.md",
@@ -16571,14 +16575,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-24T17:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-24T18:27:31.762343+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ccf3da3c-f772-44fa-8435-ab8d058b0712",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s64c62129b8fa4b10b99064f571fbba35",
     "title": "モニター台 目隠しをどう選ぶ？条件別に違いを確認_OPP-E768A8631070_20260922_002401",
     "name": "モニター台 目隠しをどう選ぶ？条件別に違いを確認_OPP-E768A8631070_20260922_002401.md",
@@ -16587,14 +16593,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-24T18:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-24T18:27:31.762343+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "93cdb034-ea5d-43d3-8f52-f53e4f04242b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s170ea103aa9f4ce9bcce181b87500c3c",
     "title": "工匠藤井 モニター台 折りたたみ式 三段式幅調整の選び方｜設置条件に合うサイズを判断するポイント_OPP-C23A45175900_20260922_004357",
     "name": "工匠藤井 モニター台 折りたたみ式 三段式幅調整の選び方｜設置条件に合うサイズを判断するポイント_OPP-C23A45175900_20260922_004357.md",
@@ -16603,10 +16611,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-24T19:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-24T18:27:31.762343+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cd7ef431-cd8e-4861-90b6-accc03cb87b9",
