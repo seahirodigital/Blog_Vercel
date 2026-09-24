@@ -16548,7 +16548,7 @@
   },
   {
     "id": "c4235a1f-3554-4e07-9236-ad037b28919d",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s5bb645cbce31422bbda39764e30b05fb",
     "title": "ノートpcスタンド 薄型を選ぶ前に確認したい条件と考え方_OPP-A1238C3C22C9_20260922_021934",
     "name": "ノートpcスタンド 薄型を選ぶ前に確認したい条件と考え方_OPP-A1238C3C22C9_20260922_021934.md",
@@ -16558,8 +16558,8 @@
     "publishAt": "2026-09-24T16:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
     "queuedAt": "2026-09-24T19:58:13.433179+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-24T20:00:35.914133+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n2f3dbf42e1d8?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
