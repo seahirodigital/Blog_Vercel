@@ -16620,7 +16620,7 @@
   },
   {
     "id": "cd7ef431-cd8e-4861-90b6-accc03cb87b9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfb4ef6daaeac4835bf49dfe2b208a592",
     "title": "ノートpcスタンド 高さ調整の選び方｜設置条件に合うサイズを判断するポイント_OPP-6FAB944F5384_20260922_020902",
     "name": "ノートpcスタンド 高さ調整の選び方｜設置条件に合うサイズを判断するポイント_OPP-6FAB944F5384_20260922_020902.md",
@@ -16629,10 +16629,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-24T20:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-24T19:25:37.305613+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d79c1466-702e-49e6-8a93-c86faecb4ca6",
