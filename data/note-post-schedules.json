@@ -16584,7 +16584,7 @@
   },
   {
     "id": "ccf3da3c-f772-44fa-8435-ab8d058b0712",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s64c62129b8fa4b10b99064f571fbba35",
     "title": "モニター台 目隠しをどう選ぶ？条件別に違いを確認_OPP-E768A8631070_20260922_002401",
     "name": "モニター台 目隠しをどう選ぶ？条件別に違いを確認_OPP-E768A8631070_20260922_002401.md",
@@ -16594,8 +16594,8 @@
     "publishAt": "2026-09-24T18:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
     "queuedAt": "2026-09-24T18:27:31.762343+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-24T18:29:55.256749+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n6d3bb3edf39a?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
