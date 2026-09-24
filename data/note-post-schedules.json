@@ -16638,7 +16638,7 @@
   },
   {
     "id": "d79c1466-702e-49e6-8a93-c86faecb4ca6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s13be7ebaf44549d3853b9bff82e1f4f5",
     "title": "ケーブル収納 卓上の選び方｜用途や設置条件に合うタイプを判断_OPP-6E80B76C2FC4_20260922_011356",
     "name": "ケーブル収納 卓上の選び方｜用途や設置条件に合うタイプを判断_OPP-6E80B76C2FC4_20260922_011356.md",
@@ -16647,10 +16647,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-24T21:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-24T20:25:47.208776+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e7e41ed7-db76-4e4e-a6ae-674d18949e92",
