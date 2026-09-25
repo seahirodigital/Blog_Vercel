@@ -16692,7 +16692,7 @@
   },
   {
     "id": "a8402864-2871-4237-81c1-f5da5f96f207",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s658deefe8b1b451386f722285f0c28e5",
     "title": "モニター台 ケーブル収納の選び方｜用途や設置条件に合うタイプを判断_OPP-22C7DE31993F_20260922_012953",
     "name": "モニター台 ケーブル収納の選び方｜用途や設置条件に合うタイプを判断_OPP-22C7DE31993F_20260922_012953.md",
@@ -16702,8 +16702,8 @@
     "publishAt": "2026-09-25T17:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
     "queuedAt": "2026-09-25T18:44:21.016938+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-25T18:46:43.465002+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n52b936be5f07?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
