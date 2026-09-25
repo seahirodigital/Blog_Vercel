@@ -16656,7 +16656,7 @@
   },
   {
     "id": "e7e41ed7-db76-4e4e-a6ae-674d18949e92",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sebcbb76f9c1c4428b973fd1c2f3334c0",
     "title": "ノートpcスタンド モニターアームの選び方｜用途や設置条件に合うタイプを判断_OPP-E8A341DA4BDC_20260922_013446",
     "name": "ノートpcスタンド モニターアームの選び方｜用途や設置条件に合うタイプを判断_OPP-E8A341DA4BDC_20260922_013446.md",
@@ -16666,8 +16666,8 @@
     "publishAt": "2026-09-25T15:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
     "queuedAt": "2026-09-25T20:15:11.486180+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-25T20:17:39.571955+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nab897bb1d8e8?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
