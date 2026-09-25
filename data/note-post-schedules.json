@@ -16728,7 +16728,7 @@
   },
   {
     "id": "7348a8b3-7efc-4cdc-b786-6bb455e098d1",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf14587ed80b34b9fbf5708f255140780",
     "title": "モニター台 折りたたみをどう選ぶ？条件別に違いを確認_OPP-7193F220C70A_20260921_235418",
     "name": "モニター台 折りたたみをどう選ぶ？条件別に違いを確認_OPP-7193F220C70A_20260921_235418.md",
@@ -16738,8 +16738,8 @@
     "publishAt": "2026-09-25T19:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
     "queuedAt": "2026-09-25T18:44:21.016938+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-25T19:02:10.725813+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nfbfa048db010?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
