@@ -16746,7 +16746,7 @@
   },
   {
     "id": "22913b50-0dda-43ff-b63b-af021d81cb1a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7f3f00615cfb408fb161a9b2144f4bd3",
     "title": "モニター台 安いで困りごとを解決するには？選ぶ条件を整理_OPP-65B3C923C775_20260922_012431",
     "name": "モニター台 安いで困りごとを解決するには？選ぶ条件を整理_OPP-65B3C923C775_20260922_012431.md",
@@ -16755,10 +16755,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-25T20:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-25T19:25:13.154491+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1be39883-0ed1-4a86-a028-83cea04021b1",
