@@ -16764,7 +16764,7 @@
   },
   {
     "id": "1be39883-0ed1-4a86-a028-83cea04021b1",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb729d8ecf9fa4180aa52b679b32963ac",
     "title": "モニター台 クランプ式の選び方｜設置条件に合うサイズを判断するポイント_OPP-040F2386EBD6_20260921_233301",
     "name": "モニター台 クランプ式の選び方｜設置条件に合うサイズを判断するポイント_OPP-040F2386EBD6_20260921_233301.md",
@@ -16774,8 +16774,8 @@
     "publishAt": "2026-09-25T21:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
     "queuedAt": "2026-09-25T20:25:26.722103+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-25T21:02:17.844650+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nb554430213bd?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
