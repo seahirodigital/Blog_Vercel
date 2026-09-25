@@ -16764,7 +16764,7 @@
   },
   {
     "id": "1be39883-0ed1-4a86-a028-83cea04021b1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb729d8ecf9fa4180aa52b679b32963ac",
     "title": "モニター台 クランプ式の選び方｜設置条件に合うサイズを判断するポイント_OPP-040F2386EBD6_20260921_233301",
     "name": "モニター台 クランプ式の選び方｜設置条件に合うサイズを判断するポイント_OPP-040F2386EBD6_20260921_233301.md",
@@ -16773,10 +16773,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-25T21:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-25T20:25:26.722103+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d491e408-9b1a-4570-8bb7-210148cf0842",
