@@ -16872,7 +16872,7 @@
   },
   {
     "id": "5cce14e6-dcc9-4a10-b600-76386343e6eb",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s7437727d5bc24000bd7cac33022e1c07",
     "title": "モニターアーム ケーブル収納 エルゴトロンの選び方｜用途や設置条件に合うタイプを判断_OPP-CF2C4C0F71EE_20260922_014537",
     "name": "モニターアーム ケーブル収納 エルゴトロンの選び方｜用途や設置条件に合うタイプを判断_OPP-CF2C4C0F71EE_20260922_014537.md",
@@ -16882,8 +16882,8 @@
     "publishAt": "2026-09-26T20:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
     "queuedAt": "2026-09-26T19:25:52.106066+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-26T20:02:15.382980+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n4a7bed8b45a8?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
