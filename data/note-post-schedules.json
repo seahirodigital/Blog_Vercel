@@ -16800,7 +16800,7 @@
   },
   {
     "id": "a6ebeb14-0f80-4374-9295-05b6fc698aef",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s209002b492cb47e1a289fed734b30af4",
     "title": "モニター台 ノートパソコンの選び方｜用途や設置条件に合うタイプを判断_OPP-054BE2F0A4E3_20260922_013916",
     "name": "モニター台 ノートパソコンの選び方｜用途や設置条件に合うタイプを判断_OPP-054BE2F0A4E3_20260922_013916.md",
@@ -16810,8 +16810,8 @@
     "publishAt": "2026-09-26T16:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
     "queuedAt": "2026-09-26T17:49:14.067978+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-26T17:51:34.016579+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7b2445cc7538?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
