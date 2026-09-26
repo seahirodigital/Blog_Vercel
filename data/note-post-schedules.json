@@ -16854,7 +16854,7 @@
   },
   {
     "id": "c35115ee-cea0-4ad4-8103-e8965a1e4fca",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sed8e349604b7407c93042beb43fbc143",
     "title": "ノートpcスタンド 2段の選び方｜設置条件に合うサイズを判断するポイント_OPP-00D45DF0618B_20260922_024457",
     "name": "ノートpcスタンド 2段の選び方｜設置条件に合うサイズを判断するポイント_OPP-00D45DF0618B_20260922_024457.md",
@@ -16863,10 +16863,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-26T19:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-26T18:25:54.138177+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5cce14e6-dcc9-4a10-b600-76386343e6eb",
