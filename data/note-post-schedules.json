@@ -16782,7 +16782,7 @@
   },
   {
     "id": "d491e408-9b1a-4570-8bb7-210148cf0842",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s09721bab700c4361add233196e9d70ec",
     "title": "モニター台 伸縮の選び方｜設置条件に合うサイズを判断するポイント_OPP-F623F9E4B8BE_20260922_002954",
     "name": "モニター台 伸縮の選び方｜設置条件に合うサイズを判断するポイント_OPP-F623F9E4B8BE_20260922_002954.md",
@@ -16791,14 +16791,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-26T15:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-26T17:49:14.067978+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a6ebeb14-0f80-4374-9295-05b6fc698aef",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s209002b492cb47e1a289fed734b30af4",
     "title": "モニター台 ノートパソコンの選び方｜用途や設置条件に合うタイプを判断_OPP-054BE2F0A4E3_20260922_013916",
     "name": "モニター台 ノートパソコンの選び方｜用途や設置条件に合うタイプを判断_OPP-054BE2F0A4E3_20260922_013916.md",
@@ -16807,14 +16809,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-26T16:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-26T17:49:14.067978+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0678f289-aa82-4e0f-bbde-acce76921493",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9d4a3c88130341ac855545a6477938a7",
     "title": "ノートpcスタンド クランプを選ぶ前に確認したい条件と考え方_OPP-A926B2F5180C_20260922_022446",
     "name": "ノートpcスタンド クランプを選ぶ前に確認したい条件と考え方_OPP-A926B2F5180C_20260922_022446.md",
@@ -16823,14 +16827,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-26T17:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-26T17:49:14.067978+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "407907c8-cf2d-4bf0-86c2-c7c5a535047e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3512184d81f84841a3204a73ef7d7712",
     "title": "モニター台の選び方｜設置条件に合うサイズを判断するポイント_OPP-75EFF8A7C035_20260922_020333",
     "name": "モニター台の選び方｜設置条件に合うサイズを判断するポイント_OPP-75EFF8A7C035_20260922_020333.md",
@@ -16839,10 +16845,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-26T18:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-26T17:49:14.067978+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c35115ee-cea0-4ad4-8103-e8965a1e4fca",
