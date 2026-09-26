@@ -16908,7 +16908,7 @@
   },
   {
     "id": "75c41a01-925a-4fec-afa5-8bf13c19c900",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc187c7c2a0b44857b33a132c18235a42",
     "title": "東芝 ER-S17ZB 電子レンジ レビュー比較まとめ",
     "name": "東芝 ER-S17ZB 電子レンジ レビュー比較まとめ.md",
@@ -16917,10 +16917,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-26T22:00:00.000Z",
     "createdAt": "2026-09-26T06:20:15.249Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-26T21:25:48.570872+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b70eee04-c6ab-4cb7-8135-0868e451b9cd",
