@@ -16890,7 +16890,7 @@
   },
   {
     "id": "137586dc-e311-40ab-8069-ee2501742209",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s83db7e95149c4e62a82093f73644838f",
     "title": "モニター台 卓上 折りたたみをどう選ぶ？条件別に違いを確認",
     "name": "モニター台 卓上 折りたたみをどう選ぶ？条件別に違いを確認_OPP-5CA8024000DC_20260921_232939.md",
@@ -16900,8 +16900,8 @@
     "publishAt": "2026-09-26T21:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
     "queuedAt": "2026-09-26T20:25:49.953289+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-26T21:02:09.005699+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n1d69517cd8c6?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
