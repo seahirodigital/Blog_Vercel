@@ -17034,7 +17034,7 @@
   },
   {
     "id": "14d9ae60-e894-4dee-836a-29ae8ad0a95b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s325323d92da247c5b9218140e623276b",
     "title": "リモートワーク モニター台の選び方｜用途や設置条件に合うタイプを判断_OPP-194DBB334B17_20260922_004811",
     "name": "リモートワーク モニター台の選び方｜用途や設置条件に合うタイプを判断_OPP-194DBB334B17_20260922_004811.md",
@@ -17043,10 +17043,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-27T17:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-27T16:25:46.408921+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "af73e2af-06b7-4c06-a985-b538caf48791",
