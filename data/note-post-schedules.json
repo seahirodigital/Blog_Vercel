@@ -17070,7 +17070,7 @@
   },
   {
     "id": "1cf0a405-6363-494b-ae61-f241bba5d709",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa7c26e0577be4539b5c211629802f63d",
     "title": "ケーブル収納 クランプをどう選ぶ？条件別に違いを確認_OPP-B84338F373BA_20260922_000408",
     "name": "ケーブル収納 クランプをどう選ぶ？条件別に違いを確認_OPP-B84338F373BA_20260922_000408.md",
@@ -17080,8 +17080,8 @@
     "publishAt": "2026-09-27T19:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
     "queuedAt": "2026-09-27T18:29:35.180334+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-27T19:02:09.251961+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nc47df36333f1?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
