@@ -17124,7 +17124,7 @@
   },
   {
     "id": "b0e71e80-bfab-43d4-8590-a91306236eaf",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!scabc07c79c2c4520be3aa40a32a0749b",
     "title": "スイッチボット SwitchBot ハブ3 レビュー比較まとめ",
     "name": "スイッチボット SwitchBot ハブ3 レビュー比較まとめ.md",
@@ -17133,10 +17133,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-27T22:00:00.000Z",
     "createdAt": "2026-09-26T06:20:15.249Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-27T21:25:01.075707+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bd11f134-f0e1-4598-8b9e-1b0be7ea2df2",
