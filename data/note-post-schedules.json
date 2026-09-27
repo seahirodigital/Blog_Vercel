@@ -16998,7 +16998,7 @@
   },
   {
     "id": "20e50a31-be7c-4ebe-b512-29e693098ab8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5d614a5aa360453394e2e695b35da3c3",
     "title": "ノートpcスタンド 折りたたみ おすすめを選ぶ前に確認したい条件と考え方_OPP-2D0BAFDE98CC_20260922_024024",
     "name": "ノートpcスタンド 折りたたみ おすすめを選ぶ前に確認したい条件と考え方_OPP-2D0BAFDE98CC_20260922_024024.md",
@@ -17007,10 +17007,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-27T15:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-27T14:25:42.196369+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a7f5a551-9cc0-4e9e-b18d-75a3e1b78a9f",
