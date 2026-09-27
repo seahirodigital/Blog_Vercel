@@ -17088,7 +17088,7 @@
   },
   {
     "id": "ff413250-faf1-477e-8398-59c422f27a82",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2f8affc533c34bdf9d04883f5995cb64",
     "title": "ノートpcスタンド usbハブをどう選ぶ？条件別に違いを確認_OPP-773861B56DF6_20260922_015809",
     "name": "ノートpcスタンド usbハブをどう選ぶ？条件別に違いを確認_OPP-773861B56DF6_20260922_015809.md",
@@ -17097,10 +17097,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-27T20:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-27T19:25:01.710876+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d93ec109-74d4-48b5-9db0-22bb513e8811",
