@@ -17016,7 +17016,7 @@
   },
   {
     "id": "a7f5a551-9cc0-4e9e-b18d-75a3e1b78a9f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc7ab1d1d15fe43ba978e4f7da560440e",
     "title": "ノートpcスタンド 固定を選ぶ前に確認したい条件と考え方_OPP-91829E79F1E5_20260922_021421",
     "name": "ノートpcスタンド 固定を選ぶ前に確認したい条件と考え方_OPP-91829E79F1E5_20260922_021421.md",
@@ -17025,10 +17025,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-27T16:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-27T15:25:43.983230+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "14d9ae60-e894-4dee-836a-29ae8ad0a95b",
