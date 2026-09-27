@@ -17052,7 +17052,7 @@
   },
   {
     "id": "af73e2af-06b7-4c06-a985-b538caf48791",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s96a56c6e287e4ab1a4926c172d23aaf4",
     "title": "ケーブル収納 安いで困りごとを解決するには？選ぶ条件を整理_OPP-96CC54BECBAD_20260922_010308",
     "name": "ケーブル収納 安いで困りごとを解決するには？選ぶ条件を整理_OPP-96CC54BECBAD_20260922_010308.md",
@@ -17062,8 +17062,8 @@
     "publishAt": "2026-09-27T18:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
     "queuedAt": "2026-09-27T17:25:49.966465+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-27T18:02:15.768787+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n160948cbc8b6?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
