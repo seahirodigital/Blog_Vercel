@@ -16980,7 +16980,7 @@
   },
   {
     "id": "06a324b7-b243-4fe7-9433-db38325aaa67",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3a2aca3be812413988d243180979d4dc",
     "title": "SALONIA(サロニア) スムースシャイン スマート ドライヤー レビュー比較まとめ",
     "name": "SALONIA(サロニア) スムースシャイン スマート ドライヤー レビュー比較まとめ.md",
@@ -16989,10 +16989,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-27T12:30:00.000Z",
     "createdAt": "2026-09-26T06:20:15.249Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-27T11:55:26.465079+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "20e50a31-be7c-4ebe-b512-29e693098ab8",
