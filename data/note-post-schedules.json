@@ -16944,7 +16944,7 @@
   },
   {
     "id": "48166667-6e19-466a-8bf5-25cea6317f48",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sc7725e31683a48f3900fa3f8793ff2ad",
     "title": "アイオーデータ GCFX ゲーミングモニター 24.5型 1ms (HDMIDPVESAチルト角調整) EX-GD251",
     "name": "アイオーデータ GCFX ゲーミングモニター 24.5型 1ms (HDMIDPVESAチルト角調整) EX-GD251.md",
@@ -16954,8 +16954,8 @@
     "publishAt": "2026-09-27T08:00:00.000Z",
     "createdAt": "2026-09-26T06:20:15.249Z",
     "queuedAt": "2026-09-27T07:25:42.043232+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-27T08:02:16.047196+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5a8e04a3dbf5?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
