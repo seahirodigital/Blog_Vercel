@@ -17268,7 +17268,7 @@
   },
   {
     "id": "861c242b-cbc1-462d-8680-82069d5685e3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!scecc6aa3f6634a5bbb3b86784cdbc4ec",
     "title": "ノートパソコンスタンド 折りたたみ式 ノートpcスタンドをどう選ぶ？条件別に違いを確認_OPP-B395EF83D29F_20260921_235949",
     "name": "ノートパソコンスタンド 折りたたみ式 ノートpcスタンドをどう選ぶ？条件別に違いを確認_OPP-B395EF83D29F_20260921_235949.md",
@@ -17277,10 +17277,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-28T18:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-28T17:25:12.465453+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d77f254c-8eec-4472-8a9f-b22a6b76077a",
