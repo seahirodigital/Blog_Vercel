@@ -17142,7 +17142,7 @@
   },
   {
     "id": "bd11f134-f0e1-4598-8b9e-1b0be7ea2df2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdf6760b923bf429db3e30d870d21ee35",
     "title": "Zinus BASIC レビュー比較まとめ",
     "name": "Zinus BASIC レビュー比較まとめ.md",
@@ -17151,10 +17151,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-28T02:30:00.000Z",
     "createdAt": "2026-09-26T06:20:15.249Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-28T01:55:11.523265+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "aeebc704-bd78-404f-89a1-eecf5820bb13",
