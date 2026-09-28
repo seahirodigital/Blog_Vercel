@@ -17250,7 +17250,7 @@
   },
   {
     "id": "83264639-fbcb-4375-b189-6c95b51efaaa",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sdff818557aa54cf99a07deac3d3a440a",
     "title": "昇降デスク ケーブル収納の選び方｜設置条件に合うサイズを判断するポイント_OPP-AC3C57D0E73E_20260922_004008",
     "name": "昇降デスク ケーブル収納の選び方｜設置条件に合うサイズを判断するポイント_OPP-AC3C57D0E73E_20260922_004008.md",
@@ -17260,8 +17260,8 @@
     "publishAt": "2026-09-28T17:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
     "queuedAt": "2026-09-28T16:25:20.493785+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-28T17:02:18.734304+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf1166e9a5514?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
