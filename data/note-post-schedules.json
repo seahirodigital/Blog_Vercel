@@ -17286,7 +17286,7 @@
   },
   {
     "id": "d77f254c-8eec-4472-8a9f-b22a6b76077a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3a811749da074403b679f85f20368f24",
     "title": "モニター台 机上台 幅100cm クランプ式 木製 ホワイトの選び方｜設置条件に合うサイズを判断するポイント",
     "name": "モニター台 机上台 幅100cm クランプ式 木製 ホワイトの選び方｜設置条件に合うサイズを判断するポイント_OPP-D8208B5A309C_20260917_133539.md",
@@ -17296,8 +17296,8 @@
     "publishAt": "2026-09-28T19:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
     "queuedAt": "2026-09-28T18:25:03.044083+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-28T19:02:20.842186+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n4b20aa6822ec?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
