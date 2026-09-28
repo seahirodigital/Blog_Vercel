@@ -17160,7 +17160,7 @@
   },
   {
     "id": "aeebc704-bd78-404f-89a1-eecf5820bb13",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s984647306fdf43d7b89c44352b11f46a",
     "title": "Xiaomi POCO M8 5G レビュー比較まとめ",
     "name": "Xiaomi POCO M8 + 日本語版 Simフリー スマートフォン レビュー比較まとめ.md",
@@ -17169,14 +17169,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-28T08:00:00.000Z",
     "createdAt": "2026-09-26T06:20:15.249Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-28T15:39:32.344158+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4eb51515-8790-4386-809c-ed8c37e31dc1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbb308bfc3bba48b1ba86faab6ddfca66",
     "title": "パナソニック TV-55A90B テレビ レビュー比較まとめ",
     "name": "パナソニック TV-55A90B テレビ レビュー比較まとめ.md",
@@ -17185,14 +17187,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-28T11:00:00.000Z",
     "createdAt": "2026-09-26T06:20:15.249Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-28T15:39:32.344158+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e9ef4943-38aa-42e0-9596-2d3c799e070f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc44c7652184d4c1d95a3998f8e81a642",
     "title": "パナソニック ラムダッシュPRO 電気シェーバー 5枚刃 お風呂剃り可 ES-NLV5X-K レビュー比較まとめ",
     "name": "パナソニック ラムダッシュPRO 電気シェーバー 5枚刃 お風呂剃り可 ES-NLV5X-K レビュー比較まとめ.md",
@@ -17201,14 +17205,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-28T12:30:00.000Z",
     "createdAt": "2026-09-26T06:20:15.249Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-28T15:39:32.344158+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4b596e71-d9a2-4f48-82b1-ea7328a5d5ae",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s872d350a2d034b81ad1139eb8700fc1a",
     "title": "ケーブル収納の選び方｜設置条件に合うサイズを判断するポイント_OPP-1675FAF92944_20260922_023521",
     "name": "ケーブル収納の選び方｜設置条件に合うサイズを判断するポイント_OPP-1675FAF92944_20260922_023521.md",
@@ -17217,14 +17223,16 @@
     "noTopImage": false,
     "publishAt": "2026-09-28T15:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-28T15:39:32.344158+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ed948a5e-fd3a-4ee1-a817-811ad302124e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2b7f560607d945f8b01529b852edaf62",
     "title": "モニター台 卓上 安いで困りごとを解決するには？選ぶ条件を整理_OPP-CAF95D91859A_20260922_005252",
     "name": "モニター台 卓上 安いで困りごとを解決するには？選ぶ条件を整理_OPP-CAF95D91859A_20260922_005252.md",
@@ -17233,10 +17241,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-28T16:00:00.000Z",
     "createdAt": "2026-09-23T04:45:47.209Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-28T15:39:32.344158+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "83264639-fbcb-4375-b189-6c95b51efaaa",
