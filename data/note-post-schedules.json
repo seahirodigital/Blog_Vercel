@@ -17340,7 +17340,7 @@
   },
   {
     "id": "04be0383-086f-43b3-b8d0-a6bb12d092c4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa0cfe0130a354b13bb61f266d74765f7",
     "title": "Dell S2725QC-A レビュー比較まとめ",
     "name": "Dell S2725QC-A レビュー比較まとめ.md",
@@ -17352,11 +17352,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:33.744Z"
   },
   {
     "id": "9b8079f4-f75c-488f-b4ec-2e263edec00d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3a46c35cdcf54163a889355403fd1321",
     "title": "Shark LC156JGY1 スティッククリーナー レビュー比較まとめ",
     "name": "Shark LC156JGY1 スティッククリーナー レビュー比較まとめ.md",
@@ -17368,11 +17369,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:33.744Z"
   },
   {
     "id": "9d66b21a-f4a2-4927-839a-f5f899d3aa9d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc27662a658aa4de1bc1a9f24bedd9f98",
     "title": "LIHILIS筋膜リリースガン レビュー比較まとめ",
     "name": "LIHILIS レビュー比較まとめ.md",
@@ -17384,7 +17386,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:33.744Z"
   },
   {
     "id": "4c37c5e1-2422-4092-8cd1-c8251b09ccfd",
