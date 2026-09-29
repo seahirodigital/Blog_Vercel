@@ -74,10 +74,6 @@ on:
     - cron: '55 2 18 10 *'
     - cron: '55 7 18 10 *'
     - cron: '55 12 18 10 *'
-    - cron: '55 19 18 10 *'
-    - cron: '55 1 19 10 *'
-    - cron: '55 6 19 10 *'
-    - cron: '55 11 19 10 *'
 
 jobs:
   dispatch-reserved-posts:
