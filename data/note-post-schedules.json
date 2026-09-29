@@ -17322,7 +17322,7 @@
   },
   {
     "id": "fb99ab7a-8b68-458a-8b2b-77b382722943",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb12ac727b824411eac2571fc162beb5c",
     "title": "レグザ 65Z570L テレビ レビュー比較まとめ",
     "name": "レグザ 65Z570L テレビ レビュー比較まとめ.md",
@@ -17331,10 +17331,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-29T02:30:00.000Z",
     "createdAt": "2026-09-26T06:20:15.249Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-29T01:55:31.505555+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "04be0383-086f-43b3-b8d0-a6bb12d092c4",
