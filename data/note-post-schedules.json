@@ -23743,7 +23743,7 @@
   },
   {
     "id": "9d28949d-4780-432e-9a7f-22c3a68d150a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0bc2ce88dfaa4d858199184c17427591",
     "title": "HiKOKI(ハイコーキ) WR18DH インパクトレンチ レビュー比較まとめ",
     "name": "HiKOKI(ハイコーキ) WR18DH インパクトレンチ レビュー比較まとめ.md",
@@ -23755,11 +23755,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "5479e92b-7a37-4894-b07e-8a8280978983",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbf797d80be744ffaa8e3e5caccf98c28",
     "title": "昭和西川 羽毛布団 レビュー比較まとめ",
     "name": "昭和西川 羽毛布団 レビュー比較まとめ.md",
@@ -23771,11 +23772,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "2ed4f9e4-e8dc-4a8b-a428-d48144c69081",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2218188f917149288953bacec28bcc3a",
     "title": "PORMIDOAUTO G10 レビュー比較まとめ",
     "name": "PORMIDOAUTO G10 レビュー比較まとめ.md",
@@ -23787,11 +23789,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "b2da8787-6ae3-436b-bc3e-d5feae9408b4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbd6d0d4dd7704d6fb7e71cbb13cf68c2",
     "title": "ORICO 5ベイ RAID ハードドライブ ー JMS591 ps USB en2x2 エンクロージャ レビュー比較ま",
     "name": "ORICO 5ベイ RAID ハードドライブ ー JMS591 ps USB en2x2 エンクロージャ レビュー比較ま.md",
@@ -23803,11 +23806,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "4a217c6f-b61b-4b7c-bdc6-7ba13d731962",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s57c25c9189694f6abdffe7fe2017a479",
     "title": "昭和西川 ドイツ産 ダック90％ セミダブルロング レビュー比較まとめ",
     "name": "昭和西川 ドイツ産 ダック90％ セミダブルロング レビュー比較まとめ.md",
@@ -23819,11 +23823,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "511193d3-4ed2-4c86-a290-5dd11a60208a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s41c544b7204944298dc1406dcb826078",
     "title": "PORMIDOAUTO レビュー比較まとめ",
     "name": "PORMIDOAUTO レビュー比較まとめ.md",
@@ -23835,11 +23840,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "870b1283-4d26-4fa4-bfde-80569b8332ef",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s38b24abf0ed34c2bbe3170fb151f963f",
     "title": "VENTOTA Larco ソファベッド レビュー比較まとめ",
     "name": "VENTOTA Larco ソファベッド レビュー比較まとめ.md",
@@ -23851,11 +23857,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "9b8f951d-a9e4-47f3-a77e-db553f9291e0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sdcac37db0458406aa8448f686780d895",
     "title": "ASUS ROG Falcata Gaming Keyboard レビュー比較まとめ",
     "name": "ASUS ROG Falcata Gaming Keyboard レビュー比較まとめ.md",
@@ -23867,11 +23874,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "7702403d-5585-451a-81ec-806cf5baabf4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sefbe3368b8934ae89ddafad8f8b8bcaa",
     "title": "FLEXISPOT Lotus リクライニングチェア ソファー レビュー比較まとめ",
     "name": "FLEXISPOT Lotus リクライニングチェア ソファー レビュー比較まとめ.md",
@@ -23883,11 +23891,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "a89b9477-9201-45f4-aa1a-c09177ecf8fa",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfd4537165e4d4aa4a30476aa16735dff",
     "title": "PHILIPS (フィリップス) PUH7231 テレビ レビュー比較まとめ",
     "name": "PHILIPS (フィリップス) PUH7231 テレビ レビュー比較まとめ.md",
@@ -23899,11 +23908,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "a9f511f7-b750-4f3f-adc0-f2009d7db9d1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sec582fe6d98844a4aa8afd71a28216fc",
     "title": "HiKOKI CB12-ST2 レビュー比較まとめ",
     "name": "HiKOKI CB12-ST2 レビュー比較まとめ.md",
@@ -23915,11 +23925,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "442ffac3-c3d7-4112-ba42-971062a916df",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s766bcd6f6c0e4fc2adcbfe565c2f552f",
     "title": "ベルメゾン フロアソファー グータラグ シングルコーナータイプ ラグが洗える ローソファ カウチ ソファ・カウチ レビュ",
     "name": "ベルメゾン フロアソファー グータラグ シングルコーナータイプ ラグが洗える ローソファ カウチ ソファ・カウチ レビュ.md",
@@ -23931,11 +23942,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "3dac86b1-c943-4ac6-857f-fb72bdb9c822",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbd6d0d4dd7704d6fb7e71cbb13cf68c2",
     "title": "ORICO 5ベイ RAID ハードドライブ ー JMS591 ps USB en2x2 エンクロージャ レビュー比較ま",
     "name": "ORICO 5ベイ RAID ハードドライブ ー JMS591 ps USB en2x2 エンクロージャ レビュー比較ま.md",
@@ -23947,11 +23959,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "79811eb9-2020-4bc0-9a82-75627b13d61c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbf63607a33eb418db029dcde105d6394",
     "title": "FUNROLUX 折りたたみダイニングテーブル 4人 伸長式 バタフライテーブル 4椅子付き可動式 引き出しと収納付き",
     "name": "FUNROLUX 折りたたみダイニングテーブル 4人 伸長式 バタフライテーブル 4椅子付き可動式 引き出しと収納付き.md",
@@ -23963,11 +23976,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "998e4622-a2e2-4a93-bd89-fefbf1eb3d1d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa5e8b41f11ec4cb2abd4927653719849",
     "title": "HiKOKI No.153(全長250ｍｍ)(50枚入) レビュー比較まとめ",
     "name": "HiKOKI No.153(全長250ｍｍ)(50枚入) レビュー比較まとめ.md",
@@ -23979,11 +23993,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "496b9843-27cf-45ed-8bb0-da8faaa62dae",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sefb3728a02d9458fae7b7102a5cb325c",
     "title": "Insta360 Mic Pro（送信機2台＋受信機1台＋充電ケース） レビュー比較まとめ",
     "name": "Insta360 Mic Pro（送信機2台＋受信機1台＋充電ケース） レビュー比較まとめ.md",
@@ -23995,11 +24010,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "1d3f045e-d726-46eb-9630-c29ff8118227",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbf797d80be744ffaa8e3e5caccf98c28",
     "title": "昭和西川 羽毛布団 レビュー比較まとめ",
     "name": "昭和西川 羽毛布団 レビュー比較まとめ.md",
@@ -24011,11 +24027,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "262d791e-1877-44ec-9afd-1bb991c3918c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s003563c5719c4deb8dcfc68435a7777a",
     "title": "ベルメゾン グータラグ メルトロ チャコール 大 厚さ ソファ・カウチ レビュー比較まとめ",
     "name": "ベルメゾン グータラグ メルトロ チャコール 大 厚さ ソファ・カウチ レビュー比較まとめ.md",
@@ -24027,11 +24044,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "3c26064f-6632-451b-bb78-dc78ce4b8e4c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb94d5c26021c4472abd13afa80597da4",
     "title": "HiKOKI 36V 充電式 集じん丸のこ C3605DYB( ) レビュー比較まとめ",
     "name": "HiKOKI 36V 充電式 集じん丸のこ C3605DYB( ) レビュー比較まとめ.md",
@@ -24043,11 +24061,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "ae2cf48f-846c-4bf1-afa8-0d3b3d189024",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7f08cd49d9c543499a3c1f0ff8713ff2",
     "title": "YESKAMOO レビュー比較まとめ",
     "name": "YESKAMOO レビュー比較まとめ.md",
@@ -24059,11 +24078,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "20b467bd-6219-4133-a51c-3c138e3c0820",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb39dfe4770bc4e0bb9e20b7877aa8bcc",
     "title": "Samsung Samsung Galaxy Watch8 スマートウォッチ レビュー比較まとめ",
     "name": "Samsung Samsung Galaxy Watch8 スマートウォッチ レビュー比較まとめ.md",
@@ -24075,11 +24095,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "38518911-f264-453f-ae85-d0bbd628ff36",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb598e8c441a34a258db2465aa2d1b140",
     "title": "サンワダイレクト 業務用 400-PSD073BK レビュー比較まとめ",
     "name": "サンワダイレクト 業務用 400-PSD073BK レビュー比較まとめ.md",
@@ -24091,11 +24112,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "b7ff2d2a-96c5-4f6e-aa34-8a459ae74f91",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s57d04833b3f74d6cb39f8a51f99f1aee",
     "title": "HiKOKI No.143(全長250ｍｍ)(50枚入) レビュー比較まとめ",
     "name": "HiKOKI No.143(全長250ｍｍ)(50枚入) レビュー比較まとめ.md",
@@ -24107,11 +24129,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "8bd9e14c-c945-4702-92ff-856cff0de119",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4fa60876599c4c01b3d3e30f710b9fe9",
     "title": "ル・クルーゼ 鋳物 ホーロー 鍋 ココット・ロンド 鋳物ホーロー鍋 レビュー比較まとめ",
     "name": "ル・クルーゼ 鋳物 ホーロー 鍋 ココット・ロンド 鋳物ホーロー鍋 レビュー比較まとめ.md",
@@ -24123,11 +24146,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "b6487197-1453-4e4b-836a-748206e3d78f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sae4f3e5a11104ee28537b576dba3382b",
     "title": "Withings ScanWatch Vitals ハイブリッドスマートウォッチ レビュー比較まとめ",
     "name": "Withings ScanWatch Vitals ハイブリッドスマートウォッチ レビュー比較まとめ.md",
@@ -24139,11 +24163,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "abb75c99-52fc-4eca-b34f-e0e565f260f7",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa5e8b41f11ec4cb2abd4927653719849",
     "title": "HiKOKI No.153(全長250ｍｍ)(50枚入) レビュー比較まとめ",
     "name": "HiKOKI No.153(全長250ｍｍ)(50枚入) レビュー比較まとめ.md",
@@ -24155,11 +24180,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "3202ed48-fa18-44e5-9ab2-803963f10ecc",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3cbbca2cea1c46e3b3efbd231fef4c27",
     "title": "VOICE Model-G5 レーザー墨出し器 レビュー比較まとめ",
     "name": "VOICE Model-G5 レーザー墨出し器 レビュー比較まとめ.md",
@@ -24171,11 +24197,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "ef8b9181-c1fb-4496-ad09-db8d0254ce09",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s26ba616b5e894a87ab541f9a32fcfe0e",
     "title": "ATOTO S en4 S 211P-S01 レビュー比較まとめ",
     "name": "ATOTO S en4 S 211P-S01 レビュー比較まとめ.md",
@@ -24187,11 +24214,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "435c560c-d444-4b89-95eb-abf60d49bac7",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s21a27eb9bb6e4db7841261ad8e3b1370",
     "title": "ヒツジのいらない枕 ヒツジのいらないマットレス ーSLEEPERー セミダブル レビュー比較まとめ",
     "name": "ヒツジのいらない枕 ヒツジのいらないマットレス ーSLEEPERー セミダブル レビュー比較まとめ.md",
@@ -24203,11 +24231,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "7f6a0cde-9efa-4fdc-a52f-76a6f860fafa",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scf6b481ba7644e139dd5cdab837aa2c3",
     "title": "ガーデンマスター(Gardenmaster) DSLB-1515 物置 屋外 収納庫 レビュー比較まとめ",
     "name": "ガーデンマスター(Gardenmaster) DSLB-1515 物置 屋外 収納庫 レビュー比較まとめ.md",
@@ -24219,11 +24248,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "76a999c2-0444-40ab-8a63-e3a91ba9099d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s26ba616b5e894a87ab541f9a32fcfe0e",
     "title": "ATOTO S en4 S 211P-S01 レビュー比較まとめ",
     "name": "ATOTO S en4 S 211P-S01 レビュー比較まとめ.md",
@@ -24235,11 +24265,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "4f85f896-875f-4d1e-b550-f01a671d59ea",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa8555212701b4da6855aebde46b8d55e",
     "title": "ガーデンマスター(Gardenmaster) DSLB-1515K レビュー比較まとめ",
     "name": "ガーデンマスター(Gardenmaster) DSLB-1515K レビュー比較まとめ.md",
@@ -24251,11 +24282,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "4061568f-f059-4370-8ea8-d4ac7c21c3c2",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sdcac37db0458406aa8448f686780d895",
     "title": "ASUS ROG Falcata Gaming Keyboard レビュー比較まとめ",
     "name": "ASUS ROG Falcata Gaming Keyboard レビュー比較まとめ.md",
@@ -24267,11 +24299,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "543c648c-0338-4bad-b0c4-feeb4e2e52a6",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sce31efc2addb4a4faca5eb77f4c9e31f",
     "title": "HiKOKI WR36DE(2XPSZ) インパクトレンチ レビュー比較まとめ",
     "name": "HiKOKI WR36DE(2XPSZ) インパクトレンチ レビュー比較まとめ.md",
@@ -24283,11 +24316,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "0dc2517b-fd09-4fc8-ad9f-7ea9a7ae91a4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s56c9d97c370e47c99e8214b962669c50",
     "title": "HUAWEI WATCH GT 6 Pro スマートウォッチ レビュー比較まとめ",
     "name": "HUAWEI WATCH GT 6 Pro スマートウォッチ レビュー比較まとめ.md",
@@ -24299,11 +24333,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "d898120e-3854-401d-ad06-37b381d48d36",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s49ab1abc4d534647b8272b517d050604",
     "title": "サンワダイレクト 400-PSD037 電動 シュレッダー 業務用 大容量 40L レビュー比較まとめ",
     "name": "サンワダイレクト 400-PSD037 電動 シュレッダー 業務用 大容量 40L レビュー比較まとめ.md",
@@ -24315,11 +24350,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "2ee57b58-455d-43cc-b1ca-69017ba4d7cc",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd068066b626d48e8a3f0af822f1ceb27",
     "title": "Ledlenser H Signatureシリーズ LEDヘッドライト レビュー比較まとめ",
     "name": "Ledlenser H Signatureシリーズ LEDヘッドライト レビュー比較まとめ.md",
@@ -24331,11 +24367,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "703abf1c-2cc8-4ca4-9a14-91ca30bcef2c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!seb59004134404d15aa6f86106912b9fc",
     "title": "イーサプライ EEX-TVS042BK テレビ レビュー比較まとめ",
     "name": "イーサプライ EEX-TVS042BK テレビ レビュー比較まとめ.md",
@@ -24347,11 +24384,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "628abe8d-3296-49df-bd6a-13a2824b6b60",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se3e463d688dd4625907d963b7c9e06a9",
     "title": "ガーデンマスター(Gardenmaster) DSLB-1515K 物置 屋外 収納庫 レビュー比較まとめ",
     "name": "ガーデンマスター(Gardenmaster) DSLB-1515K 物置 屋外 収納庫 レビュー比較まとめ.md",
@@ -24363,11 +24401,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "5fe5bc97-2691-4a35-a953-3f24665f4fa3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s343911f59ad54d4b9435a77ea56c551d",
     "title": "HOKUTO HB-50EM 防湿庫・ドライボックス レビュー比較まとめ",
     "name": "HOKUTO HB-50EM 防湿庫・ドライボックス レビュー比較まとめ.md",
@@ -24379,11 +24418,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "73733f5b-b020-4ff6-8085-cf9d12a4fba6",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s09175ee3b492427f98a38ebdc549b04b",
     "title": "ポーミド PRD81C-1 レビュー比較まとめ",
     "name": "ポーミド PRD81C-1 レビュー比較まとめ.md",
@@ -24395,11 +24435,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "2c337a84-c0f6-4d42-b656-993892035bf6",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd6c6370d566141b68fde01001be5c239",
     "title": "HiKOKI WF4HS レビュー比較まとめ",
     "name": "HiKOKI WF4HS レビュー比較まとめ.md",
@@ -24411,11 +24452,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "c21e30e4-d7db-4a09-8da2-8f40b5b4204c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!see6e488b79e0415f83de13267773ac2c",
     "title": "サンワダイレクト 400-PSD029 電動 シュレッダー 業務用 レビュー比較まとめ",
     "name": "サンワダイレクト 400-PSD029 電動 シュレッダー 業務用 レビュー比較まとめ.md",
@@ -24427,11 +24469,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "1191d326-2b59-4ea7-96a6-71d3e1a4a5d3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7e6ba22a2b1a40228b017dc066b18012",
     "title": "雲のやすらぎ プレミアム 三つ折りマットレス セミダブル レビュー比較まとめ",
     "name": "雲のやすらぎ プレミアム 三つ折りマットレス セミダブル レビュー比較まとめ.md",
@@ -24443,11 +24486,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "1c3dec7a-f511-4e52-bdf2-886bb60c921d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd6c6370d566141b68fde01001be5c239",
     "title": "HiKOKI WF4HS レビュー比較まとめ",
     "name": "HiKOKI WF4HS レビュー比較まとめ.md",
@@ -24459,11 +24503,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "4f4fce4a-a295-4395-8dd3-f3e3b36b741d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4a4053b158db4a8c91ae1dd1bc5b3da9",
     "title": "Wacom Intuos Pro medium TPTK670K0C ペンタブレット レビュー比較まとめ",
     "name": "Wacom Intuos Pro medium TPTK670K0C ペンタブレット レビュー比較まとめ.md",
@@ -24475,11 +24520,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "76a943cd-d4ba-407d-8a60-5c4adba66c39",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s766bcd6f6c0e4fc2adcbfe565c2f552f",
     "title": "ベルメゾン フロアソファー グータラグ シングルコーナータイプ ラグが洗える ローソファ カウチ ソファ・カウチ レビュ",
     "name": "ベルメゾン フロアソファー グータラグ シングルコーナータイプ ラグが洗える ローソファ カウチ ソファ・カウチ レビュ.md",
@@ -24491,11 +24537,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "57cb4a16-9498-42a7-bb1f-818dd9318496",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!see6e488b79e0415f83de13267773ac2c",
     "title": "サンワダイレクト 400-PSD029 電動 シュレッダー 業務用 レビュー比較まとめ",
     "name": "サンワダイレクト 400-PSD029 電動 シュレッダー 業務用 レビュー比較まとめ.md",
@@ -24507,11 +24554,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "e7c90817-5d31-463f-b0f7-3ed16136f570",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scc0b2c67b62a417d92900edda448fe7f",
     "title": "LIXIL(リクシル) INAX シャワートイレ RAシリーズ 瞬間式 工事不要 CW-RAA20 BN8 温水洗浄便座",
     "name": "LIXIL(リクシル) INAX シャワートイレ RAシリーズ 瞬間式 工事不要 CW-RAA20 BN8 温水洗浄便座.md",
@@ -24523,11 +24571,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "9f6f5275-1854-42ac-a50b-21acb7dc2772",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd40ff5dd45754926ad83aed904811120",
     "title": "バッファロー おもいでばこ 有線 Giga LAN エントリーモデル PD-2000E-L レビュー比較まとめ",
     "name": "バッファロー おもいでばこ 有線 Giga LAN エントリーモデル PD-2000E-L レビュー比較まとめ.md",
@@ -24539,11 +24588,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "f0ff197f-2c49-447f-83a4-4983e5ff2dcb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s58587084095b493d9b20f42db48b5975",
     "title": "アイリスオーヤマ BPS-30210 人工芝 レビュー比較まとめ",
     "name": "アイリスオーヤマ BPS-30210 人工芝 レビュー比較まとめ.md",
@@ -24555,11 +24605,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   },
   {
     "id": "a7ad52f3-c520-4ffa-bbb4-0eeb4fc60c00",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa9b13f07efec4cc2bebc1f23ece06e44",
     "title": "HiKOKI AW18DBL(LXPZ) レビュー比較まとめ",
     "name": "HiKOKI AW18DBL(LXPZ) レビュー比較まとめ.md",
@@ -24571,6 +24622,7 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:42.597Z"
   }
 ]
