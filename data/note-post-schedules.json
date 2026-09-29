@@ -10736,7 +10736,7 @@
   },
   {
     "id": "fa52785e-f556-46f6-b623-70aeb5a47ed5",
-    "status": "queued",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s87a745e5e2804b4da118200b84bdcb70",
     "title": "Elgato Stream Deck+ レビュー比較まとめ",
     "name": "Elgato SM7BHyperX PS5Pro 8K60 Stream Deck レビュー比較まとめ.md",
@@ -10750,11 +10750,12 @@
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 2
+    "dispatchAttempts": 2,
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "bb0ee99f-5282-4835-a1b6-1009cb58556f",
-    "status": "queued",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa2f57869fe65409ba8773c37be09a8ec",
     "title": "TOSHIBA(東芝) コードレス スティック掃除機 強力パワー持続 軽量 サイ レビュー比較まとめ",
     "name": "東芝 VC-CLX52 スティッククリーナー レビュー比較まとめ.md",
@@ -10768,7 +10769,8 @@
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 2
+    "dispatchAttempts": 2,
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "e8b23d99-82f3-4b5f-8fbf-aad9a92e920e",
@@ -17391,7 +17393,7 @@
   },
   {
     "id": "4c37c5e1-2422-4092-8cd1-c8251b09ccfd",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se3a01f4765934abb9e9981457f1ff837",
     "title": "Logicool G ハンコン G923 グランツーリスモ7 Forza Horizon 6 レビュー比較まとめ",
     "name": "Logicool G ハンコン G923 グランツーリスモ7 Forza Horizon 6 レビュー比較まとめ.md",
@@ -17403,11 +17405,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "986f0aef-c4ef-4741-8e86-00711214727a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s51a199c499684c9aa3e4eb0290575ed4",
     "title": "SanDisk SSD外付けSDSSDE61-2T00-GH25 エクストリーム レビュー比較まとめ",
     "name": "SanDisk SDSSDE61-2T00-GH25 エクストリーム レビュー比較まとめ.md",
@@ -17419,11 +17422,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "1a1d1583-6096-4315-b194-65d2c55e2614",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s851a1f4280294797b3866f00ae4a756f",
     "title": "オーディオテクニカ AT-UMX3 USB オーディオミキサー オーディオインターフェース レビュー比較まとめ",
     "name": "Audio Technica(オーディオテクニカ) AT-UMX3 USB オーディオミキサー オーディオインターフェー.md",
@@ -17435,11 +17439,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "a3207421-8876-4627-9617-46530223da59",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb7de9e6bd7744fe1b034f3d99934bbef",
     "title": "YAMAHA Pシリーズ 88鍵盤 P-45B 電子ピアノ レビュー比較まとめ",
     "name": "YAMAHA Pシリーズ 88鍵盤 P-45B 電子ピアノ レビュー比較まとめ.md",
@@ -17451,11 +17456,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "689e9136-5ad1-41be-aa68-a5043245aac5",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0e06fd63aa094e85a138c1c2c302d142",
     "title": "エレコム EC-AC104100BK レビュー比較まとめ",
     "name": "エレコム EC-AC104100BK レビュー比較まとめ.md",
@@ -17467,11 +17473,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "b5c7d151-c603-442c-a746-8e42e1a1b469",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc73c8a18312443c99a5d8a5be4a1fb05",
     "title": "Dell S2425HSM-A モニター レビュー比較まとめ",
     "name": "Dell S2425HSM-A モニター レビュー比較まとめ.md",
@@ -17483,11 +17490,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "5f22ee57-e662-43ba-82e7-4d471877bc08",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s16672aad35e64c54a552cf6e41211732",
     "title": "Braun 8560cc レビュー比較まとめ",
     "name": "Braun 8560cc レビュー比較まとめ.md",
@@ -17499,11 +17507,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "8a699c6b-615f-4ca2-9026-535b5bac0b8a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5344c87e9d0747e09f485c7f81d3bc41",
     "title": "スイッチボット SwitchBot ハブ3 スマートリモコン Alexa対応 - 赤外線家電管理 モニター スイッチボット レビュー比較まとめ",
     "name": "スイッチボット SwitchBot ハブ3 スマートリモコン Alexa対応 - 赤外線家電管理 モニター スイッチボッ.md",
@@ -17515,11 +17524,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "86bc6dc6-2207-46e9-a982-d51bf67d57b0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc43e6f271233467ab324f65c2a243959",
     "title": "SHOKZ OpenDots ONE イヤホン レビュー比較まとめ",
     "name": "SHOKZ OpenDots ONE イヤホン レビュー比較まとめ.md",
@@ -17531,11 +17541,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "2c8750a5-f17e-40e8-a61e-389abfd1ff10",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sff83cf577b784def8df13fa472aa97b3",
     "title": "東芝 SCS-T162(N) レビュー比較まとめ",
     "name": "東芝 SCS-T162(N) レビュー比較まとめ.md",
@@ -17547,11 +17558,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "2e13445e-707e-4dfc-b0b6-353a54724f89",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s223929f523854c349c0f1242e09ab0b1",
     "title": "東芝 RC-5ZXT(W) 炊飯器 レビュー比較まとめ",
     "name": "東芝 RC-5ZXT(W) 炊飯器 レビュー比較まとめ.md",
@@ -17563,11 +17575,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "7fd55250-22a4-4274-82e0-d4ea9e4eb2eb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s421a80490451406ca3be266d7a8d2e7e",
     "title": "dreame (ドリーミー) T16 乾湿両用 レビュー比較まとめ",
     "name": "dreame (ドリーミー) T16 乾湿両用 レビュー比較まとめ.md",
@@ -17579,11 +17592,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "6b07356c-5c79-45e3-abd3-dcf486d3d20c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!see861338c94941cf9b4f5e22cbb7a56d",
     "title": "アイオーデータ EX-A241DB レビュー比較まとめ",
     "name": "アイオーデータ EX-A241DB レビュー比較まとめ.md",
@@ -17595,11 +17609,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "6f03630d-7928-423e-98c7-f80d8035d151",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sba430756ceae4a5eaa05f6f320dc7278",
     "title": "BOSE Bose QuietComfort Ultra Headphones（第2世代） オーバーイヤー型 ヘッドホン",
     "name": "BOSE Bose QuietComfort Ultra Headphones（第2世代） オーバーイヤー型 ヘッドホン.md",
@@ -17611,11 +17626,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "11fc52be-6c5e-4fa2-b9df-2714abd75d78",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s36cea05a7b4d40dcb6261a28ca3ff138",
     "title": "スイッチボット SwitchBot CO2センサー レビュー比較まとめ",
     "name": "スイッチボット SwitchBot CO2センサー レビュー比較まとめ.md",
@@ -17627,11 +17643,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "d637344b-2b5b-41a4-a868-6e3b69f7db8a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s692b184f622e4cc98cc53390570ebce0",
     "title": "JBL FLIP 7 ポータブルスピーカー レビュー比較まとめ",
     "name": "JBL FLIP 7 ポータブルスピーカー レビュー比較まとめ.md",
@@ -17643,11 +17660,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "c8fcc5af-1598-4635-9471-af760cd53c34",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s16b122ccd53840acb8b4fb62bd311707",
     "title": "SALONIA(サロニア) EMS リフトブラシ & ピュアブライト スチーマー セット レビュー比較まとめ",
     "name": "SALONIA(サロニア) EMS リフトブラシ & ピュアブライト スチーマー セット レビュー比較まとめ.md",
@@ -17659,11 +17677,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "585f961b-d8c7-4d02-98fc-512d9ce60a01",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s39a4ed129fc14bb0a0720580fec935bd",
     "title": "パナソニック N-100D23L/C8 CAOS 標準車(充電制御車)用 レビュー比較まとめ",
     "name": "パナソニック N-100D23LC8 CAOS 標準車(充電制御車)用 レビュー比較まとめ.md",
@@ -17675,11 +17694,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "ad17855c-7875-4312-8d47-2d5c0d0ee3d8",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa8fdf5ca4742474ba26d134c04907817",
     "title": "TOUR BOX TourBox NEO レビュー比較まとめ",
     "name": "TOUR BOX TourBox NEO レビュー比較まとめ.md",
@@ -17691,11 +17711,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "8a7890b8-2d6d-4317-8351-2e84561ae0c5",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s97830a5138bf42f389807d1b1357641b",
     "title": "Braun シルクエキスパート Pro5 PL5387 脱毛器 レビュー比較まとめ",
     "name": "Braun シルクエキスパート Pro5 PL5387 脱毛器 レビュー比較まとめ.md",
@@ -17707,11 +17728,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "e875d89e-f796-4a96-b05a-c87e95dd7092",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sdabfe5f7a6994fc3b25cc48d6e7571d9",
     "title": "ハイパーエックス HyperX SoloCast 2 コンデンサーマイク レビュー比較まとめ",
     "name": "ハイパーエックス HyperX SoloCast 2 コンデンサーマイク レビュー比較まとめ.md",
@@ -17723,11 +17745,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "fd00fa67-a441-4b5d-9d3c-a0738f8df180",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5d9bce6d6e814e2fae74c6d1979942d8",
     "title": "De'Longhi マグニフィカS ECAM22112B コーヒーメーカー レビュー比較まとめ",
     "name": "De'Longhi マグニフィカS ECAM22112B コーヒーメーカー レビュー比較まとめ.md",
@@ -17739,11 +17762,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "d4908c1a-27c1-4560-b2c5-9eba7f200076",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s98097c310a074c8d82dd21c51fa7021e",
     "title": "キヤノン TS5630 レビュー比較まとめ",
     "name": "キヤノン TS5630 レビュー比較まとめ.md",
@@ -17755,11 +17779,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "7234266d-06f7-49bd-bd0c-a4f4c0463c75",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!seabe1580339c4eeeb181a54309d54a13",
     "title": "東芝 ER-S17ZB (K) 電子レンジ レビュー比較まとめ",
     "name": "東芝 ER-S17ZB (K) 電子レンジ レビュー比較まとめ.md",
@@ -17771,11 +17796,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "5fa2ba4c-f12c-4897-9c1c-6b5df965f46e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb445211df3ad4049a5f834a26dbb6dae",
     "title": "タイガー魔法瓶 JPI-A100 KO レビュー比較まとめ",
     "name": "タイガー魔法瓶 JPI-A100 KO レビュー比較まとめ.md",
@@ -17787,11 +17813,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "4f5950fd-5232-48d4-845b-5ce248718eff",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s898a17d699ea4a96b7355ef94b22507e",
     "title": "ハイパーエックス HyperX Cloud III 有線 ゲーミング ドライバー搭載 727A8AA ヘッドセット レビ",
     "name": "ハイパーエックス HyperX Cloud III 有線 ゲーミング ドライバー搭載 727A8AA ヘッドセット レビ.md",
@@ -17803,11 +17830,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "c366e785-19ec-4fcf-8f96-4398b2733459",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7da95d48a3e34390bea2220c10f1a549",
     "title": "スイッチボット K20+Pro ロボット掃除機 レビュー比較まとめ",
     "name": "スイッチボット K20+Pro ロボット掃除機 レビュー比較まとめ.md",
@@ -17819,11 +17847,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "fefdd1d1-5666-487f-bfc8-bc892de2650a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3f56287e53364feb88089506545e7d8b",
     "title": "BOSE Bose QuietComfort SC Headphones レビュー比較まとめ",
     "name": "BOSE Bose QuietComfort SC Headphones レビュー比較まとめ.md",
@@ -17835,11 +17864,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "4d34b4ba-8e96-4e75-957f-db40ba86b6ae",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s13541a16b69a4228b4d638e3d6768d4a",
     "title": "Dyson V8 Fluffy スティック +Up-top adaptor アップトップアダプター 掃除機 レビュー比較まとめ",
     "name": "Dyson V8 Fluffy スティック +Up-top adaptor アップトップアダプター 掃除機 レビュー比較.md",
@@ -17851,11 +17881,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "8188a484-8118-4e96-bedb-cc47c814ca67",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb8ce66b2032340c985a53f612670b24d",
     "title": "Shark LC350JWH スティッククリーナー レビュー比較まとめ",
     "name": "Shark LC350JWH スティッククリーナー レビュー比較まとめ.md",
@@ -17867,11 +17898,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "7e9f2d86-5134-4317-80e7-29ce0878b505",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8b7c88bab88e492b97227b2f624098fc",
     "title": "パナソニック SR-CR10Z1-K レビュー比較まとめ",
     "name": "パナソニック SR-CR10Z1-K レビュー比較まとめ.md",
@@ -17883,11 +17915,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f510cae8-71be-494e-be68-2b027045584a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2f28ad0b0ac647e085023b5000cdeef9",
     "title": "Insta360 Ace Pro 2 クリエイターキット（新型） アクションカメラ レビュー比較まとめ",
     "name": "Insta360 Ace Pro 2 クリエイターキット（新型） アクションカメラ レビュー比較まとめ.md",
@@ -17899,11 +17932,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "21bd9f81-8cec-41a7-aae7-3789353a753e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s90021c7fc48440fb90f628578a8fa02d",
     "title": "Dabbsson Charger S 2000L レビュー比較まとめ",
     "name": "Dabbsson Charger S 2000L レビュー比較まとめ.md",
@@ -17915,11 +17949,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "3ca43f2e-83cf-41a5-a717-6d27b14d6056",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s91cdbbb161cc4ce6b9781dc0f1e5b6f5",
     "title": "HiKOKI UL18DD 冷温庫 レビュー比較まとめ",
     "name": "HiKOKI UL18DD 冷温庫 レビュー比較まとめ.md",
@@ -17931,11 +17966,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "9b3d50ba-bf05-4e03-95ec-ede1e8a5f306",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s563295fb3fdd4e319e402e4072ab0d2a",
     "title": "シモンズ マットレス セミダブル ポケットコイル ユーロトップ仕様 硬さミディアム 日本製 AB24A10 レビュー比較",
     "name": "シモンズ マットレス セミダブル ポケットコイル ユーロトップ仕様 硬さミディアム 日本製 AB24A10 レビュー比較.md",
@@ -17947,11 +17983,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f380778c-4055-4a9e-a92b-8aff2a760aa1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9e43e31efaf54bc2979afb9abd941ab6",
     "title": "Pure Luxe 食器棚 レビュー比較まとめ",
     "name": "Pure Luxe 食器棚 レビュー比較まとめ.md",
@@ -17963,11 +18000,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "e169d727-f98f-4bde-a18e-749ca9c0b103",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3de0ba4636f9404ebba6e632b906e1e2",
     "title": "JESIMAIK JM6000XiE 発電機 レビュー比較まとめ",
     "name": "JESIMAIK JM6000XiE 発電機 レビュー比較まとめ.md",
@@ -17979,11 +18017,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "a6178df1-92d1-425f-a33c-e500f09f8c19",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!saed11d5289b04a5886452c6cce37f83e",
     "title": "JESIMAIK JM2400iS 発電機 レビュー比較まとめ",
     "name": "JESIMAIK JM2400iS 発電機 レビュー比較まとめ.md",
@@ -17995,11 +18034,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "1ba403c8-eea7-42eb-940e-78050c849d4a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc39165db0eb140848f421bd86c5202f2",
     "title": "【神コスパ】AVIOT TE-W2 ＆ ピヤホンシリーズ第10弾「TE-W2-PNK」徹底比較レビュー！24K純金振動板",
     "name": "20260927_1159_【神コスパ】AVIOT TE-W2 ＆ ピヤホンシリーズ第10弾「TE-W2-PNK」徹底比較レビュー！24K純金振動板.md",
@@ -18011,11 +18051,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "94334b91-f9b9-426e-ae86-254b3c98b4b3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s90e47521711d4ce7b1c206ac47be741e",
     "title": "シモンズ マットレス ポケットコイル ユーロトップ仕様 硬さ 日本製 AB24A10 レビュー比較まとめ",
     "name": "シモンズ マットレス ポケットコイル ユーロトップ仕様 硬さ 日本製 AB24A10 レビュー比較まとめ.md",
@@ -18027,11 +18068,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "29beddc5-5946-476a-ad7c-0ede4c32b0bb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8e3699444543431faec5854f301fed3b",
     "title": "Jackery ポータブル電源 2000 New レビュー比較まとめ",
     "name": "Jackery ポータブル電源 2000 New レビュー比較まとめ.md",
@@ -18043,11 +18085,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "8c17d4d2-cdc7-478f-81d5-4b86fba1d12e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf2320dafa5774f4cad257b9df6582cd6",
     "title": "ブレインスリープ コンフォーター パーフェクト ウォーム EX ダブル 2025年モデル 掛け布団 布団 レビュー比較ま",
     "name": "ブレインスリープ コンフォーター パーフェクト ウォーム EX ダブル 2025年モデル 掛け布団 布団 レビュー比較ま.md",
@@ -18059,11 +18102,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "b887fc98-0793-4b58-a6dc-e0d69eb13239",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s75f5124cb5a84bfd9ee2254fd7d234a9",
     "title": "EastForce MONSTER LUMBIRT2.0 デスクチェア レビュー比較まとめ",
     "name": "EastForce MONSTER LUMBIRT2.0 デスクチェア レビュー比較まとめ.md",
@@ -18075,11 +18119,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f3f7c8b2-6eed-43cd-8289-3517328f2d23",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s565d42afc87e43b4be38a7635c6ba8c1",
     "title": "H.VIEW 防犯カメラ 4台セット 屋内・屋外 PoE有線 800万画素 バレット型 デュアルライト 4K8MP 8C",
     "name": "H.VIEW 防犯カメラ 4台セット 屋内・屋外 PoE有線 800万画素 バレット型 デュアルライト 4K8MP 8C.md",
@@ -18091,11 +18136,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "be0f4dec-e4ee-454c-a0a3-97347674804c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf902d7927bf24baaa2f429d6cffcb4c8",
     "title": "koala CUSHY レビュー比較まとめ",
     "name": "koala CUSHY レビュー比較まとめ.md",
@@ -18107,11 +18153,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "ce713f08-4628-4101-bfed-47db42da19e8",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd59889dc690640e4a392d93a02c4dde1",
     "title": "GSEICE 製氷機 レビュー比較まとめ",
     "name": "GSEICE 製氷機 レビュー比較まとめ.md",
@@ -18123,11 +18170,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "5b1d2b6a-e02a-4a04-82cf-3a0ddd7eb45d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0ef8b5defe244a919b0b00ad634050c7",
     "title": "BROWEY ポータブル電源 レビュー比較まとめ",
     "name": "BROWEY ポータブル電源 レビュー比較まとめ.md",
@@ -18139,11 +18187,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "a215ad4f-0568-42e8-84f7-500859ecbfcb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa58b1bc8f8784fb58fae22768d58717c",
     "title": "Atomos Ninja TX GO 外部モニターレコーダー クラウド連携 レビュー比較まとめ",
     "name": "Atomos Ninja TX GO 外部モニターレコーダー クラウド連携 レビュー比較まとめ.md",
@@ -18155,11 +18204,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "e3102318-41ee-4dfc-b8c9-587ed23c4119",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s041e84887f0b4f9cb514cfd3908a2df4",
     "title": "山善 EHD-U1470 デスク レビュー比較まとめ",
     "name": "山善 EHD-U1470 デスク レビュー比較まとめ.md",
@@ -18171,11 +18221,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "d947154a-4be1-47b5-bffa-9b179095bcf3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s057eeb23ee79490781788abbe4dc7eaf",
     "title": "HiKOKI N3604DJ(NNK) レビュー比較まとめ",
     "name": "HiKOKI N3604DJ(NNK) レビュー比較まとめ.md",
@@ -18187,11 +18238,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "aec086a8-7cca-4b10-888e-7aa99d906381",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s873daec62e484597b9cffdecb09634ff",
     "title": "サンワダイレクト 400-PSD051 レビュー比較まとめ",
     "name": "サンワダイレクト 400-PSD051 レビュー比較まとめ.md",
@@ -18203,11 +18255,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f7b004fe-6472-4a60-a79a-ed7dcdf7ccfc",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbb115667a4b54e71861302724a5e26c5",
     "title": "Jackery Solar Generator 2000 New レビュー比較まとめ",
     "name": "Jackery Solar Generator 2000 New レビュー比較まとめ.md",
@@ -18219,11 +18272,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "44678507-9d10-4dc2-8147-8a8d2044b047",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbf45ead0784e4a3daaf7c34c69ca1c98",
     "title": "OBSBOT Tail 2 レビュー比較まとめ",
     "name": "OBSBOT Tail 2 レビュー比較まとめ.md",
@@ -18235,11 +18289,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f34f464f-d899-461f-98b3-f110b23ea540",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3d697236e3944adcbbdf684f00aef97a",
     "title": "TCL 75Q7D Pro レビュー比較まとめ",
     "name": "TCL 75Q7D Pro レビュー比較まとめ.md",
@@ -18251,11 +18306,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "1f745795-8b0a-4a6f-b985-ce62cb8b9f50",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf8eaa6d8c2044331b9be6a9d924be175",
     "title": "EENOUR GS2200iD-B 発電機 レビュー比較まとめ",
     "name": "EENOUR GS2200iD-B 発電機 レビュー比較まとめ.md",
@@ -18267,11 +18323,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "2edc4895-5c09-4cf4-b6d1-eb81b6aa67b7",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3e68a09a1eff431194fbd2c5594b5cd2",
     "title": "MEMSドライバー搭載で最高の高域を実現！Astell&Kern CLARUSをご紹介",
     "name": "20260928_0312_MEMSドライバー搭載で最高の高域を実現！Astell&Kern CLARUSをご紹介.md",
@@ -18283,11 +18340,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "e973fe2c-8208-4891-b828-42d94d1512d4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s28dc2d5d5bb64c22992bab2d272827b8",
     "title": "koala コアラフトン PLUS レビュー比較まとめ",
     "name": "koala コアラフトン PLUS レビュー比較まとめ.md",
@@ -18299,11 +18357,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "6bd026c5-877d-4ef4-9a6e-ded0215daab6",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf32b2df3bcc242ffabf8f9c30e844cca",
     "title": "Jackery ポータブル電源 2000 New JE-2000F レビュー比較まとめ",
     "name": "Jackery ポータブル電源 2000 New JE-2000F レビュー比較まとめ.md",
@@ -18315,11 +18374,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "d25618e7-d344-4b22-b8f7-ff72ec252356",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s735668bc9ad14b5aabcd613e54bd94d6",
     "title": "BLUETTI AORA 200 220Wソーラーパネル 1枚 セット レビュー比較まとめ",
     "name": "BLUETTI AORA 200 220Wソーラーパネル 1枚 セット レビュー比較まとめ.md",
@@ -18331,11 +18391,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "1b47e681-da95-419d-b89e-6db8ff0c644f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s1284791c548843c1ae96ed88d196980f",
     "title": "ヒツジのいらない枕 ヒツジのいらない セミダブル レビュー比較まとめ",
     "name": "ヒツジのいらない枕 ヒツジのいらない セミダブル レビュー比較まとめ.md",
@@ -18347,11 +18408,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "94d07119-80f9-4854-afd2-e01bbe2f8845",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfe1232a7f84e477c8449e8d92864aba6",
     "title": "Jackery ポータブル電源 3000 New 折り畳み式 キャリーカート 1台 2点セット レビュー比較まとめ",
     "name": "Jackery ポータブル電源 3000 New 折り畳み式 キャリーカート 1台 2点セット レビュー比較まとめ.md",
@@ -18363,11 +18425,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "2ba04415-8741-4a4e-8a3f-d6b584c24737",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s1f011bb801bc45d4a9bdf694161af613",
     "title": "LiberNovo Maxis Airflow 人間工学オフィスチェア レビュー比較まとめ",
     "name": "LiberNovo Maxis Airflow 人間工学オフィスチェア レビュー比較まとめ.md",
@@ -18379,11 +18442,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "58bcc932-69f5-4ac6-b709-a28edd70665e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd03cf8ecce4c44e1a68f96c5b6f2a54f",
     "title": "AFERIY Haven2800Haven3000専用拡張バッテリー レビュー比較まとめ",
     "name": "AFERIY Haven2800Haven3000専用拡張バッテリー レビュー比較まとめ.md",
@@ -18395,11 +18459,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "d109d2ff-f8e5-47eb-8eb3-6efa92ccd7e0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s96c90843aabf463dbc3412c47aa4830a",
     "title": "Xiaomi 17T Pro レビュー比較まとめ",
     "name": "Xiaomi 17T Pro レビュー比較まとめ.md",
@@ -18411,11 +18476,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "85e1e913-fcb0-4dce-b1ae-0e64584234cd",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa9e057ff02be4e37ab3417d490cb721e",
     "title": "Jackery 1000 Plus レビュー比較まとめ",
     "name": "Jackery 1000 Plus レビュー比較まとめ.md",
@@ -18427,11 +18493,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "a8e0d9d2-8801-47a1-96d2-f6b3c0cb709b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4c5976990008496682e8e53320b4bd70",
     "title": "FLEXISPOT Lotus Pro レビュー比較まとめ",
     "name": "FLEXISPOT Lotus Pro レビュー比較まとめ.md",
@@ -18443,11 +18510,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "436a1ab1-c497-4b36-ab35-ff1673f2c98d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa71f5c6f1dab490e8ccb49906cf6c15a",
     "title": "HiKOKI(ハイコーキ) 36V 充電式 鉄筋カットベンダ 蓄電池 ・充電器付 VB3616DA(XPZ) レビュー比",
     "name": "HiKOKI(ハイコーキ) 36V 充電式 鉄筋カットベンダ 蓄電池 ・充電器付 VB3616DA(XPZ) レビュー比.md",
@@ -18459,11 +18527,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "9765b6e6-212d-4d44-a337-ee1c6f3080a6",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sde2e8d545c384609919153ad08b4af9c",
     "title": "iPhone 18 Pro、2つ前の16 Proから乗り換えはアリ？性能やカメラの画質などどれくらい違うか比較！",
     "name": "20260928_0318_iPhone 18 Pro、2つ前の16 Proから乗り換えはアリ？性能やカメラの画質などどれくらい違うか比較！.md",
@@ -18475,11 +18544,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "58feed66-0ac0-43aa-8c84-3089f6b24213",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s43c69a82e0cc4488864cbdc01d917174",
     "title": "NELL スイート シングル レビュー比較まとめ",
     "name": "NELL スイート シングル レビュー比較まとめ.md",
@@ -18491,11 +18561,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "c3042aa4-7f09-4781-af54-2cd80fe91bbe",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s363ccfef1d4248508e3e15f0e677216c",
     "title": "桐らくね 折りたたみベッドプレミアム24 レビュー比較まとめ",
     "name": "桐らくね 折りたたみベッドプレミアム24 レビュー比較まとめ.md",
@@ -18507,11 +18578,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f8835c3b-a568-4201-9b93-eb42dc4a6095",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8aaffc8eaed04e40bd8417809efc073f",
     "title": "Jackery ポータブル電源 2000 New 2048Wh レビュー比較まとめ",
     "name": "Jackery ポータブル電源 2000 New 2048Wh レビュー比較まとめ.md",
@@ -18523,11 +18595,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "bf08c80e-d4ed-4756-9a53-7b0bd098215c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sba58cfec4b8e4d81b6e61c02c2cc0a2e",
     "title": "Jackery ポータブル電源 1000 New 200W ソーラーパネル 1枚 2点セット レビュー比較まとめ",
     "name": "Jackery ポータブル電源 1000 New 200W ソーラーパネル 1枚 2点セット レビュー比較まとめ.md",
@@ -18539,11 +18612,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "b52550a6-0b8b-4f2d-8677-621eb32058dc",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7e2657313c9543ea98e271135d424a57",
     "title": "Insta360 Ace Pro 2 アクションカメラ レビュー比較まとめ",
     "name": "Insta360 Ace Pro 2 アクションカメラ レビュー比較まとめ.md",
@@ -18555,11 +18629,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "422cd75d-bc3e-4fbe-b832-15aba7cc3e5c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se701980c84514c4ab83b38b8647273de",
     "title": "Jackery ポータブル電源 1500 New レビュー比較まとめ",
     "name": "Jackery ポータブル電源 1500 New レビュー比較まとめ.md",
@@ -18571,11 +18646,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "4f1d3099-377b-4a41-8f78-b15fe87b76e5",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sdf4628a7e64a464781332408137a97e4",
     "title": "RayNeo GT Max ARXRグラス レビュー比較まとめ",
     "name": "RayNeo GT Max ARXRグラス レビュー比較まとめ.md",
@@ -18587,11 +18663,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "322a40a9-26d3-4509-b718-91181d25a93b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5b41c6cd708a41eeb8fd8945d02d7fd1",
     "title": "LiberNovo Omni Pro AirFlow 人間工学オフィスチェア レビュー比較まとめ",
     "name": "LiberNovo Omni Pro AirFlow 人間工学オフィスチェア レビュー比較まとめ.md",
@@ -18603,11 +18680,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "a770e568-c61c-416c-ad88-e37a2d47c6df",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6af0c749f00548cc92cb11f095773679",
     "title": "Wacom Intuos Pro large TPTK870K0C ペンタブレット レビュー比較まとめ",
     "name": "Wacom Intuos Pro large TPTK870K0C ペンタブレット レビュー比較まとめ.md",
@@ -18619,11 +18697,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "b8f6659e-a99f-4138-8d6a-3e74d3e6807d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s87a19c59b0174b668cb60fec9c59cb4c",
     "title": "バッファロー おもいでばこ レビュー比較まとめ",
     "name": "バッファロー おもいでばこ レビュー比較まとめ.md",
@@ -18635,11 +18714,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "2bb104fa-582c-4427-a58b-effe7800f6d4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa064e637f7c04cc6ac9b5ea0e7e9df49",
     "title": "スチールケース(Steelcase) ジェスチャー(Gesture) HR5S26 フレーム張り地カラー442A50EC",
     "name": "スチールケース(Steelcase) ジェスチャー(Gesture) HR5S26 フレーム張り地カラー442A50EC.md",
@@ -18651,11 +18731,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "982f1320-19d9-4c27-b90e-062b966a0c2c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2820eefc2202499cb33fc6b47a308556",
     "title": "ATOTOZONE X10 レビュー比較まとめ",
     "name": "ATOTOZONE X10 レビュー比較まとめ.md",
@@ -18667,11 +18748,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "020c88cc-adbc-4bd5-a8ea-acf072c8d9a8",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s68fdecdf7dc64f8eb37df82c8a8dd711",
     "title": "アイリスオーヤマ × BLUETTI PS2000AA-W レビュー比較まとめ",
     "name": "アイリスオーヤマ × BLUETTI PS2000AA-W レビュー比較まとめ.md",
@@ -18683,11 +18765,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "3fb3f162-9878-4e5d-ac66-5e346ab4b394",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0428b5ad09544ca78d11884a18938c28",
     "title": "Kareyou COY-380 レビュー比較まとめ",
     "name": "Kareyou COY-380 レビュー比較まとめ.md",
@@ -18699,11 +18782,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "9ec3016e-9f58-487b-b974-ab42ac292176",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6f08c7da94404ccb9446935c3431ec7a",
     "title": "Samsung SM-X820NZAAXJP タブレット レビュー比較まとめ",
     "name": "Samsung SM-X820NZAAXJP タブレット レビュー比較まとめ.md",
@@ -18715,11 +18799,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "b338614b-bc8b-44ce-a9d6-78df47376409",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s163c5f9a799c472194f3c89a4ae864a7",
     "title": "EENOUR GT4700iO-3 発電機 レビュー比較まとめ",
     "name": "EENOUR GT4700iO-3 発電機 レビュー比較まとめ.md",
@@ -18731,11 +18816,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "8d5f5ebe-2998-491c-a993-c31ea0e349a8",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sef108820f3a9494faf3a20168319d166",
     "title": "CAGUUU アクシスエルゴコア オフィスチェア レビュー比較まとめ",
     "name": "CAGUUU アクシスエルゴコア オフィスチェア レビュー比較まとめ.md",
@@ -18747,11 +18833,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "bd4308b2-fa4a-48df-8e03-d0b1434e79ae",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa3cb0c074db54652b82a86150793d4bb",
     "title": "Samsung Galaxy Tab S10 FE タブレット レビュー比較まとめ",
     "name": "Samsung Galaxy Tab S10 FE タブレット レビュー比較まとめ.md",
@@ -18763,11 +18850,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "83f14751-b5d4-409c-8c5c-7d3dc9fb7e8b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!seadcaac672b94975bdeab6b41568b329",
     "title": "HiKOKI 36V 充電式 ロータリー ポータブル CB3612DA(XPZ) バンドソー レビュー比較まとめ",
     "name": "HiKOKI 36V 充電式 ロータリー ポータブル CB3612DA(XPZ) バンドソー レビュー比較まとめ.md",
@@ -18779,11 +18867,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "219bfdd2-64b1-4a56-b0c0-ebf6da51d8e3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s09fffe42064b40a1acbbba544c02e5f5",
     "title": "CZUR ET24 Pro ブックスキャナー レビュー比較まとめ",
     "name": "CZUR ET24 Pro ブックスキャナー レビュー比較まとめ.md",
@@ -18795,11 +18884,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "84b46016-037f-4825-9f26-8bd7c26b9419",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3faae26c882c4b47a634a17fc9413ce2",
     "title": "COFO Chair Pro 2 デスクチェア レビュー比較まとめ",
     "name": "COFO Chair Pro 2 デスクチェア レビュー比較まとめ.md",
@@ -18811,11 +18901,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "ebdb1a5c-f87e-41c6-982f-c95e82a86cd9",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb5670c3ab9934cdabf0545591f591dfc",
     "title": "Genmitsu PROVerXL 4030 V2 レビュー比較まとめ",
     "name": "Genmitsu PROVerXL 4030 V2 レビュー比較まとめ.md",
@@ -18827,11 +18918,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "9ca7163a-3ddc-4408-8ee5-eae274c15fab",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbddd9d7f1e2246df857cc90059f377e1",
     "title": "Jackery 1500 New 100W ソーラーパネル 1枚 2点セット レビュー比較まとめ",
     "name": "Jackery 1500 New 100W ソーラーパネル 1枚 2点セット レビュー比較まとめ.md",
@@ -18843,11 +18935,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "760b952c-5566-4e1f-baa2-aa956a90cfbe",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4e149f2c26c44572ade74945d42a8b70",
     "title": "HiKOKI UL18DBA レビュー比較まとめ",
     "name": "HiKOKI UL18DBA レビュー比較まとめ.md",
@@ -18859,11 +18952,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "1406222b-4577-463f-9d68-a26b2d47af1b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd2f2b6a9000748ba89f767c99588071b",
     "title": "Genmitsu 4040-PRO MAX レビュー比較まとめ",
     "name": "Genmitsu 4040-PRO MAX レビュー比較まとめ.md",
@@ -18875,11 +18969,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "34623eee-d944-461e-bad9-2ad263146871",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s86a88d5b6f554034b2d3106f91d001f7",
     "title": "Jackery ポータブル電源 1500 New 100W ソーラーパネル 1枚 2点セット レビュー比較まとめ",
     "name": "Jackery ポータブル電源 1500 New 100W ソーラーパネル 1枚 2点セット レビュー比較まとめ.md",
@@ -18891,11 +18986,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "ba4e1849-3b9e-4e17-83d0-75faa14bb376",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfdeb6cca08fe48b6be2ddfcddb6ea2cc",
     "title": "Bigme B7 Pro 電子書籍リーダー レビュー比較まとめ",
     "name": "Bigme B7 Pro 電子書籍リーダー レビュー比較まとめ.md",
@@ -18907,11 +19003,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "c178b17e-7a7a-448a-b262-be28440afa0f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf1377e80bf2c41f0a8bbf38e0f10ea35",
     "title": "Genmitsu 3030-PROVer Ultra レビュー比較まとめ",
     "name": "Genmitsu 3030-PROVer Ultra レビュー比較まとめ.md",
@@ -18923,11 +19020,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "6ba2dd3e-76f1-4e96-87a5-a816f9d46c1e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s1c7304632b964952bd5d594b8d532bfc",
     "title": "AutoFull G7 レビュー比較まとめ",
     "name": "AutoFull G7 レビュー比較まとめ.md",
@@ -18939,11 +19037,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "a6246636-1a07-4564-b886-b4369179fd50",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s61520ccca05f4e13ba77d860a7e88fb2",
     "title": "kurflo 止水パネル レビュー比較まとめ",
     "name": "kurflo 止水パネル レビュー比較まとめ.md",
@@ -18955,11 +19054,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "04e1afbe-420b-4fb7-818e-816c04c6895e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s62bee6c730bb4340bd48fafd7cc6ae7f",
     "title": "EcoFlow DELTA 2 Max レビュー比較まとめ",
     "name": "EcoFlow DELTA 2 Max レビュー比較まとめ.md",
@@ -18971,11 +19071,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "331eb01f-792d-4442-b255-66d48b77ab6e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5bc4e21991e74f9f988c3e8423a4abe8",
     "title": "DJI Osmo 360 エッセンシャルコンボ アクションカメラ レビュー比較まとめ",
     "name": "DJI Osmo 360 エッセンシャルコンボ アクションカメラ レビュー比較まとめ.md",
@@ -18987,11 +19088,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "5afab781-9247-4b32-aa7d-5d7032ef955d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s45cc7f6514114904bce631871b8e96b0",
     "title": "サンワダイレクト SSD 外付け USB en2 ポータブル PS5PS4動作確認済み 直挿し 600-USSD S レ",
     "name": "サンワダイレクト SSD 外付け USB en2 ポータブル PS5PS4動作確認済み 直挿し 600-USSD S レ.md",
@@ -19003,11 +19105,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "6e864191-9dbb-49b6-a1b4-13cea8429c3c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8bb282fabcca4f4b944d9c1f7e8fb541",
     "title": "Nearity 120 Max C46S レビュー比較まとめ",
     "name": "Nearity 120 Max C46S レビュー比較まとめ.md",
@@ -19019,11 +19122,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "a261286a-cf28-4a80-8796-dd2732f3b12e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s903b2951381c49b39cd8da62d1631f1e",
     "title": "Apple iPhone Air (SIMフリー) レビュー比較まとめ",
     "name": "Apple iPhone Air (SIMフリー) レビュー比較まとめ.md",
@@ -19035,11 +19139,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "32ea2e88-bb98-429b-b921-806f5d3fa121",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0b5cdb216e7445ce823d83a68d669f37",
     "title": "HiKOKI VB16Y レビュー比較まとめ",
     "name": "HiKOKI VB16Y レビュー比較まとめ.md",
@@ -19051,11 +19156,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "b6e7f469-7c4e-4947-8799-dda53e496118",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfc5daf8621374e909a150a6c604134d0",
     "title": "Aladdin X X2 Plus 家庭用 ルーメン フルHD 天井投影 天井照明一体型 プロジェクター レビュー比較ま",
     "name": "Aladdin X X2 Plus 家庭用 ルーメン フルHD 天井投影 天井照明一体型 プロジェクター レビュー比較ま.md",
@@ -19067,11 +19173,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "7541610e-c244-4072-83b1-bf64802c9e19",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s55b4b320b3e3476faa74b401c70bc7e9",
     "title": "Philips PUH7231 テレビ レビュー比較まとめ",
     "name": "Philips PUH7231 テレビ レビュー比較まとめ.md",
@@ -19083,11 +19190,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "681bb355-c749-43f5-8ca9-f5e6c8516f15",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s1e3dc2cde4764d718abae8ad58458b8d",
     "title": "Garvee インバーター 発電機 レビュー比較まとめ",
     "name": "Garvee インバーター 発電機 レビュー比較まとめ.md",
@@ -19099,11 +19207,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "43adc4fb-e2ef-415d-aa33-b93c9bf681de",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s147d1985b35a4301ac6652d9f288ad80",
     "title": "BLUETTI AORA 100 mini レビュー比較まとめ",
     "name": "BLUETTI AORA 100 mini レビュー比較まとめ.md",
@@ -19115,11 +19224,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "4fdf9a9e-1bae-41cb-835c-1d369aa57b08",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s726a4448422e4859b180f9ded6c94b84",
     "title": "Steelcase Gesture レビュー比較まとめ",
     "name": "Steelcase Gesture レビュー比較まとめ.md",
@@ -19131,11 +19241,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "e1c4c018-6845-4ea4-bbf0-1d10253a56bb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!see50aeb48f524898ae899953667e1044",
     "title": "VITURE Luma レビュー比較まとめ",
     "name": "VITURE Luma レビュー比較まとめ.md",
@@ -19147,11 +19258,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "5764222c-85df-4b17-a7e9-8de47dda3d56",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4cbf32adcc08491dbb4314981dd9afb5",
     "title": "LiberNovo Omni Pro AirFlow 内蔵ファン搭載の人間工学オフィスチェア 座面奥行き レビュー比較ま",
     "name": "LiberNovo Omni Pro AirFlow 内蔵ファン搭載の人間工学オフィスチェア 座面奥行き レビュー比較ま.md",
@@ -19163,11 +19275,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "0f10c4d3-5831-4aee-89c5-ce22f60a9e4d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s079a9da826164476b230283d5e2dcae1",
     "title": "Insta360 Ace Pro 2 プロシューターキット - 、 。 、 、 。 アクションカメラ レビュー比較まとめ",
     "name": "Insta360 Ace Pro 2 プロシューターキット - 、 。 、 、 。 アクションカメラ レビュー比較まとめ.md",
@@ -19179,11 +19292,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "161d8659-6cdd-44e8-8891-faf860d6e307",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scd9155f35ea04c1aaa62ff14febe0bff",
     "title": "Insta360 X5 BMW Motorrad 版 レビュー比較まとめ",
     "name": "Insta360 X5 BMW Motorrad 版 レビュー比較まとめ.md",
@@ -19195,11 +19309,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "38251a2a-0d0b-405a-b874-b28591bd741a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfd225193b01a4666883f6a5acfc87eec",
     "title": "HiKOKI R3640DA(XPSZ) 集じん機 レビュー比較まとめ",
     "name": "HiKOKI R3640DA(XPSZ) 集じん機 レビュー比較まとめ.md",
@@ -19211,11 +19326,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "7d1c2242-a8cf-4142-84cf-e4c465bd6248",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4f44dc73720547788128cc1ebed160a5",
     "title": "SIHOO Doro C300 オフィスチェア レビュー比較まとめ",
     "name": "SIHOO Doro C300 オフィスチェア レビュー比較まとめ.md",
@@ -19227,11 +19343,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "e77722d0-e39b-425d-bbe5-d870aa3cb71c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3ec6c598301d46b290cfb97595fef2fc",
     "title": "NANLITE PavoTube II 30X レビュー比較まとめ",
     "name": "NANLITE PavoTube II 30X レビュー比較まとめ.md",
@@ -19243,11 +19360,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "04e8142a-3711-4d81-b244-31ab5ba3f325",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s85efe7aa02e944ff80eb858c6bea4877",
     "title": "Jackery ポータブル電源 1000 New V3 100W ソーラーパネル 1枚 2点セット レビュー比較まとめ",
     "name": "Jackery ポータブル電源 1000 New V3 100W ソーラーパネル 1枚 2点セット レビュー比較まとめ.md",
@@ -19259,11 +19377,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "ab0ff118-f1a3-452f-a998-44c6b977b5cc",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa00697f252b045899b6a34da64431d3b",
     "title": "HiKOKI CS3625DC (XPZ) チェーンソー レビュー比較まとめ",
     "name": "HiKOKI CS3625DC (XPZ) チェーンソー レビュー比較まとめ.md",
@@ -19275,11 +19394,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "5a0fe6c4-559d-441a-92dd-da42c55e4c06",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfc38c22d56934264b6ec4bdc06330517",
     "title": "Kaedear KDR-BH2-W レビュー比較まとめ",
     "name": "Kaedear KDR-BH2-W レビュー比較まとめ.md",
@@ -19291,11 +19411,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "9df8eb2a-7e14-411f-9c20-a7a350206cf0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfdd23747060c429c939a669be046b0cf",
     "title": "HiKOKI(ハイコーキ) ハンマ H60MEY レビュー比較まとめ",
     "name": "HiKOKI(ハイコーキ) ハンマ H60MEY レビュー比較まとめ.md",
@@ -19307,11 +19428,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "aae12e8f-e36a-4ba3-b8d2-cd6a7b831b7f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfd39cada62ae48e3a71bd847cd921dc6",
     "title": "BRAIN SLEEP ブレインスリープ マットレス レビュー比較まとめ",
     "name": "BRAIN SLEEP ブレインスリープ マットレス レビュー比較まとめ.md",
@@ -19323,11 +19445,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f9ba687b-964e-4521-973e-635a345147bd",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se933a768097448748500d87f8c0058e6",
     "title": "Insta360 X5 レビュー比較まとめ",
     "name": "Insta360 X5 レビュー比較まとめ.md",
@@ -19339,11 +19462,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "17907214-e736-410c-90ca-0800dd1eb30f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sedf027b9688f43569581eb76c423a518",
     "title": "Master Lock LFW205FYC レビュー比較まとめ",
     "name": "Master Lock LFW205FYC レビュー比較まとめ.md",
@@ -19355,11 +19479,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "3b9e1067-2428-4052-a122-aa408c8de324",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sdaeb90cae78642eebde0efcd62d2298a",
     "title": "Kaedear KDR-BH2-A レビュー比較まとめ",
     "name": "Kaedear KDR-BH2-A レビュー比較まとめ.md",
@@ -19371,11 +19496,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "ca11855b-b97f-45b9-a455-21dc34492c3a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6b72ca3103994f928677275007ec0a3b",
     "title": "AFERIY Haven2800 レビュー比較まとめ",
     "name": "AFERIY Haven2800 レビュー比較まとめ.md",
@@ -19387,11 +19513,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "5653d081-3312-4124-9b75-b31e50218942",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s1d793f15b83d493191f97408e987bf70",
     "title": "HOVER X1 Smart レビュー比較まとめ",
     "name": "HOVER X1 Smart レビュー比較まとめ.md",
@@ -19403,11 +19530,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "8c0b9b92-1281-48d7-a694-5b465c7581e5",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s66aa54c6cc284d4dbe5c4138400abf79",
     "title": "バッファロー おもいでばこ Wi-Fi6 スタンダードモデル PD-2000-L レビュー比較まとめ",
     "name": "バッファロー おもいでばこ Wi-Fi6 スタンダードモデル PD-2000-L レビュー比較まとめ.md",
@@ -19419,11 +19547,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "fb4041fc-ef92-47a9-b8c2-875b844baf78",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s919546030bfe433493bb9a401d698ea5",
     "title": "LUNYEE 3018 Pro Ultra フライス盤 レビュー比較まとめ",
     "name": "LUNYEE 3018 Pro Ultra フライス盤 レビュー比較まとめ.md",
@@ -19435,11 +19564,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "a5e0dbb2-57d9-45fb-9b0c-6321407c5371",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb459d2b57cca4b5f9eb3da0d47f3e1d1",
     "title": "京セラ EGIN 590100A 発電機 レビュー比較まとめ",
     "name": "京セラ EGIN 590100A 発電機 レビュー比較まとめ.md",
@@ -19451,11 +19581,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "0189ad14-c0f9-41ec-93cb-26ac7f8dd451",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5bd010ccd50e477a97f48734c59da0b6",
     "title": "Bauhutte (バウヒュッテ) BGB-100FA2-BK レビュー比較まとめ",
     "name": "Bauhutte (バウヒュッテ) BGB-100FA2-BK レビュー比較まとめ.md",
@@ -19467,11 +19598,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "a077247d-8d32-4689-8705-29eae8286185",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa0806a75e5c744fd88044c2f4d3dafd8",
     "title": "RICOH THETA Z1 レビュー比較まとめ",
     "name": "RICOH THETA Z1 レビュー比較まとめ.md",
@@ -19483,11 +19615,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "52a20ae4-a6a2-42e4-8714-5916c5ce67e0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s56062ebb5af74799a70ef2c67b35c8dc",
     "title": "YOSHINO B1200 SST SP200 レビュー比較まとめ",
     "name": "YOSHINO B1200 SST SP200 レビュー比較まとめ.md",
@@ -19499,11 +19632,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "3ca5393e-7111-4b9b-a2b2-a75c48ae7a4b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3b2597f844974baa8aabcdd697901598",
     "title": "Jackery ポータブル電源 1000 New 収納バッグ付き 2点セット レビュー比較まとめ",
     "name": "Jackery ポータブル電源 1000 New 収納バッグ付き 2点セット レビュー比較まとめ.md",
@@ -19515,11 +19649,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "5316166a-ee9f-4a21-b17a-f497214cfca4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6bee6569e93a49859fcd0586751b418c",
     "title": "ヒツジのいらない枕 ヒツジのいらない ダブル レビュー比較まとめ",
     "name": "ヒツジのいらない枕 ヒツジのいらない ダブル レビュー比較まとめ.md",
@@ -19531,11 +19666,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "69491e55-afdb-44b9-a957-9475c1eec2cc",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s03d4f5c82fa64ee4b5726f887ed50e1b",
     "title": "FOSSiBOT F1800 レビュー比較まとめ",
     "name": "FOSSiBOT F1800 レビュー比較まとめ.md",
@@ -19547,11 +19683,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "abe8f301-8545-48aa-acca-ee28938609ed",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sdf933f1d43c24583aba8b59691592f79",
     "title": "EENOUR DK7250iE 発電機 レビュー比較まとめ",
     "name": "EENOUR DK7250iE 発電機 レビュー比較まとめ.md",
@@ -19563,11 +19700,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "083a59fd-1b92-4ad8-9ac4-18a8bcf0e5cb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa7731b87697c4b8da59b0dd97fb4b7f7",
     "title": "シモンズ セミダブル ポケットコイル やや硬め ミディアム 両面仕様 日本製 レビュー比較まとめ",
     "name": "シモンズ セミダブル ポケットコイル やや硬め ミディアム 両面仕様 日本製 レビュー比較まとめ.md",
@@ -19579,11 +19717,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f199c840-c78f-4a6f-9042-fff8b6839493",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4711df04d81b44bda11e1087459f0d7e",
     "title": "OPPO Reno15 A SIMフリー スマートフォン レビュー比較まとめ",
     "name": "OPPO Reno15 A SIMフリー スマートフォン レビュー比較まとめ.md",
@@ -19595,11 +19734,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "e3c144bb-fa08-4152-bb79-b7cee2b7cfec",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se3e5c563e58e42a68da91c9880c76f59",
     "title": "NANLITE FC-720C レビュー比較まとめ",
     "name": "NANLITE FC-720C レビュー比較まとめ.md",
@@ -19611,11 +19751,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "3290335a-cc79-4b1a-86ce-251aef70e0a8",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9a61f2e137d44d26bfde6d7125b75e75",
     "title": "OUTISAN e-Wagon Air キャリーカート レビュー比較まとめ",
     "name": "OUTISAN e-Wagon Air キャリーカート レビュー比較まとめ.md",
@@ -19627,11 +19768,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "b16d1034-7b4e-441a-bf0b-9579c8f60f6d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc7f50df78b414fd282362b4bccadbe0e",
     "title": "Cayin RU9 レビュー比較まとめ",
     "name": "Cayin RU9 レビュー比較まとめ.md",
@@ -19643,11 +19785,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "c6a8ca06-b0cf-4bf7-b859-e0b1fc882024",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6faca7544fa74702a7f875d17a04b123",
     "title": "Insta360 X5 アクションカメラ レビュー比較まとめ",
     "name": "Insta360 X5 アクションカメラ レビュー比較まとめ.md",
@@ -19659,11 +19802,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "ecda3a59-97db-4764-8efc-5059f83fb619",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5d5beb6489f74be287513e561b3e913e",
     "title": "BLUETTI AORA100 V2 100Wソーラーパネル 1枚 セット レビュー比較まとめ",
     "name": "BLUETTI AORA100 V2 100Wソーラーパネル 1枚 セット レビュー比較まとめ.md",
@@ -19675,11 +19819,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "0a5d7317-8e62-433f-9945-5d36c0e2adb3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s63d1544a3a564b07b6b02940edf3e079",
     "title": "Jackery Solar Generator 2000 New 2048Wh ポータブル電源 レビュー比較まとめ",
     "name": "Jackery Solar Generator 2000 New 2048Wh ポータブル電源 レビュー比較まとめ.md",
@@ -19691,11 +19836,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "5ecf522c-5283-42a1-a09e-624b4224ecfa",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s818ef4ddacd04bb689e7499d91638f46",
     "title": "VITURE Luma Ultra レビュー比較まとめ",
     "name": "VITURE Luma Ultra レビュー比較まとめ.md",
@@ -19707,11 +19853,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "49b42241-516e-4a38-9fac-667a0320c769",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se22dbe44decf4824a61b013aedd4640b",
     "title": "EcoFlow DELTA 3 Max Plus +220W軽量両面ソーラーパネル レビュー比較まとめ",
     "name": "EcoFlow DELTA 3 Max Plus +220W軽量両面ソーラーパネル レビュー比較まとめ.md",
@@ -19723,11 +19870,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "33087ea2-4cfb-4f57-8fed-ac9060a8987d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s420b1a2b99e644afb2de1b4fb68e1d33",
     "title": "シモンズ マットレス クィーン ポケットコイル ユーロトップ仕様 硬さミディアム 日本製 AB24A10 レビュー比較ま",
     "name": "シモンズ マットレス クィーン ポケットコイル ユーロトップ仕様 硬さミディアム 日本製 AB24A10 レビュー比較ま.md",
@@ -19739,11 +19887,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "9fb47297-d879-4787-b4b0-a80cc7dd2779",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6ad4eb91b1c9473a99418263935e35cd",
     "title": "H.VIEW カメラ 8台セット 屋内・屋外 PoE有線 800万画素 バレット型 デュアルライト 4K8MP 8CH録",
     "name": "H.VIEW カメラ 8台セット 屋内・屋外 PoE有線 800万画素 バレット型 デュアルライト 4K8MP 8CH録.md",
@@ -19755,11 +19904,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "b8bd5cf7-e109-4603-b848-8521ef46c034",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s112bc71d7bc344ca950a2f9097de5940",
     "title": "ハイセンス 100E70S テレビ レビュー比較まとめ",
     "name": "ハイセンス 100E70S テレビ レビュー比較まとめ.md",
@@ -19771,11 +19921,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "09b4d8b8-ff0d-4b14-ba7e-a8bbf301eb3c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s650698b39e0e46af9dc255ecd087f175",
     "title": "MuMu レビュー比較まとめ",
     "name": "MuMu レビュー比較まとめ.md",
@@ -19787,11 +19938,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "833a0578-7702-44f3-b0ff-ff4a11302ca1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2e60c91dbd95465bb4e9be2df58407fa",
     "title": "AMOS JP-EX COLOR 麻雀 レビュー比較まとめ",
     "name": "AMOS JP-EX COLOR 麻雀 レビュー比較まとめ.md",
@@ -19803,11 +19955,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "eed077b6-7d7c-448f-a33a-ee6a5115f823",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s864f237d437e4e8b96ced43bbc558adb",
     "title": "Jackery ポータブル電源 2000 New 200W ソーラーパネル 1枚 2点セット レビュー比較まとめ",
     "name": "Jackery ポータブル電源 2000 New 200W ソーラーパネル 1枚 2点セット レビュー比較まとめ.md",
@@ -19819,11 +19972,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "599905aa-2dc4-4aa2-b8bd-b4f7f8a7a0d1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3486d97250404cb4a720fb98b4a8e0b3",
     "title": "Master Lock LFW123FTC レビュー比較まとめ",
     "name": "Master Lock LFW123FTC レビュー比較まとめ.md",
@@ -19835,11 +19989,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "22c9e206-db6a-4df8-9e4a-ef7bbf406354",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s81b60f6b357649a1bdeb67a9a31f1f02",
     "title": "BLUETTI AC70 レビュー比較まとめ",
     "name": "BLUETTI AC70 レビュー比較まとめ.md",
@@ -19851,11 +20006,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "dc1ce15f-df75-4da2-9da3-4d4e6626c12c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s595641a4e94e455fa7e55b333db8a8c9",
     "title": "FOSSiBOT F107 Pro レビュー比較まとめ",
     "name": "FOSSiBOT F107 Pro レビュー比較まとめ.md",
@@ -19867,11 +20023,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "bb9d749a-a365-4492-8a2d-9c3536a5a3e0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scc19bb067d214e6baa7a8f8046bc2044",
     "title": "CZUR ET MAX-USBC レビュー比較まとめ",
     "name": "CZUR ET MAX-USBC レビュー比較まとめ.md",
@@ -19883,11 +20040,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "61270b56-c924-48d5-a61f-f7e940f1d25c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s791d6ab1f98e4b5ebfa8063ac0ddfee0",
     "title": "EENOUR GS950iD-B 発電機 レビュー比較まとめ",
     "name": "EENOUR GS950iD-B 発電機 レビュー比較まとめ.md",
@@ -19899,11 +20057,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "11d106fb-e8a3-4407-b684-92a82a96dc9d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfc45a59c467447e68fbb240306540410",
     "title": "Jackery SolarSaga 200 200W 太陽光パネル レビュー比較まとめ",
     "name": "Jackery SolarSaga 200 200W 太陽光パネル レビュー比較まとめ.md",
@@ -19915,11 +20074,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "25c48204-617a-41c3-bcf0-c5b357e8934a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s633aec61593a4dbc8db4f29ea3df06f2",
     "title": "Jackery ポータブル電源 1500 New 200W ソーラーパネル 1枚 2点セット レビュー比較まとめ",
     "name": "Jackery ポータブル電源 1500 New 200W ソーラーパネル 1枚 2点セット レビュー比較まとめ.md",
@@ -19931,11 +20091,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "c8f638b0-5862-4179-b947-cf3da81cff21",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sdbc8801509184a9194c79d37fd4a2957",
     "title": "Insta360 GO Ultra アクションカメラ レビュー比較まとめ",
     "name": "Insta360 GO Ultra アクションカメラ レビュー比較まとめ.md",
@@ -19947,11 +20108,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "110c6d7e-73e5-4303-a9ad-021f29e7f915",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s19b8d441ea1746be81c628caa9441223",
     "title": "レグザ REGZA 65Z770R(A) テレビ レビュー比較まとめ",
     "name": "レグザ REGZA 65Z770R(A) テレビ レビュー比較まとめ.md",
@@ -19963,11 +20125,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "601876c9-bc41-4f8b-9c28-cac3024f9e6e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3884f5db3c614982b042960aed9dbd46",
     "title": "Jackery ポータブル電源 2000 New ソーラーパネル 1枚 2点セット レビュー比較まとめ",
     "name": "Jackery ポータブル電源 2000 New ソーラーパネル 1枚 2点セット レビュー比較まとめ.md",
@@ -19979,11 +20142,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f15110fd-a3b3-4c95-9155-dd77ca096967",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa0702162a3c44f18bbf8b3fa9834fd0b",
     "title": "HiKOKI 18V コードレス UL18DBA 冷温庫 レビュー比較まとめ",
     "name": "HiKOKI 18V コードレス UL18DBA 冷温庫 レビュー比較まとめ.md",
@@ -19995,11 +20159,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "498cfe94-8f69-41e3-8e78-b3df6b0aa966",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s67b9c018710a4a4582067fb0fb41976f",
     "title": "HiKOKI W36DYA(XPZ) レビュー比較まとめ",
     "name": "HiKOKI W36DYA(XPZ) レビュー比較まとめ.md",
@@ -20011,11 +20176,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "90107b26-7dbf-4901-83e0-9865e56c4fdf",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd82a561a171e4012a3d0fa9934e37794",
     "title": "BLUETTI AORA100 V2 レビュー比較まとめ",
     "name": "BLUETTI AORA100 V2 レビュー比較まとめ.md",
@@ -20027,11 +20193,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "a30105fd-e7a6-4644-80dd-e0430f9f3ea9",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9da24e99b6d44cf7b42c7bcfbd416d31",
     "title": "JESIMAIK JM5500iE 200V 発電機 レビュー比較まとめ",
     "name": "JESIMAIK JM5500iE 200V 発電機 レビュー比較まとめ.md",
@@ -20043,11 +20210,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "141d6842-b500-4604-93db-11c12d9857ff",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6fab0117689d42a7962e54d2acf231bc",
     "title": "EENOUR DK4000iEDF 発電機 レビュー比較まとめ",
     "name": "EENOUR DK4000iEDF 発電機 レビュー比較まとめ.md",
@@ -20059,11 +20227,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "9a8e75fc-4769-4c06-8176-e11bd90db112",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc0bda4c38e0247cf96746f1714483117",
     "title": "LiberNovo Omni Pro AirFlow レビュー比較まとめ",
     "name": "LiberNovo Omni Pro AirFlow レビュー比較まとめ.md",
@@ -20075,11 +20244,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "5837ce49-2011-4d6f-a963-e0cbdce369b7",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5392c9c55d08445796449155d2e90f1b",
     "title": "HiKOKI AC100V ロータリー CB13FB バンドソー レビュー比較まとめ",
     "name": "HiKOKI AC100V ロータリー CB13FB バンドソー レビュー比較まとめ.md",
@@ -20091,11 +20261,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "9d129c34-3dcc-4624-9fbb-446a1dc217cf",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s30e8d3ebe54840fa8b2c4b475aa160c5",
     "title": "HUION Kamvas22 Plus ペンタブレット レビュー比較まとめ",
     "name": "HUION Kamvas22 Plus ペンタブレット レビュー比較まとめ.md",
@@ -20107,11 +20278,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "478179a2-1c1e-4dc0-a3d3-cdaac4083016",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9b626b3a44bf433cb50daec4bb298704",
     "title": "BLUETTI AORA100 V2 220Wソーラーパネル セット レビュー比較まとめ",
     "name": "BLUETTI AORA100 V2 220Wソーラーパネル セット レビュー比較まとめ.md",
@@ -20123,11 +20295,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f222e31a-cffe-44e7-9c96-d43aa5808c89",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se21b9274e4b044348eb54caca1662eae",
     "title": "シャオミ Xiaomi Xiaomi 17T Pro レビュー比較まとめ",
     "name": "シャオミ Xiaomi Xiaomi 17T Pro レビュー比較まとめ.md",
@@ -20139,11 +20312,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "a745407c-9ffd-44e7-8555-4dcf71cf51e0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2f1c5a3e1a64483fb9279354c947fd79",
     "title": "Sennheiser ゼンハイザー HD 800 S レビュー比較まとめ",
     "name": "Sennheiser ゼンハイザー HD 800 S レビュー比較まとめ.md",
@@ -20155,11 +20329,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "fdefdbd6-69da-4d21-97b7-29b45bbf380f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa13f3c2384bd4dc3a8f1917f266dcd5b",
     "title": "Jackery Solar Generator 3000 New レビュー比較まとめ",
     "name": "Jackery Solar Generator 3000 New レビュー比較まとめ.md",
@@ -20171,11 +20346,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "4248dfe4-b691-456a-a129-05d1d6bddaf8",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd1ac29db7b1b48dba70f0bc92f2723ac",
     "title": "Jackery ポータブル電源 1000 New 100W ソーラーパネル 1枚 2点セット 1070Wh レビュー比較",
     "name": "Jackery ポータブル電源 1000 New 100W ソーラーパネル 1枚 2点セット 1070Wh レビュー比較.md",
@@ -20187,11 +20363,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "9e1c3218-3951-45e7-9fbd-00d624f21485",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s14894057f34640c3b04259ba19314700",
     "title": "xTool SafetyPro AP2 フィルター レビュー比較まとめ",
     "name": "xTool SafetyPro AP2 フィルター レビュー比較まとめ.md",
@@ -20203,11 +20380,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "1c196196-5f5e-4bc4-a265-eb48944b5959",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s865d212f42de45a69469abf6b9c2bcd6",
     "title": "ナカトミ ERC-98DQN レビュー比較まとめ",
     "name": "ナカトミ ERC-98DQN レビュー比較まとめ.md",
@@ -20219,11 +20397,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "bb0ae54d-00b5-49bd-9208-bcb321bfb23b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7f34ada88025414d8bfada3b12867921",
     "title": "Samsung Samsung Galaxy Watch8 Classic スマートウォッチ レビュー比較まとめ",
     "name": "Samsung Samsung Galaxy Watch8 Classic スマートウォッチ レビュー比較まとめ.md",
@@ -20235,11 +20414,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "2937fefe-2966-4ee3-9d25-af025eb0d28e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc13538a3c3eb44669b47beabed0a994b",
     "title": "SteelSeries Arctis Nova Pro Omni ゲーミングヘッドセット レビュー比較まとめ",
     "name": "SteelSeries Arctis Nova Pro Omni ゲーミングヘッドセット レビュー比較まとめ.md",
@@ -20251,11 +20431,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "6d9137dc-9b83-4926-bcb9-50657bfb7809",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s165d4540a68f4d3d9b9256dcefe67058",
     "title": "DEWALT DCF891P2T インパクトレンチ レビュー比較まとめ",
     "name": "DEWALT DCF891P2T インパクトレンチ レビュー比較まとめ.md",
@@ -20267,11 +20448,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "1a8b17ba-8299-4174-9ad1-cf7da9d37d18",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s42695a57340943168cc736ec58b084e8",
     "title": "Hbada E3 Pro デスクチェア レビュー比較まとめ",
     "name": "Hbada E3 Pro デスクチェア レビュー比較まとめ.md",
@@ -20283,11 +20465,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f1c864ac-e98c-4caa-94b3-ae7f4da06252",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sba1a3cb4b1a74dada864d477f5220f7c",
     "title": "Insta360 Ace Pro 2 レビュー比較まとめ",
     "name": "Insta360 Ace Pro 2 レビュー比較まとめ.md",
@@ -20299,11 +20482,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "5b87306b-5cdb-4783-9acf-cb07b961d309",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9b7f404c0c4d48f7b8362bc9c87c6960",
     "title": "Motorola motorola edge 60pro PANTONE レビュー比較まとめ",
     "name": "Motorola motorola edge 60pro PANTONE レビュー比較まとめ.md",
@@ -20315,11 +20499,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "49c2a485-3fee-41e1-b16c-b57bb2daafa3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0df968e155b24746b166c114c6632d59",
     "title": "Xiaomi POCO X8 Pro スマートフォン レビュー比較まとめ",
     "name": "Xiaomi POCO X8 Pro スマートフォン レビュー比較まとめ.md",
@@ -20331,11 +20516,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "50a9c628-b63b-4b8b-a01f-642127f527e1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5d74299086a44f69b4830a90cd4176ac",
     "title": "xTool F2 レビュー比較まとめ",
     "name": "xTool F2 レビュー比較まとめ.md",
@@ -20347,11 +20533,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "626ec6a9-0538-4104-9991-89846ba1af05",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s487b64967cda4d8a8a9634577bb30d39",
     "title": "Jackery 500 New 100W ソーラーパネル 1枚 2点セット レビュー比較まとめ",
     "name": "Jackery 500 New 100W ソーラーパネル 1枚 2点セット レビュー比較まとめ.md",
@@ -20363,11 +20550,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "b6cc83a5-2736-475e-81af-babb0915e1f8",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se8793580b10d4987b4f69bc27e8a35d8",
     "title": "koala オリジナルコアラマットレス レビュー比較まとめ",
     "name": "koala オリジナルコアラマットレス レビュー比較まとめ.md",
@@ -20379,11 +20567,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "40237a7f-9473-4600-b688-89d95d16bbc0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6ae481a093934ab2ba200f9872e5047f",
     "title": "Dabbsson 600L レビュー比較まとめ",
     "name": "Dabbsson 600L レビュー比較まとめ.md",
@@ -20395,11 +20584,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "a60e4154-7569-4dfc-844b-630c62647543",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s234d663a39544ddcb1de44cd8d384751",
     "title": "VOICE Model-G8 レーザー墨出し器 レビュー比較まとめ",
     "name": "VOICE Model-G8 レーザー墨出し器 レビュー比較まとめ.md",
@@ -20411,11 +20601,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "ee0fe88f-59ee-49e3-9fd8-19431fec4ad4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2308f0004d5a4fcfa969d1cce2f2a3e0",
     "title": "Aurest J-FIT プレミアム メッシュ オフィスチェア MC-2 レビュー比較まとめ",
     "name": "Aurest J-FIT プレミアム メッシュ オフィスチェア MC-2 レビュー比較まとめ.md",
@@ -20427,11 +20618,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "3b299bda-7542-434c-82bd-c7996c416261",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s78829ffde9c842d8af133a4ecabdf1dc",
     "title": "Jackery Solar Generator 5000Plus 5040Wh 200W*2 レビュー比較まとめ",
     "name": "Jackery Solar Generator 5000Plus 5040Wh 200W2 レビュー比較まとめ.md",
@@ -20443,11 +20635,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "46e8bdd2-77e6-4fb0-8d90-f862516de863",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf68356a3df6e4703a83ff2daa969b4b3",
     "title": "Secretlab TITAN Evo Stealth ゲーミングチェア (サイズ R) PUレザー レビュー比較まとめ",
     "name": "Secretlab TITAN Evo Stealth ゲーミングチェア (サイズ R) PUレザー レビュー比較まとめ.md",
@@ -20459,11 +20652,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f8fc5dd5-cd75-4104-b40c-b381403234c6",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbc5a4416725a4d8b890279b05ff99e2c",
     "title": "Jackery ドライブチャージャー 600W DC-DC Charger 走行充電器 レビュー比較まとめ",
     "name": "Jackery ドライブチャージャー 600W DC-DC Charger 走行充電器 レビュー比較まとめ.md",
@@ -20475,11 +20669,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "80e33251-4510-485b-840c-342e2f63453b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s80acd04476844d9d9d8e0d1db3c3b378",
     "title": "JESIMAIK JM4200iS 発電機 レビュー比較まとめ",
     "name": "JESIMAIK JM4200iS 発電機 レビュー比較まとめ.md",
@@ -20491,11 +20686,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "c62a96d8-a095-49a4-ba65-92b88342c6e1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scc39496088eb46eba409ebc9aa140924",
     "title": "Insta360 Ace Pro 2 ストリート撮影キット Pro アクションカメラ レビュー比較まとめ",
     "name": "Insta360 Ace Pro 2 ストリート撮影キット Pro アクションカメラ レビュー比較まとめ.md",
@@ -20507,11 +20703,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "48312e91-4d62-4c91-ac40-069e1861ce59",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4fb59a00b3f44f1584f1b2c5169d7ce1",
     "title": "Jackery 2000 New V2 2048Wh レビュー比較まとめ",
     "name": "Jackery 2000 New V2 2048Wh レビュー比較まとめ.md",
@@ -20523,11 +20720,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "6d6efd34-1eb8-4d1a-a127-07deab2a5b4f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd7accea953af425c851505c938e669dc",
     "title": "Insta360 GO Ultra クリエイターキット アクションカメラ レビュー比較まとめ",
     "name": "Insta360 GO Ultra クリエイターキット アクションカメラ レビュー比較まとめ.md",
@@ -20539,11 +20737,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "bff29278-9a75-45ed-abeb-ba85549b1f95",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s20208ec6611447c1a08be2d90b5808d0",
     "title": "WTW 塚本無線 スマホ対応 レビュー比較まとめ",
     "name": "WTW 塚本無線 スマホ対応 レビュー比較まとめ.md",
@@ -20555,11 +20754,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "cab22607-3452-413d-a0ff-68ef3aa5f82c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd2de0daac36b438bad482210b7c8cdc0",
     "title": "FOSSiBOT F116 Pro レビュー比較まとめ",
     "name": "FOSSiBOT F116 Pro レビュー比較まとめ.md",
@@ -20571,11 +20771,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "c1710963-57b8-4cd8-948e-42ee5666af7d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6dadaeb3eb54411cb0f5167c84e042e7",
     "title": "EF ECOFLOW DELTA 3 1000 Air レビュー比較まとめ",
     "name": "EF ECOFLOW DELTA 3 1000 Air レビュー比較まとめ.md",
@@ -20587,11 +20788,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "6db8908f-6dd6-44b7-97f7-3240cd727a2b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s423f418e6d6945f7a763c86391f9cca9",
     "title": "EENOUR MIG160P レビュー比較まとめ",
     "name": "EENOUR MIG160P レビュー比較まとめ.md",
@@ -20603,11 +20805,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "2c4f9300-5d1e-47eb-a330-928074f0edc7",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s646dde0356ef44d99eaefca15740ced9",
     "title": "AKEEYO CHIGEE AIO-6 MAX レビュー比較まとめ",
     "name": "AKEEYO CHIGEE AIO-6 MAX レビュー比較まとめ.md",
@@ -20619,11 +20822,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "2f35f1be-4388-4d40-9709-b3f5f935851a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3651d9777b7a4a1280e7ac7900718624",
     "title": "アストロプロダクツ ワイドロールキャビネット 5段 WRC207 ツールキャビネット レビュー比較まとめ",
     "name": "アストロプロダクツ ワイドロールキャビネット 5段 WRC207 ツールキャビネット レビュー比較まとめ.md",
@@ -20635,11 +20839,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "47e985e9-94b7-466c-b6c0-459a2da4350a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc782b9cce38c4248827ca495f0593e00",
     "title": "ASUS ROG Azoth Extreme ゲーミングキーボード レビュー比較まとめ",
     "name": "ASUS ROG Azoth Extreme ゲーミングキーボード レビュー比較まとめ.md",
@@ -20651,11 +20856,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "8163c4a5-5851-45c2-87fa-8ac7b4243806",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s30fb25ebb569496bbfb6cfbc51b65dd0",
     "title": "HiKOKI FC7FSB レビュー比較まとめ",
     "name": "HiKOKI FC7FSB レビュー比較まとめ.md",
@@ -20667,11 +20873,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "a7a3cf18-b841-4050-8383-1b53bfb041b3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scb06da89ea88488ea05041ca54965e78",
     "title": "Aladdin X X2 Plus 推奨テレビチューナーセット ルーメン 照明一体型 プロジェクター レビュー比較まとめ",
     "name": "Aladdin X X2 Plus 推奨テレビチューナーセット ルーメン 照明一体型 プロジェクター レビュー比較まとめ.md",
@@ -20683,11 +20890,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "d2528860-9227-420a-85bd-072cad151e97",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa2f3ac8977a442e8b7c2381cad21e402",
     "title": "Creality Falcon A1 10W彫刻機 レビュー比較まとめ",
     "name": "Creality Falcon A1 10W彫刻機 レビュー比較まとめ.md",
@@ -20699,11 +20907,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "195348f1-66e1-4446-821b-5cb634b29b5b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa26962e4546446feb8b89ff359057f43",
     "title": "Acer Predator Vesta Ⅱ DDR5 6000MHz デスクトップPC用 メモリ レビュー比較まとめ",
     "name": "Acer Predator Vesta Ⅱ DDR5 6000MHz デスクトップPC用 メモリ レビュー比較まとめ.md",
@@ -20715,11 +20924,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "614fa4b0-238c-4173-aa2b-1a21238c4ae9",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc24a65fde37d43b0a91bd4ac93ede902",
     "title": "JESIMAIK JM3000Xi 発電機 レビュー比較まとめ",
     "name": "JESIMAIK JM3000Xi 発電機 レビュー比較まとめ.md",
@@ -20731,11 +20941,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "d1961191-f2aa-4fc4-ac78-5c3b7ae3593b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd248df7a787c4fb2bf77c9e768b73dd2",
     "title": "FLEXISPOT Lotus Pro リクライニングチェア ソファー レビュー比較まとめ",
     "name": "FLEXISPOT Lotus Pro リクライニングチェア ソファー レビュー比較まとめ.md",
@@ -20747,11 +20958,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "e80ace4a-d17f-4c0a-beaa-b8e4cd65bc90",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf9dba3adcd1048e7bfdebd16ef6af2d9",
     "title": "HiKOKI(ハイコーキ) AC100V 卓上スライド丸のこ C12RSH3 レビュー比較まとめ",
     "name": "HiKOKI(ハイコーキ) AC100V 卓上スライド丸のこ C12RSH3 レビュー比較まとめ.md",
@@ -20763,11 +20975,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "ee9a1a32-db53-41ed-930c-aa98faf2826f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s1e0c7812feb04a1ebd92742199b8af6e",
     "title": "Samsung Galaxy A57 レビュー比較まとめ",
     "name": "Samsung Galaxy A57 レビュー比較まとめ.md",
@@ -20779,11 +20992,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "4a331763-8f17-4aa9-b291-69f20c373083",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd575aff843714b6ba7adb32e0b26560d",
     "title": "シモンズ レビュー比較まとめ",
     "name": "シモンズ レビュー比較まとめ.md",
@@ -20795,11 +21009,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "99cffc21-93a6-41f5-9baa-44525e01e680",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s72e8c4b50cb44da389f1c175669ea08e",
     "title": "EENOUR DK4500iAEFI 発電機 レビュー比較まとめ",
     "name": "EENOUR DK4500iAEFI 発電機 レビュー比較まとめ.md",
@@ -20811,11 +21026,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "490c6b9c-0e1b-43e4-8222-e2c052671b96",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf579b8cb9707451c9eef277cc8c2702b",
     "title": "HOVERAir X1 Smart レビュー比較まとめ",
     "name": "HOVERAir X1 Smart レビュー比較まとめ.md",
@@ -20827,11 +21043,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "2b08e608-48b0-4707-8f30-a02a3ba91dce",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf5e7763a98fc4c32a98d7993e9ab9ec4",
     "title": "LIBRIDS C600 レビュー比較まとめ",
     "name": "LIBRIDS C600 レビュー比較まとめ.md",
@@ -20843,11 +21060,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "1db5a7bd-c4fe-4ad6-a64d-92ae05f393e8",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa2385e7b4a6f4e05aaee8fec21c49073",
     "title": "PORMIDO PR-G30 レビュー比較まとめ",
     "name": "PORMIDO PR-G30 レビュー比較まとめ.md",
@@ -20859,11 +21077,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "dcf7aa3d-5e68-4a43-a418-bdb85adc1294",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc7c1c10b2f9543279424edbbe9b22907",
     "title": "Jackery ポータブル電源 500 New 100W Air ソーラーパネル 1枚 2点セット レビュー比較まとめ",
     "name": "Jackery ポータブル電源 500 New 100W Air ソーラーパネル 1枚 2点セット レビュー比較まとめ.md",
@@ -20875,11 +21094,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "bc3fba2a-6b36-416a-bfb9-f9ea2487f806",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s93cd0356f5414db7a3829e4882577a9f",
     "title": "Cardo PACKTALK PRO レビュー比較まとめ",
     "name": "Cardo PACKTALK PRO レビュー比較まとめ.md",
@@ -20891,11 +21111,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "498eabbf-4d52-4103-83d5-4879f431fb67",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sda7291d32ee84ca0b3b3f3dbebaf22b7",
     "title": "EcoFlow 600W 走行充電器 レビュー比較まとめ",
     "name": "EcoFlow 600W 走行充電器 レビュー比較まとめ.md",
@@ -20907,11 +21128,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "a2d87618-e676-4583-b173-c58eaa0ef0df",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb48aa53b72604987a30bb71d115ff906",
     "title": "YESKAMOO AI検知 レビュー比較まとめ",
     "name": "YESKAMOO AI検知 レビュー比較まとめ.md",
@@ -20923,11 +21145,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "ce83e849-0c16-4813-a05d-ac5f8dcba22a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7d4b1f73747347a5936c3936d05c4959",
     "title": "BLUETTI AORA300 レビュー比較まとめ",
     "name": "BLUETTI AORA300 レビュー比較まとめ.md",
@@ -20939,11 +21162,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "46f3d90a-fab7-49d3-bfa3-da692bc40f10",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s1ceb751086014413b61729a3d4efd56e",
     "title": "koala MIRAIKUSTOM ミライカスタムベッドフレーム クイーン すのこベッド レビュー比較まとめ",
     "name": "koala MIRAIKUSTOM ミライカスタムベッドフレーム クイーン すのこベッド レビュー比較まとめ.md",
@@ -20955,11 +21179,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "9f1113d5-cea1-46c3-af46-af940000fb79",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4460cdcbc2704632a21c69ea9cbb888a",
     "title": "EENOUR DK4000iAPS 発電機 レビュー比較まとめ",
     "name": "EENOUR DK4000iAPS 発電機 レビュー比較まとめ.md",
@@ -20971,11 +21196,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "9c4b406f-a112-45ad-be32-2d15db12b6df",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd9e7e568f7f34871955a3b2cd66f1045",
     "title": "EcoFlow DELTA Pro3 4,096Wh 大容量+ 400W両面軽量 ソーラーパネル セット レビュー比較ま",
     "name": "EcoFlow DELTA Pro3 4,096Wh 大容量+ 400W両面軽量 ソーラーパネル セット レビュー比較ま.md",
@@ -20987,11 +21213,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "3da7a815-0043-4889-b4c6-f5bd13ce72c1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s51b49e2be0694d80a0e03aebf43cfce8",
     "title": "OBSBOT Tail Air レビュー比較まとめ",
     "name": "OBSBOT Tail Air レビュー比較まとめ.md",
@@ -21003,11 +21230,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "e3e82081-d909-4548-824b-8b6ae8a583dc",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sac1f21f22fec4ad086caa4974df7af84",
     "title": "Jackery ポータブル電源 500 New 40W ソーラーパネル 1枚 2点セット 512Wh レビュー比較まとめ",
     "name": "Jackery ポータブル電源 500 New 40W ソーラーパネル 1枚 2点セット 512Wh レビュー比較まとめ.md",
@@ -21019,11 +21247,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "5e586954-bbd2-4a3b-a58f-01f26cc8b1c3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8c9690e2d60541ceb9e669143afa5ad4",
     "title": "EENOUR DK3000iSDF 発電機 レビュー比較まとめ",
     "name": "EENOUR DK3000iSDF 発電機 レビュー比較まとめ.md",
@@ -21035,11 +21264,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "1ff6936f-f387-4b93-9e6e-81d3a866be9c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!seea191793ff841d7849536c0626f7911",
     "title": "JM200 レビュー比較まとめ",
     "name": "JM200 レビュー比較まとめ.md",
@@ -21051,11 +21281,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "72ec96a0-a40b-426a-8cab-1ac12140eb9a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s14857369597e4eb686a35f6b4d3ee90e",
     "title": "ケルヒャー(Karcher) K5プレミアムサイレント ベーシック 1.603-544.0 レビュー比較まとめ",
     "name": "ケルヒャー(Karcher) K5プレミアムサイレント ベーシック 1.603-544.0 レビュー比較まとめ.md",
@@ -21067,11 +21298,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "6993beb5-18da-46d5-acda-09c64714d8ed",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s835c029c04a54af9a625924f013fef88",
     "title": "EENOUR P2001PLUS レビュー比較まとめ",
     "name": "EENOUR P2001PLUS レビュー比較まとめ.md",
@@ -21083,11 +21315,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "cd8c5586-3870-40d7-9cfe-ff90b0c464bb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb6cf99c304274beabfc00649788317a7",
     "title": "Yoshino B1200 SST レビュー比較まとめ",
     "name": "Yoshino B1200 SST レビュー比較まとめ.md",
@@ -21099,11 +21332,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "1b5b08d3-faff-4e1a-81d0-9fd848189c79",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sefa70c8ab1b44a3e892cde05a9c5dcc8",
     "title": "Insta360 X4 アクションカメラ レビュー比較まとめ",
     "name": "Insta360 X4 アクションカメラ レビュー比較まとめ.md",
@@ -21115,11 +21349,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "8cfc65db-8f79-4a96-afb2-1045aabd6719",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s41ba5b3066344d4cb876e6a384fa40bf",
     "title": "HiKOKI 湾曲セーバソーブレード レシプロソーブレード No.154(全長300ｍｍ)( ) 0000-4412 レ",
     "name": "HiKOKI 湾曲セーバソーブレード レシプロソーブレード No.154(全長300ｍｍ)( ) 0000-4412 レ.md",
@@ -21131,11 +21366,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "2577c25e-1080-484b-8ea7-2f89536bf33a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s10f6be03ef1e4e5b970d084b99deb88b",
     "title": "ハイセンス 55E70S テレビ レビュー比較まとめ",
     "name": "ハイセンス 55E70S テレビ レビュー比較まとめ.md",
@@ -21147,11 +21383,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "6a3d4e9e-c9b8-47b0-9b5f-9017f6c15763",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3fb15d2a7e3c4c088314b558477b727d",
     "title": "Jackery 1500 New レビュー比較まとめ",
     "name": "Jackery 1500 New レビュー比較まとめ.md",
@@ -21163,11 +21400,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "d1ff8fc1-4c51-459a-97ea-7169774afb9a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa599bf2f32724ff8988373e0d7c01416",
     "title": "Jackery ポータブル電源 1000 New V3 200W ソーラーパネル 1枚 2点セット 家庭用 レビュー比較",
     "name": "Jackery ポータブル電源 1000 New V3 200W ソーラーパネル 1枚 2点セット 家庭用 レビュー比較.md",
@@ -21179,11 +21417,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "a88ad96c-0c9b-442f-aebc-05d1326a885d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s62d52a7c631445a097f21149d313a00f",
     "title": "サンワダイレクト 400-PSD070 レビュー比較まとめ",
     "name": "サンワダイレクト 400-PSD070 レビュー比較まとめ.md",
@@ -21195,11 +21434,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "747ebfa3-9a1a-49ef-a039-45166cfecd37",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5a8ac8d2077849bf942195a55b0d7d96",
     "title": "EONON UX7SK2J-PRO-MAX-N2 レビュー比較まとめ",
     "name": "EONON UX7SK2J-PRO-MAX-N2 レビュー比較まとめ.md",
@@ -21211,11 +21451,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "b736bf44-ad87-431a-8adf-3fa40bc2e045",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9348bc5152b84f8c8ef3a4af9c093b09",
     "title": "NANLITE FS-300C レビュー比較まとめ",
     "name": "NANLITE FS-300C レビュー比較まとめ.md",
@@ -21227,11 +21468,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "2c2de0a9-9a69-4fe5-9c2c-41c3ebf696a1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s288e14ec021847f5b6f308dc9f0817d3",
     "title": "Philips チューナーレステレビ レビュー比較まとめ",
     "name": "Philips チューナーレステレビ レビュー比較まとめ.md",
@@ -21243,11 +21485,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "0029cb02-b743-4b0f-8776-cf71f1477343",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sccceb64f6ab54cc1802057d56fb0268c",
     "title": "NELL レビュー比較まとめ",
     "name": "NELL レビュー比較まとめ.md",
@@ -21259,11 +21502,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "0bbfb4ea-ac4b-41bc-a289-887da0b21cc0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4e34e290badc41d289b88bb478fadb73",
     "title": "SmallRig x Potato Jet TRIBEX SE 5305 三脚 レビュー比較まとめ",
     "name": "SmallRig x Potato Jet TRIBEX SE 5305 三脚 レビュー比較まとめ.md",
@@ -21275,11 +21519,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "56de03bd-ebf4-434c-914d-66ae5660f5e0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s27e9b86682d8422cb766b7c8bd02ce60",
     "title": "HiKOKI CB12FA2 バンドソー レビュー比較まとめ",
     "name": "HiKOKI CB12FA2 バンドソー レビュー比較まとめ.md",
@@ -21291,11 +21536,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "e0881d5b-b5e9-44c6-b5f1-41af744ca17a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3438b13155b24d31b3f93b84e7a1e558",
     "title": "UGREEN Maxidok 17in1 Thunderbolt5 ドッキングステーション レビュー比較まとめ",
     "name": "UGREEN Maxidok 17in1 Thunderbolt5 ドッキングステーション レビュー比較まとめ.md",
@@ -21307,11 +21553,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "447533de-a948-4616-858a-da82b0bd8bcb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0b98a4b6a4b84883aff3fa633e991731",
     "title": "koala コアラマットレスシュプリーム SUPREME レビュー比較まとめ",
     "name": "koala コアラマットレスシュプリーム SUPREME レビュー比較まとめ.md",
@@ -21323,11 +21570,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f4180340-0c60-49a2-8b75-17de9325830d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb48a85965a254ca5883a038cba4b014f",
     "title": "桐らくね 折りたたみベッド プレミアム３５ レビュー比較まとめ",
     "name": "桐らくね 折りたたみベッド プレミアム３５ レビュー比較まとめ.md",
@@ -21339,11 +21587,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "c57961c4-4d47-44e6-899c-96b22afd3bc7",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s97bddb8649e34a0cb5d357b800636003",
     "title": "SLEEPY TOFU レビュー比較まとめ",
     "name": "SLEEPY TOFU レビュー比較まとめ.md",
@@ -21355,11 +21604,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "1372ed37-e1ed-44b5-b24c-331d3ba21c79",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s382b69aaf00240aca5d23ca991061cdc",
     "title": "AFERIY Nomad1800 レビュー比較まとめ",
     "name": "AFERIY Nomad1800 レビュー比較まとめ.md",
@@ -21371,11 +21621,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "9f606b54-153a-42ef-8d81-1bda104033e4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s219cf4499c3f44fb8df2516d9affc6d1",
     "title": "AWOL VISION ALR (ALR-F220C) プロジェクタースクリーン レビュー比較まとめ",
     "name": "AWOL VISION ALR (ALR-F220C) プロジェクタースクリーン レビュー比較まとめ.md",
@@ -21387,11 +21638,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "304acf79-41c4-494c-a622-f86de5a73c2a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s1fc625d56e0141db96356258429e2ef3",
     "title": "シモンズ AB24A10 レビュー比較まとめ",
     "name": "シモンズ AB24A10 レビュー比較まとめ.md",
@@ -21403,11 +21655,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "6e12fd6a-aa6d-497e-b202-cd0095982128",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s11888f0712594090833118ab4fb1bb3d",
     "title": "Jackery 2000 Plus レビュー比較まとめ",
     "name": "Jackery 2000 Plus レビュー比較まとめ.md",
@@ -21419,11 +21672,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "4adde407-14f9-48da-a5c2-7c8659993d3f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s18d8f67fd65047d0930f8c937d71d4f4",
     "title": "Dabbsson DBS2300plus レビュー比較まとめ",
     "name": "Dabbsson DBS2300plus レビュー比較まとめ.md",
@@ -21435,11 +21689,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "efc557cd-70c4-4206-a69e-79311ab3ca5c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9f29c21c3e164f75aa970c1b46a4e1dd",
     "title": "SIHOO C300-PRO-V2 オフィスチェア デスクチェア レビュー比較まとめ",
     "name": "SIHOO C300-PRO-V2 オフィスチェア デスクチェア レビュー比較まとめ.md",
@@ -21451,11 +21706,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "68a6b030-a69e-4e9b-b3d7-41bfb1959c97",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s85dc8985114b49cf954aeed8b3cfc8df",
     "title": "VENTOTA Soroi レビュー比較まとめ",
     "name": "VENTOTA Soroi レビュー比較まとめ.md",
@@ -21467,11 +21723,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "d4336ef8-7bf2-436b-9ef9-9cade50c28cb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5182d3b663664257b3583514de327416",
     "title": "HiKOKI RP150YD(SC) 集じん機 レビュー比較まとめ",
     "name": "HiKOKI RP150YD(SC) 集じん機 レビュー比較まとめ.md",
@@ -21483,11 +21740,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "b9b5d664-cfbd-4685-a682-ae7721e79af4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb9017e39cb41475784341f8533d49eb9",
     "title": "サンワダイレクト プロジェクター 100-PRS026 スクリーン レビュー比較まとめ",
     "name": "サンワダイレクト プロジェクター 100-PRS026 スクリーン レビュー比較まとめ.md",
@@ -21499,11 +21757,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "db0b6e1f-34a4-48f7-9a42-f2eec4245717",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s167fc2731b454c699875c71ce17e33e5",
     "title": "XbotGo Falcon レビュー比較まとめ",
     "name": "XbotGo Falcon レビュー比較まとめ.md",
@@ -21515,11 +21774,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "81dd983b-4e36-4ba6-bf32-5bcf7c397744",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbdfbc06905084e39bc7569ad305e724a",
     "title": "VITURE Beast レビュー比較まとめ",
     "name": "VITURE Beast レビュー比較まとめ.md",
@@ -21531,11 +21791,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "dda05a82-19f7-456a-838a-3446c2f09890",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2aff9e2c3e2c4440b0ec12038d53eb72",
     "title": "HAIGE LPガスガソリン両用 インバーター 3.5kVA 屋外電源設備 HG-iG4000R-2 発電機 レビュー比",
     "name": "HAIGE LPガスガソリン両用 インバーター 3.5kVA 屋外電源設備 HG-iG4000R-2 発電機 レビュー比.md",
@@ -21547,11 +21808,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "5b143408-4589-4da0-98be-1b47aaf9e28a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3876968eb0f842ea9cd5057f859e487e",
     "title": "XREAL 1S ARグラス レビュー比較まとめ",
     "name": "XREAL 1S ARグラス レビュー比較まとめ.md",
@@ -21563,11 +21825,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "86798db6-a865-4182-915b-ea71b2443f9f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9808a420c704490d9d7b01dd27d07bd4",
     "title": "Hiseeu レビュー比較まとめ",
     "name": "Hiseeu レビュー比較まとめ.md",
@@ -21579,11 +21842,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "190f3834-c5d8-4225-b42a-783a76caa3d0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scb071870664649a3b07a72d4d8f260aa",
     "title": "NELL スイート セミダブル レビュー比較まとめ",
     "name": "NELL スイート セミダブル レビュー比較まとめ.md",
@@ -21595,11 +21859,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "ea2e0097-06d9-4f4e-8fbd-486671a891d7",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s74825e3be72c478aba499ff5fd6862bc",
     "title": "Jackery ポータブル電源 3600Plus 専用拡張バッテリー 3584Wh レビュー比較まとめ",
     "name": "Jackery ポータブル電源 3600Plus 専用拡張バッテリー 3584Wh レビュー比較まとめ.md",
@@ -21611,11 +21876,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "db10680a-2f90-4d96-8f3e-b04cfb278979",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s971d31e9a1294913933f6e18f87a8200",
     "title": "Jackery Solar Generator 2000 Plus レビュー比較まとめ",
     "name": "Jackery Solar Generator 2000 Plus レビュー比較まとめ.md",
@@ -21627,11 +21893,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "9b5a2d0d-4de4-42c3-aafd-13605a3ed97a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4b3ebfec4f0c4093a7a0796c40de08f8",
     "title": "AutoFull M6 Ultra 2.0 レビュー比較まとめ",
     "name": "AutoFull M6 Ultra 2.0 レビュー比較まとめ.md",
@@ -21643,11 +21910,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f70cde39-6058-4bae-95ae-87bcd5be4716",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbaa61b4fbd9e4c5f8df34c0a0792faa3",
     "title": "HiKOKI 36Vコードレス鉄筋カットベンダ VB3616DA(NN) レビュー比較まとめ",
     "name": "HiKOKI 36Vコードレス鉄筋カットベンダ VB3616DA(NN) レビュー比較まとめ.md",
@@ -21659,11 +21927,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "a4b5ac23-ccb1-41e4-a5e7-2e8b74cf0d3c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9cf64b4fca5f4381a45ad82f7ca76194",
     "title": "OPPO Reno16 スマートフォン レビュー比較まとめ",
     "name": "OPPO Reno16 スマートフォン レビュー比較まとめ.md",
@@ -21675,11 +21944,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "04eb529a-90bb-4a4d-943b-639e408aecc9",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sdaabc473912c441cb653291f33d98e4b",
     "title": "NANLITE PJ-BM-25-45 レビュー比較まとめ",
     "name": "NANLITE PJ-BM-25-45 レビュー比較まとめ.md",
@@ -21691,11 +21961,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "e383b0f8-3069-4c38-954e-facb4cd9ec92",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s09013e7356f44e99b0b9af9a11ac2434",
     "title": "XREAL One Pro レビュー比較まとめ",
     "name": "XREAL One Pro レビュー比較まとめ.md",
@@ -21707,11 +21978,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "e385df20-9a23-4dcb-b6aa-49edda9d65a4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0bd36664a83b45f2af9b8f55f39c699d",
     "title": "Neakasa M1 Plus レビュー比較まとめ",
     "name": "Neakasa M1 Plus レビュー比較まとめ.md",
@@ -21723,11 +21995,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "bdc651cd-e18c-4e50-a23e-14388c6d9a53",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd1046024956d484aa88ce685aea77dbb",
     "title": "昭和西川 ドイツ産 グース90％ 羽毛たっぷり ダウンパワー380 抗菌防臭 掛け布団 レビュー比較まとめ",
     "name": "昭和西川 ドイツ産 グース90％ 羽毛たっぷり ダウンパワー380 抗菌防臭 掛け布団 レビュー比較まとめ.md",
@@ -21739,11 +22012,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "5a8e9604-ca00-4ee9-9149-11eff2957563",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scb38c1166c3e47bbb2e91222bb2d0f85",
     "title": "Outisan e-Wagon Lite キャリーカート レビュー比較まとめ",
     "name": "Outisan e-Wagon Lite キャリーカート レビュー比較まとめ.md",
@@ -21755,11 +22029,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "7dda47ee-4cc6-4d62-8802-4fe6239a52a1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sde581d2c407d44bf812acc666809dc2b",
     "title": "OTTOCAST OttoAibox P3 Pro レビュー比較まとめ",
     "name": "OTTOCAST OttoAibox P3 Pro レビュー比較まとめ.md",
@@ -21771,11 +22046,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "7982c542-fe52-4abb-ae56-c17f0e2c9953",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s58fb679cdc7f423883c64ad28df9e477",
     "title": "Jackery 3000 Pro レビュー比較まとめ",
     "name": "Jackery 3000 Pro レビュー比較まとめ.md",
@@ -21787,11 +22063,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "58038ee4-c320-470e-92d4-1af5555338d7",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfb3b08c89ebc4784a2ad3ea60694838a",
     "title": "LIXIL INAX CW-RWA30ABW1 温水洗浄便座 レビュー比較まとめ",
     "name": "LIXIL INAX CW-RWA30ABW1 温水洗浄便座 レビュー比較まとめ.md",
@@ -21803,11 +22080,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "d6945cae-38f8-4e9f-9e43-269d04a27132",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9ed3f42c648c4c788d1aea2f23f87171",
     "title": "HiKOKI 36V 充電式 セーバーソー CR36DA(NN) レシプロソー レビュー比較まとめ",
     "name": "HiKOKI 36V 充電式 セーバーソー CR36DA(NN) レシプロソー レビュー比較まとめ.md",
@@ -21819,11 +22097,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "3e7297cf-cb97-4ac5-831a-7ea8866206bd",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8784b1ceb19d432aa4bc63570d0fb693",
     "title": "ブライトン Rider S810 GPSサイクルコンピューター レビュー比較まとめ",
     "name": "ブライトン Rider S810 GPSサイクルコンピューター レビュー比較まとめ.md",
@@ -21835,11 +22114,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "6b53317f-46f0-4e0e-8b3b-6e8a2a3c215d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s58587084095b493d9b20f42db48b5975",
     "title": "アイリスオーヤマ BPS-30210 人工芝 レビュー比較まとめ",
     "name": "アイリスオーヤマ BPS-30210 人工芝 レビュー比較まとめ.md",
@@ -21851,11 +22131,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "e407ef90-cbe2-482d-aec3-f5d6723ac66a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4fa60876599c4c01b3d3e30f710b9fe9",
     "title": "ル・クルーゼ 鋳物 ホーロー 鍋 ココット・ロンド 鋳物ホーロー鍋 レビュー比較まとめ",
     "name": "ル・クルーゼ 鋳物 ホーロー 鍋 ココット・ロンド 鋳物ホーロー鍋 レビュー比較まとめ.md",
@@ -21867,11 +22148,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "a64038fd-7007-42af-b0e3-ed5d2c8f09d3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se3e463d688dd4625907d963b7c9e06a9",
     "title": "ガーデンマスター(Gardenmaster) DSLB-1515K 物置 屋外 収納庫 レビュー比較まとめ",
     "name": "ガーデンマスター(Gardenmaster) DSLB-1515K 物置 屋外 収納庫 レビュー比較まとめ.md",
@@ -21883,11 +22165,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "8113c927-754f-4fcd-b040-9097c582ba5a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se9906169bfe149fe91b166052779e3aa",
     "title": "HiKOKI(ハイコーキ) R40YA 集じん機 レビュー比較まとめ",
     "name": "HiKOKI(ハイコーキ) R40YA 集じん機 レビュー比較まとめ.md",
@@ -21899,11 +22182,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "1ac55de0-f7d0-4f0b-83d3-4b23ca0e79c0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2218188f917149288953bacec28bcc3a",
     "title": "PORMIDOAUTO G10 レビュー比較まとめ",
     "name": "PORMIDOAUTO G10 レビュー比較まとめ.md",
@@ -21915,11 +22199,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "60f0523d-5657-492c-849d-4f050922f29a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf7463e8846b84d268f42d911d8565075",
     "title": "ASUS ROG DELTA II-KJP ゲーミングヘッドセット レビュー比較まとめ",
     "name": "ASUS ROG DELTA II-KJP ゲーミングヘッドセット レビュー比較まとめ.md",
@@ -21931,11 +22216,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "0474fd09-b2f6-432a-a545-94024078920d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sae4f3e5a11104ee28537b576dba3382b",
     "title": "Withings ScanWatch Vitals ハイブリッドスマートウォッチ レビュー比較まとめ",
     "name": "Withings ScanWatch Vitals ハイブリッドスマートウォッチ レビュー比較まとめ.md",
@@ -21947,11 +22233,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "2f5b0b2d-808e-4a81-9de8-a1c30dfc46e5",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s663851f7332941928c3bebc960e7e555",
     "title": "サンワダイレクト スタンド ハイタイプ 手動昇降式 60～ 対応 耐荷重 キャスター付き 棚板付属 100-PL041",
     "name": "サンワダイレクト スタンド ハイタイプ 手動昇降式 60～ 対応 耐荷重 キャスター付き 棚板付属 100-PL041.md",
@@ -21963,11 +22250,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "2277dea6-958b-4072-9a3f-a93d06f02524",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s97d1789f0d8745e2ac77de009b06ba9f",
     "title": "FUNROLUX 折りたたみダイニングテーブルセット 4人用 伸長式 バタフライテーブル チェア4脚 レビュー比較まとめ",
     "name": "FUNROLUX 折りたたみダイニングテーブルセット 4人用 伸長式 バタフライテーブル チェア4脚 レビュー比較まとめ.md",
@@ -21979,11 +22267,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "1e95758e-c62a-45d7-9ab8-c39168350024",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6c5a439e49a04f4690168a3cef6d22bc",
     "title": "ガーデンマスター(Gardenmaster) KSLB-1515 物置 屋外 収納庫 レビュー比較まとめ",
     "name": "ガーデンマスター(Gardenmaster) KSLB-1515 物置 屋外 収納庫 レビュー比較まとめ.md",
@@ -21995,11 +22284,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "c92db09c-0957-46b1-8caa-be15a6dbe4e8",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbd5ace20eb6f4296ae1e1f31c2bba79a",
     "title": "HiKOKI R36DB スティッククリーナー レビュー比較まとめ",
     "name": "HiKOKI R36DB スティッククリーナー レビュー比較まとめ.md",
@@ -22011,11 +22301,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "d4d74e1a-0f02-4762-8cbe-a7dcdb459502",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!seb59004134404d15aa6f86106912b9fc",
     "title": "イーサプライ EEX-TVS042BK テレビ レビュー比較まとめ",
     "name": "イーサプライ EEX-TVS042BK テレビ レビュー比較まとめ.md",
@@ -22027,11 +22318,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "dc7e15a4-16f4-495e-8812-a79e570dbb66",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd49a6ea13523423d8e83d752c852f6c9",
     "title": "HiKOKI AC100V ロータリーハンマドリル DH28PCY2 レビュー比較まとめ",
     "name": "HiKOKI AC100V ロータリーハンマドリル DH28PCY2 レビュー比較まとめ.md",
@@ -22043,11 +22335,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "15076bc1-a3b1-4f7c-ab69-ee27a59051a0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sefb3728a02d9458fae7b7102a5cb325c",
     "title": "Insta360 Mic Pro（送信機2台＋受信機1台＋充電ケース） レビュー比較まとめ",
     "name": "Insta360 Mic Pro（送信機2台＋受信機1台＋充電ケース） レビュー比較まとめ.md",
@@ -22059,11 +22352,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "eca367f5-6d70-4d7a-b520-9b7b7e104818",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sec582fe6d98844a4aa8afd71a28216fc",
     "title": "HiKOKI CB12-ST2 レビュー比較まとめ",
     "name": "HiKOKI CB12-ST2 レビュー比較まとめ.md",
@@ -22075,11 +22369,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f4a9e26f-b04c-4699-85d2-a92d4d335bd2",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6ecd6e8146f146a4983f0663d6d00077",
     "title": "OTTOCAST Ottocast P3 Pro レビュー比較まとめ",
     "name": "OTTOCAST Ottocast P3 Pro レビュー比較まとめ.md",
@@ -22091,11 +22386,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "06111936-2a59-4b4c-a264-b6b915e0de13",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sec5969f2eb8844e8ab587013c4bebf87",
     "title": "Insta360 X4 Air レビュー比較まとめ",
     "name": "Insta360 X4 Air レビュー比較まとめ.md",
@@ -22107,11 +22403,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "16705ba9-2aad-43c9-9632-1b604c175687",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s523ddcd90bd5461db13eecb3eb70be9d",
     "title": "HiKOKI RP3608DB(L)(NN) 集じん機 レビュー比較まとめ",
     "name": "HiKOKI RP3608DB(L)(NN) 集じん機 レビュー比較まとめ.md",
@@ -22123,11 +22420,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "812d38b0-3653-4681-9b2a-52459e2af913",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s56a309630af247e88b234d343d32952f",
     "title": "Insta360 Ace Pro 2 デュアルバッテリーキット アクションカメラ レビュー比較まとめ",
     "name": "Insta360 Ace Pro 2 デュアルバッテリーキット アクションカメラ レビュー比較まとめ.md",
@@ -22139,11 +22437,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "591facab-30ba-45b1-9363-191e01d41b5a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb9f59f75296c4025b2da1b4b77661ffc",
     "title": "70mai Dash Cam 4K T800 レビュー比較まとめ",
     "name": "70mai Dash Cam 4K T800 レビュー比較まとめ.md",
@@ -22155,11 +22454,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "2378084d-7af3-4e16-93bc-c27cdc82ba12",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8784b1ceb19d432aa4bc63570d0fb693",
     "title": "ブライトン Rider S810 GPSサイクルコンピューター レビュー比較まとめ",
     "name": "ブライトン Rider S810 GPSサイクルコンピューター レビュー比較まとめ.md",
@@ -22171,11 +22471,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "fba53d6f-bc42-4afa-af50-2b701eadb855",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sec5969f2eb8844e8ab587013c4bebf87",
     "title": "Insta360 X4 Air レビュー比較まとめ",
     "name": "Insta360 X4 Air レビュー比較まとめ.md",
@@ -22187,11 +22488,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "b147d162-0dc3-4898-a615-b9870bf4a9b4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s523ddcd90bd5461db13eecb3eb70be9d",
     "title": "HiKOKI RP3608DB(L)(NN) 集じん機 レビュー比較まとめ",
     "name": "HiKOKI RP3608DB(L)(NN) 集じん機 レビュー比較まとめ.md",
@@ -22203,11 +22505,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "a00993ba-7851-45bc-a1d8-2a43c046107d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!seba43ed2719c49c1bedb1ae228f3f1b8",
     "title": "昭和西川 ダックダウン85％ レビュー比較まとめ",
     "name": "昭和西川 ダックダウン85％ レビュー比較まとめ.md",
@@ -22219,11 +22522,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "87309587-3a8d-4dc5-9f67-a6d62183241f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sff05e90114ef4c589df25c6a42995db3",
     "title": "ASUS ROG Kithara ゲーミングヘッドセット レビュー比較まとめ",
     "name": "ASUS ROG Kithara ゲーミングヘッドセット レビュー比較まとめ.md",
@@ -22235,11 +22539,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "c360783d-3b45-44f3-98cd-2d247e2c67ba",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s80a12e1d97f1498faad8f63411abb338",
     "title": "レグザ 75E350S テレビ レビュー比較まとめ",
     "name": "レグザ 75E350S テレビ レビュー比較まとめ.md",
@@ -22251,11 +22556,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "307e2067-8cfd-4c5c-9e45-92d7ec1a7a29",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd5173e8fe344420fa1ec175f23618dc6",
     "title": "EARTH ELEVATED プランター レビュー比較まとめ",
     "name": "EARTH ELEVATED プランター レビュー比較まとめ.md",
@@ -22267,11 +22573,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "bf686b14-8ed4-4295-8b29-04e03ae73e1b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s01ca7ea51a23442e9be97a8b07276985",
     "title": "アイリスオーヤマ TD-SM7070C-BB テレビドアホン レビュー比較まとめ",
     "name": "アイリスオーヤマ TD-SM7070C-BB テレビドアホン レビュー比較まとめ.md",
@@ -22283,11 +22590,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "c8467850-c49f-46f1-83fe-6224e24363d9",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se9906169bfe149fe91b166052779e3aa",
     "title": "HiKOKI(ハイコーキ) R40YA 集じん機 レビュー比較まとめ",
     "name": "HiKOKI(ハイコーキ) R40YA 集じん機 レビュー比較まとめ.md",
@@ -22299,11 +22607,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "cac7b9a9-4841-4f6e-b14f-cc817636ca26",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd49a6ea13523423d8e83d752c852f6c9",
     "title": "HiKOKI AC100V ロータリーハンマドリル DH28PCY2 レビュー比較まとめ",
     "name": "HiKOKI AC100V ロータリーハンマドリル DH28PCY2 レビュー比較まとめ.md",
@@ -22315,11 +22624,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "70974339-eabf-4f6d-a047-73241f0858a3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2ca49e427634419cbaf5cd6b8cf30460",
     "title": "HiKOKI DH3628DA レビュー比較まとめ",
     "name": "HiKOKI DH3628DA レビュー比較まとめ.md",
@@ -22331,11 +22641,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "4c6b7f29-db76-4006-b26c-5b7fe8a3935e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s97d1789f0d8745e2ac77de009b06ba9f",
     "title": "FUNROLUX 折りたたみダイニングテーブルセット 4人用 伸長式 バタフライテーブル チェア4脚 レビュー比較まとめ",
     "name": "FUNROLUX 折りたたみダイニングテーブルセット 4人用 伸長式 バタフライテーブル チェア4脚 レビュー比較まとめ.md",
@@ -22347,11 +22658,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "ec712db1-d329-459e-bfd3-9ea6a4076ca4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scc0b2c67b62a417d92900edda448fe7f",
     "title": "LIXIL(リクシル) INAX シャワートイレ RAシリーズ 瞬間式 工事不要 CW-RAA20 BN8 温水洗浄便座",
     "name": "LIXIL(リクシル) INAX シャワートイレ RAシリーズ 瞬間式 工事不要 CW-RAA20 BN8 温水洗浄便座.md",
@@ -22363,11 +22675,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "9ea50595-05cf-47e6-ae3a-f7db45d5c3f5",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s56a309630af247e88b234d343d32952f",
     "title": "Insta360 Ace Pro 2 デュアルバッテリーキット アクションカメラ レビュー比較まとめ",
     "name": "Insta360 Ace Pro 2 デュアルバッテリーキット アクションカメラ レビュー比較まとめ.md",
@@ -22379,11 +22692,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "0de35634-1749-4ddd-bfdb-fc959509dd34",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s21a27eb9bb6e4db7841261ad8e3b1370",
     "title": "ヒツジのいらない枕 ヒツジのいらないマットレス ーSLEEPERー セミダブル レビュー比較まとめ",
     "name": "ヒツジのいらない枕 ヒツジのいらないマットレス ーSLEEPERー セミダブル レビュー比較まとめ.md",
@@ -22395,11 +22709,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "bce5d387-32a1-4144-ade1-7d2771dd2d74",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbf63607a33eb418db029dcde105d6394",
     "title": "FUNROLUX 折りたたみダイニングテーブル 4人 伸長式 バタフライテーブル 4椅子付き可動式 引き出しと収納付き",
     "name": "FUNROLUX 折りたたみダイニングテーブル 4人 伸長式 バタフライテーブル 4椅子付き可動式 引き出しと収納付き.md",
@@ -22411,11 +22726,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "cb6833d1-18a8-46b8-92b5-ece0e40f7192",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s09175ee3b492427f98a38ebdc549b04b",
     "title": "ポーミド PRD81C-1 レビュー比較まとめ",
     "name": "ポーミド PRD81C-1 レビュー比較まとめ.md",
@@ -22427,11 +22743,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "ce0240f3-e496-44aa-82ea-cc94cdb83212",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4a4053b158db4a8c91ae1dd1bc5b3da9",
     "title": "Wacom Intuos Pro medium TPTK670K0C ペンタブレット レビュー比較まとめ",
     "name": "Wacom Intuos Pro medium TPTK670K0C ペンタブレット レビュー比較まとめ.md",
@@ -22443,11 +22760,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "2d6a6592-211a-40a4-b986-39b46b1dafc1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfb3b08c89ebc4784a2ad3ea60694838a",
     "title": "LIXIL INAX CW-RWA30ABW1 温水洗浄便座 レビュー比較まとめ",
     "name": "LIXIL INAX CW-RWA30ABW1 温水洗浄便座 レビュー比較まとめ.md",
@@ -22459,11 +22777,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "05034bc7-e52b-41cb-be0f-38f4a5c26e71",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2ca49e427634419cbaf5cd6b8cf30460",
     "title": "HiKOKI DH3628DA レビュー比較まとめ",
     "name": "HiKOKI DH3628DA レビュー比較まとめ.md",
@@ -22475,11 +22794,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "06aa0e9a-c796-488c-a30c-86c4e5f60901",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s88c9608f5d0646a882f03b59c4c60bf6",
     "title": "Logicool G G923d レビュー比較まとめ",
     "name": "Logicool G G923d レビュー比較まとめ.md",
@@ -22491,11 +22811,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "bbf48607-4247-4be7-8453-bdeecd83a019",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd5173e8fe344420fa1ec175f23618dc6",
     "title": "EARTH ELEVATED プランター レビュー比較まとめ",
     "name": "EARTH ELEVATED プランター レビュー比較まとめ.md",
@@ -22507,11 +22828,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "8fb7688c-3dab-4836-99c6-7430294c956f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7b356379218144279d3a6c82b80731b8",
     "title": "FLEXISPOT C7 Pro デスクチェア レビュー比較まとめ",
     "name": "FLEXISPOT C7 Pro デスクチェア レビュー比較まとめ.md",
@@ -22523,11 +22845,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "80f415a7-4d6a-4e72-8921-fe664b0a9199",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7b356379218144279d3a6c82b80731b8",
     "title": "FLEXISPOT C7 Pro デスクチェア レビュー比較まとめ",
     "name": "FLEXISPOT C7 Pro デスクチェア レビュー比較まとめ.md",
@@ -22539,11 +22862,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "b2835c31-533f-4882-880b-452985afce55",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se8024434aa2445a09ebc2fb2cd56b355",
     "title": "ながら洗車 イージーショット×タンクセット 高圧洗浄機 レビュー比較まとめ",
     "name": "ながら洗車 イージーショット×タンクセット 高圧洗浄機 レビュー比較まとめ.md",
@@ -22555,11 +22879,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "144c1ec7-4105-41df-8e4d-39be20a73fb5",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7f08cd49d9c543499a3c1f0ff8713ff2",
     "title": "YESKAMOO レビュー比較まとめ",
     "name": "YESKAMOO レビュー比較まとめ.md",
@@ -22571,11 +22896,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "09cac087-a0f4-4028-97f1-7ff215c9a090",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s504d2b953bed48d9987b72690a57f2b2",
     "title": "レグザ 100E670R テレビ レビュー比較まとめ",
     "name": "レグザ 100E670R テレビ レビュー比較まとめ.md",
@@ -22587,11 +22913,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "fd8c4952-42a8-46db-80ec-7d9ae370431c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6f7f5d2db77847e8b84629cba70b1392",
     "title": "Potensic ATOM 2 レビュー比較まとめ",
     "name": "Potensic ATOM 2 レビュー比較まとめ.md",
@@ -22603,11 +22930,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "ab68f339-6f3b-45e0-889f-a773d95c2b11",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc6b62dfc730e447f888023dd10908c8c",
     "title": "山善(YAMAZEN) ELD-FS(MBK)T1400(SDGY) デスク レビュー比較まとめ",
     "name": "山善(YAMAZEN) ELD-FS(MBK)T1400(SDGY) デスク レビュー比較まとめ.md",
@@ -22619,11 +22947,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "574190c2-8f99-44e9-b70b-1cd94d55effd",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa8555212701b4da6855aebde46b8d55e",
     "title": "ガーデンマスター(Gardenmaster) DSLB-1515K レビュー比較まとめ",
     "name": "ガーデンマスター(Gardenmaster) DSLB-1515K レビュー比較まとめ.md",
@@ -22635,11 +22964,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "b8b740e9-d584-4360-91f6-88dd8eb1de49",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfaa14349b45043b3a4fa1c9976674e56",
     "title": "Bauhutte 電動スーパーゲーミング スーパーロー BHD-1400FAL-BK デスク レビュー比較まとめ",
     "name": "Bauhutte 電動スーパーゲーミング スーパーロー BHD-1400FAL-BK デスク レビュー比較まとめ.md",
@@ -22651,11 +22981,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "deff0003-f3ac-4ad6-8fe7-bbc214d399c8",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s09ac026498874f1eb0d8c0b5359346f0",
     "title": "HiKOKI C3606DB(XPSZ) レビュー比較まとめ",
     "name": "HiKOKI C3606DB(XPSZ) レビュー比較まとめ.md",
@@ -22667,11 +22998,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "cab735d3-247c-4b8c-9f63-92a4c62dc434",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s01ca7ea51a23442e9be97a8b07276985",
     "title": "アイリスオーヤマ TD-SM7070C-BB テレビドアホン レビュー比較まとめ",
     "name": "アイリスオーヤマ TD-SM7070C-BB テレビドアホン レビュー比較まとめ.md",
@@ -22683,11 +23015,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "05a28c79-2920-4357-a7f3-ac444381bbb6",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfd4537165e4d4aa4a30476aa16735dff",
     "title": "PHILIPS (フィリップス) PUH7231 テレビ レビュー比較まとめ",
     "name": "PHILIPS (フィリップス) PUH7231 テレビ レビュー比較まとめ.md",
@@ -22699,11 +23032,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "ab6ae357-9968-43ed-888c-2bce8c8d0563",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd2aa72c4df7c4e89836f10a67a7c4f09",
     "title": "HiKOKI CB3612DA(NN) バンドソー レビュー比較まとめ",
     "name": "HiKOKI CB3612DA(NN) バンドソー レビュー比較まとめ.md",
@@ -22715,11 +23049,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "c987ede8-13a7-4f2c-b5ec-30cc2d21fb0e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scf6b481ba7644e139dd5cdab837aa2c3",
     "title": "ガーデンマスター(Gardenmaster) DSLB-1515 物置 屋外 収納庫 レビュー比較まとめ",
     "name": "ガーデンマスター(Gardenmaster) DSLB-1515 物置 屋外 収納庫 レビュー比較まとめ.md",
@@ -22731,11 +23066,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "ecdba262-1871-41e6-881d-d4aa4da6591f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sdf4ac5d41ad14ad2afc8d48b0c81b42f",
     "title": "HiKOKI(ハイコーキ) H41SE レビュー比較まとめ",
     "name": "HiKOKI(ハイコーキ) H41SE レビュー比較まとめ.md",
@@ -22747,11 +23083,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "e858c941-9c2f-4ae8-9333-8764f711e1fa",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7e6ba22a2b1a40228b017dc066b18012",
     "title": "雲のやすらぎ プレミアム 三つ折りマットレス セミダブル レビュー比較まとめ",
     "name": "雲のやすらぎ プレミアム 三つ折りマットレス セミダブル レビュー比較まとめ.md",
@@ -22763,11 +23100,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "1563be75-3bb5-4e2c-840a-61c766fb2b14",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa830aed8d2dd4ee5aff8165966b4079d",
     "title": "Logicool G ハンコン G29 LPRC-15000d レビュー比較まとめ",
     "name": "Logicool G ハンコン G29 LPRC-15000d レビュー比較まとめ.md",
@@ -22779,11 +23117,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "3960aeec-5e50-4ab5-b74b-d8d2f7e1cd08",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb06a0831405242d2b59b5cd26d90706f",
     "title": "AIVOLT 発電機 レビュー比較まとめ",
     "name": "AIVOLT 発電機 レビュー比較まとめ.md",
@@ -22795,11 +23134,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "0e59aaa0-a7e5-455c-a85b-96333eb64957",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb06a0831405242d2b59b5cd26d90706f",
     "title": "AIVOLT 発電機 レビュー比較まとめ",
     "name": "AIVOLT 発電機 レビュー比較まとめ.md",
@@ -22811,11 +23151,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "b74d5c0b-dc22-4dab-aea2-da1d5fcebcc0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se8024434aa2445a09ebc2fb2cd56b355",
     "title": "ながら洗車 イージーショット×タンクセット 高圧洗浄機 レビュー比較まとめ",
     "name": "ながら洗車 イージーショット×タンクセット 高圧洗浄機 レビュー比較まとめ.md",
@@ -22827,11 +23168,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "b6014a67-c106-4321-839c-e683214398fe",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb39dfe4770bc4e0bb9e20b7877aa8bcc",
     "title": "Samsung Samsung Galaxy Watch8 スマートウォッチ レビュー比較まとめ",
     "name": "Samsung Samsung Galaxy Watch8 スマートウォッチ レビュー比較まとめ.md",
@@ -22843,11 +23185,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "83413b9d-4195-48ef-8f2a-d9fcc9e58a78",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s343911f59ad54d4b9435a77ea56c551d",
     "title": "HOKUTO HB-50EM 防湿庫・ドライボックス レビュー比較まとめ",
     "name": "HOKUTO HB-50EM 防湿庫・ドライボックス レビュー比較まとめ.md",
@@ -22859,11 +23202,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f5b6e556-af06-478d-ba0e-cdfabe29ba59",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s663851f7332941928c3bebc960e7e555",
     "title": "サンワダイレクト スタンド ハイタイプ 手動昇降式 60～ 対応 耐荷重 キャスター付き 棚板付属 100-PL041",
     "name": "サンワダイレクト スタンド ハイタイプ 手動昇降式 60～ 対応 耐荷重 キャスター付き 棚板付属 100-PL041.md",
@@ -22875,11 +23219,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "669cec1c-23c8-4771-b9a1-0c2d2ffd9574",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc6b62dfc730e447f888023dd10908c8c",
     "title": "山善(YAMAZEN) ELD-FS(MBK)T1400(SDGY) デスク レビュー比較まとめ",
     "name": "山善(YAMAZEN) ELD-FS(MBK)T1400(SDGY) デスク レビュー比較まとめ.md",
@@ -22891,11 +23236,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "6bf7f5e2-dabe-44a6-b4d0-dbf85e4aec9b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc79dcf3e8b604e8384297d74a6c27838",
     "title": "ベルメゾン フロアソファー グータラグ ダブルコーナータイプ 撥水 カバーが洗える ラグの厚さが選べる ロー ソファ・カ",
     "name": "ベルメゾン フロアソファー グータラグ ダブルコーナータイプ 撥水 カバーが洗える ラグの厚さが選べる ロー ソファ・カ.md",
@@ -22907,11 +23253,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "8fdda369-1f3f-43de-b1af-104dd3c87549",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9ed3f42c648c4c788d1aea2f23f87171",
     "title": "HiKOKI 36V 充電式 セーバーソー CR36DA(NN) レシプロソー レビュー比較まとめ",
     "name": "HiKOKI 36V 充電式 セーバーソー CR36DA(NN) レシプロソー レビュー比較まとめ.md",
@@ -22923,11 +23270,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "8bb4f9e1-9a2d-4a6d-bec9-ce48943949f5",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2e25df9b5bce442d96d55545752a2c05",
     "title": "エムリリー 優反発 マットレス セミダブル 厚さ レビュー比較まとめ",
     "name": "エムリリー 優反発 マットレス セミダブル 厚さ レビュー比較まとめ.md",
@@ -22939,11 +23287,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "aa24077e-ff6b-4e59-926b-f292ada2d738",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb598e8c441a34a258db2465aa2d1b140",
     "title": "サンワダイレクト 業務用 400-PSD073BK レビュー比較まとめ",
     "name": "サンワダイレクト 業務用 400-PSD073BK レビュー比較まとめ.md",
@@ -22955,11 +23304,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "c26d3ace-e94a-4beb-91e8-511ef9678666",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0bc2ce88dfaa4d858199184c17427591",
     "title": "HiKOKI(ハイコーキ) WR18DH インパクトレンチ レビュー比較まとめ",
     "name": "HiKOKI(ハイコーキ) WR18DH インパクトレンチ レビュー比較まとめ.md",
@@ -22971,11 +23321,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "0fd866b1-9c77-4007-b265-658524d065cd",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbefc7debc2274e469fdd210c40051d09",
     "title": "HAZET 606N12 レビュー比較まとめ",
     "name": "HAZET 606N12 レビュー比較まとめ.md",
@@ -22987,11 +23338,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "eb0776b3-d652-4400-9659-d9bbd5935655",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s57c25c9189694f6abdffe7fe2017a479",
     "title": "昭和西川 ドイツ産 ダック90％ セミダブルロング レビュー比較まとめ",
     "name": "昭和西川 ドイツ産 ダック90％ セミダブルロング レビュー比較まとめ.md",
@@ -23003,11 +23355,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "95ef2ff1-6d4d-4490-a9f6-a5f2731a0914",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s49ab1abc4d534647b8272b517d050604",
     "title": "サンワダイレクト 400-PSD037 電動 シュレッダー 業務用 大容量 40L レビュー比較まとめ",
     "name": "サンワダイレクト 400-PSD037 電動 シュレッダー 業務用 大容量 40L レビュー比較まとめ.md",
@@ -23019,11 +23372,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "c0adb1fb-2c02-495b-ac4e-8992e19f9012",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc87e97f9c0ff4ee6a4521c4efaadf9da",
     "title": "HAIGE HG-3WF-3A レビュー比較まとめ",
     "name": "HAIGE HG-3WF-3A レビュー比較まとめ.md",
@@ -23035,11 +23389,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "5d295af6-a6e0-4d86-afb2-d49d36d8b1d2",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc79dcf3e8b604e8384297d74a6c27838",
     "title": "ベルメゾン フロアソファー グータラグ ダブルコーナータイプ 撥水 カバーが洗える ラグの厚さが選べる ロー ソファ・カ",
     "name": "ベルメゾン フロアソファー グータラグ ダブルコーナータイプ 撥水 カバーが洗える ラグの厚さが選べる ロー ソファ・カ.md",
@@ -23051,11 +23406,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "75e3ea35-88bf-479c-8d01-714eb5ace595",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s56c9d97c370e47c99e8214b962669c50",
     "title": "HUAWEI WATCH GT 6 Pro スマートウォッチ レビュー比較まとめ",
     "name": "HUAWEI WATCH GT 6 Pro スマートウォッチ レビュー比較まとめ.md",
@@ -23067,11 +23423,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "fc2e4242-4b6f-4606-a905-79982ec6bebe",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbd5ace20eb6f4296ae1e1f31c2bba79a",
     "title": "HiKOKI R36DB スティッククリーナー レビュー比較まとめ",
     "name": "HiKOKI R36DB スティッククリーナー レビュー比較まとめ.md",
@@ -23083,11 +23440,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f2de5145-e0f9-4fb0-a699-7a18ac6fc9af",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sec64f16ad35c4591a5bb78eaf10b84a4",
     "title": "Samsung Galaxy Watch8 スマートウォッチ レビュー比較まとめ",
     "name": "Samsung Galaxy Watch8 スマートウォッチ レビュー比較まとめ.md",
@@ -23099,11 +23457,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "7acbbd36-7340-4c8b-8a5f-92b1d713d35d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3b9cb6952c584cb48119b48504a5efb0",
     "title": "PRD82 レビュー比較まとめ",
     "name": "PRD82 レビュー比較まとめ.md",
@@ -23115,11 +23474,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "42377050-00b8-4ebf-b818-aa47bb6deaba",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf7463e8846b84d268f42d911d8565075",
     "title": "ASUS ROG DELTA II-KJP ゲーミングヘッドセット レビュー比較まとめ",
     "name": "ASUS ROG DELTA II-KJP ゲーミングヘッドセット レビュー比較まとめ.md",
@@ -23131,11 +23491,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f90dd32a-8bb2-47ff-93be-407553f135ad",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd40ff5dd45754926ad83aed904811120",
     "title": "バッファロー おもいでばこ 有線 Giga LAN エントリーモデル PD-2000E-L レビュー比較まとめ",
     "name": "バッファロー おもいでばこ 有線 Giga LAN エントリーモデル PD-2000E-L レビュー比較まとめ.md",
@@ -23147,11 +23508,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "7bf7225b-a663-4a55-a1f8-1762ba0dc839",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sefbe3368b8934ae89ddafad8f8b8bcaa",
     "title": "FLEXISPOT Lotus リクライニングチェア ソファー レビュー比較まとめ",
     "name": "FLEXISPOT Lotus リクライニングチェア ソファー レビュー比較まとめ.md",
@@ -23163,11 +23525,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "65664dbf-8ddb-4cee-85fe-c49d406a23eb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfaa14349b45043b3a4fa1c9976674e56",
     "title": "Bauhutte 電動スーパーゲーミング スーパーロー BHD-1400FAL-BK デスク レビュー比較まとめ",
     "name": "Bauhutte 電動スーパーゲーミング スーパーロー BHD-1400FAL-BK デスク レビュー比較まとめ.md",
@@ -23179,11 +23542,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "d0d8883e-07ad-4c59-83fc-4c9d013bd8eb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6c5a439e49a04f4690168a3cef6d22bc",
     "title": "ガーデンマスター(Gardenmaster) KSLB-1515 物置 屋外 収納庫 レビュー比較まとめ",
     "name": "ガーデンマスター(Gardenmaster) KSLB-1515 物置 屋外 収納庫 レビュー比較まとめ.md",
@@ -23195,11 +23559,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "96c9f846-d202-459c-814b-763297e6cb4f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa9b13f07efec4cc2bebc1f23ece06e44",
     "title": "HiKOKI AW18DBL(LXPZ) レビュー比較まとめ",
     "name": "HiKOKI AW18DBL(LXPZ) レビュー比較まとめ.md",
@@ -23211,11 +23576,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "75350d3b-4b52-42cd-9349-20ccbbc44974",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd068066b626d48e8a3f0af822f1ceb27",
     "title": "Ledlenser H Signatureシリーズ LEDヘッドライト レビュー比較まとめ",
     "name": "Ledlenser H Signatureシリーズ LEDヘッドライト レビュー比較まとめ.md",
@@ -23227,11 +23593,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "796c43e6-bd31-434b-b3ee-7706cc22a709",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sec9c8831a04b4be297f2c1c813835c82",
     "title": "YESKAMOO 防犯カメラ セット レビュー比較まとめ",
     "name": "YESKAMOO 防犯カメラ セット レビュー比較まとめ.md",
@@ -23243,11 +23610,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "ab5782be-09e3-412c-a698-788cefaa1f87",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc01b4227a5c54990b12c90790741d45c",
     "title": "EENOUR GS900i-B 発電機 レビュー比較まとめ",
     "name": "EENOUR GS900i-B 発電機 レビュー比較まとめ.md",
@@ -23259,11 +23627,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "0880f8a9-2dfe-46cc-b0be-5e1d529d2f30",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sce31efc2addb4a4faca5eb77f4c9e31f",
     "title": "HiKOKI WR36DE(2XPSZ) インパクトレンチ レビュー比較まとめ",
     "name": "HiKOKI WR36DE(2XPSZ) インパクトレンチ レビュー比較まとめ.md",
@@ -23275,11 +23644,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "b7430524-5d82-4175-a22e-8846585d2a34",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3cbbca2cea1c46e3b3efbd231fef4c27",
     "title": "VOICE Model-G5 レーザー墨出し器 レビュー比較まとめ",
     "name": "VOICE Model-G5 レーザー墨出し器 レビュー比較まとめ.md",
@@ -23291,11 +23661,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "3c8c0f93-5777-4d57-a879-529afc781695",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s88c9608f5d0646a882f03b59c4c60bf6",
     "title": "Logicool G G923d レビュー比較まとめ",
     "name": "Logicool G G923d レビュー比較まとめ.md",
@@ -23307,11 +23678,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "8c328bf0-10b1-49ea-a9be-e9ef7fe5d042",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3b9cb6952c584cb48119b48504a5efb0",
     "title": "PRD82 レビュー比較まとめ",
     "name": "PRD82 レビュー比較まとめ.md",
@@ -23323,11 +23695,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "3bb1a40f-58c1-4a4c-8a9a-424d64bad4ab",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sdf4ac5d41ad14ad2afc8d48b0c81b42f",
     "title": "HiKOKI(ハイコーキ) H41SE レビュー比較まとめ",
     "name": "HiKOKI(ハイコーキ) H41SE レビュー比較まとめ.md",
@@ -23339,11 +23712,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "1645f0fa-535b-4dcb-a6dd-04e828248727",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfa79617968cc4e9aa9bd7ae48150cc27",
     "title": "RASIK トゥーリエ レビュー比較まとめ",
     "name": "RASIK トゥーリエ レビュー比較まとめ.md",
@@ -23355,11 +23729,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f12baa59-5775-4768-af5f-94b65f5b8d68",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa830aed8d2dd4ee5aff8165966b4079d",
     "title": "Logicool G ハンコン G29 LPRC-15000d レビュー比較まとめ",
     "name": "Logicool G ハンコン G29 LPRC-15000d レビュー比較まとめ.md",
@@ -23371,11 +23746,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f4bd4aff-8f8d-41db-a11b-f55d94dd7534",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sbefc7debc2274e469fdd210c40051d09",
     "title": "HAZET 606N12 レビュー比較まとめ",
     "name": "HAZET 606N12 レビュー比較まとめ.md",
@@ -23387,11 +23763,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "134e9550-2199-4d43-a685-2c7268b1820b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s003563c5719c4deb8dcfc68435a7777a",
     "title": "ベルメゾン グータラグ メルトロ チャコール 大 厚さ ソファ・カウチ レビュー比較まとめ",
     "name": "ベルメゾン グータラグ メルトロ チャコール 大 厚さ ソファ・カウチ レビュー比較まとめ.md",
@@ -23403,11 +23780,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "325c30d0-a5f3-4cd0-a4bf-2be3c59d28d8",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sec9c8831a04b4be297f2c1c813835c82",
     "title": "YESKAMOO 防犯カメラ セット レビュー比較まとめ",
     "name": "YESKAMOO 防犯カメラ セット レビュー比較まとめ.md",
@@ -23419,11 +23797,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f15e5a4c-ba4e-4cc9-9538-7d99371b1cc8",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfa79617968cc4e9aa9bd7ae48150cc27",
     "title": "RASIK トゥーリエ レビュー比較まとめ",
     "name": "RASIK トゥーリエ レビュー比較まとめ.md",
@@ -23435,11 +23814,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "87226cf0-5f4c-4842-b9c4-c024dab33dc5",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!seba43ed2719c49c1bedb1ae228f3f1b8",
     "title": "昭和西川 ダックダウン85％ レビュー比較まとめ",
     "name": "昭和西川 ダックダウン85％ レビュー比較まとめ.md",
@@ -23451,11 +23831,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "e376e799-a7da-4cba-b264-e57fb2215aaa",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s41c544b7204944298dc1406dcb826078",
     "title": "PORMIDOAUTO レビュー比較まとめ",
     "name": "PORMIDOAUTO レビュー比較まとめ.md",
@@ -23467,11 +23848,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "911b4316-fc54-4b8b-b5e5-45fab59993f6",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6f7f5d2db77847e8b84629cba70b1392",
     "title": "Potensic ATOM 2 レビュー比較まとめ",
     "name": "Potensic ATOM 2 レビュー比較まとめ.md",
@@ -23483,11 +23865,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f40ec385-e55a-4108-bf92-c5894ac6fa36",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sff05e90114ef4c589df25c6a42995db3",
     "title": "ASUS ROG Kithara ゲーミングヘッドセット レビュー比較まとめ",
     "name": "ASUS ROG Kithara ゲーミングヘッドセット レビュー比較まとめ.md",
@@ -23499,11 +23882,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "0ca06376-5fc0-40e7-8c47-170d64305f51",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb9f59f75296c4025b2da1b4b77661ffc",
     "title": "70mai Dash Cam 4K T800 レビュー比較まとめ",
     "name": "70mai Dash Cam 4K T800 レビュー比較まとめ.md",
@@ -23515,11 +23899,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "08afd7b0-589c-4f89-81cb-258fb6a027d0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc01b4227a5c54990b12c90790741d45c",
     "title": "EENOUR GS900i-B 発電機 レビュー比較まとめ",
     "name": "EENOUR GS900i-B 発電機 レビュー比較まとめ.md",
@@ -23531,11 +23916,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "6a7b59fa-2ff8-4f4b-96bc-f2bc4ee07f69",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6ecd6e8146f146a4983f0663d6d00077",
     "title": "OTTOCAST Ottocast P3 Pro レビュー比較まとめ",
     "name": "OTTOCAST Ottocast P3 Pro レビュー比較まとめ.md",
@@ -23547,11 +23933,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "eb0536a9-e1a1-4869-84ef-7390247e80c4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc87e97f9c0ff4ee6a4521c4efaadf9da",
     "title": "HAIGE HG-3WF-3A レビュー比較まとめ",
     "name": "HAIGE HG-3WF-3A レビュー比較まとめ.md",
@@ -23563,11 +23950,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "47c43923-a6fa-491e-8280-81caede1e0f0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s80a12e1d97f1498faad8f63411abb338",
     "title": "レグザ 75E350S テレビ レビュー比較まとめ",
     "name": "レグザ 75E350S テレビ レビュー比較まとめ.md",
@@ -23579,11 +23967,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "55de9f95-2721-43e6-aa40-79f374667330",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd2aa72c4df7c4e89836f10a67a7c4f09",
     "title": "HiKOKI CB3612DA(NN) バンドソー レビュー比較まとめ",
     "name": "HiKOKI CB3612DA(NN) バンドソー レビュー比較まとめ.md",
@@ -23595,11 +23984,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "fcecf1e7-2638-4842-9592-1930ec3d22e8",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s38b24abf0ed34c2bbe3170fb151f963f",
     "title": "VENTOTA Larco ソファベッド レビュー比較まとめ",
     "name": "VENTOTA Larco ソファベッド レビュー比較まとめ.md",
@@ -23611,11 +24001,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "b51fc6e8-397f-492b-a60d-1792756cb3c6",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf331ff93c9d946c8ba6d317e37e0bd56",
     "title": "ガーデンマスター ASB-1215 レビュー比較まとめ",
     "name": "ガーデンマスター ASB-1215 レビュー比較まとめ.md",
@@ -23627,11 +24018,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "e5b3bdc1-acf6-4922-8511-0c0c300c49ce",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb94d5c26021c4472abd13afa80597da4",
     "title": "HiKOKI 36V 充電式 集じん丸のこ C3605DYB( ) レビュー比較まとめ",
     "name": "HiKOKI 36V 充電式 集じん丸のこ C3605DYB( ) レビュー比較まとめ.md",
@@ -23643,11 +24035,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "1d392da6-a291-4954-b7a0-ef00f7785776",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sec64f16ad35c4591a5bb78eaf10b84a4",
     "title": "Samsung Galaxy Watch8 スマートウォッチ レビュー比較まとめ",
     "name": "Samsung Galaxy Watch8 スマートウォッチ レビュー比較まとめ.md",
@@ -23659,11 +24052,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "0255cf08-9ad5-4cee-bf29-1651dc787c18",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s57d04833b3f74d6cb39f8a51f99f1aee",
     "title": "HiKOKI No.143(全長250ｍｍ)(50枚入) レビュー比較まとめ",
     "name": "HiKOKI No.143(全長250ｍｍ)(50枚入) レビュー比較まとめ.md",
@@ -23675,11 +24069,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "4ea91d37-e1ec-4923-bf6c-ddf5f0576cbc",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s504d2b953bed48d9987b72690a57f2b2",
     "title": "レグザ 100E670R テレビ レビュー比較まとめ",
     "name": "レグザ 100E670R テレビ レビュー比較まとめ.md",
@@ -23691,11 +24086,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "f9da2d38-b8de-4480-b96f-1718a650bd89",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf331ff93c9d946c8ba6d317e37e0bd56",
     "title": "ガーデンマスター ASB-1215 レビュー比較まとめ",
     "name": "ガーデンマスター ASB-1215 レビュー比較まとめ.md",
@@ -23707,11 +24103,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "38d7ddd0-872a-49b6-9bd1-3450413adb9e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2e25df9b5bce442d96d55545752a2c05",
     "title": "エムリリー 優反発 マットレス セミダブル 厚さ レビュー比較まとめ",
     "name": "エムリリー 優反発 マットレス セミダブル 厚さ レビュー比較まとめ.md",
@@ -23723,11 +24120,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "4cc4d1c5-3e3b-414d-b2ca-e6f31eb96789",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s09ac026498874f1eb0d8c0b5359346f0",
     "title": "HiKOKI C3606DB(XPSZ) レビュー比較まとめ",
     "name": "HiKOKI C3606DB(XPSZ) レビュー比較まとめ.md",
@@ -23739,7 +24137,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-09-29T06:46:49.825Z"
   },
   {
     "id": "9d28949d-4780-432e-9a7f-22c3a68d150a",
