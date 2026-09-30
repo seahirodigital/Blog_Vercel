@@ -1194,7 +1194,7 @@
   },
   {
     "id": "7642dfe3-f0ab-44df-b20e-fdcb046c4851",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sfa79617968cc4e9aa9bd7ae48150cc27",
     "title": "RASIK トゥーリエ レビュー比較まとめ",
     "name": "RASIK トゥーリエ レビュー比較まとめ.md",
@@ -1204,8 +1204,8 @@
     "publishAt": "2026-09-30T07:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
     "queuedAt": "2026-09-30T13:04:21.194032+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-30T13:07:17.324362+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nc4747dbdfd02?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
