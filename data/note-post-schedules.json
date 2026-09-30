@@ -1410,7 +1410,7 @@
   },
   {
     "id": "32c19497-8c8a-4ef2-8b98-dc3b4f59675c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb94d5c26021c4472abd13afa80597da4",
     "title": "HiKOKI 36V 充電式 集じん丸のこ C3605DYB( ) レビュー比較まとめ",
     "name": "HiKOKI 36V 充電式 集じん丸のこ C3605DYB( ) レビュー比較まとめ.md",
@@ -1420,8 +1420,8 @@
     "publishAt": "2026-09-30T17:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
     "queuedAt": "2026-09-30T16:55:23.963881+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-30T17:32:25.506296+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nfb8b708529be?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
