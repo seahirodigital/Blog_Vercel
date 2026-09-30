@@ -1374,7 +1374,7 @@
   },
   {
     "id": "97fd71cc-d237-40d8-a24a-5559f30302b4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd068066b626d48e8a3f0af822f1ceb27",
     "title": "Ledlenser H Signatureシリーズ LEDヘッドライト レビュー比較まとめ",
     "name": "Ledlenser H Signatureシリーズ LEDヘッドライト レビュー比較まとめ.md",
@@ -1384,8 +1384,8 @@
     "publishAt": "2026-09-30T16:00:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
     "queuedAt": "2026-09-30T15:25:59.008800+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-30T16:02:32.604083+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n82bd136eb507?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
