@@ -1464,7 +1464,7 @@
   },
   {
     "id": "8876539c-2dec-407e-a83d-f98bfd8b3384",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sc6b62dfc730e447f888023dd10908c8c",
     "title": "山善(YAMAZEN) ELD-FS(MBK)T1400(SDGY) デスク レビュー比較まとめ",
     "name": "山善(YAMAZEN) ELD-FS(MBK)T1400(SDGY) デスク レビュー比較まとめ.md",
@@ -1474,8 +1474,8 @@
     "publishAt": "2026-09-30T22:00:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
     "queuedAt": "2026-09-30T21:25:16.766869+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-30T22:02:28.861392+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nb6e381c27561?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
