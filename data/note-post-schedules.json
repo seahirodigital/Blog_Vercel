@@ -1356,7 +1356,7 @@
   },
   {
     "id": "e0679315-41e1-46d1-96e2-fb950be976d5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sec9c8831a04b4be297f2c1c813835c82",
     "title": "YESKAMOO 防犯カメラ セット レビュー比較まとめ",
     "name": "YESKAMOO 防犯カメラ セット レビュー比較まとめ.md",
@@ -1365,10 +1365,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-30T15:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-30T14:55:28.004693+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "97fd71cc-d237-40d8-a24a-5559f30302b4",
