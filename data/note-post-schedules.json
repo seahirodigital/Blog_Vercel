@@ -1428,7 +1428,7 @@
   },
   {
     "id": "a6bb6c97-9de1-4711-9ed2-62390c6bfb60",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6ecd6e8146f146a4983f0663d6d00077",
     "title": "OTTOCAST Ottocast P3 Pro レビュー比較まとめ",
     "name": "OTTOCAST Ottocast P3 Pro レビュー比較まとめ.md",
@@ -1437,10 +1437,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-30T20:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-30T19:55:24.807945+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "568ec0ef-bb38-4b75-8099-51a3632c6530",
