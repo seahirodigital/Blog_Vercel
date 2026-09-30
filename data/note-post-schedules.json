@@ -1500,7 +1500,7 @@
   },
   {
     "id": "452c3d8e-cebf-427d-abd7-8c5e863d1a8e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s7e6ba22a2b1a40228b017dc066b18012",
     "title": "雲のやすらぎ プレミアム 三つ折りマットレス セミダブル レビュー比較まとめ",
     "name": "雲のやすらぎ プレミアム 三つ折りマットレス セミダブル レビュー比較まとめ.md",
@@ -1510,8 +1510,8 @@
     "publishAt": "2026-09-30T23:00:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
     "queuedAt": "2026-09-30T22:25:52.126727+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-30T23:02:18.526506+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n9f158c60b719?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
