@@ -1230,7 +1230,7 @@
   },
   {
     "id": "a0bf75d4-b08f-4c63-988f-9aa187c11570",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s88c9608f5d0646a882f03b59c4c60bf6",
     "title": "Logicool G G923d レビュー比較まとめ",
     "name": "Logicool G G923d レビュー比較まとめ.md",
@@ -1240,8 +1240,8 @@
     "publishAt": "2026-09-30T09:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
     "queuedAt": "2026-09-30T14:35:02.118800+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-30T14:38:07.194840+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf83e24595c9c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
