@@ -1284,7 +1284,7 @@
   },
   {
     "id": "503684dd-8124-4282-98d6-159ce3aa4b74",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s663851f7332941928c3bebc960e7e555",
     "title": "サンワダイレクト スタンド ハイタイプ 手動昇降式 60～ 対応 耐荷重 キャスター付き 棚板付属 100-PL041",
     "name": "サンワダイレクト スタンド ハイタイプ 手動昇降式 60～ 対応 耐荷重 キャスター付き 棚板付属 100-PL041.md",
@@ -1294,8 +1294,8 @@
     "publishAt": "2026-09-30T12:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
     "queuedAt": "2026-09-30T13:04:21.194032+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-30T13:07:07.271060+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5c5c81dd4c8b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
