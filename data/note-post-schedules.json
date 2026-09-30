@@ -1338,7 +1338,7 @@
   },
   {
     "id": "06411c33-000e-4ef4-804a-bf221a791c45",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb39dfe4770bc4e0bb9e20b7877aa8bcc",
     "title": "Samsung Samsung Galaxy Watch8 スマートウォッチ レビュー比較まとめ",
     "name": "Samsung Samsung Galaxy Watch8 スマートウォッチ レビュー比較まとめ.md",
@@ -1347,10 +1347,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-30T15:00:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-30T14:25:50.910668+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e0679315-41e1-46d1-96e2-fb950be976d5",
