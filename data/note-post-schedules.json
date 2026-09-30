@@ -1482,7 +1482,7 @@
   },
   {
     "id": "e94af392-9f26-4e46-8708-1e7915627998",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb9f59f75296c4025b2da1b4b77661ffc",
     "title": "70mai Dash Cam 4K T800 レビュー比較まとめ",
     "name": "70mai Dash Cam 4K T800 レビュー比較まとめ.md",
@@ -1492,8 +1492,8 @@
     "publishAt": "2026-09-30T22:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
     "queuedAt": "2026-09-30T21:55:35.224379+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-30T22:32:15.116249+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n4ce7ab2c7d1f?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
