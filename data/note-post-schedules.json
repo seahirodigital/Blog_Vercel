@@ -1248,7 +1248,7 @@
   },
   {
     "id": "e80e737c-8bc3-438f-88dc-3dfcc047294a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd40ff5dd45754926ad83aed904811120",
     "title": "バッファロー おもいでばこ 有線 Giga LAN エントリーモデル PD-2000E-L レビュー比較まとめ",
     "name": "バッファロー おもいでばこ 有線 Giga LAN エントリーモデル PD-2000E-L レビュー比較まとめ.md",
@@ -1258,8 +1258,8 @@
     "publishAt": "2026-09-30T10:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
     "queuedAt": "2026-09-30T13:04:21.194032+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-09-30T13:06:58.991600+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd4560f1cb6eb?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
