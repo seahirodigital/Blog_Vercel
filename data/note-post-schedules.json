@@ -1518,7 +1518,7 @@
   },
   {
     "id": "26cbaf01-9d9f-4dc7-9441-6c4cfc7de93b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfd4537165e4d4aa4a30476aa16735dff",
     "title": "PHILIPS (フィリップス) PUH7231 テレビ レビュー比較まとめ",
     "name": "PHILIPS (フィリップス) PUH7231 テレビ レビュー比較まとめ.md",
@@ -1527,10 +1527,12 @@
     "noTopImage": false,
     "publishAt": "2026-09-30T23:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
-    "queuedAt": "",
+    "queuedAt": "2026-09-30T22:55:08.742477+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cba7360c-4e5f-41f2-9727-ca207b29b7fd",
