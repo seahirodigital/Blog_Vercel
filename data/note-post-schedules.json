@@ -1626,7 +1626,7 @@
   },
   {
     "id": "cad01688-e0a2-410b-9df0-dc5b0d1ae19f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s09ac026498874f1eb0d8c0b5359346f0",
     "title": "HiKOKI C3606DB(XPSZ) レビュー比較まとめ",
     "name": "HiKOKI C3606DB(XPSZ) レビュー比較まとめ.md",
@@ -1635,10 +1635,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-01T05:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-01T04:55:19.750005+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cb6dddf6-8a72-4252-86ea-5d076770dadf",
