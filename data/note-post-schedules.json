@@ -1716,7 +1716,7 @@
   },
   {
     "id": "ff2215d4-1d37-4082-a17d-c32878febcb3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4a4053b158db4a8c91ae1dd1bc5b3da9",
     "title": "Wacom Intuos Pro medium TPTK670K0C ペンタブレット レビュー比較まとめ",
     "name": "Wacom Intuos Pro medium TPTK670K0C ペンタブレット レビュー比較まとめ.md",
@@ -1725,10 +1725,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-01T10:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-01T09:55:51.321469+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ab1ff533-dc14-49e1-ab66-9b26ca381c9c",
