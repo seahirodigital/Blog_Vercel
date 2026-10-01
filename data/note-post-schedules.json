@@ -1734,7 +1734,7 @@
   },
   {
     "id": "ab1ff533-dc14-49e1-ab66-9b26ca381c9c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s38b24abf0ed34c2bbe3170fb151f963f",
     "title": "VENTOTA Larco ソファベッド レビュー比較まとめ",
     "name": "VENTOTA Larco ソファベッド レビュー比較まとめ.md",
@@ -1743,10 +1743,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-01T11:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-01T10:55:52.891947+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0bbe2847-1136-4cec-b996-24a74d2f5ab9",
