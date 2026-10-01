@@ -1860,7 +1860,7 @@
   },
   {
     "id": "d969a021-0873-4ba8-bbb4-6c603b2ccea3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9ed3f42c648c4c788d1aea2f23f87171",
     "title": "HiKOKI 36V 充電式 セーバーソー CR36DA(NN) レシプロソー レビュー比較まとめ",
     "name": "HiKOKI 36V 充電式 セーバーソー CR36DA(NN) レシプロソー レビュー比較まとめ.md",
@@ -1869,10 +1869,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-01T16:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-01T15:55:32.285961+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "69a2c49f-12f7-4c2a-9ff9-02b9ea2075e0",
