@@ -1554,7 +1554,7 @@
   },
   {
     "id": "3471a0bd-daae-4a23-83c0-7fbd439294a5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s56a309630af247e88b234d343d32952f",
     "title": "Insta360 Ace Pro 2 デュアルバッテリーキット アクションカメラ レビュー比較まとめ",
     "name": "Insta360 Ace Pro 2 デュアルバッテリーキット アクションカメラ レビュー比較まとめ.md",
@@ -1563,10 +1563,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-01T02:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-01T01:55:08.389445+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3b7fcfc6-e419-406c-8769-1feac4c8cd4c",
