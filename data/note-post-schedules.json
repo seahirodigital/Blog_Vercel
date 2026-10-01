@@ -1644,7 +1644,7 @@
   },
   {
     "id": "cb6dddf6-8a72-4252-86ea-5d076770dadf",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sce31efc2addb4a4faca5eb77f4c9e31f",
     "title": "HiKOKI WR36DE(2XPSZ) インパクトレンチ レビュー比較まとめ",
     "name": "HiKOKI WR36DE(2XPSZ) インパクトレンチ レビュー比較まとめ.md",
@@ -1653,10 +1653,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-01T06:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-01T05:55:49.250272+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9078877c-9f70-4768-b37a-68fb5245ef64",
