@@ -1788,7 +1788,7 @@
   },
   {
     "id": "5c755680-b22f-4b1f-a9bb-3c253fb9a072",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd5173e8fe344420fa1ec175f23618dc6",
     "title": "EARTH ELEVATED プランター レビュー比較まとめ",
     "name": "EARTH ELEVATED プランター レビュー比較まとめ.md",
@@ -1798,8 +1798,8 @@
     "publishAt": "2026-10-01T14:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
     "queuedAt": "2026-10-01T13:55:52.478760+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-01T14:32:22.965479+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n19585d5aee4a?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
