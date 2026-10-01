@@ -1878,7 +1878,7 @@
   },
   {
     "id": "69a2c49f-12f7-4c2a-9ff9-02b9ea2075e0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa5e8b41f11ec4cb2abd4927653719849",
     "title": "HiKOKI No.153(全長250ｍｍ)(50枚入) レビュー比較まとめ",
     "name": "HiKOKI No.153(全長250ｍｍ)(50枚入) レビュー比較まとめ.md",
@@ -1887,10 +1887,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-01T17:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-01T16:55:56.548035+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e5583829-9837-452c-8254-6c9287f9263e",
