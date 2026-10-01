@@ -1662,7 +1662,7 @@
   },
   {
     "id": "9078877c-9f70-4768-b37a-68fb5245ef64",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb06a0831405242d2b59b5cd26d90706f",
     "title": "AIVOLT 発電機 レビュー比較まとめ",
     "name": "AIVOLT 発電機 レビュー比較まとめ.md",
@@ -1671,10 +1671,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-01T07:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-01T06:55:19.550620+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7df00539-1060-4b56-a6b6-62d22a3cfff3",
