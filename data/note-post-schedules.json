@@ -1698,7 +1698,7 @@
   },
   {
     "id": "d28c92be-4bfe-4a7c-aec0-93dace208b4e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sefb3728a02d9458fae7b7102a5cb325c",
     "title": "Insta360 Mic Pro（送信機2台＋受信機1台＋充電ケース） レビュー比較まとめ",
     "name": "Insta360 Mic Pro（送信機2台＋受信機1台＋充電ケース） レビュー比較まとめ.md",
@@ -1707,10 +1707,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-01T09:30:00.000Z",
     "createdAt": "2026-09-29T06:47:35.048Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-01T08:55:20.569435+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ff2215d4-1d37-4082-a17d-c32878febcb3",
