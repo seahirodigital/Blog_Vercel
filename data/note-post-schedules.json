@@ -3527,7 +3527,7 @@
   },
   {
     "id": "27539743-b641-4373-a8f4-e4dfe027ef02",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2d95a19574fd4cc2869266180fe89e9c",
     "title": "EENOUR P2001PLUS(P2001進級版) ポータブル電源 レビュー比較まとめ",
     "name": "EENOUR P2001PLUS(P2001進級版) ポータブル電源 レビュー比較まとめ.md",
@@ -3536,10 +3536,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T22:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-02T23:24:17.432926+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5ed9bf87-c9f5-4214-8e55-e08e3adbcf9d",
@@ -3594,7 +3596,7 @@
   },
   {
     "id": "9effc076-f826-4bd6-b53c-4959a339b78a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc16984c7312649beb516bc795d1aa3ab",
     "title": "サンワダイレクト A3 A4 400-PSD051 シュレッダー 業務用 レビュー比較まとめ",
     "name": "サンワダイレクト A3 A4 400-PSD051 シュレッダー 業務用 レビュー比較まとめ.md",
@@ -3603,10 +3605,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-02T23:24:17.432926+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "655403dd-995a-4f18-8b33-8ab2726d8179",
@@ -3661,7 +3665,7 @@
   },
   {
     "id": "d6e40544-397c-4af0-af19-24e28d41e8ba",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6cc77b614e6d403d9486461f1ba6ee2c",
     "title": "Le Creuset(ル・クルーゼ) ココット・ロンド 鋳物ホーロー鍋 レビュー比較まとめ",
     "name": "Le Creuset(ル・クルーゼ) ココット・ロンド 鋳物ホーロー鍋 レビュー比較まとめ.md",
@@ -3670,10 +3674,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T23:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-02T23:24:17.432926+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "73bd0d2f-d4ea-4aac-8ecb-c5c48367f56d",
