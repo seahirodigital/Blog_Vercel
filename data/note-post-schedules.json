@@ -3372,7 +3372,7 @@
   },
   {
     "id": "635128ab-a9a4-4ffc-af0d-0c55ea61111d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sff0c1eaf91b34ec49094dea28ac3f5db",
     "title": "ヒツジのいらない枕 ヒツジのいらないマットレス 匠 セミダブル マットレス レビュー比較まとめ",
     "name": "ヒツジのいらない枕 ヒツジのいらないマットレス 匠 セミダブル マットレス レビュー比較まとめ.md",
@@ -3381,10 +3381,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T20:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-02T19:55:40.048589+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "982678e5-c486-4fec-8b1b-14d77255ccac",
