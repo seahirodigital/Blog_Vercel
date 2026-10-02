@@ -3062,7 +3062,7 @@
   },
   {
     "id": "c73c018d-5efb-43d2-b7a7-3b5df3639b7c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd9e7e568f7f34871955a3b2cd66f1045",
     "title": "EcoFlow DELTA Pro3 4,096Wh 大容量+ 400W両面軽量 ソーラーパネル セット レビュー比較ま",
     "name": "EcoFlow DELTA Pro3 4,096Wh 大容量+ 400W両面軽量 ソーラーパネル セット レビュー比較ま.md",
@@ -3072,8 +3072,8 @@
     "publishAt": "2026-10-02T14:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-02T13:55:15.767844+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-02T14:32:40.762832+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7ab3cba0a440?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
