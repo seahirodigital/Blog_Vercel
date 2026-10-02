@@ -2372,7 +2372,7 @@
   },
   {
     "id": "9f304d9c-cf28-45d2-b448-9e95c8625e03",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sbf63607a33eb418db029dcde105d6394",
     "title": "FUNROLUX 折りたたみダイニングテーブル 4人 伸長式 バタフライテーブル 4椅子付き可動式 引き出しと収納付き",
     "name": "FUNROLUX 折りたたみダイニングテーブル 4人 伸長式 バタフライテーブル 4椅子付き可動式 引き出しと収納付き.md",
@@ -2382,8 +2382,8 @@
     "publishAt": "2026-10-02T04:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-02T07:33:54.545054+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-02T07:36:31.524219+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n1637d3ac44a6?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
