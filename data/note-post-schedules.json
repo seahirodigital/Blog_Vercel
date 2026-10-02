@@ -3441,7 +3441,7 @@
   },
   {
     "id": "2290c89a-805b-4dc0-84dc-6ecaab72ba30",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se3a01f4765934abb9e9981457f1ff837",
     "title": "Logicool G ハンコン G923 グランツーリスモ7 Forza Horizon 6 レビュー比較まとめ",
     "name": "Logicool G ハンコン G923 グランツーリスモ7 Forza Horizon 6 レビュー比較まとめ.md",
@@ -3450,10 +3450,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T21:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-02T20:55:12.675752+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "68ea719f-9f59-434a-81c1-c17a30ddcdb3",
