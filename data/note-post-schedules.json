@@ -2648,7 +2648,7 @@
   },
   {
     "id": "c0b32171-47e0-4ea9-bc32-19ba3457c6cd",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se28b95e3a4e84f17b98d1dc2062a2621",
     "title": "EF ECOFLOW EcoFlow ポータブル電源 DELTA Pro3 大容量+ 両面軽量 ソーラーパネル セット",
     "name": "EF ECOFLOW EcoFlow ポータブル電源 DELTA Pro3 大容量+ 両面軽量 ソーラーパネル セット.md",
@@ -2657,10 +2657,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T08:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-02T07:55:30.267078+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "577e88ba-4aba-40b4-9252-4cc92400baae",
