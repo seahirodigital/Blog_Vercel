@@ -3131,7 +3131,7 @@
   },
   {
     "id": "8b0751e6-d8ef-4427-91d2-b2ffaf6ca8cc",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb1922f9d9abf45f9a7f7288723edff93",
     "title": "ナカトミ ERC-98DQN エンジン耕運機 排気量98ml レビュー比較まとめ",
     "name": "ナカトミ ERC-98DQN エンジン耕運機 排気量98ml レビュー比較まとめ.md",
@@ -3140,10 +3140,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T15:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-02T14:25:32.811670+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bf2547fa-e77c-4437-a569-b3a2db6d2e1b",
