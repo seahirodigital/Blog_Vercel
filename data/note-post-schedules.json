@@ -3286,7 +3286,7 @@
   },
   {
     "id": "c7c468df-e712-4760-b45d-a3245b173aca",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5027824f5ff8420bade02a9e3b574f1f",
     "title": "エマ・スリープ V2 エマ・オリジナル クイーン レビュー比較まとめ",
     "name": "エマ・スリープ V2 エマ・オリジナル クイーン レビュー比較まとめ.md",
@@ -3295,10 +3295,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T16:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-02T15:55:22.424866+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ad7ae3e7-ea80-4706-b82e-ef7774f02ad5",
