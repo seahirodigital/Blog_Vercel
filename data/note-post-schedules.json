@@ -2855,7 +2855,7 @@
   },
   {
     "id": "cd854f87-63c2-4cc8-8c8f-fc196d7dee3e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4147cad46367439bb6afe0591b1f28d1",
     "title": "Dabbsson DBS2300plus ポータブル電源 EV用半固体リン酸鉄リチウムバッテリー レビュー比較まとめ",
     "name": "Dabbsson DBS2300plus ポータブル電源 EV用半固体リン酸鉄リチウムバッテリー レビュー比較まとめ.md",
@@ -2864,10 +2864,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T11:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-02T10:55:04.473044+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "26fa3d3e-826c-4e9a-ad48-3e496c81b2de",
