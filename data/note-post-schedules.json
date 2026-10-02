@@ -3665,7 +3665,7 @@
   },
   {
     "id": "d6e40544-397c-4af0-af19-24e28d41e8ba",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s6cc77b614e6d403d9486461f1ba6ee2c",
     "title": "Le Creuset(ル・クルーゼ) ココット・ロンド 鋳物ホーロー鍋 レビュー比較まとめ",
     "name": "Le Creuset(ル・クルーゼ) ココット・ロンド 鋳物ホーロー鍋 レビュー比較まとめ.md",
@@ -3675,8 +3675,8 @@
     "publishAt": "2026-10-02T23:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-02T23:24:17.432926+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-02T23:32:19.725819+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nabaf845d74f6?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
