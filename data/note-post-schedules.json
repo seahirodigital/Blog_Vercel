@@ -2165,7 +2165,7 @@
   },
   {
     "id": "c13c9a53-8fd3-4098-bdad-1fc667c2162a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9884b90c21804c7f80057774b7617beb",
     "title": "Edifier S2000MKIII ブックシェルフスピーカー レビュー比較まとめ",
     "name": "Edifier S2000MKIII ブックシェルフスピーカー レビュー比較まとめ.md",
@@ -2174,10 +2174,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T02:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-02T07:33:54.545054+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ff8358b9-4348-4334-8087-7c2946d91fc4",
@@ -2232,7 +2234,7 @@
   },
   {
     "id": "0dbbc1ef-ef2c-4aec-99fd-6296dac6b528",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdb81b08d293f476d84562731b5ab3ea7",
     "title": "V VOICE Model-G5 レーザー墨出し器 レビュー比較まとめ",
     "name": "V VOICE Model-G5 レーザー墨出し器 レビュー比較まとめ.md",
@@ -2241,10 +2243,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T03:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-02T07:33:54.545054+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c642226e-425a-4cb5-85a4-57b3ec4a2205",
@@ -2299,7 +2303,7 @@
   },
   {
     "id": "2e03c762-0c50-40b7-8e66-a9e776b77d7d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc43e6f271233467ab324f65c2a243959",
     "title": "SHOKZ OpenDots ONE イヤホン レビュー比較まとめ",
     "name": "SHOKZ OpenDots ONE イヤホン レビュー比較まとめ.md",
@@ -2308,10 +2312,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T03:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-02T07:33:54.545054+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1067c324-4109-460b-8bad-a9d60f84a6f8",
@@ -2366,7 +2372,7 @@
   },
   {
     "id": "9f304d9c-cf28-45d2-b448-9e95c8625e03",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbf63607a33eb418db029dcde105d6394",
     "title": "FUNROLUX 折りたたみダイニングテーブル 4人 伸長式 バタフライテーブル 4椅子付き可動式 引き出しと収納付き",
     "name": "FUNROLUX 折りたたみダイニングテーブル 4人 伸長式 バタフライテーブル 4椅子付き可動式 引き出しと収納付き.md",
@@ -2375,10 +2381,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T04:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-02T07:33:54.545054+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a5c78cce-7b29-472b-9c18-11ec22c4f4ee",
@@ -2433,7 +2441,7 @@
   },
   {
     "id": "8e82461f-f75d-43da-8de5-27ed3fbc1707",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s13541a16b69a4228b4d638e3d6768d4a",
     "title": "Dyson V8 Fluffy スティック +Up-top adaptor アップトップアダプター 掃除機 レビュー比較まとめ",
     "name": "Dyson V8 Fluffy スティック +Up-top adaptor アップトップアダプター 掃除機 レビュー比較.md",
@@ -2442,10 +2450,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-02T07:33:54.545054+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7a461413-3371-418a-a1b4-dd3beb08a662",
@@ -2500,7 +2510,7 @@
   },
   {
     "id": "114fcbe9-f5de-4eb9-b63e-514ad702440c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5e99ea409ab644b9b9058de461371617",
     "title": "EF ECOFLOW DELTA 3 Max Plus + 1000Wオルタネーターチャージャー ポータブル電源 レビュ",
     "name": "EF ECOFLOW DELTA 3 Max Plus + 1000Wオルタネーターチャージャー ポータブル電源 レビュ.md",
@@ -2509,10 +2519,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T06:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-02T07:33:54.545054+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5973737f-4816-42f7-b7df-717b17cc5191",
@@ -2567,7 +2579,7 @@
   },
   {
     "id": "8cc501a0-693a-4eff-a323-7e67c853112f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s39c4827ca3ec4d52989020ad50ba69d0",
     "title": "Jackery ポータブル電源 3000 Pro レビュー比較まとめ",
     "name": "Jackery ポータブル電源 3000 Pro レビュー比較まとめ.md",
@@ -2576,10 +2588,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-02T07:33:54.545054+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2fb53231-ecfe-416f-b8f6-cbe6877a2e79",
