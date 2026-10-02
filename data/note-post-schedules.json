@@ -3217,7 +3217,7 @@
   },
   {
     "id": "4ed7534f-5370-4796-89e0-bf72a0344c91",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdb8dc8d09e7e467983144d47c8cf4c7e",
     "title": "VITURE 6DoF 1500nit Luma Ultra レビュー比較まとめ",
     "name": "VITURE 6DoF 1500nit Luma Ultra レビュー比較まとめ.md",
@@ -3226,10 +3226,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T16:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-02T15:25:01.409602+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0b245201-b423-4906-a513-351cc967e41d",
