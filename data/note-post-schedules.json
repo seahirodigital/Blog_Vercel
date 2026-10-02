@@ -2786,7 +2786,7 @@
   },
   {
     "id": "c41f76d4-d6bf-4f68-a41e-cc2c951e051f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s45dfaf2b4a4c48f0be98ead0a7ee022b",
     "title": "RICOH360 RICOH THETA Z1 360度カメラ レビュー比較まとめ",
     "name": "RICOH360 RICOH THETA Z1 360度カメラ レビュー比較まとめ.md",
@@ -2796,8 +2796,8 @@
     "publishAt": "2026-10-02T10:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-02T09:55:52.900873+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-02T10:32:16.546044+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n1eef6a15c27c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
