@@ -2510,7 +2510,7 @@
   },
   {
     "id": "114fcbe9-f5de-4eb9-b63e-514ad702440c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s5e99ea409ab644b9b9058de461371617",
     "title": "EF ECOFLOW DELTA 3 Max Plus + 1000Wオルタネーターチャージャー ポータブル電源 レビュ",
     "name": "EF ECOFLOW DELTA 3 Max Plus + 1000Wオルタネーターチャージャー ポータブル電源 レビュ.md",
@@ -2520,8 +2520,8 @@
     "publishAt": "2026-10-02T06:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-02T07:33:54.545054+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-02T07:44:07.156926+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n682664b215b3/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
