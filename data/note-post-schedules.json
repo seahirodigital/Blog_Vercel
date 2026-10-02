@@ -2924,7 +2924,7 @@
   },
   {
     "id": "6e3ca095-11f2-4934-8516-644501991960",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s45f1671ff5e440148313b6f5fa5973da",
     "title": "Dangbei MP1 Max プロジェクター レビュー比較まとめ",
     "name": "Dangbei MP1 Max プロジェクター レビュー比較まとめ.md",
@@ -2933,10 +2933,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T12:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-02T11:55:14.052718+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "62f6eb5b-d509-4d9b-8ab7-d43d6a7e7726",
