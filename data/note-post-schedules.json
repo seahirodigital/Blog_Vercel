@@ -3527,7 +3527,7 @@
   },
   {
     "id": "27539743-b641-4373-a8f4-e4dfe027ef02",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2d95a19574fd4cc2869266180fe89e9c",
     "title": "EENOUR P2001PLUS(P2001進級版) ポータブル電源 レビュー比較まとめ",
     "name": "EENOUR P2001PLUS(P2001進級版) ポータブル電源 レビュー比較まとめ.md",
@@ -3537,8 +3537,8 @@
     "publishAt": "2026-10-02T22:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-02T23:24:17.432926+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-02T23:26:47.651010+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n0d2ce3912f53?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
