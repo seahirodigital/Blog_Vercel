@@ -5079,7 +5079,7 @@
   },
   {
     "id": "8532c4b3-c208-4ac6-bdc2-5cdf935afdec",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sfd9ab5449d954cd7b2a788e5efbe47fc",
     "title": "エマ・スリープ V2 エマ・オリジナル ダブル レビュー比較まとめ",
     "name": "エマ・スリープ V2 エマ・オリジナル ダブル レビュー比較まとめ.md",
@@ -5089,8 +5089,8 @@
     "publishAt": "2026-10-03T21:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-03T20:55:05.077188+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-03T21:32:34.169695+00:00",
+    "publishedUrl": "https://note.com/startupm/n/neb3fc0becf75?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
