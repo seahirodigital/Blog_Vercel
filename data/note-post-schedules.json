@@ -4010,7 +4010,7 @@
   },
   {
     "id": "a5e15430-66ef-472e-98fa-3028bb9e4c35",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s62ab104c7bc94ac8948ab3745490e756",
     "title": "BRAIN SLEEP コンフォーター パーフェクト ウォーム EX セミダブル 2025年モデル 掛け布団 布団 レビ",
     "name": "BRAIN SLEEP コンフォーター パーフェクト ウォーム EX セミダブル 2025年モデル 掛け布団 布団 レビ.md",
@@ -4019,10 +4019,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T04:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T03:55:22.472758+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0d3187d0-f8b4-42ff-b2de-11294a877d60",
