@@ -4855,7 +4855,7 @@
   },
   {
     "id": "03fd8359-7c3a-4b8b-9b31-ba1905d891c3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4917b86f9a2b45cc877bc97d1f766e77",
     "title": "ガーデンマスター ASB-1215 物置 屋外 レビュー比較まとめ",
     "name": "ガーデンマスター ASB-1215 物置 屋外 レビュー比較まとめ.md",
@@ -4864,10 +4864,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T16:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T15:25:11.067932+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a391e471-0b6f-40b3-8044-99aceb493902",
