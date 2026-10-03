@@ -5303,7 +5303,7 @@
   },
   {
     "id": "d7123438-416d-40f6-a41c-6dd084c9f70c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbe064f1009454065a335b1f664680cec",
     "title": "AFERIY Haven2800Haven3000 ポータブル電源 Haven3000専用拡張バッテリー レビュー比較ま",
     "name": "AFERIY Haven2800Haven3000 ポータブル電源 Haven3000専用拡張バッテリー レビュー比較ま.md",
@@ -5312,10 +5312,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T23:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T22:55:32.028967+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "eccfcbcd-4904-4925-8ec9-60669a835bd0",
