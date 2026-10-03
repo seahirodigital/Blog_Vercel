@@ -4355,7 +4355,7 @@
   },
   {
     "id": "30d6b7f3-52e5-4c78-860e-588d984aabe0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s829199f17a754e17b1b88faa336408c8",
     "title": "Eufy(ユーフィ) Anker Eufy (ユーフィ) Robot Vacuum Omni E25 Robot Vac",
     "name": "Eufy(ユーフィ) Anker Eufy (ユーフィ) Robot Vacuum Omni E25 Robot Vac.md",
@@ -4364,10 +4364,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T09:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T08:55:14.284346+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8c37939f-0c25-4a1e-adf6-02fedc0e3a0c",
