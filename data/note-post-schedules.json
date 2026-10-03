@@ -3872,7 +3872,7 @@
   },
   {
     "id": "5b07c28e-a3a6-4b93-803f-1700b1bfc661",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s64dd87ea2d694cc1867e97ee238c217e",
     "title": "JBL AUTHENTICS 500 スピーカー レビュー比較まとめ",
     "name": "JBL AUTHENTICS 500 スピーカー レビュー比較まとめ.md",
@@ -3882,8 +3882,8 @@
     "publishAt": "2026-10-03T03:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-03T02:25:41.212362+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-03T03:02:26.337923+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ncaab83a79d48?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
