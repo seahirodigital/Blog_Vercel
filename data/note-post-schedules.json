@@ -4424,7 +4424,7 @@
   },
   {
     "id": "83a32da0-7d61-42c3-bda0-eee7f022def4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa830aed8d2dd4ee5aff8165966b4079d",
     "title": "Logicool G ハンコン G29 LPRC-15000d レビュー比較まとめ",
     "name": "Logicool G ハンコン G29 LPRC-15000d レビュー比較まとめ.md",
@@ -4434,8 +4434,8 @@
     "publishAt": "2026-10-03T10:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-03T09:55:48.459020+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-03T10:32:25.225041+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n3d39318a5c07?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
