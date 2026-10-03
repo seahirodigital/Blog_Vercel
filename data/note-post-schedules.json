@@ -4700,7 +4700,7 @@
   },
   {
     "id": "f6d67951-db11-4e00-8af7-7b7b11a226da",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbf68c5bbbb994a92afa5bea64a63e332",
     "title": "LiberNovo Omni Pro AirFlow 人間工学オフィスチェア フットレスト付き レビュー比較まとめ",
     "name": "LiberNovo Omni Pro AirFlow 人間工学オフィスチェア フットレスト付き レビュー比較まとめ.md",
@@ -4709,10 +4709,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T14:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T13:55:28.784804+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "afca829f-d2db-4d42-9e72-684fe7327fc3",
