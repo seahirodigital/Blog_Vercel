@@ -5165,7 +5165,7 @@
   },
   {
     "id": "e3339742-cf57-42f4-a943-3887aa5fac2c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0b5a59b85313443aaf52dca556108eb4",
     "title": "スチールケース(Steelcase) Gesture ジェスチャー オフィスゲーミングチェア レビュー比較まとめ",
     "name": "スチールケース(Steelcase) Gesture ジェスチャー オフィスゲーミングチェア レビュー比較まとめ.md",
@@ -5174,10 +5174,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T22:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T22:31:03.679969+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "85b2359d-a2f8-4de9-af86-6dca18349ead",
@@ -5232,7 +5234,7 @@
   },
   {
     "id": "6d0337f4-d0dd-4d8b-a452-af697cae4111",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s563e5d52899347ec9ce6efd6c32e7903",
     "title": "サンワダイレクト シュレッダー 業務用 オートフィード 自動細断150枚 ミニクロスカット 【60分連続細断】 大容量3",
     "name": "サンワダイレクト シュレッダー 業務用 オートフィード 自動細断150枚 ミニクロスカット 【60分連続細断】 大容量3.md",
@@ -5241,10 +5243,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T22:31:03.679969+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c8ccc8dd-c388-45c2-ac1b-a2667b5b9e14",
