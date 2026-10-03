@@ -3941,7 +3941,7 @@
   },
   {
     "id": "f88a04c0-907c-4a5d-9ff6-c30246c2d5ce",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa064e637f7c04cc6ac9b5ea0e7e9df49",
     "title": "スチールケース(Steelcase) ジェスチャー(Gesture) HR5S26 フレーム張り地カラー442A50EC",
     "name": "スチールケース(Steelcase) ジェスチャー(Gesture) HR5S26 フレーム張り地カラー442A50EC.md",
@@ -3951,8 +3951,8 @@
     "publishAt": "2026-10-03T03:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-03T02:55:55.952678+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-03T03:32:22.279734+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nb43d6011e63a?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
