@@ -4493,7 +4493,7 @@
   },
   {
     "id": "77ba87a0-f9f8-4df6-b319-9f1366cd149c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5be46362b72b4a3999fcc0bdc9073f4a",
     "title": "PORMIDOAUTO PRD81C-1 レビュー比較まとめ",
     "name": "PORMIDOAUTO PRD81C-1 レビュー比較まとめ.md",
@@ -4502,10 +4502,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T11:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T10:55:19.127090+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5525f37e-218e-48c7-ae34-a057231ebb33",
