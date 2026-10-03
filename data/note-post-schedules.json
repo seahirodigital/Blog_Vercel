@@ -5079,7 +5079,7 @@
   },
   {
     "id": "8532c4b3-c208-4ac6-bdc2-5cdf935afdec",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfd9ab5449d954cd7b2a788e5efbe47fc",
     "title": "エマ・スリープ V2 エマ・オリジナル ダブル レビュー比較まとめ",
     "name": "エマ・スリープ V2 エマ・オリジナル ダブル レビュー比較まとめ.md",
@@ -5088,10 +5088,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T21:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T20:55:05.077188+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7d163817-84e6-4598-9477-28596a906c9f",
