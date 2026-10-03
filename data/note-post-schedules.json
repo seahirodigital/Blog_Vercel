@@ -4924,7 +4924,7 @@
   },
   {
     "id": "9d1c2976-ed26-4f13-8b64-4a6ca6d5db5b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s71af6daaf41b40f1ae458989927eba07",
     "title": "Ａｕｒｅｓｔ MC-2 日本人の体形に合わせた設計 J-FIT レビュー比較まとめ",
     "name": "Ａｕｒｅｓｔ MC-2 日本人の体形に合わせた設計 J-FIT レビュー比較まとめ.md",
@@ -4933,10 +4933,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T16:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T15:55:46.852710+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d68fdb17-eb9f-4a61-b80f-ce6044cd4e60",
