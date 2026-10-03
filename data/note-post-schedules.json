@@ -3605,12 +3605,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-02T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "2026-10-02T23:24:17.432926+00:00",
+    "queuedAt": "2026-10-03T00:55:00.744991+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "655403dd-995a-4f18-8b33-8ab2726d8179",
