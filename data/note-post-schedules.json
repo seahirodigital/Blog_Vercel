@@ -4217,7 +4217,7 @@
   },
   {
     "id": "f7627b65-859e-4bd0-afa2-c3814416f3d0",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sfe1232a7f84e477c8449e8d92864aba6",
     "title": "Jackery ポータブル電源 3000 New 折り畳み式 キャリーカート 1台 2点セット レビュー比較まとめ",
     "name": "Jackery ポータブル電源 3000 New 折り畳み式 キャリーカート 1台 2点セット レビュー比較まとめ.md",
@@ -4227,8 +4227,8 @@
     "publishAt": "2026-10-03T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-03T07:13:33.621252+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-03T07:32:20.154774+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n46e509377ffa?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
