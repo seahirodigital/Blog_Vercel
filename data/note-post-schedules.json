@@ -4562,7 +4562,7 @@
   },
   {
     "id": "2283604d-f626-4671-bbde-1114d64af4c5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sacc0372c154d4aecbd6b21147f8ef096",
     "title": "Acer DDR5 PC5-48000 9BWWR Predator Vesta レビュー比較まとめ",
     "name": "Acer DDR5 PC5-48000 9BWWR Predator Vesta レビュー比較まとめ.md",
@@ -4571,10 +4571,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T12:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T11:55:50.514589+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d96ad6fd-be76-420d-8e98-74fbedbcfdd1",
