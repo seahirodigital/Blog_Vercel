@@ -5234,7 +5234,7 @@
   },
   {
     "id": "6d0337f4-d0dd-4d8b-a452-af697cae4111",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s563e5d52899347ec9ce6efd6c32e7903",
     "title": "サンワダイレクト シュレッダー 業務用 オートフィード 自動細断150枚 ミニクロスカット 【60分連続細断】 大容量3",
     "name": "サンワダイレクト シュレッダー 業務用 オートフィード 自動細断150枚 ミニクロスカット 【60分連続細断】 大容量3.md",
@@ -5244,8 +5244,8 @@
     "publishAt": "2026-10-03T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-03T22:31:03.679969+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-03T23:02:21.841675+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n744ac12b1411?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
