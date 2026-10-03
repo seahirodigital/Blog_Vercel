@@ -5010,7 +5010,7 @@
   },
   {
     "id": "7f82554e-d449-4e42-9c07-fe4432e52b8b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s523ddcd90bd5461db13eecb3eb70be9d",
     "title": "HiKOKI RP3608DB(L)(NN) 集じん機 レビュー比較まとめ",
     "name": "HiKOKI RP3608DB(L)(NN) 集じん機 レビュー比較まとめ.md",
@@ -5019,10 +5019,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T20:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T19:55:01.183210+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5e994070-b8e8-4bad-8489-2ee391cf9189",
