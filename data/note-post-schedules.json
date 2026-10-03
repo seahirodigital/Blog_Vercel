@@ -3596,7 +3596,7 @@
   },
   {
     "id": "9effc076-f826-4bd6-b53c-4959a339b78a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sc16984c7312649beb516bc795d1aa3ab",
     "title": "サンワダイレクト A3 A4 400-PSD051 シュレッダー 業務用 レビュー比較まとめ",
     "name": "サンワダイレクト A3 A4 400-PSD051 シュレッダー 業務用 レビュー比較まとめ.md",
@@ -3606,8 +3606,8 @@
     "publishAt": "2026-10-02T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-03T00:55:00.744991+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-03T00:57:33.457011+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n1658873f6c94?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
