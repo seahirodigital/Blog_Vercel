@@ -4631,7 +4631,7 @@
   },
   {
     "id": "af1c4626-3b10-4979-bf0d-d5dc66331f0b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5ac2d05deccf4ea7a7c50a4fdb6be1e2",
     "title": "KTOW PAX4 エルゴノミクスチェア ゲーミングチェア レビュー比較まとめ",
     "name": "KTOW PAX4 エルゴノミクスチェア ゲーミングチェア レビュー比較まとめ.md",
@@ -4640,10 +4640,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T13:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T12:55:20.728696+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5d0b6a74-e62c-43a3-afea-999931821aef",
