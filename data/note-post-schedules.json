@@ -3734,7 +3734,7 @@
   },
   {
     "id": "0c2a48e1-f06d-4351-b480-f283ead410b9",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s58587084095b493d9b20f42db48b5975",
     "title": "アイリスオーヤマ BPS-30210 人工芝 レビュー比較まとめ",
     "name": "アイリスオーヤマ BPS-30210 人工芝 レビュー比較まとめ.md",
@@ -3744,8 +3744,8 @@
     "publishAt": "2026-10-03T00:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-02T23:25:22.735400+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-03T00:02:29.533913+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nb43973c59197?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
