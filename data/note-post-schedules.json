@@ -3803,7 +3803,7 @@
   },
   {
     "id": "0cc0a5c6-a865-46bc-9241-9fd2ddbc1a13",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa0cfe0130a354b13bb61f266d74765f7",
     "title": "Dell S2725QC-A レビュー比較まとめ",
     "name": "Dell S2725QC-A レビュー比較まとめ.md",
@@ -3812,10 +3812,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T02:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T01:55:27.185550+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6716383e-c4e1-46ca-bc87-8044724a76b7",
