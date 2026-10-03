@@ -5165,7 +5165,7 @@
   },
   {
     "id": "e3339742-cf57-42f4-a943-3887aa5fac2c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s0b5a59b85313443aaf52dca556108eb4",
     "title": "スチールケース(Steelcase) Gesture ジェスチャー オフィスゲーミングチェア レビュー比較まとめ",
     "name": "スチールケース(Steelcase) Gesture ジェスチャー オフィスゲーミングチェア レビュー比較まとめ.md",
@@ -5175,8 +5175,8 @@
     "publishAt": "2026-10-03T22:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-03T22:31:03.679969+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-03T22:33:36.947487+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n9055c1419805?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
