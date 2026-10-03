@@ -4769,7 +4769,7 @@
   },
   {
     "id": "f6a2bc9e-faa6-4fc7-87f4-4fada169337b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s98097c310a074c8d82dd21c51fa7021e",
     "title": "キヤノン TS5630 レビュー比較まとめ",
     "name": "キヤノン TS5630 レビュー比較まとめ.md",
@@ -4778,10 +4778,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T15:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T14:25:02.352967+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "75caf441-a653-4acb-9f07-e2f85637cff0",
