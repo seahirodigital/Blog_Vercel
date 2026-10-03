@@ -4079,7 +4079,7 @@
   },
   {
     "id": "65c7e81c-50c3-4455-b1e6-816e41b3014a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s421a80490451406ca3be266d7a8d2e7e",
     "title": "dreame (ドリーミー) T16 乾湿両用 レビュー比較まとめ",
     "name": "dreame (ドリーミー) T16 乾湿両用 レビュー比較まとめ.md",
@@ -4088,10 +4088,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T07:13:33.621252+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bb130964-e0e1-496d-ba38-635f4d7c82ae",
@@ -4146,7 +4148,7 @@
   },
   {
     "id": "56a46ef8-be48-495d-bb19-0facde62ea66",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8a500ef12062456e944014c8601380cf",
     "title": "LIXIL CW-RWA30A BW1 温水洗浄便座 レビュー比較まとめ",
     "name": "LIXIL CW-RWA30A BW1 温水洗浄便座 レビュー比較まとめ.md",
@@ -4155,10 +4157,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T06:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T07:13:33.621252+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5c40c305-f16c-4b77-a461-b95f670724e8",
@@ -4213,7 +4217,7 @@
   },
   {
     "id": "f7627b65-859e-4bd0-afa2-c3814416f3d0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfe1232a7f84e477c8449e8d92864aba6",
     "title": "Jackery ポータブル電源 3000 New 折り畳み式 キャリーカート 1台 2点セット レビュー比較まとめ",
     "name": "Jackery ポータブル電源 3000 New 折り畳み式 キャリーカート 1台 2点セット レビュー比較まとめ.md",
@@ -4222,10 +4226,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T07:13:33.621252+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6bf3a369-913c-4d9e-8e4d-1dd42ced95b2",
