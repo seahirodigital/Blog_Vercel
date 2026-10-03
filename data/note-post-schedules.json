@@ -4286,7 +4286,7 @@
   },
   {
     "id": "b88b604a-b20d-4153-806d-cd6f547be860",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s20bf3a373ee247ce8b6992a62a634452",
     "title": "xTool F2 レーザー彫刻機 15Wダイオード 5W赤外線 レーザー スマートカメラ搭載 レビュー比較まとめ",
     "name": "xTool F2 レーザー彫刻機 15Wダイオード 5W赤外線 レーザー スマートカメラ搭載 レビュー比較まとめ.md",
@@ -4295,10 +4295,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-03T08:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-03T07:55:41.036631+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fef3f7b2-366b-4ee4-b97a-67951c962371",
