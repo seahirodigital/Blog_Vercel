@@ -5579,7 +5579,7 @@
   },
   {
     "id": "84084931-8748-46db-ba8a-636d0fd45671",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s71cae034d7024123baf5b367c9607cdc",
     "title": "BRAIN SLEEP(ブレインスリープ) W100 L196 H5 レビュー比較まとめ",
     "name": "BRAIN SLEEP(ブレインスリープ) W100 L196 H5 レビュー比較まとめ.md",
@@ -5588,10 +5588,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-04T03:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T02:55:46.552472+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "92a56ae4-2f6d-42d9-8833-127660a7f010",
