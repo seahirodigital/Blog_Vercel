@@ -5372,7 +5372,7 @@
   },
   {
     "id": "bc168e66-15d2-4e80-a597-243c9bb4aeb3",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s51a199c499684c9aa3e4eb0290575ed4",
     "title": "SanDisk SSD外付けSDSSDE61-2T00-GH25 エクストリーム レビュー比較まとめ",
     "name": "SanDisk SDSSDE61-2T00-GH25 エクストリーム レビュー比較まとめ.md",
@@ -5382,8 +5382,8 @@
     "publishAt": "2026-10-04T00:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-03T23:25:04.450712+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-04T00:02:19.496620+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n036ba371fda8?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
