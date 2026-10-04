@@ -6872,7 +6872,7 @@
   },
   {
     "id": "9b1ad626-7457-4f14-bb74-4d0d1abcda73",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s9884c64379a24c1c898783aa9255c33d",
     "title": "Insta360 X4 Air 360度全景カメラ レビュー比較まとめ",
     "name": "Insta360 X4 Air 360度全景カメラ レビュー比較まとめ.md",
@@ -6882,8 +6882,8 @@
     "publishAt": "2026-10-04T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-04T22:33:27.935398+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-04T23:02:21.429577+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n34040ac57e7b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
