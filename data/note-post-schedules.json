@@ -6562,7 +6562,7 @@
   },
   {
     "id": "ee8f5dc7-670d-4edd-ba90-60910ab8d4a5",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s320cb7b80ea94fab9b74a130ecc298a8",
     "title": "EENOUR MIG160P アルミ溶接機 パルス溶接機 レビュー比較まとめ",
     "name": "EENOUR MIG160P アルミ溶接機 パルス溶接機 レビュー比較まとめ.md",
@@ -6572,8 +6572,8 @@
     "publishAt": "2026-10-04T16:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-04T15:55:42.195485+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-04T16:32:20.023609+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n587b8cfa6166?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
