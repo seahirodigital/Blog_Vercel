@@ -7010,7 +7010,7 @@
   },
   {
     "id": "5e3369d6-7ba9-4569-9590-a4b49daef407",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s26ba616b5e894a87ab541f9a32fcfe0e",
     "title": "ATOTO S en4 S 211P-S01 レビュー比較まとめ",
     "name": "ATOTO S en4 S 211P-S01 レビュー比較まとめ.md",
@@ -7019,10 +7019,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T00:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T23:25:59.015109+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fa026697-9ac6-441e-9e0c-43dd5fd38e8a",
