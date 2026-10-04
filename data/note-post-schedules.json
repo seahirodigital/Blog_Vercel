@@ -5441,7 +5441,7 @@
   },
   {
     "id": "09335d92-c377-4e70-9db4-8f0c9699a55d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfa1e255e7fcf43f7876eadead4aa0f4e",
     "title": "NEARITY C46S 120 Max レビュー比較まとめ",
     "name": "NEARITY C46S 120 Max レビュー比較まとめ.md",
@@ -5450,10 +5450,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-04T02:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T01:55:40.404204+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a5f15765-0b93-4fdf-829a-c21b64038e40",
