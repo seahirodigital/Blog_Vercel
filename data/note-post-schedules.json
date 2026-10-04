@@ -5648,7 +5648,7 @@
   },
   {
     "id": "8e9113e2-015c-4eea-8039-d9bceb8bd53f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s91056c8798ce4b15a061dae05f6b497b",
     "title": "Genmitsu V2 CNC ルーターマシンPROVerXL レビュー比較まとめ",
     "name": "Genmitsu V2 CNC ルーターマシンPROVerXL レビュー比較まとめ.md",
@@ -5657,10 +5657,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-04T04:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T07:27:26.069305+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d057359a-f0c8-451f-a05c-20200acf4618",
@@ -5715,7 +5717,7 @@
   },
   {
     "id": "83d6c5bb-c9f0-4f09-990e-7845b5d6f4d7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s57a018256bb04eb39fbffd769abf8078",
     "title": "iflytek AINOTE 2 レビュー比較まとめ",
     "name": "iflytek AINOTE 2 レビュー比較まとめ.md",
@@ -5724,10 +5726,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-04T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T07:27:26.069305+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2f50f4ed-e245-4cee-947b-c72ecc35628f",
@@ -5782,7 +5786,7 @@
   },
   {
     "id": "90e934f5-73de-4e63-a47c-f3a32f95b6d5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sae4737581cee49e2a0e2753fb90c4009",
     "title": "Insta360 Mic Pro ワイヤレスマイク レビュー比較まとめ",
     "name": "Insta360 Mic Pro ワイヤレスマイク レビュー比較まとめ.md",
@@ -5791,10 +5795,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-04T06:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T07:27:26.069305+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "dc1f1a57-8e4a-4625-947d-df7a2988db4c",
@@ -5849,7 +5855,7 @@
   },
   {
     "id": "c1a7ca35-1fdb-45a8-84f2-5f8e2257cd72",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s21a27eb9bb6e4db7841261ad8e3b1370",
     "title": "ヒツジのいらない枕 ヒツジのいらないマットレス ーSLEEPERー セミダブル レビュー比較まとめ",
     "name": "ヒツジのいらない枕 ヒツジのいらないマットレス ーSLEEPERー セミダブル レビュー比較まとめ.md",
@@ -5858,10 +5864,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-04T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T07:27:26.069305+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7f4b1fa0-8869-4cf7-9cf6-5ddbad7cc1cd",
