@@ -6717,7 +6717,7 @@
   },
   {
     "id": "6bbcca57-ceb0-49af-8f65-90f8879e47d4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc2f47b707a2e443eb2391aedbbc8b2f0",
     "title": "レグザ REGZA 75E350S テレビ レビュー比較まとめ",
     "name": "レグザ REGZA 75E350S テレビ レビュー比較まとめ.md",
@@ -6726,10 +6726,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-04T21:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T20:55:03.315839+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c7ec0ff4-ddec-4762-9822-7f73ccc0f023",
