@@ -6200,7 +6200,7 @@
   },
   {
     "id": "5db84a83-303b-4f0c-83e0-da689eb92b06",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc61f40e6f79546999cbb1accb27aff14",
     "title": "Xiaomi Xiaomi 17T Pro レビュー比較まとめ",
     "name": "Xiaomi Xiaomi 17T Pro レビュー比較まとめ.md",
@@ -6209,10 +6209,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-04T12:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T11:55:51.239197+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "54c5097c-4989-4f0e-b95d-501882a97816",
