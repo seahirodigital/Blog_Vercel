@@ -6803,7 +6803,7 @@
   },
   {
     "id": "65eee132-a072-4698-a843-b2f289be466d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!see6e488b79e0415f83de13267773ac2c",
     "title": "サンワダイレクト 400-PSD029 電動 シュレッダー 業務用 レビュー比較まとめ",
     "name": "サンワダイレクト 400-PSD029 電動 シュレッダー 業務用 レビュー比較まとめ.md",
@@ -6812,10 +6812,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-04T22:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T22:33:27.935398+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b9f66759-c116-44db-af2d-1d7245b2bded",
@@ -6870,7 +6872,7 @@
   },
   {
     "id": "9b1ad626-7457-4f14-bb74-4d0d1abcda73",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9884c64379a24c1c898783aa9255c33d",
     "title": "Insta360 X4 Air 360度全景カメラ レビュー比較まとめ",
     "name": "Insta360 X4 Air 360度全景カメラ レビュー比較まとめ.md",
@@ -6879,10 +6881,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-04T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T22:33:27.935398+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f9382c07-4c07-4e22-a6c1-59123422c7f9",
