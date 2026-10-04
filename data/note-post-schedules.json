@@ -5993,7 +5993,7 @@
   },
   {
     "id": "4af6eca0-b1c1-4767-8833-55e1e8cf79dc",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s73a096695e074e18b6970739c0fb292e",
     "title": "Airpulse A100 ブックシェルフスピーカー レビュー比較まとめ",
     "name": "Airpulse A100 ブックシェルフスピーカー レビュー比較まとめ.md",
@@ -6002,10 +6002,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-04T09:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T08:55:38.736285+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1e2f40f5-f665-433a-934e-f1e23dac3ef3",
