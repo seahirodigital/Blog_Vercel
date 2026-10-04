@@ -6407,7 +6407,7 @@
   },
   {
     "id": "931ae94f-a03a-4a0e-86ca-439a7cf26577",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3f56287e53364feb88089506545e7d8b",
     "title": "BOSE Bose QuietComfort SC Headphones レビュー比較まとめ",
     "name": "BOSE Bose QuietComfort SC Headphones レビュー比較まとめ.md",
@@ -6416,10 +6416,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-04T15:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T14:25:55.619638+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fc47bac6-b0f4-433c-a256-7f777eaf4122",
