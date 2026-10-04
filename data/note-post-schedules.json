@@ -6338,7 +6338,7 @@
   },
   {
     "id": "c503cf61-57ed-456d-a93f-1f0df9753410",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8fc666672f9042b2a682a5c8798f21e7",
     "title": "EENOUR GT4700iO-3 8kVA 300h インバーター発電機 定格出力3 レビュー比較まとめ",
     "name": "EENOUR GT4700iO-3 8kVA 300h インバーター発電機 定格出力3 レビュー比較まとめ.md",
@@ -6347,10 +6347,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-04T14:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T13:55:39.165423+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "37ead7d9-a990-409d-b170-328f68e92af8",
