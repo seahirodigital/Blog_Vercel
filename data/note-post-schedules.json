@@ -6062,7 +6062,7 @@
   },
   {
     "id": "e9a5b745-81b2-4100-9697-a9dce964f935",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0e06fd63aa094e85a138c1c2c302d142",
     "title": "エレコム EC-AC104100BK レビュー比較まとめ",
     "name": "エレコム EC-AC104100BK レビュー比較まとめ.md",
@@ -6071,10 +6071,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-04T10:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T09:55:24.548379+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5dcad12c-590e-4de7-b2fa-5d1cd4c1caac",
