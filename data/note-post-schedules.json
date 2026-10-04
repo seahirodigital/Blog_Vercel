@@ -5510,7 +5510,7 @@
   },
   {
     "id": "ec72ddd4-09ea-4b79-b697-88e867dc500d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s44aaf06eaa224324ba91a32811b6c8e2",
     "title": "FLEXISPOT XRC5 リクライニングチェア ソファー レビュー比較まとめ",
     "name": "FLEXISPOT XRC5 リクライニングチェア ソファー レビュー比較まとめ.md",
@@ -5519,10 +5519,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-04T03:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T02:25:13.021241+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3e2d538a-aa9e-4d21-a877-79f00a60c539",
