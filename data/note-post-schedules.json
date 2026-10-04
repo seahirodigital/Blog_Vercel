@@ -6131,7 +6131,7 @@
   },
   {
     "id": "911bf2f1-bdd6-40db-a7a4-bf8abe25ea82",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa4e611f356234a97abd4df0cf44c7d22",
     "title": "BLUETTI AORA100 V2 100Wソーラーパネル 収納バッグ セット レビュー比較まとめ",
     "name": "BLUETTI AORA100 V2 100Wソーラーパネル 収納バッグ セット レビュー比較まとめ.md",
@@ -6140,10 +6140,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-04T11:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T10:55:08.956503+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b5bc9421-bf99-40f4-8849-5b32e3601f13",
