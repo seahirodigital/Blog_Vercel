@@ -5924,7 +5924,7 @@
   },
   {
     "id": "aaa063c1-2a30-4429-b9d2-666bec3d7ea1",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s8f00055d03e54328955d76c0cbe86bc9",
     "title": "Jackery 5000Plus Solar Generator レビュー比較まとめ",
     "name": "Jackery 5000Plus Solar Generator レビュー比較まとめ.md",
@@ -5934,8 +5934,8 @@
     "publishAt": "2026-10-04T08:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-04T07:55:50.996461+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-04T08:32:22.759699+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ndd5c21f2aebb?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
