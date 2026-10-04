@@ -6493,7 +6493,7 @@
   },
   {
     "id": "115cc083-1c18-4198-880b-dc699f620f0d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9c76f248d831437db7edac2114e59aa8",
     "title": "HiKOKI(ハイコーキ) R36DB スティッククリーナー レビュー比較まとめ",
     "name": "HiKOKI(ハイコーキ) R36DB スティッククリーナー レビュー比較まとめ.md",
@@ -6502,10 +6502,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-04T16:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T15:25:26.125111+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8eb4f2d3-25d4-446e-aefd-538673f149d1",
