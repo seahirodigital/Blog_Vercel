@@ -6648,7 +6648,7 @@
   },
   {
     "id": "27135a54-c083-4578-bc4d-6043464c973a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s288cd8bdd2794395bcce467411a60b63",
     "title": "Jackery ポータブル電源 2000 Plus レビュー比較まとめ",
     "name": "Jackery ポータブル電源 2000 Plus レビュー比較まとめ.md",
@@ -6658,8 +6658,8 @@
     "publishAt": "2026-10-04T20:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-04T19:55:26.912751+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-04T20:32:25.111478+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7648feec24bd?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
