@@ -6269,7 +6269,7 @@
   },
   {
     "id": "e7907ecd-106a-4eae-beb9-bf6bf74c35b3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2d3088fda7cb4faca90252c752bfe07c",
     "title": "Cardo PTP00001 カルド PACKTALK レビュー比較まとめ",
     "name": "Cardo PTP00001 カルド PACKTALK レビュー比較まとめ.md",
@@ -6278,10 +6278,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-04T13:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-04T12:55:07.605006+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2743659c-83cc-4f09-895e-47532b644f51",
