@@ -5717,7 +5717,7 @@
   },
   {
     "id": "83d6c5bb-c9f0-4f09-990e-7845b5d6f4d7",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s57a018256bb04eb39fbffd769abf8078",
     "title": "iflytek AINOTE 2 レビュー比較まとめ",
     "name": "iflytek AINOTE 2 レビュー比較まとめ.md",
@@ -5727,8 +5727,8 @@
     "publishAt": "2026-10-04T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-04T07:27:26.069305+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-04T07:29:58.763222+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n21a899bfce9e?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
