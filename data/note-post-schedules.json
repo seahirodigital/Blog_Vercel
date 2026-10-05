@@ -7562,7 +7562,7 @@
   },
   {
     "id": "cda4139e-0148-438e-bfa7-258275faf0b8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4b97815439a84350a975ec46326431e1",
     "title": "アストロプロダクツ WRC207 ワイドロールキャビネット 5段 レビュー比較まとめ",
     "name": "アストロプロダクツ WRC207 ワイドロールキャビネット 5段 レビュー比較まとめ.md",
@@ -7571,10 +7571,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T08:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-05T07:55:20.674623+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e02e93bb-0641-43ba-a115-a938a933366c",
