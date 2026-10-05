@@ -8131,7 +8131,7 @@
   },
   {
     "id": "ddbab82d-42d8-48df-8025-64d98b523ac6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdb87bbe6cc8649e684895e93e8200bfd",
     "title": "Jackery 3600Plus ジャクリ ポータブル電源 レビュー比較まとめ",
     "name": "Jackery 3600Plus ジャクリ ポータブル電源 レビュー比較まとめ.md",
@@ -8140,10 +8140,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T16:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-05T15:25:26.511441+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cbd13b7d-36c0-4d95-8c4e-67cc2ba15853",
