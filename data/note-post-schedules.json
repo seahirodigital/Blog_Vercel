@@ -8355,7 +8355,7 @@
   },
   {
     "id": "9bd3edf6-5b92-476d-ad44-bbd19e239c55",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s52b3c725fbab4fb6b9f3795d16cb7aee",
     "title": "Yoshino B1200 ヨシノ ポータブル電源 レビュー比較まとめ",
     "name": "Yoshino B1200 ヨシノ ポータブル電源 レビュー比較まとめ.md",
@@ -8364,10 +8364,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T21:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-05T20:55:23.562950+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0522a10b-af6d-469d-b4c2-bc112b31f9fe",
