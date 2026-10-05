@@ -8364,12 +8364,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T21:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "2026-10-05T20:55:23.562950+00:00",
+    "queuedAt": "2026-10-05T22:25:52.008367+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "0522a10b-af6d-469d-b4c2-bc112b31f9fe",
@@ -8510,7 +8510,7 @@
   },
   {
     "id": "d494ead2-1498-48f5-a8f0-a5b17b6a3c71",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s43f0a2d6ba60462d838a7b5c4d05375c",
     "title": "レグザ 65E770S テレビ レビュー比較まとめ",
     "name": "レグザ 65E770S テレビ レビュー比較まとめ.md",
@@ -8519,10 +8519,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-05T22:25:52.008367+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7f21223d-ea2c-4d26-ad27-af20781f0bb3",
