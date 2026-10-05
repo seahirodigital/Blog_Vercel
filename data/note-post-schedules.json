@@ -8648,7 +8648,7 @@
   },
   {
     "id": "36447744-7c0f-4935-9996-f3d9444355ad",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd906622b5d50460ab3f88f6fa54a8031",
     "title": "HiKOKI AC100V ロータリー CB13FB バンドソー レビュー比較まとめ",
     "name": "HiKOKI AC100V ロータリー CB13FB バンドソー レビュー比較まとめ.md",
@@ -8657,10 +8657,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-06T00:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-05T23:25:32.205760+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7e423405-a032-4b38-840a-be13f57bb26d",
