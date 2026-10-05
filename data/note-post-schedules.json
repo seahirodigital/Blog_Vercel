@@ -7148,7 +7148,7 @@
   },
   {
     "id": "76ef4888-38e8-43f4-9562-0209b8786cab",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!saa81893bf39345b188eb9db0cfed8d30",
     "title": "koala CUSHY ソファーベッド レビュー比較まとめ",
     "name": "koala CUSHY ソファーベッド レビュー比較まとめ.md",
@@ -7157,10 +7157,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T03:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-05T02:25:31.565700+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4c306915-10cb-4806-9c59-387b6a652b1a",
