@@ -7286,7 +7286,7 @@
   },
   {
     "id": "2de260b3-d5c7-4128-a6c9-edf59f10c220",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb1cbac907b474d95bdad707be41a2ad4",
     "title": "ブライトン Bryton Rider S810 (スピード、ケイデンス、心拍センサー付属) GPSサイクルコンピューター",
     "name": "ブライトン Bryton Rider S810 (スピード、ケイデンス、心拍センサー付属) GPSサイクルコンピューター.md",
@@ -7295,10 +7295,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T04:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-05T07:48:11.567971+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "86761df7-fc7b-409f-b613-7fc98a4684ef",
@@ -7353,7 +7355,7 @@
   },
   {
     "id": "1dc8e2c3-86c6-42e6-befd-32b739de4562",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s49b06a50d9d7422e98df2478a8440048",
     "title": "HiKOKI H60MEY レビュー比較まとめ",
     "name": "HiKOKI H60MEY レビュー比較まとめ.md",
@@ -7362,10 +7364,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-05T07:48:11.567971+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5785883b-d46e-473a-b413-f083959ad7a5",
@@ -7420,7 +7424,7 @@
   },
   {
     "id": "03e3e429-8367-4bf1-bf35-1859757a35af",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s37aad85771b4499b963c3400ccb30740",
     "title": "JESIMAIK JM4200iS ガソリン発電機 レビュー比較まとめ",
     "name": "JESIMAIK JM4200iS ガソリン発電機 レビュー比較まとめ.md",
@@ -7429,10 +7433,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T06:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-05T07:48:11.567971+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6cbc8213-ca01-4e0f-a776-94ae3ede956a",
@@ -7487,7 +7493,7 @@
   },
   {
     "id": "6924f066-dc0d-4cbd-b6c3-cb852a1cc37b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3be278ad2a0542e0b5c9585347ca0a54",
     "title": "JmGO N1S Ultimate 4K 3色レーザー プロジェクター レビュー比較まとめ",
     "name": "JmGO N1S Ultimate 4K 3色レーザー プロジェクター レビュー比較まとめ.md",
@@ -7496,10 +7502,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-05T07:48:11.567971+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b4dafc49-a542-43b0-a9c6-a529a7de402c",
