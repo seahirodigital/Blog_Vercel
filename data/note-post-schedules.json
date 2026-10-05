@@ -7838,7 +7838,7 @@
   },
   {
     "id": "94b510a0-6fcf-4e25-b2d5-7ce84b0fc17d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc73c8a18312443c99a5d8a5be4a1fb05",
     "title": "Dell S2425HSM-A モニター レビュー比較まとめ",
     "name": "Dell S2425HSM-A モニター レビュー比較まとめ.md",
@@ -7847,10 +7847,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T12:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-05T11:55:26.510943+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "06bf1393-6fd4-491f-8bcf-501348d64f07",
