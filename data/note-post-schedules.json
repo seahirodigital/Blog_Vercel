@@ -8441,7 +8441,7 @@
   },
   {
     "id": "fdc78ce4-a810-4ccb-968a-1fbf58c1c845",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s87a19c59b0174b668cb60fec9c59cb4c",
     "title": "バッファロー おもいでばこ レビュー比較まとめ",
     "name": "バッファロー おもいでばこ レビュー比較まとめ.md",
@@ -8451,8 +8451,8 @@
     "publishAt": "2026-10-05T22:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-05T21:55:01.012827+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-05T22:32:31.014874+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n0e1805828e6a?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
