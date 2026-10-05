@@ -7493,7 +7493,7 @@
   },
   {
     "id": "6924f066-dc0d-4cbd-b6c3-cb852a1cc37b",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3be278ad2a0542e0b5c9585347ca0a54",
     "title": "JmGO N1S Ultimate 4K 3色レーザー プロジェクター レビュー比較まとめ",
     "name": "JmGO N1S Ultimate 4K 3色レーザー プロジェクター レビュー比較まとめ.md",
@@ -7503,8 +7503,8 @@
     "publishAt": "2026-10-05T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-05T09:19:04.059747+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-05T09:21:43.046603+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n274dd6b5dbad?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
