@@ -8510,7 +8510,7 @@
   },
   {
     "id": "d494ead2-1498-48f5-a8f0-a5b17b6a3c71",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s43f0a2d6ba60462d838a7b5c4d05375c",
     "title": "レグザ 65E770S テレビ レビュー比較まとめ",
     "name": "レグザ 65E770S テレビ レビュー比較まとめ.md",
@@ -8520,8 +8520,8 @@
     "publishAt": "2026-10-05T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-05T22:25:52.008367+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-05T23:02:27.689710+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n9a282d2dcd3b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
