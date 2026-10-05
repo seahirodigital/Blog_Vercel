@@ -7217,7 +7217,7 @@
   },
   {
     "id": "438e70c5-e528-44b9-9a4a-f893e3b09eaf",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s4a658c81e3ed479696b9d76b3fa6af81",
     "title": "Logicool G ハンコン G923 グランツーリスモ7 Forza Horizon 923d レビュー比較まとめ",
     "name": "Logicool G ハンコン G923 グランツーリスモ7 Forza Horizon 923d レビュー比較まとめ.md",
@@ -7227,8 +7227,8 @@
     "publishAt": "2026-10-05T03:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-05T02:55:47.933328+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-05T03:32:22.151752+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ndbb87c18a4e0?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
