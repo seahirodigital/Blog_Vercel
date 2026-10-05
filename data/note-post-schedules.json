@@ -7631,7 +7631,7 @@
   },
   {
     "id": "8b8ededd-5abc-49cf-ba32-8464c9cf1d15",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7da95d48a3e34390bea2220c10f1a549",
     "title": "スイッチボット K20+Pro ロボット掃除機 レビュー比較まとめ",
     "name": "スイッチボット K20+Pro ロボット掃除機 レビュー比較まとめ.md",
@@ -7640,10 +7640,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T09:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-05T08:55:50.276179+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "355a966a-96d7-446f-9900-05c82e7a844c",
