@@ -8286,7 +8286,7 @@
   },
   {
     "id": "dd836ef3-d8a2-43d5-af71-be979a7f46a6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s73d8b7d16ec44ebab8c9ae05b6c30ac3",
     "title": "Genmitsu 4040-PRO MAX CNC レビュー比較まとめ",
     "name": "Genmitsu 4040-PRO MAX CNC レビュー比較まとめ.md",
@@ -8295,10 +8295,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T20:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-05T19:55:58.030576+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3d9b498b-e12a-46eb-a762-fdd1dba5599d",
