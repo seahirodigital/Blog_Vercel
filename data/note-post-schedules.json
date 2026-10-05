@@ -8579,7 +8579,7 @@
   },
   {
     "id": "62955deb-7965-4ca4-be62-a08acc9d7e7c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb62f7300cdfc4ea3963628916e3a63cb",
     "title": "Soundcore Anker Soundcore Nebula P1 プロジェクター レビュー比較まとめ",
     "name": "Soundcore Anker Soundcore Nebula P1 プロジェクター レビュー比較まとめ.md",
@@ -8589,8 +8589,8 @@
     "publishAt": "2026-10-05T23:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-05T22:55:41.920328+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-05T23:32:24.160001+00:00",
+    "publishedUrl": "https://note.com/notes/n967ff237d2e7/landing",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
