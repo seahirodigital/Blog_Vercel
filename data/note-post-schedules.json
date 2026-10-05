@@ -7769,7 +7769,7 @@
   },
   {
     "id": "12af2a30-5ec6-4be7-9181-034a6e3d26b1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa564ab84fad742169a832c7153211390",
     "title": "タイガー魔法瓶 PIS-N300T 電気ポット 蒸気レス レビュー比較まとめ",
     "name": "タイガー魔法瓶 PIS-N300T 電気ポット 蒸気レス レビュー比較まとめ.md",
@@ -7778,10 +7778,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T11:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-05T10:55:56.622461+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a855dbc1-9553-4306-a89d-f1f6debc1f17",
