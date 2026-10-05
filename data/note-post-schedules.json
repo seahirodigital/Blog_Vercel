@@ -7907,7 +7907,7 @@
   },
   {
     "id": "f91b2de4-2fe2-47b6-a640-99fad7bbee35",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf73084874401431597df9120ca2e7e61",
     "title": "roborock ロボロック Saros10R ロボット掃除機 黒 20000P 黒 レビュー比較まとめ",
     "name": "roborock Saros10R ロボット掃除機 レビュー比較まとめ.md",
@@ -7916,10 +7916,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T13:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-05T15:24:18.674723+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b698c021-4d22-4559-93c9-a46a300e3d6d",
@@ -7974,7 +7976,7 @@
   },
   {
     "id": "1043f6fc-6ea1-4c30-b6e9-34f3e119423d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9b03cf127cf24ef29a10da6df3988650",
     "title": "PHILIPS PUH7231 テレビ レビュー比較まとめ",
     "name": "PHILIPS PUH7231 テレビ レビュー比較まとめ.md",
@@ -7983,10 +7985,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T14:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-05T15:24:18.674723+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "89e17b4b-ca5d-4e45-8546-353726d295b8",
@@ -8041,7 +8045,7 @@
   },
   {
     "id": "150a2977-7e76-4307-9cb7-b0e37a3afb8a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6aee8292093a48c2a47261a95812a1fb",
     "title": "EF ECOFLOW EcoFlow DELTA 3 2000 Air ポータブル電源 +WAVE 3 ポータブルエアコ",
     "name": "EF ECOFLOW EcoFlow DELTA 3 2000 Air ポータブル電源 +WAVE 3 ポータブルエアコ.md",
@@ -8050,10 +8054,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T15:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-05T15:24:18.674723+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "715bf061-3ff3-468c-8086-f8e9a27b4ed4",
