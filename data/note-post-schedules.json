@@ -8200,7 +8200,7 @@
   },
   {
     "id": "4c2fcc31-1f4a-4cba-83c3-9d1952f4de0f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9ae7336aad1f43dd88971b683d293b27",
     "title": "EENOUR DK4000iEDF 5kVA 3kVA インバーター発電機 定格出力3 レビュー比較まとめ",
     "name": "EENOUR DK4000iEDF 5kVA 3kVA インバーター発電機 定格出力3 レビュー比較まとめ.md",
@@ -8209,10 +8209,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-05T16:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-05T15:55:54.082840+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "251a440e-91b8-4b75-bc67-43a8b2d79b86",
