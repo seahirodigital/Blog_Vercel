@@ -7286,7 +7286,7 @@
   },
   {
     "id": "2de260b3-d5c7-4128-a6c9-edf59f10c220",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb1cbac907b474d95bdad707be41a2ad4",
     "title": "ブライトン Bryton Rider S810 (スピード、ケイデンス、心拍センサー付属) GPSサイクルコンピューター",
     "name": "ブライトン Bryton Rider S810 (スピード、ケイデンス、心拍センサー付属) GPSサイクルコンピューター.md",
@@ -7296,8 +7296,8 @@
     "publishAt": "2026-10-05T04:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-05T07:48:11.567971+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-05T07:50:43.523929+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nb82357a9c72d?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
