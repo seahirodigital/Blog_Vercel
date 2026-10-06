@@ -9993,7 +9993,7 @@
   },
   {
     "id": "858e6cb7-af7c-406e-a571-5c7b26c90f1b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc96d152591ac464eb04850fd46fb8f36",
     "title": "Jackery JE-2000F ポータブル電源 2000 レビュー比較まとめ",
     "name": "Jackery JE-2000F ポータブル電源 2000 レビュー比較まとめ.md",
@@ -10002,10 +10002,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-06T21:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-06T20:55:08.062455+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a1cb47a0-2af5-42fb-9f78-356db5515e5b",
