@@ -9140,12 +9140,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-06T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "2026-10-06T08:11:13.654063+00:00",
+    "queuedAt": "2026-10-06T09:42:03.937304+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "6dd77bac-6ec7-4e08-bc9c-a0abb82fd52c",
