@@ -8993,7 +8993,7 @@
   },
   {
     "id": "989c4bf5-515d-45aa-9012-ad013e6190f2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4cca717fefdf4fb89e63434bd631c820",
     "title": "Neakasa M1 Plus レビュー比較まとめ",
     "name": "Neakasa M1 Plus レビュー比較まとめ.md",
@@ -9002,10 +9002,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-06T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-06T04:55:33.880266+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d0dcf993-592e-4761-bb4c-c9ac1e4cbb90",
