@@ -10217,7 +10217,7 @@
   },
   {
     "id": "991c336c-1e09-474d-9605-c9bc44f13601",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s87a745e5e2804b4da118200b84bdcb70",
     "title": "Elgato SM7BHyperX PS5Pro 8K60 Stream Deck レビュー比較まとめ",
     "name": "Elgato SM7BHyperX PS5Pro 8K60 Stream Deck レビュー比較まとめ.md",
@@ -10226,10 +10226,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-06T23:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-06T22:55:40.449576+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ebbdfb68-b81a-48cc-a738-65d0ad44fe8e",
