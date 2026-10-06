@@ -9407,7 +9407,7 @@
   },
   {
     "id": "6a27afa6-72ba-4dbd-a5c6-6d3a1e022cb4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc1bcc137f66d4c819d58744ee1d18847",
     "title": "Biwin DW100 DDR5 6000MT PC5-48000 CL30 s デスクトップPC用メモリ レビュー比較",
     "name": "Biwin DW100 DDR5 6000MT PC5-48000 CL30 s デスクトップPC用メモリ レビュー比較.md",
@@ -9416,10 +9416,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-06T11:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-06T10:55:44.464363+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "53a4ea83-40bc-4b13-b091-ac13902fe48d",
