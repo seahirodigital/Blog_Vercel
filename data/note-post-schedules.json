@@ -9769,7 +9769,7 @@
   },
   {
     "id": "3e124eaa-f5c1-409f-9468-7ead0612e1e2",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb91ff78db31f44b6951b00cd3f370839",
     "title": "AMOS JP-EX COLOR 麻雀卓 レビュー比較まとめ",
     "name": "AMOS JP-EX COLOR 麻雀卓 レビュー比較まとめ.md",
@@ -9779,8 +9779,8 @@
     "publishAt": "2026-10-06T16:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-06T15:25:26.247492+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-06T16:02:28.465554+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5950a0ec901e?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
