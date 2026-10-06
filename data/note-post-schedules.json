@@ -10148,7 +10148,7 @@
   },
   {
     "id": "ac9faa7d-0a5c-425b-bc76-1328be8e2e56",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0e79ccc789b54d4ba7cc828004694e8b",
     "title": "NELL 公式 マットレス スイート セミダブル レビュー比較まとめ",
     "name": "NELL 公式 マットレス スイート セミダブル レビュー比較まとめ.md",
@@ -10157,10 +10157,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-06T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-06T22:25:15.506580+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2fa3a71a-edf7-416c-9559-4713bd8bc79a",
