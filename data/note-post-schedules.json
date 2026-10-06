@@ -9614,7 +9614,7 @@
   },
   {
     "id": "166f94a0-9da7-4c69-aa92-d33cd128eab8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc8471182bfed4a1bbeaa8caba66af755",
     "title": "EF ECOFLOW EcoFlow DELTA 3 Ultra レビュー比較まとめ",
     "name": "EF ECOFLOW EcoFlow DELTA 3 Ultra レビュー比較まとめ.md",
@@ -9623,10 +9623,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-06T14:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-06T13:55:59.335954+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ede525c1-b649-48c7-94aa-65be9014da1c",
