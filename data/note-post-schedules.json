@@ -9338,7 +9338,7 @@
   },
   {
     "id": "b033c459-31f7-4bdd-9a0c-3f0574cee22c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s6ef583df51484cc989001cc039f62c67",
     "title": "Jackery ポータブル電源 2000 New 2048Wh 大容量 家庭用 車中泊 レビュー比較まとめ",
     "name": "Jackery ポータブル電源 2000 New 2048Wh 大容量 家庭用 車中泊 レビュー比較まとめ.md",
@@ -9348,8 +9348,8 @@
     "publishAt": "2026-10-06T10:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-06T09:55:12.544099+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-06T10:32:23.756391+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n322dc41417a0?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
