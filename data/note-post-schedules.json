@@ -8717,7 +8717,7 @@
   },
   {
     "id": "5b6da1f8-ac3b-4872-a9c6-9d06683367f4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s18e5777c7b77492ab5b06513d82ffa59",
     "title": "Edifier R2750DB MKII 3way アクティブスピーカー レビュー比較まとめ",
     "name": "Edifier R2750DB MKII 3way アクティブスピーカー レビュー比較まとめ.md",
@@ -8727,8 +8727,8 @@
     "publishAt": "2026-10-06T02:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-06T01:55:03.069822+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-06T02:32:45.780332+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na2f5ac2ffa7d?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
