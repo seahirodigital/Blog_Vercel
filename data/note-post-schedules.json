@@ -9683,7 +9683,7 @@
   },
   {
     "id": "6faf97f7-1e84-4a76-8bf7-b8a0656ee9c9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4e12d995ef694937af127e9e9c0957d7",
     "title": "BELLE MAISON(ベルメゾン) グータラグ レビュー比較まとめ",
     "name": "BELLE MAISON(ベルメゾン) グータラグ レビュー比較まとめ.md",
@@ -9692,10 +9692,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-06T15:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-06T14:25:49.603248+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "db94f297-101f-4c6d-9704-6ea7673c9852",
