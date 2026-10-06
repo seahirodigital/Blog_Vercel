@@ -9269,7 +9269,7 @@
   },
   {
     "id": "fdb7e78b-0bbf-47d6-86a1-88704c62d2de",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s315a0bfede614ee3a1299e3f8a99d580",
     "title": "JESIMAIK JM5500iE 200V 発電機 レビュー比較まとめ",
     "name": "JESIMAIK JM5500iE 200V 発電機 レビュー比較まとめ.md",
@@ -9279,8 +9279,8 @@
     "publishAt": "2026-10-06T09:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-06T08:55:37.937204+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-06T09:32:30.969878+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n6377f2019417?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
