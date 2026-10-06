@@ -9476,7 +9476,7 @@
   },
   {
     "id": "9a3b2e7c-c5f2-4a70-afc2-ed53a9a8fa52",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc93106c397f64af59f870f1e31332cb0",
     "title": "HOVERAir X1 Smart レビュー比較まとめ",
     "name": "HOVERAir X1 Smart レビュー比較まとめ.md",
@@ -9485,10 +9485,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-06T12:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-06T11:55:15.932716+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "93843700-62f2-4b45-89d9-c8f4cafc2d3d",
