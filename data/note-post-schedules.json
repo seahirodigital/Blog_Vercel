@@ -10079,7 +10079,7 @@
   },
   {
     "id": "c87fe6bc-59b6-48fc-abdc-c3b11c7cf8ac",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sff5539cc65914b9b8192d2a99ab56105",
     "title": "Anker Solix C1000 Gen 2 Portable Power Station レビュー比較まとめ",
     "name": "Anker C1000 ドライヤー レビュー比較まとめ.md",
@@ -10088,10 +10088,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-06T22:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-06T21:55:51.513586+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b043ab29-3ff5-4b92-a6aa-7dff50e6de18",
