@@ -8786,7 +8786,7 @@
   },
   {
     "id": "e1a3514c-c279-4e5d-b8ff-b4e10fa2db91",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb3ec73ed918d402d92b58307d5eab3fe",
     "title": "EENOUR DK4500iAEFI 5kVA インバーター発電機 定格出力3 レビュー比較まとめ",
     "name": "EENOUR DK4500iAEFI 5kVA インバーター発電機 定格出力3 レビュー比較まとめ.md",
@@ -8795,10 +8795,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-06T03:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-06T02:25:29.692216+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3640745b-1480-4268-b4e5-d77673a2425d",
