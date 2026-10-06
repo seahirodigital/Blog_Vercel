@@ -9924,7 +9924,7 @@
   },
   {
     "id": "06d8d187-e13b-4300-a19a-2082543f6490",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbd08b1e118fc41eaa8375f0e659e12f9",
     "title": "YESKAMOO 自動追尾 ワイヤレス防犯カメラセット 360°監視カバー モニター付き レビュー比較まとめ",
     "name": "YESKAMOO 自動追尾 ワイヤレス防犯カメラセット 360°監視カバー モニター付き レビュー比較まとめ.md",
@@ -9933,10 +9933,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-06T20:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-06T19:55:24.293087+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c9e22530-99aa-4cb0-97e5-0f9ca88de7da",
