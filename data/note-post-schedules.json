@@ -8924,7 +8924,7 @@
   },
   {
     "id": "b82bea1c-5fe0-4122-a12a-5700187cd78b",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s36f092b8e53e4f9dabafe4e663fecf41",
     "title": "EF ECOFLOW EcoFlow ポータブル電源 DELTA 2 Max レビュー比較まとめ",
     "name": "EF ECOFLOW EcoFlow ポータブル電源 DELTA 2 Max レビュー比較まとめ.md",
@@ -8934,8 +8934,8 @@
     "publishAt": "2026-10-06T04:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-06T03:55:45.187302+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-06T04:32:21.021202+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n6f793bbe3c52?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
