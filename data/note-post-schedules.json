@@ -10424,7 +10424,7 @@
   },
   {
     "id": "431fb3b0-52e8-4e13-8a12-383e750f4d4f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc6f9cfc668054d7e8114c4b34c6f480b",
     "title": "ATOTO S en4 レビュー比較まとめ",
     "name": "ATOTO S en4 レビュー比較まとめ.md",
@@ -10433,10 +10433,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-07T03:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-07T02:25:30.501037+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e5a72a7c-e0e1-46c1-9339-7dfca867f96e",
