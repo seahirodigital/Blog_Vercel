@@ -11183,7 +11183,7 @@
   },
   {
     "id": "8651cab8-759c-456a-9ae0-36714a69ad2a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s898a17d699ea4a96b7355ef94b22507e",
     "title": "ハイパーエックス HyperX Cloud III 有線 ゲーミング ドライバー搭載 727A8AA ヘッドセット レビ",
     "name": "ハイパーエックス HyperX Cloud III 有線 ゲーミング ドライバー搭載 727A8AA ヘッドセット レビ.md",
@@ -11192,10 +11192,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-07T13:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-07T14:03:04.397013+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3869b8d9-7a6b-4fb6-bf15-50c3a4e74603",
@@ -11250,7 +11252,7 @@
   },
   {
     "id": "e55fe561-e403-4645-be8e-8177453d54bb",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8ad321f687194d01ba213f899b3285e5",
     "title": "Yoshino B1200 SP200 ヨシノ ポータブル電源 レビュー比較まとめ",
     "name": "Yoshino B1200 SP200 ヨシノ ポータブル電源 レビュー比較まとめ.md",
@@ -11259,10 +11261,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-07T14:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-07T14:03:04.397013+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "89f6145c-a1f6-4560-b279-78228ebd8d01",
