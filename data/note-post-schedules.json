@@ -10838,7 +10838,7 @@
   },
   {
     "id": "24f80cd6-485a-4886-9ab2-2e3014b87d5e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s9638ff52b93d486ca8a81c0ba15deace",
     "title": "RIDERNAV R7X アクションカメラ レビュー比較まとめ",
     "name": "RIDERNAV R7X アクションカメラ レビュー比較まとめ.md",
@@ -10848,8 +10848,8 @@
     "publishAt": "2026-10-07T08:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-07T07:55:49.212991+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-07T08:34:23.969700+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n437f40f25abe?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
