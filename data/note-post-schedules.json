@@ -11407,7 +11407,7 @@
   },
   {
     "id": "49b2be5b-bb4b-41b8-8d35-787fb10b6575",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se36dfd2991a3492490813c44969eaf81",
     "title": "V VOICE Model-G5 レビュー比較まとめ",
     "name": "V VOICE Model-G5 レビュー比較まとめ.md",
@@ -11416,10 +11416,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-07T16:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-07T15:25:53.126870+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2f854fcd-392f-4f59-a5ed-7f891a37eb8a",
