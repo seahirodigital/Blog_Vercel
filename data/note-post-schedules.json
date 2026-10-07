@@ -10493,7 +10493,7 @@
   },
   {
     "id": "30fe7791-2eda-4026-ba4f-e7bfd113252b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s56c9d97c370e47c99e8214b962669c50",
     "title": "HUAWEI WATCH GT 6 Pro スマートウォッチ レビュー比較まとめ",
     "name": "HUAWEI WATCH GT 6 Pro スマートウォッチ レビュー比較まとめ.md",
@@ -10502,10 +10502,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-07T03:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-07T02:55:02.191494+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cedb3ef5-4839-40b6-83a0-a08ad30e3687",
