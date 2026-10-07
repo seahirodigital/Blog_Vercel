@@ -10976,7 +10976,7 @@
   },
   {
     "id": "cf624f4d-c6ae-4808-b0eb-2cf03b8a1241",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s5401d9a2a4024134b80f181a01c49711",
     "title": "Apple(アップル) Apple iPhone Air (SIMフリー) レビュー比較まとめ",
     "name": "Apple(アップル) Apple iPhone Air (SIMフリー) レビュー比較まとめ.md",
@@ -10986,8 +10986,8 @@
     "publishAt": "2026-10-07T10:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-07T09:55:15.470699+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-07T10:32:57.821493+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ndb689b9911f0?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
