@@ -10700,7 +10700,7 @@
   },
   {
     "id": "54dbe441-6a63-4627-86c0-2c28b69f376a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s29346f1f80cc46e1899b9bee8ea88658",
     "title": "kareyou COY-380 212cc ウッドチッパー エンジン式 レビュー比較まとめ",
     "name": "kareyou COY-380 212cc ウッドチッパー エンジン式 レビュー比較まとめ.md",
@@ -10710,8 +10710,8 @@
     "publishAt": "2026-10-07T06:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-07T07:50:40.483716+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-07T07:53:27.211805+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n89a25cb7aff7?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
