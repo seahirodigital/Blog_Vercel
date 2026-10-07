@@ -11476,7 +11476,7 @@
   },
   {
     "id": "9e28aecb-7b8c-4044-8148-15a924e43543",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s79658553b11748b6a25ebe807cbfa4b8",
     "title": "DJI 120fps Osmo 360 レビュー比較まとめ",
     "name": "DJI 120fps Osmo 360 レビュー比較まとめ.md",
@@ -11485,10 +11485,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-07T16:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-07T15:55:31.491992+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c4bbf807-fcda-476e-a053-1b980f6ef3b8",
