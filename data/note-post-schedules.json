@@ -10355,7 +10355,7 @@
   },
   {
     "id": "cb23486f-2520-4641-9344-a0e37bc7f55a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3c72c9a9fbad4a2bb787c5e1031a1501",
     "title": "HiKOKI C3605DA レビュー比較まとめ",
     "name": "HiKOKI C3605DA レビュー比較まとめ.md",
@@ -10365,8 +10365,8 @@
     "publishAt": "2026-10-07T02:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-07T01:55:57.293422+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-07T02:32:16.915403+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nc7de22cdee4f?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
