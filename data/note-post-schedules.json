@@ -10907,7 +10907,7 @@
   },
   {
     "id": "8b5959f1-7fb5-4768-8316-6719ae6a1b69",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3a81ca5670d64982b714dcfd4b410d8b",
     "title": "Galaxy S10 SM-X820NZAAXJP Tab + レビュー比較まとめ",
     "name": "Galaxy S10 SM-X820NZAAXJP Tab + レビュー比較まとめ.md",
@@ -10916,10 +10916,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-07T09:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-07T08:55:31.700720+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "da2b8cbc-85c9-4ca5-a60c-da9a42b5d13b",
