@@ -11252,7 +11252,7 @@
   },
   {
     "id": "e55fe561-e403-4645-be8e-8177453d54bb",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s8ad321f687194d01ba213f899b3285e5",
     "title": "Yoshino B1200 SP200 ヨシノ ポータブル電源 レビュー比較まとめ",
     "name": "Yoshino B1200 SP200 ヨシノ ポータブル電源 レビュー比較まとめ.md",
@@ -11262,8 +11262,8 @@
     "publishAt": "2026-10-07T14:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-07T14:03:04.397013+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-07T14:32:18.394450+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n58f77f286148?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
