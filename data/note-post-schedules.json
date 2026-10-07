@@ -11321,7 +11321,7 @@
   },
   {
     "id": "be05a6da-9fd5-45fb-a066-ca5dfece76b5",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s1dbe25baffa341f8bddcb3dfee65620c",
     "title": "ORICO JMS591 5ベイ RAID ハードドライブエンクロージャー レビュー比較まとめ",
     "name": "ORICO JMS591 5ベイ RAID ハードドライブエンクロージャー レビュー比較まとめ.md",
@@ -11331,8 +11331,8 @@
     "publishAt": "2026-10-07T15:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-07T14:25:37.029375+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-07T15:02:16.880500+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7a0d4209e319?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
