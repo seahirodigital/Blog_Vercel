@@ -11717,7 +11717,7 @@
   },
   {
     "id": "d39c3609-2591-4164-862b-8a029ee52c55",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf620a2ea97a84bfda791e3629ff69a61",
     "title": "PORMIDO-LINK PR-G20 レビュー比較まとめ",
     "name": "PORMIDO-LINK PR-G20 レビュー比較まとめ.md",
@@ -11727,8 +11727,8 @@
     "publishAt": "2026-10-07T22:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-07T21:55:09.538782+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-07T22:32:25.321866+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nc9537255c093?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
