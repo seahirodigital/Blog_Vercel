@@ -11786,7 +11786,7 @@
   },
   {
     "id": "d35c2fbd-5e15-44da-9fbb-1fd53e34f061",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s926e202fcc2e4c6b96ade0c76509375a",
     "title": "エマ・スリープ エマ・オリジナルV2 (セミダブル)ハイブリッドマットレス レビュー比較まとめ",
     "name": "エマ・スリープ エマ・オリジナルV2 (セミダブル)ハイブリッドマットレス レビュー比較まとめ.md",
@@ -11796,8 +11796,8 @@
     "publishAt": "2026-10-07T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-07T22:25:44.655594+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-07T23:02:24.104655+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n466cc2f38527?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
