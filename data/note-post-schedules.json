@@ -11045,7 +11045,7 @@
   },
   {
     "id": "2fd9d2ec-d576-4574-8bca-04cd26697c9c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s49ab1abc4d534647b8272b517d050604",
     "title": "サンワダイレクト 400-PSD037 電動 シュレッダー 業務用 大容量 40L レビュー比較まとめ",
     "name": "サンワダイレクト 400-PSD037 電動 シュレッダー 業務用 大容量 40L レビュー比較まとめ.md",
@@ -11055,8 +11055,8 @@
     "publishAt": "2026-10-07T11:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-07T10:55:01.229565+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-07T11:32:38.965242+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n693f37caf82d?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
