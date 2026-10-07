@@ -11631,7 +11631,7 @@
   },
   {
     "id": "d101df74-a9fe-45fe-b104-1ed049c8aabb",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!scf6b481ba7644e139dd5cdab837aa2c3",
     "title": "ガーデンマスター(Gardenmaster) DSLB-1515 物置 屋外 収納庫 レビュー比較まとめ",
     "name": "ガーデンマスター(Gardenmaster) DSLB-1515 物置 屋外 収納庫 レビュー比較まとめ.md",
@@ -11640,10 +11640,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-07T21:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-07T20:55:03.015705+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f866d52e-5ac9-489a-b445-dc301c96c721",
