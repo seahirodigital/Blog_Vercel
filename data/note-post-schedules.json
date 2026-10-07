@@ -10631,7 +10631,7 @@
   },
   {
     "id": "899d89c5-8248-4859-a9e8-403e8ce8087d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8106e373f9f34b04898605dacee4c400",
     "title": "Jackery ポータブル電源 2000 New 200W ソーラーパネル 1枚 2点セット 2048Wh レビュー比較",
     "name": "Jackery ポータブル電源 2000 New 200W ソーラーパネル 1枚 2点セット 2048Wh レビュー比較.md",
@@ -10640,10 +10640,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-07T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-07T07:50:40.483716+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4263e859-77ed-4a0e-a865-f874bb787187",
@@ -10698,7 +10700,7 @@
   },
   {
     "id": "54dbe441-6a63-4627-86c0-2c28b69f376a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s29346f1f80cc46e1899b9bee8ea88658",
     "title": "kareyou COY-380 212cc ウッドチッパー エンジン式 レビュー比較まとめ",
     "name": "kareyou COY-380 212cc ウッドチッパー エンジン式 レビュー比較まとめ.md",
@@ -10707,10 +10709,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-07T06:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-07T07:50:40.483716+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0b037f5e-c837-4dcd-9b5b-953349f9662a",
@@ -10765,7 +10769,7 @@
   },
   {
     "id": "b51bb73b-36f0-4747-9fc3-c75d53985d56",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7e69e92e5b5f450195d7a20109f66d2b",
     "title": "ガーデンマスター DSLB-1515K 物置 屋外 レビュー比較まとめ",
     "name": "ガーデンマスター DSLB-1515K 物置 屋外 レビュー比較まとめ.md",
@@ -10774,10 +10778,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-07T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-07T07:50:40.483716+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2731a042-0afb-483b-92cc-345587798310",
