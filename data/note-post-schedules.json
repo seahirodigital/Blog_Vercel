@@ -11855,7 +11855,7 @@
   },
   {
     "id": "908ed052-63fe-4d2a-8c9f-a4bf987ee11a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0df2d8b2526a4c4ea032e2c33fb6bf64",
     "title": "Gaidoh SY-75 ウッドチッパーエンジン式 木材粉砕機 レビュー比較まとめ",
     "name": "Gaidoh SY-75 ウッドチッパーエンジン式 木材粉砕機 レビュー比較まとめ.md",
@@ -11864,10 +11864,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-07T23:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-07T22:55:19.246950+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "283d2ce8-bbed-4220-bde6-f1039dc28bb2",
