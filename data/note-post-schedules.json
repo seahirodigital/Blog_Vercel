@@ -11114,7 +11114,7 @@
   },
   {
     "id": "249c0562-6f40-4bc9-aa73-788679c8bcbb",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sff83cf577b784def8df13fa472aa97b3",
     "title": "東芝 SCS-T162(N) レビュー比較まとめ",
     "name": "東芝 SCS-T162(N) レビュー比較まとめ.md",
@@ -11123,10 +11123,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-07T12:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-07T11:55:44.863021+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "757f172a-ee18-4800-8cdf-ff9cde452102",
