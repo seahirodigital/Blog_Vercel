@@ -11562,7 +11562,7 @@
   },
   {
     "id": "df01053d-68ed-42ac-8270-359a49d0d9fc",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3c67166c31ad4b76b8085a251cb920ec",
     "title": "NEBULA Anker Nebula X1 & 専用サテライト スピーカー セット プロジェクター レビュー比較まとめ",
     "name": "NEBULA Anker Nebula X1 & 専用サテライト スピーカー セット プロジェクター レビュー比較まとめ.md",
@@ -11571,10 +11571,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-07T20:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-07T19:55:55.195481+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0c2cf9b8-af6a-41a8-a491-412c95321ab9",
