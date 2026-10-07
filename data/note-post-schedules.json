@@ -10769,7 +10769,7 @@
   },
   {
     "id": "b51bb73b-36f0-4747-9fc3-c75d53985d56",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s7e69e92e5b5f450195d7a20109f66d2b",
     "title": "ガーデンマスター DSLB-1515K 物置 屋外 レビュー比較まとめ",
     "name": "ガーデンマスター DSLB-1515K 物置 屋外 レビュー比較まとめ.md",
@@ -10779,8 +10779,8 @@
     "publishAt": "2026-10-07T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-07T07:50:40.483716+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-07T07:53:19.544531+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n06f2617b3c5f?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
