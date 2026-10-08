@@ -13355,7 +13355,7 @@
   },
   {
     "id": "01cf8016-1ae6-458e-b022-5d7aecc323d9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sade32b6c856c45d2880e803d23a88632",
     "title": "XREAL 3DoF X1 1S ARグラス レビュー比較まとめ",
     "name": "XREAL 3DoF X1 1S ARグラス レビュー比較まとめ.md",
@@ -13364,10 +13364,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-08T22:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T21:55:25.961247+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "32a1b298-6bb1-41a6-82fb-a5d5f597fd82",
