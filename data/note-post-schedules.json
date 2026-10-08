@@ -13493,7 +13493,7 @@
   },
   {
     "id": "bc1e57cf-682e-4b34-ab64-9ba38c20de70",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9d40b397c5434225a5a0dc26ba07321b",
     "title": "バッファロー おもいでばこ Wi-Fi6 スタンダードモデル レビュー比較まとめ",
     "name": "バッファロー おもいでばこ Wi-Fi6 スタンダードモデル レビュー比較まとめ.md",
@@ -13502,10 +13502,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-08T23:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T22:55:22.936942+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e607b2ee-d4d3-493b-bd37-474bea057890",
