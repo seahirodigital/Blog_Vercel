@@ -13269,7 +13269,7 @@
   },
   {
     "id": "639ca8ff-06a5-4a17-a9e6-a57e8f841607",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf5095011a8744d05a3e593168d954872",
     "title": "Jackery Jackery (ジャクリ) ポータブル電源 1500 New 100W ソーラーパネル 1枚 2点セッ",
     "name": "Jackery Jackery (ジャクリ) ポータブル電源 1500 New 100W ソーラーパネル 1枚 2点セッ.md",
@@ -13278,10 +13278,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-08T21:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T20:55:33.108522+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "345a58ad-9171-454e-96ea-44b9f6aa5cae",
