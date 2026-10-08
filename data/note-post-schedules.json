@@ -12890,7 +12890,7 @@
   },
   {
     "id": "b9713500-566e-4c13-9dd5-4ed839e11d4e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sea47374f28b6437c9e616a22a0e1a10a",
     "title": "THRIVE(スライヴ) CHD-9124 マッサージチェア レビュー比較まとめ",
     "name": "THRIVE(スライヴ) CHD-9124 マッサージチェア レビュー比較まとめ.md",
@@ -12899,10 +12899,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-08T14:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T14:05:46.105105+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a6e32abc-d33a-4299-9fd8-f5dfd1b0116c",
