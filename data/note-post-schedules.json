@@ -12545,7 +12545,7 @@
   },
   {
     "id": "8327df4a-23c9-4bed-815f-91aa69a27ba0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s01ca7ea51a23442e9be97a8b07276985",
     "title": "アイリスオーヤマ TD-SM7070C-BB テレビドアホン レビュー比較まとめ",
     "name": "アイリスオーヤマ TD-SM7070C-BB テレビドアホン レビュー比較まとめ.md",
@@ -12554,10 +12554,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-08T09:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T08:55:20.403108+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ee1da65f-aa90-4bc9-895d-7b4992166812",
