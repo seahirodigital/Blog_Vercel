@@ -12338,7 +12338,7 @@
   },
   {
     "id": "c419e33e-1202-4998-8ff5-1ca898bd9f6d",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s8188c26374fc484db8f3f2b01cb1f216",
     "title": "Dabbsson レビュー比較まとめ",
     "name": "Dabbsson レビュー比較まとめ.md",
@@ -12348,8 +12348,8 @@
     "publishAt": "2026-10-08T06:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-08T09:32:55.558259+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-08T09:35:29.303886+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7765e4027531?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
