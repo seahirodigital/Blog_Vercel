@@ -12614,7 +12614,7 @@
   },
   {
     "id": "49cc69d2-8e8b-4e3c-bedf-8983499ab3ff",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8fbae62f670e4b1094d70c463b750f48",
     "title": "EF ECOFLOW EcoFlow ポータブル電源 DELTA 3 Max Plus +220W軽量両面ソーラーパネル",
     "name": "EF ECOFLOW EcoFlow ポータブル電源 DELTA 3 Max Plus +220W軽量両面ソーラーパネル.md",
@@ -12623,10 +12623,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-08T10:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T09:55:19.003050+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "71a3b542-8b6e-40a6-9508-dd4d6bb39569",
