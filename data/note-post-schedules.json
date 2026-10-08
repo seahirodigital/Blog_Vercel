@@ -12476,7 +12476,7 @@
   },
   {
     "id": "e0a27f0f-717e-413f-b6af-1436268b8ca8",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb911998f8ac84c03ae1fdd51b68cb959",
     "title": "Creality A1 Falcon レビュー比較まとめ",
     "name": "Creality A1 Falcon レビュー比較まとめ.md",
@@ -12486,8 +12486,8 @@
     "publishAt": "2026-10-08T08:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-08T08:02:29.265058+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-08T08:32:24.832043+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n322cce91be7e?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
