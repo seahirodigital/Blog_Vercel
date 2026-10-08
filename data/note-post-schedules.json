@@ -13114,7 +13114,7 @@
   },
   {
     "id": "dba59d0e-94af-489b-9221-331d5e047d4e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s54f24b7602b34f1d87fa5715801f7cd2",
     "title": "JESIMAIK 100V200V 5kVA JM6000XiE インバーター発電機 200V発電機 レビュー比較まとめ",
     "name": "JESIMAIK 100V200V 5kVA JM6000XiE インバーター発電機 200V発電機 レビュー比較まとめ.md",
@@ -13123,10 +13123,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-08T16:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T15:55:35.415608+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0b2e6696-4a45-4c81-8f09-3ff2190b7515",
