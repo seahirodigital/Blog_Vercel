@@ -12752,7 +12752,7 @@
   },
   {
     "id": "fccaf93c-fa24-49e3-bf7f-1debb7ceff25",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0ef46b52c4e946fd9b78cf05a90af0e6",
     "title": "Genmitsu 3030-PROVer Ultra CNCルーターマシン レビュー比較まとめ",
     "name": "Genmitsu 3030-PROVer Ultra CNCルーターマシン レビュー比較まとめ.md",
@@ -12761,10 +12761,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-08T12:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T11:55:02.339322+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "903d77bc-5907-48f7-ab73-1ee8cb0a5e72",
