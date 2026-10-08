@@ -12959,7 +12959,7 @@
   },
   {
     "id": "7d230cbd-2b91-466b-a9c9-daa0468f134a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9041012584f84e4381bf32062edd4ac5",
     "title": "タイガー魔法瓶 JPI-S10NK 炊飯器 レビュー比較まとめ",
     "name": "タイガー魔法瓶 JPI-S10NK 炊飯器 レビュー比較まとめ.md",
@@ -12968,10 +12968,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-08T15:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T14:25:07.394602+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3167e4fc-363b-4e4e-8104-a65a866a5b1a",
