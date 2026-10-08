@@ -12131,7 +12131,7 @@
   },
   {
     "id": "bededdce-5e36-49cb-9b3d-f3e54516349a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3cbbca2cea1c46e3b3efbd231fef4c27",
     "title": "VOICE Model-G5 レーザー墨出し器 レビュー比較まとめ",
     "name": "VOICE Model-G5 レーザー墨出し器 レビュー比較まとめ.md",
@@ -12141,8 +12141,8 @@
     "publishAt": "2026-10-08T03:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-08T02:55:29.288886+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-08T03:32:20.520268+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n66f40052d6a2?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
