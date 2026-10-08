@@ -12062,7 +12062,7 @@
   },
   {
     "id": "20eb6b12-42d5-46de-a4f3-aed0ff9736bc",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!se2d70defd28942d69b021f8b4232f9cc",
     "title": "V VOICE Model-G8 レビュー比較まとめ",
     "name": "V VOICE Model-G8 レビュー比較まとめ.md",
@@ -12072,8 +12072,8 @@
     "publishAt": "2026-10-08T03:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-08T02:25:50.627051+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-08T03:02:17.508169+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n0ae2c9d7264b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
