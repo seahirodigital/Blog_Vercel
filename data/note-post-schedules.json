@@ -12269,7 +12269,7 @@
   },
   {
     "id": "9c2c173b-67e2-4b5c-b92b-3dabdcc6b6e2",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3a46c35cdcf54163a889355403fd1321",
     "title": "Shark LC156JGY1 スティッククリーナー レビュー比較まとめ",
     "name": "Shark LC156JGY1 スティッククリーナー レビュー比較まとめ.md",
@@ -12279,8 +12279,8 @@
     "publishAt": "2026-10-08T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-08T09:32:55.558259+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-08T09:35:51.770854+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n0287c54edb1e?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
