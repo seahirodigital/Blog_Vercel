@@ -12821,7 +12821,7 @@
   },
   {
     "id": "7f36cd02-b34f-44ea-89aa-44dcf52eb27c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s38350e66f9a54e1dba6d3e4c7627ad59",
     "title": "オートフル G7 AutoFull レビュー比較まとめ",
     "name": "オートフル G7 AutoFull レビュー比較まとめ.md",
@@ -12830,10 +12830,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-08T13:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T12:55:56.012002+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "357703e5-e698-4a48-8d2d-aea6ac7dfa91",
