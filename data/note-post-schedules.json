@@ -13424,7 +13424,7 @@
   },
   {
     "id": "2aa847b5-cb62-456c-b003-6e9586a1d0f9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s34f5248995c24517a4d56afdeab7b898",
     "title": "ヒツジのいらない枕 匠 レビュー比較まとめ",
     "name": "ヒツジのいらない枕 匠 レビュー比較まとめ.md",
@@ -13433,10 +13433,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-08T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T22:25:52.711325+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "25a9009a-21a4-450a-965a-aa8b1d1dd6f9",
