@@ -11924,7 +11924,7 @@
   },
   {
     "id": "d9f31883-9b7f-4df4-8f20-0e29b50b232c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2c3728920a454364b389af3f42cd5c51",
     "title": "日本寝具通信販売 440dp 羽毛布団 シングル レビュー比較まとめ",
     "name": "日本寝具通信販売 440dp 羽毛布団 シングル レビュー比較まとめ.md",
@@ -11934,8 +11934,8 @@
     "publishAt": "2026-10-08T00:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-07T23:53:39.777026+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-08T00:03:29.964303+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n8f22dd423b0a?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
