@@ -11993,7 +11993,7 @@
   },
   {
     "id": "f28df393-f683-4f35-8f3b-4a1ba517e4cf",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdf933f1d43c24583aba8b59691592f79",
     "title": "EENOUR DK7250iE 発電機 レビュー比較まとめ",
     "name": "EENOUR DK7250iE 発電機 レビュー比較まとめ.md",
@@ -12002,10 +12002,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-08T02:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T01:55:10.729832+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cbf0804c-2701-47a1-9943-72849ed18da0",
