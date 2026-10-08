@@ -12269,7 +12269,7 @@
   },
   {
     "id": "9c2c173b-67e2-4b5c-b92b-3dabdcc6b6e2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3a46c35cdcf54163a889355403fd1321",
     "title": "Shark LC156JGY1 スティッククリーナー レビュー比較まとめ",
     "name": "Shark LC156JGY1 スティッククリーナー レビュー比較まとめ.md",
@@ -12278,10 +12278,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-08T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T08:02:29.265058+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "93c58570-1456-41f5-afff-8417034484c6",
@@ -12336,7 +12338,7 @@
   },
   {
     "id": "c419e33e-1202-4998-8ff5-1ca898bd9f6d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8188c26374fc484db8f3f2b01cb1f216",
     "title": "Dabbsson レビュー比較まとめ",
     "name": "Dabbsson レビュー比較まとめ.md",
@@ -12345,10 +12347,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-08T06:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T08:02:29.265058+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d6d56db1-2e2d-458b-b09f-48fff3efdf35",
@@ -12403,7 +12407,7 @@
   },
   {
     "id": "e7980e41-d0d6-428e-a36b-cb5e1fe9c0bc",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2270e9e5ec30463f912ba813ba6a8c0a",
     "title": "Hisense 55E70S AirPlay2 テレビ レビュー比較まとめ",
     "name": "Hisense 55E70S AirPlay2 テレビ レビュー比較まとめ.md",
@@ -12412,10 +12416,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-08T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T08:02:29.265058+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ca9d518e-02ac-4b00-bdca-3414f409d183",
@@ -12470,7 +12476,7 @@
   },
   {
     "id": "e0a27f0f-717e-413f-b6af-1436268b8ca8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb911998f8ac84c03ae1fdd51b68cb959",
     "title": "Creality A1 Falcon レビュー比較まとめ",
     "name": "Creality A1 Falcon レビュー比較まとめ.md",
@@ -12479,10 +12485,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-08T08:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T08:02:29.265058+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b9477ed2-04a5-4594-af1f-43a8d6a51aa8",
