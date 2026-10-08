@@ -13562,7 +13562,7 @@
   },
   {
     "id": "154a07aa-ac6e-4bdb-95f4-2e0c4ace2d4d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5344c87e9d0747e09f485c7f81d3bc41",
     "title": "スイッチボット SwitchBot ハブ3 スマートリモコン Alexa対応 - 赤外線家電管理 モニター スイッチボット レビュー比較まとめ",
     "name": "スイッチボット SwitchBot ハブ3 スマートリモコン Alexa対応 - 赤外線家電管理 モニター スイッチボッ.md",
@@ -13571,10 +13571,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-09T00:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T23:25:50.439445+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5980bd0b-a401-4250-8414-677329e1a547",
