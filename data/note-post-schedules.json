@@ -13045,7 +13045,7 @@
   },
   {
     "id": "a9d1b4da-92f9-4b6d-86fe-0e155ba8bfb0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2b1342695d5842d38411f0b73c45acf8",
     "title": "Bigme B7 Proカラー電子リーダー レビュー比較まとめ",
     "name": "Bigme B7 Proカラー電子リーダー レビュー比較まとめ.md",
@@ -13054,10 +13054,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-08T16:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T15:25:04.342084+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "03219520-03e1-4d7e-954e-792376a98e6d",
