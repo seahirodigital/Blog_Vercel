@@ -13200,7 +13200,7 @@
   },
   {
     "id": "b4e5d921-0b34-4d69-9373-6d62ec2ddd9c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd344dc7c4cec4350ba1566a45a290b3d",
     "title": "ガーデンマスター KSLB-1515 物置 屋外 レビュー比較まとめ",
     "name": "ガーデンマスター KSLB-1515 物置 屋外 レビュー比較まとめ.md",
@@ -13210,8 +13210,8 @@
     "publishAt": "2026-10-08T20:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-08T19:55:40.576112+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-08T20:32:26.371332+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ne53fe8679239?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
