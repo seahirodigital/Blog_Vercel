@@ -12200,7 +12200,7 @@
   },
   {
     "id": "8c85a051-6d63-4e9a-8631-f2f6071481ef",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7784fd86579e494b821dafcbf16ba79a",
     "title": "Master Lock A4 LFW123FTC レビュー比較まとめ",
     "name": "Master Lock A4 LFW123FTC レビュー比較まとめ.md",
@@ -12209,10 +12209,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-08T04:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-08T03:55:46.093129+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d84b25cb-a6b8-433b-8e45-c58b6bb907b0",
