@@ -15131,7 +15131,7 @@
   },
   {
     "id": "66c57965-7bb5-4df3-a63c-be1e093839f1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0f7f329c594b4464810860bfd2e89b43",
     "title": "OBSBOT Tail 2 PTZR カメラ レビュー比較まとめ",
     "name": "OBSBOT Tail 2 PTZR カメラ レビュー比較まとめ.md",
@@ -15140,10 +15140,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-09T23:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-09T22:55:57.404424+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "205736dd-f2a6-43f0-9804-1925d09871df",
