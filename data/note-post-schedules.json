@@ -13700,7 +13700,7 @@
   },
   {
     "id": "c7810586-2e94-4d9f-aadd-aae2ef9fe12a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s337070faeda845969268ef0fb2d06ca2",
     "title": "Galaxy S10 SM-X520NZAAXJP Samsung Tab レビュー比較まとめ",
     "name": "Galaxy S10 SM-X520NZAAXJP Samsung Tab レビュー比較まとめ.md",
@@ -13709,10 +13709,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-09T03:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-09T02:25:28.891444+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fceee4a7-8e0b-4eb1-a4e1-52e01928c6af",
