@@ -14390,7 +14390,7 @@
   },
   {
     "id": "dc2d66a6-05ad-44b6-ba49-bf192c5d97a6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7cad5849c85d42f3ad7135fcebda9875",
     "title": "SwitchBot AI アートキャンバス アートキャンバス インテリア フレーム レビュー比較まとめ",
     "name": "SwitchBot AI アートキャンバス アートキャンバス インテリア フレーム レビュー比較まとめ.md",
@@ -14399,10 +14399,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-09T12:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-09T11:55:10.724176+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6a9fbe5c-f47f-4df7-962a-ca4e74936618",
