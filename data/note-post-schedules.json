@@ -14838,7 +14838,7 @@
   },
   {
     "id": "0f4fb11d-39c5-4d5b-bd5d-9dbb1363eb6b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s16672aad35e64c54a552cf6e41211732",
     "title": "Braun 8560cc レビュー比較まとめ",
     "name": "Braun 8560cc レビュー比較まとめ.md",
@@ -14847,10 +14847,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-09T20:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-09T19:55:32.141460+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e42638a5-ce67-451c-82c5-3fe0daab36ee",
