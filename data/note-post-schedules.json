@@ -14597,7 +14597,7 @@
   },
   {
     "id": "4c5eb5ff-d3c6-4467-9f0a-985543fcb0c1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc27662a658aa4de1bc1a9f24bedd9f98",
     "title": "LIHILIS筋膜リリースガン レビュー比較まとめ",
     "name": "LIHILIS レビュー比較まとめ.md",
@@ -14606,10 +14606,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-09T15:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-09T14:25:33.818051+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3e840fc0-b81f-4f88-8f20-4838be13b86d",
