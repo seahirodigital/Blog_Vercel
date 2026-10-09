@@ -14321,7 +14321,7 @@
   },
   {
     "id": "d3a9adf5-61b8-49a4-a78d-32465cc4e4d7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s692b184f622e4cc98cc53390570ebce0",
     "title": "JBL FLIP 7 ポータブルスピーカー レビュー比較まとめ",
     "name": "JBL FLIP 7 ポータブルスピーカー レビュー比較まとめ.md",
@@ -14330,10 +14330,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-09T11:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-09T10:56:00.634180+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "25947d99-6c28-4c12-83ec-4b7edcf1b62e",
