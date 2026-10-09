@@ -14459,7 +14459,7 @@
   },
   {
     "id": "1c163c56-52c8-4794-9db5-66086a887949",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6e32ed2e289c4bc085363ab638e80cb7",
     "title": "KÄRCHER K5 ケルヒャー Karcher レビュー比較まとめ",
     "name": "KÄRCHER K5 ケルヒャー Karcher レビュー比較まとめ.md",
@@ -14468,10 +14468,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-09T13:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-09T12:55:22.782123+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d5b007d3-c6ec-4b83-af07-f8b450104a6f",
