@@ -13769,7 +13769,7 @@
   },
   {
     "id": "92e8a76c-e2a8-42b8-9f8a-627adc21200f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s801df162a6e44e55bf4923523079fc5f",
     "title": "ＡＭＢＥＲ totonoi AMBER サウナテント レビュー比較まとめ",
     "name": "ＡＭＢＥＲ totonoi AMBER サウナテント レビュー比較まとめ.md",
@@ -13778,10 +13778,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-09T03:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-09T02:55:20.318557+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e31bbdd2-588d-4429-aa84-8ec45da1cf39",
