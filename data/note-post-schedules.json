@@ -14752,7 +14752,7 @@
   },
   {
     "id": "6ceeeaf1-6fc6-4e87-a392-fccbe9c7b9ea",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s921dce67ac2642de9c847f55b60b2b2e",
     "title": "エマ・スリープ V2n エマ・ハイブリッド セミダブル レビュー比較まとめ",
     "name": "エマ・スリープ V2n エマ・ハイブリッド セミダブル レビュー比較まとめ.md",
@@ -14762,8 +14762,8 @@
     "publishAt": "2026-10-09T16:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-09T17:25:40.581548+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-09T17:28:13.293136+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n1debdd1b6c19?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
