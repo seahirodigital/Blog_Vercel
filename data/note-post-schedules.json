@@ -13976,7 +13976,7 @@
   },
   {
     "id": "eef45a57-e619-464c-bdd4-492a85d895fe",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa8fdf5ca4742474ba26d134c04907817",
     "title": "TOUR BOX TourBox NEO レビュー比較まとめ",
     "name": "TOUR BOX TourBox NEO レビュー比較まとめ.md",
@@ -13986,8 +13986,8 @@
     "publishAt": "2026-10-09T06:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-09T08:02:32.095771+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-09T08:05:03.235900+00:00",
+    "publishedUrl": "https://note.com/startupm/n/naca3cab2baf6?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
