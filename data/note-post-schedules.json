@@ -14252,7 +14252,7 @@
   },
   {
     "id": "40651baa-41f9-4887-96a9-468145ebe79c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!seee4a2a36a604fbd95ad4586c4651652",
     "title": "Withings ScanWatch Vitals スマートウォッチ レビュー比較まとめ",
     "name": "Withings ScanWatch Vitals スマートウォッチ レビュー比較まとめ.md",
@@ -14261,10 +14261,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-09T10:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-09T09:55:49.826552+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5de9d492-5aa3-45de-82fb-90607bd6f8c1",
