@@ -14528,7 +14528,7 @@
   },
   {
     "id": "b5cc6d8b-e63b-4fb0-9358-b259017dc1f7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s542bbe52d21c4e37a51b77e9ba2228cd",
     "title": "Jackery Jackery ポータブル電源 2000 New レビュー比較まとめ",
     "name": "Jackery Jackery ポータブル電源 2000 New レビュー比較まとめ.md",
@@ -14537,10 +14537,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-09T14:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-09T14:02:07.240689+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d43fc8ee-1594-42e7-904c-dc933ca9d75c",
