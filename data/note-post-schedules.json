@@ -14993,7 +14993,7 @@
   },
   {
     "id": "2f6851de-6ca2-4a50-8565-390070749f45",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb3ca3a6232094ccc9eb48aa00085e1e5",
     "title": "BLUETTI 1kWh ポータブル電源 AORA レビュー比較まとめ",
     "name": "BLUETTI 1kWh ポータブル電源 AORA レビュー比較まとめ.md",
@@ -15003,8 +15003,8 @@
     "publishAt": "2026-10-09T22:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-09T21:55:28.234940+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-09T22:32:25.722937+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ncb10a6233bed?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
