@@ -13907,7 +13907,7 @@
   },
   {
     "id": "c5696418-e019-4973-9ef2-c56c46d3f022",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6a55e179aa2e4316b5e3298255f350de",
     "title": "Dyson(ダイソン) SV18 OR2 スティッククリーナー レビュー比較まとめ",
     "name": "Dyson(ダイソン) SV18 OR2 スティッククリーナー レビュー比較まとめ.md",
@@ -13916,10 +13916,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-09T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-09T08:02:32.095771+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "11bda873-5546-4bdd-8aea-ae74d28a22ea",
@@ -13974,7 +13976,7 @@
   },
   {
     "id": "eef45a57-e619-464c-bdd4-492a85d895fe",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa8fdf5ca4742474ba26d134c04907817",
     "title": "TOUR BOX TourBox NEO レビュー比較まとめ",
     "name": "TOUR BOX TourBox NEO レビュー比較まとめ.md",
@@ -13983,10 +13985,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-09T06:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-09T08:02:32.095771+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4141ac8b-471a-4dc0-9ed7-58cd8429c8ad",
@@ -14041,7 +14045,7 @@
   },
   {
     "id": "b5eabac0-f4c8-4cf5-b5af-4783019fa12f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s11888f0712594090833118ab4fb1bb3d",
     "title": "Jackery 2000 Plus レビュー比較まとめ",
     "name": "Jackery 2000 Plus レビュー比較まとめ.md",
@@ -14050,10 +14054,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-09T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-09T08:02:32.095771+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b9dac008-0f61-4b70-99b0-8aa8398b6c2e",
@@ -14108,7 +14114,7 @@
   },
   {
     "id": "be6434be-affd-4a18-935b-2fc6c48667e4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbf797d80be744ffaa8e3e5caccf98c28",
     "title": "昭和西川 羽毛布団 レビュー比較まとめ",
     "name": "昭和西川 羽毛布団 レビュー比較まとめ.md",
@@ -14117,10 +14123,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-09T08:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-09T08:02:32.095771+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "76ef1548-174e-40d7-8177-147d8f17ffcc",
