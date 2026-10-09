@@ -13838,7 +13838,7 @@
   },
   {
     "id": "edbe3752-4ce3-4eb0-b62d-06ab00567986",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s06a29e6f1df84101ba2c926e9f86e467",
     "title": "Aladdin X X2 テレビ レビュー比較まとめ",
     "name": "Aladdin X X2 テレビ レビュー比較まとめ.md",
@@ -13848,8 +13848,8 @@
     "publishAt": "2026-10-09T04:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-09T03:55:00.648372+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-09T04:32:24.740619+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ned6cf130d482?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
