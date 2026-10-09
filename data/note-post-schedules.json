@@ -13631,7 +13631,7 @@
   },
   {
     "id": "a785f007-0837-4754-b07f-3a88aae0cb8b",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s63d1544a3a564b07b6b02940edf3e079",
     "title": "Jackery Solar Generator 2000 New 2048Wh ポータブル電源 レビュー比較まとめ",
     "name": "Jackery Solar Generator 2000 New 2048Wh ポータブル電源 レビュー比較まとめ.md",
@@ -13641,8 +13641,8 @@
     "publishAt": "2026-10-09T02:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-09T01:55:39.056281+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-09T02:32:13.628276+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n8b06292b3a24?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
