@@ -15200,7 +15200,7 @@
   },
   {
     "id": "c9ffc4e6-fe4c-4d72-9767-4101d424fccb",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s931e63079b7f4382bb58e4c52ff406d4",
     "title": "SIHOO C300-PRO-V2 オフィスチェア デスクチェア レビュー比較まとめ",
     "name": "SIHOO C300-PRO-V2 オフィスチェア デスクチェア レビュー比較まとめ.md",
@@ -15209,10 +15209,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-10T00:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-09T23:44:20.297759+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "929a7d59-ee4b-4a17-afad-601517bb2042",
