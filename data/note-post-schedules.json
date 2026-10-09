@@ -14045,7 +14045,7 @@
   },
   {
     "id": "b5eabac0-f4c8-4cf5-b5af-4783019fa12f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s11888f0712594090833118ab4fb1bb3d",
     "title": "Jackery 2000 Plus レビュー比較まとめ",
     "name": "Jackery 2000 Plus レビュー比較まとめ.md",
@@ -14055,8 +14055,8 @@
     "publishAt": "2026-10-09T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-09T08:02:32.095771+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-09T08:05:05.601347+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nef9c49fbe3ae?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
