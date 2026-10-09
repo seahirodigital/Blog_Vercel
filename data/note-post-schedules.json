@@ -14183,7 +14183,7 @@
   },
   {
     "id": "2e6afdea-72ff-4d50-8f2c-f52c45e9e07c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sc961c928c2fb4a00aa9662368a9f9a9c",
     "title": "エマ・スリープ エマ・ハイブリッドV2n (シングル)【ハイブリッドマットレス】 レビュー比較まとめ",
     "name": "エマ・スリープ エマ・ハイブリッドV2n (シングル)【ハイブリッドマットレス】 レビュー比較まとめ.md",
@@ -14193,8 +14193,8 @@
     "publishAt": "2026-10-09T09:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-09T08:55:38.472877+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-09T09:32:47.860226+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n17a9117a396c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
