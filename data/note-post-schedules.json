@@ -15062,7 +15062,7 @@
   },
   {
     "id": "26e9c9b9-9b41-4dc6-b4c7-7789b7ae7c22",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbefc7debc2274e469fdd210c40051d09",
     "title": "HAZET 606N12 レビュー比較まとめ",
     "name": "HAZET 606N12 レビュー比較まとめ.md",
@@ -15071,10 +15071,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-09T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-09T22:25:42.660237+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "574e7751-0adb-4268-a26f-2b167fcd3429",
