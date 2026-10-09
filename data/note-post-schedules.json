@@ -14907,7 +14907,7 @@
   },
   {
     "id": "0237d3c4-aa9c-4361-9e90-e7452134cf4e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sba430756ceae4a5eaa05f6f320dc7278",
     "title": "BOSE Bose QuietComfort Ultra Headphones（第2世代） オーバーイヤー型 ヘッドホン",
     "name": "BOSE Bose QuietComfort Ultra Headphones（第2世代） オーバーイヤー型 ヘッドホン.md",
@@ -14916,10 +14916,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-09T21:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-09T20:55:00.547277+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bc19fb59-58d3-44ab-b924-1150fd690ad4",
