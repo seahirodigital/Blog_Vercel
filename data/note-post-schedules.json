@@ -16235,7 +16235,7 @@
   },
   {
     "id": "7b686593-e497-4d47-8bec-fd0731edbac3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s504d2b953bed48d9987b72690a57f2b2",
     "title": "レグザ 100E670R テレビ レビュー比較まとめ",
     "name": "レグザ 100E670R テレビ レビュー比較まとめ.md",
@@ -16244,10 +16244,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-10T15:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-10T14:25:59.626016+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3c602694-4c74-437f-aa60-ab3bb7cf07fa",
