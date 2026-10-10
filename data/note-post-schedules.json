@@ -16028,7 +16028,7 @@
   },
   {
     "id": "40dbac96-cf51-47ab-9f05-a15cef0eb274",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd3d9efd3830943318c17bde63e16a28d",
     "title": "Xiaomi X8 8500-Ultra POCO レビュー比較まとめ",
     "name": "Xiaomi X8 8500-Ultra POCO レビュー比較まとめ.md",
@@ -16037,10 +16037,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-10T12:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-10T11:55:34.017936+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3c2c0b57-54af-4de7-b485-7921ee5b3930",
