@@ -15959,7 +15959,7 @@
   },
   {
     "id": "7b002750-1f90-4d38-9c90-fdce287ba165",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb9057eb1f784434abd43bed24dfdb660",
     "title": "Insta360 GO Ultra アクションカメラ レビュー比較まとめ",
     "name": "Insta360 GO Ultra アクションカメラ レビュー比較まとめ.md",
@@ -15968,10 +15968,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-10T11:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-10T10:55:56.948342+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ea6c3010-809d-424a-9faa-2f6a9df176b6",
