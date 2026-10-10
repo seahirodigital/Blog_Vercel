@@ -15821,7 +15821,7 @@
   },
   {
     "id": "e06d2a84-aef9-447a-8634-2db2238325f2",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2dfa0cfaf2c34eed82b6f87b5d81cef8",
     "title": "Jackery Solar Generator 2000 New レビュー比較まとめ",
     "name": "Jackery Solar Generator 2000 New レビュー比較まとめ.md",
@@ -15831,8 +15831,8 @@
     "publishAt": "2026-10-10T09:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-10T08:55:41.185416+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-10T09:32:25.156239+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n73807d9d39c3?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
