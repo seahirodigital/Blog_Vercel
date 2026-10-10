@@ -15890,7 +15890,7 @@
   },
   {
     "id": "b3da5063-754e-4989-b88c-680529c54c3c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2e25df9b5bce442d96d55545752a2c05",
     "title": "エムリリー 優反発 マットレス セミダブル 厚さ レビュー比較まとめ",
     "name": "エムリリー 優反発 マットレス セミダブル 厚さ レビュー比較まとめ.md",
@@ -15899,10 +15899,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-10T10:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-10T09:55:19.974365+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7e5a1b51-eab5-41eb-94ee-e2fd59ef2a00",
