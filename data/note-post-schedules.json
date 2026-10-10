@@ -16321,7 +16321,7 @@
   },
   {
     "id": "b8a6d417-9135-475e-b9c2-86ebbf454988",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s8c42a470b4844ce081c123313fd23c3e",
     "title": "BLUETTI AORA100 V2 220Wソーラーパネル セット ポータブル電源 レビュー比較まとめ",
     "name": "BLUETTI AORA100 V2 220Wソーラーパネル セット ポータブル電源 レビュー比較まとめ.md",
@@ -16331,8 +16331,8 @@
     "publishAt": "2026-10-10T16:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-10T15:25:34.789428+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-10T16:02:25.934806+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n9e2c950587d5?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
