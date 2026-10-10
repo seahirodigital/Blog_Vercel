@@ -15338,7 +15338,7 @@
   },
   {
     "id": "05fa87f6-a0cd-4307-8ca4-b61b4a27b2d5",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s9489afea31af45b28e68316a7424d2dd",
     "title": "サンワダイレクト 電動 シュレッダー 電動シュレッダー レビュー比較まとめ",
     "name": "サンワダイレクト 電動 シュレッダー 電動シュレッダー レビュー比較まとめ.md",
@@ -15348,8 +15348,8 @@
     "publishAt": "2026-10-10T03:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-10T02:25:30.576977+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-10T03:02:20.890532+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n221ae94fab77?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
