@@ -15545,7 +15545,7 @@
   },
   {
     "id": "da3ab0e1-f112-4372-8de9-ecaacf9e8776",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4fa60876599c4c01b3d3e30f710b9fe9",
     "title": "ル・クルーゼ 鋳物 ホーロー 鍋 ココット・ロンド 鋳物ホーロー鍋 レビュー比較まとめ",
     "name": "ル・クルーゼ 鋳物 ホーロー 鍋 ココット・ロンド 鋳物ホーロー鍋 レビュー比較まとめ.md",
@@ -15554,10 +15554,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-10T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-10T07:46:44.428818+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2ad1a031-e6da-461c-b6ad-1955f791c409",
@@ -15612,7 +15614,7 @@
   },
   {
     "id": "bb6cc562-fb5b-4d0c-88e6-f90a81813fa8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s899c2c63dd4e4e7880ad00eff4096a22",
     "title": "Edifier R1850DB ブックシェルフスピーカー レビュー比較まとめ",
     "name": "Edifier R1850DB ブックシェルフスピーカー レビュー比較まとめ.md",
@@ -15621,10 +15623,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-10T06:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-10T07:46:44.428818+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "391056ee-d97e-4544-ad5c-a4572de396d0",
@@ -15679,7 +15683,7 @@
   },
   {
     "id": "19d525f7-9ad1-4ee4-abec-52d66b808b26",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa5e1011e9144471db720d61de9bcaeac",
     "title": "EastForce LUMBIRT2 日本ブランド MONSTER レビュー比較まとめ",
     "name": "EastForce LUMBIRT2 日本ブランド MONSTER レビュー比較まとめ.md",
@@ -15688,10 +15692,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-10T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-10T07:46:44.428818+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b3a0c57e-59b4-4030-a6ef-44ea51d280fe",
