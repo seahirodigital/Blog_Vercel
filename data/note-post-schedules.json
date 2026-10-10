@@ -16166,7 +16166,7 @@
   },
   {
     "id": "670debbd-54f1-4250-8388-622ce81b8221",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9f890308433144faa063e490e05f54ea",
     "title": "EF ECOFLOW EcoFlow DELTA Pro3 専用エクストラバッテリー 4096Wh レビュー比較まとめ",
     "name": "EF ECOFLOW EcoFlow DELTA Pro3 専用エクストラバッテリー 4096Wh レビュー比較まとめ.md",
@@ -16175,10 +16175,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-10T14:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-10T13:55:10.239384+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fccf0cd2-ce19-4a7d-b219-d5d03e550271",
