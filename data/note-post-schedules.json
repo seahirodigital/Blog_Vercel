@@ -16545,7 +16545,7 @@
   },
   {
     "id": "4466d8af-eab1-413d-bbe2-1c16d7db68cf",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s223929f523854c349c0f1242e09ab0b1",
     "title": "東芝 RC-5ZXT(W) 炊飯器 レビュー比較まとめ",
     "name": "東芝 RC-5ZXT(W) 炊飯器 レビュー比較まとめ.md",
@@ -16555,8 +16555,8 @@
     "publishAt": "2026-10-10T21:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-10T20:55:27.610718+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-10T21:32:26.843403+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ne6375482de92?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
