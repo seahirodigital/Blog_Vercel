@@ -16390,7 +16390,7 @@
   },
   {
     "id": "25b16d0b-c8a7-4a9b-b0fe-83d9fd63b1ff",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0861c07f3bd04650b4a54362ebc2c3f5",
     "title": "Atomos 1500nit Ninja TX レビュー比較まとめ",
     "name": "Atomos 1500nit Ninja TX レビュー比較まとめ.md",
@@ -16399,10 +16399,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-10T16:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-10T15:55:23.595476+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "042d0154-bed3-4f69-968a-523c4c315d35",
