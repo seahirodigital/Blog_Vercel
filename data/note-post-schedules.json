@@ -15752,7 +15752,7 @@
   },
   {
     "id": "b324fc28-1220-4f77-a363-9c692754fe82",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb7de9e6bd7744fe1b034f3d99934bbef",
     "title": "YAMAHA Pシリーズ 88鍵盤 P-45B 電子ピアノ レビュー比較まとめ",
     "name": "YAMAHA Pシリーズ 88鍵盤 P-45B 電子ピアノ レビュー比較まとめ.md",
@@ -15762,8 +15762,8 @@
     "publishAt": "2026-10-10T08:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-10T07:55:02.618676+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-10T08:32:31.247039+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n593142e50c36?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
