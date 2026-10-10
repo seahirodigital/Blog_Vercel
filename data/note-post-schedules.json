@@ -15269,7 +15269,7 @@
   },
   {
     "id": "7a2b4332-e9c5-43b2-b6a8-7a2d79e1b125",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!secaed4a93d2244a38cc8fa39172b15b4",
     "title": "AMOS JP-EX COLOR レビュー比較まとめ",
     "name": "AMOS JP-EX COLOR レビュー比較まとめ.md",
@@ -15278,10 +15278,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-10T02:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-10T01:55:16.639472+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2e358a49-d379-4fff-a7f8-e375c6ed2b2c",
