@@ -16476,7 +16476,7 @@
   },
   {
     "id": "725cb949-6f89-4df7-b640-93e0e1112040",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s09175ee3b492427f98a38ebdc549b04b",
     "title": "ポーミド PRD81C-1 レビュー比較まとめ",
     "name": "ポーミド PRD81C-1 レビュー比較まとめ.md",
@@ -16485,10 +16485,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-10T20:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-10T19:55:49.395344+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "39824c26-fea0-42b6-8580-de347f4db9a2",
