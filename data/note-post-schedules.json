@@ -15683,7 +15683,7 @@
   },
   {
     "id": "19d525f7-9ad1-4ee4-abec-52d66b808b26",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa5e1011e9144471db720d61de9bcaeac",
     "title": "EastForce LUMBIRT2 日本ブランド MONSTER レビュー比較まとめ",
     "name": "EastForce LUMBIRT2 日本ブランド MONSTER レビュー比較まとめ.md",
@@ -15693,8 +15693,8 @@
     "publishAt": "2026-10-10T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-10T07:46:44.428818+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-10T07:49:22.764541+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n20c8f197bdf6?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
