@@ -16631,7 +16631,7 @@
   },
   {
     "id": "bd63bff4-c6c6-4566-a384-57fd7b2f66ec",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa13f3c2384bd4dc3a8f1917f266dcd5b",
     "title": "Jackery Solar Generator 3000 New レビュー比較まとめ",
     "name": "Jackery Solar Generator 3000 New レビュー比較まとめ.md",
@@ -16640,10 +16640,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-10T22:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-10T23:03:07.777560+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d42adc93-b196-478c-9fbd-1e1f8cb08b8b",
@@ -16698,7 +16700,7 @@
   },
   {
     "id": "f41ccf0d-9075-40c3-81ea-690b110728bf",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s22a03bf9840a40139dbeddbda8165de2",
     "title": "CZUR ET24 A3 Pro ブックスキャナー レビュー比較まとめ",
     "name": "CZUR ET24 A3 Pro ブックスキャナー レビュー比較まとめ.md",
@@ -16707,10 +16709,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-10T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-10T23:03:07.777560+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f8f125ec-c21f-486c-8b13-d5efa8893d49",
@@ -16765,7 +16769,7 @@
   },
   {
     "id": "92564392-d5f9-488d-98d7-99e2c64015b2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2a718d92f12d4c67b023ceb1d1b86fe7",
     "title": "お風呂掃除 長いブラシの選び方｜設置条件に合うサイズを判断するポイント",
     "name": "お風呂掃除 長いブラシの選び方｜設置条件に合うサイズを判断するポイント_OPP-E89B849DE30D_20260923_154341.md",
@@ -16774,10 +16778,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-10T23:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-10T23:03:07.777560+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "322df4f6-0888-4a84-ac65-bcc90f06f7a2",
