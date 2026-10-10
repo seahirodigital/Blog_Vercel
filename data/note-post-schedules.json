@@ -15545,7 +15545,7 @@
   },
   {
     "id": "da3ab0e1-f112-4372-8de9-ecaacf9e8776",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s4fa60876599c4c01b3d3e30f710b9fe9",
     "title": "ル・クルーゼ 鋳物 ホーロー 鍋 ココット・ロンド 鋳物ホーロー鍋 レビュー比較まとめ",
     "name": "ル・クルーゼ 鋳物 ホーロー 鍋 ココット・ロンド 鋳物ホーロー鍋 レビュー比較まとめ.md",
@@ -15555,8 +15555,8 @@
     "publishAt": "2026-10-10T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-10T07:46:44.428818+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-10T07:49:28.981149+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n0fafafa0f3f7?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
