@@ -16097,7 +16097,7 @@
   },
   {
     "id": "554b9d16-293d-4198-ba1b-857b451823ab",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb598e8c441a34a258db2465aa2d1b140",
     "title": "サンワダイレクト 業務用 400-PSD073BK レビュー比較まとめ",
     "name": "サンワダイレクト 業務用 400-PSD073BK レビュー比較まとめ.md",
@@ -16106,10 +16106,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-10T13:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-10T13:05:53.213399+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "aae7cf2a-b2fd-492b-b838-89e57e8454eb",
