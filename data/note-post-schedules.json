@@ -15476,7 +15476,7 @@
   },
   {
     "id": "b3192c9a-f329-481c-b1ec-9395497a491a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s12578f6609d44f6eaad44a0ebfbf9a6e",
     "title": "【2026年最強候補】AZ100と同じ磁性流体ドライバーを搭載したワイヤレスヘッドホン『Technics EAH-A10",
     "name": "20260930_1754_【2026年最強候補】AZ100と同じ磁性流体ドライバーを搭載したワイヤレスヘッドホン『Technics EAH-A10.md",
@@ -15486,8 +15486,8 @@
     "publishAt": "2026-10-10T04:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-10T03:55:11.389330+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-10T04:32:27.156105+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na0d9e68080fc?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
