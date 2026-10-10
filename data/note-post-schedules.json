@@ -15407,7 +15407,7 @@
   },
   {
     "id": "9a33ce55-e104-4e88-b5ea-902c6ef2491e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sbf44cc4fd7354833a0b4dcb47fdc8d19",
     "title": "Dabbsson 2000L レビュー比較まとめ",
     "name": "Dabbsson 2000L レビュー比較まとめ.md",
@@ -15417,8 +15417,8 @@
     "publishAt": "2026-10-10T03:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-10T02:55:44.656505+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-10T03:32:32.657387+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n11186ff2e7a0?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
