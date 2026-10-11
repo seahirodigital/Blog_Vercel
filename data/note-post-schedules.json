@@ -17528,7 +17528,7 @@
   },
   {
     "id": "b9851da0-7f38-4cbd-aecb-867101af9799",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc41ff634af6b4c9d98b0aa210a0ef96e",
     "title": "サンワダイレクト 400-PSD059 シュレッダー 業務用 レビュー比較まとめ",
     "name": "サンワダイレクト 400-PSD059 シュレッダー 業務用 レビュー比較まとめ.md",
@@ -17537,10 +17537,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-11T10:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-11T09:55:12.447120+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "aff24b2b-f21c-4e0a-82ca-e9f7e7eda626",
