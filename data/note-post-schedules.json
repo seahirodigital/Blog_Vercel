@@ -17804,7 +17804,7 @@
   },
   {
     "id": "d226303b-6500-4827-99db-92942d920ea6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sba6d2fda83da46ec95e3053a5ea5301d",
     "title": "LIXIL INAX シャワートイレ RAシリーズ 瞬間式 工事不要 CW-RAA20 BN8 温水洗浄便座 レビュー比",
     "name": "LIXIL INAX シャワートイレ RAシリーズ 瞬間式 工事不要 CW-RAA20 BN8 温水洗浄便座 レビュー比.md",
@@ -17813,10 +17813,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-11T14:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-11T13:55:36.686648+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2d6ff9e6-20dc-4f1d-b79a-aef1144a0068",
