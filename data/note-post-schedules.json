@@ -16907,7 +16907,7 @@
   },
   {
     "id": "c3ba59bf-5eff-4e71-9f2e-e414f3907717",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s89c0707f646a48669c3744c6f1bf72b1",
     "title": "AKEEYO AIO-6 60FPS Bluetooth5 CHIGEE MAX レビュー比較まとめ",
     "name": "AKEEYO AIO-6 60FPS Bluetooth5 CHIGEE MAX レビュー比較まとめ.md",
@@ -16916,10 +16916,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-11T02:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-11T01:55:13.518785+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "704e93b4-d998-417a-b717-df5999862e09",
