@@ -17959,7 +17959,7 @@
   },
   {
     "id": "342618a6-85cf-4339-862f-7bea36afc29e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s0858c224684f457697fa7edd47ca577a",
     "title": "サンワダイレクト 400-PSD070 シュレッダー 業務用 レビュー比較まとめ",
     "name": "サンワダイレクト 400-PSD070 シュレッダー 業務用 レビュー比較まとめ.md",
@@ -17969,8 +17969,8 @@
     "publishAt": "2026-10-11T16:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-11T15:25:08.788646+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-11T16:02:19.135039+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nbc8d5c513f3a?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
