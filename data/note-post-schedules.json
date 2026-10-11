@@ -18338,7 +18338,7 @@
   },
   {
     "id": "a5439150-748e-41bf-8d2b-d8348249a569",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s864f237d437e4e8b96ced43bbc558adb",
     "title": "Jackery ポータブル電源 2000 New 200W ソーラーパネル 1枚 2点セット レビュー比較まとめ",
     "name": "Jackery ポータブル電源 2000 New 200W ソーラーパネル 1枚 2点セット レビュー比較まとめ.md",
@@ -18348,8 +18348,8 @@
     "publishAt": "2026-10-11T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-11T23:13:24.926882+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-11T23:15:52.661929+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ndbef65738928?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
