@@ -17735,7 +17735,7 @@
   },
   {
     "id": "030be7a5-d7c2-4397-994a-7efdd48dfb72",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s735668bc9ad14b5aabcd613e54bd94d6",
     "title": "BLUETTI AORA 200 220Wソーラーパネル 1枚 セット レビュー比較まとめ",
     "name": "BLUETTI AORA 200 220Wソーラーパネル 1枚 セット レビュー比較まとめ.md",
@@ -17744,10 +17744,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-11T13:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-11T13:35:14.561519+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c200cf5b-76f9-4069-b380-49afad4444ce",
