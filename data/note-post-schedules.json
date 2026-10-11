@@ -18269,7 +18269,7 @@
   },
   {
     "id": "60790777-33d5-4262-a979-fda111db96f1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se9906169bfe149fe91b166052779e3aa",
     "title": "HiKOKI(ハイコーキ) R40YA 集じん機 レビュー比較まとめ",
     "name": "HiKOKI(ハイコーキ) R40YA 集じん機 レビュー比較まとめ.md",
@@ -18278,10 +18278,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-11T22:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-11T23:13:24.926882+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "566e1c08-b60b-49e8-a185-fa7ef8685f0b",
@@ -18336,7 +18338,7 @@
   },
   {
     "id": "a5439150-748e-41bf-8d2b-d8348249a569",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s864f237d437e4e8b96ced43bbc558adb",
     "title": "Jackery ポータブル電源 2000 New 200W ソーラーパネル 1枚 2点セット レビュー比較まとめ",
     "name": "Jackery ポータブル電源 2000 New 200W ソーラーパネル 1枚 2点セット レビュー比較まとめ.md",
@@ -18345,10 +18347,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-11T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-11T23:13:24.926882+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "49092726-acff-490a-a95f-46b845a95413",
@@ -18403,7 +18407,7 @@
   },
   {
     "id": "5326b2fd-8e18-42b6-a8e2-e9015dcb24b9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb16e79c157ff48f3a71a8ccdea6020c4",
     "title": "Samsung Watch8 5ATM v5 SM-L500NZKJXJP Galaxy Classic レビュー比較ま",
     "name": "Samsung Watch8 5ATM v5 SM-L500NZKJXJP Galaxy Classic レビュー比較ま.md",
@@ -18412,10 +18416,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-11T23:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-11T23:13:24.926882+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "34041dcd-3984-41cf-be17-4968efdbc681",
