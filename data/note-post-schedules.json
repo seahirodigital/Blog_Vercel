@@ -18114,7 +18114,7 @@
   },
   {
     "id": "51862a01-a745-4eef-beb3-11fcf468e387",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sebf9779156124c94bb1ebf67c9df614c",
     "title": "Kaedear KDR-BH2-W カエディア バイク レビュー比較まとめ",
     "name": "Kaedear KDR-BH2-W カエディア バイク レビュー比較まとめ.md",
@@ -18123,10 +18123,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-11T20:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-11T19:55:02.650382+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8573cc42-6b62-468b-aa21-ba97a0f392ef",
