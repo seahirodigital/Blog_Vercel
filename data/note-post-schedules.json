@@ -17183,7 +17183,7 @@
   },
   {
     "id": "b03d12fc-6224-4a1c-8cd3-260986dac23b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdd7c01e9c33b48f7a98f04a24381e81a",
     "title": "Seiko KH411S セイコークロック 掛け時計 レビュー比較まとめ",
     "name": "Seiko KH411S セイコークロック 掛け時計 レビュー比較まとめ.md",
@@ -17192,10 +17192,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-11T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-11T07:52:59.098295+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6df819b6-805e-4e58-bbbb-8dc537b7bc8c",
@@ -17250,7 +17252,7 @@
   },
   {
     "id": "438ae174-9a78-4052-87f2-bae9d68b2219",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4b14d3cf90bc486ab8a9718db0fa08c2",
     "title": "DEWALT(デウォルト) DCF891P2T コードレス ブラシレス レビュー比較まとめ",
     "name": "DEWALT(デウォルト) DCF891P2T コードレス ブラシレス レビュー比較まとめ.md",
@@ -17259,10 +17261,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-11T06:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-11T07:52:59.098295+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "966d06ac-e4ff-465b-a5c7-e2a2b2993247",
@@ -17317,7 +17321,7 @@
   },
   {
     "id": "30bd3a85-3366-4fc7-96c0-41ce173a1146",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc204e77485f24ae4b4d939e4e8e7d5aa",
     "title": "KOSUPA レビュー比較まとめ",
     "name": "KOSUPA レビュー比較まとめ.md",
@@ -17326,10 +17330,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-11T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-11T07:52:59.098295+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5856d698-2a59-4a21-8d00-3a00d5ef871f",
