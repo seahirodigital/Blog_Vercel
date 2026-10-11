@@ -17459,7 +17459,7 @@
   },
   {
     "id": "1d375b04-7178-4a5e-a462-64c96b9c3b72",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdcba8c5bc7c84250aa7c7fa4a498b4c5",
     "title": "ガーデンマスター DSLB-1515 レビュー比較まとめ",
     "name": "ガーデンマスター DSLB-1515 レビュー比較まとめ.md",
@@ -17468,10 +17468,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-11T09:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-11T08:55:08.792417+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "36bec332-00e6-4cf4-a246-5c1eda2315be",
