@@ -17459,7 +17459,7 @@
   },
   {
     "id": "1d375b04-7178-4a5e-a462-64c96b9c3b72",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sdcba8c5bc7c84250aa7c7fa4a498b4c5",
     "title": "ガーデンマスター DSLB-1515 レビュー比較まとめ",
     "name": "ガーデンマスター DSLB-1515 レビュー比較まとめ.md",
@@ -17469,8 +17469,8 @@
     "publishAt": "2026-10-11T09:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-11T08:55:08.792417+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-11T09:32:20.174423+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nca7692f7bda4?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
