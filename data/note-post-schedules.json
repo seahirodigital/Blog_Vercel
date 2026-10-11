@@ -17114,7 +17114,7 @@
   },
   {
     "id": "798160db-9e29-4762-bb45-c6b617aa8412",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!seba43ed2719c49c1bedb1ae228f3f1b8",
     "title": "昭和西川 ダックダウン85％ レビュー比較まとめ",
     "name": "昭和西川 ダックダウン85％ レビュー比較まとめ.md",
@@ -17123,10 +17123,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-11T04:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-11T03:55:26.068567+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ced284c4-49a7-4b3e-9d6c-051857d4402f",
