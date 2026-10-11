@@ -17597,7 +17597,7 @@
   },
   {
     "id": "831ea080-00af-4630-9b55-e503541eea70",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8ad6cc73f428431e99317711d1201c1c",
     "title": "koala コアラマットレスシュプリーム SUPREME マットレス セミダブル レビュー比較まとめ",
     "name": "koala コアラマットレスシュプリーム SUPREME マットレス セミダブル レビュー比較まとめ.md",
@@ -17606,10 +17606,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-11T11:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-11T10:55:18.031639+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6e202bf5-d16d-4fb1-b5a8-0d02a73ed611",
