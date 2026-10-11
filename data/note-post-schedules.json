@@ -18028,7 +18028,7 @@
   },
   {
     "id": "ee1d1a90-a962-4574-b01b-88f84963ace3",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s739021ea411c451a9a9b4f47a64d5e90",
     "title": "VITURE 1200p Luma AR レビュー比較まとめ",
     "name": "VITURE 1200p Luma AR レビュー比較まとめ.md",
@@ -18038,8 +18038,8 @@
     "publishAt": "2026-10-11T16:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-11T15:55:40.804249+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-11T16:32:26.787775+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na327570c09ec?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
