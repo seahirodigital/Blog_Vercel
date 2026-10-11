@@ -17873,7 +17873,7 @@
   },
   {
     "id": "4a7ae679-3651-4f3c-8f73-6091a4a2e03a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sc2aecefaa2ea423cb23c4ae7cc0548d3",
     "title": "HiKOKI(ハイコーキ) UL18DBA 冷温庫 レビュー比較まとめ",
     "name": "HiKOKI(ハイコーキ) UL18DBA 冷温庫 レビュー比較まとめ.md",
@@ -17883,8 +17883,8 @@
     "publishAt": "2026-10-11T15:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-11T14:25:07.958893+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-11T15:02:15.899797+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd482337ef300?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
