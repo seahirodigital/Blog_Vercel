@@ -17045,7 +17045,7 @@
   },
   {
     "id": "1a63006c-b8bc-484f-b6ab-c415aae63bf8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s26e163a163d040f2b142a2ae697a229f",
     "title": "Edifier S880DB MKII アクティブブックシェルフスピーカー 2.0 レビュー比較まとめ",
     "name": "Edifier S880DB MKII アクティブブックシェルフスピーカー 2.0 レビュー比較まとめ.md",
@@ -17054,10 +17054,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-11T03:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-11T02:55:22.112484+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0a3b6b3f-aaa9-47e0-b65d-fc624292c2f8",
