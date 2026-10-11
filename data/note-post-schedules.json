@@ -17114,7 +17114,7 @@
   },
   {
     "id": "798160db-9e29-4762-bb45-c6b617aa8412",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!seba43ed2719c49c1bedb1ae228f3f1b8",
     "title": "昭和西川 ダックダウン85％ レビュー比較まとめ",
     "name": "昭和西川 ダックダウン85％ レビュー比較まとめ.md",
@@ -17124,8 +17124,8 @@
     "publishAt": "2026-10-11T04:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-11T03:55:26.068567+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-11T04:32:33.172023+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n8481ae14811f?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
