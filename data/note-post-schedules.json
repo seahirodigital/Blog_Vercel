@@ -18183,7 +18183,7 @@
   },
   {
     "id": "57cc5b46-92ab-47f5-a1e2-5383584b89cb",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf29707be1da244c6b0160f1c55c692be",
     "title": "BLUETTI ポータブル電源 AORA 200 220Wソーラーパネル 1枚 セット レビュー比較まとめ",
     "name": "BLUETTI ポータブル電源 AORA 200 220Wソーラーパネル 1枚 セット レビュー比較まとめ.md",
@@ -18192,10 +18192,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-11T21:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-11T20:55:44.030956+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f6b123bc-871c-41dc-9c69-42bea60996c3",
