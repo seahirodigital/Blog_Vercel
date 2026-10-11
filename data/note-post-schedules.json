@@ -17666,7 +17666,7 @@
   },
   {
     "id": "b48457b9-8eaf-4876-bd6b-ab0c557c73a6",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sfa6ec7dd00504cd9b9e92bb6b51509b3",
     "title": "xTool AP2 SafetyPro スーパーサイクロンシステム搭載煙清浄機 レビュー比較まとめ",
     "name": "xTool AP2 SafetyPro スーパーサイクロンシステム搭載煙清浄機 レビュー比較まとめ.md",
@@ -17676,8 +17676,8 @@
     "publishAt": "2026-10-11T12:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-11T11:55:23.853253+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-11T12:32:21.919215+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n11ae86708571?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
