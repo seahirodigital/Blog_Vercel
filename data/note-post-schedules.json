@@ -17183,7 +17183,7 @@
   },
   {
     "id": "b03d12fc-6224-4a1c-8cd3-260986dac23b",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sdd7c01e9c33b48f7a98f04a24381e81a",
     "title": "Seiko KH411S セイコークロック 掛け時計 レビュー比較まとめ",
     "name": "Seiko KH411S セイコークロック 掛け時計 レビュー比較まとめ.md",
@@ -17193,8 +17193,8 @@
     "publishAt": "2026-10-11T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-11T07:52:59.098295+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-11T07:55:45.172306+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n2dfcc0e916b1?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
