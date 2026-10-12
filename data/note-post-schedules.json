@@ -18959,7 +18959,7 @@
   },
   {
     "id": "0891d673-9a43-4445-8365-059648723555",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s1ebe862e408d4f138725b6f015180628",
     "title": "シモンズ AB24A10 レビュー比較まとめ",
     "name": "シモンズ AB24A10 レビュー比較まとめ.md",
@@ -18969,8 +18969,8 @@
     "publishAt": "2026-10-12T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-12T08:06:46.239659+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-12T08:09:15.450024+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n10df8cf32832?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
