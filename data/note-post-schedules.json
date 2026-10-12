@@ -19976,7 +19976,7 @@
   },
   {
     "id": "3b41a534-8f96-4485-a582-917587ef7183",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s15a7e9fca24842b1875b3346ab10c3f4",
     "title": "ヒツジのいらない枕 匠 ベッドマット レビュー比較まとめ",
     "name": "ヒツジのいらない枕 匠 ベッドマット レビュー比較まとめ.md",
@@ -19985,10 +19985,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-12T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-12T22:25:03.299079+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e8a52af4-ee27-424b-a656-30df9a942a87",
