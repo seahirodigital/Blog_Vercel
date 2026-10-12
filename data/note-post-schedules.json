@@ -19235,7 +19235,7 @@
   },
   {
     "id": "c5fac6ac-d21d-418b-8fee-cdff6cb18238",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s145f7dbab9fe40d09ae74c6454a8afa8",
     "title": "Hiseeu P0E POE有線接続 防犯カメラセット レビュー比較まとめ",
     "name": "Hiseeu P0E POE有線接続 防犯カメラセット レビュー比較まとめ.md",
@@ -19244,10 +19244,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-12T11:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-12T10:55:34.030068+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "98cbd055-49a4-4b5b-96f3-e955fee50ea6",
