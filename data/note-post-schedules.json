@@ -18821,7 +18821,7 @@
   },
   {
     "id": "94475767-7bda-4249-9264-0cbaf9e19cac",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sbd6d0d4dd7704d6fb7e71cbb13cf68c2",
     "title": "ORICO 5ベイ RAID ハードドライブ ー JMS591 ps USB en2x2 エンクロージャ レビュー比較ま",
     "name": "ORICO 5ベイ RAID ハードドライブ ー JMS591 ps USB en2x2 エンクロージャ レビュー比較ま.md",
@@ -18831,8 +18831,8 @@
     "publishAt": "2026-10-12T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-12T08:06:46.239659+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-12T08:09:18.688989+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7bc20e00f476?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
