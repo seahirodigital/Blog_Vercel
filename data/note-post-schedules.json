@@ -18614,7 +18614,7 @@
   },
   {
     "id": "1b275085-6574-4e9c-9358-93cf446b55a4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb2246979e28140d08be892a45d10222a",
     "title": "Acer H6815ATV プロジェクター レビュー比較まとめ",
     "name": "Acer H6815ATV プロジェクター レビュー比較まとめ.md",
@@ -18623,10 +18623,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-12T03:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-12T02:25:53.315268+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6a3ba877-ef5b-425c-b6ce-ad69bac7d9c2",
