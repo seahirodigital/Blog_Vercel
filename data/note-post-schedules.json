@@ -19028,7 +19028,7 @@
   },
   {
     "id": "3bf590e1-b09c-416b-852e-452cc09ea7d4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s8daf207da5b64667adebcec1f0d7f7b0",
     "title": "TCL(ティーシーエル) 75Q7D AirPlay2 テレビ レビュー比較まとめ",
     "name": "TCL(ティーシーエル) 75Q7D AirPlay2 テレビ レビュー比較まとめ.md",
@@ -19038,8 +19038,8 @@
     "publishAt": "2026-10-12T08:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-12T08:06:46.239659+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-12T08:32:32.792736+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf974d311fcb5?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
