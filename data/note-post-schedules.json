@@ -19304,7 +19304,7 @@
   },
   {
     "id": "c2933f76-999e-4223-9b21-60e40c3fbd87",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sbe63d808e774474e8e5b45f9b3cebfb1",
     "title": "山善 EHD-U1470 昇降デスク 電動 レビュー比較まとめ",
     "name": "山善 EHD-U1470 昇降デスク 電動 レビュー比較まとめ.md",
@@ -19314,8 +19314,8 @@
     "publishAt": "2026-10-12T12:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-12T11:55:15.739677+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-12T12:32:18.715554+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5a3871ed4d0c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
