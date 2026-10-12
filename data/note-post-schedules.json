@@ -18821,7 +18821,7 @@
   },
   {
     "id": "94475767-7bda-4249-9264-0cbaf9e19cac",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbd6d0d4dd7704d6fb7e71cbb13cf68c2",
     "title": "ORICO 5ベイ RAID ハードドライブ ー JMS591 ps USB en2x2 エンクロージャ レビュー比較ま",
     "name": "ORICO 5ベイ RAID ハードドライブ ー JMS591 ps USB en2x2 エンクロージャ レビュー比較ま.md",
@@ -18830,10 +18830,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-12T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-12T08:06:46.239659+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "26eeb5f8-b817-4b6f-adc9-d3f4c8343440",
@@ -18888,7 +18890,7 @@
   },
   {
     "id": "1cf7dbc6-4e64-46e9-86db-02520f538d3a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s44ae72d6c56641b7b727888adfcdf7d6",
     "title": "Jackery ポータブル電源 1500 New 100W ソーラーパネル 1枚 2点セット レビュー比較まとめ",
     "name": "Jackery ポータブル電源 1500 New 100W ソーラーパネル 1枚 2点セット レビュー比較まとめ.md",
@@ -18897,10 +18899,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-12T06:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-12T08:06:46.239659+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9e4ba8fd-0c02-4456-85d6-c393b2e61a93",
@@ -18955,7 +18959,7 @@
   },
   {
     "id": "0891d673-9a43-4445-8365-059648723555",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1ebe862e408d4f138725b6f015180628",
     "title": "シモンズ AB24A10 レビュー比較まとめ",
     "name": "シモンズ AB24A10 レビュー比較まとめ.md",
@@ -18964,10 +18968,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-12T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-12T08:06:46.239659+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0c32414a-12f8-4c84-8bc7-b3aada0a333e",
@@ -19022,7 +19028,7 @@
   },
   {
     "id": "3bf590e1-b09c-416b-852e-452cc09ea7d4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8daf207da5b64667adebcec1f0d7f7b0",
     "title": "TCL(ティーシーエル) 75Q7D AirPlay2 テレビ レビュー比較まとめ",
     "name": "TCL(ティーシーエル) 75Q7D AirPlay2 テレビ レビュー比較まとめ.md",
@@ -19031,10 +19037,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-12T08:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-12T08:06:46.239659+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b80fc468-0da5-46de-9b4a-c4abe944695f",
