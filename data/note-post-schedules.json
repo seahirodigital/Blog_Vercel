@@ -19442,7 +19442,7 @@
   },
   {
     "id": "b48566f3-5548-4f6c-8427-07437899bd61",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2ca241894fd745c8a0cfd4b697e67347",
     "title": "Hisense 100E70S AirPlay2 テレビ レビュー比較まとめ",
     "name": "Hisense 100E70S AirPlay2 テレビ レビュー比較まとめ.md",
@@ -19451,10 +19451,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-12T14:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-12T16:11:48.887819+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5b8d8535-784a-4a6f-84ac-d9af6741e76e",
@@ -19509,7 +19511,7 @@
   },
   {
     "id": "0dff1f07-8cbd-4c97-bf92-79dd94eb9353",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s16b122ccd53840acb8b4fb62bd311707",
     "title": "SALONIA(サロニア) EMS リフトブラシ & ピュアブライト スチーマー セット レビュー比較まとめ",
     "name": "SALONIA(サロニア) EMS リフトブラシ & ピュアブライト スチーマー セット レビュー比較まとめ.md",
@@ -19518,10 +19520,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-12T15:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-12T16:11:48.887819+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e3370258-cb95-43a5-8475-9160c546611f",
@@ -19593,7 +19597,7 @@
   },
   {
     "id": "8f032759-4396-4a3e-ab81-5eeee71a8404",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfb6681206eb74ab6a202eee09653679c",
     "title": "龍翔産業 rs-ds-38m レビュー比較まとめ",
     "name": "龍翔産業 rs-ds-38m レビュー比較まとめ.md",
@@ -19602,10 +19606,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-12T16:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-12T16:11:48.887819+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8ec55ec2-6738-4470-abd3-1c32257f93e4",
@@ -19660,7 +19666,7 @@
   },
   {
     "id": "53866fea-0935-4193-a2a7-a36957dec8d7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd4d256d844ef4d19ab04d03e003168c9",
     "title": "OTTOCAST P3 オットキャスト レビュー比較まとめ",
     "name": "OTTOCAST P3 オットキャスト レビュー比較まとめ.md",
@@ -19669,10 +19675,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-12T16:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-12T16:11:48.887819+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fb10a5e1-ed8d-4d2b-886b-b7ff04882ccb",
