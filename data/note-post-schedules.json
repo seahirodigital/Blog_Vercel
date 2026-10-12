@@ -20045,7 +20045,7 @@
   },
   {
     "id": "0e61a76c-1f88-49c2-a48c-b3dcb4289993",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s7232250f65e54a5ca29914e762c42f03",
     "title": "EF ECOFLOW 8kW6100Bt ポータブルエアコン レビュー比較まとめ",
     "name": "EF ECOFLOW 8kW6100Bt ポータブルエアコン レビュー比較まとめ.md",
@@ -20055,8 +20055,8 @@
     "publishAt": "2026-10-12T23:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-12T22:55:57.099208+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-12T23:32:50.929217+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf10efbfc0e27?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
