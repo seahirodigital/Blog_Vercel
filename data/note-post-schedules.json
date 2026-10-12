@@ -19373,7 +19373,7 @@
   },
   {
     "id": "45f0690f-ae0c-477e-afe0-6d3ccd8bb0fc",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s64c7093dde2b4bd8b6dc3db963b63ee2",
     "title": "EcoFlow DELTA 3 Max Plus ポータブル電源 レビュー比較まとめ",
     "name": "EcoFlow DELTA 3 Max Plus ポータブル電源 レビュー比較まとめ.md",
@@ -19382,10 +19382,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-12T13:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-12T12:55:00.044582+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d79dcdbe-ec30-40dc-b3fd-df52ca88c101",
