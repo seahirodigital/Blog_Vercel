@@ -19451,12 +19451,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-12T14:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "2026-10-12T16:11:48.887819+00:00",
+    "queuedAt": "2026-10-12T17:42:28.144726+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "5b8d8535-784a-4a6f-84ac-d9af6741e76e",
