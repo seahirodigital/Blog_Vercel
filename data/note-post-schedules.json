@@ -19597,7 +19597,7 @@
   },
   {
     "id": "8f032759-4396-4a3e-ab81-5eeee71a8404",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sfb6681206eb74ab6a202eee09653679c",
     "title": "龍翔産業 rs-ds-38m レビュー比較まとめ",
     "name": "龍翔産業 rs-ds-38m レビュー比較まとめ.md",
@@ -19607,8 +19607,8 @@
     "publishAt": "2026-10-12T16:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-12T16:11:48.887819+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-12T16:14:30.376552+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na267abd235d1?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
