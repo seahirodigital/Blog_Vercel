@@ -19166,7 +19166,7 @@
   },
   {
     "id": "f06af406-1b0a-4dfb-9361-b17e6a30061f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2df8349438ea4b649b44c8bc80925949",
     "title": "AFERIY Haven2800 レビュー比較まとめ",
     "name": "AFERIY Haven2800 レビュー比較まとめ.md",
@@ -19176,8 +19176,8 @@
     "publishAt": "2026-10-12T10:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-12T09:55:54.857469+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-12T10:32:22.891762+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7478343dc7b0?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
