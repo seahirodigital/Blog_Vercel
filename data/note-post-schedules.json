@@ -19821,7 +19821,7 @@
   },
   {
     "id": "f8bd32cb-8869-4b3b-b38f-706149443284",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc4721cf6ec1548ac8850359ca0626b89",
     "title": "サンワダイレクト スタンド ハイタイプ 手動昇降式 対応 100-PL041 テレビ レビュー比較まとめ",
     "name": "サンワダイレクト スタンド ハイタイプ 手動昇降式 対応 100-PL041 テレビ レビュー比較まとめ.md",
@@ -19830,10 +19830,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-12T21:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-12T20:55:47.924463+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2ff11756-6b65-4306-9b10-c49ae5703199",
