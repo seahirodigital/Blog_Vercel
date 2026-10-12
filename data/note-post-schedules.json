@@ -18476,7 +18476,7 @@
   },
   {
     "id": "f29ef901-8339-4f6c-a31c-2431ddc5154c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s7d4b1f73747347a5936c3936d05c4959",
     "title": "BLUETTI AORA300 レビュー比較まとめ",
     "name": "BLUETTI AORA300 レビュー比較まとめ.md",
@@ -18486,8 +18486,8 @@
     "publishAt": "2026-10-12T00:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-11T23:25:34.640634+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-12T00:02:26.144848+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf400962aee06?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
