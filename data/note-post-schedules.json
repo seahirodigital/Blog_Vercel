@@ -19752,7 +19752,7 @@
   },
   {
     "id": "d330b9a4-4964-4f4f-bae6-15635983db23",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s851a1f4280294797b3866f00ae4a756f",
     "title": "オーディオテクニカ AT-UMX3 USB オーディオミキサー オーディオインターフェース レビュー比較まとめ",
     "name": "Audio Technica(オーディオテクニカ) AT-UMX3 USB オーディオミキサー オーディオインターフェー.md",
@@ -19762,8 +19762,8 @@
     "publishAt": "2026-10-12T20:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-12T19:55:43.914170+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-12T20:32:18.556212+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n1f66df869442?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
