@@ -19907,7 +19907,7 @@
   },
   {
     "id": "0b2d4ae7-05e6-4953-986c-8b2b351b53b0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf1f8b4126628430997422d44d6dfb156",
     "title": "Insta360 Ace Pro 2 アクションカメラ レビュー比較まとめ",
     "name": "Insta360 Ace Pro 2 アクションカメラ レビュー比較まとめ.md",
@@ -19916,10 +19916,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-12T22:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-12T21:55:12.548748+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "978733d2-9be0-4e3c-abef-850a8737d0d3",
