@@ -19442,7 +19442,7 @@
   },
   {
     "id": "b48566f3-5548-4f6c-8427-07437899bd61",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2ca241894fd745c8a0cfd4b697e67347",
     "title": "Hisense 100E70S AirPlay2 テレビ レビュー比較まとめ",
     "name": "Hisense 100E70S AirPlay2 テレビ レビュー比較まとめ.md",
@@ -19452,8 +19452,8 @@
     "publishAt": "2026-10-12T14:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-12T17:42:28.144726+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-12T17:45:01.530666+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nff8b2fd73d2f?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
