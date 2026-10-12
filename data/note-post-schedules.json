@@ -19097,7 +19097,7 @@
   },
   {
     "id": "2e829f97-61be-4612-8f4e-a4c41dcddf35",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se22dbe44decf4824a61b013aedd4640b",
     "title": "EcoFlow DELTA 3 Max Plus +220W軽量両面ソーラーパネル レビュー比較まとめ",
     "name": "EcoFlow DELTA 3 Max Plus +220W軽量両面ソーラーパネル レビュー比較まとめ.md",
@@ -19106,10 +19106,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-12T09:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-12T08:55:13.380501+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0e8a8ad3-3526-419b-ab90-5093fcdef7c5",
