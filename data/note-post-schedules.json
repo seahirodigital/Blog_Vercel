@@ -21459,7 +21459,7 @@
   },
   {
     "id": "f00e39fb-ae70-4d50-a987-585046b2d020",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf12c4c63a1b444d197a69b1cc4fc7158",
     "title": "DJI Osmo Action 4 エッセンシャルコンボ レビュー比較まとめ",
     "name": "DJI Osmo Action 4 エッセンシャルコンボ レビュー比較まとめ.md",
@@ -21469,8 +21469,8 @@
     "publishAt": "2026-10-13T21:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-13T20:55:55.906478+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-13T21:32:38.985830+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n575faa025288?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
