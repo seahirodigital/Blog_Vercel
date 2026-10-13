@@ -20813,12 +20813,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-13T10:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "2026-10-13T09:55:41.653605+00:00",
+    "queuedAt": "2026-10-13T11:26:37.302254+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "7d55293b-f57c-4cc3-b516-391218cb00a0",
