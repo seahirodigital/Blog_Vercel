@@ -21080,7 +21080,7 @@
   },
   {
     "id": "b65746da-7142-4fda-968f-3f52a4a861ac",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8b7c88bab88e492b97227b2f624098fc",
     "title": "パナソニック SR-CR10Z1-K レビュー比較まとめ",
     "name": "パナソニック SR-CR10Z1-K レビュー比較まとめ.md",
@@ -21089,10 +21089,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-13T14:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-13T14:37:20.610856+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "240b5a00-bf93-4fb6-ac1b-5cfc437e4f1b",
@@ -21147,7 +21149,7 @@
   },
   {
     "id": "96ed65d7-a871-4777-b4e8-cfb689ca55f5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2d5ae1d2ce10453e8f334f534a88ea5a",
     "title": "EENOUR DK7250iE 7kVA インバーター発電機 定格出力5 レビュー比較まとめ",
     "name": "EENOUR DK7250iE 7kVA インバーター発電機 定格出力5 レビュー比較まとめ.md",
@@ -21156,10 +21158,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-13T15:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-13T14:37:20.610856+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "afb10651-7b21-4a2e-840f-3a5293567189",
