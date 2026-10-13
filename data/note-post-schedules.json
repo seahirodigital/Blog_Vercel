@@ -21683,7 +21683,7 @@
   },
   {
     "id": "196123d8-0078-4a06-8d75-608d2841de22",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!scb1f85f81df64ed093a066b0e30fcfd0",
     "title": "HUION Kamvas22 液タブ Plus レビュー比較まとめ",
     "name": "HUION Kamvas22 液タブ Plus レビュー比較まとめ.md",
@@ -21693,8 +21693,8 @@
     "publishAt": "2026-10-13T23:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-13T22:55:08.506900+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-13T23:32:24.216115+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd5172ed7324e?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
