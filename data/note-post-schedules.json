@@ -20735,7 +20735,7 @@
   },
   {
     "id": "bdb25212-5051-470d-b3b3-f2b1925d5d3d",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sff05e90114ef4c589df25c6a42995db3",
     "title": "ASUS ROG Kithara ゲーミングヘッドセット レビュー比較まとめ",
     "name": "ASUS ROG Kithara ゲーミングヘッドセット レビュー比較まとめ.md",
@@ -20745,8 +20745,8 @@
     "publishAt": "2026-10-13T09:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-13T08:55:02.547556+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-13T09:32:16.683762+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n96d76220e854?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
