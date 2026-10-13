@@ -1,4 +1,5 @@
 import argparse
+import hashlib
 import os
 import sys
 from datetime import datetime, timezone
@@ -81,15 +82,25 @@ def _gemini_candidates() -> list[tuple[str, str]]:
     return candidates
 
 
-def _save_github_output(channel_name: str, title: str, notion_page_id: str):
+def _viewer_url(video_url: str) -> str:
+    normalized = _normalized_video_url(video_url)
+    if not normalized:
+        return ""
+    article_id = hashlib.sha256(normalized.encode("utf-8")).hexdigest()[:18]
+    base_url = os.getenv("INFO_VIEWER_PUBLIC_URL", "https://info-viewer.pages.dev").rstrip("/")
+    return f"{base_url}/articles/{article_id}/"
+
+
+def _save_github_output(channel_name: str, title: str, notion_page_id: str, video_url: str):
     github_output = os.getenv("GITHUB_OUTPUT", "")
     if not github_output or not notion_page_id:
         return
     safe_channel = channel_name.replace(",", "，").replace("|", "｜")
     safe_title = title.replace(",", "，").replace("|", "｜")
     page_id = notion_page_id.replace("-", "")
+    viewer_url = _viewer_url(video_url)
     with open(github_output, "a", encoding="utf-8") as output_file:
-        output_file.write(f"notion_urls={safe_channel}|{safe_title}|https://notion.so/{page_id}\n")
+        output_file.write(f"notion_urls={safe_channel}|{safe_title}|https://notion.so/{page_id}|{viewer_url}\n")
 
 
 def _mark_failed(
@@ -236,7 +247,7 @@ def main() -> int:
 
     state_store.mark_done(state, video_url, run_id, upload_result=upload_result)
     state_store.save_state(state)
-    _save_github_output(video["channel_name"], title, notion_page_id)
+    _save_github_output(video["channel_name"], title, notion_page_id, video_url)
 
     print("-" * 72)
     print("手動URL単発処理成功")

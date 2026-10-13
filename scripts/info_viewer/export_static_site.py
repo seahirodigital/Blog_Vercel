@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import argparse
 import hashlib
 import json
@@ -7,14 +9,25 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, urlparse
 
-from modules import notion_writer, onedrive_writer
-
-
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 SITE_ROOT = PROJECT_ROOT / "info_viewer_site"
 CONTENT_DIR = SITE_ROOT / "content" / "articles"
 DATA_PATH = SITE_ROOT / "data" / "article_index.json"
 SEARCH_PATH = SITE_ROOT / "static" / "search.json"
+
+KNOWN_PERSONS: list[tuple[str, list[str]]] = [
+    ("ちょる子", ["ちょる子", "ちょるこ", "チョル子", "チョルコ"]),
+    ("大川智宏", ["大川智宏", r"大川\.?智宏"]),
+    ("岡崎良介", ["岡崎良介", r"岡崎\.?良介", "ザキオカ", "ザ岡"]),
+    ("木野内栄治", ["木野内栄治", r"木野内\.?栄治"]),
+    ("テスタ", ["テスタ"]),
+    ("田中泰輔", ["田中泰輔", r"田中\.?泰輔"]),
+    ("森永康平", ["森永康平", r"森永\.?康平"]),
+    ("大橋ひろこ", ["大橋ひろこ", r"大橋\.?ひろこ"]),
+    ("池水雄一", ["池水雄一", r"池水\.?雄一"]),
+    ("田端信太郎", ["田端信太郎", r"田端\.?信太郎"]),
+    ("あばねちゃん", ["あばねちゃん"]),
+]
 
 
 def _read_json(path: Path, fallback: Any) -> Any:
@@ -24,6 +37,41 @@ def _read_json(path: Path, fallback: Any) -> Any:
         return json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return fallback
+
+
+def _parse_frontmatter(text: str) -> tuple[dict[str, str], str]:
+    if not text.startswith("---"):
+        return {}, text
+    match = re.match(r"^---\s*\n(.*?)\n---\s*\n?(.*)$", text, flags=re.S)
+    if not match:
+        return {}, text
+    metadata: dict[str, str] = {}
+    meta_block, body = match.groups()
+    for line in meta_block.splitlines():
+        if ":" not in line:
+            continue
+        key, value = line.split(":", 1)
+        normalized = value.strip()
+        if (normalized.startswith('"') and normalized.endswith('"')) or (
+            normalized.startswith("'") and normalized.endswith("'")
+        ):
+            normalized = normalized[1:-1]
+        metadata[key.strip()] = normalized.replace('\\"', '"').replace("\\\\", "\\")
+    return metadata, body
+
+
+def _extract_persons_from_title(title: str) -> list[str]:
+    found: list[str] = []
+    for canonical, patterns in KNOWN_PERSONS:
+        if any(re.search(pattern, str(title or "")) for pattern in patterns):
+            found.append(canonical)
+    return found
+
+
+def _remote_modules():
+    from modules import onedrive_writer
+
+    return onedrive_writer
 
 
 def _write_json(path: Path, data: Any) -> None:
@@ -71,6 +119,34 @@ def _format_date(value: str) -> str:
         return text[:10].replace("-", ".").replace("/", ".")
 
 
+def _format_duration(value: str) -> str:
+    text = str(value or "").strip()
+    if not text:
+        return ""
+    iso_match = re.fullmatch(r"PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?", text, flags=re.I)
+    if iso_match:
+        hours, minutes, seconds = (int(part or 0) for part in iso_match.groups())
+        if hours:
+            return f"{hours}:{minutes:02d}:{seconds:02d}"
+        return f"{minutes}:{seconds:02d}"
+    if re.fullmatch(r"\d+", text):
+        total_seconds = int(text)
+        hours, remainder = divmod(total_seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
+        return f"{hours}:{minutes:02d}:{seconds:02d}" if hours else f"{minutes}:{seconds:02d}"
+    return text
+
+
+def _format_recorded_time(value: str) -> str:
+    text = str(value or "").strip()
+    if not text:
+        return ""
+    try:
+        return datetime.fromisoformat(text.replace("Z", "+00:00")).strftime("%Y.%m.%d %H:%M")
+    except ValueError:
+        return _format_date(text)
+
+
 def _channel_tab(channel_name: str) -> str:
     normalized = "".join(str(channel_name or "").split())
     return normalized[:4] or "手動URL"
@@ -98,12 +174,14 @@ def _entry_from_markdown(
     source_file_id: str,
 ) -> tuple[dict[str, Any], str]:
     markdown = raw_markdown.decode("utf-8-sig")
-    metadata, _ = onedrive_writer.parse_frontmatter(markdown)
+    metadata, _ = _parse_frontmatter(markdown)
     title = str(metadata.get("title") or fallback.get("title") or "無題").strip()
     youtube_url = str(metadata.get("video_url") or fallback.get("youtubeUrl") or "").strip()
     channel_name = str(metadata.get("channel_name") or fallback.get("channelName") or "手動URL").strip()
     published_at = str(metadata.get("published_at") or fallback.get("publishedAt") or "").strip()
-    people = notion_writer.extract_persons_from_title(title)
+    recorded_at = str(metadata.get("generated_at") or fallback.get("generatedAt") or last_modified or "").strip()
+    duration = _format_duration(str(metadata.get("duration") or fallback.get("duration") or ""))
+    people = _extract_persons_from_title(title)
     entry = {
         "id": article_id,
         "url": f"/articles/{article_id}/",
@@ -115,6 +193,10 @@ def _entry_from_markdown(
         "thumbnail": _thumbnail_url(youtube_url),
         "publishedAt": published_at,
         "publishedLabel": _format_date(published_at),
+        "duration": duration,
+        "recordedAt": recorded_at,
+        "recordedLabel": _format_recorded_time(recorded_at),
+        "timeLabel": duration or _format_recorded_time(recorded_at),
         "persons": people,
         "lastModified": last_modified,
         "sourceFileId": source_file_id,
@@ -123,6 +205,7 @@ def _entry_from_markdown(
 
 
 def _load_article(article: dict[str, Any], previous: dict[str, Any]) -> tuple[dict[str, Any], str, bool]:
+    onedrive_writer = _remote_modules()
     article_id = _article_id(article)
     last_modified = str(article.get("lastModified") or "")
     destination = CONTENT_DIR / f"{article_id}.md"
@@ -144,13 +227,20 @@ def _load_article(article: dict[str, Any], previous: dict[str, Any]) -> tuple[di
     return entry, plain_text, should_download
 
 
-def _load_local_article(source: Path, source_root: Path) -> tuple[dict[str, Any], str, bool]:
+def _load_local_article(
+    source: Path,
+    source_root: Path,
+    used_article_ids: set[str],
+) -> tuple[dict[str, Any], str, bool]:
     raw_markdown = source.read_bytes()
     markdown = raw_markdown.decode("utf-8-sig")
-    metadata, _ = onedrive_writer.parse_frontmatter(markdown)
+    metadata, _ = _parse_frontmatter(markdown)
     youtube_url = str(metadata.get("video_url") or "").strip()
     relative_path = source.relative_to(source_root).as_posix()
     article_id = _article_id({"youtubeUrlNormalized": youtube_url, "relativePath": relative_path})
+    if article_id in used_article_ids:
+        article_id = hashlib.sha256(f"{youtube_url}\n{relative_path}".encode("utf-8")).hexdigest()[:18]
+    used_article_ids.add(article_id)
     destination = CONTENT_DIR / f"{article_id}.md"
     should_write = not destination.exists() or destination.read_bytes() != raw_markdown
     if should_write:
@@ -177,6 +267,8 @@ def _search_item(entry: dict[str, Any], plain_text: str) -> dict[str, Any]:
         "title": entry["title"],
         "channelName": entry["channelName"],
         "channelTab": entry["channelTab"],
+        "duration": entry["duration"],
+        "timeLabel": entry["timeLabel"],
         "persons": entry["persons"],
         "text": plain_text,
     }
@@ -203,6 +295,7 @@ def _write_site_index(entries: list[dict[str, Any]], search_items: list[dict[str
 
 
 def _write_remote_articles() -> int:
+    onedrive_writer = _remote_modules()
     previous_articles = _existing_metadata()
     entries: list[dict[str, Any]] = []
     search_items: list[dict[str, Any]] = []
@@ -223,21 +316,22 @@ def _write_remote_articles() -> int:
 
 
 def _write_local_seed_articles(seed_dir: Path, limit: int) -> int:
-    if limit < 1:
-        raise ValueError("--limit は1以上にしてください。")
     source_root = seed_dir.expanduser().resolve()
     if not source_root.is_dir():
         raise FileNotFoundError(f"Markdownの保存先が見つかりません: {source_root}")
 
-    candidates = sorted(source_root.rglob("*.md"), key=lambda path: path.stat().st_mtime, reverse=True)[:limit]
+    candidates = sorted(source_root.rglob("*.md"), key=lambda path: path.stat().st_mtime, reverse=True)
+    if limit > 0:
+        candidates = candidates[:limit]
     if not candidates:
         raise FileNotFoundError(f"Markdownが見つかりません: {source_root}")
 
     entries: list[dict[str, Any]] = []
     search_items: list[dict[str, Any]] = []
     changed_count = 0
+    used_article_ids: set[str] = set()
     for source in candidates:
-        entry, plain_text, changed = _load_local_article(source, source_root)
+        entry, plain_text, changed = _load_local_article(source, source_root, used_article_ids)
         entries.append(entry)
         search_items.append(_search_item(entry, plain_text))
         changed_count += int(changed)
@@ -250,7 +344,7 @@ def _write_local_seed_articles(seed_dir: Path, limit: int) -> int:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Info Viewerの静的サイトを書き出す")
     parser.add_argument("--seed-dir", type=Path, help="初期表示に使う既存Markdownのフォルダ")
-    parser.add_argument("--limit", type=int, default=4, help="初期表示に載せる記事数")
+    parser.add_argument("--limit", type=int, default=4, help="初期表示に載せる記事数。0なら全件")
     return parser.parse_args()
 
 

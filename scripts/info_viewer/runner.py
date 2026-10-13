@@ -1,4 +1,5 @@
 import argparse
+import hashlib
 import os
 import sys
 import time
@@ -22,6 +23,7 @@ GEMINI_TOKEN_INVEST = os.getenv("GEMINI_TOKEN_invest", "") or os.getenv("GEMINI_
 GEMINI_TOKEN_INVEST_SUB = os.getenv("GEMINI_TOKEN_INVESTsub", "") or os.getenv("GEMINI_TOKEN_INVESTSUB", "")
 GEMINI_TOKEN_TECH = os.getenv("GEMINI_TOKEN_tech", "") or os.getenv("GEMINI_TOKEN_TECH", "")
 GEMINI_SERIAL_DELAY_SECONDS = int(os.getenv("INFO_VIEWER_GEMINI_SERIAL_DELAY_SECONDS", "20") or 20)
+INFO_VIEWER_PUBLIC_URL = os.getenv("INFO_VIEWER_PUBLIC_URL", "https://info-viewer.pages.dev").rstrip("/")
 
 GEMINI_TOKEN_POOLS = {
     "invest": ("GEMINI_TOKEN_invest", GEMINI_TOKEN_INVEST),
@@ -83,6 +85,14 @@ def _now_iso() -> str:
 
 def _video_key(video_url: str) -> str:
     return onedrive_writer.normalize_youtube_url(video_url or "")
+
+
+def _viewer_url(video_url: str) -> str:
+    normalized = _video_key(video_url)
+    if not normalized:
+        return ""
+    article_id = hashlib.sha256(normalized.encode("utf-8")).hexdigest()[:18]
+    return f"{INFO_VIEWER_PUBLIC_URL}/articles/{article_id}/"
 
 
 def _append_processing_log(
@@ -1564,7 +1574,8 @@ def _process_pending_videos(
             page_id = upload_result.get("notionPageId").replace("-", "")
             safe_title = actual_title.replace(",", "，").replace("|", "｜")
             safe_channel = video.get("channel_name", "").replace(",", "，").replace("|", "｜")
-            _created_notion_urls.append(f"{safe_channel}|{safe_title}|https://notion.so/{page_id}")
+            viewer_url = _viewer_url(video.get("video_url", ""))
+            _created_notion_urls.append(f"{safe_channel}|{safe_title}|https://notion.so/{page_id}|{viewer_url}")
 
         save_message = (
             "Markdown を OneDrive と Notion に保存しました"

@@ -161,11 +161,8 @@ jobs:
 
           IFS=',' read -ra ITEMS <<< "${{ steps.manual_info_viewer.outputs.notion_urls }}"
           for ITEM in "${ITEMS[@]}"; do
-            CHANNEL="${ITEM%%|*}"
-            REST="${ITEM#*|}"
-            TITLE="${REST%%|*}"
-            URL="${REST##*|}"
-            MESSAGE="【Notion記事更新】\n${CHANNEL}\n${TITLE}\n${URL}"
+            IFS='|' read -r CHANNEL TITLE NOTION_URL VIEWER_URL <<< "$ITEM"
+            MESSAGE="【記事更新】\n${CHANNEL}\n${TITLE}\nNotion\n${NOTION_URL}\nInfo Viewer\n${VIEWER_URL}"
             curl -H "Content-Type: application/json" -d "{\"content\": \"$MESSAGE\"}" "$DISCORD_WEBHOOK"
           done
 
@@ -181,10 +178,7 @@ jobs:
           
           IFS=',' read -ra ITEMS <<< "${{ steps.info_viewer.outputs.notion_urls }}"
           for ITEM in "${ITEMS[@]}"; do
-            CHANNEL="${ITEM%%|*}"
-            REST="${ITEM#*|}"
-            TITLE="${REST%%|*}"
-            URL="${REST##*|}"
-            MESSAGE="【Notion記事更新】\n${CHANNEL}\n${TITLE}\n${URL}"
+            IFS='|' read -r CHANNEL TITLE NOTION_URL VIEWER_URL <<< "$ITEM"
+            MESSAGE="【記事更新】\n${CHANNEL}\n${TITLE}\nNotion\n${NOTION_URL}\nInfo Viewer\n${VIEWER_URL}"
             curl -H "Content-Type: application/json" -d "{\"content\": \"$MESSAGE\"}" "$DISCORD_WEBHOOK"
           done

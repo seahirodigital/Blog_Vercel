@@ -31,9 +31,12 @@
         {{ with .thumbnail }}<img src="{{ . }}" alt="" loading="lazy" decoding="async">{{ end }}
       </span>
       <span class="article-card__content">
-        <span class="article-card__channel">{{ .channelTab }}</span>
+        <span class="article-card__channel">{{ .channelName }}</span>
         <strong class="article-card__title">{{ .title }}</strong>
-        <span class="article-card__meta">{{ .publishedLabel }}</span>
+        <span class="article-card__meta">
+          {{ with .timeLabel }}<span class="article-card__duration">{{ . }}</span>{{ end }}
+          {{ with .publishedLabel }}<span>{{ . }}</span>{{ end }}
+        </span>
       </span>
     </a>
     {{ end }}{{ end }}

@@ -3,20 +3,23 @@
 {{ $meta := index $index.articles .File.BaseFileName }}
 <main class="app-shell article-page" data-channel="{{ $meta.channelTab }}" data-channel-key="{{ $meta.channelKey }}">
   <header class="article-header">
-    <a class="back-link" href="{{ "/" | relURL }}?channel={{ $meta.channelTab | urlquery }}" aria-label="記事一覧へ戻る">← 一覧</a>
-    <span class="article-header__channel">{{ $meta.channelTab }}</span>
+    <a class="back-link" href="{{ "/" | relURL }}" aria-label="記事一覧へ戻る">← 一覧</a>
+    <div class="article-header__actions">
+      <span class="article-header__channel">{{ $meta.channelTab }}</span>
+      <a class="youtube-link" href="{{ $meta.youtubeUrl }}" target="_blank" rel="noopener noreferrer">
+        YouTube <span aria-hidden="true">↗</span>
+      </a>
+    </div>
   </header>
 
   <article>
     <div class="article-hero">
       {{ with $meta.thumbnail }}<img src="{{ . }}" alt="" decoding="async">{{ end }}
     </div>
-    <a class="youtube-link" href="{{ $meta.youtubeUrl }}" target="_blank" rel="noopener noreferrer">
-      YouTubeを開く <span aria-hidden="true">↗</span>
-    </a>
     <h1>{{ .Title }}</h1>
     <div class="article-meta">
       <span>{{ $meta.channelName }}</span>
+      {{ with $meta.timeLabel }}<span>{{ . }}</span>{{ end }}
       {{ with $meta.publishedLabel }}<span>{{ . }}</span>{{ end }}
     </div>
     {{ with $meta.persons }}
@@ -24,9 +27,11 @@
       {{ range . }}<span>{{ . }}</span>{{ end }}
     </div>
     {{ end }}
-    <div class="markdown-body">{{ .Content }}</div>
+    {{ $markdown := .RawContent }}
+    {{ with $meta.youtubeUrl }}{{ $markdown = replace $markdown . "" }}{{ end }}
+    <div class="markdown-body">{{ $markdown | markdownify }}</div>
   </article>
 
-  <p class="swipe-hint" aria-hidden="true">左右スワイプで同じチャンネルの記事へ</p>
+  <p class="swipe-hint" id="swipe-hint" aria-hidden="true">左右スワイプで記事を移動</p>
 </main>
 {{ end }}

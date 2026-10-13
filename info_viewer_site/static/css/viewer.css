@@ -167,19 +167,6 @@ a {
   background: linear-gradient(135deg, #e7e8eb, #c8ceda);
 }
 
-.article-card__image-wrap::after {
-  position: absolute;
-  inset: auto 7px 7px auto;
-  padding: 3px 5px;
-  border-radius: 4px;
-  background: rgb(0 0 0 / 66%);
-  color: #fff;
-  content: "YT";
-  font-size: 0.58rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-}
-
 .article-card__image-wrap img {
   display: block;
   width: 100%;
@@ -215,9 +202,17 @@ a {
 }
 
 .article-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
   margin-top: 7px;
   color: var(--muted);
   font-size: 0.68rem;
+}
+
+.article-card__duration {
+  color: #555552;
+  font-weight: 800;
 }
 
 .empty-state {
@@ -255,13 +250,30 @@ a {
   font-weight: 800;
 }
 
-.article-header__channel {
+.article-header__actions {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+}
+
+.article-header__channel,
+.youtube-link {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  gap: 4px;
   padding: 5px 9px;
   border-radius: 999px;
   background: var(--blue-soft);
   color: var(--blue);
   font-size: 0.68rem;
   font-weight: 800;
+}
+
+.youtube-link {
+  white-space: nowrap;
 }
 
 .article-page article {
@@ -280,20 +292,6 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.youtube-link {
-  display: inline-flex;
-  min-height: 38px;
-  align-items: center;
-  gap: 7px;
-  margin: 18px 0 13px;
-  padding: 0 12px;
-  border: 1px solid var(--blue);
-  border-radius: 7px;
-  color: var(--blue);
-  font-size: 0.78rem;
-  font-weight: 800;
 }
 
 .article-page h1 {
@@ -479,7 +477,8 @@ a {
 }
 
 .tool-button:active,
-.tool-button.is-active {
+.tool-button.is-active,
+.tool-button.has-filter {
   background: var(--blue-soft);
   color: var(--blue);
 }
