@@ -23,6 +23,15 @@ GEMINI_TOKEN_CANDIDATES = (
 )
 
 
+def _requires_notion_save() -> bool:
+    return str(os.getenv("INFO_VIEWER_REQUIRE_NOTION_SAVE", "true")).strip().lower() not in {
+        "0",
+        "false",
+        "no",
+        "off",
+    }
+
+
 def parse_args():
     parser = argparse.ArgumentParser(description="info_viewer 手動URL単発処理")
     parser.add_argument("--video-url", required=True)
@@ -198,7 +207,14 @@ def main() -> int:
         raise
 
     notion_page_id = ""
-    if notion_writer.is_configured():
+    notion_required = _requires_notion_save()
+    if not notion_writer.is_configured():
+        message = "Notion 保存に必要な設定がありません"
+        if notion_required:
+            _mark_failed(state, video_url, run_id, "Notion", message)
+            raise RuntimeError(message)
+        print(f"Notion 保存は任意のためスキップ: {message}")
+    else:
         try:
             notion_result = notion_writer.save_article(
                 video=video,
@@ -213,6 +229,9 @@ def main() -> int:
             upload_result["notionAction"] = notion_result.get("action", "")
             print(f"Notion 保存完了: {notion_writer.schema_summary(notion_result)}")
         except Exception as error:
+            if notion_required:
+                _mark_failed(state, video_url, run_id, "Notion", str(error))
+                raise
             print(f"Notion 保存は任意のためスキップ: {error}")
 
     state_store.mark_done(state, video_url, run_id, upload_result=upload_result)

@@ -1,5 +1,6 @@
 import notionHandler from '../lib/info-viewer-notion.js';
 import { syncGitHubActionsRefreshToken } from '../lib/onedrive-token-sync.js';
+import { timingSafeEqual } from 'node:crypto';
 
 const GRAPH_API = 'https://graph.microsoft.com/v1.0';
 const TOKEN_URL = 'https://login.microsoftonline.com/common/oauth2/v2.0/token';
@@ -14,6 +15,12 @@ const PRIMARY_FOLDER =
 const LEGACY_FOLDER = 'Obsidian in Onedrive 202602/Vercel_Blog/情報取得/info_viewer';
 const STATE_RELATIVE_PATH = 'state/pipeline_state.json';
 const ASSET_RELATIVE_FOLDER = 'assets';
+
+function isAdminRequest(req) {
+  const expected = Buffer.from(String(process.env.INFO_VIEWER_ADMIN_SECRET || ''));
+  const supplied = Buffer.from(String(req.headers['x-info-viewer-admin-secret'] || ''));
+  return Boolean(expected.length && expected.length === supplied.length && timingSafeEqual(expected, supplied));
+}
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -621,16 +628,12 @@ async function dispatchPriorityWorkflow(videoUrl) {
         Accept: 'application/vnd.github.v3+json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        ref: 'main',
-        inputs: {
-          mode: 'process_queue',
-          max_items: '1',
-          channel_name: '',
-          video_url: videoUrl,
-          rebuild_manifest_only: 'false',
-        },
-      }),
+        body: JSON.stringify({
+          ref: 'main',
+          inputs: {
+            video_url: videoUrl,
+          },
+        }),
     }
   );
 
@@ -774,6 +777,9 @@ export default async function handler(req, res) {
       return await handleImageUploadRequest(req, res, token);
     }
     if (req.method === 'POST' && resource === 'priority') {
+      if (!isAdminRequest(req)) {
+        return res.status(401).json({ success: false, error: 'Unauthorized' });
+      }
       return await handlePriorityRequest(req, res, token);
     }
     if (req.method === 'PUT' && (resource === 'article' || resource === 'save')) {

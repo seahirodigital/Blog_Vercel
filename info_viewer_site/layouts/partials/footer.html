@@ -1,0 +1,41 @@
+<footer class="tool-footer" aria-label="ビューアー操作">
+  <button class="tool-button" type="button" data-tool="search" aria-controls="tool-sheet" aria-label="本文を検索">
+    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/></svg>
+    <span>検索</span>
+  </button>
+  <button class="tool-button" type="button" data-tool="people" aria-controls="tool-sheet" aria-label="人物タグで絞り込む">
+    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.59 13.41 11 23l-9.59-9.59A2 2 0 0 1 .83 12L11 .83A2 2 0 0 1 12.24.24l8.35 8.35a2 2 0 0 1 0 2.82Z"/><circle cx="7.5" cy="7.5" r="1.25"/></svg>
+    <span>人物</span>
+  </button>
+  <button class="tool-button" type="button" data-tool="submit" aria-controls="tool-sheet" aria-label="YouTube URLを即時処理する">
+    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="m22 2-7 20-4-9-9-4Z"/></svg>
+    <span>即時URL</span>
+  </button>
+</footer>
+
+<div class="tool-sheet" id="tool-sheet" hidden>
+  <div class="tool-sheet__head">
+    <h2 id="tool-title">検索</h2>
+    <button class="icon-button" type="button" data-close-tool aria-label="閉じる">×</button>
+  </div>
+  <div class="tool-sheet__body" data-tool-panel="search" hidden>
+    <label class="field-label" for="search-input">記事本文・タイトルを検索</label>
+    <input id="search-input" class="text-input" type="search" placeholder="例：金利、半導体、テスタ" autocomplete="off">
+    <p class="tool-help" id="search-status">検索語を入力すると、本文を含む検索結果を表示します。</p>
+    <div class="search-results" id="search-results"></div>
+  </div>
+  <div class="tool-sheet__body" data-tool-panel="people" hidden>
+    <p class="tool-help">既存のNotion人物タグと同じ判定ルールで絞り込みます。</p>
+    <div class="tag-list" id="person-tags"></div>
+  </div>
+  <div class="tool-sheet__body" data-tool-panel="submit" hidden>
+    <p class="tool-help">送信後、既存のGitHub Actionsが文字起こし・Markdown・Notion保存・静的サイト更新を順に実行します。</p>
+    <label class="field-label" for="video-url">YouTube URL</label>
+    <input id="video-url" class="text-input" type="url" inputmode="url" placeholder="https://www.youtube.com/watch?v=..." autocomplete="url">
+    <label class="field-label" for="admin-secret">管理シークレット</label>
+    <input id="admin-secret" class="text-input" type="password" placeholder="Vercelの INFO_VIEWER_ADMIN_SECRET" autocomplete="current-password">
+    <button id="submit-video" class="submit-button" type="button">GO!</button>
+    <p class="tool-help" id="submit-status">閲覧には不要です。送信時だけ入力します。</p>
+  </div>
+</div>
+<div class="tool-backdrop" data-close-tool hidden></div>

@@ -1,0 +1,44 @@
+{
+  "generatedAt": "2026-10-13T12:00:00+09:00",
+  "articleList": [
+    {
+      "id": "qa-sample",
+      "url": "/articles/qa-sample/",
+      "title": "検証用の動画記事",
+      "channelName": "検証チャンネル",
+      "channelKey": "検証チャンネル",
+      "channelTab": "検証チャ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+      "publishedAt": "2026-10-13T12:00:00+09:00",
+      "publishedLabel": "2026.10.13",
+      "persons": ["テスタ"],
+      "lastModified": "2026-10-13T12:00:00+09:00",
+      "sourceFileId": "qa"
+    }
+  ],
+  "articles": {
+    "qa-sample": {
+      "id": "qa-sample",
+      "url": "/articles/qa-sample/",
+      "title": "検証用の動画記事",
+      "channelName": "検証チャンネル",
+      "channelKey": "検証チャンネル",
+      "channelTab": "検証チャ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+      "publishedAt": "2026-10-13T12:00:00+09:00",
+      "publishedLabel": "2026.10.13",
+      "persons": ["テスタ"],
+      "lastModified": "2026-10-13T12:00:00+09:00",
+      "sourceFileId": "qa"
+    }
+  },
+  "channels": [
+    {
+      "name": "検証チャンネル",
+      "tab": "検証チャ"
+    }
+  ],
+  "people": ["テスタ"]
+}

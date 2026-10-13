@@ -1,0 +1,24 @@
+baseURL = "/"
+title = "Info Viewer"
+locale = "ja-JP"
+defaultContentLanguage = "ja"
+hasCJKLanguage = true
+enableRobotsTXT = true
+timeZone = "Asia/Tokyo"
+disableKinds = ["RSS", "taxonomy", "term", "section"]
+
+[permalinks]
+  articles = "/articles/:filename/"
+
+[params]
+  triggerEndpoint = "https://blog-vercel-dun.vercel.app/api/trigger-info-viewer"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = false
+  [markup.highlight]
+    noClasses = false
+
+[minify]
+  minifyOutput = true

@@ -1,0 +1,46 @@
+{{ define "main" }}
+{{ $index := hugo.Data.article_index }}
+<main class="app-shell list-page">
+  <header class="site-header">
+    <p class="eyebrow">YOUTUBE NOTES</p>
+    <h1>Info Viewer</h1>
+    <p class="site-description">読みたい動画を、すぐ読む。</p>
+  </header>
+
+  <nav class="channel-tabs" aria-label="チャンネル">
+    <button class="channel-tab is-active" type="button" data-channel="all">すべて</button>
+    {{ with $index }}{{ range .channels }}
+      <button class="channel-tab" type="button" data-channel="{{ .tab }}" title="{{ .name }}">{{ .tab }}</button>
+    {{ end }}{{ end }}
+  </nav>
+
+  <section class="list-summary" aria-live="polite">
+    <span id="result-count">{{ with $index }}{{ len .articleList }}{{ else }}0{{ end }}件</span>
+    <span class="list-summary__rule"></span>
+    <span id="active-filter">新着順</span>
+  </section>
+
+  <section class="article-list" id="article-list" aria-label="記事一覧">
+    {{ with $index }}{{ range .articleList }}
+    <a
+      class="article-card"
+      href="{{ .url }}"
+      data-article-id="{{ .id }}"
+      data-channel="{{ .channelTab }}"
+      data-title="{{ .title }}"
+      data-persons="{{ delimit .persons "," }}">
+      <span class="article-card__image-wrap">
+        {{ with .thumbnail }}<img src="{{ . }}" alt="" loading="lazy" decoding="async">{{ end }}
+      </span>
+      <span class="article-card__content">
+        <span class="article-card__channel">{{ .channelTab }}</span>
+        <strong class="article-card__title">{{ .title }}</strong>
+        <span class="article-card__meta">{{ .publishedLabel }}</span>
+      </span>
+    </a>
+    {{ end }}{{ end }}
+  </section>
+
+  <p class="empty-state" id="empty-state" hidden>該当する記事はありません。</p>
+</main>
+{{ end }}

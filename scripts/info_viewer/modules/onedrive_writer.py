@@ -464,6 +464,20 @@ def _download_item_text(item_id: str, token: str, byte_range: Optional[str] = No
     return response.text
 
 
+def download_item_bytes(item_id: str) -> bytes:
+    clean_id = str(item_id or "").strip()
+    if not clean_id:
+        raise ValueError("OneDrive item ID が不足しています。")
+    token = _get_access_token()
+    response = _request_with_retries(
+        "GET",
+        f"{GRAPH_API_BASE}/me/drive/items/{quote(clean_id)}/content",
+        token,
+    )
+    response.raise_for_status()
+    return response.content
+
+
 def list_saved_articles() -> list[dict[str, Any]]:
     token = _get_access_token()
     _ensure_folder_path(PRIMARY_BASE_FOLDER, token)
