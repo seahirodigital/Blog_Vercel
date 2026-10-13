@@ -20942,7 +20942,7 @@
   },
   {
     "id": "f661d781-bc49-4c07-827e-d999f04947f7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s70dde44f0b964014b8f423a4c8c51f0d",
     "title": "アイリスオーヤマ TD-SM7070C-BB テレビ レビュー比較まとめ",
     "name": "アイリスオーヤマ TD-SM7070C-BB テレビ レビュー比較まとめ.md",
@@ -20951,10 +20951,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-13T12:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-13T11:55:55.567726+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "db6c4415-d18f-4759-92df-d5dd982475c5",
