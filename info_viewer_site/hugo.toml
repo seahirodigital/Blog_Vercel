@@ -11,7 +11,7 @@ disableKinds = ["RSS", "taxonomy", "term", "section"]
   articles = "/articles/:filename/"
 
 [params]
-  triggerEndpoint = "https://blog-vercel-dun.vercel.app/api/trigger-info-viewer"
+  triggerEndpoint = "https://blog-vercel-dun.vercel.app/api/info-viewer?resource=priority"
 
 [markup]
   [markup.goldmark]
