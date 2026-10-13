@@ -20528,7 +20528,7 @@
   },
   {
     "id": "44f2fa8b-cba8-4117-8dbf-bf72a47ff6d1",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s1f011bb801bc45d4a9bdf694161af613",
     "title": "LiberNovo Maxis Airflow 人間工学オフィスチェア レビュー比較まとめ",
     "name": "LiberNovo Maxis Airflow 人間工学オフィスチェア レビュー比較まとめ.md",
@@ -20538,8 +20538,8 @@
     "publishAt": "2026-10-13T06:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-13T05:55:04.810435+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-13T06:32:28.465830+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n05f57012bfc8?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
