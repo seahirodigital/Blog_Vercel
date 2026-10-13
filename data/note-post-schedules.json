@@ -20114,7 +20114,7 @@
   },
   {
     "id": "7b3ed248-5b97-4b74-bbf6-4b8fef7a8abb",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sdf8ea6db4a764c879e1a04063bf3c61b",
     "title": "スイッチボット K11 4GWi-Fi サーキュレーター レビュー比較まとめ",
     "name": "スイッチボット K11 4GWi-Fi サーキュレーター レビュー比較まとめ.md",
@@ -20124,8 +20124,8 @@
     "publishAt": "2026-10-13T00:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-12T23:25:49.561018+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-13T00:02:39.143724+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5563d6821555?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
