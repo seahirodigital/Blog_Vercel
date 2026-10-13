@@ -21545,7 +21545,7 @@
   },
   {
     "id": "0fc9921e-aaf3-46fb-942e-02be131bf963",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s66910c9ad18742e199fd87555f2aa498",
     "title": "Apple(アップル) Apple Watch Series 11(GPSモデル)- と - ML レビュー比較まとめ",
     "name": "Apple(アップル) Apple Watch Series 11(GPSモデル)- と - ML レビュー比較まとめ.md",
@@ -21555,8 +21555,8 @@
     "publishAt": "2026-10-13T22:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-13T21:55:33.052045+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-13T22:32:18.195028+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n0ea413992d3b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
