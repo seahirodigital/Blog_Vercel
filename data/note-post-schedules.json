@@ -20183,7 +20183,7 @@
   },
   {
     "id": "3399065a-d9fa-467a-a092-7e07ed97c501",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1f11318aa41846a8bbd9f6fdce8eb825",
     "title": "FLEXISPOT C7 オフィスチェア デスクチェア レビュー比較まとめ",
     "name": "FLEXISPOT C7 オフィスチェア デスクチェア レビュー比較まとめ.md",
@@ -20192,10 +20192,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-13T02:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-13T01:55:55.752614+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6413d593-500d-49ae-939e-466fbe898bae",
