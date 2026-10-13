@@ -21304,7 +21304,7 @@
   },
   {
     "id": "6f68ab2d-b2ce-4883-9580-86c0c2c225fb",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s78829ffde9c842d8af133a4ecabdf1dc",
     "title": "Jackery Solar Generator 5000Plus 5040Wh 200W*2 レビュー比較まとめ",
     "name": "Jackery Solar Generator 5000Plus 5040Wh 200W2 レビュー比較まとめ.md",
@@ -21313,10 +21313,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-13T16:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-13T15:55:25.483710+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8a0702da-5d2b-4d43-932c-8b576f2a8b2f",
