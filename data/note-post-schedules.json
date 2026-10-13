@@ -20321,7 +20321,7 @@
   },
   {
     "id": "0675c85f-d8d0-49fb-bb39-a3d787b575c4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf981282a27054a9789a145aabd36f86f",
     "title": "Steelcase HR5S26 442A50EC スチールケース ジェスチャー レビュー比較まとめ",
     "name": "Steelcase HR5S26 442A50EC スチールケース ジェスチャー レビュー比較まとめ.md",
@@ -20330,10 +20330,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-13T03:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-13T02:55:37.434791+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7617452a-93ff-4465-a0d4-7ca1f3a47f5a",
