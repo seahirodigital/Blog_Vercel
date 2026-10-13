@@ -20252,7 +20252,7 @@
   },
   {
     "id": "5a962c9c-6487-46cb-bd5a-b79a66f83325",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s86f3f757a8014fbfbb97f68da9855152",
     "title": "YESKAMOO 防犯カメラ 屋外 POE給電 4台セット レビュー比較まとめ",
     "name": "YESKAMOO 防犯カメラ 屋外 POE給電 4台セット レビュー比較まとめ.md",
@@ -20261,10 +20261,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-13T03:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-13T02:25:46.271014+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5710c62d-0353-492f-bec0-ce523d248af5",
