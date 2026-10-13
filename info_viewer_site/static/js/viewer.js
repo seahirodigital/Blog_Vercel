@@ -180,7 +180,7 @@
     const button = document.getElementById("submit-video");
     const endpoint = body.dataset.triggerEndpoint || "";
     const videoUrl = input?.value.trim() || "";
-    const adminSecret = secret?.value || "";
+    const adminSecret = secret?.value.trim() || "";
     let parsedUrl;
     try {
       parsedUrl = new URL(videoUrl);
@@ -201,7 +201,7 @@
       return;
     }
     button.disabled = true;
-    if (status) status.textContent = "GitHub Actionsを起動しています。";
+    if (status) status.textContent = "送信を確認中です。";
     try {
       const response = await fetch(endpoint, {
         method: "POST",
@@ -212,6 +212,9 @@
         body: JSON.stringify({ video_url: videoUrl }),
       });
       const payload = await response.json().catch(() => ({}));
+      if (response.status === 401) {
+        throw new Error("管理シークレットがVercelの INFO_VIEWER_ADMIN_SECRET と一致しません。");
+      }
       if (!response.ok || !payload.success) throw new Error(payload.error || `起動に失敗しました (${response.status})`);
       if (status) status.textContent = "起動しました。完了後、Cloudflare Pagesへ新しい記事が自動公開されます。";
       if (input) input.value = "";

@@ -1,7 +1,161 @@
 {
-  "generatedAt": "",
-  "articleList": [],
-  "articles": {},
-  "channels": [],
-  "people": []
+    "generatedAt":  "2026-10-13T23:53:31.5768982+09:00",
+    "articleList":  [
+                        {
+                            "id":  "b44da3b77706011a63",
+                            "url":  "/articles/b44da3b77706011a63/",
+                            "title":  "【ザキオカ＆ひろこの米株・オプションTV＃76】もう一つの時限爆弾（岡崎良介×大橋ひろこ）",
+                            "channelName":  "なるほど投資ゼミ（大橋ひろこ",
+                            "channelKey":  "なるほど投資ゼミ（大橋ひろこ",
+                            "channelTab":  "なるほど",
+                            "youtubeUrl":  "https://www.youtube.com/watch?v=SWJkyOWizFA",
+                            "thumbnail":  "https://i.ytimg.com/vi/SWJkyOWizFA/hqdefault.jpg",
+                            "publishedAt":  "",
+                            "publishedLabel":  "",
+                            "persons":  [
+                                            "岡崎良介"
+                                        ],
+                            "lastModified":  "2026-10-12T07:11:17.0000000+09:00",
+                            "sourceFileId":  ""
+                        },
+                        {
+                            "id":  "bb9c7669113dbef35c",
+                            "url":  "/articles/bb9c7669113dbef35c/",
+                            "title":  "【AI関連株】ハイパースケーラー4社の設備投資解説｜AIバブルは続く!?｜1社あたり最大約30兆円の投資計画でも株価下落リスク｜半導体・データセンター株の今後【元機関投資家が解説】",
+                            "channelName":  "イズミダイズム",
+                            "channelKey":  "イズミダイズム",
+                            "channelTab":  "イズミダ",
+                            "youtubeUrl":  "https://www.youtube.com/watch?v=EG26umx9qhU",
+                            "thumbnail":  "https://i.ytimg.com/vi/EG26umx9qhU/hqdefault.jpg",
+                            "publishedAt":  "",
+                            "publishedLabel":  "",
+                            "persons":  [
+
+                                        ],
+                            "lastModified":  "2026-10-12T07:10:01.0000000+09:00",
+                            "sourceFileId":  ""
+                        },
+                        {
+                            "id":  "b3a6dc2d3993218cd2",
+                            "url":  "/articles/b3a6dc2d3993218cd2/",
+                            "title":  "LIVE  マーケットアップデート　SQ週　魔の水曜日　半導体が下げるとすぐ落ちる日本株・・・",
+                            "channelName":  "YTの投資銀行",
+                            "channelKey":  "YTの投資銀行",
+                            "channelTab":  "YTの投",
+                            "youtubeUrl":  "https://www.youtube.com/watch?v=XCqNskzBGtQ",
+                            "thumbnail":  "https://i.ytimg.com/vi/XCqNskzBGtQ/hqdefault.jpg",
+                            "publishedAt":  "",
+                            "publishedLabel":  "",
+                            "persons":  [
+
+                                        ],
+                            "lastModified":  "2026-10-12T03:13:33.0000000+09:00",
+                            "sourceFileId":  ""
+                        },
+                        {
+                            "id":  "e531cd769b9114698e",
+                            "url":  "/articles/e531cd769b9114698e/",
+                            "title":  "【ゴールドの起源】なぜ錬金術は不可能なのか？（貴金属スペシャリスト 池水雄一さん） [ウィークリーゴールド]",
+                            "channelName":  "なるほど投資ゼミ（大橋ひろこ",
+                            "channelKey":  "なるほど投資ゼミ（大橋ひろこ",
+                            "channelTab":  "なるほど",
+                            "youtubeUrl":  "https://www.youtube.com/watch?v=OEoes0PT9H4",
+                            "thumbnail":  "https://i.ytimg.com/vi/OEoes0PT9H4/hqdefault.jpg",
+                            "publishedAt":  "",
+                            "publishedLabel":  "",
+                            "persons":  [
+                                            "池水雄一"
+                                        ],
+                            "lastModified":  "2026-10-11T05:15:01.0000000+09:00",
+                            "sourceFileId":  ""
+                        }
+                    ],
+    "articles":  {
+                     "b44da3b77706011a63":  {
+                                                "id":  "b44da3b77706011a63",
+                                                "url":  "/articles/b44da3b77706011a63/",
+                                                "title":  "【ザキオカ＆ひろこの米株・オプションTV＃76】もう一つの時限爆弾（岡崎良介×大橋ひろこ）",
+                                                "channelName":  "なるほど投資ゼミ（大橋ひろこ",
+                                                "channelKey":  "なるほど投資ゼミ（大橋ひろこ",
+                                                "channelTab":  "なるほど",
+                                                "youtubeUrl":  "https://www.youtube.com/watch?v=SWJkyOWizFA",
+                                                "thumbnail":  "https://i.ytimg.com/vi/SWJkyOWizFA/hqdefault.jpg",
+                                                "publishedAt":  "",
+                                                "publishedLabel":  "",
+                                                "persons":  [
+                                                                "岡崎良介"
+                                                            ],
+                                                "lastModified":  "2026-10-12T07:11:17.0000000+09:00",
+                                                "sourceFileId":  ""
+                                            },
+                     "bb9c7669113dbef35c":  {
+                                                "id":  "bb9c7669113dbef35c",
+                                                "url":  "/articles/bb9c7669113dbef35c/",
+                                                "title":  "【AI関連株】ハイパースケーラー4社の設備投資解説｜AIバブルは続く!?｜1社あたり最大約30兆円の投資計画でも株価下落リスク｜半導体・データセンター株の今後【元機関投資家が解説】",
+                                                "channelName":  "イズミダイズム",
+                                                "channelKey":  "イズミダイズム",
+                                                "channelTab":  "イズミダ",
+                                                "youtubeUrl":  "https://www.youtube.com/watch?v=EG26umx9qhU",
+                                                "thumbnail":  "https://i.ytimg.com/vi/EG26umx9qhU/hqdefault.jpg",
+                                                "publishedAt":  "",
+                                                "publishedLabel":  "",
+                                                "persons":  [
+
+                                                            ],
+                                                "lastModified":  "2026-10-12T07:10:01.0000000+09:00",
+                                                "sourceFileId":  ""
+                                            },
+                     "b3a6dc2d3993218cd2":  {
+                                                "id":  "b3a6dc2d3993218cd2",
+                                                "url":  "/articles/b3a6dc2d3993218cd2/",
+                                                "title":  "LIVE  マーケットアップデート　SQ週　魔の水曜日　半導体が下げるとすぐ落ちる日本株・・・",
+                                                "channelName":  "YTの投資銀行",
+                                                "channelKey":  "YTの投資銀行",
+                                                "channelTab":  "YTの投",
+                                                "youtubeUrl":  "https://www.youtube.com/watch?v=XCqNskzBGtQ",
+                                                "thumbnail":  "https://i.ytimg.com/vi/XCqNskzBGtQ/hqdefault.jpg",
+                                                "publishedAt":  "",
+                                                "publishedLabel":  "",
+                                                "persons":  [
+
+                                                            ],
+                                                "lastModified":  "2026-10-12T03:13:33.0000000+09:00",
+                                                "sourceFileId":  ""
+                                            },
+                     "e531cd769b9114698e":  {
+                                                "id":  "e531cd769b9114698e",
+                                                "url":  "/articles/e531cd769b9114698e/",
+                                                "title":  "【ゴールドの起源】なぜ錬金術は不可能なのか？（貴金属スペシャリスト 池水雄一さん） [ウィークリーゴールド]",
+                                                "channelName":  "なるほど投資ゼミ（大橋ひろこ",
+                                                "channelKey":  "なるほど投資ゼミ（大橋ひろこ",
+                                                "channelTab":  "なるほど",
+                                                "youtubeUrl":  "https://www.youtube.com/watch?v=OEoes0PT9H4",
+                                                "thumbnail":  "https://i.ytimg.com/vi/OEoes0PT9H4/hqdefault.jpg",
+                                                "publishedAt":  "",
+                                                "publishedLabel":  "",
+                                                "persons":  [
+                                                                "池水雄一"
+                                                            ],
+                                                "lastModified":  "2026-10-11T05:15:01.0000000+09:00",
+                                                "sourceFileId":  ""
+                                            }
+                 },
+    "channels":  [
+                     {
+                         "name":  "YTの投資銀行",
+                         "tab":  "YTの投"
+                     },
+                     {
+                         "name":  "イズミダイズム",
+                         "tab":  "イズミダ"
+                     },
+                     {
+                         "name":  "なるほど投資ゼミ（大橋ひろこ",
+                         "tab":  "なるほど"
+                     }
+                 ],
+    "people":  [
+                   "岡崎良介",
+                   "池水雄一"
+               ]
 }
