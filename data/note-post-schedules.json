@@ -21752,7 +21752,7 @@
   },
   {
     "id": "e02c8c37-92b4-4297-994f-dff1cff22484",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb2e773deeba44591927adfa4f3f43f3b",
     "title": "HiKOKI 36Vコードレス鉄筋カットベンダ VB3616DA(NN) 鉄筋の曲げ・切断 レビュー比較まとめ",
     "name": "HiKOKI 36Vコードレス鉄筋カットベンダ VB3616DA(NN) 鉄筋の曲げ・切断 レビュー比較まとめ.md",
@@ -21761,10 +21761,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-14T00:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-13T23:25:28.116512+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b81d9c51-4e3d-462c-869f-c6f41e4b41a4",
