@@ -20666,7 +20666,7 @@
   },
   {
     "id": "d0e1fb5a-0f46-4f73-b9ee-beacea557b4a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5d9bce6d6e814e2fae74c6d1979942d8",
     "title": "De'Longhi マグニフィカS ECAM22112B コーヒーメーカー レビュー比較まとめ",
     "name": "De'Longhi マグニフィカS ECAM22112B コーヒーメーカー レビュー比較まとめ.md",
@@ -20675,10 +20675,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-13T08:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-13T07:55:04.722390+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "08998d4a-c867-4a5c-9c42-64d3a960be5e",
