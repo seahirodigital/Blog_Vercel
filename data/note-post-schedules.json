@@ -21080,7 +21080,7 @@
   },
   {
     "id": "b65746da-7142-4fda-968f-3f52a4a861ac",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s8b7c88bab88e492b97227b2f624098fc",
     "title": "パナソニック SR-CR10Z1-K レビュー比較まとめ",
     "name": "パナソニック SR-CR10Z1-K レビュー比較まとめ.md",
@@ -21090,8 +21090,8 @@
     "publishAt": "2026-10-13T14:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-13T14:37:20.610856+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-13T14:39:59.099951+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n2069fe65aee9?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
