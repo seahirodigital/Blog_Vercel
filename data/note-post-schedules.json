@@ -20873,7 +20873,7 @@
   },
   {
     "id": "aec21918-c720-4e29-8d7b-781b24bf1873",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s69ca4eb9fb7c4f9eae0799277aa1d758",
     "title": "Cayin VGP2026 RU9 AK4493SEQ ポータブルNutube USB レビュー比較まとめ",
     "name": "Cayin VGP2026 RU9 AK4493SEQ ポータブルNutube USB レビュー比較まとめ.md",
@@ -20882,10 +20882,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-13T11:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-13T10:55:17.225330+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e3d490cc-8eee-45ee-9a9e-feaa21f6d008",
