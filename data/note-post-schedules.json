@@ -20597,7 +20597,7 @@
   },
   {
     "id": "a0f4f491-f7a1-416b-a5e4-06776ad28383",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb6f73d88ea204c12b51f7e65b75b3910",
     "title": "Jackery Solar Generator 2000 New 2048Wh ポータブル電源 100W ソーラーパネル",
     "name": "Jackery Solar Generator 2000 New 2048Wh ポータブル電源 100W ソーラーパネル.md",
@@ -20607,8 +20607,8 @@
     "publishAt": "2026-10-13T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-13T06:55:34.576039+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-13T07:32:20.257117+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n8341b80ad502?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
