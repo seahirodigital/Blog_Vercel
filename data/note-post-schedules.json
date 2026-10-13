@@ -21614,7 +21614,7 @@
   },
   {
     "id": "9733e08c-2164-481e-a550-a0845ce340e7",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s766bcd6f6c0e4fc2adcbfe565c2f552f",
     "title": "ベルメゾン フロアソファー グータラグ シングルコーナータイプ ラグが洗える ローソファ カウチ ソファ・カウチ レビュ",
     "name": "ベルメゾン フロアソファー グータラグ シングルコーナータイプ ラグが洗える ローソファ カウチ ソファ・カウチ レビュ.md",
@@ -21624,8 +21624,8 @@
     "publishAt": "2026-10-13T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-13T22:25:51.052757+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-13T23:02:15.998260+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5193bb0c9791?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
