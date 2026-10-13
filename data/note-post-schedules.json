@@ -20804,7 +20804,7 @@
   },
   {
     "id": "3f379d18-8bd8-4385-86d3-1990004068f2",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s72b2a0c7715d407bb5892835d24ebe78",
     "title": "XGIMI Halo+New プロジェクター レビュー比較まとめ",
     "name": "XGIMI Halo+New プロジェクター レビュー比較まとめ.md",
@@ -20814,8 +20814,8 @@
     "publishAt": "2026-10-13T10:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-13T11:26:37.302254+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-13T11:29:13.030700+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd6af935d6a55?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
