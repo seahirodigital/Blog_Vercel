@@ -21390,7 +21390,7 @@
   },
   {
     "id": "66c317c6-e385-4fa9-a823-105a8e3a840d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0f05af2a6203446a919caf22d76c6273",
     "title": "Jackery V2 ジャクリ ポータブル電源 レビュー比較まとめ",
     "name": "Jackery V2 ジャクリ ポータブル電源 レビュー比較まとめ.md",
@@ -21399,10 +21399,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-13T20:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-13T19:55:20.019836+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3bd6223a-de64-4540-8f2f-d7e9ad5bd2ea",
