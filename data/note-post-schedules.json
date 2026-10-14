@@ -22322,7 +22322,7 @@
   },
   {
     "id": "720ad51b-10d2-4cfa-accc-cec15130aee4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s97830a5138bf42f389807d1b1357641b",
     "title": "Braun シルクエキスパート Pro5 PL5387 脱毛器 レビュー比較まとめ",
     "name": "Braun シルクエキスパート Pro5 PL5387 脱毛器 レビュー比較まとめ.md",
@@ -22331,10 +22331,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-14T09:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-14T08:55:08.262029+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7c2063fe-11b9-4117-a2c6-b1c5823baf77",
