@@ -22634,7 +22634,7 @@
   },
   {
     "id": "cb0823b6-3925-4513-b3c3-91e7c95e5831",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4705b7f2e9c94c1fbeb927c105b3dc94",
     "title": "Edifier S2000MKⅢ ブックシェルフスピーカー レビュー比較まとめ",
     "name": "Edifier S2000MKⅢ ブックシェルフスピーカー レビュー比較まとめ.md",
@@ -22643,10 +22643,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-14T15:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-14T14:25:05.157068+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2ee038ce-2384-446d-9dbd-05063d632994",
