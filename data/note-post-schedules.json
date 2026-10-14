@@ -22946,7 +22946,7 @@
   },
   {
     "id": "cd8d7c04-4b99-4f6f-b691-339efe0d6a6d",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!se88c5560ab004e67ab1917ce87ad8036",
     "title": "Gaidoh 0HP 3500PSI GS24MPA エンジン高圧洗浄機 ガソリン燃料 レビュー比較まとめ",
     "name": "Gaidoh 0HP 3500PSI GS24MPA エンジン高圧洗浄機 ガソリン燃料 レビュー比較まとめ.md",
@@ -22956,8 +22956,8 @@
     "publishAt": "2026-10-14T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-14T22:42:52.720200+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-14T23:02:25.775747+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n70d1d78f1e48?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
