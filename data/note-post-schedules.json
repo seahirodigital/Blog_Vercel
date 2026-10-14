@@ -22270,7 +22270,7 @@
   },
   {
     "id": "81947bb2-240c-4f39-9ce0-5d9dca375d5e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdabfe5f7a6994fc3b25cc48d6e7571d9",
     "title": "ハイパーエックス HyperX SoloCast 2 コンデンサーマイク レビュー比較まとめ",
     "name": "ハイパーエックス HyperX SoloCast 2 コンデンサーマイク レビュー比較まとめ.md",
@@ -22279,10 +22279,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-14T08:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-14T07:55:23.520653+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7b66035d-ab06-4b1a-9036-00f1384dd14f",
