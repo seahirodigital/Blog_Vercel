@@ -22842,7 +22842,7 @@
   },
   {
     "id": "20a226b9-ffd3-419a-b238-94da7510f07d",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s36cea05a7b4d40dcb6261a28ca3ff138",
     "title": "スイッチボット SwitchBot CO2センサー レビュー比較まとめ",
     "name": "スイッチボット SwitchBot CO2センサー レビュー比較まとめ.md",
@@ -22852,8 +22852,8 @@
     "publishAt": "2026-10-14T21:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-14T20:55:57.965616+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-14T21:32:20.877201+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n066dde1e5a00?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
