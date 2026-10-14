@@ -22530,7 +22530,7 @@
   },
   {
     "id": "034faf49-9294-4cda-90ee-80b064705cd5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4a296c3dc80243b5bec9ef5ffe891f17",
     "title": "昭和西川 羽毛布団 日本製 レビュー比較まとめ",
     "name": "昭和西川 羽毛布団 日本製 レビュー比較まとめ.md",
@@ -22539,10 +22539,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-14T13:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-14T12:55:26.400001+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "eb619664-c9b5-42a9-8810-9e280e6b362b",
