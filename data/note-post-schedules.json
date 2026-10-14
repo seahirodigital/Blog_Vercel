@@ -22998,7 +22998,7 @@
   },
   {
     "id": "2ec5702b-b577-46e8-8b9a-32dc865e7e83",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!see861338c94941cf9b4f5e22cbb7a56d",
     "title": "アイオーデータ EX-A241DB レビュー比較まとめ",
     "name": "アイオーデータ EX-A241DB レビュー比較まとめ.md",
@@ -23007,10 +23007,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-14T23:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-14T22:55:09.625332+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "257c2d0c-c264-485f-9642-b65b13577dbf",
