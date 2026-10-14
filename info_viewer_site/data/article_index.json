@@ -1,6 +1,46 @@
 {
-  "generatedAt": "2026-10-14T20:03:10.156459+00:00",
+  "generatedAt": "2026-10-14T22:53:51.266579+00:00",
   "articleList": [
+    {
+      "id": "032523f36568a58b00",
+      "url": "/articles/032523f36568a58b00/",
+      "title": "岡崎良介のマーケットインサイト『企業物価指数から見た電子部品デバイスの動向』 （収録日：2026年10月14日）",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=ycnGyzI3UD0",
+      "thumbnail": "https://i.ytimg.com/vi/ycnGyzI3UD0/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-14T22:32:26.533758",
+      "recordedLabel": "2026.10.14 22:32",
+      "timeLabel": "2026.10.14 22:32",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-14T22:32:33Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s2c824ea996ff4539903b2f2e3b4454d5"
+    },
+    {
+      "id": "d44f62ea44023ede04",
+      "url": "/articles/d44f62ea44023ede04/",
+      "title": "【オリックス】キオクシア頼みの株価か？利益の7割を生む\"投資の目利き\"｜三菱HCが「公家」なら「野武士」の総合金融、個人投資家はどう持つべきか｜爆益は実力か幸運か!?【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=rxNmS3l3aH0",
+      "thumbnail": "https://i.ytimg.com/vi/rxNmS3l3aH0/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-14T22:31:13.158321",
+      "recordedLabel": "2026.10.14 22:31",
+      "timeLabel": "2026.10.14 22:31",
+      "persons": [],
+      "lastModified": "2026-10-14T22:31:21Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s72b3aaaaa5354f9da78c443fa4032b3f"
+    },
     {
       "id": "021789c389eac48d29",
       "url": "/articles/021789c389eac48d29/",
@@ -8386,6 +8426,46 @@
     }
   ],
   "articles": {
+    "032523f36568a58b00": {
+      "id": "032523f36568a58b00",
+      "url": "/articles/032523f36568a58b00/",
+      "title": "岡崎良介のマーケットインサイト『企業物価指数から見た電子部品デバイスの動向』 （収録日：2026年10月14日）",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=ycnGyzI3UD0",
+      "thumbnail": "https://i.ytimg.com/vi/ycnGyzI3UD0/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-14T22:32:26.533758",
+      "recordedLabel": "2026.10.14 22:32",
+      "timeLabel": "2026.10.14 22:32",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-14T22:32:33Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s2c824ea996ff4539903b2f2e3b4454d5"
+    },
+    "d44f62ea44023ede04": {
+      "id": "d44f62ea44023ede04",
+      "url": "/articles/d44f62ea44023ede04/",
+      "title": "【オリックス】キオクシア頼みの株価か？利益の7割を生む\"投資の目利き\"｜三菱HCが「公家」なら「野武士」の総合金融、個人投資家はどう持つべきか｜爆益は実力か幸運か!?【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=rxNmS3l3aH0",
+      "thumbnail": "https://i.ytimg.com/vi/rxNmS3l3aH0/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-14T22:31:13.158321",
+      "recordedLabel": "2026.10.14 22:31",
+      "timeLabel": "2026.10.14 22:31",
+      "persons": [],
+      "lastModified": "2026-10-14T22:31:21Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s72b3aaaaa5354f9da78c443fa4032b3f"
+    },
     "021789c389eac48d29": {
       "id": "021789c389eac48d29",
       "url": "/articles/021789c389eac48d29/",
@@ -16772,6 +16852,16 @@
   },
   "channels": [
     {
+      "name": "ゆたかTV",
+      "tab": "ゆたかT",
+      "latestAt": "2026-10-14T22:32:26.533758"
+    },
+    {
+      "name": "イズミダイズム",
+      "tab": "イズミダ",
+      "latestAt": "2026-10-14T22:31:13.158321"
+    },
+    {
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-10-14T18:49:21.375178"
@@ -16782,11 +16872,6 @@
       "latestAt": "2026-10-14T18:48:07.957436"
     },
     {
-      "name": "ゆたかTV",
-      "tab": "ゆたかT",
-      "latestAt": "2026-10-14T15:08:19.773536"
-    },
-    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-10-14T15:06:29.005437"
@@ -16795,11 +16880,6 @@
       "name": "PIVOT 公式チャンネル",
       "tab": "PIVO",
       "latestAt": "2026-10-13T15:17:38.610677"
-    },
-    {
-      "name": "イズミダイズム",
-      "tab": "イズミダ",
-      "latestAt": "2026-10-11T22:09:55.022621"
     },
     {
       "name": "マーケットマスターズ",
