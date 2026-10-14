@@ -1,6 +1,46 @@
 {
-  "generatedAt": "2026-10-14T15:27:55.934499+00:00",
+  "generatedAt": "2026-10-14T19:05:43.376756+00:00",
   "articleList": [
+    {
+      "id": "021789c389eac48d29",
+      "url": "/articles/021789c389eac48d29/",
+      "title": "【米中間選挙、向かい風か追い風か】メタ「Muse」が変える世界の株式市場（大川智宏さん） [マーケットディーパー]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=dkmjV0V2cac",
+      "thumbnail": "https://i.ytimg.com/vi/dkmjV0V2cac/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-14T18:49:21.375178",
+      "recordedLabel": "2026.10.14 18:49",
+      "timeLabel": "2026.10.14 18:49",
+      "persons": [
+        "大川智宏"
+      ],
+      "lastModified": "2026-10-14T18:49:27Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s85bbd60260144149bcaeb99f301e404f"
+    },
+    {
+      "id": "599776e179e1b2d237",
+      "url": "/articles/599776e179e1b2d237/",
+      "title": "ASML決算で下げた日本株ですが、明日は要注意です",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=AKa9nv7VtLI",
+      "thumbnail": "https://i.ytimg.com/vi/AKa9nv7VtLI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-14T18:48:07.957436",
+      "recordedLabel": "2026.10.14 18:48",
+      "timeLabel": "2026.10.14 18:48",
+      "persons": [],
+      "lastModified": "2026-10-14T18:48:16Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s532328f8e593414585b455d924d0f1c9"
+    },
     {
       "id": "5c4bb63cfd8bc66d05",
       "url": "/articles/5c4bb63cfd8bc66d05/",
@@ -8346,6 +8386,46 @@
     }
   ],
   "articles": {
+    "021789c389eac48d29": {
+      "id": "021789c389eac48d29",
+      "url": "/articles/021789c389eac48d29/",
+      "title": "【米中間選挙、向かい風か追い風か】メタ「Muse」が変える世界の株式市場（大川智宏さん） [マーケットディーパー]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=dkmjV0V2cac",
+      "thumbnail": "https://i.ytimg.com/vi/dkmjV0V2cac/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-14T18:49:21.375178",
+      "recordedLabel": "2026.10.14 18:49",
+      "timeLabel": "2026.10.14 18:49",
+      "persons": [
+        "大川智宏"
+      ],
+      "lastModified": "2026-10-14T18:49:27Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s85bbd60260144149bcaeb99f301e404f"
+    },
+    "599776e179e1b2d237": {
+      "id": "599776e179e1b2d237",
+      "url": "/articles/599776e179e1b2d237/",
+      "title": "ASML決算で下げた日本株ですが、明日は要注意です",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=AKa9nv7VtLI",
+      "thumbnail": "https://i.ytimg.com/vi/AKa9nv7VtLI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-14T18:48:07.957436",
+      "recordedLabel": "2026.10.14 18:48",
+      "timeLabel": "2026.10.14 18:48",
+      "persons": [],
+      "lastModified": "2026-10-14T18:48:16Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s532328f8e593414585b455d924d0f1c9"
+    },
     "5c4bb63cfd8bc66d05": {
       "id": "5c4bb63cfd8bc66d05",
       "url": "/articles/5c4bb63cfd8bc66d05/",
@@ -16692,6 +16772,16 @@
   },
   "channels": [
     {
+      "name": "なるほど投資ゼミ（大橋ひろこ",
+      "tab": "なるほど",
+      "latestAt": "2026-10-14T18:49:21.375178"
+    },
+    {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-10-14T18:48:07.957436"
+    },
+    {
       "name": "ゆたかTV",
       "tab": "ゆたかT",
       "latestAt": "2026-10-14T15:08:19.773536"
@@ -16705,11 +16795,6 @@
       "name": "PIVOT 公式チャンネル",
       "tab": "PIVO",
       "latestAt": "2026-10-13T15:17:38.610677"
-    },
-    {
-      "name": "なるほど投資ゼミ（大橋ひろこ",
-      "tab": "なるほど",
-      "latestAt": "2026-10-11T22:11:11.709069"
     },
     {
       "name": "イズミダイズム",
