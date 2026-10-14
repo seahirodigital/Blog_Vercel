@@ -23050,7 +23050,7 @@
   },
   {
     "id": "b8b22b22-f885-42c1-ac4a-423ae6ab1487",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbe702b3aa3204b78bc0806c64ce8e0a9",
     "title": "アイリスオーヤマ × BLUETTI PS2000AA-W レビュー比較まとめ",
     "name": "アイリスオーヤマ × BLUETTI PS2000AA-W レビュー比較まとめ.md",
@@ -23059,10 +23059,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T00:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-14T23:25:47.020963+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c11f35f3-c26f-4cdc-b4ed-b25c8e952352",
