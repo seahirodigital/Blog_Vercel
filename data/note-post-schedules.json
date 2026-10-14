@@ -21821,7 +21821,7 @@
   },
   {
     "id": "8291035e-d390-4080-ac39-e37dbefd1763",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s62dd8c3443ad4a93a435c92e903aee93",
     "title": "SOURCENEXT Meeting Owl 3 (ミーティングオウル 3) レビュー比較まとめ",
     "name": "SOURCENEXT Meeting Owl 3 (ミーティングオウル 3) レビュー比較まとめ.md",
@@ -21830,10 +21830,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-14T02:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-14T01:55:46.816833+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c264ddaf-b175-43dc-9848-6246665272d9",
