@@ -21890,7 +21890,7 @@
   },
   {
     "id": "ad9967e3-6ab2-42b0-8427-a24fb1a5efba",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s56c15329feef487baba7af95d95d8cfb",
     "title": "ゼンハイザー HD 800 S レビュー比較まとめ",
     "name": "ゼンハイザー HD 800 S レビュー比較まとめ.md",
@@ -21900,8 +21900,8 @@
     "publishAt": "2026-10-14T03:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-14T02:25:21.796286+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-14T03:02:16.273088+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n531e22131a14?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
