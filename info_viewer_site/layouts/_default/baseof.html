@@ -1,3 +1,6 @@
+{{ $index := hugo.Data.article_index }}
+{{ $indexVersion := "1" }}
+{{ with $index }}{{ with .generatedAt }}{{ $indexVersion = md5 . }}{{ end }}{{ end }}
 <!doctype html>
 <html lang="ja">
   <head>
@@ -6,15 +9,16 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="description" content="YouTubeの文字起こしを軽量に読むモバイル専用ビューアー">
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
-    <link rel="stylesheet" href="{{ "css/viewer.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/viewer.css" | relURL }}?v={{ $indexVersion }}">
   </head>
   <body
     data-page-kind="{{ if .IsHome }}list{{ else }}article{{ end }}"
     data-article-id="{{ if not .IsHome }}{{ .File.BaseFileName }}{{ end }}"
+    data-index-version="{{ $indexVersion }}"
     data-trigger-endpoint="{{ .Site.Params.triggerEndpoint }}">
     {{ block "main" . }}{{ end }}
     {{ partial "footer.html" . }}
-    <script id="viewer-data" type="application/json">{{ $index := hugo.Data.article_index }}{{ $articles := slice }}{{ with $index }}{{ with .articleList }}{{ $articles = . }}{{ end }}{{ end }}{{ $articles | jsonify | safeJS }}</script>
-    <script src="{{ "js/viewer.js" | relURL }}" defer></script>
+    <script id="viewer-data" type="application/json">{{ $articles := slice }}{{ with $index }}{{ with .articleList }}{{ $articles = . }}{{ end }}{{ end }}{{ $articles | jsonify | safeJS }}</script>
+    <script src="{{ "js/viewer.js" | relURL }}?v={{ $indexVersion }}" defer></script>
   </body>
 </html>

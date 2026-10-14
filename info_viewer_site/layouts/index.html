@@ -12,10 +12,16 @@
     {{ end }}{{ end }}
   </nav>
 
-  <section class="list-summary" aria-live="polite">
-    <span id="result-count">{{ with $index }}{{ len .articleList }}{{ else }}0{{ end }}件</span>
-    <span class="list-summary__rule"></span>
-    <span id="active-filter">新着順</span>
+  <section class="list-summary">
+    <div class="list-summary__status" aria-live="polite">
+      <span id="result-count">{{ with $index }}{{ len .articleList }}{{ else }}0{{ end }}件</span>
+      <span class="list-summary__rule"></span>
+      <span id="active-filter">すべて</span>
+    </div>
+    <div class="sort-control" role="group" aria-label="記事の並び順">
+      <button class="sort-button is-active" type="button" data-sort="newest" aria-pressed="true">新着順</button>
+      <button class="sort-button" type="button" data-sort="date" aria-pressed="false">日付順</button>
+    </div>
   </section>
 
   <section class="article-list" id="article-list" aria-label="記事一覧">
@@ -26,6 +32,9 @@
       data-article-id="{{ .id }}"
       data-channel="{{ .channelTab }}"
       data-title="{{ .title }}"
+      data-recorded-at="{{ .recordedAt }}"
+      data-published-at="{{ .publishedAt }}"
+      data-last-modified="{{ .lastModified }}"
       data-persons="{{ delimit .persons "," }}">
       <span class="article-card__image-wrap">
         {{ with .thumbnail }}<img src="{{ . }}" alt="" loading="lazy" decoding="async">{{ end }}

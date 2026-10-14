@@ -4,11 +4,13 @@
   const articleDataNode = document.getElementById("viewer-data");
   const articles = articleDataNode ? JSON.parse(articleDataNode.textContent || "[]") : [];
   const rootPath = "/";
+  const indexVersion = body.dataset.indexVersion || "1";
   const adminSecretStorageKey = "info-viewer.admin-secret.v1";
   const state = {
     channel: "all",
     person: "",
     query: "",
+    sort: "newest",
     searchIndex: null,
     searchPromise: null,
   };
@@ -22,6 +24,29 @@
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 
+  function articleTimestamp(article, sortMode = state.sort) {
+    const candidates = sortMode === "date"
+      ? [article.publishedAt, article.recordedAt, article.lastModified]
+      : [article.recordedAt, article.lastModified, article.publishedAt];
+    for (const value of candidates) {
+      const parsed = Date.parse(String(value || ""));
+      if (Number.isFinite(parsed)) return parsed;
+    }
+    return 0;
+  }
+
+  function compareArticles(left, right) {
+    const timeDifference = articleTimestamp(right) - articleTimestamp(left);
+    if (timeDifference) return timeDifference;
+    const modifiedDifference = articleTimestamp(right, "newest") - articleTimestamp(left, "newest");
+    if (modifiedDifference) return modifiedDifference;
+    return normalize(left.title).localeCompare(normalize(right.title), "ja");
+  }
+
+  function sortedArticles(items) {
+    return [...items].sort(compareArticles);
+  }
+
   const toolSheet = document.getElementById("tool-sheet");
   const toolBackdrop = document.querySelector(".tool-backdrop");
   const toolTitle = document.getElementById("tool-title");
@@ -33,9 +58,10 @@
   const personTags = document.getElementById("person-tags");
   const titleByTool = { search: "検索", people: "人物タグ", submit: "即時URL" };
 
-  function currentListParams() {
+  function currentListParams(includeDefaults = false) {
     const params = new URLSearchParams();
-    if (state.channel !== "all") params.set("channel", state.channel);
+    if (includeDefaults || state.channel !== "all") params.set("channel", state.channel);
+    if (includeDefaults || state.sort !== "newest") params.set("sort", state.sort);
     if (state.person) params.set("person", state.person);
     if (state.query) params.set("q", state.query);
     return params;
@@ -47,8 +73,7 @@
   }
 
   function articleUrl(rawUrl) {
-    const params = currentListParams();
-    if (!params.toString()) return rawUrl;
+    const params = currentListParams(true);
     return `${rawUrl}${rawUrl.includes("?") ? "&" : "?"}${params.toString()}`;
   }
 
@@ -93,6 +118,23 @@
     return [...document.querySelectorAll(".article-card")];
   }
 
+  function cardAsArticle(card) {
+    return {
+      title: card.dataset.title || "",
+      publishedAt: card.dataset.publishedAt || "",
+      recordedAt: card.dataset.recordedAt || "",
+      lastModified: card.dataset.lastModified || "",
+    };
+  }
+
+  function applyCardOrder() {
+    const list = document.getElementById("article-list");
+    if (!list) return;
+    activeCards()
+      .sort((left, right) => compareArticles(cardAsArticle(left), cardAsArticle(right)))
+      .forEach((card) => list.appendChild(card));
+  }
+
   function updateArticleLinks() {
     if (pageKind !== "list") return;
     activeCards().forEach((card) => {
@@ -121,6 +163,7 @@
 
   function updateListFilters() {
     if (pageKind !== "list") return;
+    applyCardOrder();
     const query = normalize(state.query);
     const resultIds = matchedSearchIds();
     let visible = 0;
@@ -142,7 +185,7 @@
         : state.person
           ? `人物: ${state.person}`
           : state.channel === "all"
-            ? "新着順"
+            ? "すべて"
             : state.channel;
     }
     if (empty) empty.hidden = visible !== 0;
@@ -165,6 +208,22 @@
 
   document.querySelectorAll(".channel-tab").forEach((button) => {
     button.addEventListener("click", () => setChannel(button.dataset.channel));
+  });
+
+  function setSort(sortMode) {
+    state.sort = sortMode === "date" ? "date" : "newest";
+    document.querySelectorAll("[data-sort]").forEach((button) => {
+      const active = button.dataset.sort === state.sort;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    updateListFilters();
+    renderSearchResults();
+    syncListUrl();
+  }
+
+  document.querySelectorAll("[data-sort]").forEach((button) => {
+    button.addEventListener("click", () => setSort(button.dataset.sort));
   });
 
   function setPerson(person) {
@@ -198,7 +257,7 @@
     if (state.searchIndex) return state.searchIndex;
     if (!state.searchPromise) {
       if (searchStatus) searchStatus.textContent = "タイトル・人物・本文を読み込んでいます。";
-      state.searchPromise = fetch(`${rootPath}search.json`, { cache: "force-cache" })
+      state.searchPromise = fetch(`${rootPath}search.json?v=${encodeURIComponent(indexVersion)}`, { cache: "no-cache" })
         .then((response) => {
           if (!response.ok) throw new Error(`検索インデックスを取得できません (${response.status})`);
           return response.json();
@@ -228,7 +287,7 @@
       if (searchStatus) searchStatus.textContent = "検索インデックスを読み込んでいます。";
       return;
     }
-    const matches = state.searchIndex.filter((item) => searchText(item).includes(query));
+    const matches = sortedArticles(state.searchIndex.filter((item) => searchText(item).includes(query)));
     if (searchStatus) searchStatus.textContent = `タイトル・人物・本文から ${matches.length}件見つかりました。`;
     if (!matches.length) {
       searchResults.innerHTML = '<p class="tool-help">一致する記事はありません。</p>';
@@ -333,6 +392,7 @@
     state.channel = params.get("channel") || "all";
     state.person = params.get("person") || "";
     state.query = params.get("q") || "";
+    state.sort = params.get("sort") === "date" ? "date" : "newest";
     const backLink = document.querySelector(".back-link");
     if (backLink) backLink.setAttribute("href", listUrl());
     syncToolButtons();
@@ -344,9 +404,9 @@
     const requestedChannel = state.channel;
     const currentIndex = articles.findIndex((article) => article.id === articleId);
     if (currentIndex < 0) return;
-    const scoped = requestedChannel === "all"
+    const scoped = sortedArticles(requestedChannel === "all"
       ? articles
-      : articles.filter((article) => article.channelTab === requestedChannel);
+      : articles.filter((article) => article.channelTab === requestedChannel));
     const position = scoped.findIndex((article) => article.id === articleId);
     if (position < 0 || scoped.length < 2) return;
     const hint = document.getElementById("swipe-hint");
@@ -378,14 +438,21 @@
     const requestedChannel = params.get("channel") || "all";
     const requestedPerson = params.get("person") || "";
     const requestedQuery = params.get("q") || "";
+    const requestedSort = params.get("sort") === "date" ? "date" : "newest";
     if ([...document.querySelectorAll(".channel-tab")].some((button) => button.dataset.channel === requestedChannel)) {
       state.channel = requestedChannel;
     }
     state.person = requestedPerson;
     state.query = requestedQuery;
+    state.sort = requestedSort;
     if (searchInput) searchInput.value = requestedQuery;
     document.querySelectorAll(".channel-tab").forEach((button) => {
       button.classList.toggle("is-active", button.dataset.channel === state.channel);
+    });
+    document.querySelectorAll("[data-sort]").forEach((button) => {
+      const active = button.dataset.sort === state.sort;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
     });
     updateListFilters();
     if (requestedQuery) {

@@ -4,7 +4,7 @@ import argparse
 import hashlib
 import json
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, urlparse
@@ -179,7 +179,13 @@ def _entry_from_markdown(
     youtube_url = str(metadata.get("video_url") or fallback.get("youtubeUrl") or "").strip()
     channel_name = str(metadata.get("channel_name") or fallback.get("channelName") or "手動URL").strip()
     published_at = str(metadata.get("published_at") or fallback.get("publishedAt") or "").strip()
-    recorded_at = str(metadata.get("generated_at") or fallback.get("generatedAt") or last_modified or "").strip()
+    recorded_at = str(
+        metadata.get("generated_at")
+        or fallback.get("recordedAt")
+        or fallback.get("generatedAt")
+        or last_modified
+        or ""
+    ).strip()
     duration = _format_duration(str(metadata.get("duration") or fallback.get("duration") or ""))
     people = _extract_persons_from_title(title)
     entry = {
@@ -252,10 +258,24 @@ def _load_local_article(
     return entry, plain_text, should_write
 
 
-def _sort_key(entry: dict[str, Any]) -> tuple[str, str, str]:
+def _timestamp_sort_value(value: Any) -> float:
+    text = str(value or "").strip()
+    if not text:
+        return 0.0
+    try:
+        parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=timezone.utc)
+        return parsed.timestamp()
+    except ValueError:
+        return 0.0
+
+
+def _newest_sort_key(entry: dict[str, Any]) -> tuple[float, float, float, str]:
     return (
-        str(entry.get("publishedAt") or ""),
-        str(entry.get("lastModified") or ""),
+        _timestamp_sort_value(entry.get("recordedAt")),
+        _timestamp_sort_value(entry.get("lastModified")),
+        _timestamp_sort_value(entry.get("publishedAt")),
         str(entry.get("title") or ""),
     )
 
@@ -269,6 +289,9 @@ def _search_item(entry: dict[str, Any], plain_text: str) -> dict[str, Any]:
         "channelTab": entry["channelTab"],
         "duration": entry["duration"],
         "timeLabel": entry["timeLabel"],
+        "publishedAt": entry["publishedAt"],
+        "recordedAt": entry["recordedAt"],
+        "lastModified": entry["lastModified"],
         "persons": entry["persons"],
         "text": plain_text,
     }
@@ -276,18 +299,26 @@ def _search_item(entry: dict[str, Any], plain_text: str) -> dict[str, Any]:
 
 def _write_site_index(entries: list[dict[str, Any]], search_items: list[dict[str, Any]]) -> None:
 
-    entries.sort(key=_sort_key, reverse=True)
-    search_items.sort(key=lambda item: _sort_key(next(entry for entry in entries if entry["id"] == item["id"])), reverse=True)
-    channels_by_key: dict[str, dict[str, str]] = {}
+    entries.sort(key=_newest_sort_key, reverse=True)
+    entries_by_id = {entry["id"]: entry for entry in entries}
+    search_items.sort(key=lambda item: _newest_sort_key(entries_by_id[item["id"]]), reverse=True)
+    latest_entry_by_channel: dict[str, dict[str, Any]] = {}
     for entry in entries:
         key = entry["channelKey"]
-        channels_by_key.setdefault(key, {"name": entry["channelName"], "tab": entry["channelTab"]})
+        current = latest_entry_by_channel.get(key)
+        if current is None or _newest_sort_key(entry) > _newest_sort_key(current):
+            latest_entry_by_channel[key] = entry
+
+    channels = [
+        {"name": entry["channelName"], "tab": entry["channelTab"], "latestAt": entry["recordedAt"]}
+        for entry in sorted(latest_entry_by_channel.values(), key=_newest_sort_key, reverse=True)
+    ]
 
     index = {
         "generatedAt": datetime.now().astimezone().isoformat(),
         "articleList": entries,
         "articles": {entry["id"]: entry for entry in entries},
-        "channels": sorted(channels_by_key.values(), key=lambda item: (item["tab"], item["name"])),
+        "channels": channels,
         "people": sorted({person for entry in entries for person in entry["persons"]}),
     }
     _write_json(DATA_PATH, index)
@@ -341,15 +372,47 @@ def _write_local_seed_articles(seed_dir: Path, limit: int) -> int:
     return 0
 
 
+def _reindex_existing_articles() -> int:
+    current = _read_json(DATA_PATH, {})
+    previous_entries = current.get("articleList", []) if isinstance(current, dict) else []
+    if not isinstance(previous_entries, list) or not previous_entries:
+        raise FileNotFoundError(f"既存の記事索引が見つかりません: {DATA_PATH}")
+
+    entries: list[dict[str, Any]] = []
+    search_items: list[dict[str, Any]] = []
+    for previous in previous_entries:
+        article_id = str(previous.get("id") or "").strip()
+        source = CONTENT_DIR / f"{article_id}.md"
+        if not article_id or not source.is_file():
+            raise FileNotFoundError(f"索引に対応するMarkdownが見つかりません: {source}")
+        raw_markdown = source.read_bytes()
+        entry, plain_text = _entry_from_markdown(
+            article_id,
+            raw_markdown,
+            previous,
+            str(previous.get("lastModified") or ""),
+            str(previous.get("sourceFileId") or ""),
+        )
+        entries.append(entry)
+        search_items.append(_search_item(entry, plain_text))
+
+    _write_site_index(entries, search_items)
+    print(f"既存Markdownから索引を再生成しました: 記事 {len(entries)}件")
+    return 0
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Info Viewerの静的サイトを書き出す")
     parser.add_argument("--seed-dir", type=Path, help="初期表示に使う既存Markdownのフォルダ")
     parser.add_argument("--limit", type=int, default=4, help="初期表示に載せる記事数。0なら全件")
+    parser.add_argument("--reindex-existing", action="store_true", help="既存の記事IDを維持したまま索引を再生成する")
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
+    if args.reindex_existing:
+        return _reindex_existing_articles()
     if args.seed_dir:
         return _write_local_seed_articles(args.seed_dir, args.limit)
     return _write_remote_articles()
