@@ -8,6 +8,7 @@ STATE_FILE_PATH = os.getenv("INFO_VIEWER_STATE_FILE", "state/pipeline_state.json
 DEFAULT_RETRY_SECONDS = int(os.getenv("INFO_VIEWER_RETRY_SECONDS", "3600") or 3600)
 QUOTA_RETRY_SECONDS = int(os.getenv("INFO_VIEWER_QUOTA_RETRY_SECONDS", "7200") or 7200)
 PROCESSING_STALE_SECONDS = int(os.getenv("INFO_VIEWER_PROCESSING_STALE_SECONDS", "14400") or 14400)
+MAX_FAILED_RETRY_SECONDS = int(os.getenv("INFO_VIEWER_MAX_FAILED_RETRY_SECONDS", "604800") or 604800)
 REQUIRE_NOTION_SAVE = str(os.getenv("INFO_VIEWER_REQUIRE_NOTION_SAVE", "true")).strip().lower() not in {
     "0",
     "false",
@@ -21,6 +22,13 @@ DEFERRED_STATUS = "deferred"
 FAILED_STATUS = "failed"
 DONE_STATUS = "done"
 INACTIVE_STATUS = "inactive"
+
+QUEUE_STATUS_PRIORITY = {
+    PENDING_STATUS: 0,
+    PROCESSING_STATUS: 1,
+    DEFERRED_STATUS: 2,
+    FAILED_STATUS: 3,
+}
 
 # AppSheet からロケットボタンで手動起動したときにスプレッドシートに書かれるステータス値
 # この値が検出された行をキューの最優先に引き上げる
@@ -306,6 +314,25 @@ def _is_stale_processing(record: dict[str, Any], now: datetime) -> bool:
     return (now - processing_started_at).total_seconds() >= PROCESSING_STALE_SECONDS
 
 
+def _queue_sort_key(item: dict[str, Any]) -> tuple[Any, ...]:
+    manual_priority_at = item.get("_queue_manual_priority_at", "")
+    status = str(item.get("_queue_status") or PENDING_STATUS)
+    content_timestamp = _timestamp(item.get("video_updated_at", "") or item.get("published_at", ""))
+
+    # 手動指定を最優先にし、通常処理では未処理の新着を古い失敗動画より先に流す。
+    # 再試行対象どうしは期限の早いものから処理する。
+    status_order = QUEUE_STATUS_PRIORITY.get(status, len(QUEUE_STATUS_PRIORITY))
+    status_time = -content_timestamp if status == PENDING_STATUS else _timestamp(item.get("_queue_next_retry_at", ""))
+    return (
+        0 if manual_priority_at else 1,
+        -_timestamp(manual_priority_at),
+        status_order,
+        status_time,
+        -content_timestamp,
+        str(item.get("video_url", "")),
+    )
+
+
 def list_processable_videos(
     state: dict[str, Any],
     max_items: int = 0,
@@ -334,15 +361,7 @@ def list_processable_videos(
 
         candidates.append(_record_to_video(record))
 
-    candidates.sort(
-        key=lambda item: (
-            0 if item.get("_queue_manual_priority_at") else 1,
-            -_timestamp(item.get("_queue_manual_priority_at", "")),
-            str(item.get("_queue_next_retry_at", "")),
-            -_timestamp(item.get("video_updated_at", "") or item.get("published_at", "")),
-            str(item.get("video_url", "")),
-        )
-    )
+    candidates.sort(key=_queue_sort_key)
     if max_items > 0:
         return candidates[:max_items]
     return candidates
@@ -402,13 +421,21 @@ def mark_retry(
 ) -> dict[str, Any]:
     record = _ensure_record(state, video_url)
     now_iso = _now_iso()
+    effective_wait_seconds = max(0, int(wait_seconds or 0))
+    if status == FAILED_STATUS:
+        attempt_count = max(1, int(record.get("attemptCount") or 1))
+        retry_multiplier = 2 ** min(attempt_count - 1, 7)
+        effective_wait_seconds = min(
+            MAX_FAILED_RETRY_SECONDS,
+            effective_wait_seconds * retry_multiplier,
+        )
     record["status"] = status
     record["lastRunId"] = run_id
     record["lastStage"] = stage
     record["lastError"] = str(error or "").strip()
     record["lastFailureAt"] = now_iso
     record["processingStartedAt"] = ""
-    record["nextRetryAt"] = _iso_after(wait_seconds)
+    record["nextRetryAt"] = _iso_after(effective_wait_seconds)
     state["updatedAt"] = now_iso
     return record
 
