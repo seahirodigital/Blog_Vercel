@@ -22426,7 +22426,7 @@
   },
   {
     "id": "9c085575-cadb-4c71-9d58-7eaa26f7f48d",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!seb59004134404d15aa6f86106912b9fc",
     "title": "イーサプライ EEX-TVS042BK テレビ レビュー比較まとめ",
     "name": "イーサプライ EEX-TVS042BK テレビ レビュー比較まとめ.md",
@@ -22436,8 +22436,8 @@
     "publishAt": "2026-10-14T11:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-14T10:55:40.473742+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-14T11:32:27.241232+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5b51d5f52c7b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
