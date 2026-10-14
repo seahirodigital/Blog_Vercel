@@ -22478,7 +22478,7 @@
   },
   {
     "id": "7462eafc-93ba-4cd9-9314-057821fe966f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4cde0b007e2943399df49db6b0be2801",
     "title": "JESIMAIK 100V200V JM6000XiE 0kVA インバーター発電機 単相100V レビュー比較まとめ",
     "name": "JESIMAIK 100V200V JM6000XiE 0kVA インバーター発電機 単相100V レビュー比較まとめ.md",
@@ -22487,10 +22487,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-14T12:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-14T12:28:56.206591+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ffdcbeb1-580c-4e04-8128-7ab818f151c7",
