@@ -22374,7 +22374,7 @@
   },
   {
     "id": "348fbd6e-92fc-4eef-a09e-f5a2799fc860",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4855e49095e24ffbb5868e9633a82f97",
     "title": "SIHOO C300 Doro オフィスチェア レビュー比較まとめ",
     "name": "SIHOO C300 Doro オフィスチェア レビュー比較まとめ.md",
@@ -22383,10 +22383,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-14T10:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-14T09:55:54.490279+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ff7d459d-2a27-4f1d-a5ca-c7b96d6b828f",
