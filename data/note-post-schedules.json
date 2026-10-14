@@ -22097,7 +22097,7 @@
   },
   {
     "id": "c4f0f37e-a74d-4da4-aad1-614ed6f6c659",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3b9cb6952c584cb48119b48504a5efb0",
     "title": "PRD82 レビュー比較まとめ",
     "name": "PRD82 レビュー比較まとめ.md",
@@ -22106,10 +22106,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-14T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-14T04:55:28.368648+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "26d2bf39-1331-4e3d-aad3-93d39ec5b4a0",
