@@ -22218,7 +22218,7 @@
   },
   {
     "id": "768be7bd-7579-4453-84a9-20f21542d7d0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s686744917bc4455d94005bf92d8ba56a",
     "title": "BLUETTI AORA300 3014.4Wh 2000W定格 4000W電力リフト 1.6時間満充電 家庭・屋外用バ",
     "name": "BLUETTI AORA300 3014.4Wh 2000W定格 4000W電力リフト 1.6時間満充電 家庭・屋外用バ.md",
@@ -22227,10 +22227,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-14T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-14T06:55:40.281317+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f92f1d10-54e1-4f84-b71f-f4983bb974d4",
