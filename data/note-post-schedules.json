@@ -21959,7 +21959,7 @@
   },
   {
     "id": "08465cd0-4413-4cdf-a30c-6911068a47eb",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se1584ee258bd4765bc222876f69c61a7",
     "title": "PORMIDO-LINK STARVIS2 IMX662 PRD82C-SZ SUZUKI専用 ミラー型ドライブレコーダ",
     "name": "PORMIDO-LINK STARVIS2 IMX662 PRD82C-SZ SUZUKI専用 ミラー型ドライブレコーダ.md",
@@ -21968,10 +21968,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-14T03:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-14T02:55:58.913157+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c5a7a0b6-10af-4f7a-be36-6ec829a22394",
