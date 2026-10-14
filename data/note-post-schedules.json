@@ -22738,7 +22738,7 @@
   },
   {
     "id": "4b264c0a-15f1-457d-8fcc-f88e3de216f2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2e60c91dbd95465bb4e9be2df58407fa",
     "title": "AMOS JP-EX COLOR 麻雀 レビュー比較まとめ",
     "name": "AMOS JP-EX COLOR 麻雀 レビュー比較まとめ.md",
@@ -22747,10 +22747,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-14T16:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-14T15:55:45.235028+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "90c8d7ba-9073-45fb-a5c4-c28471413f48",
