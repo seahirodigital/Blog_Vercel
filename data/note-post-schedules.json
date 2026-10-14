@@ -22686,7 +22686,7 @@
   },
   {
     "id": "40e5cc1f-3649-4eda-a3f2-9bcc18550f11",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8abc5f994a1142d8b39a113918feb023",
     "title": "Wacom(ワコム) TPTK870K0C Intuos Pro レビュー比較まとめ",
     "name": "Wacom(ワコム) TPTK870K0C Intuos Pro レビュー比較まとめ.md",
@@ -22695,10 +22695,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-14T16:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-14T15:25:12.143276+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "27ab757e-8705-4700-a69f-18cb637e575b",
