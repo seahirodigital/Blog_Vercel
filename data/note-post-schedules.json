@@ -22028,7 +22028,7 @@
   },
   {
     "id": "fc6212da-2b12-4085-ae81-72dca4905b0e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s39a4ed129fc14bb0a0720580fec935bd",
     "title": "パナソニック N-100D23L/C8 CAOS 標準車(充電制御車)用 レビュー比較まとめ",
     "name": "パナソニック N-100D23LC8 CAOS 標準車(充電制御車)用 レビュー比較まとめ.md",
@@ -22038,8 +22038,8 @@
     "publishAt": "2026-10-14T04:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-14T03:55:07.331060+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-14T04:32:10.504866+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n20572ecefc2a?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
