@@ -51,6 +51,62 @@ def _record(video_id: str, status: str, published_at: str, **overrides):
 
 
 class StateStoreQueueTest(unittest.TestCase):
+    def test_processing_cutoff_ignores_old_queue_and_keeps_new_video(self):
+        old_url = "https://www.youtube.com/watch?v=old-before-cutoff"
+        new_url = "https://www.youtube.com/watch?v=new-after-cutoff"
+        videos = [
+            {
+                "video_url": old_url,
+                "video_title": "過去動画",
+                "channel_name": "テスト",
+                "published_at": "2026-10-14T12:00:00Z",
+                "video_updated_at": "2026-10-14T12:00:00Z",
+                "status": "",
+            },
+            {
+                "video_url": new_url,
+                "video_title": "新着動画",
+                "channel_name": "テスト",
+                "published_at": "2026-10-14T17:00:00Z",
+                "video_updated_at": "2026-10-14T17:00:00Z",
+                "status": "",
+            },
+        ]
+        state = {"videos": {}}
+
+        with (
+            patch.object(state_store, "PROCESS_AFTER_VALUE", "2026-10-14T16:35:35Z"),
+            patch.object(state_store, "_now", return_value=datetime(2026, 10, 14, 18, tzinfo=timezone.utc)),
+        ):
+            stats = state_store.sync_target_videos(state, videos, {})
+            selected = state_store.list_processable_videos(state, max_items=4)
+
+        self.assertEqual(stats["ignoredBeforeCutoff"], 1)
+        self.assertFalse(state["videos"][old_url]["active"])
+        self.assertEqual(state["videos"][old_url]["status"], state_store.INACTIVE_STATUS)
+        self.assertEqual([item["video_url"] for item in selected], [new_url])
+
+    def test_manual_trigger_can_process_video_before_cutoff(self):
+        video_url = "https://www.youtube.com/watch?v=manual-before-cutoff"
+        videos = [{
+            "video_url": video_url,
+            "video_title": "手動指定",
+            "channel_name": "テスト",
+            "published_at": "2026-10-13T00:00:00Z",
+            "video_updated_at": "2026-10-13T00:00:00Z",
+            "status": state_store.MANUAL_TRIGGER_STATUS,
+        }]
+        state = {"videos": {}}
+
+        with (
+            patch.object(state_store, "PROCESS_AFTER_VALUE", "2026-10-14T16:35:35Z"),
+            patch.object(state_store, "_now", return_value=datetime(2026, 10, 14, 18, tzinfo=timezone.utc)),
+        ):
+            state_store.sync_target_videos(state, videos, {})
+            selected = state_store.list_processable_videos(state, max_items=1)
+
+        self.assertEqual([item["video_url"] for item in selected], [video_url])
+
     def test_pending_new_videos_are_selected_before_failed_retries(self):
         failed_url, failed = _record(
             "failed-old",

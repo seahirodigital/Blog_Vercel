@@ -9,6 +9,7 @@ DEFAULT_RETRY_SECONDS = int(os.getenv("INFO_VIEWER_RETRY_SECONDS", "3600") or 36
 QUOTA_RETRY_SECONDS = int(os.getenv("INFO_VIEWER_QUOTA_RETRY_SECONDS", "7200") or 7200)
 PROCESSING_STALE_SECONDS = int(os.getenv("INFO_VIEWER_PROCESSING_STALE_SECONDS", "14400") or 14400)
 MAX_FAILED_RETRY_SECONDS = int(os.getenv("INFO_VIEWER_MAX_FAILED_RETRY_SECONDS", "604800") or 604800)
+PROCESS_AFTER_VALUE = os.getenv("INFO_VIEWER_PROCESS_AFTER", "").strip()
 REQUIRE_NOTION_SAVE = str(os.getenv("INFO_VIEWER_REQUIRE_NOTION_SAVE", "true")).strip().lower() not in {
     "0",
     "false",
@@ -81,6 +82,18 @@ def _timestamp(value: str | None) -> float:
 def _iso_after(wait_seconds: int) -> str:
     delay = max(0, int(wait_seconds or 0))
     return (_now() + timedelta(seconds=delay)).isoformat().replace("+00:00", "Z")
+
+
+def _is_before_processing_cutoff(video: dict[str, Any], record: dict[str, Any]) -> bool:
+    cutoff = _parse_iso(PROCESS_AFTER_VALUE)
+    if cutoff is None:
+        return False
+    candidate = (
+        _parse_iso(video.get("video_updated_at", ""))
+        or _parse_iso(video.get("published_at", ""))
+        or _parse_iso(record.get("firstSeenAt", ""))
+    )
+    return candidate is not None and candidate < cutoff
 
 
 def _blank_state() -> dict[str, Any]:
@@ -188,6 +201,7 @@ def sync_target_videos(
         "pending": 0,
         "markedDone": 0,
         "deactivated": 0,
+        "ignoredBeforeCutoff": 0,
     }
 
     for video in target_videos:
@@ -245,6 +259,15 @@ def sync_target_videos(
             record["processingStartedAt"] = ""
             if record.get("status") != PENDING_STATUS:
                 stats["pending"] += 1
+            continue
+
+        if _is_before_processing_cutoff(video, record):
+            record["active"] = False
+            record["status"] = INACTIVE_STATUS
+            record["nextRetryAt"] = ""
+            record["processingStartedAt"] = ""
+            record["ignoredBefore"] = PROCESS_AFTER_VALUE
+            stats["ignoredBeforeCutoff"] += 1
             continue
 
         if record.get("status") in ("", INACTIVE_STATUS, DONE_STATUS):

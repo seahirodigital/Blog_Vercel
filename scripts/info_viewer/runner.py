@@ -1702,7 +1702,8 @@ def main():
             "キュー同期: "
             f"scanned={sync_stats['scanned']} added={sync_stats['added']} "
             f"pending={sync_stats['pending']} done={sync_stats['markedDone']} "
-            f"deactivated={sync_stats['deactivated']}"
+            f"deactivated={sync_stats['deactivated']} "
+            f"ignoredBeforeCutoff={sync_stats.get('ignoredBeforeCutoff', 0)}"
         )
         state_store.attach_queue_metadata(all_target_videos, state)
         _print_queue_summary(state, "キュー状況")

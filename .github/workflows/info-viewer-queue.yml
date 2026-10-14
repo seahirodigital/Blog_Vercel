@@ -1,9 +1,6 @@
 name: Info Viewer Pipeline
 
 on:
-  schedule:
-    - cron: "0,30 * * * *"
-    - cron: "15 * * * *"
   workflow_dispatch:
     inputs:
       video_url:
@@ -20,7 +17,7 @@ concurrency:
 jobs:
   build-info-viewer:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
 
     steps:
       - name: リポジトリをチェックアウト
@@ -28,6 +25,7 @@ jobs:
         with:
           token: ${{ secrets.GH_PAT }}
           fetch-depth: 0
+          ref: main
 
       - name: Python 3.13 をセットアップ
         uses: actions/setup-python@v5
@@ -86,26 +84,15 @@ jobs:
           INFO_VIEWER_GEMINI_SERIAL_DELAY_SECONDS: "20"
           INFO_VIEWER_RETRY_SECONDS: "3600"
           INFO_VIEWER_QUOTA_RETRY_SECONDS: "7200"
+          INFO_VIEWER_PROCESS_AFTER: "2026-10-14T16:35:35Z"
           INPUT_MODE: process_queue
-          INPUT_MAX_ITEMS: ${{ github.event_name == 'workflow_dispatch' && '1' || '2' }}
+          INPUT_MAX_ITEMS: "4"
           INPUT_CHANNEL_NAME: ""
-          INPUT_VIDEO_URL: ${{ github.event.inputs.video_url || '' }}
+          INPUT_VIDEO_URL: ${{ github.event.client_payload.video_url || '' }}
           INPUT_REBUILD_MANIFEST_ONLY: "false"
-          EVENT_NAME: ${{ github.event_name }}
-          EVENT_SCHEDULE: ${{ github.event.schedule || '' }}
         run: |
           MODE="${INPUT_MODE}"
           MAX_ITEMS="${INPUT_MAX_ITEMS}"
-
-          if [ "${EVENT_NAME}" = "schedule" ]; then
-            if [ "${EVENT_SCHEDULE}" = "0,30 * * * *" ]; then
-              MODE="sync_only"
-              MAX_ITEMS="0"
-            elif [ "${EVENT_SCHEDULE}" = "15 * * * *" ]; then
-              MODE="process_queue"
-              MAX_ITEMS="${INPUT_MAX_ITEMS}"
-            fi
-          fi
 
           if [ "${MODE}" = "notion_backfill" ]; then
             CMD=(python scripts/info_viewer/notion_backfill.py
@@ -133,7 +120,7 @@ jobs:
           "${CMD[@]}"
 
       - name: Cloudflare Pages用の静的Viewerを書き出し
-        if: success()
+        if: success() && (github.event_name == 'workflow_dispatch' || steps.info_viewer.outputs.success_count != '0')
         env:
           ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
           ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
@@ -142,8 +129,13 @@ jobs:
         run: python scripts/info_viewer/export_static_site.py
 
       - name: 静的Viewerの更新をGitHubへ反映
-        if: success()
+        if: success() && (github.event_name == 'workflow_dispatch' || steps.info_viewer.outputs.success_count != '0')
         id: publish_static_viewer
+        env:
+          ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
+          ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          INFO_VIEWER_ONEDRIVE_FOLDER: Obsidian in Onedrive 202602/Vercel_Blog/info_viewer
         run: |
           git config user.name "info-viewer-bot"
           git config user.email "info-viewer-bot@users.noreply.github.com"
@@ -158,8 +150,16 @@ jobs:
             git fetch origin main
             if ! git rebase origin/main; then
               git rebase --abort || true
-              echo "::error::最新mainへのrebaseに失敗しました。静的記事と同じファイルが別処理で更新された可能性があります。"
-              exit 1
+              echo "最新mainと競合したため、最新状態から静的Viewerを再生成します。"
+              git reset --hard origin/main
+              python scripts/info_viewer/export_static_site.py
+              git add -- info_viewer_site/content/articles info_viewer_site/data/article_index.json info_viewer_site/static/search.json
+              if git diff --cached --quiet; then
+                echo "最新mainに同じ内容が反映済みです。"
+                exit 0
+              fi
+              git commit -m "chore: info viewer static content"
+              continue
             fi
             if git push origin HEAD:main; then
               echo "静的Viewerをmainへ反映しました。"

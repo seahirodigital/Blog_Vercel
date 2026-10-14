@@ -16,10 +16,20 @@ const LEGACY_FOLDER = 'Obsidian in Onedrive 202602/Vercel_Blog/情報取得/info
 const STATE_RELATIVE_PATH = 'state/pipeline_state.json';
 const ASSET_RELATIVE_FOLDER = 'assets';
 
-function isAdminRequest(req) {
-  const expected = Buffer.from(String(process.env.INFO_VIEWER_ADMIN_SECRET || ''));
-  const supplied = Buffer.from(String(req.headers['x-info-viewer-admin-secret'] || ''));
+function matchesSecret(expectedValue, suppliedValue) {
+  const expected = Buffer.from(String(expectedValue || ''));
+  const supplied = Buffer.from(String(suppliedValue || ''));
   return Boolean(expected.length && expected.length === supplied.length && timingSafeEqual(expected, supplied));
+}
+
+function isAdminRequest(req) {
+  return matchesSecret(
+    process.env.INFO_VIEWER_ADMIN_SECRET,
+    req.headers['x-info-viewer-admin-secret']
+  ) || matchesSecret(
+    process.env.INFO_VIEWER_GAS_SECRET,
+    req.headers['x-info-viewer-gas-secret']
+  );
 }
 
 function sleep(ms) {
@@ -608,7 +618,7 @@ function ensurePriorityRecord(state, body) {
   return record;
 }
 
-async function dispatchPriorityWorkflow(videoUrl) {
+async function dispatchPriorityWorkflow(videoUrl, source = '') {
   const githubToken = process.env.GITHUB_TOKEN;
   const repo = process.env.GITHUB_REPO || 'seahirodigital/Blog_Vercel';
 
@@ -619,23 +629,33 @@ async function dispatchPriorityWorkflow(videoUrl) {
     };
   }
 
-  const response = await fetch(
-    `https://api.github.com/repos/${repo}/actions/workflows/info-viewer-queue.yml/dispatches`,
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${githubToken}`,
-        Accept: 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json',
-      },
-        body: JSON.stringify({
+  const isSheetWatcher = source === 'gas-sheet-watcher';
+  const endpoint = isSheetWatcher
+    ? `https://api.github.com/repos/${repo}/dispatches`
+    : `https://api.github.com/repos/${repo}/actions/workflows/info-viewer-queue.yml/dispatches`;
+  const requestBody = isSheetWatcher
+    ? {
+        event_type: 'trigger-from-appsheet-info-viewer',
+        client_payload: {
+          video_url: videoUrl,
+          source,
+        },
+      }
+    : {
           ref: 'main',
           inputs: {
             video_url: videoUrl,
           },
-        }),
-    }
-  );
+      };
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${githubToken}`,
+      Accept: 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestBody),
+  });
 
   if (response.status === 204) {
     return {
@@ -685,7 +705,10 @@ async function handlePriorityRequest(req, res, token) {
   const state = await loadState(token);
   const record = ensurePriorityRecord(state, req.body || {});
   await saveState(token, state);
-  const dispatchResult = await dispatchPriorityWorkflow(record.normalizedVideoUrl);
+  const dispatchResult = await dispatchPriorityWorkflow(
+    record.normalizedVideoUrl,
+    String(req.body?.source || '')
+  );
 
   return res.status(200).json({
     success: true,
@@ -752,7 +775,7 @@ async function handleImageReadRequest(req, res, token) {
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-info-viewer-admin-secret');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-info-viewer-admin-secret, x-info-viewer-gas-secret');
   res.setHeader('Cache-Control', 'no-store');
 
   if (req.method === 'OPTIONS') {
