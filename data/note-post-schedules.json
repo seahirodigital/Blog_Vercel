@@ -22790,7 +22790,7 @@
   },
   {
     "id": "683f3d0d-63b3-4d73-9cb7-a127eb4c0d17",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s560a7e0ba67342039e0d3d186307f835",
     "title": "EF ECOFLOW EcoFlow DELTA 3 Ultra +400W軽量両面ソーラーパネル ポータブル電源 レビ",
     "name": "EF ECOFLOW EcoFlow DELTA 3 Ultra +400W軽量両面ソーラーパネル ポータブル電源 レビ.md",
@@ -22799,10 +22799,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-14T20:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-14T19:55:22.982617+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f11aa0ad-df03-4001-b1a5-2bf81fc888f6",
