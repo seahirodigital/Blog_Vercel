@@ -1,6 +1,46 @@
 {
-  "generatedAt": "2026-10-14T14:50:59.248637+00:00",
+  "generatedAt": "2026-10-14T15:27:55.934499+00:00",
   "articleList": [
+    {
+      "id": "5c4bb63cfd8bc66d05",
+      "url": "/articles/5c4bb63cfd8bc66d05/",
+      "title": "岡崎良介×永濱利廣【災い転じて福となす 借金比率・倒産確率が低い日本は有利か『企業物価指数から見えてくる 日本企業の景況感』岡崎良介のリジカーレ#53】10月14日公開 ※11/14大宮セミナー募集",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=n1C9CgbAPlo",
+      "thumbnail": "https://i.ytimg.com/vi/n1C9CgbAPlo/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-14T15:08:19.773536",
+      "recordedLabel": "2026.10.14 15:08",
+      "timeLabel": "2026.10.14 15:08",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-14T15:08:25Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s69e112a4acd048e8bb27c853e81adb55"
+    },
+    {
+      "id": "b214904a87d82a3a7e",
+      "url": "/articles/b214904a87d82a3a7e/",
+      "title": "LIVE  マーケットアップデート USCPIを見よう. ASML決算は乱高下の反応",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=O6zZVKfN47Y",
+      "thumbnail": "https://i.ytimg.com/vi/O6zZVKfN47Y/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-14T15:06:29.005437",
+      "recordedLabel": "2026.10.14 15:06",
+      "timeLabel": "2026.10.14 15:06",
+      "persons": [],
+      "lastModified": "2026-10-14T15:06:36Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s9388072f7e54442297ce5b443cd830f9"
+    },
     {
       "id": "5f22e9c300753da9f5",
       "url": "/articles/5f22e9c300753da9f5/",
@@ -8306,6 +8346,46 @@
     }
   ],
   "articles": {
+    "5c4bb63cfd8bc66d05": {
+      "id": "5c4bb63cfd8bc66d05",
+      "url": "/articles/5c4bb63cfd8bc66d05/",
+      "title": "岡崎良介×永濱利廣【災い転じて福となす 借金比率・倒産確率が低い日本は有利か『企業物価指数から見えてくる 日本企業の景況感』岡崎良介のリジカーレ#53】10月14日公開 ※11/14大宮セミナー募集",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=n1C9CgbAPlo",
+      "thumbnail": "https://i.ytimg.com/vi/n1C9CgbAPlo/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-14T15:08:19.773536",
+      "recordedLabel": "2026.10.14 15:08",
+      "timeLabel": "2026.10.14 15:08",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-14T15:08:25Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s69e112a4acd048e8bb27c853e81adb55"
+    },
+    "b214904a87d82a3a7e": {
+      "id": "b214904a87d82a3a7e",
+      "url": "/articles/b214904a87d82a3a7e/",
+      "title": "LIVE  マーケットアップデート USCPIを見よう. ASML決算は乱高下の反応",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=O6zZVKfN47Y",
+      "thumbnail": "https://i.ytimg.com/vi/O6zZVKfN47Y/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-14T15:06:29.005437",
+      "recordedLabel": "2026.10.14 15:06",
+      "timeLabel": "2026.10.14 15:06",
+      "persons": [],
+      "lastModified": "2026-10-14T15:06:36Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s9388072f7e54442297ce5b443cd830f9"
+    },
     "5f22e9c300753da9f5": {
       "id": "5f22e9c300753da9f5",
       "url": "/articles/5f22e9c300753da9f5/",
@@ -16612,6 +16692,16 @@
   },
   "channels": [
     {
+      "name": "ゆたかTV",
+      "tab": "ゆたかT",
+      "latestAt": "2026-10-14T15:08:19.773536"
+    },
+    {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-10-14T15:06:29.005437"
+    },
+    {
       "name": "PIVOT 公式チャンネル",
       "tab": "PIVO",
       "latestAt": "2026-10-13T15:17:38.610677"
@@ -16625,16 +16715,6 @@
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-10-11T22:09:55.022621"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-10-11T18:13:29.133029"
-    },
-    {
-      "name": "ゆたかTV",
-      "tab": "ゆたかT",
-      "latestAt": "2026-10-10T01:52:39.492995"
     },
     {
       "name": "マーケットマスターズ",
