@@ -22894,7 +22894,7 @@
   },
   {
     "id": "0d25dfe5-22dd-4c92-9b72-2c48511c320a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s57c25c9189694f6abdffe7fe2017a479",
     "title": "昭和西川 ドイツ産 ダック90％ セミダブルロング レビュー比較まとめ",
     "name": "昭和西川 ドイツ産 ダック90％ セミダブルロング レビュー比較まとめ.md",
@@ -22903,10 +22903,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-14T22:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-14T22:42:52.720200+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a693acae-6709-44b8-8a69-b56b22980d30",
@@ -22944,7 +22946,7 @@
   },
   {
     "id": "cd8d7c04-4b99-4f6f-b691-339efe0d6a6d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se88c5560ab004e67ab1917ce87ad8036",
     "title": "Gaidoh 0HP 3500PSI GS24MPA エンジン高圧洗浄機 ガソリン燃料 レビュー比較まとめ",
     "name": "Gaidoh 0HP 3500PSI GS24MPA エンジン高圧洗浄機 ガソリン燃料 レビュー比較まとめ.md",
@@ -22953,10 +22955,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-14T23:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-14T22:42:52.720200+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fc9bf08f-70b1-47ce-b6a5-aea9baaa213e",
