@@ -13,6 +13,10 @@ on:
   repository_dispatch:
     types: [trigger-from-appsheet-info-viewer, trigger-from-appsheet]
 
+concurrency:
+  group: info-viewer-pipeline
+  cancel-in-progress: false
+
 jobs:
   build-info-viewer:
     runs-on: ubuntu-latest
@@ -23,6 +27,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GH_PAT }}
+          fetch-depth: 0
 
       - name: Python 3.13 をセットアップ
         uses: actions/setup-python@v5
@@ -138,6 +143,7 @@ jobs:
 
       - name: 静的Viewerの更新をGitHubへ反映
         if: success()
+        id: publish_static_viewer
         run: |
           git config user.name "info-viewer-bot"
           git config user.email "info-viewer-bot@users.noreply.github.com"
@@ -147,7 +153,26 @@ jobs:
             exit 0
           fi
           git commit -m "chore: info viewer static content"
-          git push origin HEAD:main
+          for ATTEMPT in 1 2 3 4 5; do
+            echo "mainへの反映を試行します: ${ATTEMPT}/5"
+            git fetch origin main
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo "::error::最新mainへのrebaseに失敗しました。静的記事と同じファイルが別処理で更新された可能性があります。"
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              echo "静的Viewerをmainへ反映しました。"
+              exit 0
+            fi
+            if [ "${ATTEMPT}" -lt 5 ]; then
+              WAIT_SECONDS=$((ATTEMPT * 10))
+              echo "別処理がmainを更新したため、${WAIT_SECONDS}秒後に再試行します。"
+              sleep "${WAIT_SECONDS}"
+            fi
+          done
+          echo "::error::5回試行しても静的Viewerをmainへ反映できませんでした。"
+          exit 1
 
       - name: Discord Notification (手動URL)
         if: always() && steps.manual_info_viewer.outputs.notion_urls != ''
@@ -182,3 +207,22 @@ jobs:
             MESSAGE="【記事更新】\n${CHANNEL}\n${TITLE}\nNotion\n${NOTION_URL}\nInfo Viewer\n${VIEWER_URL}"
             curl -H "Content-Type: application/json" -d "{\"content\": \"$MESSAGE\"}" "$DISCORD_WEBHOOK"
           done
+
+      - name: Info Viewer実行結果を確認
+        if: always() && github.event_name != 'workflow_dispatch'
+        env:
+          SUCCESS_COUNT: ${{ steps.info_viewer.outputs.success_count }}
+          FAILURE_COUNT: ${{ steps.info_viewer.outputs.failure_count }}
+          APIFY_AUTH_ERROR: ${{ steps.info_viewer.outputs.apify_auth_error }}
+        run: |
+          {
+            echo "## Info Viewer 実行結果"
+            echo "- 成功: ${SUCCESS_COUNT:-0}件"
+            echo "- 失敗: ${FAILURE_COUNT:-0}件"
+            echo "- Apify認証・権限エラー: ${APIFY_AUTH_ERROR:-false}"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          if [ "${APIFY_AUTH_ERROR}" = "true" ]; then
+            echo "::error::ApifyがHTTP 401または403を返しました。APIFY_API_KEYの権限を確認してください。静的Viewerの書き出しとGitHub反映は先に実行済みです。"
+            exit 1
+          fi

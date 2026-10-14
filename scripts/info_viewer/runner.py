@@ -1760,10 +1760,18 @@ def main():
     print(f"manifest 更新完了: {manifest.get('generatedAt')}")
     print("-" * 72)
 
-    if _created_notion_urls:
-        github_output = os.getenv("GITHUB_OUTPUT")
-        if github_output:
-            with open(github_output, "a", encoding="utf-8") as f:
+    github_output = os.getenv("GITHUB_OUTPUT")
+    if github_output:
+        apify_auth_error = any(
+            failure.get("stageKey") == "apify"
+            and str(failure.get("httpStatus") or "") in {"401", "403"}
+            for failure in failures_this_run
+        )
+        with open(github_output, "a", encoding="utf-8") as f:
+            f.write(f"success_count={success_count}\n")
+            f.write(f"failure_count={len(failures_this_run)}\n")
+            f.write(f"apify_auth_error={'true' if apify_auth_error else 'false'}\n")
+            if _created_notion_urls:
                 f.write(f"notion_urls={','.join(_created_notion_urls)}\n")
 
     for failure in failures_this_run:
