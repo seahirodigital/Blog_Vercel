@@ -1604,7 +1604,7 @@
   },
   {
     "id": "aa532cce-99e9-47ac-9339-3c20b50eb83e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!scc7c127574594c84ab5bfcf4c865185e",
     "title": "EF ECOFLOW EcoFlow RIVER 2 Max レビュー比較まとめ",
     "name": "EF ECOFLOW EcoFlow RIVER 2 Max レビュー比較まとめ.md",
@@ -1613,10 +1613,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T21:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T20:25:03.594526+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e911c420-e364-47fd-adb6-5c4b91a5fd51",
