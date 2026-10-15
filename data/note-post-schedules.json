@@ -1478,7 +1478,7 @@
   },
   {
     "id": "0ca1874c-47e0-4135-ab3e-746fc6959071",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf086f1ad71634bf080d8d300f71cb567",
     "title": "ビックスリー ダブルベッド 収納付きベッドフレーム 引き出し付き 棚付き コンセント付き 木製 ポケットコイルマットレス レビュー比較まとめ",
     "name": "ビックスリー ダブルベッド 収納付きベッドフレーム 引き出し付き 棚付き コンセント付き 木製 ポケットコイルマットレス.md",
@@ -1488,8 +1488,8 @@
     "publishAt": "2026-10-15T16:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-15T15:25:53.137145+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-15T16:02:35.799507+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nb3fb6705f7e5?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
