@@ -1658,7 +1658,7 @@
   },
   {
     "id": "93799f49-9b41-4fd2-aec2-abb6b25d6014",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd694c5c8d23244a3b2fdee426d12791f",
     "title": "Ledlenser H Signatureシリーズ レビュー比較まとめ",
     "name": "Ledlenser H Signatureシリーズ レビュー比較まとめ.md",
@@ -1668,8 +1668,8 @@
     "publishAt": "2026-10-15T23:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-15T22:25:37.263994+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-15T23:02:18.876890+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7d45d0369722?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
