@@ -1496,7 +1496,7 @@
   },
   {
     "id": "ce3f22e0-b235-49a8-aa8b-a5966c59291c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5efe9232fb7b49a584fc7375eed2eaa8",
     "title": "シモンズ マットレス セミダブル ポケットコイル やや硬め ミディアム 両面仕様 日本製 レビュー比較まとめ",
     "name": "シモンズ マットレス セミダブル ポケットコイル やや硬め ミディアム 両面仕様 日本製 レビュー比較まとめ.md",
@@ -1505,10 +1505,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T16:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T15:55:19.007114+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e348d3ee-ba85-4fde-91bb-6db3b83d98db",
