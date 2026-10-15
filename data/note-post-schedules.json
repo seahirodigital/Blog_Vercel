@@ -1370,7 +1370,7 @@
   },
   {
     "id": "51815116-7bff-4f6d-b8d8-a181ba573fd3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdec5c601ad084d5ea43f4cdd43c88a3a",
     "title": "シモンズ マットレス クィーン ポケットコイル やや硬めミディアム SIMMONS 両面仕様 日本製 通気性 体圧分散",
     "name": "シモンズ マットレス クィーン ポケットコイル やや硬めミディアム SIMMONS 両面仕様 日本製 通気性 体圧分散.md",
@@ -1379,10 +1379,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T12:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T11:55:38.222088+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "816d27f1-2889-4620-9196-f1d0988d0198",
