@@ -1586,7 +1586,7 @@
   },
   {
     "id": "39d93ed3-ef55-44c6-b570-2271cfcf480c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6b9e71f7496044fb8220e963837af29e",
     "title": "HiKOKI DH3628DA(XPZ) レビュー比較まとめ",
     "name": "HiKOKI DH3628DA(XPZ) レビュー比較まとめ.md",
@@ -1595,10 +1595,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T20:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T19:25:17.167168+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "aa532cce-99e9-47ac-9339-3c20b50eb83e",
