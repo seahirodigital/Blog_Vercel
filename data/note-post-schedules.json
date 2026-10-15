@@ -1532,7 +1532,7 @@
   },
   {
     "id": "861e72a1-9bea-4118-b5e1-22a4d8261350",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sbcf7051a08fb4ba29c5c94ea55ed3288",
     "title": "HOKUTO HB68EM HBシリーズ 防湿庫・ドライボックス レビュー比較まとめ",
     "name": "HOKUTO HB68EM HBシリーズ 防湿庫・ドライボックス レビュー比較まとめ.md",
@@ -1542,8 +1542,8 @@
     "publishAt": "2026-10-15T17:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-15T16:55:08.066932+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-15T17:32:15.565030+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n6acdd36c9866?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
