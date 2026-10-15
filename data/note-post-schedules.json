@@ -1442,7 +1442,7 @@
   },
   {
     "id": "22f93b00-9d92-45c7-a4ea-f6ec91954e59",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!scd2eb9c3fa2c4a3ebe4af8e10250e15a",
     "title": "koala オリジナルコアラマットレス レビュー比較まとめ",
     "name": "koala オリジナルコアラマットレス レビュー比較まとめ.md",
@@ -1451,10 +1451,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T14:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T13:55:34.364991+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5fcfcfa3-8975-49a3-969a-e5b592b8a104",
