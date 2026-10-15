@@ -23824,7 +23824,7 @@
   },
   {
     "id": "34c76817-f7c9-45ba-b195-91a5a871aa15",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s983bfb72e93b46e6ac842739db4b7665",
     "title": "ストウブ ピコ ココット ラウンド チェリー スチーマーセット 鋳物ホーロー鍋 レビュー比較まとめ",
     "name": "ストウブ ピコ ココット ラウンド チェリー スチーマーセット 鋳物ホーロー鍋 レビュー比較まとめ.md",
@@ -23836,7 +23836,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:14.525Z"
   },
   {
     "id": "f266f403-2a38-41f2-82c1-4fe7cc2db6a6",
@@ -23874,7 +23875,7 @@
   },
   {
     "id": "22935389-b696-417a-90c0-26932affdae7",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sec012ef6387846a7bcc0fdbee10daa23",
     "title": "EF ECOFLOW Pro3 レビュー比較まとめ",
     "name": "EF ECOFLOW Pro3 レビュー比較まとめ.md",
@@ -23886,7 +23887,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:14.525Z"
   },
   {
     "id": "7cf7dc9b-1161-409a-ab8b-4ceff94dc339",
@@ -23924,7 +23926,7 @@
   },
   {
     "id": "f0a8651c-33c5-4a83-9c2f-44abe43d7114",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd0853c11a6c747548549ba62f6f7e4a7",
     "title": "エマ・スリープ V2 エマ・オリジナル キング レビュー比較まとめ",
     "name": "エマ・スリープ V2 エマ・オリジナル キング レビュー比較まとめ.md",
@@ -23936,7 +23938,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:14.525Z"
   },
   {
     "id": "296d4e0a-450a-48e0-b103-3ab83542dcc2",
@@ -23974,7 +23977,7 @@
   },
   {
     "id": "58b597a4-120f-44a7-a7c9-469aafb79cbe",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5a86d61cdb824854a8048a2ae80236c3",
     "title": "Jackery ポータブル電源 1500 New 200W ソーラーパネル 1枚 2点セット レビュー比較まとめ",
     "name": "Jackery ポータブル電源 1500 New 200W ソーラーパネル 1枚 2点セット レビュー比較まとめ.md",
@@ -23986,7 +23989,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:14.525Z"
   },
   {
     "id": "73523a54-4194-4b94-a147-a2d236b617ce",
@@ -24024,7 +24028,7 @@
   },
   {
     "id": "3c6fac76-a5cf-4cfc-8651-d523906a2e8f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc5c8ca07861c4443baf9eb305b9133eb",
     "title": "RayNeo 3DoF GT Max レビュー比較まとめ",
     "name": "RayNeo 3DoF GT Max レビュー比較まとめ.md",
@@ -24036,6 +24040,7 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:14.525Z"
   }
 ]
