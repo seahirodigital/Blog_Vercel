@@ -1676,7 +1676,7 @@
   },
   {
     "id": "9209819a-85a6-48ef-8564-7d92f3657741",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s244026576690490893192b172e74a5a9",
     "title": "Jackery ポータブル電源 1000 New V3 レビュー比較まとめ",
     "name": "Jackery ポータブル電源 1000 New V3 レビュー比較まとめ.md",
@@ -1685,10 +1685,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T00:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T23:25:37.085328+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4aaf3033-0cd8-45f9-a412-425ab8d7987d",
