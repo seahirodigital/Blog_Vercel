@@ -1622,7 +1622,7 @@
   },
   {
     "id": "e911c420-e364-47fd-adb6-5c4b91a5fd51",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd1494bfed9524206bef2387a8ca4809c",
     "title": "Magniflex メッシュウィング 日本用 三つ折り 高反発 マットレス ダブル レビュー比較まとめ",
     "name": "Magniflex メッシュウィング 日本用 三つ折り 高反発 マットレス ダブル レビュー比較まとめ.md",
@@ -1631,10 +1631,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T22:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T21:25:50.275056+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bcd31c2e-c8e0-48cd-82ad-c14b64262fa5",
