@@ -23414,7 +23414,7 @@
   },
   {
     "id": "bc117674-949a-41ec-ba16-a6729a54514f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!saca0769c457443c890ad74f9fff40cc2",
     "title": "roborock Q7B+ ロボット掃除機 小型 お掃除ロ レビュー比較まとめ",
     "name": "roborock Q7B Q7BP52-04 掃除機 レビュー比較まとめ.md",
@@ -23423,10 +23423,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T07:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T06:55:50.258407+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4ecc76d3-1b07-4569-a649-e184d9982c72",
