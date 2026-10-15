@@ -23102,7 +23102,7 @@
   },
   {
     "id": "0f1d548f-6741-4afe-890b-09fd1f2c220e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!see07711fe91e4c5da4458b6e7cc92b66",
     "title": "HAIGE LPガスガソリン両用 インバーター 3.5kVA 屋外電源設備 HG-iG4000R-2 発電機 レビュー比",
     "name": "HAIGE LPガスガソリン両用 インバーター 3.5kVA 屋外電源設備 HG-iG4000R-2 発電機 レビュー比.md",
@@ -23112,8 +23112,8 @@
     "publishAt": "2026-10-15T02:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-15T01:55:28.890877+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-15T02:32:10.396951+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n18f7cf75d281?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
