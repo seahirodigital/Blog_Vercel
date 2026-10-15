@@ -1460,7 +1460,7 @@
   },
   {
     "id": "5fcfcfa3-8975-49a3-969a-e5b592b8a104",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s8f14d3d44bb145fe832cad5eb7e001b2",
     "title": "YESKAMOO 4K 360°全方位自動追跡 レビュー比較まとめ",
     "name": "YESKAMOO 4K 360°全方位自動追跡 レビュー比較まとめ.md",
@@ -1470,8 +1470,8 @@
     "publishAt": "2026-10-15T15:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-15T14:25:59.888434+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-15T15:02:20.142486+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n582aa37202f5?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
