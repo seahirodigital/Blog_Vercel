@@ -1262,7 +1262,7 @@
   },
   {
     "id": "1b09a4f5-70bb-4ca9-b06a-be071ff23b36",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s30ceba1a632d49bf8b3f87a7436621b0",
     "title": "日本寝具通信販売 羽毛布団 日本製 レビュー比較まとめ",
     "name": "日本寝具通信販売 羽毛布団 日本製 レビュー比較まとめ.md",
@@ -1272,8 +1272,8 @@
     "publishAt": "2026-10-15T09:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-15T11:45:21.224935+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-15T11:47:50.199200+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n75e0452ad572?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
