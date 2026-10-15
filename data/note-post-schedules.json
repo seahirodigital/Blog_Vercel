@@ -1280,7 +1280,7 @@
   },
   {
     "id": "6ea642be-6cf4-4839-85da-4c9a159bb8a3",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s9d6509731a9541e984de971bc426ca92",
     "title": "WiiM Amp ストリーミングアンプ パッシブスピーカー対応 HDMI ARC搭載 レビュー比較まとめ",
     "name": "WiiM Amp ストリーミングアンプ パッシブスピーカー対応 HDMI ARC搭載 レビュー比較まとめ.md",
@@ -1290,8 +1290,8 @@
     "publishAt": "2026-10-15T10:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-15T13:15:54.334249+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-15T13:18:30.308972+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n4c65971c6dcb?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
