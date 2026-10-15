@@ -23362,7 +23362,7 @@
   },
   {
     "id": "c2bdcf2f-693f-4537-93ea-7e1cac2975cc",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s92a0c061fd8d4aee895506d3a68f69b7",
     "title": "HiKOKI WR18DH(2XPZ) インパクトレンチ レビュー比較まとめ",
     "name": "HiKOKI WR18DH(2XPZ) インパクトレンチ レビュー比較まとめ.md",
@@ -23372,8 +23372,8 @@
     "publishAt": "2026-10-15T06:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-15T06:32:15.029767+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-15T06:34:56.686353+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n863de7496e9c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
