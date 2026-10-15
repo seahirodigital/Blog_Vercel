@@ -6,11 +6,13 @@ const INFO_VIEWER_CONFIG = Object.freeze({
   secretProperty: 'INFO_VIEWER_GAS_SECRET',
   stateProperty: 'INFO_VIEWER_DISPATCH_META_V1',
   videoPropertyPrefix: 'INFO_VIEWER_DISPATCH_VIDEO_',
+  baselinePropertyPrefix: 'INFO_VIEWER_DISPATCH_BASELINE_',
   pollFunction: 'pollInfoViewerNewVideos',
   retryMinutes: 10,
   redispatchMinutes: 45,
   maxDispatchesPerRun: 4,
-  maxStateEntries: 1000,
+  maxStateEntries: 300,
+  baselineChunkLength: 6000,
 });
 
 const INFO_VIEWER_ALIASES = Object.freeze({
@@ -57,20 +59,8 @@ function installInfoViewerDispatcher() {
     videos: {},
   };
 
-  targets.forEach((video) => {
-    state.videos[video.key] = {
-      videoUrl: video.videoUrl,
-      rowNumber: video.rowNumber,
-      firstSeenAt: now,
-      lastSeenAt: now,
-      status: 'legacy',
-      attempts: 0,
-      lastDispatchAt: '',
-      nextRetryAt: '',
-      lastError: '',
-    };
-  });
-
+  clearDispatcherState_();
+  saveBaselineKeys_(targets.map((video) => baselineKey_(video.key)));
   saveState_(state);
   removeDispatcherTriggers_();
   ScriptApp.newTrigger(INFO_VIEWER_CONFIG.pollFunction).timeBased().everyMinutes(1).create();
@@ -101,6 +91,7 @@ function pollInfoViewerNewVideos() {
     const now = new Date();
     const nowIso = now.toISOString();
     const videos = loadTargetVideos_();
+    const baselineKeys = loadBaselineKeys_();
     const activeKeys = new Set();
     let dispatchCount = 0;
     let completedCount = 0;
@@ -110,6 +101,12 @@ function pollInfoViewerNewVideos() {
     videos.forEach((video) => {
       activeKeys.add(video.key);
       const existing = state.videos[video.key];
+      if (!existing && baselineKeys.has(baselineKey_(video.key))) {
+        return;
+      }
+      if (!existing && video.status === '完了') {
+        return;
+      }
       const record = existing || {
         videoUrl: video.videoUrl,
         rowNumber: video.rowNumber,
@@ -128,9 +125,7 @@ function pollInfoViewerNewVideos() {
       state.videos[video.key] = record;
 
       if (video.status === '完了') {
-        if (record.status !== 'legacy') {
-          record.status = 'done';
-        }
+        record.status = 'done';
         record.lastError = '';
         completedCount += 1;
         return;
@@ -389,6 +384,49 @@ function saveState_(state) {
 
   Object.keys(existing)
     .filter((key) => key.startsWith(INFO_VIEWER_CONFIG.videoPropertyPrefix) && !(key in nextProperties))
+    .forEach((key) => scriptProperties.deleteProperty(key));
+}
+
+function baselineKey_(videoUrl) {
+  const digest = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, String(videoUrl || ''));
+  return digest.map((value) => (`0${(value & 0xff).toString(16)}`).slice(-2)).join('').slice(0, 12);
+}
+
+function loadBaselineKeys_() {
+  const properties = PropertiesService.getScriptProperties().getProperties();
+  const encoded = Object.entries(properties)
+    .filter(([key]) => key.startsWith(INFO_VIEWER_CONFIG.baselinePropertyPrefix))
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([, value]) => value)
+    .join('');
+  return new Set(encoded.split('\n').filter(Boolean));
+}
+
+function saveBaselineKeys_(keys) {
+  const scriptProperties = PropertiesService.getScriptProperties();
+  const uniqueKeys = [...new Set(keys)].sort();
+  const encoded = uniqueKeys.join('\n');
+  const nextProperties = {};
+  for (let offset = 0, index = 0; offset < encoded.length || index === 0; offset += INFO_VIEWER_CONFIG.baselineChunkLength, index += 1) {
+    nextProperties[`${INFO_VIEWER_CONFIG.baselinePropertyPrefix}${String(index).padStart(3, '0')}`] = encoded.slice(
+      offset,
+      offset + INFO_VIEWER_CONFIG.baselineChunkLength
+    );
+  }
+  scriptProperties.setProperties(nextProperties, false);
+  Object.keys(scriptProperties.getProperties())
+    .filter((key) => key.startsWith(INFO_VIEWER_CONFIG.baselinePropertyPrefix) && !(key in nextProperties))
+    .forEach((key) => scriptProperties.deleteProperty(key));
+}
+
+function clearDispatcherState_() {
+  const scriptProperties = PropertiesService.getScriptProperties();
+  Object.keys(scriptProperties.getProperties())
+    .filter((key) =>
+      key === INFO_VIEWER_CONFIG.stateProperty ||
+      key.startsWith(INFO_VIEWER_CONFIG.videoPropertyPrefix) ||
+      key.startsWith(INFO_VIEWER_CONFIG.baselinePropertyPrefix)
+    )
     .forEach((key) => scriptProperties.deleteProperty(key));
 }
 
