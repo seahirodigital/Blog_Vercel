@@ -1388,7 +1388,7 @@
   },
   {
     "id": "816d27f1-2889-4620-9196-f1d0988d0198",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sba26dec2f3244c02b78bf8a2eba2c869",
     "title": "HiKOKI UL18DD 冷温庫 レビュー比較まとめ",
     "name": "HiKOKI UL18DD 冷温庫 レビュー比較まとめ.md",
@@ -1397,10 +1397,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T13:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T12:25:03.219791+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2c291a1b-3675-4d33-af44-e3558b957718",
