@@ -23414,7 +23414,7 @@
   },
   {
     "id": "bc117674-949a-41ec-ba16-a6729a54514f",
-    "status": "queued",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!saca0769c457443c890ad74f9fff40cc2",
     "title": "roborock Q7B+ ロボット掃除機 小型 お掃除ロ レビュー比較まとめ",
     "name": "roborock Q7B Q7BP52-04 掃除機 レビュー比較まとめ.md",
@@ -23428,7 +23428,8 @@
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 1,
+    "cancelledAt": "2026-10-15T07:19:08.203Z"
   },
   {
     "id": "4ecc76d3-1b07-4569-a649-e184d9982c72",
@@ -23466,7 +23467,7 @@
   },
   {
     "id": "41f76c56-922b-4f8c-a03a-a7ebc478e33e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!see3582535c5a4364bcffbeb551d748cb",
     "title": "Hbada E3 Pro レビュー比較まとめ",
     "name": "Hbada E3 Pro レビュー比較まとめ.md",
@@ -23478,7 +23479,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:08.203Z"
   },
   {
     "id": "35a2889e-f320-4a60-8649-c634636d87e6",
@@ -23516,7 +23518,7 @@
   },
   {
     "id": "35d090ad-883c-4946-94e9-a1cb2c02f4d1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s97d1789f0d8745e2ac77de009b06ba9f",
     "title": "FUNROLUX 折りたたみダイニングテーブルセット 4人用 伸長式 バタフライテーブル チェア4脚 レビュー比較まとめ",
     "name": "FUNROLUX 折りたたみダイニングテーブルセット 4人用 伸長式 バタフライテーブル チェア4脚 レビュー比較まとめ.md",
@@ -23528,7 +23530,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:08.203Z"
   },
   {
     "id": "1d405890-852a-4d17-a7f8-5a47a60283a9",
@@ -23566,7 +23569,7 @@
   },
   {
     "id": "da841a50-9e6c-4415-8033-9d17239c0347",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2156b1af8cbd4415a52e4f75e1fc3195",
     "title": "BLUETTI AORA300 ポータブル電源 3014Wh大容量 レビュー比較まとめ",
     "name": "BLUETTI AORA300 ポータブル電源 3014Wh大容量 レビュー比較まとめ.md",
@@ -23578,7 +23581,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:08.203Z"
   },
   {
     "id": "3732ebdd-8265-4086-8af9-b8588e7610fa",
@@ -23616,7 +23620,7 @@
   },
   {
     "id": "5fd6baf0-3d3f-4004-a091-798fc6b53d2b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se61962e3a9a2468f9ff14592bae75f89",
     "title": "Atomos Ninja TX レビュー比較まとめ",
     "name": "Atomos Ninja TX レビュー比較まとめ.md",
@@ -23628,7 +23632,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:08.203Z"
   },
   {
     "id": "44788f4f-0cda-4bc4-84e7-ed96a62018ab",
@@ -23666,7 +23671,7 @@
   },
   {
     "id": "d4c69e1f-0308-4bdc-80d3-0b7b7c7c46da",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3cb17eb1eeb447f5b7a1a5af0f6c028d",
     "title": "Jackery ポータブル電源 1000 New V3 200W ソーラーパネル 1枚 レビュー比較まとめ",
     "name": "Jackery ポータブル電源 1000 New V3 200W ソーラーパネル 1枚 レビュー比較まとめ.md",
@@ -23678,7 +23683,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:08.203Z"
   },
   {
     "id": "d63c34e4-54d3-4608-bb1a-515792aca2f5",
@@ -23716,7 +23722,7 @@
   },
   {
     "id": "2752336e-b5dd-4a50-a911-6cbad24d3c07",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!seabe1580339c4eeeb181a54309d54a13",
     "title": "東芝 ER-S17ZB (K) 電子レンジ レビュー比較まとめ",
     "name": "東芝 ER-S17ZB (K) 電子レンジ レビュー比較まとめ.md",
@@ -23728,7 +23734,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:08.203Z"
   },
   {
     "id": "e0201b60-93a6-4c89-ae11-8ffc86808d7e",
@@ -23766,7 +23773,7 @@
   },
   {
     "id": "58dd070e-db71-42e8-b411-dd34bab5d756",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s219cf4499c3f44fb8df2516d9affc6d1",
     "title": "AWOL VISION ALR (ALR-F220C) プロジェクタースクリーン レビュー比較まとめ",
     "name": "AWOL VISION ALR (ALR-F220C) プロジェクタースクリーン レビュー比較まとめ.md",
@@ -23778,7 +23785,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:08.203Z"
   },
   {
     "id": "5737b2e3-8704-4954-ac3a-c00bc98433ac",
