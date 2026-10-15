@@ -52,7 +52,7 @@
   },
   {
     "id": "34247e9e-8619-4450-bd32-557acc1c5139",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sc7114b75b35e4ecd87a912eac0e1c0f8",
     "title": "クワッズ BISARA PRO ハンズフリースタンドドライヤー、ながら乾かし美髪ケアの最新レビュー比較をまとめます",
     "name": "BISARA PRO ハンズフリースタンドドライヤー、ながら乾かし美髪ケアの最新レビュー比較をまとめます.md",
@@ -64,7 +64,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:44.377Z"
   },
   {
     "id": "c85598a6-6c2b-4609-abf4-43e0a400342f",
@@ -357,7 +358,7 @@
   },
   {
     "id": "d7c16a74-c3f4-46cf-985a-ae843911e8b2",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa48f95ef90a94c2492663fdeea2f79bc",
     "title": "Shark LC350JWH EVOPOWER SYSTEM NEO+ レビュー比較まとめ",
     "name": "Shark 掃除機 自動ゴミ収集ドック付き スティッククリーナー LC350JWH EVOPOWER SYSTEM NE.md",
@@ -369,7 +370,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:44.377Z"
   },
   {
     "id": "99f10da9-4ac8-4ea2-99db-36d8c356ef7b",
@@ -730,7 +732,7 @@
   },
   {
     "id": "6d31221a-25c5-4723-9d0f-ff8c40b0224d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se58b715c52d44cdc960c1f71319d6970",
     "title": "Shark(シャーク) FA222JBKNC FlexBreeze レビュー比較まとめ",
     "name": "Shark シャーク 扇風機 FlexBreeze コードレスサーキュレーター ファン FA222JBKNC レビュー比.md",
@@ -742,7 +744,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:44.377Z"
   },
   {
     "id": "3deebb54-8c8c-4571-be48-7e5a1be6add8",
@@ -814,7 +817,7 @@
   },
   {
     "id": "7e09a768-69a8-4ac9-8749-d2a6170ef5da",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s850c4cc2691b4526a7592cb363def8e4",
     "title": "Shark シャーク 扇風機 サーキュレーター TF200SJBKNC TURBOBLADE ハイパワー タワーファン",
     "name": "Shark シャーク 扇風機 サーキュレーター TF200SJBKNC TURBOBLADE ハイパワー タワーファン.md",
@@ -826,7 +829,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:44.377Z"
   },
   {
     "id": "53f0ff5e-3e27-4374-a6f8-9bb6b3bf149a",
@@ -1034,7 +1038,7 @@
   },
   {
     "id": "e022b4ff-f6e0-48f6-9ea5-86df8b005346",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5d91e5d54f004fbfb447382d36601e3f",
     "title": "Mindoo AquaX Plus 水拭き掃除機 レビュー比較まとめ：効率的なお掃除を実現する新常識",
     "name": "Mindoo AquaX Plus 水拭き掃除機 レビュー比較まとめ：効率的なお掃除を実現する新常識.md",
@@ -1046,11 +1050,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:44.377Z"
   },
   {
     "id": "58cf226d-ade8-4efb-8d28-17aaf694e95f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf12a4d8829e043ab9dc96f4ba8874b28",
     "title": "Reencle Prime 家庭用 生ごみ処理機 ハイブリッド式 レビュー比較まとめ",
     "name": "Reencle Prime 家庭用 生ごみ処理機 ハイブリッド式 レビュー比較まとめ.md",
@@ -1062,11 +1067,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:44.377Z"
   },
   {
     "id": "3a99c605-8c41-4c19-b943-dbb225beee09",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9356b096d1924a1583acae3f5a827d2e",
     "title": "アイリスオーヤマ シェフドラム 自動調理鍋 レビュー比較まとめ：忙しい毎日を劇的に変える時短家電の真価",
     "name": "アイリスオーヤマ シェフドラム 自動調理鍋 レビュー比較まとめ：忙しい毎日を劇的に変える時短家電の真価.md",
@@ -1078,11 +1084,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:44.377Z"
   },
   {
     "id": "bff93971-54b9-4341-8e5b-d860e2d192ae",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd6698e44fd7342a2b17d4019656025cb",
     "title": "パナソニック オートクッカー ビストロ 自動調理なべ NF-AC1000-K レビュー比較まとめ",
     "name": "パナソニック オートクッカー ビストロ 自動調理なべ NF-AC1000-K レビュー比較まとめ.md",
@@ -1094,11 +1101,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:44.377Z"
   },
   {
     "id": "0674ac7d-01c7-4503-a412-8f0bd89d641d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s725c5bc5208d40029d0085b869500366",
     "title": "リファビューテック ドライヤー SE レビュー比較まとめ：効率的な美髪ケアを実現する新体験",
     "name": "ティファール 自動調理鍋 かきまぜ機能 レビュー比較まとめ：時短と効率を叶える新時代のキッチン家電レビュー.md",
@@ -1110,11 +1118,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:44.377Z"
   },
   {
     "id": "8d6e26da-0070-46ec-a220-5bcec22050c6",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s41f088be7dab48599c30b25eade4695b",
     "title": "リファファインバブル U+ レビュー比較まとめ：効率的なバスタイムで美と節約を両立する新体験",
     "name": "リファファインバブル U+ シャワーヘッド レビュー比較まとめ：効率的なバスタイムで美と節約を両立する新体験.md",
@@ -1126,11 +1135,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:44.377Z"
   },
   {
     "id": "65b95e94-6db9-4fdb-9147-8729b69d8281",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8a99bd00ecfb440b91453c29e62329f9",
     "title": "リファバイタルテックモイストスムーススタンドカラースリープウェアの選び方と効果的な活用法をレビュー比較まとめ",
     "name": "リファバイタルテックモイストスムーススタンドカラースリープウェアWOMENの選び方と効果的な活用法をレビュー比較まとめ.md",
@@ -1142,11 +1152,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:44.377Z"
   },
   {
     "id": "03a0cfb8-3b61-4536-8681-7505dd8e663d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s75494b2e712c48818c74b5e3a92c1e8c",
     "title": "リファファインバブル ピュア MTG シャワーヘッド選びの決定版レビュー比較",
     "name": "リファファインバブル ピュア、シャワーヘッド選びの決定版レビュー比較.md",
@@ -1158,11 +1169,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:44.377Z"
   },
   {
     "id": "298df4b5-c007-4559-a399-6b76e1e6e229",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s1b8298e1cb8148ca857e6a807c13dfdd",
     "title": "リファビューテック ドライヤー SE レビュー比較まとめ：効率的な美髪ケアを実現する新体験",
     "name": "リファビューテック ドライヤー SE レビュー比較まとめ：効率的な美髪ケアを実現する新体験をレビュー比較.md",
@@ -1174,11 +1186,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:44.377Z"
   },
   {
     "id": "443630d9-8ede-46c8-985c-7cbc6c01e257",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se76861e3a2a24295890d63cd6297ed35",
     "title": "Dyson PencilVac Fluffycones SV50 レビュー比較まとめ",
     "name": "Dyson掃除機 コードレス PencilVac Fluffycones SV50 レビュー比較まとめ.md",
@@ -1190,6 +1203,7 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:19:44.377Z"
   }
 ]
