@@ -23258,7 +23258,7 @@
   },
   {
     "id": "25f6ffcd-4081-4d90-91b7-b991ce7113b0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s84acb37143c1440cbdcdcd2ecc3d8c02",
     "title": "ヒツジのいらない枕 ヒツジのいらないマットレス ーSLEEPERー セミダブル カバー付 マットレス レビュー比較まとめ",
     "name": "ヒツジのいらない枕 ヒツジのいらないマットレス ーSLEEPERー セミダブル カバー付 マットレス レビュー比較まとめ.md",
@@ -23267,10 +23267,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T04:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T06:32:15.029767+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "064e0aa8-d475-44e2-b3f8-9edddad63e86",
@@ -23308,7 +23310,7 @@
   },
   {
     "id": "b8a67b41-2e95-4ab0-8de5-cd5e6f1125b4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6bd4d7b905c14eb69ba7238324366e64",
     "title": "EENOUR DK4000iAPS 5kVA インバーター発電機 定格出力3 レビュー比較まとめ",
     "name": "EENOUR DK4000iAPS 5kVA インバーター発電機 定格出力3 レビュー比較まとめ.md",
@@ -23317,10 +23319,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T06:32:15.029767+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3d8f026b-416a-4e0a-91df-33715159d81b",
@@ -23358,7 +23362,7 @@
   },
   {
     "id": "c2bdcf2f-693f-4537-93ea-7e1cac2975cc",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s92a0c061fd8d4aee895506d3a68f69b7",
     "title": "HiKOKI WR18DH(2XPZ) インパクトレンチ レビュー比較まとめ",
     "name": "HiKOKI WR18DH(2XPZ) インパクトレンチ レビュー比較まとめ.md",
@@ -23367,10 +23371,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T06:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T06:32:15.029767+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "705f6deb-71b2-474e-8a00-6830c2acb9a8",
