@@ -1424,7 +1424,7 @@
   },
   {
     "id": "f9dba06d-ca2a-48f7-92f5-abbb879db1e6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2c37dee99f144fe3b9a511c740ff3d52",
     "title": "ASUS ROG Falcata Gaming Keyboard ゲーミングキーボード レビュー比較まとめ",
     "name": "ASUS ROG Falcata Gaming Keyboard ゲーミングキーボード レビュー比較まとめ.md",
@@ -1433,10 +1433,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T14:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T13:25:06.748464+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "22f93b00-9d92-45c7-a4ea-f6ec91954e59",
