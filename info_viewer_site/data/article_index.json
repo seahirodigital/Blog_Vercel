@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-10-15T08:53:28.435003+00:00",
+  "generatedAt": "2026-10-15T11:48:17.976676+00:00",
   "articleList": [
+    {
+      "id": "80641accdac7932caf",
+      "url": "/articles/80641accdac7932caf/",
+      "title": "田中泰輔のマネーは語る：【米国株】AI相場再滑落　波動を前提とする投資戦術（田中 泰輔）【楽天証券 トウシル】",
+      "channelName": "トウシル（楽天証券）",
+      "channelKey": "トウシル（楽天証券）",
+      "channelTab": "トウシル",
+      "youtubeUrl": "https://www.youtube.com/watch?v=H7yKuNMRPHo",
+      "thumbnail": "https://i.ytimg.com/vi/H7yKuNMRPHo/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-15T11:32:02.392895",
+      "recordedLabel": "2026.10.15 11:32",
+      "timeLabel": "2026.10.15 11:32",
+      "persons": [
+        "田中泰輔"
+      ],
+      "lastModified": "2026-10-15T11:32:07Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s554c76fae8914ca8aa4968cc5debb585"
+    },
     {
       "id": "95b81b305f3547779f",
       "url": "/articles/95b81b305f3547779f/",
@@ -8505,6 +8526,27 @@
     }
   ],
   "articles": {
+    "80641accdac7932caf": {
+      "id": "80641accdac7932caf",
+      "url": "/articles/80641accdac7932caf/",
+      "title": "田中泰輔のマネーは語る：【米国株】AI相場再滑落　波動を前提とする投資戦術（田中 泰輔）【楽天証券 トウシル】",
+      "channelName": "トウシル（楽天証券）",
+      "channelKey": "トウシル（楽天証券）",
+      "channelTab": "トウシル",
+      "youtubeUrl": "https://www.youtube.com/watch?v=H7yKuNMRPHo",
+      "thumbnail": "https://i.ytimg.com/vi/H7yKuNMRPHo/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-15T11:32:02.392895",
+      "recordedLabel": "2026.10.15 11:32",
+      "timeLabel": "2026.10.15 11:32",
+      "persons": [
+        "田中泰輔"
+      ],
+      "lastModified": "2026-10-15T11:32:07Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s554c76fae8914ca8aa4968cc5debb585"
+    },
     "95b81b305f3547779f": {
       "id": "95b81b305f3547779f",
       "url": "/articles/95b81b305f3547779f/",
@@ -17010,6 +17052,11 @@
   },
   "channels": [
     {
+      "name": "トウシル（楽天証券）",
+      "tab": "トウシル",
+      "latestAt": "2026-10-15T11:32:02.392895"
+    },
+    {
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-10-15T08:37:51.543593"
@@ -17053,11 +17100,6 @@
       "name": "NVIDIA",
       "tab": "NVID",
       "latestAt": "2026-06-14T16:18:52.273878"
-    },
-    {
-      "name": "トウシル（楽天証券）",
-      "tab": "トウシル",
-      "latestAt": "2026-06-12T07:00:20.604246"
     },
     {
       "name": "中村 仁の投資アカデミー / ブルーモ証券",
