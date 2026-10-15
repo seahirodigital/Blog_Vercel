@@ -1,6 +1,28 @@
 {
-  "generatedAt": "2026-10-15T01:58:51.625086+00:00",
+  "generatedAt": "2026-10-15T07:48:00.129431+00:00",
   "articleList": [
+    {
+      "id": "4519df77368007aee0",
+      "url": "/articles/4519df77368007aee0/",
+      "title": "【ザキオカ☆オプションゼミ＃41】データからここからの日経平均株価を予想する（岡崎良介×大橋ひろこ）",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=miF7sKVPDGU",
+      "thumbnail": "https://i.ytimg.com/vi/miF7sKVPDGU/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-15T07:32:04.257162",
+      "recordedLabel": "2026.10.15 07:32",
+      "timeLabel": "2026.10.15 07:32",
+      "persons": [
+        "岡崎良介",
+        "大橋ひろこ"
+      ],
+      "lastModified": "2026-10-15T07:32:10Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s0542f0879bad4456a7e551f1d578402f"
+    },
     {
       "id": "890168c89602c57712",
       "url": "/articles/890168c89602c57712/",
@@ -8464,6 +8486,28 @@
     }
   ],
   "articles": {
+    "4519df77368007aee0": {
+      "id": "4519df77368007aee0",
+      "url": "/articles/4519df77368007aee0/",
+      "title": "【ザキオカ☆オプションゼミ＃41】データからここからの日経平均株価を予想する（岡崎良介×大橋ひろこ）",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=miF7sKVPDGU",
+      "thumbnail": "https://i.ytimg.com/vi/miF7sKVPDGU/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-15T07:32:04.257162",
+      "recordedLabel": "2026.10.15 07:32",
+      "timeLabel": "2026.10.15 07:32",
+      "persons": [
+        "岡崎良介",
+        "大橋ひろこ"
+      ],
+      "lastModified": "2026-10-15T07:32:10Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s0542f0879bad4456a7e551f1d578402f"
+    },
     "890168c89602c57712": {
       "id": "890168c89602c57712",
       "url": "/articles/890168c89602c57712/",
@@ -16928,6 +16972,11 @@
   },
   "channels": [
     {
+      "name": "なるほど投資ゼミ（大橋ひろこ",
+      "tab": "なるほど",
+      "latestAt": "2026-10-15T07:32:04.257162"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-10-15T01:41:54.429875"
@@ -16946,11 +16995,6 @@
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-10-14T22:31:13.158321"
-    },
-    {
-      "name": "なるほど投資ゼミ（大橋ひろこ",
-      "tab": "なるほど",
-      "latestAt": "2026-10-14T18:49:21.375178"
     },
     {
       "name": "PIVOT 公式チャンネル",
