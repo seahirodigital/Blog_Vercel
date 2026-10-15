@@ -23310,7 +23310,7 @@
   },
   {
     "id": "b8a67b41-2e95-4ab0-8de5-cd5e6f1125b4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s6bd4d7b905c14eb69ba7238324366e64",
     "title": "EENOUR DK4000iAPS 5kVA インバーター発電機 定格出力3 レビュー比較まとめ",
     "name": "EENOUR DK4000iAPS 5kVA インバーター発電機 定格出力3 レビュー比較まとめ.md",
@@ -23320,8 +23320,8 @@
     "publishAt": "2026-10-15T05:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-15T06:32:15.029767+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-15T06:34:49.433736+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7a0d0b33814e?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
