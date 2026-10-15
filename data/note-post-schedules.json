@@ -4058,7 +4058,7 @@
   },
   {
     "id": "e23f02f7-0b99-4afc-b503-eb156306d38e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb44af850a9ca4067a15809add6b55fe7",
     "title": "EENOUR P2001PLUS(P2001進級版) ポータブル電源 レビュー比較まとめ",
     "name": "EENOUR P2001PLUS(P2001進級版) ポータブル電源 レビュー比較まとめ.md",
@@ -4070,11 +4070,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "3f36f0bf-cdff-4124-adba-286d84eb4810",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sd45bc097d8e041d3a6be186f08130e89",
     "title": "Belkin Thunderbolt 5 12-in-1 140W PD給電 最大3画面出力 8K 4K 対応 ドッキン",
     "name": "Belkin Thunderbolt 5 12-in-1 140W PD給電 最大3画面出力 8K 4K 対応 ドッキン.md",
@@ -4086,11 +4087,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "685eff77-d76b-427d-b667-7b64aa0152ff",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7358e45ed536413eaeea8a5dacc6df06",
     "title": "SMALLRIG x Potato Jet TRIBEX SE 5305 三脚 レビュー比較まとめ",
     "name": "SMALLRIG x Potato Jet TRIBEX SE 5305 三脚 レビュー比較まとめ.md",
@@ -4102,11 +4104,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "691f24aa-5a49-4933-9ebb-3eca4b3d3e17",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sdf597e2f19594c80bb49b2d595584c49",
     "title": "AIVOLT 発電機 レビュー比較まとめ",
     "name": "AIVOLT 発電機 レビュー比較まとめ.md",
@@ -4118,11 +4121,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "8123fce7-91d3-4e3d-a485-b9bfadb1ad1d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se732a69fa7aa49019bebbc34a836afb5",
     "title": "Gaidoh GH4500i 発電機 レビュー比較まとめ",
     "name": "Gaidoh GH4500i 発電機 レビュー比較まとめ.md",
@@ -4134,11 +4138,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "dcee297d-bbd7-4e81-9de2-0176e1f9e947",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s424d7db435974c1080554cbb0bf25b38",
     "title": "サンワダイレクト プロジェクター 自立式 169 4K フルHD 超短焦点対応 パンタグラフ式 難燃性 100-PRS0",
     "name": "サンワダイレクト プロジェクター 自立式 169 4K フルHD 超短焦点対応 パンタグラフ式 難燃性 100-PRS0.md",
@@ -4150,11 +4155,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "ab128694-70de-4c63-9ef5-db3cb1212e79",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se93cd358ea334e8dbf71a32443a30e34",
     "title": "Jackery ポータブル電源 1500 New レビュー比較まとめ",
     "name": "Jackery ポータブル電源 1500 New レビュー比較まとめ.md",
@@ -4166,11 +4172,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "144f6c0e-2701-4d7f-8272-d61d01a0a103",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9b3333c5402242e1a30feca80a506408",
     "title": "PORMIDO-LINK PR-G30 レビュー比較まとめ",
     "name": "PORMIDO-LINK PR-G30 レビュー比較まとめ.md",
@@ -4182,11 +4189,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "ebc8bf64-0ed0-4ef9-a764-18bbf1ec14da",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sff7ea362bfa2468db49d37f855967d2f",
     "title": "LUNYEE 3018 Pro Ultra CNC フライス盤 レビュー比較まとめ",
     "name": "LUNYEE 3018 Pro Ultra CNC フライス盤 レビュー比較まとめ.md",
@@ -4198,11 +4206,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "3576d71f-c5c9-483c-bdac-9ad5b8ba3a2c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!scf032b0bfdf44125a754fe80123efa96",
     "title": "ASUS ROG Azoth Extreme キーボード ゲーミングキーボード レビュー比較まとめ",
     "name": "ASUS ROG Azoth Extreme キーボード ゲーミングキーボード レビュー比較まとめ.md",
@@ -4214,11 +4223,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "922ba918-685e-4af8-907a-d88c53be2240",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7541bd26bfc74f1c9e406c0126529f22",
     "title": "Insta360 X5 アクションカメラ レビュー比較まとめ",
     "name": "Insta360 X5 アクションカメラ レビュー比較まとめ.md",
@@ -4230,11 +4240,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "69b5b7ee-d6f8-4700-8272-16c201ac4124",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sdbf4486f26aa4b259b555ffc0b6151fa",
     "title": "山善 ELD-FS(MBK)T1400(SDGY) レビュー比較まとめ",
     "name": "山善 ELD-FS(MBK)T1400(SDGY) レビュー比較まとめ.md",
@@ -4246,11 +4257,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "98d3cd46-131d-489b-bdc2-71727ee0f41f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf55bfbd848944943843eef34f8172a85",
     "title": "CZUR ET MAX-USBC レビュー比較まとめ",
     "name": "CZUR ET MAX-USBC レビュー比較まとめ.md",
@@ -4262,11 +4274,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "04ab2146-5287-4918-86b1-d0432bf94fdd",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4e99a4ecbf254f2faf7502ccb64fcaca",
     "title": "HiKOKI UL18DBA 冷温庫 レビュー比較まとめ",
     "name": "HiKOKI UL18DBA 冷温庫 レビュー比較まとめ.md",
@@ -4278,11 +4291,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "3ff04bda-ebd2-4a7c-bc81-21c9cb858f00",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s52024d319e494dfab04a394a350345bf",
     "title": "kurflo レビュー比較まとめ",
     "name": "kurflo レビュー比較まとめ.md",
@@ -4294,11 +4308,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "4369f73d-3dcb-4aa4-aa15-10288d60293f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s526da4a2e6964363842a9311a0342ad0",
     "title": "桐らくね 折りたたみベッドプレミアム24 【日本製】 総桐製 ロータイプ シングル すのこベッド レビュー比較まとめ",
     "name": "桐らくね 折りたたみベッドプレミアム24 【日本製】 総桐製 ロータイプ シングル すのこベッド レビュー比較まとめ.md",
@@ -4310,11 +4325,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "5008425d-5f09-4635-99f2-5eda3e07a348",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4150ece6d38f43acbbc6553d0b3e925c",
     "title": "NANLITE PJ-BM-25-45 プロジェクションアタッチメント 25-45° ズーム式 ボーエンズマウント レビ",
     "name": "NANLITE PJ-BM-25-45 プロジェクションアタッチメント 25-45° ズーム式 ボーエンズマウント レビ.md",
@@ -4326,11 +4342,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "b245b685-b5c6-4154-be84-692c492d8bc2",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb822c64774d141a7a5ce614dbae06eee",
     "title": "Jackery ドライブチャージャー 600W DC-DC Charger 走行充電器 レビュー比較まとめ",
     "name": "Jackery ドライブチャージャー 600W DC-DC Charger 走行充電器 レビュー比較まとめ.md",
@@ -4342,11 +4359,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "f2ae586e-5349-4444-9e8b-097ede13ef16",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4d72c8a165134a8598205821f7f4785a",
     "title": "SteelSeries Arctis Nova Pro Omni Black ゲーミングヘッドセット レビュー比較まとめ",
     "name": "SteelSeries Arctis Nova Pro Omni Black ゲーミングヘッドセット レビュー比較まとめ.md",
@@ -4358,11 +4376,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "f2c0b942-2910-4f25-9fc2-8174eaa97609",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf544826c89ca4d02a29bd183145605a0",
     "title": "Jackery ポータブル電源 1000 New 200W ソーラーパネル 1枚 2点セット レビュー比較まとめ",
     "name": "Jackery ポータブル電源 1000 New 200W ソーラーパネル 1枚 2点セット レビュー比較まとめ.md",
@@ -4374,11 +4393,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "c0db61b5-a66b-4218-9e8e-7025d40fc731",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8b132eaa9a194a1a93614f4ff0f487ab",
     "title": "koala MIRAIKUSTOM ミライカスタム すのこベッド クイーン ベッドフレーム レビュー比較まとめ",
     "name": "koala MIRAIKUSTOM ミライカスタム すのこベッド クイーン ベッドフレーム レビュー比較まとめ.md",
@@ -4390,11 +4410,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   },
   {
     "id": "6287e9ec-0d4b-4c65-b4db-48b5aafdd54b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4cf95bdf95ce4ddb9fe3270aefae5e63",
     "title": "ATOTOEXCEL V10 QLEDディスプレイオーディオ2DIN レビュー比較まとめ",
     "name": "ATOTOEXCEL V10 QLEDディスプレイオーディオ2DIN レビュー比較まとめ.md",
@@ -4406,6 +4427,7 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-10-15T07:20:50.498Z"
   }
 ]
