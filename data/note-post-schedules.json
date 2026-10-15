@@ -1334,7 +1334,7 @@
   },
   {
     "id": "c1c6b986-6c02-4cd5-9d2a-e854a740a2eb",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s4abf022d28ce4fe5bf424ecfdee67551",
     "title": "RISE ライズ東京 スリープマジック 極厚マットレス シングル レビュー比較まとめ",
     "name": "RISE ライズ東京 スリープマジック 極厚マットレス シングル レビュー比較まとめ.md",
@@ -1344,8 +1344,8 @@
     "publishAt": "2026-10-15T11:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-15T11:45:21.224935+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-15T11:47:54.496781+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n0559390600d6/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
