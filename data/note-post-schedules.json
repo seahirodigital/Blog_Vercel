@@ -1226,7 +1226,7 @@
   },
   {
     "id": "15edc1b2-e52b-4a7c-bf35-78b490fbee3b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s295fe6295c5942f0ab0d2066f08ddd2a",
     "title": "Magniflex モデル246 ダブル レビュー比較まとめ",
     "name": "Magniflex モデル246 ダブル レビュー比較まとめ.md",
@@ -1235,14 +1235,16 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T08:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T11:45:21.224935+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1cadcab0-3815-4182-b512-5f3a1c2502f4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa96d11a4f02f440db63e4934557cb587",
     "title": "WTW 塚本無線 500万画素防犯カメラ モニター一体型 録画機 防犯カメラ レビュー比較まとめ",
     "name": "WTW 塚本無線 500万画素防犯カメラ モニター一体型 録画機 防犯カメラ レビュー比較まとめ.md",
@@ -1251,14 +1253,16 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T09:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T11:45:21.224935+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1b09a4f5-70bb-4ca9-b06a-be071ff23b36",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s30ceba1a632d49bf8b3f87a7436621b0",
     "title": "日本寝具通信販売 羽毛布団 日本製 レビュー比較まとめ",
     "name": "日本寝具通信販売 羽毛布団 日本製 レビュー比較まとめ.md",
@@ -1267,14 +1271,16 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T09:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T11:45:21.224935+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6ea642be-6cf4-4839-85da-4c9a159bb8a3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9d6509731a9541e984de971bc426ca92",
     "title": "WiiM Amp ストリーミングアンプ パッシブスピーカー対応 HDMI ARC搭載 レビュー比較まとめ",
     "name": "WiiM Amp ストリーミングアンプ パッシブスピーカー対応 HDMI ARC搭載 レビュー比較まとめ.md",
@@ -1283,14 +1289,16 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T10:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T11:45:21.224935+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cd646f53-b546-4c37-85ca-7f2435a0baa5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbf7782c6839a4f6e9c4704ad8cf8d250",
     "title": "OBSBOT Tail Air レビュー比較まとめ",
     "name": "OBSBOT Tail Air レビュー比較まとめ.md",
@@ -1299,14 +1307,16 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T10:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T11:45:21.224935+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "53c0570b-5011-4cce-ace0-4832c37275ca",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdb96cdfedc8547168e5d98c7bc1ff3d3",
     "title": "adget Alternative 32inch スタンド付き大画面 スマートモニター タブレット レビュー比較まとめ",
     "name": "adget Alternative 32inch スタンド付き大画面 スマートモニター タブレット レビュー比較まとめ.md",
@@ -1315,14 +1325,16 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T11:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T11:45:21.224935+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c1c6b986-6c02-4cd5-9d2a-e854a740a2eb",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4abf022d28ce4fe5bf424ecfdee67551",
     "title": "RISE ライズ東京 スリープマジック 極厚マットレス シングル レビュー比較まとめ",
     "name": "RISE ライズ東京 スリープマジック 極厚マットレス シングル レビュー比較まとめ.md",
@@ -1331,14 +1343,16 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T11:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T11:45:21.224935+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "599de7cd-9816-48eb-98fa-e11f5d723300",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa879e64fd795492caf3de52e343bd004",
     "title": "EARTH ELEVATED カナダ産シダーウッド 高床式ガーデンベッド レビュー比較まとめ",
     "name": "EARTH ELEVATED カナダ産シダーウッド 高床式ガーデンベッド レビュー比較まとめ.md",
@@ -1347,10 +1361,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T12:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T11:45:21.224935+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "51815116-7bff-4f6d-b8d8-a181ba573fd3",
