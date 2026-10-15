@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-15T08:28:23.573750+00:00",
+  "generatedAt": "2026-10-15T08:53:28.435003+00:00",
   "articleList": [
+    {
+      "id": "95b81b305f3547779f",
+      "url": "/articles/95b81b305f3547779f/",
+      "title": "【伸び悩むゴールド価格】金相場に臨む、４つの心構え（三井物産 山口英雄さん） [ウィークリーゴールド]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=1CDcM2TEwFU",
+      "thumbnail": "https://i.ytimg.com/vi/1CDcM2TEwFU/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-15T08:37:51.543593",
+      "recordedLabel": "2026.10.15 08:37",
+      "timeLabel": "2026.10.15 08:37",
+      "persons": [],
+      "lastModified": "2026-10-15T08:37:56Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s25e4006e3e054a18a328034d93f5aced"
+    },
     {
       "id": "4519df77368007aee0",
       "url": "/articles/4519df77368007aee0/",
@@ -8486,6 +8505,25 @@
     }
   ],
   "articles": {
+    "95b81b305f3547779f": {
+      "id": "95b81b305f3547779f",
+      "url": "/articles/95b81b305f3547779f/",
+      "title": "【伸び悩むゴールド価格】金相場に臨む、４つの心構え（三井物産 山口英雄さん） [ウィークリーゴールド]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=1CDcM2TEwFU",
+      "thumbnail": "https://i.ytimg.com/vi/1CDcM2TEwFU/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-15T08:37:51.543593",
+      "recordedLabel": "2026.10.15 08:37",
+      "timeLabel": "2026.10.15 08:37",
+      "persons": [],
+      "lastModified": "2026-10-15T08:37:56Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s25e4006e3e054a18a328034d93f5aced"
+    },
     "4519df77368007aee0": {
       "id": "4519df77368007aee0",
       "url": "/articles/4519df77368007aee0/",
@@ -16974,7 +17012,7 @@
     {
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
-      "latestAt": "2026-10-15T08:16:03.275317"
+      "latestAt": "2026-10-15T08:37:51.543593"
     },
     {
       "name": "げんたろうの投資ch【元機関投資家】",
