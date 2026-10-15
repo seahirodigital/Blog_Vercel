@@ -23154,7 +23154,7 @@
   },
   {
     "id": "c8ea3de2-ee72-4f1c-8e26-e90142ca4b0d",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd49a6ea13523423d8e83d752c852f6c9",
     "title": "HiKOKI AC100V ロータリーハンマドリル DH28PCY2 レビュー比較まとめ",
     "name": "HiKOKI AC100V ロータリーハンマドリル DH28PCY2 レビュー比較まとめ.md",
@@ -23164,8 +23164,8 @@
     "publishAt": "2026-10-15T03:00:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
     "queuedAt": "2026-10-15T02:25:02.906441+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-15T03:02:29.797763+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n145d1c2b7b22?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
