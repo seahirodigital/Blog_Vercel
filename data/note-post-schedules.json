@@ -1568,7 +1568,7 @@
   },
   {
     "id": "b37f112b-1bf9-4dad-b5a8-e72a03a56e62",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd6dbced95afb4c5e98de2ebdc76d818b",
     "title": "Potensic ATOM 2 レビュー比較まとめ",
     "name": "Potensic ATOM 2 レビュー比較まとめ.md",
@@ -1577,10 +1577,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T19:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T18:25:31.128626+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "39d93ed3-ef55-44c6-b570-2271cfcf480c",
