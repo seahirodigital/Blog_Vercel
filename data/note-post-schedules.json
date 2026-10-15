@@ -1514,7 +1514,7 @@
   },
   {
     "id": "e348d3ee-ba85-4fde-91bb-6db3b83d98db",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s35aefcefe44140b097fee313006055e7",
     "title": "Dabbsson ポータブル電源 600L レビュー比較まとめ",
     "name": "Dabbsson ポータブル電源 600L レビュー比較まとめ.md",
@@ -1524,8 +1524,8 @@
     "publishAt": "2026-10-15T17:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-15T16:25:43.858247+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-15T17:02:16.236050+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n582a788c2cf5?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
