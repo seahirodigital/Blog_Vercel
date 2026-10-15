@@ -23206,7 +23206,7 @@
   },
   {
     "id": "3087e7c5-cc0c-42c8-82fd-1aed50a03010",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sac8207d4dc2447f0b38eac88f60d57a1",
     "title": "Apple(アップル) Apple iPhone Air レビュー比較まとめ",
     "name": "Apple(アップル) Apple iPhone Air レビュー比較まとめ.md",
@@ -23215,10 +23215,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T03:30:00.000Z",
     "createdAt": "2026-10-01T23:24:18.881Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T02:55:37.727109+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c9820f2c-56db-4526-b33b-b689dc0f2266",
