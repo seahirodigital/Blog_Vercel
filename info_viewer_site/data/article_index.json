@@ -1,6 +1,44 @@
 {
-  "generatedAt": "2026-10-14T23:28:48.277627+00:00",
+  "generatedAt": "2026-10-15T01:58:51.625086+00:00",
   "articleList": [
+    {
+      "id": "890168c89602c57712",
+      "url": "/articles/890168c89602c57712/",
+      "title": "【キオクシア急落！緊急雑談LIVE】10/13 19:00~",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=_tsvZ4A6I0Y",
+      "thumbnail": "https://i.ytimg.com/vi/_tsvZ4A6I0Y/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-15T01:41:54.429875",
+      "recordedLabel": "2026.10.15 01:41",
+      "timeLabel": "2026.10.15 01:41",
+      "persons": [],
+      "lastModified": "2026-10-15T01:42:00Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sc92cf715713d46d68ed57e9c905f15cf"
+    },
+    {
+      "id": "580c9fece24d5edb1c",
+      "url": "/articles/580c9fece24d5edb1c/",
+      "title": "LIVE  マーケットアップデート　半導体株急落　　バリュー買いへのセクターローテーションか？",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=-j3mLBzmexg",
+      "thumbnail": "https://i.ytimg.com/vi/-j3mLBzmexg/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-15T01:40:44.551804",
+      "recordedLabel": "2026.10.15 01:40",
+      "timeLabel": "2026.10.15 01:40",
+      "persons": [],
+      "lastModified": "2026-10-15T01:40:49Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s51406566170f4419bddbd93515c7383c"
+    },
     {
       "id": "032523f36568a58b00",
       "url": "/articles/032523f36568a58b00/",
@@ -8426,6 +8464,44 @@
     }
   ],
   "articles": {
+    "890168c89602c57712": {
+      "id": "890168c89602c57712",
+      "url": "/articles/890168c89602c57712/",
+      "title": "【キオクシア急落！緊急雑談LIVE】10/13 19:00~",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=_tsvZ4A6I0Y",
+      "thumbnail": "https://i.ytimg.com/vi/_tsvZ4A6I0Y/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-15T01:41:54.429875",
+      "recordedLabel": "2026.10.15 01:41",
+      "timeLabel": "2026.10.15 01:41",
+      "persons": [],
+      "lastModified": "2026-10-15T01:42:00Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sc92cf715713d46d68ed57e9c905f15cf"
+    },
+    "580c9fece24d5edb1c": {
+      "id": "580c9fece24d5edb1c",
+      "url": "/articles/580c9fece24d5edb1c/",
+      "title": "LIVE  マーケットアップデート　半導体株急落　　バリュー買いへのセクターローテーションか？",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=-j3mLBzmexg",
+      "thumbnail": "https://i.ytimg.com/vi/-j3mLBzmexg/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-15T01:40:44.551804",
+      "recordedLabel": "2026.10.15 01:40",
+      "timeLabel": "2026.10.15 01:40",
+      "persons": [],
+      "lastModified": "2026-10-15T01:40:49Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s51406566170f4419bddbd93515c7383c"
+    },
     "032523f36568a58b00": {
       "id": "032523f36568a58b00",
       "url": "/articles/032523f36568a58b00/",
@@ -16852,6 +16928,16 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-10-15T01:41:54.429875"
+    },
+    {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-10-15T01:40:44.551804"
+    },
+    {
       "name": "ゆたかTV",
       "tab": "ゆたかT",
       "latestAt": "2026-10-14T22:32:26.533758"
@@ -16865,16 +16951,6 @@
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-10-14T18:49:21.375178"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-10-14T18:48:07.957436"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-10-14T15:06:29.005437"
     },
     {
       "name": "PIVOT 公式チャンネル",
