@@ -1244,7 +1244,7 @@
   },
   {
     "id": "1cadcab0-3815-4182-b512-5f3a1c2502f4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa96d11a4f02f440db63e4934557cb587",
     "title": "WTW 塚本無線 500万画素防犯カメラ モニター一体型 録画機 防犯カメラ レビュー比較まとめ",
     "name": "WTW 塚本無線 500万画素防犯カメラ モニター一体型 録画機 防犯カメラ レビュー比較まとめ.md",
@@ -1254,8 +1254,8 @@
     "publishAt": "2026-10-15T09:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-15T13:15:54.334249+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-15T13:18:44.512158+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nae8df30a4db5?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
