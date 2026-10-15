@@ -1352,7 +1352,7 @@
   },
   {
     "id": "599de7cd-9816-48eb-98fa-e11f5d723300",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa879e64fd795492caf3de52e343bd004",
     "title": "EARTH ELEVATED カナダ産シダーウッド 高床式ガーデンベッド レビュー比較まとめ",
     "name": "EARTH ELEVATED カナダ産シダーウッド 高床式ガーデンベッド レビュー比較まとめ.md",
@@ -1362,8 +1362,8 @@
     "publishAt": "2026-10-15T12:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-15T11:45:21.224935+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-15T12:02:12.642921+00:00",
+    "publishedUrl": "https://editor.note.com/notes/ndac399020a46/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
