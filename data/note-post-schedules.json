@@ -1550,7 +1550,7 @@
   },
   {
     "id": "3df2db3d-3409-4ee3-bad3-22d37acd20b2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s39faa8d02aa34a8bbd8d0eff2ad6bd37",
     "title": "Insta360 GO Ultra クリエイターキット レビュー比較まとめ",
     "name": "Insta360 GO Ultra クリエイターキット レビュー比較まとめ.md",
@@ -1559,10 +1559,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-15T18:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-15T17:25:45.435659+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b37f112b-1bf9-4dad-b5a8-e72a03a56e62",
