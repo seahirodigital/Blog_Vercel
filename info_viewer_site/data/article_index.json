@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-10-16T08:03:56.778146+00:00",
+  "generatedAt": "2026-10-16T08:42:15.267590+00:00",
   "articleList": [
+    {
+      "id": "02386bab5381333723",
+      "url": "/articles/02386bab5381333723/",
+      "title": "岡崎良介×永濱利廣【『企業物価指数から見えてくる 日本企業の景況感』岡崎良介のリジカーレ『勇気をもって投資せよ』#54】10月16日公開 ※11/14大宮、11/28大阪セミナー募集",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=OxNdx6Oyk_A",
+      "thumbnail": "https://i.ytimg.com/vi/OxNdx6Oyk_A/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-16T08:27:26.733992",
+      "recordedLabel": "2026.10.16 08:27",
+      "timeLabel": "2026.10.16 08:27",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-16T08:27:31Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sd42cc574ffd34c59ba86dbd4338c8ea8"
+    },
     {
       "id": "5d5961f72dd4f042a5",
       "url": "/articles/5d5961f72dd4f042a5/",
@@ -8587,6 +8608,27 @@
     }
   ],
   "articles": {
+    "02386bab5381333723": {
+      "id": "02386bab5381333723",
+      "url": "/articles/02386bab5381333723/",
+      "title": "岡崎良介×永濱利廣【『企業物価指数から見えてくる 日本企業の景況感』岡崎良介のリジカーレ『勇気をもって投資せよ』#54】10月16日公開 ※11/14大宮、11/28大阪セミナー募集",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=OxNdx6Oyk_A",
+      "thumbnail": "https://i.ytimg.com/vi/OxNdx6Oyk_A/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-16T08:27:26.733992",
+      "recordedLabel": "2026.10.16 08:27",
+      "timeLabel": "2026.10.16 08:27",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-16T08:27:31Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sd42cc574ffd34c59ba86dbd4338c8ea8"
+    },
     "5d5961f72dd4f042a5": {
       "id": "5d5961f72dd4f042a5",
       "url": "/articles/5d5961f72dd4f042a5/",
@@ -17174,6 +17216,11 @@
   },
   "channels": [
     {
+      "name": "ゆたかTV",
+      "tab": "ゆたかT",
+      "latestAt": "2026-10-16T08:27:26.733992"
+    },
+    {
       "name": "ピクテ・ジャパン",
       "tab": "ピクテ・",
       "latestAt": "2026-10-16T07:51:21.260581"
@@ -17202,11 +17249,6 @@
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-10-15T01:40:44.551804"
-    },
-    {
-      "name": "ゆたかTV",
-      "tab": "ゆたかT",
-      "latestAt": "2026-10-14T22:32:26.533758"
     },
     {
       "name": "イズミダイズム",
