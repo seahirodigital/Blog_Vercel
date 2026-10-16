@@ -1964,7 +1964,7 @@
   },
   {
     "id": "78cbb6df-9cfb-401b-8747-d5116d3fcb4c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s25f72f5f942b4ac8959825e9e18360c8",
     "title": "YESKAMOO ワイヤレス 防犯カメラ 屋外 4台セット レビュー比較まとめ",
     "name": "YESKAMOO ワイヤレス 防犯カメラ 屋外 4台セット レビュー比較まとめ.md",
@@ -1973,10 +1973,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T08:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T07:55:01.184100+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "86144389-488d-4197-a1da-d4cda152c12e",
