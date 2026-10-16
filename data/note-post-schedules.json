@@ -2342,7 +2342,7 @@
   },
   {
     "id": "b2a3b745-a2b8-4a79-aa4f-3f16d7523ef4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s1401b3a1b719425e8f920f91d4fd7f53",
     "title": "REOLINK レビュー比較まとめ",
     "name": "REOLINK レビュー比較まとめ.md",
@@ -2352,8 +2352,8 @@
     "publishAt": "2026-10-16T21:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-16T20:25:20.839267+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-16T21:02:11.828176+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ne3a391701464?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
