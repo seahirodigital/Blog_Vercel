@@ -2072,7 +2072,7 @@
   },
   {
     "id": "090b83fc-0ebf-4ac4-9d95-c6946a67d55d",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s525f81c244d94486b25a7646ab4ed17e",
     "title": "Hisense 55E55S テレビ レビュー比較まとめ",
     "name": "Hisense 55E55S テレビ レビュー比較まとめ.md",
@@ -2082,8 +2082,8 @@
     "publishAt": "2026-10-16T11:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-16T10:55:42.007315+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-16T11:32:32.604437+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n2280bd56bd69?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
