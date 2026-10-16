@@ -1820,7 +1820,7 @@
   },
   {
     "id": "010ccad6-b3d1-4d11-9dab-9edd69e016f7",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s58e380a4c6064a6c80da57bbc1b1774e",
     "title": "FOSSiBOT F116 Pro レビュー比較まとめ",
     "name": "FOSSiBOT F116 Pro レビュー比較まとめ.md",
@@ -1830,8 +1830,8 @@
     "publishAt": "2026-10-16T04:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-16T03:55:20.875710+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-16T04:32:19.178136+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7e3ec1700f84?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
