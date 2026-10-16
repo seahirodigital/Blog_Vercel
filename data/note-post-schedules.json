@@ -1928,7 +1928,7 @@
   },
   {
     "id": "5a2bb44b-5c45-48a9-8309-5fcd28d025eb",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb20cb3ba876848bd840763df5401e7de",
     "title": "loofen 生ゴミ処理機 レビュー比較まとめ",
     "name": "loofen 生ゴミ処理機 レビュー比較まとめ.md",
@@ -1937,10 +1937,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T07:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T06:55:22.904580+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "da8e1be8-36a4-41de-826e-fcf11c30584c",
