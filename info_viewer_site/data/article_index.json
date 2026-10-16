@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-16T09:59:20.345453+00:00",
+  "generatedAt": "2026-10-16T10:25:24.741702+00:00",
   "articleList": [
+    {
+      "id": "0b52196caef8ccab9f",
+      "url": "/articles/0b52196caef8ccab9f/",
+      "title": "LIVE  マーケットアップデート 日経3300円下落. 株から債券への資金シフトへ",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=hSD7NoAZKKI",
+      "thumbnail": "https://i.ytimg.com/vi/hSD7NoAZKKI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-16T10:10:31.327400",
+      "recordedLabel": "2026.10.16 10:10",
+      "timeLabel": "2026.10.16 10:10",
+      "persons": [],
+      "lastModified": "2026-10-16T10:10:36Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!seb2e247a245a4a22aba9c780c0135c48"
+    },
     {
       "id": "55627a397000db1207",
       "url": "/articles/55627a397000db1207/",
@@ -8650,6 +8669,25 @@
     }
   ],
   "articles": {
+    "0b52196caef8ccab9f": {
+      "id": "0b52196caef8ccab9f",
+      "url": "/articles/0b52196caef8ccab9f/",
+      "title": "LIVE  マーケットアップデート 日経3300円下落. 株から債券への資金シフトへ",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=hSD7NoAZKKI",
+      "thumbnail": "https://i.ytimg.com/vi/hSD7NoAZKKI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-16T10:10:31.327400",
+      "recordedLabel": "2026.10.16 10:10",
+      "timeLabel": "2026.10.16 10:10",
+      "persons": [],
+      "lastModified": "2026-10-16T10:10:36Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!seb2e247a245a4a22aba9c780c0135c48"
+    },
     "55627a397000db1207": {
       "id": "55627a397000db1207",
       "url": "/articles/55627a397000db1207/",
@@ -17300,6 +17338,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-10-16T10:10:31.327400"
+    },
+    {
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
       "latestAt": "2026-10-16T09:43:53.551086"
@@ -17328,11 +17371,6 @@
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-10-15T08:37:51.543593"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-10-15T01:40:44.551804"
     },
     {
       "name": "イズミダイズム",
