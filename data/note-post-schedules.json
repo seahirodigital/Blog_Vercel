@@ -2252,7 +2252,7 @@
   },
   {
     "id": "28d8f6e9-b7b9-4d3f-9b7c-54e610d8d0e8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s02186aea2b374ed8acdbb1355ccb75c5",
     "title": "WTW 塚本無線 レビュー比較まとめ",
     "name": "WTW 塚本無線 レビュー比較まとめ.md",
@@ -2261,10 +2261,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T17:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T16:25:13.357853+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4b868aae-b82a-4702-88bb-f872bd7a05f4",
