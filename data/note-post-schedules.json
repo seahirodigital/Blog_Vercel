@@ -1874,7 +1874,7 @@
   },
   {
     "id": "812f90ed-3b5c-4ccc-905e-b0d239d0faac",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc09497df629d4c82a7965ed33c47c0ac",
     "title": "Hiseeu LCD液晶モニタ一体型NVR 500万画素ワイヤレスカメラ8台セット レビュー比較まとめ",
     "name": "Hiseeu LCD液晶モニタ一体型NVR 500万画素ワイヤレスカメラ8台セット レビュー比較まとめ.md",
@@ -1883,10 +1883,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T06:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T05:25:28.501379+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c48bd4ab-21c7-41fc-8914-79cfd41ce221",
