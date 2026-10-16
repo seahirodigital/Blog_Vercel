@@ -2108,7 +2108,7 @@
   },
   {
     "id": "5fccf8dc-abca-45f5-b4ec-863753608d16",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sca84fc6d89d240b4a4835abcf9ad6f48",
     "title": "EENOUR GS2200iD-B カセットボンベ・ガソリン両用 定格出力1.8kVA1.7kVA 防音型 発電機 レビ",
     "name": "EENOUR GS2200iD-B カセットボンベ・ガソリン両用 定格出力1.8kVA1.7kVA 防音型 発電機 レビ.md",
@@ -2118,8 +2118,8 @@
     "publishAt": "2026-10-16T12:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-16T11:55:20.970261+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-16T12:32:22.731209+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7a3163567442?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
