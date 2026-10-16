@@ -2216,7 +2216,7 @@
   },
   {
     "id": "dc939eb0-3815-4e57-94e9-09511565545f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0cfd3358116e45848e187b1ec2ce5e43",
     "title": "地球家具 JONY レビュー比較まとめ",
     "name": "地球家具 JONY レビュー比較まとめ.md",
@@ -2225,10 +2225,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T16:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T15:25:44.725916+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3bb13205-268a-4734-a3a7-e7963c066329",
