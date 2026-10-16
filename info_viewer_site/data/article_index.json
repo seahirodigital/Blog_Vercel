@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-10-16T09:19:15.538966+00:00",
+  "generatedAt": "2026-10-16T09:59:20.345453+00:00",
   "articleList": [
+    {
+      "id": "55627a397000db1207",
+      "url": "/articles/55627a397000db1207/",
+      "title": "岡崎良介×永濱利廣【コアウィーブ・ショック『CPIショックでない株価下落』モス型メモリ集積回路 生産金額前年比300%｜鈴木銘柄分析】10月9日公開※11/14大宮セミナー11/28大阪セミナー",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=9DBAa4__MlM",
+      "thumbnail": "https://i.ytimg.com/vi/9DBAa4__MlM/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-16T09:43:53.551086",
+      "recordedLabel": "2026.10.16 09:43",
+      "timeLabel": "2026.10.16 09:43",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-16T09:43:59Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sfb45bb7d39264a30952efb21e9576476"
+    },
     {
       "id": "adf6ddc0e0c563fca9",
       "url": "/articles/adf6ddc0e0c563fca9/",
@@ -8629,6 +8650,27 @@
     }
   ],
   "articles": {
+    "55627a397000db1207": {
+      "id": "55627a397000db1207",
+      "url": "/articles/55627a397000db1207/",
+      "title": "岡崎良介×永濱利廣【コアウィーブ・ショック『CPIショックでない株価下落』モス型メモリ集積回路 生産金額前年比300%｜鈴木銘柄分析】10月9日公開※11/14大宮セミナー11/28大阪セミナー",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=9DBAa4__MlM",
+      "thumbnail": "https://i.ytimg.com/vi/9DBAa4__MlM/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-16T09:43:53.551086",
+      "recordedLabel": "2026.10.16 09:43",
+      "timeLabel": "2026.10.16 09:43",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-16T09:43:59Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sfb45bb7d39264a30952efb21e9576476"
+    },
     "adf6ddc0e0c563fca9": {
       "id": "adf6ddc0e0c563fca9",
       "url": "/articles/adf6ddc0e0c563fca9/",
@@ -17258,6 +17300,11 @@
   },
   "channels": [
     {
+      "name": "マーケットマスターズ",
+      "tab": "マーケッ",
+      "latestAt": "2026-10-16T09:43:53.551086"
+    },
+    {
       "name": "ゆたかTV",
       "tab": "ゆたかT",
       "latestAt": "2026-10-16T09:05:58.141070"
@@ -17266,11 +17313,6 @@
       "name": "ピクテ・ジャパン",
       "tab": "ピクテ・",
       "latestAt": "2026-10-16T07:51:21.260581"
-    },
-    {
-      "name": "マーケットマスターズ",
-      "tab": "マーケッ",
-      "latestAt": "2026-10-16T07:30:30.150715"
     },
     {
       "name": "げんたろうの投資ch【元機関投資家】",
