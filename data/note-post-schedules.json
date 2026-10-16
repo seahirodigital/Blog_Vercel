@@ -1766,7 +1766,7 @@
   },
   {
     "id": "c8c98f79-aae2-4c74-bd08-de7aca0c54f8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sce916e3f7c444486870257249941cf15",
     "title": "Logicool G ハンコン G29 グランツーリスモ7 Forza Horizon 6 LPRC-15000d レビ",
     "name": "Logicool G ハンコン G29 グランツーリスモ7 Forza Horizon 6 LPRC-15000d レビ.md",
@@ -1775,10 +1775,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T03:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T02:25:04.855619+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e3185143-9685-4015-8a62-b5f1053251c9",
