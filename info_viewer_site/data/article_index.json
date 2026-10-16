@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-10-15T13:20:51.453052+00:00",
+  "generatedAt": "2026-10-16T07:43:49.053713+00:00",
   "articleList": [
+    {
+      "id": "8a156a682ebcb2fe5e",
+      "url": "/articles/8a156a682ebcb2fe5e/",
+      "title": "木野内栄治【お休みですがコメントのみ緊急配信「今回の混乱は足もとでｾﾘﾝｸﾞｸﾗｲﾏｯｸｽの可能性が高いと見ています」代読：鈴木一之】スズキノチャンネル♯59 10/16配信",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=aRBi9FEEvPw",
+      "thumbnail": "https://i.ytimg.com/vi/aRBi9FEEvPw/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-16T07:30:30.150715",
+      "recordedLabel": "2026.10.16 07:30",
+      "timeLabel": "2026.10.16 07:30",
+      "persons": [
+        "木野内栄治"
+      ],
+      "lastModified": "2026-10-16T07:30:34Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sba8a745129e049e89fdcac0ffc0aa555"
+    },
     {
       "id": "6c13a432d1daf72f20",
       "url": "/articles/6c13a432d1daf72f20/",
@@ -8545,6 +8566,27 @@
     }
   ],
   "articles": {
+    "8a156a682ebcb2fe5e": {
+      "id": "8a156a682ebcb2fe5e",
+      "url": "/articles/8a156a682ebcb2fe5e/",
+      "title": "木野内栄治【お休みですがコメントのみ緊急配信「今回の混乱は足もとでｾﾘﾝｸﾞｸﾗｲﾏｯｸｽの可能性が高いと見ています」代読：鈴木一之】スズキノチャンネル♯59 10/16配信",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=aRBi9FEEvPw",
+      "thumbnail": "https://i.ytimg.com/vi/aRBi9FEEvPw/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-16T07:30:30.150715",
+      "recordedLabel": "2026.10.16 07:30",
+      "timeLabel": "2026.10.16 07:30",
+      "persons": [
+        "木野内栄治"
+      ],
+      "lastModified": "2026-10-16T07:30:34Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sba8a745129e049e89fdcac0ffc0aa555"
+    },
     "6c13a432d1daf72f20": {
       "id": "6c13a432d1daf72f20",
       "url": "/articles/6c13a432d1daf72f20/",
@@ -17090,6 +17132,11 @@
   },
   "channels": [
     {
+      "name": "マーケットマスターズ",
+      "tab": "マーケッ",
+      "latestAt": "2026-10-16T07:30:30.150715"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-10-15T13:03:27.793342"
@@ -17123,11 +17170,6 @@
       "name": "PIVOT 公式チャンネル",
       "tab": "PIVO",
       "latestAt": "2026-10-13T15:17:38.610677"
-    },
-    {
-      "name": "マーケットマスターズ",
-      "tab": "マーケッ",
-      "latestAt": "2026-10-06T10:32:23.417018"
     },
     {
       "name": "ピクテ・ジャパン",
