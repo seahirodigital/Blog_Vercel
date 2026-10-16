@@ -1946,7 +1946,7 @@
   },
   {
     "id": "da8e1be8-36a4-41de-826e-fcf11c30584c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s961d43f30c69414488190d011b5d1e5a",
     "title": "BRAIN SLEEP(ブレインスリープ) [BRAIN SLEEP] ブレインスリープ オールインワン マットレスと枕",
     "name": "BRAIN SLEEP(ブレインスリープ) [BRAIN SLEEP] ブレインスリープ オールインワン マットレスと枕.md",
@@ -1956,8 +1956,8 @@
     "publishAt": "2026-10-16T08:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-16T07:25:42.653577+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-16T08:02:23.061496+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n4669dc8622b3?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
