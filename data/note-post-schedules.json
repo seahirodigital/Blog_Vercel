@@ -2234,7 +2234,7 @@
   },
   {
     "id": "3bb13205-268a-4734-a3a7-e7963c066329",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa90443b6863b4648bb3ddc7994196bd0",
     "title": "HiKOKI 湾曲セーバソーブレード レシプロソーブレード No.154(全長300ｍｍ)( ) 0000-4412 レ",
     "name": "HiKOKI 湾曲セーバソーブレード レシプロソーブレード No.154(全長300ｍｍ)( ) 0000-4412 レ.md",
@@ -2244,8 +2244,8 @@
     "publishAt": "2026-10-16T16:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-16T15:55:58.740934+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-16T16:32:20.522734+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n81866f67b3b1?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
