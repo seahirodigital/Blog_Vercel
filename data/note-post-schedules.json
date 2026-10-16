@@ -2018,7 +2018,7 @@
   },
   {
     "id": "14567919-d790-49ad-a61e-5d58ffa41b49",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdcb72ac45d324b89b29dd8209f7fda58",
     "title": "HiKOKI(ハイコーキ) N3604DJ(NNK) レビュー比較まとめ",
     "name": "HiKOKI(ハイコーキ) N3604DJ(NNK) レビュー比較まとめ.md",
@@ -2027,10 +2027,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T10:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T09:26:00.243689+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8bdc5787-5aa2-48b6-a5a9-fd621904a214",
