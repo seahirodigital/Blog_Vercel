@@ -1694,7 +1694,7 @@
   },
   {
     "id": "4aaf3033-0cd8-45f9-a412-425ab8d7987d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5128d677f38847f1bfb08ebc77899a5f",
     "title": "HiKOKI RP150YD(SC) 集じん機 レビュー比較まとめ",
     "name": "HiKOKI RP150YD(SC) 集じん機 レビュー比較まとめ.md",
@@ -1703,10 +1703,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T01:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T00:25:25.498125+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "512d2905-2eb6-4c5f-95f3-e300c4e6a87c",
