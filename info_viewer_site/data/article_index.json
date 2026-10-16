@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-16T10:25:24.741702+00:00",
+  "generatedAt": "2026-10-16T11:17:14.501265+00:00",
   "articleList": [
+    {
+      "id": "eb2274fd83626199dd",
+      "url": "/articles/eb2274fd83626199dd/",
+      "title": "月曜日要注意！今、アツいのはAI恩恵のあの業界です",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=CfeZ6Z6NeQw",
+      "thumbnail": "https://i.ytimg.com/vi/CfeZ6Z6NeQw/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-16T11:01:53.152902",
+      "recordedLabel": "2026.10.16 11:01",
+      "timeLabel": "2026.10.16 11:01",
+      "persons": [],
+      "lastModified": "2026-10-16T11:02:00Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s476ae07262c447a5b5f48e5a440c92ac"
+    },
     {
       "id": "0b52196caef8ccab9f",
       "url": "/articles/0b52196caef8ccab9f/",
@@ -8669,6 +8688,25 @@
     }
   ],
   "articles": {
+    "eb2274fd83626199dd": {
+      "id": "eb2274fd83626199dd",
+      "url": "/articles/eb2274fd83626199dd/",
+      "title": "月曜日要注意！今、アツいのはAI恩恵のあの業界です",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=CfeZ6Z6NeQw",
+      "thumbnail": "https://i.ytimg.com/vi/CfeZ6Z6NeQw/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-16T11:01:53.152902",
+      "recordedLabel": "2026.10.16 11:01",
+      "timeLabel": "2026.10.16 11:01",
+      "persons": [],
+      "lastModified": "2026-10-16T11:02:00Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s476ae07262c447a5b5f48e5a440c92ac"
+    },
     "0b52196caef8ccab9f": {
       "id": "0b52196caef8ccab9f",
       "url": "/articles/0b52196caef8ccab9f/",
@@ -17338,6 +17376,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-10-16T11:01:53.152902"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-10-16T10:10:31.327400"
@@ -17356,11 +17399,6 @@
       "name": "ピクテ・ジャパン",
       "tab": "ピクテ・",
       "latestAt": "2026-10-16T07:51:21.260581"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-10-15T13:03:27.793342"
     },
     {
       "name": "トウシル（楽天証券）",
