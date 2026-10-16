@@ -1838,7 +1838,7 @@
   },
   {
     "id": "3baad3b0-e5f1-44a2-9819-54f90ebcd133",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbeebe4349b4149a3b69a6b0d320bdeac",
     "title": "EENOUR GS900i-B 発電機 レビュー比較まとめ",
     "name": "EENOUR GS900i-B 発電機 レビュー比較まとめ.md",
@@ -1847,10 +1847,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T05:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T04:25:51.552187+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "16dd7d1a-3c1c-47b1-b1d7-8ab3b20feae9",
