@@ -2144,7 +2144,7 @@
   },
   {
     "id": "e5381a84-175c-40b3-97f3-e215a7ca2d82",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2d9f168d9a92492ba83b0602aa5eee96",
     "title": "MuMu レビュー比較まとめ",
     "name": "MuMu レビュー比較まとめ.md",
@@ -2153,10 +2153,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T13:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T12:56:00.175074+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "66c65695-7d18-496f-9685-431432a49725",
