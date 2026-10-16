@@ -2396,7 +2396,7 @@
   },
   {
     "id": "f2c72b18-0bd6-4ee1-adab-a07234970427",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s66d8efa626714715a833b92eaa9d72d1",
     "title": "Motorola edge 60 pro PANTONE レビュー比較まとめ",
     "name": "Motorola edge 60 pro PANTONE レビュー比較まとめ.md",
@@ -2406,8 +2406,8 @@
     "publishAt": "2026-10-16T23:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-16T22:25:33.828486+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-16T23:02:20.030974+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n8f20e77736cd?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
