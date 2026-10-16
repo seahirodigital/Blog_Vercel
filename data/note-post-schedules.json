@@ -2054,7 +2054,7 @@
   },
   {
     "id": "d798506a-360f-4202-84e2-44a1c7b3802f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sfe90110036614a4bac9ab53fc6d6a1c1",
     "title": "NANLITE FS-300C レビュー比較まとめ",
     "name": "NANLITE FS-300C レビュー比較まとめ.md",
@@ -2064,8 +2064,8 @@
     "publishAt": "2026-10-16T11:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-16T10:25:22.519367+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-16T11:02:11.179744+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n6b0a196492d0?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
