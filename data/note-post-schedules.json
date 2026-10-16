@@ -1892,7 +1892,7 @@
   },
   {
     "id": "c48bd4ab-21c7-41fc-8914-79cfd41ce221",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s78f87666dace4f6daa1a68959e65f4a6",
     "title": "バッファロー おもいでばこ PD-2000-XL レビュー比較まとめ",
     "name": "バッファロー おもいでばこ PD-2000-XL レビュー比較まとめ.md",
@@ -1901,10 +1901,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T06:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T05:55:47.169611+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "23a9b46c-7dbf-400a-835f-2adde401444f",
