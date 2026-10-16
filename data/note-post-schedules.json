@@ -2198,7 +2198,7 @@
   },
   {
     "id": "132a2fd3-576d-4b86-aa77-f16404512ec7",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s46a52ab457b84c00b1d995b7612ce43c",
     "title": "日本寝具通信販売 羽毛布団 ハンガリー産 マザーグースダウン 二層立体 ツインキルト 日本製 レビュー比較まとめ",
     "name": "日本寝具通信販売 羽毛布団 ハンガリー産 マザーグースダウン 二層立体 ツインキルト 日本製 レビュー比較まとめ.md",
@@ -2208,8 +2208,8 @@
     "publishAt": "2026-10-16T15:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-16T14:26:00.557106+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-16T15:02:16.304157+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n2379082c1a02?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
