@@ -1982,7 +1982,7 @@
   },
   {
     "id": "86144389-488d-4197-a1da-d4cda152c12e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s19a55ba914454ce6b857979980b2b62a",
     "title": "Blackmagic Design DaVinci Resolve Studio レビュー比較まとめ",
     "name": "Blackmagic Design DaVinci Resolve Studio レビュー比較まとめ.md",
@@ -1991,10 +1991,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T09:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T08:25:21.602897+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1c85dcdc-15a9-4866-99bb-111bb7a61ce5",
