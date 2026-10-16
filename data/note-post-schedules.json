@@ -1856,7 +1856,7 @@
   },
   {
     "id": "16dd7d1a-3c1c-47b1-b1d7-8ab3b20feae9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s83b2f193a0e448f0ab36b5a8595cb13b",
     "title": "景品野郎 7点 セット ディズニーランド ペアチケット 肉 カニ レビュー比較まとめ",
     "name": "景品野郎 7点 セット ディズニーランド ペアチケット 肉 カニ レビュー比較まとめ.md",
@@ -1865,10 +1865,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T05:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T04:55:09.888735+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "812f90ed-3b5c-4ccc-905e-b0d239d0faac",
