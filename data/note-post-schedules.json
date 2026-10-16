@@ -2324,7 +2324,7 @@
   },
   {
     "id": "7290a8ee-8ef7-4eac-bc16-2ae5e1b2fe3f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s76be6d3d2e554c96a283ba6556b3e82a",
     "title": "Jackery SolarSaga 200 太陽光パネル レビュー比較まとめ",
     "name": "Jackery SolarSaga 200 太陽光パネル レビュー比較まとめ.md",
@@ -2333,10 +2333,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T20:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T19:25:30.054164+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b2a3b745-a2b8-4a79-aa4f-3f16d7523ef4",
