@@ -2378,7 +2378,7 @@
   },
   {
     "id": "852d580c-3337-457c-b7ac-4c314a375cd7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfdf5384653e44e5bad9a698c324a0742",
     "title": "サンワダイレクト A3対応 大容量30L 静音 細断枚数13枚 クロスカット 30分連続細断 電動 400-PSD073",
     "name": "サンワダイレクト A3対応 大容量30L 静音 細断枚数13枚 クロスカット 30分連続細断 電動 400-PSD073.md",
@@ -2387,10 +2387,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T22:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T21:55:58.698900+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f2c72b18-0bd6-4ee1-adab-a07234970427",
