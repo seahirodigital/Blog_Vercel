@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-10-16T07:43:49.053713+00:00",
+  "generatedAt": "2026-10-16T08:03:56.778146+00:00",
   "articleList": [
+    {
+      "id": "5d5961f72dd4f042a5",
+      "url": "/articles/5d5961f72dd4f042a5/",
+      "title": "【地球金利上昇】 生き残るのは誰/FRBの誤算/10-12月期は株の曲がり角/株20%安なら債券買いで金利天井  ＜糸島孝俊×岡崎良介＞Pictet Mareket Lounge 2026.10.13",
+      "channelName": "ピクテ・ジャパン",
+      "channelKey": "ピクテ・ジャパン",
+      "channelTab": "ピクテ・",
+      "youtubeUrl": "https://www.youtube.com/watch?v=67-I1_PWUyo",
+      "thumbnail": "https://i.ytimg.com/vi/67-I1_PWUyo/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-16T07:51:21.260581",
+      "recordedLabel": "2026.10.16 07:51",
+      "timeLabel": "2026.10.16 07:51",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-16T07:51:26Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s6f1edd3a1275418c93cac507c774ff2d"
+    },
     {
       "id": "8a156a682ebcb2fe5e",
       "url": "/articles/8a156a682ebcb2fe5e/",
@@ -8566,6 +8587,27 @@
     }
   ],
   "articles": {
+    "5d5961f72dd4f042a5": {
+      "id": "5d5961f72dd4f042a5",
+      "url": "/articles/5d5961f72dd4f042a5/",
+      "title": "【地球金利上昇】 生き残るのは誰/FRBの誤算/10-12月期は株の曲がり角/株20%安なら債券買いで金利天井  ＜糸島孝俊×岡崎良介＞Pictet Mareket Lounge 2026.10.13",
+      "channelName": "ピクテ・ジャパン",
+      "channelKey": "ピクテ・ジャパン",
+      "channelTab": "ピクテ・",
+      "youtubeUrl": "https://www.youtube.com/watch?v=67-I1_PWUyo",
+      "thumbnail": "https://i.ytimg.com/vi/67-I1_PWUyo/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-16T07:51:21.260581",
+      "recordedLabel": "2026.10.16 07:51",
+      "timeLabel": "2026.10.16 07:51",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-16T07:51:26Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s6f1edd3a1275418c93cac507c774ff2d"
+    },
     "8a156a682ebcb2fe5e": {
       "id": "8a156a682ebcb2fe5e",
       "url": "/articles/8a156a682ebcb2fe5e/",
@@ -17132,6 +17174,11 @@
   },
   "channels": [
     {
+      "name": "ピクテ・ジャパン",
+      "tab": "ピクテ・",
+      "latestAt": "2026-10-16T07:51:21.260581"
+    },
+    {
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
       "latestAt": "2026-10-16T07:30:30.150715"
@@ -17170,11 +17217,6 @@
       "name": "PIVOT 公式チャンネル",
       "tab": "PIVO",
       "latestAt": "2026-10-13T15:17:38.610677"
-    },
-    {
-      "name": "ピクテ・ジャパン",
-      "tab": "ピクテ・",
-      "latestAt": "2026-08-12T08:47:06.439913"
     },
     {
       "name": "NVIDIA",
