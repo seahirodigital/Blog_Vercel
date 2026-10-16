@@ -1712,7 +1712,7 @@
   },
   {
     "id": "512d2905-2eb6-4c5f-95f3-e300c4e6a87c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2974c6f31e3544e6954b4c6383cafe7d",
     "title": "PORMIDOAUTO レビュー比較まとめ",
     "name": "PORMIDOAUTO レビュー比較まとめ.md",
@@ -1721,10 +1721,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T01:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T00:55:50.613721+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a1341aad-ca84-4fed-9062-5b27c990d3df",
