@@ -2162,7 +2162,7 @@
   },
   {
     "id": "66c65695-7d18-496f-9685-431432a49725",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s26745f82ecb744179107b1437aabcfe2",
     "title": "HiKOKI(ハイコーキ) AC100V 卓上スライド丸のこ C12RSH3 レビュー比較まとめ",
     "name": "HiKOKI(ハイコーキ) AC100V 卓上スライド丸のこ C12RSH3 レビュー比較まとめ.md",
@@ -2172,8 +2172,8 @@
     "publishAt": "2026-10-16T14:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-16T13:25:19.894089+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-16T14:02:13.382246+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5027fcdd56bd?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
