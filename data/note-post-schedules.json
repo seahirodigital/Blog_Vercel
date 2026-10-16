@@ -2000,7 +2000,7 @@
   },
   {
     "id": "1c85dcdc-15a9-4866-99bb-111bb7a61ce5",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3f2bf51a5bd34cccbe8e7a1c3ef17e34",
     "title": "Island land PPC-51-BK レビュー比較まとめ",
     "name": "Island land PPC-51-BK レビュー比較まとめ.md",
@@ -2010,8 +2010,8 @@
     "publishAt": "2026-10-16T09:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-16T08:55:40.429421+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-16T09:32:24.130257+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5fc1794d8e45?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
