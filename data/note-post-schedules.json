@@ -2126,7 +2126,7 @@
   },
   {
     "id": "51e8d2e1-9ac5-4e5b-a357-4d297436630d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5e9f5a95daa24aea80f6dcba1d8500f1",
     "title": "BELLE MAISON(ベルメゾン) グータラグ ダブルコーナータイプ フロアソファー ラグが洗える ローソファ カウ",
     "name": "BELLE MAISON(ベルメゾン) グータラグ ダブルコーナータイプ フロアソファー ラグが洗える ローソファ カウ.md",
@@ -2135,10 +2135,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T13:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T12:25:40.212413+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e5381a84-175c-40b3-97f3-e215a7ca2d82",
