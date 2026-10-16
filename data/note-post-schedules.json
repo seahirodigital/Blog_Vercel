@@ -2090,7 +2090,7 @@
   },
   {
     "id": "62790fd9-a5f7-49b9-9bca-5ea86422e9ff",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s42fceb6323104a1985162ecbe8c03980",
     "title": "Aladdin X 2 Plus プロジェクター レビュー比較まとめ",
     "name": "Aladdin X 2 Plus プロジェクター レビュー比較まとめ.md",
@@ -2099,10 +2099,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T12:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T11:25:00.936654+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5fccf8dc-abca-45f5-b4ec-863753608d16",
