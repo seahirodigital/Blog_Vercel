@@ -2270,7 +2270,7 @@
   },
   {
     "id": "4b868aae-b82a-4702-88bb-f872bd7a05f4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s70b40aa453e647ffb89ec8344e15fcf8",
     "title": "FOSSiBOT F1800 ポータブル電源 レビュー比較まとめ",
     "name": "FOSSiBOT F1800 ポータブル電源 レビュー比較まとめ.md",
@@ -2280,8 +2280,8 @@
     "publishAt": "2026-10-16T17:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-16T16:55:28.134534+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-16T17:32:22.136885+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n40415de5e9a5?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
