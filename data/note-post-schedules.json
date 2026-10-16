@@ -2036,7 +2036,7 @@
   },
   {
     "id": "8bdc5787-5aa2-48b6-a5a9-fd621904a214",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s36d72ef9ecac4dec890e77fc0542b61a",
     "title": "OUTISAN e-Wagon Lite キャリーカート レビュー比較まとめ",
     "name": "OUTISAN e-Wagon Lite キャリーカート レビュー比較まとめ.md",
@@ -2045,10 +2045,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T10:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T09:55:02.973945+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d798506a-360f-4202-84e2-44a1c7b3802f",
