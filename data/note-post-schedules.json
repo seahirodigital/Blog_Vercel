@@ -2288,7 +2288,7 @@
   },
   {
     "id": "311e885e-daaf-4d98-8d52-dd45368bb43e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sc2ef01165cf54f858b808dc138f1cc12",
     "title": "Jackery ポータブル電源 500 New 100W Air ソーラーパネル 1枚 2点セット レビュー比較まとめ",
     "name": "Jackery ポータブル電源 500 New 100W Air ソーラーパネル 1枚 2点セット レビュー比較まとめ.md",
@@ -2298,8 +2298,8 @@
     "publishAt": "2026-10-16T18:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-16T17:25:41.238806+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-16T18:02:10.529474+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na4bfe3508f22?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
