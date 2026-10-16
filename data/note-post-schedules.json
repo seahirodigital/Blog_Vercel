@@ -1748,7 +1748,7 @@
   },
   {
     "id": "8e180111-7451-4173-8fee-428c95ad0b10",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5f5e053afe7d4b068dc3e63254093a96",
     "title": "Insta360 X5 BMW Motorrad 版 レビュー比較まとめ",
     "name": "Insta360 X5 BMW Motorrad 版 レビュー比較まとめ.md",
@@ -1757,10 +1757,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-16T02:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-16T01:55:40.337481+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c8c98f79-aae2-4c74-bd08-de7aca0c54f8",
