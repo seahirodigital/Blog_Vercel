@@ -2684,7 +2684,7 @@
   },
   {
     "id": "0dbd06f7-b572-4242-9157-fbfcb3f437f0",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s9578cb0cf55a4e9ca706bb4eefb37c1e",
     "title": "koala コアラフトン PLUS 折り畳みマットレス シングル レビュー比較まとめ",
     "name": "koala コアラフトン PLUS 折り畳みマットレス シングル レビュー比較まとめ.md",
@@ -2694,8 +2694,8 @@
     "publishAt": "2026-10-17T08:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-17T07:25:28.292272+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-17T08:02:18.362561+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n593dbd536741?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
