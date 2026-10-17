@@ -2990,7 +2990,7 @@
   },
   {
     "id": "2aca2938-9a8a-4a60-bc1f-e05334e9d4d5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sda98ee2c3c2e408eb01dcc5142c84bae",
     "title": "Forest dawn レビュー比較まとめ",
     "name": "Forest dawn レビュー比較まとめ.md",
@@ -2999,10 +2999,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T17:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T16:25:53.303790+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b547b272-ac5d-4930-958b-9a296add6b02",
