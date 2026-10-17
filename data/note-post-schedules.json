@@ -2936,7 +2936,7 @@
   },
   {
     "id": "3c8bed66-74db-4446-8f0b-a838137dffda",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se0cce41bc73d41d8a7e1899638c8c53a",
     "title": "OUTISAN e-Wagon Air レビュー比較まとめ",
     "name": "OUTISAN e-Wagon Air レビュー比較まとめ.md",
@@ -2945,10 +2945,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T15:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T14:25:10.792939+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3aff5fbd-745b-4470-a397-0ef2553e3c45",
