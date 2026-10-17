@@ -3044,7 +3044,7 @@
   },
   {
     "id": "6eb3e6b5-824b-4955-82c8-682dd5354044",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sffc3843e10c04ecb850302b414a0c50a",
     "title": "テンピュール(Tempur) イーズ フトン 折りたたみマットレス レビュー比較まとめ",
     "name": "テンピュール(Tempur) イーズ フトン 折りたたみマットレス レビュー比較まとめ.md",
@@ -3053,10 +3053,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T19:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T18:25:45.547274+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e59c7102-ef08-4c01-96e2-8c5e754ddfb2",
