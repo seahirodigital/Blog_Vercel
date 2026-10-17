@@ -2810,7 +2810,7 @@
   },
   {
     "id": "dad47691-b8d3-424f-a1b1-59a064378bdd",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se00578a86f6f458aa86408dbc60d6c0a",
     "title": "AFERIY Nomad1800 レビュー比較まとめ",
     "name": "AFERIY Nomad1800 レビュー比較まとめ.md",
@@ -2819,10 +2819,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T11:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T10:55:05.493698+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "76bfceda-7d37-465c-aa5c-5ded2dd46079",
