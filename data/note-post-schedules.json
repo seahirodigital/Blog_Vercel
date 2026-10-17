@@ -2792,7 +2792,7 @@
   },
   {
     "id": "bd9f0438-6183-4880-b685-426d9ce76e6d",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sae12e6cdb009467d8cff9fc94bcd5e29",
     "title": "OPPO Pad 2 タブレット レビュー比較まとめ",
     "name": "OPPO Pad 2 タブレット レビュー比較まとめ.md",
@@ -2802,8 +2802,8 @@
     "publishAt": "2026-10-17T11:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-17T10:25:43.992324+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-17T11:02:23.528587+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n0cafc3e11b5e?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
