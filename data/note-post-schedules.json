@@ -2774,7 +2774,7 @@
   },
   {
     "id": "e7a19a27-fb0e-4346-bb83-a21ab9d836fd",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfdeb6ec0ac2c4150806c9e6f3efda3b9",
     "title": "HiKOKI VB3616DA(XPZ) レビュー比較まとめ",
     "name": "HiKOKI VB3616DA(XPZ) レビュー比較まとめ.md",
@@ -2783,10 +2783,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T10:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T09:55:21.757527+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bd9f0438-6183-4880-b685-426d9ce76e6d",
