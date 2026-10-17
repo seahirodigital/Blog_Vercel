@@ -2522,7 +2522,7 @@
   },
   {
     "id": "34288d6b-9bf5-4c5b-a8e2-edc85aa220d9",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s48a7e7dcdfaa40bb988eff19774d63ab",
     "title": "CAGUUU アクシスエルゴコア オフィスチェア レビュー比較まとめ",
     "name": "CAGUUU アクシスエルゴコア オフィスチェア レビュー比較まとめ.md",
@@ -2532,8 +2532,8 @@
     "publishAt": "2026-10-17T03:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-17T02:55:18.914201+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-17T03:32:25.073698+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n6d79b2553e7a?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
