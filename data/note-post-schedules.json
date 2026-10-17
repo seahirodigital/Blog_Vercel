@@ -2846,7 +2846,7 @@
   },
   {
     "id": "c290df11-c9b0-4a04-af57-0dee65439f8c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc5372d2dba33422f822d479eb79e1f98",
     "title": "Insta360 X4 アクションカメラ レビュー比較まとめ",
     "name": "Insta360 X4 アクションカメラ レビュー比較まとめ.md",
@@ -2855,10 +2855,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T12:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T11:55:51.708373+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6b0f246b-bc03-4e3a-a721-0ab7ebe6068d",
