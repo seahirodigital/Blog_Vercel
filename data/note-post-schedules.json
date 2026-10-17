@@ -3098,7 +3098,7 @@
   },
   {
     "id": "ecfd9966-c66b-4bd1-8b36-13f4d431f4f9",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf5d33bcf71f743fe8fa839f5129b6f23",
     "title": "ASUS ROG Harpe II Extreme Edition 20 レビュー比較まとめ",
     "name": "ASUS ROG Harpe II Extreme Edition 20 レビュー比較まとめ.md",
@@ -3108,8 +3108,8 @@
     "publishAt": "2026-10-17T22:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-17T21:25:56.708076+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-17T22:02:20.047317+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd5d442682b13?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
