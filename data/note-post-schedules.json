@@ -2594,7 +2594,7 @@
   },
   {
     "id": "752058b4-1a93-4fe7-b174-f849cc807293",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s11f0cb6640d2497a898bbea02a3b733d",
     "title": "HiKOKI CB12-ST2 レビュー比較まとめ",
     "name": "HiKOKI CB12-ST2 レビュー比較まとめ.md",
@@ -2604,8 +2604,8 @@
     "publishAt": "2026-10-17T05:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-17T04:55:14.238121+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-17T05:32:22.781026+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n52a159133bfa?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
