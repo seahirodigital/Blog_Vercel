@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-17T09:42:42.843360+00:00",
+  "generatedAt": "2026-10-17T10:29:22.163989+00:00",
   "articleList": [
+    {
+      "id": "787e63d3de5b76d47e",
+      "url": "/articles/787e63d3de5b76d47e/",
+      "title": "事態が急変しました...。日米株の急落に続き、来月に控えた大イベントで株式市場に今後とんでもないことが起こるかもしれません",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=ENN3VPQFcHM",
+      "thumbnail": "https://i.ytimg.com/vi/ENN3VPQFcHM/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-17T10:15:59.099509",
+      "recordedLabel": "2026.10.17 10:15",
+      "timeLabel": "2026.10.17 10:15",
+      "persons": [],
+      "lastModified": "2026-10-17T10:16:03Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s30c762d1bf2c4fc0a9ddd772fd24959f"
+    },
     {
       "id": "4919a9fa97798f1755",
       "url": "/articles/4919a9fa97798f1755/",
@@ -8709,6 +8728,25 @@
     }
   ],
   "articles": {
+    "787e63d3de5b76d47e": {
+      "id": "787e63d3de5b76d47e",
+      "url": "/articles/787e63d3de5b76d47e/",
+      "title": "事態が急変しました...。日米株の急落に続き、来月に控えた大イベントで株式市場に今後とんでもないことが起こるかもしれません",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=ENN3VPQFcHM",
+      "thumbnail": "https://i.ytimg.com/vi/ENN3VPQFcHM/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-17T10:15:59.099509",
+      "recordedLabel": "2026.10.17 10:15",
+      "timeLabel": "2026.10.17 10:15",
+      "persons": [],
+      "lastModified": "2026-10-17T10:16:03Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s30c762d1bf2c4fc0a9ddd772fd24959f"
+    },
     "4919a9fa97798f1755": {
       "id": "4919a9fa97798f1755",
       "url": "/articles/4919a9fa97798f1755/",
@@ -17418,14 +17456,14 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-10-17T10:15:59.099509"
+    },
+    {
       "name": "マネーフォワード ME イベント&セミナー",
       "tab": "マネーフ",
       "latestAt": "2026-10-17T09:30:04.464579"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-10-16T11:01:53.152902"
     },
     {
       "name": "YTの投資銀行",
