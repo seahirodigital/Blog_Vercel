@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-10-16T11:17:14.501265+00:00",
+  "generatedAt": "2026-10-17T09:42:42.843360+00:00",
   "articleList": [
+    {
+      "id": "4919a9fa97798f1755",
+      "url": "/articles/4919a9fa97798f1755/",
+      "title": "【コアウィーブ・ショックなぜ!?】日経平均は過去3番目の下げ幅 / AI・半導体業界にとって長期的にはプラス!? / 中国メモリ&米中間選挙の影響も解説【大川&Nobbyの聴くだけ投資】大川智宏",
+      "channelName": "マネーフォワード ME イベント&セミナー",
+      "channelKey": "マネーフォワード ME イベント&セミナー",
+      "channelTab": "マネーフ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=PUCRR1bzu0o",
+      "thumbnail": "https://i.ytimg.com/vi/PUCRR1bzu0o/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-17T09:30:04.464579",
+      "recordedLabel": "2026.10.17 09:30",
+      "timeLabel": "2026.10.17 09:30",
+      "persons": [
+        "大川智宏"
+      ],
+      "lastModified": "2026-10-17T09:30:10Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf1b83199c9904d3c84f5f63521a575f8"
+    },
     {
       "id": "eb2274fd83626199dd",
       "url": "/articles/eb2274fd83626199dd/",
@@ -8688,6 +8709,27 @@
     }
   ],
   "articles": {
+    "4919a9fa97798f1755": {
+      "id": "4919a9fa97798f1755",
+      "url": "/articles/4919a9fa97798f1755/",
+      "title": "【コアウィーブ・ショックなぜ!?】日経平均は過去3番目の下げ幅 / AI・半導体業界にとって長期的にはプラス!? / 中国メモリ&米中間選挙の影響も解説【大川&Nobbyの聴くだけ投資】大川智宏",
+      "channelName": "マネーフォワード ME イベント&セミナー",
+      "channelKey": "マネーフォワード ME イベント&セミナー",
+      "channelTab": "マネーフ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=PUCRR1bzu0o",
+      "thumbnail": "https://i.ytimg.com/vi/PUCRR1bzu0o/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-17T09:30:04.464579",
+      "recordedLabel": "2026.10.17 09:30",
+      "timeLabel": "2026.10.17 09:30",
+      "persons": [
+        "大川智宏"
+      ],
+      "lastModified": "2026-10-17T09:30:10Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf1b83199c9904d3c84f5f63521a575f8"
+    },
     "eb2274fd83626199dd": {
       "id": "eb2274fd83626199dd",
       "url": "/articles/eb2274fd83626199dd/",
@@ -17375,6 +17417,11 @@
     }
   },
   "channels": [
+    {
+      "name": "マネーフォワード ME イベント&セミナー",
+      "tab": "マネーフ",
+      "latestAt": "2026-10-17T09:30:04.464579"
+    },
     {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
