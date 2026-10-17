@@ -2612,7 +2612,7 @@
   },
   {
     "id": "8dad376b-0263-4969-b8c3-2063e95b78fa",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sfa0a94ceb91d472b8514e0eaec8a1c16",
     "title": "HiKOKI(ハイコーキ) 湾曲セーバソーブレード レシプロソーブレード No.153( )( ) 0000-4411",
     "name": "HiKOKI(ハイコーキ) 湾曲セーバソーブレード レシプロソーブレード No.153( )( ) 0000-4411.md",
@@ -2622,8 +2622,8 @@
     "publishAt": "2026-10-17T06:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-17T05:25:42.292854+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-17T06:02:18.597873+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n49fc98e45d8e?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
