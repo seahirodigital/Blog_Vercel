@@ -2666,7 +2666,7 @@
   },
   {
     "id": "208f72bb-bbd4-4568-b6ba-b45f71ec2ad1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s379b3943788b4b39a281e50ef658cc79",
     "title": "BRAIN SLEEP コンフォーター パーフェクト ウォーム EX コンフォーター パーフェクト ウォーム EX レビ",
     "name": "BRAIN SLEEP コンフォーター パーフェクト ウォーム EX コンフォーター パーフェクト ウォーム EX レビ.md",
@@ -2675,10 +2675,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T07:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T06:55:08.712379+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0dbd06f7-b572-4242-9157-fbfcb3f437f0",
