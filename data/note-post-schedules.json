@@ -2756,7 +2756,7 @@
   },
   {
     "id": "145f7038-aaac-4f96-8f17-26ccc8187c0e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s8b74fd4904774acd87db27f101d88dd0",
     "title": "昭和西川 羽毛布団 日本製 マザーグース ダウン 93% レビュー比較まとめ",
     "name": "昭和西川 羽毛布団 日本製 マザーグース ダウン 93% レビュー比較まとめ.md",
@@ -2766,8 +2766,8 @@
     "publishAt": "2026-10-17T10:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-17T09:25:59.717561+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-17T10:02:20.706460+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n78dd0199df0a?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
