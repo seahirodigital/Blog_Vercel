@@ -2558,7 +2558,7 @@
   },
   {
     "id": "261fa5dd-13e4-4c64-a938-7c61f536531d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s833e397a144b4403bf71abc7f21c0663",
     "title": "XbotGo Falcon 4Kデュアルレンズ搭載 オールインワンAIスポーツカメラ レビュー比較まとめ",
     "name": "XbotGo Falcon 4Kデュアルレンズ搭載 オールインワンAIスポーツカメラ レビュー比較まとめ.md",
@@ -2567,10 +2567,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T04:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T03:55:17.049709+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7d7ce7c2-e36f-421b-aead-f9e8f73d6208",
