@@ -3008,7 +3008,7 @@
   },
   {
     "id": "b547b272-ac5d-4930-958b-9a296add6b02",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3c68755169a542cb9f7452d0b8d6be0d",
     "title": "Jackery Solar Generator 240 New 256Wh ポータブル電源 100W ソーラーパネル 1",
     "name": "Jackery Solar Generator 240 New 256Wh ポータブル電源 100W ソーラーパネル 1.md",
@@ -3018,8 +3018,8 @@
     "publishAt": "2026-10-17T17:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-17T16:55:03.914909+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-17T17:32:30.633044+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n17e06549a9ba?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
