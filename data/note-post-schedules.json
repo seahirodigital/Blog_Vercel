@@ -2495,12 +2495,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T02:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "2026-10-17T01:55:23.153149+00:00",
+    "queuedAt": "2026-10-17T03:25:47.724114+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "56e3f9ee-6d02-49c1-9d06-368b9d40d241",
@@ -2540,7 +2540,7 @@
   },
   {
     "id": "6035da4a-397a-4fa3-b7df-a58f394923db",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb16db4a4c04244fdb8b9cf76779b60a0",
     "title": "JESIMAIK JM2400iS 発電機 レビュー比較まとめ",
     "name": "JESIMAIK JM2400iS 発電機 レビュー比較まとめ.md",
@@ -2549,10 +2549,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T04:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T03:25:47.724114+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "261fa5dd-13e4-4c64-a938-7c61f536531d",
