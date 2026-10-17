@@ -2486,7 +2486,7 @@
   },
   {
     "id": "dd9b6676-5e7e-40cd-a8a0-e5b9f711500c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2f79fcb4bcef4f298e2f4055ee793602",
     "title": "昭和西川 羽毛布団 日本製 マザーグース ダウン 93% 冬用 あったかい 掛け布団 レビュー比較まとめ",
     "name": "昭和西川 羽毛布団 日本製 マザーグース ダウン 93% 冬用 あったかい 掛け布団 レビュー比較まとめ.md",
@@ -2496,8 +2496,8 @@
     "publishAt": "2026-10-17T02:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-17T03:25:47.724114+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-17T03:28:21.629111+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n17dcc73aeb12?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
