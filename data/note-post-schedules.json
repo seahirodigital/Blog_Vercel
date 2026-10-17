@@ -2972,7 +2972,7 @@
   },
   {
     "id": "96c791c2-548b-4c87-880d-1eab26ed86cf",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb599d36584df4962a13382de696808f5",
     "title": "JESIMAIK JM3000Xi インバーター発電機 レビュー比較まとめ",
     "name": "JESIMAIK JM3000Xi インバーター発電機 レビュー比較まとめ.md",
@@ -2982,8 +2982,8 @@
     "publishAt": "2026-10-17T16:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-17T15:55:41.915359+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-17T16:32:19.840307+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n67c01433b984?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
