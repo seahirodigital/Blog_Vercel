@@ -2882,7 +2882,7 @@
   },
   {
     "id": "fe326fb2-e2d9-4282-9079-468321543b09",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sba1b020657ac44f7853f0db333022785",
     "title": "BELLE MAISON ベルメゾン フロアソファー グータラグ ダブルコーナータイプ ソファ・カウチ レビュー比較まと",
     "name": "BELLE MAISON ベルメゾン フロアソファー グータラグ ダブルコーナータイプ ソファ・カウチ レビュー比較まと.md",
@@ -2891,10 +2891,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T13:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T12:55:37.269637+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b77711d3-1b24-479e-ac23-e4a32f66d170",
