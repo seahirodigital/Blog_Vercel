@@ -2954,7 +2954,7 @@
   },
   {
     "id": "3aff5fbd-745b-4470-a397-0ef2553e3c45",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s48b63e99d4c34f1383dd48e72a493dc9",
     "title": "サンワダイレクト 電動 シュレッダー 業務用 レビュー比較まとめ",
     "name": "サンワダイレクト 電動 シュレッダー 業務用 レビュー比較まとめ.md",
@@ -2964,8 +2964,8 @@
     "publishAt": "2026-10-17T16:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-17T15:25:31.166293+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-17T16:02:15.498844+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n1407b5248635?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
