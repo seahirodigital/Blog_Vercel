@@ -2576,7 +2576,7 @@
   },
   {
     "id": "7d7ce7c2-e36f-421b-aead-f9e8f73d6208",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5a64f64bbf824cb79a35b185b39f60fd",
     "title": "OTTOCAST P3 Pro CarPlay AI Box レビュー比較まとめ",
     "name": "OTTOCAST P3 Pro CarPlay AI Box レビュー比較まとめ.md",
@@ -2585,10 +2585,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T05:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T04:25:46.380495+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "752058b4-1a93-4fe7-b174-f849cc807293",
