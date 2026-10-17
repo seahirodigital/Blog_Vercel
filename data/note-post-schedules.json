@@ -3116,7 +3116,7 @@
   },
   {
     "id": "94a9bb6b-e801-4b03-a990-ade744a5e210",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9e39ddc5d07f473aa3a5995b4dd42df0",
     "title": "RIDERNAV R7X レビュー比較まとめ",
     "name": "RIDERNAV R7X レビュー比較まとめ.md",
@@ -3125,10 +3125,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T22:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T21:55:09.875909+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7766b61b-3694-4a2f-83dd-696789510b3f",
