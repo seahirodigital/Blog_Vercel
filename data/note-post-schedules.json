@@ -2702,7 +2702,7 @@
   },
   {
     "id": "3f21dbc1-5fec-4b9a-b53e-fee25804d62d",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s0eb603d1ba26435ba7a4e5f92536fa8c",
     "title": "OBSBOT TINY 2 webカメラ レビュー比較まとめ",
     "name": "OBSBOT TINY 2 webカメラ レビュー比較まとめ.md",
@@ -2712,8 +2712,8 @@
     "publishAt": "2026-10-17T08:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-17T07:55:51.988900+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-17T08:32:16.765501+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n8955be579918?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
