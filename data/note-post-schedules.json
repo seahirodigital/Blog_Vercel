@@ -2468,7 +2468,7 @@
   },
   {
     "id": "538e94f3-48cf-4198-a294-b662d99ded4a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sc53adebd55494d95a826996a349663c3",
     "title": "SLEEPY TOFU レビュー比較まとめ",
     "name": "SLEEPY TOFU レビュー比較まとめ.md",
@@ -2478,8 +2478,8 @@
     "publishAt": "2026-10-17T02:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-17T01:25:42.928421+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-17T02:02:23.170180+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ne00654506107?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
