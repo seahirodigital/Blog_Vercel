@@ -3134,7 +3134,7 @@
   },
   {
     "id": "7766b61b-3694-4a2f-83dd-696789510b3f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb07cf413b9304b7ba2301fa3674a6cc0",
     "title": "kareyou COY-704M レビュー比較まとめ",
     "name": "kareyou COY-704M レビュー比較まとめ.md",
@@ -3143,10 +3143,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T23:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T22:25:22.154239+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "aed260f6-6429-486b-bb19-1597706b9fa9",
