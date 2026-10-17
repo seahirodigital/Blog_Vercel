@@ -2648,7 +2648,7 @@
   },
   {
     "id": "3b957143-980f-44b4-a5bb-63258d523e44",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3f01f0b6bfad433eb5b9c342944ffbbc",
     "title": "HAIGE HG-3WF-3A レビュー比較まとめ",
     "name": "HAIGE HG-3WF-3A レビュー比較まとめ.md",
@@ -2657,10 +2657,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T07:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T06:25:39.535423+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "208f72bb-bbd4-4568-b6ba-b45f71ec2ad1",
