@@ -3152,7 +3152,7 @@
   },
   {
     "id": "aed260f6-6429-486b-bb19-1597706b9fa9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9a14c78dec00463988f6c73a789e1631",
     "title": "Bauhutte BHD-1400FAM-BK パソコンデスク レビュー比較まとめ",
     "name": "Bauhutte BHD-1400FAM-BK パソコンデスク レビュー比較まとめ.md",
@@ -3161,10 +3161,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T00:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T23:25:10.041351+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c9e4fa55-b57a-471a-9b7c-403faec10e42",
