@@ -2540,7 +2540,7 @@
   },
   {
     "id": "6035da4a-397a-4fa3-b7df-a58f394923db",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb16db4a4c04244fdb8b9cf76779b60a0",
     "title": "JESIMAIK JM2400iS 発電機 レビュー比較まとめ",
     "name": "JESIMAIK JM2400iS 発電機 レビュー比較まとめ.md",
@@ -2550,8 +2550,8 @@
     "publishAt": "2026-10-17T04:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-17T03:25:47.724114+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-17T04:02:27.110790+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nbff4c0b6c3b1?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
