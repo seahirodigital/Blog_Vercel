@@ -2918,7 +2918,7 @@
   },
   {
     "id": "15cb58a3-b1aa-4569-993f-2c460059284f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s87c98cf597ae4a459d49703d78bcccdf",
     "title": "京セラ(Kyocera) EGIN 590100A 発電機 レビュー比較まとめ",
     "name": "京セラ(Kyocera) EGIN 590100A 発電機 レビュー比較まとめ.md",
@@ -2927,10 +2927,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T14:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T13:55:58.839513+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3c8bed66-74db-4446-8f0b-a838137dffda",
