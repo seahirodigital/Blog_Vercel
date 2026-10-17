@@ -3026,7 +3026,7 @@
   },
   {
     "id": "50f6ef44-a4fc-4c4b-940f-919164e7d744",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s890d5867bcb64587831f853482ddc022",
     "title": "BRAIN SLEEP ブレインスリープ コンフォーター パーフェクト ウォーム EX シングル 2025年モデル 掛け",
     "name": "BRAIN SLEEP ブレインスリープ コンフォーター パーフェクト ウォーム EX シングル 2025年モデル 掛け.md",
@@ -3035,10 +3035,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T18:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T17:25:15.599926+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6eb3e6b5-824b-4955-82c8-682dd5354044",
