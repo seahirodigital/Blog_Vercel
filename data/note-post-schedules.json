@@ -2432,7 +2432,7 @@
   },
   {
     "id": "5410197c-49f4-40b4-a8f6-865306bb230e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s5ceabf61db7f4740b2e9e8caa9eaf9a4",
     "title": "EF ECOFLOW EcoFlow N型 単結晶シリコン レビュー比較まとめ",
     "name": "EF ECOFLOW EcoFlow N型 単結晶シリコン レビュー比較まとめ.md",
@@ -2442,8 +2442,8 @@
     "publishAt": "2026-10-17T01:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-17T00:25:38.089157+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-17T01:02:26.545429+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n943f41eab5bd?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
