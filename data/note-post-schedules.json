@@ -2900,7 +2900,7 @@
   },
   {
     "id": "b77711d3-1b24-479e-ac23-e4a32f66d170",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s176131aba1834364ac0d15c9af2ae7af",
     "title": "日本寝具通信販売 羽毛布団 セミダブル ハンガリー産 マザー グースダウン 二層立体 ツインキルト 日本製 レビュー比較",
     "name": "日本寝具通信販売 羽毛布団 セミダブル ハンガリー産 マザー グースダウン 二層立体 ツインキルト 日本製 レビュー比較.md",
@@ -2910,8 +2910,8 @@
     "publishAt": "2026-10-17T14:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-17T13:25:48.028143+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-17T14:02:22.864748+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n20fb76fe760c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
