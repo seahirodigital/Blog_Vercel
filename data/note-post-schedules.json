@@ -2414,7 +2414,7 @@
   },
   {
     "id": "86a31784-4e4c-43c0-a6e3-9c44b99f6493",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s01584cc6058d4667a74a6e92a08dea5a",
     "title": "LiberNovo Omni Pro AirFlow 内蔵ファン搭載の人間工学オフィスチェア 座面奥行き レビュー比較ま",
     "name": "LiberNovo Omni Pro AirFlow 内蔵ファン搭載の人間工学オフィスチェア 座面奥行き レビュー比較ま.md",
@@ -2424,8 +2424,8 @@
     "publishAt": "2026-10-17T00:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-16T23:25:36.433878+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-17T00:02:31.145054+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n4cce3bb33170?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
