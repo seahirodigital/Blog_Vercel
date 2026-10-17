@@ -2639,12 +2639,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T06:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "2026-10-17T07:25:28.292272+00:00",
+    "queuedAt": "2026-10-17T08:55:35.476492+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 2
+    "dispatchAttempts": 3
   },
   {
     "id": "3b957143-980f-44b4-a5bb-63258d523e44",
@@ -2738,7 +2738,7 @@
   },
   {
     "id": "223ed4c9-8019-4605-a50d-f47f88302877",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd478e1fbfd4241688cc5c77e98d0d5d0",
     "title": "BELLE MAISON(ベルメゾン) グータラグ メルトロ チャコール ソファ・カウチ レビュー比較まとめ",
     "name": "BELLE MAISON(ベルメゾン) グータラグ メルトロ チャコール ソファ・カウチ レビュー比較まとめ.md",
@@ -2747,10 +2747,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T09:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T08:55:35.476492+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "145f7038-aaac-4f96-8f17-26ccc8187c0e",
