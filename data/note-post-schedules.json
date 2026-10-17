@@ -2864,7 +2864,7 @@
   },
   {
     "id": "6b0f246b-bc03-4e3a-a721-0ab7ebe6068d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s74e9acdeac0342d9822961c4717f1cc9",
     "title": "NELL マットレス セミダブル レビュー比較まとめ",
     "name": "NELL マットレス セミダブル レビュー比較まとめ.md",
@@ -2873,10 +2873,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T13:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T12:25:14.070216+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fe326fb2-e2d9-4282-9079-468321543b09",
