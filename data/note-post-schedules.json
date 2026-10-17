@@ -2783,12 +2783,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T10:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "2026-10-17T09:55:21.757527+00:00",
+    "queuedAt": "2026-10-17T11:25:28.271475+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "bd9f0438-6183-4880-b685-426d9ce76e6d",
@@ -2828,7 +2828,7 @@
   },
   {
     "id": "76bfceda-7d37-465c-aa5c-5ded2dd46079",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa90b5946ccd94b90a164d319dff2ffd3",
     "title": "HiKOKI R3640DA(XPSZ) 集じん機 レビュー比較まとめ",
     "name": "HiKOKI R3640DA(XPSZ) 集じん機 レビュー比較まとめ.md",
@@ -2837,10 +2837,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-17T12:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-17T11:25:28.271475+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c290df11-c9b0-4a04-af57-0dee65439f8c",
