@@ -1413,20 +1413,18 @@ def _process_pending_videos(
             geminiTokenEnv=gemini_token_name,
             geminiCandidateOrder=candidate_order,
         )
-
         _append_processing_log(
             processing_logs,
             run_id,
             video,
-            "日本株リンク",
+            "Moomoo検索リンク",
             "success" if not stock_link_result.error else "skipped",
             (
-                f"Yahoo Finance確認済みの日本株リンクを {stock_link_result.linked_count} 件付与しました"
+                f"日米企業名のMoomoo検索リンクを {stock_link_result.linked_count} 件付与しました"
                 if not stock_link_result.error
-                else "日本株リンクを省略し、Gemini本文をそのまま保存します"
+                else "Moomoo検索リンクを省略し、Gemini本文をそのまま保存します"
             ),
             linkedCount=stock_link_result.linked_count,
-            yahooLookupCount=stock_link_result.lookup_count,
             error=stock_link_result.error,
         )
 

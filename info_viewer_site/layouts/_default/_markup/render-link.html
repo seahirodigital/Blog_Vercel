@@ -1,7 +1,8 @@
-{{- $isMoomooStock := hasPrefix .Destination "https://www.moomoo.com/ja/stock/" -}}
+{{- $isLegacyMoomooStock := hasPrefix .Destination "https://www.moomoo.com/ja/stock/" -}}
+{{- $isMoomooSearch := hasPrefix .Destination "ftmm://search?keyword=" -}}
 {{- $destination := .Destination | safeURL -}}
 {{- $href := $destination -}}
-{{- if $isMoomooStock -}}
-  {{- $href = printf "ftmm://url/%s" (urlquery .Destination) | safeURL -}}
+{{- if $isLegacyMoomooStock -}}
+  {{- $href = printf "ftmm://search?keyword=%s" (urlquery (.Text | plainify)) | safeURL -}}
 {{- end -}}
-<a href="{{ $href }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $isMoomooStock }} class="moomoo-stock-link" data-moomoo-stock-link="true" data-moomoo-web-url="{{ $destination }}" aria-label="Moomooアプリで{{ .Text }}を開く"{{ end }}>{{ .Text | safeHTML }}</a>
+<a href="{{ $href }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if or $isLegacyMoomooStock $isMoomooSearch }} class="moomoo-stock-link" data-moomoo-stock-link="true" target="_blank" rel="noopener noreferrer" aria-label="Moomooアプリで{{ .Text }}を検索"{{ end }}>{{ .Text | safeHTML }}</a>

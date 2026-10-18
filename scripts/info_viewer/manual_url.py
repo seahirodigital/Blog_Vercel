@@ -202,11 +202,11 @@ def main() -> int:
     stock_link_result = jp_stock_linker.link_gemini_markdown(markdown)
     markdown = stock_link_result.markdown
     if stock_link_result.error:
-        print(f"日本株リンクを省略し、Gemini本文をそのまま保存します: {stock_link_result.error}")
+        print(f"Moomoo検索リンクを省略し、Gemini本文をそのまま保存します: {stock_link_result.error}")
     else:
         print(
-            "日本株リンクを付与: "
-            f"{stock_link_result.linked_count}件（Yahoo Finance照合 {stock_link_result.lookup_count}件）"
+            "Moomoo検索リンクを付与: "
+            f"{stock_link_result.linked_count}件（日米の企業名を検索語として使用）"
         )
     try:
         upload_result = onedrive_writer.upload_markdown(
