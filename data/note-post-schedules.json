@@ -3422,7 +3422,7 @@
   },
   {
     "id": "74c8ab5e-2c2d-4817-975a-f1ad1c3edfa0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!saed6a2678ee448d2abd54f57296ea6cd",
     "title": "NANLITE PavoTube II 30X チューブ型撮影用ライト スティックライト RGBライト LEDライト レ",
     "name": "NANLITE PavoTube II 30X チューブ型撮影用ライト スティックライト RGBライト LEDライト レ.md",
@@ -3431,10 +3431,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T08:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T07:25:37.505897+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f2fc10e8-3a8f-48f4-8eb3-a2314a4cd72b",
