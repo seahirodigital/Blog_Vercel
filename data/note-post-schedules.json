@@ -3638,7 +3638,7 @@
   },
   {
     "id": "59fa8a44-438c-4033-a0e3-4215d6d63eb7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa64b793adade4750a6b71c7b0c0f2d48",
     "title": "VENTOTA SoroiBE st413846 レビュー比較まとめ",
     "name": "VENTOTA SoroiBE st413846 レビュー比較まとめ.md",
@@ -3647,10 +3647,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T14:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T13:25:34.598636+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "92522020-0b71-4e8f-8dbe-68b23d661526",
