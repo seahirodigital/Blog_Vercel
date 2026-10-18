@@ -3548,7 +3548,7 @@
   },
   {
     "id": "fa3a4b4d-101d-45ef-a317-118861a656c7",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3c63b6d7f1e94be1a0b612a09bf16afb",
     "title": "HiKOKI(ハイコーキ) WF4HS レビュー比較まとめ",
     "name": "HiKOKI(ハイコーキ) WF4HS レビュー比較まとめ.md",
@@ -3558,8 +3558,8 @@
     "publishAt": "2026-10-18T11:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-18T10:55:32.542549+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-18T11:32:15.946964+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd6a2a0025235?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
