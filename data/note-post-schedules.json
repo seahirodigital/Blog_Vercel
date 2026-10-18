@@ -3548,7 +3548,7 @@
   },
   {
     "id": "fa3a4b4d-101d-45ef-a317-118861a656c7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3c63b6d7f1e94be1a0b612a09bf16afb",
     "title": "HiKOKI(ハイコーキ) WF4HS レビュー比較まとめ",
     "name": "HiKOKI(ハイコーキ) WF4HS レビュー比較まとめ.md",
@@ -3557,10 +3557,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T11:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T10:55:32.542549+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cb1b2ad4-bf27-471e-84fb-0f7856dadc6e",
