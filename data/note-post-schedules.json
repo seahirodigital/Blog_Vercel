@@ -3710,7 +3710,7 @@
   },
   {
     "id": "85694b27-dc04-43cc-95d5-e5706c6b85cd",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4f6f391322ae4817aa3d446591e7c749",
     "title": "ビックスリー ベッド 収納付きベッドフレーム 引き出し付き 棚付き コンセント付き 木製 （ ）セット レビュー比較まと",
     "name": "ビックスリー ベッド 収納付きベッドフレーム 引き出し付き 棚付き コンセント付き 木製 （ ）セット レビュー比較まと.md",
@@ -3719,10 +3719,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T16:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T15:55:06.398822+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6ef69cd0-bcde-42b9-b20d-bdf5ef83a2cd",
