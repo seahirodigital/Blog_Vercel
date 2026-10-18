@@ -3260,7 +3260,7 @@
   },
   {
     "id": "1684ae3c-3dd5-4743-90da-ff27647a778e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s62cf719f909648e18d083a0e28449503",
     "title": "NANLITE FC-720C レビュー比較まとめ",
     "name": "NANLITE FC-720C レビュー比較まとめ.md",
@@ -3269,10 +3269,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T03:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T02:55:55.505934+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0d72c8eb-19f5-47d0-8631-e2b04d39b70c",
