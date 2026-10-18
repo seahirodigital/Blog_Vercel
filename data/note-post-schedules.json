@@ -3278,7 +3278,7 @@
   },
   {
     "id": "0d72c8eb-19f5-47d0-8631-e2b04d39b70c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s622acaf2b52849f883f6430d11165b25",
     "title": "VITURE Beast ARグラス レビュー比較まとめ",
     "name": "VITURE Beast ARグラス レビュー比較まとめ.md",
@@ -3287,10 +3287,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T04:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T03:25:27.128125+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "73123dbc-dc7a-41ca-8a4c-40ea6bf0231b",
