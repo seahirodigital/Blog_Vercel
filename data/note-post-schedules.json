@@ -3242,7 +3242,7 @@
   },
   {
     "id": "dd6b0069-8cfd-4365-8577-9a5f857028ee",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!saf418e9473c44f28aeab396c54d919e8",
     "title": "SMALLRIG x Potato Jet TRIBEX Carbon IIカーボンファイバー キット雲台付き 三脚 レ",
     "name": "SMALLRIG x Potato Jet TRIBEX Carbon IIカーボンファイバー キット雲台付き 三脚 レ.md",
@@ -3251,10 +3251,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T03:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T02:25:22.662343+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1684ae3c-3dd5-4743-90da-ff27647a778e",
