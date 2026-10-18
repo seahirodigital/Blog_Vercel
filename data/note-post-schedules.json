@@ -3368,7 +3368,7 @@
   },
   {
     "id": "b63a98b4-4ceb-41c4-ba0f-2a4737161da3",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3e8caedc3d624bd3912427961c842e93",
     "title": "Eonon UX7SK2J-PRO-MAX-N2 ディスプレイオーディオ 2K 1DINカーナビ レビュー比較まとめ",
     "name": "Eonon UX7SK2J-PRO-MAX-N2 ディスプレイオーディオ 2K 1DINカーナビ レビュー比較まとめ.md",
@@ -3378,8 +3378,8 @@
     "publishAt": "2026-10-18T06:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-18T06:04:02.630149+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-18T06:32:20.464894+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nfde9840a8553?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
