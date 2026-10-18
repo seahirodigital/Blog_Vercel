@@ -3854,7 +3854,7 @@
   },
   {
     "id": "bbfc1930-b820-4b5a-982d-307c42a1eb3d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se1ccfc51423e40e0b18b772d8baf5d68",
     "title": "Comandante American Cherry C40 MK4 ニトロブレード レビュー比較まとめ",
     "name": "Comandante American Cherry C40 MK4 ニトロブレード レビュー比較まとめ.md",
@@ -3863,10 +3863,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T22:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T21:55:16.025863+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0e2dffdb-f653-49b2-9332-402aa1bd1159",
