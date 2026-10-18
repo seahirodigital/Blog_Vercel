@@ -3314,7 +3314,7 @@
   },
   {
     "id": "bdeff716-30f1-451a-84b8-7f29352a3918",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s788a85fd8e73433ea04206c333dd6b06",
     "title": "LIBRIDS C600 レビュー比較まとめ",
     "name": "LIBRIDS C600 レビュー比較まとめ.md",
@@ -3323,10 +3323,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T05:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T04:25:32.563967+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "dccce01f-f03e-42ee-a7ec-952d27e02833",
