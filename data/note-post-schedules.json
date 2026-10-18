@@ -3872,7 +3872,7 @@
   },
   {
     "id": "0e2dffdb-f653-49b2-9332-402aa1bd1159",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se1894050758e4b25a7ba8fa57e7145f3",
     "title": "HiKOKI AW18DBL(LXPZ) レビュー比較まとめ",
     "name": "HiKOKI AW18DBL(LXPZ) レビュー比較まとめ.md",
@@ -3881,10 +3881,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T23:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T22:25:49.773639+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "77d0eb25-e85c-40be-ad17-8996aaa136e4",
