@@ -3494,7 +3494,7 @@
   },
   {
     "id": "8d4b1e68-1640-4f4c-be70-82c598113c79",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s30bf4d5c4ffb4ab2bc8d94f5f69daae0",
     "title": "OWC Thunderbolt 5 Dual E Network Dock レビュー比較まとめ",
     "name": "OWC Thunderbolt 5 Dual E Network Dock レビュー比較まとめ.md",
@@ -3503,10 +3503,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T10:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T09:25:53.812129+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4ad09f80-ef32-4c64-bdb7-595f21d6ee42",
