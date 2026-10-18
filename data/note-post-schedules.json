@@ -3764,7 +3764,7 @@
   },
   {
     "id": "825cfc3c-2a70-4ed5-8ebc-948644cdb1d1",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd41e3bf7cbaa4e6cb7143b610231a83c",
     "title": "HiKOKI C3605DYB レビュー比較まとめ",
     "name": "HiKOKI C3605DYB レビュー比較まとめ.md",
@@ -3774,8 +3774,8 @@
     "publishAt": "2026-10-18T18:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-18T18:56:03.788654+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-18T18:58:35.414867+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ndc8dace71b4b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
