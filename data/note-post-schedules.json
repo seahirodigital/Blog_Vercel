@@ -3224,7 +3224,7 @@
   },
   {
     "id": "ea0732ba-8706-4a08-b8ff-e851f41f9812",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7c5b0b1b1a6947e98aff82f11b7f8248",
     "title": "XREAL One Pro ARグラス｜X1チップ＆X-Prism光学搭載｜ネイティブ3DoF対応｜3Dリアル変換機能",
     "name": "XREAL One Pro ARグラス｜X1チップ＆X-Prism光学搭載｜ネイティブ3DoF対応｜3Dリアル変換機能.md",
@@ -3233,10 +3233,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T02:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T01:55:50.829906+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "dd6b0069-8cfd-4365-8577-9a5f857028ee",
