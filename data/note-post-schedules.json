@@ -3602,7 +3602,7 @@
   },
   {
     "id": "e7926f2a-295c-428a-a2f4-7171d95687a9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfae55065a5de4d28897fd2efd5c19798",
     "title": "BRAIN SLEEP(ブレインスリープ) ブレインスリープ マットレス プラス フロート レビュー比較まとめ",
     "name": "BRAIN SLEEP(ブレインスリープ) ブレインスリープ マットレス プラス フロート レビュー比較まとめ.md",
@@ -3611,10 +3611,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T13:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T12:25:57.379097+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "02e7f3ce-8080-4c07-a8ba-b6ef77b34ab6",
