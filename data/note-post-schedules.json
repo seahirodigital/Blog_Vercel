@@ -3350,7 +3350,7 @@
   },
   {
     "id": "32d22688-a78a-4213-9bd0-bbcf29f3dde1",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s766ebc154b4448968ad12d1204786430",
     "title": "HiKOKI H41SE レビュー比較まとめ",
     "name": "HiKOKI H41SE レビュー比較まとめ.md",
@@ -3360,8 +3360,8 @@
     "publishAt": "2026-10-18T06:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-18T06:04:02.630149+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-18T06:06:42.903811+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ne3767a2faaf3?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
