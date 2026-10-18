@@ -3773,12 +3773,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T18:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "2026-10-18T17:25:25.911261+00:00",
+    "queuedAt": "2026-10-18T18:56:03.788654+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "b17710aa-b1f8-4a06-abb8-27ba39162531",
