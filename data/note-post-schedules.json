@@ -3476,7 +3476,7 @@
   },
   {
     "id": "53ff858b-3bc0-4974-9bbe-ba10ab9c8600",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s560015f6a3364819a6fb2b202ece0a03",
     "title": "Secretlab TITAN Evo Stealth ゲーミングチェア (サイズ R) PUレザー レビュー比較まとめ",
     "name": "Secretlab TITAN Evo Stealth ゲーミングチェア (サイズ R) PUレザー レビュー比較まとめ.md",
@@ -3486,8 +3486,8 @@
     "publishAt": "2026-10-18T09:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-18T08:55:18.002927+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-18T09:32:25.151899+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd2bd016e279e?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
