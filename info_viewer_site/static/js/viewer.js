@@ -432,6 +432,88 @@
     }, { passive: true });
   }
 
+  function isMobileTouchDevice() {
+    return window.matchMedia?.("(pointer: coarse)")?.matches || navigator.maxTouchPoints > 0;
+  }
+
+  function bindMoomooMobileLinks() {
+    if (!isMobileTouchDevice()) return;
+    document.querySelectorAll("a[data-moomoo-stock-link]").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey) return;
+        // 公式HTTPSリンクを直接遷移させ、iOS Universal Link / Android App LinkでMoomooアプリを優先する。
+        event.preventDefault();
+        window.location.assign(link.href);
+      });
+    });
+  }
+
+  function bindPullToRefresh() {
+    if (!isMobileTouchDevice()) return;
+    const threshold = 78;
+    const indicator = document.createElement("div");
+    indicator.className = "pull-refresh-indicator";
+    indicator.setAttribute("aria-live", "polite");
+    document.body.append(indicator);
+
+    let startX = 0;
+    let startY = 0;
+    let pullDistance = 0;
+    let tracking = false;
+    let refreshing = false;
+
+    const reset = () => {
+      pullDistance = 0;
+      indicator.classList.remove("is-visible", "is-ready");
+      indicator.style.transform = "translate(-50%, -52px)";
+    };
+
+    document.addEventListener("touchstart", (event) => {
+      if (refreshing || window.scrollY > 0 || event.touches.length !== 1) return;
+      const touch = event.touches[0];
+      startX = touch.clientX;
+      startY = touch.clientY;
+      tracking = true;
+    }, { passive: true });
+
+    document.addEventListener("touchmove", (event) => {
+      if (!tracking || refreshing) return;
+      const touch = event.touches[0];
+      const distanceY = touch.clientY - startY;
+      const distanceX = touch.clientX - startX;
+      if (Math.abs(distanceX) > Math.abs(distanceY)) {
+        tracking = false;
+        reset();
+        return;
+      }
+      if (distanceY <= 0 || window.scrollY > 0) {
+        reset();
+        return;
+      }
+      pullDistance = Math.min(112, distanceY * 0.55);
+      indicator.textContent = pullDistance >= threshold ? "離して更新" : "引っ張って更新";
+      indicator.classList.toggle("is-ready", pullDistance >= threshold);
+      indicator.classList.add("is-visible");
+      indicator.style.transform = `translate(-50%, ${Math.round(pullDistance - 44)}px)`;
+      event.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener("touchend", () => {
+      if (!tracking || refreshing) return;
+      tracking = false;
+      if (pullDistance < threshold) {
+        reset();
+        return;
+      }
+      refreshing = true;
+      indicator.textContent = "更新しています…";
+      indicator.classList.remove("is-ready");
+      indicator.classList.add("is-visible");
+      indicator.style.transform = "translate(-50%, 0)";
+      window.location.reload();
+    }, { passive: true });
+  }
+
   function initializeList() {
     if (pageKind !== "list") return;
     const params = getQueryParams();
@@ -466,5 +548,7 @@
   initializeList();
   initializeArticleNavigation();
   bindArticleSwipe();
+  bindMoomooMobileLinks();
+  bindPullToRefresh();
   restoreAdminSecret();
 })();

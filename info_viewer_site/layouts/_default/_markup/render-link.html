@@ -1,0 +1,3 @@
+{{- $destination := .Destination | safeURL -}}
+{{- $isMoomooStock := hasPrefix .Destination "https://www.moomoo.com/ja/stock/" -}}
+<a href="{{ $destination }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $isMoomooStock }} class="moomoo-stock-link" data-moomoo-stock-link="true" target="_blank" rel="noopener noreferrer"{{ end }}>{{ .Text | safeHTML }}</a>

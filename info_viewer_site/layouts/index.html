@@ -1,10 +1,6 @@
 {{ define "main" }}
 {{ $index := hugo.Data.article_index }}
 <main class="app-shell list-page">
-  <header class="site-header">
-    <h1>Info Viewer</h1>
-  </header>
-
   <nav class="channel-tabs" aria-label="チャンネル">
     <button class="channel-tab is-active" type="button" data-channel="all">すべて</button>
     {{ with $index }}{{ range .channels }}
