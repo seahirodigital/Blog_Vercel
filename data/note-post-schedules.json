@@ -3404,7 +3404,7 @@
   },
   {
     "id": "b39e096e-c8f0-4537-979a-5f7569d546f5",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s861dd2046bf9488d8ac64b3c8e9b48b5",
     "title": "NELL 公式 マットレス スイート シングル レビュー比較まとめ",
     "name": "NELL 公式 マットレス スイート シングル レビュー比較まとめ.md",
@@ -3414,8 +3414,8 @@
     "publishAt": "2026-10-18T07:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-18T06:55:03.336949+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-18T07:32:20.148118+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n6f249f7a9f3d?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
