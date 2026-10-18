@@ -3692,7 +3692,7 @@
   },
   {
     "id": "95a4c12e-1538-4b07-a451-5e6efd95061a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s003992e6beb84d46a6ad3390c7f596b0",
     "title": "H. VIEW 防犯カメラ 4台セット 屋内・屋外 PoE有線 800万画素 ドーム型 デュアルライト 4K8MP 8C",
     "name": "H. VIEW 防犯カメラ 4台セット 屋内・屋外 PoE有線 800万画素 ドーム型 デュアルライト 4K8MP 8C.md",
@@ -3701,10 +3701,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T16:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T15:25:48.443797+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "85694b27-dc04-43cc-95d5-e5706c6b85cd",
