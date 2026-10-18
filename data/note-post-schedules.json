@@ -3386,7 +3386,7 @@
   },
   {
     "id": "d722972d-8108-4a4e-8b0f-ae25d0ccf55d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc526db18a1594d4b992e11addbc9075f",
     "title": "HiKOKI(ハイコーキ) 湾曲セーバソーブレード レシプロソーブレード ( )( ) 0000-3463 レビュー比較",
     "name": "HiKOKI(ハイコーキ) 湾曲セーバソーブレード レシプロソーブレード ( )( ) 0000-3463 レビュー比較.md",
@@ -3395,10 +3395,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T07:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T06:25:29.450698+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b39e096e-c8f0-4537-979a-5f7569d546f5",
