@@ -3674,7 +3674,7 @@
   },
   {
     "id": "803e8999-c5fe-4d90-ac5f-5b593f78dbf4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3c6f889ae6ef46ec99473188d796b331",
     "title": "GSEICE 業務用 製氷機 レビュー比較まとめ",
     "name": "GSEICE 業務用 製氷機 レビュー比較まとめ.md",
@@ -3683,10 +3683,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T15:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T14:25:12.235074+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "95a4c12e-1538-4b07-a451-5e6efd95061a",
