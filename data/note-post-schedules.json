@@ -3188,7 +3188,7 @@
   },
   {
     "id": "ce180803-f0fc-49d5-88d8-3730d562f26a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!saae48e9a0984432c95707c725a8dbcf2",
     "title": "桐らくね 折りたたみベッド プレミアム３５ すのこベッド レビュー比較まとめ",
     "name": "桐らくね 折りたたみベッド プレミアム３５ すのこベッド レビュー比較まとめ.md",
@@ -3197,10 +3197,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T01:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T00:55:45.882934+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bfa1e107-d4b0-4147-a384-7917054fb1c2",
