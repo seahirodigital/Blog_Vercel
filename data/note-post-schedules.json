@@ -3296,7 +3296,7 @@
   },
   {
     "id": "73123dbc-dc7a-41ca-8a4c-40ea6bf0231b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s310fe294b7814bb3a300bb791762b150",
     "title": "Jackery ポータブル電源 1000 New 100W ソーラーパネル 1枚 2点セット レビュー比較まとめ",
     "name": "Jackery ポータブル電源 1000 New 100W ソーラーパネル 1枚 2点セット レビュー比較まとめ.md",
@@ -3305,10 +3305,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T04:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T03:56:00.478261+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bdeff716-30f1-451a-84b8-7f29352a3918",
