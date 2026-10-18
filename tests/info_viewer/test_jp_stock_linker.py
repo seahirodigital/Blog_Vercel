@@ -148,6 +148,11 @@ class JapaneseStockLinkerTest(unittest.TestCase):
         self.assertIn("Google", google.aliases)
         self.assertIn("Meta", meta.aliases)
 
+    def test_adds_amazon_alias_for_sec_name_without_punctuation(self):
+        aliases = jp_stock_linker._aliases_for_us_company("Amazon Com Inc")
+
+        self.assertIn("Amazon", aliases)
+
     def test_keeps_additional_company_links_available_when_name_masters_are_unavailable(self):
         with (
             patch.object(jp_stock_linker, "load_japanese_listed_companies", side_effect=OSError("jpx offline")),

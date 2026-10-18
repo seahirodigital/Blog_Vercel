@@ -31,6 +31,7 @@ US_COMPANY_ALIASES: dict[str, tuple[str, ...]] = {
     "ALPHABET INC.": ("Alphabet", "Google", "グーグル"),
     "META PLATFORMS, INC.": ("Meta Platforms", "Meta", "Facebook", "メタ"),
     "AMAZON.COM, INC.": ("Amazon", "アマゾン"),
+    "AMAZON COM INC": ("Amazon", "アマゾン"),
     "APPLE INC.": ("Apple", "アップル"),
     "MICROSOFT CORP": ("Microsoft", "マイクロソフト"),
     "NVIDIA CORP": ("NVIDIA", "エヌビディア"),

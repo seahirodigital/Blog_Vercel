@@ -50,11 +50,14 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="既存記事へMoomoo検索リンクを再適用")
     parser.add_argument("--article-id", required=True, help="Info Viewerの記事ID")
     parser.add_argument("--apply", action="store_true", help="OneDriveと静的Markdownへ反映する")
+    parser.add_argument("--local-only", action="store_true", help="OneDriveを更新せず静的Markdownだけを更新する")
     args = parser.parse_args()
 
     load_dotenv()
-    target = _target_article(args.article_id)
-    source: Path = target["source"]
+    source = CONTENT_DIR / f"{args.article_id}.md"
+    if not source.is_file():
+        raise FileNotFoundError(f"対象記事が見つかりません: {source}")
+    target = None if args.local_only else _target_article(args.article_id)
     original = source.read_text(encoding="utf-8-sig")
     frontmatter, body = _split_frontmatter(original)
     result = jp_stock_linker.link_gemini_markdown(body)
@@ -76,9 +79,10 @@ def main() -> int:
         print("変更対象はありません")
         return 0
 
-    onedrive_writer.update_item_text(target["article"]["fileId"], updated)
-    source.write_text(updated, encoding="utf-8", newline="\n")
-    print("OneDrive正本と静的Markdownを更新しました")
+    if target:
+        onedrive_writer.update_item_text(target["article"]["fileId"], updated)
+    source.write_text(updated, encoding="utf-8")
+    print("静的Markdownを更新しました" if args.local_only else "OneDrive正本と静的Markdownを更新しました")
     return 0
 
 
