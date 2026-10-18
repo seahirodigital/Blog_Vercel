@@ -3746,7 +3746,7 @@
   },
   {
     "id": "296d1799-98a0-4d66-8865-8422402b11dc",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf18eb1edda44488b8c5cc693eb19a860",
     "title": "HiKOKI FC7FSB 卓上スライド丸のこ レビュー比較まとめ",
     "name": "HiKOKI FC7FSB 卓上スライド丸のこ レビュー比較まとめ.md",
@@ -3755,10 +3755,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T17:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T16:55:44.647698+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "825cfc3c-2a70-4ed5-8ebc-948644cdb1d1",
