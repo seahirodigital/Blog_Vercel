@@ -3332,7 +3332,7 @@
   },
   {
     "id": "dccce01f-f03e-42ee-a7ec-952d27e02833",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s97d740c3488c4c828ea20c90416cf2e1",
     "title": "BLUETTI ポータブル電源 AORA100 V2 100Wソーラーパネル 1枚 セット レビュー比較まとめ",
     "name": "BLUETTI ポータブル電源 AORA100 V2 100Wソーラーパネル 1枚 セット レビュー比較まとめ.md",
@@ -3341,14 +3341,16 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T05:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T06:04:02.630149+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "32d22688-a78a-4213-9bd0-bbcf29f3dde1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s766ebc154b4448968ad12d1204786430",
     "title": "HiKOKI H41SE レビュー比較まとめ",
     "name": "HiKOKI H41SE レビュー比較まとめ.md",
@@ -3357,14 +3359,16 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T06:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T06:04:02.630149+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b63a98b4-4ceb-41c4-ba0f-2a4737161da3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3e8caedc3d624bd3912427961c842e93",
     "title": "Eonon UX7SK2J-PRO-MAX-N2 ディスプレイオーディオ 2K 1DINカーナビ レビュー比較まとめ",
     "name": "Eonon UX7SK2J-PRO-MAX-N2 ディスプレイオーディオ 2K 1DINカーナビ レビュー比較まとめ.md",
@@ -3373,10 +3377,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T06:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T06:04:02.630149+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d722972d-8108-4a4e-8b0f-ae25d0ccf55d",
