@@ -16,7 +16,6 @@
     <div class="article-hero">
       {{ with $meta.thumbnail }}<img src="{{ . }}" alt="" decoding="async">{{ end }}
     </div>
-    <h1>{{ .Title }}</h1>
     <div class="article-meta">
       <span>{{ $meta.channelName }}</span>
       {{ with $meta.timeLabel }}<span>{{ . }}</span>{{ end }}
