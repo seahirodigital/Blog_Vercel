@@ -3458,7 +3458,7 @@
   },
   {
     "id": "4e234c9d-3301-4aa7-9857-ea30d3d0e682",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s1bb19796ad6e4f0ead1cb2cd3c90d087",
     "title": "ヒツジのいらない枕 ヒツジのいらないマットレス 2層構造 高反発 マットレス ベッドマット マットレストッパー 3つ折り",
     "name": "ヒツジのいらない枕 ヒツジのいらないマットレス 2層構造 高反発 マットレス ベッドマット マットレストッパー 3つ折り.md",
@@ -3468,8 +3468,8 @@
     "publishAt": "2026-10-18T09:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-18T08:25:43.381615+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-18T09:02:18.516598+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nfb97b81eb7ab?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
