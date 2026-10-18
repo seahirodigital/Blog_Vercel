@@ -5,7 +5,7 @@
   <header class="article-header">
     <a class="back-link" href="{{ "/" | relURL }}" aria-label="記事一覧へ戻る">← 一覧</a>
     <div class="article-header__actions">
-      <span class="article-header__channel">{{ $meta.channelTab }}</span>
+      <a class="article-header__channel" href="{{ printf "/?channel=%s" (urlquery $meta.channelTab) | relURL }}" aria-label="{{ $meta.channelName }}の記事一覧を表示">{{ $meta.channelTab }}</a>
       <a class="youtube-link" href="{{ $meta.youtubeUrl }}" target="_blank" rel="noopener noreferrer">
         YouTube <span aria-hidden="true">↗</span>
       </a>

@@ -37,6 +37,10 @@ US_COMPANY_ALIASES: dict[str, tuple[str, ...]] = {
     "TESLA, INC.": ("Tesla", "テスラ"),
 }
 
+# 上場前・非上場でも投資動画で頻出する企業は、検索対象として明示的に補う。
+# Moomoo検索に社名を渡すだけであり、証券コードとの照合や投資対象の判定は行わない。
+ADDITIONAL_COMPANY_NAMES = ("SpaceX", "Anthropic", "OpenAI")
+
 
 @dataclass(frozen=True)
 class JapaneseListedCompany:
@@ -55,7 +59,15 @@ class AmericanListedCompany:
     aliases: tuple[str, ...]
 
 
-CompanyCandidate = Union[JapaneseListedCompany, AmericanListedCompany]
+@dataclass(frozen=True)
+class AdditionalCompany:
+    """上場有無を問わず、Moomoo検索へ渡す頻出企業名。"""
+
+    name: str
+    aliases: tuple[str, ...]
+
+
+CompanyCandidate = Union[JapaneseListedCompany, AmericanListedCompany, AdditionalCompany]
 
 
 @dataclass(frozen=True)
@@ -273,7 +285,9 @@ def link_markdown(markdown: str, companies: tuple[CompanyCandidate, ...]) -> Lin
 def link_gemini_markdown(markdown: str) -> LinkResult:
     """本番用入口。取得できた日米の名称辞書だけを使い、証券コード照合はしない。"""
 
-    companies: list[CompanyCandidate] = []
+    companies: list[CompanyCandidate] = [
+        AdditionalCompany(name=name, aliases=(name,)) for name in ADDITIONAL_COMPANY_NAMES
+    ]
     errors: list[str] = []
     for loader in (load_japanese_listed_companies, load_american_listed_companies):
         try:

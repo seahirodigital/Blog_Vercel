@@ -478,6 +478,24 @@ def download_item_bytes(item_id: str) -> bytes:
     return response.content
 
 
+def update_item_text(item_id: str, content: str) -> dict[str, Any]:
+    """Update an existing OneDrive text file by item ID."""
+
+    clean_id = str(item_id or "").strip()
+    if not clean_id:
+        raise ValueError("OneDrive item ID is required.")
+    token = _get_access_token()
+    response = _request(
+        "PUT",
+        f"{GRAPH_API_BASE}/me/drive/items/{quote(clean_id)}/content",
+        token,
+        headers={"Content-Type": "text/markdown; charset=utf-8"},
+        data=str(content or "").encode("utf-8"),
+    )
+    response.raise_for_status()
+    return response.json()
+
+
 def list_saved_articles() -> list[dict[str, Any]]:
     token = _get_access_token()
     _ensure_folder_path(PRIMARY_BASE_FOLDER, token)

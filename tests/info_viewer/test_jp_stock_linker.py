@@ -32,6 +32,8 @@ META = jp_stock_linker.AmericanListedCompany(
     name="Meta Platforms, Inc.",
     aliases=("Meta Platforms", "Meta", "Facebook", "メタ"),
 )
+AMAZON = jp_stock_linker.AmericanListedCompany(name="Amazon.com, Inc.", aliases=("Amazon", "アマゾン"))
+SPACEX = jp_stock_linker.AdditionalCompany(name="SpaceX", aliases=("SpaceX",))
 
 MULTIPLE_COMPANIES = (
     jp_stock_linker.JapaneseListedCompany(code="9432", name="ＮＴＴ", aliases=("NTT",)),
@@ -81,14 +83,14 @@ class JapaneseStockLinkerTest(unittest.TestCase):
         )
         self.assertEqual(result.linked_count, 1)
 
-    def test_links_us_company_names_with_the_text_as_the_search_query(self):
-        result = jp_stock_linker.link_markdown("GoogleとMetaが市場を牽引する。", (GOOGLE, META))
+    def test_links_us_and_non_listed_company_names_with_the_text_as_the_search_query(self):
+        result = jp_stock_linker.link_markdown("GoogleとMeta、Amazon、SpaceXが市場を牽引する。", (GOOGLE, META, AMAZON, SPACEX))
 
         self.assertEqual(
             result.markdown,
-            "[Google](ftmm://search?keyword=Google)と[Meta](ftmm://search?keyword=Meta)が市場を牽引する。",
+            "[Google](ftmm://search?keyword=Google)と[Meta](ftmm://search?keyword=Meta)、[Amazon](ftmm://search?keyword=Amazon)、[SpaceX](ftmm://search?keyword=SpaceX)が市場を牽引する。",
         )
-        self.assertEqual(result.linked_count, 2)
+        self.assertEqual(result.linked_count, 4)
 
     def test_preserves_existing_links_and_code_fences(self):
         source = (
@@ -146,18 +148,17 @@ class JapaneseStockLinkerTest(unittest.TestCase):
         self.assertIn("Google", google.aliases)
         self.assertIn("Meta", meta.aliases)
 
-    def test_keeps_original_markdown_when_both_name_masters_are_unavailable(self):
+    def test_keeps_additional_company_links_available_when_name_masters_are_unavailable(self):
         with (
             patch.object(jp_stock_linker, "load_japanese_listed_companies", side_effect=OSError("jpx offline")),
             patch.object(jp_stock_linker, "load_american_listed_companies", side_effect=OSError("sec offline")),
         ):
-            result = jp_stock_linker.link_gemini_markdown("トヨタは増益を見込む。")
+            result = jp_stock_linker.link_gemini_markdown("SpaceXとトヨタに注目する。")
 
-        self.assertEqual(result.markdown, "トヨタは増益を見込む。")
-        self.assertEqual(result.linked_count, 0)
+        self.assertEqual(result.markdown, "[SpaceX](ftmm://search?keyword=SpaceX)とトヨタに注目する。")
+        self.assertEqual(result.linked_count, 1)
         self.assertEqual(result.lookup_count, 0)
-        self.assertIn("jpx offline", result.error)
-        self.assertIn("sec offline", result.error)
+        self.assertEqual(result.error, "")
 
 
 if __name__ == "__main__":

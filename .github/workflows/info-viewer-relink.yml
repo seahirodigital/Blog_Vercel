@@ -1,0 +1,55 @@
+name: Info Viewer 既存記事再リンク
+
+on:
+  workflow_dispatch:
+    inputs:
+      article_id:
+        description: "Moomoo検索リンクを再付与するInfo Viewer記事ID"
+        required: true
+        type: string
+
+jobs:
+  relink-article:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Python 3.13 をセットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: 依存パッケージをインストール
+        run: pip install -r scripts/pipeline/requirements.txt
+
+      - name: OneDrive refresh token をVercelから同期
+        env:
+          ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          VERCEL_URL: https://blog-vercel-dun.vercel.app
+        run: python scripts/pipeline/sync_onedrive_refresh_token_from_vercel.py
+
+      - name: 既存記事へMoomoo検索リンクを再付与
+        env:
+          ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
+          ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          INFO_VIEWER_ONEDRIVE_FOLDER: Obsidian in Onedrive 202602/Vercel_Blog/info_viewer
+        run: python scripts/info_viewer/relink_existing_article.py --article-id "${{ inputs.article_id }}" --apply
+
+      - name: 更新した静的記事をGitHubへ反映
+        run: |
+          git config user.name "info-viewer-bot"
+          git config user.email "info-viewer-bot@users.noreply.github.com"
+          git add -- "info_viewer_site/content/articles/${{ inputs.article_id }}.md"
+          if git diff --cached --quiet; then
+            echo "静的記事に反映すべき差分はありません。"
+            exit 0
+          fi
+          git commit -m "chore: relink info viewer article"
+          git push origin HEAD:main
