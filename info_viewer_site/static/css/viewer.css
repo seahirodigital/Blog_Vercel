@@ -120,61 +120,40 @@ a {
   box-shadow: 0 -1px 2px rgb(20 25 35 / 4%);
 }
 
-.list-summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 15px 3px 10px;
-  color: var(--muted);
-  font-size: 0.74rem;
-}
-
-.list-summary__status {
-  display: flex;
-  min-width: 0;
-  align-items: center;
-  gap: 9px;
-}
-
-.list-summary__rule {
-  flex: 0 0 auto;
-  width: 1px;
-  height: 11px;
-  background: var(--line);
-}
-
-#active-filter {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .sort-control {
   display: flex;
-  flex: 0 0 auto;
-  gap: 2px;
-  padding: 2px;
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  background: var(--surface-subtle);
+  gap: 8px;
 }
 
 .sort-button {
-  min-height: 27px;
-  padding: 0 8px;
-  border: 0;
-  border-radius: 5px;
-  background: transparent;
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 13px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-subtle);
   color: var(--muted);
-  font-size: 0.68rem;
+  font-size: 0.76rem;
   font-weight: 800;
 }
 
 .sort-button.is-active {
-  background: var(--surface);
+  border-color: rgb(15 63 156 / 25%);
+  background: var(--blue-soft);
   color: var(--blue);
-  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+}
+
+.sort-button svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
 }
 
 .article-list {
@@ -500,7 +479,7 @@ a {
   display: grid;
   width: min(100%, 560px);
   height: calc(var(--footer-height) + env(safe-area-inset-bottom));
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   margin: 0 auto;
   padding: 2px 8px env(safe-area-inset-bottom);
   border-top: 1px solid var(--line);
@@ -623,6 +602,12 @@ a {
 
 .tool-sheet__body {
   padding: 18px 17px 22px;
+}
+
+.settings-section + .settings-section {
+  margin-top: 24px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
 }
 
 .field-label {

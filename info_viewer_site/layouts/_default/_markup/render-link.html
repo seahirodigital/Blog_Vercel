@@ -1,3 +1,7 @@
-{{- $destination := .Destination | safeURL -}}
 {{- $isMoomooStock := hasPrefix .Destination "https://www.moomoo.com/ja/stock/" -}}
-<a href="{{ $destination }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $isMoomooStock }} class="moomoo-stock-link" data-moomoo-stock-link="true" target="_blank" rel="noopener noreferrer"{{ end }}>{{ .Text | safeHTML }}</a>
+{{- $destination := .Destination | safeURL -}}
+{{- $href := $destination -}}
+{{- if $isMoomooStock -}}
+  {{- $href = printf "ftmm://url/%s" (urlquery .Destination) | safeURL -}}
+{{- end -}}
+<a href="{{ $href }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $isMoomooStock }} class="moomoo-stock-link" data-moomoo-stock-link="true" data-moomoo-web-url="{{ $destination }}" aria-label="Moomooアプリで{{ .Text }}を開く"{{ end }}>{{ .Text | safeHTML }}</a>

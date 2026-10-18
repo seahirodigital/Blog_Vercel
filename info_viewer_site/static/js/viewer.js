@@ -56,7 +56,7 @@
   const searchStatus = document.getElementById("search-status");
   const searchResults = document.getElementById("search-results");
   const personTags = document.getElementById("person-tags");
-  const titleByTool = { search: "検索", people: "人物タグ", submit: "即時URL" };
+  const titleByTool = { settings: "設定", search: "検索", people: "人物タグ", submit: "即時URL" };
 
   function currentListParams(includeDefaults = false) {
     const params = new URLSearchParams();
@@ -106,7 +106,7 @@
       ensureSearchIndex().then(renderSearchResults);
       window.setTimeout(() => searchInput?.focus(), 30);
     }
-    if (name === "submit") restoreAdminSecret();
+    if (name === "settings" || name === "submit") restoreAdminSecret();
   }
 
   toolButtons.forEach((button) => {
@@ -175,19 +175,7 @@
       card.hidden = !show;
       if (show) visible += 1;
     });
-    const count = document.getElementById("result-count");
-    const filter = document.getElementById("active-filter");
     const empty = document.getElementById("empty-state");
-    if (count) count.textContent = `${visible}件`;
-    if (filter) {
-      filter.textContent = state.query
-        ? `検索: ${state.query}`
-        : state.person
-          ? `人物: ${state.person}`
-          : state.channel === "all"
-            ? "すべて"
-            : state.channel;
-    }
     if (empty) empty.hidden = visible !== 0;
     updateArticleLinks();
     syncToolButtons();
@@ -314,7 +302,7 @@
 
   function restoreAdminSecret() {
     const secret = document.getElementById("admin-secret");
-    const status = document.getElementById("submit-status");
+    const status = document.getElementById("settings-secret-status");
     const saved = storedAdminSecret();
     if (secret && saved && !secret.value) secret.value = saved;
     if (status && saved) status.textContent = "この端末に保存済みの管理シークレットを使います。";
@@ -349,7 +337,7 @@
       return;
     }
     if (!adminSecret) {
-      if (status) status.textContent = "管理シークレットを入力してください。";
+      if (status) status.textContent = "歯車の設定で管理シークレットを入力してください。";
       return;
     }
     if (!endpoint) {
@@ -434,18 +422,6 @@
 
   function isMobileTouchDevice() {
     return window.matchMedia?.("(pointer: coarse)")?.matches || navigator.maxTouchPoints > 0;
-  }
-
-  function bindMoomooMobileLinks() {
-    if (!isMobileTouchDevice()) return;
-    document.querySelectorAll("a[data-moomoo-stock-link]").forEach((link) => {
-      link.addEventListener("click", (event) => {
-        if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey) return;
-        // 公式HTTPSリンクを直接遷移させ、iOS Universal Link / Android App LinkでMoomooアプリを優先する。
-        event.preventDefault();
-        window.location.assign(link.href);
-      });
-    });
   }
 
   function bindPullToRefresh() {
@@ -548,7 +524,6 @@
   initializeList();
   initializeArticleNavigation();
   bindArticleSwipe();
-  bindMoomooMobileLinks();
   bindPullToRefresh();
   restoreAdminSecret();
 })();
