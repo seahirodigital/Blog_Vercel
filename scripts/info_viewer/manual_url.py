@@ -8,7 +8,7 @@ from typing import Any
 import requests
 from dotenv import load_dotenv
 
-from modules import apify_fetcher, gemini_formatter, notion_writer, onedrive_writer, state_store
+from modules import apify_fetcher, gemini_formatter, jp_stock_linker, notion_writer, onedrive_writer, state_store
 
 
 load_dotenv()
@@ -199,6 +199,15 @@ def main() -> int:
         raise RuntimeError(message)
 
     markdown = gemini_result["markdown"]
+    stock_link_result = jp_stock_linker.link_gemini_markdown(markdown)
+    markdown = stock_link_result.markdown
+    if stock_link_result.error:
+        print(f"日本株リンクを省略し、Gemini本文をそのまま保存します: {stock_link_result.error}")
+    else:
+        print(
+            "日本株リンクを付与: "
+            f"{stock_link_result.linked_count}件（Yahoo Finance照合 {stock_link_result.lookup_count}件）"
+        )
     try:
         upload_result = onedrive_writer.upload_markdown(
             channel_name=video["channel_name"],

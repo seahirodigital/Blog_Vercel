@@ -113,6 +113,11 @@ class ManualUrlTest(unittest.TestCase):
                 return_value={"ok": True, "markdown": "# 手動処理テスト"},
             ),
             patch.object(
+                manual_url.jp_stock_linker,
+                "link_gemini_markdown",
+                return_value=SimpleNamespace(markdown="# 手動処理テスト", linked_count=0, lookup_count=0, error=""),
+            ),
+            patch.object(
                 manual_url.onedrive_writer,
                 "upload_markdown",
                 return_value=upload_result,

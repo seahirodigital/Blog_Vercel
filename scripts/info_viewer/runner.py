@@ -8,7 +8,7 @@ from typing import Any
 
 from dotenv import load_dotenv
 
-from modules import apify_fetcher, gemini_formatter, manifest_builder, notion_writer, onedrive_writer, sheet_reader, state_store
+from modules import apify_fetcher, gemini_formatter, jp_stock_linker, manifest_builder, notion_writer, onedrive_writer, sheet_reader, state_store
 
 load_dotenv()
 
@@ -1393,6 +1393,8 @@ def _process_pending_videos(
         resolved_profile = selected_candidate["resolved_profile"]
         gemini_token_name = selected_candidate["token_name"]
         markdown = successful_gemini_result["markdown"]
+        stock_link_result = jp_stock_linker.link_gemini_markdown(markdown)
+        markdown = stock_link_result.markdown
         _append_processing_log(
             processing_logs,
             run_id,
@@ -1410,6 +1412,22 @@ def _process_pending_videos(
             geminiResolvedProfile=resolved_profile,
             geminiTokenEnv=gemini_token_name,
             geminiCandidateOrder=candidate_order,
+        )
+
+        _append_processing_log(
+            processing_logs,
+            run_id,
+            video,
+            "日本株リンク",
+            "success" if not stock_link_result.error else "skipped",
+            (
+                f"Yahoo Finance確認済みの日本株リンクを {stock_link_result.linked_count} 件付与しました"
+                if not stock_link_result.error
+                else "日本株リンクを省略し、Gemini本文をそのまま保存します"
+            ),
+            linkedCount=stock_link_result.linked_count,
+            yahooLookupCount=stock_link_result.lookup_count,
+            error=stock_link_result.error,
         )
 
         try:
