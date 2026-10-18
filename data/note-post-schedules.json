@@ -3728,7 +3728,7 @@
   },
   {
     "id": "6ef69cd0-bcde-42b9-b20d-bdf5ef83a2cd",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9377aac7b991430c8b4ea9625321e29d",
     "title": "HiKOKI W36DYA(XPZ) レビュー比較まとめ",
     "name": "HiKOKI W36DYA(XPZ) レビュー比較まとめ.md",
@@ -3737,10 +3737,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T17:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T16:25:25.335344+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "296d1799-98a0-4d66-8865-8422402b11dc",
