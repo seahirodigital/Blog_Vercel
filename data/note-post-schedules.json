@@ -3620,7 +3620,7 @@
   },
   {
     "id": "02e7f3ce-8080-4c07-a8ba-b6ef77b34ab6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf590375997c44c2b9ed37351b866b366",
     "title": "NELL 防臭 レビュー比較まとめ",
     "name": "NELL 防臭 レビュー比較まとめ.md",
@@ -3629,10 +3629,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T13:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T12:55:15.579605+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "59fa8a44-438c-4033-a0e3-4215d6d63eb7",
