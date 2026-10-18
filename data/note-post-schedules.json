@@ -3566,7 +3566,7 @@
   },
   {
     "id": "cb1b2ad4-bf27-471e-84fb-0f7856dadc6e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!scc5f4ae6a40b4539aa7ab296106fb2c8",
     "title": "SOOHAO レビュー比較まとめ",
     "name": "SOOHAO レビュー比較まとめ.md",
@@ -3575,10 +3575,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T12:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T11:25:05.127527+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "82017aed-d922-4198-86b5-96eded551f25",
