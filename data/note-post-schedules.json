@@ -3440,7 +3440,7 @@
   },
   {
     "id": "f2fc10e8-3a8f-48f4-8eb3-a2314a4cd72b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s984c48e018184cf9b1f7d44ca0c128ac",
     "title": "BROWEY ポータブル電源 ソーラーパネル付き 大容量 614Wh 1000W 出力 ポータブルバッテリー レビュー比",
     "name": "BROWEY ポータブル電源 ソーラーパネル付き 大容量 614Wh 1000W 出力 ポータブルバッテリー レビュー比.md",
@@ -3449,10 +3449,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T08:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T07:55:09.887796+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4e234c9d-3301-4aa7-9857-ea30d3d0e682",
