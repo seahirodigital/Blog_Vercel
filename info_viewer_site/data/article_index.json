@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-18T04:53:45.397351+00:00",
+  "generatedAt": "2026-10-18T09:51:27.768239+00:00",
   "articleList": [
+    {
+      "id": "797ad55b4d5e04859a",
+      "url": "/articles/797ad55b4d5e04859a/",
+      "title": "【緊急】株式市場の混乱と急加速する金利上昇...。これから「あなたのお金」に起こる4つのこと",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=lSO0O3aEGPQ",
+      "thumbnail": "https://i.ytimg.com/vi/lSO0O3aEGPQ/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-18T09:38:18.184708",
+      "recordedLabel": "2026.10.18 09:38",
+      "timeLabel": "2026.10.18 09:38",
+      "persons": [],
+      "lastModified": "2026-10-18T09:38:23Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s168128bc7e5a4681b2bd04e959eb9dd1"
+    },
     {
       "id": "787e63d3de5b76d47e",
       "url": "/articles/787e63d3de5b76d47e/",
@@ -17,7 +36,7 @@
       "recordedLabel": "2026.10.17 10:15",
       "timeLabel": "2026.10.17 10:15",
       "persons": [],
-      "lastModified": "2026-10-17T10:16:03Z",
+      "lastModified": "2026-10-18T04:53:21Z",
       "sourceFileId": "FFCC26DEDBBA4E70!s30c762d1bf2c4fc0a9ddd772fd24959f"
     },
     {
@@ -8728,6 +8747,25 @@
     }
   ],
   "articles": {
+    "797ad55b4d5e04859a": {
+      "id": "797ad55b4d5e04859a",
+      "url": "/articles/797ad55b4d5e04859a/",
+      "title": "【緊急】株式市場の混乱と急加速する金利上昇...。これから「あなたのお金」に起こる4つのこと",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=lSO0O3aEGPQ",
+      "thumbnail": "https://i.ytimg.com/vi/lSO0O3aEGPQ/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-18T09:38:18.184708",
+      "recordedLabel": "2026.10.18 09:38",
+      "timeLabel": "2026.10.18 09:38",
+      "persons": [],
+      "lastModified": "2026-10-18T09:38:23Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s168128bc7e5a4681b2bd04e959eb9dd1"
+    },
     "787e63d3de5b76d47e": {
       "id": "787e63d3de5b76d47e",
       "url": "/articles/787e63d3de5b76d47e/",
@@ -8744,7 +8782,7 @@
       "recordedLabel": "2026.10.17 10:15",
       "timeLabel": "2026.10.17 10:15",
       "persons": [],
-      "lastModified": "2026-10-17T10:16:03Z",
+      "lastModified": "2026-10-18T04:53:21Z",
       "sourceFileId": "FFCC26DEDBBA4E70!s30c762d1bf2c4fc0a9ddd772fd24959f"
     },
     "4919a9fa97798f1755": {
@@ -17458,7 +17496,7 @@
     {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
-      "latestAt": "2026-10-17T10:15:59.099509"
+      "latestAt": "2026-10-18T09:38:18.184708"
     },
     {
       "name": "マネーフォワード ME イベント&セミナー",
