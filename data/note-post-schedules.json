@@ -3836,7 +3836,7 @@
   },
   {
     "id": "f4ac6246-e180-4e8a-bc51-f67cd428d1eb",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s78921bcfd21d4eb2a4174235a09940ca",
     "title": "COFO Chair Pro 2 デスクチェア レビュー比較まとめ",
     "name": "COFO Chair Pro 2 デスクチェア レビュー比較まとめ.md",
@@ -3846,8 +3846,8 @@
     "publishAt": "2026-10-18T22:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-18T21:25:43.604607+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-18T22:02:18.730028+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf7a450676a3d?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
