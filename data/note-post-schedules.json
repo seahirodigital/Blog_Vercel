@@ -3656,7 +3656,7 @@
   },
   {
     "id": "92522020-0b71-4e8f-8dbe-68b23d661526",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s14895b095a424283a40b3b8e52a24cdf",
     "title": "Bauhutte(バウヒュッテ) Bauhutte (バウヒュッテ) 電動ゲーミングベッド2 BGB-100FA2-BK",
     "name": "Bauhutte(バウヒュッテ) Bauhutte (バウヒュッテ) 電動ゲーミングベッド2 BGB-100FA2-BK.md",
@@ -3665,10 +3665,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T14:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T13:55:53.595577+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "803e8999-c5fe-4d90-ac5f-5b593f78dbf4",
