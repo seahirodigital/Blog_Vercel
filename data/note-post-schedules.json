@@ -3800,7 +3800,7 @@
   },
   {
     "id": "a2543fe3-b2c2-4503-91ac-1e2ae27834f5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s66f016ba1abf4fc0a42245efa2894b14",
     "title": "SLEEPY TOFU マットレス シングル【硬め 高反発 120日トライアル 腰に優しい ウレタン&コイルのハイブリッ",
     "name": "SLEEPY TOFU マットレス シングル【硬め 高反発 120日トライアル 腰に優しい ウレタン&コイルのハイブリッ.md",
@@ -3809,10 +3809,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T20:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T19:25:36.518772+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "56973dd1-2c25-43b1-8bd3-26067936adce",
