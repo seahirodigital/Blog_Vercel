@@ -3170,7 +3170,7 @@
   },
   {
     "id": "c9e4fa55-b57a-471a-9b7c-403faec10e42",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc361b0d54bb7480e9c15e92761ce27c2",
     "title": "NELL マットレス シングル レビュー比較まとめ",
     "name": "NELL マットレス シングル レビュー比較まとめ.md",
@@ -3179,10 +3179,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-18T01:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-18T00:25:12.542388+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ce180803-f0fc-49d5-88d8-3730d562f26a",
