@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-18T09:51:27.768239+00:00",
+  "generatedAt": "2026-10-19T11:18:31.918088+00:00",
   "articleList": [
+    {
+      "id": "059d2437bf93959b14",
+      "url": "/articles/059d2437bf93959b14/",
+      "title": "次の国策に高市首相が言及して株価爆上げ中です",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=DOU58xS-nlE",
+      "thumbnail": "https://i.ytimg.com/vi/DOU58xS-nlE/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-19T11:03:21.027318",
+      "recordedLabel": "2026.10.19 11:03",
+      "timeLabel": "2026.10.19 11:03",
+      "persons": [],
+      "lastModified": "2026-10-19T11:03:26Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s3c4539dbd22a4de7871e2048963c7853"
+    },
     {
       "id": "797ad55b4d5e04859a",
       "url": "/articles/797ad55b4d5e04859a/",
@@ -8747,6 +8766,25 @@
     }
   ],
   "articles": {
+    "059d2437bf93959b14": {
+      "id": "059d2437bf93959b14",
+      "url": "/articles/059d2437bf93959b14/",
+      "title": "次の国策に高市首相が言及して株価爆上げ中です",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=DOU58xS-nlE",
+      "thumbnail": "https://i.ytimg.com/vi/DOU58xS-nlE/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-19T11:03:21.027318",
+      "recordedLabel": "2026.10.19 11:03",
+      "timeLabel": "2026.10.19 11:03",
+      "persons": [],
+      "lastModified": "2026-10-19T11:03:26Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s3c4539dbd22a4de7871e2048963c7853"
+    },
     "797ad55b4d5e04859a": {
       "id": "797ad55b4d5e04859a",
       "url": "/articles/797ad55b4d5e04859a/",
@@ -17496,7 +17534,7 @@
     {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
-      "latestAt": "2026-10-18T09:38:18.184708"
+      "latestAt": "2026-10-19T11:03:21.027318"
     },
     {
       "name": "マネーフォワード ME イベント&セミナー",
