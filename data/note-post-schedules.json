@@ -4196,7 +4196,7 @@
   },
   {
     "id": "9f35d453-8ae9-4db8-a08d-b3270e5e3a5d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4a911cd6499a4f08ab844cd5edfca749",
     "title": "Bigme B7 Pro 電子書籍リーダー レビュー比較まとめ",
     "name": "Bigme B7 Pro 電子書籍リーダー レビュー比較まとめ.md",
@@ -4205,10 +4205,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-19T09:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-19T08:25:08.429069+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b0b4745f-9e12-4bf6-8067-eb8d4952819d",
