@@ -4124,7 +4124,7 @@
   },
   {
     "id": "4a90f9e3-9868-4542-8729-47efb73c61b8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s166a90c972b441e2923405515b9fca09",
     "title": "PLT Poly Voyager Focus 2 ワイヤレス ヘッドセット アクティブ ノイズキャンセル レビュー比較ま",
     "name": "PLT Poly Voyager Focus 2 ワイヤレス ヘッドセット アクティブ ノイズキャンセル レビュー比較ま.md",
@@ -4133,10 +4133,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-19T07:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-19T06:25:48.266795+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d0ca139d-9b08-4900-b611-a49884eef6b9",
