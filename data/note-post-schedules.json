@@ -4358,7 +4358,7 @@
   },
   {
     "id": "441edc62-30d9-4d9b-b6ee-9e4304214ff1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6e5435331c3b4573be126999f9723907",
     "title": "HiKOKI R40YA 集じん機 レビュー比較まとめ",
     "name": "HiKOKI R40YA 集じん機 レビュー比較まとめ.md",
@@ -4367,10 +4367,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-19T13:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-19T12:55:19.286045+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e17c8479-dbfc-4a34-881b-83818d618fa5",
