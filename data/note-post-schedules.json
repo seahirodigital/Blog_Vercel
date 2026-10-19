@@ -4250,7 +4250,7 @@
   },
   {
     "id": "56cb9c7d-c297-4d29-923c-9d1f43a65356",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sed49bb1e4be14e119bbba32d00d3d210",
     "title": "PORMIDO-LINK JB64WJB74WJC74W対応ディスプレイオーディオ【JM200】 レビュー比較まとめ",
     "name": "PORMIDO-LINK JB64WJB74WJC74W対応ディスプレイオーディオ【JM200】 レビュー比較まとめ.md",
@@ -4259,10 +4259,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-19T10:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-19T09:55:19.742453+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6b0defc1-09b1-4621-aca0-c24224fd6a7e",
