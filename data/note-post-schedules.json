@@ -4232,7 +4232,7 @@
   },
   {
     "id": "2f6ea65f-eda3-42b3-9616-3e7831c384c4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb2f3cf130db946149146f4b39df66677",
     "title": "Ralcam 内視鏡 レビュー比較まとめ",
     "name": "Ralcam 内視鏡 レビュー比較まとめ.md",
@@ -4241,10 +4241,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-19T10:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-19T09:25:49.470404+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "56cb9c7d-c297-4d29-923c-9d1f43a65356",
