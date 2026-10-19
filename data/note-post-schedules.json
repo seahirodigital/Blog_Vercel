@@ -3998,7 +3998,7 @@
   },
   {
     "id": "be31c8df-37ef-4c44-916c-5464066ec8f2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9052203aabe34ab3bd7e6ee56e7dc75e",
     "title": "Galaxy A57 レビュー比較まとめ",
     "name": "Galaxy A57 レビュー比較まとめ.md",
@@ -4007,10 +4007,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-19T03:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-19T02:55:00.828846+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bed043fb-917c-4fda-adf0-12e3de4701e4",
