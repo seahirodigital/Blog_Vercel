@@ -4034,7 +4034,7 @@
   },
   {
     "id": "2e28add5-8bea-4a81-a6f2-dd97b9c42b60",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sff51045c7f024b9c8fec4ce448ce1892",
     "title": "Samsung Galaxy Watch8 グラファイト スマートウォッチ 本体 端末 レビュー比較まとめ",
     "name": "Samsung Galaxy Watch8 グラファイト スマートウォッチ 本体 端末 レビュー比較まとめ.md",
@@ -4043,10 +4043,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-19T04:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-19T03:55:08.395490+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "25d3407e-772b-432c-9c4a-2eccb263c3f6",
