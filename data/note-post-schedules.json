@@ -4214,7 +4214,7 @@
   },
   {
     "id": "b0b4745f-9e12-4bf6-8067-eb8d4952819d",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s6d03b716d0ea400980def47e16f8e183",
     "title": "Bauhutte BHD-1400FAH-BK レビュー比較まとめ",
     "name": "Bauhutte BHD-1400FAH-BK レビュー比較まとめ.md",
@@ -4224,8 +4224,8 @@
     "publishAt": "2026-10-19T09:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-19T08:55:29.179816+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-19T09:32:26.342916+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n033c66c58af0?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
