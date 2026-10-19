@@ -4106,7 +4106,7 @@
   },
   {
     "id": "1b1a48e6-5ef6-442b-ad53-b72401f2e9a5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s70c4efe4d7c0482484145032ccd916ea",
     "title": "ヒツジのいらない枕 ヒツジのいらない ダブル レビュー比較まとめ",
     "name": "ヒツジのいらない枕 ヒツジのいらない ダブル レビュー比較まとめ.md",
@@ -4115,10 +4115,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-19T06:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-19T05:55:29.144562+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4a90f9e3-9868-4542-8729-47efb73c61b8",
