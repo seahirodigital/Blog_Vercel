@@ -3908,7 +3908,7 @@
   },
   {
     "id": "1c40547e-aefa-4fc6-a55f-974e9368eaf1",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s9bc50227f2ff4c94aa357c03e2cf76e6",
     "title": "ながら洗車 イージーショット×タンクセット 高圧洗浄機 レビュー比較まとめ",
     "name": "ながら洗車 イージーショット×タンクセット 高圧洗浄機 レビュー比較まとめ.md",
@@ -3918,8 +3918,8 @@
     "publishAt": "2026-10-19T01:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-19T00:25:11.602188+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-19T01:02:29.960255+00:00",
+    "publishedUrl": "https://note.com/startupm/n/neddfaebeee4c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
