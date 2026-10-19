@@ -4142,7 +4142,7 @@
   },
   {
     "id": "d0ca139d-9b08-4900-b611-a49884eef6b9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1b3c4ef3a63f41368a02663c6e8e904d",
     "title": "HiKOKI CB3612DA バンドソー レビュー比較まとめ",
     "name": "HiKOKI CB3612DA バンドソー レビュー比較まとめ.md",
@@ -4151,10 +4151,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-19T07:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-19T06:55:06.416518+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4e1ae9a1-3a6b-45ae-9a33-39eb9b7dcd79",
