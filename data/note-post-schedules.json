@@ -4088,7 +4088,7 @@
   },
   {
     "id": "2cee7b9e-1017-484a-bc04-6ed50a8fee98",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd9ed0f365f0a4c72983158f2e6670636",
     "title": "H. VIEW レビュー比較まとめ",
     "name": "H. VIEW レビュー比較まとめ.md",
@@ -4098,8 +4098,8 @@
     "publishAt": "2026-10-19T06:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-19T05:25:07.618755+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-19T06:02:23.427532+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n31b5d8fc42d2?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
