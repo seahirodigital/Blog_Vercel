@@ -4394,7 +4394,7 @@
   },
   {
     "id": "fc8cd153-38c2-4ca9-83a5-9bf704ede664",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sfc9a81e861d64e09bbdc56c360746cc5",
     "title": "龍翔産業 rs-ds48m 電動剥線機 テ-プル式線抜き機 自動電線皮むき工具 ケーブル皮むき 銅リサイクル電線かわむき",
     "name": "龍翔産業 rs-ds48m 電動剥線機 テ-プル式線抜き機 自動電線皮むき工具 ケーブル皮むき 銅リサイクル電線かわむき.md",
@@ -4404,8 +4404,8 @@
     "publishAt": "2026-10-19T14:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-19T13:56:00.249211+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-19T14:32:16.842707+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5630c604e4ae?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
