@@ -4016,7 +4016,7 @@
   },
   {
     "id": "bed043fb-917c-4fda-adf0-12e3de4701e4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s7af7c26817cc414a91c74a0a7b0533de",
     "title": "Bauhutte BHD-1400FAL-BK パソコンデスク レビュー比較まとめ",
     "name": "Bauhutte BHD-1400FAL-BK パソコンデスク レビュー比較まとめ.md",
@@ -4026,8 +4026,8 @@
     "publishAt": "2026-10-19T04:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-19T03:25:35.123176+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-19T04:02:26.672010+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n133758a6280c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
