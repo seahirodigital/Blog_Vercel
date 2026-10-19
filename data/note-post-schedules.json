@@ -4340,7 +4340,7 @@
   },
   {
     "id": "431de8ae-fab5-4d41-aef6-1122cc91c640",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s4e7b8cf3ec5244319732487977c88f12",
     "title": "FPD テレビ テレビ レビュー比較まとめ",
     "name": "FPD テレビ テレビ レビュー比較まとめ.md",
@@ -4350,8 +4350,8 @@
     "publishAt": "2026-10-19T13:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-19T12:25:59.582728+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-19T13:02:26.579679+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n789b9d966761?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
