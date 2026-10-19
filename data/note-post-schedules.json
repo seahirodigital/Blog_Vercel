@@ -4322,7 +4322,7 @@
   },
   {
     "id": "b71f58d3-70b6-488d-a6ba-bdf4cd8e87a7",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s122561ccc4124097914c4dd50873a921",
     "title": "EENOUR GS950iD-B 発電機 レビュー比較まとめ",
     "name": "EENOUR GS950iD-B 発電機 レビュー比較まとめ.md",
@@ -4332,8 +4332,8 @@
     "publishAt": "2026-10-19T12:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-19T11:55:39.424019+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-19T12:32:17.613999+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nca564b4754e6?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
