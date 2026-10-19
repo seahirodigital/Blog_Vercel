@@ -4286,7 +4286,7 @@
   },
   {
     "id": "c2122de9-6b89-49d4-a123-796a77fd03a4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9c1edba855774988a66779159299fb90",
     "title": "FOSSiBOT F107 Pro レビュー比較まとめ",
     "name": "FOSSiBOT F107 Pro レビュー比較まとめ.md",
@@ -4295,10 +4295,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-19T11:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-19T10:56:00.457401+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a0005212-3607-40df-bfb0-021129c00e38",
