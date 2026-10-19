@@ -4268,7 +4268,7 @@
   },
   {
     "id": "6b0defc1-09b1-4621-aca0-c24224fd6a7e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1d82edb79f20459d83a4ae20187bdf0e",
     "title": "OTTOCAST オットキャスト OttoAibox P3 Pro Android13搭載 + 新型専用リモコン付き レ",
     "name": "OTTOCAST オットキャスト OttoAibox P3 Pro Android13搭載 + 新型専用リモコン付き レ.md",
@@ -4277,10 +4277,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-19T11:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-19T10:25:39.776651+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c2122de9-6b89-49d4-a123-796a77fd03a4",
