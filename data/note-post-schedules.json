@@ -4178,7 +4178,7 @@
   },
   {
     "id": "7dcc03b2-ce3a-4aa0-aedc-bd2e01e88ef9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6716fdf1ba4e49179ae5f20b6409f280",
     "title": "Insta360 Ace Pro 2 – レビュー比較まとめ",
     "name": "Insta360 Ace Pro 2 – レビュー比較まとめ.md",
@@ -4187,10 +4187,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-19T08:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-19T07:55:48.688067+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9f35d453-8ae9-4db8-a08d-b3270e5e3a5d",
