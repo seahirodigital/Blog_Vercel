@@ -4376,7 +4376,7 @@
   },
   {
     "id": "e17c8479-dbfc-4a34-881b-83818d618fa5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb196902eb6b14ebfae4b212ada05f8fb",
     "title": "ATOTOZONE X 141E-R3 レビュー比較まとめ",
     "name": "ATOTOZONE X 141E-R3 レビュー比較まとめ.md",
@@ -4385,10 +4385,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-19T14:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-19T13:25:39.117630+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fc8cd153-38c2-4ca9-83a5-9bf704ede664",
