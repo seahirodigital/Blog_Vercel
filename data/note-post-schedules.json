@@ -4052,7 +4052,7 @@
   },
   {
     "id": "25d3407e-772b-432c-9c4a-2eccb263c3f6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa415b84ba81d4d1a954a1dfcefad814b",
     "title": "Insta360 X5 通常版 レビュー比較まとめ",
     "name": "Insta360 X5 通常版 レビュー比較まとめ.md",
@@ -4061,10 +4061,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-19T05:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-19T04:25:30.952968+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d8ab6e2c-25c2-47be-bf63-6c5175c005a7",
