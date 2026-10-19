@@ -4070,7 +4070,7 @@
   },
   {
     "id": "d8ab6e2c-25c2-47be-bf63-6c5175c005a7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s40a01e8861ee4571a5d2ce841d805324",
     "title": "PORMIDOAUTO 1DIN＆ 大画面ディスプレイオーディオ 2K QLED Androidナビ「8コア6+ 」【G",
     "name": "PORMIDOAUTO 1DIN＆ 大画面ディスプレイオーディオ 2K QLED Androidナビ「8コア6+ 」【G.md",
@@ -4079,10 +4079,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-19T05:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-19T04:55:49.587482+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2cee7b9e-1017-484a-bc04-6ed50a8fee98",
