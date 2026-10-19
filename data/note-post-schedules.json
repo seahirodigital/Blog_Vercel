@@ -3962,7 +3962,7 @@
   },
   {
     "id": "38ebdbab-ea9c-408e-8d07-f795536f3cd1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s42905757918940098cbeb5f425c0fb5a",
     "title": "Bose TV Speaker 第2世代レビュー比較まとめ：テレビの音質を劇的に向上させる方法",
     "name": "20261006_1701_Bose新型！コスパ最高のサウンドバーがやってきた／Bose TV Speaker (第2世代).md",
@@ -3971,10 +3971,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-19T02:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-19T01:55:54.254612+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b7c7c072-70af-45d8-aaca-bda3230c53cc",
