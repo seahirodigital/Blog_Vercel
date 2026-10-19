@@ -3926,7 +3926,7 @@
   },
   {
     "id": "cf089a7b-4ee8-4161-a6df-b97b59e7687b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s17c0fa15b1434cd98df974b95f82c59e",
     "title": "シモンズ マットレス ダブル ポケットコイル やや硬め ミディアム 両面仕様 日本製 通気性 体圧分散 AB20553",
     "name": "シモンズ マットレス ダブル ポケットコイル やや硬め ミディアム 両面仕様 日本製 通気性 体圧分散 AB20553.md",
@@ -3935,10 +3935,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-19T01:30:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-19T00:55:46.366820+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d0d9e4bc-bfde-4ad1-b09d-8cfa53544604",
