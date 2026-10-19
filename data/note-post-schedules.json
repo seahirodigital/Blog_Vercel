@@ -4304,7 +4304,7 @@
   },
   {
     "id": "a0005212-3607-40df-bfb0-021129c00e38",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s091cf96d9c254838912dddf8327fd782",
     "title": "HiKOKI CR36DA レシプロソー レビュー比較まとめ",
     "name": "HiKOKI CR36DA レシプロソー レビュー比較まとめ.md",
@@ -4314,8 +4314,8 @@
     "publishAt": "2026-10-19T12:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
     "queuedAt": "2026-10-19T11:25:19.520326+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-19T12:02:18.339038+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nfa0ff16ac1b2?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
