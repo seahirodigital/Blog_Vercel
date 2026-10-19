@@ -3980,7 +3980,7 @@
   },
   {
     "id": "b7c7c072-70af-45d8-aaca-bda3230c53cc",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7944ff610d71410cb9d509a14ab5f3e7",
     "title": "サンワダイレクト SSD 外付け USB en2 ポータブル PS5PS4動作確認済み 直挿し 600-USSD S レ",
     "name": "サンワダイレクト SSD 外付け USB en2 ポータブル PS5PS4動作確認済み 直挿し 600-USSD S レ.md",
@@ -3989,10 +3989,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-19T03:00:00.000Z",
     "createdAt": "2026-10-15T07:20:17.652Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-19T02:25:27.607731+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "be31c8df-37ef-4c44-916c-5464066ec8f2",
