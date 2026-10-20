@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-10-20T17:20:55.668142+00:00",
+  "generatedAt": "2026-10-20T22:54:26.064501+00:00",
   "articleList": [
+    {
+      "id": "b1177c6104ef7fe22f",
+      "url": "/articles/b1177c6104ef7fe22f/",
+      "title": "↓↓本編はこちら！地球金利上昇を止める“犠牲”の正体＜糸島孝俊×岡崎良介＞Pictet Market Lounge 2026.10.13 ショート",
+      "channelName": "ピクテ・ジャパン",
+      "channelKey": "ピクテ・ジャパン",
+      "channelTab": "ピクテ・",
+      "youtubeUrl": "https://www.youtube.com/watch?v=T0ruqxFsxz0",
+      "thumbnail": "https://i.ytimg.com/vi/T0ruqxFsxz0/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-20T22:40:01.849954",
+      "recordedLabel": "2026.10.20 22:40",
+      "timeLabel": "2026.10.20 22:40",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-20T22:40:06Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s3c9ef6bbb69841bdab671eb4a4f35666"
+    },
     {
       "id": "30acaad0a715c8e140",
       "url": "/articles/30acaad0a715c8e140/",
@@ -8804,6 +8825,27 @@
     }
   ],
   "articles": {
+    "b1177c6104ef7fe22f": {
+      "id": "b1177c6104ef7fe22f",
+      "url": "/articles/b1177c6104ef7fe22f/",
+      "title": "↓↓本編はこちら！地球金利上昇を止める“犠牲”の正体＜糸島孝俊×岡崎良介＞Pictet Market Lounge 2026.10.13 ショート",
+      "channelName": "ピクテ・ジャパン",
+      "channelKey": "ピクテ・ジャパン",
+      "channelTab": "ピクテ・",
+      "youtubeUrl": "https://www.youtube.com/watch?v=T0ruqxFsxz0",
+      "thumbnail": "https://i.ytimg.com/vi/T0ruqxFsxz0/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-20T22:40:01.849954",
+      "recordedLabel": "2026.10.20 22:40",
+      "timeLabel": "2026.10.20 22:40",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-20T22:40:06Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s3c9ef6bbb69841bdab671eb4a4f35666"
+    },
     "30acaad0a715c8e140": {
       "id": "30acaad0a715c8e140",
       "url": "/articles/30acaad0a715c8e140/",
@@ -17608,6 +17650,11 @@
   },
   "channels": [
     {
+      "name": "ピクテ・ジャパン",
+      "tab": "ピクテ・",
+      "latestAt": "2026-10-20T22:40:01.849954"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-10-20T17:06:15.024002"
@@ -17631,11 +17678,6 @@
       "name": "ゆたかTV",
       "tab": "ゆたかT",
       "latestAt": "2026-10-16T09:05:58.141070"
-    },
-    {
-      "name": "ピクテ・ジャパン",
-      "tab": "ピクテ・",
-      "latestAt": "2026-10-16T07:51:21.260581"
     },
     {
       "name": "トウシル（楽天証券）",
