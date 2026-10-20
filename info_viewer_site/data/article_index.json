@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-20T09:45:19.015843+00:00",
+  "generatedAt": "2026-10-20T17:20:55.668142+00:00",
   "articleList": [
+    {
+      "id": "30acaad0a715c8e140",
+      "url": "/articles/30acaad0a715c8e140/",
+      "title": "LIVE  マーケットアップデート. リスクオフ相場. AI株安・原油高. 悪い雰囲気継続",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=vKOoGOk8lfU",
+      "thumbnail": "https://i.ytimg.com/vi/vKOoGOk8lfU/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-20T17:06:15.024002",
+      "recordedLabel": "2026.10.20 17:06",
+      "timeLabel": "2026.10.20 17:06",
+      "persons": [],
+      "lastModified": "2026-10-20T17:06:19Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s9c243a82d5af4e9a9cb68d1de455bf9f"
+    },
     {
       "id": "3a5b85b8c893dda6e7",
       "url": "/articles/3a5b85b8c893dda6e7/",
@@ -8785,6 +8804,25 @@
     }
   ],
   "articles": {
+    "30acaad0a715c8e140": {
+      "id": "30acaad0a715c8e140",
+      "url": "/articles/30acaad0a715c8e140/",
+      "title": "LIVE  マーケットアップデート. リスクオフ相場. AI株安・原油高. 悪い雰囲気継続",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=vKOoGOk8lfU",
+      "thumbnail": "https://i.ytimg.com/vi/vKOoGOk8lfU/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-20T17:06:15.024002",
+      "recordedLabel": "2026.10.20 17:06",
+      "timeLabel": "2026.10.20 17:06",
+      "persons": [],
+      "lastModified": "2026-10-20T17:06:19Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s9c243a82d5af4e9a9cb68d1de455bf9f"
+    },
     "3a5b85b8c893dda6e7": {
       "id": "3a5b85b8c893dda6e7",
       "url": "/articles/3a5b85b8c893dda6e7/",
@@ -17570,6 +17608,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-10-20T17:06:15.024002"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-10-20T09:30:53.021683"
@@ -17578,11 +17621,6 @@
       "name": "マネーフォワード ME イベント&セミナー",
       "tab": "マネーフ",
       "latestAt": "2026-10-17T09:30:04.464579"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-10-16T10:10:31.327400"
     },
     {
       "name": "マーケットマスターズ",
