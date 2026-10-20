@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-19T11:18:31.918088+00:00",
+  "generatedAt": "2026-10-20T09:45:19.015843+00:00",
   "articleList": [
+    {
+      "id": "3a5b85b8c893dda6e7",
+      "url": "/articles/3a5b85b8c893dda6e7/",
+      "title": "最高値から株価62%下落しているイオン株について今が買い時なのかプロの投資家に聞いてみた",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=A_FhV02d_eM",
+      "thumbnail": "https://i.ytimg.com/vi/A_FhV02d_eM/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-20T09:30:53.021683",
+      "recordedLabel": "2026.10.20 09:30",
+      "timeLabel": "2026.10.20 09:30",
+      "persons": [],
+      "lastModified": "2026-10-20T09:30:57Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s4bb3edd240414937b1520917fe984135"
+    },
     {
       "id": "059d2437bf93959b14",
       "url": "/articles/059d2437bf93959b14/",
@@ -8766,6 +8785,25 @@
     }
   ],
   "articles": {
+    "3a5b85b8c893dda6e7": {
+      "id": "3a5b85b8c893dda6e7",
+      "url": "/articles/3a5b85b8c893dda6e7/",
+      "title": "最高値から株価62%下落しているイオン株について今が買い時なのかプロの投資家に聞いてみた",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=A_FhV02d_eM",
+      "thumbnail": "https://i.ytimg.com/vi/A_FhV02d_eM/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-20T09:30:53.021683",
+      "recordedLabel": "2026.10.20 09:30",
+      "timeLabel": "2026.10.20 09:30",
+      "persons": [],
+      "lastModified": "2026-10-20T09:30:57Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s4bb3edd240414937b1520917fe984135"
+    },
     "059d2437bf93959b14": {
       "id": "059d2437bf93959b14",
       "url": "/articles/059d2437bf93959b14/",
@@ -17534,7 +17572,7 @@
     {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
-      "latestAt": "2026-10-19T11:03:21.027318"
+      "latestAt": "2026-10-20T09:30:53.021683"
     },
     {
       "name": "マネーフォワード ME イベント&セミナー",
