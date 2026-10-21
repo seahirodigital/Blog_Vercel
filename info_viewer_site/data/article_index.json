@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-10-21T05:46:04.782277+00:00",
+  "generatedAt": "2026-10-21T07:45:44.436137+00:00",
   "articleList": [
+    {
+      "id": "488f0c1667c3693fb6",
+      "url": "/articles/488f0c1667c3693fb6/",
+      "title": "【ゴールドフェスタ2026開催報告】不透明な時代、どうなる金価格（貴金属スペシャリスト 池水雄一さん） [ウィークリーゴールド]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=YD2QXbMLm5o",
+      "thumbnail": "https://i.ytimg.com/vi/YD2QXbMLm5o/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-21T07:31:26.007558",
+      "recordedLabel": "2026.10.21 07:31",
+      "timeLabel": "2026.10.21 07:31",
+      "persons": [
+        "池水雄一"
+      ],
+      "lastModified": "2026-10-21T07:31:31Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s97d3bf0e6e9e43faa2e3a16931b97fc0"
+    },
     {
       "id": "1e202f19bc5b8df54f",
       "url": "/articles/1e202f19bc5b8df54f/",
@@ -8866,6 +8887,27 @@
     }
   ],
   "articles": {
+    "488f0c1667c3693fb6": {
+      "id": "488f0c1667c3693fb6",
+      "url": "/articles/488f0c1667c3693fb6/",
+      "title": "【ゴールドフェスタ2026開催報告】不透明な時代、どうなる金価格（貴金属スペシャリスト 池水雄一さん） [ウィークリーゴールド]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=YD2QXbMLm5o",
+      "thumbnail": "https://i.ytimg.com/vi/YD2QXbMLm5o/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-21T07:31:26.007558",
+      "recordedLabel": "2026.10.21 07:31",
+      "timeLabel": "2026.10.21 07:31",
+      "persons": [
+        "池水雄一"
+      ],
+      "lastModified": "2026-10-21T07:31:31Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s97d3bf0e6e9e43faa2e3a16931b97fc0"
+    },
     "1e202f19bc5b8df54f": {
       "id": "1e202f19bc5b8df54f",
       "url": "/articles/1e202f19bc5b8df54f/",
@@ -17734,7 +17776,7 @@
     {
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
-      "latestAt": "2026-10-21T05:31:11.208595"
+      "latestAt": "2026-10-21T07:31:26.007558"
     },
     {
       "name": "げんたろうの投資ch【元機関投資家】",
