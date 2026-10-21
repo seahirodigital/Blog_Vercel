@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-21T13:26:33.242548+00:00",
+  "generatedAt": "2026-10-21T17:38:48.106153+00:00",
   "articleList": [
+    {
+      "id": "5b671f8f7a15b60a9d",
+      "url": "/articles/5b671f8f7a15b60a9d/",
+      "title": "LIVE  マーケットアップデート　下がらない違和感に備える　今日も方向感はなく・・・",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=HVpzyCDd86M",
+      "thumbnail": "https://i.ytimg.com/vi/HVpzyCDd86M/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-21T17:21:23.909106",
+      "recordedLabel": "2026.10.21 17:21",
+      "timeLabel": "2026.10.21 17:21",
+      "persons": [],
+      "lastModified": "2026-10-21T17:21:30Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s5635076d524a42cba53e99ba9ee38dfa"
+    },
     {
       "id": "1ffbf9fff4fe3a52e4",
       "url": "/articles/1ffbf9fff4fe3a52e4/",
@@ -8925,6 +8944,25 @@
     }
   ],
   "articles": {
+    "5b671f8f7a15b60a9d": {
+      "id": "5b671f8f7a15b60a9d",
+      "url": "/articles/5b671f8f7a15b60a9d/",
+      "title": "LIVE  マーケットアップデート　下がらない違和感に備える　今日も方向感はなく・・・",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=HVpzyCDd86M",
+      "thumbnail": "https://i.ytimg.com/vi/HVpzyCDd86M/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-21T17:21:23.909106",
+      "recordedLabel": "2026.10.21 17:21",
+      "timeLabel": "2026.10.21 17:21",
+      "persons": [],
+      "lastModified": "2026-10-21T17:21:30Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s5635076d524a42cba53e99ba9ee38dfa"
+    },
     "1ffbf9fff4fe3a52e4": {
       "id": "1ffbf9fff4fe3a52e4",
       "url": "/articles/1ffbf9fff4fe3a52e4/",
@@ -17850,6 +17888,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-10-21T17:21:23.909106"
+    },
+    {
       "name": "ゆたかTV",
       "tab": "ゆたかT",
       "latestAt": "2026-10-21T13:15:09.041062"
@@ -17868,11 +17911,6 @@
       "name": "ピクテ・ジャパン",
       "tab": "ピクテ・",
       "latestAt": "2026-10-20T22:40:01.849954"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-10-20T17:06:15.024002"
     },
     {
       "name": "マネーフォワード ME イベント&セミナー",
