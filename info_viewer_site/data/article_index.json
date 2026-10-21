@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-10-21T17:38:48.106153+00:00",
+  "generatedAt": "2026-10-21T22:57:57.009749+00:00",
   "articleList": [
+    {
+      "id": "19b92e38c1d650a745",
+      "url": "/articles/19b92e38c1d650a745/",
+      "title": "↓↓本編はこちら！金利高・株高 共存の限界か＜糸島孝俊×岡崎良介＞Pictet Market Lounge 2026.10.13 ショート",
+      "channelName": "ピクテ・ジャパン",
+      "channelKey": "ピクテ・ジャパン",
+      "channelTab": "ピクテ・",
+      "youtubeUrl": "https://www.youtube.com/watch?v=VFh7ZZ6B2V8",
+      "thumbnail": "https://i.ytimg.com/vi/VFh7ZZ6B2V8/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-21T22:41:42.641693",
+      "recordedLabel": "2026.10.21 22:41",
+      "timeLabel": "2026.10.21 22:41",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-21T22:41:47Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s1c51ed94398c4e6d90df56b9d7392b74"
+    },
     {
       "id": "5b671f8f7a15b60a9d",
       "url": "/articles/5b671f8f7a15b60a9d/",
@@ -8944,6 +8965,27 @@
     }
   ],
   "articles": {
+    "19b92e38c1d650a745": {
+      "id": "19b92e38c1d650a745",
+      "url": "/articles/19b92e38c1d650a745/",
+      "title": "↓↓本編はこちら！金利高・株高 共存の限界か＜糸島孝俊×岡崎良介＞Pictet Market Lounge 2026.10.13 ショート",
+      "channelName": "ピクテ・ジャパン",
+      "channelKey": "ピクテ・ジャパン",
+      "channelTab": "ピクテ・",
+      "youtubeUrl": "https://www.youtube.com/watch?v=VFh7ZZ6B2V8",
+      "thumbnail": "https://i.ytimg.com/vi/VFh7ZZ6B2V8/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-21T22:41:42.641693",
+      "recordedLabel": "2026.10.21 22:41",
+      "timeLabel": "2026.10.21 22:41",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-21T22:41:47Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s1c51ed94398c4e6d90df56b9d7392b74"
+    },
     "5b671f8f7a15b60a9d": {
       "id": "5b671f8f7a15b60a9d",
       "url": "/articles/5b671f8f7a15b60a9d/",
@@ -17888,6 +17930,11 @@
   },
   "channels": [
     {
+      "name": "ピクテ・ジャパン",
+      "tab": "ピクテ・",
+      "latestAt": "2026-10-21T22:41:42.641693"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-10-21T17:21:23.909106"
@@ -17906,11 +17953,6 @@
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-10-21T07:31:26.007558"
-    },
-    {
-      "name": "ピクテ・ジャパン",
-      "tab": "ピクテ・",
-      "latestAt": "2026-10-20T22:40:01.849954"
     },
     {
       "name": "マネーフォワード ME イベント&セミナー",
