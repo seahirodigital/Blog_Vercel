@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-20T22:54:26.064501+00:00",
+  "generatedAt": "2026-10-21T02:44:49.639756+00:00",
   "articleList": [
+    {
+      "id": "c5fb824b4ea287e325",
+      "url": "/articles/c5fb824b4ea287e325/",
+      "title": "最近のAI株の動向。弟子が遂に信用取引に手を出したぞ！【配信日:10/21】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=7bZhNXtzuZU",
+      "thumbnail": "https://i.ytimg.com/vi/7bZhNXtzuZU/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-21T02:30:32.944836",
+      "recordedLabel": "2026.10.21 02:30",
+      "timeLabel": "2026.10.21 02:30",
+      "persons": [],
+      "lastModified": "2026-10-21T02:30:38Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sb3d7f795668149858bf612983e24df1c"
+    },
     {
       "id": "b1177c6104ef7fe22f",
       "url": "/articles/b1177c6104ef7fe22f/",
@@ -8825,6 +8844,25 @@
     }
   ],
   "articles": {
+    "c5fb824b4ea287e325": {
+      "id": "c5fb824b4ea287e325",
+      "url": "/articles/c5fb824b4ea287e325/",
+      "title": "最近のAI株の動向。弟子が遂に信用取引に手を出したぞ！【配信日:10/21】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=7bZhNXtzuZU",
+      "thumbnail": "https://i.ytimg.com/vi/7bZhNXtzuZU/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-21T02:30:32.944836",
+      "recordedLabel": "2026.10.21 02:30",
+      "timeLabel": "2026.10.21 02:30",
+      "persons": [],
+      "lastModified": "2026-10-21T02:30:38Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sb3d7f795668149858bf612983e24df1c"
+    },
     "b1177c6104ef7fe22f": {
       "id": "b1177c6104ef7fe22f",
       "url": "/articles/b1177c6104ef7fe22f/",
@@ -17650,6 +17688,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-10-21T02:30:32.944836"
+    },
+    {
       "name": "ピクテ・ジャパン",
       "tab": "ピクテ・",
       "latestAt": "2026-10-20T22:40:01.849954"
@@ -17658,11 +17701,6 @@
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-10-20T17:06:15.024002"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-10-20T09:30:53.021683"
     },
     {
       "name": "マネーフォワード ME イベント&セミナー",
