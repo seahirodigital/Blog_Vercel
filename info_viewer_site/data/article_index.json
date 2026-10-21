@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-21T07:45:44.436137+00:00",
+  "generatedAt": "2026-10-21T11:26:27.225113+00:00",
   "articleList": [
+    {
+      "id": "7ee2b1c55ff86b7380",
+      "url": "/articles/7ee2b1c55ff86b7380/",
+      "title": "もうすぐ決算シーズン！上方修正祭り！？月末に仕込め！！",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=_SFG93va0XY",
+      "thumbnail": "https://i.ytimg.com/vi/_SFG93va0XY/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-21T11:11:40.852870",
+      "recordedLabel": "2026.10.21 11:11",
+      "timeLabel": "2026.10.21 11:11",
+      "persons": [],
+      "lastModified": "2026-10-21T11:11:48Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s859907ef616640d2a1052e5570b9027f"
+    },
     {
       "id": "488f0c1667c3693fb6",
       "url": "/articles/488f0c1667c3693fb6/",
@@ -8887,6 +8906,25 @@
     }
   ],
   "articles": {
+    "7ee2b1c55ff86b7380": {
+      "id": "7ee2b1c55ff86b7380",
+      "url": "/articles/7ee2b1c55ff86b7380/",
+      "title": "もうすぐ決算シーズン！上方修正祭り！？月末に仕込め！！",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=_SFG93va0XY",
+      "thumbnail": "https://i.ytimg.com/vi/_SFG93va0XY/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-21T11:11:40.852870",
+      "recordedLabel": "2026.10.21 11:11",
+      "timeLabel": "2026.10.21 11:11",
+      "persons": [],
+      "lastModified": "2026-10-21T11:11:48Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s859907ef616640d2a1052e5570b9027f"
+    },
     "488f0c1667c3693fb6": {
       "id": "488f0c1667c3693fb6",
       "url": "/articles/488f0c1667c3693fb6/",
@@ -17774,14 +17812,14 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-10-21T11:11:40.852870"
+    },
+    {
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-10-21T07:31:26.007558"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-10-21T02:30:32.944836"
     },
     {
       "name": "ピクテ・ジャパン",
