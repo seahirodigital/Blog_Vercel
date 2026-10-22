@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-22T10:43:48.937255+00:00",
+  "generatedAt": "2026-10-22T16:53:08.910215+00:00",
   "articleList": [
+    {
+      "id": "3377c0a0d616a34a4f",
+      "url": "/articles/3377c0a0d616a34a4f/",
+      "title": "LIVE  マーケットアップデート日経1700円下落 海外勢売り越し",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=uAaWH1kbxRE",
+      "thumbnail": "https://i.ytimg.com/vi/uAaWH1kbxRE/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-22T16:36:23.473220",
+      "recordedLabel": "2026.10.22 16:36",
+      "timeLabel": "2026.10.22 16:36",
+      "persons": [],
+      "lastModified": "2026-10-22T16:36:28Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s7254447a3260488ba7f485689a4826f5"
+    },
     {
       "id": "215ff7649393450af5",
       "url": "/articles/215ff7649393450af5/",
@@ -9005,6 +9024,25 @@
     }
   ],
   "articles": {
+    "3377c0a0d616a34a4f": {
+      "id": "3377c0a0d616a34a4f",
+      "url": "/articles/3377c0a0d616a34a4f/",
+      "title": "LIVE  マーケットアップデート日経1700円下落 海外勢売り越し",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=uAaWH1kbxRE",
+      "thumbnail": "https://i.ytimg.com/vi/uAaWH1kbxRE/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-22T16:36:23.473220",
+      "recordedLabel": "2026.10.22 16:36",
+      "timeLabel": "2026.10.22 16:36",
+      "persons": [],
+      "lastModified": "2026-10-22T16:36:28Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s7254447a3260488ba7f485689a4826f5"
+    },
     "215ff7649393450af5": {
       "id": "215ff7649393450af5",
       "url": "/articles/215ff7649393450af5/",
@@ -18010,6 +18048,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-10-22T16:36:23.473220"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-10-22T10:29:31.607697"
@@ -18023,11 +18066,6 @@
       "name": "ピクテ・ジャパン",
       "tab": "ピクテ・",
       "latestAt": "2026-10-21T22:41:42.641693"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-10-21T17:21:23.909106"
     },
     {
       "name": "ゆたかTV",
