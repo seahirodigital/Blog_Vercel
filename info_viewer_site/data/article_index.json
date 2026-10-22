@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-22T09:13:55.218013+00:00",
+  "generatedAt": "2026-10-22T10:43:48.937255+00:00",
   "articleList": [
+    {
+      "id": "215ff7649393450af5",
+      "url": "/articles/215ff7649393450af5/",
+      "title": "【暴落に備えろ】株価が下落し続けている銀行株...。利上げの恩恵はまだあるのか？元機関投資家が徹底解説します",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=ZKmqyyBWUJ4",
+      "thumbnail": "https://i.ytimg.com/vi/ZKmqyyBWUJ4/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-22T10:29:31.607697",
+      "recordedLabel": "2026.10.22 10:29",
+      "timeLabel": "2026.10.22 10:29",
+      "persons": [],
+      "lastModified": "2026-10-22T10:29:38Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s290cb35b70e14e899e9c985e14784d2a"
+    },
     {
       "id": "eb796dff5a758c8bb5",
       "url": "/articles/eb796dff5a758c8bb5/",
@@ -8986,6 +9005,25 @@
     }
   ],
   "articles": {
+    "215ff7649393450af5": {
+      "id": "215ff7649393450af5",
+      "url": "/articles/215ff7649393450af5/",
+      "title": "【暴落に備えろ】株価が下落し続けている銀行株...。利上げの恩恵はまだあるのか？元機関投資家が徹底解説します",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=ZKmqyyBWUJ4",
+      "thumbnail": "https://i.ytimg.com/vi/ZKmqyyBWUJ4/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-22T10:29:31.607697",
+      "recordedLabel": "2026.10.22 10:29",
+      "timeLabel": "2026.10.22 10:29",
+      "persons": [],
+      "lastModified": "2026-10-22T10:29:38Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s290cb35b70e14e899e9c985e14784d2a"
+    },
     "eb796dff5a758c8bb5": {
       "id": "eb796dff5a758c8bb5",
       "url": "/articles/eb796dff5a758c8bb5/",
@@ -17972,6 +18010,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-10-22T10:29:31.607697"
+    },
+    {
       "name": "トウシル（楽天証券）",
       "tab": "トウシル",
       "latestAt": "2026-10-22T09:00:29.085099"
@@ -17990,11 +18033,6 @@
       "name": "ゆたかTV",
       "tab": "ゆたかT",
       "latestAt": "2026-10-21T13:15:09.041062"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-10-21T11:11:40.852870"
     },
     {
       "name": "なるほど投資ゼミ（大橋ひろこ",
