@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-10-22T16:53:08.910215+00:00",
+  "generatedAt": "2026-10-22T22:53:31.106675+00:00",
   "articleList": [
+    {
+      "id": "f0f4925b76975a1f28",
+      "url": "/articles/f0f4925b76975a1f28/",
+      "title": "↓↓本編はこちら！金利高・株高の継続はバブル崩壊の前兆か＜糸島孝俊×岡崎良介＞Pictet Market Lounge 2026.10.13 ショート",
+      "channelName": "ピクテ・ジャパン",
+      "channelKey": "ピクテ・ジャパン",
+      "channelTab": "ピクテ・",
+      "youtubeUrl": "https://www.youtube.com/watch?v=iR8BUIqiBGc",
+      "thumbnail": "https://i.ytimg.com/vi/iR8BUIqiBGc/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-22T22:39:26.406547",
+      "recordedLabel": "2026.10.22 22:39",
+      "timeLabel": "2026.10.22 22:39",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-22T22:39:32Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sa294f40b527e445f998e794223bb986b"
+    },
     {
       "id": "3377c0a0d616a34a4f",
       "url": "/articles/3377c0a0d616a34a4f/",
@@ -9024,6 +9045,27 @@
     }
   ],
   "articles": {
+    "f0f4925b76975a1f28": {
+      "id": "f0f4925b76975a1f28",
+      "url": "/articles/f0f4925b76975a1f28/",
+      "title": "↓↓本編はこちら！金利高・株高の継続はバブル崩壊の前兆か＜糸島孝俊×岡崎良介＞Pictet Market Lounge 2026.10.13 ショート",
+      "channelName": "ピクテ・ジャパン",
+      "channelKey": "ピクテ・ジャパン",
+      "channelTab": "ピクテ・",
+      "youtubeUrl": "https://www.youtube.com/watch?v=iR8BUIqiBGc",
+      "thumbnail": "https://i.ytimg.com/vi/iR8BUIqiBGc/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-22T22:39:26.406547",
+      "recordedLabel": "2026.10.22 22:39",
+      "timeLabel": "2026.10.22 22:39",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-22T22:39:32Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sa294f40b527e445f998e794223bb986b"
+    },
     "3377c0a0d616a34a4f": {
       "id": "3377c0a0d616a34a4f",
       "url": "/articles/3377c0a0d616a34a4f/",
@@ -18048,6 +18090,11 @@
   },
   "channels": [
     {
+      "name": "ピクテ・ジャパン",
+      "tab": "ピクテ・",
+      "latestAt": "2026-10-22T22:39:26.406547"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-10-22T16:36:23.473220"
@@ -18061,11 +18108,6 @@
       "name": "トウシル（楽天証券）",
       "tab": "トウシル",
       "latestAt": "2026-10-22T09:00:29.085099"
-    },
-    {
-      "name": "ピクテ・ジャパン",
-      "tab": "ピクテ・",
-      "latestAt": "2026-10-21T22:41:42.641693"
     },
     {
       "name": "ゆたかTV",
