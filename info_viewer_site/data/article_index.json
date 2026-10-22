@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-10-21T22:57:57.009749+00:00",
+  "generatedAt": "2026-10-22T09:13:55.218013+00:00",
   "articleList": [
+    {
+      "id": "eb796dff5a758c8bb5",
+      "url": "/articles/eb796dff5a758c8bb5/",
+      "title": "田中泰輔のマネーは語る：【米国株】AI相場、11月へ問題多発。黒白つけようじゃないか（田中 泰輔）【楽天証券 トウシル】",
+      "channelName": "トウシル（楽天証券）",
+      "channelKey": "トウシル（楽天証券）",
+      "channelTab": "トウシル",
+      "youtubeUrl": "https://www.youtube.com/watch?v=DlMqrziQ-iw",
+      "thumbnail": "https://i.ytimg.com/vi/DlMqrziQ-iw/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-22T09:00:29.085099",
+      "recordedLabel": "2026.10.22 09:00",
+      "timeLabel": "2026.10.22 09:00",
+      "persons": [
+        "田中泰輔"
+      ],
+      "lastModified": "2026-10-22T09:00:36Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sc0070474ca8441a1864fd16697c1c006"
+    },
     {
       "id": "19b92e38c1d650a745",
       "url": "/articles/19b92e38c1d650a745/",
@@ -8965,6 +8986,27 @@
     }
   ],
   "articles": {
+    "eb796dff5a758c8bb5": {
+      "id": "eb796dff5a758c8bb5",
+      "url": "/articles/eb796dff5a758c8bb5/",
+      "title": "田中泰輔のマネーは語る：【米国株】AI相場、11月へ問題多発。黒白つけようじゃないか（田中 泰輔）【楽天証券 トウシル】",
+      "channelName": "トウシル（楽天証券）",
+      "channelKey": "トウシル（楽天証券）",
+      "channelTab": "トウシル",
+      "youtubeUrl": "https://www.youtube.com/watch?v=DlMqrziQ-iw",
+      "thumbnail": "https://i.ytimg.com/vi/DlMqrziQ-iw/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-22T09:00:29.085099",
+      "recordedLabel": "2026.10.22 09:00",
+      "timeLabel": "2026.10.22 09:00",
+      "persons": [
+        "田中泰輔"
+      ],
+      "lastModified": "2026-10-22T09:00:36Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sc0070474ca8441a1864fd16697c1c006"
+    },
     "19b92e38c1d650a745": {
       "id": "19b92e38c1d650a745",
       "url": "/articles/19b92e38c1d650a745/",
@@ -17930,6 +17972,11 @@
   },
   "channels": [
     {
+      "name": "トウシル（楽天証券）",
+      "tab": "トウシル",
+      "latestAt": "2026-10-22T09:00:29.085099"
+    },
+    {
       "name": "ピクテ・ジャパン",
       "tab": "ピクテ・",
       "latestAt": "2026-10-21T22:41:42.641693"
@@ -17963,11 +18010,6 @@
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
       "latestAt": "2026-10-16T09:43:53.551086"
-    },
-    {
-      "name": "トウシル（楽天証券）",
-      "tab": "トウシル",
-      "latestAt": "2026-10-15T11:32:02.392895"
     },
     {
       "name": "イズミダイズム",
