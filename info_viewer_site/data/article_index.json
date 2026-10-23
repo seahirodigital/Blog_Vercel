@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-10-23T09:31:37.262793+00:00",
+  "generatedAt": "2026-10-23T10:08:01.191162+00:00",
   "articleList": [
+    {
+      "id": "a5d4ca417ff51cdd62",
+      "url": "/articles/a5d4ca417ff51cdd62/",
+      "title": "岡崎良介×永濱利廣×久我尚子【半導体と半導体製造装置の数量効果と価格効果「選ばない消費」とは｜エコノミストコンセンサス｜鈴木銘柄分析】10月23日公開※11/14大宮セミナー11/28大阪セミナー",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=hjD3mV99Rkw",
+      "thumbnail": "https://i.ytimg.com/vi/hjD3mV99Rkw/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-23T09:44:56.950776",
+      "recordedLabel": "2026.10.23 09:44",
+      "timeLabel": "2026.10.23 09:44",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-23T09:45:06Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!scfbb58f3e10447b1a1b49561be62d40a"
+    },
     {
       "id": "61a6056021dfbaee64",
       "url": "/articles/61a6056021dfbaee64/",
@@ -9066,6 +9087,27 @@
     }
   ],
   "articles": {
+    "a5d4ca417ff51cdd62": {
+      "id": "a5d4ca417ff51cdd62",
+      "url": "/articles/a5d4ca417ff51cdd62/",
+      "title": "岡崎良介×永濱利廣×久我尚子【半導体と半導体製造装置の数量効果と価格効果「選ばない消費」とは｜エコノミストコンセンサス｜鈴木銘柄分析】10月23日公開※11/14大宮セミナー11/28大阪セミナー",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=hjD3mV99Rkw",
+      "thumbnail": "https://i.ytimg.com/vi/hjD3mV99Rkw/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-23T09:44:56.950776",
+      "recordedLabel": "2026.10.23 09:44",
+      "timeLabel": "2026.10.23 09:44",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-23T09:45:06Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!scfbb58f3e10447b1a1b49561be62d40a"
+    },
     "61a6056021dfbaee64": {
       "id": "61a6056021dfbaee64",
       "url": "/articles/61a6056021dfbaee64/",
@@ -18134,7 +18176,7 @@
     {
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
-      "latestAt": "2026-10-23T09:08:14.864892"
+      "latestAt": "2026-10-23T09:44:56.950776"
     },
     {
       "name": "ピクテ・ジャパン",
