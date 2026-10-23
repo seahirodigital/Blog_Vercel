@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-10-22T22:53:31.106675+00:00",
+  "generatedAt": "2026-10-23T09:31:37.262793+00:00",
   "articleList": [
+    {
+      "id": "61a6056021dfbaee64",
+      "url": "/articles/61a6056021dfbaee64/",
+      "title": "木野内栄治【今週もお休みですがコメントのみ配信「セリングクライマックスとなっておらず申し訳ございません。ただし引き続き押し目買い戦略が有効」代読：鈴木一之】スズキノチャンネル 10/23配信",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=7XrznWQ9UpE",
+      "thumbnail": "https://i.ytimg.com/vi/7XrznWQ9UpE/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-23T09:08:14.864892",
+      "recordedLabel": "2026.10.23 09:08",
+      "timeLabel": "2026.10.23 09:08",
+      "persons": [
+        "木野内栄治"
+      ],
+      "lastModified": "2026-10-23T09:08:23Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sec947d1236f749b7aef2aa0de4312aae"
+    },
     {
       "id": "f0f4925b76975a1f28",
       "url": "/articles/f0f4925b76975a1f28/",
@@ -9045,6 +9066,27 @@
     }
   ],
   "articles": {
+    "61a6056021dfbaee64": {
+      "id": "61a6056021dfbaee64",
+      "url": "/articles/61a6056021dfbaee64/",
+      "title": "木野内栄治【今週もお休みですがコメントのみ配信「セリングクライマックスとなっておらず申し訳ございません。ただし引き続き押し目買い戦略が有効」代読：鈴木一之】スズキノチャンネル 10/23配信",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=7XrznWQ9UpE",
+      "thumbnail": "https://i.ytimg.com/vi/7XrznWQ9UpE/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-23T09:08:14.864892",
+      "recordedLabel": "2026.10.23 09:08",
+      "timeLabel": "2026.10.23 09:08",
+      "persons": [
+        "木野内栄治"
+      ],
+      "lastModified": "2026-10-23T09:08:23Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sec947d1236f749b7aef2aa0de4312aae"
+    },
     "f0f4925b76975a1f28": {
       "id": "f0f4925b76975a1f28",
       "url": "/articles/f0f4925b76975a1f28/",
@@ -18090,6 +18132,11 @@
   },
   "channels": [
     {
+      "name": "マーケットマスターズ",
+      "tab": "マーケッ",
+      "latestAt": "2026-10-23T09:08:14.864892"
+    },
+    {
       "name": "ピクテ・ジャパン",
       "tab": "ピクテ・",
       "latestAt": "2026-10-22T22:39:26.406547"
@@ -18123,11 +18170,6 @@
       "name": "マネーフォワード ME イベント&セミナー",
       "tab": "マネーフ",
       "latestAt": "2026-10-17T09:30:04.464579"
-    },
-    {
-      "name": "マーケットマスターズ",
-      "tab": "マーケッ",
-      "latestAt": "2026-10-16T09:43:53.551086"
     },
     {
       "name": "イズミダイズム",
