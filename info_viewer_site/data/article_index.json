@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-23T10:08:01.191162+00:00",
+  "generatedAt": "2026-10-23T11:44:53.879837+00:00",
   "articleList": [
+    {
+      "id": "8047369bd5f0abbcad",
+      "url": "/articles/8047369bd5f0abbcad/",
+      "title": "矢嶋康次【2027年世界経済に大きな屈折ない 分水嶺は超金利｜4大メガトレンド 絶対に起こしてはいけない「歴史の韻」｜ポストトランプのリーダーは】スズキノチャンネル ゲスト:矢嶋康次 10月23日配信",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=ILm3MLGuXhM",
+      "thumbnail": "https://i.ytimg.com/vi/ILm3MLGuXhM/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-23T11:32:12.038144",
+      "recordedLabel": "2026.10.23 11:32",
+      "timeLabel": "2026.10.23 11:32",
+      "persons": [],
+      "lastModified": "2026-10-23T11:32:17Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!se4837f38004147669e62552bcecccf6b"
+    },
     {
       "id": "a5d4ca417ff51cdd62",
       "url": "/articles/a5d4ca417ff51cdd62/",
@@ -9087,6 +9106,25 @@
     }
   ],
   "articles": {
+    "8047369bd5f0abbcad": {
+      "id": "8047369bd5f0abbcad",
+      "url": "/articles/8047369bd5f0abbcad/",
+      "title": "矢嶋康次【2027年世界経済に大きな屈折ない 分水嶺は超金利｜4大メガトレンド 絶対に起こしてはいけない「歴史の韻」｜ポストトランプのリーダーは】スズキノチャンネル ゲスト:矢嶋康次 10月23日配信",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=ILm3MLGuXhM",
+      "thumbnail": "https://i.ytimg.com/vi/ILm3MLGuXhM/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-23T11:32:12.038144",
+      "recordedLabel": "2026.10.23 11:32",
+      "timeLabel": "2026.10.23 11:32",
+      "persons": [],
+      "lastModified": "2026-10-23T11:32:17Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!se4837f38004147669e62552bcecccf6b"
+    },
     "a5d4ca417ff51cdd62": {
       "id": "a5d4ca417ff51cdd62",
       "url": "/articles/a5d4ca417ff51cdd62/",
@@ -18176,7 +18214,7 @@
     {
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
-      "latestAt": "2026-10-23T09:44:56.950776"
+      "latestAt": "2026-10-23T11:32:12.038144"
     },
     {
       "name": "ピクテ・ジャパン",
