@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-23T11:44:53.879837+00:00",
+  "generatedAt": "2026-10-24T09:43:26.410611+00:00",
   "articleList": [
+    {
+      "id": "0a06ef5cd0a97354d9",
+      "url": "/articles/0a06ef5cd0a97354d9/",
+      "title": "【正解はコレ】金利上昇時代、現金はどこに投資して増やすべきなのか元機関投資家が徹底解説",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Xwt6uUtWUbo",
+      "thumbnail": "https://i.ytimg.com/vi/Xwt6uUtWUbo/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-24T09:30:52.277417",
+      "recordedLabel": "2026.10.24 09:30",
+      "timeLabel": "2026.10.24 09:30",
+      "persons": [],
+      "lastModified": "2026-10-24T09:30:56Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s0b10e2690e8e4c66a1453027f8701eec"
+    },
     {
       "id": "8047369bd5f0abbcad",
       "url": "/articles/8047369bd5f0abbcad/",
@@ -9106,6 +9125,25 @@
     }
   ],
   "articles": {
+    "0a06ef5cd0a97354d9": {
+      "id": "0a06ef5cd0a97354d9",
+      "url": "/articles/0a06ef5cd0a97354d9/",
+      "title": "【正解はコレ】金利上昇時代、現金はどこに投資して増やすべきなのか元機関投資家が徹底解説",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Xwt6uUtWUbo",
+      "thumbnail": "https://i.ytimg.com/vi/Xwt6uUtWUbo/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-24T09:30:52.277417",
+      "recordedLabel": "2026.10.24 09:30",
+      "timeLabel": "2026.10.24 09:30",
+      "persons": [],
+      "lastModified": "2026-10-24T09:30:56Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s0b10e2690e8e4c66a1453027f8701eec"
+    },
     "8047369bd5f0abbcad": {
       "id": "8047369bd5f0abbcad",
       "url": "/articles/8047369bd5f0abbcad/",
@@ -18212,6 +18250,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-10-24T09:30:52.277417"
+    },
+    {
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
       "latestAt": "2026-10-23T11:32:12.038144"
@@ -18225,11 +18268,6 @@
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-10-22T16:36:23.473220"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-10-22T10:29:31.607697"
     },
     {
       "name": "トウシル（楽天証券）",
