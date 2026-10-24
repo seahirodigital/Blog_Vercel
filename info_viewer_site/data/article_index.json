@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-24T10:37:43.677985+00:00",
+  "generatedAt": "2026-10-24T13:42:49.253306+00:00",
   "articleList": [
+    {
+      "id": "c4b0fecd2c6e25331f",
+      "url": "/articles/c4b0fecd2c6e25331f/",
+      "title": "来週の日本株展望(2026/10/26~)好決算でも下げる半導体株　内需・ディフェンシブ　優位は続くか？",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=26xkQe0pGyo",
+      "thumbnail": "https://i.ytimg.com/vi/26xkQe0pGyo/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-24T13:30:57.440342",
+      "recordedLabel": "2026.10.24 13:30",
+      "timeLabel": "2026.10.24 13:30",
+      "persons": [],
+      "lastModified": "2026-10-24T13:31:01Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s9d196dddc1874dee9b1d92be3375ab85"
+    },
     {
       "id": "73a44746b4d8235dd5",
       "url": "/articles/73a44746b4d8235dd5/",
@@ -9146,6 +9165,25 @@
     }
   ],
   "articles": {
+    "c4b0fecd2c6e25331f": {
+      "id": "c4b0fecd2c6e25331f",
+      "url": "/articles/c4b0fecd2c6e25331f/",
+      "title": "来週の日本株展望(2026/10/26~)好決算でも下げる半導体株　内需・ディフェンシブ　優位は続くか？",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=26xkQe0pGyo",
+      "thumbnail": "https://i.ytimg.com/vi/26xkQe0pGyo/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-24T13:30:57.440342",
+      "recordedLabel": "2026.10.24 13:30",
+      "timeLabel": "2026.10.24 13:30",
+      "persons": [],
+      "lastModified": "2026-10-24T13:31:01Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s9d196dddc1874dee9b1d92be3375ab85"
+    },
     "73a44746b4d8235dd5": {
       "id": "73a44746b4d8235dd5",
       "url": "/articles/73a44746b4d8235dd5/",
@@ -18292,6 +18330,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-10-24T13:30:57.440342"
+    },
+    {
       "name": "マネーフォワード ME イベント&セミナー",
       "tab": "マネーフ",
       "latestAt": "2026-10-24T10:26:28.449334"
@@ -18310,11 +18353,6 @@
       "name": "ピクテ・ジャパン",
       "tab": "ピクテ・",
       "latestAt": "2026-10-22T22:39:26.406547"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-10-22T16:36:23.473220"
     },
     {
       "name": "トウシル（楽天証券）",
