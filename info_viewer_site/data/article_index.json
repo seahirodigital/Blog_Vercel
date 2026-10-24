@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-10-24T09:43:26.410611+00:00",
+  "generatedAt": "2026-10-24T10:37:43.677985+00:00",
   "articleList": [
+    {
+      "id": "73a44746b4d8235dd5",
+      "url": "/articles/73a44746b4d8235dd5/",
+      "title": "【もはや\"国防\"銘柄!?】セキュリティ株に猛烈な追い風!? / コアウィーブに続きMeta動向も市況に波及!? / スペースX初黒字とテスラ統合のシナリオまで【大川&Nobbyの聴くだけ投資】大川智宏",
+      "channelName": "マネーフォワード ME イベント&セミナー",
+      "channelKey": "マネーフォワード ME イベント&セミナー",
+      "channelTab": "マネーフ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=-u8A2kA7Rfo",
+      "thumbnail": "https://i.ytimg.com/vi/-u8A2kA7Rfo/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-24T10:26:28.449334",
+      "recordedLabel": "2026.10.24 10:26",
+      "timeLabel": "2026.10.24 10:26",
+      "persons": [
+        "大川智宏"
+      ],
+      "lastModified": "2026-10-24T10:26:34Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf8d82c28a53e4e2db5b51291dd19e1ee"
+    },
     {
       "id": "0a06ef5cd0a97354d9",
       "url": "/articles/0a06ef5cd0a97354d9/",
@@ -9125,6 +9146,27 @@
     }
   ],
   "articles": {
+    "73a44746b4d8235dd5": {
+      "id": "73a44746b4d8235dd5",
+      "url": "/articles/73a44746b4d8235dd5/",
+      "title": "【もはや\"国防\"銘柄!?】セキュリティ株に猛烈な追い風!? / コアウィーブに続きMeta動向も市況に波及!? / スペースX初黒字とテスラ統合のシナリオまで【大川&Nobbyの聴くだけ投資】大川智宏",
+      "channelName": "マネーフォワード ME イベント&セミナー",
+      "channelKey": "マネーフォワード ME イベント&セミナー",
+      "channelTab": "マネーフ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=-u8A2kA7Rfo",
+      "thumbnail": "https://i.ytimg.com/vi/-u8A2kA7Rfo/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-24T10:26:28.449334",
+      "recordedLabel": "2026.10.24 10:26",
+      "timeLabel": "2026.10.24 10:26",
+      "persons": [
+        "大川智宏"
+      ],
+      "lastModified": "2026-10-24T10:26:34Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf8d82c28a53e4e2db5b51291dd19e1ee"
+    },
     "0a06ef5cd0a97354d9": {
       "id": "0a06ef5cd0a97354d9",
       "url": "/articles/0a06ef5cd0a97354d9/",
@@ -18250,6 +18292,11 @@
   },
   "channels": [
     {
+      "name": "マネーフォワード ME イベント&セミナー",
+      "tab": "マネーフ",
+      "latestAt": "2026-10-24T10:26:28.449334"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-10-24T09:30:52.277417"
@@ -18283,11 +18330,6 @@
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-10-21T07:31:26.007558"
-    },
-    {
-      "name": "マネーフォワード ME イベント&セミナー",
-      "tab": "マネーフ",
-      "latestAt": "2026-10-17T09:30:04.464579"
     },
     {
       "name": "イズミダイズム",
