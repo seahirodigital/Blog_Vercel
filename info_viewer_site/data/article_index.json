@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-24T13:42:49.253306+00:00",
+  "generatedAt": "2026-10-24T16:04:53.054270+00:00",
   "articleList": [
+    {
+      "id": "5b0f8d85c2f4126db2",
+      "url": "/articles/5b0f8d85c2f4126db2/",
+      "title": "【緊急】日経平均、2週間続けて大暴落...。来週からとんでもない相場が始まるかもしれません",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=rFXwdEJA2kg",
+      "thumbnail": "https://i.ytimg.com/vi/rFXwdEJA2kg/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-24T15:52:08.945025",
+      "recordedLabel": "2026.10.24 15:52",
+      "timeLabel": "2026.10.24 15:52",
+      "persons": [],
+      "lastModified": "2026-10-24T15:52:13Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s3dd51b36188d4807a8d59a4a67a632e3"
+    },
     {
       "id": "c4b0fecd2c6e25331f",
       "url": "/articles/c4b0fecd2c6e25331f/",
@@ -9165,6 +9184,25 @@
     }
   ],
   "articles": {
+    "5b0f8d85c2f4126db2": {
+      "id": "5b0f8d85c2f4126db2",
+      "url": "/articles/5b0f8d85c2f4126db2/",
+      "title": "【緊急】日経平均、2週間続けて大暴落...。来週からとんでもない相場が始まるかもしれません",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=rFXwdEJA2kg",
+      "thumbnail": "https://i.ytimg.com/vi/rFXwdEJA2kg/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-24T15:52:08.945025",
+      "recordedLabel": "2026.10.24 15:52",
+      "timeLabel": "2026.10.24 15:52",
+      "persons": [],
+      "lastModified": "2026-10-24T15:52:13Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s3dd51b36188d4807a8d59a4a67a632e3"
+    },
     "c4b0fecd2c6e25331f": {
       "id": "c4b0fecd2c6e25331f",
       "url": "/articles/c4b0fecd2c6e25331f/",
@@ -18330,6 +18368,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-10-24T15:52:08.945025"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-10-24T13:30:57.440342"
@@ -18338,11 +18381,6 @@
       "name": "マネーフォワード ME イベント&セミナー",
       "tab": "マネーフ",
       "latestAt": "2026-10-24T10:26:28.449334"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-10-24T09:30:52.277417"
     },
     {
       "name": "マーケットマスターズ",
