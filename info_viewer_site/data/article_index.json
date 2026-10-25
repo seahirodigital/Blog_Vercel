@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-24T16:04:53.054270+00:00",
+  "generatedAt": "2026-10-25T09:46:09.031496+00:00",
   "articleList": [
+    {
+      "id": "f9dec5865a8b9ef29a",
+      "url": "/articles/f9dec5865a8b9ef29a/",
+      "title": "【徹底解説】AIバブルの裏で急成長。世界が注目する技術でイケイケな日本企業を徹底解説します",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=kVE9WtE7KhE",
+      "thumbnail": "https://i.ytimg.com/vi/kVE9WtE7KhE/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-25T09:34:50.250677",
+      "recordedLabel": "2026.10.25 09:34",
+      "timeLabel": "2026.10.25 09:34",
+      "persons": [],
+      "lastModified": "2026-10-25T09:34:55Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s7ffb20a4484346d1be0322fc52c35b93"
+    },
     {
       "id": "5b0f8d85c2f4126db2",
       "url": "/articles/5b0f8d85c2f4126db2/",
@@ -9184,6 +9203,25 @@
     }
   ],
   "articles": {
+    "f9dec5865a8b9ef29a": {
+      "id": "f9dec5865a8b9ef29a",
+      "url": "/articles/f9dec5865a8b9ef29a/",
+      "title": "【徹底解説】AIバブルの裏で急成長。世界が注目する技術でイケイケな日本企業を徹底解説します",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=kVE9WtE7KhE",
+      "thumbnail": "https://i.ytimg.com/vi/kVE9WtE7KhE/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-25T09:34:50.250677",
+      "recordedLabel": "2026.10.25 09:34",
+      "timeLabel": "2026.10.25 09:34",
+      "persons": [],
+      "lastModified": "2026-10-25T09:34:55Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s7ffb20a4484346d1be0322fc52c35b93"
+    },
     "5b0f8d85c2f4126db2": {
       "id": "5b0f8d85c2f4126db2",
       "url": "/articles/5b0f8d85c2f4126db2/",
@@ -18370,7 +18408,7 @@
     {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
-      "latestAt": "2026-10-24T15:52:08.945025"
+      "latestAt": "2026-10-25T09:34:50.250677"
     },
     {
       "name": "YTの投資銀行",
