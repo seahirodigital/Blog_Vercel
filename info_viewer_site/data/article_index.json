@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-26T09:52:13.641891+00:00",
+  "generatedAt": "2026-10-26T14:49:42.279097+00:00",
   "articleList": [
+    {
+      "id": "c6b46eb1e7563ced21",
+      "url": "/articles/c6b46eb1e7563ced21/",
+      "title": "流石に下げすぎてるあの株にチャンスがやってきました！！",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=xukNb2TLloA",
+      "thumbnail": "https://i.ytimg.com/vi/xukNb2TLloA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-26T14:34:12.469903",
+      "recordedLabel": "2026.10.26 14:34",
+      "timeLabel": "2026.10.26 14:34",
+      "persons": [],
+      "lastModified": "2026-10-26T14:34:17Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s69a0598b6052440aa2b1b8434c30ba1e"
+    },
     {
       "id": "431db201a8705e8d67",
       "url": "/articles/431db201a8705e8d67/",
@@ -6300,27 +6319,6 @@
       "sourceFileId": "FFCC26DEDBBA4E70!s0055747484244fd0929cc17bcfc6c463"
     },
     {
-      "id": "557d477edc29d07b02",
-      "url": "/articles/557d477edc29d07b02/",
-      "title": "【アナリスト謝罪!?】NAND意外といけんじゃないか《大山聡×大川智宏》",
-      "channelName": "楽待",
-      "channelKey": "楽待",
-      "channelTab": "楽待",
-      "youtubeUrl": "https://www.youtube.com/watch?v=9T8zEGQNRbI",
-      "thumbnail": "https://i.ytimg.com/vi/9T8zEGQNRbI/hqdefault.jpg",
-      "publishedAt": "",
-      "publishedLabel": "",
-      "duration": "",
-      "recordedAt": "2026-05-29T01:13:48.027294",
-      "recordedLabel": "2026.05.29 01:13",
-      "timeLabel": "2026.05.29 01:13",
-      "persons": [
-        "大川智宏"
-      ],
-      "lastModified": "2026-05-29T01:13:52Z",
-      "sourceFileId": "FFCC26DEDBBA4E70!sfb7c4b33b8f141dab9b478d7c9ed061a"
-    },
-    {
       "id": "7632ab264ea0e1f316",
       "url": "/articles/7632ab264ea0e1f316/",
       "title": "LIVE2026/5/28 マーケットアップデート. イランヘッドライン. 後場急落. 怪しい値動きに",
@@ -9222,6 +9220,25 @@
     }
   ],
   "articles": {
+    "c6b46eb1e7563ced21": {
+      "id": "c6b46eb1e7563ced21",
+      "url": "/articles/c6b46eb1e7563ced21/",
+      "title": "流石に下げすぎてるあの株にチャンスがやってきました！！",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=xukNb2TLloA",
+      "thumbnail": "https://i.ytimg.com/vi/xukNb2TLloA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-26T14:34:12.469903",
+      "recordedLabel": "2026.10.26 14:34",
+      "timeLabel": "2026.10.26 14:34",
+      "persons": [],
+      "lastModified": "2026-10-26T14:34:17Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s69a0598b6052440aa2b1b8434c30ba1e"
+    },
     "431db201a8705e8d67": {
       "id": "431db201a8705e8d67",
       "url": "/articles/431db201a8705e8d67/",
@@ -15520,27 +15537,6 @@
       "lastModified": "2026-05-29T12:31:08Z",
       "sourceFileId": "FFCC26DEDBBA4E70!s0055747484244fd0929cc17bcfc6c463"
     },
-    "557d477edc29d07b02": {
-      "id": "557d477edc29d07b02",
-      "url": "/articles/557d477edc29d07b02/",
-      "title": "【アナリスト謝罪!?】NAND意外といけんじゃないか《大山聡×大川智宏》",
-      "channelName": "楽待",
-      "channelKey": "楽待",
-      "channelTab": "楽待",
-      "youtubeUrl": "https://www.youtube.com/watch?v=9T8zEGQNRbI",
-      "thumbnail": "https://i.ytimg.com/vi/9T8zEGQNRbI/hqdefault.jpg",
-      "publishedAt": "",
-      "publishedLabel": "",
-      "duration": "",
-      "recordedAt": "2026-05-29T01:13:48.027294",
-      "recordedLabel": "2026.05.29 01:13",
-      "timeLabel": "2026.05.29 01:13",
-      "persons": [
-        "大川智宏"
-      ],
-      "lastModified": "2026-05-29T01:13:52Z",
-      "sourceFileId": "FFCC26DEDBBA4E70!sfb7c4b33b8f141dab9b478d7c9ed061a"
-    },
     "7632ab264ea0e1f316": {
       "id": "7632ab264ea0e1f316",
       "url": "/articles/7632ab264ea0e1f316/",
@@ -18444,14 +18440,14 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-10-26T14:34:12.469903"
+    },
+    {
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-10-26T09:41:04.169708"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-10-25T09:34:50.250677"
     },
     {
       "name": "YTの投資銀行",
@@ -18506,7 +18502,7 @@
     {
       "name": "楽待",
       "tab": "楽待",
-      "latestAt": "2026-05-29T01:13:48.027294"
+      "latestAt": "2026-05-28T23:55:27.202528"
     },
     {
       "name": "YOU投資チャンネル",
