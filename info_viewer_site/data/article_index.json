@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-25T09:46:09.031496+00:00",
+  "generatedAt": "2026-10-26T09:52:13.641891+00:00",
   "articleList": [
+    {
+      "id": "431db201a8705e8d67",
+      "url": "/articles/431db201a8705e8d67/",
+      "title": "【イオン】優待目当ての個人投資家は持ち続けていいのか？ディフェンシブ株なのにPER40倍、過去は300倍超の\"カラクリ\"｜2桁増益でも株価は6割下落｜買い場か底なしか!?【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=gZ0qj3Pm4oA",
+      "thumbnail": "https://i.ytimg.com/vi/gZ0qj3Pm4oA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-26T09:41:04.169708",
+      "recordedLabel": "2026.10.26 09:41",
+      "timeLabel": "2026.10.26 09:41",
+      "persons": [],
+      "lastModified": "2026-10-26T09:41:10Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s271932d19d484eb6af9b36fd8e2a1515"
+    },
     {
       "id": "f9dec5865a8b9ef29a",
       "url": "/articles/f9dec5865a8b9ef29a/",
@@ -9203,6 +9222,25 @@
     }
   ],
   "articles": {
+    "431db201a8705e8d67": {
+      "id": "431db201a8705e8d67",
+      "url": "/articles/431db201a8705e8d67/",
+      "title": "【イオン】優待目当ての個人投資家は持ち続けていいのか？ディフェンシブ株なのにPER40倍、過去は300倍超の\"カラクリ\"｜2桁増益でも株価は6割下落｜買い場か底なしか!?【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=gZ0qj3Pm4oA",
+      "thumbnail": "https://i.ytimg.com/vi/gZ0qj3Pm4oA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-26T09:41:04.169708",
+      "recordedLabel": "2026.10.26 09:41",
+      "timeLabel": "2026.10.26 09:41",
+      "persons": [],
+      "lastModified": "2026-10-26T09:41:10Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s271932d19d484eb6af9b36fd8e2a1515"
+    },
     "f9dec5865a8b9ef29a": {
       "id": "f9dec5865a8b9ef29a",
       "url": "/articles/f9dec5865a8b9ef29a/",
@@ -18406,6 +18444,11 @@
   },
   "channels": [
     {
+      "name": "イズミダイズム",
+      "tab": "イズミダ",
+      "latestAt": "2026-10-26T09:41:04.169708"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-10-25T09:34:50.250677"
@@ -18444,11 +18487,6 @@
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-10-21T07:31:26.007558"
-    },
-    {
-      "name": "イズミダイズム",
-      "tab": "イズミダ",
-      "latestAt": "2026-10-14T22:31:13.158321"
     },
     {
       "name": "PIVOT 公式チャンネル",
