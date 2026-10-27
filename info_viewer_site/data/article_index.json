@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-26T16:03:39.238979+00:00",
+  "generatedAt": "2026-10-27T07:57:20.173191+00:00",
   "articleList": [
+    {
+      "id": "37d980a8526142849b",
+      "url": "/articles/37d980a8526142849b/",
+      "title": "【プラチナフォーカス】プラチナ＆パラジウムの下落と対照的なその他のPGMの上昇＜2026年10月度＞",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=HLVdI90g7PA",
+      "thumbnail": "https://i.ytimg.com/vi/HLVdI90g7PA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-27T07:42:47.914728",
+      "recordedLabel": "2026.10.27 07:42",
+      "timeLabel": "2026.10.27 07:42",
+      "persons": [],
+      "lastModified": "2026-10-27T07:42:53Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s308365c0b3b64834803f2fc1fb916c74"
+    },
     {
       "id": "4187c5550c0a0b56f8",
       "url": "/articles/4187c5550c0a0b56f8/",
@@ -9260,6 +9279,25 @@
     }
   ],
   "articles": {
+    "37d980a8526142849b": {
+      "id": "37d980a8526142849b",
+      "url": "/articles/37d980a8526142849b/",
+      "title": "【プラチナフォーカス】プラチナ＆パラジウムの下落と対照的なその他のPGMの上昇＜2026年10月度＞",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=HLVdI90g7PA",
+      "thumbnail": "https://i.ytimg.com/vi/HLVdI90g7PA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-27T07:42:47.914728",
+      "recordedLabel": "2026.10.27 07:42",
+      "timeLabel": "2026.10.27 07:42",
+      "persons": [],
+      "lastModified": "2026-10-27T07:42:53Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s308365c0b3b64834803f2fc1fb916c74"
+    },
     "4187c5550c0a0b56f8": {
       "id": "4187c5550c0a0b56f8",
       "url": "/articles/4187c5550c0a0b56f8/",
@@ -18520,6 +18558,11 @@
   },
   "channels": [
     {
+      "name": "なるほど投資ゼミ（大橋ひろこ",
+      "tab": "なるほど",
+      "latestAt": "2026-10-27T07:42:47.914728"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-10-26T15:47:52.950628"
@@ -18558,11 +18601,6 @@
       "name": "ゆたかTV",
       "tab": "ゆたかT",
       "latestAt": "2026-10-21T13:15:09.041062"
-    },
-    {
-      "name": "なるほど投資ゼミ（大橋ひろこ",
-      "tab": "なるほど",
-      "latestAt": "2026-10-21T07:31:26.007558"
     },
     {
       "name": "PIVOT 公式チャンネル",
