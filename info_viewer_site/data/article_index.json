@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-27T07:57:20.173191+00:00",
+  "generatedAt": "2026-10-27T11:17:25.507674+00:00",
   "articleList": [
+    {
+      "id": "ff7a267194c3716de4",
+      "url": "/articles/ff7a267194c3716de4/",
+      "title": "【緊急】事態が急変しました...。米国中間選挙前の異常事態！11月からとんでもない相場が始まるかもしれません【日本株/米国株/新NISA】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=v_CmDNiTrkQ",
+      "thumbnail": "https://i.ytimg.com/vi/v_CmDNiTrkQ/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-27T11:02:49.552940",
+      "recordedLabel": "2026.10.27 11:02",
+      "timeLabel": "2026.10.27 11:02",
+      "persons": [],
+      "lastModified": "2026-10-27T11:02:54Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf57c5e4174d8460da393c0621c90fa5c"
+    },
     {
       "id": "37d980a8526142849b",
       "url": "/articles/37d980a8526142849b/",
@@ -9279,6 +9298,25 @@
     }
   ],
   "articles": {
+    "ff7a267194c3716de4": {
+      "id": "ff7a267194c3716de4",
+      "url": "/articles/ff7a267194c3716de4/",
+      "title": "【緊急】事態が急変しました...。米国中間選挙前の異常事態！11月からとんでもない相場が始まるかもしれません【日本株/米国株/新NISA】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=v_CmDNiTrkQ",
+      "thumbnail": "https://i.ytimg.com/vi/v_CmDNiTrkQ/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-27T11:02:49.552940",
+      "recordedLabel": "2026.10.27 11:02",
+      "timeLabel": "2026.10.27 11:02",
+      "persons": [],
+      "lastModified": "2026-10-27T11:02:54Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf57c5e4174d8460da393c0621c90fa5c"
+    },
     "37d980a8526142849b": {
       "id": "37d980a8526142849b",
       "url": "/articles/37d980a8526142849b/",
@@ -18558,6 +18596,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-10-27T11:02:49.552940"
+    },
+    {
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-10-27T07:42:47.914728"
@@ -18566,11 +18609,6 @@
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-10-26T15:47:52.950628"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-10-26T14:34:12.469903"
     },
     {
       "name": "イズミダイズム",
