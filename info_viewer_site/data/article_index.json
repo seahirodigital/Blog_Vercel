@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-28T11:43:49.831256+00:00",
+  "generatedAt": "2026-10-28T16:47:33.953528+00:00",
   "articleList": [
+    {
+      "id": "85494415f414a073c1",
+      "url": "/articles/85494415f414a073c1/",
+      "title": "LIVE  マーケットアップデート. アドバンテスト上方修正. AI相場の再開か？",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=SxICNvm2BNA",
+      "thumbnail": "https://i.ytimg.com/vi/SxICNvm2BNA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-28T15:53:09.994951",
+      "recordedLabel": "2026.10.28 15:53",
+      "timeLabel": "2026.10.28 15:53",
+      "persons": [],
+      "lastModified": "2026-10-28T15:53:14Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s80065b0e26514dc1848064aa9f827272"
+    },
     {
       "id": "24afb363312e615b9b",
       "url": "/articles/24afb363312e615b9b/",
@@ -9377,6 +9396,25 @@
     }
   ],
   "articles": {
+    "85494415f414a073c1": {
+      "id": "85494415f414a073c1",
+      "url": "/articles/85494415f414a073c1/",
+      "title": "LIVE  マーケットアップデート. アドバンテスト上方修正. AI相場の再開か？",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=SxICNvm2BNA",
+      "thumbnail": "https://i.ytimg.com/vi/SxICNvm2BNA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-28T15:53:09.994951",
+      "recordedLabel": "2026.10.28 15:53",
+      "timeLabel": "2026.10.28 15:53",
+      "persons": [],
+      "lastModified": "2026-10-28T15:53:14Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s80065b0e26514dc1848064aa9f827272"
+    },
     "24afb363312e615b9b": {
       "id": "24afb363312e615b9b",
       "url": "/articles/24afb363312e615b9b/",
@@ -18754,6 +18792,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-10-28T15:53:09.994951"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-10-28T11:31:41.825220"
@@ -18767,11 +18810,6 @@
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-10-28T09:30:15.954183"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-10-26T15:47:52.950628"
     },
     {
       "name": "マネーフォワード ME イベント&セミナー",
