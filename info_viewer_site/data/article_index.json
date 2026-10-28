@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-28T08:31:07.647823+00:00",
+  "generatedAt": "2026-10-28T09:41:49.398701+00:00",
   "articleList": [
+    {
+      "id": "12eac63ae8c9c1056b",
+      "url": "/articles/12eac63ae8c9c1056b/",
+      "title": "【AIの需要 vs AIの借金】コアウィーブ・ショックで市場が疑った\"本当のリスク\"｜日経平均4.9%安、個人投資家はどう備えるべきか｜リーマン再来か一過性か!?【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=uzH2w6p9i_s",
+      "thumbnail": "https://i.ytimg.com/vi/uzH2w6p9i_s/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-28T09:30:15.954183",
+      "recordedLabel": "2026.10.28 09:30",
+      "timeLabel": "2026.10.28 09:30",
+      "persons": [],
+      "lastModified": "2026-10-28T09:30:19Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s7d81925f44e64b4fa45bce08eb7d2eed"
+    },
     {
       "id": "99f9d76aca65c64650",
       "url": "/articles/99f9d76aca65c64650/",
@@ -9317,6 +9336,25 @@
     }
   ],
   "articles": {
+    "12eac63ae8c9c1056b": {
+      "id": "12eac63ae8c9c1056b",
+      "url": "/articles/12eac63ae8c9c1056b/",
+      "title": "【AIの需要 vs AIの借金】コアウィーブ・ショックで市場が疑った\"本当のリスク\"｜日経平均4.9%安、個人投資家はどう備えるべきか｜リーマン再来か一過性か!?【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=uzH2w6p9i_s",
+      "thumbnail": "https://i.ytimg.com/vi/uzH2w6p9i_s/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-28T09:30:15.954183",
+      "recordedLabel": "2026.10.28 09:30",
+      "timeLabel": "2026.10.28 09:30",
+      "persons": [],
+      "lastModified": "2026-10-28T09:30:19Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s7d81925f44e64b4fa45bce08eb7d2eed"
+    },
     "99f9d76aca65c64650": {
       "id": "99f9d76aca65c64650",
       "url": "/articles/99f9d76aca65c64650/",
@@ -18634,6 +18672,11 @@
   },
   "channels": [
     {
+      "name": "イズミダイズム",
+      "tab": "イズミダ",
+      "latestAt": "2026-10-28T09:30:15.954183"
+    },
+    {
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-10-28T08:16:34.794594"
@@ -18647,11 +18690,6 @@
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-10-26T15:47:52.950628"
-    },
-    {
-      "name": "イズミダイズム",
-      "tab": "イズミダ",
-      "latestAt": "2026-10-26T09:41:04.169708"
     },
     {
       "name": "マネーフォワード ME イベント&セミナー",
