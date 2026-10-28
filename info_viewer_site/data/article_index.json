@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-28T10:17:12.641118+00:00",
+  "generatedAt": "2026-10-28T11:43:49.831256+00:00",
   "articleList": [
+    {
+      "id": "24afb363312e615b9b",
+      "url": "/articles/24afb363312e615b9b/",
+      "title": "AI株爆益決算で反転開始！？今の相場、見逃し厳禁です",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=8DUl1C7fJl0",
+      "thumbnail": "https://i.ytimg.com/vi/8DUl1C7fJl0/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-28T11:31:41.825220",
+      "recordedLabel": "2026.10.28 11:31",
+      "timeLabel": "2026.10.28 11:31",
+      "persons": [],
+      "lastModified": "2026-10-28T11:31:46Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s4c242d27c8e5422a8f905e21d67482e4"
+    },
     {
       "id": "6df5a6816172ddf787",
       "url": "/articles/6df5a6816172ddf787/",
@@ -9358,6 +9377,25 @@
     }
   ],
   "articles": {
+    "24afb363312e615b9b": {
+      "id": "24afb363312e615b9b",
+      "url": "/articles/24afb363312e615b9b/",
+      "title": "AI株爆益決算で反転開始！？今の相場、見逃し厳禁です",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=8DUl1C7fJl0",
+      "thumbnail": "https://i.ytimg.com/vi/8DUl1C7fJl0/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-28T11:31:41.825220",
+      "recordedLabel": "2026.10.28 11:31",
+      "timeLabel": "2026.10.28 11:31",
+      "persons": [],
+      "lastModified": "2026-10-28T11:31:46Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s4c242d27c8e5422a8f905e21d67482e4"
+    },
     "6df5a6816172ddf787": {
       "id": "6df5a6816172ddf787",
       "url": "/articles/6df5a6816172ddf787/",
@@ -18716,6 +18754,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-10-28T11:31:41.825220"
+    },
+    {
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-10-28T10:03:45.583624"
@@ -18724,11 +18767,6 @@
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-10-28T09:30:15.954183"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-10-27T11:02:49.552940"
     },
     {
       "name": "YTの投資銀行",
