@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-27T11:17:25.507674+00:00",
+  "generatedAt": "2026-10-28T08:31:07.647823+00:00",
   "articleList": [
+    {
+      "id": "99f9d76aca65c64650",
+      "url": "/articles/99f9d76aca65c64650/",
+      "title": "【デジタルゴールド、金ETF以来の革命に】日本の保険会社も金投資開始（マーケットエッジ代表 小菅努さん） [ウィークリーゴールド]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=OPfc100NkMQ",
+      "thumbnail": "https://i.ytimg.com/vi/OPfc100NkMQ/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-28T08:16:34.794594",
+      "recordedLabel": "2026.10.28 08:16",
+      "timeLabel": "2026.10.28 08:16",
+      "persons": [],
+      "lastModified": "2026-10-28T08:16:39Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s4c2002810117440280f9f3e6d646e038"
+    },
     {
       "id": "ff7a267194c3716de4",
       "url": "/articles/ff7a267194c3716de4/",
@@ -9298,6 +9317,25 @@
     }
   ],
   "articles": {
+    "99f9d76aca65c64650": {
+      "id": "99f9d76aca65c64650",
+      "url": "/articles/99f9d76aca65c64650/",
+      "title": "【デジタルゴールド、金ETF以来の革命に】日本の保険会社も金投資開始（マーケットエッジ代表 小菅努さん） [ウィークリーゴールド]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=OPfc100NkMQ",
+      "thumbnail": "https://i.ytimg.com/vi/OPfc100NkMQ/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-28T08:16:34.794594",
+      "recordedLabel": "2026.10.28 08:16",
+      "timeLabel": "2026.10.28 08:16",
+      "persons": [],
+      "lastModified": "2026-10-28T08:16:39Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s4c2002810117440280f9f3e6d646e038"
+    },
     "ff7a267194c3716de4": {
       "id": "ff7a267194c3716de4",
       "url": "/articles/ff7a267194c3716de4/",
@@ -18596,14 +18634,14 @@
   },
   "channels": [
     {
+      "name": "なるほど投資ゼミ（大橋ひろこ",
+      "tab": "なるほど",
+      "latestAt": "2026-10-28T08:16:34.794594"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-10-27T11:02:49.552940"
-    },
-    {
-      "name": "なるほど投資ゼミ（大橋ひろこ",
-      "tab": "なるほど",
-      "latestAt": "2026-10-27T07:42:47.914728"
     },
     {
       "name": "YTの投資銀行",
