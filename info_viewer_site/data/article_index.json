@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-10-29T09:48:08.563435+00:00",
+  "generatedAt": "2026-10-29T10:42:18.527083+00:00",
   "articleList": [
+    {
+      "id": "8fa311715181d8ba3d",
+      "url": "/articles/8fa311715181d8ba3d/",
+      "title": "田中泰輔のマネーは語る：【米日金利・株】金利を知らないリスク。債券投資という選択肢（田中 泰輔）【楽天証券 トウシル】",
+      "channelName": "トウシル（楽天証券）",
+      "channelKey": "トウシル（楽天証券）",
+      "channelTab": "トウシル",
+      "youtubeUrl": "https://www.youtube.com/watch?v=2BYBO3rf1As",
+      "thumbnail": "https://i.ytimg.com/vi/2BYBO3rf1As/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-29T10:30:07.952297",
+      "recordedLabel": "2026.10.29 10:30",
+      "timeLabel": "2026.10.29 10:30",
+      "persons": [
+        "田中泰輔"
+      ],
+      "lastModified": "2026-10-29T10:30:12Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s95b20a8be6d7465cb2f9d9392c100f0d"
+    },
     {
       "id": "5b82a4fb8773b64036",
       "url": "/articles/5b82a4fb8773b64036/",
@@ -9415,6 +9436,27 @@
     }
   ],
   "articles": {
+    "8fa311715181d8ba3d": {
+      "id": "8fa311715181d8ba3d",
+      "url": "/articles/8fa311715181d8ba3d/",
+      "title": "田中泰輔のマネーは語る：【米日金利・株】金利を知らないリスク。債券投資という選択肢（田中 泰輔）【楽天証券 トウシル】",
+      "channelName": "トウシル（楽天証券）",
+      "channelKey": "トウシル（楽天証券）",
+      "channelTab": "トウシル",
+      "youtubeUrl": "https://www.youtube.com/watch?v=2BYBO3rf1As",
+      "thumbnail": "https://i.ytimg.com/vi/2BYBO3rf1As/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-29T10:30:07.952297",
+      "recordedLabel": "2026.10.29 10:30",
+      "timeLabel": "2026.10.29 10:30",
+      "persons": [
+        "田中泰輔"
+      ],
+      "lastModified": "2026-10-29T10:30:12Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s95b20a8be6d7465cb2f9d9392c100f0d"
+    },
     "5b82a4fb8773b64036": {
       "id": "5b82a4fb8773b64036",
       "url": "/articles/5b82a4fb8773b64036/",
@@ -18830,6 +18872,11 @@
   },
   "channels": [
     {
+      "name": "トウシル（楽天証券）",
+      "tab": "トウシル",
+      "latestAt": "2026-10-29T10:30:07.952297"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-10-29T09:38:10.799920"
@@ -18863,11 +18910,6 @@
       "name": "ピクテ・ジャパン",
       "tab": "ピクテ・",
       "latestAt": "2026-10-22T22:39:26.406547"
-    },
-    {
-      "name": "トウシル（楽天証券）",
-      "tab": "トウシル",
-      "latestAt": "2026-10-22T09:00:29.085099"
     },
     {
       "name": "ゆたかTV",
