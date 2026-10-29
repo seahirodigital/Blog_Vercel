@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-28T16:47:33.953528+00:00",
+  "generatedAt": "2026-10-29T09:48:08.563435+00:00",
   "articleList": [
+    {
+      "id": "5b82a4fb8773b64036",
+      "url": "/articles/5b82a4fb8773b64036/",
+      "title": "【緊急】いつもと何か違う...。異例のキオクシア決算発表直前！今後の株式市場の動きについて徹底解説します",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=PCPE4bX4HxE",
+      "thumbnail": "https://i.ytimg.com/vi/PCPE4bX4HxE/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-29T09:38:10.799920",
+      "recordedLabel": "2026.10.29 09:38",
+      "timeLabel": "2026.10.29 09:38",
+      "persons": [],
+      "lastModified": "2026-10-29T09:38:15Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s7be798c44c5b44e5b3acd60760318e3c"
+    },
     {
       "id": "85494415f414a073c1",
       "url": "/articles/85494415f414a073c1/",
@@ -9396,6 +9415,25 @@
     }
   ],
   "articles": {
+    "5b82a4fb8773b64036": {
+      "id": "5b82a4fb8773b64036",
+      "url": "/articles/5b82a4fb8773b64036/",
+      "title": "【緊急】いつもと何か違う...。異例のキオクシア決算発表直前！今後の株式市場の動きについて徹底解説します",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=PCPE4bX4HxE",
+      "thumbnail": "https://i.ytimg.com/vi/PCPE4bX4HxE/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-29T09:38:10.799920",
+      "recordedLabel": "2026.10.29 09:38",
+      "timeLabel": "2026.10.29 09:38",
+      "persons": [],
+      "lastModified": "2026-10-29T09:38:15Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s7be798c44c5b44e5b3acd60760318e3c"
+    },
     "85494415f414a073c1": {
       "id": "85494415f414a073c1",
       "url": "/articles/85494415f414a073c1/",
@@ -18792,14 +18830,14 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-10-29T09:38:10.799920"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-10-28T15:53:09.994951"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-10-28T11:31:41.825220"
     },
     {
       "name": "なるほど投資ゼミ（大橋ひろこ",
