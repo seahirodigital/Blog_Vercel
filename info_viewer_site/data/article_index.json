@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-10-30T03:57:06.898491+00:00",
+  "generatedAt": "2026-10-30T10:19:59.943143+00:00",
   "articleList": [
+    {
+      "id": "dfd35682158243a56c",
+      "url": "/articles/dfd35682158243a56c/",
+      "title": "木野内栄治【米10月損出し売り終了で神経質な場面終了『テック大幅増産計画判明 AIファンダメンタルズ好調確認』米中間選挙終了で中東注意も不透明感終了】スズキノチャンネル♯61 10/30配信",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=phEU9S4A0D0",
+      "thumbnail": "https://i.ytimg.com/vi/phEU9S4A0D0/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-30T10:09:36.534825",
+      "recordedLabel": "2026.10.30 10:09",
+      "timeLabel": "2026.10.30 10:09",
+      "persons": [
+        "木野内栄治"
+      ],
+      "lastModified": "2026-10-30T10:09:41Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf7d594a6e30942d5aa728f70e9c42b54"
+    },
     {
       "id": "c46b5cbc4975169ebc",
       "url": "/articles/c46b5cbc4975169ebc/",
@@ -9455,6 +9476,27 @@
     }
   ],
   "articles": {
+    "dfd35682158243a56c": {
+      "id": "dfd35682158243a56c",
+      "url": "/articles/dfd35682158243a56c/",
+      "title": "木野内栄治【米10月損出し売り終了で神経質な場面終了『テック大幅増産計画判明 AIファンダメンタルズ好調確認』米中間選挙終了で中東注意も不透明感終了】スズキノチャンネル♯61 10/30配信",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=phEU9S4A0D0",
+      "thumbnail": "https://i.ytimg.com/vi/phEU9S4A0D0/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-30T10:09:36.534825",
+      "recordedLabel": "2026.10.30 10:09",
+      "timeLabel": "2026.10.30 10:09",
+      "persons": [
+        "木野内栄治"
+      ],
+      "lastModified": "2026-10-30T10:09:41Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf7d594a6e30942d5aa728f70e9c42b54"
+    },
     "c46b5cbc4975169ebc": {
       "id": "c46b5cbc4975169ebc",
       "url": "/articles/c46b5cbc4975169ebc/",
@@ -18910,6 +18952,11 @@
   },
   "channels": [
     {
+      "name": "マーケットマスターズ",
+      "tab": "マーケッ",
+      "latestAt": "2026-10-30T10:09:36.534825"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-10-30T03:42:55.703438"
@@ -18938,11 +18985,6 @@
       "name": "マネーフォワード ME イベント&セミナー",
       "tab": "マネーフ",
       "latestAt": "2026-10-24T10:26:28.449334"
-    },
-    {
-      "name": "マーケットマスターズ",
-      "tab": "マーケッ",
-      "latestAt": "2026-10-23T11:32:12.038144"
     },
     {
       "name": "ピクテ・ジャパン",
