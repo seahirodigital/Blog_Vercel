@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-30T12:41:38.950317+00:00",
+  "generatedAt": "2026-10-30T15:20:16.007867+00:00",
   "articleList": [
+    {
+      "id": "fbd893955ea8a163ee",
+      "url": "/articles/fbd893955ea8a163ee/",
+      "title": "LIVE  マーケットアップデート　半導体総崩れ　キオクシア決算下振れ　PTSで下落・・・",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=0A6b4P1kxUI",
+      "thumbnail": "https://i.ytimg.com/vi/0A6b4P1kxUI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-30T15:04:37.023327",
+      "recordedLabel": "2026.10.30 15:04",
+      "timeLabel": "2026.10.30 15:04",
+      "persons": [],
+      "lastModified": "2026-10-30T15:04:42Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sd87e11dc3be743d780b28876c773eebd"
+    },
     {
       "id": "69c1b2b145a565f463",
       "url": "/articles/69c1b2b145a565f463/",
@@ -9495,6 +9514,25 @@
     }
   ],
   "articles": {
+    "fbd893955ea8a163ee": {
+      "id": "fbd893955ea8a163ee",
+      "url": "/articles/fbd893955ea8a163ee/",
+      "title": "LIVE  マーケットアップデート　半導体総崩れ　キオクシア決算下振れ　PTSで下落・・・",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=0A6b4P1kxUI",
+      "thumbnail": "https://i.ytimg.com/vi/0A6b4P1kxUI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-30T15:04:37.023327",
+      "recordedLabel": "2026.10.30 15:04",
+      "timeLabel": "2026.10.30 15:04",
+      "persons": [],
+      "lastModified": "2026-10-30T15:04:42Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sd87e11dc3be743d780b28876c773eebd"
+    },
     "69c1b2b145a565f463": {
       "id": "69c1b2b145a565f463",
       "url": "/articles/69c1b2b145a565f463/",
@@ -18990,6 +19028,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-10-30T15:04:37.023327"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-10-30T12:29:38.898328"
@@ -18998,11 +19041,6 @@
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
       "latestAt": "2026-10-30T10:09:36.534825"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-10-30T03:42:55.703438"
     },
     {
       "name": "トウシル（楽天証券）",
