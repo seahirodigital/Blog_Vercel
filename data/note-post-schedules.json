@@ -4804,7 +4804,7 @@
   },
   {
     "id": "b249825f-d5b8-42a4-be22-cea7c721824b",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s6640efb62289434495d58dbf88e535ce",
     "title": "DJI Osmo Pocket 4P レビュー比較まとめ：高画質・安定撮影で映像制作を時短・効率化",
     "name": "20261023_0902_失敗できない撮影で、これを選ぶ理由。DJI Osmo Pocket 4Pを4ヶ月使って分かったこと.md",
@@ -4814,8 +4814,8 @@
     "publishAt": "2026-10-30T02:30:00.000Z",
     "createdAt": "2026-10-29T03:26:15.208Z",
     "queuedAt": "2026-10-30T07:49:17.255679+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-10-30T07:51:41.999968+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nfb4c8de9f42a?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
