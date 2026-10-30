@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-30T10:19:59.943143+00:00",
+  "generatedAt": "2026-10-30T12:41:38.950317+00:00",
   "articleList": [
+    {
+      "id": "69c1b2b145a565f463",
+      "url": "/articles/69c1b2b145a565f463/",
+      "title": "【緊急解説】キオクシア決算発表で大荒れ！？今後のAI相場について解説します",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=n_yLpE9YvUk",
+      "thumbnail": "https://i.ytimg.com/vi/n_yLpE9YvUk/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-30T12:29:38.898328",
+      "recordedLabel": "2026.10.30 12:29",
+      "timeLabel": "2026.10.30 12:29",
+      "persons": [],
+      "lastModified": "2026-10-30T12:29:44Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s4e91a80fcca04130aca0c21f3ab1b6e0"
+    },
     {
       "id": "dfd35682158243a56c",
       "url": "/articles/dfd35682158243a56c/",
@@ -9476,6 +9495,25 @@
     }
   ],
   "articles": {
+    "69c1b2b145a565f463": {
+      "id": "69c1b2b145a565f463",
+      "url": "/articles/69c1b2b145a565f463/",
+      "title": "【緊急解説】キオクシア決算発表で大荒れ！？今後のAI相場について解説します",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=n_yLpE9YvUk",
+      "thumbnail": "https://i.ytimg.com/vi/n_yLpE9YvUk/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-30T12:29:38.898328",
+      "recordedLabel": "2026.10.30 12:29",
+      "timeLabel": "2026.10.30 12:29",
+      "persons": [],
+      "lastModified": "2026-10-30T12:29:44Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s4e91a80fcca04130aca0c21f3ab1b6e0"
+    },
     "dfd35682158243a56c": {
       "id": "dfd35682158243a56c",
       "url": "/articles/dfd35682158243a56c/",
@@ -18952,6 +18990,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-10-30T12:29:38.898328"
+    },
+    {
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
       "latestAt": "2026-10-30T10:09:36.534825"
@@ -18965,11 +19008,6 @@
       "name": "トウシル（楽天証券）",
       "tab": "トウシル",
       "latestAt": "2026-10-29T10:30:07.952297"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-10-29T09:38:10.799920"
     },
     {
       "name": "なるほど投資ゼミ（大橋ひろこ",
