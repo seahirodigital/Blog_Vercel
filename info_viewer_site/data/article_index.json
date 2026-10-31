@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-31T02:49:02.202376+00:00",
+  "generatedAt": "2026-10-31T09:45:38.805776+00:00",
   "articleList": [
+    {
+      "id": "4652bd03bc2dfa1f78",
+      "url": "/articles/4652bd03bc2dfa1f78/",
+      "title": "【終わる】不正アクセス問題で大炎上中のGMOグループ！今後の株価動向と株式市場全体の動きについて解説します",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=WQkpp5ThFUI",
+      "thumbnail": "https://i.ytimg.com/vi/WQkpp5ThFUI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-31T09:31:33.054608",
+      "recordedLabel": "2026.10.31 09:31",
+      "timeLabel": "2026.10.31 09:31",
+      "persons": [],
+      "lastModified": "2026-10-31T09:31:37Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sffd3dc79694f422c87d17543a64b2f25"
+    },
     {
       "id": "3d95a9eea6b8901de5",
       "url": "/articles/3d95a9eea6b8901de5/",
@@ -9533,6 +9552,25 @@
     }
   ],
   "articles": {
+    "4652bd03bc2dfa1f78": {
+      "id": "4652bd03bc2dfa1f78",
+      "url": "/articles/4652bd03bc2dfa1f78/",
+      "title": "【終わる】不正アクセス問題で大炎上中のGMOグループ！今後の株価動向と株式市場全体の動きについて解説します",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=WQkpp5ThFUI",
+      "thumbnail": "https://i.ytimg.com/vi/WQkpp5ThFUI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-31T09:31:33.054608",
+      "recordedLabel": "2026.10.31 09:31",
+      "timeLabel": "2026.10.31 09:31",
+      "persons": [],
+      "lastModified": "2026-10-31T09:31:37Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sffd3dc79694f422c87d17543a64b2f25"
+    },
     "3d95a9eea6b8901de5": {
       "id": "3d95a9eea6b8901de5",
       "url": "/articles/3d95a9eea6b8901de5/",
@@ -19066,6 +19104,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-10-31T09:31:33.054608"
+    },
+    {
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-10-31T02:36:30.658727"
@@ -19074,11 +19117,6 @@
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-10-30T15:04:37.023327"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-10-30T12:29:38.898328"
     },
     {
       "name": "マーケットマスターズ",
