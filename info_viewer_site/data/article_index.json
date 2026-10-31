@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-31T09:45:38.805776+00:00",
+  "generatedAt": "2026-10-31T11:09:04.448915+00:00",
   "articleList": [
+    {
+      "id": "7e8b845df6c7139ca8",
+      "url": "/articles/7e8b845df6c7139ca8/",
+      "title": "来週の日本株展望(2026/11/2~) AI株はもう終わりなのか？ ハイパースケーラの本業不振中国AIの安値攻勢",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=rB7R8NklINA",
+      "thumbnail": "https://i.ytimg.com/vi/rB7R8NklINA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-31T10:58:43.860916",
+      "recordedLabel": "2026.10.31 10:58",
+      "timeLabel": "2026.10.31 10:58",
+      "persons": [],
+      "lastModified": "2026-10-31T10:58:47Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s1f9270390cd64b51a930b5f1174d50e3"
+    },
     {
       "id": "4652bd03bc2dfa1f78",
       "url": "/articles/4652bd03bc2dfa1f78/",
@@ -9552,6 +9571,25 @@
     }
   ],
   "articles": {
+    "7e8b845df6c7139ca8": {
+      "id": "7e8b845df6c7139ca8",
+      "url": "/articles/7e8b845df6c7139ca8/",
+      "title": "来週の日本株展望(2026/11/2~) AI株はもう終わりなのか？ ハイパースケーラの本業不振中国AIの安値攻勢",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=rB7R8NklINA",
+      "thumbnail": "https://i.ytimg.com/vi/rB7R8NklINA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-31T10:58:43.860916",
+      "recordedLabel": "2026.10.31 10:58",
+      "timeLabel": "2026.10.31 10:58",
+      "persons": [],
+      "lastModified": "2026-10-31T10:58:47Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s1f9270390cd64b51a930b5f1174d50e3"
+    },
     "4652bd03bc2dfa1f78": {
       "id": "4652bd03bc2dfa1f78",
       "url": "/articles/4652bd03bc2dfa1f78/",
@@ -19104,6 +19142,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-10-31T10:58:43.860916"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-10-31T09:31:33.054608"
@@ -19112,11 +19155,6 @@
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-10-31T02:36:30.658727"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-10-30T15:04:37.023327"
     },
     {
       "name": "マーケットマスターズ",
