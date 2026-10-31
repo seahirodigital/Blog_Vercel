@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-30T15:20:16.007867+00:00",
+  "generatedAt": "2026-10-31T02:49:02.202376+00:00",
   "articleList": [
+    {
+      "id": "3d95a9eea6b8901de5",
+      "url": "/articles/3d95a9eea6b8901de5/",
+      "title": "【スペースX】投資を最大400億ドルに倍増でも\"回収は早い\"？AI事業がいきなり黒字化｜売上161%増の上場後初決算、個人投資家はどう見るべきか｜本命か期待先行か!?【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=zaq3Hx2lLqA",
+      "thumbnail": "https://i.ytimg.com/vi/zaq3Hx2lLqA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-31T02:36:30.658727",
+      "recordedLabel": "2026.10.31 02:36",
+      "timeLabel": "2026.10.31 02:36",
+      "persons": [],
+      "lastModified": "2026-10-31T02:36:35Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!saaa20758daa447e3aa514bf4f362f5b4"
+    },
     {
       "id": "fbd893955ea8a163ee",
       "url": "/articles/fbd893955ea8a163ee/",
@@ -9514,6 +9533,25 @@
     }
   ],
   "articles": {
+    "3d95a9eea6b8901de5": {
+      "id": "3d95a9eea6b8901de5",
+      "url": "/articles/3d95a9eea6b8901de5/",
+      "title": "【スペースX】投資を最大400億ドルに倍増でも\"回収は早い\"？AI事業がいきなり黒字化｜売上161%増の上場後初決算、個人投資家はどう見るべきか｜本命か期待先行か!?【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=zaq3Hx2lLqA",
+      "thumbnail": "https://i.ytimg.com/vi/zaq3Hx2lLqA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-31T02:36:30.658727",
+      "recordedLabel": "2026.10.31 02:36",
+      "timeLabel": "2026.10.31 02:36",
+      "persons": [],
+      "lastModified": "2026-10-31T02:36:35Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!saaa20758daa447e3aa514bf4f362f5b4"
+    },
     "fbd893955ea8a163ee": {
       "id": "fbd893955ea8a163ee",
       "url": "/articles/fbd893955ea8a163ee/",
@@ -19028,6 +19066,11 @@
   },
   "channels": [
     {
+      "name": "イズミダイズム",
+      "tab": "イズミダ",
+      "latestAt": "2026-10-31T02:36:30.658727"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-10-30T15:04:37.023327"
@@ -19051,11 +19094,6 @@
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-10-28T10:03:45.583624"
-    },
-    {
-      "name": "イズミダイズム",
-      "tab": "イズミダ",
-      "latestAt": "2026-10-28T09:30:15.954183"
     },
     {
       "name": "マネーフォワード ME イベント&セミナー",
