@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-10-31T11:55:05.185565+00:00",
+  "generatedAt": "2026-10-31T14:16:25.715314+00:00",
   "articleList": [
+    {
+      "id": "5f4159f4e5a6fe6074",
+      "url": "/articles/5f4159f4e5a6fe6074/",
+      "title": "岡崎良介の投資戦略ラボ『Anthropicが認識しているリスクの核心』 （収録日：2026年10月29日）",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=wLqzTT6TlbI",
+      "thumbnail": "https://i.ytimg.com/vi/wLqzTT6TlbI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-31T14:02:59.396035",
+      "recordedLabel": "2026.10.31 14:02",
+      "timeLabel": "2026.10.31 14:02",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-31T14:03:04Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s961c04de73794c2fb1dcf27c953077e3"
+    },
     {
       "id": "a5b6945024e062f1cd",
       "url": "/articles/a5b6945024e062f1cd/",
@@ -9592,6 +9613,27 @@
     }
   ],
   "articles": {
+    "5f4159f4e5a6fe6074": {
+      "id": "5f4159f4e5a6fe6074",
+      "url": "/articles/5f4159f4e5a6fe6074/",
+      "title": "岡崎良介の投資戦略ラボ『Anthropicが認識しているリスクの核心』 （収録日：2026年10月29日）",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=wLqzTT6TlbI",
+      "thumbnail": "https://i.ytimg.com/vi/wLqzTT6TlbI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-31T14:02:59.396035",
+      "recordedLabel": "2026.10.31 14:02",
+      "timeLabel": "2026.10.31 14:02",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-10-31T14:03:04Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s961c04de73794c2fb1dcf27c953077e3"
+    },
     "a5b6945024e062f1cd": {
       "id": "a5b6945024e062f1cd",
       "url": "/articles/a5b6945024e062f1cd/",
@@ -19184,6 +19226,11 @@
   },
   "channels": [
     {
+      "name": "ゆたかTV",
+      "tab": "ゆたかT",
+      "latestAt": "2026-10-31T14:02:59.396035"
+    },
+    {
       "name": "マネーフォワード ME イベント&セミナー",
       "tab": "マネーフ",
       "latestAt": "2026-10-31T11:44:48.307920"
@@ -19222,11 +19269,6 @@
       "name": "ピクテ・ジャパン",
       "tab": "ピクテ・",
       "latestAt": "2026-10-22T22:39:26.406547"
-    },
-    {
-      "name": "ゆたかTV",
-      "tab": "ゆたかT",
-      "latestAt": "2026-10-21T13:15:09.041062"
     },
     {
       "name": "PIVOT 公式チャンネル",
