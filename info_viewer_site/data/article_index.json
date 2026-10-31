@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-10-31T11:09:04.448915+00:00",
+  "generatedAt": "2026-10-31T11:55:05.185565+00:00",
   "articleList": [
+    {
+      "id": "a5b6945024e062f1cd",
+      "url": "/articles/a5b6945024e062f1cd/",
+      "title": "【米ハイテク決算 イッキ聴き総括】アマゾン・マイクロソフト明暗!? / アルファベット株13%安に / インテル50年ぶり大暴落!? / 日米金利据え置きへ【大川&Nobbyの聴くだけ投資】大川智宏",
+      "channelName": "マネーフォワード ME イベント&セミナー",
+      "channelKey": "マネーフォワード ME イベント&セミナー",
+      "channelTab": "マネーフ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Ym5Pgvtj6Ao",
+      "thumbnail": "https://i.ytimg.com/vi/Ym5Pgvtj6Ao/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-31T11:44:48.307920",
+      "recordedLabel": "2026.10.31 11:44",
+      "timeLabel": "2026.10.31 11:44",
+      "persons": [
+        "大川智宏"
+      ],
+      "lastModified": "2026-10-31T11:44:52Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s53de39960cfa439497112eecfa252623"
+    },
     {
       "id": "7e8b845df6c7139ca8",
       "url": "/articles/7e8b845df6c7139ca8/",
@@ -9571,6 +9592,27 @@
     }
   ],
   "articles": {
+    "a5b6945024e062f1cd": {
+      "id": "a5b6945024e062f1cd",
+      "url": "/articles/a5b6945024e062f1cd/",
+      "title": "【米ハイテク決算 イッキ聴き総括】アマゾン・マイクロソフト明暗!? / アルファベット株13%安に / インテル50年ぶり大暴落!? / 日米金利据え置きへ【大川&Nobbyの聴くだけ投資】大川智宏",
+      "channelName": "マネーフォワード ME イベント&セミナー",
+      "channelKey": "マネーフォワード ME イベント&セミナー",
+      "channelTab": "マネーフ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Ym5Pgvtj6Ao",
+      "thumbnail": "https://i.ytimg.com/vi/Ym5Pgvtj6Ao/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-10-31T11:44:48.307920",
+      "recordedLabel": "2026.10.31 11:44",
+      "timeLabel": "2026.10.31 11:44",
+      "persons": [
+        "大川智宏"
+      ],
+      "lastModified": "2026-10-31T11:44:52Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s53de39960cfa439497112eecfa252623"
+    },
     "7e8b845df6c7139ca8": {
       "id": "7e8b845df6c7139ca8",
       "url": "/articles/7e8b845df6c7139ca8/",
@@ -19142,6 +19184,11 @@
   },
   "channels": [
     {
+      "name": "マネーフォワード ME イベント&セミナー",
+      "tab": "マネーフ",
+      "latestAt": "2026-10-31T11:44:48.307920"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-10-31T10:58:43.860916"
@@ -19170,11 +19217,6 @@
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-10-28T10:03:45.583624"
-    },
-    {
-      "name": "マネーフォワード ME イベント&セミナー",
-      "tab": "マネーフ",
-      "latestAt": "2026-10-24T10:26:28.449334"
     },
     {
       "name": "ピクテ・ジャパン",
