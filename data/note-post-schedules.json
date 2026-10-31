@@ -4822,7 +4822,7 @@
   },
   {
     "id": "45ae1f1d-6d17-4f30-915d-583c4ce27baf",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa152247bc6d24fabb68be8246489078c",
     "title": "Comulytic Note Pro AIレビュー比較まとめ",
     "name": "20261023_0858_今までになかった発想のAI 搭載スマートリング、すごいんだが／Vocci（ヴォッチ）.md",
@@ -4831,10 +4831,12 @@
     "noTopImage": false,
     "publishAt": "2026-10-31T02:30:00.000Z",
     "createdAt": "2026-10-29T03:28:16.524Z",
-    "queuedAt": "",
+    "queuedAt": "2026-10-31T07:34:48.758166+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "41e4e519-e256-4c29-b192-e8adca6d314e",
