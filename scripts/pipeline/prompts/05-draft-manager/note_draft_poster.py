@@ -3025,6 +3025,9 @@ def _run_ogp_expansion_on_draft(
             browser.close()
             return result
 
+        if dry_run_publish and NOTE_TOP_IMAGE_DEBUG:
+            _dump_page_artifacts(page, artifacts_dir, 'draft_before_dry_run')
+
         if run_ogp:
             try:
                 processed_count = process_ogp_urls(page)
