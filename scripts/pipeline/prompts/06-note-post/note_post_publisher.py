@@ -146,7 +146,8 @@ def main() -> int:
     if result.get("success"):
         published_url = result.get("published_url") or result.get("url", "")
         file_id = os.getenv("FILE_ID", "")
-        _save_post_url_to_github_var(file_id, published_url)
+        if not args.dry_run_publish:
+            _save_post_url_to_github_var(file_id, published_url)
         label = "公開投稿dry-run" if args.dry_run_publish else "公開投稿"
         print(f"\n🎉 {label}成功！")
         print(f"   タイトル: {result.get('title', '')}")

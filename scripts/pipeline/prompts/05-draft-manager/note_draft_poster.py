@@ -1259,6 +1259,100 @@ def _insert_table_of_contents(page, source_markdown: str = "") -> dict:
     return result
 
 
+TAISHI_IMAGE_INTRO = "当記事では色付きの関連内容を記載します。"
+
+
+def _place_caret_at_first_body_heading(page) -> str:
+    heading_text = page.evaluate(
+        """() => {
+          const editor = document.querySelector('.note-editable, [contenteditable="true"]') || document.querySelector('.ProseMirror');
+          const heading = editor && editor.querySelector('h1, h2');
+          if (!heading) return '';
+          heading.scrollIntoView({block: 'center'});
+          editor.focus();
+          const range = document.createRange();
+          range.selectNodeContents(heading);
+          range.collapse(true);
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+          return (heading.textContent || '').trim();
+        }"""
+    )
+    if not heading_text:
+        raise RuntimeError('本文の最初の見出しを確認できません')
+    return heading_text
+
+
+def _taishi_layout_status(page) -> dict:
+    return page.evaluate(
+        """(intro) => {
+          const editor = document.querySelector('.note-editable, [contenteditable="true"]') || document.querySelector('.ProseMirror');
+          if (!editor) return {ok: false, reason: 'editor_missing'};
+          const heading = editor.querySelector('h1, h2');
+          if (!heading) return {ok: false, reason: 'heading_missing'};
+          const toc = editor.querySelector('table-of-contents, [data-type="table-of-contents"], [data-type="tableOfContents"], [data-node-type="table-of-contents"], [data-node-type="tableOfContents"]');
+          const paragraph = Array.from(editor.querySelectorAll('p')).find(p => (p.textContent || '').trim() === intro);
+          const image = paragraph && Array.from(editor.querySelectorAll('img')).find(img => {
+            const src = img.getAttribute('src') || '';
+            return src && !src.startsWith('blob:') && (paragraph.compareDocumentPosition(img) & Node.DOCUMENT_POSITION_FOLLOWING) && (img.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_FOLLOWING);
+          });
+          const ordered = Boolean(heading && toc && paragraph && image && (toc.compareDocumentPosition(paragraph) & Node.DOCUMENT_POSITION_FOLLOWING) && (paragraph.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_FOLLOWING));
+          return {ok: ordered, heading: heading ? heading.textContent.trim() : '', toc: Boolean(toc), intro: Boolean(paragraph), image: Boolean(image)};
+        }""",
+        TAISHI_IMAGE_INTRO,
+    )
+
+
+def _insert_taishi_toc_and_image(page, image_dir: str) -> dict:
+    if not image_dir:
+        raise RuntimeError('大志の記事画像の保存先が指定されていません')
+    image_files = [p for p in Path(image_dir).glob('article-image.*') if p.is_file()]
+    if len(image_files) != 1:
+        raise RuntimeError(f'記事に対応する画像が1件必要です: {image_dir} ({len(image_files)}件)')
+    initial = _taishi_layout_status(page)
+    if initial.get('ok'):
+        return {'success': True, 'already_exists': True, 'layout': initial}
+    if initial.get('toc') or initial.get('intro'):
+        raise RuntimeError(f'既存の目次・画像を安全に再配置できません: {initial}')
+
+    heading_before = _place_caret_at_first_body_heading(page)
+    page.keyboard.press('Enter')
+    page.keyboard.press('ArrowUp')
+    page.wait_for_timeout(500)
+    _insert_toc_by_slash_popup(page)
+    page.wait_for_timeout(1500)
+    if not _editor_has_table_of_contents(page):
+        raise RuntimeError('目次の挿入を確認できません')
+    if _place_caret_at_first_body_heading(page) != heading_before:
+        raise RuntimeError('目次挿入中に最初の見出しが変化しました')
+    page.keyboard.press('Enter')
+    page.keyboard.press('ArrowUp')
+    page.keyboard.insert_text(TAISHI_IMAGE_INTRO)
+    page.keyboard.press('Enter')
+    page.keyboard.type('/')
+    page.wait_for_timeout(800)
+    with page.expect_file_chooser(timeout=8000) as chooser:
+        _click_visible_candidate(
+            page,
+            candidates=[
+                ('画像メニュー', page.get_by_role('menuitem', name='画像', exact=True)),
+                ('画像ボタン', page.get_by_role('button', name='画像', exact=True)),
+                ('画像の挿入', page.get_by_text('画像', exact=True)),
+            ],
+            description='本文画像の挿入',
+            timeout_ms=5000,
+        )
+    chooser.value.set_files(str(image_files[0]))
+    layout = {}
+    for _ in range(30):
+        page.wait_for_timeout(1000)
+        layout = _taishi_layout_status(page)
+        if layout.get('ok') and layout.get('heading') == heading_before:
+            return {'success': True, 'already_exists': False, 'layout': layout}
+    raise RuntimeError(f'目次・説明文・画像の配置を確認できません: {layout}')
+
+
 def _click_publish_next(page) -> str:
     strategy = _click_visible_candidate(
         page,
@@ -2896,10 +2990,13 @@ def _run_ogp_expansion_on_draft(
 
     with sync_playwright() as p:
         storage_state_path = _resolve_browser_storage_state_path() if (NOTE_TOP_IMAGE_USE_ADOBE or NOTE_TOP_IMAGE_DEBUG) else None
-        browser = p.chromium.launch(
-            headless=headless,
-            args=["--disable-blink-features=AutomationControlled", "--no-sandbox"],
-        )
+        if os.getenv('NOTE_BROWSER') == 'webkit':
+            browser = p.webkit.launch(headless=headless)
+        else:
+            browser = p.chromium.launch(
+                headless=headless,
+                args=["--disable-blink-features=AutomationControlled", "--no-sandbox"],
+            )
         context_kwargs = dict(
             viewport={"width": 1280, "height": 900},
             user_agent=UA,
@@ -2938,7 +3035,15 @@ def _run_ogp_expansion_on_draft(
         print("   ⏳ OGP反映待機（5秒）...")
         page.wait_for_timeout(5000)
 
-        if insert_toc:
+        if insert_toc and os.getenv('NOTE_TARGET') == 'taishi':
+            try:
+                result['toc'] = _insert_taishi_toc_and_image(page, os.getenv('TAISHI_BODY_IMAGE_DIR', ''))
+            except Exception as e:
+                result['toc'] = {'success': False, 'strategy': f'error: {e}'}
+                print(f'   ❌ 大志の記事の目次・画像挿入に失敗したため公開を中止します: {e}')
+                browser.close()
+                return result
+        elif insert_toc:
             try:
                 result["toc"] = _insert_table_of_contents(page, source_markdown=source_markdown)
             except Exception as e:
@@ -3380,6 +3485,8 @@ def post_draft_to_note(
             top_image_path=top_image_path,
         )
         result["editor_result"] = editor_result
+        if os.getenv('NOTE_TARGET') == 'taishi' and not editor_result.get('success'):
+            result['success'] = False
         publish_result = editor_result.get("publish") or {}
         if publish:
             result["success"] = bool(publish_result.get("success"))
