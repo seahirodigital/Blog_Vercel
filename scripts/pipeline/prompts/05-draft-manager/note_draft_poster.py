@@ -1330,8 +1330,11 @@ def _insert_taishi_toc_and_image(page, image_dir: str) -> dict:
     page.keyboard.press('ArrowUp')
     page.keyboard.insert_text(TAISHI_IMAGE_INTRO)
     page.keyboard.press('Enter')
-    page.keyboard.type('/')
     page.wait_for_timeout(800)
+    page.get_by_role('button', name='メニューを開く', exact=True).click(timeout=5000)
+    page.wait_for_timeout(500)
+    if NOTE_TOP_IMAGE_DEBUG:
+        _dump_page_artifacts(page, NOTE_TOP_IMAGE_ARTIFACTS_DIR, 'taishi_image_menu')
     with page.expect_file_chooser(timeout=8000) as chooser:
         _click_visible_candidate(
             page,
