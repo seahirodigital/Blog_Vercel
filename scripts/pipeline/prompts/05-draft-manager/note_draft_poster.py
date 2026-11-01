@@ -3059,6 +3059,15 @@ def _run_ogp_expansion_on_draft(
             print("   ⏭️ 目次挿入はオプション指定によりスキップします")
 
         if run_top_image:
+            if os.getenv('NOTE_TARGET') == 'taishi':
+                thumbnail_dir = os.getenv('TAISHI_THUMBNAIL_DIR', '')
+                thumbnails = list(Path(thumbnail_dir).glob('thumbnail.*')) if thumbnail_dir else []
+                thumbnails = [image for image in thumbnails if image.is_file()]
+                if len(thumbnails) != 1:
+                    print(f'   ❌ 対応するサムネイルが1件ではないため処理を中止します: {len(thumbnails)}件')
+                    browser.close()
+                    return result
+                top_image_path = str(thumbnails[0])
             if top_image_path:
                 top_image_result = _attach_local_top_image_to_page(
                     page,

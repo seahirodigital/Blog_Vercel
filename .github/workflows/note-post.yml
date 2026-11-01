@@ -297,6 +297,7 @@ jobs:
           SCHEDULE_ID: ${{ inputs.schedule_id }}
           NOTE_EDITOR_URL: ${{ inputs.editor_url }}
           TAISHI_BODY_IMAGE_DIR: /tmp/note-taishi-image
+          TAISHI_THUMBNAIL_DIR: /tmp/note-taishi-thumbnail
           NOTE_BROWSER: ${{ (inputs.dry_run == 'true' || inputs.note_target == 'taishi') && 'webkit' || 'chromium' }}
           DRY_RUN: ${{ inputs.dry_run }}
           NOTE_TOP_IMAGE_DEBUG: "1"
@@ -309,8 +310,6 @@ jobs:
           import json
           import os
           import sys
-          import unicodedata
-          from pathlib import Path
 
           import requests
 
@@ -401,38 +400,8 @@ jobs:
               if not content_res.ok:
                   raise RuntimeError(f'OneDrive記事取得失敗: HTTP {content_res.status_code}: {_body_preview(content_res)}')
               if os.getenv('NOTE_TARGET') == 'taishi':
-                  headers = {'Authorization': f'Bearer {token}'}
-                  metadata_res = requests.get(f'{GRAPH_API}/me/drive/items/{file_id}', headers=headers, timeout=60)
-                  metadata_res.raise_for_status()
-                  metadata = metadata_res.json()
-                  article_name = metadata.get('name', '')
-                  parent_id = (metadata.get('parentReference') or {}).get('id', '')
-                  if not parent_id or not article_name.lower().endswith('.md'):
-                      raise RuntimeError('記事名または親フォルダを確認できません')
-                  stem = unicodedata.normalize('NFC', article_name[:-3])
-                  next_url = f'{GRAPH_API}/me/drive/items/{parent_id}/children'
-                  matches = []
-                  while next_url:
-                      listing_res = requests.get(next_url, headers=headers, timeout=60)
-                      listing_res.raise_for_status()
-                      listing = listing_res.json()
-                      for item in listing.get('value', []):
-                          name = item.get('name', '')
-                          path = Path(name)
-                          if item.get('file') and path.suffix.lower() in {'.jpg', '.jpeg', '.png', '.webp'} and unicodedata.normalize('NFC', path.stem) == stem:
-                              matches.append(item)
-                      next_url = listing.get('@odata.nextLink')
-                  if len(matches) != 1:
-                      raise RuntimeError(f'記事と同名の画像は1件必要です（{len(matches)}件）')
-                  image_res = requests.get(f\"{GRAPH_API}/me/drive/items/{matches[0]['id']}/content\", headers=headers, timeout=120)
-                  image_res.raise_for_status()
-                  image_dir = Path(os.environ['TAISHI_BODY_IMAGE_DIR'])
-                  image_dir.mkdir(parents=True, exist_ok=True)
-                  image_file = image_dir / ('article-image' + Path(matches[0]['name']).suffix.lower())
-                  image_file.write_bytes(image_res.content)
-                  if not image_res.content:
-                      raise RuntimeError('同名画像が空です')
-                  print('✅ 同名画像取得完了: {}'.format(matches[0].get('name', '')))
+                  from modules.note_onedrive_assets import download_article_assets
+                  download_article_assets(token, file_id, need_thumbnail=os.getenv('NO_TOP_IMAGE') != 'true')
               return content_res.text
 
 
@@ -495,7 +464,9 @@ jobs:
                 echo "下書きURLまたは投稿先が不正です" >&2
                 exit 1
               fi
-              python prompts/06-note-post/note_post_publisher.py /tmp/article.md --editor-url "$NOTE_EDITOR_URL" --no-top-image "${dry_run_args[@]}" --result-json /tmp/note_post_result.json
+              image_args=()
+              if [ "$NO_TOP_IMAGE" = "true" ]; then image_args+=(--no-top-image); fi
+              python prompts/06-note-post/note_post_publisher.py /tmp/article.md --editor-url "$NOTE_EDITOR_URL" "${image_args[@]}" "${dry_run_args[@]}" --result-json /tmp/note_post_result.json
             elif [ "$NO_TOP_IMAGE" = "true" ]; then
               python prompts/06-note-post/note_post_publisher.py /tmp/article.md --no-top-image --result-json /tmp/note_post_result.json
             else
