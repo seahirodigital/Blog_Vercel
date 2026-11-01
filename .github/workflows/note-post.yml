@@ -48,6 +48,11 @@ on:
         required: false
         default: 'false'
         type: string
+      inspect_only:
+        description: '検証時に下書きの編集画面を確認するだけ'
+        required: false
+        default: 'false'
+        type: string
 
 jobs:
   post-to-note:
@@ -180,7 +185,7 @@ jobs:
         if: steps.schedule_gate.outputs.skip != 'true'
         run: pip install -r scripts/pipeline/requirements.txt
 
-      - name: Playwright ブラウザをインストール（Chromium）
+      - name: Playwright ブラウザをインストール
         if: steps.schedule_gate.outputs.skip != 'true'
         env:
           DRY_RUN: ${{ inputs.dry_run }}
@@ -298,6 +303,7 @@ jobs:
           TAISHI_BODY_IMAGE_DIR: /tmp/note-taishi-image
           NOTE_BROWSER: ${{ inputs.dry_run == 'true' && 'webkit' || 'chromium' }}
           DRY_RUN: ${{ inputs.dry_run }}
+          INSPECT_EDITOR_ONLY: ${{ inputs.inspect_only }}
           NOTE_TOP_IMAGE_DEBUG: "1"
           NOTE_PUBLISH_SETTINGS_READY_TIMEOUT_MS: "45000"
         working-directory: scripts/pipeline

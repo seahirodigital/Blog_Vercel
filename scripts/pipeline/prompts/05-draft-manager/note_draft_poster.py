@@ -3022,6 +3022,12 @@ def _run_ogp_expansion_on_draft(
             browser.close()
             return result
 
+        if os.getenv('INSPECT_EDITOR_ONLY') == 'true':
+            _dump_page_artifacts(page, artifacts_dir, 'taishi_inspect')
+            print('   ℹ️ 下書きの状態を確認しました。編集・公開は行いません。')
+            browser.close()
+            return result
+
         if run_ogp:
             try:
                 processed_count = process_ogp_urls(page)
@@ -3041,6 +3047,8 @@ def _run_ogp_expansion_on_draft(
             except Exception as e:
                 result['toc'] = {'success': False, 'strategy': f'error: {e}'}
                 print(f'   ❌ 大志の記事の目次・画像挿入に失敗したため公開を中止します: {e}')
+                if NOTE_TOP_IMAGE_DEBUG:
+                    _dump_page_artifacts(page, artifacts_dir, 'taishi_layout_error')
                 browser.close()
                 return result
         elif insert_toc:
