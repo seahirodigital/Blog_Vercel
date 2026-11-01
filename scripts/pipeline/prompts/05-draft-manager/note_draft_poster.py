@@ -1303,8 +1303,10 @@ def _taishi_layout_status(page) -> dict:
             const src = img.getAttribute('src') || '';
             return src && !src.startsWith('blob:') && (paragraph.compareDocumentPosition(img) & Node.DOCUMENT_POSITION_FOLLOWING) && (img.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_FOLLOWING);
           });
-          const ordered = Boolean(heading && toc && paragraph && image && (toc.compareDocumentPosition(paragraph) & Node.DOCUMENT_POSITION_FOLLOWING) && (paragraph.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_FOLLOWING));
-          return {ok: ordered, heading: heading ? heading.textContent.trim() : '', toc: Boolean(toc), intro: Boolean(paragraph), image: Boolean(image)};
+          const before = (a, b) => Boolean(a && b && (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING));
+          const ordered = before(paragraph, image) && before(image, toc) && before(toc, heading);
+          const oldOrder = before(toc, paragraph) && before(paragraph, image) && before(image, heading);
+          return {ok: ordered, old_order: oldOrder, heading: heading ? heading.textContent.trim() : '', toc: Boolean(toc), intro: Boolean(paragraph), image: Boolean(image)};
         }""",
         TAISHI_IMAGE_INTRO,
     )
@@ -1319,19 +1321,41 @@ def _insert_taishi_toc_and_image(page, image_dir: str) -> dict:
     initial = _taishi_layout_status(page)
     if initial.get('ok'):
         return {'success': True, 'already_exists': True, 'layout': initial}
+    if initial.get('old_order'):
+        # 旧配置の目次だけを削除し、本文と画像を残して後方に再挿入する。
+        selected = page.evaluate("""() => {
+          const editor = document.querySelector('.note-editable, [contenteditable="true"]') || document.querySelector('.ProseMirror');
+          const toc = editor && editor.querySelector('table-of-contents, [data-type="table-of-contents"], [data-type="tableOfContents"], [data-node-type="table-of-contents"], [data-node-type="tableOfContents"]');
+          if (!toc || toc.parentElement !== editor) return false;
+          editor.focus();
+          const range = document.createRange();
+          range.selectNode(toc);
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+          return true;
+        }""")
+        if not selected:
+            raise RuntimeError('既存の目次を安全に選択できません')
+        page.keyboard.press('Backspace')
+        page.wait_for_timeout(500)
+        after_removal = _taishi_layout_status(page)
+        if after_removal.get('toc') or not after_removal.get('intro') or not after_removal.get('image'):
+            page.keyboard.press('Control+z')
+            raise RuntimeError(f'既存の目次を安全に移動できません: {after_removal}')
+        heading_before = _place_caret_at_first_body_heading(page)
+        page.keyboard.press('Enter')
+        page.keyboard.press('ArrowUp')
+        _insert_toc_by_slash_popup(page)
+        page.wait_for_timeout(1500)
+        layout = _taishi_layout_status(page)
+        if not layout.get('ok') or layout.get('heading') != heading_before:
+            raise RuntimeError(f'目次の移動後の配置を確認できません: {layout}')
+        return {'success': True, 'already_exists': False, 'reordered': True, 'layout': layout}
     if initial.get('toc') or initial.get('intro'):
         raise RuntimeError(f'既存の目次・画像を安全に再配置できません: {initial}')
 
     heading_before = _place_caret_at_first_body_heading(page)
-    page.keyboard.press('Enter')
-    page.keyboard.press('ArrowUp')
-    page.wait_for_timeout(500)
-    _insert_toc_by_slash_popup(page)
-    page.wait_for_timeout(1500)
-    if not _editor_has_table_of_contents(page):
-        raise RuntimeError('目次の挿入を確認できません')
-    if _place_caret_at_first_body_heading(page) != heading_before:
-        raise RuntimeError('目次挿入中に最初の見出しが変化しました')
     page.keyboard.press('Enter')
     page.keyboard.press('ArrowUp')
     page.keyboard.insert_text(TAISHI_IMAGE_INTRO)
@@ -1353,6 +1377,19 @@ def _insert_taishi_toc_and_image(page, image_dir: str) -> dict:
             timeout_ms=5000,
         )
     chooser.value.set_files(str(image_files[0]))
+    for _ in range(30):
+        page.wait_for_timeout(1000)
+        layout = _taishi_layout_status(page)
+        if layout.get('intro') and layout.get('image'):
+            break
+    else:
+        raise RuntimeError(f'説明文・画像の挿入を確認できません: {layout}')
+    if _place_caret_at_first_body_heading(page) != heading_before:
+        raise RuntimeError('画像挿入中に最初の見出しが変化しました')
+    page.keyboard.press('Enter')
+    page.keyboard.press('ArrowUp')
+    page.wait_for_timeout(500)
+    _insert_toc_by_slash_popup(page)
     layout = {}
     for _ in range(30):
         page.wait_for_timeout(1000)
