@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-10-31T14:16:25.715314+00:00",
+  "generatedAt": "2026-11-01T09:43:22.143200+00:00",
   "articleList": [
+    {
+      "id": "8d84ac3c3616c76200",
+      "url": "/articles/8d84ac3c3616c76200/",
+      "title": "【上場廃止待ったなし？】とんでもない不正のオンパレード！これからニデック株に起きる最悪のシナリオを解説します",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=kCkqK580dUA",
+      "thumbnail": "https://i.ytimg.com/vi/kCkqK580dUA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-01T09:31:57.889469",
+      "recordedLabel": "2026.11.01 09:31",
+      "timeLabel": "2026.11.01 09:31",
+      "persons": [],
+      "lastModified": "2026-11-01T09:32:02Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s55ae21204b5443a884bd95ef3bef943e"
+    },
     {
       "id": "5f4159f4e5a6fe6074",
       "url": "/articles/5f4159f4e5a6fe6074/",
@@ -9613,6 +9632,25 @@
     }
   ],
   "articles": {
+    "8d84ac3c3616c76200": {
+      "id": "8d84ac3c3616c76200",
+      "url": "/articles/8d84ac3c3616c76200/",
+      "title": "【上場廃止待ったなし？】とんでもない不正のオンパレード！これからニデック株に起きる最悪のシナリオを解説します",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=kCkqK580dUA",
+      "thumbnail": "https://i.ytimg.com/vi/kCkqK580dUA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-01T09:31:57.889469",
+      "recordedLabel": "2026.11.01 09:31",
+      "timeLabel": "2026.11.01 09:31",
+      "persons": [],
+      "lastModified": "2026-11-01T09:32:02Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s55ae21204b5443a884bd95ef3bef943e"
+    },
     "5f4159f4e5a6fe6074": {
       "id": "5f4159f4e5a6fe6074",
       "url": "/articles/5f4159f4e5a6fe6074/",
@@ -19226,6 +19264,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-01T09:31:57.889469"
+    },
+    {
       "name": "ゆたかTV",
       "tab": "ゆたかT",
       "latestAt": "2026-10-31T14:02:59.396035"
@@ -19239,11 +19282,6 @@
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-10-31T10:58:43.860916"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-10-31T09:31:33.054608"
     },
     {
       "name": "イズミダイズム",
