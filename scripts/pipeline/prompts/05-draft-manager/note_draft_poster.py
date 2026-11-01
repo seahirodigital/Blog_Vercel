@@ -2581,9 +2581,36 @@ def _attach_local_top_image_to_page(
             "before_image_count": _count_page_images(page),
         }
 
-    before_count = _count_page_images(page)
     cover_before = page.locator('img[alt="eyecatch"]')
     previous_cover_src = (cover_before.first.get_attribute('src') or '') if cover_before.count() else ''
+    if os.getenv('NOTE_TARGET') == 'taishi' and previous_cover_src:
+        from io import BytesIO
+        from urllib.parse import urlparse
+        from PIL import Image, ImageChops, ImageOps, ImageStat
+
+        parsed = urlparse(previous_cover_src)
+        if parsed.scheme != 'https' or parsed.hostname != 'assets.st-note.com':
+            raise RuntimeError('現在の見出し画像の取得元を確認できません')
+        response = http_requests.get(previous_cover_src, timeout=30)
+        response.raise_for_status()
+        with Image.open(local_path) as original, Image.open(BytesIO(response.content)) as existing:
+            size = (120, 63)
+            target = ImageOps.fit(original.convert('RGB'), size)
+            current = ImageOps.fit(existing.convert('RGB'), size)
+            difference = sum(ImageStat.Stat(ImageChops.difference(target, current)).mean) / 3
+        if difference <= 1.8:
+            print('   ✅ 見出し画像は対応するサムネイルと一致しています')
+            return {'image_flow': 'already_matches', 'selected_image_path': str(local_path), 'difference': difference}
+
+        cover_container = cover_before.first.locator('xpath=ancestor::div[@data-dragging][1]')
+        remove_buttons = cover_container.get_by_role('button')
+        if remove_buttons.count() != 1:
+            raise RuntimeError('既存の見出し画像を安全に変更できません')
+        remove_buttons.first.click()
+        page.locator('img[alt="eyecatch"]').first.wait_for(state='hidden', timeout=15000)
+        previous_cover_src = ''
+
+    before_count = _count_page_images(page)
     controls_before = _collect_control_snapshot(page)
     _write_json(artifacts_dir / "controls_before_top_image.json", controls_before)
 
@@ -3105,7 +3132,7 @@ def _run_ogp_expansion_on_draft(
             print("   ⏭️ Amazonトップ画像はオプション指定によりスキップします")
         result["top_image"] = top_image_result
 
-        if top_image_result.get("image_flow") in {"skipped", "skipped_by_option"}:
+        if top_image_result.get("image_flow") in {"skipped", "skipped_by_option", "already_matches"}:
             print("   💾 トップ画像スキップのため Ctrl+S で保存を要求します...")
             try:
                 editor = page.locator(".ProseMirror, .note-editable, [contenteditable='true']").first

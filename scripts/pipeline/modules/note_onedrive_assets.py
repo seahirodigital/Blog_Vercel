@@ -31,7 +31,7 @@ def find_article_assets(article_name, entries, need_thumbnail=True):
             continue
         if image.stem == article.stem:
             body.append(entry)
-        if image.stem == prefix + '_サムネイル':
+        if image.stem.startswith(prefix + '_') and 'サムネイル' in image.stem:
             thumbnails.append(entry)
     if len(body) != 1:
         raise ValueError(f'記事と同名の本文画像は1件必要です（{len(body)}件）')
