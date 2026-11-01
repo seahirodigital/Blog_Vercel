@@ -4853,5 +4853,21 @@
     "publishedAt": "",
     "publishedUrl": "",
     "error": ""
+  },
+  {
+    "id": "4c7615cf-05c0-44de-995a-c01837544511",
+    "status": "scheduled",
+    "fileId": "FFCC26DEDBBA4E70!s8f9632dc316f425e8e343f12e73f4c58",
+    "title": "新規事業の企画書の書き方｜必要な項目と社内承認のポイント",
+    "name": "A-03_新規事業の企画書の書き方｜必要な項目と社内承認のポイント.md",
+    "path": "",
+    "noteTarget": "taishi",
+    "noTopImage": false,
+    "publishAt": "2026-11-29T03:30:00.000Z",
+    "createdAt": "2026-11-01T08:01:50.435Z",
+    "queuedAt": "",
+    "publishedAt": "",
+    "publishedUrl": "",
+    "error": ""
   }
 ]
