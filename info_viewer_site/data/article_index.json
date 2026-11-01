@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-11-01T09:43:22.143200+00:00",
+  "generatedAt": "2026-11-01T12:13:28.891152+00:00",
   "articleList": [
+    {
+      "id": "b5e6d312db6c92a498",
+      "url": "/articles/b5e6d312db6c92a498/",
+      "title": "岡崎良介のマーケットインサイト『2026年10月29日：FOMCの第一印象』 （収録日：2026年10月29日）",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=oTI2OcvC-Js",
+      "thumbnail": "https://i.ytimg.com/vi/oTI2OcvC-Js/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-01T11:59:25.491265",
+      "recordedLabel": "2026.11.01 11:59",
+      "timeLabel": "2026.11.01 11:59",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-01T11:59:29Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s11b6de3a45d2449dba32c605c6097636"
+    },
     {
       "id": "8d84ac3c3616c76200",
       "url": "/articles/8d84ac3c3616c76200/",
@@ -9632,6 +9653,27 @@
     }
   ],
   "articles": {
+    "b5e6d312db6c92a498": {
+      "id": "b5e6d312db6c92a498",
+      "url": "/articles/b5e6d312db6c92a498/",
+      "title": "岡崎良介のマーケットインサイト『2026年10月29日：FOMCの第一印象』 （収録日：2026年10月29日）",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=oTI2OcvC-Js",
+      "thumbnail": "https://i.ytimg.com/vi/oTI2OcvC-Js/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-01T11:59:25.491265",
+      "recordedLabel": "2026.11.01 11:59",
+      "timeLabel": "2026.11.01 11:59",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-01T11:59:29Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s11b6de3a45d2449dba32c605c6097636"
+    },
     "8d84ac3c3616c76200": {
       "id": "8d84ac3c3616c76200",
       "url": "/articles/8d84ac3c3616c76200/",
@@ -19264,14 +19306,14 @@
   },
   "channels": [
     {
+      "name": "ゆたかTV",
+      "tab": "ゆたかT",
+      "latestAt": "2026-11-01T11:59:25.491265"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-01T09:31:57.889469"
-    },
-    {
-      "name": "ゆたかTV",
-      "tab": "ゆたかT",
-      "latestAt": "2026-10-31T14:02:59.396035"
     },
     {
       "name": "マネーフォワード ME イベント&セミナー",
