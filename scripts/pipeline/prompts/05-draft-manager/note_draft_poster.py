@@ -77,6 +77,17 @@ NOTE_POST_TAGS = (
     "マーケティング 旅 夢  哲学  フリーランス  自己啓発 ライフスタイル カメラ "
     "Youtube動画 SNS ネットビジネス 記事 アニメ キャリア 学校 エンタメ"
 )
+TAISHI_NOTE_POST_TAGS = (
+    "自分 note 仕事 副業 投資 人生 AI 生成AI ビジネス 時間 人間関係 転職 "
+    "生き方 AI活用 教育 お金 勉強 コミュニケーション ブログ 最近の学び 生活 "
+    "キャリア 株式投資 フリーランス 哲学 起業 副業初心者 マーケティング 私の仕事 "
+    "AIとやってみた 仕事術 副業収入 お金の勉強 投資家 ネット副業 お金を稼ぐ "
+    "お金の話 スタートアップ 個人事業主 投資初心者 AI副業 お金について考える "
+    "ビジネススキル 人生哲学 AIエージェント SNSマーケティング 自己投資 アイデア "
+    "仕事の悩み Webマーケティング キャリアアップ ネットビジネス 新規事業 仕事のコツ "
+    "お金稼ぎ ビジネス書 仕事効率化 ビジネスモデル 事業 お金持ちになる方法 "
+    "豊かなお金持ち 新規事業開発 新規事業立ち上げ"
+)
 
 # ── OGP展開設定 ────────────────────────────────────────
 NOTE_PUBLISH_SETTINGS_READY_TIMEOUT_MS = int(os.getenv("NOTE_PUBLISH_SETTINGS_READY_TIMEOUT_MS", "45000"))
@@ -199,9 +210,9 @@ window.noteFormatter = {
                 if (count === occurrence) {
                     range.setStart(node, idx + url.length);
                     range.setEnd(node, idx + url.length);
+                    editor.focus();
                     selection.removeAllRanges();
                     selection.addRange(range);
-                    editor.focus();
                     return true;
                 }
                 startIdx = idx + 1;
@@ -1761,6 +1772,8 @@ def _publish_editor_page(page, tags: str = NOTE_POST_TAGS, dry_run: bool = False
     }
     result["publish_next_strategy"] = _click_publish_next(page)
     result["publish_settings_ready_strategy"] = _wait_for_publish_settings_ready(page)
+    if os.getenv("NOTE_TARGET") == "taishi" and tags == NOTE_POST_TAGS:
+        tags = TAISHI_NOTE_POST_TAGS
     result["tag_strategy"] = _fill_note_hashtags(page, tags)
     magazine_name = "新規事業開発ナレッジ" if os.getenv("NOTE_TARGET") == "taishi" else "ガジェット"
     result["magazine_strategy"] = _add_gadget_magazine(page, magazine_name)
@@ -2810,7 +2823,10 @@ def process_ogp_urls(page) -> int:
     for sweep in range(MAX_SWEEPS):
         print(f"\n   [Python] 🔄 {sweep + 1}回目のスイープ...")
         all_urls = page.evaluate("window.noteFormatter.extractUrls()")
-        target_urls = [u for u in set(all_urls) if any(d in u for d in OGP_TARGET_DOMAINS)]
+        if os.getenv("NOTE_TARGET") == "taishi":
+            target_urls = list(dict.fromkeys(all_urls))
+        else:
+            target_urls = list(dict.fromkeys(u for u in all_urls if any(d in u for d in OGP_TARGET_DOMAINS)))
 
         if not target_urls:
             print("   [Python] 展開漏れのURLはありません。スイープ終了。")
@@ -2823,10 +2839,11 @@ def process_ogp_urls(page) -> int:
         for url in target_urls:
             occurrences = all_urls.count(url)
             while target_counts[url] < occurrences:
+                occurrence = occurrences - target_counts[url]
                 target_counts[url] += 1
                 found = page.evaluate(
                     "(args) => window.noteFormatter.setCaretAtUrlEnd(args.url, args.occ)",
-                    {"url": url, "occ": target_counts[url]},
+                    {"url": url, "occ": occurrence},
                 )
                 if found:
                     page.keyboard.press("Enter")

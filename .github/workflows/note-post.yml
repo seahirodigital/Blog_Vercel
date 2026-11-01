@@ -433,7 +433,7 @@ jobs:
                 echo "下書きURLまたは投稿先が不正です" >&2
                 exit 1
               fi
-              python prompts/06-note-post/note_post_publisher.py /tmp/article.md --editor-url "$NOTE_EDITOR_URL" --no-ogp --no-toc --no-top-image --result-json /tmp/note_post_result.json
+              python prompts/06-note-post/note_post_publisher.py /tmp/article.md --editor-url "$NOTE_EDITOR_URL" --no-toc --no-top-image --result-json /tmp/note_post_result.json
             elif [ "$NO_TOP_IMAGE" = "true" ]; then
               python prompts/06-note-post/note_post_publisher.py /tmp/article.md --no-top-image --result-json /tmp/note_post_result.json
             else
