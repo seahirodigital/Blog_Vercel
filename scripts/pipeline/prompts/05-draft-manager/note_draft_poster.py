@@ -1303,8 +1303,10 @@ def _taishi_layout_status(page) -> dict:
             const src = img.getAttribute('src') || '';
             return src && !src.startsWith('blob:') && (paragraph.compareDocumentPosition(img) & Node.DOCUMENT_POSITION_FOLLOWING) && (img.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_FOLLOWING);
           });
-          const ordered = Boolean(heading && toc && paragraph && image && (toc.compareDocumentPosition(paragraph) & Node.DOCUMENT_POSITION_FOLLOWING) && (paragraph.compareDocumentPosition(heading) & Node.DOCUMENT_POSITION_FOLLOWING));
-          return {ok: ordered, heading: heading ? heading.textContent.trim() : '', toc: Boolean(toc), intro: Boolean(paragraph), image: Boolean(image)};
+          const before = (a, b) => Boolean(a && b && (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING));
+          const ordered = before(paragraph, image) && before(image, toc) && before(toc, heading);
+          const oldOrder = before(toc, paragraph) && before(paragraph, image) && before(image, heading);
+          return {ok: ordered, old_order: oldOrder, heading: heading ? heading.textContent.trim() : '', toc: Boolean(toc), intro: Boolean(paragraph), image: Boolean(image)};
         }""",
         TAISHI_IMAGE_INTRO,
     )
@@ -1319,19 +1321,12 @@ def _insert_taishi_toc_and_image(page, image_dir: str) -> dict:
     initial = _taishi_layout_status(page)
     if initial.get('ok'):
         return {'success': True, 'already_exists': True, 'layout': initial}
+    if initial.get('old_order'):
+        raise RuntimeError('既存の下書きは目次が画像より前にあります。noteの編集画面で目次を画像の後へ移動してください')
     if initial.get('toc') or initial.get('intro'):
         raise RuntimeError(f'既存の目次・画像を安全に再配置できません: {initial}')
 
     heading_before = _place_caret_at_first_body_heading(page)
-    page.keyboard.press('Enter')
-    page.keyboard.press('ArrowUp')
-    page.wait_for_timeout(500)
-    _insert_toc_by_slash_popup(page)
-    page.wait_for_timeout(1500)
-    if not _editor_has_table_of_contents(page):
-        raise RuntimeError('目次の挿入を確認できません')
-    if _place_caret_at_first_body_heading(page) != heading_before:
-        raise RuntimeError('目次挿入中に最初の見出しが変化しました')
     page.keyboard.press('Enter')
     page.keyboard.press('ArrowUp')
     page.keyboard.insert_text(TAISHI_IMAGE_INTRO)
@@ -1353,6 +1348,19 @@ def _insert_taishi_toc_and_image(page, image_dir: str) -> dict:
             timeout_ms=5000,
         )
     chooser.value.set_files(str(image_files[0]))
+    for _ in range(30):
+        page.wait_for_timeout(1000)
+        layout = _taishi_layout_status(page)
+        if layout.get('intro') and layout.get('image'):
+            break
+    else:
+        raise RuntimeError(f'説明文・画像の挿入を確認できません: {layout}')
+    if _place_caret_at_first_body_heading(page) != heading_before:
+        raise RuntimeError('画像挿入中に最初の見出しが変化しました')
+    page.keyboard.press('Enter')
+    page.keyboard.press('ArrowUp')
+    page.wait_for_timeout(500)
+    _insert_toc_by_slash_popup(page)
     layout = {}
     for _ in range(30):
         page.wait_for_timeout(1000)
