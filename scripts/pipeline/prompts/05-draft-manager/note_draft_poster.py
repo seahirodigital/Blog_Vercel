@@ -1322,6 +1322,13 @@ def _insert_taishi_toc_and_image(page, image_dir: str) -> dict:
     if initial.get('ok'):
         return {'success': True, 'already_exists': True, 'layout': initial}
     if initial.get('old_order'):
+        print('   🔎 エディタ状態:', page.evaluate("""() => {
+          const editor = document.querySelector('.note-editable, [contenteditable="true"]') || document.querySelector('.ProseMirror');
+          const desc = editor && editor.pmViewDesc;
+          const view = desc && desc.view;
+          return {desc: !!desc, desc_keys: desc ? Object.keys(desc) : [], view: !!view, view_keys: view ? Object.keys(view) : [], dom_keys: editor ? Object.keys(editor) : []};
+        }"""))
+        raise RuntimeError('既存の目次の移動方法を調査中です')
         # 旧配置の目次だけを削除し、本文と画像を残して後方に再挿入する。
         selected = page.evaluate("""() => {
           const editor = document.querySelector('.note-editable, [contenteditable="true"]') || document.querySelector('.ProseMirror');
