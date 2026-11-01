@@ -8072,6 +8072,7 @@
                 }}>
                   {NOTE_ACCOUNTS.map(([id, label]) => <option key={id} value={id}>{label}</option>)}
                 </select>
+                <div className={isNewArticle ? "min-w-0" : "hidden md:block min-w-0"}>
                 {isNewArticle ? (
                   <input
                     type="text"
@@ -8124,6 +8125,7 @@
                 ) : (
                   <p className="text-sm text-slate-400">記事を選択してください</p>
                 )}
+                </div>
               </div>
 
               {/* アクションボタン群 */}
