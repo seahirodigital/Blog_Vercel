@@ -872,9 +872,15 @@ def _save_crop_dialog(page) -> str:
     return save_strategy
 
 
-def _wait_for_uploaded_image_ready(page, previous_count: int, timeout_sec: int = 60) -> tuple[int, str]:
+def _wait_for_uploaded_image_ready(page, previous_count: int, timeout_sec: int = 60, previous_cover_src: str | None = None) -> tuple[int, str]:
     for _ in range(timeout_sec):
         current_count = _count_page_images(page)
+        if previous_cover_src is not None:
+            cover = page.locator('img[alt="eyecatch"]')
+            if cover.count():
+                current_src = cover.first.get_attribute('src') or ''
+                if current_src and not current_src.startswith('blob:') and current_src != previous_cover_src:
+                    return current_count, 'cover_image_changed'
         if current_count > previous_count:
             return current_count, "main_img_detected"
 
@@ -1882,7 +1888,7 @@ def _publish_editor_page(page, tags: str = NOTE_POST_TAGS, dry_run: bool = False
     return result
 
 
-def _run_direct_note_image_upload(page, image_path: Path, artifacts_dir: Path, previous_count: int) -> dict:
+def _run_direct_note_image_upload(page, image_path: Path, artifacts_dir: Path, previous_count: int, previous_cover_src: str | None = None) -> dict:
     controls_after_menu = _collect_control_snapshot(page)
     _write_json(artifacts_dir / "controls_after_top_image_menu.json", controls_after_menu)
     upload_entry_strategy = _choose_direct_upload_image_file(page, image_path, artifacts_dir=artifacts_dir)
@@ -1894,6 +1900,7 @@ def _run_direct_note_image_upload(page, image_path: Path, artifacts_dir: Path, p
         page,
         previous_count=previous_count,
         timeout_sec=60,
+        previous_cover_src=previous_cover_src,
     )
     return {
         "upload_entry_strategy": upload_entry_strategy,
@@ -2574,6 +2581,35 @@ def _attach_local_top_image_to_page(
             "before_image_count": _count_page_images(page),
         }
 
+    cover_before = page.locator('img[alt="eyecatch"]')
+    previous_cover_src = (cover_before.first.get_attribute('src') or '') if cover_before.count() else ''
+    if os.getenv('NOTE_TARGET') == 'taishi' and previous_cover_src:
+        from io import BytesIO
+        from urllib.parse import urlparse
+        from PIL import Image, ImageChops, ImageOps, ImageStat
+
+        parsed = urlparse(previous_cover_src)
+        if parsed.scheme != 'https' or parsed.hostname != 'assets.st-note.com':
+            raise RuntimeError('現在の見出し画像の取得元を確認できません')
+        response = http_requests.get(previous_cover_src, timeout=30)
+        response.raise_for_status()
+        with Image.open(local_path) as original, Image.open(BytesIO(response.content)) as existing:
+            size = (120, 63)
+            target = ImageOps.fit(original.convert('RGB'), size)
+            current = ImageOps.fit(existing.convert('RGB'), size)
+            difference = sum(ImageStat.Stat(ImageChops.difference(target, current)).mean) / 3
+        if difference <= 1.8:
+            print('   ✅ 見出し画像は対応するサムネイルと一致しています')
+            return {'image_flow': 'already_matches', 'selected_image_path': str(local_path), 'difference': difference}
+
+        cover_container = cover_before.first.locator('xpath=ancestor::div[@data-dragging][1]')
+        remove_buttons = cover_container.get_by_role('button')
+        if remove_buttons.count() != 1:
+            raise RuntimeError('既存の見出し画像を安全に変更できません')
+        remove_buttons.first.click()
+        page.locator('img[alt="eyecatch"]').first.wait_for(state='hidden', timeout=15000)
+        previous_cover_src = ''
+
     before_count = _count_page_images(page)
     controls_before = _collect_control_snapshot(page)
     _write_json(artifacts_dir / "controls_before_top_image.json", controls_before)
@@ -2585,7 +2621,13 @@ def _attach_local_top_image_to_page(
         local_path,
         artifacts_dir,
         previous_count=before_count,
+        previous_cover_src=previous_cover_src,
     )
+    if os.getenv('NOTE_TARGET') == 'taishi':
+        cover_after = page.locator('img[alt="eyecatch"]')
+        cover_src = (cover_after.first.get_attribute('src') or '') if cover_after.count() else ''
+        if not cover_src or cover_src.startswith('blob:') or cover_src == previous_cover_src:
+            raise RuntimeError('サムネイルの更新を確認できないため投稿を中止します')
 
     if save_draft_after_upload:
         draft_save_strategy = _save_editor_draft(page)
@@ -3025,6 +3067,9 @@ def _run_ogp_expansion_on_draft(
             browser.close()
             return result
 
+        if dry_run_publish and NOTE_TOP_IMAGE_DEBUG:
+            _dump_page_artifacts(page, artifacts_dir, 'draft_before_dry_run')
+
         if run_ogp:
             try:
                 processed_count = process_ogp_urls(page)
@@ -3059,6 +3104,15 @@ def _run_ogp_expansion_on_draft(
             print("   ⏭️ 目次挿入はオプション指定によりスキップします")
 
         if run_top_image:
+            if os.getenv('NOTE_TARGET') == 'taishi':
+                thumbnail_dir = os.getenv('TAISHI_THUMBNAIL_DIR', '')
+                thumbnails = list(Path(thumbnail_dir).glob('thumbnail.*')) if thumbnail_dir else []
+                thumbnails = [image for image in thumbnails if image.is_file()]
+                if len(thumbnails) != 1:
+                    print(f'   ❌ 対応するサムネイルが1件ではないため処理を中止します: {len(thumbnails)}件')
+                    browser.close()
+                    return result
+                top_image_path = str(thumbnails[0])
             if top_image_path:
                 top_image_result = _attach_local_top_image_to_page(
                     page,
@@ -3078,7 +3132,7 @@ def _run_ogp_expansion_on_draft(
             print("   ⏭️ Amazonトップ画像はオプション指定によりスキップします")
         result["top_image"] = top_image_result
 
-        if top_image_result.get("image_flow") in {"skipped", "skipped_by_option"}:
+        if top_image_result.get("image_flow") in {"skipped", "skipped_by_option", "already_matches"}:
             print("   💾 トップ画像スキップのため Ctrl+S で保存を要求します...")
             try:
                 editor = page.locator(".ProseMirror, .note-editable, [contenteditable='true']").first

@@ -39,8 +39,15 @@ jobs:
       - name: Python 依存パッケージをインストール
         run: pip install -r scripts/pipeline/requirements.txt
 
-      - name: Playwright ブラウザをインストール（Chromium）
-        run: playwright install --with-deps chromium
+      - name: Playwright ブラウザをインストール
+        env:
+          NOTE_TARGET: ${{ inputs.note_target }}
+        run: |
+          if [ "$NOTE_TARGET" = "taishi" ]; then
+            playwright install --with-deps webkit
+          else
+            playwright install --with-deps chromium
+          fi
 
       - name: note 保存先の認証情報を選択
         env:
@@ -142,6 +149,9 @@ jobs:
           FILE_ID: ${{ inputs.file_id }}
           NO_TOP_IMAGE: ${{ inputs.no_top_image }}
           NOTE_TARGET: ${{ inputs.note_target }}
+          NOTE_BROWSER: ${{ inputs.note_target == 'taishi' && 'webkit' || 'chromium' }}
+          TAISHI_BODY_IMAGE_DIR: /tmp/note-taishi-image
+          TAISHI_THUMBNAIL_DIR: /tmp/note-taishi-thumbnail
         working-directory: scripts/pipeline
         run: |
           echo "note 保存先: ${NOTE_TARGET_LABEL}"
@@ -239,6 +249,9 @@ jobs:
               )
               if not content_res.ok:
                   raise RuntimeError(f'OneDrive記事取得失敗: HTTP {content_res.status_code}: {_body_preview(content_res)}')
+              if os.getenv('NOTE_TARGET') == 'taishi':
+                  from modules.note_onedrive_assets import download_article_assets
+                  download_article_assets(token, file_id, need_thumbnail=os.getenv('NO_TOP_IMAGE') != 'true')
               return content_res.text
 
 
@@ -265,6 +278,9 @@ jobs:
               print('✅ OneDrive Graph APIから記事取得完了')
           except Exception as graph_error:
               print(f'⚠️ OneDrive Graph APIからの記事取得に失敗しました: {graph_error}')
+              if os.getenv('NOTE_TARGET') == 'taishi':
+                  print('❌ 大志の記事と画像を確認できないため下書き投稿を中止します')
+                  sys.exit(1)
               print('↪️ Vercel /api/articles 経由で再取得します')
               try:
                   content = _fetch_article_via_vercel(file_id)
