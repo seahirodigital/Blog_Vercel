@@ -6424,9 +6424,9 @@
       };
 
       // note下書き投稿（単体 or 複数選択）
-      const handleNoteDraft = async () => {
+      const handleNoteDraft = async (requestedIds = null) => {
         // 複数選択モード
-        const targetIds = selectMode && selectedIds.size > 0
+        const targetIds = Array.isArray(requestedIds) ? requestedIds : selectMode && selectedIds.size > 0
           ? Array.from(selectedIds)
           : selectedArticle ? [selectedArticle.id] : [];
 
@@ -7801,7 +7801,7 @@
                       </div>
                     )}
 
-                    <div className="mt-6 flex items-center justify-end gap-2">
+                    <div className="mt-6 flex flex-wrap items-center justify-end gap-2">
                       {notePostMode === 'schedule' && (
                         <button
                           type="button"
@@ -7823,8 +7823,16 @@
                       </button>
                       <button
                         type="button"
+                        onClick={() => handleNoteDraft(selectedPostTargets.map(target => target.id))}
+                        disabled={noteDraftRunning || notePostRunning || selectedPostTargets.length === 0}
+                        className="rounded-lg border border-[#7C4DFF] px-3 py-2 text-xs font-bold text-[#7C4DFF] transition-colors hover:bg-purple-50 disabled:border-slate-300 disabled:text-slate-400"
+                      >
+                        {noteDraftRunning ? '起動中...' : '下書き投稿'}
+                      </button>
+                      <button
+                        type="button"
                         onClick={() => handleNotePostSubmit(notePostMode)}
-                        disabled={notePostRunning || selectedPostTargets.length === 0}
+                        disabled={notePostRunning || noteDraftRunning || selectedPostTargets.length === 0}
                         className="rounded-lg bg-[#7C4DFF] px-4 py-2 text-xs font-bold text-white shadow-sm shadow-purple-200 transition-colors hover:bg-[#651FFF] disabled:bg-slate-300 disabled:shadow-none"
                       >
                         {notePostRunning ? '起動中...' : notePostMode === 'schedule' ? `予約する（${notePostConfiguredCount}/${selectedPostTargets.length}）` : '今すぐ投稿'}
