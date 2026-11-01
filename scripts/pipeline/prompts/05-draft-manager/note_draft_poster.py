@@ -1544,10 +1544,10 @@ def _fill_note_hashtags(page, tags: str) -> str:
     return f"{strategy}->{paste_strategy}"
 
 
-def _get_gadget_magazine_status(page) -> dict:
+def _get_gadget_magazine_status(page, magazine_name="ガジェット") -> dict:
     return page.evaluate(
         """
-        () => {
+        (magazineName) => {
           const normalize = (value) => (value || '').replace(/\\s+/g, ' ').trim();
           const isVisible = (el) => {
             const rect = el.getBoundingClientRect();
@@ -1558,17 +1558,19 @@ def _get_gadget_magazine_status(page) -> dict:
           const labels = Array.from(document.querySelectorAll('body *')).filter((el) => {
             if (!isVisible(el)) return false;
             const text = normalize(el.innerText || el.textContent || '');
-            return text === 'ガジェット';
+            return text === magazineName;
           });
 
           for (const label of labels) {
             let row = label;
             for (let depth = 0; row && depth < 8; depth += 1, row = row.parentElement) {
               const rowText = normalize(row.innerText || row.textContent || '');
-              if (!rowText.includes('ガジェット')) continue;
+              if (!rowText.includes(magazineName)) continue;
               if (!rowText.includes('追加') && !rowText.includes('追加済')) continue;
               const buttons = Array.from(row.querySelectorAll('button, [role="button"]')).filter(isVisible);
-              const already = rowText.includes('追加済') || buttons.some((button) => buttonText(button).includes('追加済'));
+              const magazineButtons = buttons.filter((button) => buttonText(button).includes('追加'));
+              if (magazineButtons.length !== 1) continue;
+              const already = buttonText(magazineButtons[0]).includes('追加済');
               const canAdd = buttons.some((button) => {
                 const text = buttonText(button);
                 return (text === '追加' || text.includes('追加')) && !text.includes('追加済');
@@ -1584,14 +1586,15 @@ def _get_gadget_magazine_status(page) -> dict:
           }
           return { found: false, already: false, canAdd: false, rowText: '' };
         }
-        """
+        """,
+        magazine_name,
     )
 
 
-def _click_gadget_magazine_by_dom(page) -> str:
+def _click_gadget_magazine_by_dom(page, magazine_name="ガジェット") -> str:
     result = page.evaluate(
         """
-        () => {
+        (magazineName) => {
           const normalize = (value) => (value || '').replace(/\\s+/g, ' ').trim();
           const isVisible = (el) => {
             const rect = el.getBoundingClientRect();
@@ -1602,17 +1605,19 @@ def _click_gadget_magazine_by_dom(page) -> str:
           const labels = Array.from(document.querySelectorAll('body *')).filter((el) => {
             if (!isVisible(el)) return false;
             const text = normalize(el.innerText || el.textContent || '');
-            return text === 'ガジェット';
+            return text === magazineName;
           });
 
           for (const label of labels) {
             let row = label;
             for (let depth = 0; row && depth < 8; depth += 1, row = row.parentElement) {
               const rowText = normalize(row.innerText || row.textContent || '');
-              if (!rowText.includes('ガジェット')) continue;
+              if (!rowText.includes(magazineName)) continue;
               if (!rowText.includes('追加') && !rowText.includes('追加済')) continue;
               const buttons = Array.from(row.querySelectorAll('button, [role="button"]')).filter(isVisible);
-              const already = rowText.includes('追加済') || buttons.some((button) => buttonText(button).includes('追加済'));
+              const magazineButtons = buttons.filter((button) => buttonText(button).includes('追加'));
+              if (magazineButtons.length !== 1) continue;
+              const already = buttonText(magazineButtons[0]).includes('追加済');
               if (already) {
                 return { ok: true, already: true, strategy: `dom_gadget_already_added_depth_${depth}`, rowText };
               }
@@ -1626,27 +1631,28 @@ def _click_gadget_magazine_by_dom(page) -> str:
               }
             }
           }
-          return { ok: false, already: false, strategy: '', rowText: '', reason: 'ガジェット行の追加ボタンが見つかりません' };
+          return { ok: false, already: false, strategy: '', rowText: '', reason: `${magazineName}行の追加ボタンが見つかりません` };
         }
-        """
+        """,
+        magazine_name,
     )
     if not result.get("ok"):
-        raise RuntimeError(result.get("reason") or "ガジェット行の追加ボタンが見つかりません")
+        raise RuntimeError(result.get("reason") or f"{magazine_name}行の追加ボタンが見つかりません")
     page.wait_for_timeout(1500)
     return result.get("strategy") or "dom_gadget_row_add"
 
 
-def _wait_for_gadget_magazine_added(page) -> dict:
+def _wait_for_gadget_magazine_added(page, magazine_name="ガジェット") -> dict:
     status = {}
     for _ in range(12):
-        status = _get_gadget_magazine_status(page)
+        status = _get_gadget_magazine_status(page, magazine_name)
         if status.get("already"):
             return status
         page.wait_for_timeout(500)
-    raise RuntimeError(f"ガジェットマガジンの追加済みを確認できませんでした: {status}")
+    raise RuntimeError(f"{magazine_name}マガジンの追加済みを確認できませんでした: {status}")
 
 
-def _add_gadget_magazine(page) -> str:
+def _add_gadget_magazine(page, magazine_name="ガジェット") -> str:
     tab_strategy = ""
     try:
         tab_strategy = _click_visible_candidate(
@@ -1664,15 +1670,17 @@ def _add_gadget_magazine(page) -> str:
     except Exception as exc:
         print(f"   ⚠️ マガジンタブのクリックをスキップします: {exc}")
 
-    status = _get_gadget_magazine_status(page)
+    status = _get_gadget_magazine_status(page, magazine_name)
     if status.get("already"):
         strategy = "gadget_already_added"
-        print(f"   ✅ ガジェットマガジンは既に追加済みです: {status.get('rowText', '')[:80]}")
+        print(f"   ✅ {magazine_name}マガジンは既に追加済みです: {status.get('rowText', '')[:80]}")
         return f"{tab_strategy}->{strategy}" if tab_strategy else strategy
 
     try:
-        strategy = _click_gadget_magazine_by_dom(page)
+        strategy = _click_gadget_magazine_by_dom(page, magazine_name)
     except Exception as dom_exc:
+        if magazine_name != "ガジェット":
+            raise RuntimeError(f"指定されたマガジン「{magazine_name}」を追加できません: {dom_exc}") from dom_exc
         print(f"   ⚠️ DOM指定でのガジェット追加に失敗しました。XPathで再試行します: {dom_exc}")
         strategy, locator = _find_visible_candidate(
             candidates=[
@@ -1705,8 +1713,8 @@ def _add_gadget_magazine(page) -> str:
         )
         _click_locator_with_fallback(page, locator, strategy, "ガジェットマガジン追加", timeout_ms=5000)
 
-    added_status = _wait_for_gadget_magazine_added(page)
-    print(f"   ✅ ガジェットマガジン追加完了: {strategy} / {added_status.get('rowText', '')[:80]}")
+    added_status = _wait_for_gadget_magazine_added(page, magazine_name)
+    print(f"   ✅ {magazine_name}マガジン追加完了: {strategy} / {added_status.get('rowText', '')[:80]}")
     return f"{tab_strategy}->{strategy}" if tab_strategy else strategy
 
 
@@ -1754,7 +1762,8 @@ def _publish_editor_page(page, tags: str = NOTE_POST_TAGS, dry_run: bool = False
     result["publish_next_strategy"] = _click_publish_next(page)
     result["publish_settings_ready_strategy"] = _wait_for_publish_settings_ready(page)
     result["tag_strategy"] = _fill_note_hashtags(page, tags)
-    result["magazine_strategy"] = _add_gadget_magazine(page)
+    magazine_name = "新規事業開発ナレッジ" if os.getenv("NOTE_TARGET") == "taishi" else "ガジェット"
+    result["magazine_strategy"] = _add_gadget_magazine(page, magazine_name)
     result["post_strategy"] = _click_final_post_button(page, dry_run=dry_run)
     page.wait_for_timeout(5000)
     result["final_url"] = page.url

@@ -38,6 +38,11 @@ on:
         required: false
         default: ''
         type: string
+      editor_url:
+        description: '再開するnote下書きの編集URL（任意）'
+        required: false
+        default: ''
+        type: string
 
 jobs:
   post-to-note:
@@ -277,6 +282,7 @@ jobs:
           NO_TOP_IMAGE: ${{ inputs.no_top_image }}
           NOTE_TARGET: ${{ inputs.note_target }}
           SCHEDULE_ID: ${{ inputs.schedule_id }}
+          NOTE_EDITOR_URL: ${{ inputs.editor_url }}
           NOTE_TOP_IMAGE_DEBUG: "1"
           NOTE_PUBLISH_SETTINGS_READY_TIMEOUT_MS: "45000"
         working-directory: scripts/pipeline
@@ -422,7 +428,13 @@ jobs:
               python ../../info_viewer/note_upload/info_viewer_note_publisher.py /tmp/article.md --publish --result-json /tmp/note_post_result.json
             fi
           else
-            if [ "$NO_TOP_IMAGE" = "true" ]; then
+            if [ -n "$NOTE_EDITOR_URL" ]; then
+              if [ "$NOTE_TARGET" != "taishi" ] || [[ ! "$NOTE_EDITOR_URL" =~ ^https://editor\.note\.com/notes/n[a-zA-Z0-9]+/edit/?$ ]]; then
+                echo "下書きURLまたは投稿先が不正です" >&2
+                exit 1
+              fi
+              python prompts/06-note-post/note_post_publisher.py /tmp/article.md --editor-url "$NOTE_EDITOR_URL" --no-ogp --no-toc --no-top-image --result-json /tmp/note_post_result.json
+            elif [ "$NO_TOP_IMAGE" = "true" ]; then
               python prompts/06-note-post/note_post_publisher.py /tmp/article.md --no-top-image --result-json /tmp/note_post_result.json
             else
               python prompts/06-note-post/note_post_publisher.py /tmp/article.md --result-json /tmp/note_post_result.json
