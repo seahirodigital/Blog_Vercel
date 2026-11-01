@@ -302,7 +302,7 @@ jobs:
             fi
           else
             if [ "$NO_TOP_IMAGE" = "true" ]; then
-              python prompts/05-draft-manager/note_draft_poster.py /tmp/article.md --no-top-image
+              FILE_ID='' GITHUB_TOKEN='' python prompts/05-draft-manager/note_draft_poster.py /tmp/article.md --no-top-image
             else
               python prompts/05-draft-manager/note_draft_poster.py /tmp/article.md
             fi

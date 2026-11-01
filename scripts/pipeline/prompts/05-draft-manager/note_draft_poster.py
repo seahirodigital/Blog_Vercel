@@ -1322,43 +1322,7 @@ def _insert_taishi_toc_and_image(page, image_dir: str) -> dict:
     if initial.get('ok'):
         return {'success': True, 'already_exists': True, 'layout': initial}
     if initial.get('old_order'):
-        print('   🔎 エディタ状態:', page.evaluate("""() => {
-          const editor = document.querySelector('.note-editable, [contenteditable="true"]') || document.querySelector('.ProseMirror');
-          const desc = editor && editor.pmViewDesc;
-          const view = desc && desc.view;
-          return {desc: !!desc, desc_keys: desc ? Object.keys(desc) : [], view: !!view, view_keys: view ? Object.keys(view) : [], dom_keys: editor ? Object.keys(editor) : []};
-        }"""))
-        raise RuntimeError('既存の目次の移動方法を調査中です')
-        # 旧配置の目次だけを削除し、本文と画像を残して後方に再挿入する。
-        selected = page.evaluate("""() => {
-          const editor = document.querySelector('.note-editable, [contenteditable="true"]') || document.querySelector('.ProseMirror');
-          const toc = editor && editor.querySelector('table-of-contents, [data-type="table-of-contents"], [data-type="tableOfContents"], [data-node-type="table-of-contents"], [data-node-type="tableOfContents"]');
-          if (!toc || toc.parentElement !== editor) return false;
-          editor.focus();
-          const range = document.createRange();
-          range.selectNode(toc);
-          const selection = window.getSelection();
-          selection.removeAllRanges();
-          selection.addRange(range);
-          return true;
-        }""")
-        if not selected:
-            raise RuntimeError('既存の目次を安全に選択できません')
-        page.keyboard.press('Backspace')
-        page.wait_for_timeout(500)
-        after_removal = _taishi_layout_status(page)
-        if after_removal.get('toc') or not after_removal.get('intro') or not after_removal.get('image'):
-            page.keyboard.press('Control+z')
-            raise RuntimeError(f'既存の目次を安全に移動できません: {after_removal}')
-        heading_before = _place_caret_at_first_body_heading(page)
-        page.keyboard.press('Enter')
-        page.keyboard.press('ArrowUp')
-        _insert_toc_by_slash_popup(page)
-        page.wait_for_timeout(1500)
-        layout = _taishi_layout_status(page)
-        if not layout.get('ok') or layout.get('heading') != heading_before:
-            raise RuntimeError(f'目次の移動後の配置を確認できません: {layout}')
-        return {'success': True, 'already_exists': False, 'reordered': True, 'layout': layout}
+        raise RuntimeError('既存の下書きは目次が画像より前にあります。noteの編集画面で目次を画像の後へ移動してください')
     if initial.get('toc') or initial.get('intro'):
         raise RuntimeError(f'既存の目次・画像を安全に再配置できません: {initial}')
 
