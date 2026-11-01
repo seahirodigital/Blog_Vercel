@@ -809,7 +809,13 @@
       ['taishi', '大志事業開発（seahirodigital1@gmail.com）'],
       ['shii', 'しぃ副業クリエイター（seahirodigital@gmail.com）'],
     ];
-    let activeNoteAccount = 'blog_main';
+    const NOTE_ACCOUNT_STORAGE_KEY = 'sb_noteAccount';
+    let activeNoteAccount = (() => {
+      try {
+        const saved = localStorage.getItem(NOTE_ACCOUNT_STORAGE_KEY);
+        return NOTE_ACCOUNTS.some(([id]) => id === saved) ? saved : 'blog_main';
+      } catch { return 'blog_main'; }
+    })();
     const articlesUrl = () => `${API_BASE}/articles?account=${encodeURIComponent(activeNoteAccount)}`;
     const FOLDER_LOAD_SETTINGS_STORAGE_KEY = 'sb_folderLoadSettings';
     const NOTE_UPLOADED_VISIBILITY_MIGRATION_KEY = 'sb_noteUploadedVisibleV1';
@@ -3823,7 +3829,7 @@
 
     // === メインアプリ ===
     function App() {
-      const [noteAccount, setNoteAccount] = useState('blog_main');
+      const [noteAccount, setNoteAccount] = useState(activeNoteAccount);
       const [articles, setArticles] = useState([]);
       const [folderMeta, setFolderMeta] = useState({});
       const [folderLoading, setFolderLoading] = useState({});
@@ -8065,6 +8071,7 @@
                   if (next === noteAccount) return;
                   if (hasChanges && !confirm('未保存の変更があります。アカウントを切り替えて破棄しますか？')) return;
                   activeNoteAccount = next;
+                  try { localStorage.setItem(NOTE_ACCOUNT_STORAGE_KEY, next); } catch { }
                   selectedArticleRef.current = null;
                   setSelectedArticle(null); setContent(''); setOriginalContent(''); setIsNewArticle(false);
                   setArticles([]); setFolderMeta({}); setFolderLoading({}); setSelectedIds(new Set());

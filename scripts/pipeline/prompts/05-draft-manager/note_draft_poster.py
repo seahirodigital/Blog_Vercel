@@ -96,6 +96,10 @@ class NoteLoginRequiresManualAction(Exception):
     """note側の認証要求により、無人環境ではログインを続行できない状態。"""
 
 
+class NoteEmailActivationRequired(Exception):
+    """note側でメールアドレス認証を求められた状態。"""
+
+
 def _print_manual_cookie_refresh_steps(reason: str) -> None:
     """GitHub Actionsログに、手動Cookie更新の復旧手順を出力する。"""
     print(f"   ⚠️ 自動セッション復旧不可: {reason}")
@@ -3145,6 +3149,12 @@ def _create_draft_api(session: http_requests.Session, title: str, body_html: str
     print(f"   🔍 POST {res.status_code}")
     if not res.ok:
         print(f"   ❌ 記事作成失敗 ({res.status_code}): {res.text[:300]}")
+        try:
+            error = res.json().get("error", {})
+        except (ValueError, AttributeError):
+            error = {}
+        if isinstance(error, dict) and error.get("code") == "email_activation":
+            raise NoteEmailActivationRequired("noteでメールアドレスの認証を完了してください")
         return {}
 
     try:
@@ -3293,7 +3303,11 @@ def post_draft_to_note(
 
     # Phase 2: 下書き作成
     print("\n── Phase 2: 下書き作成（API） ──")
-    draft = _create_draft_api(session, title, body_html)
+    try:
+        draft = _create_draft_api(session, title, body_html)
+    except NoteEmailActivationRequired as error:
+        print(f"❌ {error}。noteにログインし、画面下部の「メールを再送信」を確認してください。")
+        return {**result, "error": "email_activation"}
     if not draft:
         if not _verify_session(session):
             print("   ⚠️ Cookie無効 → APIログインにフォールバック")
@@ -3305,7 +3319,11 @@ def post_draft_to_note(
             if not login_ok:
                 print("❌ 全ての認証手段が失敗しました")
                 return result
-        draft = _create_draft_api(session, title, body_html)
+        try:
+            draft = _create_draft_api(session, title, body_html)
+        except NoteEmailActivationRequired as error:
+            print(f"❌ {error}。noteにログインし、画面下部の「メールを再送信」を確認してください。")
+            return {**result, "error": "email_activation"}
     if not draft:
         return result
 
