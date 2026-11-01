@@ -187,6 +187,15 @@ jobs:
           INFO_VIEWER_NOTE_EMAIL: ${{ secrets.NOTE_EMAIL_INFO_VIEWER }}
           INFO_VIEWER_NOTE_PASSWORD: ${{ secrets.NOTE_PASSWORD_INFO_VIEWER }}
           INFO_VIEWER_NOTE_STORAGE_STATE: ${{ secrets.NOTE_STORAGE_STATE_INFO_VIEWER }}
+          COOKIE_NOTE_EMAIL: ${{ secrets.NOTE_EMAIL_COOKIE }}
+          COOKIE_NOTE_PASSWORD: ${{ secrets.NOTE_PASSWORD_COOKIE }}
+          COOKIE_NOTE_STORAGE_STATE: ${{ secrets.NOTE_STORAGE_STATE_COOKIE }}
+          TAISHI_NOTE_EMAIL: ${{ secrets.NOTE_EMAIL_TAISHI }}
+          TAISHI_NOTE_PASSWORD: ${{ secrets.NOTE_PASSWORD_TAISHI }}
+          TAISHI_NOTE_STORAGE_STATE: ${{ secrets.NOTE_STORAGE_STATE_TAISHI }}
+          SHII_NOTE_EMAIL: ${{ secrets.NOTE_EMAIL_SHII }}
+          SHII_NOTE_PASSWORD: ${{ secrets.NOTE_PASSWORD_SHII }}
+          SHII_NOTE_STORAGE_STATE: ${{ secrets.NOTE_STORAGE_STATE_SHII }}
         run: |
           if [ "$NOTE_TARGET" = "info_viewer" ]; then
             echo "NOTE_EMAIL=${INFO_VIEWER_NOTE_EMAIL}" >> "$GITHUB_ENV"
@@ -208,7 +217,37 @@ jobs:
               echo "${XPOST_NOTE_STORAGE_STATE}"
               echo "__NOTE_STORAGE_STATE__"
             } >> "$GITHUB_ENV"
-          else
+          elif [ "$NOTE_TARGET" = "cookie" ]; then
+            echo "NOTE_EMAIL=${COOKIE_NOTE_EMAIL}" >> "$GITHUB_ENV"
+            echo "NOTE_PASSWORD=${COOKIE_NOTE_PASSWORD}" >> "$GITHUB_ENV"
+            echo "NOTE_STORAGE_SECRET_NAME=NOTE_STORAGE_STATE_COOKIE" >> "$GITHUB_ENV"
+            echo "NOTE_TARGET_LABEL=cookie" >> "$GITHUB_ENV"
+            {
+              echo "NOTE_STORAGE_STATE<<__NOTE_STORAGE_STATE__"
+              echo "${COOKIE_NOTE_STORAGE_STATE}"
+              echo "__NOTE_STORAGE_STATE__"
+            } >> "$GITHUB_ENV"
+          elif [ "$NOTE_TARGET" = "taishi" ]; then
+            echo "NOTE_EMAIL=${TAISHI_NOTE_EMAIL}" >> "$GITHUB_ENV"
+            echo "NOTE_PASSWORD=${TAISHI_NOTE_PASSWORD}" >> "$GITHUB_ENV"
+            echo "NOTE_STORAGE_SECRET_NAME=NOTE_STORAGE_STATE_TAISHI" >> "$GITHUB_ENV"
+            echo "NOTE_TARGET_LABEL=taishi" >> "$GITHUB_ENV"
+            {
+              echo "NOTE_STORAGE_STATE<<__NOTE_STORAGE_STATE__"
+              echo "${TAISHI_NOTE_STORAGE_STATE}"
+              echo "__NOTE_STORAGE_STATE__"
+            } >> "$GITHUB_ENV"
+          elif [ "$NOTE_TARGET" = "shii" ]; then
+            echo "NOTE_EMAIL=${SHII_NOTE_EMAIL}" >> "$GITHUB_ENV"
+            echo "NOTE_PASSWORD=${SHII_NOTE_PASSWORD}" >> "$GITHUB_ENV"
+            echo "NOTE_STORAGE_SECRET_NAME=NOTE_STORAGE_STATE_SHII" >> "$GITHUB_ENV"
+            echo "NOTE_TARGET_LABEL=shii" >> "$GITHUB_ENV"
+            {
+              echo "NOTE_STORAGE_STATE<<__NOTE_STORAGE_STATE__"
+              echo "${SHII_NOTE_STORAGE_STATE}"
+              echo "__NOTE_STORAGE_STATE__"
+            } >> "$GITHUB_ENV"
+          elif [ "$NOTE_TARGET" = "blog_main" ] || [ -z "$NOTE_TARGET" ]; then
             echo "NOTE_EMAIL=${BLOG_NOTE_EMAIL}" >> "$GITHUB_ENV"
             echo "NOTE_PASSWORD=${BLOG_NOTE_PASSWORD}" >> "$GITHUB_ENV"
             echo "NOTE_STORAGE_SECRET_NAME=NOTE_STORAGE_STATE" >> "$GITHUB_ENV"
@@ -218,6 +257,9 @@ jobs:
               echo "${BLOG_NOTE_STORAGE_STATE}"
               echo "__NOTE_STORAGE_STATE__"
             } >> "$GITHUB_ENV"
+          else
+            echo "不正なnote投稿先です" >&2
+            exit 1
           fi
 
       - name: OneDriveから記事を取得し note に公開投稿
@@ -480,7 +522,7 @@ jobs:
           PY
 
       - name: 公開完了後に記事をnoteアップ済へ移動
-        if: ${{ steps.schedule_gate.outputs.skip != 'true' && inputs.note_target != 'info_viewer' }}
+        if: ${{ steps.schedule_gate.outputs.skip != 'true' && (inputs.note_target == 'blog_main' || inputs.note_target == '' || inputs.note_target == 'xpost_tech') }}
         env:
           ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
           ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}

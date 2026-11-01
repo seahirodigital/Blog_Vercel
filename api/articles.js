@@ -535,14 +535,14 @@ async function getArticle(token, fileId) {
 }
 
 // 記事保存（新規: パス指定 / 既存: ファイルID指定）
-async function saveArticle(token, filename, content, fileId = null) {
+async function saveArticle(token, filename, content, fileId = null, baseFolder) {
   let url;
   if (fileId) {
     // 既存ファイル: IDで直接上書き（フォルダ位置を維持）
     url = `${GRAPH_API}/me/drive/items/${fileId}/content`;
   } else {
     // 新規ファイル: ルートフォルダに作成
-    const folder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
+    const folder = baseFolder;
     const encoded = encodeFolderPath(folder);
     const encodedFile = encodeURIComponent(filename);
     url = `${GRAPH_API}/me/drive/root:/${encoded}/${encodedFile}:/content`;
@@ -567,8 +567,7 @@ async function saveArticle(token, filename, content, fileId = null) {
 }
 
 // 記事移動（ファイルID + 移動先フォルダの相対パス）
-async function moveArticle(token, fileId, destRelativePath) {
-  const baseFolder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
+async function moveArticle(token, fileId, destRelativePath, baseFolder) {
   const destPath = destRelativePath ? `${baseFolder}/${destRelativePath}` : baseFolder;
   // 移動先フォルダのIDを取得
   const folderUrl = `${GRAPH_API}/me/drive/root:/${encodeFolderPath(destPath)}`;
@@ -628,8 +627,8 @@ async function deleteArticle(token, fileId) {
 }
 
 // 記事ルート配下のフォルダだけをパスで解決し、ごみ箱へ移動する。
-async function deleteFolder(token, relativePath) {
-  const baseFolder = String(process.env.ONEDRIVE_FOLDER || 'Blog_Articles').trim().replace(/^\/+|\/+$/g, '');
+async function deleteFolder(token, relativePath, baseFolder) {
+  baseFolder = String(baseFolder).trim().replace(/^\/+|\/+$/g, '');
   const safePath = normalizeDeletableFolderPath(relativePath);
   const fullPath = `${baseFolder}/${safePath}`;
   const lookupUrl = `${GRAPH_API}/me/drive/root:/${encodeFolderPath(fullPath)}?$select=id,name,folder`;
@@ -648,9 +647,8 @@ async function deleteFolder(token, relativePath) {
 }
 
 // 記事複製（コンテンツ読み込み → 同フォルダに新規保存）
-async function duplicateArticle(token, fileId, newName, folderPath) {
+async function duplicateArticle(token, fileId, newName, folderPath, baseFolder) {
   const content = await getArticle(token, fileId);
-  const baseFolder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
   const targetFolder = folderPath ? `${baseFolder}/${folderPath}` : baseFolder;
   const encoded = encodeFolderPath(targetFolder);
   const encodedFile = encodeURIComponent(newName);
@@ -680,6 +678,17 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   try {
+    const account = firstQueryValue(req.query?.account, 'blog_main');
+    const roots = {
+      blog_main: process.env.ONEDRIVE_FOLDER || 'Blog_Articles',
+      cookie: '開発/investment_dashboard/note',
+      taishi: '開発/LP Maker/output/note_blog/articles',
+      shii: '',
+    };
+    if (!Object.prototype.hasOwnProperty.call(roots, account)) return res.status(400).json({ error: 'アカウントが不正です' });
+    const baseFolder = roots[account];
+    if (!baseFolder && req.method === 'GET' && !req.query?.id) return res.status(200).json({ articles: [], folders: [], unconfigured: true });
+    if (!baseFolder && req.method !== 'GET') return res.status(400).json({ error: 'このアカウントの記事保存先は未設定です' });
     const token = await getAccessToken();
 
     // GET: 記事一覧 or 記事内容
@@ -689,7 +698,7 @@ export default async function handler(req, res) {
         const content = await getArticle(token, id);
         return res.status(200).json({ content });
       }
-      const folder = process.env.ONEDRIVE_FOLDER || 'Blog_Articles';
+      const folder = baseFolder;
 
       const requestedMode = firstQueryValue(mode, 'shallow');
       if (requestedMode !== 'recursive' || folderPath !== undefined || folderId) {
@@ -701,6 +710,11 @@ export default async function handler(req, res) {
         const listing = folderId
           ? await listArticlesShallowById(token, firstQueryValue(folderId), targetPath, { h1Limit: limit, includeAll: allPeriods, includeAllArticles: allArticles, articleLimit: maxArticles })
           : await listArticlesShallow(token, targetPath ? `${folder}/${targetPath}` : folder, targetPath, { h1Limit: limit, includeAll: allPeriods, includeAllArticles: allArticles, articleLimit: maxArticles });
+
+        if (account === 'cookie' && !targetPath && !folderId) {
+          listing.articles = listing.articles.filter(item => !/^readme\.md$/i.test(item.name));
+          listing.folders = listing.folders.filter(item => !['prompt', 'note_publisher', '__pycache__'].includes(item.name));
+        }
 
         if (!targetPath && !folderId && externalUrls) {
           try {
@@ -774,7 +788,7 @@ export default async function handler(req, res) {
       if (!filename || content === undefined || content === null) {
         return res.status(400).json({ error: 'filename と content は必須です' });
       }
-      const result = await saveArticle(token, filename, content, fileId || null);
+      const result = await saveArticle(token, filename, content, fileId || null, baseFolder);
       return res.status(200).json({
         success: true,
         id: result.id || '',
@@ -792,7 +806,7 @@ export default async function handler(req, res) {
         if (!fileId || destFolderPath === undefined) {
           return res.status(400).json({ error: 'fileId と destFolderPath は必須です' });
         }
-        const result = await moveArticle(token, fileId, destFolderPath);
+        const result = await moveArticle(token, fileId, destFolderPath, baseFolder);
         return res.status(200).json({
           success: true,
           id: result.id || fileId,
@@ -832,7 +846,7 @@ export default async function handler(req, res) {
         const errors = [];
         for (const folderPath of targets) {
           try {
-            deletedPaths.push(await deleteFolder(token, folderPath));
+            deletedPaths.push(await deleteFolder(token, folderPath, baseFolder));
           } catch (error) {
             errors.push({ path: folderPath, error: String(error?.message || error) });
           }
@@ -852,7 +866,7 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
       const { fileId, newName, folderPath } = req.body;
       if (!fileId || !newName) return res.status(400).json({ error: 'fileId と newName は必須です' });
-      const result = await duplicateArticle(token, fileId, newName, folderPath || '');
+      const result = await duplicateArticle(token, fileId, newName, folderPath || '', baseFolder);
       return res.status(200).json({
         success: true,
         id: result.id || '',

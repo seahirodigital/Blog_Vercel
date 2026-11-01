@@ -11,7 +11,7 @@ import { createHash } from 'crypto';
 
 const GITHUB_API = 'https://api.github.com';
 const DEFAULT_NOTE_TARGET = 'blog_main';
-const ALLOWED_NOTE_TARGETS = new Set(['blog_main', 'xpost_tech', 'info_viewer']);
+const ALLOWED_NOTE_TARGETS = new Set(['blog_main', 'xpost_tech', 'info_viewer', 'cookie', 'taishi', 'shii']);
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');

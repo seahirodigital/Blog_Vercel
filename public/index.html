@@ -803,6 +803,14 @@
 
     // === API ヘルパー ===
     const API_BASE = '/api';
+    const NOTE_ACCOUNTS = [
+      ['blog_main', 'Appleとカメラ（seahiro@gmail.com）'],
+      ['cookie', 'クッキー（denkidenshigroove@gmail.com）'],
+      ['taishi', '大志事業開発（seahirodigital1@gmail.com）'],
+      ['shii', 'しぃ副業クリエイター（seahirodigital@gmail.com）'],
+    ];
+    let activeNoteAccount = 'blog_main';
+    const articlesUrl = () => `${API_BASE}/articles?account=${encodeURIComponent(activeNoteAccount)}`;
     const FOLDER_LOAD_SETTINGS_STORAGE_KEY = 'sb_folderLoadSettings';
     const NOTE_UPLOADED_VISIBILITY_MIGRATION_KEY = 'sb_noteUploadedVisibleV1';
     const ROOT_ARTICLE_LIMIT_STORAGE_KEY = 'sb_rootArticleLimit';
@@ -949,6 +957,7 @@
 
     async function fetchArticles(externalUrls = [], options = {}) {
       const params = new URLSearchParams();
+      params.set('account', activeNoteAccount);
       if (externalUrls && externalUrls.length > 0) params.set('externalUrls', JSON.stringify(externalUrls));
       if (options.mode) params.set('mode', options.mode);
       if (options.folderPath) params.set('folderPath', options.folderPath);
@@ -966,14 +975,14 @@
     }
 
     async function fetchArticleContent(id) {
-      const res = await fetch(`${API_BASE}/articles?id=${id}`);
+      const res = await fetch(`${articlesUrl()}&id=${encodeURIComponent(id)}`);
       if (!res.ok) throw new Error('記事の読み込みに失敗しました');
       const data = await res.json();
       return data.content || '';
     }
 
     async function saveArticle(filename, content, fileId = null) {
-      const res = await fetch(`${API_BASE}/articles`, {
+      const res = await fetch(articlesUrl(), {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ filename, content, fileId }),
@@ -986,7 +995,7 @@
     }
 
     async function renameArticleApi(fileId, newName) {
-      const res = await fetch(`${API_BASE}/articles`, {
+      const res = await fetch(articlesUrl(), {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ fileId, newName }),
@@ -999,7 +1008,7 @@
     }
 
     async function deleteArticleApi(fileId) {
-      const res = await fetch(`${API_BASE}/articles`, {
+      const res = await fetch(articlesUrl(), {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ fileId }),
@@ -1012,7 +1021,7 @@
     }
 
     async function deleteFoldersApi(folderPaths) {
-      const res = await fetch(`${API_BASE}/articles`, {
+      const res = await fetch(articlesUrl(), {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ folderPaths }),
@@ -1023,7 +1032,7 @@
     }
 
     async function duplicateArticleApi(fileId, newName, folderPath) {
-      const res = await fetch(`${API_BASE}/articles`, {
+      const res = await fetch(articlesUrl(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ fileId, newName, folderPath }),
@@ -1036,7 +1045,7 @@
     }
 
     async function moveArticleApi(fileId, destFolderPath) {
-      const res = await fetch(`${API_BASE}/articles`, {
+      const res = await fetch(articlesUrl(), {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ fileId, action: 'move', destFolderPath }),
@@ -1068,7 +1077,7 @@
       const res = await fetch(`${API_BASE}/note-draft`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fileIds: ids, noteTarget: 'blog_main' }),
+        body: JSON.stringify({ fileIds: ids, noteTarget: activeNoteAccount }),
       });
       if (!res.ok) throw new Error('note下書き投稿の起動に失敗しました');
       return await res.json();
@@ -1079,7 +1088,7 @@
       const body = {
         fileIds: ids,
         mode: options.mode || 'now',
-        noteTarget: 'blog_main',
+        noteTarget: activeNoteAccount,
         articles: options.articles || [],
       };
       if (options.publishAt) body.publishAt = options.publishAt;
@@ -3814,6 +3823,7 @@
 
     // === メインアプリ ===
     function App() {
+      const [noteAccount, setNoteAccount] = useState('blog_main');
       const [articles, setArticles] = useState([]);
       const [folderMeta, setFolderMeta] = useState({});
       const [folderLoading, setFolderLoading] = useState({});
@@ -4091,10 +4101,12 @@
 
       // 記事一覧取得
       const loadArticles = useCallback(async (exUrls = null) => {
+        const requestedAccount = noteAccount;
         setLoading(true);
         try {
-          const targetUrls = exUrls !== null ? exUrls : externalFolderUrls;
+          const targetUrls = noteAccount === 'blog_main' ? (Array.isArray(exUrls) ? exUrls : externalFolderUrls) : [];
           const data = await fetchArticles(targetUrls, { raw: true, mode: 'shallow', h1Limit: 3, includeAllArticles: true, articleLimit: rootArticleLimit });
+          if (requestedAccount !== activeNoteAccount) return;
           const initialArticles = data.articles || [];
           const selected = selectedArticleRef.current;
           setArticles(selected && selected.path && !initialArticles.some(article => article.id === selected.id)
@@ -4107,7 +4119,7 @@
         } finally {
           setLoading(false);
         }
-      }, [externalFolderUrls, rootArticleLimit]);
+      }, [externalFolderUrls, rootArticleLimit, noteAccount]);
 
       const changeRootArticleLimit = useCallback((value) => {
         const next = normalizeRootArticleLimit(value);
@@ -4116,6 +4128,7 @@
       }, []);
 
       const loadFolder = useCallback(async (folderPath, meta = {}, options = {}) => {
+        const requestedAccount = activeNoteAccount;
         const normalizedPath = (folderPath || '').trim().replace(/^\/+|\/+$/g, '');
         if (!normalizedPath) return;
         setFolderLoading(prev => ({ ...prev, [normalizedPath]: true }));
@@ -4131,6 +4144,7 @@
             includeAll,
             articleLimit,
           });
+          if (requestedAccount !== activeNoteAccount) return;
           setArticles(prev => mergeArticlesById(prev.filter(article => article.path !== normalizedPath), data.articles || []));
           setFolderMeta(prev => {
             const next = foldersToMeta(data.folders || [], prev);
@@ -4989,6 +5003,10 @@
 
       // 新規記事
       const handleNewArticle = () => {
+        if (noteAccount === 'shii') {
+          showToast('このアカウントは記事の保存先が未設定のため、新規作成・投稿できません', 'error');
+          return;
+        }
         if (hasChanges && !confirm('未保存の変更があります。破棄しますか？')) return;
         const now = new Date();
         const dateStr = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
@@ -6383,7 +6401,7 @@
           showToast('削除できる予約はありません', 'info');
           return;
         }
-        if (!confirm(`現在予約されている${targets.length}件をすべて削除します。本当に消してよいですか？`)) return;
+        if (!confirm(`全アカウント共通の予約${targets.length}件をすべて削除します。本当に消してよいですか？`)) return;
 
         setNotePostRunning(true);
         try {
@@ -7969,7 +7987,7 @@
                                     </button>
                                   )}
                                   <p className="truncate text-[10px] font-bold text-slate-700">{formatTimeJa(item.publishAt)} {getScheduleTitle(item)}</p>
-                                  <p className="truncate text-[9px] text-slate-400">登録 {formatDateTimeJa(item.createdAt)}</p>
+                                  <p className="truncate text-[9px] text-slate-400">{NOTE_ACCOUNTS.find(([id]) => id === (item.noteTarget || 'blog_main'))?.[1] || item.noteTarget} / 登録 {formatDateTimeJa(item.createdAt)}</p>
                                 </div>
                               ))}
                               {schedules.length > 2 && <p className="text-[10px] font-bold text-slate-400">+{schedules.length - 2}</p>}
@@ -7981,7 +7999,7 @@
 
                     <div className="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-3">
                       <div className="mb-2 flex items-center justify-between">
-                        <p className="text-xs font-bold text-slate-600">{notePostSelectedDate} の予約</p>
+                        <p className="text-xs font-bold text-slate-600">{notePostSelectedDate} の予約（全アカウント）</p>
                         <div className="flex items-center gap-2">
                           <span className="text-[11px] font-semibold text-slate-400">{selectedDateSchedules.length}件</span>
                           <button
@@ -8003,7 +8021,7 @@
                             <div key={item.id} className="flex items-start justify-between gap-3 rounded-md border border-slate-200 bg-white px-3 py-2">
                               <div className="min-w-0">
                                 <p className="truncate text-xs font-bold text-slate-800">{formatTimeJa(item.publishAt)} {getScheduleTitle(item)}</p>
-                                <p className="mt-0.5 text-[11px] text-slate-400">登録 {formatDateTimeJa(item.createdAt)} / {item.status}</p>
+                                <p className="mt-0.5 text-[11px] text-slate-400">{NOTE_ACCOUNTS.find(([id]) => id === (item.noteTarget || 'blog_main'))?.[1] || item.noteTarget} / 登録 {formatDateTimeJa(item.createdAt)} / {item.status}</p>
                               </div>
                               {isCancellableNotePostSchedule(item) && (
                                 <button
@@ -8042,6 +8060,18 @@
               </button>
               {/* ファイル名 / タイトル */}
               <div className="flex-1 min-w-0 flex items-center gap-2">
+                <select aria-label="noteアカウント" title={NOTE_ACCOUNTS.find(([id]) => id === noteAccount)?.[1]} value={noteAccount} disabled={contentLoading || saving || noteDraftRunning || notePostRunning || notePostModalOpen} className="max-w-[145px] md:max-w-[340px] text-xs border border-slate-300 rounded px-2 py-1 disabled:opacity-50" onChange={(event) => {
+                  const next = event.target.value;
+                  if (next === noteAccount) return;
+                  if (hasChanges && !confirm('未保存の変更があります。アカウントを切り替えて破棄しますか？')) return;
+                  activeNoteAccount = next;
+                  selectedArticleRef.current = null;
+                  setSelectedArticle(null); setContent(''); setOriginalContent(''); setIsNewArticle(false);
+                  setArticles([]); setFolderMeta({}); setFolderLoading({}); setSelectedIds(new Set());
+                  setNoteAccount(next);
+                }}>
+                  {NOTE_ACCOUNTS.map(([id, label]) => <option key={id} value={id}>{label}</option>)}
+                </select>
                 {isNewArticle ? (
                   <input
                     type="text"
