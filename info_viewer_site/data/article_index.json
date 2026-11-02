@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-01T12:13:28.891152+00:00",
+  "generatedAt": "2026-11-02T08:43:41.002507+00:00",
   "articleList": [
+    {
+      "id": "efc4ab0657041342a2",
+      "url": "/articles/efc4ab0657041342a2/",
+      "title": "【2025年と2026年で入れ替わった主役】原油・貴金属マーケット次の焦点とは（エネルギーアナリスト/ポスト石油戦略研究所 代表 大場紀章さん）－ファッションを探せ！",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=hFktC65ELrw",
+      "thumbnail": "https://i.ytimg.com/vi/hFktC65ELrw/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-02T08:32:27.818576",
+      "recordedLabel": "2026.11.02 08:32",
+      "timeLabel": "2026.11.02 08:32",
+      "persons": [],
+      "lastModified": "2026-11-02T08:32:31Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sc3cf3f7550b848cfafc3d717f014b07f"
+    },
     {
       "id": "b5e6d312db6c92a498",
       "url": "/articles/b5e6d312db6c92a498/",
@@ -9653,6 +9672,25 @@
     }
   ],
   "articles": {
+    "efc4ab0657041342a2": {
+      "id": "efc4ab0657041342a2",
+      "url": "/articles/efc4ab0657041342a2/",
+      "title": "【2025年と2026年で入れ替わった主役】原油・貴金属マーケット次の焦点とは（エネルギーアナリスト/ポスト石油戦略研究所 代表 大場紀章さん）－ファッションを探せ！",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=hFktC65ELrw",
+      "thumbnail": "https://i.ytimg.com/vi/hFktC65ELrw/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-02T08:32:27.818576",
+      "recordedLabel": "2026.11.02 08:32",
+      "timeLabel": "2026.11.02 08:32",
+      "persons": [],
+      "lastModified": "2026-11-02T08:32:31Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sc3cf3f7550b848cfafc3d717f014b07f"
+    },
     "b5e6d312db6c92a498": {
       "id": "b5e6d312db6c92a498",
       "url": "/articles/b5e6d312db6c92a498/",
@@ -19306,6 +19344,11 @@
   },
   "channels": [
     {
+      "name": "なるほど投資ゼミ（大橋ひろこ",
+      "tab": "なるほど",
+      "latestAt": "2026-11-02T08:32:27.818576"
+    },
+    {
       "name": "ゆたかTV",
       "tab": "ゆたかT",
       "latestAt": "2026-11-01T11:59:25.491265"
@@ -19339,11 +19382,6 @@
       "name": "トウシル（楽天証券）",
       "tab": "トウシル",
       "latestAt": "2026-10-29T10:30:07.952297"
-    },
-    {
-      "name": "なるほど投資ゼミ（大橋ひろこ",
-      "tab": "なるほど",
-      "latestAt": "2026-10-28T10:03:45.583624"
     },
     {
       "name": "ピクテ・ジャパン",
