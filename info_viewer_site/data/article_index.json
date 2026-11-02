@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-02T08:43:41.002507+00:00",
+  "generatedAt": "2026-11-02T13:29:38.620866+00:00",
   "articleList": [
+    {
+      "id": "61e614285df534aa74",
+      "url": "/articles/61e614285df534aa74/",
+      "title": "中間選挙直前に相場大荒れ...水曜朝、注意してください",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=F7ULD2Je600",
+      "thumbnail": "https://i.ytimg.com/vi/F7ULD2Je600/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-02T13:19:13.068009",
+      "recordedLabel": "2026.11.02 13:19",
+      "timeLabel": "2026.11.02 13:19",
+      "persons": [],
+      "lastModified": "2026-11-02T13:19:17Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sb91e5b2db078469cbe7aa4d51af557a6"
+    },
     {
       "id": "efc4ab0657041342a2",
       "url": "/articles/efc4ab0657041342a2/",
@@ -9672,6 +9691,25 @@
     }
   ],
   "articles": {
+    "61e614285df534aa74": {
+      "id": "61e614285df534aa74",
+      "url": "/articles/61e614285df534aa74/",
+      "title": "中間選挙直前に相場大荒れ...水曜朝、注意してください",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=F7ULD2Je600",
+      "thumbnail": "https://i.ytimg.com/vi/F7ULD2Je600/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-02T13:19:13.068009",
+      "recordedLabel": "2026.11.02 13:19",
+      "timeLabel": "2026.11.02 13:19",
+      "persons": [],
+      "lastModified": "2026-11-02T13:19:17Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sb91e5b2db078469cbe7aa4d51af557a6"
+    },
     "efc4ab0657041342a2": {
       "id": "efc4ab0657041342a2",
       "url": "/articles/efc4ab0657041342a2/",
@@ -19344,6 +19382,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-02T13:19:13.068009"
+    },
+    {
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-11-02T08:32:27.818576"
@@ -19352,11 +19395,6 @@
       "name": "ゆたかTV",
       "tab": "ゆたかT",
       "latestAt": "2026-11-01T11:59:25.491265"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-01T09:31:57.889469"
     },
     {
       "name": "マネーフォワード ME イベント&セミナー",
