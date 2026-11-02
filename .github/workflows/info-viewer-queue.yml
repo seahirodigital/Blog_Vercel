@@ -192,7 +192,7 @@ jobs:
           done
 
       - name: Discord Notification
-        if: always() && steps.info_viewer.outputs.notion_urls != ''
+        if: always() && steps.info_viewer.outputs.notion_urls != '' && github.event.client_payload.skip_discord != true
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
@@ -224,5 +224,9 @@ jobs:
 
           if [ "${APIFY_AUTH_ERROR}" = "true" ]; then
             echo "::error::ApifyがHTTP 401または403を返しました。APIFY_API_KEYの権限を確認してください。静的Viewerの書き出しとGitHub反映は先に実行済みです。"
+            exit 1
+          fi
+          if [ "${FAILURE_COUNT:-0}" -gt 0 ] && [ "${SUCCESS_COUNT:-0}" -eq 0 ]; then
+            echo "::error::記事処理がすべて失敗しました。パイプラインのログを確認してください。"
             exit 1
           fi

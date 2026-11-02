@@ -18,6 +18,32 @@ SPEC.loader.exec_module(apify_fetcher)
 
 
 class ApifyFetcherTest(unittest.TestCase):
+    def test_empty_primary_captions_use_fallback(self):
+        primary = Mock(status_code=201)
+        primary.raise_for_status.return_value = None
+        primary.json.return_value = [{"captions": None, "reason": "字幕を取得できません"}]
+        fallback = Mock(status_code=201)
+        fallback.raise_for_status.return_value = None
+        fallback.json.return_value = [{"status": "success", "text": "代替字幕", "videoId": "abc123"}]
+        with patch.object(apify_fetcher.requests, "post", side_effect=[primary, fallback]) as post:
+            result = apify_fetcher.get_transcript("https://www.youtube.com/watch?v=abc123", "key")
+        self.assertTrue(result["ok"])
+        self.assertEqual(result["transcript"]["captions"], "代替字幕")
+        self.assertEqual(post.call_args.kwargs["json"]["language"], "ja")
+
+    def test_fallback_failure_reports_both_reasons(self):
+        primary = Mock(status_code=201)
+        primary.raise_for_status.return_value = None
+        primary.json.return_value = [{"captions": None, "reason": "取得失敗"}]
+        fallback = Mock(status_code=201)
+        fallback.raise_for_status.return_value = None
+        fallback.json.return_value = [{"status": "error", "error": "字幕なし"}]
+        with patch.object(apify_fetcher.requests, "post", side_effect=[primary, fallback]):
+            result = apify_fetcher.get_transcript("https://www.youtube.com/watch?v=abc123", "key")
+        self.assertFalse(result["ok"])
+        self.assertIn("取得失敗", result["error"])
+        self.assertIn("字幕なし", result["error"])
+
     def test_uses_bearer_auth_without_token_or_memory_query(self):
         response = Mock()
         response.status_code = 201

@@ -7,6 +7,7 @@ import requests
 DEFAULT_ACTOR_ID = "1s7eXiaukVuOr4Ueg"
 ACTOR_ID = os.getenv("INFO_VIEWER_APIFY_ACTOR_ID", DEFAULT_ACTOR_ID).strip() or DEFAULT_ACTOR_ID
 APIFY_BASE_URL = "https://api.apify.com/v2"
+FALLBACK_ACTOR_ID = "actose~youtube-transcripts"
 MAX_RETRIES = max(1, int(os.getenv("INFO_VIEWER_APIFY_MAX_RETRIES", "3") or 3))
 RETRY_WAIT_SECONDS = max(1, int(os.getenv("INFO_VIEWER_APIFY_RETRY_SECONDS", "15") or 15))
 
@@ -20,6 +21,38 @@ def _read_response_text(response: requests.Response) -> str:
 
 def _is_retryable_status(status_code: Optional[int]) -> bool:
     return status_code is None or status_code == 429 or (status_code is not None and status_code >= 500)
+
+
+def _fallback_transcript(video_url: str, api_key: str, language: str, reason: str) -> dict[str, Any]:
+    print(f"   字幕が空のため代替 Actor で取得します: {reason}")
+    try:
+        response = requests.post(
+            f"{APIFY_BASE_URL}/acts/{FALLBACK_ACTOR_ID}/run-sync-get-dataset-items",
+            json={"urls": [video_url.strip()], "language": language, "fallbackToAnyLanguage": True,
+                  "includeTimestamps": False, "includeMarkdown": False, "saveSrtFile": False},
+            params={"timeout": 300, "maxItems": 1},
+            headers={"Authorization": f"Bearer {api_key}"},
+            timeout=360,
+        )
+        response.raise_for_status()
+        data = response.json()
+        item = data[0] if isinstance(data, list) and data and isinstance(data[0], dict) else {}
+        captions = item.get("text")
+        if item.get("status") == "success" and isinstance(captions, str) and captions.strip():
+            captions = captions.strip()
+            print(f"   代替 Actor から字幕を取得: {len(captions)}文字")
+            return {"ok": True, "stage": "Apify", "httpStatus": response.status_code,
+                    "videoUrl": video_url, "itemCount": len(data), "captionChars": len(captions),
+                    "transcript": {"title": item.get("title", ""), "captions": captions,
+                                   "video_id": item.get("videoId", ""), "url": video_url}}
+        detail = str(item.get("error") or item.get("status") or "結果が空でした")[:300]
+        return {"ok": False, "stage": "Apify", "error": f"{reason} / 代替 Actor: {detail}",
+                "httpStatus": response.status_code, "videoUrl": video_url}
+    except (requests.RequestException, ValueError) as error:
+        response = getattr(error, "response", None)
+        status_code = getattr(response, "status_code", None)
+        return {"ok": False, "stage": "Apify", "error": f"{reason} / 代替 Actor の取得失敗: {error}",
+                "httpStatus": status_code, "videoUrl": video_url}
 
 
 def get_transcript(video_url: str, api_key: str, language: str = "ja") -> dict[str, Any]:
@@ -66,15 +99,9 @@ def get_transcript(video_url: str, api_key: str, language: str = "ja") -> dict[s
             item = data[0]
             captions = item.get("captions")
             if not captions:
-                return {
-                    "ok": False,
-                    "stage": "Apify",
-                    "error": "Apify の captions が空でした",
-                    "httpStatus": status_code,
-                    "videoUrl": video_url,
-                    "itemCount": len(data) if isinstance(data, list) else 0,
-                    "title": item.get("title", ""),
-                }
+                detail = " / ".join(str(item.get(key))[:200] for key in ("status", "reason", "error") if item.get(key))
+                reason = "Apify の captions が空でした" + (f" ({detail})" if detail else "")
+                return _fallback_transcript(video_url, api_key, language, reason)
 
             if isinstance(captions, list):
                 caption_text = " ".join(
