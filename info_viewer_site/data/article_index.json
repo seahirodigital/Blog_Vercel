@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-02T13:29:38.620866+00:00",
+  "generatedAt": "2026-11-02T14:33:08.064392+00:00",
   "articleList": [
+    {
+      "id": "3359cf0c68984ad43f",
+      "url": "/articles/3359cf0c68984ad43f/",
+      "title": "LIVE  マーケットアップデート 日経リバウンド信じていいのか？  半導体株明暗分かれる",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=2obk1V4xqB8",
+      "thumbnail": "https://i.ytimg.com/vi/2obk1V4xqB8/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-02T14:19:56.558380",
+      "recordedLabel": "2026.11.02 14:19",
+      "timeLabel": "2026.11.02 14:19",
+      "persons": [],
+      "lastModified": "2026-11-02T14:20:01Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s94b0bffff09d410b9781f2330d530f9c"
+    },
     {
       "id": "61e614285df534aa74",
       "url": "/articles/61e614285df534aa74/",
@@ -9691,6 +9710,25 @@
     }
   ],
   "articles": {
+    "3359cf0c68984ad43f": {
+      "id": "3359cf0c68984ad43f",
+      "url": "/articles/3359cf0c68984ad43f/",
+      "title": "LIVE  マーケットアップデート 日経リバウンド信じていいのか？  半導体株明暗分かれる",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=2obk1V4xqB8",
+      "thumbnail": "https://i.ytimg.com/vi/2obk1V4xqB8/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-02T14:19:56.558380",
+      "recordedLabel": "2026.11.02 14:19",
+      "timeLabel": "2026.11.02 14:19",
+      "persons": [],
+      "lastModified": "2026-11-02T14:20:01Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s94b0bffff09d410b9781f2330d530f9c"
+    },
     "61e614285df534aa74": {
       "id": "61e614285df534aa74",
       "url": "/articles/61e614285df534aa74/",
@@ -19382,6 +19420,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-11-02T14:19:56.558380"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-02T13:19:13.068009"
@@ -19400,11 +19443,6 @@
       "name": "マネーフォワード ME イベント&セミナー",
       "tab": "マネーフ",
       "latestAt": "2026-10-31T11:44:48.307920"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-10-31T10:58:43.860916"
     },
     {
       "name": "イズミダイズム",
