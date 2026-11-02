@@ -33,11 +33,11 @@ def find_article_assets(article_name, entries, need_thumbnail=True):
             body.append(entry)
         if image.stem.startswith(prefix + '_') and 'サムネイル' in image.stem:
             thumbnails.append(entry)
-    if len(body) != 1:
-        raise ValueError(f'記事と同名の本文画像は1件必要です（{len(body)}件）')
+    if len(body) > 1:
+        raise ValueError(f'記事と同名の本文画像が複数あります（{len(body)}件）')
     if need_thumbnail and len(thumbnails) != 1:
         raise ValueError(f'{prefix}のサムネイルは1件必要です（{len(thumbnails)}件）')
-    return body[0], thumbnails[0] if need_thumbnail else None
+    return body[0] if body else None, thumbnails[0] if need_thumbnail else None
 
 
 def download_article_assets(token, file_id, need_thumbnail=True):
@@ -57,6 +57,8 @@ def download_article_assets(token, file_id, need_thumbnail=True):
         entries.extend(listing.get('value', []))
         next_url = listing.get('@odata.nextLink')
     body, thumbnail = find_article_assets(article.get('name', ''), entries, need_thumbnail)
+    if body is None:
+        print('ℹ️ 記事と同名の本文画像がないため、本文画像を省略します')
     for entry, directory_name, base_name in (
         (body, 'TAISHI_BODY_IMAGE_DIR', 'article-image'),
         (thumbnail, 'TAISHI_THUMBNAIL_DIR', 'thumbnail'),

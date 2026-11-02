@@ -1306,7 +1306,7 @@ def _taishi_layout_status(page) -> dict:
           const before = (a, b) => Boolean(a && b && (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING));
           const ordered = before(paragraph, image) && before(image, toc) && before(toc, heading);
           const oldOrder = before(toc, paragraph) && before(paragraph, image) && before(image, heading);
-          return {ok: ordered, old_order: oldOrder, heading: heading ? heading.textContent.trim() : '', toc: Boolean(toc), intro: Boolean(paragraph), image: Boolean(image)};
+          return {ok: ordered, old_order: oldOrder, toc_before_heading: before(toc, heading), heading: heading ? heading.textContent.trim() : '', toc: Boolean(toc), intro: Boolean(paragraph), image: Boolean(image)};
         }""",
         TAISHI_IMAGE_INTRO,
     )
@@ -1316,17 +1316,30 @@ def _insert_taishi_toc_and_image(page, image_dir: str) -> dict:
     if not image_dir:
         raise RuntimeError('大志の記事画像の保存先が指定されていません')
     image_files = [p for p in Path(image_dir).glob('article-image.*') if p.is_file()]
-    if len(image_files) != 1:
-        raise RuntimeError(f'記事に対応する画像が1件必要です: {image_dir} ({len(image_files)}件)')
+    if len(image_files) > 1:
+        raise RuntimeError(f'記事に対応する画像が複数あります: {image_dir} ({len(image_files)}件)')
     initial = _taishi_layout_status(page)
     if initial.get('ok'):
         return {'success': True, 'already_exists': True, 'layout': initial}
+    if not image_files and initial.get('toc_before_heading') and not initial.get('intro'):
+        return {'success': True, 'already_exists': True, 'image_skipped': True, 'layout': initial}
     if initial.get('old_order'):
         raise RuntimeError('既存の下書きは目次が画像より前にあります。noteの編集画面で目次を画像の後へ移動してください')
     if initial.get('toc') or initial.get('intro'):
         raise RuntimeError(f'既存の目次・画像を安全に再配置できません: {initial}')
 
     heading_before = _place_caret_at_first_body_heading(page)
+    if not image_files:
+        print('   ℹ️ 本文画像がないため説明文と画像を省略し、目次を挿入します')
+        page.keyboard.press('Enter')
+        page.keyboard.press('ArrowUp')
+        page.wait_for_timeout(500)
+        _insert_toc_by_slash_popup(page)
+        page.wait_for_timeout(1500)
+        layout = _taishi_layout_status(page)
+        if not layout.get('toc_before_heading') or layout.get('intro') or layout.get('heading') != heading_before:
+            raise RuntimeError(f'本文画像を省略した目次の配置を確認できません: {layout}')
+        return {'success': True, 'already_exists': False, 'image_skipped': True, 'layout': layout}
     page.keyboard.press('Enter')
     page.keyboard.press('ArrowUp')
     page.keyboard.insert_text(TAISHI_IMAGE_INTRO)
