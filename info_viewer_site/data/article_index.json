@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-02T14:33:08.064392+00:00",
+  "generatedAt": "2026-11-03T09:45:34.488940+00:00",
   "articleList": [
+    {
+      "id": "086c374af3d3a2fdc2",
+      "url": "/articles/086c374af3d3a2fdc2/",
+      "title": "【初心者にもオススメ】AI半導体相場が不安定な今だから知っておきたい。日本とアメリカを代表する高配当ETFを徹底開設します【日本株/米国株/新NISA/高配当】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=XtLbldqJeE8",
+      "thumbnail": "https://i.ytimg.com/vi/XtLbldqJeE8/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-03T09:31:42.853250",
+      "recordedLabel": "2026.11.03 09:31",
+      "timeLabel": "2026.11.03 09:31",
+      "persons": [],
+      "lastModified": "2026-11-03T09:31:48Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s73c7668ad46d4f25962ee9742f28806d"
+    },
     {
       "id": "3359cf0c68984ad43f",
       "url": "/articles/3359cf0c68984ad43f/",
@@ -9710,6 +9729,25 @@
     }
   ],
   "articles": {
+    "086c374af3d3a2fdc2": {
+      "id": "086c374af3d3a2fdc2",
+      "url": "/articles/086c374af3d3a2fdc2/",
+      "title": "【初心者にもオススメ】AI半導体相場が不安定な今だから知っておきたい。日本とアメリカを代表する高配当ETFを徹底開設します【日本株/米国株/新NISA/高配当】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=XtLbldqJeE8",
+      "thumbnail": "https://i.ytimg.com/vi/XtLbldqJeE8/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-03T09:31:42.853250",
+      "recordedLabel": "2026.11.03 09:31",
+      "timeLabel": "2026.11.03 09:31",
+      "persons": [],
+      "lastModified": "2026-11-03T09:31:48Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s73c7668ad46d4f25962ee9742f28806d"
+    },
     "3359cf0c68984ad43f": {
       "id": "3359cf0c68984ad43f",
       "url": "/articles/3359cf0c68984ad43f/",
@@ -19420,14 +19458,14 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-03T09:31:42.853250"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-02T14:19:56.558380"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-02T13:19:13.068009"
     },
     {
       "name": "なるほど投資ゼミ（大橋ひろこ",
