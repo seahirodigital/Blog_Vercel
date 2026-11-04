@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-04T14:06:17.691967+00:00",
+  "generatedAt": "2026-11-04T16:57:15.998902+00:00",
   "articleList": [
+    {
+      "id": "54a4f24a845c7a3ac7",
+      "url": "/articles/54a4f24a845c7a3ac7/",
+      "title": "LIVE  マーケットアップデート. 米中間選民主党大勝 日経は60000円割れ目前から3500円リバウンド",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=S4Tzrevp8uA",
+      "thumbnail": "https://i.ytimg.com/vi/S4Tzrevp8uA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-04T16:55:42.164215",
+      "recordedLabel": "2026.11.04 16:55",
+      "timeLabel": "2026.11.04 16:55",
+      "persons": [],
+      "lastModified": "2026-11-04T16:55:48Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sc1a211e3a80c49aea749dc1e8bd2b8f9"
+    },
     {
       "id": "d543b895323f802301",
       "url": "/articles/d543b895323f802301/",
@@ -9789,6 +9808,25 @@
     }
   ],
   "articles": {
+    "54a4f24a845c7a3ac7": {
+      "id": "54a4f24a845c7a3ac7",
+      "url": "/articles/54a4f24a845c7a3ac7/",
+      "title": "LIVE  マーケットアップデート. 米中間選民主党大勝 日経は60000円割れ目前から3500円リバウンド",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=S4Tzrevp8uA",
+      "thumbnail": "https://i.ytimg.com/vi/S4Tzrevp8uA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-04T16:55:42.164215",
+      "recordedLabel": "2026.11.04 16:55",
+      "timeLabel": "2026.11.04 16:55",
+      "persons": [],
+      "lastModified": "2026-11-04T16:55:48Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sc1a211e3a80c49aea749dc1e8bd2b8f9"
+    },
     "d543b895323f802301": {
       "id": "d543b895323f802301",
       "url": "/articles/d543b895323f802301/",
@@ -19578,6 +19616,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-11-04T16:55:42.164215"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-04T11:29:09.724596"
@@ -19591,11 +19634,6 @@
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-11-04T08:30:15.401311"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-11-02T14:19:56.558380"
     },
     {
       "name": "ゆたかTV",
