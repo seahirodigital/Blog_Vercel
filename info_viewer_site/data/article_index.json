@@ -1,6 +1,44 @@
 {
-  "generatedAt": "2026-11-04T08:41:44.785680+00:00",
+  "generatedAt": "2026-11-04T11:40:22.961093+00:00",
   "articleList": [
+    {
+      "id": "d543b895323f802301",
+      "url": "/articles/d543b895323f802301/",
+      "title": "【緊急速報】遂に始まりました...。中間選挙でトランプ陣営が完全敗北。これからとんでもない相場が始まるかもしれません【日本株/米国株/新NISA】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=gRKdcEnrgFg",
+      "thumbnail": "https://i.ytimg.com/vi/gRKdcEnrgFg/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-04T11:29:09.724596",
+      "recordedLabel": "2026.11.04 11:29",
+      "timeLabel": "2026.11.04 11:29",
+      "persons": [],
+      "lastModified": "2026-11-04T11:29:13Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s0511937bea0248de926bdec105c46b22"
+    },
+    {
+      "id": "4f1e2c391c3a6f8c33",
+      "url": "/articles/4f1e2c391c3a6f8c33/",
+      "title": "【儲けるほど保険料が増える!?】確定申告しなくても配当は\"筒抜け\"に｜75歳以上の保険料・窓口負担に反映、NISAの外の投資家はどう備えるべきか｜75歳だけか広がるか!?【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=9QVrLidmByo",
+      "thumbnail": "https://i.ytimg.com/vi/9QVrLidmByo/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-04T09:37:11.398832",
+      "recordedLabel": "2026.11.04 09:37",
+      "timeLabel": "2026.11.04 09:37",
+      "persons": [],
+      "lastModified": "2026-11-04T09:37:16Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sa354076ca1fa443182dbd851170e6b5e"
+    },
     {
       "id": "7e1a12d4c41e10a942",
       "url": "/articles/7e1a12d4c41e10a942/",
@@ -9751,6 +9789,44 @@
     }
   ],
   "articles": {
+    "d543b895323f802301": {
+      "id": "d543b895323f802301",
+      "url": "/articles/d543b895323f802301/",
+      "title": "【緊急速報】遂に始まりました...。中間選挙でトランプ陣営が完全敗北。これからとんでもない相場が始まるかもしれません【日本株/米国株/新NISA】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=gRKdcEnrgFg",
+      "thumbnail": "https://i.ytimg.com/vi/gRKdcEnrgFg/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-04T11:29:09.724596",
+      "recordedLabel": "2026.11.04 11:29",
+      "timeLabel": "2026.11.04 11:29",
+      "persons": [],
+      "lastModified": "2026-11-04T11:29:13Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s0511937bea0248de926bdec105c46b22"
+    },
+    "4f1e2c391c3a6f8c33": {
+      "id": "4f1e2c391c3a6f8c33",
+      "url": "/articles/4f1e2c391c3a6f8c33/",
+      "title": "【儲けるほど保険料が増える!?】確定申告しなくても配当は\"筒抜け\"に｜75歳以上の保険料・窓口負担に反映、NISAの外の投資家はどう備えるべきか｜75歳だけか広がるか!?【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=9QVrLidmByo",
+      "thumbnail": "https://i.ytimg.com/vi/9QVrLidmByo/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-04T09:37:11.398832",
+      "recordedLabel": "2026.11.04 09:37",
+      "timeLabel": "2026.11.04 09:37",
+      "persons": [],
+      "lastModified": "2026-11-04T09:37:16Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sa354076ca1fa443182dbd851170e6b5e"
+    },
     "7e1a12d4c41e10a942": {
       "id": "7e1a12d4c41e10a942",
       "url": "/articles/7e1a12d4c41e10a942/",
@@ -19502,14 +19578,19 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-04T11:29:09.724596"
+    },
+    {
+      "name": "イズミダイズム",
+      "tab": "イズミダ",
+      "latestAt": "2026-11-04T09:37:11.398832"
+    },
+    {
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-11-04T08:30:15.401311"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-03T09:31:42.853250"
     },
     {
       "name": "YTの投資銀行",
@@ -19525,11 +19606,6 @@
       "name": "マネーフォワード ME イベント&セミナー",
       "tab": "マネーフ",
       "latestAt": "2026-10-31T11:44:48.307920"
-    },
-    {
-      "name": "イズミダイズム",
-      "tab": "イズミダ",
-      "latestAt": "2026-10-31T02:36:30.658727"
     },
     {
       "name": "マーケットマスターズ",
