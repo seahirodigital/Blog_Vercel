@@ -1751,7 +1751,10 @@ def main():
             state_store.attach_queue_metadata(all_target_videos, state)
             _print_queue_summary(state, "処理後キュー状況")
 
-    saved_articles_after = onedrive_writer.list_saved_articles() if success_count else saved_articles_before
+    needs_rescan = success_count or any(
+        failure.get("stageKey") not in {"apify", "gemini"} for failure in failures_this_run
+    )
+    saved_articles_after = onedrive_writer.list_saved_articles() if needs_rescan else saved_articles_before
     resolved_keys = {
         article.get("youtubeUrlNormalized")
         for article in saved_articles_after
