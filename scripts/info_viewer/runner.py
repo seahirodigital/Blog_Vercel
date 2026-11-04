@@ -1,9 +1,11 @@
 import argparse
 import hashlib
+import json
 import os
 import sys
 import time
 from datetime import datetime
+from pathlib import Path
 from typing import Any
 
 from dotenv import load_dotenv
@@ -212,6 +214,31 @@ def _build_existing_article_map(saved_articles: list[dict[str, Any]]) -> dict[st
     }
 
 
+def _viewer_needs_publish(saved_articles: list[dict[str, Any]], state: dict[str, Any]) -> bool:
+    index_path = Path(__file__).resolve().parents[2] / "info_viewer_site" / "data" / "article_index.json"
+    try:
+        index = json.loads(index_path.read_text(encoding="utf-8"))
+        indexed = index["articles"]
+        if not isinstance(indexed, dict):
+            return True
+    except (OSError, ValueError, KeyError, TypeError):
+        return True
+    records = state.get("videos", {})
+    if not isinstance(records, dict):
+        return False
+    for article in saved_articles:
+        key = article.get("youtubeUrlNormalized")
+        record = records.get(key, {})
+        if not key or not isinstance(record, dict) or record.get("status") != state_store.DONE_STATUS:
+            continue
+        article_id = hashlib.sha256(str(key).encode("utf-8")).hexdigest()[:18]
+        current = indexed.get(article_id, {})
+        if (current.get("sourceFileId") != article.get("fileId") or
+                current.get("lastModified") != article.get("lastModified")):
+            return True
+    return False
+
+
 def _sync_sheet_status_for_saved_articles(
     target_videos: list[dict[str, Any]],
     existing_article_map: dict[str, dict[str, Any]],
@@ -242,6 +269,7 @@ def _sync_sheet_status_for_saved_articles(
                 video["row_number"],
                 COMPLETED_STATUS,
                 sheet_name=VIDEO_SHEET_NAME,
+                expected_video_url=video.get("video_url", ""),
             )
             video["status"] = COMPLETED_STATUS
             synced_count += 1
@@ -632,6 +660,7 @@ def _process_pending_videos(
                 video["row_number"],
                 COMPLETED_STATUS,
                 sheet_name=VIDEO_SHEET_NAME,
+                expected_video_url=video.get("video_url", ""),
             )
             video["status"] = COMPLETED_STATUS
             _append_processing_log(
@@ -1621,6 +1650,7 @@ def _process_pending_videos(
                 video["row_number"],
                 COMPLETED_STATUS,
                 sheet_name=VIDEO_SHEET_NAME,
+                expected_video_url=video.get("video_url", ""),
             )
             video["status"] = COMPLETED_STATUS
             _append_processing_log(
@@ -1755,6 +1785,8 @@ def main():
         failure.get("stageKey") not in {"apify", "gemini"} for failure in failures_this_run
     )
     saved_articles_after = onedrive_writer.list_saved_articles() if needs_rescan else saved_articles_before
+    viewer_needs_publish = _viewer_needs_publish(saved_articles_after, state)
+    print(f"静的Viewerの公開待ち: {'あり' if viewer_needs_publish else 'なし'}")
     resolved_keys = {
         article.get("youtubeUrlNormalized")
         for article in saved_articles_after
@@ -1790,6 +1822,7 @@ def main():
         with open(github_output, "a", encoding="utf-8") as f:
             f.write(f"success_count={success_count}\n")
             f.write(f"failure_count={len(failures_this_run)}\n")
+            f.write(f"viewer_needs_publish={'true' if viewer_needs_publish else 'false'}\n")
             f.write(f"apify_auth_error={'true' if apify_auth_error else 'false'}\n")
             if _created_notion_urls:
                 f.write(f"notion_urls={','.join(_created_notion_urls)}\n")

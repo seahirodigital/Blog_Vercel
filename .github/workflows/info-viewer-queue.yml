@@ -86,7 +86,7 @@ jobs:
           INFO_VIEWER_QUOTA_RETRY_SECONDS: "7200"
           INFO_VIEWER_PROCESS_AFTER: "2026-10-14T16:35:35Z"
           INFO_VIEWER_IGNORE_OLD_FAILURES_BEFORE: "2026-11-04T08:19:34Z"
-          INPUT_MODE: process_queue
+          INPUT_MODE: ${{ github.event.client_payload.source == 'maintenance-verification' && 'sync_only' || 'process_queue' }}
           INPUT_MAX_ITEMS: "4"
           INPUT_CHANNEL_NAME: ""
           INPUT_VIDEO_URL: ${{ github.event.client_payload.source != 'gas-sheet-watcher' && github.event.client_payload.video_url || '' }}
@@ -120,17 +120,8 @@ jobs:
 
           "${CMD[@]}"
 
-      - name: Cloudflare Pages用の静的Viewerを書き出し
-        if: success() && (github.event_name == 'workflow_dispatch' || steps.info_viewer.outputs.success_count != '0')
-        env:
-          ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
-          ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
-          INFO_VIEWER_ONEDRIVE_FOLDER: Obsidian in Onedrive 202602/Vercel_Blog/info_viewer
-        run: python scripts/info_viewer/export_static_site.py
-
       - name: 静的Viewerの更新をGitHubへ反映
-        if: success() && (github.event_name == 'workflow_dispatch' || steps.info_viewer.outputs.success_count != '0')
+        if: success() && (github.event_name == 'workflow_dispatch' || github.event.client_payload.source == 'maintenance-verification' || steps.info_viewer.outputs.success_count != '0' || steps.info_viewer.outputs.viewer_needs_publish == 'true')
         id: publish_static_viewer
         env:
           ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
@@ -140,32 +131,25 @@ jobs:
         run: |
           git config user.name "info-viewer-bot"
           git config user.email "info-viewer-bot@users.noreply.github.com"
-          git add -- info_viewer_site/content/articles info_viewer_site/data/article_index.json info_viewer_site/static/search.json info_viewer_site/static/search
-          if git diff --cached --quiet; then
-            echo "静的Viewerに反映すべき差分はありません。"
-            exit 0
-          fi
-          git commit -m "chore: info viewer static content"
           for ATTEMPT in 1 2 3 4 5; do
             echo "mainへの反映を試行します: ${ATTEMPT}/5"
             git fetch origin main
-            if ! git rebase origin/main; then
-              git rebase --abort || true
-              echo "最新mainと競合したため、最新状態から静的Viewerを再生成します。"
-              git reset --hard origin/main
-              python scripts/info_viewer/export_static_site.py
-              git add -- info_viewer_site/content/articles info_viewer_site/data/article_index.json info_viewer_site/static/search.json info_viewer_site/static/search
+            PUBLISH_DIR="${RUNNER_TEMP}/info-viewer-publish-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${ATTEMPT}"
+            git worktree add --detach "${PUBLISH_DIR}" origin/main
+            (
+              cd "${PUBLISH_DIR}" || exit 1
+              python scripts/info_viewer/export_static_site.py || exit 1
+              git add -- info_viewer_site/content/articles info_viewer_site/data/article_index.json info_viewer_site/static/search.json info_viewer_site/static/search || exit 1
               if git diff --cached --quiet; then
                 echo "最新mainに同じ内容が反映済みです。"
                 exit 0
               fi
-              git commit -m "chore: info viewer static content"
-              continue
-            fi
-            if git push origin HEAD:main; then
+              git commit -m "chore: info viewer static content" || exit 1
+              git push origin HEAD:main
+            ) && {
               echo "静的Viewerをmainへ反映しました。"
               exit 0
-            fi
+            }
             if [ "${ATTEMPT}" -lt 5 ]; then
               WAIT_SECONDS=$((ATTEMPT * 10))
               echo "別処理がmainを更新したため、${WAIT_SECONDS}秒後に再試行します。"

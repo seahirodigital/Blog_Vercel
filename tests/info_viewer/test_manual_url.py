@@ -123,6 +123,7 @@ class ManualUrlTest(unittest.TestCase):
                 return_value=upload_result,
             ) as upload,
             patch.object(manual_url.notion_writer, "is_configured", return_value=False),
+            patch.object(manual_url, "_requires_notion_save", return_value=False),
             patch.object(manual_url, "_save_github_output"),
         ):
             result = manual_url.main()

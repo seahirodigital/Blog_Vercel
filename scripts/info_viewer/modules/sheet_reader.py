@@ -9,6 +9,7 @@ from typing import Any
 import gspread
 from gspread.exceptions import APIError
 from google.oauth2.service_account import Credentials
+from modules.onedrive_writer import normalize_youtube_url
 
 SCOPES = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -358,6 +359,7 @@ def update_video_status(
     row_number: int,
     new_status: str = "完了",
     sheet_name: str = DEFAULT_VIDEO_SHEET_NAME,
+    expected_video_url: str = "",
 ):
     worksheet = _get_worksheet(spreadsheet_id, sheet_name)
     headers = _with_google_retry("ヘッダー取得", lambda: worksheet.row_values(1))
@@ -369,5 +371,24 @@ def update_video_status(
 
     if status_col is None:
         raise ValueError("動画リストに「状況」列が見つかりません。")
+    url_columns = [i for i, header in enumerate(headers, start=1)
+                   if _normalize_key(header) in {_normalize_key(x) for x in ("動画URL", "video_url", "url")}]
+    expected = normalize_youtube_url(expected_video_url)
+    if len(url_columns) != 1 or not expected:
+        raise ValueError("動画URL列または更新対象URLを一意に確認できません。")
+    url_col = url_columns[0]
+    urls = _with_google_retry("動画URL取得", lambda: worksheet.col_values(url_col))
+    matches = [i for i, value in enumerate(urls, start=1) if i > 1 and normalize_youtube_url(value) == expected]
+    if len(matches) != 1:
+        raise ValueError(f"更新対象の動画URLが一意ではありません: {len(matches)}件")
+    row_number = matches[0]
 
-    _with_google_retry("ステータス更新", lambda: worksheet.update_cell(row_number, status_col, new_status))
+    def row_matches():
+        row = _with_google_retry("対象行確認", lambda: worksheet.row_values(row_number))
+        return len(row) >= url_col and normalize_youtube_url(row[url_col - 1]) == expected
+
+    if not row_matches():
+        raise RuntimeError("更新直前に動画の行が移動したため、状況更新を保留しました。")
+    worksheet.update_cell(row_number, status_col, new_status)
+    if not row_matches():
+        raise RuntimeError("状況更新中に動画の行が移動しました。シートの状況を確認してください。")

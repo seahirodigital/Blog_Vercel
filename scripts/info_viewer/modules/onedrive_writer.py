@@ -3,6 +3,7 @@ import json
 import os
 import re
 import time
+from pathlib import Path
 from datetime import datetime
 from typing import Any, Optional
 from urllib.parse import parse_qs, quote, urlencode, urlparse
@@ -496,11 +497,39 @@ def update_item_text(item_id: str, content: str) -> dict[str, Any]:
     return response.json()
 
 
+def _local_preview_cache() -> dict[tuple[str, str], str]:
+    root = Path(__file__).resolve().parents[3] / "info_viewer_site"
+    try:
+        index = json.loads((root / "data" / "article_index.json").read_text(encoding="utf-8"))
+        entries = index.get("articleList", [])
+    except (OSError, ValueError, AttributeError):
+        return {}
+    cache = {}
+    for entry in entries:
+        if not isinstance(entry, dict):
+            continue
+        article_id = str(entry.get("id") or "")
+        file_id = str(entry.get("sourceFileId") or "")
+        modified = str(entry.get("lastModified") or "")
+        if not re.fullmatch(r"[a-f0-9]{18}", article_id) or not file_id or not modified:
+            continue
+        try:
+            text = (root / "content" / "articles" / f"{article_id}.md").read_text(encoding="utf-8")
+            metadata, _ = parse_frontmatter(text)
+            if metadata.get("video_url"):
+                cache[(file_id, modified)] = text
+        except (OSError, UnicodeError):
+            continue
+    return cache
+
+
 def list_saved_articles() -> list[dict[str, Any]]:
     token = _get_access_token()
     _ensure_folder_path(PRIMARY_BASE_FOLDER, token)
 
     saved_articles_by_key: dict[str, dict[str, Any]] = {}
+    cache = _local_preview_cache()
+    cached_count = 0
     for base_folder in _candidate_base_folders():
         channels = _list_children(base_folder, token)
         for folder in channels:
@@ -513,14 +542,18 @@ def list_saved_articles() -> list[dict[str, Any]]:
                 if not file_name.endswith(".md"):
                     continue
                 try:
-                    preview_text = _download_item_text(file_item["id"], token, byte_range="bytes=0-8191")
+                    cache_key = (str(file_item.get("id") or ""), str(file_item.get("lastModifiedDateTime") or ""))
+                    preview_text = cache.get(cache_key)
+                    if preview_text is None:
+                        preview_text = _download_item_text(file_item["id"], token, byte_range="bytes=0-8191")
+                    else:
+                        cached_count += 1
                 except requests.RequestException as error:
                     status_code = error.response.status_code if getattr(error, "response", None) is not None else "network"
-                    print(
-                        "   ⚠️ OneDrive記事プレビュー取得をスキップしました: "
+                    raise RuntimeError(
+                        "OneDrive記事プレビューを取得できないため、欠落した一覧の反映を中止しました: "
                         f"{base_folder}/{folder_name}/{file_name} ({status_code})"
-                    )
-                    continue
+                    ) from error
                 metadata, _ = parse_frontmatter(preview_text)
                 youtube_url_normalized = normalize_youtube_url(metadata.get("video_url", ""))
                 dedupe_key = youtube_url_normalized or file_item.get("id", "") or f"{folder_name}/{file_name}"
@@ -546,4 +579,5 @@ def list_saved_articles() -> list[dict[str, Any]]:
                     continue
                 saved_articles_by_key[dedupe_key] = article
 
+    print(f"OneDrive記事の既存キャッシュ利用: {cached_count}件")
     return list(saved_articles_by_key.values())

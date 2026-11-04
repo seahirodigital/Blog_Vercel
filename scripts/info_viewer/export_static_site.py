@@ -217,7 +217,8 @@ def _load_article(article: dict[str, Any], previous: dict[str, Any]) -> tuple[di
     article_id = _article_id(article)
     last_modified = str(article.get("lastModified") or "")
     destination = CONTENT_DIR / f"{article_id}.md"
-    should_download = not destination.exists() or previous.get("lastModified") != last_modified
+    should_download = (not destination.exists() or previous.get("lastModified") != last_modified
+                       or previous.get("sourceFileId") != str(article.get("fileId") or ""))
     if should_download:
         raw_markdown = onedrive_writer.download_item_bytes(str(article.get("fileId") or ""))
         destination.parent.mkdir(parents=True, exist_ok=True)
