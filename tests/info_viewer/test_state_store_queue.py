@@ -62,6 +62,9 @@ class StateStoreQueueTest(unittest.TestCase):
         self.assertEqual({item["video_url"] for item in selected}, {gentaro_url, new_url})
         self.assertEqual(old["lastError"], "字幕なし")
         self.assertEqual(private["lastError"], "private video")
+        with patch.object(state_store, "IGNORE_OLD_FAILURES_BEFORE", "2026-11-04T08:19:34Z"):
+            manual_selected = state_store.list_processable_videos(state, video_url=old_url)
+        self.assertEqual([item["video_url"] for item in manual_selected], [old_url])
 
     def test_unchanged_manual_sheet_status_does_not_reset_failed_retry(self):
         video_url, record = _record("manual", state_store.FAILED_STATUS, "2026-11-01T00:00:00Z", sheetStatus=state_store.MANUAL_TRIGGER_STATUS, nextRetryAt="2099-01-01T00:00:00Z", lastError="字幕なし")
