@@ -85,10 +85,11 @@ jobs:
           INFO_VIEWER_RETRY_SECONDS: "3600"
           INFO_VIEWER_QUOTA_RETRY_SECONDS: "7200"
           INFO_VIEWER_PROCESS_AFTER: "2026-10-14T16:35:35Z"
+          INFO_VIEWER_IGNORE_OLD_FAILURES_BEFORE: "2026-11-04T08:19:34Z"
           INPUT_MODE: process_queue
           INPUT_MAX_ITEMS: "4"
           INPUT_CHANNEL_NAME: ""
-          INPUT_VIDEO_URL: ${{ github.event.client_payload.video_url || '' }}
+          INPUT_VIDEO_URL: ${{ github.event.client_payload.source != 'gas-sheet-watcher' && github.event.client_payload.video_url || '' }}
           INPUT_REBUILD_MANIFEST_ONLY: "false"
         run: |
           MODE="${INPUT_MODE}"

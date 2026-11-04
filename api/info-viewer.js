@@ -701,24 +701,27 @@ async function handleIndexRequest(req, res, token) {
   return res.status(200).json(manifest);
 }
 
-async function handlePriorityRequest(req, res, token) {
-  const state = await loadState(token);
-  const record = ensurePriorityRecord(state, req.body || {});
-  await saveState(token, state);
+async function handlePriorityRequest(req, res) {
+  const videoUrl = normalizeYoutubeUrl(req.body?.video_url || req.body?.youtubeUrl || '');
+  if (!videoUrl) {
+    return res.status(400).json({ success: false, error: 'video_url が不足しています。' });
+  }
   const dispatchResult = await dispatchPriorityWorkflow(
-    record.normalizedVideoUrl,
+    videoUrl,
     String(req.body?.source || '')
   );
 
+  if (!dispatchResult.workflowTriggered) {
+    return res.status(502).json({ success: false, error: dispatchResult.warning });
+  }
+
   return res.status(200).json({
     success: true,
-    message: dispatchResult.workflowTriggered
-      ? '最優先キューへ追加し、GitHub Actions を起動しました。'
-      : '最優先キューへ追加しました。',
+    message: 'GitHub Actions を起動しました。',
     workflowTriggered: dispatchResult.workflowTriggered,
     warning: dispatchResult.warning || '',
-    videoUrl: record.normalizedVideoUrl,
-    manualPriorityAt: record.manualPriorityAt,
+    videoUrl,
+    manualPriorityAt: new Date().toISOString(),
   });
 }
 
@@ -788,6 +791,13 @@ export default async function handler(req, res) {
       return await notionHandler(req, res);
     }
 
+    if (req.method === 'POST' && resource === 'priority') {
+      if (!isAdminRequest(req)) {
+        return res.status(401).json({ success: false, error: 'Unauthorized' });
+      }
+      return await handlePriorityRequest(req, res);
+    }
+
     const token = await getAccessToken();
 
     if (req.method === 'GET' && resource === 'image') {
@@ -798,12 +808,6 @@ export default async function handler(req, res) {
     }
     if (req.method === 'POST' && resource === 'image') {
       return await handleImageUploadRequest(req, res, token);
-    }
-    if (req.method === 'POST' && resource === 'priority') {
-      if (!isAdminRequest(req)) {
-        return res.status(401).json({ success: false, error: 'Unauthorized' });
-      }
-      return await handlePriorityRequest(req, res, token);
     }
     if (req.method === 'PUT' && (resource === 'article' || resource === 'save')) {
       return await handleArticleSaveRequest(req, res, token);

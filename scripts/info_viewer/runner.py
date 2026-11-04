@@ -1751,7 +1751,7 @@ def main():
             state_store.attach_queue_metadata(all_target_videos, state)
             _print_queue_summary(state, "処理後キュー状況")
 
-    saved_articles_after = onedrive_writer.list_saved_articles()
+    saved_articles_after = onedrive_writer.list_saved_articles() if success_count else saved_articles_before
     resolved_keys = {
         article.get("youtubeUrlNormalized")
         for article in saved_articles_after

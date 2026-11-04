@@ -51,6 +51,27 @@ def _record(video_id: str, status: str, published_at: str, **overrides):
 
 
 class StateStoreQueueTest(unittest.TestCase):
+    def test_old_failures_are_skipped_but_gentaro_and_new_videos_remain(self):
+        old_url, old = _record("old-failed", state_store.PENDING_STATUS, "2026-10-20T00:00:00Z", lastError="字幕なし")
+        gentaro_url, gentaro = _record("gentaro", state_store.FAILED_STATUS, "2026-10-20T00:00:00Z", channelName="げんたろうの投資ch", lastError="字幕なし")
+        private_url, private = _record("private", state_store.PENDING_STATUS, "2026-10-20T00:00:00Z", channelName="げんたろうの投資ch", lastError="private video")
+        new_url, new = _record("new", state_store.PENDING_STATUS, "2026-11-05T00:00:00Z")
+        state = {"videos": {old_url: old, gentaro_url: gentaro, private_url: private, new_url: new}}
+        with patch.object(state_store, "IGNORE_OLD_FAILURES_BEFORE", "2026-11-04T08:19:34Z"):
+            selected = state_store.list_processable_videos(state)
+        self.assertEqual({item["video_url"] for item in selected}, {gentaro_url, new_url})
+        self.assertEqual(old["lastError"], "字幕なし")
+        self.assertEqual(private["lastError"], "private video")
+
+    def test_unchanged_manual_sheet_status_does_not_reset_failed_retry(self):
+        video_url, record = _record("manual", state_store.FAILED_STATUS, "2026-11-01T00:00:00Z", sheetStatus=state_store.MANUAL_TRIGGER_STATUS, nextRetryAt="2099-01-01T00:00:00Z", lastError="字幕なし")
+        state = {"videos": {video_url: record}}
+        video = {"video_url": video_url, "video_title": "手動", "channel_name": "テスト", "published_at": "2026-11-01T00:00:00Z", "status": state_store.MANUAL_TRIGGER_STATUS}
+        state_store.sync_target_videos(state, [video], {})
+        self.assertEqual(record["status"], state_store.FAILED_STATUS)
+        self.assertEqual(record["nextRetryAt"], "2099-01-01T00:00:00Z")
+        self.assertEqual(state_store.list_processable_videos(state), [])
+
     def test_processing_cutoff_ignores_old_queue_and_keeps_new_video(self):
         old_url = "https://www.youtube.com/watch?v=old-before-cutoff"
         new_url = "https://www.youtube.com/watch?v=new-after-cutoff"

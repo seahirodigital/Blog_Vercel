@@ -10,6 +10,7 @@ QUOTA_RETRY_SECONDS = int(os.getenv("INFO_VIEWER_QUOTA_RETRY_SECONDS", "7200") o
 PROCESSING_STALE_SECONDS = int(os.getenv("INFO_VIEWER_PROCESSING_STALE_SECONDS", "14400") or 14400)
 MAX_FAILED_RETRY_SECONDS = int(os.getenv("INFO_VIEWER_MAX_FAILED_RETRY_SECONDS", "604800") or 604800)
 PROCESS_AFTER_VALUE = os.getenv("INFO_VIEWER_PROCESS_AFTER", "").strip()
+IGNORE_OLD_FAILURES_BEFORE = os.getenv("INFO_VIEWER_IGNORE_OLD_FAILURES_BEFORE", "").strip()
 REQUIRE_NOTION_SAVE = str(os.getenv("INFO_VIEWER_REQUIRE_NOTION_SAVE", "true")).strip().lower() not in {
     "0",
     "false",
@@ -224,6 +225,7 @@ def sync_target_videos(
             videos[key] = record
             stats["added"] += 1
 
+        previous_sheet_status = record.get("sheetStatus", "")
         _copy_video_fields(record, video)
         record["thumbnailUrl"] = video.get("thumbnail_url", "")
         record["active"] = True
@@ -252,7 +254,7 @@ def sync_target_videos(
 
         # AppSheetのロケットボタンで手動トリガーされた行（状況列 = MANUAL_TRIGGER_STATUS）を
         # キューの最優先に引き上げる。エラー残りや古い動画より先に処理される。
-        if video.get("status") == MANUAL_TRIGGER_STATUS:
+        if video.get("status") == MANUAL_TRIGGER_STATUS and previous_sheet_status != MANUAL_TRIGGER_STATUS:
             record["status"] = PENDING_STATUS
             record["manualPriorityAt"] = now_iso
             record["nextRetryAt"] = now_iso
@@ -377,6 +379,16 @@ def list_processable_videos(
             continue
         if normalized_filter and record.get("normalizedVideoUrl") != normalized_filter:
             continue
+        if not normalized_filter:
+            channel_name_value = str(record.get("channelName") or "")
+            last_error = str(record.get("lastError") or "").lower()
+            content_time = _parse_iso(record.get("videoUpdatedAt") or record.get("publishedAt"))
+            ignore_before = _parse_iso(IGNORE_OLD_FAILURES_BEFORE)
+            if (ignore_before and content_time and content_time < ignore_before
+                    and (last_error or record.get("lastFailureAt")) and "げんたろう" not in channel_name_value):
+                continue
+            if "げんたろう" in channel_name_value and ("private video" in last_error or "video is private" in last_error):
+                continue
         if status == PROCESSING_STATUS and not _is_stale_processing(record, now):
             continue
         if not normalized_filter and not _is_due(record, now):
