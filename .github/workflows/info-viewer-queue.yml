@@ -140,7 +140,7 @@ jobs:
         run: |
           git config user.name "info-viewer-bot"
           git config user.email "info-viewer-bot@users.noreply.github.com"
-          git add -- info_viewer_site/content/articles info_viewer_site/data/article_index.json info_viewer_site/static/search.json
+          git add -- info_viewer_site/content/articles info_viewer_site/data/article_index.json info_viewer_site/static/search.json info_viewer_site/static/search
           if git diff --cached --quiet; then
             echo "静的Viewerに反映すべき差分はありません。"
             exit 0
@@ -154,7 +154,7 @@ jobs:
               echo "最新mainと競合したため、最新状態から静的Viewerを再生成します。"
               git reset --hard origin/main
               python scripts/info_viewer/export_static_site.py
-              git add -- info_viewer_site/content/articles info_viewer_site/data/article_index.json info_viewer_site/static/search.json
+              git add -- info_viewer_site/content/articles info_viewer_site/data/article_index.json info_viewer_site/static/search.json info_viewer_site/static/search
               if git diff --cached --quiet; then
                 echo "最新mainに同じ内容が反映済みです。"
                 exit 0

@@ -14,6 +14,8 @@ SITE_ROOT = PROJECT_ROOT / "info_viewer_site"
 CONTENT_DIR = SITE_ROOT / "content" / "articles"
 DATA_PATH = SITE_ROOT / "data" / "article_index.json"
 SEARCH_PATH = SITE_ROOT / "static" / "search.json"
+SEARCH_SHARD_COUNT = 16
+SEARCH_ASSET_MAX_BYTES = 25 * 1024 * 1024
 
 KNOWN_PERSONS: list[tuple[str, list[str]]] = [
     ("ちょる子", ["ちょる子", "ちょるこ", "チョル子", "チョルコ"]),
@@ -297,6 +299,24 @@ def _search_item(entry: dict[str, Any], plain_text: str) -> dict[str, Any]:
     }
 
 
+def _write_search_index(search_items: list[dict[str, Any]], search_path: Path = SEARCH_PATH) -> None:
+    shards: list[list[dict[str, Any]]] = [[] for _ in range(SEARCH_SHARD_COUNT)]
+    for item in search_items:
+        digest = hashlib.sha256(str(item["id"]).encode("utf-8")).digest()
+        shards[digest[0] % SEARCH_SHARD_COUNT].append(item)
+    paths = []
+    for index, shard in enumerate(shards):
+        relative_path = f"search/part-{index:02d}.json"
+        destination = search_path.parent / relative_path
+        serialized = json.dumps(shard, ensure_ascii=False, separators=(",", ":")) + "\n"
+        if len(serialized.encode("utf-8")) > SEARCH_ASSET_MAX_BYTES:
+            raise ValueError(f"検索索引が Cloudflare Pages の上限を超えています: {destination}")
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_text(serialized, encoding="utf-8", newline="\n")
+        paths.append(relative_path)
+    _write_json(search_path, {"version": 2, "parts": paths})
+
+
 def _write_site_index(entries: list[dict[str, Any]], search_items: list[dict[str, Any]]) -> None:
 
     entries.sort(key=_newest_sort_key, reverse=True)
@@ -322,7 +342,7 @@ def _write_site_index(entries: list[dict[str, Any]], search_items: list[dict[str
         "people": sorted({person for entry in entries for person in entry["persons"]}),
     }
     _write_json(DATA_PATH, index)
-    _write_json(SEARCH_PATH, search_items)
+    _write_search_index(search_items)
 
 
 def _write_remote_articles() -> int:

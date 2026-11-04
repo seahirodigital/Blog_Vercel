@@ -14,3 +14,6 @@
 
 /search.json
   Cache-Control: public, max-age=300, must-revalidate
+
+/search/*
+  Cache-Control: public, max-age=300, must-revalidate

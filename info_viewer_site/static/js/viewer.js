@@ -250,8 +250,21 @@
           if (!response.ok) throw new Error(`検索インデックスを取得できません (${response.status})`);
           return response.json();
         })
+        .then(async (index) => {
+          if (Array.isArray(index)) return index;
+          if (!index || !Array.isArray(index.parts)) throw new Error("検索索引の形式が不正です");
+          const shards = await Promise.all(index.parts.map(async (path) => {
+            if (!/^search\/part-\d{2}\.json$/.test(path)) throw new Error("検索索引のパスが不正です");
+            const response = await fetch(`${rootPath}${path}?v=${encodeURIComponent(indexVersion)}`, { cache: "no-cache" });
+            if (!response.ok) throw new Error(`検索索引を取得できません (${response.status})`);
+            const shard = await response.json();
+            if (!Array.isArray(shard)) throw new Error("検索索引の形式が不正です");
+            return shard;
+          }));
+          return shards.flat();
+        })
         .then((index) => {
-          state.searchIndex = Array.isArray(index) ? index : [];
+          state.searchIndex = index;
           return state.searchIndex;
         })
         .catch(() => {
