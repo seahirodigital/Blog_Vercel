@@ -1,6 +1,46 @@
 {
-  "generatedAt": "2026-11-04T16:57:15.998902+00:00",
+  "generatedAt": "2026-11-05T08:26:15.735894+00:00",
   "articleList": [
+    {
+      "id": "c58e07abf5abfa13cd",
+      "url": "/articles/c58e07abf5abfa13cd/",
+      "title": "【踊り場に入った？ガバナンス改革】戦略変更するアクティビスト（清川鉉徳さん） [マーケットディーパー]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=X86vB5JnJDA",
+      "thumbnail": "https://i.ytimg.com/vi/X86vB5JnJDA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-05T08:24:55.567206",
+      "recordedLabel": "2026.11.05 08:24",
+      "timeLabel": "2026.11.05 08:24",
+      "persons": [],
+      "lastModified": "2026-11-05T08:25:01Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sb0d1827990ee4a8d9151cd15a49e4424"
+    },
+    {
+      "id": "008eace233acd44599",
+      "url": "/articles/008eace233acd44599/",
+      "title": "【世界の貴金属関係者が日本に集結】Japan Bullion Market Networking2026 開催レポート（貴金属スペシャリスト 池水雄一さん） [ウィークリーゴールド]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=YyrY5Uzh7FQ",
+      "thumbnail": "https://i.ytimg.com/vi/YyrY5Uzh7FQ/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-05T08:23:51.533848",
+      "recordedLabel": "2026.11.05 08:23",
+      "timeLabel": "2026.11.05 08:23",
+      "persons": [
+        "池水雄一"
+      ],
+      "lastModified": "2026-11-05T08:23:55Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s42a88d77852d4123ba8c92be0519e0ec"
+    },
     {
       "id": "54a4f24a845c7a3ac7",
       "url": "/articles/54a4f24a845c7a3ac7/",
@@ -9808,6 +9848,46 @@
     }
   ],
   "articles": {
+    "c58e07abf5abfa13cd": {
+      "id": "c58e07abf5abfa13cd",
+      "url": "/articles/c58e07abf5abfa13cd/",
+      "title": "【踊り場に入った？ガバナンス改革】戦略変更するアクティビスト（清川鉉徳さん） [マーケットディーパー]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=X86vB5JnJDA",
+      "thumbnail": "https://i.ytimg.com/vi/X86vB5JnJDA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-05T08:24:55.567206",
+      "recordedLabel": "2026.11.05 08:24",
+      "timeLabel": "2026.11.05 08:24",
+      "persons": [],
+      "lastModified": "2026-11-05T08:25:01Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sb0d1827990ee4a8d9151cd15a49e4424"
+    },
+    "008eace233acd44599": {
+      "id": "008eace233acd44599",
+      "url": "/articles/008eace233acd44599/",
+      "title": "【世界の貴金属関係者が日本に集結】Japan Bullion Market Networking2026 開催レポート（貴金属スペシャリスト 池水雄一さん） [ウィークリーゴールド]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=YyrY5Uzh7FQ",
+      "thumbnail": "https://i.ytimg.com/vi/YyrY5Uzh7FQ/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-05T08:23:51.533848",
+      "recordedLabel": "2026.11.05 08:23",
+      "timeLabel": "2026.11.05 08:23",
+      "persons": [
+        "池水雄一"
+      ],
+      "lastModified": "2026-11-05T08:23:55Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s42a88d77852d4123ba8c92be0519e0ec"
+    },
     "54a4f24a845c7a3ac7": {
       "id": "54a4f24a845c7a3ac7",
       "url": "/articles/54a4f24a845c7a3ac7/",
@@ -19616,6 +19696,11 @@
   },
   "channels": [
     {
+      "name": "なるほど投資ゼミ（大橋ひろこ",
+      "tab": "なるほど",
+      "latestAt": "2026-11-05T08:24:55.567206"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-04T16:55:42.164215"
@@ -19629,11 +19714,6 @@
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-11-04T09:37:11.398832"
-    },
-    {
-      "name": "なるほど投資ゼミ（大橋ひろこ",
-      "tab": "なるほど",
-      "latestAt": "2026-11-04T08:30:15.401311"
     },
     {
       "name": "ゆたかTV",
