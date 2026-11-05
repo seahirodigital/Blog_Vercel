@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-05T09:25:04.589922+00:00",
+  "generatedAt": "2026-11-05T20:31:04.236404+00:00",
   "articleList": [
+    {
+      "id": "d4fdfeb334f70fb067",
+      "url": "/articles/d4fdfeb334f70fb067/",
+      "title": "LIVE  マーケットアップデート  半導体株投げ売り. バリューディフェンシブ相場に",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=mYlb8qE3ad0",
+      "thumbnail": "https://i.ytimg.com/vi/mYlb8qE3ad0/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-05T20:29:44.689985",
+      "recordedLabel": "2026.11.05 20:29",
+      "timeLabel": "2026.11.05 20:29",
+      "persons": [],
+      "lastModified": "2026-11-05T20:29:49Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s78a65a56c3a54da2986541817107c95e"
+    },
     {
       "id": "627ee9d745262d9553",
       "url": "/articles/627ee9d745262d9553/",
@@ -9888,6 +9907,25 @@
     }
   ],
   "articles": {
+    "d4fdfeb334f70fb067": {
+      "id": "d4fdfeb334f70fb067",
+      "url": "/articles/d4fdfeb334f70fb067/",
+      "title": "LIVE  マーケットアップデート  半導体株投げ売り. バリューディフェンシブ相場に",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=mYlb8qE3ad0",
+      "thumbnail": "https://i.ytimg.com/vi/mYlb8qE3ad0/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-05T20:29:44.689985",
+      "recordedLabel": "2026.11.05 20:29",
+      "timeLabel": "2026.11.05 20:29",
+      "persons": [],
+      "lastModified": "2026-11-05T20:29:49Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s78a65a56c3a54da2986541817107c95e"
+    },
     "627ee9d745262d9553": {
       "id": "627ee9d745262d9553",
       "url": "/articles/627ee9d745262d9553/",
@@ -19776,6 +19814,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-11-05T20:29:44.689985"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-05T09:23:58.978344"
@@ -19789,11 +19832,6 @@
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-11-05T08:24:55.567206"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-11-04T16:55:42.164215"
     },
     {
       "name": "イズミダイズム",
