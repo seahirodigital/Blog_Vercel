@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-05T08:55:33.204716+00:00",
+  "generatedAt": "2026-11-05T09:25:04.589922+00:00",
   "articleList": [
+    {
+      "id": "627ee9d745262d9553",
+      "url": "/articles/627ee9d745262d9553/",
+      "title": "【エグすぎる】事態が急変しました...。中間選挙終了で株式市場が大混乱の中、イーロンマスクの企みによって今後日本株、米国株にとんでもないことが起こるかもしれません",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=BEbmYRBKpgA",
+      "thumbnail": "https://i.ytimg.com/vi/BEbmYRBKpgA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-05T09:23:58.978344",
+      "recordedLabel": "2026.11.05 09:23",
+      "timeLabel": "2026.11.05 09:23",
+      "persons": [],
+      "lastModified": "2026-11-05T09:24:03Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf795d24aac464dcb85b8774183976e79"
+    },
     {
       "id": "3280f563b4969a158b",
       "url": "/articles/3280f563b4969a158b/",
@@ -9869,6 +9888,25 @@
     }
   ],
   "articles": {
+    "627ee9d745262d9553": {
+      "id": "627ee9d745262d9553",
+      "url": "/articles/627ee9d745262d9553/",
+      "title": "【エグすぎる】事態が急変しました...。中間選挙終了で株式市場が大混乱の中、イーロンマスクの企みによって今後日本株、米国株にとんでもないことが起こるかもしれません",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=BEbmYRBKpgA",
+      "thumbnail": "https://i.ytimg.com/vi/BEbmYRBKpgA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-05T09:23:58.978344",
+      "recordedLabel": "2026.11.05 09:23",
+      "timeLabel": "2026.11.05 09:23",
+      "persons": [],
+      "lastModified": "2026-11-05T09:24:03Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf795d24aac464dcb85b8774183976e79"
+    },
     "3280f563b4969a158b": {
       "id": "3280f563b4969a158b",
       "url": "/articles/3280f563b4969a158b/",
@@ -19738,6 +19776,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-05T09:23:58.978344"
+    },
+    {
       "name": "トウシル（楽天証券）",
       "tab": "トウシル",
       "latestAt": "2026-11-05T08:54:27.822600"
@@ -19751,11 +19794,6 @@
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-04T16:55:42.164215"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-04T11:29:09.724596"
     },
     {
       "name": "イズミダイズム",
