@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-11-05T08:26:15.735894+00:00",
+  "generatedAt": "2026-11-05T08:55:33.204716+00:00",
   "articleList": [
+    {
+      "id": "3280f563b4969a158b",
+      "url": "/articles/3280f563b4969a158b/",
+      "title": "田中泰輔のマネーは語る：【米国株】AI半導体株続落　クライマックスはどこ？（田中 泰輔）【楽天証券 トウシル】",
+      "channelName": "トウシル（楽天証券）",
+      "channelKey": "トウシル（楽天証券）",
+      "channelTab": "トウシル",
+      "youtubeUrl": "https://www.youtube.com/watch?v=zKz5up6yHLw",
+      "thumbnail": "https://i.ytimg.com/vi/zKz5up6yHLw/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-05T08:54:27.822600",
+      "recordedLabel": "2026.11.05 08:54",
+      "timeLabel": "2026.11.05 08:54",
+      "persons": [
+        "田中泰輔"
+      ],
+      "lastModified": "2026-11-05T08:54:32Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s6f5402ee49a84edfbd5d50c53c6b6ef8"
+    },
     {
       "id": "c58e07abf5abfa13cd",
       "url": "/articles/c58e07abf5abfa13cd/",
@@ -9848,6 +9869,27 @@
     }
   ],
   "articles": {
+    "3280f563b4969a158b": {
+      "id": "3280f563b4969a158b",
+      "url": "/articles/3280f563b4969a158b/",
+      "title": "田中泰輔のマネーは語る：【米国株】AI半導体株続落　クライマックスはどこ？（田中 泰輔）【楽天証券 トウシル】",
+      "channelName": "トウシル（楽天証券）",
+      "channelKey": "トウシル（楽天証券）",
+      "channelTab": "トウシル",
+      "youtubeUrl": "https://www.youtube.com/watch?v=zKz5up6yHLw",
+      "thumbnail": "https://i.ytimg.com/vi/zKz5up6yHLw/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-05T08:54:27.822600",
+      "recordedLabel": "2026.11.05 08:54",
+      "timeLabel": "2026.11.05 08:54",
+      "persons": [
+        "田中泰輔"
+      ],
+      "lastModified": "2026-11-05T08:54:32Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s6f5402ee49a84edfbd5d50c53c6b6ef8"
+    },
     "c58e07abf5abfa13cd": {
       "id": "c58e07abf5abfa13cd",
       "url": "/articles/c58e07abf5abfa13cd/",
@@ -19696,6 +19738,11 @@
   },
   "channels": [
     {
+      "name": "トウシル（楽天証券）",
+      "tab": "トウシル",
+      "latestAt": "2026-11-05T08:54:27.822600"
+    },
+    {
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-11-05T08:24:55.567206"
@@ -19729,11 +19776,6 @@
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
       "latestAt": "2026-10-30T10:09:36.534825"
-    },
-    {
-      "name": "トウシル（楽天証券）",
-      "tab": "トウシル",
-      "latestAt": "2026-10-29T10:30:07.952297"
     },
     {
       "name": "ピクテ・ジャパン",
