@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-06T09:54:53.086947+00:00",
+  "generatedAt": "2026-11-06T10:54:53.776369+00:00",
   "articleList": [
+    {
+      "id": "69def810c1b61b946e",
+      "url": "/articles/69def810c1b61b946e/",
+      "title": "【緊急解説】遂に始まりました...。大暴落こそチャンスです！今狙うべきなのはこれ一択！",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=93ksP8EPgOs",
+      "thumbnail": "https://i.ytimg.com/vi/93ksP8EPgOs/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-06T10:53:55.666744",
+      "recordedLabel": "2026.11.06 10:53",
+      "timeLabel": "2026.11.06 10:53",
+      "persons": [],
+      "lastModified": "2026-11-06T10:53:59Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s22a2f3c21bf64707a5f5ef5e8a298d08"
+    },
     {
       "id": "8d6466fa310cdda0a4",
       "url": "/articles/8d6466fa310cdda0a4/",
@@ -9989,6 +10008,25 @@
     }
   ],
   "articles": {
+    "69def810c1b61b946e": {
+      "id": "69def810c1b61b946e",
+      "url": "/articles/69def810c1b61b946e/",
+      "title": "【緊急解説】遂に始まりました...。大暴落こそチャンスです！今狙うべきなのはこれ一択！",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=93ksP8EPgOs",
+      "thumbnail": "https://i.ytimg.com/vi/93ksP8EPgOs/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-06T10:53:55.666744",
+      "recordedLabel": "2026.11.06 10:53",
+      "timeLabel": "2026.11.06 10:53",
+      "persons": [],
+      "lastModified": "2026-11-06T10:53:59Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s22a2f3c21bf64707a5f5ef5e8a298d08"
+    },
     "8d6466fa310cdda0a4": {
       "id": "8d6466fa310cdda0a4",
       "url": "/articles/8d6466fa310cdda0a4/",
@@ -19978,6 +20016,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-06T10:53:55.666744"
+    },
+    {
       "name": "ゆたかTV",
       "tab": "ゆたかT",
       "latestAt": "2026-11-06T09:53:47.912684"
@@ -19996,11 +20039,6 @@
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-05T20:29:44.689985"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-05T09:23:58.978344"
     },
     {
       "name": "トウシル（楽天証券）",
