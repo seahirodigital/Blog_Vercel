@@ -1,6 +1,48 @@
 {
-  "generatedAt": "2026-11-05T20:31:04.236404+00:00",
+  "generatedAt": "2026-11-06T08:26:21.337217+00:00",
   "articleList": [
+    {
+      "id": "a737aab49469fd3143",
+      "url": "/articles/a737aab49469fd3143/",
+      "title": "岡崎良介×永濱利廣【一時4000円大幅安の要因は｜米選挙結果で迫るロシア｜SOX指数が動かす２つの市場｜輸出増も輸入増足かせ｜鈴木銘柄分析】11月6日公開※11/14大宮セミナー11/28大阪セミナー",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=eXG4DvQTUpM",
+      "thumbnail": "https://i.ytimg.com/vi/eXG4DvQTUpM/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-06T08:25:15.087871",
+      "recordedLabel": "2026.11.06 08:25",
+      "timeLabel": "2026.11.06 08:25",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-06T08:25:18Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s20d1a174ace54ca3aa7f9cfe7b71ef08"
+    },
+    {
+      "id": "eb9a8d5fa9be680f1e",
+      "url": "/articles/eb9a8d5fa9be680f1e/",
+      "title": "岡崎良介の投資戦略ラボ『SOX指数の不穏な動き』 （収録日：2026年11月6日）",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=dg1w1mbpPYQ",
+      "thumbnail": "https://i.ytimg.com/vi/dg1w1mbpPYQ/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-06T08:23:52.926910",
+      "recordedLabel": "2026.11.06 08:23",
+      "timeLabel": "2026.11.06 08:23",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-06T08:23:57Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s2be2efe235b049edb7be01ef7f19f222"
+    },
     {
       "id": "d4fdfeb334f70fb067",
       "url": "/articles/d4fdfeb334f70fb067/",
@@ -9907,6 +9949,48 @@
     }
   ],
   "articles": {
+    "a737aab49469fd3143": {
+      "id": "a737aab49469fd3143",
+      "url": "/articles/a737aab49469fd3143/",
+      "title": "岡崎良介×永濱利廣【一時4000円大幅安の要因は｜米選挙結果で迫るロシア｜SOX指数が動かす２つの市場｜輸出増も輸入増足かせ｜鈴木銘柄分析】11月6日公開※11/14大宮セミナー11/28大阪セミナー",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=eXG4DvQTUpM",
+      "thumbnail": "https://i.ytimg.com/vi/eXG4DvQTUpM/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-06T08:25:15.087871",
+      "recordedLabel": "2026.11.06 08:25",
+      "timeLabel": "2026.11.06 08:25",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-06T08:25:18Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s20d1a174ace54ca3aa7f9cfe7b71ef08"
+    },
+    "eb9a8d5fa9be680f1e": {
+      "id": "eb9a8d5fa9be680f1e",
+      "url": "/articles/eb9a8d5fa9be680f1e/",
+      "title": "岡崎良介の投資戦略ラボ『SOX指数の不穏な動き』 （収録日：2026年11月6日）",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=dg1w1mbpPYQ",
+      "thumbnail": "https://i.ytimg.com/vi/dg1w1mbpPYQ/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-06T08:23:52.926910",
+      "recordedLabel": "2026.11.06 08:23",
+      "timeLabel": "2026.11.06 08:23",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-06T08:23:57Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s2be2efe235b049edb7be01ef7f19f222"
+    },
     "d4fdfeb334f70fb067": {
       "id": "d4fdfeb334f70fb067",
       "url": "/articles/d4fdfeb334f70fb067/",
@@ -19814,6 +19898,16 @@
   },
   "channels": [
     {
+      "name": "マーケットマスターズ",
+      "tab": "マーケッ",
+      "latestAt": "2026-11-06T08:25:15.087871"
+    },
+    {
+      "name": "ゆたかTV",
+      "tab": "ゆたかT",
+      "latestAt": "2026-11-06T08:23:52.926910"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-05T20:29:44.689985"
@@ -19839,19 +19933,9 @@
       "latestAt": "2026-11-04T09:37:11.398832"
     },
     {
-      "name": "ゆたかTV",
-      "tab": "ゆたかT",
-      "latestAt": "2026-11-01T11:59:25.491265"
-    },
-    {
       "name": "マネーフォワード ME イベント&セミナー",
       "tab": "マネーフ",
       "latestAt": "2026-10-31T11:44:48.307920"
-    },
-    {
-      "name": "マーケットマスターズ",
-      "tab": "マーケッ",
-      "latestAt": "2026-10-30T10:09:36.534825"
     },
     {
       "name": "ピクテ・ジャパン",
