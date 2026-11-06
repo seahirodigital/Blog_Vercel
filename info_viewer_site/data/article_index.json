@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-06T10:54:53.776369+00:00",
+  "generatedAt": "2026-11-06T15:31:13.877849+00:00",
   "articleList": [
+    {
+      "id": "ea2376b4ae7b97ddd3",
+      "url": "/articles/ea2376b4ae7b97ddd3/",
+      "title": "LIVE  マーケットアップデート　雇用統計を見よう　日経3462円急落　バリュー/ディフェンシブ売りの半導体はGD後は買い戻し",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=0_GVTnvKhxI",
+      "thumbnail": "https://i.ytimg.com/vi/0_GVTnvKhxI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-06T15:30:04.496443",
+      "recordedLabel": "2026.11.06 15:30",
+      "timeLabel": "2026.11.06 15:30",
+      "persons": [],
+      "lastModified": "2026-11-06T15:30:09Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s6b9416052c2f40289273c9333c03c059"
+    },
     {
       "id": "69def810c1b61b946e",
       "url": "/articles/69def810c1b61b946e/",
@@ -10008,6 +10027,25 @@
     }
   ],
   "articles": {
+    "ea2376b4ae7b97ddd3": {
+      "id": "ea2376b4ae7b97ddd3",
+      "url": "/articles/ea2376b4ae7b97ddd3/",
+      "title": "LIVE  マーケットアップデート　雇用統計を見よう　日経3462円急落　バリュー/ディフェンシブ売りの半導体はGD後は買い戻し",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=0_GVTnvKhxI",
+      "thumbnail": "https://i.ytimg.com/vi/0_GVTnvKhxI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-06T15:30:04.496443",
+      "recordedLabel": "2026.11.06 15:30",
+      "timeLabel": "2026.11.06 15:30",
+      "persons": [],
+      "lastModified": "2026-11-06T15:30:09Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s6b9416052c2f40289273c9333c03c059"
+    },
     "69def810c1b61b946e": {
       "id": "69def810c1b61b946e",
       "url": "/articles/69def810c1b61b946e/",
@@ -20016,6 +20054,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-11-06T15:30:04.496443"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-06T10:53:55.666744"
@@ -20034,11 +20077,6 @@
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
       "latestAt": "2026-11-06T08:25:15.087871"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-11-05T20:29:44.689985"
     },
     {
       "name": "トウシル（楽天証券）",
