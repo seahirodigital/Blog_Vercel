@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-06T09:25:44.375513+00:00",
+  "generatedAt": "2026-11-06T09:54:53.086947+00:00",
   "articleList": [
+    {
+      "id": "8d6466fa310cdda0a4",
+      "url": "/articles/8d6466fa310cdda0a4/",
+      "title": "書き出しインサイト202611061309",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=SYA5cbT4W0I",
+      "thumbnail": "https://i.ytimg.com/vi/SYA5cbT4W0I/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-06T09:53:47.912684",
+      "recordedLabel": "2026.11.06 09:53",
+      "timeLabel": "2026.11.06 09:53",
+      "persons": [],
+      "lastModified": "2026-11-06T09:53:53Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s896f54ef05ae41f885700be9ad2d9a54"
+    },
     {
       "id": "35c2be029e49fe929f",
       "url": "/articles/35c2be029e49fe929f/",
@@ -9970,6 +9989,25 @@
     }
   ],
   "articles": {
+    "8d6466fa310cdda0a4": {
+      "id": "8d6466fa310cdda0a4",
+      "url": "/articles/8d6466fa310cdda0a4/",
+      "title": "書き出しインサイト202611061309",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=SYA5cbT4W0I",
+      "thumbnail": "https://i.ytimg.com/vi/SYA5cbT4W0I/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-06T09:53:47.912684",
+      "recordedLabel": "2026.11.06 09:53",
+      "timeLabel": "2026.11.06 09:53",
+      "persons": [],
+      "lastModified": "2026-11-06T09:53:53Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s896f54ef05ae41f885700be9ad2d9a54"
+    },
     "35c2be029e49fe929f": {
       "id": "35c2be029e49fe929f",
       "url": "/articles/35c2be029e49fe929f/",
@@ -19940,6 +19978,11 @@
   },
   "channels": [
     {
+      "name": "ゆたかTV",
+      "tab": "ゆたかT",
+      "latestAt": "2026-11-06T09:53:47.912684"
+    },
+    {
       "name": "マネーフォワード ME イベント&セミナー",
       "tab": "マネーフ",
       "latestAt": "2026-11-06T09:24:25.145996"
@@ -19948,11 +19991,6 @@
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
       "latestAt": "2026-11-06T08:25:15.087871"
-    },
-    {
-      "name": "ゆたかTV",
-      "tab": "ゆたかT",
-      "latestAt": "2026-11-06T08:23:52.926910"
     },
     {
       "name": "YTの投資銀行",
