@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-11-06T08:26:21.337217+00:00",
+  "generatedAt": "2026-11-06T09:25:44.375513+00:00",
   "articleList": [
+    {
+      "id": "35c2be029e49fe929f",
+      "url": "/articles/35c2be029e49fe929f/",
+      "title": "【前倒し緊急配信!!】大荒れの相場、今が買い場!? / 日経平均 一時4000円安 / 米中間選挙とデータセンター建設反対派が揺るがすAI関連株の行方 【大川&Nobbyの聴くだけ投資】大川智宏",
+      "channelName": "マネーフォワード ME イベント&セミナー",
+      "channelKey": "マネーフォワード ME イベント&セミナー",
+      "channelTab": "マネーフ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=265jpzvgGws",
+      "thumbnail": "https://i.ytimg.com/vi/265jpzvgGws/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-06T09:24:25.145996",
+      "recordedLabel": "2026.11.06 09:24",
+      "timeLabel": "2026.11.06 09:24",
+      "persons": [
+        "大川智宏"
+      ],
+      "lastModified": "2026-11-06T09:24:30Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s8806343b780041b49037ee04c81166e5"
+    },
     {
       "id": "a737aab49469fd3143",
       "url": "/articles/a737aab49469fd3143/",
@@ -9949,6 +9970,27 @@
     }
   ],
   "articles": {
+    "35c2be029e49fe929f": {
+      "id": "35c2be029e49fe929f",
+      "url": "/articles/35c2be029e49fe929f/",
+      "title": "【前倒し緊急配信!!】大荒れの相場、今が買い場!? / 日経平均 一時4000円安 / 米中間選挙とデータセンター建設反対派が揺るがすAI関連株の行方 【大川&Nobbyの聴くだけ投資】大川智宏",
+      "channelName": "マネーフォワード ME イベント&セミナー",
+      "channelKey": "マネーフォワード ME イベント&セミナー",
+      "channelTab": "マネーフ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=265jpzvgGws",
+      "thumbnail": "https://i.ytimg.com/vi/265jpzvgGws/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-06T09:24:25.145996",
+      "recordedLabel": "2026.11.06 09:24",
+      "timeLabel": "2026.11.06 09:24",
+      "persons": [
+        "大川智宏"
+      ],
+      "lastModified": "2026-11-06T09:24:30Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s8806343b780041b49037ee04c81166e5"
+    },
     "a737aab49469fd3143": {
       "id": "a737aab49469fd3143",
       "url": "/articles/a737aab49469fd3143/",
@@ -19898,6 +19940,11 @@
   },
   "channels": [
     {
+      "name": "マネーフォワード ME イベント&セミナー",
+      "tab": "マネーフ",
+      "latestAt": "2026-11-06T09:24:25.145996"
+    },
+    {
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
       "latestAt": "2026-11-06T08:25:15.087871"
@@ -19931,11 +19978,6 @@
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-11-04T09:37:11.398832"
-    },
-    {
-      "name": "マネーフォワード ME イベント&セミナー",
-      "tab": "マネーフ",
-      "latestAt": "2026-10-31T11:44:48.307920"
     },
     {
       "name": "ピクテ・ジャパン",
