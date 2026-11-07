@@ -4876,7 +4876,7 @@
   },
   {
     "id": "c8a17bf5-89f9-40f5-bb98-5ad615ed0b0b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3443cfcddfcf49aaa581660bd3b730db",
     "title": "Apple M6 iMac レビュー比較まとめ：AI処理、高速SSD、Wi-Fi 7で生産性向上と新しい働き方を実現",
     "name": "20261106_0951_AI時代に選ぶべき一台。2年ぶりに進化した「M6 iMac」を先行レビューします。.md",
@@ -4885,14 +4885,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-07T11:30:00.000Z",
     "createdAt": "2026-11-07T10:46:03.983Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-07T17:52:56.456875+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "624f7506-2f7e-4bbb-9f27-9fc73b522540",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s23f197de1a3944a189eac9c019c424b6",
     "title": "Hisense U9NシリーズRGB mini-LED TVレビュー比較まとめ：革新的な高画質テレビがもたらす新たな視聴体験",
     "name": "20261105_0755_【世界初RGB MiniLED】ハイセンス最新4Kテレビ「RGB 65U9S」をガチ検証！大人気「65E80S」と2台並.md",
@@ -4901,14 +4903,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-07T13:30:00.000Z",
     "createdAt": "2026-11-07T10:58:21.193Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-07T17:52:56.456875+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a5efb910-1af7-48bd-bfec-3ff60ef95f51",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7a9fb84eed954955bcddfa9ca81e9e12",
     "title": "Mytrex Zone、マイトレックス ゾーン レビュー比較まとめ",
     "name": "20261103_0722_この枕、喋るぞ…？頭が冴えて眠れない夜を強制終了する「MYTREX ZONE Pillow」がヤバすぎ！【正直レビューゾ.md",
@@ -4917,10 +4921,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-07T14:30:00.000Z",
     "createdAt": "2026-11-07T10:58:21.193Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-07T17:52:56.456875+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "87890301-c6b1-484a-90b6-5f9561799ba2",
