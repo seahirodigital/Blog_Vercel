@@ -4930,7 +4930,7 @@
   },
   {
     "id": "87890301-c6b1-484a-90b6-5f9561799ba2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s16dc9aa579da4d568f7665ee6f2e69b0",
     "title": "iPhone Duo Apple Pencil レビュー比較まとめ：使い方・メリット・デメリットを徹底解説",
     "name": "20261103_0720_祝！iPhone DuoがApple Pencil正式対応！iPad miniと比べてみたら…？.md",
@@ -4939,10 +4939,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-07T21:30:00.000Z",
     "createdAt": "2026-11-07T10:58:21.193Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-07T20:55:37.486497+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d9e203df-b75b-436e-a103-1a61898e6232",
