@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-06T15:31:13.877849+00:00",
+  "generatedAt": "2026-11-07T04:29:07.294780+00:00",
   "articleList": [
+    {
+      "id": "1cd50b627c9c47c194",
+      "url": "/articles/1cd50b627c9c47c194/",
+      "title": "【朝倉慶の緊急解説】株が急落した本当の理由／米中間選挙で誰も予想しなかった「想定外」／暴落は「上げ」を生む、株は下がらない／投資は覚悟を決めろ／年内日経8万円の可能性は",
+      "channelName": "楽待 RAKUMACHI",
+      "channelKey": "楽待 RAKUMACHI",
+      "channelTab": "楽待RA",
+      "youtubeUrl": "https://www.youtube.com/watch?v=C_y0HN63ric",
+      "thumbnail": "https://i.ytimg.com/vi/C_y0HN63ric/hqdefault.jpg",
+      "publishedAt": "2026-11-07T04:27:45.638272Z",
+      "publishedLabel": "2026.11.07",
+      "duration": "",
+      "recordedAt": "2026-11-07T04:28:34.850618",
+      "recordedLabel": "2026.11.07 04:28",
+      "timeLabel": "2026.11.07 04:28",
+      "persons": [],
+      "lastModified": "2026-11-07T04:28:38Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s17830a58c9e4490a8fd6dc753ea3105e"
+    },
     {
       "id": "ea2376b4ae7b97ddd3",
       "url": "/articles/ea2376b4ae7b97ddd3/",
@@ -10027,6 +10046,25 @@
     }
   ],
   "articles": {
+    "1cd50b627c9c47c194": {
+      "id": "1cd50b627c9c47c194",
+      "url": "/articles/1cd50b627c9c47c194/",
+      "title": "【朝倉慶の緊急解説】株が急落した本当の理由／米中間選挙で誰も予想しなかった「想定外」／暴落は「上げ」を生む、株は下がらない／投資は覚悟を決めろ／年内日経8万円の可能性は",
+      "channelName": "楽待 RAKUMACHI",
+      "channelKey": "楽待 RAKUMACHI",
+      "channelTab": "楽待RA",
+      "youtubeUrl": "https://www.youtube.com/watch?v=C_y0HN63ric",
+      "thumbnail": "https://i.ytimg.com/vi/C_y0HN63ric/hqdefault.jpg",
+      "publishedAt": "2026-11-07T04:27:45.638272Z",
+      "publishedLabel": "2026.11.07",
+      "duration": "",
+      "recordedAt": "2026-11-07T04:28:34.850618",
+      "recordedLabel": "2026.11.07 04:28",
+      "timeLabel": "2026.11.07 04:28",
+      "persons": [],
+      "lastModified": "2026-11-07T04:28:38Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s17830a58c9e4490a8fd6dc753ea3105e"
+    },
     "ea2376b4ae7b97ddd3": {
       "id": "ea2376b4ae7b97ddd3",
       "url": "/articles/ea2376b4ae7b97ddd3/",
@@ -20054,6 +20092,11 @@
   },
   "channels": [
     {
+      "name": "楽待 RAKUMACHI",
+      "tab": "楽待RA",
+      "latestAt": "2026-11-07T04:28:34.850618"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-06T15:30:04.496443"
@@ -20127,11 +20170,6 @@
       "name": "カエルの投資 Vlog",
       "tab": "カエルの",
       "latestAt": "2026-05-25T15:27:36.501448"
-    },
-    {
-      "name": "楽待 RAKUMACHI",
-      "tab": "楽待RA",
-      "latestAt": "2026-05-22T13:54:17.918042"
     },
     {
       "name": "馬渕磨理子の株式クラブ",
