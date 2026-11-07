@@ -4875,6 +4875,22 @@
     "cancelledAt": "2026-11-01T11:54:02.495Z"
   },
   {
+    "id": "c8a17bf5-89f9-40f5-bb98-5ad615ed0b0b",
+    "status": "scheduled",
+    "fileId": "FFCC26DEDBBA4E70!s3443cfcddfcf49aaa581660bd3b730db",
+    "title": "Apple M6 iMac レビュー比較まとめ：AI処理、高速SSD、Wi-Fi 7で生産性向上と新しい働き方を実現",
+    "name": "20261106_0951_AI時代に選ぶべき一台。2年ぶりに進化した「M6 iMac」を先行レビューします。.md",
+    "path": "",
+    "noteTarget": "blog_main",
+    "noTopImage": false,
+    "publishAt": "2026-11-07T11:30:00.000Z",
+    "createdAt": "2026-11-07T10:46:03.983Z",
+    "queuedAt": "",
+    "publishedAt": "",
+    "publishedUrl": "",
+    "error": ""
+  },
+  {
     "id": "4c7615cf-05c0-44de-995a-c01837544511",
     "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8f9632dc316f425e8e343f12e73f4c58",
