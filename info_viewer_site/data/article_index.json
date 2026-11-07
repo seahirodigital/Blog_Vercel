@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-07T04:29:07.294780+00:00",
+  "generatedAt": "2026-11-07T10:25:26.254424+00:00",
   "articleList": [
+    {
+      "id": "4f68c13e0b839782fa",
+      "url": "/articles/4f68c13e0b839782fa/",
+      "title": "【個人投資家必見】暴落の底を当てろ！株価の底打ちを見抜く方法とは？｜「押し目」と「ただの下落」を見分ける方法を徹底解説します【日本株/米国株/新NISA/日経平均】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=RkvA15bkV3E",
+      "thumbnail": "https://i.ytimg.com/vi/RkvA15bkV3E/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-07T10:24:16.586366",
+      "recordedLabel": "2026.11.07 10:24",
+      "timeLabel": "2026.11.07 10:24",
+      "persons": [],
+      "lastModified": "2026-11-07T10:24:22Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sb0e975a0025d4c1ba98b6fae9ec85fe7"
+    },
     {
       "id": "1cd50b627c9c47c194",
       "url": "/articles/1cd50b627c9c47c194/",
@@ -10046,6 +10065,25 @@
     }
   ],
   "articles": {
+    "4f68c13e0b839782fa": {
+      "id": "4f68c13e0b839782fa",
+      "url": "/articles/4f68c13e0b839782fa/",
+      "title": "【個人投資家必見】暴落の底を当てろ！株価の底打ちを見抜く方法とは？｜「押し目」と「ただの下落」を見分ける方法を徹底解説します【日本株/米国株/新NISA/日経平均】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=RkvA15bkV3E",
+      "thumbnail": "https://i.ytimg.com/vi/RkvA15bkV3E/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-07T10:24:16.586366",
+      "recordedLabel": "2026.11.07 10:24",
+      "timeLabel": "2026.11.07 10:24",
+      "persons": [],
+      "lastModified": "2026-11-07T10:24:22Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sb0e975a0025d4c1ba98b6fae9ec85fe7"
+    },
     "1cd50b627c9c47c194": {
       "id": "1cd50b627c9c47c194",
       "url": "/articles/1cd50b627c9c47c194/",
@@ -20092,6 +20130,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-07T10:24:16.586366"
+    },
+    {
       "name": "楽待 RAKUMACHI",
       "tab": "楽待RA",
       "latestAt": "2026-11-07T04:28:34.850618"
@@ -20100,11 +20143,6 @@
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-06T15:30:04.496443"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-06T10:53:55.666744"
     },
     {
       "name": "ゆたかTV",
