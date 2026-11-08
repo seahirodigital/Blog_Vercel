@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-07T10:25:26.254424+00:00",
+  "generatedAt": "2026-11-08T02:14:04.312864+00:00",
   "articleList": [
+    {
+      "id": "fa06a38dca7403d2bc",
+      "url": "/articles/fa06a38dca7403d2bc/",
+      "title": "【中島聡】AIの次は“ハード”がくる／フィジカルAIの現在地／AI覇権を左右する「電力不足」／米国と中国の決定的な差／ロボット・ドローン・自動運転が伸びる／日本の勝ち筋は「部品と素材」",
+      "channelName": "ビジネス＋ITチャンネル",
+      "channelKey": "ビジネス＋ITチャンネル",
+      "channelTab": "ビジネス",
+      "youtubeUrl": "https://www.youtube.com/watch?v=5Md8xOG6JUY",
+      "thumbnail": "https://i.ytimg.com/vi/5Md8xOG6JUY/hqdefault.jpg",
+      "publishedAt": "2026-11-08T02:12:54.401235Z",
+      "publishedLabel": "2026.11.08",
+      "duration": "",
+      "recordedAt": "2026-11-08T02:13:20.780748",
+      "recordedLabel": "2026.11.08 02:13",
+      "timeLabel": "2026.11.08 02:13",
+      "persons": [],
+      "lastModified": "2026-11-08T02:13:27Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s89c010f5d66042eeae38ca87a12f0f79"
+    },
     {
       "id": "4f68c13e0b839782fa",
       "url": "/articles/4f68c13e0b839782fa/",
@@ -10065,6 +10084,25 @@
     }
   ],
   "articles": {
+    "fa06a38dca7403d2bc": {
+      "id": "fa06a38dca7403d2bc",
+      "url": "/articles/fa06a38dca7403d2bc/",
+      "title": "【中島聡】AIの次は“ハード”がくる／フィジカルAIの現在地／AI覇権を左右する「電力不足」／米国と中国の決定的な差／ロボット・ドローン・自動運転が伸びる／日本の勝ち筋は「部品と素材」",
+      "channelName": "ビジネス＋ITチャンネル",
+      "channelKey": "ビジネス＋ITチャンネル",
+      "channelTab": "ビジネス",
+      "youtubeUrl": "https://www.youtube.com/watch?v=5Md8xOG6JUY",
+      "thumbnail": "https://i.ytimg.com/vi/5Md8xOG6JUY/hqdefault.jpg",
+      "publishedAt": "2026-11-08T02:12:54.401235Z",
+      "publishedLabel": "2026.11.08",
+      "duration": "",
+      "recordedAt": "2026-11-08T02:13:20.780748",
+      "recordedLabel": "2026.11.08 02:13",
+      "timeLabel": "2026.11.08 02:13",
+      "persons": [],
+      "lastModified": "2026-11-08T02:13:27Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s89c010f5d66042eeae38ca87a12f0f79"
+    },
     "4f68c13e0b839782fa": {
       "id": "4f68c13e0b839782fa",
       "url": "/articles/4f68c13e0b839782fa/",
@@ -20129,6 +20167,11 @@
     }
   },
   "channels": [
+    {
+      "name": "ビジネス＋ITチャンネル",
+      "tab": "ビジネス",
+      "latestAt": "2026-11-08T02:13:20.780748"
+    },
     {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
