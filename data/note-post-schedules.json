@@ -4966,7 +4966,7 @@
   },
   {
     "id": "d8fa1030-1e16-41a8-b9f5-ad7b91d00681",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s0c25ae582727427a923134a4da216df9",
     "title": "Insta360 Mic レビュー比較まとめ：高音質ワイヤレスマイクで動画制作を効率化",
     "name": "20261103_0713_【Insta360 Mic レビュー】廉価モデル登場かと思いきや全然こっちでよくないか？これYouTubeの1人撮影にち.md",
@@ -4976,8 +4976,8 @@
     "publishAt": "2026-11-08T08:30:00.000Z",
     "createdAt": "2026-11-07T10:58:21.193Z",
     "queuedAt": "2026-11-08T08:24:40.098844+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-08T08:32:12.766799+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nf937435fb250?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
