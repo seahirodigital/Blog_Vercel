@@ -4948,7 +4948,7 @@
   },
   {
     "id": "d9e203df-b75b-436e-a103-1a61898e6232",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5a607b72835646aa82bbe0bc5b1ce603",
     "title": "iPhone 18 Pro Duo レビュー比較まとめ",
     "name": "20261103_0716_【総じて楽しい】iPhone Duo1週間！購入理由どおり問題解決：レビュー第三弾・ココが良い追加イマイチ.md",
@@ -4957,10 +4957,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-08T02:30:00.000Z",
     "createdAt": "2026-11-07T10:58:21.193Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-08T01:55:09.745292+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d8fa1030-1e16-41a8-b9f5-ad7b91d00681",
