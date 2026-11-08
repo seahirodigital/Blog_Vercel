@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-08T09:24:50.653684+00:00",
+  "generatedAt": "2026-11-08T10:25:22.356624+00:00",
   "articleList": [
+    {
+      "id": "49f297ed884583b789",
+      "url": "/articles/49f297ed884583b789/",
+      "title": "【徹底解説】下落はいつ終わる？今後のAI相場・株式市場・個人投資家はどのように立ち回るべきなのかについて徹底解説します。【日本株/米国株/新NISA】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=S2wOxk896Uw",
+      "thumbnail": "https://i.ytimg.com/vi/S2wOxk896Uw/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-08T10:23:59.223514",
+      "recordedLabel": "2026.11.08 10:23",
+      "timeLabel": "2026.11.08 10:23",
+      "persons": [],
+      "lastModified": "2026-11-08T10:24:03Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s2a4b4e4ccd5247319fe0328d6dec67f3"
+    },
     {
       "id": "af2debb4dbe4516788",
       "url": "/articles/af2debb4dbe4516788/",
@@ -10122,6 +10141,25 @@
     }
   ],
   "articles": {
+    "49f297ed884583b789": {
+      "id": "49f297ed884583b789",
+      "url": "/articles/49f297ed884583b789/",
+      "title": "【徹底解説】下落はいつ終わる？今後のAI相場・株式市場・個人投資家はどのように立ち回るべきなのかについて徹底解説します。【日本株/米国株/新NISA】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=S2wOxk896Uw",
+      "thumbnail": "https://i.ytimg.com/vi/S2wOxk896Uw/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-08T10:23:59.223514",
+      "recordedLabel": "2026.11.08 10:23",
+      "timeLabel": "2026.11.08 10:23",
+      "persons": [],
+      "lastModified": "2026-11-08T10:24:03Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s2a4b4e4ccd5247319fe0328d6dec67f3"
+    },
     "af2debb4dbe4516788": {
       "id": "af2debb4dbe4516788",
       "url": "/articles/af2debb4dbe4516788/",
@@ -20244,6 +20282,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-08T10:23:59.223514"
+    },
+    {
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-11-08T09:23:45.656836"
@@ -20257,11 +20300,6 @@
       "name": "ビジネス＋ITチャンネル",
       "tab": "ビジネス",
       "latestAt": "2026-11-08T02:13:20.780748"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-07T10:24:16.586366"
     },
     {
       "name": "楽待 RAKUMACHI",
