@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-08T02:14:04.312864+00:00",
+  "generatedAt": "2026-11-08T06:25:31.956548+00:00",
   "articleList": [
+    {
+      "id": "49d91baee1070024be",
+      "url": "/articles/49d91baee1070024be/",
+      "title": "来週の日本株展望(2026/11/9~)　今、Ai株が買われるロジックとは？民主党知事下でのデータセンター建設の今後　ヘッジファンドのマージンコールの投げ売りの可能性も・・・",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=6pKw_bVPu5s",
+      "thumbnail": "https://i.ytimg.com/vi/6pKw_bVPu5s/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-08T06:24:09.040338",
+      "recordedLabel": "2026.11.08 06:24",
+      "timeLabel": "2026.11.08 06:24",
+      "persons": [],
+      "lastModified": "2026-11-08T06:24:14Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s38dee48afadf4022a64b5ad2ab0d48ea"
+    },
     {
       "id": "fa06a38dca7403d2bc",
       "url": "/articles/fa06a38dca7403d2bc/",
@@ -10084,6 +10103,25 @@
     }
   ],
   "articles": {
+    "49d91baee1070024be": {
+      "id": "49d91baee1070024be",
+      "url": "/articles/49d91baee1070024be/",
+      "title": "来週の日本株展望(2026/11/9~)　今、Ai株が買われるロジックとは？民主党知事下でのデータセンター建設の今後　ヘッジファンドのマージンコールの投げ売りの可能性も・・・",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=6pKw_bVPu5s",
+      "thumbnail": "https://i.ytimg.com/vi/6pKw_bVPu5s/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-08T06:24:09.040338",
+      "recordedLabel": "2026.11.08 06:24",
+      "timeLabel": "2026.11.08 06:24",
+      "persons": [],
+      "lastModified": "2026-11-08T06:24:14Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s38dee48afadf4022a64b5ad2ab0d48ea"
+    },
     "fa06a38dca7403d2bc": {
       "id": "fa06a38dca7403d2bc",
       "url": "/articles/fa06a38dca7403d2bc/",
@@ -20168,6 +20206,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-11-08T06:24:09.040338"
+    },
+    {
       "name": "ビジネス＋ITチャンネル",
       "tab": "ビジネス",
       "latestAt": "2026-11-08T02:13:20.780748"
@@ -20181,11 +20224,6 @@
       "name": "楽待 RAKUMACHI",
       "tab": "楽待RA",
       "latestAt": "2026-11-07T04:28:34.850618"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-11-06T15:30:04.496443"
     },
     {
       "name": "ゆたかTV",
