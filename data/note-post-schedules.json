@@ -4984,7 +4984,7 @@
   },
   {
     "id": "06c87736-ce14-476a-99f0-981bf4250d88",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd7f6344fb5444ac6a4a1dbd87fc5ae7a",
     "title": "Audio-Technica ATH-M50xSTS-WL",
     "name": "20261031_0221_【本日発売】海外ガチ勢が絶賛した神ヘッドセット「ATH-M50xSTS-WL」が異次元すぎた！AT2020級のマイク＆足.md",
@@ -4993,10 +4993,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-08T21:30:00.000Z",
     "createdAt": "2026-11-07T10:58:21.193Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-09T00:24:38.459145+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8df0e5d8-c9b5-4ac0-bd7d-494ee53b824a",
