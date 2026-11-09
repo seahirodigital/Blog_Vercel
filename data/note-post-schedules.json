@@ -5056,7 +5056,7 @@
   },
   {
     "id": "3ffce73d-5ba6-4fbc-a5d4-b6a2eb8dd3ef",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!seb1c6f8ef5424b5188286c1411dde2ee",
     "title": "ソニー(SONY) NW-WM1ZM3 C　レビュー比較まとめ",
     "name": "20261020_0709_【ハイエンド編】最新ウォークマンが遂に登場！「SONY NW-WM1ZM3」を人気機種と比較！【60万円級】.md",
@@ -5065,10 +5065,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-09T11:30:00.000Z",
     "createdAt": "2026-11-07T10:58:21.193Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-09T10:55:17.843259+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "46565f07-4ee9-43e4-9aa2-dbf673f7ed2c",
