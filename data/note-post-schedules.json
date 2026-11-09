@@ -5020,7 +5020,7 @@
   },
   {
     "id": "06a0347e-e0d8-42a4-9c26-73f8c46930ef",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s64cc2e28832f434e8536605a1275149e",
     "title": "HomePod mini 2 レビュー比較まとめ：スマートスピーカーで快適なApple Homeを実現",
     "name": "20261030_0742_待ってたぞ..!! 6年ぶりに進化した「HomePod mini 2」がすごいぞ..。.md",
@@ -5029,10 +5029,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-09T08:30:00.000Z",
     "createdAt": "2026-11-07T10:58:21.193Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-09T08:42:58.861426+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c8e9498e-ba38-42ff-bb5a-ab36b65e2f84",
