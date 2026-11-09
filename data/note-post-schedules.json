@@ -5002,7 +5002,7 @@
   },
   {
     "id": "8df0e5d8-c9b5-4ac0-bd7d-494ee53b824a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8dbbb2ad35574e7b9fcbeb83c42453cf",
     "title": "Google Fitbit Edge レビュー比較まとめ：健康管理を効率化し、日々の生活を快適にするスマートパートナー",
     "name": "20261030_0746_【バカ売れ確定】画面＆GPS搭載！新型Fitbit Edgeキタ！.md",
@@ -5011,10 +5011,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-09T02:30:00.000Z",
     "createdAt": "2026-11-07T10:58:21.193Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-09T01:55:09.083406+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "06a0347e-e0d8-42a4-9c26-73f8c46930ef",
