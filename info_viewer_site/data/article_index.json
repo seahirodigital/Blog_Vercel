@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-09T11:24:49.563947+00:00",
+  "generatedAt": "2026-11-09T13:10:22.827389+00:00",
   "articleList": [
+    {
+      "id": "7fe7487da899ac9941",
+      "url": "/articles/7fe7487da899ac9941/",
+      "title": "【雑談LIVE】遂に反発開始？日経平均の動きと今後の相場について解説します",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Nf8IR_jVU70",
+      "thumbnail": "https://i.ytimg.com/vi/Nf8IR_jVU70/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-09T13:09:01.300254",
+      "recordedLabel": "2026.11.09 13:09",
+      "timeLabel": "2026.11.09 13:09",
+      "persons": [],
+      "lastModified": "2026-11-09T13:09:04Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s2e5e4c72e8b340798f8373d63712d3c0"
+    },
     {
       "id": "7609a2af085556baf5",
       "url": "/articles/7609a2af085556baf5/",
@@ -10198,6 +10217,25 @@
     }
   ],
   "articles": {
+    "7fe7487da899ac9941": {
+      "id": "7fe7487da899ac9941",
+      "url": "/articles/7fe7487da899ac9941/",
+      "title": "【雑談LIVE】遂に反発開始？日経平均の動きと今後の相場について解説します",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Nf8IR_jVU70",
+      "thumbnail": "https://i.ytimg.com/vi/Nf8IR_jVU70/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-09T13:09:01.300254",
+      "recordedLabel": "2026.11.09 13:09",
+      "timeLabel": "2026.11.09 13:09",
+      "persons": [],
+      "lastModified": "2026-11-09T13:09:04Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s2e5e4c72e8b340798f8373d63712d3c0"
+    },
     "7609a2af085556baf5": {
       "id": "7609a2af085556baf5",
       "url": "/articles/7609a2af085556baf5/",
@@ -20398,7 +20436,7 @@
     {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
-      "latestAt": "2026-11-09T11:23:51.272729"
+      "latestAt": "2026-11-09T13:09:01.300254"
     },
     {
       "name": "ゆたかTV",
