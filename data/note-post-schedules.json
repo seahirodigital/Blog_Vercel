@@ -5038,7 +5038,7 @@
   },
   {
     "id": "c8e9498e-ba38-42ff-bb5a-ab36b65e2f84",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s01d9b576f7624772944ee7c266337d29",
     "title": "iPhone Fold、折りたたみスマホ、Galaxy Z Foldの比較検討に悩む方へ、最新のiPhone Foldの魅力と実用性を深く掘り下げ、モバイルライフを次のレベルへと導くためのレビュー比較まとめ",
     "name": "20261031_0224_iPhone Duo 実際どうなの？！良いところ、使いにくいところ！早くアプリ対応して〜！モンハンもプレイしたよ.md",
@@ -5048,8 +5048,8 @@
     "publishAt": "2026-11-09T10:30:00.000Z",
     "createdAt": "2026-11-07T10:58:21.193Z",
     "queuedAt": "2026-11-09T09:55:14.779677+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-09T10:32:16.312693+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nc18983c8e9c3?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
