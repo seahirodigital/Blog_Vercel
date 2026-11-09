@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-09T01:33:06.952782+00:00",
+  "generatedAt": "2026-11-09T09:56:43.559963+00:00",
   "articleList": [
+    {
+      "id": "bb578792bfa8d9136a",
+      "url": "/articles/bb578792bfa8d9136a/",
+      "title": "【《大統領選後の為替/FX》2021年から5年9か月の円安トレンド転換⁉｜154円を割り込むとドル下落幅拡大の可能性】川合美智子×松尾英里子のワールド・カレンシー11月9日公開※11/28大阪セミナー",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=4X9Qo6EIsBI",
+      "thumbnail": "https://i.ytimg.com/vi/4X9Qo6EIsBI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-09T09:54:35.642866",
+      "recordedLabel": "2026.11.09 09:54",
+      "timeLabel": "2026.11.09 09:54",
+      "persons": [],
+      "lastModified": "2026-11-09T09:54:41Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sa4ce5ade7ff448daaf9c413fced5f3c5"
+    },
     {
       "id": "e090723a18693c2770",
       "url": "/articles/e090723a18693c2770/",
@@ -10160,6 +10179,25 @@
     }
   ],
   "articles": {
+    "bb578792bfa8d9136a": {
+      "id": "bb578792bfa8d9136a",
+      "url": "/articles/bb578792bfa8d9136a/",
+      "title": "【《大統領選後の為替/FX》2021年から5年9か月の円安トレンド転換⁉｜154円を割り込むとドル下落幅拡大の可能性】川合美智子×松尾英里子のワールド・カレンシー11月9日公開※11/28大阪セミナー",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=4X9Qo6EIsBI",
+      "thumbnail": "https://i.ytimg.com/vi/4X9Qo6EIsBI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-09T09:54:35.642866",
+      "recordedLabel": "2026.11.09 09:54",
+      "timeLabel": "2026.11.09 09:54",
+      "persons": [],
+      "lastModified": "2026-11-09T09:54:41Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sa4ce5ade7ff448daaf9c413fced5f3c5"
+    },
     "e090723a18693c2770": {
       "id": "e090723a18693c2770",
       "url": "/articles/e090723a18693c2770/",
@@ -20320,6 +20358,11 @@
   },
   "channels": [
     {
+      "name": "ゆたかTV",
+      "tab": "ゆたかT",
+      "latestAt": "2026-11-09T09:54:35.642866"
+    },
+    {
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-11-09T01:31:50.629061"
@@ -20343,11 +20386,6 @@
       "name": "楽待 RAKUMACHI",
       "tab": "楽待RA",
       "latestAt": "2026-11-07T04:28:34.850618"
-    },
-    {
-      "name": "ゆたかTV",
-      "tab": "ゆたかT",
-      "latestAt": "2026-11-06T09:53:47.912684"
     },
     {
       "name": "マネーフォワード ME イベント&セミナー",
