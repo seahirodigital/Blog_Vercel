@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-08T10:25:22.356624+00:00",
+  "generatedAt": "2026-11-09T01:33:06.952782+00:00",
   "articleList": [
+    {
+      "id": "e090723a18693c2770",
+      "url": "/articles/e090723a18693c2770/",
+      "title": "【東京エレクトロン】過去最高益 vs 株価、市場が見ている\"もう1つの数字\"｜営業利益67.2%増・通期は1兆1690億円予想、個人投資家はどう見るべきか｜買い場か様子見か!?【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=bPzQpXJ-9QI",
+      "thumbnail": "https://i.ytimg.com/vi/bPzQpXJ-9QI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-09T01:31:50.629061",
+      "recordedLabel": "2026.11.09 01:31",
+      "timeLabel": "2026.11.09 01:31",
+      "persons": [],
+      "lastModified": "2026-11-09T01:31:54Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sa2b170218a2e41ed99a651523a4bbd4e"
+    },
     {
       "id": "49f297ed884583b789",
       "url": "/articles/49f297ed884583b789/",
@@ -10141,6 +10160,25 @@
     }
   ],
   "articles": {
+    "e090723a18693c2770": {
+      "id": "e090723a18693c2770",
+      "url": "/articles/e090723a18693c2770/",
+      "title": "【東京エレクトロン】過去最高益 vs 株価、市場が見ている\"もう1つの数字\"｜営業利益67.2%増・通期は1兆1690億円予想、個人投資家はどう見るべきか｜買い場か様子見か!?【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=bPzQpXJ-9QI",
+      "thumbnail": "https://i.ytimg.com/vi/bPzQpXJ-9QI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-09T01:31:50.629061",
+      "recordedLabel": "2026.11.09 01:31",
+      "timeLabel": "2026.11.09 01:31",
+      "persons": [],
+      "lastModified": "2026-11-09T01:31:54Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sa2b170218a2e41ed99a651523a4bbd4e"
+    },
     "49f297ed884583b789": {
       "id": "49f297ed884583b789",
       "url": "/articles/49f297ed884583b789/",
@@ -20282,14 +20320,14 @@
   },
   "channels": [
     {
+      "name": "イズミダイズム",
+      "tab": "イズミダ",
+      "latestAt": "2026-11-09T01:31:50.629061"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-08T10:23:59.223514"
-    },
-    {
-      "name": "イズミダイズム",
-      "tab": "イズミダ",
-      "latestAt": "2026-11-08T09:23:45.656836"
     },
     {
       "name": "YTの投資銀行",
