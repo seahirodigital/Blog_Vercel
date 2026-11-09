@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-09T09:56:43.559963+00:00",
+  "generatedAt": "2026-11-09T11:24:49.563947+00:00",
   "articleList": [
+    {
+      "id": "7609a2af085556baf5",
+      "url": "/articles/7609a2af085556baf5/",
+      "title": "【緊急解説】JT株が2日連続ストップ安…。プーチン大統領令でロシア事業が管理下に。配当272円は守れるのか？元機関投資家が今後のJT株を徹底解説します【日本たばこ産業/高配当株/日本株/新NISA】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=5LutwaytVPY",
+      "thumbnail": "https://i.ytimg.com/vi/5LutwaytVPY/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-09T11:23:51.272729",
+      "recordedLabel": "2026.11.09 11:23",
+      "timeLabel": "2026.11.09 11:23",
+      "persons": [],
+      "lastModified": "2026-11-09T11:23:54Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s6eb5622449474c7ebd7be25221db8482"
+    },
     {
       "id": "bb578792bfa8d9136a",
       "url": "/articles/bb578792bfa8d9136a/",
@@ -10179,6 +10198,25 @@
     }
   ],
   "articles": {
+    "7609a2af085556baf5": {
+      "id": "7609a2af085556baf5",
+      "url": "/articles/7609a2af085556baf5/",
+      "title": "【緊急解説】JT株が2日連続ストップ安…。プーチン大統領令でロシア事業が管理下に。配当272円は守れるのか？元機関投資家が今後のJT株を徹底解説します【日本たばこ産業/高配当株/日本株/新NISA】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=5LutwaytVPY",
+      "thumbnail": "https://i.ytimg.com/vi/5LutwaytVPY/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-09T11:23:51.272729",
+      "recordedLabel": "2026.11.09 11:23",
+      "timeLabel": "2026.11.09 11:23",
+      "persons": [],
+      "lastModified": "2026-11-09T11:23:54Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s6eb5622449474c7ebd7be25221db8482"
+    },
     "bb578792bfa8d9136a": {
       "id": "bb578792bfa8d9136a",
       "url": "/articles/bb578792bfa8d9136a/",
@@ -20358,6 +20396,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-09T11:23:51.272729"
+    },
+    {
       "name": "ゆたかTV",
       "tab": "ゆたかT",
       "latestAt": "2026-11-09T09:54:35.642866"
@@ -20366,11 +20409,6 @@
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-11-09T01:31:50.629061"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-08T10:23:59.223514"
     },
     {
       "name": "YTの投資銀行",
