@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-09T13:10:22.827389+00:00",
+  "generatedAt": "2026-11-09T14:28:34.276840+00:00",
   "articleList": [
+    {
+      "id": "8bbabc54d5deedd6a6",
+      "url": "/articles/8bbabc54d5deedd6a6/",
+      "title": "LIVE  マーケットアップデート　日経大幅反発　半導体以外が堅調　この上昇は継続するか？",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=XFP5hsZZ32g",
+      "thumbnail": "https://i.ytimg.com/vi/XFP5hsZZ32g/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-09T14:27:11.443552",
+      "recordedLabel": "2026.11.09 14:27",
+      "timeLabel": "2026.11.09 14:27",
+      "persons": [],
+      "lastModified": "2026-11-09T14:27:16Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s18e9b150f372451d844e2a85cf7ae7c1"
+    },
     {
       "id": "7fe7487da899ac9941",
       "url": "/articles/7fe7487da899ac9941/",
@@ -10217,6 +10236,25 @@
     }
   ],
   "articles": {
+    "8bbabc54d5deedd6a6": {
+      "id": "8bbabc54d5deedd6a6",
+      "url": "/articles/8bbabc54d5deedd6a6/",
+      "title": "LIVE  マーケットアップデート　日経大幅反発　半導体以外が堅調　この上昇は継続するか？",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=XFP5hsZZ32g",
+      "thumbnail": "https://i.ytimg.com/vi/XFP5hsZZ32g/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-09T14:27:11.443552",
+      "recordedLabel": "2026.11.09 14:27",
+      "timeLabel": "2026.11.09 14:27",
+      "persons": [],
+      "lastModified": "2026-11-09T14:27:16Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s18e9b150f372451d844e2a85cf7ae7c1"
+    },
     "7fe7487da899ac9941": {
       "id": "7fe7487da899ac9941",
       "url": "/articles/7fe7487da899ac9941/",
@@ -20434,6 +20472,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-11-09T14:27:11.443552"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-09T13:09:01.300254"
@@ -20447,11 +20490,6 @@
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-11-09T01:31:50.629061"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-11-08T06:24:09.040338"
     },
     {
       "name": "ビジネス＋ITチャンネル",
