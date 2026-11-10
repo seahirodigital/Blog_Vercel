@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-10T09:25:34.157890+00:00",
+  "generatedAt": "2026-11-10T10:25:01.493225+00:00",
   "articleList": [
+    {
+      "id": "2820ed79f8033024ab",
+      "url": "/articles/2820ed79f8033024ab/",
+      "title": "キオクシアと日本の未来について",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=sRLBvvi8-mM",
+      "thumbnail": "https://i.ytimg.com/vi/sRLBvvi8-mM/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-10T10:23:57.408024",
+      "recordedLabel": "2026.11.10 10:23",
+      "timeLabel": "2026.11.10 10:23",
+      "persons": [],
+      "lastModified": "2026-11-10T10:24:01Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s2bbc6fd2bb1d4ec99b82966560bd0d98"
+    },
     {
       "id": "e07fed506ed47425db",
       "url": "/articles/e07fed506ed47425db/",
@@ -10255,6 +10274,25 @@
     }
   ],
   "articles": {
+    "2820ed79f8033024ab": {
+      "id": "2820ed79f8033024ab",
+      "url": "/articles/2820ed79f8033024ab/",
+      "title": "キオクシアと日本の未来について",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=sRLBvvi8-mM",
+      "thumbnail": "https://i.ytimg.com/vi/sRLBvvi8-mM/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-10T10:23:57.408024",
+      "recordedLabel": "2026.11.10 10:23",
+      "timeLabel": "2026.11.10 10:23",
+      "persons": [],
+      "lastModified": "2026-11-10T10:24:01Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s2bbc6fd2bb1d4ec99b82966560bd0d98"
+    },
     "e07fed506ed47425db": {
       "id": "e07fed506ed47425db",
       "url": "/articles/e07fed506ed47425db/",
@@ -20510,6 +20548,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-10T10:23:57.408024"
+    },
+    {
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-11-10T09:24:11.400345"
@@ -20518,11 +20561,6 @@
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-09T14:27:11.443552"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-09T13:09:01.300254"
     },
     {
       "name": "ゆたかTV",
