@@ -5092,7 +5092,7 @@
   },
   {
     "id": "bd2b8d49-0e81-4d2e-8311-34ebab86980e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa0a45f1ae77b44c98b1a25e9e4a6365a",
     "title": "iPhone Duo Galaxy Z Fold 8 折りたたみスマホ レビュー比較まとめ",
     "name": "20261023_0856_【比較】iPhone DuoとGalaxy Z Fold8！折りたたみスマホ、買うならどっち？.md",
@@ -5102,8 +5102,8 @@
     "publishAt": "2026-11-10T03:00:00.000Z",
     "createdAt": "2026-11-07T10:58:21.193Z",
     "queuedAt": "2026-11-10T08:56:31.961773+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-10T08:59:10.027829+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n52386f9ce763?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
