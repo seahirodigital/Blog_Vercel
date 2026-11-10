@@ -5074,7 +5074,7 @@
   },
   {
     "id": "46565f07-4ee9-43e4-9aa2-dbf673f7ed2c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf4f97fed4f0d4f139c6ae420702c5021",
     "title": "MacBook Pro Pro-LED XDR display M5 タッチパネル レビュー比較まとめ",
     "name": "20261029_0324_【速報】軽量化・タッチ操作可能なMacBook Proが出た！PROLED XDRディスプレイ搭載：特徴まとめ・価格表.md",
@@ -5084,8 +5084,8 @@
     "publishAt": "2026-11-10T02:30:00.000Z",
     "createdAt": "2026-11-07T10:58:21.193Z",
     "queuedAt": "2026-11-10T08:56:31.961773+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-10T08:58:57.721797+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5a90f9d236c5?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
