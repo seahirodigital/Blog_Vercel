@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-09T14:28:34.276840+00:00",
+  "generatedAt": "2026-11-10T09:25:34.157890+00:00",
   "articleList": [
+    {
+      "id": "e07fed506ed47425db",
+      "url": "/articles/e07fed506ed47425db/",
+      "title": "【アンソロピック上場】AI・半導体相場の復活あるか？巨額赤字800億ドルの真実｜Google Amazon Microsoftへの2500億ドル以上の巨額支払いの義務の実態【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=lTZ2DNHL1ps",
+      "thumbnail": "https://i.ytimg.com/vi/lTZ2DNHL1ps/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-10T09:24:11.400345",
+      "recordedLabel": "2026.11.10 09:24",
+      "timeLabel": "2026.11.10 09:24",
+      "persons": [],
+      "lastModified": "2026-11-10T09:24:17Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s381d36a3840c453abcbc8c5a12aaa194"
+    },
     {
       "id": "8bbabc54d5deedd6a6",
       "url": "/articles/8bbabc54d5deedd6a6/",
@@ -10236,6 +10255,25 @@
     }
   ],
   "articles": {
+    "e07fed506ed47425db": {
+      "id": "e07fed506ed47425db",
+      "url": "/articles/e07fed506ed47425db/",
+      "title": "【アンソロピック上場】AI・半導体相場の復活あるか？巨額赤字800億ドルの真実｜Google Amazon Microsoftへの2500億ドル以上の巨額支払いの義務の実態【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=lTZ2DNHL1ps",
+      "thumbnail": "https://i.ytimg.com/vi/lTZ2DNHL1ps/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-10T09:24:11.400345",
+      "recordedLabel": "2026.11.10 09:24",
+      "timeLabel": "2026.11.10 09:24",
+      "persons": [],
+      "lastModified": "2026-11-10T09:24:17Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s381d36a3840c453abcbc8c5a12aaa194"
+    },
     "8bbabc54d5deedd6a6": {
       "id": "8bbabc54d5deedd6a6",
       "url": "/articles/8bbabc54d5deedd6a6/",
@@ -20472,6 +20510,11 @@
   },
   "channels": [
     {
+      "name": "イズミダイズム",
+      "tab": "イズミダ",
+      "latestAt": "2026-11-10T09:24:11.400345"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-09T14:27:11.443552"
@@ -20485,11 +20528,6 @@
       "name": "ゆたかTV",
       "tab": "ゆたかT",
       "latestAt": "2026-11-09T09:54:35.642866"
-    },
-    {
-      "name": "イズミダイズム",
-      "tab": "イズミダ",
-      "latestAt": "2026-11-09T01:31:50.629061"
     },
     {
       "name": "ビジネス＋ITチャンネル",
