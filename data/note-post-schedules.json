@@ -5146,7 +5146,7 @@
   },
   {
     "id": "49eb424b-c77c-4160-9a3f-b508e16d10ba",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s90f63aec76084c018eaa80dc6f4bd929",
     "title": "Anker Desktop USB-C Hub (10-in-1) レビュー比較まとめ",
     "name": "20261020_0706_【Anker最強ハブ】画面付きで配線スッキリ！これ1台でデスク完成.md",
@@ -5155,10 +5155,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-11T10:30:00.000Z",
     "createdAt": "2026-11-07T10:58:21.193Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-11T09:55:54.833173+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4c7615cf-05c0-44de-995a-c01837544511",
