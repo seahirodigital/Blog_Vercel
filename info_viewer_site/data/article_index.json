@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-11T09:55:49.749089+00:00",
+  "generatedAt": "2026-11-11T10:54:49.000348+00:00",
   "articleList": [
+    {
+      "id": "f446d302208665e793",
+      "url": "/articles/f446d302208665e793/",
+      "title": "【緊急解説】ソフトバンクグループ決算で7680億円の赤字転落…日本のAI産業はどうなるのかプロの投資家に聞いてみた",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=5ogE4ylZ8m0",
+      "thumbnail": "https://i.ytimg.com/vi/5ogE4ylZ8m0/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-11T10:53:52.755750",
+      "recordedLabel": "2026.11.11 10:53",
+      "timeLabel": "2026.11.11 10:53",
+      "persons": [],
+      "lastModified": "2026-11-11T10:53:56Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sed34e83223144a609cb95163c792b640"
+    },
     {
       "id": "14d318a2611f73bcc5",
       "url": "/articles/14d318a2611f73bcc5/",
@@ -10336,6 +10355,25 @@
     }
   ],
   "articles": {
+    "f446d302208665e793": {
+      "id": "f446d302208665e793",
+      "url": "/articles/f446d302208665e793/",
+      "title": "【緊急解説】ソフトバンクグループ決算で7680億円の赤字転落…日本のAI産業はどうなるのかプロの投資家に聞いてみた",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=5ogE4ylZ8m0",
+      "thumbnail": "https://i.ytimg.com/vi/5ogE4ylZ8m0/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-11T10:53:52.755750",
+      "recordedLabel": "2026.11.11 10:53",
+      "timeLabel": "2026.11.11 10:53",
+      "persons": [],
+      "lastModified": "2026-11-11T10:53:56Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sed34e83223144a609cb95163c792b640"
+    },
     "14d318a2611f73bcc5": {
       "id": "14d318a2611f73bcc5",
       "url": "/articles/14d318a2611f73bcc5/",
@@ -20672,6 +20710,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-11T10:53:52.755750"
+    },
+    {
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-11-11T09:54:16.459830"
@@ -20680,11 +20723,6 @@
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-11-11T08:54:24.829052"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-10T10:23:57.408024"
     },
     {
       "name": "YTの投資銀行",
