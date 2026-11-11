@@ -5110,7 +5110,7 @@
   },
   {
     "id": "c57a7d67-ef64-4384-9efb-7e841edbfa9e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!saaaccf1bd47c42e3a6eb6c18112f34d8",
     "title": "AQUOS wish6とAQUOS wish5比較まとめ：エントリーモデルスマホの選び方",
     "name": "20261107_1045_AQUOS wish6 意外と変わった？高価になっていく格安スマホ！wish5との違いを比較！.md",
@@ -5120,8 +5120,8 @@
     "publishAt": "2026-11-10T21:30:00.000Z",
     "createdAt": "2026-11-07T10:58:21.193Z",
     "queuedAt": "2026-11-11T00:58:31.423070+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-11T01:01:01.988470+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n0e1884b306c1?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
