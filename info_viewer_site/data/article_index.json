@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-11-10T10:25:01.493225+00:00",
+  "generatedAt": "2026-11-11T08:26:18.818716+00:00",
   "articleList": [
+    {
+      "id": "e36448f8e5fc3ea0be",
+      "url": "/articles/e36448f8e5fc3ea0be/",
+      "title": "【中国人民銀行ゴールド買い25.8トン】金も金利を生む：リースレートとは？（貴金属スペシャリスト 池水雄一さん） [ウィークリーゴールド]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=GdHli4keT9Y",
+      "thumbnail": "https://i.ytimg.com/vi/GdHli4keT9Y/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-11T08:24:28.898122",
+      "recordedLabel": "2026.11.11 08:24",
+      "timeLabel": "2026.11.11 08:24",
+      "persons": [
+        "池水雄一"
+      ],
+      "lastModified": "2026-11-11T08:24:34Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s36b98cb1f11649faaa9e4148d9cdb4e0"
+    },
     {
       "id": "2820ed79f8033024ab",
       "url": "/articles/2820ed79f8033024ab/",
@@ -10274,6 +10295,27 @@
     }
   ],
   "articles": {
+    "e36448f8e5fc3ea0be": {
+      "id": "e36448f8e5fc3ea0be",
+      "url": "/articles/e36448f8e5fc3ea0be/",
+      "title": "【中国人民銀行ゴールド買い25.8トン】金も金利を生む：リースレートとは？（貴金属スペシャリスト 池水雄一さん） [ウィークリーゴールド]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=GdHli4keT9Y",
+      "thumbnail": "https://i.ytimg.com/vi/GdHli4keT9Y/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-11T08:24:28.898122",
+      "recordedLabel": "2026.11.11 08:24",
+      "timeLabel": "2026.11.11 08:24",
+      "persons": [
+        "池水雄一"
+      ],
+      "lastModified": "2026-11-11T08:24:34Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s36b98cb1f11649faaa9e4148d9cdb4e0"
+    },
     "2820ed79f8033024ab": {
       "id": "2820ed79f8033024ab",
       "url": "/articles/2820ed79f8033024ab/",
@@ -20548,6 +20590,11 @@
   },
   "channels": [
     {
+      "name": "なるほど投資ゼミ（大橋ひろこ",
+      "tab": "なるほど",
+      "latestAt": "2026-11-11T08:24:28.898122"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-10T10:23:57.408024"
@@ -20591,11 +20638,6 @@
       "name": "トウシル（楽天証券）",
       "tab": "トウシル",
       "latestAt": "2026-11-05T08:54:27.822600"
-    },
-    {
-      "name": "なるほど投資ゼミ（大橋ひろこ",
-      "tab": "なるほど",
-      "latestAt": "2026-11-05T08:24:55.567206"
     },
     {
       "name": "ピクテ・ジャパン",
