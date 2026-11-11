@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-11T10:54:49.000348+00:00",
+  "generatedAt": "2026-11-11T14:44:03.953411+00:00",
   "articleList": [
+    {
+      "id": "1d4822365d95980aef",
+      "url": "/articles/1d4822365d95980aef/",
+      "title": "夢のIPOに落とし穴!?　アンソロピックを財務から読む",
+      "channelName": "株式会社東京金融取引所",
+      "channelKey": "株式会社東京金融取引所",
+      "channelTab": "株式会社",
+      "youtubeUrl": "https://www.youtube.com/watch?v=DV9clRCRRJM",
+      "thumbnail": "https://i.ytimg.com/vi/DV9clRCRRJM/hqdefault.jpg",
+      "publishedAt": "2026-11-11T14:42:37.186663Z",
+      "publishedLabel": "2026.11.11",
+      "duration": "",
+      "recordedAt": "2026-11-11T14:43:15.472250",
+      "recordedLabel": "2026.11.11 14:43",
+      "timeLabel": "2026.11.11 14:43",
+      "persons": [],
+      "lastModified": "2026-11-11T14:43:22Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s03d3d3550dac4f79997e156377b5eb7c"
+    },
     {
       "id": "f446d302208665e793",
       "url": "/articles/f446d302208665e793/",
@@ -10355,6 +10374,25 @@
     }
   ],
   "articles": {
+    "1d4822365d95980aef": {
+      "id": "1d4822365d95980aef",
+      "url": "/articles/1d4822365d95980aef/",
+      "title": "夢のIPOに落とし穴!?　アンソロピックを財務から読む",
+      "channelName": "株式会社東京金融取引所",
+      "channelKey": "株式会社東京金融取引所",
+      "channelTab": "株式会社",
+      "youtubeUrl": "https://www.youtube.com/watch?v=DV9clRCRRJM",
+      "thumbnail": "https://i.ytimg.com/vi/DV9clRCRRJM/hqdefault.jpg",
+      "publishedAt": "2026-11-11T14:42:37.186663Z",
+      "publishedLabel": "2026.11.11",
+      "duration": "",
+      "recordedAt": "2026-11-11T14:43:15.472250",
+      "recordedLabel": "2026.11.11 14:43",
+      "timeLabel": "2026.11.11 14:43",
+      "persons": [],
+      "lastModified": "2026-11-11T14:43:22Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s03d3d3550dac4f79997e156377b5eb7c"
+    },
     "f446d302208665e793": {
       "id": "f446d302208665e793",
       "url": "/articles/f446d302208665e793/",
@@ -20709,6 +20747,11 @@
     }
   },
   "channels": [
+    {
+      "name": "株式会社東京金融取引所",
+      "tab": "株式会社",
+      "latestAt": "2026-11-11T14:43:15.472250"
+    },
     {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
