@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-11T08:55:37.569055+00:00",
+  "generatedAt": "2026-11-11T09:55:49.749089+00:00",
   "articleList": [
+    {
+      "id": "14d318a2611f73bcc5",
+      "url": "/articles/14d318a2611f73bcc5/",
+      "title": "【ロシアの日本企業接収】あなたの保有株も危ない？JT以外にもロシアリスクのある企業が続々｜JTの配当272円は守られるのか？｜株価は底か？まだ下がる？【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Do_Z1TVq8PM",
+      "thumbnail": "https://i.ytimg.com/vi/Do_Z1TVq8PM/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-11T09:54:16.459830",
+      "recordedLabel": "2026.11.11 09:54",
+      "timeLabel": "2026.11.11 09:54",
+      "persons": [],
+      "lastModified": "2026-11-11T09:54:22Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sc22ef5b7cd364af88f37ceb5b2e179e8"
+    },
     {
       "id": "af510c348fe17b4e22",
       "url": "/articles/af510c348fe17b4e22/",
@@ -10317,6 +10336,25 @@
     }
   ],
   "articles": {
+    "14d318a2611f73bcc5": {
+      "id": "14d318a2611f73bcc5",
+      "url": "/articles/14d318a2611f73bcc5/",
+      "title": "【ロシアの日本企業接収】あなたの保有株も危ない？JT以外にもロシアリスクのある企業が続々｜JTの配当272円は守られるのか？｜株価は底か？まだ下がる？【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Do_Z1TVq8PM",
+      "thumbnail": "https://i.ytimg.com/vi/Do_Z1TVq8PM/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-11T09:54:16.459830",
+      "recordedLabel": "2026.11.11 09:54",
+      "timeLabel": "2026.11.11 09:54",
+      "persons": [],
+      "lastModified": "2026-11-11T09:54:22Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sc22ef5b7cd364af88f37ceb5b2e179e8"
+    },
     "af510c348fe17b4e22": {
       "id": "af510c348fe17b4e22",
       "url": "/articles/af510c348fe17b4e22/",
@@ -20634,6 +20672,11 @@
   },
   "channels": [
     {
+      "name": "イズミダイズム",
+      "tab": "イズミダ",
+      "latestAt": "2026-11-11T09:54:16.459830"
+    },
+    {
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-11-11T08:54:24.829052"
@@ -20642,11 +20685,6 @@
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-10T10:23:57.408024"
-    },
-    {
-      "name": "イズミダイズム",
-      "tab": "イズミダ",
-      "latestAt": "2026-11-10T09:24:11.400345"
     },
     {
       "name": "YTの投資銀行",
