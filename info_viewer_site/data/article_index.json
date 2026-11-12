@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-11-11T15:04:00.925188+00:00",
+  "generatedAt": "2026-11-12T08:24:23.254577+00:00",
   "articleList": [
+    {
+      "id": "1bb9c499d6d5308f14",
+      "url": "/articles/1bb9c499d6d5308f14/",
+      "title": "【シルバーフォーカス】現物買い＆ソーラーパネル回収の現状（貴金属スペシャリスト 池水雄一さん）＜2026年11月度＞",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=X74tw5xci2g",
+      "thumbnail": "https://i.ytimg.com/vi/X74tw5xci2g/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-12T08:23:01.338751",
+      "recordedLabel": "2026.11.12 08:23",
+      "timeLabel": "2026.11.12 08:23",
+      "persons": [
+        "池水雄一"
+      ],
+      "lastModified": "2026-11-12T08:23:06Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sa49e29e50d6649a6898d679526b37345"
+    },
     {
       "id": "af7ed69df2d7a675f6",
       "url": "/articles/af7ed69df2d7a675f6/",
@@ -10393,6 +10414,27 @@
     }
   ],
   "articles": {
+    "1bb9c499d6d5308f14": {
+      "id": "1bb9c499d6d5308f14",
+      "url": "/articles/1bb9c499d6d5308f14/",
+      "title": "【シルバーフォーカス】現物買い＆ソーラーパネル回収の現状（貴金属スペシャリスト 池水雄一さん）＜2026年11月度＞",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=X74tw5xci2g",
+      "thumbnail": "https://i.ytimg.com/vi/X74tw5xci2g/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-12T08:23:01.338751",
+      "recordedLabel": "2026.11.12 08:23",
+      "timeLabel": "2026.11.12 08:23",
+      "persons": [
+        "池水雄一"
+      ],
+      "lastModified": "2026-11-12T08:23:06Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sa49e29e50d6649a6898d679526b37345"
+    },
     "af7ed69df2d7a675f6": {
       "id": "af7ed69df2d7a675f6",
       "url": "/articles/af7ed69df2d7a675f6/",
@@ -20786,6 +20828,11 @@
   },
   "channels": [
     {
+      "name": "なるほど投資ゼミ（大橋ひろこ",
+      "tab": "なるほど",
+      "latestAt": "2026-11-12T08:23:01.338751"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-11T15:02:22.892153"
@@ -20804,11 +20851,6 @@
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-11-11T09:54:16.459830"
-    },
-    {
-      "name": "なるほど投資ゼミ（大橋ひろこ",
-      "tab": "なるほど",
-      "latestAt": "2026-11-11T08:54:24.829052"
     },
     {
       "name": "ゆたかTV",
