@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-12T12:16:24.712074+00:00",
+  "generatedAt": "2026-11-12T14:56:44.286562+00:00",
   "articleList": [
+    {
+      "id": "e9f287e4f90e6848e5",
+      "url": "/articles/e9f287e4f90e6848e5/",
+      "title": "LIVE  マーケットアップデート 半導体後場急落  NVIDIA CEO解任報道",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Fo1oBolgXHA",
+      "thumbnail": "https://i.ytimg.com/vi/Fo1oBolgXHA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-12T14:55:24.230478",
+      "recordedLabel": "2026.11.12 14:55",
+      "timeLabel": "2026.11.12 14:55",
+      "persons": [],
+      "lastModified": "2026-11-12T14:55:28Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s8d91671580104ce18760100978ee508b"
+    },
     {
       "id": "0d4ef7834895f7d846",
       "url": "/articles/0d4ef7834895f7d846/",
@@ -10494,6 +10513,25 @@
     }
   ],
   "articles": {
+    "e9f287e4f90e6848e5": {
+      "id": "e9f287e4f90e6848e5",
+      "url": "/articles/e9f287e4f90e6848e5/",
+      "title": "LIVE  マーケットアップデート 半導体後場急落  NVIDIA CEO解任報道",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Fo1oBolgXHA",
+      "thumbnail": "https://i.ytimg.com/vi/Fo1oBolgXHA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-12T14:55:24.230478",
+      "recordedLabel": "2026.11.12 14:55",
+      "timeLabel": "2026.11.12 14:55",
+      "persons": [],
+      "lastModified": "2026-11-12T14:55:28Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s8d91671580104ce18760100978ee508b"
+    },
     "0d4ef7834895f7d846": {
       "id": "0d4ef7834895f7d846",
       "url": "/articles/0d4ef7834895f7d846/",
@@ -20988,6 +21026,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-11-12T14:55:24.230478"
+    },
+    {
       "name": "ピクテ・ジャパン株式会社",
       "tab": "ピクテ・",
       "latestAt": "2026-11-12T12:15:41.785682"
@@ -21011,11 +21054,6 @@
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-11-12T08:23:01.338751"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-11-11T15:02:22.892153"
     },
     {
       "name": "株式会社東京金融取引所",
