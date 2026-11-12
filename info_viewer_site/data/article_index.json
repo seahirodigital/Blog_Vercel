@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-12T09:26:41.336520+00:00",
+  "generatedAt": "2026-11-12T10:54:53.305959+00:00",
   "articleList": [
+    {
+      "id": "a081a720d22f3ee1a2",
+      "url": "/articles/a081a720d22f3ee1a2/",
+      "title": "NVDAのCEO解任説で市場が急落してますが、AI株はまだ強そうです",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=VausVeAylIY",
+      "thumbnail": "https://i.ytimg.com/vi/VausVeAylIY/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-12T10:53:50.266771",
+      "recordedLabel": "2026.11.12 10:53",
+      "timeLabel": "2026.11.12 10:53",
+      "persons": [],
+      "lastModified": "2026-11-12T10:53:54Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sdef79e9b9417439bb23963e8b7e4e296"
+    },
     {
       "id": "706d5ef402e44b6960",
       "url": "/articles/706d5ef402e44b6960/",
@@ -10454,6 +10473,25 @@
     }
   ],
   "articles": {
+    "a081a720d22f3ee1a2": {
+      "id": "a081a720d22f3ee1a2",
+      "url": "/articles/a081a720d22f3ee1a2/",
+      "title": "NVDAのCEO解任説で市場が急落してますが、AI株はまだ強そうです",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=VausVeAylIY",
+      "thumbnail": "https://i.ytimg.com/vi/VausVeAylIY/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-12T10:53:50.266771",
+      "recordedLabel": "2026.11.12 10:53",
+      "timeLabel": "2026.11.12 10:53",
+      "persons": [],
+      "lastModified": "2026-11-12T10:53:54Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sdef79e9b9417439bb23963e8b7e4e296"
+    },
     "706d5ef402e44b6960": {
       "id": "706d5ef402e44b6960",
       "url": "/articles/706d5ef402e44b6960/",
@@ -20908,6 +20946,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-12T10:53:50.266771"
+    },
+    {
       "name": "トウシル（楽天証券）",
       "tab": "トウシル",
       "latestAt": "2026-11-12T09:25:14.578187"
@@ -20931,11 +20974,6 @@
       "name": "株式会社東京金融取引所",
       "tab": "株式会社",
       "latestAt": "2026-11-11T14:43:15.472250"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-11T10:53:52.755750"
     },
     {
       "name": "ゆたかTV",
