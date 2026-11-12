@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-11-12T10:54:53.305959+00:00",
+  "generatedAt": "2026-11-12T12:16:24.712074+00:00",
   "articleList": [
+    {
+      "id": "0d4ef7834895f7d846",
+      "url": "/articles/0d4ef7834895f7d846/",
+      "title": "【業績トラップ】米株不穏/Anthropic上場直前/ AI上場失速/米株に不気味な兆候/日経平均の「底値」＜糸島孝俊×岡崎良介＞Pictet Market Lounge 2026.11.10",
+      "channelName": "ピクテ・ジャパン株式会社",
+      "channelKey": "ピクテ・ジャパン株式会社",
+      "channelTab": "ピクテ・",
+      "youtubeUrl": "https://www.youtube.com/watch?v=4ObXF8Z0-6M",
+      "thumbnail": "https://i.ytimg.com/vi/4ObXF8Z0-6M/hqdefault.jpg",
+      "publishedAt": "2026-11-12T12:14:55.966288Z",
+      "publishedLabel": "2026.11.12",
+      "duration": "",
+      "recordedAt": "2026-11-12T12:15:41.785682",
+      "recordedLabel": "2026.11.12 12:15",
+      "timeLabel": "2026.11.12 12:15",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-12T12:15:47Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s533f6dc30bfc43e4878ddd83542a979c"
+    },
     {
       "id": "a081a720d22f3ee1a2",
       "url": "/articles/a081a720d22f3ee1a2/",
@@ -10473,6 +10494,27 @@
     }
   ],
   "articles": {
+    "0d4ef7834895f7d846": {
+      "id": "0d4ef7834895f7d846",
+      "url": "/articles/0d4ef7834895f7d846/",
+      "title": "【業績トラップ】米株不穏/Anthropic上場直前/ AI上場失速/米株に不気味な兆候/日経平均の「底値」＜糸島孝俊×岡崎良介＞Pictet Market Lounge 2026.11.10",
+      "channelName": "ピクテ・ジャパン株式会社",
+      "channelKey": "ピクテ・ジャパン株式会社",
+      "channelTab": "ピクテ・",
+      "youtubeUrl": "https://www.youtube.com/watch?v=4ObXF8Z0-6M",
+      "thumbnail": "https://i.ytimg.com/vi/4ObXF8Z0-6M/hqdefault.jpg",
+      "publishedAt": "2026-11-12T12:14:55.966288Z",
+      "publishedLabel": "2026.11.12",
+      "duration": "",
+      "recordedAt": "2026-11-12T12:15:41.785682",
+      "recordedLabel": "2026.11.12 12:15",
+      "timeLabel": "2026.11.12 12:15",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-12T12:15:47Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s533f6dc30bfc43e4878ddd83542a979c"
+    },
     "a081a720d22f3ee1a2": {
       "id": "a081a720d22f3ee1a2",
       "url": "/articles/a081a720d22f3ee1a2/",
@@ -20945,6 +20987,11 @@
     }
   },
   "channels": [
+    {
+      "name": "ピクテ・ジャパン株式会社",
+      "tab": "ピクテ・",
+      "latestAt": "2026-11-12T12:15:41.785682"
+    },
     {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
