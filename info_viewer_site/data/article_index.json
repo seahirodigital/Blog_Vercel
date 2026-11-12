@@ -1,6 +1,46 @@
 {
-  "generatedAt": "2026-11-12T08:24:23.254577+00:00",
+  "generatedAt": "2026-11-12T09:26:41.336520+00:00",
   "articleList": [
+    {
+      "id": "706d5ef402e44b6960",
+      "url": "/articles/706d5ef402e44b6960/",
+      "title": "田中泰輔のマネーは語る：【米国株】AIはバブル破裂なの？半導体は買い場なの？​（田中 泰輔）【楽天証券 トウシル】",
+      "channelName": "トウシル（楽天証券）",
+      "channelKey": "トウシル（楽天証券）",
+      "channelTab": "トウシル",
+      "youtubeUrl": "https://www.youtube.com/watch?v=UzGcHTics8s",
+      "thumbnail": "https://i.ytimg.com/vi/UzGcHTics8s/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-12T09:25:14.578187",
+      "recordedLabel": "2026.11.12 09:25",
+      "timeLabel": "2026.11.12 09:25",
+      "persons": [
+        "田中泰輔"
+      ],
+      "lastModified": "2026-11-12T09:25:20Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s5430ac4d89b44316a63875656583b250"
+    },
+    {
+      "id": "9b88407ab1c242c8fb",
+      "url": "/articles/9b88407ab1c242c8fb/",
+      "title": "【Manus AI】最新AIツールでわかりにくい決算資料を分析・解説を自動化させた結果、革命が起きた【PR】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=58fRgK2RQ5w",
+      "thumbnail": "https://i.ytimg.com/vi/58fRgK2RQ5w/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-12T09:24:08.285214",
+      "recordedLabel": "2026.11.12 09:24",
+      "timeLabel": "2026.11.12 09:24",
+      "persons": [],
+      "lastModified": "2026-11-12T09:24:13Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s6df7028dea004a3695031a719b641da5"
+    },
     {
       "id": "1bb9c499d6d5308f14",
       "url": "/articles/1bb9c499d6d5308f14/",
@@ -10414,6 +10454,46 @@
     }
   ],
   "articles": {
+    "706d5ef402e44b6960": {
+      "id": "706d5ef402e44b6960",
+      "url": "/articles/706d5ef402e44b6960/",
+      "title": "田中泰輔のマネーは語る：【米国株】AIはバブル破裂なの？半導体は買い場なの？​（田中 泰輔）【楽天証券 トウシル】",
+      "channelName": "トウシル（楽天証券）",
+      "channelKey": "トウシル（楽天証券）",
+      "channelTab": "トウシル",
+      "youtubeUrl": "https://www.youtube.com/watch?v=UzGcHTics8s",
+      "thumbnail": "https://i.ytimg.com/vi/UzGcHTics8s/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-12T09:25:14.578187",
+      "recordedLabel": "2026.11.12 09:25",
+      "timeLabel": "2026.11.12 09:25",
+      "persons": [
+        "田中泰輔"
+      ],
+      "lastModified": "2026-11-12T09:25:20Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s5430ac4d89b44316a63875656583b250"
+    },
+    "9b88407ab1c242c8fb": {
+      "id": "9b88407ab1c242c8fb",
+      "url": "/articles/9b88407ab1c242c8fb/",
+      "title": "【Manus AI】最新AIツールでわかりにくい決算資料を分析・解説を自動化させた結果、革命が起きた【PR】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=58fRgK2RQ5w",
+      "thumbnail": "https://i.ytimg.com/vi/58fRgK2RQ5w/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-12T09:24:08.285214",
+      "recordedLabel": "2026.11.12 09:24",
+      "timeLabel": "2026.11.12 09:24",
+      "persons": [],
+      "lastModified": "2026-11-12T09:24:13Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s6df7028dea004a3695031a719b641da5"
+    },
     "1bb9c499d6d5308f14": {
       "id": "1bb9c499d6d5308f14",
       "url": "/articles/1bb9c499d6d5308f14/",
@@ -20828,6 +20908,16 @@
   },
   "channels": [
     {
+      "name": "トウシル（楽天証券）",
+      "tab": "トウシル",
+      "latestAt": "2026-11-12T09:25:14.578187"
+    },
+    {
+      "name": "イズミダイズム",
+      "tab": "イズミダ",
+      "latestAt": "2026-11-12T09:24:08.285214"
+    },
+    {
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-11-12T08:23:01.338751"
@@ -20846,11 +20936,6 @@
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-11T10:53:52.755750"
-    },
-    {
-      "name": "イズミダイズム",
-      "tab": "イズミダ",
-      "latestAt": "2026-11-11T09:54:16.459830"
     },
     {
       "name": "ゆたかTV",
@@ -20876,11 +20961,6 @@
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
       "latestAt": "2026-11-06T08:25:15.087871"
-    },
-    {
-      "name": "トウシル（楽天証券）",
-      "tab": "トウシル",
-      "latestAt": "2026-11-05T08:54:27.822600"
     },
     {
       "name": "ピクテ・ジャパン",
