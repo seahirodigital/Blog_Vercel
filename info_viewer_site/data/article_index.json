@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-11-13T12:29:10.225762+00:00",
+  "generatedAt": "2026-11-13T16:15:38.516673+00:00",
   "articleList": [
+    {
+      "id": "a58ff5c8ac083e3eb3",
+      "url": "/articles/a58ff5c8ac083e3eb3/",
+      "title": "木野内栄治【11/17エヌビディア決算｜フジクラ下方修正悪材料出尽くし『ウィッチング支えIPO換金売り待ち』SOXグランビル買いサイン｜米小売り日本CPI心配】スズキノチャンネル♯62 11/13配信",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Hjv6l3zGc24",
+      "thumbnail": "https://i.ytimg.com/vi/Hjv6l3zGc24/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-13T16:13:47.931054",
+      "recordedLabel": "2026.11.13 16:13",
+      "timeLabel": "2026.11.13 16:13",
+      "persons": [
+        "木野内栄治"
+      ],
+      "lastModified": "2026-11-13T16:13:54Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s70dd713e948846e389ba061c176375ec"
+    },
     {
       "id": "169b5dab1f0592d0b9",
       "url": "/articles/169b5dab1f0592d0b9/",
@@ -10572,6 +10593,27 @@
     }
   ],
   "articles": {
+    "a58ff5c8ac083e3eb3": {
+      "id": "a58ff5c8ac083e3eb3",
+      "url": "/articles/a58ff5c8ac083e3eb3/",
+      "title": "木野内栄治【11/17エヌビディア決算｜フジクラ下方修正悪材料出尽くし『ウィッチング支えIPO換金売り待ち』SOXグランビル買いサイン｜米小売り日本CPI心配】スズキノチャンネル♯62 11/13配信",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Hjv6l3zGc24",
+      "thumbnail": "https://i.ytimg.com/vi/Hjv6l3zGc24/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-13T16:13:47.931054",
+      "recordedLabel": "2026.11.13 16:13",
+      "timeLabel": "2026.11.13 16:13",
+      "persons": [
+        "木野内栄治"
+      ],
+      "lastModified": "2026-11-13T16:13:54Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s70dd713e948846e389ba061c176375ec"
+    },
     "169b5dab1f0592d0b9": {
       "id": "169b5dab1f0592d0b9",
       "url": "/articles/169b5dab1f0592d0b9/",
@@ -21146,7 +21188,7 @@
     {
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
-      "latestAt": "2026-11-13T12:26:28.370333"
+      "latestAt": "2026-11-13T16:13:47.931054"
     },
     {
       "name": "げんたろうの投資ch【元機関投資家】",
