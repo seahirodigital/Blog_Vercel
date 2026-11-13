@@ -1,6 +1,46 @@
 {
-  "generatedAt": "2026-11-12T14:56:44.286562+00:00",
+  "generatedAt": "2026-11-13T12:23:14.159190+00:00",
   "articleList": [
+    {
+      "id": "e7779c0dfd2feec32e",
+      "url": "/articles/e7779c0dfd2feec32e/",
+      "title": "岡崎良介×糸島孝俊×永濱利廣×【エヌビディアは⁉『生保の債券含み損 拡大本当か？』新TOPIXの行方と価値創造「日銀 高齢者消費」分析の選択バイアス｜鈴木銘柄分析】11月13日公開※11/28大阪",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=s6pIWlTouqI",
+      "thumbnail": "https://i.ytimg.com/vi/s6pIWlTouqI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-13T12:15:00.875897",
+      "recordedLabel": "2026.11.13 12:15",
+      "timeLabel": "2026.11.13 12:15",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-13T12:15:06Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf7164278d17543e0b5ae3ac6b00262d9"
+    },
+    {
+      "id": "0533e740466769aeee",
+      "url": "/articles/0533e740466769aeee/",
+      "title": "【緊急解説】事態が急変しました...。エヌビディアCEO辞任、時価総額190兆円が消えたAI相場で、これから株式市場とあなたのお金に起こること",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=GJWP7FCPnLY",
+      "thumbnail": "https://i.ytimg.com/vi/GJWP7FCPnLY/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-13T12:13:17.781988",
+      "recordedLabel": "2026.11.13 12:13",
+      "timeLabel": "2026.11.13 12:13",
+      "persons": [],
+      "lastModified": "2026-11-13T12:13:27Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sc22661522b804dd58a2909afda01b29e"
+    },
     {
       "id": "e9f287e4f90e6848e5",
       "url": "/articles/e9f287e4f90e6848e5/",
@@ -10513,6 +10553,46 @@
     }
   ],
   "articles": {
+    "e7779c0dfd2feec32e": {
+      "id": "e7779c0dfd2feec32e",
+      "url": "/articles/e7779c0dfd2feec32e/",
+      "title": "岡崎良介×糸島孝俊×永濱利廣×【エヌビディアは⁉『生保の債券含み損 拡大本当か？』新TOPIXの行方と価値創造「日銀 高齢者消費」分析の選択バイアス｜鈴木銘柄分析】11月13日公開※11/28大阪",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=s6pIWlTouqI",
+      "thumbnail": "https://i.ytimg.com/vi/s6pIWlTouqI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-13T12:15:00.875897",
+      "recordedLabel": "2026.11.13 12:15",
+      "timeLabel": "2026.11.13 12:15",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-13T12:15:06Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf7164278d17543e0b5ae3ac6b00262d9"
+    },
+    "0533e740466769aeee": {
+      "id": "0533e740466769aeee",
+      "url": "/articles/0533e740466769aeee/",
+      "title": "【緊急解説】事態が急変しました...。エヌビディアCEO辞任、時価総額190兆円が消えたAI相場で、これから株式市場とあなたのお金に起こること",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=GJWP7FCPnLY",
+      "thumbnail": "https://i.ytimg.com/vi/GJWP7FCPnLY/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-13T12:13:17.781988",
+      "recordedLabel": "2026.11.13 12:13",
+      "timeLabel": "2026.11.13 12:13",
+      "persons": [],
+      "lastModified": "2026-11-13T12:13:27Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sc22661522b804dd58a2909afda01b29e"
+    },
     "e9f287e4f90e6848e5": {
       "id": "e9f287e4f90e6848e5",
       "url": "/articles/e9f287e4f90e6848e5/",
@@ -21026,6 +21106,16 @@
   },
   "channels": [
     {
+      "name": "マーケットマスターズ",
+      "tab": "マーケッ",
+      "latestAt": "2026-11-13T12:15:00.875897"
+    },
+    {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-13T12:13:17.781988"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-12T14:55:24.230478"
@@ -21034,11 +21124,6 @@
       "name": "ピクテ・ジャパン株式会社",
       "tab": "ピクテ・",
       "latestAt": "2026-11-12T12:15:41.785682"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-12T10:53:50.266771"
     },
     {
       "name": "トウシル（楽天証券）",
@@ -21079,11 +21164,6 @@
       "name": "マネーフォワード ME イベント&セミナー",
       "tab": "マネーフ",
       "latestAt": "2026-11-06T09:24:25.145996"
-    },
-    {
-      "name": "マーケットマスターズ",
-      "tab": "マーケッ",
-      "latestAt": "2026-11-06T08:25:15.087871"
     },
     {
       "name": "ピクテ・ジャパン",
