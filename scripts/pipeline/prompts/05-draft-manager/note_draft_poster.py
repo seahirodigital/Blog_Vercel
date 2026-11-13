@@ -95,7 +95,7 @@ NOTE_PUBLISH_SETTINGS_READY_POLL_MS = int(os.getenv("NOTE_PUBLISH_SETTINGS_READY
 
 EDITOR_CONTENT_SELECTOR  = ".ProseMirror p, .ProseMirror h2, .ProseMirror h3"
 EDITOR_LOAD_TIMEOUT_SEC  = 60
-OGP_TARGET_DOMAINS       = ["amzn.to", "amazon.co.jp", "apple.com", "youtube.com"]
+OGP_TARGET_DOMAINS       = ["amzn.to", "link.amazon", "amazon.co.jp", "apple.com", "youtube.com"]
 TOP_IMAGE_BUTTON_SELECTOR = 'button[aria-label="画像を追加"]'
 PAGE_IMAGE_SELECTOR = "main img"
 CROP_DIALOG_SELECTOR = "div.ReactModal__Content.CropModal__content[role='dialog'][aria-modal='true']"
