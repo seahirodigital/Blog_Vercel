@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-13T12:23:14.159190+00:00",
+  "generatedAt": "2026-11-13T12:29:10.225762+00:00",
   "articleList": [
+    {
+      "id": "169b5dab1f0592d0b9",
+      "url": "/articles/169b5dab1f0592d0b9/",
+      "title": "矢嶋康次【26年末相場の注目イベント｜APEC 日本「蚊帳の外」レアアース「対日輸出規制は別の枠組み」減税法案 文書が決まっても実体をどう動かす】スズキノチャンネル ゲスト:矢嶋康次 11月13日配信",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=adieR12Pono",
+      "thumbnail": "https://i.ytimg.com/vi/adieR12Pono/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-13T12:26:28.370333",
+      "recordedLabel": "2026.11.13 12:26",
+      "timeLabel": "2026.11.13 12:26",
+      "persons": [],
+      "lastModified": "2026-11-13T12:26:32Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sec4ed3527b03471a948dd3ac5d1afd6e"
+    },
     {
       "id": "e7779c0dfd2feec32e",
       "url": "/articles/e7779c0dfd2feec32e/",
@@ -10553,6 +10572,25 @@
     }
   ],
   "articles": {
+    "169b5dab1f0592d0b9": {
+      "id": "169b5dab1f0592d0b9",
+      "url": "/articles/169b5dab1f0592d0b9/",
+      "title": "矢嶋康次【26年末相場の注目イベント｜APEC 日本「蚊帳の外」レアアース「対日輸出規制は別の枠組み」減税法案 文書が決まっても実体をどう動かす】スズキノチャンネル ゲスト:矢嶋康次 11月13日配信",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=adieR12Pono",
+      "thumbnail": "https://i.ytimg.com/vi/adieR12Pono/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-13T12:26:28.370333",
+      "recordedLabel": "2026.11.13 12:26",
+      "timeLabel": "2026.11.13 12:26",
+      "persons": [],
+      "lastModified": "2026-11-13T12:26:32Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sec4ed3527b03471a948dd3ac5d1afd6e"
+    },
     "e7779c0dfd2feec32e": {
       "id": "e7779c0dfd2feec32e",
       "url": "/articles/e7779c0dfd2feec32e/",
@@ -21108,7 +21146,7 @@
     {
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
-      "latestAt": "2026-11-13T12:15:00.875897"
+      "latestAt": "2026-11-13T12:26:28.370333"
     },
     {
       "name": "げんたろうの投資ch【元機関投資家】",
