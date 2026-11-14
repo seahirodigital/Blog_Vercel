@@ -1,6 +1,46 @@
 {
-  "generatedAt": "2026-11-14T03:51:49.784967+00:00",
+  "generatedAt": "2026-11-14T09:25:58.132131+00:00",
   "articleList": [
+    {
+      "id": "936d12705960681ee4",
+      "url": "/articles/936d12705960681ee4/",
+      "title": "【電線株】フジクラ・古河電工・住友電工、今買うならどれ？AIデータセンター相場で一番伸びる1社をプロの投資家に聞いてみた",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=CgnL2lCq5oI",
+      "thumbnail": "https://i.ytimg.com/vi/CgnL2lCq5oI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-14T09:24:52.643933",
+      "recordedLabel": "2026.11.14 09:24",
+      "timeLabel": "2026.11.14 09:24",
+      "persons": [],
+      "lastModified": "2026-11-14T09:24:56Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sa81e9780692144cba877091f95a7f30a"
+    },
+    {
+      "id": "63b77f5118d70791dd",
+      "url": "/articles/63b77f5118d70791dd/",
+      "title": "【フアンCEO電撃解任!?】どうなるNVIDIA!? 来週決算も!? / 米0.5%利上げ警戒・ハイテク暴落シナリオも!? / 3メガバンク最高益＆JT解説 【大川&Nobbyの聴くだけ投資】大川智宏",
+      "channelName": "マネーフォワード ME イベント&セミナー",
+      "channelKey": "マネーフォワード ME イベント&セミナー",
+      "channelTab": "マネーフ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=3QvMAsMDJbE",
+      "thumbnail": "https://i.ytimg.com/vi/3QvMAsMDJbE/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-14T09:23:48.582331",
+      "recordedLabel": "2026.11.14 09:23",
+      "timeLabel": "2026.11.14 09:23",
+      "persons": [
+        "大川智宏"
+      ],
+      "lastModified": "2026-11-14T09:23:52Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s3bba498adfb8419eb727b56ba2b330cc"
+    },
     {
       "id": "301760d4cbbce4de47",
       "url": "/articles/301760d4cbbce4de47/",
@@ -10612,6 +10652,46 @@
     }
   ],
   "articles": {
+    "936d12705960681ee4": {
+      "id": "936d12705960681ee4",
+      "url": "/articles/936d12705960681ee4/",
+      "title": "【電線株】フジクラ・古河電工・住友電工、今買うならどれ？AIデータセンター相場で一番伸びる1社をプロの投資家に聞いてみた",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=CgnL2lCq5oI",
+      "thumbnail": "https://i.ytimg.com/vi/CgnL2lCq5oI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-14T09:24:52.643933",
+      "recordedLabel": "2026.11.14 09:24",
+      "timeLabel": "2026.11.14 09:24",
+      "persons": [],
+      "lastModified": "2026-11-14T09:24:56Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sa81e9780692144cba877091f95a7f30a"
+    },
+    "63b77f5118d70791dd": {
+      "id": "63b77f5118d70791dd",
+      "url": "/articles/63b77f5118d70791dd/",
+      "title": "【フアンCEO電撃解任!?】どうなるNVIDIA!? 来週決算も!? / 米0.5%利上げ警戒・ハイテク暴落シナリオも!? / 3メガバンク最高益＆JT解説 【大川&Nobbyの聴くだけ投資】大川智宏",
+      "channelName": "マネーフォワード ME イベント&セミナー",
+      "channelKey": "マネーフォワード ME イベント&セミナー",
+      "channelTab": "マネーフ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=3QvMAsMDJbE",
+      "thumbnail": "https://i.ytimg.com/vi/3QvMAsMDJbE/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-14T09:23:48.582331",
+      "recordedLabel": "2026.11.14 09:23",
+      "timeLabel": "2026.11.14 09:23",
+      "persons": [
+        "大川智宏"
+      ],
+      "lastModified": "2026-11-14T09:23:52Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s3bba498adfb8419eb727b56ba2b330cc"
+    },
     "301760d4cbbce4de47": {
       "id": "301760d4cbbce4de47",
       "url": "/articles/301760d4cbbce4de47/",
@@ -21224,6 +21304,16 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-14T09:24:52.643933"
+    },
+    {
+      "name": "マネーフォワード ME イベント&セミナー",
+      "tab": "マネーフ",
+      "latestAt": "2026-11-14T09:23:48.582331"
+    },
+    {
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-11-14T03:50:16.778991"
@@ -21232,11 +21322,6 @@
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
       "latestAt": "2026-11-13T16:13:47.931054"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-13T12:13:17.781988"
     },
     {
       "name": "YTの投資銀行",
@@ -21277,11 +21362,6 @@
       "name": "楽待 RAKUMACHI",
       "tab": "楽待RA",
       "latestAt": "2026-11-07T04:28:34.850618"
-    },
-    {
-      "name": "マネーフォワード ME イベント&セミナー",
-      "tab": "マネーフ",
-      "latestAt": "2026-11-06T09:24:25.145996"
     },
     {
       "name": "ピクテ・ジャパン",
