@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-13T16:15:38.516673+00:00",
+  "generatedAt": "2026-11-14T03:51:49.784967+00:00",
   "articleList": [
+    {
+      "id": "301760d4cbbce4de47",
+      "url": "/articles/301760d4cbbce4de47/",
+      "title": "【ANA株】株価上昇は実は危険？バフェットも敬遠する航空株｜個人投資家はどう戦う？売上は過去最高なのに営業利益9.7%減｜株価の上振れ余地はあるか？【元ANA担当の機関投資家の視点】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=mZIFKb4wV4g",
+      "thumbnail": "https://i.ytimg.com/vi/mZIFKb4wV4g/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-14T03:50:16.778991",
+      "recordedLabel": "2026.11.14 03:50",
+      "timeLabel": "2026.11.14 03:50",
+      "persons": [],
+      "lastModified": "2026-11-14T03:50:22Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s0959b3213f6349eaab139b1437ec901c"
+    },
     {
       "id": "a58ff5c8ac083e3eb3",
       "url": "/articles/a58ff5c8ac083e3eb3/",
@@ -10593,6 +10612,25 @@
     }
   ],
   "articles": {
+    "301760d4cbbce4de47": {
+      "id": "301760d4cbbce4de47",
+      "url": "/articles/301760d4cbbce4de47/",
+      "title": "【ANA株】株価上昇は実は危険？バフェットも敬遠する航空株｜個人投資家はどう戦う？売上は過去最高なのに営業利益9.7%減｜株価の上振れ余地はあるか？【元ANA担当の機関投資家の視点】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=mZIFKb4wV4g",
+      "thumbnail": "https://i.ytimg.com/vi/mZIFKb4wV4g/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-14T03:50:16.778991",
+      "recordedLabel": "2026.11.14 03:50",
+      "timeLabel": "2026.11.14 03:50",
+      "persons": [],
+      "lastModified": "2026-11-14T03:50:22Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s0959b3213f6349eaab139b1437ec901c"
+    },
     "a58ff5c8ac083e3eb3": {
       "id": "a58ff5c8ac083e3eb3",
       "url": "/articles/a58ff5c8ac083e3eb3/",
@@ -21186,6 +21224,11 @@
   },
   "channels": [
     {
+      "name": "イズミダイズム",
+      "tab": "イズミダ",
+      "latestAt": "2026-11-14T03:50:16.778991"
+    },
+    {
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
       "latestAt": "2026-11-13T16:13:47.931054"
@@ -21209,11 +21252,6 @@
       "name": "トウシル（楽天証券）",
       "tab": "トウシル",
       "latestAt": "2026-11-12T09:25:14.578187"
-    },
-    {
-      "name": "イズミダイズム",
-      "tab": "イズミダ",
-      "latestAt": "2026-11-12T09:24:08.285214"
     },
     {
       "name": "なるほど投資ゼミ（大橋ひろこ",
