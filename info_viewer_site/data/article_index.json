@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-15T00:54:55.393849+00:00",
+  "generatedAt": "2026-11-15T03:38:04.321706+00:00",
   "articleList": [
+    {
+      "id": "a4f45907459eefb329",
+      "url": "/articles/a4f45907459eefb329/",
+      "title": "【中島聡が語る「AI大失業時代」の生存戦略】NVIDIA問題どうなる？｜10年で仕事の8割は消滅｜ベーシックインカムが世界を救う？｜一流大卒の仕事はなくなり、高専は売り手市場に｜AI失業の先の生きがい",
+      "channelName": "文藝春秋PLUS 公式チャンネル",
+      "channelKey": "文藝春秋PLUS 公式チャンネル",
+      "channelTab": "文藝春秋",
+      "youtubeUrl": "https://www.youtube.com/watch?v=fAqBsOBzBz8",
+      "thumbnail": "https://i.ytimg.com/vi/fAqBsOBzBz8/hqdefault.jpg",
+      "publishedAt": "2026-11-15T03:36:39.465081Z",
+      "publishedLabel": "2026.11.15",
+      "duration": "",
+      "recordedAt": "2026-11-15T03:37:15.503186",
+      "recordedLabel": "2026.11.15 03:37",
+      "timeLabel": "2026.11.15 03:37",
+      "persons": [],
+      "lastModified": "2026-11-15T03:37:21Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s47880621522941a38cffd0a1eb6e0420"
+    },
     {
       "id": "d9bc4c2a2d60bbd41a",
       "url": "/articles/d9bc4c2a2d60bbd41a/",
@@ -10671,6 +10690,25 @@
     }
   ],
   "articles": {
+    "a4f45907459eefb329": {
+      "id": "a4f45907459eefb329",
+      "url": "/articles/a4f45907459eefb329/",
+      "title": "【中島聡が語る「AI大失業時代」の生存戦略】NVIDIA問題どうなる？｜10年で仕事の8割は消滅｜ベーシックインカムが世界を救う？｜一流大卒の仕事はなくなり、高専は売り手市場に｜AI失業の先の生きがい",
+      "channelName": "文藝春秋PLUS 公式チャンネル",
+      "channelKey": "文藝春秋PLUS 公式チャンネル",
+      "channelTab": "文藝春秋",
+      "youtubeUrl": "https://www.youtube.com/watch?v=fAqBsOBzBz8",
+      "thumbnail": "https://i.ytimg.com/vi/fAqBsOBzBz8/hqdefault.jpg",
+      "publishedAt": "2026-11-15T03:36:39.465081Z",
+      "publishedLabel": "2026.11.15",
+      "duration": "",
+      "recordedAt": "2026-11-15T03:37:15.503186",
+      "recordedLabel": "2026.11.15 03:37",
+      "timeLabel": "2026.11.15 03:37",
+      "persons": [],
+      "lastModified": "2026-11-15T03:37:21Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s47880621522941a38cffd0a1eb6e0420"
+    },
     "d9bc4c2a2d60bbd41a": {
       "id": "d9bc4c2a2d60bbd41a",
       "url": "/articles/d9bc4c2a2d60bbd41a/",
@@ -21341,6 +21379,11 @@
     }
   },
   "channels": [
+    {
+      "name": "文藝春秋PLUS 公式チャンネル",
+      "tab": "文藝春秋",
+      "latestAt": "2026-11-15T03:37:15.503186"
+    },
     {
       "name": "YTの投資銀行",
       "tab": "YTの投",
