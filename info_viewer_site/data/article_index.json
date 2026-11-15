@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-14T09:25:58.132131+00:00",
+  "generatedAt": "2026-11-15T00:54:55.393849+00:00",
   "articleList": [
+    {
+      "id": "d9bc4c2a2d60bbd41a",
+      "url": "/articles/d9bc4c2a2d60bbd41a/",
+      "title": "来週の日本株展望(2026/11/9~)　なぜ週後半AI株の勢いが落ちたか？　AI/半導体株以外に見ておきたいバリュー/ディフェンシブ株",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=tPZ_6kxZ80o",
+      "thumbnail": "https://i.ytimg.com/vi/tPZ_6kxZ80o/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-15T00:53:58.161752",
+      "recordedLabel": "2026.11.15 00:53",
+      "timeLabel": "2026.11.15 00:53",
+      "persons": [],
+      "lastModified": "2026-11-15T00:54:02Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s91a3f7f7307f4d5dac288dfbbb6b037e"
+    },
     {
       "id": "936d12705960681ee4",
       "url": "/articles/936d12705960681ee4/",
@@ -10652,6 +10671,25 @@
     }
   ],
   "articles": {
+    "d9bc4c2a2d60bbd41a": {
+      "id": "d9bc4c2a2d60bbd41a",
+      "url": "/articles/d9bc4c2a2d60bbd41a/",
+      "title": "来週の日本株展望(2026/11/9~)　なぜ週後半AI株の勢いが落ちたか？　AI/半導体株以外に見ておきたいバリュー/ディフェンシブ株",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=tPZ_6kxZ80o",
+      "thumbnail": "https://i.ytimg.com/vi/tPZ_6kxZ80o/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-15T00:53:58.161752",
+      "recordedLabel": "2026.11.15 00:53",
+      "timeLabel": "2026.11.15 00:53",
+      "persons": [],
+      "lastModified": "2026-11-15T00:54:02Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s91a3f7f7307f4d5dac288dfbbb6b037e"
+    },
     "936d12705960681ee4": {
       "id": "936d12705960681ee4",
       "url": "/articles/936d12705960681ee4/",
@@ -21304,6 +21342,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-11-15T00:53:58.161752"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-14T09:24:52.643933"
@@ -21322,11 +21365,6 @@
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
       "latestAt": "2026-11-13T16:13:47.931054"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-11-12T14:55:24.230478"
     },
     {
       "name": "ピクテ・ジャパン株式会社",
