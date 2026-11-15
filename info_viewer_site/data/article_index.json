@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-15T03:38:04.321706+00:00",
+  "generatedAt": "2026-11-15T09:25:26.156816+00:00",
   "articleList": [
+    {
+      "id": "ca98c3fe2f7c6d5627",
+      "url": "/articles/ca98c3fe2f7c6d5627/",
+      "title": "【日本株の今後】日本のGDPが世界6位に転落…。インド・イギリスに抜かれる日本、日本株は今後どうなる？元機関投資家が徹底解説します【日本株/新NISA】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=KBrBf94lTQc",
+      "thumbnail": "https://i.ytimg.com/vi/KBrBf94lTQc/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-15T09:24:14.428902",
+      "recordedLabel": "2026.11.15 09:24",
+      "timeLabel": "2026.11.15 09:24",
+      "persons": [],
+      "lastModified": "2026-11-15T09:24:18Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s794cf14c3b3049a691d90289fe871950"
+    },
     {
       "id": "a4f45907459eefb329",
       "url": "/articles/a4f45907459eefb329/",
@@ -10690,6 +10709,25 @@
     }
   ],
   "articles": {
+    "ca98c3fe2f7c6d5627": {
+      "id": "ca98c3fe2f7c6d5627",
+      "url": "/articles/ca98c3fe2f7c6d5627/",
+      "title": "【日本株の今後】日本のGDPが世界6位に転落…。インド・イギリスに抜かれる日本、日本株は今後どうなる？元機関投資家が徹底解説します【日本株/新NISA】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=KBrBf94lTQc",
+      "thumbnail": "https://i.ytimg.com/vi/KBrBf94lTQc/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-15T09:24:14.428902",
+      "recordedLabel": "2026.11.15 09:24",
+      "timeLabel": "2026.11.15 09:24",
+      "persons": [],
+      "lastModified": "2026-11-15T09:24:18Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s794cf14c3b3049a691d90289fe871950"
+    },
     "a4f45907459eefb329": {
       "id": "a4f45907459eefb329",
       "url": "/articles/a4f45907459eefb329/",
@@ -21380,6 +21418,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-15T09:24:14.428902"
+    },
+    {
       "name": "文藝春秋PLUS 公式チャンネル",
       "tab": "文藝春秋",
       "latestAt": "2026-11-15T03:37:15.503186"
@@ -21388,11 +21431,6 @@
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-15T00:53:58.161752"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-14T09:24:52.643933"
     },
     {
       "name": "マネーフォワード ME イベント&セミナー",
