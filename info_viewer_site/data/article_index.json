@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-16T10:55:19.131771+00:00",
+  "generatedAt": "2026-11-16T15:10:09.971077+00:00",
   "articleList": [
+    {
+      "id": "bc2c0c6a3f531f515b",
+      "url": "/articles/bc2c0c6a3f531f515b/",
+      "title": "LIVE  マーケットアップデート　日経1480円下落　半導体売り止まらず　ディフェンシブ堅調",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=NZtHz5OOHuA",
+      "thumbnail": "https://i.ytimg.com/vi/NZtHz5OOHuA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-16T15:08:30.053004",
+      "recordedLabel": "2026.11.16 15:08",
+      "timeLabel": "2026.11.16 15:08",
+      "persons": [],
+      "lastModified": "2026-11-16T15:08:35Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sa5f3e15a862b4df9a9588d3ca960578e"
+    },
     {
       "id": "0ab4810a992c6f5424",
       "url": "/articles/0ab4810a992c6f5424/",
@@ -10766,6 +10785,25 @@
     }
   ],
   "articles": {
+    "bc2c0c6a3f531f515b": {
+      "id": "bc2c0c6a3f531f515b",
+      "url": "/articles/bc2c0c6a3f531f515b/",
+      "title": "LIVE  マーケットアップデート　日経1480円下落　半導体売り止まらず　ディフェンシブ堅調",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=NZtHz5OOHuA",
+      "thumbnail": "https://i.ytimg.com/vi/NZtHz5OOHuA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-16T15:08:30.053004",
+      "recordedLabel": "2026.11.16 15:08",
+      "timeLabel": "2026.11.16 15:08",
+      "persons": [],
+      "lastModified": "2026-11-16T15:08:35Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sa5f3e15a862b4df9a9588d3ca960578e"
+    },
     "0ab4810a992c6f5424": {
       "id": "0ab4810a992c6f5424",
       "url": "/articles/0ab4810a992c6f5424/",
@@ -21532,6 +21570,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-11-16T15:08:30.053004"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-16T10:54:02.983236"
@@ -21545,11 +21588,6 @@
       "name": "文藝春秋PLUS 公式チャンネル",
       "tab": "文藝春秋",
       "latestAt": "2026-11-15T03:37:15.503186"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-11-15T00:53:58.161752"
     },
     {
       "name": "マネーフォワード ME イベント&セミナー",
