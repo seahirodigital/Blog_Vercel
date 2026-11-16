@@ -29,6 +29,7 @@ import argparse
 import importlib.util
 import tempfile
 from pathlib import Path
+from urllib.parse import urlparse
 
 import requests as http_requests
 
@@ -2326,6 +2327,22 @@ def _extract_first_url_before_marker(markdown: str) -> str:
     return matches[0]
 
 
+def _amazon_image_urls(markdown: str) -> list[str]:
+    """記事中のAmazon商品URLを登場順に最大3件取り出す。"""
+    urls = []
+    for match in URL_RE.finditer(markdown or ""):
+        url = match.group(0).rstrip(".,;:!?)]}、。）」』】")
+        host = (urlparse(url).hostname or "").lower()
+        if not (host in {"amzn.to", "link.amazon", "amazon.co.jp", "amazon.com"}
+                or host.endswith(".amazon.co.jp") or host.endswith(".amazon.com")):
+            continue
+        if url not in urls:
+            urls.append(url)
+        if len(urls) == 3:
+            break
+    return urls
+
+
 def _extract_product_name_from_note_context(snapshot: dict) -> tuple[str, str]:
     affiliate_module = _load_amazon_affiliate_module()
 
@@ -2411,20 +2428,40 @@ def _attach_amazon_top_image_to_page(
     target = _resolve_amazon_image_target(page, source_markdown)
     _write_json(artifacts_dir / "amazon_target_resolution.json", target)
 
-    if target["mode"] == "skip":
-        print("   ⚠️ Amazon 画像対象を特定できなかったため、トップ画像挿入をスキップします。")
-        return {
-            "image_flow": "skipped",
-            "image_target_source": target["source"],
-            "draft_save_strategy": "",
-            "before_image_count": _count_page_images(page),
-        }
-
     amazon_image_module = _load_amazon_top_image_module()
-    fetch_result = amazon_image_module.fetch_and_save_top_images(
-        keyword=target["keyword"],
-        asin=target["asin"],
-    )
+    urls = _amazon_image_urls(source_markdown)
+    errors = []
+    fetch_result = None
+    # 従来の先頭候補とタイトル検索を優先し、失敗時に後続URLを試す。
+    if target["mode"] != "skip":
+        try:
+            fetch_result = amazon_image_module.fetch_and_save_top_images(
+                keyword=target["keyword"], asin=target["asin"]
+            )
+        except Exception as exc:
+            errors.append(f"先頭候補: {exc}")
+            print(f"   ⚠️ 先頭候補の画像取得に失敗しました: {exc}")
+
+    first_url = _extract_first_url_before_marker(source_markdown)
+    for index, url in enumerate(urls, 1):
+        if fetch_result is not None:
+            break
+        if url == first_url:
+            continue
+        try:
+            asin = amazon_image_module.extract_asin_from_url(url)
+            if not asin:
+                raise ValueError("商品IDを取得できませんでした")
+            fetch_result = amazon_image_module.fetch_and_save_top_images(keyword="", asin=asin)
+            target = {**target, "mode": "asin", "asin": asin, "keyword": "",
+                      "source": "body_url_fallback", "source_url": url}
+            print(f"   ✅ {index}件目のAmazon URLから画像を取得しました")
+        except Exception as exc:
+            errors.append(f"{index}件目: {exc}")
+            print(f"   ⚠️ {index}件目のAmazon URLから画像を取得できません: {exc}")
+
+    if fetch_result is None:
+        raise RuntimeError("Amazon画像を取得できないため公開を中止します: " + "; ".join(errors))
     amazon_hires_probe = {
         "detail_page_url": fetch_result.detail_page_url,
         "asin": fetch_result.asin,
