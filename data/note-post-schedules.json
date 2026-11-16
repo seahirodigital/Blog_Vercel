@@ -5164,7 +5164,7 @@
   },
   {
     "id": "251e8872-55d1-4f07-bf40-5cb80f9b5e6b",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s4e418537653244718a1578ffdcb0cbbe",
     "title": "Anker AOclip 2レビュー比較まとめ：次世代オープンイヤー型イヤホンの魅力",
     "name": "20261112_1253_2世代目で大幅進化！Anker 本気のイヤーカフ型ワイヤレスイヤホン「AeroClip 2」を試す！前作からどう変わった.md",
@@ -5174,8 +5174,8 @@
     "publishAt": "2026-11-16T08:00:00.000Z",
     "createdAt": "2026-11-16T07:20:15.042Z",
     "queuedAt": "2026-11-16T07:20:15.043Z",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-16T08:02:12.039078+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n3c79ddb0f45b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-direct",
     "dispatchAttempts": 1
