@@ -72,7 +72,7 @@ ASIN_IN_URL_RE = re.compile(
     r"/(?:dp|gp/product|gp/aw/d|exec/obidos/ASIN)/([A-Z0-9]{10})(?:[/?]|$)",
     re.IGNORECASE,
 )
-SHORT_AMAZON_HOSTS = {"amzn.to", "www.amzn.to", "amzn.asia", "www.amzn.asia"}
+SHORT_AMAZON_HOSTS = {"amzn.to", "www.amzn.to", "amzn.asia", "www.amzn.asia", "link.amazon", "www.link.amazon"}
 HTML_SRC_RE = re.compile(r"""\bsrc=["']([^"']+)["']""", re.IGNORECASE)
 HTML_DATA_OLD_HIRES_RE = re.compile(r"""\bdata-old-hires=["']([^"']+)["']""", re.IGNORECASE)
 DEFAULT_PAGE_HEADERS = {
