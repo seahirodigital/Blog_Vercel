@@ -460,7 +460,7 @@ jobs:
               dry_run_args+=(--dry-run-publish)
             fi
             if [ -n "$NOTE_EDITOR_URL" ]; then
-              if [ "$NOTE_TARGET" != "taishi" ] || [[ ! "$NOTE_EDITOR_URL" =~ ^https://editor\.note\.com/notes/n[a-zA-Z0-9]+/edit/?$ ]]; then
+              if { [ "$NOTE_TARGET" != "taishi" ] && [ "$NOTE_TARGET" != "blog_main" ]; } || [[ ! "$NOTE_EDITOR_URL" =~ ^https://editor\.note\.com/notes/n[a-zA-Z0-9]+/edit/?$ ]]; then
                 echo "下書きURLまたは投稿先が不正です" >&2
                 exit 1
               fi
