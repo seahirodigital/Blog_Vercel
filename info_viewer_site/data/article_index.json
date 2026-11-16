@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-16T09:25:42.238261+00:00",
+  "generatedAt": "2026-11-16T10:55:19.131771+00:00",
   "articleList": [
+    {
+      "id": "0ab4810a992c6f5424",
+      "url": "/articles/0ab4810a992c6f5424/",
+      "title": "米国利上げ観測強まり、AI株に逆風...今上がってるのはココです",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=kUYj5wbA-NA",
+      "thumbnail": "https://i.ytimg.com/vi/kUYj5wbA-NA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-16T10:54:02.983236",
+      "recordedLabel": "2026.11.16 10:54",
+      "timeLabel": "2026.11.16 10:54",
+      "persons": [],
+      "lastModified": "2026-11-16T10:54:08Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sdbec43ed9df74b659d1beb5861aac45d"
+    },
     {
       "id": "a77559d1da7a45160c",
       "url": "/articles/a77559d1da7a45160c/",
@@ -10747,6 +10766,25 @@
     }
   ],
   "articles": {
+    "0ab4810a992c6f5424": {
+      "id": "0ab4810a992c6f5424",
+      "url": "/articles/0ab4810a992c6f5424/",
+      "title": "米国利上げ観測強まり、AI株に逆風...今上がってるのはココです",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=kUYj5wbA-NA",
+      "thumbnail": "https://i.ytimg.com/vi/kUYj5wbA-NA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-16T10:54:02.983236",
+      "recordedLabel": "2026.11.16 10:54",
+      "timeLabel": "2026.11.16 10:54",
+      "persons": [],
+      "lastModified": "2026-11-16T10:54:08Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sdbec43ed9df74b659d1beb5861aac45d"
+    },
     "a77559d1da7a45160c": {
       "id": "a77559d1da7a45160c",
       "url": "/articles/a77559d1da7a45160c/",
@@ -21494,14 +21532,14 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-16T10:54:02.983236"
+    },
+    {
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-11-16T09:24:14.472097"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-15T09:24:14.428902"
     },
     {
       "name": "文藝春秋PLUS 公式チャンネル",
