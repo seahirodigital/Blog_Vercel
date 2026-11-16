@@ -2333,7 +2333,7 @@ def _amazon_image_urls(markdown: str) -> list[str]:
     for match in URL_RE.finditer(markdown or ""):
         url = match.group(0).rstrip(".,;:!?)]}、。）」』】")
         host = (urlparse(url).hostname or "").lower()
-        if not (host in {"amzn.to", "link.amazon", "amazon.co.jp", "amazon.com"}
+        if not (host in {"amzn.to", "www.amzn.to", "amzn.asia", "www.amzn.asia", "link.amazon", "www.link.amazon", "amazon.co.jp", "amazon.com"}
                 or host.endswith(".amazon.co.jp") or host.endswith(".amazon.com")):
             continue
         if url not in urls:
