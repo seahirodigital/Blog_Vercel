@@ -2442,7 +2442,7 @@ def _attach_amazon_top_image_to_page(
             errors.append(f"先頭候補: {exc}")
             print(f"   ⚠️ 先頭候補の画像取得に失敗しました: {exc}")
 
-    first_url = _extract_first_url_before_marker(source_markdown)
+    first_url = _extract_first_url_before_marker(source_markdown).rstrip(".,;:!?)]}、。）」』】")
     for index, url in enumerate(urls, 1):
         if fetch_result is not None:
             break
