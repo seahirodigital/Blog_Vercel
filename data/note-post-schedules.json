@@ -5182,7 +5182,7 @@
   },
   {
     "id": "95a3e20a-984a-44c0-a1ed-c67c913552a4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7a9fb84eed954955bcddfa9ca81e9e12",
     "title": "Mytrex Zone、マイトレックス ゾーン レビュー比較まとめ",
     "name": "20261103_0722_この枕、喋るぞ…？頭が冴えて眠れない夜を強制終了する「MYTREX ZONE Pillow」がヤバすぎ！【正直レビューゾ.md",
@@ -5191,14 +5191,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-16T12:30:00.000Z",
     "createdAt": "2026-11-16T07:20:15.042Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-16T21:17:28.459851+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b5b9c635-f73d-4b1f-9e60-f28ee19410b8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbbd2cf7c52b34c0ea6b5bc0c13fab34f",
     "title": "Olum iPhoneケース レビュー比較まとめ：アラミド繊維で軽量・薄型を実現",
     "name": "20261109_1329_【安定のアラミド】AULUMUのiPhone Duoケースを買ってみた・この辺りが落とし所かな？.md",
@@ -5207,10 +5209,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-16T21:30:00.000Z",
     "createdAt": "2026-11-16T07:20:15.042Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-16T21:17:28.459851+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "84786c70-2925-4e61-84a0-28270b23c70b",
