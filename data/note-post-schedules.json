@@ -5182,7 +5182,7 @@
   },
   {
     "id": "95a3e20a-984a-44c0-a1ed-c67c913552a4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s7a9fb84eed954955bcddfa9ca81e9e12",
     "title": "Mytrex Zone、マイトレックス ゾーン レビュー比較まとめ",
     "name": "20261103_0722_この枕、喋るぞ…？頭が冴えて眠れない夜を強制終了する「MYTREX ZONE Pillow」がヤバすぎ！【正直レビューゾ.md",
@@ -5192,8 +5192,8 @@
     "publishAt": "2026-11-16T12:30:00.000Z",
     "createdAt": "2026-11-16T07:20:15.042Z",
     "queuedAt": "2026-11-16T21:17:28.459851+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-16T21:20:30.517710+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd65d88f9bb53?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
