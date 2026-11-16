@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-15T09:25:26.156816+00:00",
+  "generatedAt": "2026-11-16T00:35:51.931043+00:00",
   "articleList": [
+    {
+      "id": "dc59301fab67f78f00",
+      "url": "/articles/dc59301fab67f78f00/",
+      "title": "【JAL株】一度は破綻した会社が超進化！利益の3割を“飛行機以外“で稼ぐ仕組み｜会社予想1,800億円 VS 市場予想は1,600億円どちらを軸に見るべき？元担当アナリストが斬る【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=R-GBquEjclM",
+      "thumbnail": "https://i.ytimg.com/vi/R-GBquEjclM/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-16T00:34:37.339894",
+      "recordedLabel": "2026.11.16 00:34",
+      "timeLabel": "2026.11.16 00:34",
+      "persons": [],
+      "lastModified": "2026-11-16T00:34:41Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s8feb1ac115e24c7fbf3734dcd68e8ffa"
+    },
     {
       "id": "ca98c3fe2f7c6d5627",
       "url": "/articles/ca98c3fe2f7c6d5627/",
@@ -10709,6 +10728,25 @@
     }
   ],
   "articles": {
+    "dc59301fab67f78f00": {
+      "id": "dc59301fab67f78f00",
+      "url": "/articles/dc59301fab67f78f00/",
+      "title": "【JAL株】一度は破綻した会社が超進化！利益の3割を“飛行機以外“で稼ぐ仕組み｜会社予想1,800億円 VS 市場予想は1,600億円どちらを軸に見るべき？元担当アナリストが斬る【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=R-GBquEjclM",
+      "thumbnail": "https://i.ytimg.com/vi/R-GBquEjclM/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-16T00:34:37.339894",
+      "recordedLabel": "2026.11.16 00:34",
+      "timeLabel": "2026.11.16 00:34",
+      "persons": [],
+      "lastModified": "2026-11-16T00:34:41Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s8feb1ac115e24c7fbf3734dcd68e8ffa"
+    },
     "ca98c3fe2f7c6d5627": {
       "id": "ca98c3fe2f7c6d5627",
       "url": "/articles/ca98c3fe2f7c6d5627/",
@@ -21418,6 +21456,11 @@
   },
   "channels": [
     {
+      "name": "イズミダイズム",
+      "tab": "イズミダ",
+      "latestAt": "2026-11-16T00:34:37.339894"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-15T09:24:14.428902"
@@ -21436,11 +21479,6 @@
       "name": "マネーフォワード ME イベント&セミナー",
       "tab": "マネーフ",
       "latestAt": "2026-11-14T09:23:48.582331"
-    },
-    {
-      "name": "イズミダイズム",
-      "tab": "イズミダ",
-      "latestAt": "2026-11-14T03:50:16.778991"
     },
     {
       "name": "マーケットマスターズ",
