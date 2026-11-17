@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-17T06:25:13.097602+00:00",
+  "generatedAt": "2026-11-17T13:12:02.180713+00:00",
   "articleList": [
+    {
+      "id": "f9d99cfc7e41ca4492",
+      "url": "/articles/f9d99cfc7e41ca4492/",
+      "title": "【つばめさんコラボLIVE】決算シーズンで気になった銘柄を徹底解説！！",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=GDH1VapGWcg",
+      "thumbnail": "https://i.ytimg.com/vi/GDH1VapGWcg/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-17T13:10:55.485010",
+      "recordedLabel": "2026.11.17 13:10",
+      "timeLabel": "2026.11.17 13:10",
+      "persons": [],
+      "lastModified": "2026-11-17T13:10:59Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s4da71631cf4147beb8b8e1ae4b82f027"
+    },
     {
       "id": "4f2fdeefee95d0f37f",
       "url": "/articles/4f2fdeefee95d0f37f/",
@@ -10806,6 +10825,25 @@
     }
   ],
   "articles": {
+    "f9d99cfc7e41ca4492": {
+      "id": "f9d99cfc7e41ca4492",
+      "url": "/articles/f9d99cfc7e41ca4492/",
+      "title": "【つばめさんコラボLIVE】決算シーズンで気になった銘柄を徹底解説！！",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=GDH1VapGWcg",
+      "thumbnail": "https://i.ytimg.com/vi/GDH1VapGWcg/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-17T13:10:55.485010",
+      "recordedLabel": "2026.11.17 13:10",
+      "timeLabel": "2026.11.17 13:10",
+      "persons": [],
+      "lastModified": "2026-11-17T13:10:59Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s4da71631cf4147beb8b8e1ae4b82f027"
+    },
     "4f2fdeefee95d0f37f": {
       "id": "4f2fdeefee95d0f37f",
       "url": "/articles/4f2fdeefee95d0f37f/",
@@ -21612,6 +21650,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-17T13:10:55.485010"
+    },
+    {
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-11-17T06:23:34.557105"
@@ -21620,11 +21663,6 @@
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-16T15:08:30.053004"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-16T10:54:02.983236"
     },
     {
       "name": "イズミダイズム",
