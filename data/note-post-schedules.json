@@ -5326,7 +5326,7 @@
   },
   {
     "id": "f16c7948-1e50-4e85-927d-bcb962f5feab",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s742130065ce94445b7c659cf90d7c5cf",
     "title": "Apple Mac mini M4 レビュー比較まとめ：AIハブとしての真価と活用法",
     "name": "20261106_0957_【悲報】Mac miniがもう手放せない1ヶ月レポ.md",
@@ -5335,14 +5335,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-17T10:30:00.000Z",
     "createdAt": "2026-11-16T07:20:15.042Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-17T09:55:45.546334+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "12a5006f-6987-4021-bc62-23eb10983552",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s16dc9aa579da4d568f7665ee6f2e69b0",
     "title": "iPhone Duo Apple Pencil レビュー比較まとめ：使い方・メリット・デメリットを徹底解説",
     "name": "20261103_0720_祝！iPhone DuoがApple Pencil正式対応！iPad miniと比べてみたら…？.md",
@@ -5351,10 +5353,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-17T10:30:00.000Z",
     "createdAt": "2026-11-16T07:20:15.042Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-17T09:55:45.546334+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "eb5d9b0f-b078-48e1-b6ec-f812e57eaeed",
