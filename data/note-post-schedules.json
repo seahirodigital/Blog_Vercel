@@ -5308,7 +5308,7 @@
   },
   {
     "id": "9cd3b284-01d2-4529-9b37-0626779ebd56",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s23f197de1a3944a189eac9c019c424b6",
     "title": "Hisense U9NシリーズRGB mini-LED TVレビュー比較まとめ：革新的な高画質テレビがもたらす新たな視聴体験",
     "name": "20261105_0755_【世界初RGB MiniLED】ハイセンス最新4Kテレビ「RGB 65U9S」をガチ検証！大人気「65E80S」と2台並.md",
@@ -5317,10 +5317,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-17T09:30:00.000Z",
     "createdAt": "2026-11-16T07:20:15.042Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-17T09:53:41.941531+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f16c7948-1e50-4e85-927d-bcb962f5feab",
