@@ -5362,7 +5362,7 @@
   },
   {
     "id": "eb5d9b0f-b078-48e1-b6ec-f812e57eaeed",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s402d852c3cbe4560b8e9645efd6f7371",
     "title": "AIボイスレコーダー Mori（モリ）レビュー比較まとめ：日々の情報整理と記憶定着を革新するデバイス",
     "name": "20261112_1245_24時間つけっぱなしのAIガジェット買ってみた。Moriを1週間使った感想.md",
@@ -5372,8 +5372,8 @@
     "publishAt": "2026-11-17T11:30:00.000Z",
     "createdAt": "2026-11-16T07:20:15.042Z",
     "queuedAt": "2026-11-17T10:55:13.871944+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-17T11:32:22.089612+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n78a1c7d58fd7?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
