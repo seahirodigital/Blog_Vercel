@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-17T13:12:02.180713+00:00",
+  "generatedAt": "2026-11-17T13:57:14.883411+00:00",
   "articleList": [
+    {
+      "id": "e06f476c65d879cfff",
+      "url": "/articles/e06f476c65d879cfff/",
+      "title": "LIVE  マーケットアップデート　NVIDIA決算前夜　日経801円下落　AIネガティブニュース増加中",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=2r3-6DKi990",
+      "thumbnail": "https://i.ytimg.com/vi/2r3-6DKi990/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-17T13:55:31.074282",
+      "recordedLabel": "2026.11.17 13:55",
+      "timeLabel": "2026.11.17 13:55",
+      "persons": [],
+      "lastModified": "2026-11-17T13:55:37Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s6315086772904b7796394a3acf5170c1"
+    },
     {
       "id": "f9d99cfc7e41ca4492",
       "url": "/articles/f9d99cfc7e41ca4492/",
@@ -10825,6 +10844,25 @@
     }
   ],
   "articles": {
+    "e06f476c65d879cfff": {
+      "id": "e06f476c65d879cfff",
+      "url": "/articles/e06f476c65d879cfff/",
+      "title": "LIVE  マーケットアップデート　NVIDIA決算前夜　日経801円下落　AIネガティブニュース増加中",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=2r3-6DKi990",
+      "thumbnail": "https://i.ytimg.com/vi/2r3-6DKi990/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-17T13:55:31.074282",
+      "recordedLabel": "2026.11.17 13:55",
+      "timeLabel": "2026.11.17 13:55",
+      "persons": [],
+      "lastModified": "2026-11-17T13:55:37Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s6315086772904b7796394a3acf5170c1"
+    },
     "f9d99cfc7e41ca4492": {
       "id": "f9d99cfc7e41ca4492",
       "url": "/articles/f9d99cfc7e41ca4492/",
@@ -21650,6 +21688,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-11-17T13:55:31.074282"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-17T13:10:55.485010"
@@ -21658,11 +21701,6 @@
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-11-17T06:23:34.557105"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-11-16T15:08:30.053004"
     },
     {
       "name": "イズミダイズム",
