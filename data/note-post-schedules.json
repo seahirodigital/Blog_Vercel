@@ -5380,7 +5380,7 @@
   },
   {
     "id": "c3ae89ef-9f2f-43b4-b6e6-15004fb792b9",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!se6da714ee85a4d6381841e59d5b3efa7",
     "title": "Anker Eufy RoboVac Omni E35, Anker Eufy RoboVac Omni C30 Edgeレビュー比較まとめ",
     "name": "20261106_0954_Ankerの新型ロボット掃除機、発想が違う。サイクロン式E35を使ってみた【C30 Edge比較】.md",
@@ -5390,8 +5390,8 @@
     "publishAt": "2026-11-17T12:00:00.000Z",
     "createdAt": "2026-11-16T07:20:15.042Z",
     "queuedAt": "2026-11-17T11:25:30.037928+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-17T12:02:15.338687+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7af32c603584?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
