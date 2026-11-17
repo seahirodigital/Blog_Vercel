@@ -5254,7 +5254,7 @@
   },
   {
     "id": "b6bdcd8a-804f-4650-a324-425a3547f789",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sefbe02f86c19433eb8220ab692312546",
     "title": "MacBookProXDRディスプレイ レビュー比較まとめ：革新的な体験と生産性向上",
     "name": "20261110_1523_【新型MacBook Pro 実機レビュー】80万円のPROLED XDR（Nano-texture）の手触りと黒が別次.md",
@@ -5264,8 +5264,8 @@
     "publishAt": "2026-11-17T02:30:00.000Z",
     "createdAt": "2026-11-16T07:20:15.042Z",
     "queuedAt": "2026-11-17T01:55:31.077866+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-17T02:32:16.002639+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n313abbc880b5?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
