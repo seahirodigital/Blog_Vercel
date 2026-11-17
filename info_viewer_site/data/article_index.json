@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-11-16T15:10:09.971077+00:00",
+  "generatedAt": "2026-11-17T06:25:13.097602+00:00",
   "articleList": [
+    {
+      "id": "4f2fdeefee95d0f37f",
+      "url": "/articles/4f2fdeefee95d0f37f/",
+      "title": "【ゴールドマーケットの変化】欧米中心からアジア中心への動き（貴金属スペシャリスト 池水雄一さん） [ウィークリーゴールド]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=ZnE5qciBnpw",
+      "thumbnail": "https://i.ytimg.com/vi/ZnE5qciBnpw/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-17T06:23:34.557105",
+      "recordedLabel": "2026.11.17 06:23",
+      "timeLabel": "2026.11.17 06:23",
+      "persons": [
+        "池水雄一"
+      ],
+      "lastModified": "2026-11-17T06:23:41Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s607d4476a4a843edab15dc433fa6939e"
+    },
     {
       "id": "bc2c0c6a3f531f515b",
       "url": "/articles/bc2c0c6a3f531f515b/",
@@ -10785,6 +10806,27 @@
     }
   ],
   "articles": {
+    "4f2fdeefee95d0f37f": {
+      "id": "4f2fdeefee95d0f37f",
+      "url": "/articles/4f2fdeefee95d0f37f/",
+      "title": "【ゴールドマーケットの変化】欧米中心からアジア中心への動き（貴金属スペシャリスト 池水雄一さん） [ウィークリーゴールド]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=ZnE5qciBnpw",
+      "thumbnail": "https://i.ytimg.com/vi/ZnE5qciBnpw/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-17T06:23:34.557105",
+      "recordedLabel": "2026.11.17 06:23",
+      "timeLabel": "2026.11.17 06:23",
+      "persons": [
+        "池水雄一"
+      ],
+      "lastModified": "2026-11-17T06:23:41Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s607d4476a4a843edab15dc433fa6939e"
+    },
     "bc2c0c6a3f531f515b": {
       "id": "bc2c0c6a3f531f515b",
       "url": "/articles/bc2c0c6a3f531f515b/",
@@ -21570,6 +21612,11 @@
   },
   "channels": [
     {
+      "name": "なるほど投資ゼミ（大橋ひろこ",
+      "tab": "なるほど",
+      "latestAt": "2026-11-17T06:23:34.557105"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-16T15:08:30.053004"
@@ -21608,11 +21655,6 @@
       "name": "トウシル（楽天証券）",
       "tab": "トウシル",
       "latestAt": "2026-11-12T09:25:14.578187"
-    },
-    {
-      "name": "なるほど投資ゼミ（大橋ひろこ",
-      "tab": "なるほど",
-      "latestAt": "2026-11-12T08:23:01.338751"
     },
     {
       "name": "株式会社東京金融取引所",
