@@ -5236,7 +5236,7 @@
   },
   {
     "id": "b09d84f3-409f-4629-a9e6-45ea5762b7da",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!saaaccf1bd47c42e3a6eb6c18112f34d8",
     "title": "AQUOS wish6とAQUOS wish5比較まとめ：エントリーモデルスマホの選び方",
     "name": "20261107_1045_AQUOS wish6 意外と変わった？高価になっていく格安スマホ！wish5との違いを比較！.md",
@@ -5245,14 +5245,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-17T02:30:00.000Z",
     "createdAt": "2026-11-16T07:20:15.042Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-17T01:55:31.077866+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b6bdcd8a-804f-4650-a324-425a3547f789",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sefbe02f86c19433eb8220ab692312546",
     "title": "MacBookProXDRディスプレイ レビュー比較まとめ：革新的な体験と生産性向上",
     "name": "20261110_1523_【新型MacBook Pro 実機レビュー】80万円のPROLED XDR（Nano-texture）の手触りと黒が別次.md",
@@ -5261,10 +5263,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-17T02:30:00.000Z",
     "createdAt": "2026-11-16T07:20:15.042Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-17T01:55:31.077866+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "952dbc6b-9327-43c0-b5db-965b4fe27b47",
