@@ -5290,7 +5290,7 @@
   },
   {
     "id": "ce77813d-dd85-4b8e-8839-1343cd1166d6",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s45ac871cafc041af99a92a6703402092",
     "title": "Apple iPhone DuoとSamsung Galaxy Z Fold8を比較まとめ：あなたに最適な折りたたみスマホは？",
     "name": "20261109_1327_折りたたみ歴6年のマニアが、iPhone DuoとGalaxy Z Fold8を100点満点で比較してみた.md",
@@ -5300,8 +5300,8 @@
     "publishAt": "2026-11-17T07:30:00.000Z",
     "createdAt": "2026-11-16T07:20:15.042Z",
     "queuedAt": "2026-11-17T06:55:38.291066+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-17T07:32:11.356307+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n0e972ba98fcf?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
