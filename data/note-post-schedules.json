@@ -5470,7 +5470,7 @@
   },
   {
     "id": "9c50f79f-0ee9-4b87-bd22-3de280700cbf",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s28e8883bcbf941088e6fc68b27017f80",
     "title": "iPad Miniレビュー比較まとめ：最新モデルの魅力と実用性を解説",
     "name": "20261109_1324_新型iPad mini 第8世代はどう変わった？.md",
@@ -5479,10 +5479,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-18T07:30:00.000Z",
     "createdAt": "2026-11-16T07:20:15.042Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-18T06:55:37.048651+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "92c296c7-141f-4c8a-9b81-07206e426f1c",
