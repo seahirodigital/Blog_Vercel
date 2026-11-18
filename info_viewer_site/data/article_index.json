@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-18T05:54:32.260049+00:00",
+  "generatedAt": "2026-11-18T07:54:58.358323+00:00",
   "articleList": [
+    {
+      "id": "17141ccbe08e6f61f9",
+      "url": "/articles/17141ccbe08e6f61f9/",
+      "title": "【金利・インフレ・財政・政府債務・成長力】日米経済政策の逆説と「責任ある積極財政」（永濱利廣さん） [マーケットディーパー]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=eus2YX0o-Dw",
+      "thumbnail": "https://i.ytimg.com/vi/eus2YX0o-Dw/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-18T07:53:52.955876",
+      "recordedLabel": "2026.11.18 07:53",
+      "timeLabel": "2026.11.18 07:53",
+      "persons": [],
+      "lastModified": "2026-11-18T07:53:57Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s6cda7903460b4accbcbc82d393b42155"
+    },
     {
       "id": "b2645b566e5db2d4a6",
       "url": "/articles/b2645b566e5db2d4a6/",
@@ -10866,6 +10885,25 @@
     }
   ],
   "articles": {
+    "17141ccbe08e6f61f9": {
+      "id": "17141ccbe08e6f61f9",
+      "url": "/articles/17141ccbe08e6f61f9/",
+      "title": "【金利・インフレ・財政・政府債務・成長力】日米経済政策の逆説と「責任ある積極財政」（永濱利廣さん） [マーケットディーパー]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=eus2YX0o-Dw",
+      "thumbnail": "https://i.ytimg.com/vi/eus2YX0o-Dw/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-18T07:53:52.955876",
+      "recordedLabel": "2026.11.18 07:53",
+      "timeLabel": "2026.11.18 07:53",
+      "persons": [],
+      "lastModified": "2026-11-18T07:53:57Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s6cda7903460b4accbcbc82d393b42155"
+    },
     "b2645b566e5db2d4a6": {
       "id": "b2645b566e5db2d4a6",
       "url": "/articles/b2645b566e5db2d4a6/",
@@ -21734,7 +21772,7 @@
     {
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
-      "latestAt": "2026-11-18T05:53:11.883829"
+      "latestAt": "2026-11-18T07:53:52.955876"
     },
     {
       "name": "YTの投資銀行",
