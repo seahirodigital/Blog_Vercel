@@ -5488,7 +5488,7 @@
   },
   {
     "id": "92c296c7-141f-4c8a-9b81-07206e426f1c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0c25ae582727427a923134a4da216df9",
     "title": "Insta360 Mic レビュー比較まとめ：高音質ワイヤレスマイクで動画制作を効率化",
     "name": "20261103_0713_【Insta360 Mic レビュー】廉価モデル登場かと思いきや全然こっちでよくないか？これYouTubeの1人撮影にち.md",
@@ -5497,14 +5497,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-18T10:30:00.000Z",
     "createdAt": "2026-11-16T07:20:15.042Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-18T15:59:49.699913+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "326d174b-f0b9-43f9-be5a-0db97fb4704f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3443cfcddfcf49aaa581660bd3b730db",
     "title": "Apple M6 iMac レビュー比較まとめ：AI処理、高速SSD、Wi-Fi 7で生産性向上と新しい働き方を実現",
     "name": "20261106_0951_AI時代に選ぶべき一台。2年ぶりに進化した「M6 iMac」を先行レビューします。.md",
@@ -5513,10 +5515,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-18T12:00:00.000Z",
     "createdAt": "2026-11-16T07:20:15.042Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-18T15:59:49.699913+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4c7615cf-05c0-44de-995a-c01837544511",
