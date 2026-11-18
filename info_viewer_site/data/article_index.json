@@ -1,6 +1,46 @@
 {
-  "generatedAt": "2026-11-18T11:55:52.893929+00:00",
+  "generatedAt": "2026-11-18T13:56:20.921714+00:00",
   "articleList": [
+    {
+      "id": "b396dfb1f53fa96490",
+      "url": "/articles/b396dfb1f53fa96490/",
+      "title": "【​エヌビディアの高成長続くか？｜ＡＩ投資の持続性 資金循環 今後も可能か？｜ＡＩ相場行く先 半導体・電子部品株見通し｜流動性 潤沢な企業】鈴木一之×鎌田伸一（11月18日公開）11/28大阪セミナー",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=pGLAU1opxKk",
+      "thumbnail": "https://i.ytimg.com/vi/pGLAU1opxKk/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-18T13:54:47.812938",
+      "recordedLabel": "2026.11.18 13:54",
+      "timeLabel": "2026.11.18 13:54",
+      "persons": [],
+      "lastModified": "2026-11-18T13:54:53Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s47e40d94294142ecbb05e0573bbf468f"
+    },
+    {
+      "id": "6a4c09e5008bd383fe",
+      "url": "/articles/6a4c09e5008bd383fe/",
+      "title": "リジカーレ＃55岡崎良介×永濱利廣【『国内生命保険会社資産運用苦闘の歴史』｜岡崎良介のリジカーレ『勇気をもって投資せよ』#55 】11月18日公開 ※11/28大阪セミナー募集",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=G6ZBQDvPYGk",
+      "thumbnail": "https://i.ytimg.com/vi/G6ZBQDvPYGk/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-18T13:53:41.843064",
+      "recordedLabel": "2026.11.18 13:53",
+      "timeLabel": "2026.11.18 13:53",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-18T13:53:49Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s512caf587a0b4a4d96ec1475f96d94a0"
+    },
     {
       "id": "3a2ae6e706eb446c3e",
       "url": "/articles/3a2ae6e706eb446c3e/",
@@ -10923,6 +10963,46 @@
     }
   ],
   "articles": {
+    "b396dfb1f53fa96490": {
+      "id": "b396dfb1f53fa96490",
+      "url": "/articles/b396dfb1f53fa96490/",
+      "title": "【​エヌビディアの高成長続くか？｜ＡＩ投資の持続性 資金循環 今後も可能か？｜ＡＩ相場行く先 半導体・電子部品株見通し｜流動性 潤沢な企業】鈴木一之×鎌田伸一（11月18日公開）11/28大阪セミナー",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=pGLAU1opxKk",
+      "thumbnail": "https://i.ytimg.com/vi/pGLAU1opxKk/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-18T13:54:47.812938",
+      "recordedLabel": "2026.11.18 13:54",
+      "timeLabel": "2026.11.18 13:54",
+      "persons": [],
+      "lastModified": "2026-11-18T13:54:53Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s47e40d94294142ecbb05e0573bbf468f"
+    },
+    "6a4c09e5008bd383fe": {
+      "id": "6a4c09e5008bd383fe",
+      "url": "/articles/6a4c09e5008bd383fe/",
+      "title": "リジカーレ＃55岡崎良介×永濱利廣【『国内生命保険会社資産運用苦闘の歴史』｜岡崎良介のリジカーレ『勇気をもって投資せよ』#55 】11月18日公開 ※11/28大阪セミナー募集",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=G6ZBQDvPYGk",
+      "thumbnail": "https://i.ytimg.com/vi/G6ZBQDvPYGk/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-18T13:53:41.843064",
+      "recordedLabel": "2026.11.18 13:53",
+      "timeLabel": "2026.11.18 13:53",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-18T13:53:49Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s512caf587a0b4a4d96ec1475f96d94a0"
+    },
     "3a2ae6e706eb446c3e": {
       "id": "3a2ae6e706eb446c3e",
       "url": "/articles/3a2ae6e706eb446c3e/",
@@ -21846,6 +21926,11 @@
   },
   "channels": [
     {
+      "name": "ゆたかTV",
+      "tab": "ゆたかT",
+      "latestAt": "2026-11-18T13:54:47.812938"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-18T11:54:16.492347"
@@ -21894,11 +21979,6 @@
       "name": "株式会社東京金融取引所",
       "tab": "株式会社",
       "latestAt": "2026-11-11T14:43:15.472250"
-    },
-    {
-      "name": "ゆたかTV",
-      "tab": "ゆたかT",
-      "latestAt": "2026-11-09T09:54:35.642866"
     },
     {
       "name": "ビジネス＋ITチャンネル",
