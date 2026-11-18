@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-18T07:54:58.358323+00:00",
+  "generatedAt": "2026-11-18T09:25:26.908500+00:00",
   "articleList": [
+    {
+      "id": "77d49338eec28cce37",
+      "url": "/articles/77d49338eec28cce37/",
+      "title": "【S&P500】このまま積立続けて大丈夫？AI相場不安で停滞中｜2000年から6754営業日のデータ分析で勝ちパターンを徹底検証！あなたの投資行動損してないですか？【ファンドアナリストが解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=8wvfqryHoME",
+      "thumbnail": "https://i.ytimg.com/vi/8wvfqryHoME/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-18T09:24:21.762942",
+      "recordedLabel": "2026.11.18 09:24",
+      "timeLabel": "2026.11.18 09:24",
+      "persons": [],
+      "lastModified": "2026-11-18T09:24:27Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s8deb901db663443bb90b9ae8aa53c6bb"
+    },
     {
       "id": "17141ccbe08e6f61f9",
       "url": "/articles/17141ccbe08e6f61f9/",
@@ -10885,6 +10904,25 @@
     }
   ],
   "articles": {
+    "77d49338eec28cce37": {
+      "id": "77d49338eec28cce37",
+      "url": "/articles/77d49338eec28cce37/",
+      "title": "【S&P500】このまま積立続けて大丈夫？AI相場不安で停滞中｜2000年から6754営業日のデータ分析で勝ちパターンを徹底検証！あなたの投資行動損してないですか？【ファンドアナリストが解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=8wvfqryHoME",
+      "thumbnail": "https://i.ytimg.com/vi/8wvfqryHoME/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-18T09:24:21.762942",
+      "recordedLabel": "2026.11.18 09:24",
+      "timeLabel": "2026.11.18 09:24",
+      "persons": [],
+      "lastModified": "2026-11-18T09:24:27Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s8deb901db663443bb90b9ae8aa53c6bb"
+    },
     "17141ccbe08e6f61f9": {
       "id": "17141ccbe08e6f61f9",
       "url": "/articles/17141ccbe08e6f61f9/",
@@ -21770,6 +21808,11 @@
   },
   "channels": [
     {
+      "name": "イズミダイズム",
+      "tab": "イズミダ",
+      "latestAt": "2026-11-18T09:24:21.762942"
+    },
+    {
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-11-18T07:53:52.955876"
@@ -21783,11 +21826,6 @@
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-17T13:10:55.485010"
-    },
-    {
-      "name": "イズミダイズム",
-      "tab": "イズミダ",
-      "latestAt": "2026-11-16T09:24:14.472097"
     },
     {
       "name": "文藝春秋PLUS 公式チャンネル",
