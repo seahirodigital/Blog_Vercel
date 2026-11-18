@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-18T13:56:20.921714+00:00",
+  "generatedAt": "2026-11-18T14:26:21.486208+00:00",
   "articleList": [
+    {
+      "id": "a2d6fc124b93121c2d",
+      "url": "/articles/a2d6fc124b93121c2d/",
+      "title": "LIVE  マーケットアップデート NVIDIA決算通過  前場急落  後場リバのハイボラ相場に",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=JfSZaOdh7Gg",
+      "thumbnail": "https://i.ytimg.com/vi/JfSZaOdh7Gg/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-18T14:24:54.646600",
+      "recordedLabel": "2026.11.18 14:24",
+      "timeLabel": "2026.11.18 14:24",
+      "persons": [],
+      "lastModified": "2026-11-18T14:24:59Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s84ca070266594f4d9da62c571ad6e201"
+    },
     {
       "id": "b396dfb1f53fa96490",
       "url": "/articles/b396dfb1f53fa96490/",
@@ -10963,6 +10982,25 @@
     }
   ],
   "articles": {
+    "a2d6fc124b93121c2d": {
+      "id": "a2d6fc124b93121c2d",
+      "url": "/articles/a2d6fc124b93121c2d/",
+      "title": "LIVE  マーケットアップデート NVIDIA決算通過  前場急落  後場リバのハイボラ相場に",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=JfSZaOdh7Gg",
+      "thumbnail": "https://i.ytimg.com/vi/JfSZaOdh7Gg/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-18T14:24:54.646600",
+      "recordedLabel": "2026.11.18 14:24",
+      "timeLabel": "2026.11.18 14:24",
+      "persons": [],
+      "lastModified": "2026-11-18T14:24:59Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s84ca070266594f4d9da62c571ad6e201"
+    },
     "b396dfb1f53fa96490": {
       "id": "b396dfb1f53fa96490",
       "url": "/articles/b396dfb1f53fa96490/",
@@ -21926,6 +21964,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-11-18T14:24:54.646600"
+    },
+    {
       "name": "ゆたかTV",
       "tab": "ゆたかT",
       "latestAt": "2026-11-18T13:54:47.812938"
@@ -21944,11 +21987,6 @@
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-11-18T07:53:52.955876"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-11-17T13:55:31.074282"
     },
     {
       "name": "文藝春秋PLUS 公式チャンネル",
