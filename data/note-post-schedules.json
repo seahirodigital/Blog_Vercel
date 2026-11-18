@@ -5452,7 +5452,7 @@
   },
   {
     "id": "9d1ea284-84e0-41aa-8711-8bfac9b834a4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s99e39f84bea54151bea355dee3ae409b",
     "title": "Apple HomePod Mini 2レビュー比較まとめ",
     "name": "20261107_1043_Apple新型HomePod mini 2買ったぞ！今回はどうなの？.md",
@@ -5461,10 +5461,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-18T02:30:00.000Z",
     "createdAt": "2026-11-16T07:20:15.042Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-18T01:55:17.691814+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9c50f79f-0ee9-4b87-bd22-3de280700cbf",
