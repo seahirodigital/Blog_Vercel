@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-18T09:25:26.908500+00:00",
+  "generatedAt": "2026-11-18T11:55:52.893929+00:00",
   "articleList": [
+    {
+      "id": "3a2ae6e706eb446c3e",
+      "url": "/articles/3a2ae6e706eb446c3e/",
+      "title": "NVDA決算に楽天証券情報漏洩で市場大パニック...流石に下げ過ぎか？",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=sx4TlBl3heI",
+      "thumbnail": "https://i.ytimg.com/vi/sx4TlBl3heI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-18T11:54:16.492347",
+      "recordedLabel": "2026.11.18 11:54",
+      "timeLabel": "2026.11.18 11:54",
+      "persons": [],
+      "lastModified": "2026-11-18T11:54:22Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sb74fb9d40d22447a802a0078b2dd1cb0"
+    },
     {
       "id": "77d49338eec28cce37",
       "url": "/articles/77d49338eec28cce37/",
@@ -10904,6 +10923,25 @@
     }
   ],
   "articles": {
+    "3a2ae6e706eb446c3e": {
+      "id": "3a2ae6e706eb446c3e",
+      "url": "/articles/3a2ae6e706eb446c3e/",
+      "title": "NVDA決算に楽天証券情報漏洩で市場大パニック...流石に下げ過ぎか？",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=sx4TlBl3heI",
+      "thumbnail": "https://i.ytimg.com/vi/sx4TlBl3heI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-18T11:54:16.492347",
+      "recordedLabel": "2026.11.18 11:54",
+      "timeLabel": "2026.11.18 11:54",
+      "persons": [],
+      "lastModified": "2026-11-18T11:54:22Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sb74fb9d40d22447a802a0078b2dd1cb0"
+    },
     "77d49338eec28cce37": {
       "id": "77d49338eec28cce37",
       "url": "/articles/77d49338eec28cce37/",
@@ -21808,6 +21846,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-18T11:54:16.492347"
+    },
+    {
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-11-18T09:24:21.762942"
@@ -21821,11 +21864,6 @@
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-17T13:55:31.074282"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-17T13:10:55.485010"
     },
     {
       "name": "文藝春秋PLUS 公式チャンネル",
