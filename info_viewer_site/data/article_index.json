@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-11-18T14:26:21.486208+00:00",
+  "generatedAt": "2026-11-19T04:25:34.846471+00:00",
   "articleList": [
+    {
+      "id": "8dee2242f310242b82",
+      "url": "/articles/8dee2242f310242b82/",
+      "title": "リジカーレ＃56岡崎良介×永濱利廣【半導体インフレ？『米国の物価上昇持続不可能な構造問題』｜岡崎良介のリジカーレ『勇気をもって投資せよ 】11月19日公開 ※11/28大阪セミナー募集",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=DfTSdO47N_A",
+      "thumbnail": "https://i.ytimg.com/vi/DfTSdO47N_A/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-19T04:24:20.332698",
+      "recordedLabel": "2026.11.19 04:24",
+      "timeLabel": "2026.11.19 04:24",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-19T04:24:25Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s9820cbc970c14d01a6ddbf391eb0d733"
+    },
     {
       "id": "a2d6fc124b93121c2d",
       "url": "/articles/a2d6fc124b93121c2d/",
@@ -10982,6 +11003,27 @@
     }
   ],
   "articles": {
+    "8dee2242f310242b82": {
+      "id": "8dee2242f310242b82",
+      "url": "/articles/8dee2242f310242b82/",
+      "title": "リジカーレ＃56岡崎良介×永濱利廣【半導体インフレ？『米国の物価上昇持続不可能な構造問題』｜岡崎良介のリジカーレ『勇気をもって投資せよ 】11月19日公開 ※11/28大阪セミナー募集",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=DfTSdO47N_A",
+      "thumbnail": "https://i.ytimg.com/vi/DfTSdO47N_A/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-19T04:24:20.332698",
+      "recordedLabel": "2026.11.19 04:24",
+      "timeLabel": "2026.11.19 04:24",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-19T04:24:25Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s9820cbc970c14d01a6ddbf391eb0d733"
+    },
     "a2d6fc124b93121c2d": {
       "id": "a2d6fc124b93121c2d",
       "url": "/articles/a2d6fc124b93121c2d/",
@@ -21964,14 +22006,14 @@
   },
   "channels": [
     {
+      "name": "ゆたかTV",
+      "tab": "ゆたかT",
+      "latestAt": "2026-11-19T04:24:20.332698"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-18T14:24:54.646600"
-    },
-    {
-      "name": "ゆたかTV",
-      "tab": "ゆたかT",
-      "latestAt": "2026-11-18T13:54:47.812938"
     },
     {
       "name": "げんたろうの投資ch【元機関投資家】",
