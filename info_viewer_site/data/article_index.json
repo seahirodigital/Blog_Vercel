@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-19T04:25:34.846471+00:00",
+  "generatedAt": "2026-11-19T05:25:12.160041+00:00",
   "articleList": [
+    {
+      "id": "ace6f889b4266b16f5",
+      "url": "/articles/ace6f889b4266b16f5/",
+      "title": "【​アンソロピック上場後 株式市場に資金は戻るか｜AI開発ペース鈍化の収益への影響｜バリュエーション調整完了接近か｜半導体関連低PER銘柄】鈴木一之×鎌田伸一（11月19日公開）11/28大阪セミナー",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=WnOimckWUfY",
+      "thumbnail": "https://i.ytimg.com/vi/WnOimckWUfY/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-19T05:23:53.423614",
+      "recordedLabel": "2026.11.19 05:23",
+      "timeLabel": "2026.11.19 05:23",
+      "persons": [],
+      "lastModified": "2026-11-19T05:23:58Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s567c4e84b507441781b31d0c412113b8"
+    },
     {
       "id": "8dee2242f310242b82",
       "url": "/articles/8dee2242f310242b82/",
@@ -11003,6 +11022,25 @@
     }
   ],
   "articles": {
+    "ace6f889b4266b16f5": {
+      "id": "ace6f889b4266b16f5",
+      "url": "/articles/ace6f889b4266b16f5/",
+      "title": "【​アンソロピック上場後 株式市場に資金は戻るか｜AI開発ペース鈍化の収益への影響｜バリュエーション調整完了接近か｜半導体関連低PER銘柄】鈴木一之×鎌田伸一（11月19日公開）11/28大阪セミナー",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=WnOimckWUfY",
+      "thumbnail": "https://i.ytimg.com/vi/WnOimckWUfY/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-19T05:23:53.423614",
+      "recordedLabel": "2026.11.19 05:23",
+      "timeLabel": "2026.11.19 05:23",
+      "persons": [],
+      "lastModified": "2026-11-19T05:23:58Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s567c4e84b507441781b31d0c412113b8"
+    },
     "8dee2242f310242b82": {
       "id": "8dee2242f310242b82",
       "url": "/articles/8dee2242f310242b82/",
@@ -22008,7 +22046,7 @@
     {
       "name": "ゆたかTV",
       "tab": "ゆたかT",
-      "latestAt": "2026-11-19T04:24:20.332698"
+      "latestAt": "2026-11-19T05:23:53.423614"
     },
     {
       "name": "YTの投資銀行",
