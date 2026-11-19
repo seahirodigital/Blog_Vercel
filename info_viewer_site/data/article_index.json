@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-11-19T08:24:27.608204+00:00",
+  "generatedAt": "2026-11-19T09:25:57.650530+00:00",
   "articleList": [
+    {
+      "id": "ca690ac433cea20045",
+      "url": "/articles/ca690ac433cea20045/",
+      "title": "田中泰輔のマネーは語る：【米国株】AI相場、崩落と回復の心理学。ファンダメンタルズでは見えないこと（田中 泰輔）【楽天証券 トウシル】",
+      "channelName": "トウシル（楽天証券）",
+      "channelKey": "トウシル（楽天証券）",
+      "channelTab": "トウシル",
+      "youtubeUrl": "https://www.youtube.com/watch?v=_8Qy5ddkBik",
+      "thumbnail": "https://i.ytimg.com/vi/_8Qy5ddkBik/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-19T09:24:40.870666",
+      "recordedLabel": "2026.11.19 09:24",
+      "timeLabel": "2026.11.19 09:24",
+      "persons": [
+        "田中泰輔"
+      ],
+      "lastModified": "2026-11-19T09:24:45Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s97d58def0cc74373b0f39a674385f713"
+    },
     {
       "id": "a7a2e44171d2d3b1b4",
       "url": "/articles/a7a2e44171d2d3b1b4/",
@@ -11041,6 +11062,27 @@
     }
   ],
   "articles": {
+    "ca690ac433cea20045": {
+      "id": "ca690ac433cea20045",
+      "url": "/articles/ca690ac433cea20045/",
+      "title": "田中泰輔のマネーは語る：【米国株】AI相場、崩落と回復の心理学。ファンダメンタルズでは見えないこと（田中 泰輔）【楽天証券 トウシル】",
+      "channelName": "トウシル（楽天証券）",
+      "channelKey": "トウシル（楽天証券）",
+      "channelTab": "トウシル",
+      "youtubeUrl": "https://www.youtube.com/watch?v=_8Qy5ddkBik",
+      "thumbnail": "https://i.ytimg.com/vi/_8Qy5ddkBik/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-19T09:24:40.870666",
+      "recordedLabel": "2026.11.19 09:24",
+      "timeLabel": "2026.11.19 09:24",
+      "persons": [
+        "田中泰輔"
+      ],
+      "lastModified": "2026-11-19T09:24:45Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s97d58def0cc74373b0f39a674385f713"
+    },
     "a7a2e44171d2d3b1b4": {
       "id": "a7a2e44171d2d3b1b4",
       "url": "/articles/a7a2e44171d2d3b1b4/",
@@ -22082,6 +22124,11 @@
   },
   "channels": [
     {
+      "name": "トウシル（楽天証券）",
+      "tab": "トウシル",
+      "latestAt": "2026-11-19T09:24:40.870666"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-19T08:23:20.146375"
@@ -22125,11 +22172,6 @@
       "name": "ピクテ・ジャパン株式会社",
       "tab": "ピクテ・",
       "latestAt": "2026-11-12T12:15:41.785682"
-    },
-    {
-      "name": "トウシル（楽天証券）",
-      "tab": "トウシル",
-      "latestAt": "2026-11-12T09:25:14.578187"
     },
     {
       "name": "株式会社東京金融取引所",
