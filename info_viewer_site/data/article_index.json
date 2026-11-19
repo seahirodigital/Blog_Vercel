@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-19T05:25:12.160041+00:00",
+  "generatedAt": "2026-11-19T08:24:27.608204+00:00",
   "articleList": [
+    {
+      "id": "a7a2e44171d2d3b1b4",
+      "url": "/articles/a7a2e44171d2d3b1b4/",
+      "title": "11月19日までの株式市場ニュース斬った【楽天証券/情報漏洩/NVIDIA/防衛株/農林中金/半導体株】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=O5p0PyvK3zE",
+      "thumbnail": "https://i.ytimg.com/vi/O5p0PyvK3zE/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-19T08:23:20.146375",
+      "recordedLabel": "2026.11.19 08:23",
+      "timeLabel": "2026.11.19 08:23",
+      "persons": [],
+      "lastModified": "2026-11-19T08:23:24Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sed9cb1c354114cc4ba04f75227689f63"
+    },
     {
       "id": "ace6f889b4266b16f5",
       "url": "/articles/ace6f889b4266b16f5/",
@@ -11022,6 +11041,25 @@
     }
   ],
   "articles": {
+    "a7a2e44171d2d3b1b4": {
+      "id": "a7a2e44171d2d3b1b4",
+      "url": "/articles/a7a2e44171d2d3b1b4/",
+      "title": "11月19日までの株式市場ニュース斬った【楽天証券/情報漏洩/NVIDIA/防衛株/農林中金/半導体株】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=O5p0PyvK3zE",
+      "thumbnail": "https://i.ytimg.com/vi/O5p0PyvK3zE/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-19T08:23:20.146375",
+      "recordedLabel": "2026.11.19 08:23",
+      "timeLabel": "2026.11.19 08:23",
+      "persons": [],
+      "lastModified": "2026-11-19T08:23:24Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sed9cb1c354114cc4ba04f75227689f63"
+    },
     "ace6f889b4266b16f5": {
       "id": "ace6f889b4266b16f5",
       "url": "/articles/ace6f889b4266b16f5/",
@@ -22044,6 +22082,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-19T08:23:20.146375"
+    },
+    {
       "name": "ゆたかTV",
       "tab": "ゆたかT",
       "latestAt": "2026-11-19T05:23:53.423614"
@@ -22052,11 +22095,6 @@
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-18T14:24:54.646600"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-18T11:54:16.492347"
     },
     {
       "name": "イズミダイズム",
