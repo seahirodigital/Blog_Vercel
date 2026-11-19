@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-11-19T09:25:57.650530+00:00",
+  "generatedAt": "2026-11-19T13:55:38.208804+00:00",
   "articleList": [
+    {
+      "id": "658a8d661a1534c342",
+      "url": "/articles/658a8d661a1534c342/",
+      "title": "岡崎良介のマーケットインサイト『米国小売り統計から見えてきた小さな変化』 （収録日：2026年11月19日）",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=IIiB3JRldTg",
+      "thumbnail": "https://i.ytimg.com/vi/IIiB3JRldTg/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-19T13:54:08.209809",
+      "recordedLabel": "2026.11.19 13:54",
+      "timeLabel": "2026.11.19 13:54",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-19T13:54:13Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s459a5160575c4b808c8624b744a92e41"
+    },
     {
       "id": "ca690ac433cea20045",
       "url": "/articles/ca690ac433cea20045/",
@@ -11062,6 +11083,27 @@
     }
   ],
   "articles": {
+    "658a8d661a1534c342": {
+      "id": "658a8d661a1534c342",
+      "url": "/articles/658a8d661a1534c342/",
+      "title": "岡崎良介のマーケットインサイト『米国小売り統計から見えてきた小さな変化』 （収録日：2026年11月19日）",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=IIiB3JRldTg",
+      "thumbnail": "https://i.ytimg.com/vi/IIiB3JRldTg/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-19T13:54:08.209809",
+      "recordedLabel": "2026.11.19 13:54",
+      "timeLabel": "2026.11.19 13:54",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-19T13:54:13Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s459a5160575c4b808c8624b744a92e41"
+    },
     "ca690ac433cea20045": {
       "id": "ca690ac433cea20045",
       "url": "/articles/ca690ac433cea20045/",
@@ -22124,6 +22166,11 @@
   },
   "channels": [
     {
+      "name": "ゆたかTV",
+      "tab": "ゆたかT",
+      "latestAt": "2026-11-19T13:54:08.209809"
+    },
+    {
       "name": "トウシル（楽天証券）",
       "tab": "トウシル",
       "latestAt": "2026-11-19T09:24:40.870666"
@@ -22132,11 +22179,6 @@
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-19T08:23:20.146375"
-    },
-    {
-      "name": "ゆたかTV",
-      "tab": "ゆたかT",
-      "latestAt": "2026-11-19T05:23:53.423614"
     },
     {
       "name": "YTの投資銀行",
