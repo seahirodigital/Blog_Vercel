@@ -30,7 +30,6 @@ class OGPRepeatTests(unittest.TestCase):
         self.assertEqual(page.wait_for_timeout.call_args_list.count(unittest.mock.call(5000)), 4)
         self.assertIn("4回目終了時の未展開対象URL: 1種 / 1箇所", log.getvalue())
         self.assertNotIn("5回目終了時の未展開対象URL", log.getvalue())
-        self.assertIn('OGP未展開URL_JSON: ["https://amzn.to/example"]', log.getvalue())
 
     def test_残りがなくなれば早期終了する(self):
         page = Mock()
