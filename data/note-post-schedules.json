@@ -5558,7 +5558,7 @@
   },
   {
     "id": "b7cdcc7b-4281-47d7-9083-2b9babd049c3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!saba26f2a92eb484dab1c1f65ef08c969",
     "title": "Amazon ブラックフライデー 2026 おすすめ│Apple製品iPhone・iPad mini・Macbookをお得に買う方法まとめ",
     "name": "コピー_20261120_ブラックフライデー2026_母艦_パイプラインテスト.md",
@@ -5570,7 +5570,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "52da18a3-d29e-4193-a660-427d9a82da2e",
@@ -6441,7 +6442,7 @@
   },
   {
     "id": "edff52da-ca13-4b7a-ae7c-2937202e99f0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s4b4e54ce65094066a3057fd83922628e",
     "title": "Amazon ブラックフライデー 2026│開催期間とApple製品をお得に買う方法まとめ",
     "name": "Amazon ブラックフライデー 2026.md",
@@ -6453,7 +6454,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "b71aed30-5ba6-4fde-a4e7-06bb101ec61c",
@@ -6474,7 +6476,7 @@
   },
   {
     "id": "8ced5c64-36bb-4a21-bcd4-1dcbff201b85",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb72c41de0df544799824cd3c86af094b",
     "title": "Amazon ブラックフライデー Switch2 2026│Nintendo Switch 2の選び方まとめ",
     "name": "Amazon ブラックフライデー Switch2 2026.md",
@@ -6486,7 +6488,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "a84b00b9-b648-4a35-8892-f75896c0656c",
@@ -6507,7 +6510,7 @@
   },
   {
     "id": "4e56f732-2ee4-4d98-b80e-3472b71b0c1d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3d4785271f394743bd7da23b77322ed6",
     "title": "Amazon ブラックフライデー ウイスキー 2026│ウイスキーのおすすめと選び方まとめ",
     "name": "Amazon ブラックフライデー ウイスキー 2026.md",
@@ -6519,7 +6522,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "f5b06d08-e058-4d01-9b78-c942c1a314ae",
@@ -6540,7 +6544,7 @@
   },
   {
     "id": "748cc5f1-d337-4900-8225-ca30d4c27a74",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb52a63ed06b7409494132d9c1003a63f",
     "title": "Amazon ブラックフライデー エアコン 2026",
     "name": "Amazon ブラックフライデー エアコン 2026.md",
@@ -6552,7 +6556,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "a61ce337-0c5d-4926-93e7-36155c217329",
@@ -6573,7 +6578,7 @@
   },
   {
     "id": "ab327263-1fc1-4304-9522-a31f5b64246e",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3b558d447ca54cdb8b9df2d472822cc6",
     "title": "Amazon ブラックフライデー おすすめ 2026",
     "name": "Amazon ブラックフライデー おすすめ 2026.md",
@@ -6585,7 +6590,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "6a990945-e42e-4365-ad23-8361e7319d68",
@@ -6606,7 +6612,7 @@
   },
   {
     "id": "ae53cd26-0dd3-42d0-83bc-c9a9fd75fb27",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s42f4cc1a7b2541158527e6c214d6a165",
     "title": "Amazon ブラックフライデー クリスマスプレゼント 2026",
     "name": "Amazon ブラックフライデー クリスマスプレゼント 2026.md",
@@ -6618,7 +6624,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "51475cf9-8584-4ee3-9c37-f25dc98d8184",
@@ -6639,7 +6646,7 @@
   },
   {
     "id": "513643dc-ae9d-4539-907c-2886c7e7cec9",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa541837b4caa42b2ab4b8a454caf7d67",
     "title": "Amazon ブラックフライデー ケノン 2026",
     "name": "Amazon ブラックフライデー ケノン 2026.md",
@@ -6651,7 +6658,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "4845a9a8-fa68-4f29-be05-fe87d2a3fc45",
@@ -6672,7 +6680,7 @@
   },
   {
     "id": "8e533ecb-1568-46ba-b668-4ef5511b591a",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9ea59aefd2bf4df89069ad281a48858d",
     "title": "Amazon ブラックフライデー ケルヒャー 2026",
     "name": "Amazon ブラックフライデー ケルヒャー 2026.md",
@@ -6684,7 +6692,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "680c360c-d0e4-4895-ae5a-ddf11cfe5c18",
@@ -6705,7 +6714,7 @@
   },
   {
     "id": "480328f9-edce-44ff-b75a-100333374b21",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sab9e653e3ed14c9e8dab451c0522bdb5",
     "title": "Amazon ブラックフライデー コーヒーメーカー 2026",
     "name": "Amazon ブラックフライデー コーヒーメーカー 2026.md",
@@ -6717,7 +6726,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "417b948c-bab8-4a4e-bdd4-e26ab4e31f58",
@@ -6738,7 +6748,7 @@
   },
   {
     "id": "2e78ddac-f44f-4351-adf2-f736d5d24961",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8ad553b822a34699bb0fc3cbb61b9996",
     "title": "Amazon ブラックフライデー シェーバー 2026",
     "name": "Amazon ブラックフライデー シェーバー 2026.md",
@@ -6750,7 +6760,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "2f05283e-cfee-454a-948f-b7104f44ec73",
@@ -6771,7 +6782,7 @@
   },
   {
     "id": "c4f0885e-ea7a-4b87-bace-10f186390963",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8e83f8ea67fa4c4f952a8d994d10559c",
     "title": "Amazon ブラックフライデー タイヤ 2026",
     "name": "Amazon ブラックフライデー タイヤ 2026.md",
@@ -6783,7 +6794,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "27a67079-d923-45d0-92e6-7bce439b69dc",
@@ -6804,7 +6816,7 @@
   },
   {
     "id": "9e31b409-3ed7-4480-afac-cb98409bbaee",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s95ae6db0d699453d9ab35fcf9fe987f9",
     "title": "Amazon ブラックフライデー タブレット おすすめ 2026",
     "name": "Amazon ブラックフライデー タブレット おすすめ 2026.md",
@@ -6816,7 +6828,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "fae0f179-e475-48c6-ad2f-e9aecbadf41c",
@@ -6837,7 +6850,7 @@
   },
   {
     "id": "e0839137-6c0b-4dbc-b0d3-b1d4f81980f1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s87e802ab4080496aa4220dcb60031090",
     "title": "Amazon ブラックフライデー 売れ筋 2026",
     "name": "Amazon ブラックフライデー 売れ筋 2026.md",
@@ -6849,7 +6862,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "0c07756e-499b-4d7d-b8a4-745fb69ea552",
@@ -6870,7 +6884,7 @@
   },
   {
     "id": "7e4596f7-bbac-4394-a5b5-c01c97f4e312",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s526c0d2e44b94d4781be193cfbddd0ef",
     "title": "Amazon ブラックフライデー 工具 2026",
     "name": "Amazon ブラックフライデー 工具 2026.md",
@@ -6882,7 +6896,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "3a5c799f-7ad3-4c0f-ba37-b2741dcdfc06",
@@ -6903,7 +6918,7 @@
   },
   {
     "id": "10f5f0ed-d220-4ba4-af72-51a639b9e525",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s500f47334db94873bb3f2cd4a96593f1",
     "title": "Amazon ブラックフライデー 掃除機 2026",
     "name": "Amazon ブラックフライデー 掃除機 2026.md",
@@ -6915,7 +6930,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "52c200fa-94a6-41eb-9eff-b8cd73458fb0",
@@ -6936,7 +6952,7 @@
   },
   {
     "id": "24e909ee-5e0a-4095-b67a-92f215bf5fb3",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sff6f4a17838248ae9a9d807a47a7d1e9",
     "title": "Amazon ブラックフライデー 洗濯機 2026",
     "name": "Amazon ブラックフライデー 洗濯機 2026.md",
@@ -6948,7 +6964,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "a6922acb-ede1-4823-97e9-37af0fbde2fe",
@@ -6969,7 +6986,7 @@
   },
   {
     "id": "34a31ba3-83d7-4ceb-8f6a-7462dcc48fd5",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfd01e72258674de988aada861fbd540b",
     "title": "Amazon ブラックフライデー 空気清浄機 2026",
     "name": "Amazon ブラックフライデー 空気清浄機 2026.md",
@@ -6981,7 +6998,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "ef99f88e-1e41-47ad-affd-ad5f3649c051",
@@ -7002,7 +7020,7 @@
   },
   {
     "id": "8d58640c-997b-4e53-ada9-b0b32724c8f7",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf722c65005f34ba5a5ee73d259cc24a2",
     "title": "Amazon ブラックフライデー 羽毛布団 2026",
     "name": "Amazon ブラックフライデー 羽毛布団 2026.md",
@@ -7014,7 +7032,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "d3d6de81-3a71-4061-a6ef-9423a6bc4538",
@@ -7035,7 +7054,7 @@
   },
   {
     "id": "1de12621-bd0c-4af7-9990-0ac56e264c32",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfaa35e8cf43045279a48a5697b6b349c",
     "title": "Amazon ブラックフライデー 腕時計 2026",
     "name": "Amazon ブラックフライデー 腕時計 2026.md",
@@ -7047,7 +7066,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "1d6e7f2b-9951-40b6-bb40-7b6f065a7232",
@@ -7068,7 +7088,7 @@
   },
   {
     "id": "eac06725-b44d-4877-8c2d-3c1235943199",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2f409e2f23c9480dad547502613a2282",
     "title": "Amazon ブラックフライデー 10000 円以上 2026",
     "name": "Amazon ブラックフライデー 10000 円以上 2026.md",
@@ -7080,7 +7100,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "89a549e6-b5d3-4ebc-a63e-2bf62dd4ba6e",
@@ -7101,7 +7122,7 @@
   },
   {
     "id": "79f669f1-b7e7-4683-ba7a-f3d639dd217b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s502034e709064951ad68bea5a6dffd60",
     "title": "Amazon ブラックフライデー 12月 2026",
     "name": "Amazon ブラックフライデー 12月 2026.md",
@@ -7113,7 +7134,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "90272c5f-6c32-47a0-9e9c-980ceaee033a",
@@ -7134,7 +7156,7 @@
   },
   {
     "id": "cc91b78c-510f-4d17-9868-af6d9428f6e0",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sdffe6cbcd69a4bcc805f93b4fed4c340",
     "title": "Amazon ブラックフライデー 1万円以上 2026",
     "name": "Amazon ブラックフライデー 1万円以上 2026.md",
@@ -7146,7 +7168,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "dd76bec9-1a1a-4970-991d-76421887bf30",
@@ -7167,7 +7190,7 @@
   },
   {
     "id": "830bb516-a4a7-4a73-bf58-c6363452760d",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6d0a8365d3c14171955221b5aade4194",
     "title": "Amazon ブラックフライデー 2026 iPhone",
     "name": "Amazon ブラックフライデー 2026 iPhone.md",
@@ -7179,7 +7202,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "5f20b7e2-1acc-489d-ac0d-4b120a2b653c",
@@ -7200,7 +7224,7 @@
   },
   {
     "id": "0f790188-860d-4fe5-8f14-c434fc70c76c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa5e7cc469b194e9f8661cdc9990b7214",
     "title": "Amazon ブラックフライデー 2026 いつから",
     "name": "Amazon ブラックフライデー 2026 いつから.md",
@@ -7212,7 +7236,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "27d9ed2a-cbf0-4cd8-be94-7cff49e983b8",
@@ -7233,7 +7258,7 @@
   },
   {
     "id": "89f19e70-55c2-4437-a616-ceb906462bfa",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!seb34aebae9244fbe88a8357e69016140",
     "title": "Amazon ブラックフライデー 2026 いつまで",
     "name": "Amazon ブラックフライデー 2026 いつまで.md",
@@ -7245,7 +7270,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "b036012f-a1e4-42d5-bd48-086bbe9559c1",
@@ -7266,7 +7292,7 @@
   },
   {
     "id": "81fd7e05-abe7-4f4b-a923-c2cc7951a188",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sa0785449ac034a4b86538cd486e8d172",
     "title": "Amazon ブラックフライデー 2026 期間",
     "name": "Amazon ブラックフライデー 2026 期間.md",
@@ -7278,7 +7304,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "5c64f279-5053-4da2-8ccd-0093d1406f83",
@@ -7299,7 +7326,7 @@
   },
   {
     "id": "1c83bcf6-2517-47c5-aaa8-35c1769ca6a9",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb5a92ddff3b54b799ae8c3c1fa2dd226",
     "title": "Amazon ブラックフライデー Adobe 2026",
     "name": "Amazon ブラックフライデー Adobe 2026.md",
@@ -7311,7 +7338,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "14bc1de8-d42a-4599-a506-65b0df29cc3d",
@@ -7332,7 +7360,7 @@
   },
   {
     "id": "652df5e4-ce18-4bd4-a955-79fb17965939",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7a7ead2110a74739867dd807a6ce57a6",
     "title": "Amazon ブラックフライデー AirPods 2026",
     "name": "Amazon ブラックフライデー AirPods 2026.md",
@@ -7344,7 +7372,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "27bccccd-5c55-4952-b207-c7b34da54690",
@@ -7365,7 +7394,7 @@
   },
   {
     "id": "fa1ebe40-8bcc-4e35-a323-5a67e177bc63",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5f3f282caccc4980a026d37e0d90ffce",
     "title": "Amazon ブラックフライデー AirPods pro3 2026",
     "name": "Amazon ブラックフライデー AirPods pro3 2026.md",
@@ -7377,7 +7406,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "911554ba-76dd-4fdd-bd33-965ac6e27255",
@@ -7398,7 +7428,7 @@
   },
   {
     "id": "14caf379-fd5d-43ce-ad48-688e6082f6dc",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf9c2ba1d7a3a4a7994395a4fef973a02",
     "title": "Amazon ブラックフライデー AirPods5 2026",
     "name": "Amazon ブラックフライデー AirPods5 2026.md",
@@ -7410,7 +7440,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "775b5e22-e34e-4e7c-9194-c925474716a6",
@@ -7431,7 +7462,7 @@
   },
   {
     "id": "50448ba1-d63c-49db-93b7-349191afcfb7",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3144e33a0b2a4ff4a3060971717ffd88",
     "title": "Amazon ブラックフライデー Anker 2026",
     "name": "Amazon ブラックフライデー Anker 2026.md",
@@ -7443,7 +7474,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "1dc34b64-38a2-444b-ab38-400226c662ec",
@@ -7464,7 +7496,7 @@
   },
   {
     "id": "ad868d15-7abd-4e3d-b24f-39a642769ff9",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5ac81c76e0a5447b9ce26d024ae9edba",
     "title": "Amazon ブラックフライデー Apple 2026",
     "name": "Amazon ブラックフライデー Apple 2026.md",
@@ -7476,7 +7508,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "8e66b3a6-7a0f-4874-996d-0fe29d92349e",
@@ -7497,7 +7530,7 @@
   },
   {
     "id": "c7b35081-1928-4058-a5c9-234b4b456369",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s59082d5309f34d92adbcb3cbe5ca9458",
     "title": "Amazon ブラックフライデー Apple watch 2026",
     "name": "Amazon ブラックフライデー Apple watch 2026.md",
@@ -7509,7 +7542,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "112b05c6-5a3d-4b7d-9183-fea004e3b8ab",
@@ -7530,7 +7564,7 @@
   },
   {
     "id": "051790bf-e219-49d2-b73e-081f5b38f817",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2ad4f542182645229eae27112982fd4e",
     "title": "Amazon ブラックフライデー Apple製品 2026",
     "name": "Amazon ブラックフライデー Apple製品 2026.md",
@@ -7542,7 +7576,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "013210ac-0410-46de-affe-ea0f4456d7c2",
@@ -7563,7 +7598,7 @@
   },
   {
     "id": "f8420079-46d3-4bae-9f8c-9814776533ff",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s35922a2074b64579b9e0a49c2fb30c77",
     "title": "Amazon ブラックフライデー iPad 2026",
     "name": "Amazon ブラックフライデー iPad 2026.md",
@@ -7575,7 +7610,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "3abac3fa-822e-4a90-9046-bf8f295fa67c",
@@ -7596,7 +7632,7 @@
   },
   {
     "id": "9b4ba63e-5cf0-406e-8f4e-75da366d1134",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s6683c96df3df414cbaa750b071daaec8",
     "title": "Amazon ブラックフライデー iPad air 2026",
     "name": "Amazon ブラックフライデー iPad air 2026.md",
@@ -7608,7 +7644,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "1b6a073d-ede4-4e93-ac4a-c9fc18e72af5",
@@ -7629,7 +7666,7 @@
   },
   {
     "id": "fc469375-153b-4299-b325-858e56a21b42",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7100fbb5abd747478d2ae156bbf3340f",
     "title": "Amazon ブラックフライデー iPad mini 2026",
     "name": "Amazon ブラックフライデー iPad mini 2026.md",
@@ -7641,7 +7678,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "5146ce5d-9a87-4ffc-a97c-f41b558e0f2d",
@@ -7662,7 +7700,7 @@
   },
   {
     "id": "9082ae9b-5b71-4140-a9be-6c1e1f9c8ba1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s9239fade9470444a8d4eb08d88b24b16",
     "title": "Amazon ブラックフライデー iPad pro 2026",
     "name": "Amazon ブラックフライデー iPad pro 2026.md",
@@ -7674,7 +7712,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "d9b23a99-556b-4723-8897-da39952cfb89",
@@ -7695,7 +7734,7 @@
   },
   {
     "id": "be89aca5-709a-4675-a0e6-c51220ff54b1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0d32c1dcafdd42b1ac3ff642d8b3ea06",
     "title": "Amazon ブラックフライデー iPad どれくらい安くなる 2026",
     "name": "Amazon ブラックフライデー iPad どれくらい安くなる 2026.md",
@@ -7707,7 +7746,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "8f15889d-9c27-4eef-86ae-6898587f449f",
@@ -7728,7 +7768,7 @@
   },
   {
     "id": "648bc0ae-54e3-4425-a114-ec9657bf9b10",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s0d254e23728b47b98a57ef3a0ce4af27",
     "title": "Amazon ブラックフライデー iPhone 2026",
     "name": "Amazon ブラックフライデー iPhone 2026.md",
@@ -7740,7 +7780,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "4c7615cf-05c0-44de-995a-c01837544511",
@@ -7778,7 +7819,7 @@
   },
   {
     "id": "011e2fe4-c83f-43b3-97d8-b00620048b51",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!se46147113fc842cca2d2dfa6fedac52b",
     "title": "Amazon ブラックフライデー iPhone 安くなる 2026",
     "name": "Amazon ブラックフライデー iPhone 安くなる 2026.md",
@@ -7790,7 +7831,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "73aefd59-405a-4bb3-89ba-2389136e4207",
@@ -7811,7 +7853,7 @@
   },
   {
     "id": "ef76352b-e009-421a-a74b-5bdf7aa28bdb",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s3bd22054afa74210bb756d1e874c3b74",
     "title": "Amazon ブラックフライデー iPhone16 価格 2026",
     "name": "Amazon ブラックフライデー iPhone16 価格 2026.md",
@@ -7823,7 +7865,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "b7ecf894-923c-492b-8adf-9962f2660b3c",
@@ -7844,7 +7887,7 @@
   },
   {
     "id": "5420534b-423c-48c0-a55b-97f11073327f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s7fb0f4be5a0343b0a7f093b253eddb95",
     "title": "Amazon ブラックフライデー iPhone17 2026",
     "name": "Amazon ブラックフライデー iPhone17 2026.md",
@@ -7856,7 +7899,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "e3613a28-67b2-458c-94af-32fa37ec269d",
@@ -7877,7 +7921,7 @@
   },
   {
     "id": "1c601f0d-a7ef-479c-8dfe-6bc21ca902cf",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb00f7ac19cc1446dbbf025f6fa1afd37",
     "title": "Amazon ブラックフライデー Pixel 9a 2026",
     "name": "Amazon ブラックフライデー Pixel 9a 2026.md",
@@ -7889,7 +7933,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "092945e4-486f-4701-8188-ba0ceac62b3b",
@@ -7910,7 +7955,7 @@
   },
   {
     "id": "79c4ca5f-d2ea-4345-a242-0346febe7e78",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s23f80a7319224621a7064fb049f35957",
     "title": "Amazon ブラックフライデー PlayStation 5 2026",
     "name": "Amazon ブラックフライデー PlayStation 5 2026.md",
@@ -7922,7 +7967,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "7313a7ea-87fb-4d88-8cf7-5c79a11feaa2",
@@ -7943,7 +7989,7 @@
   },
   {
     "id": "f9b31eb9-3fb9-4c91-8a27-9639460b638b",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sf30ebdbea0d4405fa2c21795c8093c7e",
     "title": "Amazon ブラックフライデー PS5 値段 2026",
     "name": "Amazon ブラックフライデー PS5 値段 2026.md",
@@ -7955,7 +8001,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "599cd0ac-bbae-47b1-b354-9a4290866670",
@@ -7976,7 +8023,7 @@
   },
   {
     "id": "542600ea-5da4-4d08-8702-6cd2b4854532",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s279b9f37fa8048409051ad030e911ab3",
     "title": "Amazon ブラックフライデー PS5Pro 2026",
     "name": "Amazon ブラックフライデー PS5Pro 2026.md",
@@ -7988,7 +8035,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "fe700680-d589-4949-bc76-75f6a55e9c0c",
@@ -8009,7 +8057,7 @@
   },
   {
     "id": "326cb4d1-17e7-42ef-9cea-659db8322e7f",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s05802605849f46cba47e2565ecf2aef8",
     "title": "Amazon ブラックフライデー アップルギフトカード 2026",
     "name": "Amazon ブラックフライデー アップルギフトカード 2026.md",
@@ -8021,7 +8069,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "0c6b3243-ba88-4754-9bc1-f2da230cc319",
@@ -8042,7 +8091,7 @@
   },
   {
     "id": "22d10ca0-cc95-4f9f-a816-1347505dc7ec",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8e42fd76fbb144c1a3a1bc54cbde200c",
     "title": "Amazon ブラックフライデー いつから始まった 2026",
     "name": "Amazon ブラックフライデー いつから始まった 2026.md",
@@ -8054,7 +8103,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   },
   {
     "id": "dd37b949-cfa0-4060-851e-81716be58933",
@@ -8075,7 +8125,7 @@
   },
   {
     "id": "d29c9033-b604-49e7-a038-4023ff2a0221",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s5b741e004a07400bad07e28fd6d115e6",
     "title": "Amazon ブラックフライデーセール 2026",
     "name": "Amazon ブラックフライデーセール 2026.md",
@@ -8087,6 +8137,7 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:23:25.711Z"
   }
 ]
