@@ -3019,7 +3019,7 @@ def process_ogp_urls(page) -> int:
     page.evaluate("window.noteFormatter.convertMarkdownToHtml()")
 
     total_processed = 0
-    MAX_SWEEPS = 6
+    MAX_SWEEPS = 5
 
     for sweep in range(MAX_SWEEPS):
         print(f"\n   [Python] 🔄 {sweep + 1}回目のスイープ...")
