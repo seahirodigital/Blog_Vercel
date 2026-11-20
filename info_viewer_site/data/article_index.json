@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-20T07:25:37.293869+00:00",
+  "generatedAt": "2026-11-20T09:25:11.725305+00:00",
   "articleList": [
+    {
+      "id": "c01f826d005cf18620",
+      "url": "/articles/c01f826d005cf18620/",
+      "title": "【トヨタ自動車】次の相場の主役となるか？フィジカルAIとロボット事業で株価の評価は変わる？40万台・年1兆円の需要トヨタロボティクスの正体｜割安株から成長株へなる条件【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=_phDyROC0NY",
+      "thumbnail": "https://i.ytimg.com/vi/_phDyROC0NY/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-20T09:24:12.607661",
+      "recordedLabel": "2026.11.20 09:24",
+      "timeLabel": "2026.11.20 09:24",
+      "persons": [],
+      "lastModified": "2026-11-20T09:24:16Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sd68bbfa589bc45e6b7ff563b3e7244d3"
+    },
     {
       "id": "9fd430d223cdcfd04d",
       "url": "/articles/9fd430d223cdcfd04d/",
@@ -11125,6 +11144,25 @@
     }
   ],
   "articles": {
+    "c01f826d005cf18620": {
+      "id": "c01f826d005cf18620",
+      "url": "/articles/c01f826d005cf18620/",
+      "title": "【トヨタ自動車】次の相場の主役となるか？フィジカルAIとロボット事業で株価の評価は変わる？40万台・年1兆円の需要トヨタロボティクスの正体｜割安株から成長株へなる条件【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=_phDyROC0NY",
+      "thumbnail": "https://i.ytimg.com/vi/_phDyROC0NY/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-20T09:24:12.607661",
+      "recordedLabel": "2026.11.20 09:24",
+      "timeLabel": "2026.11.20 09:24",
+      "persons": [],
+      "lastModified": "2026-11-20T09:24:16Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sd68bbfa589bc45e6b7ff563b3e7244d3"
+    },
     "9fd430d223cdcfd04d": {
       "id": "9fd430d223cdcfd04d",
       "url": "/articles/9fd430d223cdcfd04d/",
@@ -22250,6 +22288,11 @@
   },
   "channels": [
     {
+      "name": "イズミダイズム",
+      "tab": "イズミダ",
+      "latestAt": "2026-11-20T09:24:12.607661"
+    },
+    {
       "name": "マーケットマスターズ",
       "tab": "マーケッ",
       "latestAt": "2026-11-20T07:24:08.122983"
@@ -22273,11 +22316,6 @@
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-18T14:24:54.646600"
-    },
-    {
-      "name": "イズミダイズム",
-      "tab": "イズミダ",
-      "latestAt": "2026-11-18T09:24:21.762942"
     },
     {
       "name": "なるほど投資ゼミ（大橋ひろこ",
