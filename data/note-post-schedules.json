@@ -5876,7 +5876,7 @@
   },
   {
     "id": "ea744232-6b53-4afa-9d8d-99c6bad044b1",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s42f4cc1a7b2541158527e6c214d6a165",
     "title": "Amazon ブラックフライデー クリスマスプレゼント 2026",
     "name": "Amazon ブラックフライデー クリスマスプレゼント 2026.md",
@@ -5886,8 +5886,8 @@
     "publishAt": "2026-11-20T12:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
     "queuedAt": "2026-11-20T15:48:06.296429+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-20T15:52:52.603821+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n0bf799863155?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
