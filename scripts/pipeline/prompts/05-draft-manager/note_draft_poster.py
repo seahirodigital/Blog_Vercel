@@ -28,6 +28,7 @@ import base64
 import argparse
 import importlib.util
 import tempfile
+import unicodedata
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -49,6 +50,7 @@ ADOBE_STORAGE_STATE_FILE = SCRIPT_DIR / "adobe_express_storage_state.json"
 AMAZON_PROMPTS_DIR = SCRIPT_DIR.parent / "04-affiliate-link-manager"
 AMAZON_AFFILIATE_SCRIPT = AMAZON_PROMPTS_DIR / "insert_amazon_affiliate.py"
 AMAZON_TOP_IMAGE_SCRIPT = AMAZON_PROMPTS_DIR / "amazon_gazo_get.py"
+BLACK_FRIDAY_TOP_IMAGE = SCRIPT_DIR.parent.parent / "assets" / "black-friday-2026-date-reveal.jpg"
 NOTE_TOP_IMAGE_ARTIFACTS_DIR = SCRIPT_DIR.parent.parent / "debug" / "note_gazo_test" / "artifacts"
 NOTE_TOP_IMAGE_DEBUG = os.getenv("NOTE_TOP_IMAGE_DEBUG", "").strip().lower() in {"1", "true", "yes", "on"}
 NOTE_TOP_IMAGE_USE_ADOBE = os.getenv("NOTE_TOP_IMAGE_USE_ADOBE", "").strip().lower() in {"1", "true", "yes", "on"}
@@ -3056,6 +3058,14 @@ def process_ogp_urls(page) -> int:
     return total_processed
 
 
+def _black_friday_top_image_for_title(title: str) -> Path | None:
+    """タイトルがブラックフライデー記事ならリポジトリ内の画像を返す。"""
+    normalized = unicodedata.normalize("NFKC", title or "").casefold()
+    if re.search(r"ブラック[\s・･\-ー]*フライデー|black[\s_\-]*friday", normalized):
+        return BLACK_FRIDAY_TOP_IMAGE
+    return None
+
+
 def _run_ogp_expansion_on_draft(
     editor_url: str,
     cookies_dict: dict,
@@ -3171,6 +3181,16 @@ def _run_ogp_expansion_on_draft(
                     browser.close()
                     return result
                 top_image_path = str(thumbnails[0])
+            if source_markdown.strip():
+                image_title, _ = extract_title_and_body(source_markdown)
+            else:
+                image_title = (_collect_note_editor_snapshot(page).get("title") or "").strip()
+            black_friday_image = _black_friday_top_image_for_title(image_title)
+            if black_friday_image:
+                if not black_friday_image.is_file():
+                    raise FileNotFoundError(f"ブラックフライデーの見出し画像が見つかりません: {black_friday_image}")
+                print(f"   🖼️ ブラックフライデー用の見出し画像を使用します: {black_friday_image}")
+                top_image_path = str(black_friday_image)
             if top_image_path:
                 top_image_result = _attach_local_top_image_to_page(
                     page,
@@ -3185,6 +3205,8 @@ def _run_ogp_expansion_on_draft(
                     artifacts_dir=artifacts_dir,
                     save_draft_after_upload=not publish_after,
                 )
+            if black_friday_image and top_image_result.get("image_flow") in {"skipped", "skipped_by_option"}:
+                raise RuntimeError("ブラックフライデーの見出し画像を設定できないため投稿を中止します")
         else:
             top_image_result = {"image_flow": "skipped_by_option"}
             print("   ⏭️ Amazonトップ画像はオプション指定によりスキップします")
