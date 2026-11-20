@@ -5646,7 +5646,7 @@
   },
   {
     "id": "7d1827a0-aecd-4e81-99ed-aac2c3969af1",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!saba26f2a92eb484dab1c1f65ef08c969",
     "title": "Amazon ブラックフライデー 2026 おすすめ│Apple製品iPhone・iPad mini・Macbookをお得に買う方法まとめ",
     "name": "コピー_20261120_ブラックフライデー2026_母艦_パイプラインテスト.md",
@@ -5656,8 +5656,8 @@
     "publishAt": "2026-11-20T07:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
     "queuedAt": "2026-11-20T15:48:06.296429+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-20T15:53:10.418418+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n2667b0124922/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
