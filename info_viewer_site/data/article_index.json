@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-20T11:25:22.288593+00:00",
+  "generatedAt": "2026-11-20T13:54:09.408805+00:00",
   "articleList": [
+    {
+      "id": "e888d88716b1e7b30b",
+      "url": "/articles/e888d88716b1e7b30b/",
+      "title": "LIVE  マーケットアップデート　日経3000円暴落　アンソロピック上場後、半導体叩き売り",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=X4QN8VUjnxE",
+      "thumbnail": "https://i.ytimg.com/vi/X4QN8VUjnxE/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-20T13:52:59.767929",
+      "recordedLabel": "2026.11.20 13:52",
+      "timeLabel": "2026.11.20 13:52",
+      "persons": [],
+      "lastModified": "2026-11-20T13:53:04Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s2a2d3c3762f24525bceb7bb1119ef6ad"
+    },
     {
       "id": "c398075474142031ee",
       "url": "/articles/c398075474142031ee/",
@@ -11163,6 +11182,25 @@
     }
   ],
   "articles": {
+    "e888d88716b1e7b30b": {
+      "id": "e888d88716b1e7b30b",
+      "url": "/articles/e888d88716b1e7b30b/",
+      "title": "LIVE  マーケットアップデート　日経3000円暴落　アンソロピック上場後、半導体叩き売り",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=X4QN8VUjnxE",
+      "thumbnail": "https://i.ytimg.com/vi/X4QN8VUjnxE/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-20T13:52:59.767929",
+      "recordedLabel": "2026.11.20 13:52",
+      "timeLabel": "2026.11.20 13:52",
+      "persons": [],
+      "lastModified": "2026-11-20T13:53:04Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s2a2d3c3762f24525bceb7bb1119ef6ad"
+    },
     "c398075474142031ee": {
       "id": "c398075474142031ee",
       "url": "/articles/c398075474142031ee/",
@@ -22326,6 +22364,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-11-20T13:52:59.767929"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-20T11:24:11.960689"
@@ -22349,11 +22392,6 @@
       "name": "トウシル（楽天証券）",
       "tab": "トウシル",
       "latestAt": "2026-11-19T09:24:40.870666"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-11-18T14:24:54.646600"
     },
     {
       "name": "なるほど投資ゼミ（大橋ひろこ",
