@@ -5592,7 +5592,7 @@
   },
   {
     "id": "ed974bed-f701-45a2-baa4-5434a2a2df85",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4b4e54ce65094066a3057fd83922628e",
     "title": "Amazon ブラックフライデー 2026│開催期間とApple製品をお得に買う方法まとめ",
     "name": "Amazon ブラックフライデー 2026.md",
@@ -5601,14 +5601,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T07:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T15:48:06.296429+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d35de1b5-4d9e-4ad5-8b4d-e43ef5ea8528",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!saba26f2a92eb484dab1c1f65ef08c969",
     "title": "Amazon ブラックフライデー 2026 おすすめ│Apple製品iPhone・iPad mini・Macbookをお得に買う方法まとめ",
     "name": "コピー_20261120_ブラックフライデー2026_母艦_パイプラインテスト.md",
@@ -5617,14 +5619,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T07:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T15:48:06.296429+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "08e718b4-b93e-45a7-86d0-55eb1cdd254c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s4b4e54ce65094066a3057fd83922628e",
     "title": "Amazon ブラックフライデー 2026│開催期間とApple製品をお得に買う方法まとめ",
     "name": "Amazon ブラックフライデー 2026.md",
@@ -5633,14 +5637,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T07:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T15:48:06.296429+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7d1827a0-aecd-4e81-99ed-aac2c3969af1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!saba26f2a92eb484dab1c1f65ef08c969",
     "title": "Amazon ブラックフライデー 2026 おすすめ│Apple製品iPhone・iPad mini・Macbookをお得に買う方法まとめ",
     "name": "コピー_20261120_ブラックフライデー2026_母艦_パイプラインテスト.md",
@@ -5649,10 +5655,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T07:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T15:48:06.296429+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "52da18a3-d29e-4193-a660-427d9a82da2e",
@@ -5673,7 +5681,7 @@
   },
   {
     "id": "796d0167-a297-4861-8394-c7df3200351c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb72c41de0df544799824cd3c86af094b",
     "title": "Amazon ブラックフライデー Switch2 2026│Nintendo Switch 2の選び方まとめ",
     "name": "Amazon ブラックフライデー Switch2 2026.md",
@@ -5682,14 +5690,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T08:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T15:48:06.296429+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d0cbddfb-48aa-402b-b7a5-b0573f7a7e75",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb72c41de0df544799824cd3c86af094b",
     "title": "Amazon ブラックフライデー Switch2 2026│Nintendo Switch 2の選び方まとめ",
     "name": "Amazon ブラックフライデー Switch2 2026.md",
@@ -5698,10 +5708,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T08:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T15:48:06.296429+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bb98dfb7-26db-4144-b25f-a0cd084f4bd5",
@@ -5722,7 +5734,7 @@
   },
   {
     "id": "34347966-9166-4bf3-b779-c48d747c7ec8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3d4785271f394743bd7da23b77322ed6",
     "title": "Amazon ブラックフライデー ウイスキー 2026│ウイスキーのおすすめと選び方まとめ",
     "name": "Amazon ブラックフライデー ウイスキー 2026.md",
@@ -5731,14 +5743,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T09:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T15:48:06.296429+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e6d71975-11c3-44e5-9ddd-cbd93858b70f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3d4785271f394743bd7da23b77322ed6",
     "title": "Amazon ブラックフライデー ウイスキー 2026│ウイスキーのおすすめと選び方まとめ",
     "name": "Amazon ブラックフライデー ウイスキー 2026.md",
@@ -5747,10 +5761,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T09:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T15:48:06.296429+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d96c1b86-979d-46ce-bdd6-adb19273d0b5",
@@ -5771,7 +5787,7 @@
   },
   {
     "id": "1e22d6be-95f5-4ef0-b8e3-4850d5221821",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb52a63ed06b7409494132d9c1003a63f",
     "title": "Amazon ブラックフライデー エアコン 2026",
     "name": "Amazon ブラックフライデー エアコン 2026.md",
@@ -5780,14 +5796,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T10:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T15:48:06.296429+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5362147e-c63c-44cc-8415-da01d289fd7d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb52a63ed06b7409494132d9c1003a63f",
     "title": "Amazon ブラックフライデー エアコン 2026",
     "name": "Amazon ブラックフライデー エアコン 2026.md",
@@ -5796,14 +5814,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T10:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T15:48:06.296429+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9f4b7853-8801-4912-aaca-e0be3a785711",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3b558d447ca54cdb8b9df2d472822cc6",
     "title": "Amazon ブラックフライデー おすすめ 2026",
     "name": "Amazon ブラックフライデー おすすめ 2026.md",
@@ -5812,14 +5832,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T11:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T15:48:06.296429+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e18a74a3-69e6-4714-8e92-eb43f087e05f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3b558d447ca54cdb8b9df2d472822cc6",
     "title": "Amazon ブラックフライデー おすすめ 2026",
     "name": "Amazon ブラックフライデー おすすめ 2026.md",
@@ -5828,10 +5850,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T11:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T15:48:06.296429+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3506a432-2884-4339-93be-95602904bd5b",
@@ -5852,7 +5876,7 @@
   },
   {
     "id": "ea744232-6b53-4afa-9d8d-99c6bad044b1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s42f4cc1a7b2541158527e6c214d6a165",
     "title": "Amazon ブラックフライデー クリスマスプレゼント 2026",
     "name": "Amazon ブラックフライデー クリスマスプレゼント 2026.md",
@@ -5861,14 +5885,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T12:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T15:48:06.296429+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "18bcafa1-a28a-4bf4-90b2-c69d6bc6df56",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s42f4cc1a7b2541158527e6c214d6a165",
     "title": "Amazon ブラックフライデー クリスマスプレゼント 2026",
     "name": "Amazon ブラックフライデー クリスマスプレゼント 2026.md",
@@ -5877,14 +5903,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T12:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T15:48:06.296429+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "746a5ac0-624c-42d6-b54f-2ab7d3976892",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa541837b4caa42b2ab4b8a454caf7d67",
     "title": "Amazon ブラックフライデー ケノン 2026",
     "name": "Amazon ブラックフライデー ケノン 2026.md",
@@ -5893,14 +5921,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T12:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T15:48:06.296429+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "099752fa-1b3a-4b86-9455-9474103a72b4",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa541837b4caa42b2ab4b8a454caf7d67",
     "title": "Amazon ブラックフライデー ケノン 2026",
     "name": "Amazon ブラックフライデー ケノン 2026.md",
@@ -5909,10 +5939,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T12:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T15:48:06.296429+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9ed8dc6a-a5d3-4b78-991d-3c89ccf725cf",
@@ -5933,7 +5965,7 @@
   },
   {
     "id": "dde30bf5-f228-4382-a8eb-1872c1b637c5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9ea59aefd2bf4df89069ad281a48858d",
     "title": "Amazon ブラックフライデー ケルヒャー 2026",
     "name": "Amazon ブラックフライデー ケルヒャー 2026.md",
@@ -5942,14 +5974,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T13:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T15:48:06.296429+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6f8107e5-bb52-4283-b47b-b66257d846e3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9ea59aefd2bf4df89069ad281a48858d",
     "title": "Amazon ブラックフライデー ケルヒャー 2026",
     "name": "Amazon ブラックフライデー ケルヒャー 2026.md",
@@ -5958,10 +5992,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T13:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T15:48:06.296429+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6c8e3463-70db-4263-bc1a-209fa622a3e7",
