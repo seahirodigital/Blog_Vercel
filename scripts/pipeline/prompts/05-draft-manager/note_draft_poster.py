@@ -1580,7 +1580,8 @@ def _get_publish_settings_ready_state(page) -> dict:
                 return text.includes('ハッシュタグ') || text.includes('タグを入力') || text.includes('タグを追加') || text.includes('タグ設定');
               });
               const magazineLabel = labels.find((label) => textOf(label).includes('マガジン'));
-              const ready = Boolean(finalButton || tagField || tagLabel || magazineLabel);
+              const onPublishRoute = /\/notes\/[^/]+\/publish\/?$/.test(window.location.pathname);
+              const ready = Boolean(onPublishRoute && finalButton && tagField);
               const reason = finalButton
                 ? 'final_post_button'
                 : tagField
@@ -1616,7 +1617,8 @@ def _wait_for_publish_settings_ready(
 
     while time.monotonic() < deadline:
         last_state = _get_publish_settings_ready_state(page)
-        if last_state.get("ready"):
+        route = urlparse(str(last_state.get("url") or "")).path
+        if last_state.get("ready") and re.fullmatch(r"/notes/[^/]+/publish/?", route):
             elapsed = time.monotonic() - started_at
             print(f"   ✅ 公開設定画面を検出: {last_state.get('reason')} ({elapsed:.1f}秒後)")
             return str(last_state.get("reason") or "ready")

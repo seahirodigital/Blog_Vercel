@@ -1,6 +1,7 @@
 import importlib.util
 import unittest
 from pathlib import Path
+from unittest.mock import Mock, patch
 
 
 SCRIPT = (
@@ -36,6 +37,19 @@ class BlackFridayImageTests(unittest.TestCase):
         for title in ["iPadのレビュー", "Amazon プライムデーおすすめ", "", "金曜日の買い物"]:
             with self.subTest(title=title):
                 self.assertIsNone(module._black_friday_top_image_for_title(title))
+
+    def test_編集画面の誤判定を無視し公開設定画面を待つ(self):
+        page = Mock()
+        states = [
+            {"ready": True, "reason": "tag_input_candidate", "url": "https://editor.note.com/notes/n123/edit/"},
+            {"ready": False, "reason": "not_ready", "url": "https://editor.note.com/notes/n123/publish/"},
+            {"ready": True, "reason": "final_post_button", "url": "https://editor.note.com/notes/n123/publish/"},
+        ]
+        with patch.object(module, "_get_publish_settings_ready_state", side_effect=states) as probe:
+            result = module._wait_for_publish_settings_ready(page, timeout_ms=1000, poll_ms=100)
+        self.assertEqual(result, "final_post_button")
+        self.assertEqual(probe.call_count, 3)
+        self.assertEqual(page.wait_for_timeout.call_count, 2)
 
 
 if __name__ == "__main__":
