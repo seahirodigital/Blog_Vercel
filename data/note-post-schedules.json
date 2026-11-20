@@ -5805,7 +5805,7 @@
   },
   {
     "id": "5362147e-c63c-44cc-8415-da01d289fd7d",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb52a63ed06b7409494132d9c1003a63f",
     "title": "Amazon ブラックフライデー エアコン 2026",
     "name": "Amazon ブラックフライデー エアコン 2026.md",
@@ -5815,8 +5815,8 @@
     "publishAt": "2026-11-20T10:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
     "queuedAt": "2026-11-20T17:18:11.532540+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-20T17:22:33.544734+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na9f145f94700?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
