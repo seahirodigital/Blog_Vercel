@@ -5699,7 +5699,7 @@
   },
   {
     "id": "d0cbddfb-48aa-402b-b7a5-b0573f7a7e75",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb72c41de0df544799824cd3c86af094b",
     "title": "Amazon ブラックフライデー Switch2 2026│Nintendo Switch 2の選び方まとめ",
     "name": "Amazon ブラックフライデー Switch2 2026.md",
@@ -5709,8 +5709,8 @@
     "publishAt": "2026-11-20T08:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
     "queuedAt": "2026-11-20T15:48:06.296429+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-20T15:52:42.517642+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ndf6589dcada0?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
