@@ -6088,7 +6088,7 @@
   },
   {
     "id": "eda306b0-ad3d-4055-aff1-353b2e1ac066",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8ad553b822a34699bb0fc3cbb61b9996",
     "title": "Amazon ブラックフライデー シェーバー 2026",
     "name": "Amazon ブラックフライデー シェーバー 2026.md",
@@ -6097,14 +6097,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T22:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T21:55:09.105704+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e84af3b2-ce3b-4546-b4ab-bc02ba9a59fd",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8ad553b822a34699bb0fc3cbb61b9996",
     "title": "Amazon ブラックフライデー シェーバー 2026",
     "name": "Amazon ブラックフライデー シェーバー 2026.md",
@@ -6113,10 +6115,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T22:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T21:55:09.105704+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "875d834b-ba04-4bc4-8bda-7c694825416e",
