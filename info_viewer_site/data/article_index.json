@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-20T09:25:11.725305+00:00",
+  "generatedAt": "2026-11-20T11:25:22.288593+00:00",
   "articleList": [
+    {
+      "id": "c398075474142031ee",
+      "url": "/articles/c398075474142031ee/",
+      "title": "【緊急解説】状況が一変しました...。日経一時3000円安。大暴落こそチャンスです！今個人投資家はどう動くべきなのか徹底解説します",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=cLxLu0mCuow",
+      "thumbnail": "https://i.ytimg.com/vi/cLxLu0mCuow/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-20T11:24:11.960689",
+      "recordedLabel": "2026.11.20 11:24",
+      "timeLabel": "2026.11.20 11:24",
+      "persons": [],
+      "lastModified": "2026-11-20T11:24:16Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s4c6a2dad928f49ca8297a18b4ff06593"
+    },
     {
       "id": "c01f826d005cf18620",
       "url": "/articles/c01f826d005cf18620/",
@@ -11144,6 +11163,25 @@
     }
   ],
   "articles": {
+    "c398075474142031ee": {
+      "id": "c398075474142031ee",
+      "url": "/articles/c398075474142031ee/",
+      "title": "【緊急解説】状況が一変しました...。日経一時3000円安。大暴落こそチャンスです！今個人投資家はどう動くべきなのか徹底解説します",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=cLxLu0mCuow",
+      "thumbnail": "https://i.ytimg.com/vi/cLxLu0mCuow/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-20T11:24:11.960689",
+      "recordedLabel": "2026.11.20 11:24",
+      "timeLabel": "2026.11.20 11:24",
+      "persons": [],
+      "lastModified": "2026-11-20T11:24:16Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s4c6a2dad928f49ca8297a18b4ff06593"
+    },
     "c01f826d005cf18620": {
       "id": "c01f826d005cf18620",
       "url": "/articles/c01f826d005cf18620/",
@@ -22288,6 +22326,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-20T11:24:11.960689"
+    },
+    {
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-11-20T09:24:12.607661"
@@ -22306,11 +22349,6 @@
       "name": "トウシル（楽天証券）",
       "tab": "トウシル",
       "latestAt": "2026-11-19T09:24:40.870666"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-19T08:23:20.146375"
     },
     {
       "name": "YTの投資銀行",
