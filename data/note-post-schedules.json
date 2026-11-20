@@ -5752,7 +5752,7 @@
   },
   {
     "id": "e6d71975-11c3-44e5-9ddd-cbd93858b70f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3d4785271f394743bd7da23b77322ed6",
     "title": "Amazon ブラックフライデー ウイスキー 2026│ウイスキーのおすすめと選び方まとめ",
     "name": "Amazon ブラックフライデー ウイスキー 2026.md",
@@ -5762,8 +5762,8 @@
     "publishAt": "2026-11-20T09:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
     "queuedAt": "2026-11-20T15:48:06.296429+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-20T15:52:47.280578+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n00bf8e6c49ad?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
