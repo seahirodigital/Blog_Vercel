@@ -5930,7 +5930,7 @@
   },
   {
     "id": "099752fa-1b3a-4b86-9455-9474103a72b4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa541837b4caa42b2ab4b8a454caf7d67",
     "title": "Amazon ブラックフライデー ケノン 2026",
     "name": "Amazon ブラックフライデー ケノン 2026.md",
@@ -5940,8 +5940,8 @@
     "publishAt": "2026-11-20T12:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
     "queuedAt": "2026-11-20T17:18:11.532540+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-20T17:22:57.301513+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n40f3d28e32a5?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
