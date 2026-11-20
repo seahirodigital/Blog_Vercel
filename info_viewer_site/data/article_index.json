@@ -1,6 +1,48 @@
 {
-  "generatedAt": "2026-11-19T13:55:38.208804+00:00",
+  "generatedAt": "2026-11-20T07:25:37.293869+00:00",
   "articleList": [
+    {
+      "id": "9fd430d223cdcfd04d",
+      "url": "/articles/9fd430d223cdcfd04d/",
+      "title": "岡崎良介×永濱利廣【半導体インフレを検証『G5超長期金利の比較分析 問題のある国』『所得増加のわりに伸びは緩やか』月例経済報告閣僚資料｜鈴木銘柄分析】11月20日公開※11/28大阪",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=V3efdoyoaGA",
+      "thumbnail": "https://i.ytimg.com/vi/V3efdoyoaGA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-20T07:24:08.122983",
+      "recordedLabel": "2026.11.20 07:24",
+      "timeLabel": "2026.11.20 07:24",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-20T07:24:13Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s054fa7e698c84f07b2d9dee4cd6a7193"
+    },
+    {
+      "id": "b87e0e00b62455af45",
+      "url": "/articles/b87e0e00b62455af45/",
+      "title": "岡崎良介の投資戦略ラボ『日本の輸出半導体と半導体製造装置の数量と価格』 （収録日：2026年11月19日）",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=wFUjLyFLQKI",
+      "thumbnail": "https://i.ytimg.com/vi/wFUjLyFLQKI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-20T07:22:55.250172",
+      "recordedLabel": "2026.11.20 07:22",
+      "timeLabel": "2026.11.20 07:22",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-20T07:23:01Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s80c14f589dd24b189e79b5636f39ff0c"
+    },
     {
       "id": "658a8d661a1534c342",
       "url": "/articles/658a8d661a1534c342/",
@@ -11083,6 +11125,48 @@
     }
   ],
   "articles": {
+    "9fd430d223cdcfd04d": {
+      "id": "9fd430d223cdcfd04d",
+      "url": "/articles/9fd430d223cdcfd04d/",
+      "title": "岡崎良介×永濱利廣【半導体インフレを検証『G5超長期金利の比較分析 問題のある国』『所得増加のわりに伸びは緩やか』月例経済報告閣僚資料｜鈴木銘柄分析】11月20日公開※11/28大阪",
+      "channelName": "マーケットマスターズ",
+      "channelKey": "マーケットマスターズ",
+      "channelTab": "マーケッ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=V3efdoyoaGA",
+      "thumbnail": "https://i.ytimg.com/vi/V3efdoyoaGA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-20T07:24:08.122983",
+      "recordedLabel": "2026.11.20 07:24",
+      "timeLabel": "2026.11.20 07:24",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-20T07:24:13Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s054fa7e698c84f07b2d9dee4cd6a7193"
+    },
+    "b87e0e00b62455af45": {
+      "id": "b87e0e00b62455af45",
+      "url": "/articles/b87e0e00b62455af45/",
+      "title": "岡崎良介の投資戦略ラボ『日本の輸出半導体と半導体製造装置の数量と価格』 （収録日：2026年11月19日）",
+      "channelName": "ゆたかTV",
+      "channelKey": "ゆたかTV",
+      "channelTab": "ゆたかT",
+      "youtubeUrl": "https://www.youtube.com/watch?v=wFUjLyFLQKI",
+      "thumbnail": "https://i.ytimg.com/vi/wFUjLyFLQKI/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-20T07:22:55.250172",
+      "recordedLabel": "2026.11.20 07:22",
+      "timeLabel": "2026.11.20 07:22",
+      "persons": [
+        "岡崎良介"
+      ],
+      "lastModified": "2026-11-20T07:23:01Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s80c14f589dd24b189e79b5636f39ff0c"
+    },
     "658a8d661a1534c342": {
       "id": "658a8d661a1534c342",
       "url": "/articles/658a8d661a1534c342/",
@@ -22166,9 +22250,14 @@
   },
   "channels": [
     {
+      "name": "マーケットマスターズ",
+      "tab": "マーケッ",
+      "latestAt": "2026-11-20T07:24:08.122983"
+    },
+    {
       "name": "ゆたかTV",
       "tab": "ゆたかT",
-      "latestAt": "2026-11-19T13:54:08.209809"
+      "latestAt": "2026-11-20T07:22:55.250172"
     },
     {
       "name": "トウシル（楽天証券）",
@@ -22204,11 +22293,6 @@
       "name": "マネーフォワード ME イベント&セミナー",
       "tab": "マネーフ",
       "latestAt": "2026-11-14T09:23:48.582331"
-    },
-    {
-      "name": "マーケットマスターズ",
-      "tab": "マーケッ",
-      "latestAt": "2026-11-13T16:13:47.931054"
     },
     {
       "name": "ピクテ・ジャパン株式会社",
