@@ -6035,7 +6035,7 @@
   },
   {
     "id": "6515a09b-5f35-44c6-b4e2-b69f6b28cf31",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sab9e653e3ed14c9e8dab451c0522bdb5",
     "title": "Amazon ブラックフライデー コーヒーメーカー 2026",
     "name": "Amazon ブラックフライデー コーヒーメーカー 2026.md",
@@ -6044,14 +6044,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T21:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T20:55:18.548247+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cd443f0a-d3a3-48c3-a61a-b2ee922e69c3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sab9e653e3ed14c9e8dab451c0522bdb5",
     "title": "Amazon ブラックフライデー コーヒーメーカー 2026",
     "name": "Amazon ブラックフライデー コーヒーメーカー 2026.md",
@@ -6060,10 +6062,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-20T21:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-20T20:55:18.548247+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "088e31a8-ca8f-4020-83b9-23b563d6e398",
