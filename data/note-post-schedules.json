@@ -6260,7 +6260,7 @@
   },
   {
     "id": "321459a3-093b-4e42-b4ba-1bef9c195ce4",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sb5a92ddff3b54b799ae8c3c1fa2dd226",
     "title": "Amazon ブラックフライデー Adobe 2026",
     "name": "Amazon ブラックフライデー Adobe 2026.md",
@@ -6272,11 +6272,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:20:40.915Z"
   },
   {
     "id": "1b69074e-dd1d-4fb2-ac4d-db7ce7ddd1af",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!sfaa35e8cf43045279a48a5697b6b349c",
     "title": "Amazon ブラックフライデー 腕時計 2026",
     "name": "Amazon ブラックフライデー 腕時計 2026.md",
@@ -6288,11 +6289,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:20:40.915Z"
   },
   {
     "id": "e544dd4c-15d4-4ee5-81b4-557bc77618bd",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s8e83f8ea67fa4c4f952a8d994d10559c",
     "title": "Amazon ブラックフライデー タイヤ 2026",
     "name": "Amazon ブラックフライデー タイヤ 2026.md",
@@ -6304,11 +6306,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:20:40.915Z"
   },
   {
     "id": "efc214f8-2a5f-48a3-a813-42ef942355d1",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!saba26f2a92eb484dab1c1f65ef08c969",
     "title": "Amazon ブラックフライデー 2026 おすすめ│Apple製品iPhone・iPad mini・Macbookをお得に買う方法まとめ",
     "name": "コピー_20261120_ブラックフライデー2026_母艦_パイプラインテスト.md",
@@ -6320,11 +6323,12 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:20:40.915Z"
   },
   {
     "id": "bcdd27a2-c66d-4d8f-8a64-8732db91b90c",
-    "status": "scheduled",
+    "status": "cancelled",
     "fileId": "FFCC26DEDBBA4E70!s2f409e2f23c9480dad547502613a2282",
     "title": "Amazon ブラックフライデー 10000 円以上 2026",
     "name": "Amazon ブラックフライデー 10000 円以上 2026.md",
@@ -6336,7 +6340,8 @@
     "queuedAt": "",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "cancelledAt": "2026-11-20T06:20:40.915Z"
   },
   {
     "id": "4c7615cf-05c0-44de-995a-c01837544511",
