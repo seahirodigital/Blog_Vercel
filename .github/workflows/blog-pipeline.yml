@@ -1,93 +1,18 @@
-name: Blog Pipeline - YouTube → AI → OneDrive
-run-name: Blog Pipeline ${{ github.event.inputs.request_id || github.event_name }}
-
+name: ブラックフライデー商品調査
 on:
-  # AppSheetからの外部トリガー（Webhook検知用）
-  repository_dispatch:
-    types: [trigger-from-appsheet]
-
-  # 定時実行 (毎日 JST 9:00 = UTC 0:00)
-  schedule:
-    - cron: '0 0 * * *'
-
-  # 手動トリガー（Vercel UIからのAPI経由 or GitHub UIから）
   workflow_dispatch:
-    inputs:
-      mode:
-        description: '実行モード'
-        required: false
-        default: 'batch'
-        type: choice
-        options:
-          - batch
-          - single
-      source_type:
-        description: '入力ソース種別（amazon指定時はsource_urlsを直接処理）'
-        required: false
-        default: ''
-      source_urls:
-        description: '直接処理するURL配列(JSON)または改行区切りURL'
-        required: false
-        default: ''
-      source_payloads:
-        description: 'Chrome拡張で抽出済みのAmazon商品詳細payload(JSON)'
-        required: false
-        default: ''
-      status:
-        description: 'Gemini writer prompt status'
-        required: false
-        default: '単品'
-      request_id:
-        description: 'Chrome拡張/APIから渡された起動リクエストID'
-        required: false
-        default: ''
-
 jobs:
-  generate-blog:
+  search:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
-
+    timeout-minutes: 20
     steps:
-      - name: リポジトリをチェックアウト
-        uses: actions/checkout@v4
-
-      - name: Python 3.13 セットアップ
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-
-      - name: Python 依存パッケージをインストール
-        run: pip install -r scripts/pipeline/requirements.txt
-
-      - name: Playwright Chromium ブラウザをインストール
-        run: playwright install --with-deps chromium
-
-      - name: ブログ生成パイプラインを実行
+      - run: pip install requests
+      - name: Creators APIで商品候補を確認
         env:
-          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
-          SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
-          SHEET_NAME: ${{ secrets.SHEET_NAME }}
-          APIFY_API_KEY: ${{ secrets.APIFY_API_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_TOKEN_sub: ${{ secrets.GEMINI_TOKEN_SUB }}
-          GEMINI_TOKEN_SUB2: ${{ secrets.GEMINI_TOKEN_SUB2 }}
-          GEMINI_TOKEN_SUB3: ${{ secrets.GEMINI_TOKEN_SUB3 }}
-          ONEDRIVE_CLIENT_ID: ${{ secrets.ONEDRIVE_CLIENT_ID }}
-          ONEDRIVE_CLIENT_SECRET: ${{ secrets.ONEDRIVE_CLIENT_SECRET }}
-          ONEDRIVE_REFRESH_TOKEN: ${{ secrets.ONEDRIVE_REFRESH_TOKEN }}
-          ONEDRIVE_FOLDER: ${{ secrets.ONEDRIVE_FOLDER }}
-          GH_PAT: ${{ secrets.GH_PAT }}
-          GITHUB_REPO: ${{ github.repository }}
-          VERCEL_URL: https://blog-vercel-dun.vercel.app
-          GOOGLE_CSE_API_KEY: ${{ secrets.GOOGLE_CSE_API_KEY }}
-          GOOGLE_CSE_CX: ${{ secrets.GOOGLE_CSE_CX }}
           AMAZON_CLIENT_ID: ${{ secrets.AMAZON_CLIENT_ID }}
           AMAZON_CLIENT_SECRET: ${{ secrets.AMAZON_CLIENT_SECRET }}
-          INPUT_MODE: ${{ github.event.inputs.mode || 'batch' }}
-          INPUT_SOURCE_TYPE: ${{ github.event.inputs.source_type || '' }}
-          INPUT_SOURCE_URLS: ${{ github.event.inputs.source_urls || '' }}
-          INPUT_SOURCE_PAYLOADS: ${{ github.event.inputs.source_payloads || '' }}
-          INPUT_STATUS: ${{ github.event.inputs.status || '単品' }}
-          INPUT_REQUEST_ID: ${{ github.event.inputs.request_id || '' }}
-        working-directory: scripts/pipeline
-        run: python main.py
+        run: python scripts/black_friday_creators_search.py
