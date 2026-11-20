@@ -3019,7 +3019,7 @@ def process_ogp_urls(page) -> int:
     page.evaluate("window.noteFormatter.convertMarkdownToHtml()")
 
     total_processed = 0
-    MAX_SWEEPS = 3
+    MAX_SWEEPS = 6
 
     for sweep in range(MAX_SWEEPS):
         print(f"\n   [Python] 🔄 {sweep + 1}回目のスイープ...")
@@ -3049,11 +3049,21 @@ def process_ogp_urls(page) -> int:
                 if found:
                     page.keyboard.press("Enter")
                     processed_this_loop += 1
-                    page.wait_for_timeout(300)
+                    page.wait_for_timeout(600)
 
         total_processed += processed_this_loop
-        print("   [Python] カード展開の非同期反映を待機 (3秒)...")
-        page.wait_for_timeout(3000)
+        print("   [Python] カード展開の非同期反映を待機 (5秒)...")
+        page.wait_for_timeout(5000)
+        remaining_urls = page.evaluate("window.noteFormatter.extractUrls()")
+        if os.getenv("NOTE_TARGET") != "taishi":
+            remaining_urls = [u for u in remaining_urls if any(d in u for d in OGP_TARGET_DOMAINS)]
+        print(
+            f"   [Python] {sweep + 1}回目終了時の未展開対象URL: "
+            f"{len(set(remaining_urls))}種 / {len(remaining_urls)}箇所"
+        )
+        if not remaining_urls:
+            print("   [Python] 展開漏れのURLはありません。スイープ終了。")
+            break
 
     print("\n   [Python] 🧹 不要な空行を最終一括削除...")
     page.evaluate("window.noteFormatter.normalizeLineBreaks()")
