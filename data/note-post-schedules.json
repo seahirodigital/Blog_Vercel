@@ -5592,7 +5592,7 @@
   },
   {
     "id": "ed974bed-f701-45a2-baa4-5434a2a2df85",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s4b4e54ce65094066a3057fd83922628e",
     "title": "Amazon ブラックフライデー 2026│開催期間とApple製品をお得に買う方法まとめ",
     "name": "Amazon ブラックフライデー 2026.md",
@@ -5602,8 +5602,8 @@
     "publishAt": "2026-11-20T07:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
     "queuedAt": "2026-11-20T15:48:06.296429+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-20T15:52:29.150881+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nac7533ddc40b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
