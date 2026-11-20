@@ -3019,7 +3019,7 @@ def process_ogp_urls(page) -> int:
     page.evaluate("window.noteFormatter.convertMarkdownToHtml()")
 
     total_processed = 0
-    MAX_SWEEPS = 5
+    MAX_SWEEPS = 4
 
     for sweep in range(MAX_SWEEPS):
         print(f"\n   [Python] 🔄 {sweep + 1}回目のスイープ...")
@@ -3061,6 +3061,8 @@ def process_ogp_urls(page) -> int:
             f"   [Python] {sweep + 1}回目終了時の未展開対象URL: "
             f"{len(set(remaining_urls))}種 / {len(remaining_urls)}箇所"
         )
+        if sweep + 1 == MAX_SWEEPS and remaining_urls:
+            print("OGP未展開URL_JSON: " + json.dumps(list(dict.fromkeys(remaining_urls)), ensure_ascii=False))
         if not remaining_urls:
             print("   [Python] 展開漏れのURLはありません。スイープ終了。")
             break
