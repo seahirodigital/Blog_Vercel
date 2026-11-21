@@ -6443,7 +6443,7 @@
   },
   {
     "id": "de0835b6-002b-4a45-a484-7af83e26ed2e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sfd01e72258674de988aada861fbd540b",
     "title": "Amazon ブラックフライデー 空気清浄機 2026",
     "name": "Amazon ブラックフライデー 空気清浄機 2026.md",
@@ -6453,8 +6453,8 @@
     "publishAt": "2026-11-21T11:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
     "queuedAt": "2026-11-21T10:55:54.518868+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-21T11:33:57.545008+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n2f4e7afb0152?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
