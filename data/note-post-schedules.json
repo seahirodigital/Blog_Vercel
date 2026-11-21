@@ -6690,7 +6690,7 @@
   },
   {
     "id": "a40bc906-be77-44f1-a958-d26faed49524",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sdffe6cbcd69a4bcc805f93b4fed4c340",
     "title": "Amazon ブラックフライデー 1万円以上 2026",
     "name": "Amazon ブラックフライデー 1万円以上 2026.md",
@@ -6700,8 +6700,8 @@
     "publishAt": "2026-11-21T22:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
     "queuedAt": "2026-11-21T21:55:50.696883+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-21T22:33:52.943999+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n479e2c207013?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
