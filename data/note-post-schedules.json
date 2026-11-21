@@ -6514,7 +6514,7 @@
   },
   {
     "id": "0a3fd64e-b4ab-4ed4-bdc6-4639fe886671",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfaa35e8cf43045279a48a5697b6b349c",
     "title": "Amazon ブラックフライデー 腕時計 2026",
     "name": "Amazon ブラックフライデー 腕時計 2026.md",
@@ -6523,14 +6523,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T12:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T11:55:25.575058+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "996a9b37-f50c-4c3e-a1e1-67202e239b78",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfaa35e8cf43045279a48a5697b6b349c",
     "title": "Amazon ブラックフライデー 腕時計 2026",
     "name": "Amazon ブラックフライデー 腕時計 2026.md",
@@ -6539,10 +6541,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T12:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T11:55:25.575058+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "97f599d2-bbed-420c-b1c5-79527b78af63",
