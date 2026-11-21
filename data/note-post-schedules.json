@@ -6283,7 +6283,7 @@
   },
   {
     "id": "49ee8685-6622-4f35-b9d4-0b58709c3076",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s526c0d2e44b94d4781be193cfbddd0ef",
     "title": "Amazon ブラックフライデー 工具 2026",
     "name": "Amazon ブラックフライデー 工具 2026.md",
@@ -6293,8 +6293,8 @@
     "publishAt": "2026-11-21T08:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
     "queuedAt": "2026-11-21T10:30:43.470493+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-21T10:34:55.728713+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n54027d5bd5de?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
