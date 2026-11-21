@@ -6398,12 +6398,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T10:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "2026-11-21T09:25:16.971630+00:00",
+    "queuedAt": "2026-11-21T10:55:54.518868+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "9fa1b11e-8e74-4619-b999-206de1903a34",
@@ -6425,7 +6425,7 @@
   },
   {
     "id": "a246e42d-7d61-4089-90a5-538eb6c00603",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfd01e72258674de988aada861fbd540b",
     "title": "Amazon ブラックフライデー 空気清浄機 2026",
     "name": "Amazon ブラックフライデー 空気清浄機 2026.md",
@@ -6434,14 +6434,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T11:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T10:55:54.518868+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "de0835b6-002b-4a45-a484-7af83e26ed2e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sfd01e72258674de988aada861fbd540b",
     "title": "Amazon ブラックフライデー 空気清浄機 2026",
     "name": "Amazon ブラックフライデー 空気清浄機 2026.md",
@@ -6450,10 +6452,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T11:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T10:55:54.518868+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "061a63c7-1078-486f-ac68-b1befaccb89d",
