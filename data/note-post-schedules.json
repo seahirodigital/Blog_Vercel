@@ -6637,7 +6637,7 @@
   },
   {
     "id": "5fff2a6f-d44f-45cb-a6fd-6b47194dfd97",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s502034e709064951ad68bea5a6dffd60",
     "title": "Amazon ブラックフライデー 12月 2026",
     "name": "Amazon ブラックフライデー 12月 2026.md",
@@ -6646,14 +6646,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T21:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T20:55:09.850651+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "59c7a986-2155-44c3-af9d-845410f236e1",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s502034e709064951ad68bea5a6dffd60",
     "title": "Amazon ブラックフライデー 12月 2026",
     "name": "Amazon ブラックフライデー 12月 2026.md",
@@ -6662,10 +6664,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T21:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T20:55:09.850651+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "70a22c89-c358-4658-bb25-3bfa84d71fcc",
