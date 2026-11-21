@@ -6177,7 +6177,7 @@
   },
   {
     "id": "75c5eb6a-f645-43f5-b162-aad0de238d6e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s95ae6db0d699453d9ab35fcf9fe987f9",
     "title": "Amazon ブラックフライデー タブレット おすすめ 2026",
     "name": "Amazon ブラックフライデー タブレット おすすめ 2026.md",
@@ -6186,14 +6186,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T03:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T02:55:04.008643+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cfc3be36-a2c5-407f-afab-ac1b5963fc24",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s95ae6db0d699453d9ab35fcf9fe987f9",
     "title": "Amazon ブラックフライデー タブレット おすすめ 2026",
     "name": "Amazon ブラックフライデー タブレット おすすめ 2026.md",
@@ -6202,10 +6204,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T03:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T02:55:04.008643+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "94eb338a-210b-4c82-af5f-cf0bc22deb51",
