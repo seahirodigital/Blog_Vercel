@@ -1,6 +1,27 @@
 {
-  "generatedAt": "2026-11-20T13:54:09.408805+00:00",
+  "generatedAt": "2026-11-21T09:26:03.168667+00:00",
   "articleList": [
+    {
+      "id": "a439a9859e3ba90092",
+      "url": "/articles/a439a9859e3ba90092/",
+      "title": "【大底は52,000円!?】SPゲストkenmo登場 / なぜ日経平均株価が一時3,000円以上下落!? / アンソロピック上場、ロックアップまで様子見!? 【大川&Nobbyの聴くだけ投資】大川智宏",
+      "channelName": "マネーフォワード ME イベント&セミナー",
+      "channelKey": "マネーフォワード ME イベント&セミナー",
+      "channelTab": "マネーフ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=vWnz0Inkpx0",
+      "thumbnail": "https://i.ytimg.com/vi/vWnz0Inkpx0/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-21T09:24:02.654750",
+      "recordedLabel": "2026.11.21 09:24",
+      "timeLabel": "2026.11.21 09:24",
+      "persons": [
+        "大川智宏"
+      ],
+      "lastModified": "2026-11-21T09:24:08Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sb5bb10fd2e6a4fec90a9b375f7bd385d"
+    },
     {
       "id": "e888d88716b1e7b30b",
       "url": "/articles/e888d88716b1e7b30b/",
@@ -11182,6 +11203,27 @@
     }
   ],
   "articles": {
+    "a439a9859e3ba90092": {
+      "id": "a439a9859e3ba90092",
+      "url": "/articles/a439a9859e3ba90092/",
+      "title": "【大底は52,000円!?】SPゲストkenmo登場 / なぜ日経平均株価が一時3,000円以上下落!? / アンソロピック上場、ロックアップまで様子見!? 【大川&Nobbyの聴くだけ投資】大川智宏",
+      "channelName": "マネーフォワード ME イベント&セミナー",
+      "channelKey": "マネーフォワード ME イベント&セミナー",
+      "channelTab": "マネーフ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=vWnz0Inkpx0",
+      "thumbnail": "https://i.ytimg.com/vi/vWnz0Inkpx0/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-21T09:24:02.654750",
+      "recordedLabel": "2026.11.21 09:24",
+      "timeLabel": "2026.11.21 09:24",
+      "persons": [
+        "大川智宏"
+      ],
+      "lastModified": "2026-11-21T09:24:08Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sb5bb10fd2e6a4fec90a9b375f7bd385d"
+    },
     "e888d88716b1e7b30b": {
       "id": "e888d88716b1e7b30b",
       "url": "/articles/e888d88716b1e7b30b/",
@@ -22364,6 +22406,11 @@
   },
   "channels": [
     {
+      "name": "マネーフォワード ME イベント&セミナー",
+      "tab": "マネーフ",
+      "latestAt": "2026-11-21T09:24:02.654750"
+    },
+    {
       "name": "YTの投資銀行",
       "tab": "YTの投",
       "latestAt": "2026-11-20T13:52:59.767929"
@@ -22402,11 +22449,6 @@
       "name": "文藝春秋PLUS 公式チャンネル",
       "tab": "文藝春秋",
       "latestAt": "2026-11-15T03:37:15.503186"
-    },
-    {
-      "name": "マネーフォワード ME イベント&セミナー",
-      "tab": "マネーフ",
-      "latestAt": "2026-11-14T09:23:48.582331"
     },
     {
       "name": "ピクテ・ジャパン株式会社",
