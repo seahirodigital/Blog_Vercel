@@ -6389,7 +6389,7 @@
   },
   {
     "id": "d2eab94a-00c9-49cc-a123-dccaa21bf9da",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sff6f4a17838248ae9a9d807a47a7d1e9",
     "title": "Amazon ブラックフライデー 洗濯機 2026",
     "name": "Amazon ブラックフライデー 洗濯機 2026.md",
@@ -6399,8 +6399,8 @@
     "publishAt": "2026-11-21T10:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
     "queuedAt": "2026-11-21T10:55:54.518868+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-21T11:00:14.337979+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n1426eccdae2d?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
