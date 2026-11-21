@@ -6230,7 +6230,7 @@
   },
   {
     "id": "a30e10f5-bd7d-4257-af31-927859ef5011",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s87e802ab4080496aa4220dcb60031090",
     "title": "Amazon ブラックフライデー 売れ筋 2026",
     "name": "Amazon ブラックフライデー 売れ筋 2026.md",
@@ -6239,14 +6239,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T07:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T08:59:59.998751+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "943728a8-a020-452f-8248-fa0014ff0583",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s87e802ab4080496aa4220dcb60031090",
     "title": "Amazon ブラックフライデー 売れ筋 2026",
     "name": "Amazon ブラックフライデー 売れ筋 2026.md",
@@ -6255,10 +6257,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T07:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T08:59:59.998751+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5b769f4d-cc14-48c9-97e0-42e9a3a57241",
@@ -6279,7 +6283,7 @@
   },
   {
     "id": "49ee8685-6622-4f35-b9d4-0b58709c3076",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s526c0d2e44b94d4781be193cfbddd0ef",
     "title": "Amazon ブラックフライデー 工具 2026",
     "name": "Amazon ブラックフライデー 工具 2026.md",
@@ -6288,14 +6292,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T08:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T08:59:59.998751+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6a470b53-2666-4abd-bdbe-856d5c2b626f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s526c0d2e44b94d4781be193cfbddd0ef",
     "title": "Amazon ブラックフライデー 工具 2026",
     "name": "Amazon ブラックフライデー 工具 2026.md",
@@ -6304,10 +6310,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T08:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T08:59:59.998751+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5aa67625-2cd6-4f6f-b199-cc6b6be0272b",
@@ -6328,7 +6336,7 @@
   },
   {
     "id": "99e3eb5b-a867-499d-bfae-c1c8a2dfb6e8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s500f47334db94873bb3f2cd4a96593f1",
     "title": "Amazon ブラックフライデー 掃除機 2026",
     "name": "Amazon ブラックフライデー 掃除機 2026.md",
@@ -6337,14 +6345,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T09:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T08:59:59.998751+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ee3b904f-7d96-41c4-9c63-1952beb1c09c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s500f47334db94873bb3f2cd4a96593f1",
     "title": "Amazon ブラックフライデー 掃除機 2026",
     "name": "Amazon ブラックフライデー 掃除機 2026.md",
@@ -6353,10 +6363,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T09:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T08:59:59.998751+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "18a5d51d-46f4-4e7e-83b3-c271f442ee1e",
