@@ -6141,7 +6141,7 @@
   },
   {
     "id": "5ac4bd5a-96f5-4f13-9f89-0f9587435571",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s8e83f8ea67fa4c4f952a8d994d10559c",
     "title": "Amazon ブラックフライデー タイヤ 2026",
     "name": "Amazon ブラックフライデー タイヤ 2026.md",
@@ -6151,8 +6151,8 @@
     "publishAt": "2026-11-21T02:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
     "queuedAt": "2026-11-21T01:55:23.271837+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-21T02:34:18.248239+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n63364abf0d3e?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
