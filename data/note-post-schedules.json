@@ -6478,7 +6478,7 @@
   },
   {
     "id": "48e17991-53c2-419a-b238-8c1e96e9a20c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf722c65005f34ba5a5ee73d259cc24a2",
     "title": "Amazon ブラックフライデー 羽毛布団 2026",
     "name": "Amazon ブラックフライデー 羽毛布団 2026.md",
@@ -6487,14 +6487,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T12:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T11:25:11.049936+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2d4f0579-e256-4bd5-9bd5-2478387ad5e0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf722c65005f34ba5a5ee73d259cc24a2",
     "title": "Amazon ブラックフライデー 羽毛布団 2026",
     "name": "Amazon ブラックフライデー 羽毛布団 2026.md",
@@ -6503,10 +6505,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T12:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T11:25:11.049936+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0a3fd64e-b4ab-4ed4-bdc6-4639fe886671",
