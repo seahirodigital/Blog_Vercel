@@ -6141,7 +6141,7 @@
   },
   {
     "id": "5ac4bd5a-96f5-4f13-9f89-0f9587435571",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8e83f8ea67fa4c4f952a8d994d10559c",
     "title": "Amazon ブラックフライデー タイヤ 2026",
     "name": "Amazon ブラックフライデー タイヤ 2026.md",
@@ -6150,14 +6150,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T02:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T01:55:23.271837+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "ad41da35-c0cc-4ee3-a9eb-7b7a4ff7877d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8e83f8ea67fa4c4f952a8d994d10559c",
     "title": "Amazon ブラックフライデー タイヤ 2026",
     "name": "Amazon ブラックフライデー タイヤ 2026.md",
@@ -6166,10 +6168,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T02:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T01:55:23.271837+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "75c5eb6a-f645-43f5-b162-aad0de238d6e",
