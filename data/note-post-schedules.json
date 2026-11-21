@@ -6389,7 +6389,7 @@
   },
   {
     "id": "d2eab94a-00c9-49cc-a123-dccaa21bf9da",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sff6f4a17838248ae9a9d807a47a7d1e9",
     "title": "Amazon ブラックフライデー 洗濯機 2026",
     "name": "Amazon ブラックフライデー 洗濯機 2026.md",
@@ -6398,14 +6398,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T10:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T09:25:16.971630+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9fa1b11e-8e74-4619-b999-206de1903a34",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sff6f4a17838248ae9a9d807a47a7d1e9",
     "title": "Amazon ブラックフライデー 洗濯機 2026",
     "name": "Amazon ブラックフライデー 洗濯機 2026.md",
@@ -6414,10 +6416,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T10:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T09:25:16.971630+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a246e42d-7d61-4089-90a5-538eb6c00603",
