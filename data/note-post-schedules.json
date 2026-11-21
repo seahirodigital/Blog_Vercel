@@ -6690,7 +6690,7 @@
   },
   {
     "id": "a40bc906-be77-44f1-a958-d26faed49524",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdffe6cbcd69a4bcc805f93b4fed4c340",
     "title": "Amazon ブラックフライデー 1万円以上 2026",
     "name": "Amazon ブラックフライデー 1万円以上 2026.md",
@@ -6699,14 +6699,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T22:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T21:55:50.696883+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fc98458c-d348-41da-879c-bf76e9012c41",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sdffe6cbcd69a4bcc805f93b4fed4c340",
     "title": "Amazon ブラックフライデー 1万円以上 2026",
     "name": "Amazon ブラックフライデー 1万円以上 2026.md",
@@ -6715,10 +6717,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T22:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-21T21:55:50.696883+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b7646e7f-b811-42e9-abb2-9014ecc706b1",
