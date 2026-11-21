@@ -6354,7 +6354,7 @@
   },
   {
     "id": "ee3b904f-7d96-41c4-9c63-1952beb1c09c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s500f47334db94873bb3f2cd4a96593f1",
     "title": "Amazon ブラックフライデー 掃除機 2026",
     "name": "Amazon ブラックフライデー 掃除機 2026.md",
@@ -6364,8 +6364,8 @@
     "publishAt": "2026-11-21T09:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
     "queuedAt": "2026-11-21T08:59:59.998751+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-21T09:04:29.417979+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n80d4eb9c2ab6?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
