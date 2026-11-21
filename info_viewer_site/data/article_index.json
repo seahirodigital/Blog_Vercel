@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-21T09:26:03.168667+00:00",
+  "generatedAt": "2026-11-21T16:04:59.972640+00:00",
   "articleList": [
+    {
+      "id": "028aa65fe23f8e0c44",
+      "url": "/articles/028aa65fe23f8e0c44/",
+      "title": "来週の日本株展望(2026/11/24~) 緊急LIve. ナイトも日経先物1870円下落　マーケットはクラッシュするのか？しないのか？",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=fVVeuP0GVYY",
+      "thumbnail": "https://i.ytimg.com/vi/fVVeuP0GVYY/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-21T16:03:26.123459",
+      "recordedLabel": "2026.11.21 16:03",
+      "timeLabel": "2026.11.21 16:03",
+      "persons": [],
+      "lastModified": "2026-11-21T16:03:31Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s02467209e3c84748965ad73c625c97cc"
+    },
     {
       "id": "a439a9859e3ba90092",
       "url": "/articles/a439a9859e3ba90092/",
@@ -11203,6 +11222,25 @@
     }
   ],
   "articles": {
+    "028aa65fe23f8e0c44": {
+      "id": "028aa65fe23f8e0c44",
+      "url": "/articles/028aa65fe23f8e0c44/",
+      "title": "来週の日本株展望(2026/11/24~) 緊急LIve. ナイトも日経先物1870円下落　マーケットはクラッシュするのか？しないのか？",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=fVVeuP0GVYY",
+      "thumbnail": "https://i.ytimg.com/vi/fVVeuP0GVYY/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-21T16:03:26.123459",
+      "recordedLabel": "2026.11.21 16:03",
+      "timeLabel": "2026.11.21 16:03",
+      "persons": [],
+      "lastModified": "2026-11-21T16:03:31Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s02467209e3c84748965ad73c625c97cc"
+    },
     "a439a9859e3ba90092": {
       "id": "a439a9859e3ba90092",
       "url": "/articles/a439a9859e3ba90092/",
@@ -22406,14 +22444,14 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-11-21T16:03:26.123459"
+    },
+    {
       "name": "マネーフォワード ME イベント&セミナー",
       "tab": "マネーフ",
       "latestAt": "2026-11-21T09:24:02.654750"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-11-20T13:52:59.767929"
     },
     {
       "name": "げんたろうの投資ch【元機関投資家】",
