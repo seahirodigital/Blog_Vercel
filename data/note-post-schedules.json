@@ -6478,7 +6478,7 @@
   },
   {
     "id": "48e17991-53c2-419a-b238-8c1e96e9a20c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf722c65005f34ba5a5ee73d259cc24a2",
     "title": "Amazon ブラックフライデー 羽毛布団 2026",
     "name": "Amazon ブラックフライデー 羽毛布団 2026.md",
@@ -6488,8 +6488,8 @@
     "publishAt": "2026-11-21T12:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
     "queuedAt": "2026-11-21T11:25:11.049936+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-21T12:04:01.359337+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n728dc54ed4f3?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
