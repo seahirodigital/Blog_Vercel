@@ -6292,12 +6292,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-21T08:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "2026-11-21T08:59:59.998751+00:00",
+    "queuedAt": "2026-11-21T10:30:43.470493+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "6a470b53-2666-4abd-bdbe-856d5c2b626f",
