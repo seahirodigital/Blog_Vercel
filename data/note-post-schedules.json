@@ -6850,7 +6850,7 @@
   },
   {
     "id": "abb63abb-dffd-4b55-8efc-9373a4f57e41",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!seb34aebae9244fbe88a8357e69016140",
     "title": "Amazon ブラックフライデー 2026 いつまで",
     "name": "Amazon ブラックフライデー 2026 いつまで.md",
@@ -6860,8 +6860,8 @@
     "publishAt": "2026-11-22T07:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
     "queuedAt": "2026-11-22T08:55:06.095749+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-22T08:59:27.142040+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n2bb699c551c9?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
