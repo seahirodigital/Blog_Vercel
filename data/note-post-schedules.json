@@ -7257,7 +7257,7 @@
   },
   {
     "id": "6e094947-2e08-467e-b616-c6e8bca12b83",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s59082d5309f34d92adbcb3cbe5ca9458",
     "title": "Amazon ブラックフライデー Apple watch 2026",
     "name": "Amazon ブラックフライデー Apple watch 2026.md",
@@ -7267,8 +7267,8 @@
     "publishAt": "2026-11-22T21:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
     "queuedAt": "2026-11-22T20:55:09.182708+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-22T21:34:11.933564+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nffe2fd7ceb47?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
