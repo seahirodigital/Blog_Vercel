@@ -6903,7 +6903,7 @@
   },
   {
     "id": "0f4196f3-c6b9-4e2a-84a7-ad712d43b48b",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa0785449ac034a4b86538cd486e8d172",
     "title": "Amazon ブラックフライデー 2026 期間",
     "name": "Amazon ブラックフライデー 2026 期間.md",
@@ -6913,8 +6913,8 @@
     "publishAt": "2026-11-22T08:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
     "queuedAt": "2026-11-22T08:55:06.095749+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-22T08:59:42.934442+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n3fc342a1fca2?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
