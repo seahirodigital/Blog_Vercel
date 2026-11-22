@@ -6779,7 +6779,7 @@
   },
   {
     "id": "fea32804-a6d0-46a7-9561-5a8092c486ef",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa5e7cc469b194e9f8661cdc9990b7214",
     "title": "Amazon ブラックフライデー 2026 いつから",
     "name": "Amazon ブラックフライデー 2026 いつから.md",
@@ -6788,14 +6788,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T03:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-22T02:55:27.799998+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8cbcd20e-3447-4790-b821-8ba65254e23c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa5e7cc469b194e9f8661cdc9990b7214",
     "title": "Amazon ブラックフライデー 2026 いつから",
     "name": "Amazon ブラックフライデー 2026 いつから.md",
@@ -6804,10 +6806,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T03:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-22T02:55:27.799998+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "812e99f8-1d7a-44cd-bfaa-f559b412bf08",
