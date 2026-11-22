@@ -7027,7 +7027,7 @@
   },
   {
     "id": "f8fc04a9-9f3a-40e8-b708-a2a1748c4d5a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s5f3f282caccc4980a026d37e0d90ffce",
     "title": "Amazon ブラックフライデー AirPods pro3 2026",
     "name": "Amazon ブラックフライデー AirPods pro3 2026.md",
@@ -7037,8 +7037,8 @@
     "publishAt": "2026-11-22T11:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
     "queuedAt": "2026-11-22T10:55:46.068543+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-22T11:33:57.050094+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n27a3a726bbb3?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
