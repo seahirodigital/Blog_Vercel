@@ -6938,7 +6938,7 @@
   },
   {
     "id": "2f68161e-2524-4e6f-804d-f779c4b39256",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb5a92ddff3b54b799ae8c3c1fa2dd226",
     "title": "Amazon ブラックフライデー Adobe 2026",
     "name": "Amazon ブラックフライデー Adobe 2026.md",
@@ -6948,8 +6948,8 @@
     "publishAt": "2026-11-22T09:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
     "queuedAt": "2026-11-22T08:55:06.095749+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-22T09:03:53.046412+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n48114d5d30d2?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
