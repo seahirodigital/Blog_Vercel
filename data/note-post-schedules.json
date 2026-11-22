@@ -7310,7 +7310,7 @@
   },
   {
     "id": "e6d29f83-4488-475a-82a6-4e63d0de1db2",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2ad4f542182645229eae27112982fd4e",
     "title": "Amazon ブラックフライデー Apple製品 2026",
     "name": "Amazon ブラックフライデー Apple製品 2026.md",
@@ -7320,8 +7320,8 @@
     "publishAt": "2026-11-22T22:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
     "queuedAt": "2026-11-22T21:55:48.873399+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-22T22:34:06.510746+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nb108ad3ecdc6?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
