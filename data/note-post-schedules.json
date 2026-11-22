@@ -7239,7 +7239,7 @@
   },
   {
     "id": "4e112bff-1551-4428-89c9-2e211496eda3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s59082d5309f34d92adbcb3cbe5ca9458",
     "title": "Amazon ブラックフライデー Apple watch 2026",
     "name": "Amazon ブラックフライデー Apple watch 2026.md",
@@ -7248,14 +7248,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T21:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-22T20:55:09.182708+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6e094947-2e08-467e-b616-c6e8bca12b83",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s59082d5309f34d92adbcb3cbe5ca9458",
     "title": "Amazon ブラックフライデー Apple watch 2026",
     "name": "Amazon ブラックフライデー Apple watch 2026.md",
@@ -7264,10 +7266,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T21:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-22T20:55:09.182708+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c39c8796-a6f9-414b-bd3e-5feae6ca1a66",
