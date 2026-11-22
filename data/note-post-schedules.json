@@ -6832,7 +6832,7 @@
   },
   {
     "id": "51fed626-88cd-43bb-98e4-6bc3ed77f11b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!seb34aebae9244fbe88a8357e69016140",
     "title": "Amazon ブラックフライデー 2026 いつまで",
     "name": "Amazon ブラックフライデー 2026 いつまで.md",
@@ -6841,14 +6841,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T07:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-22T08:55:06.095749+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "abb63abb-dffd-4b55-8efc-9373a4f57e41",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!seb34aebae9244fbe88a8357e69016140",
     "title": "Amazon ブラックフライデー 2026 いつまで",
     "name": "Amazon ブラックフライデー 2026 いつまで.md",
@@ -6857,10 +6859,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T07:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-22T08:55:06.095749+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5373772d-2986-4532-aa94-aeb9c173570f",
@@ -6881,7 +6885,7 @@
   },
   {
     "id": "b3364d2e-282b-48d7-8d52-1a0eeb1c9db9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa0785449ac034a4b86538cd486e8d172",
     "title": "Amazon ブラックフライデー 2026 期間",
     "name": "Amazon ブラックフライデー 2026 期間.md",
@@ -6890,14 +6894,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T08:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-22T08:55:06.095749+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0f4196f3-c6b9-4e2a-84a7-ad712d43b48b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sa0785449ac034a4b86538cd486e8d172",
     "title": "Amazon ブラックフライデー 2026 期間",
     "name": "Amazon ブラックフライデー 2026 期間.md",
@@ -6906,10 +6912,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T08:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-22T08:55:06.095749+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "691a675d-b729-4a05-b447-0c04a7892ba3",
@@ -6930,7 +6938,7 @@
   },
   {
     "id": "2f68161e-2524-4e6f-804d-f779c4b39256",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb5a92ddff3b54b799ae8c3c1fa2dd226",
     "title": "Amazon ブラックフライデー Adobe 2026",
     "name": "Amazon ブラックフライデー Adobe 2026.md",
@@ -6939,14 +6947,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T09:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-22T08:55:06.095749+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2418c5d7-09ab-4e40-8ae5-eb7414e35619",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb5a92ddff3b54b799ae8c3c1fa2dd226",
     "title": "Amazon ブラックフライデー Adobe 2026",
     "name": "Amazon ブラックフライデー Adobe 2026.md",
@@ -6955,10 +6965,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T09:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-22T08:55:06.095749+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "dd9af15a-b952-43ee-b2aa-2a91c47053ac",
