@@ -6991,7 +6991,7 @@
   },
   {
     "id": "f797da51-8c90-43d8-981b-d44da0e1955b",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7a7ead2110a74739867dd807a6ce57a6",
     "title": "Amazon ブラックフライデー AirPods 2026",
     "name": "Amazon ブラックフライデー AirPods 2026.md",
@@ -7000,14 +7000,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T10:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-22T09:25:36.227126+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "13f3489b-ab3b-4b7d-8b40-800b10410e51",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7a7ead2110a74739867dd807a6ce57a6",
     "title": "Amazon ブラックフライデー AirPods 2026",
     "name": "Amazon ブラックフライデー AirPods 2026.md",
@@ -7016,10 +7018,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T10:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-22T09:25:36.227126+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f8fc04a9-9f3a-40e8-b708-a2a1748c4d5a",
