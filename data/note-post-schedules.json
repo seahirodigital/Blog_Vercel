@@ -7080,7 +7080,7 @@
   },
   {
     "id": "fc9835d8-0c6f-4bfc-b26c-82fd9e88c60a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf9c2ba1d7a3a4a7994395a4fef973a02",
     "title": "Amazon ブラックフライデー AirPods5 2026",
     "name": "Amazon ブラックフライデー AirPods5 2026.md",
@@ -7090,8 +7090,8 @@
     "publishAt": "2026-11-22T12:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
     "queuedAt": "2026-11-22T11:25:11.308225+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-22T12:04:12.160095+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n28cd6d97f5d8?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
