@@ -7196,12 +7196,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T13:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "2026-11-22T12:55:23.119956+00:00",
+    "queuedAt": "2026-11-22T14:56:41.204145+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "67dae082-a3d7-4941-8305-6aff90b6e24b",
