@@ -6743,7 +6743,7 @@
   },
   {
     "id": "3fb69ba7-a4aa-422d-92b6-999f0a0ab8f2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6d0a8365d3c14171955221b5aade4194",
     "title": "Amazon ブラックフライデー 2026 iPhone",
     "name": "Amazon ブラックフライデー 2026 iPhone.md",
@@ -6752,14 +6752,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T02:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-22T01:55:40.544685+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4abf468c-aab0-42df-b484-ecace906cb88",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6d0a8365d3c14171955221b5aade4194",
     "title": "Amazon ブラックフライデー 2026 iPhone",
     "name": "Amazon ブラックフライデー 2026 iPhone.md",
@@ -6768,10 +6770,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T02:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-22T01:55:40.544685+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "fea32804-a6d0-46a7-9561-5a8092c486ef",
