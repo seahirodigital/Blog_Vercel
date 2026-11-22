@@ -7292,7 +7292,7 @@
   },
   {
     "id": "dfbfa845-5cce-44d1-bc3d-40c931b1243c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2ad4f542182645229eae27112982fd4e",
     "title": "Amazon ブラックフライデー Apple製品 2026",
     "name": "Amazon ブラックフライデー Apple製品 2026.md",
@@ -7301,14 +7301,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T22:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-22T21:55:48.873399+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e6d29f83-4488-475a-82a6-4e63d0de1db2",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2ad4f542182645229eae27112982fd4e",
     "title": "Amazon ブラックフライデー Apple製品 2026",
     "name": "Amazon ブラックフライデー Apple製品 2026.md",
@@ -7317,10 +7319,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T22:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-22T21:55:48.873399+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e56eed41-e205-427a-9592-e786d849fe73",
