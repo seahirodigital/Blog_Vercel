@@ -7116,7 +7116,7 @@
   },
   {
     "id": "4ecd65c8-fa1f-464f-8b38-c597c4dee265",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3144e33a0b2a4ff4a3060971717ffd88",
     "title": "Amazon ブラックフライデー Anker 2026",
     "name": "Amazon ブラックフライデー Anker 2026.md",
@@ -7125,14 +7125,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T12:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-22T11:55:36.146814+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "7d24689a-a236-42b1-88aa-f09488e9afa9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3144e33a0b2a4ff4a3060971717ffd88",
     "title": "Amazon ブラックフライデー Anker 2026",
     "name": "Amazon ブラックフライデー Anker 2026.md",
@@ -7141,10 +7143,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-22T12:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-22T11:55:36.146814+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "09a2e99f-0c63-4b49-a934-e4dd125234df",
