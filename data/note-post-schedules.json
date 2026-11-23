@@ -7894,7 +7894,7 @@
   },
   {
     "id": "33f525e9-e9eb-4c25-b6d1-3a209c745d8f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf30ebdbea0d4405fa2c21795c8093c7e",
     "title": "Amazon ブラックフライデー PS5 値段 2026",
     "name": "Amazon ブラックフライデー PS5 値段 2026.md",
@@ -7903,14 +7903,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-23T22:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-23T21:55:01.420686+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c4a71e85-2cdb-4a0e-9c0e-9bf4674bb891",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf30ebdbea0d4405fa2c21795c8093c7e",
     "title": "Amazon ブラックフライデー PS5 値段 2026",
     "name": "Amazon ブラックフライデー PS5 値段 2026.md",
@@ -7919,10 +7921,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-23T22:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-23T21:55:01.420686+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "65bde8ac-fa11-46bf-a6b6-08db286456cb",
