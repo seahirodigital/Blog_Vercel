@@ -7629,7 +7629,7 @@
   },
   {
     "id": "7561e079-e941-4d83-83d2-3f1630981c6a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!se46147113fc842cca2d2dfa6fedac52b",
     "title": "Amazon ブラックフライデー iPhone 安くなる 2026",
     "name": "Amazon ブラックフライデー iPhone 安くなる 2026.md",
@@ -7639,8 +7639,8 @@
     "publishAt": "2026-11-23T11:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
     "queuedAt": "2026-11-23T10:55:19.118347+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-23T11:34:12.782729+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n79fd4d00e01e?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
