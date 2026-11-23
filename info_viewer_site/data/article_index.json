@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-22T09:25:10.935253+00:00",
+  "generatedAt": "2026-11-23T09:25:59.758993+00:00",
   "articleList": [
+    {
+      "id": "1d8f5ba1bd9a15bbc2",
+      "url": "/articles/1d8f5ba1bd9a15bbc2/",
+      "title": "【騙し上げ】暴落後の反発は騙し上げか？見分け方と本物の底打ちサインを元機関投資家が徹底解説",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=TM6ydivn9m0",
+      "thumbnail": "https://i.ytimg.com/vi/TM6ydivn9m0/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-23T09:23:59.172949",
+      "recordedLabel": "2026.11.23 09:23",
+      "timeLabel": "2026.11.23 09:23",
+      "persons": [],
+      "lastModified": "2026-11-23T09:24:04Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s0fd73d3f14e7435fac66e366230aa43b"
+    },
     {
       "id": "5705d0c4b4267a9e21",
       "url": "/articles/5705d0c4b4267a9e21/",
@@ -11241,6 +11260,25 @@
     }
   ],
   "articles": {
+    "1d8f5ba1bd9a15bbc2": {
+      "id": "1d8f5ba1bd9a15bbc2",
+      "url": "/articles/1d8f5ba1bd9a15bbc2/",
+      "title": "【騙し上げ】暴落後の反発は騙し上げか？見分け方と本物の底打ちサインを元機関投資家が徹底解説",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=TM6ydivn9m0",
+      "thumbnail": "https://i.ytimg.com/vi/TM6ydivn9m0/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-23T09:23:59.172949",
+      "recordedLabel": "2026.11.23 09:23",
+      "timeLabel": "2026.11.23 09:23",
+      "persons": [],
+      "lastModified": "2026-11-23T09:24:04Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s0fd73d3f14e7435fac66e366230aa43b"
+    },
     "5705d0c4b4267a9e21": {
       "id": "5705d0c4b4267a9e21",
       "url": "/articles/5705d0c4b4267a9e21/",
@@ -22484,7 +22522,7 @@
     {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
-      "latestAt": "2026-11-22T09:23:54.165178"
+      "latestAt": "2026-11-23T09:23:59.172949"
     },
     {
       "name": "YTの投資銀行",
