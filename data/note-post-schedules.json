@@ -7452,7 +7452,7 @@
   },
   {
     "id": "6af0a4a1-8dca-43c1-b0a3-7a9e018b5596",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s7100fbb5abd747478d2ae156bbf3340f",
     "title": "Amazon ブラックフライデー iPad mini 2026",
     "name": "Amazon ブラックフライデー iPad mini 2026.md",
@@ -7462,8 +7462,8 @@
     "publishAt": "2026-11-23T07:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
     "queuedAt": "2026-11-23T11:28:53.506723+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-23T11:33:18.205781+00:00",
+    "publishedUrl": "https://note.com/startupm/n/naf24fe8305ab?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
