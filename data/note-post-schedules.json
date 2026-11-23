@@ -7718,7 +7718,7 @@
   },
   {
     "id": "2bd444d5-ee2b-4048-9262-f0bd9a50ff0b",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s7fb0f4be5a0343b0a7f093b253eddb95",
     "title": "Amazon ブラックフライデー iPhone17 2026",
     "name": "Amazon ブラックフライデー iPhone17 2026.md",
@@ -7728,8 +7728,8 @@
     "publishAt": "2026-11-23T12:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
     "queuedAt": "2026-11-23T11:55:17.734212+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-23T12:34:17.181223+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n9e1e4447cf04?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
