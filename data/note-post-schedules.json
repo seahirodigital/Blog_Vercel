@@ -7611,7 +7611,7 @@
   },
   {
     "id": "8ed31b1d-04c7-4ba3-97b1-ae7beb696481",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s0d254e23728b47b98a57ef3a0ce4af27",
     "title": "Amazon ブラックフライデー iPhone 2026",
     "name": "Amazon ブラックフライデー iPhone 2026.md",
@@ -7621,8 +7621,8 @@
     "publishAt": "2026-11-23T10:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
     "queuedAt": "2026-11-23T09:58:21.425004+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-23T10:04:07.368410+00:00",
+    "publishedUrl": "https://editor.note.com/notes/ne15b8e11ec13/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
