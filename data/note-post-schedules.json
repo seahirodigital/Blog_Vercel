@@ -7682,7 +7682,7 @@
   },
   {
     "id": "ddf506ae-b0ee-46a0-9cdd-9d1833c8ae83",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3bd22054afa74210bb756d1e874c3b74",
     "title": "Amazon ブラックフライデー iPhone16 価格 2026",
     "name": "Amazon ブラックフライデー iPhone16 価格 2026.md",
@@ -7691,14 +7691,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-23T12:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-23T11:25:47.417485+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5ef79631-0b1b-41b3-b7f0-29d0ad98bbe9",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3bd22054afa74210bb756d1e874c3b74",
     "title": "Amazon ブラックフライデー iPhone16 価格 2026",
     "name": "Amazon ブラックフライデー iPhone16 価格 2026.md",
@@ -7707,10 +7709,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-23T12:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-23T11:25:47.417485+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2bd444d5-ee2b-4048-9262-f0bd9a50ff0b",
