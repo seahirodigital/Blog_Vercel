@@ -7771,7 +7771,7 @@
   },
   {
     "id": "ee179c71-402a-4215-9e69-19dcc1c17f77",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sb00f7ac19cc1446dbbf025f6fa1afd37",
     "title": "Amazon ブラックフライデー Pixel 9a 2026",
     "name": "Amazon ブラックフライデー Pixel 9a 2026.md",
@@ -7781,8 +7781,8 @@
     "publishAt": "2026-11-23T13:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
     "queuedAt": "2026-11-23T12:55:11.723464+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-23T13:34:51.816237+00:00",
+    "publishedUrl": "https://note.com/startupm/n/na72c4cd9f576?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
