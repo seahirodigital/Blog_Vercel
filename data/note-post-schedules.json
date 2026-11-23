@@ -7399,7 +7399,7 @@
   },
   {
     "id": "620797fc-a3a1-4320-8aaf-f4bd4db4d8b0",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s6683c96df3df414cbaa750b071daaec8",
     "title": "Amazon ブラックフライデー iPad air 2026",
     "name": "Amazon ブラックフライデー iPad air 2026.md",
@@ -7409,8 +7409,8 @@
     "publishAt": "2026-11-23T03:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
     "queuedAt": "2026-11-23T02:55:31.489141+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-23T03:34:13.598947+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n54d6b0f8815a?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
