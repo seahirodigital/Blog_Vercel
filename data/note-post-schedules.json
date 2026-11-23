@@ -7345,7 +7345,7 @@
   },
   {
     "id": "bc1561be-1e87-4010-81c2-f129ddc92ab3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s35922a2074b64579b9e0a49c2fb30c77",
     "title": "Amazon ブラックフライデー iPad 2026",
     "name": "Amazon ブラックフライデー iPad 2026.md",
@@ -7354,14 +7354,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-23T02:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-23T01:55:07.196523+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "01e233ea-9556-4380-a873-32b141c42e81",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s35922a2074b64579b9e0a49c2fb30c77",
     "title": "Amazon ブラックフライデー iPad 2026",
     "name": "Amazon ブラックフライデー iPad 2026.md",
@@ -7370,10 +7372,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-23T02:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-23T01:55:07.196523+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "db584e7f-04d3-4016-a606-f053fc56c82c",
