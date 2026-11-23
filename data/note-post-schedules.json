@@ -7859,7 +7859,7 @@
   },
   {
     "id": "74ae5463-b6a1-4283-a7be-1798010a3061",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s23f80a7319224621a7064fb049f35957",
     "title": "Amazon ブラックフライデー PlayStation 5 2026",
     "name": "Amazon ブラックフライデー PlayStation 5 2026.md",
@@ -7869,8 +7869,8 @@
     "publishAt": "2026-11-23T21:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
     "queuedAt": "2026-11-23T20:55:44.724937+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-23T21:33:48.334456+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nfeb2c4d8aa65?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
