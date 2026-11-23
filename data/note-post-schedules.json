@@ -7912,7 +7912,7 @@
   },
   {
     "id": "c4a71e85-2cdb-4a0e-9c0e-9bf4674bb891",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sf30ebdbea0d4405fa2c21795c8093c7e",
     "title": "Amazon ブラックフライデー PS5 値段 2026",
     "name": "Amazon ブラックフライデー PS5 値段 2026.md",
@@ -7922,8 +7922,8 @@
     "publishAt": "2026-11-23T22:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
     "queuedAt": "2026-11-23T21:55:01.420686+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-23T22:34:08.393008+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd7c2a20f3196?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
