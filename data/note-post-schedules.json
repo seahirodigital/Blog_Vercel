@@ -7629,7 +7629,7 @@
   },
   {
     "id": "7561e079-e941-4d83-83d2-3f1630981c6a",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se46147113fc842cca2d2dfa6fedac52b",
     "title": "Amazon ブラックフライデー iPhone 安くなる 2026",
     "name": "Amazon ブラックフライデー iPhone 安くなる 2026.md",
@@ -7638,14 +7638,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-23T11:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-23T10:55:19.118347+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "9165690e-2e22-403d-a09d-4462b1410e04",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se46147113fc842cca2d2dfa6fedac52b",
     "title": "Amazon ブラックフライデー iPhone 安くなる 2026",
     "name": "Amazon ブラックフライデー iPhone 安くなる 2026.md",
@@ -7654,10 +7656,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-23T11:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-23T10:55:19.118347+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "78ca6ebf-374e-4549-8628-c0d1862b1fa9",
