@@ -7461,12 +7461,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-23T07:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "2026-11-23T09:58:21.425004+00:00",
+    "queuedAt": "2026-11-23T11:28:53.506723+00:00",
     "publishedAt": "",
     "publishedUrl": "",
     "error": "",
     "queuedBy": "github-reservation-monitor",
-    "dispatchAttempts": 1
+    "dispatchAttempts": 2
   },
   {
     "id": "ef90c890-4b55-4744-9a54-62a08e387022",
