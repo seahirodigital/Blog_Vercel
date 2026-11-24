@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-24T06:25:36.117185+00:00",
+  "generatedAt": "2026-11-24T10:25:33.609621+00:00",
   "articleList": [
+    {
+      "id": "d22d9a2e13c4ba6fa7",
+      "url": "/articles/d22d9a2e13c4ba6fa7/",
+      "title": "【緊急解説】事態が急変しました...。日経平均、遂に反発開始？NVIDIAのフアンCEO復帰によって今後の株式市場がどうなるのか元機関投資家が徹底解説します",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=AZdHxEQzKwc",
+      "thumbnail": "https://i.ytimg.com/vi/AZdHxEQzKwc/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-24T10:24:03.382113",
+      "recordedLabel": "2026.11.24 10:24",
+      "timeLabel": "2026.11.24 10:24",
+      "persons": [],
+      "lastModified": "2026-11-24T10:24:08Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s03369aa4d6074072b962f8f114e0510b"
+    },
     {
       "id": "dcab567c8a25e43ff8",
       "url": "/articles/dcab567c8a25e43ff8/",
@@ -11298,6 +11317,25 @@
     }
   ],
   "articles": {
+    "d22d9a2e13c4ba6fa7": {
+      "id": "d22d9a2e13c4ba6fa7",
+      "url": "/articles/d22d9a2e13c4ba6fa7/",
+      "title": "【緊急解説】事態が急変しました...。日経平均、遂に反発開始？NVIDIAのフアンCEO復帰によって今後の株式市場がどうなるのか元機関投資家が徹底解説します",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=AZdHxEQzKwc",
+      "thumbnail": "https://i.ytimg.com/vi/AZdHxEQzKwc/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-24T10:24:03.382113",
+      "recordedLabel": "2026.11.24 10:24",
+      "timeLabel": "2026.11.24 10:24",
+      "persons": [],
+      "lastModified": "2026-11-24T10:24:08Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s03369aa4d6074072b962f8f114e0510b"
+    },
     "dcab567c8a25e43ff8": {
       "id": "dcab567c8a25e43ff8",
       "url": "/articles/dcab567c8a25e43ff8/",
@@ -22596,6 +22634,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-24T10:24:03.382113"
+    },
+    {
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-11-24T06:24:12.423564"
@@ -22604,11 +22647,6 @@
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-11-23T17:02:26.742809"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-23T09:23:59.172949"
     },
     {
       "name": "YTの投資銀行",
