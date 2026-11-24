@@ -8106,7 +8106,7 @@
   },
   {
     "id": "4127dac5-2f15-43b0-aa36-8f166e9be66f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5b741e004a07400bad07e28fd6d115e6",
     "title": "Amazon ブラックフライデーセール 2026",
     "name": "Amazon ブラックフライデーセール 2026.md",
@@ -8115,14 +8115,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-24T08:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-24T07:25:31.396768+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "88c0a7f0-0a5a-4a0b-b66b-3039e04598b8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s5b741e004a07400bad07e28fd6d115e6",
     "title": "Amazon ブラックフライデーセール 2026",
     "name": "Amazon ブラックフライデーセール 2026.md",
@@ -8131,10 +8133,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-24T08:00:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-24T07:25:31.396768+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "61df8fa7-680e-4347-8df5-8a118dc04eeb",
