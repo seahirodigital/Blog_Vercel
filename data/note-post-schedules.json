@@ -8106,7 +8106,7 @@
   },
   {
     "id": "4127dac5-2f15-43b0-aa36-8f166e9be66f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s5b741e004a07400bad07e28fd6d115e6",
     "title": "Amazon ブラックフライデーセール 2026",
     "name": "Amazon ブラックフライデーセール 2026.md",
@@ -8116,8 +8116,8 @@
     "publishAt": "2026-11-24T08:00:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
     "queuedAt": "2026-11-24T07:25:31.396768+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-24T08:04:06.547958+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd5d5b2e24a8a?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
