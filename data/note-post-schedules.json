@@ -7947,7 +7947,7 @@
   },
   {
     "id": "84b13732-75c3-4bff-a0ed-8918f83fccac",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s279b9f37fa8048409051ad030e911ab3",
     "title": "Amazon ブラックフライデー PS5Pro 2026",
     "name": "Amazon ブラックフライデー PS5Pro 2026.md",
@@ -7957,8 +7957,8 @@
     "publishAt": "2026-11-24T02:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
     "queuedAt": "2026-11-24T01:56:00.958375+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-24T02:34:04.986975+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n65076e077b4c?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
