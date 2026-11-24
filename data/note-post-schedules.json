@@ -7983,7 +7983,7 @@
   },
   {
     "id": "f377b00d-e95d-4b4e-bd1d-a5384878a878",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s05802605849f46cba47e2565ecf2aef8",
     "title": "Amazon ブラックフライデー アップルギフトカード 2026",
     "name": "Amazon ブラックフライデー アップルギフトカード 2026.md",
@@ -7992,14 +7992,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-24T03:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-24T02:55:15.159722+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "e6afd6c8-f7fe-4e6e-a9f3-a5957dd222e0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s05802605849f46cba47e2565ecf2aef8",
     "title": "Amazon ブラックフライデー アップルギフトカード 2026",
     "name": "Amazon ブラックフライデー アップルギフトカード 2026.md",
@@ -8008,10 +8010,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-24T03:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-24T02:55:15.159722+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a5b6350f-086a-4020-81be-38c7cd9a6877",
