@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-24T10:25:33.609621+00:00",
+  "generatedAt": "2026-11-24T11:25:14.754403+00:00",
   "articleList": [
+    {
+      "id": "c433d2dcf926857b79",
+      "url": "/articles/c433d2dcf926857b79/",
+      "title": "日経平均の今後と株式市場の裏側で起きていること＋雑談【配信日11/24 19:00~】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=y_MT0U2vNKQ",
+      "thumbnail": "https://i.ytimg.com/vi/y_MT0U2vNKQ/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-24T11:23:57.271316",
+      "recordedLabel": "2026.11.24 11:23",
+      "timeLabel": "2026.11.24 11:23",
+      "persons": [],
+      "lastModified": "2026-11-24T11:24:01Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf395e9b1f899440a8dd05ddd3b1d1e81"
+    },
     {
       "id": "d22d9a2e13c4ba6fa7",
       "url": "/articles/d22d9a2e13c4ba6fa7/",
@@ -11317,6 +11336,25 @@
     }
   ],
   "articles": {
+    "c433d2dcf926857b79": {
+      "id": "c433d2dcf926857b79",
+      "url": "/articles/c433d2dcf926857b79/",
+      "title": "日経平均の今後と株式市場の裏側で起きていること＋雑談【配信日11/24 19:00~】",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=y_MT0U2vNKQ",
+      "thumbnail": "https://i.ytimg.com/vi/y_MT0U2vNKQ/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-24T11:23:57.271316",
+      "recordedLabel": "2026.11.24 11:23",
+      "timeLabel": "2026.11.24 11:23",
+      "persons": [],
+      "lastModified": "2026-11-24T11:24:01Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf395e9b1f899440a8dd05ddd3b1d1e81"
+    },
     "d22d9a2e13c4ba6fa7": {
       "id": "d22d9a2e13c4ba6fa7",
       "url": "/articles/d22d9a2e13c4ba6fa7/",
@@ -22636,7 +22674,7 @@
     {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
-      "latestAt": "2026-11-24T10:24:03.382113"
+      "latestAt": "2026-11-24T11:23:57.271316"
     },
     {
       "name": "なるほど投資ゼミ（大橋ひろこ",
