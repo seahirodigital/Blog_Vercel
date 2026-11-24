@@ -7947,7 +7947,7 @@
   },
   {
     "id": "84b13732-75c3-4bff-a0ed-8918f83fccac",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s279b9f37fa8048409051ad030e911ab3",
     "title": "Amazon ブラックフライデー PS5Pro 2026",
     "name": "Amazon ブラックフライデー PS5Pro 2026.md",
@@ -7956,14 +7956,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-24T02:30:00.000Z",
     "createdAt": "2026-11-20T06:24:26.799Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-24T01:56:00.958375+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "db99b72f-550f-4e44-b0ae-754c96b4a484",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s279b9f37fa8048409051ad030e911ab3",
     "title": "Amazon ブラックフライデー PS5Pro 2026",
     "name": "Amazon ブラックフライデー PS5Pro 2026.md",
@@ -7972,10 +7974,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-24T02:30:00.000Z",
     "createdAt": "2026-11-20T06:24:48.915Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-24T01:56:00.958375+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f377b00d-e95d-4b4e-bd1d-a5384878a878",
