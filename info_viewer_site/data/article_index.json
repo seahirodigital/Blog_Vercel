@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-23T17:03:58.695499+00:00",
+  "generatedAt": "2026-11-24T06:25:36.117185+00:00",
   "articleList": [
+    {
+      "id": "dcab567c8a25e43ff8",
+      "url": "/articles/dcab567c8a25e43ff8/",
+      "title": "【プラチナフォーカス】今年は韓国で開催！パラジウム・フューチャー・フォーラム2026＜2026年11月度＞",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=mK6i98ZCcD8",
+      "thumbnail": "https://i.ytimg.com/vi/mK6i98ZCcD8/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-24T06:24:12.423564",
+      "recordedLabel": "2026.11.24 06:24",
+      "timeLabel": "2026.11.24 06:24",
+      "persons": [],
+      "lastModified": "2026-11-24T06:24:19Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf2eac79a0b4843ea91be861e9e1f088a"
+    },
     {
       "id": "594c6f2e1169940b00",
       "url": "/articles/594c6f2e1169940b00/",
@@ -11279,6 +11298,25 @@
     }
   ],
   "articles": {
+    "dcab567c8a25e43ff8": {
+      "id": "dcab567c8a25e43ff8",
+      "url": "/articles/dcab567c8a25e43ff8/",
+      "title": "【プラチナフォーカス】今年は韓国で開催！パラジウム・フューチャー・フォーラム2026＜2026年11月度＞",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=mK6i98ZCcD8",
+      "thumbnail": "https://i.ytimg.com/vi/mK6i98ZCcD8/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-24T06:24:12.423564",
+      "recordedLabel": "2026.11.24 06:24",
+      "timeLabel": "2026.11.24 06:24",
+      "persons": [],
+      "lastModified": "2026-11-24T06:24:19Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf2eac79a0b4843ea91be861e9e1f088a"
+    },
     "594c6f2e1169940b00": {
       "id": "594c6f2e1169940b00",
       "url": "/articles/594c6f2e1169940b00/",
@@ -22558,6 +22596,11 @@
   },
   "channels": [
     {
+      "name": "なるほど投資ゼミ（大橋ひろこ",
+      "tab": "なるほど",
+      "latestAt": "2026-11-24T06:24:12.423564"
+    },
+    {
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-11-23T17:02:26.742809"
@@ -22591,11 +22634,6 @@
       "name": "トウシル（楽天証券）",
       "tab": "トウシル",
       "latestAt": "2026-11-19T09:24:40.870666"
-    },
-    {
-      "name": "なるほど投資ゼミ（大橋ひろこ",
-      "tab": "なるほど",
-      "latestAt": "2026-11-18T07:53:52.955876"
     },
     {
       "name": "文藝春秋PLUS 公式チャンネル",
