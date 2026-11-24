@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-24T11:25:14.754403+00:00",
+  "generatedAt": "2026-11-24T13:24:54.488885+00:00",
   "articleList": [
+    {
+      "id": "e2b46bbbec79520e4b",
+      "url": "/articles/e2b46bbbec79520e4b/",
+      "title": "LIVE  マーケットアップデート革ジャンCEO復帰日経2207円急騰ラッキーヘッドラインで上昇は継続できるか？",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=xyC8UJppYww",
+      "thumbnail": "https://i.ytimg.com/vi/xyC8UJppYww/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-24T13:23:36.674962",
+      "recordedLabel": "2026.11.24 13:23",
+      "timeLabel": "2026.11.24 13:23",
+      "persons": [],
+      "lastModified": "2026-11-24T13:23:41Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf850091bb2c14a09a475b1d45fa3ee0b"
+    },
     {
       "id": "c433d2dcf926857b79",
       "url": "/articles/c433d2dcf926857b79/",
@@ -11336,6 +11355,25 @@
     }
   ],
   "articles": {
+    "e2b46bbbec79520e4b": {
+      "id": "e2b46bbbec79520e4b",
+      "url": "/articles/e2b46bbbec79520e4b/",
+      "title": "LIVE  マーケットアップデート革ジャンCEO復帰日経2207円急騰ラッキーヘッドラインで上昇は継続できるか？",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=xyC8UJppYww",
+      "thumbnail": "https://i.ytimg.com/vi/xyC8UJppYww/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-24T13:23:36.674962",
+      "recordedLabel": "2026.11.24 13:23",
+      "timeLabel": "2026.11.24 13:23",
+      "persons": [],
+      "lastModified": "2026-11-24T13:23:41Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf850091bb2c14a09a475b1d45fa3ee0b"
+    },
     "c433d2dcf926857b79": {
       "id": "c433d2dcf926857b79",
       "url": "/articles/c433d2dcf926857b79/",
@@ -22672,6 +22710,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-11-24T13:23:36.674962"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-24T11:23:57.271316"
@@ -22685,11 +22728,6 @@
       "name": "イズミダイズム",
       "tab": "イズミダ",
       "latestAt": "2026-11-23T17:02:26.742809"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-11-21T16:03:26.123459"
     },
     {
       "name": "マネーフォワード ME イベント&セミナー",
