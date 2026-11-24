@@ -67,6 +67,7 @@ NOTE_DISCLOSURE_FULL_TEXT = (
     "文章にはAIの整形・編集が含まれます。"
 )
 NOTE_DISCLOSURE_MARKERS = [NOTE_DISCLOSURE_FULL_TEXT, NOTE_DISCLOSURE_PREFIX]
+DERIVATIVE_TITLE_RE = re.compile(r"(モバイルバッテリー|バッテリー|充電器|ケーブル|ケース・カバー|ケース|カバー|MagSafe|ガラスフィルム|フィルム|SSD|USBメモリ|ワイヤレスイヤホン|イヤホン|マイク|スピーカー|写真印刷|キーボード|マウス|スタンド|ハブ|ヘッドホン|モニター)おすすめまとめ")
 NOTE_POST_TAGS = (
     "エッセイ 写真 毎日note 小説 イラスト 競艇予想屋 ボートレース予想 競輪予想 "
     "スキしてみて note 毎日更新  仕事 音楽 マンガ コラム 人生 自分 競艇投資 "
@@ -2374,6 +2375,23 @@ def _extract_product_name_from_note_context(snapshot: dict) -> tuple[str, str]:
 
 def _resolve_amazon_image_target(page, source_markdown: str) -> dict:
     snapshot = _collect_note_editor_snapshot(page)
+    # 派生記事（「製品名 カテゴリおすすめまとめ」）のサムネイルは、発生したアクセサリー商品ではなく
+    # 主体となる本体製品の画像にする。本文で最初に出るAmazon URLが本体の▼ブロックのものである。
+    title, _ = extract_title_and_body(source_markdown or "")
+    if DERIVATIVE_TITLE_RE.search(title or ""):
+        amazon_image_module = _load_amazon_top_image_module()
+        for url in _amazon_image_urls(source_markdown):
+            asin = amazon_image_module.extract_asin_from_url(url)
+            if asin:
+                return {
+                    "mode": "asin",
+                    "asin": asin,
+                    "keyword": "",
+                    "source": "derivative_parent_product",
+                    "source_url": url,
+                    "snapshot": snapshot,
+                }
+        print("   ⚠️ 派生記事の本体ASINを特定できませんでした。通常の判定へ進みます")
     first_url = _extract_first_url_before_marker(source_markdown)
     if first_url:
         amazon_image_module = _load_amazon_top_image_module()
