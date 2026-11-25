@@ -8703,7 +8703,7 @@
   },
   {
     "id": "27b19eb5-8b43-4ca3-85fa-bdaa7a7d0bca",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6ff7e9839f244da1b3002dabe32f67b5",
     "title": "T-Fal ジャスティン ロック コントロール KO823NJPA 電気ケトル レビュー比較まとめ",
     "name": "T-Fal ジャスティン ロック コントロール KO823NJPA 電気ケトル レビュー比較まとめ.md",
@@ -8712,10 +8712,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-25T14:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-25T22:52:25.905747+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "51475cf9-8584-4ee3-9c37-f25dc98d8184",
@@ -8787,7 +8789,7 @@
   },
   {
     "id": "395b38cd-15e2-4e92-83c9-debab63c4f25",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s07f24a1c333b42e88617bda8371f76a1",
     "title": "アイリスオーヤマ TCW-100A01-W 洗濯機 レビュー比較まとめ",
     "name": "アイリスオーヤマ TCW-100A01-W 洗濯機 レビュー比較まとめ.md",
@@ -8796,14 +8798,16 @@
     "noTopImage": false,
     "publishAt": "2026-11-25T16:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-25T22:52:25.905747+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3fdedd69-cdcc-4d7a-8942-c33c9738a903",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s65b67a1041fe4294985f59918e1d069d",
     "title": "タイガー魔法瓶 PIQ-N220T 電気ポット とく子さん レビュー比較まとめ",
     "name": "タイガー魔法瓶 PIQ-N220T 電気ポット とく子さん レビュー比較まとめ.md",
@@ -8812,10 +8816,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-25T17:00:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-25T22:52:25.905747+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4845a9a8-fa68-4f29-be05-fe87d2a3fc45",
@@ -8887,7 +8893,7 @@
   },
   {
     "id": "0ce9858d-d2f2-4450-88c1-efe49332ad33",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sace3d6ca152c469ca9435fb3c8d07b14",
     "title": "Braun iO10 I iO senseコーチ付属+替えブラシ5本付き 電動歯ブラシ レビュー比較まとめ",
     "name": "Braun iO10 I iO senseコーチ付属+替えブラシ5本付き 電動歯ブラシ レビュー比較まとめ.md",
@@ -8896,10 +8902,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-25T21:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-25T22:52:25.905747+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "680c360c-d0e4-4895-ae5a-ddf11cfe5c18",
@@ -8971,7 +8979,7 @@
   },
   {
     "id": "ddf008d0-6955-49da-bbff-ac6f6b8236f8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s7906d55f9353479fb807397304d66cec",
     "title": "元Apple社員が作ったコーヒーマシンが凄すぎる…／xBloom Studio",
     "name": "20261119_0200_元Apple社員が作ったコーヒーマシンが凄すぎる…／xBloom Studio.md",
@@ -8980,10 +8988,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-25T22:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-25T22:52:25.905747+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "417b948c-bab8-4a4e-bdd4-e26ab4e31f58",
