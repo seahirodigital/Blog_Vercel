@@ -8703,7 +8703,7 @@
   },
   {
     "id": "27b19eb5-8b43-4ca3-85fa-bdaa7a7d0bca",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s6ff7e9839f244da1b3002dabe32f67b5",
     "title": "T-Fal ジャスティン ロック コントロール KO823NJPA 電気ケトル レビュー比較まとめ",
     "name": "T-Fal ジャスティン ロック コントロール KO823NJPA 電気ケトル レビュー比較まとめ.md",
@@ -8713,8 +8713,8 @@
     "publishAt": "2026-11-25T14:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
     "queuedAt": "2026-11-25T22:52:25.905747+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-25T22:55:19.911949+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nb68d15c9288e?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
