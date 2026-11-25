@@ -29,7 +29,9 @@ for query in queries:
                                                 ensure_ascii=False), flush=True)
         else:
             result = response.json().get("searchResult", {})
-            print("検索結果_JSON " + json.dumps({"query": query, "searchURL": result.get("searchURL", "")},
+            candidates = [{"title": i.get("itemInfo", {}).get("title", {}).get("displayValue", ""),
+                           "detailPageURL": i.get("detailPageURL", "")} for i in result.get("items", [])]
+            print("検索結果_JSON " + json.dumps({"query": query, "searchURL": result.get("searchURL", ""), "items": candidates},
                                                 ensure_ascii=False), flush=True)
     except requests.RequestException:
         print("検索結果_JSON " + json.dumps({"query": query, "error": "通信失敗"},
