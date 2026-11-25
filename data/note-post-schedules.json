@@ -8789,7 +8789,7 @@
   },
   {
     "id": "395b38cd-15e2-4e92-83c9-debab63c4f25",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s07f24a1c333b42e88617bda8371f76a1",
     "title": "アイリスオーヤマ TCW-100A01-W 洗濯機 レビュー比較まとめ",
     "name": "アイリスオーヤマ TCW-100A01-W 洗濯機 レビュー比較まとめ.md",
@@ -8799,8 +8799,8 @@
     "publishAt": "2026-11-25T16:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
     "queuedAt": "2026-11-25T22:52:25.905747+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-25T22:55:31.447364+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n21723d8020ee?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
