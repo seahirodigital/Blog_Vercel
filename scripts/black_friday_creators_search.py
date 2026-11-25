@@ -3,7 +3,7 @@ import os
 import time
 import requests
 
-queries = ["PS5", "iPad", "洗濯機"]
+queries = ["テレビ"]
 r = requests.post("https://api.amazon.co.jp/auth/o2/token", data={
     "grant_type": "client_credentials",
     "client_id": os.environ["AMAZON_CLIENT_ID"],
