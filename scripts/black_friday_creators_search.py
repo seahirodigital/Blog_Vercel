@@ -3,7 +3,7 @@ import os
 import time
 import requests
 
-queries = ["テレビ"]
+queries = ["PS5","iPad","iPad Air 13インチ","AirPods 4","AirPods Max","PS5 SSD","PS5 コントローラー","PS5ソフト","PS5 本体","3Dプリンター","4K モニター","プレステ 5","ニューバランス 996","アイフォン","アレクサ","UGG","絵本","映画","Kindle 端末","クリスマスツリー","化粧品","血圧計","食品","タブレット","チョコレート","Pixel Watch","Apple Pencil","FLEXISPOT","Xiaomi タブレット","VRゴーグル","LEGO","Lenovo","Logicool"]
 r = requests.post("https://api.amazon.co.jp/auth/o2/token", data={
     "grant_type": "client_credentials",
     "client_id": os.environ["AMAZON_CLIENT_ID"],
@@ -29,9 +29,7 @@ for query in queries:
                                                 ensure_ascii=False), flush=True)
         else:
             result = response.json().get("searchResult", {})
-            candidates = [{"title": i.get("itemInfo", {}).get("title", {}).get("displayValue", ""),
-                           "detailPageURL": i.get("detailPageURL", "")} for i in result.get("items", [])]
-            print("検索結果_JSON " + json.dumps({"query": query, "searchURL": result.get("searchURL", ""), "items": candidates},
+            print("検索結果_JSON " + json.dumps({"query": query, "searchURL": result.get("searchURL", "")},
                                                 ensure_ascii=False), flush=True)
     except requests.RequestException:
         print("検索結果_JSON " + json.dumps({"query": query, "error": "通信失敗"},
@@ -48,7 +46,7 @@ checks = {
     "テレビ_絞込なし": "https://www.amazon.co.jp/s?k=%E3%83%86%E3%83%AC%E3%83%93&tag=hiroshit-22&linkCode=osi",
     "テレビ_別形式": "https://www.amazon.co.jp/s/?field-keywords=%E3%83%86%E3%83%AC%E3%83%93&search-alias=aps&tag=hiroshit-22&linkCode=osi",
 }
-for label, url in checks.items():
+for label, url in []:
     try:
         response = requests.get(url, headers={"User-Agent": "notebot"}, timeout=20, allow_redirects=True)
         page = response.text[:300000]
