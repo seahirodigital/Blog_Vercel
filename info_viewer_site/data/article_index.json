@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-26T09:26:33.734884+00:00",
+  "generatedAt": "2026-11-26T12:55:50.562049+00:00",
   "articleList": [
+    {
+      "id": "57e1ebb5f68b7c9265",
+      "url": "/articles/57e1ebb5f68b7c9265/",
+      "title": "【日本株】元機関投資家が本気で選んだ1銘柄｜不安定な株式市場で今何を狙うべきなのか徹底解説",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=47h0hM02EPQ",
+      "thumbnail": "https://i.ytimg.com/vi/47h0hM02EPQ/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-26T12:54:29.233317",
+      "recordedLabel": "2026.11.26 12:54",
+      "timeLabel": "2026.11.26 12:54",
+      "persons": [],
+      "lastModified": "2026-11-26T12:54:33Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s6e85f779b9be4eb6bb59cf4af3eadd27"
+    },
     {
       "id": "8a0d7e06165a795f7e",
       "url": "/articles/8a0d7e06165a795f7e/",
@@ -11474,6 +11493,25 @@
     }
   ],
   "articles": {
+    "57e1ebb5f68b7c9265": {
+      "id": "57e1ebb5f68b7c9265",
+      "url": "/articles/57e1ebb5f68b7c9265/",
+      "title": "【日本株】元機関投資家が本気で選んだ1銘柄｜不安定な株式市場で今何を狙うべきなのか徹底解説",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=47h0hM02EPQ",
+      "thumbnail": "https://i.ytimg.com/vi/47h0hM02EPQ/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-26T12:54:29.233317",
+      "recordedLabel": "2026.11.26 12:54",
+      "timeLabel": "2026.11.26 12:54",
+      "persons": [],
+      "lastModified": "2026-11-26T12:54:33Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s6e85f779b9be4eb6bb59cf4af3eadd27"
+    },
     "8a0d7e06165a795f7e": {
       "id": "8a0d7e06165a795f7e",
       "url": "/articles/8a0d7e06165a795f7e/",
@@ -22948,6 +22986,11 @@
   },
   "channels": [
     {
+      "name": "げんたろうの投資ch【元機関投資家】",
+      "tab": "げんたろ",
+      "latestAt": "2026-11-26T12:54:29.233317"
+    },
+    {
       "name": "トウシル（楽天証券）",
       "tab": "トウシル",
       "latestAt": "2026-11-26T09:25:11.982209"
@@ -22961,11 +23004,6 @@
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-11-26T03:11:27.663656"
-    },
-    {
-      "name": "げんたろうの投資ch【元機関投資家】",
-      "tab": "げんたろ",
-      "latestAt": "2026-11-26T03:09:18.271693"
     },
     {
       "name": "YTの投資銀行",
