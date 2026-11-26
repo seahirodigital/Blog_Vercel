@@ -10343,7 +10343,7 @@
   },
   {
     "id": "7d048a1b-0d73-4d6f-b739-4f7a9e426a00",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s0ca19732c77e4797a8c8dacd5ee324cb",
     "title": "Amazon ブラックフライデー Lenovo 2026",
     "name": "Amazon ブラックフライデー Lenovo 2026.md",
@@ -10353,8 +10353,8 @@
     "publishAt": "2026-11-26T23:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-26T22:40:36.168637+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T23:19:12.506222+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n03a0f16ca050?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
