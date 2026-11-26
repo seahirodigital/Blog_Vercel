@@ -9783,7 +9783,7 @@
   },
   {
     "id": "03249469-c3c5-4209-b889-5f1fc29984e2",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s9f693f00bd124f309cd662db290076a9",
     "title": "Shark WV204JBL ハンディクリーナー レビュー比較まとめ",
     "name": "Shark WV204JBL ハンディクリーナー レビュー比較まとめ.md",
@@ -9793,8 +9793,8 @@
     "publishAt": "2026-11-26T12:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
     "queuedAt": "2026-11-26T14:35:10.752138+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T14:38:03.809671+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n1443563f3c91?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
