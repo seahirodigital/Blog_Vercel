@@ -9959,7 +9959,7 @@
   },
   {
     "id": "a0243e3f-314c-4752-b7c4-c897ad1ab705",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s2f75761d0d9e4fe19ea5065181dfb948",
     "title": "PHILIPS S59505 レビュー比較まとめ",
     "name": "PHILIPS S59505 レビュー比較まとめ.md",
@@ -9968,10 +9968,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-26T14:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-26T13:55:46.567136+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a6922acb-ede1-4823-97e9-37af0fbde2fe",
