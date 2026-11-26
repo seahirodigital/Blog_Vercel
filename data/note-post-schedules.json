@@ -9137,7 +9137,7 @@
   },
   {
     "id": "8b8da940-063f-45dd-81db-0bf8d34d959a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s32e933c0c52345bb82cf04f6d97ad37d",
     "title": "Amazon ブラックフライデー UGG 2026",
     "name": "Amazon ブラックフライデー UGG 2026.md",
@@ -9147,8 +9147,8 @@
     "publishAt": "2026-11-26T05:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-26T13:04:38.469582+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T13:09:04.811206+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n1b4b85b1c932/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
