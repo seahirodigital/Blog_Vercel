@@ -9345,7 +9345,7 @@
   },
   {
     "id": "01bde409-14fd-4548-b977-846e47c76d58",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!se3bcd491c5d04f80a1c410e404281285",
     "title": "CIO SMARTCOBY Pro SLIM SS モバイルバッテリー レビュー比較まとめ",
     "name": "CIO SMARTCOBY Pro SLIM SS モバイルバッテリー レビュー比較まとめ.md",
@@ -9355,8 +9355,8 @@
     "publishAt": "2026-11-26T08:00:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
     "queuedAt": "2026-11-26T16:05:17.191553+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T16:08:05.722763+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n855c86791586?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 3
