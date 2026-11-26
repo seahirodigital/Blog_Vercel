@@ -9155,7 +9155,7 @@
   },
   {
     "id": "3604ae75-8c67-4878-8008-9baa8f4eeb66",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sbf62e7cf3b4d4be5b44220a0cb9a4154",
     "title": "Amazon ブラックフライデー 売れ筋ランキング 2026",
     "name": "Amazon ブラックフライデー 売れ筋ランキング 2026.md",
@@ -9165,8 +9165,8 @@
     "publishAt": "2026-11-26T06:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-26T13:04:38.469582+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T13:08:51.446207+00:00",
+    "publishedUrl": "https://editor.note.com/notes/nda6705f6c144/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
