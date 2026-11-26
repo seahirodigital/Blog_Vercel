@@ -10221,7 +10221,7 @@
   },
   {
     "id": "5cc4a3ba-cfe4-4b66-a431-c7dc1561c0c7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sca2f4afe2d324934a09638552cd3aee8",
     "title": "Braun シリーズ9 SPORT+ 9320s レビュー比較まとめ",
     "name": "Braun シリーズ9 SPORT+ 9320s レビュー比較まとめ.md",
@@ -10230,10 +10230,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-26T21:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-26T20:55:01.472060+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "c6cccc27-97f4-4901-a1f1-5fa5cd0a306d",
