@@ -1,6 +1,46 @@
 {
-  "generatedAt": "2026-11-26T03:12:54.807774+00:00",
+  "generatedAt": "2026-11-26T09:26:33.734884+00:00",
   "articleList": [
+    {
+      "id": "8a0d7e06165a795f7e",
+      "url": "/articles/8a0d7e06165a795f7e/",
+      "title": "田中泰輔のマネーは語る：【米国株】暴落相場。買い向かう条件（田中 泰輔）【楽天証券 トウシル】",
+      "channelName": "トウシル（楽天証券）",
+      "channelKey": "トウシル（楽天証券）",
+      "channelTab": "トウシル",
+      "youtubeUrl": "https://www.youtube.com/watch?v=cpgWeSj9IwA",
+      "thumbnail": "https://i.ytimg.com/vi/cpgWeSj9IwA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-26T09:25:11.982209",
+      "recordedLabel": "2026.11.26 09:25",
+      "timeLabel": "2026.11.26 09:25",
+      "persons": [
+        "田中泰輔"
+      ],
+      "lastModified": "2026-11-26T09:25:16Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s578526fd587248a58c70f1e90a7039e2"
+    },
+    {
+      "id": "dcb91b3ac286ddbd46",
+      "url": "/articles/dcb91b3ac286ddbd46/",
+      "title": "【スシロー】AI株の次は寿司？最終利益54%増｜うまくいっている会社への「入り方」とバリュエーションの見方｜海外出店の上振れに潜むチャイナリスク｜今から入っても儲かるか？【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=z-9Nqfcx75k",
+      "thumbnail": "https://i.ytimg.com/vi/z-9Nqfcx75k/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-26T09:24:00.380867",
+      "recordedLabel": "2026.11.26 09:24",
+      "timeLabel": "2026.11.26 09:24",
+      "persons": [],
+      "lastModified": "2026-11-26T09:24:04Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sb24244d429a549ceae969f22e8af445f"
+    },
     {
       "id": "4aed46b00ec2d4b6c6",
       "url": "/articles/4aed46b00ec2d4b6c6/",
@@ -11434,6 +11474,46 @@
     }
   ],
   "articles": {
+    "8a0d7e06165a795f7e": {
+      "id": "8a0d7e06165a795f7e",
+      "url": "/articles/8a0d7e06165a795f7e/",
+      "title": "田中泰輔のマネーは語る：【米国株】暴落相場。買い向かう条件（田中 泰輔）【楽天証券 トウシル】",
+      "channelName": "トウシル（楽天証券）",
+      "channelKey": "トウシル（楽天証券）",
+      "channelTab": "トウシル",
+      "youtubeUrl": "https://www.youtube.com/watch?v=cpgWeSj9IwA",
+      "thumbnail": "https://i.ytimg.com/vi/cpgWeSj9IwA/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-26T09:25:11.982209",
+      "recordedLabel": "2026.11.26 09:25",
+      "timeLabel": "2026.11.26 09:25",
+      "persons": [
+        "田中泰輔"
+      ],
+      "lastModified": "2026-11-26T09:25:16Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s578526fd587248a58c70f1e90a7039e2"
+    },
+    "dcb91b3ac286ddbd46": {
+      "id": "dcb91b3ac286ddbd46",
+      "url": "/articles/dcb91b3ac286ddbd46/",
+      "title": "【スシロー】AI株の次は寿司？最終利益54%増｜うまくいっている会社への「入り方」とバリュエーションの見方｜海外出店の上振れに潜むチャイナリスク｜今から入っても儲かるか？【元機関投資家が解説】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=z-9Nqfcx75k",
+      "thumbnail": "https://i.ytimg.com/vi/z-9Nqfcx75k/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-26T09:24:00.380867",
+      "recordedLabel": "2026.11.26 09:24",
+      "timeLabel": "2026.11.26 09:24",
+      "persons": [],
+      "lastModified": "2026-11-26T09:24:04Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sb24244d429a549ceae969f22e8af445f"
+    },
     "4aed46b00ec2d4b6c6": {
       "id": "4aed46b00ec2d4b6c6",
       "url": "/articles/4aed46b00ec2d4b6c6/",
@@ -22868,6 +22948,16 @@
   },
   "channels": [
     {
+      "name": "トウシル（楽天証券）",
+      "tab": "トウシル",
+      "latestAt": "2026-11-26T09:25:11.982209"
+    },
+    {
+      "name": "イズミダイズム",
+      "tab": "イズミダ",
+      "latestAt": "2026-11-26T09:24:00.380867"
+    },
+    {
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-11-26T03:11:27.663656"
@@ -22876,11 +22966,6 @@
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-26T03:09:18.271693"
-    },
-    {
-      "name": "イズミダイズム",
-      "tab": "イズミダ",
-      "latestAt": "2026-11-26T03:08:14.683938"
     },
     {
       "name": "YTの投資銀行",
@@ -22901,11 +22986,6 @@
       "name": "ゆたかTV",
       "tab": "ゆたかT",
       "latestAt": "2026-11-20T07:22:55.250172"
-    },
-    {
-      "name": "トウシル（楽天証券）",
-      "tab": "トウシル",
-      "latestAt": "2026-11-19T09:24:40.870666"
     },
     {
       "name": "文藝春秋PLUS 公式チャンネル",
