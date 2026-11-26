@@ -10239,7 +10239,7 @@
   },
   {
     "id": "c6cccc27-97f4-4901-a1f1-5fa5cd0a306d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sf29d1fe9bbf44c0aa67c6059c455ddf0",
     "title": "Amazon ブラックフライデー 映画 2026",
     "name": "Amazon ブラックフライデー 映画 2026.md",
@@ -10248,10 +10248,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-26T22:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-26T21:40:41.532810+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d3d6de81-3a71-4061-a6ef-9423a6bc4538",
