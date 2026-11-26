@@ -10063,7 +10063,7 @@
   },
   {
     "id": "6c68bd48-25f2-428e-9e01-ab1b8149d4d5",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s60546ce4a9d64610869468e9ea912409",
     "title": "Amazon ブラックフライデー 血圧計 2026",
     "name": "Amazon ブラックフライデー 血圧計 2026.md",
@@ -10073,8 +10073,8 @@
     "publishAt": "2026-11-26T16:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-26T15:40:58.876264+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T16:19:12.836234+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n53e3005d1c31?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
