@@ -10045,7 +10045,7 @@
   },
   {
     "id": "e4cbb502-cafc-4fcc-8986-33bfe9c7c91a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s7290d120ef0047d8bae6c4f118ae0b33",
     "title": "Amazon ブラックフライデー エントリー方法 2026",
     "name": "Amazon ブラックフライデー エントリー方法 2026.md",
@@ -10055,8 +10055,8 @@
     "publishAt": "2026-11-26T15:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-26T14:40:24.699147+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T15:18:57.478634+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n375d6d46d49d?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
