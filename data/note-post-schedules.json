@@ -10117,7 +10117,7 @@
   },
   {
     "id": "08be33fc-42e4-456f-b42d-5020711de8d0",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s8e6fe3085b414dc4baf72208074af855",
     "title": "Amazon ブラックフライデー ニューバランス 996 2026",
     "name": "Amazon ブラックフライデー ニューバランス 996 2026.md",
@@ -10126,10 +10126,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-26T20:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-26T19:40:55.101206+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5af89140-fe2b-4892-bb95-78bc8cac80ff",
