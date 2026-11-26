@@ -9941,7 +9941,7 @@
   },
   {
     "id": "99bbd050-8f72-416a-9d1a-b3fdcb058eb6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s131c3d9a50214942be57441d2de8245e",
     "title": "Amazon ブラックフライデー PS5 ssd 2026",
     "name": "Amazon ブラックフライデー PS5 ssd 2026.md",
@@ -9950,10 +9950,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-26T14:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-26T13:40:36.062539+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "a0243e3f-314c-4752-b7c4-c897ad1ab705",
