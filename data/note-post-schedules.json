@@ -10325,7 +10325,7 @@
   },
   {
     "id": "010c998f-9196-444e-ac03-fdff6d4ccd4e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2afb5ab90e324247b5be60cb0d7eeebf",
     "title": "【3週間使用】iPhone Duoやっぱりココが好き！ココがダメ！12選・購入機レビュー第四弾",
     "name": "20261117_1219_【3週間使用】iPhone Duoやっぱりココが好き！ココがダメ！12選・購入機レビュー第四弾.md",
@@ -10335,8 +10335,8 @@
     "publishAt": "2026-11-26T22:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
     "queuedAt": "2026-11-26T21:55:56.629764+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T22:32:36.908354+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n9eefb96e0f64?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
