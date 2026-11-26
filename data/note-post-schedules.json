@@ -9449,7 +9449,7 @@
   },
   {
     "id": "cb5e9468-c686-4b1f-9fc5-f49fb5de7fed",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s25f24ac86f3b478da487f67206546cda",
     "title": "Braun iO5 I レビュー比較まとめ",
     "name": "Braun iO5 I レビュー比較まとめ.md",
@@ -9459,8 +9459,8 @@
     "publishAt": "2026-11-26T09:00:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
     "queuedAt": "2026-11-26T14:35:10.752138+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T14:38:01.310148+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n7844b8642f8c/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 2
