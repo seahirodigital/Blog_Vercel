@@ -9607,7 +9607,7 @@
   },
   {
     "id": "5261676f-18c4-452e-952f-a22cd59483ec",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s3dd8ec9c48c144a8a324935fc596c3a0",
     "title": "アイリスオーヤマ LB-M101-H 脱毛器 レビュー比較まとめ",
     "name": "アイリスオーヤマ LB-M101-H 脱毛器 レビュー比較まとめ.md",
@@ -9617,8 +9617,8 @@
     "publishAt": "2026-11-26T10:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
     "queuedAt": "2026-11-26T16:05:17.191553+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T16:08:17.952166+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n9bb291baf1f7?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 3
