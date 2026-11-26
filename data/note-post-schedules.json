@@ -10099,7 +10099,7 @@
   },
   {
     "id": "a5d9552a-b6ca-4b1e-8c21-b0420ee53f26",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s74e8bd5e0ed74edd8d0d608b50bf3492",
     "title": "Shark WV321JWH ハンディクリーナー レビュー比較まとめ",
     "name": "Shark WV321JWH ハンディクリーナー レビュー比較まとめ.md",
@@ -10109,8 +10109,8 @@
     "publishAt": "2026-11-26T17:00:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
     "queuedAt": "2026-11-26T16:25:31.412231+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T17:02:27.701217+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n36c39c512aa6?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
