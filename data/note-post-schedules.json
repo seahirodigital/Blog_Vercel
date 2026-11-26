@@ -9083,7 +9083,7 @@
   },
   {
     "id": "1ad9666d-26b2-4d87-ab36-4f83177141dd",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s34e65bca9d4a493b9886e158b9f1bbb1",
     "title": "Amazon ブラックフライデー 再入荷 2026",
     "name": "Amazon ブラックフライデー 再入荷 2026.md",
@@ -9093,8 +9093,8 @@
     "publishAt": "2026-11-26T03:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-26T02:49:57.216Z",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T03:21:26.517617+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd4b74e83118b?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-direct",
     "dispatchAttempts": 1
