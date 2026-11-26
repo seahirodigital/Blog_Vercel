@@ -1,6 +1,25 @@
 {
-  "generatedAt": "2026-11-26T12:55:50.562049+00:00",
+  "generatedAt": "2026-11-26T14:59:28.139877+00:00",
   "articleList": [
+    {
+      "id": "559ab35e3c4a283c81",
+      "url": "/articles/559ab35e3c4a283c81/",
+      "title": "LIVE  マーケットアップデート  キオクシアストップ高. US休場でも日本株上昇",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=KUaiCt6bz68",
+      "thumbnail": "https://i.ytimg.com/vi/KUaiCt6bz68/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-26T14:57:44.128993",
+      "recordedLabel": "2026.11.26 14:57",
+      "timeLabel": "2026.11.26 14:57",
+      "persons": [],
+      "lastModified": "2026-11-26T14:57:50Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s471586d2ff524987b10caf745776d460"
+    },
     {
       "id": "57e1ebb5f68b7c9265",
       "url": "/articles/57e1ebb5f68b7c9265/",
@@ -11493,6 +11512,25 @@
     }
   ],
   "articles": {
+    "559ab35e3c4a283c81": {
+      "id": "559ab35e3c4a283c81",
+      "url": "/articles/559ab35e3c4a283c81/",
+      "title": "LIVE  マーケットアップデート  キオクシアストップ高. US休場でも日本株上昇",
+      "channelName": "YTの投資銀行",
+      "channelKey": "YTの投資銀行",
+      "channelTab": "YTの投",
+      "youtubeUrl": "https://www.youtube.com/watch?v=KUaiCt6bz68",
+      "thumbnail": "https://i.ytimg.com/vi/KUaiCt6bz68/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-26T14:57:44.128993",
+      "recordedLabel": "2026.11.26 14:57",
+      "timeLabel": "2026.11.26 14:57",
+      "persons": [],
+      "lastModified": "2026-11-26T14:57:50Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s471586d2ff524987b10caf745776d460"
+    },
     "57e1ebb5f68b7c9265": {
       "id": "57e1ebb5f68b7c9265",
       "url": "/articles/57e1ebb5f68b7c9265/",
@@ -22986,6 +23024,11 @@
   },
   "channels": [
     {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-11-26T14:57:44.128993"
+    },
+    {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
       "latestAt": "2026-11-26T12:54:29.233317"
@@ -23004,11 +23047,6 @@
       "name": "なるほど投資ゼミ（大橋ひろこ",
       "tab": "なるほど",
       "latestAt": "2026-11-26T03:11:27.663656"
-    },
-    {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-11-24T13:23:36.674962"
     },
     {
       "name": "マネーフォワード ME イベント&セミナー",
