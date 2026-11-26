@@ -9173,7 +9173,7 @@
   },
   {
     "id": "0e0be334-49c2-443a-9de2-96fe24c28a69",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s1c9443187f7045cd9cb577b6474b3b8a",
     "title": "Amazon ブラックフライデー AirPodsmax 2026",
     "name": "Amazon ブラックフライデー AirPodsmax 2026.md",
@@ -9183,8 +9183,8 @@
     "publishAt": "2026-11-26T07:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-26T13:04:38.469582+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T13:08:59.859324+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n84784a00c803/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
