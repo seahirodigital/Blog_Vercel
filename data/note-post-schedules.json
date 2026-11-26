@@ -9819,7 +9819,7 @@
   },
   {
     "id": "e8e98ff2-db45-4684-a8f0-d3620750496c",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd222750e3dee40cd981197b67527820d",
     "title": "Amazon ブラックフライデー iPad 割引率 2026",
     "name": "Amazon ブラックフライデー iPad 割引率 2026.md",
@@ -9829,8 +9829,8 @@
     "publishAt": "2026-11-26T13:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-26T13:04:38.469582+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T13:18:51.832859+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n728b2115f7b7/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
