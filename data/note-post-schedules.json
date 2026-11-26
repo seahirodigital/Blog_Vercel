@@ -10361,7 +10361,7 @@
   },
   {
     "id": "5af4853c-ff58-4634-801f-135b63dc14b5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s86250a4e9a1b4c3bb2c821d9be094a23",
     "title": "Amazon ブラックフライデー iPad air 13インチ 2026",
     "name": "Amazon ブラックフライデー iPad air 13インチ 2026.md",
@@ -10370,10 +10370,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-27T00:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-26T23:40:32.037883+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "4b38b30d-f3e5-46a9-bb7c-d9ecb345cc5d",
