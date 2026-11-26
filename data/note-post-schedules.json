@@ -10135,7 +10135,7 @@
   },
   {
     "id": "5af89140-fe2b-4892-bb95-78bc8cac80ff",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s55d94f1aadb446e3a2cf9b4174c54a0d",
     "title": "Amazon ブラックフライデー 2026 目玉商品│目玉商品の探し方とお得な買い方まとめ",
     "name": "Amazon ブラックフライデー 2026 目玉商品.md",
@@ -10145,8 +10145,8 @@
     "publishAt": "2026-11-26T21:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-26T20:40:46.961207+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T21:19:03.357539+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n77cc5992b266?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
