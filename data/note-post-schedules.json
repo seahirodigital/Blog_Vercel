@@ -9801,7 +9801,7 @@
   },
   {
     "id": "32d1b1c2-b535-490e-8fec-f3be8ce9f9bf",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s34afd90b45864ae4bc354f017ff4056d",
     "title": "アイリスオーヤマ IRSD-14A-B 冷蔵庫 レビュー比較まとめ",
     "name": "アイリスオーヤマ IRSD-14A-B 冷蔵庫 レビュー比較まとめ.md",
@@ -9811,8 +9811,8 @@
     "publishAt": "2026-11-26T13:00:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
     "queuedAt": "2026-11-26T13:04:38.469582+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T13:07:55.360324+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n0107d65694f1/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
