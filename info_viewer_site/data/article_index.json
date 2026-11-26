@@ -1,6 +1,85 @@
 {
-  "generatedAt": "2026-11-24T13:24:54.488885+00:00",
+  "generatedAt": "2026-11-26T03:12:54.807774+00:00",
   "articleList": [
+    {
+      "id": "4aed46b00ec2d4b6c6",
+      "url": "/articles/4aed46b00ec2d4b6c6/",
+      "title": "【ザキオカ☆オプションゼミ＃44】ここからの日経平均とTOPIX（岡崎良介×大橋ひろこ）",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=kcn8LcBZ0Y4",
+      "thumbnail": "https://i.ytimg.com/vi/kcn8LcBZ0Y4/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-26T03:11:27.663656",
+      "recordedLabel": "2026.11.26 03:11",
+      "timeLabel": "2026.11.26 03:11",
+      "persons": [
+        "岡崎良介",
+        "大橋ひろこ"
+      ],
+      "lastModified": "2026-11-26T03:11:33Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sbcd4b412fbfa4a3b86e909e2a6e5d0b5"
+    },
+    {
+      "id": "d2e54a00f2d29cea88",
+      "url": "/articles/d2e54a00f2d29cea88/",
+      "title": "【FRBの逆風、中国人民銀の追い風】金相場の急落再開、反発の条件は？（マーケットエッジ代表 小菅努さん） [ウィークリーゴールド]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=OlsMWLSlYsk",
+      "thumbnail": "https://i.ytimg.com/vi/OlsMWLSlYsk/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-26T03:10:23.256843",
+      "recordedLabel": "2026.11.26 03:10",
+      "timeLabel": "2026.11.26 03:10",
+      "persons": [],
+      "lastModified": "2026-11-26T03:10:29Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf1f68d7e705d44bfb2757c8dc0f0116f"
+    },
+    {
+      "id": "31a7ca799c1ae6f4cb",
+      "url": "/articles/31a7ca799c1ae6f4cb/",
+      "title": "日経急落継続...もう終わりなのか？",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Lkv4u9pbJ7A",
+      "thumbnail": "https://i.ytimg.com/vi/Lkv4u9pbJ7A/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-26T03:09:18.271693",
+      "recordedLabel": "2026.11.26 03:09",
+      "timeLabel": "2026.11.26 03:09",
+      "persons": [],
+      "lastModified": "2026-11-26T03:09:24Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s28569016c4374778b3d79536d4f5eee4"
+    },
+    {
+      "id": "6c8bf377c14ff2e448",
+      "url": "/articles/6c8bf377c14ff2e448/",
+      "title": "【キセキの対談】岐阜暴威×泉田良輔：なぜ個人投資家は「損」を繰り返すのか？キオクシア 任天堂 ソフトバンクでの共通の失敗から学ぶ【楽待アフタートーク】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=9SIWRRfVrfQ",
+      "thumbnail": "https://i.ytimg.com/vi/9SIWRRfVrfQ/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-26T03:08:14.683938",
+      "recordedLabel": "2026.11.26 03:08",
+      "timeLabel": "2026.11.26 03:08",
+      "persons": [],
+      "lastModified": "2026-11-26T03:08:19Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s305c8deca553454f8c7671e541d96c9d"
+    },
     {
       "id": "e2b46bbbec79520e4b",
       "url": "/articles/e2b46bbbec79520e4b/",
@@ -11355,6 +11434,85 @@
     }
   ],
   "articles": {
+    "4aed46b00ec2d4b6c6": {
+      "id": "4aed46b00ec2d4b6c6",
+      "url": "/articles/4aed46b00ec2d4b6c6/",
+      "title": "【ザキオカ☆オプションゼミ＃44】ここからの日経平均とTOPIX（岡崎良介×大橋ひろこ）",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=kcn8LcBZ0Y4",
+      "thumbnail": "https://i.ytimg.com/vi/kcn8LcBZ0Y4/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-26T03:11:27.663656",
+      "recordedLabel": "2026.11.26 03:11",
+      "timeLabel": "2026.11.26 03:11",
+      "persons": [
+        "岡崎良介",
+        "大橋ひろこ"
+      ],
+      "lastModified": "2026-11-26T03:11:33Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sbcd4b412fbfa4a3b86e909e2a6e5d0b5"
+    },
+    "d2e54a00f2d29cea88": {
+      "id": "d2e54a00f2d29cea88",
+      "url": "/articles/d2e54a00f2d29cea88/",
+      "title": "【FRBの逆風、中国人民銀の追い風】金相場の急落再開、反発の条件は？（マーケットエッジ代表 小菅努さん） [ウィークリーゴールド]",
+      "channelName": "なるほど投資ゼミ（大橋ひろこ",
+      "channelKey": "なるほど投資ゼミ（大橋ひろこ",
+      "channelTab": "なるほど",
+      "youtubeUrl": "https://www.youtube.com/watch?v=OlsMWLSlYsk",
+      "thumbnail": "https://i.ytimg.com/vi/OlsMWLSlYsk/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-26T03:10:23.256843",
+      "recordedLabel": "2026.11.26 03:10",
+      "timeLabel": "2026.11.26 03:10",
+      "persons": [],
+      "lastModified": "2026-11-26T03:10:29Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!sf1f68d7e705d44bfb2757c8dc0f0116f"
+    },
+    "31a7ca799c1ae6f4cb": {
+      "id": "31a7ca799c1ae6f4cb",
+      "url": "/articles/31a7ca799c1ae6f4cb/",
+      "title": "日経急落継続...もう終わりなのか？",
+      "channelName": "げんたろうの投資ch【元機関投資家】",
+      "channelKey": "げんたろうの投資ch【元機関投資家】",
+      "channelTab": "げんたろ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Lkv4u9pbJ7A",
+      "thumbnail": "https://i.ytimg.com/vi/Lkv4u9pbJ7A/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-26T03:09:18.271693",
+      "recordedLabel": "2026.11.26 03:09",
+      "timeLabel": "2026.11.26 03:09",
+      "persons": [],
+      "lastModified": "2026-11-26T03:09:24Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s28569016c4374778b3d79536d4f5eee4"
+    },
+    "6c8bf377c14ff2e448": {
+      "id": "6c8bf377c14ff2e448",
+      "url": "/articles/6c8bf377c14ff2e448/",
+      "title": "【キセキの対談】岐阜暴威×泉田良輔：なぜ個人投資家は「損」を繰り返すのか？キオクシア 任天堂 ソフトバンクでの共通の失敗から学ぶ【楽待アフタートーク】",
+      "channelName": "イズミダイズム",
+      "channelKey": "イズミダイズム",
+      "channelTab": "イズミダ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=9SIWRRfVrfQ",
+      "thumbnail": "https://i.ytimg.com/vi/9SIWRRfVrfQ/hqdefault.jpg",
+      "publishedAt": "",
+      "publishedLabel": "",
+      "duration": "",
+      "recordedAt": "2026-11-26T03:08:14.683938",
+      "recordedLabel": "2026.11.26 03:08",
+      "timeLabel": "2026.11.26 03:08",
+      "persons": [],
+      "lastModified": "2026-11-26T03:08:19Z",
+      "sourceFileId": "FFCC26DEDBBA4E70!s305c8deca553454f8c7671e541d96c9d"
+    },
     "e2b46bbbec79520e4b": {
       "id": "e2b46bbbec79520e4b",
       "url": "/articles/e2b46bbbec79520e4b/",
@@ -22710,24 +22868,24 @@
   },
   "channels": [
     {
-      "name": "YTの投資銀行",
-      "tab": "YTの投",
-      "latestAt": "2026-11-24T13:23:36.674962"
+      "name": "なるほど投資ゼミ（大橋ひろこ",
+      "tab": "なるほど",
+      "latestAt": "2026-11-26T03:11:27.663656"
     },
     {
       "name": "げんたろうの投資ch【元機関投資家】",
       "tab": "げんたろ",
-      "latestAt": "2026-11-24T11:23:57.271316"
-    },
-    {
-      "name": "なるほど投資ゼミ（大橋ひろこ",
-      "tab": "なるほど",
-      "latestAt": "2026-11-24T06:24:12.423564"
+      "latestAt": "2026-11-26T03:09:18.271693"
     },
     {
       "name": "イズミダイズム",
       "tab": "イズミダ",
-      "latestAt": "2026-11-23T17:02:26.742809"
+      "latestAt": "2026-11-26T03:08:14.683938"
+    },
+    {
+      "name": "YTの投資銀行",
+      "tab": "YTの投",
+      "latestAt": "2026-11-24T13:23:36.674962"
     },
     {
       "name": "マネーフォワード ME イベント&セミナー",
