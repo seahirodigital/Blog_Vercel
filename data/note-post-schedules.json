@@ -9765,7 +9765,7 @@
   },
   {
     "id": "1ea74676-cb0a-4f82-9ae0-0672081014e4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sa4b393a23fae4bd2a230f9c683a4287d",
     "title": "Amazon ブラックフライデー 1000円以下 2026│1000円以下の商品を探す方法まとめ",
     "name": "Amazon ブラックフライデー 1000円以下 2026.md",
@@ -9775,8 +9775,8 @@
     "publishAt": "2026-11-26T12:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-26T13:04:38.469582+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T13:09:12.789133+00:00",
+    "publishedUrl": "https://editor.note.com/notes/nfd32dd6faed5/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
