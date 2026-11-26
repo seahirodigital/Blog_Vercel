@@ -9119,7 +9119,7 @@
   },
   {
     "id": "d1ce3558-90a6-4b10-b21c-773ecccb87c3",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s063164cbeb6b48baac0815ad23caabfd",
     "title": "Amazon ブラックフライデー アイフォン 2026",
     "name": "Amazon ブラックフライデー アイフォン 2026.md",
@@ -9128,10 +9128,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-26T04:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-26T03:40:43.435208+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8b8da940-063f-45dd-81db-0bf8d34d959a",
