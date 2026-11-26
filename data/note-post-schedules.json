@@ -9467,7 +9467,7 @@
   },
   {
     "id": "c2bc0414-6e7e-40ef-a3e7-dd0f18038c7f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s5094f2ecffc9459f84861c735f7b54d3",
     "title": "Amazon ブラックフライデー 最大割引 2026",
     "name": "Amazon ブラックフライデー 最大割引 2026.md",
@@ -9477,8 +9477,8 @@
     "publishAt": "2026-11-26T09:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-26T13:04:38.469582+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T13:09:21.512010+00:00",
+    "publishedUrl": "https://editor.note.com/notes/n392f67361c26/publish/",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
