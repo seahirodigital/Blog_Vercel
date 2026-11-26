@@ -9485,7 +9485,7 @@
   },
   {
     "id": "3850a409-b6b5-4443-b310-35caf3e78d35",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!se81910533cd04ef9b804628dcbd65a99",
     "title": "PHILIPS ソニッケアー ダイヤモンドクリーン9000 HX991114 電動歯ブラシ レビュー比較まとめ",
     "name": "PHILIPS ソニッケアー ダイヤモンドクリーン9000 HX991114 電動歯ブラシ レビュー比較まとめ.md",
@@ -9495,8 +9495,8 @@
     "publishAt": "2026-11-26T09:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
     "queuedAt": "2026-11-26T13:04:38.469582+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-26T13:07:45.860578+00:00",
+    "publishedUrl": "https://note.com/startupm/n/ndd64c609edea?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
