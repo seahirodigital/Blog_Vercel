@@ -11621,7 +11621,7 @@
   },
   {
     "id": "e12b59e4-1e5f-4de3-97be-7a125d491d9d",
-    "status": "queued",
+    "status": "error",
     "fileId": "FFCC26DEDBBA4E70!s1b111b6a4ef74b5fb2f9f55cc164ab56",
     "title": "アイリスオーヤマ 減煙 IHU-A10-B ホットプレート レビュー比較まとめ",
     "name": "アイリスオーヤマ 減煙 IHU-A10-B ホットプレート レビュー比較まとめ.md",
@@ -11633,7 +11633,7 @@
     "queuedAt": "2026-11-27T20:55:32.522393+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": "",
+    "error": "POST https://api.github.com/repos/seahirodigital/Blog_Vercel/actions/workflows/note-post.yml/dispatches failed: 500 {\"message\":\"Failed to run workflow dispatch\",\"documentation_url\":\"https://docs.github.com/rest/actions/workflows#create-a-workflow-dispatch-event\",\"status\":\"500\"}",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
   },
