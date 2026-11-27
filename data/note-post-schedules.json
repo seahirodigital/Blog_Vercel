@@ -11535,7 +11535,7 @@
   },
   {
     "id": "61213f61-38d6-41de-be4b-ba3b1599d102",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sbe6632c7cd9f4d329f5448d1fa78e39a",
     "title": "Amazon ブラックフライデー LEGO 2026",
     "name": "Amazon ブラックフライデー LEGO 2026.md",
@@ -11544,10 +11544,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-27T21:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-27T20:40:22.475981+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "14bc1de8-d42a-4599-a506-65b0df29cc3d",
