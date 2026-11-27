@@ -10763,7 +10763,7 @@
   },
   {
     "id": "bbfca38a-d151-4ed4-991e-d0fbb6265c12",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s339ff7972a114885b6cdf12007759874",
     "title": "Amazon ブラックフライデー 売り切れ 復活 2026",
     "name": "Amazon ブラックフライデー 売り切れ 復活 2026.md",
@@ -10772,10 +10772,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-27T08:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-27T07:40:25.506168+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "dd76bec9-1a1a-4970-991d-76421887bf30",
