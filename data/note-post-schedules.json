@@ -11445,7 +11445,7 @@
   },
   {
     "id": "848a6b41-cba1-43ed-9cf7-f5e43390e303",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s03f10594db004171b1f91b0f18268f9d",
     "title": "Amazon ブラックフライデー PS5 コントローラー 2026",
     "name": "Amazon ブラックフライデー PS5 コントローラー 2026.md",
@@ -11455,8 +11455,8 @@
     "publishAt": "2026-11-27T15:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-27T14:40:33.738096+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-27T15:18:59.111565+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n489958d372ad?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
