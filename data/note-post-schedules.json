@@ -11639,7 +11639,7 @@
   },
   {
     "id": "5d3be335-486f-492e-b9c9-cc8867754b92",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s43273b7f4a454711aad5919f1d9d421e",
     "title": "Amazon ブラックフライデー 1万円 2026│1万円のポイント条件まとめ",
     "name": "Amazon ブラックフライデー 1万円 2026.md",
@@ -11648,10 +11648,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-27T22:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-27T21:40:59.329487+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "27bccccd-5c55-4952-b207-c7b34da54690",
