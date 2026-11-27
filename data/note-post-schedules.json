@@ -11323,7 +11323,7 @@
   },
   {
     "id": "50497bb0-f01f-4f1d-ab4a-2e18664fe885",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s6167b5e9c9b743c58c9264d36a2916e5",
     "title": "Shark LC350JWH スティッククリーナー レビュー比較まとめ",
     "name": "Shark LC350JWH スティッククリーナー レビュー比較まとめ.md",
@@ -11332,10 +11332,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-27T14:00:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-27T13:25:31.903897+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b7f81ba1-ba7d-4b28-8059-6aa0c9150189",
