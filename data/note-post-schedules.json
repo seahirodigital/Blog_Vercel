@@ -11499,7 +11499,7 @@
   },
   {
     "id": "063daa9a-31f4-440d-bc49-31919dfe70a9",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sc73c3884ade74f9c9737da71d4b2c206",
     "title": "エレコム EC-C61MN モバイルバッテリー レビュー比較まとめ",
     "name": "エレコム EC-C61MN モバイルバッテリー レビュー比較まとめ.md",
@@ -11509,8 +11509,8 @@
     "publishAt": "2026-11-27T17:00:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
     "queuedAt": "2026-11-27T16:58:26.101717+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-27T17:02:27.826820+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nc583bba1547a?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
