@@ -11621,7 +11621,7 @@
   },
   {
     "id": "e12b59e4-1e5f-4de3-97be-7a125d491d9d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s1b111b6a4ef74b5fb2f9f55cc164ab56",
     "title": "アイリスオーヤマ 減煙 IHU-A10-B ホットプレート レビュー比較まとめ",
     "name": "アイリスオーヤマ 減煙 IHU-A10-B ホットプレート レビュー比較まとめ.md",
@@ -11630,10 +11630,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-27T21:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-27T20:55:32.522393+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "5d3be335-486f-492e-b9c9-cc8867754b92",
