@@ -10573,7 +10573,7 @@
   },
   {
     "id": "4d646c68-2e0c-4335-ac96-eb08fffaa32f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s83dde47a941948058425180f606a6b2c",
     "title": "Amazon ブラックフライデー Kindle 端末 2026",
     "name": "Amazon ブラックフライデー Kindle 端末 2026.md",
@@ -10582,10 +10582,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-27T07:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-27T06:40:53.411603+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "89a549e6-b5d3-4ebc-a63e-2bf62dd4ba6e",
