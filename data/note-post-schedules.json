@@ -10867,7 +10867,7 @@
   },
   {
     "id": "59d742c3-d7bd-4822-8f37-e2b331be3c06",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s35e3eb179151444480b263ff385e3ecc",
     "title": "Amazon ブラックフライデー オススメ商品 2026",
     "name": "Amazon ブラックフライデー オススメ商品 2026.md",
@@ -10877,8 +10877,8 @@
     "publishAt": "2026-11-27T09:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-27T08:40:56.046237+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-27T09:19:07.264628+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n3e31bab2adb1?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
