@@ -11743,7 +11743,7 @@
   },
   {
     "id": "edee433a-6491-43c2-bd1d-86a47af53345",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sb77f6017204740a3afcf5de5ce91da15",
     "title": "Amazon ブラックフライデー PS5 本体 2026",
     "name": "Amazon ブラックフライデー PS5 本体 2026.md",
@@ -11752,10 +11752,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-27T23:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-27T22:40:49.210542+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "d4f6f57c-21cc-4df2-926f-23e93fe3fec8",
