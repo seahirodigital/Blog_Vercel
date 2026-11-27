@@ -11147,7 +11147,7 @@
   },
   {
     "id": "07911213-7ecc-4b00-a454-98955be1d5b7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s10527ab0b72847cd8fbe68d2ab006db9",
     "title": "Shark IW5271JBKNC PowerClean 360 PRO スティッククリーナー レビュー比較まとめ",
     "name": "Shark IW5271JBKNC PowerClean 360 PRO スティッククリーナー レビュー比較まとめ.md",
@@ -11156,10 +11156,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-27T12:00:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-27T11:25:50.837105+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0e6d0852-bd44-47d5-a0e8-2813a14491b2",
