@@ -11183,7 +11183,7 @@
   },
   {
     "id": "92e0871f-94d1-451a-ada1-d469f14be4fa",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s390cf43c9f67480cbe1be27d63707286",
     "title": "Apple(アップル) Apple Watch Series 12（GPSモデル） レビュー比較まとめ",
     "name": "Apple(アップル) Apple Watch Series 12（GPSモデル） レビュー比較まとめ.md",
@@ -11192,10 +11192,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-27T12:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-27T11:55:17.394857+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "bb82a496-6bbc-4497-a124-28d5ab7f673a",
