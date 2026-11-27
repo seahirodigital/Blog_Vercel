@@ -11761,7 +11761,7 @@
   },
   {
     "id": "d4f6f57c-21cc-4df2-926f-23e93fe3fec8",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!scd9275061b5f416a820af931634b937d",
     "title": "Amazon ブラックフライデー Xiaomi タブレット 2026",
     "name": "Amazon ブラックフライデー Xiaomi タブレット 2026.md",
@@ -11770,10 +11770,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-28T00:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-27T23:40:21.420413+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "6244cfe3-78db-4810-bf37-439ae0f5ef96",
