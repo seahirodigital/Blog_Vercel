@@ -11341,7 +11341,7 @@
   },
   {
     "id": "b7f81ba1-ba7d-4b28-8059-6aa0c9150189",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sdc66abbe3ee845f284fbcb08c0f47e3d",
     "title": "Amazon ブラックフライデー Logicool 2026",
     "name": "Amazon ブラックフライデー Logicool 2026.md",
@@ -11351,8 +11351,8 @@
     "publishAt": "2026-11-27T14:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-27T13:40:45.028400+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-27T14:19:15.316429+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n5a121b2f8222?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
