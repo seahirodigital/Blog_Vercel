@@ -11007,7 +11007,7 @@
   },
   {
     "id": "8785229e-0c8f-44df-bb6c-7ac55f58c395",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s928e9250e48b4ffd9cea7f30a2f4afce",
     "title": "Shark Shark Zen Pro D10 RVD120X1JPWHNC ロボット 掃除機 RVD120X1JPWH",
     "name": "Shark Shark Zen Pro D10 RVD120X1JPWHNC ロボット 掃除機 RVD120X1JPWH.md",
@@ -11017,8 +11017,8 @@
     "publishAt": "2026-11-27T10:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
     "queuedAt": "2026-11-27T10:05:41.041603+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-27T10:32:37.812385+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n4cf7a20c9e40?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
