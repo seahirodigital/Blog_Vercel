@@ -11219,7 +11219,7 @@
   },
   {
     "id": "912af181-79f2-48a0-8519-bb546ddb7a69",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s946b1da367f94b37955193abc8d103de",
     "title": "Amazon ブラックフライデー 最終日 安くなる 2026",
     "name": "Amazon ブラックフライデー 最終日 安くなる 2026.md",
@@ -11228,10 +11228,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-27T13:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-27T12:40:53.970516+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "b036012f-a1e4-42d5-bd48-086bbe9559c1",
