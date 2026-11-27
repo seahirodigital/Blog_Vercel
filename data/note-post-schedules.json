@@ -10659,7 +10659,7 @@
   },
   {
     "id": "cb97cce6-d1e8-436a-844e-a45a1be83b0b",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s222e4472ee1143f181186cbedc2d95e9",
     "title": "Cosori CAF-DC601 エアフライヤー レビュー比較まとめ",
     "name": "Cosori CAF-DC601 エアフライヤー レビュー比較まとめ.md",
@@ -10669,8 +10669,8 @@
     "publishAt": "2026-11-27T07:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
     "queuedAt": "2026-11-27T06:55:01.171597+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-27T07:32:33.681876+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n76ca8689a297?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
