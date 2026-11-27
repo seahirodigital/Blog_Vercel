@@ -10483,7 +10483,7 @@
   },
   {
     "id": "cf38ad4f-e452-43d6-bbf2-7550078c29d4",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s1d9f2a105d124246958ffbe3ee1c70e9",
     "title": "Amazon ブラックフライデー AirPods4 2026",
     "name": "Amazon ブラックフライデー AirPods4 2026.md",
@@ -10493,8 +10493,8 @@
     "publishAt": "2026-11-27T03:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-27T02:40:50.840170+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-27T03:18:50.973133+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nbeff6dab8817?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
