@@ -10849,7 +10849,7 @@
   },
   {
     "id": "1b13bfba-2a6f-4f60-a7c7-a1bb23409e0f",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s5bd116b153d54bfbba260b66453c7c2d",
     "title": "Shark LC600JGN​NC スティッククリーナー レビュー比較まとめ",
     "name": "Shark LC600JGN​NC スティッククリーナー レビュー比較まとめ.md",
@@ -10859,8 +10859,8 @@
     "publishAt": "2026-11-27T09:00:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
     "queuedAt": "2026-11-27T08:25:47.574800+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-27T09:02:28.419879+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n77b374f1352e?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
