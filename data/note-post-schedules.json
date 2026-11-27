@@ -10971,7 +10971,7 @@
   },
   {
     "id": "13f468ec-4c91-4e5f-a5ea-7eae9fc99c37",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s021d5d0c927d4c92b2409dda0878eca7",
     "title": "【本格ムダ毛ケア】最新の家庭用レーザー脱毛器「TRIA 4X」2週間使用してみた！【2026年最新家電】",
     "name": "20261118_0030_【本格ムダ毛ケア】最新の家庭用レーザー脱毛器「TRIA 4X」2週間使用してみた！【2026年最新家電】.md",
@@ -10980,10 +10980,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-27T10:00:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-27T09:25:21.180447+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "cde40604-6e56-4839-ac94-06cedf4e05eb",
