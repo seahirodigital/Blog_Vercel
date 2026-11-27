@@ -10745,7 +10745,7 @@
   },
   {
     "id": "acd2b8e5-8225-47a9-97bc-cbbfcfdfb10e",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!saf1232faedda4aa59c71633950a01214",
     "title": "Shark LC204JWH スティッククリーナー レビュー比較まとめ",
     "name": "Shark LC204JWH スティッククリーナー レビュー比較まとめ.md",
@@ -10755,8 +10755,8 @@
     "publishAt": "2026-11-27T08:00:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
     "queuedAt": "2026-11-27T07:25:16.804937+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-27T08:02:43.265343+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n7db6f0ced9d2?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
