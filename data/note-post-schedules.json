@@ -10519,7 +10519,7 @@
   },
   {
     "id": "25b8ef75-ed5a-4497-a2a4-d81c9a77d8fe",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s53150159b9c84bd28e4e4c44ebe8d0f8",
     "title": "Amazon ブラックフライデー 対象商品 2026",
     "name": "Amazon ブラックフライデー 対象商品 2026.md",
@@ -10528,10 +10528,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-27T04:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-27T03:40:19.476844+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "0d9e75fc-5bde-4072-9a5c-6ce6cf60c02b",
