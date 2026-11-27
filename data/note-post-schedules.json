@@ -11517,7 +11517,7 @@
   },
   {
     "id": "5caec3e9-6041-4d44-9420-c12acab0d75d",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sd425b29fdc224c05bb4227c3a1f6d594",
     "title": "Amazon ブラックフライデー 4000ポイント 2026",
     "name": "Amazon ブラックフライデー 4000ポイント 2026.md",
@@ -11527,8 +11527,8 @@
     "publishAt": "2026-11-27T20:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-27T19:40:49.870659+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-27T20:19:25.306742+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n1c69f78db449?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
