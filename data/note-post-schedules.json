@@ -10379,7 +10379,7 @@
   },
   {
     "id": "4b38b30d-f3e5-46a9-bb7c-d9ecb345cc5d",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s3ae3307b5c0c4bc9a74015491e390219",
     "title": "Amazon ブラックフライデー iPad 売り切れ 2026",
     "name": "Amazon ブラックフライデー iPad 売り切れ 2026.md",
@@ -10388,10 +10388,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-27T02:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-27T01:40:21.704040+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1d6e7f2b-9951-40b6-bb40-7b6f065a7232",
