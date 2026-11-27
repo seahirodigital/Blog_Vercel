@@ -11043,7 +11043,7 @@
   },
   {
     "id": "be55f563-4a45-4f6e-9eca-b7cef4ca507e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sce9ed0d7cabc45d0be268cc146ba31be",
     "title": "Amazon ブラックフライデー チョコレート 2026",
     "name": "Amazon ブラックフライデー チョコレート 2026.md",
@@ -11052,10 +11052,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-27T11:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-27T10:40:13.174545+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f3322fdc-e8c5-444b-9c2a-637a9924e050",
