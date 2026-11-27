@@ -11481,7 +11481,7 @@
   },
   {
     "id": "d645541d-fe91-4d6a-a69c-0ae279128f95",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!sbf6a3c702a6b4aeab343d700c7636c8a",
     "title": "アイリスオーヤマ IRSN-32B-B レビュー比較まとめ",
     "name": "アイリスオーヤマ IRSN-32B-B レビュー比較まとめ.md",
@@ -11491,8 +11491,8 @@
     "publishAt": "2026-11-27T16:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
     "queuedAt": "2026-11-27T16:58:26.101717+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-27T17:01:25.100988+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n02c29bd9bf73?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
