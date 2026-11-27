@@ -10501,7 +10501,7 @@
   },
   {
     "id": "48532078-76f5-49bc-9a6d-b364abb51c3e",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s9623c355263f4199a31a8fd1a35a16b4",
     "title": "Shark WV517JBKNC ハンディクリーナー レビュー比較まとめ",
     "name": "Shark WV517JBKNC ハンディクリーナー レビュー比較まとめ.md",
@@ -10510,10 +10510,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-27T03:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-27T02:55:59.106111+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "25b8ef75-ed5a-4497-a2a4-d81c9a77d8fe",
