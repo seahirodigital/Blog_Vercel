@@ -12565,7 +12565,7 @@
   },
   {
     "id": "e9f31144-7b62-4481-9152-69961aaac12b",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s6711a2e336fa4cb383ec0651294e6c55",
     "title": "Amazon ブラックフライデー iPad 価格 2026",
     "name": "Amazon ブラックフライデー iPad 価格 2026.md",
@@ -12575,8 +12575,8 @@
     "publishAt": "2026-11-28T12:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-28T11:40:03.810100+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-28T12:19:07.969509+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n03a80576a398?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
