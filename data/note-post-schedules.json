@@ -11973,7 +11973,7 @@
   },
   {
     "id": "2f06595e-be53-4ce6-b60e-435053e17566",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s63d312a93edd4562be4ad7885f6d1a61",
     "title": "Amazon ブラックフライデー FLEXISPOT 2026",
     "name": "Amazon ブラックフライデー FLEXISPOT 2026.md",
@@ -11982,10 +11982,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-28T07:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-28T06:40:27.666548+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "775b5e22-e34e-4e7c-9194-c925474716a6",
