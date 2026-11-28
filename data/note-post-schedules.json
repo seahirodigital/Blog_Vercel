@@ -12461,7 +12461,7 @@
   },
   {
     "id": "243b4226-011b-4208-927a-3ae6391b03c7",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se1ddacc73efc4b9cabb79ae1d73c9b3b",
     "title": "Braun シリーズ9 PRO+ 電気シェーバー レビュー比較まとめ",
     "name": "Braun シリーズ9 PRO+ 電気シェーバー レビュー比較まとめ.md",
@@ -12470,10 +12470,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-28T11:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-28T10:55:04.292865+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "013210ac-0410-46de-affe-ea0f4456d7c2",
