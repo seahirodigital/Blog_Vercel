@@ -12583,7 +12583,7 @@
   },
   {
     "id": "fb06dbfc-ab03-4990-a9ca-80d68e2cc2a6",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s692f2a4ce2824fc992c5bb3a57729969",
     "title": "PHILIPS フィリップス i9000 Prestige Ultra 最上位モデル XP940640 レビュー比較まと",
     "name": "PHILIPS フィリップス i9000 Prestige Ultra 最上位モデル XP940640 レビュー比較まと.md",
@@ -12592,10 +12592,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-28T12:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-28T11:55:24.721397+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "f9f3a9bd-e8b2-4471-8c55-42e5d43d866c",
