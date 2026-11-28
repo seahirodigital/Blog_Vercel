@@ -11955,7 +11955,7 @@
   },
   {
     "id": "b9a0b8be-25ac-4207-9135-3e19ffd93410",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s5dc6c7b77d8840e7917e5600d42de487",
     "title": "Amazon ブラックフライデー タブレット 2026",
     "name": "Amazon ブラックフライデー タブレット 2026.md",
@@ -11965,8 +11965,8 @@
     "publishAt": "2026-11-28T06:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-28T05:40:13.396733+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-28T06:19:18.136472+00:00",
+    "publishedUrl": "https://note.com/startupm/n/nd52c43687e94?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
