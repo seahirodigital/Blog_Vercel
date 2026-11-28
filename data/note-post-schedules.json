@@ -11919,7 +11919,7 @@
   },
   {
     "id": "b4af70ac-6269-4e47-bf96-5e0425da01eb",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!se6004472c43e4704b0e80d5cba7563bb",
     "title": "Amazon ブラックフライデー アレクサ 2026",
     "name": "Amazon ブラックフライデー アレクサ 2026.md",
@@ -11928,10 +11928,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-28T04:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-28T03:40:45.736566+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3f2914c3-cc54-4c70-a18d-38a561ff3a02",
