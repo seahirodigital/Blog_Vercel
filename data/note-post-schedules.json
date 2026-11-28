@@ -12163,7 +12163,7 @@
   },
   {
     "id": "29c06d78-08d1-4ca5-b20b-5c74f2a6e9d5",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc04ce0acab564e72930cf22e7d72da2d",
     "title": "Amazon ブラックフライデー 売り切れ 再入荷 2026",
     "name": "Amazon ブラックフライデー 売り切れ 再入荷 2026.md",
@@ -12172,10 +12172,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-28T08:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-28T07:40:48.475486+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "8e66b3a6-7a0f-4874-996d-0fe29d92349e",
