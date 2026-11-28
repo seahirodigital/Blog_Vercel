@@ -11779,7 +11779,7 @@
   },
   {
     "id": "6244cfe3-78db-4810-bf37-439ae0f5ef96",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!scd61de9f1b0c455aae2c2cb9c57ec4c3",
     "title": "Amazon ブラックフライデー 化粧品 2026",
     "name": "Amazon ブラックフライデー 化粧品 2026.md",
@@ -11789,8 +11789,8 @@
     "publishAt": "2026-11-28T02:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
     "queuedAt": "2026-11-28T01:40:20.145740+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-28T02:19:16.995689+00:00",
+    "publishedUrl": "https://note.com/startupm/n/neaf24d1446ec?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
