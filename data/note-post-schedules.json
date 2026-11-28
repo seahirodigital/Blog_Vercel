@@ -12389,7 +12389,7 @@
   },
   {
     "id": "4808d69c-d635-43ac-9624-a6c048d3df9f",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc50d2ee20a2d495f8de90b936ebd51e8",
     "title": "Amazon ブラックフライデー Pixel watch 2026",
     "name": "Amazon ブラックフライデー Pixel watch 2026.md",
@@ -12398,10 +12398,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-28T10:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-28T09:40:24.702609+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "23113d7c-a89a-4066-a47a-5979e9fc4b79",
