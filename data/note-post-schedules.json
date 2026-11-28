@@ -12601,7 +12601,7 @@
   },
   {
     "id": "f9f3a9bd-e8b2-4471-8c55-42e5d43d866c",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s0263d705699a4f23937e2c90ca8f8b95",
     "title": "象印マホービン NW-VE10-BA 炊飯器 レビュー比較まとめ",
     "name": "象印マホービン NW-VE10-BA 炊飯器 レビュー比較まとめ.md",
@@ -12610,10 +12610,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-28T13:00:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-28T12:25:02.483155+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "3abac3fa-822e-4a90-9046-bf8f295fa67c",
