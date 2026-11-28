@@ -12249,7 +12249,7 @@
   },
   {
     "id": "22796f64-00a5-419c-a8ab-4b594283552a",
-    "status": "queued",
+    "status": "published",
     "fileId": "FFCC26DEDBBA4E70!s2359868be2d842c2995118e19bf674e8",
     "title": "アイリスオーヤマ OSH TCW-80A01-W 洗濯機 レビュー比較まとめ",
     "name": "アイリスオーヤマ OSH TCW-80A01-W 洗濯機 レビュー比較まとめ.md",
@@ -12259,8 +12259,8 @@
     "publishAt": "2026-11-28T09:00:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
     "queuedAt": "2026-11-28T08:25:44.673227+00:00",
-    "publishedAt": "",
-    "publishedUrl": "",
+    "publishedAt": "2026-11-28T09:02:36.182321+00:00",
+    "publishedUrl": "https://note.com/startupm/n/n8a87cbbe4ec9?app_launch=false",
     "error": "",
     "queuedBy": "github-reservation-monitor",
     "dispatchAttempts": 1
