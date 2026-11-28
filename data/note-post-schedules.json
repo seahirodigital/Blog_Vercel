@@ -11883,7 +11883,7 @@
   },
   {
     "id": "b3928e80-10f6-4675-9632-4ea3bb2f0c65",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!s12dc22a26668473e9d29cff42a02f110",
     "title": "Amazon ブラックフライデー Apple pencil 2026",
     "name": "Amazon ブラックフライデー Apple pencil 2026.md",
@@ -11892,10 +11892,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-28T03:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-28T02:40:53.476407+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "2c83e266-214e-4cb0-9957-19be68897c71",
