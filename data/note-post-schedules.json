@@ -12267,7 +12267,7 @@
   },
   {
     "id": "953be2bc-fe19-480d-adde-ce54a176a808",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sc70ad6c7b16943a69959dcd378a508ba",
     "title": "Amazon ブラックフライデー クリスマスツリー 2026",
     "name": "Amazon ブラックフライデー クリスマスツリー 2026.md",
@@ -12276,10 +12276,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-28T09:15:00.000Z",
     "createdAt": "2026-11-26T02:49:57.215Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-28T08:40:04.456652+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "92f906d4-fec6-4744-b740-93da256d2dd1",
