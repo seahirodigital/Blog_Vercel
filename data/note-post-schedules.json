@@ -12723,7 +12723,7 @@
   },
   {
     "id": "24513fcc-2c1d-4ad9-ae33-a0a4b3c32d33",
-    "status": "scheduled",
+    "status": "queued",
     "fileId": "FFCC26DEDBBA4E70!sd44ad699c17b4c3a8ea02a9e1b047996",
     "title": "アイリスオーヤマ ITW-70A01-WH 洗濯機 レビュー比較まとめ",
     "name": "アイリスオーヤマ ITW-70A01-WH 洗濯機 レビュー比較まとめ.md",
@@ -12732,10 +12732,12 @@
     "noTopImage": false,
     "publishAt": "2026-11-28T14:30:00.000Z",
     "createdAt": "2026-11-20T06:28:38.055Z",
-    "queuedAt": "",
+    "queuedAt": "2026-11-28T13:55:59.326640+00:00",
     "publishedAt": "",
     "publishedUrl": "",
-    "error": ""
+    "error": "",
+    "queuedBy": "github-reservation-monitor",
+    "dispatchAttempts": 1
   },
   {
     "id": "1b6a073d-ede4-4e93-ac4a-c9fc18e72af5",
